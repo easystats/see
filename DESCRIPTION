@@ -1,0 +1,41 @@
+Package: see
+Type: Package
+Title: Visualisation Toobox
+Version: 0.1.0
+Authors@R: c(
+	person("Daniel", 
+		"Lüdecke", 
+		role = c("aut", "cre"), 
+		email = "d.luedecke@uke.de", 
+		comment = c(ORCID = "0000-0002-8895-3206")),
+	person("Dominique", 
+		"Makowski", 
+		email = "dom.makowski@gmail.com",
+		role = c("aut", "inv"), 
+		comment = c(ORCID = "0000-0001-5375-9967"))
+	)
+Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
+URL: https://github.com/easystats/see
+BugReports: https://github.com/easystats/see/issues
+Description: Provides plotting utilities supporting easystats objects.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends:
+  R (>= 3.0),
+  stats
+Imports:
+	ggplot2,
+	ggridges
+Suggests:
+	covr,
+	dplyr,
+	tidyr,
+	knitr,
+	rmarkdown,
+	rstanarm,
+	stringr,
+	testthat
+RoxygenNote: 6.1.1
+Language: en-GB
+VignetteBuilder: knitr

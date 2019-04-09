@@ -1,0 +1,44 @@
+---
+output: 
+  github_document:
+    toc: false
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, reports]
+vignette: >
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# see <img src='man/figures/logo.png' align="right" height="139" />
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  tidy.opts=list(width.cutoff=60),
+  tidy=TRUE,
+  fig.path = "man/figures/"
+)
+options(knitr.kable.NA = '',
+        digits = 4,
+        width=60)
+```
+
+
+
+<!-- [![Build -->
+<!-- Status](https://travis-ci.org/easystats/see.svg?branch=master)](https://travis-ci.org/easystats/see) -->
+<!-- [![codecov](https://codecov.io/gh/easystats/see/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/see) -->
+[![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
+
+
+
+
+
+***"Because you have seen, you have believed"***
+
+
+WIP
