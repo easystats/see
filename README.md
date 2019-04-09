@@ -36,7 +36,7 @@ library("see")
 library(ggplot2)
 
 ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
-    geom_point() + theme_modern()
+    geom_point2() + theme_modern()
 ```
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
@@ -55,7 +55,7 @@ p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
     geom_violin() + theme_modern() + scale_fill_material_d(palette = "ice")
 
 p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) + 
-    geom_point() + theme_modern() + scale_color_material_c(palette = "rainbow")
+    geom_point2() + theme_modern() + scale_color_material_c(palette = "rainbow")
 ```
 
 The `plots` function allows us to plot the figures side by side.
@@ -77,3 +77,20 @@ plots(p1, p2, p3, ncol = 2, tags = TRUE, tags_labels = paste("Fig. ",
 ```
 
 ![](man/figures/unnamed-chunk-7-1.png)<!-- -->
+
+### Better looking points
+
+`geom_points2` and `geom_jitter2` allow points without borders and
+contour.
+
+``` r
+normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
+    geom_point(size = 8, alpha = 0.3) + theme_modern()
+
+new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
+    geom_point2(size = 8, alpha = 0.3) + theme_modern()
+
+plots(normal, new, ncol = 2)
+```
+
+![](man/figures/unnamed-chunk-8-1.png)<!-- -->

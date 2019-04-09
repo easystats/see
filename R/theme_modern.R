@@ -7,19 +7,21 @@
 #' @param legend.text.size Legend elements text size in pts.
 #' @param axis.title.space Axis title spacing.
 #' @param axis.title.size Axis title text size in pts.
-#' @param axis.title.face Font face ("plain", "italic", "bold", "bold.italic").
+#' @param axis.title.face Axis font face ("plain", "italic", "bold", "bold.italic").
 #' @param axis.text.size Axis text size in pts.
+#' @param tags.size Tags text size in pts.
+#' @param tags.face Tags font text ("plain", "italic", "bold", "bold.italic").
 #'
 #' @examples
 #' library(ggplot2)
 #' library(see)
-#' 
+#'
 #' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 #'   geom_point() +
 #'   theme_modern()
 #' @importFrom ggplot2 theme_classic element_text element_blank theme margin
 #' @export
-theme_modern <- function(legend.position = "right", axis.title.space = 20, legend.title.size = "none", legend.text.size = 13, axis.title.size = 13, axis.title.face = "plain", axis.text.size = NULL) {
+theme_modern <- function(legend.position = "right", axis.title.space = 20, legend.title.size = "none", legend.text.size = 13, axis.title.size = 13, axis.title.face = "plain", axis.text.size = NULL, tags.size=15, tags.face="bold") {
 
   # Remove legend title if necessary
   if (is.null(legend.title.size)) {
@@ -59,6 +61,7 @@ theme_modern <- function(legend.position = "right", axis.title.space = 20, legen
       axis.title.y = element_text(margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)),
       axis.title.x = element_text(margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)),
       axis.text = axis.text.size,
-      axis.ticks = element_blank()
+      axis.ticks = element_blank(),
+      plot.tag = element_text(size = tags.size, face = tags.face)
     )
 }

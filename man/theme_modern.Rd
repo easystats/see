@@ -7,7 +7,7 @@
 theme_modern(legend.position = "right", axis.title.space = 20,
   legend.title.size = "none", legend.text.size = 13,
   axis.title.size = 13, axis.title.face = "plain",
-  axis.text.size = NULL)
+  axis.text.size = NULL, tags.size = 15, tags.face = "bold")
 }
 \arguments{
 \item{legend.position}{the position of legends ("none", "left", "right",
@@ -21,9 +21,13 @@ theme_modern(legend.position = "right", axis.title.space = 20,
 
 \item{axis.title.size}{Axis title text size in pts.}
 
-\item{axis.title.face}{Font face ("plain", "italic", "bold", "bold.italic").}
+\item{axis.title.face}{Axis font face ("plain", "italic", "bold", "bold.italic").}
 
 \item{axis.text.size}{Axis text size in pts.}
+
+\item{tags.size}{Tags text size in pts.}
+
+\item{tags.face}{Tags font text ("plain", "italic", "bold", "bold.italic").}
 }
 \description{
 A modern, sleek and elegant theme for ggplot.
