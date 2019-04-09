@@ -5,9 +5,9 @@
 \title{The easystats' minimal theme}
 \usage{
 theme_modern(legend.position = "right", axis.title.space = 20,
-  legend.title.size = "none", legend.text.size = 13,
+  legend.title.size = 13, legend.text.size = 12,
   axis.title.size = 13, axis.title.face = "plain",
-  axis.text.size = NULL, tags.size = 15, tags.face = "bold")
+  axis.text.size = 12, tags.size = 15, tags.face = "bold")
 }
 \arguments{
 \item{legend.position}{the position of legends ("none", "left", "right",
@@ -17,7 +17,7 @@ theme_modern(legend.position = "right", axis.title.space = 20,
 
 \item{legend.title.size}{Legend elements text size in pts.}
 
-\item{legend.text.size}{Legend elements text size in pts.}
+\item{legend.text.size}{Legend elements text size in pts. Can be "none".}
 
 \item{axis.title.size}{Axis title text size in pts.}
 

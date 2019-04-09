@@ -106,3 +106,21 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 ```
 
 ![](man/figures/unnamed-chunk-9-1.png)<!-- -->
+
+### BayestestR support
+
+#### Probability of Direction (pd)
+
+``` r
+library(rstanarm)
+library(bayestestR)
+
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
+    data = iris)
+result <- p_direction(model)
+
+plot(result) + theme_modern() + scale_fill_manual(values = c("red", 
+    "green"))
+```
+
+![](man/figures/unnamed-chunk-11-1.png)<!-- -->

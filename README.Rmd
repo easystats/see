@@ -135,3 +135,29 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   theme_modern() +
   scale_fill_material_d()
 ```
+
+
+### BayestestR support
+
+#### Probability of Direction (pd)
+
+```{r warning=FALSE, message=FALSE, dpi=300, eval=FALSE}
+library(rstanarm)
+library(bayestestR)
+
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+result <- p_direction(model)
+
+plot(result) +
+  theme_modern() +
+  scale_fill_manual(values=c("red", "green"))
+```
+```{r warning=FALSE, message=FALSE, dpi=300, echo=FALSE}
+library(rstanarm)
+library(bayestestR)
+
+junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris))
+plot(p_direction(model)) +
+  theme_modern() +
+  scale_fill_manual(values=c("red", "green"))
+```

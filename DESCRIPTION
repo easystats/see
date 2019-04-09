@@ -30,6 +30,7 @@ Imports:
 	ggridges,
 	gridExtra
 Suggests:
+	bayestestR,
 	covr,
 	tidyr,
 	knitr,

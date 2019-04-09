@@ -4,7 +4,7 @@
 #'
 #' @inheritParams ggplot2::theme
 #' @param legend.title.size Legend elements text size in pts.
-#' @param legend.text.size Legend elements text size in pts.
+#' @param legend.text.size Legend elements text size in pts. Can be "none".
 #' @param axis.title.space Axis title spacing.
 #' @param axis.title.size Axis title text size in pts.
 #' @param axis.title.face Axis font face ("plain", "italic", "bold", "bold.italic").
@@ -21,7 +21,7 @@
 #'   theme_modern()
 #' @importFrom ggplot2 theme_classic element_text element_blank theme margin
 #' @export
-theme_modern <- function(legend.position = "right", axis.title.space = 20, legend.title.size = "none", legend.text.size = 13, axis.title.size = 13, axis.title.face = "plain", axis.text.size = NULL, tags.size=15, tags.face="bold") {
+theme_modern <- function(legend.position = "right", axis.title.space = 20, legend.title.size = 13, legend.text.size = 12, axis.title.size = 13, axis.title.face = "plain", axis.text.size = 12, tags.size=15, tags.face="bold") {
 
   # Remove legend title if necessary
   if (is.null(legend.title.size)) {
