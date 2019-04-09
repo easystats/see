@@ -94,3 +94,15 @@ plots(normal, new, ncol = 2)
 ```
 
 ![](man/figures/unnamed-chunk-8-1.png)<!-- -->
+
+### Half-violin Half-dot plot
+
+Create a half-violin half-dot plot, useful for visualising the
+distribution and the sample size at the same time.
+
+``` r
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
+    geom_violindot(fill_dots = "black") + theme_modern() + scale_fill_material_d()
+```
+
+![](man/figures/unnamed-chunk-9-1.png)<!-- -->

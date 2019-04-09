@@ -25,12 +25,12 @@ Depends:
   R (>= 3.0),
   stats
 Imports:
+	dplyr,
 	ggplot2,
 	ggridges,
 	gridExtra
 Suggests:
 	covr,
-	dplyr,
 	tidyr,
 	knitr,
 	rmarkdown,

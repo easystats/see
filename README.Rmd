@@ -122,3 +122,16 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 
 plots(normal, new, ncol=2)
 ```
+
+
+
+### Half-violin Half-dot plot
+
+Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.
+
+```{r warning=FALSE, message=FALSE, dpi=300}
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violindot(fill_dots="black") +
+  theme_modern() +
+  scale_fill_material_d()
+```
