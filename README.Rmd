@@ -38,7 +38,7 @@ options(knitr.kable.NA = '',
 
 
 
-***"Because you have seen, you have believed"***
+***"Damned are those who believe without seeing"***
 
 
 ## Installation
@@ -59,7 +59,7 @@ library("see")
 
 ### Themes
 
-- **modern**
+- **Modern**
 
 ```{r warning=FALSE, message=FALSE, dpi=300}
 library(ggplot2)
@@ -69,3 +69,23 @@ ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) +
   theme_modern()
 ```
 
+### Palettes
+
+- **Material design**
+
+```{r warning=FALSE, message=FALSE, dpi=300}
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  theme_modern() +
+  scale_fill_material_d()
+
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violin() +
+  theme_modern() +
+  scale_fill_material_d(palette = "ice")
+
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+  geom_point() +
+  theme_modern() +
+  scale_color_material_c(palette = "rainbow")
+```

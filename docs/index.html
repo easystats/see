@@ -83,7 +83,7 @@
 <!-- Status](https://travis-ci.org/easystats/see.svg?branch=master)](https://travis-ci.org/easystats/see) -->
 <!-- [![codecov](https://codecov.io/gh/easystats/see/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/see) -->
 
-<p><strong><em>“Because you have seen, you have believed”</em></strong></p>
+<p><strong><em>“Damned are those who believe without seeing”</em></strong></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -99,13 +99,31 @@
 <h3 class="hasAnchor">
 <a href="#themes" class="anchor"></a>Themes</h3>
 <ul>
-<li><strong>modern</strong></li>
+<li><strong>Modern</strong></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Sepal.Width, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-4-1.png" width="2187.5"></p>
+</div>
+<div id="palettes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#palettes" class="anchor"></a>Palettes</h3>
+<ul>
+<li><strong>Material design</strong></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-5-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">    </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-5-2.png" width="2187.5"></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-5-3.png" width="2187.5"></p>
 </div>
 </div>
 </div>

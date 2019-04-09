@@ -32,9 +32,7 @@ A modern, sleek and elegant theme for ggplot.
 library(ggplot2)
 library(see)
 
-ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) +
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
   geom_point() +
   theme_modern()
-
-
 }

@@ -13,48 +13,46 @@
 #' @examples
 #' library(ggplot2)
 #' library(see)
-#'
-#' ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) +
+#' 
+#' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 #'   geom_point() +
 #'   theme_modern()
-#'
-#'
 #' @importFrom ggplot2 theme_classic element_text element_blank theme margin
 #' @export
-theme_modern <- function(legend.position="right", axis.title.space = 20, legend.title.size="none", legend.text.size=13, axis.title.size=13, axis.title.face="plain", axis.text.size=NULL){
+theme_modern <- function(legend.position = "right", axis.title.space = 20, legend.title.size = "none", legend.text.size = 13, axis.title.size = 13, axis.title.face = "plain", axis.text.size = NULL) {
 
   # Remove legend title if necessary
-  if(is.null(legend.title.size)){
-    legend.title.size <- element_text(size=legend.title.size)
-  } else if(legend.title.size=="none"){
+  if (is.null(legend.title.size)) {
+    legend.title.size <- element_text(size = legend.title.size)
+  } else if (legend.title.size == "none") {
     legend.title.size <- element_blank()
-  } else{
-    legend.title.size <- element_text(size=legend.title.size)
+  } else {
+    legend.title.size <- element_text(size = legend.title.size)
   }
 
   # Remove axis title if necessary
-  if(is.null(axis.title.size)){
-    axis.title.size <- element_text(size=axis.title.size, face=axis.title.face)
-  } else if(axis.title.size=="none"){
+  if (is.null(axis.title.size)) {
+    axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
+  } else if (axis.title.size == "none") {
     axis.title.size <- element_blank()
-  } else{
-    axis.title.size <- element_text(size=axis.title.size, face=axis.title.face)
+  } else {
+    axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
   }
 
   # Remove axis text if necessary
-  if(is.null(axis.text.size)){
-    axis.text.size <- element_text(size=axis.text.size)
-  } else if(axis.text.size=="none"){
+  if (is.null(axis.text.size)) {
+    axis.text.size <- element_text(size = axis.text.size)
+  } else if (axis.text.size == "none") {
     axis.text.size <- element_blank()
-  } else{
-    axis.text.size <- element_text(size=axis.text.size)
+  } else {
+    axis.text.size <- element_text(size = axis.text.size)
   }
 
 
   theme_classic() +
     theme(
       legend.position = legend.position,
-      legend.text = element_text(size=legend.text.size),
+      legend.text = element_text(size = legend.text.size),
       legend.title = legend.title.size,
       legend.key = element_blank(),
       axis.title = axis.title.size,
@@ -64,4 +62,3 @@ theme_modern <- function(legend.position="right", axis.title.space = 20, legend.
       axis.ticks = element_blank()
     )
 }
-
