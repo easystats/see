@@ -41,4 +41,31 @@ options(knitr.kable.NA = '',
 ***"Because you have seen, you have believed"***
 
 
-WIP
+## Installation
+
+
+Run the following:
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("easystats/see")
+```
+```{r message=FALSE, warning=FALSE, eval=TRUE}
+library("see")
+```
+
+
+## Features
+
+### Themes
+
+- **modern**
+
+```{r warning=FALSE, message=FALSE, dpi=300}
+library(ggplot2)
+
+ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) +
+  geom_point() +
+  theme_modern()
+```
+

@@ -11,4 +11,32 @@
 
 ***“Because you have seen, you have believed”***
 
-WIP
+## Installation
+
+Run the following:
+
+``` r
+install.packages("devtools")
+devtools::install_github("easystats/see")
+```
+
+``` r
+library("see")
+```
+
+## Features
+
+### Themes
+
+  - **modern**
+
+<!-- end list -->
+
+``` r
+library(ggplot2)
+
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
+    geom_point() + theme_modern()
+```
+
+![](man/figures/unnamed-chunk-4-1.png)<!-- -->
