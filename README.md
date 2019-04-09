@@ -48,24 +48,32 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 <!-- end list -->
 
 ``` r
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
+p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
     geom_boxplot() + theme_modern() + scale_fill_material_d()
-```
 
-![](man/figures/unnamed-chunk-5-1.png)<!-- -->
-
-``` r
-
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
+p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
     geom_violin() + theme_modern() + scale_fill_material_d(palette = "ice")
-```
 
-![](man/figures/unnamed-chunk-5-2.png)<!-- -->
-
-``` r
-
-ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) + 
+p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) + 
     geom_point() + theme_modern() + scale_color_material_c(palette = "rainbow")
 ```
 
-![](man/figures/unnamed-chunk-5-3.png)<!-- -->
+The `plots` function allows us to plot the figures side by side.
+
+``` r
+plots(p1, p2, p3, ncol = 2)
+```
+
+![](man/figures/unnamed-chunk-6-1.png)<!-- -->
+
+### Multiple plots
+
+The `plots` function can also be used to add **tags** (*i.e.*, labels
+for subfigures).
+
+``` r
+plots(p1, p2, p3, ncol = 2, tags = TRUE, tags_labels = paste("Fig. ", 
+    1:3))
+```
+
+![](man/figures/unnamed-chunk-7-1.png)<!-- -->

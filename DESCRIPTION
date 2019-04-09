@@ -26,7 +26,8 @@ Depends:
   stats
 Imports:
 	ggplot2,
-	ggridges
+	ggridges,
+	gridExtra
 Suggests:
 	covr,
 	dplyr,

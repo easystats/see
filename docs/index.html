@@ -113,17 +113,25 @@
 <ul>
 <li><strong>Material design</strong></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-5-1.png" width="2187.5"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="st">    </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-5-2.png" width="2187.5"></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-5-3.png" width="2187.5"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">    </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>)</a></code></pre></div>
+<p>The <code>plots</code> function allows us to plot the figures side by side.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-6-1.png" width="2187.5"></p>
+</div>
+<div id="multiple-plots" class="section level3">
+<h3 class="hasAnchor">
+<a href="#multiple-plots" class="anchor"></a>Multiple plots</h3>
+<p>The <code>plots</code> function can also be used to add <strong>tags</strong> (<em>i.e.</em>, labels for subfigures).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">tags =</span> <span class="ot">TRUE</span>, <span class="dt">tags_labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Fig. "</span>, </a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>))</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-7-1.png" width="2187.5"></p>
 </div>
 </div>
 </div>
