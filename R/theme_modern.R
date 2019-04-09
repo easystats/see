@@ -57,6 +57,7 @@ theme_modern <- function(legend.position = "right", axis.title.space = 20, legen
       legend.text = element_text(size = legend.text.size),
       legend.title = legend.title.size,
       legend.key = element_blank(),
+      legend.spacing.x = unit(2, "pt"),
       axis.title = axis.title.size,
       axis.title.y = element_text(margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)),
       axis.title.x = element_text(margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)),
