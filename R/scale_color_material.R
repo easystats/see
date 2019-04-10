@@ -29,7 +29,6 @@
 #'   theme_modern() +
 #'   scale_color_material_c(palette = "rainbow")
 #'
-#' @importFrom ggplot2 discrete_scale scale_color_gradientn
 #' @export
 scale_color_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_material(palette = palette, reverse = reverse)
@@ -79,7 +78,6 @@ scale_colour_material_d <- scale_color_material_d
 
 
 #' @rdname scale_color_material
-#' @importFrom ggplot2 discrete_scale scale_fill_gradientn
 #' @export
 scale_fill_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_material(palette = palette, reverse = reverse)
