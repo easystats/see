@@ -90,6 +90,7 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 #'   theme_modern()
 #'
 #' }
+#' @importFrom rlang .data
 #' @export
 plot.p_direction <- function(x, data=NULL, ...){
   if (!"data_plot" %in% class(x)) {
@@ -98,12 +99,12 @@ plot.p_direction <- function(x, data=NULL, ...){
 
   p <- x %>%
     as.data.frame() %>%
-    ggplot(aes_string(
-      x = "x",
-      y = "y",
-      height = "height",
-      group = "y",
-      fill = "fill"
+    ggplot(aes(
+      x = .data$x,
+      y = .data$y,
+      height = .data$height,
+      group = .data$y,
+      fill = .data$fill
     )) +
     ggridges::geom_ridgeline_gradient() +
     .add_plotinfo(x) +
