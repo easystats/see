@@ -43,7 +43,8 @@ geom_violinhalf <- function(mapping = NULL, data = NULL, stat = "ydensity",
 #' @format NULL
 #' @usage NULL
 #' @import ggplot2
-#' @import dplyr
+#' @importFrom dplyr mutate group_by arrange
+#' @importFrom rlang .data
 #' @keywords internal
 GeomViolinHalf <-
   ggproto("GeomViolinHalf", Geom,
@@ -53,11 +54,13 @@ GeomViolinHalf <-
 
             # ymin, ymax, xmin, and xmax define the bounding rectangle for each group
             data %>%
-              group_by(group) %>%
-              mutate(ymin = min(y),
-                     ymax = max(y),
-                     xmin = x,
-                     xmax = x + width / 2)
+              dplyr::group_by(.data$group) %>%
+              dplyr::mutate(
+                ymin = min(.data$y),
+                ymax = max(.data$y),
+                xmin = .data$x,
+                xmax = .data$x + .data$width / 2
+              )
 
           },
 
