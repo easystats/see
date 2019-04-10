@@ -43,7 +43,7 @@ geom_violinhalf <- function(mapping = NULL, data = NULL, stat = "ydensity",
 #' @format NULL
 #' @usage NULL
 #' @import ggplot2
-#' @importFrom dplyr mutate group_by arrange
+#' @importFrom dplyr mutate group_by arrange desc
 #' @importFrom rlang .data
 #' @keywords internal
 GeomViolinHalf <-
@@ -66,12 +66,17 @@ GeomViolinHalf <-
 
           draw_group = function(data, panel_scales, coord) {
             # Find the points for the line to go all the way around
-            data <- transform(data, xminv = x,
-                              xmaxv = x + violinwidth * (xmax - x))
+            data <- dplyr::mutate(
+              data,
+              xminv = .data$x,
+              xmaxv = .data$x + .data$violinwidth * (.data$xmax - .data$x)
+            )
 
             # Make sure it's sorted properly to draw the outline
-            newdata <- rbind(dplyr::arrange(transform(data, x = xminv), y),
-                             dplyr::arrange(transform(data, x = xmaxv), -y))
+            newdata <- rbind(
+              dplyr::arrange(dplyr::mutate(data, x = .data$xminv), .data$y),
+              dplyr::arrange(dplyr::mutate(data, x = .data$xmaxv), dplyr::desc(.data$y))
+            )
 
             # Close the polygon: set first and last point the same
             # Needed for coord_polar and such
