@@ -16,24 +16,23 @@ data_plot <- function(x, data=NULL, ...){
 #' @importFrom graphics plot
 #' @export
 print.data_plot <- function(x, ...){
-  return(plot(x))
+  graphics::plot(x)
 }
 
 
 #' @keywords internal
-.add_plotinfo <- function(x){
+.add_plotinfo <- function(x) {
   info <- attributes(x)$info
-  out <- list(ylab(info$ylab),
-              xlab(info$xlab))
+  out <- list(ylab(info$ylab), xlab(info$xlab))
 
-  if(!is.null(info$legend_fill)){
-    out[[length(out)+1]] <- labs(fill=info$legend_fill)
+  if (!is.null(info$legend_fill)) {
+    out[[length(out) + 1]] <- labs(fill = info$legend_fill)
   }
-  if(!is.null(info$legend_color)){
-    out[[length(out)+1]] <- labs(color=info$legend_color)
+  if (!is.null(info$legend_color)) {
+    out[[length(out) + 1]] <- labs(color = info$legend_color)
   }
 
-  return(out)
+  out
 }
 
 

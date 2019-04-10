@@ -24,17 +24,16 @@ data_plot.p_direction <- function(x, data=NULL, ...){
   }
 
   data <- as.data.frame(data)
-  if(ncol(data) > 1){
+  if (ncol(data) > 1) {
     levels_order <- rev(x$Parameter)
     data <- data[, x$Parameter]
     data_plot <- data.frame()
-    for(i in names(data)){
-      data_plot <- rbind(data_plot,
-                         .compute_densities_pd(data[[i]], name=i))
+    for (i in names(data)) {
+      data_plot <- rbind(data_plot, .compute_densities_pd(data[[i]], name = i))
     }
-  } else{
+  } else {
     levels_order <- NULL
-    data_plot <- .compute_densities_pd(data[, 1], name="Posterior")
+    data_plot <- .compute_densities_pd(data[, 1], name = "Posterior")
   }
 
   data_plot <- data_plot %>%
@@ -47,8 +46,8 @@ data_plot.p_direction <- function(x, data=NULL, ...){
     dplyr::mutate_('fill2' = 'ifelse(prop >= .5, "Most probable", "Less probable")') %>%
     dplyr::select(-dplyr::one_of("n", "prop"))
 
-  if(!is.null(levels_order)){
-    data_plot$y <- factor(data_plot$y, levels=levels_order)
+  if (!is.null(levels_order)) {
+    data_plot$y <- factor(data_plot$y, levels = levels_order)
   }
 
   attr(data_plot, "info") <- list("xlab" = "Possible values",
@@ -92,16 +91,22 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 #' }
 #' @export
 plot.p_direction <- function(x, data=NULL, ...){
-  if(!"data_plot" %in% class(x)){
-    x <- data_plot(x, data=data)
+  if (!"data_plot" %in% class(x)) {
+    x <- data_plot(x, data = data)
   }
 
   p <- x %>%
     as.data.frame() %>%
-    ggplot(aes_string(x="x", y="y", height="height", group="y", fill="fill")) +
+    ggplot(aes_string(
+      x = "x",
+      y = "y",
+      height = "height",
+      group = "y",
+      fill = "fill"
+    )) +
     ggridges::geom_ridgeline_gradient() +
     .add_plotinfo(x) +
-    geom_vline(aes(xintercept=0))
+    geom_vline(aes(xintercept = 0))
 
   p
 
