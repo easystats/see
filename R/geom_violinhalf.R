@@ -82,7 +82,7 @@ GeomViolinHalf <-
             # Needed for coord_polar and such
             newdata <- rbind(newdata, newdata[1,])
 
-            ggplot2:::ggname("geom_violinhalf", GeomPolygon$draw_panel(newdata, panel_scales, coord))
+            .grobName("geom_violinhalf", GeomPolygon$draw_panel(newdata, panel_scales, coord))
           },
 
           draw_key = draw_key_polygon,
@@ -96,3 +96,11 @@ GeomViolinHalf <-
 
 #' @keywords internal
 "%||%" <- function(a, b) if (!is.null(a)) a else b
+
+
+#' @importFrom grid grobName
+#' @keywords internal
+.grobName <- function(prefix, grob) {
+  grob$name <- grid::grobName(grob, prefix)
+  grob
+}
