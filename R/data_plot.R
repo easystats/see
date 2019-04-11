@@ -16,7 +16,7 @@ data_plot <- function(x, data=NULL, ...){
 #' @importFrom graphics plot
 #' @export
 print.data_plot <- function(x, ...){
-  graphics::plot(x)
+  print(as.data.frame(x))
 }
 
 
