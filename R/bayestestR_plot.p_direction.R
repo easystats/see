@@ -16,7 +16,7 @@
 #' data <- data_plot(x)
 #' plot(data)
 #' }
-#' @import dplyr
+#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.p_direction <- function(x, data=NULL, ...){
   if (is.null(data)) {
@@ -24,53 +24,53 @@ data_plot.p_direction <- function(x, data=NULL, ...){
   }
 
   data <- as.data.frame(data)
-  if(ncol(data) > 1){
+  if (ncol(data) > 1) {
     levels_order <- rev(x$Parameter)
     data <- data[, x$Parameter]
-    data_plot <- data.frame()
-    for(i in names(data)){
-      data_plot <- rbind(data_plot,
-                         .compute_densities_pd(data[[i]], name=i))
+    dataplot <- data.frame()
+    for (i in names(data)) {
+      dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i))
     }
-  } else{
+  } else {
     levels_order <- NULL
-    data_plot <- .compute_densities_pd(data[, 1], name="Posterior")
+    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
   }
 
-  data_plot <- data_plot %>%
-    dplyr::group_by_("y", "fill") %>%
-    dplyr::mutate_("n" = "n()") %>%
+  dataplot <- dataplot %>%
+    dplyr::group_by(.data$y, .data$fill) %>%
+    dplyr::mutate(n = dplyr::n()) %>%
     dplyr::ungroup() %>%
-    dplyr::group_by_("y") %>%
-    dplyr::mutate_("prop" = "n / n()") %>%
+    dplyr::group_by(.data$y) %>%
+    dplyr::mutate(prop = .data$n / dplyr::n()) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate_('fill2' = 'ifelse(prop >= .5, "Most probable", "Less probable")') %>%
+    dplyr::mutate(fill2 = ifelse(.data$prop >= .5, "Most probable", "Less probable")) %>%
     dplyr::select(-dplyr::one_of("n", "prop"))
 
-  if(!is.null(levels_order)){
-    data_plot$y <- factor(data_plot$y, levels=levels_order)
+  if (!is.null(levels_order)) {
+    dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
-  attr(data_plot, "info") <- list("xlab" = "Possible values",
+  attr(dataplot, "info") <- list("xlab" = "Possible values",
                                   "ylab" = "Parameters",
                                   "legend_fill" = "Effect direction",
                                   "title" = "Probability of Direction")
 
-  class(data_plot) <- c("data_plot", "p_direction", class(data_plot))
-  data_plot
+  class(dataplot) <- c("data_plot", "p_direction", class(dataplot))
+  dataplot
 }
 
 
 
+#' @importFrom rlang .data
 #' @importFrom stats density
+#' @importFrom dplyr mutate
 #' @keywords internal
-.compute_densities_pd <- function(x, name="Y"){
+.compute_densities_pd <- function(x, name = "Y"){
   out <- x %>%
-    density() %>%
+    stats::density() %>%
     .as.data.frame_density() %>%
-    dplyr::mutate_('fill' = 'ifelse(x < 0, "Negative", "Positive")') %>%
-    dplyr::mutate_('height' = 'y',
-                   'y' = 'name')
+    dplyr::mutate(fill = ifelse(.data$x < 0, "Negative", "Positive")) %>%
+    dplyr::mutate(height = .data$y, y = name)
 
   out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
   out
@@ -91,18 +91,26 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 #'   theme_modern()
 #'
 #' }
+#' @importFrom rlang .data
 #' @export
 plot.p_direction <- function(x, data=NULL, ...){
-  if(!"data_plot" %in% class(x)){
-    x <- data_plot(x, data=data)
+  if (!"data_plot" %in% class(x)) {
+    x <- data_plot(x, data = data)
   }
 
   p <- x %>%
     as.data.frame() %>%
-    ggplot(aes_string(x="x", y="y", height="height", group="y", fill="fill")) +
+    ggplot(aes(
+      x = .data$x,
+      y = .data$y,
+      height = .data$height,
+      group = .data$y,
+      fill = .data$fill
+    )) +
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x) +
     geom_vline(aes(xintercept=0))
+
 
   p
 

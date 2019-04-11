@@ -28,7 +28,10 @@ Imports:
 	dplyr,
 	ggplot2,
 	ggridges,
-	gridExtra
+	grid,
+	gridExtra,
+	magrittr,
+	rlang
 Suggests:
 	bayestestR,
 	covr,

@@ -22,7 +22,6 @@
 #' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 #'   geom_point() +
 #'   theme_modern()
-#' @importFrom ggplot2 theme_classic element_text element_blank theme margin
 #' @export
 theme_modern <- function(plot.title.size=15, plot.title.face="plain", plot.title.space=20, legend.position = "right", axis.title.space = 20, legend.title.size = 13, legend.text.size = 12, axis.title.size = 13, axis.title.face = "plain", axis.text.size = 12, tags.size=15, tags.face="bold") {
 

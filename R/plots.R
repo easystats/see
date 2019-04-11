@@ -17,18 +17,17 @@
 #' plots(p1, p2, ncol=2, tags=TRUE, tags_labels=c("Fig. 1", "Fig. 2"))
 #'
 #' @importFrom gridExtra grid.arrange
-#' @importFrom ggplot2 labs
 #' @export
 plots <- function(..., nrow=NULL, ncol=NULL, tags=FALSE, tags_labels=LETTERS){
 
   plot_list <- list(...)
 
   # Add tags
-  if(tags == TRUE){
-    for(i in 1:length(plot_list)){
+  if (tags == TRUE) {
+    for (i in 1:length(plot_list)) {
       plot_list[[i]] <- plot_list[[i]] + ggplot2::labs(tag = tags_labels[i])
     }
   }
 
-  gridExtra::grid.arrange(grobs = plot_list, nrow=nrow, ncol=ncol)
+  gridExtra::grid.arrange(grobs = plot_list, nrow = nrow, ncol = ncol)
 }

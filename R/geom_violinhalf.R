@@ -43,7 +43,8 @@ geom_violinhalf <- function(mapping = NULL, data = NULL, stat = "ydensity",
 #' @format NULL
 #' @usage NULL
 #' @import ggplot2
-#' @import dplyr
+#' @importFrom dplyr mutate group_by arrange desc
+#' @importFrom rlang .data
 #' @keywords internal
 GeomViolinHalf <-
   ggproto("GeomViolinHalf", Geom,
@@ -53,28 +54,35 @@ GeomViolinHalf <-
 
             # ymin, ymax, xmin, and xmax define the bounding rectangle for each group
             data %>%
-              group_by(group) %>%
-              mutate(ymin = min(y),
-                     ymax = max(y),
-                     xmin = x,
-                     xmax = x + width / 2)
+              dplyr::group_by(.data$group) %>%
+              dplyr::mutate(
+                ymin = min(.data$y),
+                ymax = max(.data$y),
+                xmin = .data$x,
+                xmax = .data$x + .data$width / 2
+              )
 
           },
 
           draw_group = function(data, panel_scales, coord) {
             # Find the points for the line to go all the way around
-            data <- transform(data, xminv = x,
-                              xmaxv = x + violinwidth * (xmax - x))
+            data <- dplyr::mutate(
+              data,
+              xminv = .data$x,
+              xmaxv = .data$x + .data$violinwidth * (.data$xmax - .data$x)
+            )
 
             # Make sure it's sorted properly to draw the outline
-            newdata <- rbind(dplyr::arrange(transform(data, x = xminv), y),
-                             dplyr::arrange(transform(data, x = xmaxv), -y))
+            newdata <- rbind(
+              dplyr::arrange(dplyr::mutate(data, x = .data$xminv), .data$y),
+              dplyr::arrange(dplyr::mutate(data, x = .data$xmaxv), dplyr::desc(.data$y))
+            )
 
             # Close the polygon: set first and last point the same
             # Needed for coord_polar and such
             newdata <- rbind(newdata, newdata[1,])
 
-            ggplot2:::ggname("geom_violinhalf", GeomPolygon$draw_panel(newdata, panel_scales, coord))
+            .grobName("geom_violinhalf", GeomPolygon$draw_panel(newdata, panel_scales, coord))
           },
 
           draw_key = draw_key_polygon,
@@ -88,3 +96,11 @@ GeomViolinHalf <-
 
 #' @keywords internal
 "%||%" <- function(a, b) if (!is.null(a)) a else b
+
+
+#' @importFrom grid grobName
+#' @keywords internal
+.grobName <- function(prefix, grob) {
+  grob$name <- grid::grobName(grob, prefix)
+  grob
+}
