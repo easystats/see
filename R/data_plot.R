@@ -20,8 +20,11 @@ print.data_plot <- function(x, ...){
 }
 
 
-#' @keywords internal
-.add_plotinfo <- function(x){
+#' Add information stored as attributes on plot
+#'
+#' @inheritParams data_plot
+#' @export
+add_plot_attributes <- function(x){
   info <- attributes(x)$info
   out <- list(ylab(info$ylab),
               xlab(info$xlab))
@@ -31,6 +34,9 @@ print.data_plot <- function(x, ...){
   }
   if(!is.null(info$legend_color)){
     out[[length(out)+1]] <- labs(color=info$legend_color)
+  }
+  if(!is.null(info$title)){
+    out[[length(out)+1]] <- labs(title=info$title)
   }
 
   return(out)

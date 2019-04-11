@@ -4,12 +4,20 @@
 \alias{theme_modern}
 \title{The easystats' minimal theme}
 \usage{
-theme_modern(legend.position = "right", axis.title.space = 20,
-  legend.title.size = 13, legend.text.size = 12,
-  axis.title.size = 13, axis.title.face = "plain",
-  axis.text.size = 12, tags.size = 15, tags.face = "bold")
+theme_modern(plot.title.size = 15, plot.title.face = "plain",
+  plot.title.space = 20, legend.position = "right",
+  axis.title.space = 20, legend.title.size = 13,
+  legend.text.size = 12, axis.title.size = 13,
+  axis.title.face = "plain", axis.text.size = 12, tags.size = 15,
+  tags.face = "bold")
 }
 \arguments{
+\item{plot.title.size}{Title size in pts. Can be "none".}
+
+\item{plot.title.face}{Title font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{plot.title.space}{Title spacing.}
+
 \item{legend.position}{the position of legends ("none", "left", "right",
 "bottom", "top", or two-element numeric vector)}
 
@@ -27,7 +35,7 @@ theme_modern(legend.position = "right", axis.title.space = 20,
 
 \item{tags.size}{Tags text size in pts.}
 
-\item{tags.face}{Tags font text ("plain", "italic", "bold", "bold.italic").}
+\item{tags.face}{Tags font face ("plain", "italic", "bold", "bold.italic").}
 }
 \description{
 A modern, sleek and elegant theme for ggplot.

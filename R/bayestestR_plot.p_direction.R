@@ -53,7 +53,8 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 
   attr(data_plot, "info") <- list("xlab" = "Possible values",
                                   "ylab" = "Parameters",
-                                  "legend_fill" = "Effect direction")
+                                  "legend_fill" = "Effect direction",
+                                  "title" = "Probability of Direction")
 
   class(data_plot) <- c("data_plot", "p_direction", class(data_plot))
   data_plot
@@ -100,7 +101,7 @@ plot.p_direction <- function(x, data=NULL, ...){
     as.data.frame() %>%
     ggplot(aes_string(x="x", y="y", height="height", group="y", fill="fill")) +
     ggridges::geom_ridgeline_gradient() +
-    .add_plotinfo(x) +
+    add_plot_attributes(x) +
     geom_vline(aes(xintercept=0))
 
   p

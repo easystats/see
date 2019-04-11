@@ -3,6 +3,7 @@
 S3method(data_plot,p_direction)
 S3method(plot,p_direction)
 S3method(print,data_plot)
+export(add_plot_attributes)
 export(data_plot)
 export(geom_jitter2)
 export(geom_point2)

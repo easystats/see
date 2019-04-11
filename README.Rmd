@@ -157,6 +157,7 @@ library(rstanarm)
 library(bayestestR)
 
 junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris))
+
 plot(p_direction(model)) +
   theme_modern() +
   scale_fill_manual(values=c("red", "green"))
