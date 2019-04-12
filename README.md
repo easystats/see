@@ -49,10 +49,10 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 
 ``` r
 p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_boxplot() + theme_modern() + scale_fill_material_d()
+    geom_boxplot() + theme_modern(axis.text.angle = 45) + scale_fill_material_d()
 
 p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_violin() + theme_modern() + scale_fill_material_d(palette = "ice")
+    geom_violin() + theme_modern(axis.text.angle = 45) + scale_fill_material_d(palette = "ice")
 
 p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) + 
     geom_point2() + theme_modern() + scale_color_material_c(palette = "rainbow")

@@ -4,7 +4,7 @@ output:
     toc: false
     fig_width: 10.08
     fig_height: 6
-tags: [r, reports]
+tags: [readme]
 vignette: >
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
@@ -76,12 +76,12 @@ ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) +
 ```{r warning=FALSE, message=FALSE, dpi=300}
 p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_boxplot() +
-  theme_modern() +
+  theme_modern(axis.text.angle=45) +
   scale_fill_material_d()
 
 p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +
-  theme_modern() +
+  theme_modern(axis.text.angle=45) +
   scale_fill_material_d(palette = "ice")
 
 p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
