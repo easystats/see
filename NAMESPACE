@@ -2,8 +2,10 @@
 
 S3method(data_plot,hdi)
 S3method(data_plot,p_direction)
+S3method(data_plot,rope)
 S3method(plot,hdi)
 S3method(plot,p_direction)
+S3method(plot,rope)
 S3method(print,data_plot)
 export("%>%")
 export(add_plot_attributes)

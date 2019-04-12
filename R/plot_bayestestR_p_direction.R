@@ -51,7 +51,7 @@ data_plot.p_direction <- function(x, data=NULL, ...){
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
-  attr(dataplot, "info") <- list("xlab" = "Possible values",
+  attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
                                   "ylab" = "Parameters",
                                   "legend_fill" = "Effect direction",
                                   "title" = "Probability of Direction")

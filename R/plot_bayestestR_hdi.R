@@ -20,6 +20,13 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.hdi <- function(x, data=NULL, ...){
+  .data_plot_hdi(x, data)
+}
+
+
+
+#' @keywords internal
+.data_plot_hdi <- function(x, data=NULL, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -44,10 +51,10 @@ data_plot.hdi <- function(x, data=NULL, ...){
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
-  attr(dataplot, "info") <- list("xlab" = "Possible values",
-                                  "ylab" = "Parameters",
-                                  "legend_fill" = "HDI",
-                                  "title" = "Highest Density Interval (HDI)")
+  attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
+                                 "ylab" = "Parameters",
+                                 "legend_fill" = "HDI",
+                                 "title" = "Highest Density Interval (HDI)")
 
   class(dataplot) <- c("data_plot", "hdi", class(dataplot))
   dataplot

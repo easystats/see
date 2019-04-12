@@ -109,7 +109,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 
 ### BayestestR support
 
-#### Probability of Direction (pd)
+#### Highest Density Interval (HDI)
 
 ``` r
 library(rstanarm)
@@ -125,6 +125,8 @@ plot(result) + theme_modern() + scale_fill_brewer(palette = "Purples",
 
 ![](man/figures/unnamed-chunk-11-1.png)<!-- -->
 
+#### Probability of Direction (pd)
+
 ``` r
 model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
     data = iris)
@@ -135,3 +137,17 @@ plot(result) + theme_modern() + scale_fill_manual(values = c("red",
 ```
 
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+
+#### Region of Practical Equivalence
+
+``` r
+# model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width *
+# Species, data=iris)
+data <- rnorm(5000, 1, 0.5)
+result <- rope(data, ci = c(0.5, 0.75, 0.9, 0.95))
+
+plot(result, data = data, rope_color = "red") + theme_modern() + 
+    scale_fill_brewer(palette = "Greens", direction = -1)
+```
+
+![](man/figures/unnamed-chunk-15-1.png)<!-- -->
