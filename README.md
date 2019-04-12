@@ -117,10 +117,21 @@ library(bayestestR)
 
 model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
     data = iris)
+result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
+
+plot(result) + theme_modern() + scale_fill_brewer(palette = "Purples", 
+    direction = -1)
+```
+
+![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+
+``` r
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
+    data = iris)
 result <- p_direction(model)
 
 plot(result) + theme_modern() + scale_fill_manual(values = c("red", 
     "green"))
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->

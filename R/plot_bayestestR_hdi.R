@@ -6,46 +6,39 @@
 #' library(see)
 #'
 #' data <- rnorm(1000, 1)
-#' x <- p_direction(data)
+#' x <- hdi(data, c(0.8, 0.9))
 #' data <- data_plot(x, data)
 #' plot(data)
 #'
 #' \dontrun{
 #' library(rstanarm)
 #' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-#' x <- p_direction(model)
+#' x <- hdi(model)
 #' data <- data_plot(x)
 #' plot(data)
 #' }
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.p_direction <- function(x, data=NULL, ...){
+data_plot.hdi <- function(x, data=NULL, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
 
   data <- as.data.frame(data)
   if (ncol(data) > 1) {
-    levels_order <- rev(x$Parameter)
-    data <- data[, x$Parameter]
+    levels_order <- unique(rev(x$Parameter))
+    data <- data[, levels_order]
     dataplot <- data.frame()
     for (i in names(data)) {
-      dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i))
+      dataplot <- rbind(dataplot, .compute_densities_hdi(data[[i]], hdi=as.data.frame(x[x$Parameter == i, ]), name = i))
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
+    dataplot <- .compute_densities_hdi(x=data[, 1], hdi=x, name = "Posterior")
   }
 
   dataplot <- dataplot %>%
-    dplyr::group_by(.data$y, .data$fill) %>%
-    dplyr::mutate(n = dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by(.data$y) %>%
-    dplyr::mutate(prop = .data$n / dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(fill2 = ifelse(.data$prop >= .5, "Most probable", "Less probable")) %>%
-    dplyr::select(-dplyr::one_of("n", "prop"))
+    dplyr::select(dplyr::one_of("x", "y", "height", "fill"))
 
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
@@ -53,10 +46,10 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 
   attr(dataplot, "info") <- list("xlab" = "Possible values",
                                   "ylab" = "Parameters",
-                                  "legend_fill" = "Effect direction",
-                                  "title" = "Probability of Direction")
+                                  "legend_fill" = "HDI",
+                                  "title" = "Highest Density Interval (HDI)")
 
-  class(dataplot) <- c("data_plot", "p_direction", class(dataplot))
+  class(dataplot) <- c("data_plot", "hdi", class(dataplot))
   dataplot
 }
 
@@ -66,13 +59,15 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 #' @importFrom stats density
 #' @importFrom dplyr mutate
 #' @keywords internal
-.compute_densities_pd <- function(x, name = "Y"){
+.compute_densities_hdi <- function(x, hdi, name = "Y"){
+  hdi <- dplyr::arrange(hdi, dplyr::desc(.data$CI))
   out <- x %>%
     stats::density() %>%
     .as.data.frame_density() %>%
-    dplyr::mutate(fill = ifelse(.data$x < 0, "Negative", "Positive")) %>%
-    dplyr::mutate(height = .data$y, y = name)
-
+    dplyr::mutate(HDI_low = sapply(x, .classify_hdi, hdi$CI_low, c(100, hdi$CI)),
+                  HDI_high = sapply(x, .classify_hdi, rev(hdi$CI_high), c(rev(hdi$CI), 100)),
+                  fill = as.factor(ifelse(.data$HDI_low > .data$HDI_high, .data$HDI_low, .data$HDI_high)),
+                  height = .data$y, y = name)
   # normalize
   out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
   out
@@ -80,20 +75,47 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 
 
 
+
+
+
+#' @keywords internal
+.classify_hdi <- function(x, breakpoints, labels, if_lower = TRUE) {
+
+  limits <- list(
+    breakpoints = breakpoints,
+    labels = labels
+  )
+
+  check <- x < limits$breakpoints
+  if (TRUE %in% check) {
+    index <- min(which(check))
+  } else {
+    index <- length(limits$labels)
+  }
+  out <- limits$labels[index]
+  return(out)
+}
+
+
+
+
+
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
 #' @inheritParams data_plot
 #' @examples
+#' \dontrun{
 #' library(bayestestR)
 #' data <- rnorm(1000, 1)
-#' x <- p_direction(data)
+#' x <- hdi(data, ci=c(0.8, 0.9))
 #'
 #' plot(x, data) +
 #'   theme_modern()
 #'
+#' }
 #' @importFrom rlang .data
 #' @export
-plot.p_direction <- function(x, data=NULL, ...){
+plot.hdi <- function(x, data=NULL, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -108,9 +130,7 @@ plot.p_direction <- function(x, data=NULL, ...){
       fill = .data$fill
     )) +
     ggridges::geom_ridgeline_gradient() +
-    add_plot_attributes(x) +
-    geom_vline(aes(xintercept=0))
-
+    add_plot_attributes(x)
 
   p
 
