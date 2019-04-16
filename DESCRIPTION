@@ -14,6 +14,12 @@ Authors@R: c(
 		role = c("aut", "inv"), 
 		comment = c(ORCID = "0000-0001-5375-9967"))
 	)
+	person("Philip", 
+		"Waggoner", 
+		email = "philip.waggoner@gmail.com",
+		role = c("aut", "ctb"), 
+		comment = c(ORCID = "0000-0002-7825-7573"))
+	)
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
 URL: https://github.com/easystats/see
 BugReports: https://github.com/easystats/see/issues
