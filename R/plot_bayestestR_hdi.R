@@ -143,3 +143,22 @@ plot.hdi <- function(x, data=NULL, ...){
 
 }
 
+#' View the plot source code to allow for easy manipulation
+#'
+#' @rdname data_plot
+#' @inheritParams data_plot
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' results <- hdi(rnorm(1000))
+#' 
+#' how_to_plot(results)
+#' }
+#' @export
+how_to_plot  <- function(x, source = TRUE) {
+  if (source == TRUE) {
+    getAnywhere("plot.hdi")
+  } else {
+    warning("Be sure to set 'source = TRUE' to access source code.")
+  }
+}
