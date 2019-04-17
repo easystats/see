@@ -5,6 +5,7 @@
 \alias{data_plot}
 \alias{data_plot.hdi}
 \alias{plot.hdi}
+\alias{how_to_plot}
 \alias{data_plot.p_direction}
 \alias{plot.p_direction}
 \alias{data_plot.rope}
@@ -16,6 +17,8 @@ data_plot(x, data = NULL, ...)
 \method{data_plot}{hdi}(x, data = NULL, ...)
 
 \method{plot}{hdi}(x, data = NULL, ...)
+
+how_to_plot(x, source = TRUE)
 
 \method{data_plot}{p_direction}(x, data = NULL, ...)
 
@@ -65,6 +68,12 @@ x <- hdi(data, ci=c(0.8, 0.9))
 plot(x, data) +
   theme_modern()
 
+}
+\dontrun{
+library(bayestestR)
+results <- hdi(rnorm(1000))
+
+how_to_plot(results)
 }
 
 library(bayestestR)
