@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple plots side by side — plots • see</title>
+<title>Objects exported from other packages — reexports • see</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,13 @@
 
 
 
-<meta property="og:title" content="Multiple plots side by side — plots" />
+<meta property="og:title" content="Objects exported from other packages — reexports" />
 
-<meta property="og:description" content="A wrapper around gridExtra::grid.arrange to plot multiple figures side by side on the same page." />
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  magrittr%&amp;gt;%
+" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -108,63 +112,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multiple plots side by side</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/see/blob/master/R/plots.R'><code>R/plots.R</code></a></small>
-    <div class="hidden name"><code>plots.Rd</code></div>
+    <h1>Objects exported from other packages</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/see/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A wrapper around gridExtra::grid.arrange to plot multiple figures side by side on the same page.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+<dl class='dl-horizontal'>
+  <dt>magrittr</dt><dd><p><code>%&gt;%</code></p></dd>
+</dl>
     
     </div>
 
-    <pre class="usage"><span class='fu'>plots</span>(<span class='no'>...</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>tags_labels</span> <span class='kw'>=</span> <span class='no'>LETTERS</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>grobs, gtables, ggplot or trellis objects</p></td>
-    </tr>
-    <tr>
-      <th>nrow</th>
-      <td><p>argument of gtable</p></td>
-    </tr>
-    <tr>
-      <th>ncol</th>
-      <td><p>argument of gtable</p></td>
-    </tr>
-    <tr>
-      <th>tags</th>
-      <td><p>Add tags to your subfigures.</p></td>
-    </tr>
-    <tr>
-      <th>tags_labels</th>
-      <td><p>Character vector containing tags labels.</p></td>
-    </tr>
-    </table>
-    
+        
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>see</span>)
-
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>Petal.Length</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>Sepal.Width</span>)) + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>()
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>Petal.Length</span>)) + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_density'>geom_density</a></span>()
-
-<span class='fu'>plots</span>(<span class='no'>p1</span>, <span class='no'>p2</span>)</div><div class='img'><img src='plots-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plots</span>(<span class='no'>p1</span>, <span class='no'>p2</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>tags</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='plots-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plots</span>(<span class='no'>p1</span>, <span class='no'>p2</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>tags</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>tags_labels</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Fig. 1"</span>, <span class='st'>"Fig. 2"</span>))</div><div class='img'><img src='plots-3.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

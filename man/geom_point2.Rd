@@ -5,18 +5,18 @@
 \alias{geom_jitter2}
 \title{Better looking points}
 \usage{
-geom_point2(size = 2, stroke = 0, shape = 16, ...)
+geom_point2(..., size = 2, stroke = 0, shape = 16)
 
-geom_jitter2(size = 2, stroke = 0, shape = 16, ...)
+geom_jitter2(..., size = 2, stroke = 0, shape = 16)
 }
 \arguments{
+\item{...}{Other arguments to be passed to \code{geom_point}.}
+
 \item{size}{Size of points.}
 
 \item{stroke}{Stroke thickness.}
 
 \item{shape}{Shape of points.}
-
-\item{...}{Other arguments to be passed to \code{geom_point}.}
 }
 \description{
 Somewhat nicer points (especially in case of transparency) without borders and contour.

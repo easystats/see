@@ -5,6 +5,7 @@
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a statistical model or such.
 #' @param ... Arguments passed to or from other methods.
+#'
 #' @export
 data_plot <- function(x, data=NULL, ...){
   UseMethod("data_plot")

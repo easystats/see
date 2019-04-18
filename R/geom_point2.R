@@ -22,7 +22,7 @@
 #' plots(normal, new, ncol=2)
 #'
 #' @export
-geom_point2 <- function(size=2, stroke = 0, shape=16, ...){
+geom_point2 <- function(..., size=2, stroke = 0, shape=16){
   geom_point(size = size, stroke = stroke, shape = shape, ...)
 }
 
@@ -30,6 +30,6 @@ geom_point2 <- function(size=2, stroke = 0, shape=16, ...){
 
 #' @rdname geom_point2
 #' @export
-geom_jitter2 <- function(size = 2, stroke = 0, shape = 16, ...){
+geom_jitter2 <- function(..., size = 2, stroke = 0, shape = 16){
   geom_jitter(size = size, stroke = stroke, shape = shape, ...)
 }

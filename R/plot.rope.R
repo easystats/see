@@ -2,19 +2,27 @@
 #' @inheritParams data_plot
 #' @examples
 #'
-#' library(bayestestR)
-#' library(see)
+#' # library(bayestestR)
+#' # library(see)
 #'
-#' data <- rnorm(1000, 1)
-#' x <- rope(data, ci=c(0.8, 0.9))
-#' data <- data_plot(x, data)
-#' plot(data)
+#' # data <- rnorm(1000, 1)
+#' # x <- rope(data)
+#' # data <- data_plot(x, data)
+#' # plot(data)
+#'
+#' # x <- rope(data, ci=c(0.8, 0.9))
+#' # data <- data_plot(x, data)
+#' # plot(data)
 #'
 #' \dontrun{
 #' library(rstanarm)
 #' data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
 #' x <- rope(data)
-#' data <- data_plot(x)
+#' data <- data_plot(x, data)
+#' plot(data)
+#'
+#' x <- rope(data, ci=c(0.8, 0.9))
+#' data <- data_plot(x, data)
 #' plot(data)
 #' }
 #' @importFrom dplyr group_by mutate ungroup select one_of n
@@ -25,11 +33,13 @@ data_plot.rope <- function(x, data=NULL, ...){
   }
 
   # Recontruct hdi
+  hdi <- attributes(x)$HDI_area
+
   if("Parameter" %in% x){
     stop("Models not supported yet.")
   }
   if(length(attributes(x)$HDI_area)==1){
-    hdi_area <- as.data.frame(t(unlist(attributes(x)$HDI_area)))
+    hdi_area <- as.data.frame(t(unlist()))
   } else{
     hdi_area <- as.data.frame(t(as.data.frame(attributes(x)$HDI_area)))
   }
@@ -69,13 +79,15 @@ data_plot.rope <- function(x, data=NULL, ...){
 #' @param rope_color Color of ROPE ribbon.
 #' @examples
 #' \dontrun{
-#' library(bayestestR)
-#' data <- rnorm(1000, 1)
-#' x <- rope(data, ci=c(0.8, 0.9))
+#' # library(bayestestR)
+#' # data <- rnorm(1000, 1)
+#' # x <- rope(data, ci=c(0.8, 0.9))
 #'
-#' plot(x, data) +
-#'   theme_modern()
+#' # plot(x, data) +
+#' #   theme_modern()
 #'
+#' # data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+#' # x <- rope(data, ci=c(0.8, 0.9))
 #' }
 #' @importFrom rlang .data
 #' @export
