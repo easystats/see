@@ -27,6 +27,7 @@
 theme_modern <- function(plot.title.size=15, plot.title.face="plain", plot.title.space=20, legend.position = "right", axis.title.space = 20, legend.title.size = 13, legend.text.size = 12, axis.title.size = 13, axis.title.face = "plain", axis.text.size = 12, axis.text.angle=NULL, tags.size=15, tags.face="bold") {
 
 
+
   # Remove legend title if necessary
   if (is.null(plot.title.size)) {
     plot.title.size <- element_text(size = plot.title.size, face = plot.title.face, margin=margin(0,0,plot.title.space,0))
@@ -69,7 +70,6 @@ theme_modern <- function(plot.title.size=15, plot.title.face="plain", plot.title
     hjust <- NULL
   }
 
-
   theme_classic() +
     theme(
       plot.title = plot.title.size,
@@ -88,4 +88,5 @@ theme_modern <- function(plot.title.size=15, plot.title.face="plain", plot.title
       strip.background = element_blank(),
       strip.text = element_text(face="bold")
     )
+
 }

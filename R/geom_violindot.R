@@ -26,6 +26,8 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
   if(is.null(color_dots) & is.null(fill_dots)){
     dotplot <- geom_dotplot(
       binaxis = "y",
+      mapping = mapping,
+      data = data,
       dotsize = size_dots,
       stackdir = "down",
       binwidth = binwidth,
@@ -36,6 +38,8 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
   } else if(!is.null(color_dots) & is.null(fill_dots)){
     dotplot <- geom_dotplot(
       color=color_dots,
+      mapping = mapping,
+      data = data,
       binaxis = "y",
       dotsize = size_dots,
       stackdir = "down",
@@ -47,6 +51,8 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
   } else if(is.null(color_dots) & !is.null(fill_dots)){
     dotplot <- geom_dotplot(
       fill=fill_dots,
+      mapping = mapping,
+      data = data,
       binaxis = "y",
       dotsize = size_dots,
       stackdir = "down",
@@ -59,6 +65,8 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
     dotplot <- geom_dotplot(
       color=color_dots,
       fill=fill_dots,
+      mapping = mapping,
+      data = data,
       binaxis = "y",
       dotsize = size_dots,
       stackdir = "down",

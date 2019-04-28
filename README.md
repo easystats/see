@@ -41,6 +41,24 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
+  - **Blackboard**
+
+<!-- end list -->
+
+``` r
+library(rstanarm)
+library(estimate)
+
+rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
+    estimate::estimate_fit(keep_draws = TRUE, length = 100, draws = 250) %>% 
+    estimate::reshape_draws() %>% ggplot(aes(x = Petal.Length, 
+    y = Draw, group = Draw_Index)) + geom_line(color = "white", 
+    alpha = 0.05) + scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 
+    0)) + theme_blackboard()
+```
+
+![](man/figures/unnamed-chunk-6-1.png)<!-- -->
+
 ### Palettes
 
   - **Material design**
@@ -64,7 +82,7 @@ The `plots` function allows us to plot the figures side by side.
 plots(p1, p2, p3, ncol = 2)
 ```
 
-![](man/figures/unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/unnamed-chunk-8-1.png)<!-- -->
 
 ### Multiple plots
 
@@ -76,7 +94,7 @@ plots(p1, p2, p3, ncol = 2, tags = TRUE, tags_labels = paste("Fig. ",
     1:3))
 ```
 
-![](man/figures/unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/unnamed-chunk-9-1.png)<!-- -->
 
 ### Better looking points
 
@@ -93,7 +111,7 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, ncol = 2)
 ```
 
-![](man/figures/unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/unnamed-chunk-10-1.png)<!-- -->
 
 ### Half-violin Half-dot plot
 
@@ -105,9 +123,9 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
     geom_violindot(fill_dots = "black") + theme_modern() + scale_fill_material_d()
 ```
 
-![](man/figures/unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/unnamed-chunk-11-1.png)<!-- -->
 
-### BayestestR support
+### [BayestestR](https://github.com/easystats/bayestestR)
 
 #### Highest Density Interval (HDI)
 
@@ -123,7 +141,7 @@ plot(result) + theme_modern() + scale_fill_brewer(palette = "Purples",
     direction = -1)
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 #### Probability of Direction (pd)
 
@@ -136,7 +154,7 @@ plot(result) + theme_modern() + scale_fill_manual(values = c("red",
     "green"))
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
 #### Region of Practical Equivalence
 
@@ -150,4 +168,22 @@ plot(result, data = data, rope_color = "red") + theme_modern() +
     scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 
-![](man/figures/unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/unnamed-chunk-17-1.png)<!-- -->
+
+### [estimate](https://github.com/easystats/estimate)
+
+#### Pairwise Contrasts
+
+``` r
+library(rstanarm)
+library(estimate)
+
+model <- stan_glm(Sepal.Width ~ Species, data = iris) + theme_modern()
+
+contrasts <- estimate_contrasts(model)
+means <- estimate_means(model)
+
+plot(contrasts, means)
+```
+
+![](man/figures/unnamed-chunk-19-1.png)<!-- -->
