@@ -43,7 +43,7 @@ data_plot.estimateContrasts <- function(x, data=NULL, ...){
 
   attr(dataplot, "info") <- list("xlab" = x_name,
                                  "ylab" = y_name,
-                                 "title" = paste0("Estimated ", y_name, " and Contrasts"))
+                                 "title" = paste0("Estimated ", y_name, "s and Contrasts"))
 
   class(dataplot) <- c("data_plot", "estimateContrasts", class(dataplot))
   dataplot

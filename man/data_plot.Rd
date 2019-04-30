@@ -120,28 +120,29 @@ plot(x, data) +
   theme_modern()
 
 
-# library(bayestestR)
-# library(see)
+library(bayestestR)
+library(see)
 
-# data <- rnorm(1000, 1)
-# x <- rope(data)
-# data <- data_plot(x, data)
-# plot(data)
+data <- rnorm(1000, 1)
 
-# x <- rope(data, ci=c(0.8, 0.9))
-# data <- data_plot(x, data)
-# plot(data)
+x <- rope(data)
+dataplot <- data_plot(x, data)
+plot(dataplot)
+
+x <- rope(data, ci=c(0.8, 0.9))
+dataplot <- data_plot(x, data)
+plot(dataplot)
 
 \dontrun{
 library(rstanarm)
 data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
 x <- rope(data)
-data <- data_plot(x, data)
-plot(data)
+dataplot <- data_plot(x, data)
+plot(dataplot)
 
 x <- rope(data, ci=c(0.8, 0.9))
-data <- data_plot(x, data)
-plot(data)
+dataplot <- data_plot(x, data)
+plot(dataplot)
 }
 \dontrun{
 # library(bayestestR)

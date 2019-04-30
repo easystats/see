@@ -90,8 +90,7 @@ The `plots` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
 
 ``` r
-plots(p1, p2, p3, ncol = 2, tags = TRUE, tags_labels = paste("Fig. ", 
-    1:3))
+plots(p1, p2, p3, ncol = 2, tags = paste("Fig. ", 1:3))
 ```
 
 ![](man/figures/unnamed-chunk-9-1.png)<!-- -->
@@ -156,15 +155,14 @@ plot(result) + theme_modern() + scale_fill_manual(values = c("red",
 
 ![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
-#### Region of Practical Equivalence
+#### Region of Practical Equivalence (ROPE)
 
 ``` r
-# model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width *
-# Species, data=iris)
-data <- rnorm(5000, 1, 0.5)
-result <- rope(data, ci = c(0.5, 0.75, 0.9, 0.95))
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
+    data = iris)
+result <- rope(model, ci = c(0.9, 0.95))
 
-plot(result, data = data, rope_color = "red") + theme_modern() + 
+plot(result, data = model, rope_color = "red") + theme_modern() + 
     scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 

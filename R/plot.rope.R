@@ -2,28 +2,29 @@
 #' @inheritParams data_plot
 #' @examples
 #'
-#' # library(bayestestR)
-#' # library(see)
+#' library(bayestestR)
+#' library(see)
 #'
-#' # data <- rnorm(1000, 1)
-#' # x <- rope(data)
-#' # data <- data_plot(x, data)
-#' # plot(data)
+#' data <- rnorm(1000, 1)
 #'
-#' # x <- rope(data, ci=c(0.8, 0.9))
-#' # data <- data_plot(x, data)
-#' # plot(data)
+#' x <- rope(data)
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
+#'
+#' x <- rope(data, ci=c(0.8, 0.9))
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
 #'
 #' \dontrun{
 #' library(rstanarm)
 #' data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
 #' x <- rope(data)
-#' data <- data_plot(x, data)
-#' plot(data)
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
 #'
 #' x <- rope(data, ci=c(0.8, 0.9))
-#' data <- data_plot(x, data)
-#' plot(data)
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
 #' }
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
@@ -35,18 +36,11 @@ data_plot.rope <- function(x, data=NULL, ...){
   # Recontruct hdi
   hdi <- attributes(x)$HDI_area
 
-  if("Parameter" %in% x){
-    stop("Models not supported yet.")
-  }
-  if(length(attributes(x)$HDI_area)==1){
-    hdi_area <- as.data.frame(t(unlist()))
-  } else{
-    hdi_area <- as.data.frame(t(as.data.frame(attributes(x)$HDI_area)))
-  }
-  hdi <- as.data.frame(cbind(x$CI, hdi_area))
-  names(hdi) <- c("CI", "CI_low", "CI_high")
-  if("Parameter" %in% x){
-    hdi$Parameter <- x$Parameter
+  if(!is.data.frame(hdi)){
+    for(i in names(hdi)){
+      hdi[[i]]$Parameter <- i
+      }
+    hdi <- do.call("rbind", hdi)
   }
 
   # Extract data HDI

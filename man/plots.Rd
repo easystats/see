@@ -4,8 +4,7 @@
 \alias{plots}
 \title{Multiple plots side by side}
 \usage{
-plots(..., nrow = NULL, ncol = NULL, tags = FALSE,
-  tags_labels = LETTERS)
+plots(..., nrow = NULL, ncol = NULL, tags = FALSE)
 }
 \arguments{
 \item{...}{grobs, gtables, ggplot or trellis objects}
@@ -14,9 +13,7 @@ plots(..., nrow = NULL, ncol = NULL, tags = FALSE,
 
 \item{ncol}{argument of gtable}
 
-\item{tags}{Add tags to your subfigures.}
-
-\item{tags_labels}{Character vector containing tags labels.}
+\item{tags}{Add tags to your subfigures. Can be \code{FALSE} (no tags), \code{TRUE} (letter tags) or character vector containing tags labels.}
 }
 \description{
 A wrapper around gridExtra::grid.arrange to plot multiple figures side by side on the same page.
@@ -30,6 +27,6 @@ p2 <- ggplot(iris, aes(x=Petal.Length)) + geom_density()
 
 plots(p1, p2)
 plots(p1, p2, ncol=2, tags=TRUE)
-plots(p1, p2, ncol=2, tags=TRUE, tags_labels=c("Fig. 1", "Fig. 2"))
+plots(p1, p2, ncol=2, tags=c("Fig. 1", "Fig. 2"))
 
 }
