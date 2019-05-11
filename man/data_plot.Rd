@@ -30,7 +30,7 @@ data_plot(x, data = NULL, ...)
 \method{data_plot}{rope}(x, data = NULL, ...)
 
 \method{plot}{rope}(x, data = NULL, rope_alpha = 0.5,
-  rope_color = "grey", ...)
+  rope_color = "cadetblue", ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -144,15 +144,18 @@ x <- rope(data, ci=c(0.8, 0.9))
 dataplot <- data_plot(x, data)
 plot(dataplot)
 }
+library(bayestestR)
+data <- rnorm(1000, 1)
+x <- rope(data, ci = c(0.8, 0.9))
+
+plot(x, data) +
+  theme_modern()
+
 \dontrun{
-# library(bayestestR)
-# data <- rnorm(1000, 1)
-# x <- rope(data, ci=c(0.8, 0.9))
+data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+x <- rope(data, ci = c(0.8, 0.9))
 
-# plot(x, data) +
-#   theme_modern()
-
-# data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-# x <- rope(data, ci=c(0.8, 0.9))
+plot(x, data) +
+  theme_modern()
 }
 }
