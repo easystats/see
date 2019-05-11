@@ -4,10 +4,110 @@
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a statistical model or such.
+#' @param rope_alpha Transparency level of ROPE ribbon.
+#' @param rope_color Color of ROPE ribbon.
 #' @param ... Arguments passed to or from other methods.
 #'
+#' @examples
+#'
+#' library(bayestestR)
+#' library(see)
+#'
+#' data <- rnorm(1000, 1)
+#'
+#' x <- rope(data)
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
+#'
+#' x <- rope(data, ci=c(0.8, 0.9))
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+#' x <- rope(data)
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
+#'
+#' x <- rope(data, ci=c(0.8, 0.9))
+#' dataplot <- data_plot(x, data)
+#' plot(dataplot)
+#' }
+#'
+#' library(bayestestR)
+#' data <- rnorm(1000, 1)
+#' x <- rope(data, ci = c(0.8, 0.9))
+#'
+#' plot(x, data) +
+#'   theme_modern()
+#'
+#' \dontrun{
+#' data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+#' x <- rope(data, ci = c(0.8, 0.9))
+#'
+#' plot(x, data) +
+#'   theme_modern()
+#' }
+#'
+#' library(bayestestR)
+#' library(see)
+#'
+#' data <- rnorm(1000, 1)
+#' x <- hdi(data, c(0.8, 0.9))
+#' data <- data_plot(x, data)
+#' plot(data)
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+#' x <- hdi(model)
+#' data <- data_plot(x)
+#' plot(data)
+#' }
+#'
+#' \dontrun{
+#' library(bayestestR)
+#' data <- rnorm(1000, 1)
+#' x <- hdi(data, ci=c(0.8, 0.9))
+#'
+#' plot(x, data) +
+#'   theme_modern()
+#'
+#' }
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' library(estimate)
+#'
+#' model <- stan_glm(Sepal.Width ~ Species, data=iris)
+#'
+#' contrasts <- estimate_contrasts(model, test=NULL)
+#' means <- estimate_means(model)
+#'
+#' data <- data_plot(contrasts, means)
+#'
+#' plot(data)
+#' }
+#'
+#' library(bayestestR)
+#' library(see)
+#'
+#' data <- rnorm(1000, 1)
+#' x <- p_direction(data)
+#' data <- data_plot(x, data)
+#' plot(data)
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+#' x <- p_direction(model)
+#' data <- data_plot(x)
+#' plot(data)
+#' }
+#'
 #' @export
-data_plot <- function(x, data=NULL, ...){
+data_plot <- function(x, data = NULL, ...){
   UseMethod("data_plot")
 }
 

@@ -1,31 +1,3 @@
-#' @rdname data_plot
-#' @inheritParams data_plot
-#' @examples
-#'
-#' library(bayestestR)
-#' library(see)
-#'
-#' data <- rnorm(1000, 1)
-#'
-#' x <- rope(data)
-#' dataplot <- data_plot(x, data)
-#' plot(dataplot)
-#'
-#' x <- rope(data, ci=c(0.8, 0.9))
-#' dataplot <- data_plot(x, data)
-#' plot(dataplot)
-#'
-#' \dontrun{
-#' library(rstanarm)
-#' data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-#' x <- rope(data)
-#' dataplot <- data_plot(x, data)
-#' plot(dataplot)
-#'
-#' x <- rope(data, ci=c(0.8, 0.9))
-#' dataplot <- data_plot(x, data)
-#' plot(dataplot)
-#' }
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.rope <- function(x, data = NULL, ...){
@@ -68,24 +40,6 @@ data_plot.rope <- function(x, data = NULL, ...){
 
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
-#' @inheritParams data_plot
-#' @param rope_alpha Transparency level of ROPE ribbon.
-#' @param rope_color Color of ROPE ribbon.
-#' @examples
-#' library(bayestestR)
-#' data <- rnorm(1000, 1)
-#' x <- rope(data, ci = c(0.8, 0.9))
-#'
-#' plot(x, data) +
-#'   theme_modern()
-#'
-#' \dontrun{
-#' data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-#' x <- rope(data, ci = c(0.8, 0.9))
-#'
-#' plot(x, data) +
-#'   theme_modern()
-#' }
 #' @importFrom rlang .data
 #' @export
 plot.rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", ...) {

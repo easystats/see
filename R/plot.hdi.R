@@ -1,25 +1,6 @@
-#' @rdname data_plot
-#' @inheritParams data_plot
-#' @examples
-#'
-#' library(bayestestR)
-#' library(see)
-#'
-#' data <- rnorm(1000, 1)
-#' x <- hdi(data, c(0.8, 0.9))
-#' data <- data_plot(x, data)
-#' plot(data)
-#'
-#' \dontrun{
-#' library(rstanarm)
-#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-#' x <- hdi(model)
-#' data <- data_plot(x)
-#' plot(data)
-#' }
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.hdi <- function(x, data=NULL, ...){
+data_plot.hdi <- function(x, data = NULL, ...){
   .data_plot_hdi(x, data)
 }
 
@@ -37,11 +18,14 @@ data_plot.hdi <- function(x, data=NULL, ...){
     data <- data[, levels_order]
     dataplot <- data.frame()
     for (i in names(data)) {
-      dataplot <- rbind(dataplot, .compute_densities_hdi(data[[i]], hdi=as.data.frame(x[x$Parameter == i, ]), name = i))
+      dataplot <- rbind(
+        dataplot,
+        .compute_densities_hdi(data[[i]], hdi = as.data.frame(x[x$Parameter == i, ]), name = i)
+      )
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_hdi(x=data[, 1], hdi=x, name = "Posterior")
+    dataplot <- .compute_densities_hdi(x = data[, 1], hdi = x, name = "Posterior")
   }
 
   dataplot <- dataplot %>%
@@ -100,7 +84,7 @@ data_plot.hdi <- function(x, data=NULL, ...){
     index <- length(limits$labels)
   }
   out <- limits$labels[index]
-  return(out)
+  out
 }
 
 
@@ -108,21 +92,9 @@ data_plot.hdi <- function(x, data=NULL, ...){
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
-#' @inheritParams data_plot
-#' @examples
-#' \dontrun{
-#' library(bayestestR)
-#' data <- rnorm(1000, 1)
-#' x <- hdi(data, ci=c(0.8, 0.9))
-#'
-#' plot(x, data) +
-#'   theme_modern()
-#'
-#' }
 #' @importFrom rlang .data
 #' @export
-plot.hdi <- function(x, data=NULL, ...){
+plot.hdi <- function(x, data = NULL, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -140,6 +112,5 @@ plot.hdi <- function(x, data=NULL, ...){
     add_plot_attributes(x)
 
   p
-
 }
 

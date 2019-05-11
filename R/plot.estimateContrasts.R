@@ -1,22 +1,6 @@
-#' @rdname data_plot
-#' @inheritParams data_plot
-#' @examples
-#' \dontrun{
-#' library(rstanarm)
-#' library(estimate)
-#'
-#' model <- stan_glm(Sepal.Width ~ Species, data=iris)
-#'
-#' contrasts <- estimate_contrasts(model, test=NULL)
-#' means <- estimate_means(model)
-#'
-#' data <- data_plot(contrasts, means)
-#'
-#' plot(data)
-#' }
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.estimateContrasts <- function(x, data=NULL, ...){
+data_plot.estimateContrasts <- function(x, data = NULL, ...){
   .data_plot_estimateContrasts(x, data)
 }
 
@@ -24,26 +8,25 @@ data_plot.estimateContrasts <- function(x, data=NULL, ...){
 
 
 
-
-
 #' @keywords internal
-.data_plot_estimateContrasts <- function(x, means=NULL, ...){
+.data_plot_estimateContrasts <- function(x, means = NULL, ...){
 
-  if(is.null(means)){
+  if (is.null(means)) {
     warning("Please provide the estimated means data obtained via 'estimate_means()'.")
-    means <- data.frame(x_name = unique(c(x$Level1, x$Level2)),
-                        Mean = 0)
+    means <- data.frame(x_name = unique(c(x$Level1, x$Level2)), Mean = 0)
     x_name <- "x_name"
   } else{
     x_name <- names(means)[1]
   }
 
   y_name <- c("Median", "Mean", "MAP")[c("Median", "Mean", "MAP") %in% names(means)][1]
-  dataplot <- .data_Contrasts_and_Means(x, means, x_name=x_name, y_name=y_name)
+  dataplot <- .data_Contrasts_and_Means(x, means, x_name = x_name, y_name = y_name)
 
-  attr(dataplot, "info") <- list("xlab" = x_name,
-                                 "ylab" = y_name,
-                                 "title" = paste0("Estimated ", y_name, "s and Contrasts"))
+  attr(dataplot, "info") <- list(
+    "xlab" = x_name,
+    "ylab" = y_name,
+    "title" = paste0("Estimated ", y_name, "s and Contrasts")
+  )
 
   class(dataplot) <- c("data_plot", "estimateContrasts", class(dataplot))
   dataplot
@@ -68,8 +51,8 @@ data_plot.estimateContrasts <- function(x, data=NULL, ...){
   data_means$ymin <- data_means$CI_low
   data_means$ymax <- data_means$CI_high
 
-  polygons <- merge(polygons, data_means[c("Level1", "Mean1")], by="Level1")
-  polygons <- merge(polygons, data_means[c("Level2", "Mean2")], by="Level2")
+  polygons <- merge(polygons, data_means[c("Level1", "Mean1")], by = "Level1")
+  polygons <- merge(polygons, data_means[c("Level2", "Mean2")], by = "Level2")
 
   polygons <- rbind(
     cbind(polygons, data.frame("x" = polygons$Level1, "y" = polygons$Mean1)),
