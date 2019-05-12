@@ -22,7 +22,6 @@
 #' plot(x)
 #' }
 #'
-#'
 #' data <- rnorm(1000, 1)
 #' x <- hdi(data, c(0.8, 0.9))
 #' plot(x) + theme_modern()
@@ -36,15 +35,13 @@
 #'
 #' data <- rnorm(1000, 1)
 #' x <- p_direction(data)
-#' data <- data_plot(x, data)
 #' plot(x)
 #'
 #' \dontrun{
 #' library(rstanarm)
-#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 #' x <- p_direction(model)
-#' data <- data_plot(x)
-#' plot(data)
+#' plot(x)
 #' }
 #'
 #' @export
