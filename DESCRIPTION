@@ -29,6 +29,7 @@ LazyData: true
 Depends:
   R (>= 3.0),
   graphics,
+  grDevices,
   stats
 Imports:
 	dplyr,
