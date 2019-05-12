@@ -92,6 +92,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
 
 
 # Plot --------------------------------------------------------------------
+#' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
 #' @export
 plot.hdi <- function(x, data = NULL, ...){
