@@ -57,7 +57,7 @@ plot.rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue"
       fill = .data$fill
     )) +
     ggridges::geom_ridgeline_gradient() +
-    ggplot2::annotate(
+    annotate(
       "rect",
       xmin = attributes(x)$info$rope_range[1],
       xmax = attributes(x)$info$rope_range[2],

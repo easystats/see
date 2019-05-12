@@ -68,24 +68,7 @@ data_plot.estimateContrasts <- function(x, data = NULL, ...){
 
 
 
-
-
-
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
-#' @inheritParams data_plot
-#' @examples
-#' \dontrun{
-#' library(rstanarm)
-#' library(estimate)
-#'
-#' model <- stan_glm(Sepal.Width ~ Species, data=iris)
-#'
-#' contrasts <- estimate_contrasts(model, test=NULL)
-#' means <- estimate_means(model)
-#'
-#' plot(contrasts, means)
-#' }
 #' @importFrom rlang .data
 #' @export
 plot.estimateContrasts <- function(x, data=NULL, ...){
@@ -94,10 +77,17 @@ plot.estimateContrasts <- function(x, data=NULL, ...){
   }
 
   p <- ggplot() +
-    geom_polygon(data=x$geom_polygon, aes(x = .data$x, y = .data$y, group=.data$group), alpha=0.1) +
-    geom_pointrange(data=x$geom_pointrange, aes(x=.data$x, y=.data$y, ymax=.data$ymax, ymin=.data$ymin), color="black") +
+    geom_polygon(
+      data = x$geom_polygon,
+      aes(x = .data$x, y = .data$y, group = .data$group),
+      alpha = 0.1
+    ) +
+    geom_pointrange(
+      data = x$geom_pointrange,
+      aes(x = .data$x, y = .data$y, ymax = .data$ymax, ymin = .data$ymin),
+      color = "black"
+    ) +
     add_plot_attributes(x)
+
   p
-
 }
-

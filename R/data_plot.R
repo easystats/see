@@ -44,6 +44,18 @@
 #' plot(x)
 #' }
 #'
+#' x <- equivalence_test(iris, ci = c(.8, .9))
+#' plot(x) +
+#'   theme_blackboard() +
+#'   scale_fill_material()
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#' x <- equivalence_test(model)
+#' plot(x)
+#' }
+#'
 #' @export
 data_plot <- function(x, data = NULL, ...){
   UseMethod("data_plot")
