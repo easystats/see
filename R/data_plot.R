@@ -159,7 +159,10 @@ add_plot_attributes <- function(x){
   # retrieve model
   data <- tryCatch(
     {
-      get(attributes(x)$object_name, envir = parent.frame())
+      if (!is.null(attr(x, "object_name", exact = TRUE)))
+        get(attributes(x)$object_name, envir = parent.frame())
+      else
+        attr(x, "data", exact = TRUE)
     },
     error = function(e) { NULL }
   )
