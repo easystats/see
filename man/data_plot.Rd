@@ -2,12 +2,12 @@
 % Please edit documentation in R/data_plot.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
-\alias{plot.rope}
+\alias{plot.rope_see}
 \title{Prepare an object for plotting}
 \usage{
 data_plot(x, data = NULL, ...)
 
-\method{plot}{rope}(x, data = NULL, rope_alpha = 0.5,
+\method{plot}{rope_see}(x, data = NULL, rope_alpha = 0.5,
   rope_color = "cadetblue", ...)
 }
 \arguments{
