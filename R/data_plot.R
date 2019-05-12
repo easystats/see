@@ -1,6 +1,7 @@
-#' Prepare an object for plotting
+#' @title Prepare objects for plotting or plot objects
+#' @name data_plot
 #'
-#' This function attempts to extract and tranform an object to be further plotted.
+#' @description This function attempts to extract and tranform an object to be further plotted.
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a statistical model or such.
@@ -92,14 +93,6 @@ add_plot_attributes <- function(x){
 
   out
 }
-
-
-
-
-
-
-
-
 
 
 

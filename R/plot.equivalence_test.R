@@ -1,6 +1,6 @@
 #' @importFrom ggridges geom_density_ridges2
 #' @export
-plot.equivalence_test_see <- function(x, ...) {
+plot.equivalence_test_see <- function(x, rope_color = "#0171D3", rope_alpha = .2, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -70,8 +70,6 @@ plot.equivalence_test_see <- function(x, ...) {
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-  rope.color <- "#0171D3"
-  rope.alpha <- 0.15
   x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
   legend.title <- "Decision on H0"
   labels <- levels(tmp$predictor)
@@ -82,18 +80,16 @@ plot.equivalence_test_see <- function(x, ...) {
   add.args <- lapply(match.call(expand.dots = F)$`...`, function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
-  if ("rope.color" %in% names(add.args)) rope.color <- eval(add.args[["rope.color"]])
-  if ("rope.alpha" %in% names(add.args)) rope.alpha <- eval(add.args[["rope.alpha"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
   if ("labels" %in% names(add.args)) labels <- eval(add.args[["labels"]])
 
-  rope.line.alpha <- 1.25 * rope.alpha
+  rope.line.alpha <- 1.25 * rope_alpha
   if (rope.line.alpha > 1) rope.line.alpha <- 1
 
 
   p <- ggplot(tmp, aes_string(x = "estimate", y = "predictor", fill = "grp")) +
-    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope.color, alpha = rope.alpha) +
-    geom_vline(xintercept = 0, colour = rope.color, size = .8, alpha = rope.line.alpha) +
+    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope_color, alpha = rope_alpha) +
+    geom_vline(xintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
     ggridges::geom_density_ridges2(rel_min_height = 0.01, scale = 2, alpha = .5) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +

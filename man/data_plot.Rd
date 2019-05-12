@@ -3,7 +3,7 @@
 \name{data_plot}
 \alias{data_plot}
 \alias{plot.rope_see}
-\title{Prepare an object for plotting}
+\title{Prepare objects for plotting or plot objects}
 \usage{
 data_plot(x, data = NULL, ...)
 

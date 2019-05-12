@@ -40,7 +40,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
                                  "legend_fill" = "HDI",
                                  "title" = "Highest Density Interval (HDI)")
 
-  class(dataplot) <- c("data_plot", "hdi", class(dataplot))
+  class(dataplot) <- c("data_plot", "hdi_see", class(dataplot))
   dataplot
 }
 
@@ -48,7 +48,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
 
 #' @importFrom rlang .data
 #' @importFrom stats density
-#' @importFrom dplyr mutate
+#' @importFrom dplyr mutate arrange desc
 #' @keywords internal
 .compute_densities_hdi <- function(x, hdi, name = "Y"){
   hdi <- dplyr::arrange(hdi, dplyr::desc(.data$CI))
@@ -67,11 +67,8 @@ data_plot.hdi <- function(x, data = NULL, ...){
 
 
 
-
-
 #' @keywords internal
 .classify_hdi <- function(x, breakpoints, labels, if_lower = TRUE) {
-
   limits <- list(
     breakpoints = breakpoints,
     labels = labels
@@ -95,7 +92,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
 #' @export
-plot.hdi <- function(x, data = NULL, ...){
+plot.hdi_see <- function(x, data = NULL, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
