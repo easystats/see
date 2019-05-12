@@ -29,94 +29,35 @@ data_plot(x, data = NULL, ...)
 This function attempts to extract and tranform an object to be further plotted.
 }
 \examples{
-
 library(bayestestR)
-library(see)
 
 data <- rnorm(1000, 1)
-
-x <- rope(data)
-dataplot <- data_plot(x, data)
-plot(dataplot)
-
-x <- rope(data, ci=c(0.8, 0.9))
-dataplot <- data_plot(x, data)
-plot(dataplot)
+x <- rope(data, ci = c(0.8, 0.9))
+plot(x)
 
 \dontrun{
 library(rstanarm)
-data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-x <- rope(data)
-dataplot <- data_plot(x, data)
-plot(dataplot)
-
-x <- rope(data, ci=c(0.8, 0.9))
-dataplot <- data_plot(x, data)
-plot(dataplot)
+model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+x <- rope(model)
+plot(x)
 }
 
-library(bayestestR)
-data <- rnorm(1000, 1)
-x <- rope(data, ci = c(0.8, 0.9))
-
-plot(x, data) +
-  theme_modern()
-
-\dontrun{
-data <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-x <- rope(data, ci = c(0.8, 0.9))
-
-plot(x, data) +
-  theme_modern()
-}
-
-library(bayestestR)
-library(see)
 
 data <- rnorm(1000, 1)
 x <- hdi(data, c(0.8, 0.9))
-data <- data_plot(x, data)
-plot(data)
+plot(x) + theme_modern()
 
 \dontrun{
 library(rstanarm)
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
+model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 x <- hdi(model)
-data <- data_plot(x)
-plot(data)
+plot(x) + theme_modern()
 }
-
-\dontrun{
-library(bayestestR)
-data <- rnorm(1000, 1)
-x <- hdi(data, ci=c(0.8, 0.9))
-
-plot(x, data) +
-  theme_modern()
-
-}
-
-\dontrun{
-library(rstanarm)
-library(estimate)
-
-model <- stan_glm(Sepal.Width ~ Species, data=iris)
-
-contrasts <- estimate_contrasts(model, test=NULL)
-means <- estimate_means(model)
-
-data <- data_plot(contrasts, means)
-
-plot(data)
-}
-
-library(bayestestR)
-library(see)
 
 data <- rnorm(1000, 1)
 x <- p_direction(data)
 data <- data_plot(x, data)
-plot(data)
+plot(x)
 
 \dontrun{
 library(rstanarm)

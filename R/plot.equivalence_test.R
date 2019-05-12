@@ -1,6 +1,6 @@
 #' @importFrom ggridges geom_density_ridges2
 #' @export
-plot.equivalence_test <- function(x, ...) {
+plot.equivalence_test_see <- function(x, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
