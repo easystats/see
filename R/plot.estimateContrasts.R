@@ -71,7 +71,7 @@ data_plot.estimateContrasts <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
 #' @export
-plot.estimateContrasts <- function(x, data=NULL, ...){
+plot.estimateContrasts <- function(x, data = NULL, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }

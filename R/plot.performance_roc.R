@@ -1,4 +1,3 @@
-#' @rdname data_plot
 #' @export
 plot.see_performance_roc <- function(x, ...) {
 

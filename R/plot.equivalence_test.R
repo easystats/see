@@ -1,4 +1,5 @@
 #' @importFrom ggridges geom_density_ridges2
+#' @rdname data_plot
 #' @export
 plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)

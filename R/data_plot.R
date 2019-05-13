@@ -9,6 +9,33 @@
 #' @param rope_color Color of ROPE ribbon.
 #' @param ... Arguments passed to or from other methods.
 #'
+#' @details \code{data_plot()} is in most situation not needed when the purpose
+#' is plotting, since most \code{plot()}-functions in \pkg{see} internally call
+#' \code{data_plot()} to prepare the data for plotting.
+#' \cr \cr
+#' Many \code{plot()}-functions have a \code{data}-argument that is needed when
+#' the data or model for plotting can't be retrieved via \code{data_plot()}. In
+#' such cases, \code{plot()} gives an error and asks for providing data or models.
+#' \cr \cr
+#' Most \code{plot()}-functions work out-of-the-box, i.e. you don't need to do
+#' much more than calling \code{plot(<object>)} (see 'Examples'). Some plot-functions
+#' allow to specify arguments to modify the transparancy or color of geoms, these
+#' are shown in the 'Usage' section.
+#' \cr \cr
+#' Plot-functions are available for objects from following functions (note that
+#' here functions from packages might be listet that are currently still in
+#' development):
+#' \itemize{
+#'   \item \code{bayestestR::ci()}
+#'   \item \code{bayestestR::equivalence_test()}
+#'   \item \code{bayestestR::hdi()}
+#'   \item \code{bayestestR::p_direction()}
+#'   \item \code{bayestestR::rope()}
+#'   \item \code{estimate::estimateContrasts()}
+#'   \item \code{performance::binned_residuals()}
+#'   \item \code{performance::roc()}
+#' }
+#'
 #' @examples
 #' library(bayestestR)
 #'

@@ -17,19 +17,19 @@
 #'
 #' @importFrom gridExtra grid.arrange
 #' @export
-plots <- function(..., nrow=NULL, ncol=NULL, tags=FALSE){
+plots <- function(..., nrow = NULL, ncol = NULL, tags = FALSE) {
 
   plot_list <- list(...)
 
   # Add tags
-  if(length(tags) == 1){
+  if (length(tags) == 1) {
     if (tags == TRUE) {
       tags_labels = LETTERS
     } else{
       tags_labels = NULL
     }
   } else{
-    if(length(tags) < length(plot_list)){
+    if (length(tags) < length(plot_list)) {
       warning("Not enough tags labels in list. Using letters instead.")
       tags_labels = LETTERS
     } else{
@@ -40,7 +40,7 @@ plots <- function(..., nrow=NULL, ncol=NULL, tags=FALSE){
 
   if (!is.null(tags_labels)) {
     for (i in 1:length(plot_list)) {
-      plot_list[[i]] <- plot_list[[i]] + ggplot2::labs(tag = tags_labels[i])
+      plot_list[[i]] <- plot_list[[i]] + labs(tag = tags_labels[i])
     }
   }
 
