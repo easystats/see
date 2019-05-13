@@ -21,7 +21,7 @@ Authors@R: c(
 		comment = c(ORCID = "0000-0002-7825-7573"))
 	)
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
-URL: https://github.com/easystats/see
+URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues
 Description: Provides plotting utilities supporting easystats objects.
 License: GPL-3

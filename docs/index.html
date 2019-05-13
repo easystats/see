@@ -53,14 +53,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/easystats/see">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -105,7 +98,20 @@
 <a class="sourceLine" id="cb3-2" title="2"></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Sepal.Width, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-4-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-4-1.png" width="4375"></p>
+<ul>
+<li><strong>Blackboard</strong></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(estimate)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Width <span class="op">~</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/poly">poly</a></span>(Petal.Length, <span class="dv">2</span>), <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">    </span>estimate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/estimate/topics/estimate_response">estimate_fit</a></span>(<span class="dt">keep_draws =</span> <span class="ot">TRUE</span>, <span class="dt">length =</span> <span class="dv">100</span>, <span class="dt">draws =</span> <span class="dv">250</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="st">    </span>estimate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/estimate/topics/reshape_draws">reshape_draws</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, </a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="dt">y =</span> Draw, <span class="dt">group =</span> Draw_Index)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">"white"</span>, </a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="dt">alpha =</span> <span class="fl">0.05</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_blackboard.html">theme_blackboard</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-6-1.png" width="4375"></p>
 </div>
 <div id="palettes" class="section level3">
 <h3 class="hasAnchor">
@@ -113,86 +119,116 @@
 <ul>
 <li><strong>Material design</strong></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>(<span class="dt">axis.text.angle =</span> <span class="dv">45</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a>
-<a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="st">    </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>(<span class="dt">axis.text.angle =</span> <span class="dv">45</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</a>
-<a class="sourceLine" id="cb4-6" title="6"></a>
-<a class="sourceLine" id="cb4-7" title="7">p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>(<span class="dt">axis.text.angle =</span> <span class="dv">45</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">    </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>(<span class="dt">axis.text.angle =</span> <span class="dv">45</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7">p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>)</a></code></pre></div>
 <p>The <code>plots</code> function allows us to plot the figures side by side.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-6-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-8-1.png" width="4375"></p>
 </div>
 <div id="multiple-plots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#multiple-plots" class="anchor"></a>Multiple plots</h3>
 <p>The <code>plots</code> function can also be used to add <strong>tags</strong> (<em>i.e.</em>, labels for subfigures).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">tags =</span> <span class="ot">TRUE</span>, <span class="dt">tags_labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Fig. "</span>, </a>
-<a class="sourceLine" id="cb6-2" title="2">    <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>))</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-7-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">tags =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Fig. "</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>))</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-9-1.png" width="4375"></p>
 </div>
 <div id="better-looking-points" class="section level3">
 <h3 class="hasAnchor">
 <a href="#better-looking-points" class="anchor"></a>Better looking points</h3>
 <p><code>geom_points2</code> and <code>geom_jitter2</code> allow points without borders and contour.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">normal &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a>
-<a class="sourceLine" id="cb7-3" title="3"></a>
-<a class="sourceLine" id="cb7-4" title="4">new &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>(<span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a>
-<a class="sourceLine" id="cb7-6" title="6"></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="kw"><a href="reference/plots.html">plots</a></span>(normal, new, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-8-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">normal &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4">new &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>(<span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="kw"><a href="reference/plots.html">plots</a></span>(normal, new, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-10-1.png" width="4375"></p>
 </div>
 <div id="half-violin-half-dot-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#half-violin-half-dot-plot" class="anchor"></a>Half-violin Half-dot plot</h3>
 <p>Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_violindot.html">geom_violindot</a></span>(<span class="dt">fill_dots =</span> <span class="st">"black"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-9-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_violindot.html">geom_violindot</a></span>(<span class="dt">fill_dots =</span> <span class="st">"black"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-11-1.png" width="4375"></p>
 </div>
-<div id="bayestestr-support" class="section level3">
+<div id="bayestestr" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bayestestr-support" class="anchor"></a>BayestestR support</h3>
+<a href="#bayestestr" class="anchor"></a><a href="https://github.com/easystats/bayestestR">BayestestR</a>
+</h3>
 <div id="highest-density-interval-hdi" class="section level4">
 <h4 class="hasAnchor">
 <a href="#highest-density-interval-hdi" class="anchor"></a>Highest Density Interval (HDI)</h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(bayestestR)</a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
-<a class="sourceLine" id="cb9-5" title="5">    <span class="dt">data =</span> iris)</a>
-<a class="sourceLine" id="cb9-6" title="6">result &lt;-<span class="st"> </span><span class="kw">hdi</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
-<a class="sourceLine" id="cb9-7" title="7"></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Purples"</span>, </a>
-<a class="sourceLine" id="cb9-9" title="9">    <span class="dt">direction =</span> <span class="dv">-1</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-11-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(bayestestR)</a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb10-6" title="6">result &lt;-<span class="st"> </span><span class="kw">hdi</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
+<a class="sourceLine" id="cb10-7" title="7"></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Purples"</span>, </a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="dt">direction =</span> <span class="dv">-1</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-13-1.png" width="4375"></p>
 </div>
 <div id="probability-of-direction-pd" class="section level4">
 <h4 class="hasAnchor">
 <a href="#probability-of-direction-pd" class="anchor"></a>Probability of Direction (pd)</h4>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
-<a class="sourceLine" id="cb10-2" title="2">    <span class="dt">data =</span> iris)</a>
-<a class="sourceLine" id="cb10-3" title="3">result &lt;-<span class="st"> </span><span class="kw">p_direction</span>(model)</a>
-<a class="sourceLine" id="cb10-4" title="4"></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"red"</span>, </a>
-<a class="sourceLine" id="cb10-6" title="6">    <span class="st">"green"</span>))</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-13-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb11-3" title="3">result &lt;-<span class="st"> </span><span class="kw">p_direction</span>(model)</a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"red"</span>, </a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="st">"green"</span>))</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-15-1.png" width="4375"></p>
 </div>
-<div id="region-of-practical-equivalence" class="section level4">
+<div id="region-of-practical-equivalence-rope" class="section level4">
 <h4 class="hasAnchor">
-<a href="#region-of-practical-equivalence" class="anchor"></a>Region of Practical Equivalence</h4>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># model &lt;- rstanarm::stan_glm(Sepal.Length ~ Petal.Width *</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co"># Species, data=iris)</span></a>
-<a class="sourceLine" id="cb11-3" title="3">data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">5000</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb11-4" title="4">result &lt;-<span class="st"> </span><span class="kw">rope</span>(data, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
-<a class="sourceLine" id="cb11-5" title="5"></a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">data =</span> data, <span class="dt">rope_color =</span> <span class="st">"red"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="st">    </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Greens"</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-15-1.png" width="2187.5"></p>
+<a href="#region-of-practical-equivalence-rope" class="anchor"></a>Region of Practical Equivalence (ROPE)</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
+<a class="sourceLine" id="cb12-2" title="2">    <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb12-3" title="3">result &lt;-<span class="st"> </span><span class="kw">rope</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">data =</span> model, <span class="dt">rope_color =</span> <span class="st">"red"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="st">    </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Greens"</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-17-1.png" width="4375"></p>
+</div>
+<div id="test-for-practical-equivalence" class="section level4">
+<h4 class="hasAnchor">
+<a href="#test-for-practical-equivalence" class="anchor"></a>Test for Practical Equivalence</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb13-2" title="2">result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model)</a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_blackboard.html">theme_blackboard</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material</a></span>()</a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6">result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-19-1.png" width="4375"><img src="reference/figures/unnamed-chunk-19-2.png" width="4375"></p>
+</div>
+</div>
+<div id="estimate" class="section level3">
+<h3 class="hasAnchor">
+<a href="#estimate" class="anchor"></a><a href="https://github.com/easystats/estimate">estimate</a>
+</h3>
+<div id="pairwise-contrasts" class="section level4">
+<h4 class="hasAnchor">
+<a href="#pairwise-contrasts" class="anchor"></a>Pairwise Contrasts</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(estimate)</a>
+<a class="sourceLine" id="cb14-3" title="3"></a>
+<a class="sourceLine" id="cb14-4" title="4">model &lt;-<span class="st"> </span><span class="kw">stan_glm</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a>
+<a class="sourceLine" id="cb14-5" title="5"></a>
+<a class="sourceLine" id="cb14-6" title="6">contrasts &lt;-<span class="st"> </span><span class="kw">estimate_contrasts</span>(model)</a>
+<a class="sourceLine" id="cb14-7" title="7">means &lt;-<span class="st"> </span><span class="kw">estimate_means</span>(model)</a>
+<a class="sourceLine" id="cb14-8" title="8"></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(contrasts, means)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-21-1.png" width="4375"></p>
 </div>
 </div>
 </div>
@@ -203,8 +239,6 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/easystats/see">https://​github.com/​easystats/​see</a>
-</li>
 <li>Report a bug at <br><a href="https://github.com/easystats/see/issues">https://​github.com/​easystats/​see/​issues</a>
 </li>
 </ul>
