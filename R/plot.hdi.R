@@ -40,7 +40,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
                                  "legend_fill" = "HDI",
                                  "title" = "Highest Density Interval (HDI)")
 
-  class(dataplot) <- c("data_plot", "hdi_see", class(dataplot))
+  class(dataplot) <- c("data_plot", "see_hdi", class(dataplot))
   dataplot
 }
 
@@ -92,7 +92,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
 #' @export
-plot.hdi_see <- function(x, data = NULL, ...) {
+plot.see_hdi <- function(x, data = NULL, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }

@@ -28,7 +28,7 @@ data_plot.rope <- function(x, data = NULL, ...){
   attributes(dataplot)$info$rope_range <- rope_range
   attributes(dataplot)$info$title <- "Region of Practical Equivalence (ROPE)"
 
-  class(dataplot) <- c("data_plot", "rope_see", "data.frame")
+  class(dataplot) <- c("data_plot", "see_rope", "data.frame")
   dataplot
 }
 
@@ -42,7 +42,7 @@ data_plot.rope <- function(x, data = NULL, ...){
 #' @rdname data_plot
 #' @importFrom rlang .data
 #' @export
-plot.rope_see <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", ...) {
+plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }

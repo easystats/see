@@ -37,7 +37,7 @@ data_plot.p_direction <- function(x, data = NULL, ...){
                                   "legend_fill" = "Effect direction",
                                   "title" = "Probability of Direction")
 
-  class(dataplot) <- c("data_plot", "p_direction_see", class(dataplot))
+  class(dataplot) <- c("data_plot", "see_p_direction", class(dataplot))
   dataplot
 }
 
@@ -64,7 +64,7 @@ data_plot.p_direction <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
 #' @export
-plot.p_direction_see <- function(x, data = NULL, ...){
+plot.see_p_direction <- function(x, data = NULL, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }

@@ -1,6 +1,6 @@
 #' @importFrom ggridges geom_density_ridges2
 #' @export
-plot.equivalence_test_see <- function(x, rope_color = "#0171D3", rope_alpha = .2, ...) {
+plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {

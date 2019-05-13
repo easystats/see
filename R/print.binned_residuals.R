@@ -1,7 +1,7 @@
 #' @importFrom graphics plot
 #' @importFrom scales percent
 #' @export
-print.binned_residuals_see <- function(x, ...) {
+print.see_binned_residuals <- function(x, ...) {
   x$se.lo <- -x$se
   if (length(unique(x$group)) > 1)
     ltitle <- "Within error bounds"
