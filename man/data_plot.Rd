@@ -27,7 +27,9 @@ data_plot(x, data = NULL, ...)
 \item{rope_alpha}{Transparency level of ROPE ribbon.}
 }
 \description{
-This function attempts to extract and tranform an object to be further plotted.
+\code{data_plot()} attempts to extract and tranform an object
+to be further plotted, while \code{plot()} tries to visualize results of
+functions from different packages of the \href{https://github.com/easystats}{easystats-project}.
 }
 \details{
 \code{data_plot()} is in most situation not needed when the purpose
@@ -44,8 +46,8 @@ allow to specify arguments to modify the transparancy or color of geoms, these
 are shown in the 'Usage' section.
 \cr \cr
 Plot-functions are available for objects from following functions (note that
-here functions from packages might be listet that are currently still in
-development):
+functions from packages might be listed here that are currently still in
+development and probably not yet available):
 \itemize{
   \item \code{bayestestR::ci()}
   \item \code{bayestestR::equivalence_test()}

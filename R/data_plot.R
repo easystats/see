@@ -1,7 +1,9 @@
 #' @title Prepare objects for plotting or plot objects
 #' @name data_plot
 #'
-#' @description This function attempts to extract and tranform an object to be further plotted.
+#' @description \code{data_plot()} attempts to extract and tranform an object
+#' to be further plotted, while \code{plot()} tries to visualize results of
+#' functions from different packages of the \href{https://github.com/easystats}{easystats-project}.
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a statistical model or such.
@@ -23,8 +25,8 @@
 #' are shown in the 'Usage' section.
 #' \cr \cr
 #' Plot-functions are available for objects from following functions (note that
-#' here functions from packages might be listet that are currently still in
-#' development):
+#' functions from packages might be listed here that are currently still in
+#' development and probably not yet available):
 #' \itemize{
 #'   \item \code{bayestestR::ci()}
 #'   \item \code{bayestestR::equivalence_test()}
