@@ -45,14 +45,9 @@
 #' plot(x)
 #' }
 #'
-#' x <- equivalence_test(iris, ci = c(.8, .9))
-#' plot(x) +
-#'   theme_blackboard() +
-#'   scale_fill_material()
-#'
 #' \dontrun{
 #' library(rstanarm)
-#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#' model <- stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars)
 #' x <- equivalence_test(model)
 #' plot(x)
 #' }
