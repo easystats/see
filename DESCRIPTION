@@ -38,6 +38,7 @@ Imports:
 	ggridges,
 	grid,
 	gridExtra,
+	insight,
 	magrittr,
 	rlang,
 	scales

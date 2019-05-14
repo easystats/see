@@ -42,6 +42,7 @@ how_to_plot.rope  <- function(x, ...) {
 
 
 
+#' @importFrom insight print_color
 #' @importFrom utils head tail getAnywhere
 #' @keywords internal
 .how_to_plode_cleaner <- function(name){
@@ -55,10 +56,13 @@ how_to_plot.rope  <- function(x, ...) {
   code <- utils::tail(utils::head(code, -2), -5)
   # Replace begining
   code <- gsub("p <- x", "data_plot(x)", code, fixed = TRUE)
+  # Remove .data$
+  code <- gsub(".data$", "", code, fixed = TRUE)
   # Split
   code <- gsub("+", "+\n ", code, fixed = TRUE)
   code <- gsub("%>%", "%>%\n ", code, fixed = TRUE)
 
-  paste0("Assuming that the input object is `x`:\n\n", trimws(code))
+  insight::print_color("# Assuming that the input object is `x`:\n\n", "cyan")
+  cat(trimws(code))
 }
 
