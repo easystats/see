@@ -2,6 +2,7 @@ Package: see
 Type: Package
 Title: Visualisation Toobox
 Version: 0.1.0
+Date: 2019-05-12
 Authors@R: c(
 	person("Daniel", 
 		"Lüdecke", 
@@ -20,7 +21,7 @@ Authors@R: c(
 		comment = c(ORCID = "0000-0002-7825-7573"))
 	)
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
-URL: https://github.com/easystats/see
+URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues
 Description: Provides plotting utilities supporting easystats objects.
 License: GPL-3
@@ -28,6 +29,8 @@ Encoding: UTF-8
 LazyData: true
 Depends:
   R (>= 3.0),
+  graphics,
+  grDevices,
   stats
 Imports:
 	dplyr,
@@ -35,8 +38,10 @@ Imports:
 	ggridges,
 	grid,
 	gridExtra,
+	insight,
 	magrittr,
-	rlang
+	rlang,
+	scales
 Suggests:
 	bayestestR,
 	covr,

@@ -1,13 +1,88 @@
-#' Prepare an object for plotting
+#' @title Prepare objects for plotting or plot objects
+#' @name data_plot
 #'
-#' This function attempts to extract and tranform an object to be further plotted.
+#' @description \code{data_plot()} attempts to extract and tranform an object
+#' to be further plotted, while \code{plot()} tries to visualize results of
+#' functions from different packages of the \href{https://github.com/easystats}{easystats-project}.
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a statistical model or such.
+#' @param rope_alpha Transparency level of ROPE ribbon.
+#' @param rope_color Color of ROPE ribbon.
 #' @param ... Arguments passed to or from other methods.
 #'
+#' @details \code{data_plot()} is in most situation not needed when the purpose
+#' is plotting, since most \code{plot()}-functions in \pkg{see} internally call
+#' \code{data_plot()} to prepare the data for plotting.
+#' \cr \cr
+#' Many \code{plot()}-functions have a \code{data}-argument that is needed when
+#' the data or model for plotting can't be retrieved via \code{data_plot()}. In
+#' such cases, \code{plot()} gives an error and asks for providing data or models.
+#' \cr \cr
+#' Most \code{plot()}-functions work out-of-the-box, i.e. you don't need to do
+#' much more than calling \code{plot(<object>)} (see 'Examples'). Some plot-functions
+#' allow to specify arguments to modify the transparancy or color of geoms, these
+#' are shown in the 'Usage' section.
+#' \cr \cr
+#' Plot-functions are available for objects from following functions (note that
+#' functions from packages might be listed here that are currently still in
+#' development and probably not yet available):
+#' \itemize{
+#'   \item \code{bayestestR::ci()}
+#'   \item \code{bayestestR::equivalence_test()}
+#'   \item \code{bayestestR::hdi()}
+#'   \item \code{bayestestR::p_direction()}
+#'   \item \code{bayestestR::rope()}
+#'   \item \code{estimate::estimateContrasts()}
+#'   \item \code{performance::binned_residuals()}
+#'   \item \code{performance::roc()}
+#' }
+#'
+#' @examples
+#' library(bayestestR)
+#'
+#' data <- rnorm(1000, 1)
+#' x <- rope(data, ci = c(0.8, 0.9))
+#' plot(x)
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#' x <- rope(model)
+#' plot(x)
+#' }
+#'
+#' data <- rnorm(1000, 1)
+#' x <- hdi(data, c(0.8, 0.9))
+#' plot(x) + theme_modern()
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#' x <- hdi(model)
+#' plot(x) + theme_modern()
+#' }
+#'
+#' data <- rnorm(1000, 1)
+#' x <- p_direction(data)
+#' plot(x)
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#' x <- p_direction(model)
+#' plot(x)
+#' }
+#'
+#' \dontrun{
+#' library(rstanarm)
+#' model <- stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars)
+#' x <- equivalence_test(model)
+#' plot(x)
+#' }
+#'
 #' @export
-data_plot <- function(x, data=NULL, ...){
+data_plot <- function(x, data = NULL, ...){
   UseMethod("data_plot")
 }
 
@@ -36,20 +111,12 @@ add_plot_attributes <- function(x){
   if (!is.null(info$legend_color)) {
     out[[length(out) + 1]] <- labs(color = info$legend_color)
   }
-  if(!is.null(info$title)){
-    out[[length(out)+1]] <- labs(title=info$title)
+  if (!is.null(info$title)) {
+    out[[length(out) + 1]] <- labs(title = info$title)
   }
 
   out
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -59,7 +126,10 @@ add_plot_attributes <- function(x){
   # retrieve model
   data <- tryCatch(
     {
-      get(attributes(x)$object_name, envir = parent.frame())
+      if (!is.null(attr(x, "object_name", exact = TRUE)))
+        get(attributes(x)$object_name, envir = parent.frame())
+      else
+        attr(x, "data", exact = TRUE)
     },
     error = function(e) { NULL }
   )

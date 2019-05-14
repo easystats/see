@@ -168,6 +168,20 @@ plot(result, data = model, rope_color = "red") + theme_modern() +
 
 ![](man/figures/unnamed-chunk-17-1.png)<!-- -->
 
+#### Test for Practical Equivalence
+
+``` r
+model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars)
+result <- equivalence_test(model)
+
+plot(result) + theme_blackboard() + scale_fill_material()
+
+result <- equivalence_test(model, ci = c(0.9, 0.95))
+plot(result)
+```
+
+![](man/figures/unnamed-chunk-19-1.png)<!-- -->![](man/figures/unnamed-chunk-19-2.png)<!-- -->
+
 ### [estimate](https://github.com/easystats/estimate)
 
 #### Pairwise Contrasts
@@ -184,4 +198,4 @@ means <- estimate_means(model)
 plot(contrasts, means)
 ```
 
-![](man/figures/unnamed-chunk-19-1.png)<!-- -->
+![](man/figures/unnamed-chunk-21-1.png)<!-- -->

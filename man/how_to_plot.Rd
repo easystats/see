@@ -2,15 +2,9 @@
 % Please edit documentation in R/how_to_plot.R
 \name{how_to_plot}
 \alias{how_to_plot}
-\alias{how_to_plot.hdi}
-\alias{how_to_plot.p_direction}
 \title{How to plot your object}
 \usage{
 how_to_plot(x, ...)
-
-\method{how_to_plot}{hdi}(x, ...)
-
-\method{how_to_plot}{p_direction}(x, ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -21,10 +15,7 @@ how_to_plot(x, ...)
 Access the source code used for plotting.
 }
 \examples{
-\dontrun{
 library(bayestestR)
 results <- hdi(rnorm(1000))
-
 how_to_plot(results)
-}
 }

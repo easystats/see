@@ -1,25 +1,6 @@
-#' @rdname data_plot
-#' @inheritParams data_plot
-#' @examples
-#'
-#' library(bayestestR)
-#' library(see)
-#'
-#' data <- rnorm(1000, 1)
-#' x <- p_direction(data)
-#' data <- data_plot(x, data)
-#' plot(data)
-#'
-#' \dontrun{
-#' library(rstanarm)
-#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data=iris)
-#' x <- p_direction(model)
-#' data <- data_plot(x)
-#' plot(data)
-#' }
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.p_direction <- function(x, data=NULL, ...){
+data_plot.p_direction <- function(x, data = NULL, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -56,7 +37,7 @@ data_plot.p_direction <- function(x, data=NULL, ...){
                                   "legend_fill" = "Effect direction",
                                   "title" = "Probability of Direction")
 
-  class(dataplot) <- c("data_plot", "p_direction", class(dataplot))
+  class(dataplot) <- c("data_plot", "see_p_direction", class(dataplot))
   dataplot
 }
 
@@ -81,19 +62,9 @@ data_plot.p_direction <- function(x, data=NULL, ...){
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
-#' @inheritParams data_plot
-#' @examples
-#' library(bayestestR)
-#' data <- rnorm(1000, 1)
-#' x <- p_direction(data)
-#'
-#' plot(x, data) +
-#'   theme_modern()
-#'
 #' @importFrom rlang .data
 #' @export
-plot.p_direction <- function(x, data=NULL, ...){
+plot.see_p_direction <- function(x, data = NULL, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -109,10 +80,8 @@ plot.p_direction <- function(x, data=NULL, ...){
     )) +
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x) +
-    geom_vline(aes(xintercept=0))
-
+    geom_vline(aes(xintercept = 0))
 
   p
-
 }
 

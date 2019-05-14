@@ -1,13 +1,13 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.hdi <- function(x, data = NULL, ...){
-  .data_plot_hdi(x, data)
+data_plot.ci <- function(x, data = NULL, ...){
+  .data_plot_ci(x, data)
 }
 
 
 
 #' @keywords internal
-.data_plot_hdi <- function(x, data=NULL, ...){
+.data_plot_ci <- function(x, data=NULL, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -20,12 +20,12 @@ data_plot.hdi <- function(x, data = NULL, ...){
     for (i in names(data)) {
       dataplot <- rbind(
         dataplot,
-        .compute_densities_hdi(data[[i]], hdi = as.data.frame(x[x$Parameter == i, ]), name = i)
+        .compute_densities_ci(data[[i]], ci = as.data.frame(x[x$Parameter == i, ]), name = i)
       )
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_hdi(x = data[, 1], hdi = x, name = "Posterior")
+    dataplot <- .compute_densities_ci(x = data[, 1], ci = x, name = "Posterior")
   }
 
   dataplot <- dataplot %>%
@@ -37,10 +37,10 @@ data_plot.hdi <- function(x, data = NULL, ...){
 
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
                                  "ylab" = "Parameters",
-                                 "legend_fill" = "HDI",
-                                 "title" = "Highest Density Interval (HDI)")
+                                 "legend_fill" = "CI",
+                                 "title" = "Credicle Interval (CI)")
 
-  class(dataplot) <- c("data_plot", "see_hdi", class(dataplot))
+  class(dataplot) <- c("data_plot", "see_ci", class(dataplot))
   dataplot
 }
 
@@ -50,14 +50,14 @@ data_plot.hdi <- function(x, data = NULL, ...){
 #' @importFrom stats density
 #' @importFrom dplyr mutate arrange desc
 #' @keywords internal
-.compute_densities_hdi <- function(x, hdi, name = "Y"){
-  hdi <- dplyr::arrange(hdi, dplyr::desc(.data$CI))
+.compute_densities_ci <- function(x, ci, name = "Y"){
+  ci <- dplyr::arrange(ci, dplyr::desc(.data$CI))
   out <- x %>%
     stats::density() %>%
     .as.data.frame_density() %>%
-    dplyr::mutate(HDI_low = sapply(x, .classify_hdi, hdi$CI_low, c(100, hdi$CI)),
-                  HDI_high = sapply(x, .classify_hdi, rev(hdi$CI_high), c(rev(hdi$CI), 100)),
-                  fill = as.factor(ifelse(.data$HDI_low > .data$HDI_high, .data$HDI_low, .data$HDI_high)),
+    dplyr::mutate(CI_low = sapply(x, .classify_ci, ci$CI_low, c(100, ci$CI)),
+                  CI_high = sapply(x, .classify_ci, rev(ci$CI_high), c(rev(ci$CI), 100)),
+                  fill = as.factor(ifelse(.data$CI_low > .data$CI_high, .data$CI_low, .data$CI_high)),
                   height = .data$y, y = name)
   # normalize
   out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
@@ -68,7 +68,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
 
 
 #' @keywords internal
-.classify_hdi <- function(x, breakpoints, labels, if_lower = TRUE) {
+.classify_ci <- function(x, breakpoints, labels, if_lower = TRUE) {
   limits <- list(
     breakpoints = breakpoints,
     labels = labels
@@ -92,7 +92,7 @@ data_plot.hdi <- function(x, data = NULL, ...){
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
 #' @export
-plot.see_hdi <- function(x, data = NULL, ...) {
+plot.see_ci <- function(x, data = NULL, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
