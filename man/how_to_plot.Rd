@@ -15,7 +15,9 @@ how_to_plot(x, ...)
 Access the source code used for plotting.
 }
 \examples{
+\dontrun{
 library(bayestestR)
 results <- hdi(rnorm(1000))
 how_to_plot(results)
+}
 }

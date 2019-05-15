@@ -6,9 +6,11 @@
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
+#' \dontrun{
 #' library(bayestestR)
 #' results <- hdi(rnorm(1000))
 #' how_to_plot(results)
+#' }
 #' @export
 how_to_plot  <- function(x, ...) {
   UseMethod("how_to_plot")
