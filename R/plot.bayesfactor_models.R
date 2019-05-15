@@ -18,6 +18,7 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one","many"), value = c("
     ggplot(plot_data, aes(x = "", y = PostProb, fill = Model)) +
       geom_bar(width = 1, stat = "identity") +
       coord_polar("y", start = 0) +
+      labs(x = "", y = "") +
       if (value == "BF") {
         geom_text(aes(y = pos_txt, label = round(BF,2)))
       } else {
@@ -49,6 +50,7 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one","many"), value = c("
       geom_bar(width = 1, stat = "identity") +
       coord_polar("y", start = 0) +
       facet_wrap(~Model) +
+      labs(x = "", y = "") +
       if (value == "BF") {
         geom_text(aes(y = pos_txt, label = round(BF,2)))
       } else {
