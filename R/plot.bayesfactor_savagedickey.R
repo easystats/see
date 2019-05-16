@@ -9,6 +9,6 @@ plot.see_bayesfactor_savagedickey <- function(x, ...) {
     geom_area(alpha = 0.15) +
     geom_vline(xintercept = hypothesis, linetype = "dashed") +
     facet_wrap(~ind, scales = "free") +
-    labs(y = "Density") +
+    labs(y = "Density", color = "Distribution", fill = "Distribution", x = "") +
     theme(legend.position = "bottom")
 }
