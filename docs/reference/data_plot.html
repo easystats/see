@@ -39,7 +39,9 @@
 
 <meta property="og:title" content="Prepare objects for plotting or plot objects — data_plot" />
 
-<meta property="og:description" content="This function attempts to extract and tranform an object to be further plotted." />
+<meta property="og:description" content="data_plot() attempts to extract and tranform an object
+to be further plotted, while plot() tries to visualize results of
+functions from different packages of the easystats-project." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -110,11 +112,17 @@
 
     <div class="ref-description">
     
-    <p>This function attempts to extract and tranform an object to be further plotted.</p>
+    <p><code>data_plot()</code> attempts to extract and tranform an object
+to be further plotted, while <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot()</a></code> tries to visualize results of
+functions from different packages of the <a href='https://github.com/easystats'>easystats-project</a>.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>data_plot</span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for see_equivalence_test</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>rope_color</span> <span class='kw'>=</span> <span class='st'>"#0171D3"</span>,
+  <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_rope</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
@@ -136,14 +144,42 @@
       <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     <tr>
-      <th>rope_alpha</th>
-      <td><p>Transparency level of ROPE ribbon.</p></td>
-    </tr>
-    <tr>
       <th>rope_color</th>
       <td><p>Color of ROPE ribbon.</p></td>
     </tr>
+    <tr>
+      <th>rope_alpha</th>
+      <td><p>Transparency level of ROPE ribbon.</p></td>
+    </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>data_plot()</code> is in most situation not needed when the purpose
+is plotting, since most <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot()</a></code>-functions in <span class="pkg">see</span> internally call
+<code>data_plot()</code> to prepare the data for plotting.
+<br /> <br />
+Many <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot()</a></code>-functions have a <code>data</code>-argument that is needed when
+the data or model for plotting can't be retrieved via <code>data_plot()</code>. In
+such cases, <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot()</a></code> gives an error and asks for providing data or models.
+<br /> <br />
+Most <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot()</a></code>-functions work out-of-the-box, i.e. you don't need to do
+much more than calling <code>plot(&lt;object&gt;)</code> (see 'Examples'). Some plot-functions
+allow to specify arguments to modify the transparancy or color of geoms, these
+are shown in the 'Usage' section.
+<br /> <br />
+Plot-functions are available for objects from following functions (note that
+functions from packages might be listed here that are currently still in
+development and probably not yet available):</p><ul>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/ci'>bayestestR::ci()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/equivalence_test'>bayestestR::equivalence_test()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>bayestestR::hdi()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/p_direction'>bayestestR::p_direction()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>bayestestR::rope()</a></code></p></li>
+<li><p><code>estimate::estimateContrasts()</code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/binned_residuals'>performance::binned_residuals()</a></code></p></li>
+<li><p><code>performance::roc()</code></p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -188,7 +224,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

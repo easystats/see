@@ -10,5 +10,11 @@ material_colors(...)
 \item{...}{Character names of \href{https://www.materialui.co/colors}{material design colors}.}
 }
 \description{
-Extract material design colors as hex codes
+Can be used to get the hex code of specific colors from the material design color palette. Use \code{material_colors()} to see all available color.
+}
+\examples{
+material_colors()
+
+material_colors("indigo", "lime")
+
 }

@@ -39,7 +39,7 @@
 
 <meta property="og:title" content="Extract material design colors as hex codes — material_colors" />
 
-<meta property="og:description" content="Extract material design colors as hex codes" />
+<meta property="og:description" content="Can be used to get the hex code of specific colors from the material design color palette. Use material_colors() to see all available color." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -110,7 +110,7 @@
 
     <div class="ref-description">
     
-    <p>Extract material design colors as hex codes</p>
+    <p>Can be used to get the hex code of specific colors from the material design color palette. Use <code>material_colors()</code> to see all available color.</p>
     
     </div>
 
@@ -126,12 +126,26 @@
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>material_colors</span>()</div><div class='output co'>#&gt;         red        pink      purple deep purple      indigo        blue 
+#&gt;   "#f44336"   "#E91E63"   "#9C27B0"   "#673AB7"   "#3F51B5"   "#2196F3" 
+#&gt;  light blue        cyan        teal       green light green        lime 
+#&gt;   "#03A9F4"   "#00BCD4"   "#009688"   "#4CAF50"   "#8BC34A"   "#CDDC39" 
+#&gt;      yellow       amber      orange deep orange       brown        grey 
+#&gt;   "#FFEB3B"   "#FFC107"   "#FF9800"   "#FF5722"   "#795548"   "#9E9E9E" 
+#&gt;   blue grey 
+#&gt;   "#607D8B" </div><div class='input'>
+<span class='fu'>material_colors</span>(<span class='st'>"indigo"</span>, <span class='st'>"lime"</span>)</div><div class='output co'>#&gt;    indigo      lime 
+#&gt; "#3F51B5" "#CDDC39" </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
