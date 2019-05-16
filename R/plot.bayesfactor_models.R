@@ -14,17 +14,19 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one","many"), value = c("
     plot_data$BF <- log(plot_data$BF)
   }
 
-  if (n_pies == "one") {
-    ggplot(plot_data, aes(x = "", y = PostProb, fill = Model)) +
-      geom_bar(width = 1, stat = "identity") +
-      coord_polar("y", start = 0) +
-      labs(x = "", y = "") +
-      if (value == "BF") {
-        geom_text(aes(y = pos_txt, label = round(BF,2)))
-      } else {
-        geom_text(aes(y = pos_txt, label = round(PostProb*100,1)))
-      }
+  if (value == "BF") {
+    plot_data$label <- round(plot_data$BF,2)
+  } else {
+    plot_data$label <- round(plot_data$PostProb*100,1)
+  }
 
+  if (n_pies == "one") {
+    ggplot(plot_data, aes(x = "", y = .data$PostProb, fill = .data$Model)) +
+      geom_bar(width = 1, stat = "identity", color = "black", size = 1) +
+      geom_text(aes(y = .data$pos_txt, label = round(.data$label,2))) +
+      coord_polar("y", start = 0) +
+      scale_y_continuous(expand = c(0, 0)) +
+      labs(x = "", y = "", fill = "Model")
   } else {
     denominator <- attr(x,"denominator")
     denominator_name <- x$Model[denominator]
@@ -45,16 +47,17 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one","many"), value = c("
       do.call("rbind",.) %>%
       .[.$Model != denominator_name,]
 
+    if (value == "BF") {
+      plot_data2$label <- round(plot_data2$BF,2)
+    } else {
+      plot_data2$label <- round(plot_data2$PostProb*100,1)
+    }
 
-    ggplot(plot_data2, aes(x = "", y = pos_bar, fill = Type)) +
-      geom_bar(width = 1, stat = "identity") +
+    ggplot(plot_data2, aes(x = "", y = .data$pos_bar, fill = .data$Type)) +
+      geom_bar(width = 1, stat = "identity", color = "black", size = 1) +
+      geom_text(aes(y = .data$pos_txt, label = round(.data$label,2))) +
       coord_polar("y", start = 0) +
-      facet_wrap(~Model) +
-      labs(x = "", y = "") +
-      if (value == "BF") {
-        geom_text(aes(y = pos_txt, label = round(BF,2)))
-      } else {
-        geom_text(aes(y = pos_txt, label = round(PostProb*100,1)))
-      }
+      facet_wrap( ~ .data$Model) +
+      labs(x = "", y = "", fill = "Model")
   }
 }
