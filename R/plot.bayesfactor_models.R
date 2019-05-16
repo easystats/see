@@ -1,5 +1,5 @@
 #' @export
-plot.see_bayesfactor_models <- function(x, n_pies = c("one","many"), value = c("BF","Probability"), log = FALSE) {
+plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c("BF","Probability"), log = FALSE, ...) {
   n_pies <- match.arg(n_pies)
   value <- match.arg(value)
 
