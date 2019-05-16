@@ -11,7 +11,7 @@ palette_material(palette = "contrast", reverse = FALSE, ...)
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{...}{Additional arguments to pass to colorRampPalette().}
+\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
 The palette based on material design colors (https://www.materialui.co/colors).

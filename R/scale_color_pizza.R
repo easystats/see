@@ -1,35 +1,3 @@
-# # mytheme2 <- list(mytheme, scale_color_manual(values = mycolors))
-# library(ggplot2)
-# df <- data.frame(
-#   group = factor(c("tomato", "mozzarella", "basil"), levels = c("tomato", "mozzarella", "basil")),
-#   value = c(1, 1, 1)
-# )
-#
-# ggplot(df, aes(x=value, y="", fill=group))+
-#   geom_bar(stat = "identity") +
-#   coord_polar() +
-#   theme_minimal() +
-#   scale_fill_pizza()
-#
-# df <- data.frame(
-#   group = factor(c("tomato", "mozzarella", "basil"), levels = c("tomato", "mozzarella", "basil")),
-#   value = c(0.75, 0.20, 0.05)
-# )
-# ggplot(df, aes(x="", y=value, fill=group))+
-#   geom_bar(stat = "identity") +
-#   coord_polar("y") +
-#   theme_minimal() +
-#   scale_fill_pizza()
-
-
-
-
-
-
-
-
-
-
 # Scales -----------------------------------------------------------------
 
 
@@ -187,7 +155,7 @@ pizza_palettes <- list(
 #'
 #' @param palette Pizza type. Can be "margherita" (default) or "diavola".
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to colorRampPalette().
+#' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'
 #' @importFrom grDevices colorRampPalette
 #' @export
@@ -198,27 +166,4 @@ palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {
 
   grDevices::colorRampPalette(pal, ...)
 }
-
-
-
-
-# Theme --------------------------------------------------------------------
-
-
-
-#' Pizza theme
-#'
-#' A theme based on authentic neapolitan pizzas.
-#'
-#' @examples
-#' library(ggplot2)
-#' library(see)
-#'
-#' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
-#'   geom_point() +
-#'   theme_pizza()
-#' @export
-theme_pizza <- list(theme_minimal, scale_colour_pizza, scale_fill_pizza)
-
-
 

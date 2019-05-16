@@ -199,7 +199,6 @@ plot(result) +
 #### Probability of Direction (pd)
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 result <- p_direction(model)
 
 plot(result) +
@@ -207,8 +206,6 @@ plot(result) +
   scale_fill_manual(values = c("red", "green"))
 ```
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
-junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
-
 plot(p_direction(model)) +
   theme_modern() +
   scale_fill_manual(values = c("red", "green"))
@@ -217,7 +214,6 @@ plot(p_direction(model)) +
 #### Region of Practical Equivalence (ROPE)
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 result <- rope(model, ci = c(0.9, 0.95))
 
 plot(result, data = model, rope_color = "red") +
@@ -225,7 +221,6 @@ plot(result, data = model, rope_color = "red") +
   scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
-junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
 result <- rope(model, ci = c(0.9, 0.95))
 
 plot(result, data = model, rope_color = "red") +
@@ -245,9 +240,6 @@ result <- equivalence_test(model)
 plot(result) +
   theme_blackboard() +
   scale_fill_material()
-
-result <- equivalence_test(model, ci = c(.9, .95))
-plot(result)
 ```
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
 junk <- capture.output(model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars))
@@ -257,10 +249,42 @@ result <- equivalence_test(model)
 plot(result) +
   theme_blackboard() +
   scale_fill_material()
+```
 
+
+```{r warning=FALSE, message=FALSE, eval=TRUE}
 result <- equivalence_test(model, ci = c(.9, .95))
 plot(result)
 ```
+
+
+#### Bayes Factors (BFs)
+
+```{r warning=FALSE, message=FALSE, eval=TRUE}
+result <- bayesfactor_savagedickey(model)
+
+plot(result) +
+  theme_modern() +
+  scale_color_material() +
+  scale_fill_material()
+```
+
+```{r warning=FALSE, message=FALSE, eval=TRUE}
+lm0 <- lm(qsec ~ 1, data = mtcars)
+lm1 <- lm(qsec ~ drat, data = mtcars)
+lm2 <- lm(qsec ~ wt, data = mtcars)
+lm3 <- lm(qsec ~ drat + wt, data = mtcars)
+
+result <- bayesfactor_models(lm1, lm2, lm3, denominator=lm0)
+
+plot(result, n_pies = "one", value = "BF") +
+  scale_fill_pizza(reverse = TRUE)
+
+plot(result, n_pies = "many", value = "BF") +
+  scale_fill_pizza()
+```
+
+
 
 
 ### [estimate](https://github.com/easystats/estimate)

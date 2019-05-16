@@ -35,8 +35,9 @@ library("see")
 ``` r
 library(ggplot2)
 
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
-    geom_point2() + theme_modern()
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point2() +
+  theme_modern()
 ```
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
@@ -50,11 +51,13 @@ library(rstanarm)
 library(estimate)
 
 rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
-    estimate::estimate_fit(keep_draws = TRUE, length = 100, draws = 250) %>% 
-    estimate::reshape_draws() %>% ggplot(aes(x = Petal.Length, 
-    y = Draw, group = Draw_Index)) + geom_line(color = "white", 
-    alpha = 0.05) + scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 
-    0)) + theme_blackboard()
+  estimate::estimate_fit(keep_draws = TRUE, length = 100, draws = 250) %>% 
+  estimate::reshape_draws() %>% 
+  ggplot(aes(x = Petal.Length, y = Draw, group = Draw_Index)) +
+  geom_line(color = "white", alpha = 0.05) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme_blackboard() 
 ```
 
 ![](man/figures/unnamed-chunk-6-1.png)<!-- -->
@@ -66,14 +69,20 @@ rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>%
 <!-- end list -->
 
 ``` r
-p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_boxplot() + theme_modern(axis.text.angle = 45) + scale_fill_material_d()
+p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  theme_modern(axis.text.angle = 45) +
+  scale_fill_material_d()
 
-p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_violin() + theme_modern(axis.text.angle = 45) + scale_fill_material_d(palette = "ice")
+p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violin() +
+  theme_modern(axis.text.angle = 45) +
+  scale_fill_material_d(palette = "ice")
 
-p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) + 
-    geom_point2() + theme_modern() + scale_color_material_c(palette = "rainbow")
+p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+  geom_point2() +
+  theme_modern() +
+  scale_color_material_c(palette = "rainbow")
 ```
 
 The `plots` function allows us to plot the figures side by side.
@@ -90,7 +99,8 @@ The `plots` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
 
 ``` r
-plots(p1, p2, p3, ncol = 2, tags = paste("Fig. ", 1:3))
+plots(p1, p2, p3, ncol = 2, 
+      tags = paste("Fig. ", 1:3))
 ```
 
 ![](man/figures/unnamed-chunk-9-1.png)<!-- -->
@@ -101,11 +111,13 @@ plots(p1, p2, p3, ncol = 2, tags = paste("Fig. ", 1:3))
 contour.
 
 ``` r
-normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
-    geom_point(size = 8, alpha = 0.3) + theme_modern()
+normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
+  geom_point(size = 8, alpha = 0.3) +
+  theme_modern()
 
-new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
-    geom_point2(size = 8, alpha = 0.3) + theme_modern()
+new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
+  geom_point2(size = 8, alpha = 0.3) +
+  theme_modern()
 
 plots(normal, new, ncol = 2)
 ```
@@ -118,8 +130,10 @@ Create a half-violin half-dot plot, useful for visualising the
 distribution and the sample size at the same time.
 
 ``` r
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_violindot(fill_dots = "black") + theme_modern() + scale_fill_material_d()
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violindot(fill_dots = "black") +
+  theme_modern() +
+  scale_fill_material_d()
 ```
 
 ![](man/figures/unnamed-chunk-11-1.png)<!-- -->
@@ -132,12 +146,12 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 library(rstanarm)
 library(bayestestR)
 
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
-    data = iris)
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 
-plot(result) + theme_modern() + scale_fill_brewer(palette = "Purples", 
-    direction = -1)
+plot(result) +
+  theme_modern() +
+  scale_fill_brewer(palette = "Purples", direction = -1)
 ```
 
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
@@ -145,12 +159,11 @@ plot(result) + theme_modern() + scale_fill_brewer(palette = "Purples",
 #### Probability of Direction (pd)
 
 ``` r
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
-    data = iris)
 result <- p_direction(model)
 
-plot(result) + theme_modern() + scale_fill_manual(values = c("red", 
-    "green"))
+plot(result) +
+  theme_modern() +
+  scale_fill_manual(values = c("red", "green"))
 ```
 
 ![](man/figures/unnamed-chunk-15-1.png)<!-- -->
@@ -158,12 +171,11 @@ plot(result) + theme_modern() + scale_fill_manual(values = c("red",
 #### Region of Practical Equivalence (ROPE)
 
 ``` r
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, 
-    data = iris)
 result <- rope(model, ci = c(0.9, 0.95))
 
-plot(result, data = model, rope_color = "red") + theme_modern() + 
-    scale_fill_brewer(palette = "Greens", direction = -1)
+plot(result, data = model, rope_color = "red") +
+  theme_modern() +
+  scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 
 ![](man/figures/unnamed-chunk-17-1.png)<!-- -->
@@ -171,16 +183,60 @@ plot(result, data = model, rope_color = "red") + theme_modern() +
 #### Test for Practical Equivalence
 
 ``` r
-model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars)
+model <- rstanarm::stan_glm(
+  mpg ~ wt + gear + cyl + disp, data = mtcars
+)
 result <- equivalence_test(model)
 
-plot(result) + theme_blackboard() + scale_fill_material()
+plot(result) +
+  theme_blackboard() +
+  scale_fill_material()
+```
 
-result <- equivalence_test(model, ci = c(0.9, 0.95))
+![](man/figures/unnamed-chunk-19-1.png)<!-- -->
+
+``` r
+result <- equivalence_test(model, ci = c(.9, .95))
 plot(result)
 ```
 
-![](man/figures/unnamed-chunk-19-1.png)<!-- -->![](man/figures/unnamed-chunk-19-2.png)<!-- -->
+![](man/figures/unnamed-chunk-20-1.png)<!-- -->
+
+#### Bayes Factors (BFs)
+
+``` r
+result <- bayesfactor_savagedickey(model)
+## Sampling Priors
+
+plot(result) +
+  theme_modern() +
+  scale_color_material() +
+  scale_fill_material()
+```
+
+![](man/figures/unnamed-chunk-21-1.png)<!-- -->
+
+``` r
+lm0 <- lm(qsec ~ 1, data = mtcars)
+lm1 <- lm(qsec ~ drat, data = mtcars)
+lm2 <- lm(qsec ~ wt, data = mtcars)
+lm3 <- lm(qsec ~ drat + wt, data = mtcars)
+
+result <- bayesfactor_models(lm1, lm2, lm3, denominator=lm0)
+
+plot(result, n_pies = "one", value = "BF") +
+  scale_fill_pizza(reverse = TRUE)
+```
+
+![](man/figures/unnamed-chunk-22-1.png)<!-- -->
+
+``` r
+
+plot(result, n_pies = "many", value = "BF") +
+  scale_fill_pizza()
+```
+
+![](man/figures/unnamed-chunk-22-2.png)<!-- -->
 
 ### [estimate](https://github.com/easystats/estimate)
 
@@ -190,7 +246,8 @@ plot(result)
 library(rstanarm)
 library(estimate)
 
-model <- stan_glm(Sepal.Width ~ Species, data = iris) + theme_modern()
+model <- stan_glm(Sepal.Width ~ Species, data = iris) +
+  theme_modern()
 
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
@@ -198,4 +255,4 @@ means <- estimate_means(model)
 plot(contrasts, means)
 ```
 
-![](man/figures/unnamed-chunk-21-1.png)<!-- -->
+![](man/figures/unnamed-chunk-24-1.png)<!-- -->
