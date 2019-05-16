@@ -17,9 +17,9 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c(
 
   if (n_pies == "one") {
     if (value == "BF") {
-      plot_data$label <- round(plot_data$BF,2)
+      plot_data$label <- round(plot_data$BF, 2)
     } else if (value == "probability") {
-      plot_data$label <- round(plot_data$PostProb*100,1)
+      plot_data$label <- round(plot_data$PostProb * 100, 1)
     } else {
       plot_data$label <- ""
     }
@@ -33,7 +33,7 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c(
       scale_y_continuous(expand = c(0, 0)) +
       labs(x = "", y = "", fill = "Model")
   } else {
-    denominator <- attr(x,"denominator")
+    denominator <- attr(x, "denominator")
     denominator_name <- x$Model[denominator]
 
     plot_data2 <- plot_data %>%
