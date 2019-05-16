@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>How to plot your object — how_to_plot • see</title>
+<title>Pizza color palette — palette_pizza • see</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="How to plot your object — how_to_plot" />
+<meta property="og:title" content="Pizza color palette — palette_pizza" />
 
-<meta property="og:description" content="Access the source code used for plotting." />
+<meta property="og:description" content="The palette based on authentic neapolitan pizzas." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,62 +103,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>How to plot your object</h1>
+    <h1>Pizza color palette</h1>
     
-    <div class="hidden name"><code>how_to_plot.Rd</code></div>
+    <div class="hidden name"><code>palette_pizza.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Access the source code used for plotting.</p>
+    <p>The palette based on authentic neapolitan pizzas.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>how_to_plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>palette_pizza</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"margherita"</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>An object.</p></td>
+      <th>palette</th>
+      <td><p>Pizza type. Can be "margherita" (default) or "diavola".</p></td>
+    </tr>
+    <tr>
+      <th>reverse</th>
+      <td><p>Boolean indicating whether the palette should be reversed.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
+      <td><p>Additional arguments to pass to <code><a href='https://www.rdocumentation.org/packages/grDevices/topics/colorRamp'>colorRampPalette()</a></code>.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The plotting-capability of the <span class="pkg">see</span> package mainly evolve around
-two functions: <code><a href='data_plot.html'>data_plot()</a></code>, which prepares the data from various
-objects to bring it into shape for plotting, and <code><a href='data_plot.html'>plot()</a></code>,
-which takes the data from <code><a href='data_plot.html'>data_plot()</a></code> and creates the ggplot-object.
-Although ggplot-objects are easily modifiable, it is sometimes necessary to
-build up a plot from scratch, using the data that should be plotted. This
-is where <code>how_to_plot()</code> can help. It simply extracts and polishes the
-code from the various <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot()</a></code> methods and prints it to the console.
-This code can be used as "basis" for building own ggplots.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>bayestestR</span>)
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>))
-
-<span class='fu'>how_to_plot</span>(<span class='no'>results</span>)
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

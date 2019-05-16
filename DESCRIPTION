@@ -1,4 +1,4 @@
-Package: see
+﻿Package: see
 Type: Package
 Title: Visualisation Toobox
 Version: 0.1.0
@@ -18,7 +18,12 @@ Authors@R: c(
 		"Waggoner", 
 		email = "philip.waggoner@gmail.com",
 		role = c("aut", "ctb"), 
-		comment = c(ORCID = "0000-0002-7825-7573"))
+		comment = c(ORCID = "0000-0002-7825-7573")),
+	person("Mattan S.", 
+		"Ben-Shachar", 
+		role = c("aut"), 
+		email = "matanshm@post.bgu.ac.il", 
+		comment = c(ORCID = "0000-0002-4287-4801"))
 	)
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
 URL: https://easystats.github.io/see/
