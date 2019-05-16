@@ -24,7 +24,14 @@ material_colors_list <- c(
 
 #' Extract material design colors as hex codes
 #'
+#' Can be used to get the hex code of specific colors from the material design color palette. Use \code{material_colors()} to see all available color.
+#'
 #' @param ... Character names of \href{https://www.materialui.co/colors}{material design colors}.
+#'
+#' @examples
+#' material_colors()
+#'
+#' material_colors("indigo", "lime")
 #'
 #' @export
 material_colors <- function(...) {
@@ -42,11 +49,8 @@ material_colors <- function(...) {
 
 material_palettes <- list(
   `full`  = material_colors(),
-
   `ice`  = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
-
   `rainbow` = material_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "deep orange" ,"red", "pink"),
-
   `contrast` = material_colors("blue", "green", "amber", "purple", "red")
 )
 
