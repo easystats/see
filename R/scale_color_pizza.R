@@ -155,7 +155,7 @@ pizza_palettes <- list(
 #'
 #' @param palette Pizza type. Can be "margherita" (default) or "diavola".
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to colorRampPalette().
+#' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'
 #' @importFrom grDevices colorRampPalette
 #' @export
@@ -164,6 +164,6 @@ palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {
 
   if (reverse) pal <- rev(pal)
 
-  colorRampPalette(pal, ...)
+  grDevices::colorRampPalette(pal, ...)
 }
 

@@ -61,7 +61,7 @@ material_palettes <- list(
 #'
 #' @param palette Character name of palette in material_palettes. Can be "full", "ice", "rainbow" or "contrast" (default).
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to colorRampPalette().
+#' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'
 #' @importFrom grDevices colorRampPalette
 #' @export
@@ -70,7 +70,7 @@ palette_material <- function(palette = "contrast", reverse = FALSE, ...) {
 
   if (reverse) pal <- rev(pal)
 
-  colorRampPalette(pal, ...)
+  grDevices::colorRampPalette(pal, ...)
 }
 
 
