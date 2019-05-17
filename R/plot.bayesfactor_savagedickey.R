@@ -8,8 +8,8 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, ...) {
 
   d_points <- plot_data %>%
     dplyr::group_by(.data$ind, .data$Distribution) %>%
-    dplyr::summarise(y = .data$y[which.min(abs(.data$x))],
-                     x = .data$x[which.min(abs(.data$x))]) %>%
+    dplyr::summarise(y = .data$y[which.min(abs(.data$x - hypothesis))],
+                     x = .data$x[which.min(abs(.data$x - hypothesis))]) %>%
     dplyr::ungroup()
 
   # make sure point outline matches theme
