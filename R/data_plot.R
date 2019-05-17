@@ -7,11 +7,6 @@
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a statistical model or such.
-#' @param rope_alpha Transparency level of ROPE ribbon.
-#' @param rope_color Color of ROPE ribbon.
-#' @param n_pies
-#' @param value
-#' @param log
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @details \code{data_plot()} is in most situation not needed when the purpose

@@ -1,4 +1,7 @@
 #' @rdname data_plot
+#' @param n_pies Number of pies.
+#' @param value What value to display.
+#' @param log Show log-transformed Bayes factors.
 #' @export
 plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c("none", "BF", "probability"), log = FALSE, ...) {
   n_pies <- match.arg(n_pies)
@@ -43,14 +46,14 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c(
         PostProb <- PostProb[denominator]
       }) %>%
       rbind(within(plot_data,Type <- Model)) %>%
-      split(.$Model) %>%
+      split(.data$Model) %>%
       lapply(function(x) {
         x$pos_bar <- x$PostProb/sum(x$PostProb)
         x$pos_txt <- sum(x$pos_bar) + x$pos_bar / 2 - cumsum(x$pos_bar)
         x
       }) %>%
-      do.call("rbind",.) %>%
-      .[.$Model != denominator_name,]
+      do.call("rbind", .data) %>%
+      .data[.data$Model != denominator_name, ]
 
     plot_data2$Type <- factor(plot_data2$Type, levels = unique(plot_data2$Type))
 
