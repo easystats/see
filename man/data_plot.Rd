@@ -26,6 +26,12 @@ data_plot(x, data = NULL, ...)
 
 \item{...}{Arguments passed to or from other methods.}
 
+\item{n_pies}{Number of pies.}
+
+\item{value}{What value to display.}
+
+\item{log}{Show log-transformed Bayes factors.}
+
 \item{rope_color}{Color of ROPE ribbon.}
 
 \item{rope_alpha}{Transparency level of ROPE ribbon.}

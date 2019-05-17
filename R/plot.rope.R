@@ -41,6 +41,8 @@ data_plot.rope <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
 #' @importFrom rlang .data
+#' @param rope_alpha Transparency level of ROPE ribbon.
+#' @param rope_color Color of ROPE ribbon.
 #' @export
 plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", ...) {
   if (!"data_plot" %in% class(x)) {
@@ -56,6 +58,7 @@ plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetb
       group = .data$y,
       fill = .data$fill
     )) +
+    ggridges::geom_ridgeline_gradient() +
     annotate(
       "rect",
       xmin = attributes(x)$info$rope_range[1],
@@ -65,9 +68,7 @@ plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetb
       fill = rope_color,
       alpha = rope_alpha
     ) +
-    ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x)
-
   p
 }
 
