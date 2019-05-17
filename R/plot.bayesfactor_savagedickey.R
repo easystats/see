@@ -22,7 +22,7 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, ...) {
     geom_line(size = 1) +
     geom_area(alpha = 0.15) +
     geom_vline(xintercept = hypothesis, linetype = "dashed") +
-    geom_point(data = d_points, size = point_size) +
+    geom_point(data = d_points, size = point_size, pch = 21, colour = "white") +
     facet_wrap(~ind, scales = "free") +
     labs(y = "Density",
          color = "Distribution",
