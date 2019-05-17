@@ -1,6 +1,6 @@
 Package: see
 Type: Package
-Title: Visualisation Toolbox
+Title: Visualisation Toolbox and Extra Geoms, Themes and Color Palettes for 'ggplot2'
 Version: 0.1.0
 Date: 2019-05-12
 Authors@R: c(
@@ -28,7 +28,8 @@ Authors@R: c(
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
 URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues
-Description: Provides plotting utilities supporting easystats objects.
+Description: Provides plotting utilities supporting easystats objects and some extra themes, 
+    geoms, and scales for 'ggplot2'. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
