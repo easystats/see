@@ -33,7 +33,7 @@ plot.see_bayesfactor_models <-
           one_pie_data %>%
             dplyr::mutate(Type = .data$Model)) %>%
       dplyr::group_by(.data$Model) %>%
-      dplyr::mutate(pos_bar = .data$PostProb/sum(.data$PostProb),
+      dplyr::mutate(pos_bar = .data$PostProb / sum(.data$PostProb),
                     pos_txt = sum(.data$pos_bar) + .data$pos_bar / 2 - cumsum(.data$pos_bar)) %>%
       dplyr::filter(.data$Model != denominator_name) %>%
       dplyr::ungroup() %>%
