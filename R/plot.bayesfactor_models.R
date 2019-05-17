@@ -30,7 +30,7 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c(
     plot_data$Model <- factor(plot_data$Model, levels = unique(plot_data$Model))
 
     ggplot(plot_data, aes(x = "", y = .data$PostProb, fill = .data$Model)) +
-      geom_bar(width = 1, stat = "identity", color = "black", size = 1) +
+      geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
       geom_text(aes(y = .data$pos_txt, label = .data$label), position = position_nudge(.1)) +
       coord_polar("y", start = 0) +
       scale_y_continuous(expand = c(0, 0)) +
@@ -46,15 +46,15 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c(
         PostProb <- PostProb[denominator]
       }) %>%
       rbind(within(plot_data,Type <- Model)) %>%
-      split(.data$Model) %>%
-      lapply(function(x) {
-        x$pos_bar <- x$PostProb/sum(x$PostProb)
-        x$pos_txt <- sum(x$pos_bar) + x$pos_bar / 2 - cumsum(x$pos_bar)
-        x
+      split(.$Model) %>%
+      lapply(function(.x) {
+        .x$pos_bar <- .x$PostProb / sum(.x$PostProb)
+        .x$pos_txt <- sum(.x$pos_bar) + .x$pos_bar / 2 - cumsum(.x$pos_bar)
+        .x
       }) %>%
-      do.call("rbind", .data) %>%
-      .data[.data$Model != denominator_name, ]
+      do.call("rbind", .)
 
+    plot_data2 <- plot_data2[plot_data2$Model != denominator_name, ]
     plot_data2$Type <- factor(plot_data2$Type, levels = unique(plot_data2$Type))
 
     if (value == "BF") {
@@ -66,7 +66,7 @@ plot.see_bayesfactor_models <- function(x, n_pies = c("one", "many"), value = c(
     }
 
     ggplot(plot_data2, aes(x = "", y = .data$pos_bar, fill = .data$Type)) +
-      geom_bar(width = 1, stat = "identity", color = "black", size = 1) +
+      geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
       geom_text(aes(y = .data$pos_txt, label = .data$label), position = position_nudge(.1)) +
       coord_polar("y", start = 0) +
       facet_wrap( ~ .data$Model) +
