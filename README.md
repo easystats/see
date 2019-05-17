@@ -201,14 +201,16 @@ lm3 <- lm(qsec ~ drat + wt, data = mtcars)
 
 result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 
-plot(result, n_pies = "one", value = "BF") + scale_fill_pizza(reverse = TRUE)
+plot(result, n_pies = "one", value = "BF") + theme_modern() + 
+    scale_fill_pizza(reverse = TRUE)
 ```
 
 ![](man/figures/unnamed-chunk-22-1.png)<!-- -->
 
 ``` r
 
-plot(result, n_pies = "many", value = "BF") + scale_fill_pizza()
+plot(result, n_pies = "many", value = "BF") + theme_modern() + 
+    scale_fill_flat(palette = "rainbow", reverse = TRUE)
 ```
 
 ![](man/figures/unnamed-chunk-22-2.png)<!-- -->
