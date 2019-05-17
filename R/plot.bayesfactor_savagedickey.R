@@ -5,7 +5,7 @@ plot.see_bayesfactor_savagedickey <- function(x, ...) {
   hypothesis <- attr(x, "hypothesis")
 
   d_points <- plot_data %>%
-    dplyr::group_by(ind,Distribution) %>%
+    dplyr::group_by(.data$ind, .data$Distribution) %>%
     dplyr::summarise(y = .data$y[which.min(abs(.data$x))],
                      x = .data$x[which.min(abs(.data$x))]) %>%
     dplyr::ungroup()
@@ -20,7 +20,7 @@ plot.see_bayesfactor_savagedickey <- function(x, ...) {
     geom_line(size = 1) +
     geom_area(alpha = 0.15) +
     geom_vline(xintercept = hypothesis, linetype = "dashed") +
-    geom_point(data = d_points, color = "black") +
+    geom_point(data = d_points) +
     facet_wrap(~ind, scales = "free") +
     labs(y = "Density",
          color = "Distribution",
