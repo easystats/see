@@ -201,7 +201,7 @@ lm3 <- lm(qsec ~ drat + wt, data = mtcars)
 
 result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 
-plot(result, n_pies = "one", value = "BF") + theme_modern() + 
+plot(result, n_pies = "one", value = "probability") + theme_modern() + 
     scale_fill_pizza(reverse = TRUE)
 ```
 
