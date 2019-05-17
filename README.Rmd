@@ -23,8 +23,7 @@ knitr::opts_chunk$set(
   tidy = TRUE,
   fig.path = "man/figures/"
 )
-options(knitr.kable.NA = '',
-        digits = 4)
+options(knitr.kable.NA = '', digits = 4)
 ```
 
 
