@@ -17,7 +17,7 @@ editor_options:
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
-  dpi = 300,
+  dpi = 600,
   collapse = TRUE,
   tidy.opts = list(width.cutoff = 60),
   tidy = TRUE,
