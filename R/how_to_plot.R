@@ -58,7 +58,7 @@ how_to_plot.see_rope <- how_to_plot.rope
 
 #' @export
 how_to_plot.estimate_density  <- function(x, ...) {
-  cat(.how_to_plode_cleaner("plot.see_see_estimate_density"))
+  cat(.how_to_plode_cleaner("plot.see_estimate_density"))
 }
 #' @export
 how_to_plot.see_estimate_density <- how_to_plot.estimate_density

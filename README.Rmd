@@ -172,28 +172,44 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 library(bayestestR)
+library(rstanarm)
 
-df <- data.frame(replicate(4, rnorm(50)))
-result <- estimate_density(df)
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 
-plot(data_plot(result))
+result <- estimate_density(model)
+
+plot(result)
+```
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+library(bayestestR)
+library(rstanarm)
+
+junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
+
+result <- estimate_density(model)
+
+plot(result)
 ```
 
+```{r warning=FALSE, message=FALSE, eval=TRUE}
+plot(result, stack=FALSE)
+```
 
 
 #### Probability of Direction (pd)
 
-```{r warning=FALSE, message=FALSE, eval=FALSE}
+```{r warning=FALSE, message=FALSE, eval=TRUE}
 result <- p_direction(model)
 
 plot(result) +
   theme_modern() +
   scale_fill_manual(values = c("red", "green"))
 ```
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-plot(p_direction(model)) +
-  theme_modern() +
-  scale_fill_manual(values = c("red", "green"))
+
+Most of our plots can be easily *opened* via the `how_to_plot` function. This gives us the actual code used for plotting, that can then be easily extracted and tweaked to your needs.
+
+```{r warning=FALSE, message=FALSE, eval=TRUE}
+how_to_plot(result)
 ```
 
 

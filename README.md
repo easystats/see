@@ -137,21 +137,26 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 
 ### [BayestestR](https://github.com/easystats/bayestestR)
 
-#### Highest Density Interval (HDI)
+#### Density Estimation
 
 ``` r
-library(rstanarm)
 library(bayestestR)
+library(rstanarm)
 
 model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
-result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 
-plot(result) +
-  theme_modern() +
-  scale_fill_brewer(palette = "Purples", direction = -1)
+result <- estimate_density(model)
+
+plot(result)
 ```
 
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+
+``` r
+plot(result, stack=FALSE)
+```
+
+![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 #### Probability of Direction (pd)
 
@@ -165,6 +170,37 @@ plot(result) +
 
 ![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
+Most of our plots can be easily *opened* via the `how_to_plot` function.
+This gives us the actual code used for plotting, that can then be easily
+extracted and tweaked to your needs.
+
+``` r
+how_to_plot(result)
+## # Assuming that the input object is `x`:
+## 
+## data_plot(x) %>%
+##   as.data.frame() %>%
+##   ggplot(aes(x = x, y = y, height = height, group = y, fill = fill)) +
+##   ggridges::geom_ridgeline_gradient() +
+##   add_plot_attributes(x) +
+##   geom_vline(aes(xintercept = 0))
+```
+
+#### Highest Density Interval (HDI)
+
+``` r
+library(rstanarm)
+
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
+
+plot(result) +
+  theme_modern() +
+  scale_fill_brewer(palette = "Purples", direction = -1)
+```
+
+![](man/figures/unnamed-chunk-18-1.png)<!-- -->
+
 #### Region of Practical Equivalence (ROPE)
 
 ``` r
@@ -175,7 +211,7 @@ plot(result, data = model, rope_color = "red") +
   scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 
-![](man/figures/unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/unnamed-chunk-20-1.png)<!-- -->
 
 #### Test for Practical Equivalence
 
@@ -190,7 +226,7 @@ plot(result) +
   scale_fill_material()
 ```
 
-![](man/figures/unnamed-chunk-19-1.png)<!-- -->
+![](man/figures/unnamed-chunk-22-1.png)<!-- -->
 
 ``` r
 result <- equivalence_test(model, ci = c(.9, .95))
@@ -199,7 +235,7 @@ plot(result) +
     scale_fill_flat()
 ```
 
-![](man/figures/unnamed-chunk-20-1.png)<!-- -->
+![](man/figures/unnamed-chunk-23-1.png)<!-- -->
 
 #### Bayes Factors (BFs)
 
@@ -212,7 +248,7 @@ plot(result) +
   scale_fill_material()
 ```
 
-![](man/figures/unnamed-chunk-21-1.png)<!-- -->
+![](man/figures/unnamed-chunk-24-1.png)<!-- -->
 
 ``` r
 lm0 <- lm(qsec ~ 1, data = mtcars)
@@ -223,20 +259,18 @@ lm3 <- lm(qsec ~ drat + wt, data = mtcars)
 result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 
 plot(result, n_pies = "one", value = "probability") +
-  theme_modern() +
-  scale_fill_pizza(reverse = TRUE)
+  scale_fill_pizza(reverse = TRUE) 
 ```
 
-![](man/figures/unnamed-chunk-22-1.png)<!-- -->
+![](man/figures/unnamed-chunk-25-1.png)<!-- -->
 
 ``` r
 
 plot(result, n_pies = "many", value = "BF") +
-  theme_modern() +
   scale_fill_flat(palette = "rainbow", reverse = TRUE)
 ```
 
-![](man/figures/unnamed-chunk-22-2.png)<!-- -->
+![](man/figures/unnamed-chunk-25-2.png)<!-- -->
 
 ### [estimate](https://github.com/easystats/estimate)
 
@@ -255,4 +289,4 @@ means <- estimate_means(model)
 plot(contrasts, means)
 ```
 
-![](man/figures/unnamed-chunk-24-1.png)<!-- -->
+![](man/figures/unnamed-chunk-27-1.png)<!-- -->
