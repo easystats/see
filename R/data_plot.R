@@ -97,9 +97,33 @@ print.data_plot <- function(x, ...){
 
 
 
-#' Add information stored as attributes on plot
+#' Complete figure with its attributes
+#'
+#' The \link{data_plot} function usually stores information (such as title, axes labels etc.) as attributes. This function adds it to the plot.
 #'
 #' @inheritParams data_plot
+#' @examples
+#' \dontrun{
+#' library(rstanarm)
+#' library(bayestestR)
+#' library(see)
+#' library(ggplot2)
+#'
+#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#'
+#' result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
+#' data <- data_plot(result)
+#'
+#' p <- data %>%
+#'   ggplot(aes(x = x, y = y, height = height, group = y, fill = fill)) +
+#'   ggridges::geom_ridgeline_gradient()
+#'
+#' p
+#' p + add_plot_attributes(data)
+#'
+#' }
+#'
+#'
 #' @export
 add_plot_attributes <- function(x){
   info <- attributes(x)$info

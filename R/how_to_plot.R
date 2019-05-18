@@ -33,7 +33,6 @@ how_to_plot.hdi  <- function(x, ...) {
   cat(.how_to_plode_cleaner("plot.see_hdi"))
 }
 
-
 #' @export
 how_to_plot.ci  <- function(x, ...) {
   cat(.how_to_plode_cleaner("plot.see_ci"))

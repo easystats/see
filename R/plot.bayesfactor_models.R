@@ -2,6 +2,23 @@
 #' @param n_pies Number of pies.
 #' @param value What value to display.
 #' @param log Show log-transformed Bayes factors.
+#'
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' library(see)
+#'
+#' lm0 <- lm(qsec ~ 1, data = mtcars)
+#' lm1 <- lm(qsec ~ drat, data = mtcars)
+#' lm2 <- lm(qsec ~ wt, data = mtcars)
+#' lm3 <- lm(qsec ~ drat + wt, data = mtcars)
+#'
+#' result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
+#'
+#' plot(result, n_pies = "one", value = "probability") + theme_modern() +
+#'   scale_fill_pizza(reverse = TRUE)
+#' }
+#'
 #' @export
 plot.see_bayesfactor_models <-
   function(x,
@@ -64,13 +81,15 @@ plot.see_bayesfactor_models <-
       geom_text(aes(y = .data$pos_txt, label = .data$label), position = position_nudge(.1)) +
       coord_polar("y", start = 0) +
       scale_y_continuous(expand = c(0, 0)) +
-      labs(x = "", y = "", fill = "Model")
+      labs(x = "", y = "", fill = "Model") +
+      theme_void()
   } else {
     ggplot(many_pies_data, aes(x = "", y = .data$pos_bar, fill = .data$Type)) +
       geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
       geom_text(aes(y = .data$pos_txt, label = .data$label), position = position_nudge(.1)) +
       coord_polar("y", start = 0) +
       facet_wrap( ~ .data$Model) +
-      labs(x = "", y = "", fill = "Model")
+      labs(x = "", y = "", fill = "Model") +
+      theme_void()
   }
 }
