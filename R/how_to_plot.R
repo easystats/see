@@ -76,6 +76,8 @@ how_to_plot.see_estimate_density <- how_to_plot.estimate_density
 
   # Remove beginning and end of function
   code <- utils::tail(utils::head(code, -2), -5)
+  if (grepl(".remove_intercept", code[1], fixed = TRUE))
+    code <- utils::tail(code, -1)
   # Replace begining
   code <- gsub("p <- x", "data_plot(x)", code, fixed = TRUE)
   # Remove .data$
