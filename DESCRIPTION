@@ -53,11 +53,9 @@ Suggests:
 	bayestestR,
 	covr,
 	tidyr,
-	knitr,
 	rmarkdown,
 	rstanarm,
 	stringr,
 	testthat
 RoxygenNote: 6.1.1
 Language: en-GB
-VignetteBuilder: knitr
