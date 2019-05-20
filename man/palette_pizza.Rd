@@ -16,3 +16,7 @@ palette_pizza(palette = "margherita", reverse = FALSE, ...)
 \description{
 The palette based on authentic neapolitan pizzas.
 }
+\details{
+This function is usually not called directly, but from within
+  \code{\link[=scale_color_pizza]{scale_color_pizza()}}.
+}

@@ -138,10 +138,12 @@ flat_colors_list <- c(
 #'
 #' @param ... Character names of \href{https://www.materialui.co/flatuicolors}{material design colors}.
 #'
+#' @return A character vector with color-codes.
+#'
 #' @examples
 #' flat_colors()
 #'
-#' flat_colors("indigo", "lime")
+#' flat_colors("dark red", "teal")
 #'
 #' @export
 flat_colors <- function(...) {
@@ -171,11 +173,14 @@ flat_palettes <- list(
 
 #' Flat UI color palette
 #'
-#' The palette based on Flat UU colors (https://www.materialui.co/flatuicolors).
+#' The palette based on Flat UI colors (https://www.materialui.co/flatuicolors).
 #'
 #' @param palette Character name of palette in flat_palettes. Can be "full", "ice", "rainbow" or "contrast" (default).
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
+#'
+#' @details This function is usually not called directly, but from within
+#'   \code{\link[=scale_color_flat]{scale_color_flat()}}.
 #'
 #' @importFrom grDevices colorRampPalette
 #' @export

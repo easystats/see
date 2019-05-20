@@ -16,3 +16,7 @@ palette_material(palette = "contrast", reverse = FALSE, ...)
 \description{
 The palette based on material design colors (https://www.materialui.co/colors).
 }
+\details{
+This function is usually not called directly, but from within
+  \code{\link[=scale_color_material]{scale_color_material()}}.
+}

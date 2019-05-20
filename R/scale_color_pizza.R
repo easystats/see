@@ -157,6 +157,9 @@ pizza_palettes <- list(
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'
+#' @details This function is usually not called directly, but from within
+#'   \code{\link[=scale_color_pizza]{scale_color_pizza()}}.
+#'
 #' @importFrom grDevices colorRampPalette
 #' @export
 palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {

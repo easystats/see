@@ -14,5 +14,9 @@ palette_flat(palette = "contrast", reverse = FALSE, ...)
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based on Flat UU colors (https://www.materialui.co/flatuicolors).
+The palette based on Flat UI colors (https://www.materialui.co/flatuicolors).
+}
+\details{
+This function is usually not called directly, but from within
+  \code{\link[=scale_color_flat]{scale_color_flat()}}.
 }

@@ -141,6 +141,8 @@ material_colors_list <- c(
 #'
 #' @param ... Character names of \href{https://www.materialui.co/colors}{material design colors}.
 #'
+#' @return A character vector with color-codes.
+#'
 #' @examples
 #' material_colors()
 #'
@@ -179,6 +181,9 @@ material_palettes <- list(
 #' @param palette Character name of palette in material_palettes. Can be "full", "ice", "rainbow" or "contrast" (default).
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
+#'
+#' @details This function is usually not called directly, but from within
+#'   \code{\link[=scale_color_material]{scale_color_material()}}.
 #'
 #' @importFrom grDevices colorRampPalette
 #' @export

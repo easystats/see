@@ -99,7 +99,7 @@ print.data_plot <- function(x, ...){
 
 #' Complete figure with its attributes
 #'
-#' The \link{data_plot} function usually stores information (such as title, axes labels etc.) as attributes. This function adds it to the plot.
+#' The \link{data_plot} function usually stores information (such as title, axes labels etc.) as attributes. This function adds those information to the plot.
 #'
 #' @inheritParams data_plot
 #' @examples
@@ -120,7 +120,6 @@ print.data_plot <- function(x, ...){
 #'
 #' p
 #' p + add_plot_attributes(data)
-#'
 #' }
 #'
 #'

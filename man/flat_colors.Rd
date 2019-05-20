@@ -9,12 +9,15 @@ flat_colors(...)
 \arguments{
 \item{...}{Character names of \href{https://www.materialui.co/flatuicolors}{material design colors}.}
 }
+\value{
+A character vector with color-codes.
+}
 \description{
 Can be used to get the hex code of specific colors from the Flat UI color palette. Use \code{flat_colors()} to see all available color.
 }
 \examples{
 flat_colors()
 
-flat_colors("indigo", "lime")
+flat_colors("dark red", "teal")
 
 }
