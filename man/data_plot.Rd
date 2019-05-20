@@ -19,13 +19,13 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_bayesfactor_savagedickey}(x, point_size = 2, ...)
 
 \method{plot}{see_equivalence_test}(x, rope_color = "#0171D3",
-  rope_alpha = 0.2, ...)
+  rope_alpha = 0.2, show_intercept = FALSE, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
-  rope_color = "cadetblue", ...)
+  rope_color = "cadetblue", show_intercept = FALSE, ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -46,13 +46,13 @@ data_plot(x, data = NULL, ...)
 
 \item{rope_alpha}{Transparency level of ROPE ribbon.}
 
+\item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
+in the plot. By default, it is hidden because in many cases the intercept-parameter
+has posterior distribution on a very different location, so density curves of
+posterior distributions for other parameters are hardly visible.}
+
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
-
-\item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercet-parameter
-has a very different density, so density curves for other parameters are
-hardly visible.}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object

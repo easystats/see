@@ -92,10 +92,12 @@ data_plot.hdi <- function(x, data = NULL, ...){
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
 #' @export
-plot.see_hdi <- function(x, data = NULL, ...) {
+plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
+
+  x <- .remove_intercept(x, show_intercept)
 
   p <- x %>%
     as.data.frame() %>%

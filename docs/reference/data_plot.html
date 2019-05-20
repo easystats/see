@@ -131,6 +131,10 @@ functions from different packages of the <a href='https://github.com/easystats'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>rope_color</span> <span class='kw'>=</span> <span class='st'>"#0171D3"</span>,
   <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for see_estimate_density</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>stack</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
 <span class='co'># S3 method for see_rope</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
   <span class='kw'>rope_color</span> <span class='kw'>=</span> <span class='st'>"cadetblue"</span>, <span class='no'>...</span>)</pre>
@@ -173,6 +177,18 @@ functions from different packages of the <a href='https://github.com/easystats'>
     <tr>
       <th>rope_alpha</th>
       <td><p>Transparency level of ROPE ribbon.</p></td>
+    </tr>
+    <tr>
+      <th>stack</th>
+      <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
+Else, densities are plotted for each parameter among each other.</p></td>
+    </tr>
+    <tr>
+      <th>show_intercept</th>
+      <td><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
+in the plot. By default, it is hidden because in many cases the intercet-parameter
+has a very different density, so density curves for other parameters are
+hardly visible.</p></td>
     </tr>
     </table>
     

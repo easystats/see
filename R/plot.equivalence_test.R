@@ -2,7 +2,7 @@
 #' @rdname data_plot
 #' @inheritParams plot.see_rope
 #' @export
-plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, ...) {
+plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -28,7 +28,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
   # if we have intercept-only models, keep at least the intercept
   intercepts <- which(x$Parameter %in% c("Intercept", "(Intercept)", "b_Intercept"))
-  if (length(intercepts) && nrow(x) > length(intercepts)) {
+  if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
     x <- x[-intercepts, ]
   }
 

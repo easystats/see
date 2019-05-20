@@ -64,10 +64,12 @@ data_plot.p_direction <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
 #' @export
-plot.see_p_direction <- function(x, data = NULL, ...){
+plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
+
+  x <- .remove_intercept(x, show_intercept)
 
   p <- x %>%
     as.data.frame() %>%

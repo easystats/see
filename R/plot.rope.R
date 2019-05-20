@@ -44,10 +44,12 @@ data_plot.rope <- function(x, data = NULL, ...){
 #' @param rope_alpha Transparency level of ROPE ribbon.
 #' @param rope_color Color of ROPE ribbon.
 #' @export
-plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", ...) {
+plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
+
+  x <- .remove_intercept(x, show_intercept)
 
   p <- x %>%
     as.data.frame() %>%
