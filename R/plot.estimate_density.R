@@ -3,7 +3,7 @@
 data_plot.estimate_density <- function(x, ...){
   dataplot <- x
 
-  if(!"Parameter" %in% names(dataplot)){
+  if (!"Parameter" %in% names(dataplot)) {
     dataplot$Parameter <- "Distribution"
   }
 
@@ -29,7 +29,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, ...){
     x <- data_plot(x, ...)
   }
 
-  if(stack == TRUE){
+  if (stack == TRUE) {
     p <- x %>%
       ggplot(aes(
         x = .data$x,
@@ -38,13 +38,12 @@ plot.see_estimate_density <- function(x, stack = TRUE, ...){
       )) +
       geom_line() +
       add_plot_attributes(x)
-  } else{
+  } else {
     p <- x %>%
       ggplot(aes(
         x = .data$x,
         y = .data$Parameter,
-        height = .data$y,
-        fill = .data$Parameter
+        height = .data$y
       )) +
       ggridges::geom_ridgeline_gradient() +
       add_plot_attributes(x)
