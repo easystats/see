@@ -243,6 +243,20 @@ development and probably not yet available):</p><ul>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/equivalence_test'>equivalence_test</a></span>(<span class='no'>model</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)
 <span class='co'># }</span><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>bayestestR</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>see</span>)
+
+<span class='no'>lm0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>qsec</span> ~ <span class='fl'>1</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>qsec</span> ~ <span class='no'>drat</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='no'>lm2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>qsec</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='no'>lm3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>qsec</span> ~ <span class='no'>drat</span> + <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+
+<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_models'>bayesfactor_models</a></span>(<span class='no'>lm1</span>, <span class='no'>lm2</span>, <span class='no'>lm3</span>, <span class='kw'>denominator</span> <span class='kw'>=</span> <span class='no'>lm0</span>)
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>result</span>, <span class='kw'>n_pies</span> <span class='kw'>=</span> <span class='st'>"one"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"probability"</span>) + <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>() +
+  <span class='fu'><a href='scale_color_pizza.html'>scale_fill_pizza</a></span>(<span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
