@@ -1,6 +1,6 @@
 Package: see
 Type: Package
-Title: Visualisation Toolbox and Extra Geoms, Themes and Color Palettes for 'ggplot2'
+Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'
 Version: 0.1.0
 Date: 2019-05-20
 Authors@R: c(
