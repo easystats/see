@@ -123,6 +123,8 @@ pizza_colors_list <- c(
 #'
 #' @param ... Character names of pizza ingredients.
 #'
+#' @return A character vector with color-codes.
+#'
 #' @export
 pizza_colors <- function(...) {
   cols <- c(...)

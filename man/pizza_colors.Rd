@@ -9,6 +9,9 @@ pizza_colors(...)
 \arguments{
 \item{...}{Character names of pizza ingredients.}
 }
+\value{
+A character vector with color-codes.
+}
 \description{
 Extract pizza colors as hex codes
 }
