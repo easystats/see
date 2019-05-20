@@ -11,9 +11,9 @@ magrittr::`%>%`
 
 
 #' @keywords internal
-.remove_intercept <- function(x, show_intercept) {
+.remove_intercept <- function(x, column = "Parameter", show_intercept) {
   if (!show_intercept) {
-    remove <- which(x$Parameter %in% c("Intercept", "(Intercept)", "b_Intercept"))
+    remove <- which(x[[column]] %in% c("Intercept", "(Intercept)", "b_Intercept"))
     if (length(remove)) x <- x[-remove, ]
   }
   x

@@ -25,10 +25,6 @@ data_plot.estimate_density <- function(x, ...){
 #' @rdname data_plot
 #' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
 #'   Else, densities are plotted for each parameter among each other.
-#' @param show_intercept Logical, if \code{TRUE}, the intercept-parameter is included
-#'   in the plot. By default, it is hidden because in many cases the intercept-parameter
-#'   has posterior distribution on a very different location, so density curves of
-#'   posterior distributions for other parameters are hardly visible.
 #' @importFrom rlang .data
 #' @export
 plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, ...){
@@ -36,7 +32,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, .
     x <- data_plot(x, ...)
   }
 
-  x <- .remove_intercept(x, show_intercept)
+  x <- .remove_intercept(x, show_intercept = show_intercept)
 
   if (stack == TRUE) {
     p <- x %>%

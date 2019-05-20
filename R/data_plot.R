@@ -7,6 +7,10 @@
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a statistical model or such.
+#' @param show_intercept Logical, if \code{TRUE}, the intercept-parameter is included
+#'   in the plot. By default, it is hidden because in many cases the intercept-parameter
+#'   has a posterior distribution on a very different location, so density curves of
+#'   posterior distributions for other parameters are hardly visible.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @details \code{data_plot()} is in most situation not needed when the purpose

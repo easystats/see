@@ -69,7 +69,7 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
     x <- data_plot(x, data = data)
   }
 
-  x <- .remove_intercept(x, show_intercept)
+  x <- .remove_intercept(x, column = "y", show_intercept)
 
   p <- x %>%
     as.data.frame() %>%

@@ -48,7 +48,7 @@ data_plot(x, data = NULL, ...)
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the intercept-parameter
-has posterior distribution on a very different location, so density curves of
+has a posterior distribution on a very different location, so density curves of
 posterior distributions for other parameters are hardly visible.}
 
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.

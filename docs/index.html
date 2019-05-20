@@ -190,7 +190,7 @@
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="reference/how_to_plot.html">how_to_plot</a></span>(result)</a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="co">## # Assuming that the input object is `x`:</span></a>
 <a class="sourceLine" id="cb13-3" title="3"><span class="co">## </span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co">## data_plot(x) %&gt;%</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">## x &lt;- .remove_intercept(x, column = "y", show_intercept) data_plot(x) %&gt;%</span></a>
 <a class="sourceLine" id="cb13-5" title="5"><span class="co">##   as.data.frame() %&gt;%</span></a>
 <a class="sourceLine" id="cb13-6" title="6"><span class="co">##   ggplot(aes(x = x, y = y, height = height, group = y, fill = fill)) +</span></a>
 <a class="sourceLine" id="cb13-7" title="7"><span class="co">##   ggridges::geom_ridgeline_gradient() +</span></a>
