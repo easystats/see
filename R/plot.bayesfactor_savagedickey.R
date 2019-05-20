@@ -3,15 +3,9 @@
 #' @importFrom rlang .data
 #' @export
 plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, ...) {
-  plot_data <- attr(x, "plot_data")
+  plot_data <- attr(x, "plot_data")$plot_data
+  d_points <- attr(x, "plot_data")$d_points
   hypothesis <- attr(x, "hypothesis")
-
-  d_points <- plot_data %>%
-    dplyr::group_by(.data$ind, .data$Distribution) %>%
-    dplyr::summarise(y = stats::approx(.data$x, .data$y, xout = hypothesis)$y,
-                     x = hypothesis) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(y = ifelse(is.na(.data$y),0,.data$y))
 
   # make sure point outline matches theme
   t <- theme_get()
