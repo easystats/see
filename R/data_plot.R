@@ -65,8 +65,10 @@
 #' x <- hdi(data, c(0.8, 0.9))
 #' plot(x) + theme_modern()
 #'
+#' \dontrun{
 #' x <- hdi(model)
 #' plot(x) + theme_modern()
+#' }
 #'
 #' data <- rnorm(1000, 1)
 #' x <- p_direction(data)
