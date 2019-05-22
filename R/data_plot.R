@@ -74,8 +74,10 @@
 #' x <- p_direction(data)
 #' plot(x)
 #'
+#' \dontrun{
 #' x <- p_direction(model)
 #' plot(x)
+#' }
 #'
 #' \dontrun{
 #' model <- stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars)
