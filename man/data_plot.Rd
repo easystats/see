@@ -91,39 +91,34 @@ development and probably not yet available):
 }
 \examples{
 library(bayestestR)
+library(rstanarm)
 
 data <- rnorm(1000, 1)
 x <- rope(data, ci = c(0.8, 0.9))
 plot(x)
 
-\dontrun{
-library(rstanarm)
-model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+model <- stan_glm(
+  Sepal.Length ~ Petal.Width * Species,
+  data = iris,
+  chains = 2, iter = 200
+)
+
 x <- rope(model)
 plot(x)
-}
 
 data <- rnorm(1000, 1)
 x <- hdi(data, c(0.8, 0.9))
 plot(x) + theme_modern()
 
-\dontrun{
-library(rstanarm)
-model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 x <- hdi(model)
 plot(x) + theme_modern()
-}
 
 data <- rnorm(1000, 1)
 x <- p_direction(data)
 plot(x)
 
-\dontrun{
-library(rstanarm)
-model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 x <- p_direction(model)
 plot(x)
-}
 
 \dontrun{
 library(rstanarm)

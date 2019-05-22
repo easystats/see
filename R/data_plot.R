@@ -44,39 +44,34 @@
 #'
 #' @examples
 #' library(bayestestR)
+#' library(rstanarm)
 #'
 #' data <- rnorm(1000, 1)
 #' x <- rope(data, ci = c(0.8, 0.9))
 #' plot(x)
 #'
-#' \dontrun{
-#' library(rstanarm)
-#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#' model <- stan_glm(
+#'   Sepal.Length ~ Petal.Width * Species,
+#'   data = iris,
+#'   chains = 2, iter = 200
+#' )
+#'
 #' x <- rope(model)
 #' plot(x)
-#' }
 #'
 #' data <- rnorm(1000, 1)
 #' x <- hdi(data, c(0.8, 0.9))
 #' plot(x) + theme_modern()
 #'
-#' \dontrun{
-#' library(rstanarm)
-#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 #' x <- hdi(model)
 #' plot(x) + theme_modern()
-#' }
 #'
 #' data <- rnorm(1000, 1)
 #' x <- p_direction(data)
 #' plot(x)
 #'
-#' \dontrun{
-#' library(rstanarm)
-#' model <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
 #' x <- p_direction(model)
 #' plot(x)
-#' }
 #'
 #' \dontrun{
 #' library(rstanarm)
@@ -107,13 +102,16 @@ print.data_plot <- function(x, ...){
 #'
 #' @inheritParams data_plot
 #' @examples
-#' \dontrun{
 #' library(rstanarm)
 #' library(bayestestR)
 #' library(see)
 #' library(ggplot2)
 #'
-#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+#' model <- stan_glm(
+#'   Sepal.Length ~ Petal.Width * Species,
+#'   data = iris,
+#'   chains = 2, iter = 200
+#' )
 #'
 #' result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 #' data <- data_plot(result)
@@ -124,7 +122,6 @@ print.data_plot <- function(x, ...){
 #'
 #' p
 #' p + add_plot_attributes(data)
-#' }
 #'
 #'
 #' @export

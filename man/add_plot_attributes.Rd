@@ -13,13 +13,16 @@ add_plot_attributes(x)
 The \link{data_plot} function usually stores information (such as title, axes labels etc.) as attributes. This function adds those information to the plot.
 }
 \examples{
-\dontrun{
 library(rstanarm)
 library(bayestestR)
 library(see)
 library(ggplot2)
 
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+model <- stan_glm(
+  Sepal.Length ~ Petal.Width * Species,
+  data = iris,
+  chains = 2, iter = 200
+)
 
 result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 data <- data_plot(result)
@@ -30,7 +33,6 @@ p <- data \%>\%
 
 p
 p + add_plot_attributes(data)
-}
 
 
 }
