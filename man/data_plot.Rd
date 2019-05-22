@@ -103,8 +103,10 @@ model <- stan_glm(
   chains = 2, iter = 200
 )
 
+\dontrun{
 x <- rope(model)
 plot(x)
+}
 
 data <- rnorm(1000, 1)
 x <- hdi(data, c(0.8, 0.9))
@@ -121,7 +123,6 @@ x <- p_direction(model)
 plot(x)
 
 \dontrun{
-library(rstanarm)
 model <- stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars)
 x <- equivalence_test(model)
 plot(x)
