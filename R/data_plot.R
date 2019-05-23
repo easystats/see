@@ -113,7 +113,7 @@ print.data_plot <- function(x, ...){
 #' library(ggplot2)
 #'
 #' model <- stan_glm(
-#'   Sepal.Length ~ Petal.Width * Species,
+#'   Sepal.Length ~ Petal.Width + Species + Sepal.Width,
 #'   data = iris,
 #'   chains = 2, iter = 200
 #' )
