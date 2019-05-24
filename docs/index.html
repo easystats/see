@@ -190,7 +190,7 @@
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="reference/how_to_plot.html">how_to_plot</a></span>(result)</a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="co">## # Assuming that the input object is `x`:</span></a>
 <a class="sourceLine" id="cb13-3" title="3"><span class="co">## </span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co">## x &lt;- .remove_intercept(x, column = "y", show_intercept) data_plot(x) %&gt;%</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">## data_plot(x) %&gt;%</span></a>
 <a class="sourceLine" id="cb13-5" title="5"><span class="co">##   as.data.frame() %&gt;%</span></a>
 <a class="sourceLine" id="cb13-6" title="6"><span class="co">##   ggplot(aes(x = x, y = y, height = height, group = y, fill = fill)) +</span></a>
 <a class="sourceLine" id="cb13-7" title="7"><span class="co">##   ggridges::geom_ridgeline_gradient() +</span></a>
@@ -280,6 +280,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=see">https://​cloud.r-project.org/​package=see</a>
+</li>
 <li>Report a bug at <br><a href="https://github.com/easystats/see/issues">https://​github.com/​easystats/​see/​issues</a>
 </li>
 </ul>
@@ -305,6 +307,8 @@
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=see"><img src="http://www.r-pkg.org/badges/version/see" alt="CRAN"></a></li>
+<li><a href="https://cran.r-project.org/package=see"><img src="http://cranlogs.r-pkg.org/badges/see" alt="downloads"></a></li>
 <li><a href="https://travis-ci.org/easystats/see"><img src="https://travis-ci.org/easystats/see.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://codecov.io/gh/easystats/see"><img src="https://codecov.io/gh/easystats/see/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://easystats.github.io/see/"><img src="https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63" alt="Documentation"></a></li>
