@@ -12,18 +12,18 @@
 #' library(see)
 #'
 #' normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-#'   geom_point(size=8, alpha=0.3) +
+#'   geom_point(size = 8, alpha = 0.3) +
 #'   theme_modern()
 #'
 #' new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-#'   geom_point2(size=8, alpha=0.3) +
+#'   geom_point2(size = 8, alpha = 0.3) +
 #'   theme_modern()
 #'
 #' plots(normal, new, ncol=2)
 #'
 #' @export
-geom_point2 <- function(..., size=2, stroke = 0, shape=16){
-  geom_point(size = size, stroke = stroke, shape = shape, ...)
+geom_point2 <- function(..., stroke = 0, shape = 16) {
+  geom_point(stroke = stroke, shape = shape, ...)
 }
 
 

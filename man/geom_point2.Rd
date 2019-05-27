@@ -5,18 +5,18 @@
 \alias{geom_jitter2}
 \title{Better looking points}
 \usage{
-geom_point2(..., size = 2, stroke = 0, shape = 16)
+geom_point2(..., stroke = 0, shape = 16)
 
 geom_jitter2(..., size = 2, stroke = 0, shape = 16)
 }
 \arguments{
 \item{...}{Other arguments to be passed to \code{geom_point}.}
 
-\item{size}{Size of points.}
-
 \item{stroke}{Stroke thickness.}
 
 \item{shape}{Shape of points.}
+
+\item{size}{Size of points.}
 }
 \description{
 Somewhat nicer points (especially in case of transparency) without borders and contour.
@@ -26,11 +26,11 @@ library(ggplot2)
 library(see)
 
 normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-  geom_point(size=8, alpha=0.3) +
+  geom_point(size = 8, alpha = 0.3) +
   theme_modern()
 
 new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-  geom_point2(size=8, alpha=0.3) +
+  geom_point2(size = 8, alpha = 0.3) +
   theme_modern()
 
 plots(normal, new, ncol=2)
