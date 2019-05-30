@@ -2,6 +2,9 @@
 #' @param n_pies Number of pies.
 #' @param value What value to display.
 #' @param log Show log-transformed Bayes factors.
+#' @param prior_odds optional vector of prior odds for the models. See \code{BayesFactor::priorOdds}.
+#' As the size of the pizza slices corresponds to posterior probability (which is a function of prior probability and the BF),
+#' custom \code{prior_odds} will change the slices' size.
 #'
 #' @examples
 #' \dontrun{
@@ -25,6 +28,7 @@ plot.see_bayesfactor_models <-
            n_pies = c("one", "many"),
            value = c("none", "BF", "probability"),
            log = FALSE,
+           prior_odds = NULL,
            ...) {
 
   n_pies <- match.arg(n_pies)
@@ -33,11 +37,18 @@ plot.see_bayesfactor_models <-
   denominator <- attr(x, "denominator")
   denominator_name <- x$Model[denominator]
 
+  priorOdds <- rep(1, nrow(x))
+  po_txt <- ""
+  if (!is.null(prior_odds)) {
+    priorOdds[-denominator] <- prior_odds
+    po_txt <- "NOTE: Slice sizes based on custom prior odds"
+  }
+
   # Prep data and bar position:
   one_pie_data <- as.data.frame(x) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(
-      PostProb = .data$BF / sum(.data$BF),
+      PostProb = (.data$BF / sum(.data$BF)) * priorOdds,
       pos_txt  = sum(.data$PostProb) + .data$PostProb / 2 - cumsum(.data$PostProb),
       Model    = factor(.data$Model, levels = unique(.data$Model))
     )
@@ -82,7 +93,8 @@ plot.see_bayesfactor_models <-
       coord_polar("y", start = 0) +
       scale_y_continuous(expand = c(0, 0)) +
       labs(x = "", y = "", fill = "Model") +
-      theme_void()
+      theme_void() +
+      labs(caption = po_txt)
   } else {
     ggplot(many_pies_data, aes(x = "", y = .data$pos_bar, fill = .data$Type)) +
       geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
@@ -90,6 +102,7 @@ plot.see_bayesfactor_models <-
       coord_polar("y", start = 0) +
       facet_wrap( ~ .data$Model) +
       labs(x = "", y = "", fill = "Model") +
-      theme_void()
+      theme_void() +
+      labs(caption = po_txt)
   }
 }
