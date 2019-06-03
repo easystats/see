@@ -108,34 +108,31 @@ model <- stan_glm(
   chains = 2, iter = 200
 )
 
-\dontrun{
 x <- rope(model)
 plot(x)
-}
 
 data <- rnorm(1000, 1)
 x <- hdi(data, c(0.8, 0.9))
 plot(x) + theme_modern()
 
-\dontrun{
 x <- hdi(model)
 plot(x) + theme_modern()
-}
 
 data <- rnorm(1000, 1)
 x <- p_direction(data)
 plot(x)
 
-\dontrun{
 x <- p_direction(model)
 plot(x)
-}
 
-\dontrun{
-model <- stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars)
+model <- stan_glm(
+  mpg ~ wt + gear + cyl + disp,
+  chains = 2,
+  iter = 200,
+  data = mtcars
+)
 x <- equivalence_test(model)
 plot(x)
-}
 
 \dontrun{
 library(bayestestR)
