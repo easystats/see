@@ -3,16 +3,19 @@
 #' @export
 print.see_check_model <- function(x, ...) {
   p <- list()
+
   panel <- attr(x, "panel")
+  dot_size <- attr(x, "dot_size")
+  line_size <- attr(x, "line_size")
 
   if ("VIF" %in% names(x)) p$VIF <- .plot_diag_vif(x$VIF)
-  if ("QQ" %in% names(x)) p$QQ <- .plot_diag_qq(x$QQ)
-  if ("NORM" %in% names(x)) p$NORM <- .plot_diag_norm(x$NORM)
-  if ("NCV" %in% names(x)) p$NCV <- .plot_diag_ncv(x$NCV)
-  if ("HOMOGENEITY" %in% names(x)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY)
+  if ("QQ" %in% names(x)) p$QQ <- .plot_diag_qq(x$QQ, dot_size, line_size)
+  if ("NORM" %in% names(x)) p$NORM <- .plot_diag_norm(x$NORM, line_size)
+  if ("NCV" %in% names(x)) p$NCV <- .plot_diag_ncv(x$NCV, dot_size, line_size)
+  if ("HOMOGENEITY" %in% names(x)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, dot_size, line_size)
 
   if ("REQQ" %in% names(x)) {
-    ps <- .plot_diag_reqq(x$REQQ)
+    ps <- .plot_diag_reqq(x$REQQ, dot_size, line_size)
     for (i in 1:length(ps)) {
       p[[length(p) + 1]] <- ps[[i]]
     }
@@ -21,7 +24,7 @@ print.see_check_model <- function(x, ...) {
   if (panel) {
     do.call(plots, p)
   } else {
-    suppressWarnings(grpahics::plot(p))
+    lapply(p, graphics::plot)
   }
 }
 
@@ -37,7 +40,7 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_norm <- function(x) {
+.plot_diag_norm <- function(x, line_size) {
   ggplot(x, aes(x = .data$x)) +
     geom_ribbon(
       mapping = aes(ymin = 0, ymax = .data$y),
@@ -47,8 +50,8 @@ print.see_check_model <- function(x, ...) {
     ) +
     geom_line(
       mapping = aes(y = .data$curve),
-      colour = unname(flat_colors("blue")),
-      size = 0.8
+      colour = unname(flat_colors("teal")),
+      size = line_size
     ) +
     labs(
       x = "Residuals",
@@ -61,15 +64,15 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_qq <- function(x) {
+.plot_diag_qq <- function(x, dot_size, line_size) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = unname(flat_colors("dark red"))) +
-    stat_smooth(method = "lm", se = FALSE, size = .9, colour = unname(flat_colors("blue"))) +
+    geom_point2(colour = "#2c3e50", size = dot_size) +
+    stat_smooth(method = "lm", size = line_size, colour = unname(flat_colors("teal"))) +
     labs(
       title = "Non-normality of Residuals and Outliers",
       subtitle = "Dots should be plotted along the line",
       y = "(Studentized) Residuals",
-      x = "Theoretical quantiles (predicted values)"
+      x = "Theoretical Quantiles"
     ) +
     theme_light(base_size = 10)
 }
@@ -77,13 +80,13 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_homogeneity <- function(x) {
+.plot_diag_homogeneity <- function(x, dot_size, line_size) {
   ggplot(x, aes(x = .data$x, .data$y)) +
-    geom_point2(colour = unname(flat_colors("dark red"))) +
-    stat_smooth(method = "loess", se = FALSE, size = .9, colour = unname(flat_colors("blue"))) +
+    geom_point2(colour = "#2c3e50", size = dot_size) +
+    stat_smooth(method = "loess", se = FALSE, size = line_size, colour = unname(flat_colors("dark red"))) +
     labs(
       title = "Homogeneity of Variance (Scale-Location)",
-      subtitle = "Dots should spread equally around a horizontal line",
+      subtitle = "Dots should spread equally around horizontal line",
       y = "Std. Residuals (sqrt)",
       x = "Fitted values"
     ) +
@@ -92,41 +95,42 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_ncv <- function(x) {
+.plot_diag_ncv <- function(x, dot_size, line_size) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = unname(flat_colors("dark red"))) +
-    geom_smooth(method = "loess", se = FALSE, size = .9, colour = unname(flat_colors("blue"))) +
+    geom_point2(colour = "#2c3e50", size = dot_size) +
+    geom_smooth(method = "loess", se = FALSE, size = line_size, colour = unname(flat_colors("dark red"))) +
     labs(
       x = "Fitted values",
       y = "Residuals",
       title = "Homoscedasticity (Linear Relationship)",
-      subtitle = "Dots should show no distinct patterns around a horizontal line"
+      subtitle = "Dots should spread equally around horizontal line"
     ) +
     theme_light(base_size = 10)
 }
 
 
 
-.plot_diag_reqq <- function(x) {
+.plot_diag_reqq <- function(x, dot_size, line_size) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
     p <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
       labs(
-        x = "Theoretical quantiles",
-        y = "RE quantiles",
+        x = "Theoretical Quantiles",
+        y = "RE Quantiles",
         title = sprintf("Normality of Random Effects (%s)", i),
         subtitle = "Dots should be plotted along the line"
       ) +
       geom_errorbar(
         aes(ymin = .data$conf.low, ymax = .data$conf.high),
         width = 0,
-        colour = unname(flat_colors("dark red"))
+        colour = "#2c3e50"
       ) +
-      geom_point2(colour = unname(flat_colors("dark red"))) +
+      geom_point2(colour = "#2c3e50", size = dot_size) +
       stat_smooth(
         method = "lm",
         alpha = .2,
-        colour = unname(flat_colors("blue"))
+        size = line_size,
+        colour = unname(flat_colors("teal"))
       ) +
       theme_light(base_size = 10)
 
