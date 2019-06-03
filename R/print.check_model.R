@@ -11,6 +11,13 @@ print.see_check_model <- function(x, ...) {
   if ("NCV" %in% names(x)) p$NCV <- .plot_diag_ncv(x$NCV)
   if ("HOMOGENEITY" %in% names(x)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY)
 
+  if ("REQQ" %in% names(x)) {
+    ps <- .plot_diag_reqq(x$REQQ)
+    for (i in 1:length(ps)) {
+      p[[length(p) + 1]] <- ps[[i]]
+    }
+  }
+
   if (panel) {
     do.call(plots, p)
   } else {
@@ -25,7 +32,7 @@ print.see_check_model <- function(x, ...) {
     geom_col(width = 0.7) +
     labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +
     scale_fill_manual(values = unname(flat_colors("green", "orange", "red"))) +
-    theme_bw()
+    theme_light(base_size = 10)
 }
 
 
@@ -49,7 +56,7 @@ print.see_check_model <- function(x, ...) {
       title = "Non-Normality of Residuals",
       subtitle = "Distribution should look like a normal curve"
     ) +
-    theme_bw()
+    theme_light(base_size = 10)
 }
 
 
@@ -64,7 +71,7 @@ print.see_check_model <- function(x, ...) {
       y = "(Studentized) Residuals",
       x = "Theoretical quantiles (predicted values)"
     ) +
-    theme_bw()
+    theme_light(base_size = 10)
 }
 
 
@@ -80,7 +87,7 @@ print.see_check_model <- function(x, ...) {
       y = "Std. Residuals (sqrt)",
       x = "Fitted values"
     ) +
-    theme_bw()
+    theme_light(base_size = 10)
 }
 
 
@@ -95,24 +102,38 @@ print.see_check_model <- function(x, ...) {
       title = "Homoscedasticity (Linear Relationship)",
       subtitle = "Dots should show no distinct patterns around a horizontal line"
     ) +
-    theme_bw()
+    theme_light(base_size = 10)
 }
 
 
 
 .plot_diag_reqq <- function(x) {
-  ggplot(x, aes_string(
-    x = "nQQ",
-    y = "y"
-  )) +
-    facet_wrap(~ ind, scales = "free") +
-    labs(x = "Standard normal quantiles", y = "Random effect quantiles") +
-    geom_intercept_line2(0, NULL) +
-    stat_smooth(method = "lm", alpha = alpha) +
-    geom_errorbar(
-      aes_string(ymin = "conf.low", ymax = "conf.high"),
-      width = 0,
-      colour = "black"
-    ) +
-    geom_point(size = dot.size, colour = "darkblue")
+  lapply(names(x), function(i) {
+    dat <- x[[i]]
+    p <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
+      labs(
+        x = "Theoretical quantiles",
+        y = "RE quantiles",
+        title = sprintf("Normality of Random Effects (%s)", i),
+        subtitle = "Dots should be plotted along the line"
+      ) +
+      geom_errorbar(
+        aes(ymin = .data$conf.low, ymax = .data$conf.high),
+        width = 0,
+        colour = unname(flat_colors("dark red"))
+      ) +
+      geom_point2(colour = unname(flat_colors("dark red"))) +
+      stat_smooth(
+        method = "lm",
+        alpha = .2,
+        colour = unname(flat_colors("blue"))
+      ) +
+      theme_light(base_size = 10)
+
+    if (nlevels(dat$facet) > 1) {
+      p <- p + facet_wrap(~facet, scales = "free")
+    }
+
+    p
+  })
 }
