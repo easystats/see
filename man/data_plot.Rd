@@ -14,7 +14,8 @@
 data_plot(x, data = NULL, ...)
 
 \method{plot}{see_bayesfactor_models}(x, n_pies = c("one", "many"),
-  value = c("none", "BF", "probability"), log = FALSE, ...)
+  value = c("none", "BF", "probability"), log = FALSE,
+  prior_odds = NULL, ...)
 
 \method{plot}{see_bayesfactor_savagedickey}(x, point_size = 2, ...)
 
@@ -39,6 +40,10 @@ data_plot(x, data = NULL, ...)
 \item{value}{What value to display.}
 
 \item{log}{Show log-transformed Bayes factors.}
+
+\item{prior_odds}{optional vector of prior odds for the models. See \code{BayesFactor::priorOdds}.
+As the size of the pizza slices corresponds to posterior probability (which is a function of prior probability and the BF),
+custom \code{prior_odds} will change the slices' size.}
 
 \item{point_size}{Size of point-geoms.}
 
