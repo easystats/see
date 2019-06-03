@@ -23,7 +23,7 @@ print.see_check_model <- function(x, ...) {
 .plot_diag_vif <- function(x) {
   ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
-    labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = NULL) +
+    labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +
     scale_fill_manual(values = unname(flat_colors("green", "orange", "red"))) +
     theme_bw()
 }
@@ -56,7 +56,7 @@ print.see_check_model <- function(x, ...) {
 
 .plot_diag_qq <- function(x) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = unname(flat_colors("blue grey"))) +
+    geom_point2(colour = unname(flat_colors("dark red"))) +
     stat_smooth(method = "lm", se = FALSE, size = .9, colour = unname(flat_colors("blue"))) +
     labs(
       title = "Non-normality of Residuals and Outliers",
@@ -72,7 +72,7 @@ print.see_check_model <- function(x, ...) {
 
 .plot_diag_homogeneity <- function(x) {
   ggplot(x, aes(x = .data$x, .data$y)) +
-    geom_point2(colour = unname(flat_colors("blue grey"))) +
+    geom_point2(colour = unname(flat_colors("dark red"))) +
     stat_smooth(method = "loess", se = FALSE, size = .9, colour = unname(flat_colors("blue"))) +
     labs(
       title = "Homogeneity of Variance (Scale-Location)",
@@ -87,7 +87,7 @@ print.see_check_model <- function(x, ...) {
 
 .plot_diag_ncv <- function(x) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = unname(flat_colors("blue grey"))) +
+    geom_point2(colour = unname(flat_colors("dark red"))) +
     geom_smooth(method = "loess", se = FALSE, size = .9, colour = unname(flat_colors("blue"))) +
     labs(
       x = "Fitted values",
@@ -115,5 +115,4 @@ print.see_check_model <- function(x, ...) {
       colour = "black"
     ) +
     geom_point(size = dot.size, colour = "darkblue")
-}
 }

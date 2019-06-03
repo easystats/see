@@ -113,8 +113,8 @@ scale_fill_flat_c <- function(palette = "contrast", discrete = FALSE, reverse = 
 
 # The palette based on flat design colors: https://www.materialui.co/flatuicolors
 flat_colors_list <- c(
-  `red` = "#c0392b",
-  `dark red` = "#9b59b6",
+  `red` = "#e74c3c",
+  `dark red` = "#c0392b",
   `purple` = "#9b59b6",
   `deep purple` = "#8e44ad",
   `blue` = "#2980b9",
