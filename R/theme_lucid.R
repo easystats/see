@@ -1,6 +1,6 @@
-#' Light theme
+#' Lucid theme
 #'
-#' A light theme for ggplot.
+#' A light, clear theme for ggplot.
 #'
 #' @inheritParams theme_modern
 #'
@@ -10,9 +10,9 @@
 #'
 #' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
 #'   geom_point(color = "white") +
-#'   theme_light()
+#'   theme_lucid()
 #' @export
-theme_light <- function(base_size = 11, base_family = "") {
+theme_lucid <- function(base_size = 11, base_family = "") {
   (theme_minimal(base_size = base_size, base_family = base_family) +
       theme(
         axis.line.x      = element_line(colour = "grey80"),

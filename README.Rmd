@@ -66,20 +66,33 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ```
 
 
+- **Lucid**
+
+```{r warning=FALSE, message=FALSE}
+library(ggplot2)
+
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point2() +
+  theme_lucid()
+```
+
+
 - **Blackboard**
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 library(rstanarm)
 library(estimate)
 
-rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
+dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
   estimate::estimate_fit(keep_draws = TRUE, length = 100, draws = 250) %>% 
-  estimate::reshape_draws() %>% 
-  ggplot(aes(x = Petal.Length, y = Draw, group = Draw_Index)) +
+  estimate::reshape_draws()
+
+p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Index)) +
   geom_line(color = "white", alpha = 0.05) +
   scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  theme_blackboard() 
+  scale_y_continuous(expand = c(0, 0))
+
+p + theme_blackboard() 
 ```
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
 library(estimate)
@@ -87,13 +100,19 @@ library(rstanarm)
 
 junk <- capture.output(model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris))
 
-estimate_fit(model, keep_draws = TRUE, length = 100, draws = 250) %>% 
+p <- estimate_fit(model, keep_draws = TRUE, length = 100, draws = 250) %>% 
   reshape_draws() %>% 
   ggplot(aes(x = Petal.Length, y = Draw, group = Draw_Index)) +
   geom_line(color = "white", alpha = 0.05) +
   scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  theme_blackboard()
+  scale_y_continuous(expand = c(0, 0))
+p + theme_blackboard()
+```
+
+- **Abyss**
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+p + theme_abyss() 
 ```
 
 ### Palettes
@@ -117,7 +136,7 @@ p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length))
   scale_color_material_c(palette = "rainbow")
 ```
 
-The `plots` function allows us to plot the figures side by side.
+The `plots()` function allows us to plot the figures side by side.
 
 ```{r warning=FALSE, message=FALSE}
 plots(p1, p2, p3, ncol = 2)
@@ -125,7 +144,7 @@ plots(p1, p2, p3, ncol = 2)
 
 ### Multiple plots
 
-The `plots` function can also be used to add **tags** (*i.e.*, labels for subfigures).
+The `plots()` function can also be used to add **tags** (*i.e.*, labels for subfigures).
 
 ```{r warning=FALSE, message=FALSE}
 plots(p1, p2, p3, ncol = 2, 
@@ -136,7 +155,7 @@ plots(p1, p2, p3, ncol = 2,
 
 ### Better looking points
 
-`geom_points2` and `geom_jitter2` allow points without borders and contour.
+`geom_points2()` and `geom_jitter2()` allow points without borders and contour.
 
 ```{r warning=FALSE, message=FALSE, fig.width=9.5, fig.height=5.8}
 normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +

@@ -6,7 +6,7 @@
 
 ## New themes
 
-* `theme_light()`, a light and modern theme.
+* `theme_lucid()`, a light and clear theme.
 
 ## New plot-functions
 

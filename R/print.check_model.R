@@ -35,7 +35,7 @@ print.see_check_model <- function(x, ...) {
     geom_col(width = 0.7) +
     labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +
     scale_fill_manual(values = unname(flat_colors("green", "orange", "red"))) +
-    theme_light(base_size = 10)
+    theme_lucid(base_size = 10)
 }
 
 
@@ -59,7 +59,7 @@ print.see_check_model <- function(x, ...) {
       title = "Non-Normality of Residuals",
       subtitle = "Distribution should look like a normal curve"
     ) +
-    theme_light(base_size = 10)
+    theme_lucid(base_size = 10)
 }
 
 
@@ -74,7 +74,7 @@ print.see_check_model <- function(x, ...) {
       y = "(Studentized) Residuals",
       x = "Theoretical Quantiles"
     ) +
-    theme_light(base_size = 10)
+    theme_lucid(base_size = 10)
 }
 
 
@@ -90,7 +90,7 @@ print.see_check_model <- function(x, ...) {
       y = "Std. Residuals (sqrt)",
       x = "Fitted values"
     ) +
-    theme_light(base_size = 10)
+    theme_lucid(base_size = 10)
 }
 
 
@@ -105,7 +105,7 @@ print.see_check_model <- function(x, ...) {
       title = "Homoscedasticity (Linear Relationship)",
       subtitle = "Dots should spread equally around horizontal line"
     ) +
-    theme_light(base_size = 10)
+    theme_lucid(base_size = 10)
 }
 
 
@@ -132,7 +132,7 @@ print.see_check_model <- function(x, ...) {
         size = line_size,
         colour = unname(flat_colors("teal"))
       ) +
-      theme_light(base_size = 10)
+      theme_lucid(base_size = 10)
 
     if (nlevels(dat$facet) > 1) {
       p <- p + facet_wrap(~facet, scales = "free")

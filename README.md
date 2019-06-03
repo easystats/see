@@ -40,6 +40,19 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
+  - **Lucid**
+
+<!-- end list -->
+
+``` r
+library(ggplot2)
+
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
+    geom_point2() + theme_lucid()
+```
+
+![](man/figures/unnamed-chunk-5-1.png)<!-- -->
+
   - **Blackboard**
 
 <!-- end list -->
@@ -48,15 +61,22 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 library(rstanarm)
 library(estimate)
 
-rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
-    estimate::estimate_fit(keep_draws = TRUE, length = 100, draws = 250) %>% 
-    estimate::reshape_draws() %>% ggplot(aes(x = Petal.Length, 
-    y = Draw, group = Draw_Index)) + geom_line(color = "white", 
-    alpha = 0.05) + scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 
-    0)) + theme_blackboard()
+dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), 
+    data = iris) %>% estimate::estimate_fit(keep_draws = TRUE, 
+    length = 100, draws = 250) %>% estimate::reshape_draws()
+
+p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Index)) + 
+    geom_line(color = "white", alpha = 0.05) + scale_x_continuous(expand = c(0, 
+    0)) + scale_y_continuous(expand = c(0, 0))
+
+p + theme_blackboard()
 ```
 
-![](man/figures/unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/unnamed-chunk-7-1.png)<!-- -->
+
+  - **Abyss**
+
+![](man/figures/unnamed-chunk-8-1.png)<!-- -->
 
 ### Palettes
 
@@ -75,28 +95,28 @@ p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length))
     geom_point2() + theme_modern() + scale_color_material_c(palette = "rainbow")
 ```
 
-The `plots` function allows us to plot the figures side by side.
+The `plots()` function allows us to plot the figures side by side.
 
 ``` r
 plots(p1, p2, p3, ncol = 2)
 ```
 
-![](man/figures/unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/unnamed-chunk-10-1.png)<!-- -->
 
 ### Multiple plots
 
-The `plots` function can also be used to add **tags** (*i.e.*, labels
+The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
 
 ``` r
 plots(p1, p2, p3, ncol = 2, tags = paste("Fig. ", 1:3))
 ```
 
-![](man/figures/unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/unnamed-chunk-11-1.png)<!-- -->
 
 ### Better looking points
 
-`geom_points2` and `geom_jitter2` allow points without borders and
+`geom_points2()` and `geom_jitter2()` allow points without borders and
 contour.
 
 ``` r
@@ -109,7 +129,7 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, ncol = 2)
 ```
 
-![](man/figures/unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
 ### Half-violin Half-dot plot
 
@@ -121,7 +141,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
     geom_violindot(fill_dots = "black") + theme_modern() + scale_fill_material_d()
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 ### [BayestestR](https://github.com/easystats/bayestestR)
 
@@ -139,13 +159,13 @@ result <- estimate_density(model)
 plot(result)
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
 ``` r
 plot(result, stack = FALSE)
 ```
 
-![](man/figures/unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-16-1.png)<!-- -->
 
 #### Probability of Direction (pd)
 
@@ -156,7 +176,7 @@ plot(result) + theme_modern() + scale_fill_manual(values = c("red",
     "green"))
 ```
 
-![](man/figures/unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/unnamed-chunk-17-1.png)<!-- -->
 
 Most of our plots can be easily *opened* via the `how_to_plot` function.
 This gives us the actual code used for plotting, that can then be easily
@@ -187,7 +207,7 @@ plot(result) + theme_modern() + scale_fill_brewer(palette = "Purples",
     direction = -1)
 ```
 
-![](man/figures/unnamed-chunk-18-1.png)<!-- -->
+![](man/figures/unnamed-chunk-20-1.png)<!-- -->
 
 #### Region of Practical Equivalence (ROPE)
 
@@ -198,7 +218,7 @@ plot(result, data = model, rope_color = "red") + theme_modern() +
     scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 
-![](man/figures/unnamed-chunk-20-1.png)<!-- -->
+![](man/figures/unnamed-chunk-22-1.png)<!-- -->
 
 #### Test for Practical Equivalence
 
@@ -209,14 +229,14 @@ result <- equivalence_test(model)
 plot(result) + theme_blackboard() + scale_fill_material()
 ```
 
-![](man/figures/unnamed-chunk-22-1.png)<!-- -->
+![](man/figures/unnamed-chunk-24-1.png)<!-- -->
 
 ``` r
 result <- equivalence_test(model, ci = c(0.9, 0.95))
 plot(result) + theme_abyss() + scale_fill_flat()
 ```
 
-![](man/figures/unnamed-chunk-23-1.png)<!-- -->
+![](man/figures/unnamed-chunk-25-1.png)<!-- -->
 
 #### Bayes Factors (BFs)
 
@@ -226,7 +246,7 @@ result <- bayesfactor_savagedickey(model)
 plot(result) + theme_modern() + scale_color_material() + scale_fill_material()
 ```
 
-![](man/figures/unnamed-chunk-24-1.png)<!-- -->
+![](man/figures/unnamed-chunk-26-1.png)<!-- -->
 
 ``` r
 lm0 <- lm(qsec ~ 1, data = mtcars)
@@ -239,7 +259,7 @@ result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 plot(result, n_pies = "one", value = "probability") + scale_fill_pizza(reverse = TRUE)
 ```
 
-![](man/figures/unnamed-chunk-25-1.png)<!-- -->
+![](man/figures/unnamed-chunk-27-1.png)<!-- -->
 
 ``` r
 
@@ -247,7 +267,7 @@ plot(result, n_pies = "many", value = "BF") + scale_fill_flat(palette = "rainbow
     reverse = TRUE)
 ```
 
-![](man/figures/unnamed-chunk-25-2.png)<!-- -->
+![](man/figures/unnamed-chunk-27-2.png)<!-- -->
 
 ### [estimate](https://github.com/easystats/estimate)
 
@@ -265,4 +285,4 @@ means <- estimate_means(model)
 plot(contrasts, means)
 ```
 
-![](man/figures/unnamed-chunk-27-1.png)<!-- -->
+![](man/figures/unnamed-chunk-29-1.png)<!-- -->
