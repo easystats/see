@@ -15,7 +15,7 @@ plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
     labs(
       title = "Check for Influential Observations",
       x = "Cook's Distance Values",
-      y = NULL,
+      y = "Count",
       fill = NULL
     ) +
     scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
