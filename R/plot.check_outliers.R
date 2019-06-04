@@ -1,9 +1,11 @@
+#' @param text_size Size of text labels.
+#' @rdname data_plot
 #' @export
-plot.see_check_outliers <- function(x, ...) {
-  .plot_diag_outliers(x)
+plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
+  .plot_diag_outliers(x, text_size)
 }
 
-.plot_diag_outliers <- function(x) {
+.plot_diag_outliers <- function(x, text_size) {
   x$.id <- 1:nrow(x)
   x$.id[!x$.outliers] <- NA
   threshold <- attr(x, "threshold", exact = TRUE)
@@ -17,7 +19,7 @@ plot.see_check_outliers <- function(x, ...) {
       fill = NULL
     ) +
     scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
-    geom_text(y = 2.5) +
+    geom_text(y = 2.5, size = text_size) +
     geom_vline(
       xintercept = threshold,
       linetype = "dashed",

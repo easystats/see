@@ -7,6 +7,7 @@ print.see_check_model <- function(x, ...) {
   panel <- attr(x, "panel")
   dot_size <- attr(x, "dot_size")
   line_size <- attr(x, "line_size")
+  text_size <- attr(x, "text_size")
 
   if ("VIF" %in% names(x)) p$VIF <- .plot_diag_vif(x$VIF)
   if ("QQ" %in% names(x)) p$QQ <- .plot_diag_qq(x$QQ, dot_size, line_size)
@@ -14,7 +15,7 @@ print.see_check_model <- function(x, ...) {
   if ("NCV" %in% names(x)) p$NCV <- .plot_diag_ncv(x$NCV, dot_size, line_size)
   if ("HOMOGENEITY" %in% names(x)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, dot_size, line_size)
   if ("OUTLIERS" %in% names(x)) {
-    p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS)
+    p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, text_size)
     p$OUTLIERS <- p$OUTLIERS + theme_lucid(base_size = 10)
   }
 
