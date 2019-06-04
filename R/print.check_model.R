@@ -13,6 +13,10 @@ print.see_check_model <- function(x, ...) {
   if ("NORM" %in% names(x)) p$NORM <- .plot_diag_norm(x$NORM, line_size)
   if ("NCV" %in% names(x)) p$NCV <- .plot_diag_ncv(x$NCV, dot_size, line_size)
   if ("HOMOGENEITY" %in% names(x)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, dot_size, line_size)
+  if ("OUTLIERS" %in% names(x)) {
+    p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS)
+    p$OUTLIERS <- p$OUTLIERS + theme_lucid(base_size = 10)
+  }
 
   if ("REQQ" %in% names(x)) {
     ps <- .plot_diag_reqq(x$REQQ, dot_size, line_size)
