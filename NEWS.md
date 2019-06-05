@@ -12,6 +12,10 @@
 
 * Added plot-function for `performance::check_model()`.
 
+## New geoms
+
+* `geom_poolpoint()` and  `geom_pooljitter()` to draw pool ball points (points labelled with the observation name).
+
 ## Bug fixes
 
 * Fixed issues with color codes in the flat-ui palette.
