@@ -3,6 +3,7 @@
 #' A light, clear theme for ggplot.
 #'
 #' @inheritParams theme_modern
+#' @inheritParams ggplot2::theme_minimal
 #'
 #' @examples
 #' library(ggplot2)

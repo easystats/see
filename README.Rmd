@@ -182,6 +182,14 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
+### Pool ball points
+
+```{r warning=FALSE, message=FALSE}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_pooljitter(label = row.names(iris)) +
+  scale_color_flat_d() +
+  theme_modern()
+```
 
 ### [BayestestR](https://github.com/easystats/bayestestR)
 
@@ -236,7 +244,7 @@ how_to_plot(result)
 library(rstanarm)
 
 model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
-result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
+result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
 
 plot(result) +
   theme_modern() +
@@ -247,7 +255,7 @@ library(rstanarm)
 library(bayestestR)
 
 junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
-result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
+result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
 
 plot(result) +
   theme_modern() +
@@ -297,7 +305,7 @@ plot(result) +
 
 
 ```{r warning=FALSE, message=FALSE, eval=TRUE}
-result <- equivalence_test(model, ci = c(.9, .95))
+result <- equivalence_test(model, ci = c(.89, .95))
 plot(result) +
     theme_abyss() +
     scale_fill_flat()
