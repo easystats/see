@@ -11,6 +11,7 @@
 ## New plot-functions
 
 * Added plot-function for `performance::check_model()`.
+* Added plot-function for `performance::check_outliers()`.
 
 ## New geoms
 
