@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pizza color palette — palette_pizza • see</title>
+<title>Pool ball points — geom_poolpoint • see</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Pizza color palette — palette_pizza" />
+<meta property="og:title" content="Pool ball points — geom_poolpoint" />
 
-<meta property="og:description" content="The palette based on authentic neapolitan pizzas." />
+<meta property="og:description" content="Points labelled with the observation name." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -106,50 +106,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pizza color palette</h1>
+    <h1>Pool ball points</h1>
     
-    <div class="hidden name"><code>palette_pizza.Rd</code></div>
+    <div class="hidden name"><code>geom_poolpoint.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The palette based on authentic neapolitan pizzas.</p>
+    <p>Points labelled with the observation name.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>palette_pizza</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"margherita"</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>geom_poolpoint</span>(<span class='no'>label</span>, <span class='kw'>size_text</span> <span class='kw'>=</span> <span class='fl'>3.88</span>, <span class='kw'>size_background</span> <span class='kw'>=</span> <span class='no'>size_text</span> *
+  <span class='fl'>2</span>, <span class='kw'>size_point</span> <span class='kw'>=</span> <span class='no'>size_text</span> * <span class='fl'>3.5</span>, <span class='no'>...</span>)
+
+<span class='fu'>geom_pooljitter</span>(<span class='no'>label</span>, <span class='kw'>size_text</span> <span class='kw'>=</span> <span class='fl'>3.88</span>, <span class='kw'>size_background</span> <span class='kw'>=</span> <span class='no'>size_text</span> *
+  <span class='fl'>2</span>, <span class='kw'>size_point</span> <span class='kw'>=</span> <span class='no'>size_text</span> * <span class='fl'>3.5</span>, <span class='kw'>jitter</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>palette</th>
-      <td><p>Pizza type. Can be "margherita" (default) or "diavola".</p></td>
+      <th>label</th>
+      <td><p>Label to add inside the points.</p></td>
     </tr>
     <tr>
-      <th>reverse</th>
-      <td><p>Boolean indicating whether the palette should be reversed.</p></td>
+      <th>size_text</th>
+      <td><p>Size of text.</p></td>
+    </tr>
+    <tr>
+      <th>size_background</th>
+      <td><p>Size of the white background circle.</p></td>
+    </tr>
+    <tr>
+      <th>size_point</th>
+      <td><p>Size of the ball.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments to pass to <code><a href='https://www.rdocumentation.org/packages/grDevices/topics/colorRamp'>colorRampPalette()</a></code>.</p></td>
+      <td><p>Other arguments to be passed to <code>geom_point</code>.</p></td>
+    </tr>
+    <tr>
+      <th>jitter</th>
+      <td><p>Width and height of position jitter.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is usually not called directly, but from within
-  <code><a href='scale_color_pizza.html'>scale_color_pizza()</a></code>.</p>
-    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>see</span>)
 
+<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Petal.Width</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span> )) +
+  <span class='fu'>geom_poolpoint</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>iris</span>)) +
+  <span class='fu'><a href='scale_color_flat.html'>scale_color_flat_d</a></span>() +
+  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='img'><img src='geom_poolpoint-1.png' alt='' width='700' height='433' /></div><div class='input'>
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Petal.Width</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span> )) +
+  <span class='fu'>geom_pooljitter</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>iris</span>)) +
+  <span class='fu'><a href='scale_color_flat.html'>scale_color_flat_d</a></span>() +
+  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='img'><img src='geom_poolpoint-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-          </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

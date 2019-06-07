@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -114,7 +117,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>geom_point2</span>(<span class='no'>...</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>16</span>)
+    <pre class="usage"><span class='fu'>geom_point2</span>(<span class='no'>...</span>, <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>16</span>)
 
 <span class='fu'>geom_jitter2</span>(<span class='no'>...</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>16</span>)</pre>
     
@@ -126,16 +129,16 @@
       <td><p>Other arguments to be passed to <code>geom_point</code>.</p></td>
     </tr>
     <tr>
-      <th>size</th>
-      <td><p>Size of points.</p></td>
-    </tr>
-    <tr>
       <th>stroke</th>
       <td><p>Stroke thickness.</p></td>
     </tr>
     <tr>
       <th>shape</th>
       <td><p>Shape of points.</p></td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td><p>Size of points.</p></td>
     </tr>
     </table>
     
@@ -145,11 +148,11 @@
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>see</span>)
 
 <span class='no'>normal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Petal.Width</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>)) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fl'>8</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>0.3</span>) +
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>) +
   <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()
 
 <span class='no'>new</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Petal.Width</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>)) +
-  <span class='fu'>geom_point2</span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fl'>8</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>0.3</span>) +
+  <span class='fu'>geom_point2</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>) +
   <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()
 
 <span class='fu'><a href='plots.html'>plots</a></span>(<span class='no'>normal</span>, <span class='no'>new</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='img'><img src='geom_point2-1.png' alt='' width='700' height='433' /></div><div class='input'>
