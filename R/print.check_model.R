@@ -36,11 +36,15 @@ print.see_check_model <- function(x, ...) {
 
 
 .plot_diag_vif <- function(x) {
+  ylim <- max(x$y, na.rm = TRUE)
+  if (ylim < 10) ylim <- 10
+
   ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
     labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +
     scale_fill_manual(values = unname(flat_colors("green", "orange", "red"))) +
-    theme_lucid(base_size = 10)
+    theme_lucid(base_size = 10) +
+    ylim(c(0, ylim))
 }
 
 
