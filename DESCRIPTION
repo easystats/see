@@ -52,10 +52,11 @@ Imports:
 Suggests:
 	bayestestR,
 	covr,
-	tidyr,
+	ggrepel,
 	rmarkdown,
 	rstanarm,
 	stringr,
-	testthat
+	testthat,
+	tidyr
 RoxygenNote: 6.1.1
 Language: en-GB

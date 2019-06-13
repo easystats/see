@@ -19,7 +19,7 @@ plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
 
   if (is.null(text_size)) text_size <- 3.5
 
-  ggplot(x, aes(x = .data$.distance, fill = .data$.outliers, label = .data$.id)) +
+  p <- ggplot(x, aes(x = .data$.distance, fill = .data$.outliers, label = .data$.id)) +
     geom_histogram() +
     labs(
       title = "Check for Influential Observations",
@@ -28,11 +28,17 @@ plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
       fill = NULL
     ) +
     scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
-    geom_text(y = 2.5, size = text_size) +
     geom_vline(
       xintercept = threshold,
       linetype = "dashed",
       color = "#c0392b"
     ) +
     guides(fill = FALSE, color = FALSE, label = FALSE)
+
+  if (requireNamespace("ggrepel", quietly = TRUE))
+    p <- p + ggrepel::geom_text_repel(y = 2.5, size = text_size)
+  else
+    p <- p + geom_text(y = 2.5, size = text_size)
+
+  p
 }
