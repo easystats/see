@@ -9,6 +9,13 @@ plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
   x$.id <- 1:nrow(x)
   x$.id[!x$.outliers] <- NA
   threshold <- attr(x, "threshold", exact = TRUE)
+  method <- switch(
+    attr(x, "method", exact = TRUE),
+    "cook" = "Cook's Distance",
+    "mahalanobis" = "Mahalanobis Distance",
+    "ics" = "Invariant Coordinate Selection",
+    "Cook's Distance"
+  )
 
   if (is.null(text_size)) text_size <- 3.5
 
@@ -16,7 +23,7 @@ plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
     geom_histogram() +
     labs(
       title = "Check for Influential Observations",
-      x = "Cook's Distance Values",
+      x = method,
       y = "Count",
       fill = NULL
     ) +
