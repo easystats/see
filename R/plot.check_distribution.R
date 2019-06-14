@@ -1,5 +1,7 @@
-#' @importFrom bayestestR estimate_density
 #' @importFrom graphics plot
+#' @importFrom insight get_response
+#' @importFrom stats residuals
+#' @importFrom ggridges geom_density_line
 #' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else, single plots are returned.
 #' @rdname data_plot
 #' @export
@@ -27,20 +29,25 @@ plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
     geom_linerange(aes(ymin = 0, ymax = .data$y), position = position_dodge(.4), size = .8) +
     geom_point(size = 2, position = position_dodge(.4)) +
     coord_flip() +
-    labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Model Family") +
+    labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution and Response") +
     scale_y_continuous(labels = scales::percent, expand = c(0, 0), limits = c(0, max_y)) +
     scale_color_material_d() +
     theme_lucid(legend.position = lp)
 
-  dat1 <- bayestestR::estimate_density(.normalize(stats::residuals(model)))
-  dat2 <- bayestestR::estimate_density(.normalize(insight::get_response(model)))
-  dat1$grp <- "Residuals"
-  dat2$grp <- "Response"
+  dat1 <- data.frame(
+    x = .normalize(stats::residuals(model)),
+    grp = "Residuals"
+  )
+  dat2 <- data.frame(
+    x = .normalize(insight::get_response(model)),
+    grp = "Response"
+  )
 
-  p2 <- ggplot(rbind(dat1, dat2), aes(x = .data$x, y = .data$y, colour = .data$grp)) +
-    geom_line(size = .8) +
-    labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = NULL) +
+  p2 <- ggplot(rbind(dat1, dat2), aes(x = .data$x, colour = .data$grp, fill = .data$grp)) +
+    ggridges::geom_density_line(size = .7, alpha = .2) +
+    labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Density of Distribution and Response") +
     scale_color_material_d() +
+    scale_fill_material_d() +
     theme_lucid(legend.position = lp)
 
   p <- list(p1, p2)

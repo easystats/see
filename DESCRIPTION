@@ -40,7 +40,6 @@ Depends:
   grDevices,
   stats
 Imports:
-	bayestestR,
 	dplyr,
 	ggplot2,
 	ggridges,
@@ -51,6 +50,7 @@ Imports:
 	rlang,
 	scales
 Suggests:
+	bayestestR,
 	covr,
 	ggrepel,
 	rmarkdown,
