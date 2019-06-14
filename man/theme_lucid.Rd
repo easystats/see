@@ -4,12 +4,40 @@
 \alias{theme_lucid}
 \title{Lucid theme}
 \usage{
-theme_lucid(base_size = 11, base_family = "")
+theme_lucid(plot.title.size = 13, plot.title.face = "plain",
+  plot.title.space = 20, legend.position = "right",
+  axis.title.space = 20, legend.title.size = 12,
+  legend.text.size = 11, axis.title.size = 12,
+  axis.title.face = "plain", axis.text.size = 11,
+  axis.text.angle = NULL, tags.size = 13, tags.face = "plain")
 }
 \arguments{
-\item{base_size}{base font size}
+\item{plot.title.size}{Title size in pts. Can be "none".}
 
-\item{base_family}{base font family}
+\item{plot.title.face}{Title font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{plot.title.space}{Title spacing.}
+
+\item{legend.position}{the position of legends ("none", "left", "right",
+"bottom", "top", or two-element numeric vector)}
+
+\item{axis.title.space}{Axis title spacing.}
+
+\item{legend.title.size}{Legend elements text size in pts.}
+
+\item{legend.text.size}{Legend elements text size in pts. Can be "none".}
+
+\item{axis.title.size}{Axis title text size in pts.}
+
+\item{axis.title.face}{Axis font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{axis.text.size}{Axis text size in pts.}
+
+\item{axis.text.angle}{Rotate  the x axis labels.}
+
+\item{tags.size}{Tags text size in pts.}
+
+\item{tags.face}{Tags font face ("plain", "italic", "bold", "bold.italic").}
 }
 \description{
 A light, clear theme for ggplot.
