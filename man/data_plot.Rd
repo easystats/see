@@ -22,7 +22,8 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_bayesfactor_savagedickey}(x, point_size = 2, ...)
 
-\method{plot}{see_check_distribution}(x, point_size = 2, ...)
+\method{plot}{see_check_distribution}(x, point_size = 2, panel = TRUE,
+  ...)
 
 \method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
 
@@ -53,6 +54,8 @@ As the size of the pizza slices corresponds to posterior probability (which is a
 custom \code{prior_odds} will change the slices' size.}
 
 \item{point_size}{Size of point-geoms.}
+
+\item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else, single plots are returned.}
 
 \item{text_size}{Size of text labels.}
 

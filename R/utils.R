@@ -3,14 +3,12 @@
 magrittr::`%>%`
 
 
-#' @keywords internal
 .as.data.frame_density <- function(x, ...) {
   data.frame(x = x$x, y = x$y)
 }
 
 
 
-#' @keywords internal
 .remove_intercept <- function(x, column = "Parameter", show_intercept) {
   if (!show_intercept) {
     remove <- which(x[[column]] %in% c("Intercept", "(Intercept)", "b_Intercept"))
@@ -18,3 +16,10 @@ magrittr::`%>%`
   }
   x
 }
+
+
+
+.normalize <- function(x) {
+  as.vector((x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE), na.rm = TRUE))
+}
+
