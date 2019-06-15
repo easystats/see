@@ -169,9 +169,9 @@
 #&gt; Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.019 seconds (Warm-up)
-#&gt; Chain 1:                0.021 seconds (Sampling)
-#&gt; Chain 1:                0.04 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.023 seconds (Warm-up)
+#&gt; Chain 1:                0.025 seconds (Sampling)
+#&gt; Chain 1:                0.048 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
@@ -202,9 +202,9 @@
 #&gt; Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.017 seconds (Warm-up)
-#&gt; Chain 2:                0.023 seconds (Sampling)
-#&gt; Chain 2:                0.04 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 0.022 seconds (Warm-up)
+#&gt; Chain 2:                0.029 seconds (Sampling)
+#&gt; Chain 2:                0.051 seconds (Total)
 #&gt; Chain 2: </div><div class='input'>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='data_plot.html'>data_plot</a></span>(<span class='no'>result</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>model</span>)
