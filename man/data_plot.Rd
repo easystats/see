@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_plot.R, R/plot.bayesfactor_models.R,
 %   R/plot.bayesfactor_savagedickey.R, R/plot.check_distribution.R,
 %   R/plot.check_outliers.R, R/plot.equivalence_test.R,
-%   R/plot.estimate_density.R, R/plot.rope.R
+%   R/plot.estimate_density.R, R/plot.rope.R, R/plot.see_check_normality.R
 \name{data_plot}
 \alias{data_plot}
 \alias{plot.see_bayesfactor_models}
@@ -12,6 +12,7 @@
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
 \alias{plot.see_rope}
+\alias{plot.see_check_normality}
 \title{Prepare objects for plotting or plot objects}
 \usage{
 data_plot(x, data = NULL, ...)
@@ -35,6 +36,8 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
   rope_color = "cadetblue", show_intercept = FALSE, ...)
+
+\method{plot}{see_check_normality}(x)
 }
 \arguments{
 \item{x}{An object.}
