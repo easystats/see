@@ -4,7 +4,8 @@
 \alias{theme_blackboard}
 \title{Blackboard dark theme}
 \usage{
-theme_blackboard(plot.title.size = 15, plot.title.face = "plain",
+theme_blackboard(base_size = 11, base_family = "",
+  plot.title.size = 15, plot.title.face = "plain",
   plot.title.space = 20, legend.position = "right",
   axis.title.space = 20, legend.title.size = 13,
   legend.text.size = 12, axis.title.size = 13,

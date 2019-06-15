@@ -4,12 +4,13 @@
 \alias{theme_lucid}
 \title{Lucid theme}
 \usage{
-theme_lucid(plot.title.size = 13, plot.title.face = "plain",
-  plot.title.space = 20, legend.position = "right",
-  axis.title.space = 20, legend.title.size = 12,
-  legend.text.size = 11, axis.title.size = 12,
-  axis.title.face = "plain", axis.text.size = 11,
-  axis.text.angle = NULL, tags.size = 13, tags.face = "plain")
+theme_lucid(base_size = 11, base_family = "", plot.title.size = 13,
+  plot.title.face = "plain", plot.title.space = 20,
+  legend.position = "right", axis.title.space = 20,
+  legend.title.size = 12, legend.text.size = 11,
+  axis.title.size = 12, axis.title.face = "plain",
+  axis.text.size = 11, axis.text.angle = NULL, tags.size = 13,
+  tags.face = "plain")
 }
 \arguments{
 \item{plot.title.size}{Title size in pts. Can be "none".}

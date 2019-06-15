@@ -25,7 +25,9 @@
 #'   theme_modern()
 #' @export
 theme_modern <-
-  function(plot.title.size = 15,
+  function(base_size = 11,
+           base_family = "",
+           plot.title.size = 15,
            plot.title.face = "plain",
            plot.title.space = 20,
            legend.position = "right",
@@ -92,7 +94,7 @@ theme_modern <-
     hjust <- NULL
   }
 
-  theme_classic() +
+  theme_classic(base_size = base_size, base_family = base_family) +
     theme(
       plot.title = plot.title.size,
       legend.position = legend.position,

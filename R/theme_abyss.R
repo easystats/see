@@ -13,7 +13,9 @@
 #'   theme_abyss()
 #' @export
 theme_abyss <-
-  function(plot.title.size = 15,
+  function(base_size = 11,
+           base_family = "",
+           plot.title.size = 15,
            plot.title.face = "plain",
            plot.title.space = 20,
            legend.position = "right",
@@ -28,6 +30,8 @@ theme_abyss <-
            tags.face = "bold") {
 
   theme_modern(
+    base_size = base_size,
+    base_family = base_family,
     plot.title.size = plot.title.size,
     plot.title.face = plot.title.face,
     plot.title.space = plot.title.space,

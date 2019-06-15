@@ -3,7 +3,6 @@
 #' A light, clear theme for ggplot.
 #'
 #' @inheritParams theme_modern
-#' @inheritParams ggplot2::theme_minimal
 #'
 #' @examples
 #' library(ggplot2)
@@ -14,6 +13,8 @@
 #'   theme_lucid()
 #' @export
 theme_lucid <- function(
+  base_size = 11,
+  base_family = "",
   plot.title.size = 13,
   plot.title.face = "plain",
   plot.title.space = 20,
@@ -29,6 +30,8 @@ theme_lucid <- function(
   tags.face = "plain") {
 
     theme_modern(
+      base_size = base_size,
+      base_family = base_family,
       plot.title.size = plot.title.size,
       plot.title.face = plot.title.face,
       plot.title.space = plot.title.space,
