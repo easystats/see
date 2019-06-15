@@ -25,4 +25,10 @@ magrittr::`%>%`
 
 
 
-.compact_list <- function(x) x[!sapply(x, function(i) length(i) == 0 || is.null(i) || any(i == "NULL"))]
+.compact_list <- function(x) {
+  if (!is.null(x) && length(x) > 0 && is.list(x)) {
+    x[!sapply(x, function(i) length(i) == 0 || is.null(i) || any(i == "NULL"))]
+  } else {
+    x
+  }
+}
