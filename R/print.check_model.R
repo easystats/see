@@ -16,7 +16,12 @@ print.see_check_model <- function(x, ...) {
   if ("HOMOGENEITY" %in% names(x)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, dot_size, line_size)
   if ("OUTLIERS" %in% names(x)) {
     p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, text_size)
-    p$OUTLIERS <- p$OUTLIERS + theme_lucid(base_size = 10)
+    p$OUTLIERS <- p$OUTLIERS +
+      theme_lucid(
+        base_size = 10,
+        plot.title.space = 3,
+        axis.title.space = 5
+      )
   }
 
   if ("REQQ" %in% names(x)) {
@@ -43,7 +48,7 @@ print.see_check_model <- function(x, ...) {
     geom_col(width = 0.7) +
     labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +
     scale_fill_manual(values = unname(flat_colors("green", "orange", "red"))) +
-    theme_lucid(base_size = 10) +
+    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
     ylim(c(0, ylim))
 }
 
@@ -68,22 +73,38 @@ print.see_check_model <- function(x, ...) {
       title = "Non-Normality of Residuals",
       subtitle = "Distribution should look like a normal curve"
     ) +
-    theme_lucid(base_size = 10)
+    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
 
 
 
 .plot_diag_qq <- function(x, dot_size, line_size) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = "#2c3e50", size = dot_size) +
     stat_smooth(method = "lm", size = line_size, colour = unname(flat_colors("teal"))) +
+    geom_point2(colour = "#2c3e50", size = dot_size) +
     labs(
       title = "Non-normality of Residuals and Outliers",
       subtitle = "Dots should be plotted along the line",
       y = "(Studentized) Residuals",
       x = "Theoretical Quantiles"
     ) +
-    theme_lucid(base_size = 10)
+    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
+}
+
+
+
+
+.plot_diag_pp <- function(x, dot_size, line_size) {
+  ggplot(x, aes(x = .data$x, y = .data$y)) +
+    stat_smooth(method = "lm", size = line_size, colour = unname(flat_colors("teal"))) +
+    geom_point2(colour = "#2c3e50", size = dot_size) +
+    labs(
+      title = "Non-normality of Residuals and Outliers (PP plot)",
+      subtitle = "Dots should be plotted along the line",
+      y = "Residuals",
+      x = "Theoretical Quantiles"
+    ) +
+    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
 
 
@@ -99,7 +120,7 @@ print.see_check_model <- function(x, ...) {
       y = "Std. Residuals (sqrt)",
       x = "Fitted values"
     ) +
-    theme_lucid(base_size = 10)
+    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
 
 
@@ -114,7 +135,7 @@ print.see_check_model <- function(x, ...) {
       title = "Homoscedasticity (Linear Relationship)",
       subtitle = "Dots should spread equally around horizontal line"
     ) +
-    theme_lucid(base_size = 10)
+    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
 
 
@@ -141,7 +162,7 @@ print.see_check_model <- function(x, ...) {
         size = line_size,
         colour = unname(flat_colors("teal"))
       ) +
-      theme_lucid(base_size = 10)
+      theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 
     if (nlevels(dat$facet) > 1) {
       p <- p + facet_wrap(~facet, scales = "free")

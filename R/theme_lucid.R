@@ -15,18 +15,18 @@
 theme_lucid <- function(
   base_size = 11,
   base_family = "",
-  plot.title.size = 13,
+  plot.title.size = 12,
   plot.title.face = "plain",
-  plot.title.space = 20,
+  plot.title.space = 15,
   legend.position = "right",
-  axis.title.space = 20,
-  legend.title.size = 12,
-  legend.text.size = 11,
-  axis.title.size = 12,
+  axis.title.space = 10,
+  legend.title.size = 11,
+  legend.text.size = 10,
+  axis.title.size = 11,
   axis.title.face = "plain",
-  axis.text.size = 11,
+  axis.text.size = 10,
   axis.text.angle = NULL,
-  tags.size = 13,
+  tags.size = 11,
   tags.face = "plain") {
 
     theme_modern(

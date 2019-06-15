@@ -53,6 +53,7 @@ Imports:
 Suggests:
 	covr,
 	ggrepel,
+	MASS,
 	rmarkdown,
 	rstanarm,
 	stringr,

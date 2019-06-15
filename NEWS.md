@@ -12,6 +12,8 @@
 ## New plot-functions
 
 * Added plot-function for `performance::check_model()`.
+* Added plot-function for `performance::check_normality()`.
+* Added plot-function for `performance::check_heteroscedasticity()`.
 * Added plot-function for `performance::check_outliers()`.
 * Added plot-function for `performance::check_distribution()`.
 
