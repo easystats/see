@@ -16,6 +16,7 @@
 * Added plot-function for `performance::check_heteroscedasticity()`.
 * Added plot-function for `performance::check_outliers()`.
 * Added plot-function for `performance::check_distribution()`.
+* Added plot-function for `performance::check_collinearity()`.
 
 ## New geoms
 
