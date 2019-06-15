@@ -3,6 +3,7 @@
 ## General
 
 * `geom_point2()` now accepts `size`-aesthetics when mapped to data.
+* Themes now get a `base_size` and `base_family` argument, in line with **ggplot** themes, to set the default size and family for plots.
 
 ## New themes
 
