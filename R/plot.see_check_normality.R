@@ -1,13 +1,14 @@
 #' @importFrom bayestestR estimate_density
 #' @importFrom stats residuals sd dnorm rstudent ppoints pnorm
-#' @param style Character vector, indicating the type of plot.
+#' @param type Character vector, indicating the type of plot (for
+#'   \code{\link[performance]{check_normality}}).
 #' @rdname data_plot
 #' @export
-plot.see_check_normality <- function(x, style = c("density", "qq", "pp"), ...) {
-  style <- match.arg(style)
+plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), ...) {
+  type <- match.arg(type)
   model <- .retrieve_data(x)
 
-  if (style == "qq") {
+  if (type == "qq") {
     if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB"))) {
       res_ <- sort(stats::residuals(model), na.last = NA)
     } else {
@@ -17,7 +18,7 @@ plot.see_check_normality <- function(x, style = c("density", "qq", "pp"), ...) {
     fitted_ <- sort(stats::fitted(model), na.last = NA)
     dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
     .plot_diag_qq(dat, dot_size = 2, line_size = .8)
-  } else if (style == "density") {
+  } else if (type == "density") {
     r <- stats::residuals(model)
     dat <- as.data.frame(bayestestR::estimate_density(r))
     dat$curve <- stats::dnorm(
@@ -26,7 +27,7 @@ plot.see_check_normality <- function(x, style = c("density", "qq", "pp"), ...) {
       stats::sd(r)
     )
     .plot_diag_norm(dat, line_size = .8)
-  } else if (style == "pp") {
+  } else if (type == "pp") {
     if (!requireNamespace("MASS", quietly = TRUE)) {
       stop("Package 'MASS' required for PP-plots. Please install it.", call. = FALSE)
     }

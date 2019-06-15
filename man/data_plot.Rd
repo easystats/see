@@ -41,7 +41,7 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_check_heteroscedasticity}(x)
 
-\method{plot}{see_check_normality}(x, style = c("density", "qq", "pp"),
+\method{plot}{see_check_normality}(x, type = c("density", "qq", "pp"),
   ...)
 }
 \arguments{
@@ -79,7 +79,8 @@ posterior distributions for other parameters are hardly visible.}
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
 
-\item{style}{Character vector, indicating the type of plot.}
+\item{type}{Character vector, indicating the type of plot (for
+\code{\link[performance]{check_normality}}).}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object
