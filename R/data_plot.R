@@ -135,17 +135,33 @@ add_plot_attributes <- function(x){
 
 
 #' @keywords internal
-.retrieve_data <- function(x){
+.retrieve_data <- function(x) {
   # retrieve model
-  data <- tryCatch(
-    {
-      if (!is.null(attr(x, "object_name", exact = TRUE)))
-        get(attributes(x)$object_name, envir = parent.frame())
-      else
-        attr(x, "data", exact = TRUE)
+  obj_name <- attr(x, "object_name", exact = TRUE)
+
+  if (!is.null(obj_name)) {
+    # first try, parent frame
+    data <- tryCatch({
+      get(obj_name, envir = parent.frame())
     },
     error = function(e) { NULL }
-  )
+    )
+
+    if (is.null(data)) {
+      # second try, global env
+      data <- tryCatch({
+        get(obj_name, envir = globalenv())
+      },
+      error = function(e) { NULL }
+      )
+
+    }
+  }
+
+  if (is.null(data)) {
+    data <- attr(x, "data", exact = TRUE)
+  }
+
 
   if (is.null(data)) {
     stop("Failed at retrieving data :( Please provide original model or data through the `data` argument", call. = FALSE)
