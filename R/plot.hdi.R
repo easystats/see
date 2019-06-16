@@ -1,8 +1,15 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.hdi <- function(x, data = NULL, ...){
+data_plot.bayestestR_hdi <- function(x, data = NULL, ...){
   .data_plot_hdi(x, data)
 }
+
+
+
+## TODO remove after bayestestR update 0.3.0
+
+#' @export
+data_plot.hdi <- data_plot.bayestestR_hdi
 
 
 
@@ -12,7 +19,15 @@ data_plot.hdi <- function(x, data = NULL, ...){
     data <- .retrieve_data(x)
   }
 
-  data <- as.data.frame(data)
+  if (inherits(data, "emmGrid")) {
+    if (!requireNamespace("emmeans", quietly = TRUE)) {
+      stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
+    }
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+  } else {
+    data <- as.data.frame(data)
+  }
+
   if (ncol(data) > 1) {
     levels_order <- unique(rev(x$Parameter))
     data <- data[, levels_order]
