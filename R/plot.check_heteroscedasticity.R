@@ -1,9 +1,12 @@
 #' @importFrom bayestestR estimate_density
 #' @importFrom stats residuals sd dnorm
-#' @rdname data_plot
 #' @export
-plot.see_check_heteroscedasticity <- function(x) {
-  model <- .retrieve_data(x)
+plot.see_check_heteroscedasticity <- function(x, data = NULL) {
+  if (is.null(data)) {
+    model <- .retrieve_data(x)
+  } else {
+    model <- data
+  }
   dat <- data.frame(
     x = stats::fitted(model),
     y = stats::residuals(model)

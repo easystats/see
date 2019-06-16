@@ -52,6 +52,7 @@ Imports:
 	scales
 Suggests:
 	covr,
+	emmeans,
 	ggrepel,
 	MASS,
 	rmarkdown,

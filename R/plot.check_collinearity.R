@@ -1,6 +1,11 @@
 #' @export
-plot.see_check_collinearity <- function(x) {
-  dat <- .compact_list(.retrieve_data(x))
+plot.see_check_collinearity <- function(x, data = NULL) {
+  if (is.null(data)) {
+    dat <- .compact_list(.retrieve_data(x))
+  } else {
+    dat <- data
+  }
+
   if (is.null(dat)) return(NULL)
 
   dat$group <- "low"

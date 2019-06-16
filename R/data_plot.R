@@ -26,8 +26,28 @@
 #' allow to specify arguments to modify the transparancy or color of geoms, these
 #' are shown in the 'Usage' section.
 #' \cr \cr
-#' Plot-functions are available for objects from many functions of \pkg{bayestestR},
-#' \pkg{performance} or \pkg{estimate}.
+#' Plot-functions are available for objects from following functions (note that
+#' functions from packages might be listed here that are currently still in
+#' development and probably not yet available):
+#' \itemize{
+#'   \item \code{bayestestR::bayesfactor_models()}
+#'   \item \code{bayestestR::bayesfactor_savagedickey()}
+#'   \item \code{bayestestR::ci()}
+#'   \item \code{bayestestR::equivalence_test()}
+#'   \item \code{bayestestR::estimate_density()}
+#'   \item \code{bayestestR::hdi()}
+#'   \item \code{bayestestR::p_direction()}
+#'   \item \code{bayestestR::rope()}
+#'   \item \code{estimate::estimateContrasts()}
+#'   \item \code{performance::binned_residuals()}
+#'   \item \code{performance::check_collinearity()}
+#'   \item \code{performance::check_distribution()}
+#'   \item \code{performance::check_heteroscedasticity()}
+#'   \item \code{performance::check_model()}
+#'   \item \code{performance::check_normality()}
+#'   \item \code{performance::check_outliers()}
+#'   \item \code{performance::roc()}
+#' }
 #'
 #' @examples
 #' library(bayestestR)

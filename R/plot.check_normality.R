@@ -4,9 +4,14 @@
 #'   \code{\link[performance]{check_normality}}).
 #' @rdname data_plot
 #' @export
-plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), ...) {
+plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = NULL, ...) {
   type <- match.arg(type)
-  model <- .retrieve_data(x)
+
+  if (is.null(data)) {
+    model <- .retrieve_data(x)
+  } else {
+    model <- data
+  }
 
   if (type == "qq") {
     if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB"))) {

@@ -25,6 +25,9 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
     return(x)
   }
 
+  if (inherits(data, "emmGrid") && !requireNamespace("emmeans", quietly = TRUE)) {
+    stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
+  }
 
   # if we have intercept-only models, keep at least the intercept
   intercepts <- which(x$Parameter %in% c("Intercept", "(Intercept)", "b_Intercept"))
@@ -38,7 +41,11 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   tests <- split(x, x$CI)
 
   result <- lapply(tests, function(i) {
-    tmp <- as.data.frame(model, stringsAsFactors = FALSE)[, i$Parameter, drop = FALSE]
+
+    if (inherits(model, "emmGrid"))
+      tmp <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(model, names = FALSE)))[, i$Parameter, drop = FALSE]
+    else
+      tmp <- as.data.frame(model, stringsAsFactors = FALSE)[, i$Parameter, drop = FALSE]
 
     tmp2 <- lapply(1:nrow(i), function(j) {
       p <- i$Parameter[j]
