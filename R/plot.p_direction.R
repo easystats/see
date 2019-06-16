@@ -5,7 +5,13 @@ data_plot.p_direction <- function(x, data = NULL, ...){
     data <- .retrieve_data(x)
   }
 
-  data <- as.data.frame(data)
+  if (inherits(data, "emmGrid")) {
+    if (!requireNamespace("emmeans", quietly = TRUE)) {
+      stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
+    }
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+  }
+
   if (ncol(data) > 1) {
     levels_order <- rev(x$Parameter)
     data <- data[, x$Parameter]
