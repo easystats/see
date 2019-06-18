@@ -10,6 +10,8 @@ data_plot.rope <- function(x, data = NULL, ...){
       stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
     }
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+  } else {
+    data <- as.data.frame(data)
   }
 
   # Recontruct hdi
