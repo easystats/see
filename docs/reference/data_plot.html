@@ -74,7 +74,7 @@ functions from different packages of the easystats-project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -135,6 +135,10 @@ functions from different packages of the <a href='https://github.com/easystats'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>panel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)
 
+<span class='co'># S3 method for see_check_normality</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"density"</span>, <span class='st'>"qq"</span>, <span class='st'>"pp"</span>),
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
 <span class='co'># S3 method for see_check_outliers</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='no'>...</span>)
 
@@ -148,14 +152,7 @@ functions from different packages of the <a href='https://github.com/easystats'>
 
 <span class='co'># S3 method for see_rope</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>rope_color</span> <span class='kw'>=</span> <span class='st'>"cadetblue"</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for see_check_heteroscedasticity</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for see_check_normality</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"density"</span>, <span class='st'>"qq"</span>, <span class='st'>"pp"</span>),
-  <span class='no'>...</span>)</pre>
+  <span class='kw'>rope_color</span> <span class='kw'>=</span> <span class='st'>"cadetblue"</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,6 +196,11 @@ custom <code>prior_odds</code> will change the slices' size.</p></td>
       <td><p>Logical, if <code>TRUE</code>, plots are arranged as panels; else, single plots are returned.</p></td>
     </tr>
     <tr>
+      <th>type</th>
+      <td><p>Character vector, indicating the type of plot (for
+<code><a href='https://www.rdocumentation.org/packages/performance/topics/check_normality'>check_normality</a></code>).</p></td>
+    </tr>
+    <tr>
       <th>text_size</th>
       <td><p>Size of text labels.</p></td>
     </tr>
@@ -222,11 +224,6 @@ posterior distributions for other parameters are hardly visible.</p></td>
       <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.</p></td>
     </tr>
-    <tr>
-      <th>type</th>
-      <td><p>Character vector, indicating the type of plot (for
-<code><a href='https://www.rdocumentation.org/packages/performance/topics/check_normality'>check_normality</a></code>).</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -244,17 +241,35 @@ much more than calling <code>plot(&lt;object&gt;)</code> (see 'Examples'). Some 
 allow to specify arguments to modify the transparancy or color of geoms, these
 are shown in the 'Usage' section.
 <br /> <br />
-Plot-functions are available for objects from many functions of <span class="pkg">bayestestR</span>,
-<span class="pkg">performance</span> or <span class="pkg">estimate</span>.</p>
+Plot-functions are available for objects from following functions (note that
+functions from packages might be listed here that are currently still in
+development and probably not yet available):</p><ul>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_models'>bayestestR::bayesfactor_models()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_savagedickey'>bayestestR::bayesfactor_savagedickey()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/ci'>bayestestR::ci()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/equivalence_test'>bayestestR::equivalence_test()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/estimate_density'>bayestestR::estimate_density()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>bayestestR::hdi()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/p_direction'>bayestestR::p_direction()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>bayestestR::rope()</a></code></p></li>
+<li><p><code>estimate::estimateContrasts()</code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/binned_residuals'>performance::binned_residuals()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_collinearity'>performance::check_collinearity()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_distribution'>performance::check_distribution()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_heteroscedasticity'>performance::check_heteroscedasticity()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_homogeneity'>performance::check_homogeneity()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_model'>performance::check_model()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_normality'>performance::check_normality()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_outliers'>performance::check_outliers()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/performance_roc'>performance::performance_roc()</a></code></p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>bayestestR</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>rstanarm</span>)
-
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>rope</a></span>(<span class='no'>data</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='img'><img src='data_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>rstanarm</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'xts':</span>
+#&gt; <span class='message'>  method     from</span>
+#&gt; <span class='message'>  as.zoo.xts zoo </span></div><div class='output co'>#&gt; <span class='message'>rstanarm (Version 2.18.2, packaged: 2018-11-08 22:19:38 UTC)</span></div><div class='output co'>#&gt; <span class='message'>- Do not expect the default priors to remain the same in future rstanarm versions.</span></div><div class='output co'>#&gt; <span class='message'>Thus, R scripts should specify priors explicitly, even if they are just the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='message'>- Plotting theme set to bayesplot::theme_default().</span></div><div class='input'>
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm'>stan_glm</a></span>(
   <span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Width</span> * <span class='no'>Species</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
@@ -262,8 +277,8 @@ Plot-functions are available for objects from many functions of <span class="pkg
 )</div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.001 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 10 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -288,91 +303,9 @@ Plot-functions are available for objects from many functions of <span class="pkg
 #&gt; Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.087 seconds (Warm-up)
-#&gt; Chain 1:                0.079 seconds (Sampling)
-#&gt; Chain 1:                0.166 seconds (Total)
-#&gt; Chain 1: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
-#&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.001 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 10 seconds.
-#&gt; Chain 2: Adjust your expectations accordingly!
-#&gt; Chain 2: 
-#&gt; Chain 2: 
-#&gt; Chain 2: WARNING: There aren't enough warmup iterations to fit the
-#&gt; Chain 2:          three stages of adaptation as currently configured.
-#&gt; Chain 2:          Reducing each adaptation stage to 15%/75%/10% of
-#&gt; Chain 2:          the given number of warmup iterations:
-#&gt; Chain 2:            init_buffer = 15
-#&gt; Chain 2:            adapt_window = 75
-#&gt; Chain 2:            term_buffer = 10
-#&gt; Chain 2: 
-#&gt; Chain 2: Iteration:   1 / 200 [  0%]  (Warmup)
-#&gt; Chain 2: Iteration:  20 / 200 [ 10%]  (Warmup)
-#&gt; Chain 2: Iteration:  40 / 200 [ 20%]  (Warmup)
-#&gt; Chain 2: Iteration:  60 / 200 [ 30%]  (Warmup)
-#&gt; Chain 2: Iteration:  80 / 200 [ 40%]  (Warmup)
-#&gt; Chain 2: Iteration: 100 / 200 [ 50%]  (Warmup)
-#&gt; Chain 2: Iteration: 101 / 200 [ 50%]  (Sampling)
-#&gt; Chain 2: Iteration: 120 / 200 [ 60%]  (Sampling)
-#&gt; Chain 2: Iteration: 140 / 200 [ 70%]  (Sampling)
-#&gt; Chain 2: Iteration: 160 / 200 [ 80%]  (Sampling)
-#&gt; Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
-#&gt; Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
-#&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.083 seconds (Warm-up)
-#&gt; Chain 2:                0.082 seconds (Sampling)
-#&gt; Chain 2:                0.165 seconds (Total)
-#&gt; Chain 2: </div><div class='input'>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>rope</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.83), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.72). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>data</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='img'><img src='data_plot-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>model</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/p_direction'>p_direction</a></span>(<span class='no'>data</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='img'><img src='data_plot-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/p_direction'>p_direction</a></span>(<span class='no'>model</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm'>stan_glm</a></span>(
-  <span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>gear</span> + <span class='no'>cyl</span> + <span class='no'>disp</span>,
-  <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>200</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>
-)</div><div class='output co'>#&gt; 
-#&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
-#&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
-#&gt; Chain 1: Adjust your expectations accordingly!
-#&gt; Chain 1: 
-#&gt; Chain 1: 
-#&gt; Chain 1: WARNING: There aren't enough warmup iterations to fit the
-#&gt; Chain 1:          three stages of adaptation as currently configured.
-#&gt; Chain 1:          Reducing each adaptation stage to 15%/75%/10% of
-#&gt; Chain 1:          the given number of warmup iterations:
-#&gt; Chain 1:            init_buffer = 15
-#&gt; Chain 1:            adapt_window = 75
-#&gt; Chain 1:            term_buffer = 10
-#&gt; Chain 1: 
-#&gt; Chain 1: Iteration:   1 / 200 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  20 / 200 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration:  40 / 200 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration:  60 / 200 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration:  80 / 200 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 100 / 200 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 101 / 200 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 120 / 200 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 140 / 200 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 160 / 200 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
-#&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.039 seconds (Warm-up)
-#&gt; Chain 1:                0.026 seconds (Sampling)
-#&gt; Chain 1:                0.065 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.084 seconds (Warm-up)
+#&gt; Chain 1:                0.096 seconds (Sampling)
+#&gt; Chain 1:                0.18 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
@@ -403,10 +336,30 @@ Plot-functions are available for objects from many functions of <span class="pkg
 #&gt; Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.03 seconds (Warm-up)
-#&gt; Chain 2:                0.024 seconds (Sampling)
-#&gt; Chain 2:                0.054 seconds (Total)
-#&gt; Chain 2: </div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/equivalence_test'>equivalence_test</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between disp and cyl (r = 0.75). This might lead to inappropriate results. See 'Details' in '?equivalence_test'.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>Picking joint bandwidth of 0.16</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 84 rows containing non-finite values (stat_density_ridges).</span></div><div class='img'><img src='data_plot-4.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; Chain 2:  Elapsed Time: 0.091 seconds (Warm-up)
+#&gt; Chain 2:                0.093 seconds (Sampling)
+#&gt; Chain 2:                0.184 seconds (Total)
+#&gt; Chain 2: </div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>rope</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.88), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.73), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.82). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>model</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/p_direction'>p_direction</a></span>(<span class='no'>data</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)
+
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/p_direction'>p_direction</a></span>(<span class='no'>model</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm'>stan_glm</a></span>(
+  <span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>gear</span> + <span class='no'>cyl</span> + <span class='no'>disp</span>,
+  <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>200</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>
+)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/equivalence_test'>equivalence_test</a></span>(<span class='no'>model</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)
+<span class='co'># }</span><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>bayestestR</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>see</span>)

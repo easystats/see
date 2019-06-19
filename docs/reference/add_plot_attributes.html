@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -130,9 +130,9 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>rstanarm</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'xts':</span>
-#&gt; <span class='message'>  method     from</span>
-#&gt; <span class='message'>  as.zoo.xts zoo </span></div><div class='output co'>#&gt; <span class='message'>rstanarm (Version 2.18.2, packaged: 2018-11-08 22:19:38 UTC)</span></div><div class='output co'>#&gt; <span class='message'>- Do not expect the default priors to remain the same in future rstanarm versions.</span></div><div class='output co'>#&gt; <span class='message'>Thus, R scripts should specify priors explicitly, even if they are just the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='message'>- Plotting theme set to bayesplot::theme_default().</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>bayestestR</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>rstanarm</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>bayestestR</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>see</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
@@ -140,80 +140,18 @@
   <span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Width</span> + <span class='no'>Species</span> + <span class='no'>Sepal.Width</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
   <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>200</span>
-)</div><div class='output co'>#&gt; 
-#&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
-#&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
-#&gt; Chain 1: Adjust your expectations accordingly!
-#&gt; Chain 1: 
-#&gt; Chain 1: 
-#&gt; Chain 1: WARNING: There aren't enough warmup iterations to fit the
-#&gt; Chain 1:          three stages of adaptation as currently configured.
-#&gt; Chain 1:          Reducing each adaptation stage to 15%/75%/10% of
-#&gt; Chain 1:          the given number of warmup iterations:
-#&gt; Chain 1:            init_buffer = 15
-#&gt; Chain 1:            adapt_window = 75
-#&gt; Chain 1:            term_buffer = 10
-#&gt; Chain 1: 
-#&gt; Chain 1: Iteration:   1 / 200 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  20 / 200 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration:  40 / 200 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration:  60 / 200 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration:  80 / 200 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 100 / 200 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 101 / 200 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 120 / 200 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 140 / 200 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 160 / 200 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
-#&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.023 seconds (Warm-up)
-#&gt; Chain 1:                0.025 seconds (Sampling)
-#&gt; Chain 1:                0.048 seconds (Total)
-#&gt; Chain 1: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
-#&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
-#&gt; Chain 2: Adjust your expectations accordingly!
-#&gt; Chain 2: 
-#&gt; Chain 2: 
-#&gt; Chain 2: WARNING: There aren't enough warmup iterations to fit the
-#&gt; Chain 2:          three stages of adaptation as currently configured.
-#&gt; Chain 2:          Reducing each adaptation stage to 15%/75%/10% of
-#&gt; Chain 2:          the given number of warmup iterations:
-#&gt; Chain 2:            init_buffer = 15
-#&gt; Chain 2:            adapt_window = 75
-#&gt; Chain 2:            term_buffer = 10
-#&gt; Chain 2: 
-#&gt; Chain 2: Iteration:   1 / 200 [  0%]  (Warmup)
-#&gt; Chain 2: Iteration:  20 / 200 [ 10%]  (Warmup)
-#&gt; Chain 2: Iteration:  40 / 200 [ 20%]  (Warmup)
-#&gt; Chain 2: Iteration:  60 / 200 [ 30%]  (Warmup)
-#&gt; Chain 2: Iteration:  80 / 200 [ 40%]  (Warmup)
-#&gt; Chain 2: Iteration: 100 / 200 [ 50%]  (Warmup)
-#&gt; Chain 2: Iteration: 101 / 200 [ 50%]  (Sampling)
-#&gt; Chain 2: Iteration: 120 / 200 [ 60%]  (Sampling)
-#&gt; Chain 2: Iteration: 140 / 200 [ 70%]  (Sampling)
-#&gt; Chain 2: Iteration: 160 / 200 [ 80%]  (Sampling)
-#&gt; Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
-#&gt; Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
-#&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.022 seconds (Warm-up)
-#&gt; Chain 2:                0.029 seconds (Sampling)
-#&gt; Chain 2:                0.051 seconds (Total)
-#&gt; Chain 2: </div><div class='input'>
+)
+
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='data_plot.html'>data_plot</a></span>(<span class='no'>result</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>model</span>)
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='no'>data</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='no'>height</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>fill</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='no'>height</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>fill</span>)) +
   <span class='kw pkg'>ggridges</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ggridges/topics/geom_ridgeline_gradient'>geom_ridgeline_gradient</a></span>()
 
-<span class='no'>p</span></div><div class='img'><img src='add_plot_attributes-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>p</span> + <span class='fu'>add_plot_attributes</span>(<span class='no'>data</span>)</div><div class='img'><img src='add_plot_attributes-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span>
+<span class='no'>p</span> + <span class='fu'>add_plot_attributes</span>(<span class='no'>data</span>)
+<span class='co'># }</span><div class='input'>
 
 </div></pre>
   </div>
