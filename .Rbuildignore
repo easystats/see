@@ -13,3 +13,4 @@
 ^paper.*$
 ^man/figures/.
 ^README.md
+^revdep$
