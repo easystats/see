@@ -13,6 +13,7 @@ add_plot_attributes(x)
 The \link{data_plot} function usually stores information (such as title, axes labels etc.) as attributes. This function adds those information to the plot.
 }
 \examples{
+\dontrun{
 library(rstanarm)
 library(bayestestR)
 library(see)
@@ -32,7 +33,7 @@ p <- data \%>\%
   ggridges::geom_ridgeline_gradient()
 
 p
-p + add_plot_attributes(data)
+p + add_plot_attributes(data)}
 
 
 }

@@ -114,6 +114,7 @@ development and probably not yet available):
   \item \code{performance::check_collinearity()}
   \item \code{performance::check_distribution()}
   \item \code{performance::check_heteroscedasticity()}
+  \item \code{performance::check_homogeneity()}
   \item \code{performance::check_model()}
   \item \code{performance::check_normality()}
   \item \code{performance::check_outliers()}
