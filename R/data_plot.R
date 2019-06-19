@@ -47,7 +47,7 @@
 #'   \item \code{performance::check_model()}
 #'   \item \code{performance::check_normality()}
 #'   \item \code{performance::check_outliers()}
-#'   \item \code{performance::roc()}
+#'   \item \code{performance::performance_roc()}
 #' }
 #'
 #' @examples
