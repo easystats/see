@@ -1,7 +1,7 @@
 #' @importFrom bayestestR estimate_density
 #' @importFrom stats residuals sd dnorm
 #' @export
-plot.see_check_heteroscedasticity <- function(x, data = NULL) {
+plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
   if (is.null(data)) {
     model <- .retrieve_data(x)
   } else {

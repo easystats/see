@@ -1,5 +1,5 @@
 #' @export
-plot.see_check_collinearity <- function(x, data = NULL) {
+plot.see_check_collinearity <- function(x, data = NULL, ...) {
   if (is.null(data)) {
     dat <- .compact_list(.retrieve_data(x))
   } else {
