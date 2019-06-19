@@ -44,6 +44,9 @@ print.see_check_model <- function(x, ...) {
   ylim <- max(x$y, na.rm = TRUE)
   if (ylim < 10) ylim <- 10
 
+  # make sure legend is properly sorted
+  x$group <- factor(x$group, levels = c("low", "moderate", "high"))
+
   ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
     labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +

@@ -25,7 +25,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
     return(x)
   }
 
-  if (inherits(data, "emmGrid") && !requireNamespace("emmeans", quietly = TRUE)) {
+  if (inherits(model, "emmGrid") && !requireNamespace("emmeans", quietly = TRUE)) {
     stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
   }
 
