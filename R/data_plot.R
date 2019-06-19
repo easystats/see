@@ -54,10 +54,6 @@
 #' library(bayestestR)
 #' library(rstanarm)
 #'
-#' data <- rnorm(1000, 1)
-#' x <- rope(data, ci = c(0.8, 0.9))
-#' plot(x)
-#'
 #' model <- stan_glm(
 #'   Sepal.Length ~ Petal.Width * Species,
 #'   data = iris,
@@ -70,11 +66,11 @@
 #' x <- hdi(model)
 #' plot(x) + theme_modern()
 #'
+#' \dontrun{
 #' data <- rnorm(1000, 1)
 #' x <- p_direction(data)
 #' plot(x)
 #'
-#' \dontrun{
 #' x <- p_direction(model)
 #' plot(x)
 #'
