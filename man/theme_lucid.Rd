@@ -13,6 +13,10 @@ theme_lucid(base_size = 11, base_family = "", plot.title.size = 12,
   tags.face = "plain")
 }
 \arguments{
+\item{base_size}{base font size}
+
+\item{base_family}{base font family}
+
 \item{plot.title.size}{Title size in pts. Can be "none".}
 
 \item{plot.title.face}{Title font face ("plain", "italic", "bold", "bold.italic").}

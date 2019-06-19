@@ -13,6 +13,10 @@ theme_blackboard(base_size = 11, base_family = "",
   axis.text.angle = NULL, tags.size = 15, tags.face = "bold")
 }
 \arguments{
+\item{base_size}{base font size}
+
+\item{base_family}{base font family}
+
 \item{plot.title.size}{Title size in pts. Can be "none".}
 
 \item{plot.title.face}{Title font face ("plain", "italic", "bold", "bold.italic").}

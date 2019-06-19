@@ -3,6 +3,7 @@
 #' A modern, sleek and elegant theme for ggplot.
 #'
 #' @inheritParams ggplot2::theme
+#' @inheritParams ggplot2::theme_classic
 #' @param plot.title.size Title size in pts. Can be "none".
 #' @param plot.title.face Title font face ("plain", "italic", "bold", "bold.italic").
 #' @param plot.title.space Title spacing.
