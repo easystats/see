@@ -43,6 +43,7 @@
 #'   \item \code{performance::check_collinearity()}
 #'   \item \code{performance::check_distribution()}
 #'   \item \code{performance::check_heteroscedasticity()}
+#'   \item \code{performance::check_homogeneity()}
 #'   \item \code{performance::check_model()}
 #'   \item \code{performance::check_normality()}
 #'   \item \code{performance::check_outliers()}
@@ -111,6 +112,7 @@ print.data_plot <- function(x, ...){
 #'
 #' @inheritParams data_plot
 #' @examples
+#' \dontrun{
 #' library(rstanarm)
 #' library(bayestestR)
 #' library(see)
@@ -130,7 +132,7 @@ print.data_plot <- function(x, ...){
 #'   ggridges::geom_ridgeline_gradient()
 #'
 #' p
-#' p + add_plot_attributes(data)
+#' p + add_plot_attributes(data)}
 #'
 #'
 #' @export
