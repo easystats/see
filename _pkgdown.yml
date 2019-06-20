@@ -7,3 +7,42 @@ authors:
 template:
   params:
     bootswatch: cosmo
+
+reference:
+- title: "Plotting Functions"
+  contents:
+  - data_plot
+  - plots
+
+- title: "Geoms"
+  contents:
+  - geom_point2
+  - geom_poolpoint
+  - geom_violindot
+  - geom_violinhalf
+
+- title: "Scales"
+  contents:
+  - scale_color_flat
+  - scale_color_material
+  - scale_color_pizza
+
+- title: "Themes"
+  contents:
+  - theme_abyss
+  - theme_blackboard
+  - theme_lucid
+  - theme_modern
+
+- title: "Color Palettes"
+  contents:
+  - flat_colors
+  - material_colors
+  - pizza_colors
+  - palette_flat
+  - palette_material
+  - palette_pizza
+
+- title: "Miscellaneous"
+  contents:
+  - add_plot_attributes

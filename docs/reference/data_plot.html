@@ -277,8 +277,8 @@ development and probably not yet available):</p><ul>
 )</div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.001 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 10 seconds.
+#&gt; Chain 1: Gradient evaluation took 0 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -303,9 +303,9 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.084 seconds (Warm-up)
-#&gt; Chain 1:                0.096 seconds (Sampling)
-#&gt; Chain 1:                0.18 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.087 seconds (Warm-up)
+#&gt; Chain 1:                0.101 seconds (Sampling)
+#&gt; Chain 1:                0.188 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
@@ -336,9 +336,9 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.091 seconds (Warm-up)
+#&gt; Chain 2:  Elapsed Time: 0.103 seconds (Warm-up)
 #&gt; Chain 2:                0.093 seconds (Sampling)
-#&gt; Chain 2:                0.184 seconds (Total)
+#&gt; Chain 2:                0.196 seconds (Total)
 #&gt; Chain 2: </div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>rope</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.88), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.73), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.82). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>model</span>)
