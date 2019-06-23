@@ -24,7 +24,6 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, rope_color = "#
     geom_line(size = 1) +
     geom_area(alpha = 0.15) +
     geom_vline(xintercept = hypothesis, linetype = "dashed", colour = "grey50") +
-    geom_point(data = d_points, size = point_size, pch = 21, colour = null_point_outline, stroke = 1) +
     facet_wrap(~ind, scales = "free") +
     labs(y = "Density",
          color = "Distribution",
@@ -44,6 +43,9 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, rope_color = "#
         fill = rope_color,
         alpha = rope_alpha
       )
+  } else {
+    p <- p +
+      geom_point(data = d_points, size = point_size, pch = 21, colour = null_point_outline, stroke = 1)
   }
 
   p
