@@ -2,7 +2,7 @@
 #' @param point_size Size of point-geoms.
 #' @importFrom rlang .data
 #' @export
-plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, ...) {
+plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, rope_color = "#0171D3", rope_alpha = .2, ...) {
   plot_data <- attr(x, "plot_data")$plot_data
   d_points <- attr(x, "plot_data")$d_points
   hypothesis <- attr(x, "hypothesis")
@@ -14,7 +14,7 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, ...) {
   else
     null_point_outline <- t$panel.grid.major$colour
 
-  plot_data %>%
+  p <- plot_data %>%
     ggplot(aes(
       x = .data$x,
       y = .data$y,
@@ -23,7 +23,7 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, ...) {
     )) +
     geom_line(size = 1) +
     geom_area(alpha = 0.15) +
-    geom_vline(xintercept = hypothesis, linetype = "dashed") +
+    geom_vline(xintercept = hypothesis, linetype = "dashed", colour = "grey50") +
     geom_point(data = d_points, size = point_size, pch = 21, colour = null_point_outline, stroke = 1) +
     facet_wrap(~ind, scales = "free") +
     labs(y = "Density",
@@ -31,4 +31,20 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, ...) {
          fill = "Distribution",
          x = "") +
     theme(legend.position = "bottom")
+
+  if (length(hypothesis) > 1) {
+    rope <- range(hypothesis)
+    p <-
+      p + annotate(
+        "rect",
+        xmin = rope[1],
+        xmax = rope[2],
+        ymin = 0,
+        ymax = Inf,
+        fill = rope_color,
+        alpha = rope_alpha
+      )
+  }
+
+  p
 }

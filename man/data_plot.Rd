@@ -21,7 +21,8 @@ data_plot(x, data = NULL, ...)
   value = c("none", "BF", "probability"), log = FALSE,
   prior_odds = NULL, ...)
 
-\method{plot}{see_bayesfactor_savagedickey}(x, point_size = 2, ...)
+\method{plot}{see_bayesfactor_savagedickey}(x, point_size = 2,
+  rope_color = "#0171D3", rope_alpha = 0.2, ...)
 
 \method{plot}{see_check_distribution}(x, point_size = 2, panel = TRUE,
   ...)
@@ -59,16 +60,16 @@ custom \code{prior_odds} will change the slices' size.}
 
 \item{point_size}{Size of point-geoms.}
 
+\item{rope_color}{Color of ROPE ribbon.}
+
+\item{rope_alpha}{Transparency level of ROPE ribbon.}
+
 \item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else, single plots are returned.}
 
 \item{type}{Character vector, indicating the type of plot (for
 \code{\link[performance]{check_normality}}).}
 
 \item{text_size}{Size of text labels.}
-
-\item{rope_color}{Color of ROPE ribbon.}
-
-\item{rope_alpha}{Transparency level of ROPE ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the intercept-parameter
