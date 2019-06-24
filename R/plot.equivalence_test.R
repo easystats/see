@@ -84,7 +84,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   labels <- levels(tmp$predictor)
   names(labels) <- labels
 
-  fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("accepted", "rejected", "undecided"))))]
+  fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
   add.args <- lapply(match.call(expand.dots = F)$`...`, function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
