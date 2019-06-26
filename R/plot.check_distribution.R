@@ -35,7 +35,7 @@ plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(stats::residuals(model)))
-  dat2 <- data.frame(x = insight::get_response(model))
+  dat2 <- data.frame(x = .factor_to_numeric(insight::get_response(model)))
 
   # this ensures that we have integers for response variables with values
   # much greater than 1 and with a large range, so we have proper bar plots
