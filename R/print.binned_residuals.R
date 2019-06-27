@@ -1,3 +1,4 @@
+#' @importFrom rlang .data
 #' @importFrom graphics plot
 #' @importFrom scales percent
 #' @export
@@ -8,34 +9,43 @@ print.see_binned_residuals <- function(x, ...) {
   else
     ltitle <- NULL
 
+  # set defaults
+
   term <- attr(x, "term", exact = TRUE)
+  geom_color <- attr(x, "geom_color", exact = TRUE)
+  geom_size <- attr(x, "geom_size", exact = TRUE)
+
 
   if (is.null(term))
     xtitle <- sprintf("Estimated Probability of %s", attr(x, "resp_var", exact = TRUE))
   else
     xtitle = term
 
-  p <- ggplot(data = x, aes_string(x = "xbar")) +
+  if (is.null(geom_color)) geom_color <- c("#d11141", "#00aedb")
+  if (is.null(geom_size)) geom_size <- 2
+
+
+  p <- ggplot(data = x, aes(x = .data$xbar)) +
     geom_abline(slope = 0, intercept = 0, colour = "grey80")
 
   if (!is.null(term)) {
     p <- p +
       stat_smooth(
-        aes_string(y = "ybar"),
+        aes(y = .data$ybar),
         method = "loess",
         se = FALSE,
         colour = "#00b159",
-        size = .5
+        size = .6
       )
   }
 
   p <- p +
-    geom_ribbon(aes_string(ymin = -Inf, ymax = "se.lo"), alpha = .1 , fill = "grey70") +
-    geom_ribbon(aes_string(ymin = "se", ymax = Inf), alpha = .1 , fill = "grey70") +
-    geom_line(aes_string(y = "se"), colour = "grey70") +
-    geom_line(aes_string(y = "se.lo"), colour = "grey70") +
+    geom_ribbon(aes(ymin = -Inf, ymax = .data$se.lo), alpha = .1 , fill = "grey70") +
+    geom_ribbon(aes(ymin = .data$se, ymax = Inf), alpha = .1 , fill = "grey70") +
+    geom_line(aes(y = .data$se), colour = "grey70") +
+    geom_line(aes(y = .data$se.lo), colour = "grey70") +
     theme_bw() +
-    scale_color_manual(values = c("#d11141", "#00aedb")) +
+    scale_color_manual(values = geom_color) +
     labs(
       y = "Average residual",
       x = xtitle,
@@ -47,9 +57,9 @@ print.see_binned_residuals <- function(x, ...) {
   }
 
   if (is.null(ltitle)) {
-    p <- p + geom_point(aes_string(y = "ybar"))
+    p <- p + geom_point(aes(y = .data$ybar), size = geom_size)
   } else {
-    p <- p + geom_point(aes_string(y = "ybar", colour = "group"))
+    p <- p + geom_point(aes(y = .data$ybar, colour = .data$group), size = geom_size)
   }
 
   suppressWarnings(graphics::plot(p))
