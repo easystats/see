@@ -32,3 +32,39 @@ magrittr::`%>%`
     x
   }
 }
+
+
+
+# is string empty?
+.is_empty_object <- function(x) {
+  if (is.list(x)) {
+    x <- tryCatch(
+      {.compact_list(x)},
+      error = function(x) { x }
+    )
+  }
+  # this is an ugly fix because of ugly tibbles
+  if (inherits(x, c("tbl_df", "tbl"))) x <- as.data.frame(x)
+  x <- suppressWarnings(x[!is.na(x)])
+  length(x) == 0 || is.null(x)
+}
+
+
+
+
+# safe conversion from factor to numeric
+#' @importFrom stats na.omit
+.factor_to_numeric <- function(x) {
+  if (is.numeric(x))
+    return(x)
+
+  if (anyNA(suppressWarnings(as.numeric(as.character(stats::na.omit(x)))))) {
+    if (is.character(x)) {
+      x <- as.factor(x)
+    }
+    levels(x) <- 1:nlevels(x)
+  }
+
+  as.numeric(as.character(x))
+}
+
