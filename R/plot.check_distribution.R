@@ -89,15 +89,16 @@ plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE,
     scale_y_continuous(labels = scales::percent, expand = c(0, 0), limits = c(0, max_y)) +
     theme_lucid(legend.position = lp)
 
-  dat <- as.data.frame(stats::density(vec))
+  dat1 <- as.data.frame(stats::density(vec))
+  dat2 <- as.data.frame(x = vec)
 
-  p2 <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
-    geom_line(colour = "#2196F3") +
+  p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
+    geom_line() +
     labs(x = NULL, y = NULL, title = "Density of Vector") +
     theme_lucid()
 
-  p3 <- ggplot(dat, aes(x = .data$x)) +
-    geom_bar(fill = "#f44336", colour = NA) +
+  p3 <- ggplot(dat2, aes(x = .data$x)) +
+    geom_bar(, colour = NA) +
     labs(x = NULL, y = NULL, title = "Distribution of Vector") +
     theme_lucid()
 
