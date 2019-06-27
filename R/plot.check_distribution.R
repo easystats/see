@@ -90,7 +90,7 @@ plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE,
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(vec))
-  dat2 <- as.data.frame(x = vec)
+  dat2 <- data.frame(x = vec)
 
   p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
     geom_line() +
@@ -98,7 +98,7 @@ plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE,
     theme_lucid()
 
   p3 <- ggplot(dat2, aes(x = .data$x)) +
-    geom_bar(, colour = NA) +
+    geom_bar(colour = NA) +
     labs(x = NULL, y = NULL, title = "Distribution of Vector") +
     theme_lucid()
 
