@@ -53,12 +53,14 @@ Imports:
 Suggests:
 	covr,
 	emmeans,
+	ggraph,
 	ggrepel,
 	MASS,
 	rmarkdown,
 	rstanarm,
 	stringr,
 	testthat,
+	tidygraph,
 	tidyr
 RoxygenNote: 6.1.1
 Language: en-GB

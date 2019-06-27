@@ -339,6 +339,23 @@ plot(result, n_pies = "many", value = "BF") +
 ```
 
 
+### [parameters](https://github.com/easystats/parameters)
+
+#### SEM / CFA lavaan graphs
+
+
+```{r warning=FALSE, message=FALSE}
+library(lavaan)
+library(parameters)
+
+structure <- ' visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6
+               speed   =~ x7 + x8 + x9 '
+
+model <- lavaan::cfa(structure, data=HolzingerSwineford1939)
+params <- parameters::model_parameters(model)
+plot(params)
+```
 
 
 ### [estimate](https://github.com/easystats/estimate)

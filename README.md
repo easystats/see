@@ -305,6 +305,25 @@ plot(result, n_pies = "many", value = "BF") +
 
 ![](man/figures/unnamed-chunk-28-2.png)<!-- -->
 
+### [parameters](https://github.com/easystats/parameters)
+
+#### SEM / CFA lavaan graphs
+
+``` r
+library(lavaan)
+library(parameters)
+
+structure <- ' visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6
+               speed   =~ x7 + x8 + x9 '
+model <- lavaan::cfa(structure, data=HolzingerSwineford1939)
+
+params <- parameters::model_parameters(model)
+plot(params)
+```
+
+![](man/figures/unnamed-chunk-29-1.png)<!-- -->
+
 ### [estimate](https://github.com/easystats/estimate)
 
 #### Pairwise Contrasts
@@ -322,4 +341,4 @@ means <- estimate_means(model)
 plot(contrasts, means)
 ```
 
-![](man/figures/unnamed-chunk-30-1.png)<!-- -->
+![](man/figures/unnamed-chunk-31-1.png)<!-- -->
