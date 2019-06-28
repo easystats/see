@@ -37,6 +37,7 @@
 #'   \item \code{bayestestR::estimate_density()}
 #'   \item \code{bayestestR::hdi()}
 #'   \item \code{bayestestR::p_direction()}
+#'   \item \code{bayestestR::point_estimate()}
 #'   \item \code{bayestestR::rope()}
 #'   \item \code{estimate::estimateContrasts()}
 #'   \item \code{performance::binned_residuals()}
