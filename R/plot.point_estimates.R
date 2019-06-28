@@ -66,15 +66,16 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
       geom_ribbon(aes(ymin = 0, ymax = .data$y), fill = "#FFC107") +
       geom_segment(x = mean_x, xend = mean_x, y = 0, yend = mean_y, color = "#E91E63", size = 1) +
       geom_point(x = mean_x, y = mean_y, color = "#E91E63", size = point_size) +
-      geom_text(x = mean_x, y = max_y * 1.05, label = "Mean", color = "#E91E63", angle = 90, size = text_size) +
+      geom_text(x = mean_x, y = max_y * 1.05, label = "Mean", color = "#E91E63", angle = 75, size = text_size) +
       geom_segment(x = median_x, xend = median_x, y = 0, yend = median_y, color = "#2196F3", size = 1) +
       geom_point(x = median_x, y = median_y, color = "#2196F3", size = point_size) +
-      geom_text(x = median_x, y = max_y * 1.05, label = "Median", color = "#2196F3", angle = 90, size = text_size) +
+      geom_text(x = median_x, y = max_y * 1.05, label = "Median", color = "#2196F3", angle = 75, size = text_size) +
       geom_segment(x = map_x, xend = map_x, y = 0, yend = map_y, color = "#4CAF50", size = 1) +
       geom_point(x = map_x, y = map_y, color = "#4CAF50", size = point_size) +
-      geom_text(x = map_x, y = max_y * 1.05, label = "MAP", color = "#4CAF50", angle = 90, size = text_size) +
+      geom_text(x = map_x, y = max_y * 1.05, label = "MAP", color = "#4CAF50", angle = 75, size = text_size) +
       geom_vline(xintercept = 0, linetype = "dotted") +
       scale_y_continuous(expand = c(0, 0), limits = c(0, max_y * 1.15)) +
+      see::theme_lucid() +
       labs(title = "Bayesian Point Estimates", x = x_lab, y = "Probability Density")
   })
 
