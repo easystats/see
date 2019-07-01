@@ -1,3 +1,15 @@
+# see 0.2.1
+
+## New plot-functions
+
+* Added plot-function for `parameters::model_parameters()` for *lavaan*-objects.
+* Added plot-function for `bayestestR::point_estimate()` for *lavaan*-objects.
+
+## Changes to functions
+
+* The `plot()`-method for `bayestestR::bayesfactor_savagedickey()` gets `rope_color` and `rope_alpha`-argument to plot the "null"-region, when the null-hypothesis is a region of practival equivalende, not just the null-point.
+* The `plot()`-method for `performance::binned_residuals()` now also allows to modify size and colors of geoms (related arguments are in `performance::binned_residuals()`).
+
 # see 0.2.0
 
 ## General

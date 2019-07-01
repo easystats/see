@@ -117,6 +117,7 @@ development and probably not yet available):
   \item \code{bayestestR::point_estimate()}
   \item \code{bayestestR::rope()}
   \item \code{estimate::estimateContrasts()}
+  \item \code{parameters::model_parameters()}
   \item \code{performance::binned_residuals()}
   \item \code{performance::check_collinearity()}
   \item \code{performance::check_distribution()}
