@@ -36,6 +36,7 @@
 #'   \item \code{bayestestR::ci()}
 #'   \item \code{bayestestR::equivalence_test()}
 #'   \item \code{bayestestR::estimate_density()}
+#'   \item \code{bayestestR::eti()}
 #'   \item \code{bayestestR::hdi()}
 #'   \item \code{bayestestR::p_direction()}
 #'   \item \code{bayestestR::point_estimate()}
