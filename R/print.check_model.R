@@ -46,13 +46,21 @@ print.see_check_model <- function(x, ...) {
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
+  colors <- unname(flat_colors("green", "orange", "red"))
+  names(colors) <- c("low", "moderate", "high")
 
-  ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
+  p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
     labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +
-    scale_fill_manual(values = unname(flat_colors("green", "orange", "red"))) +
+    scale_fill_manual(values = colors) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
     ylim(c(0, ylim))
+
+  if ("facet" %in% colnames(x)) {
+    p <- p + facet_wrap(~facet, nrow = 1, scales = "free")
+  }
+
+  p
 }
 
 

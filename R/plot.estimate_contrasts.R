@@ -1,7 +1,7 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.estimateContrasts <- function(x, data = NULL, ...){
-  .data_plot_estimateContrasts(x, data)
+data_plot.estimate_contrasts <- function(x, data = NULL, ...){
+  .data_plot_estimate_contrasts(x, data)
 }
 
 
@@ -9,7 +9,7 @@ data_plot.estimateContrasts <- function(x, data = NULL, ...){
 
 
 #' @keywords internal
-.data_plot_estimateContrasts <- function(x, means = NULL, ...){
+.data_plot_estimate_contrasts <- function(x, means = NULL, ...){
 
   if (is.null(means)) {
     warning("Please provide the estimated means data obtained via 'estimate_means()'.")
@@ -28,7 +28,7 @@ data_plot.estimateContrasts <- function(x, data = NULL, ...){
     "title" = paste0("Estimated ", y_name, "s and Contrasts")
   )
 
-  class(dataplot) <- c("data_plot", "estimateContrasts", class(dataplot))
+  class(dataplot) <- c("data_plot", "estimate_contrasts", class(dataplot))
   dataplot
 }
 
@@ -71,7 +71,7 @@ data_plot.estimateContrasts <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
 #' @export
-plot.estimateContrasts <- function(x, data = NULL, ...){
+plot.estimate_contrasts <- function(x, data = NULL, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }

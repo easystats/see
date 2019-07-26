@@ -20,6 +20,10 @@ plot.see_check_collinearity <- function(x, data = NULL, ...) {
     dat[, c("x", "y", "group")]
   }
 
+  if (length(unique(dat$facet)) == 1) {
+    dat <- dat[, -which(colnames(dat) == "facet")]
+  }
+
   .plot_diag_vif(dat)
 }
 

@@ -31,7 +31,7 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
     edges <- edges %>%
       dplyr::mutate(Label = paste0(
         sprintf("%.2f, ", .data$Coefficient),
-        attributes(x)$CI * 100,
+        attributes(x)$ci * 100,
         "% CI [",
         sprintf("%.2f, %.2f]", .data$CI_low, .data$CI_high)))
   } else {
@@ -58,7 +58,7 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
 
   # Node
-  nodes <- data.frame(Name = unique(c(as.character(edges$from), as.character(edges$to)))) %>%
+  nodes <- data.frame(Name = unique(c(as.character(edges$from), as.character(edges$to))), stringsAsFactors = FALSE) %>%
     dplyr::left_join(latent_nodes, by = "Name") %>%
     dplyr::mutate(Latent = ifelse(is.na(.data$Latent), FALSE, .data$Latent))
 
