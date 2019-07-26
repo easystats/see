@@ -40,7 +40,7 @@
 #'   \item \code{bayestestR::p_direction()}
 #'   \item \code{bayestestR::point_estimate()}
 #'   \item \code{bayestestR::rope()}
-#'   \item \code{estimate::estimateContrasts()}
+#'   \item \code{estimate::estimate_contrasts()}
 #'   \item \code{parameters::model_parameters()}
 #'   \item \code{performance::binned_residuals()}
 #'   \item \code{performance::check_collinearity()}
