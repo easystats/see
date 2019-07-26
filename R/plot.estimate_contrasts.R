@@ -28,7 +28,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
     "title" = paste0("Estimated ", y_name, "s and Contrasts")
   )
 
-  class(dataplot) <- c("data_plot", "estimate_contrasts", class(dataplot))
+  class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
   dataplot
 }
 
@@ -71,7 +71,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
 #' @export
-plot.estimate_contrasts <- function(x, data = NULL, ...){
+plot.see_estimate_contrasts <- function(x, data = NULL, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }

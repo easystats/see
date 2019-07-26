@@ -53,11 +53,6 @@ data_plot.eti <- function(x, data = NULL, ...){
 }
 
 
-## TODO remove after bayestestR update 0.3.0
-
-#' @export
-data_plot.ci <- data_plot.eti
-
 #' @importFrom rlang .data
 #' @importFrom stats density
 #' @importFrom dplyr mutate arrange desc

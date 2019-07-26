@@ -28,8 +28,6 @@ options(knitr.kable.NA = '', digits = 4)
 
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
 [![downloads](http://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
-[![Build Status](https://travis-ci.org/easystats/see.svg?branch=master)](https://travis-ci.org/easystats/see)
-[![codecov](https://codecov.io/gh/easystats/see/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/see)
 [![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
 
 
@@ -84,10 +82,10 @@ library(rstanarm)
 library(estimate)
 
 dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
-  estimate::estimate_fit(keep_draws = TRUE, length = 100, draws = 250) %>% 
+  estimate::estimate_response(keep_draws = TRUE, length = 100, draws = 250) %>% 
   estimate::reshape_draws()
 
-p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Index)) +
+p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
   geom_line(color = "white", alpha = 0.05) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
@@ -100,9 +98,9 @@ library(rstanarm)
 
 junk <- capture.output(model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris))
 
-p <- estimate_fit(model, keep_draws = TRUE, length = 100, draws = 250) %>% 
+p <- estimate_response(model, keep_draws = TRUE, length = 100, draws = 250) %>% 
   reshape_draws() %>% 
-  ggplot(aes(x = Petal.Length, y = Draw, group = Draw_Index)) +
+  ggplot(aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
   geom_line(color = "white", alpha = 0.05) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
@@ -217,7 +215,7 @@ plot(result)
 ```
 
 ```{r warning=FALSE, message=FALSE, eval=TRUE}
-plot(result, stack=FALSE)
+plot(result, stack = FALSE)
 ```
 
 
@@ -352,7 +350,7 @@ structure <- ' visual  =~ x1 + x2 + x3
                textual =~ x4 + x5 + x6
                speed   =~ x7 + x8 + x9 '
 
-model <- lavaan::cfa(structure, data=HolzingerSwineford1939)
+model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
 params <- parameters::model_parameters(model)
 plot(params)
 ```
@@ -367,13 +365,12 @@ plot(params)
 library(rstanarm)
 library(estimate)
 
-model <- stan_glm(Sepal.Width ~ Species, data = iris) +
-  theme_modern()
+model <- stan_glm(Sepal.Width ~ Species, data = iris)
 
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
 
-plot(contrasts, means)
+plot(contrasts, means) + theme_modern()
 ```
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
 library(rstanarm)
