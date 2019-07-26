@@ -82,7 +82,7 @@ library(rstanarm)
 library(estimate)
 
 dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
-  estimate::estimate_response(keep_draws = TRUE, length = 100, draws = 250) %>% 
+  estimate::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>% 
   estimate::reshape_draws()
 
 p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
@@ -96,9 +96,9 @@ p + theme_blackboard()
 library(estimate)
 library(rstanarm)
 
-junk <- capture.output(model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris))
+model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris, refresh = 0)
 
-p <- estimate_response(model, keep_draws = TRUE, length = 100, draws = 250) %>% 
+p <- estimate_link(model, keep_draws = TRUE, length = 100, draws = 250) %>% 
   reshape_draws() %>% 
   ggplot(aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
   geom_line(color = "white", alpha = 0.05) +
