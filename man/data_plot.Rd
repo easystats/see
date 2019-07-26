@@ -108,6 +108,7 @@ functions from packages might be listed here that are currently still in
 development and probably not yet available):
 \itemize{
   \item \code{bayestestR::bayesfactor_models()}
+  \item \code{bayestestR::bayesfactor_parameters()}
   \item \code{bayestestR::bayesfactor_savagedickey()}
   \item \code{bayestestR::ci()}
   \item \code{bayestestR::equivalence_test()}

@@ -50,3 +50,7 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, rope_color = "#
 
   p
 }
+
+
+#' @export
+plot.see_bayesfactor_parameters <- plot.see_bayesfactor_savagedickey

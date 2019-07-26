@@ -3,7 +3,7 @@
 ## New plot-functions
 
 * Added plot-function for `parameters::model_parameters()` for *lavaan*-objects.
-* Added plot-function for `bayestestR::point_estimate()` for *lavaan*-objects.
+* Added plot-function for `bayestestR::point_estimate()`.
 
 ## Changes to functions
 

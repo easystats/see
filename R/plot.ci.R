@@ -58,7 +58,6 @@ data_plot.bayestestR_ci <- function(x, data = NULL, ...){
 #' @export
 data_plot.ci <- data_plot.bayestestR_ci
 
-
 #' @importFrom rlang .data
 #' @importFrom stats density
 #' @importFrom dplyr mutate arrange desc
@@ -127,3 +126,6 @@ plot.see_ci <- function(x, data = NULL, show_intercept = FALSE, ...) {
   p
 }
 
+
+#' @export
+plot.see_eti <- plot.see_ci
