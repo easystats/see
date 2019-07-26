@@ -2,7 +2,7 @@
 #' @param point_size Size of point-geoms.
 #' @importFrom rlang .data
 #' @export
-plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, rope_color = "#0171D3", rope_alpha = .2, ...) {
+plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#0171D3", rope_alpha = .2, ...) {
   plot_data <- attr(x, "plot_data")$plot_data
   d_points <- attr(x, "plot_data")$d_points
   hypothesis <- attr(x, "hypothesis")
@@ -53,4 +53,4 @@ plot.see_bayesfactor_savagedickey <- function(x, point_size = 2, rope_color = "#
 
 
 #' @export
-plot.see_bayesfactor_parameters <- plot.see_bayesfactor_savagedickey
+plot.see_bayesfactor_savagedickey <- plot.see_bayesfactor_parameters
