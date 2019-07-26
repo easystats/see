@@ -59,7 +59,7 @@ library(rstanarm)
 library(estimate)
 
 dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), 
-    data = iris) %>% estimate::estimate_response(keep_draws = TRUE, 
+    data = iris) %>% estimate::estimate_link(keep_draws = TRUE, 
     length = 100, draws = 250) %>% estimate::reshape_draws()
 
 p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) + 
