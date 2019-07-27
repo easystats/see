@@ -12,15 +12,13 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
 .data_plot_estimate_contrasts <- function(x, means = NULL, ...){
 
   if (is.null(means)) {
-    warning("Please provide the estimated means data obtained via 'estimate_means()'.")
-    means <- data.frame(x_name = unique(c(x$Level1, x$Level2)), Mean = 0)
-    x_name <- "x_name"
+    stop("Please provide the estimated means data obtained via 'estimate_means()'.")
   } else{
     x_name <- names(means)[1]
   }
 
-  y_name <- c("Median", "Mean", "MAP")[c("Median", "Mean", "MAP") %in% names(means)][1]
-  dataplot <- .data_Contrasts_and_Means(x, means, x_name = x_name, y_name = y_name)
+  y_name <- c("Median", "Mean", "MAP", "Coefficient")[c("Median", "Mean", "MAP", "Coefficient") %in% names(means)][1]
+  dataplot <- .data_contrasts_and_means(x, means, x_name = x_name, y_name = y_name)
 
   attr(dataplot, "info") <- list(
     "xlab" = x_name,
@@ -38,7 +36,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
 
 
 #' @keywords internal
-.data_Contrasts_and_Means <- function(contrasts, means, x_name, y_name){
+.data_contrasts_and_means <- function(contrasts, means, x_name, y_name){
 
   polygons <- contrasts
   polygons$group <- 1:nrow(polygons)
