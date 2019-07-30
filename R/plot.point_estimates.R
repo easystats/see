@@ -47,6 +47,10 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
 }
 
 
+#' @export
+data_plot.map_estimate <- data_plot.point_estimate
+
+
 
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
