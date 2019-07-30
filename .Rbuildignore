@@ -14,3 +14,4 @@
 ^man/figures/.
 ^README.md
 ^revdep$
+^.github$
