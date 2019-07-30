@@ -1,6 +1,6 @@
 #' @importFrom bayestestR point_estimate
 #' @export
-data_plot.point_estimate <- function(x, data = NULL, ...){
+data_plot.point_estimate <- function(x, data = NULL, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -14,6 +14,9 @@ data_plot.point_estimate <- function(x, data = NULL, ...){
     data <- as.data.frame(data)
   }
 
+  centrality <- tolower(attr(x, "centrality", exact = TRUE))
+  if (is.null(centrality)) centrality <- "all"
+
   dataplot <- lapply(colnames(data), function(i) {
     dist <- data[[i]]
 
@@ -21,14 +24,20 @@ data_plot.point_estimate <- function(x, data = NULL, ...){
     dat <- as.data.frame(stats::density(dist, n = 256))
     dat$group <- i
 
-    attr(dat, "mean_x") <- pe$Mean
-    attr(dat, "mean_y") <- dat$y[which.min(abs(dat$x - pe$Mean))]
+    if (centrality %in% c("all", "mean")) {
+      attr(dat, "mean_x") <- pe$Mean
+      attr(dat, "mean_y") <- dat$y[which.min(abs(dat$x - pe$Mean))]
+    }
 
-    attr(dat, "median_x") <- pe$Median
-    attr(dat, "median_y") <- dat$y[which.min(abs(dat$x - pe$Median))]
+    if (centrality %in% c("all", "median")) {
+      attr(dat, "median_x") <- pe$Median
+      attr(dat, "median_y") <- dat$y[which.min(abs(dat$x - pe$Median))]
+    }
 
-    attr(dat, "map_x") <- pe$MAP
-    attr(dat, "map_y") <- dat$y[which.min(abs(dat$x - pe$MAP))]
+    if (centrality %in% c("all", "map")) {
+      attr(dat, "map_x") <- pe$MAP
+      attr(dat, "map_y") <- dat$y[which.min(abs(dat$x - pe$MAP))]
+    }
 
     dat
   })
@@ -62,21 +71,37 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     else
       x_lab <- "Parameter Value"
 
-    ggplot(i, aes(x = .data$x, y = .data$y, group = .data$group)) +
-      geom_ribbon(aes(ymin = 0, ymax = .data$y), fill = "#FFC107") +
-      geom_segment(x = mean_x, xend = mean_x, y = 0, yend = mean_y, color = "#E91E63", size = 1) +
-      geom_point(x = mean_x, y = mean_y, color = "#E91E63", size = point_size) +
-      geom_text(x = mean_x, y = max_y * 1.05, label = "Mean", color = "#E91E63", angle = 75, size = text_size) +
-      geom_segment(x = median_x, xend = median_x, y = 0, yend = median_y, color = "#2196F3", size = 1) +
-      geom_point(x = median_x, y = median_y, color = "#2196F3", size = point_size) +
-      geom_text(x = median_x, y = max_y * 1.05, label = "Median", color = "#2196F3", angle = 75, size = text_size) +
-      geom_segment(x = map_x, xend = map_x, y = 0, yend = map_y, color = "#4CAF50", size = 1) +
-      geom_point(x = map_x, y = map_y, color = "#4CAF50", size = point_size) +
-      geom_text(x = map_x, y = max_y * 1.05, label = "MAP", color = "#4CAF50", angle = 75, size = text_size) +
+    p_object <- ggplot(i, aes(x = .data$x, y = .data$y, group = .data$group)) +
+      geom_ribbon(aes(ymin = 0, ymax = .data$y), fill = "#FFC107")
+
+    if (!is.null(mean_x) && !is.null(mean_y)) {
+      p_object <- p_object +
+        geom_segment(x = mean_x, xend = mean_x, y = 0, yend = mean_y, color = "#E91E63", size = 1) +
+        geom_point(x = mean_x, y = mean_y, color = "#E91E63", size = point_size) +
+        geom_text(x = mean_x, y = max_y * 1.05, label = "Mean", color = "#E91E63", size = text_size)
+    }
+
+    if (!is.null(median_x) && !is.null(median_y)) {
+      p_object <- p_object +
+        geom_segment(x = median_x, xend = median_x, y = 0, yend = median_y, color = "#2196F3", size = 1) +
+        geom_point(x = median_x, y = median_y, color = "#2196F3", size = point_size) +
+        geom_text(x = median_x, y = max_y * 1.05, label = "Median", color = "#2196F3", size = text_size)
+    }
+
+    if (!is.null(map_x) && !is.null(map_y)) {
+      p_object <- p_object +
+        geom_segment(x = map_x, xend = map_x, y = 0, yend = map_y, color = "#4CAF50", size = 1) +
+        geom_point(x = map_x, y = map_y, color = "#4CAF50", size = point_size) +
+        geom_text(inherit.aes = FALSE, x = map_x, y = max_y * 1.05, label = "MAP", color = "#4CAF50", size = text_size)
+    }
+
+    p_object <- p_object +
       geom_vline(xintercept = 0, linetype = "dotted") +
       scale_y_continuous(expand = c(0, 0), limits = c(0, max_y * 1.15)) +
       see::theme_lucid() +
       labs(title = "Bayesian Point Estimates", x = x_lab, y = "Probability Density")
+
+    p_object
   })
 
   if (length(x) == 1) {

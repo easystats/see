@@ -116,6 +116,7 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, ...) {
       fill = .data$fill
     )) +
     ggridges::geom_ridgeline_gradient() +
+    geom_vline(xintercept = 0, linetype = "dotted") +
     add_plot_attributes(x)
 
   p
