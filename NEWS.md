@@ -9,6 +9,7 @@
 
 * The `plot()`-method for `bayestestR::bayesfactor_savagedickey()` gets `rope_color` and `rope_alpha`-argument to plot the "null"-region, when the null-hypothesis is a region of practival equivalende, not just the null-point.
 * The `plot()`-method for `performance::binned_residuals()` now also allows to modify size and colors of geoms (related arguments are in `performance::binned_residuals()`).
+* The `plot()`-method (resp. `print()`-method) for `performance::check_model()` gets a `check`-argument, to select which checks should be plotted.
 
 # see 0.2.0
 

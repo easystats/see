@@ -47,7 +47,7 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
   rope_color = "cadetblue", show_intercept = FALSE, ...)
 
-\method{print}{see_check_model}(x, checks = "all", ...)
+\method{print}{see_check_model}(x, check = "all", ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -87,7 +87,7 @@ posterior distributions for other parameters are hardly visible.}
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
 
-\item{checks}{Character vector, indicating which checks for \code{performance::check_model()}
+\item{check}{Character vector, indicating which checks for \code{performance::check_model()}
 should be performed and plotted. May be one or more of
 \code{"all", "vif", "qq", "normality", "ncv", "homogeneity", "outliers", "reqq"}.
 \code{"reqq"} is a QQ-plot for random effects and only available for mixed models.
