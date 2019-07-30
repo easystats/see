@@ -38,6 +38,7 @@
 #'   \item \code{bayestestR::estimate_density()}
 #'   \item \code{bayestestR::eti()}
 #'   \item \code{bayestestR::hdi()}
+#'   \item \code{bayestestR::map_estimate()}
 #'   \item \code{bayestestR::p_direction()}
 #'   \item \code{bayestestR::point_estimate()}
 #'   \item \code{bayestestR::rope()}
