@@ -1,29 +1,23 @@
-#' @param check Character vector, indicating which checks for \code{performance::check_model()}
-#'   should be performed and plotted. May be one or more of
-#'   \code{"all", "vif", "qq", "normality", "ncv", "homogeneity", "outliers", "reqq"}.
-#'   \code{"reqq"} is a QQ-plot for random effects and only available for mixed models.
-#'   \code{"ncv"} checks for non-constant variance, i.e. for heteroscedasticity.
-#'   By default, all possible checks are performed and plotted.
 #' @importFrom rlang .data
 #' @importFrom graphics plot
-#' @rdname data_plot
 #' @export
-print.see_check_model <- function(x, check = "all", ...) {
+print.see_check_model <- function(x, ...) {
   p <- list()
 
   panel <- attr(x, "panel")
+  check <- attr(x, "check")
   dot_size <- attr(x, "dot_size")
   line_size <- attr(x, "line_size")
   text_size <- attr(x, "text_size")
 
-  check <- tolower(check)
+  if (is.null(check)) check <- all
 
-  if ("VIF" %in% names(x) && c("vif", "all") %in% check) p$VIF <- .plot_diag_vif(x$VIF)
-  if ("QQ" %in% names(x) && c("qq", "all") %in% check) p$QQ <- .plot_diag_qq(x$QQ, dot_size, line_size)
-  if ("NORM" %in% names(x) && c("normality", "all") %in% check) p$NORM <- .plot_diag_norm(x$NORM, line_size)
-  if ("NCV" %in% names(x) && c("ncv", "all") %in% check) p$NCV <- .plot_diag_ncv(x$NCV, dot_size, line_size)
-  if ("HOMOGENEITY" %in% names(x) && c("homogeneity", "all") %in% check) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, dot_size, line_size)
-  if ("OUTLIERS" %in% names(x) && c("outliers", "all") %in% check) {
+  if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF)
+  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, dot_size, line_size)
+  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, line_size)
+  if ("NCV" %in% names(x) && any(c("ncv", "all") %in% check)) p$NCV <- .plot_diag_ncv(x$NCV, dot_size, line_size)
+  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, dot_size, line_size)
+  if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
     p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, text_size)
     p$OUTLIERS <- p$OUTLIERS +
       theme_lucid(
@@ -33,7 +27,7 @@ print.see_check_model <- function(x, check = "all", ...) {
       )
   }
 
-  if ("REQQ" %in% names(x) && c("reqq", "all") %in% check) {
+  if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
     ps <- .plot_diag_reqq(x$REQQ, dot_size, line_size)
     for (i in 1:length(ps)) {
       p[[length(p) + 1]] <- ps[[i]]

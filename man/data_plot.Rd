@@ -3,7 +3,7 @@
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R,
-%   R/plot.point_estimates.R, R/plot.rope.R, R/print.check_model.R
+%   R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
 \alias{plot.see_bayesfactor_models}
@@ -15,7 +15,6 @@
 \alias{plot.see_estimate_density}
 \alias{plot.see_point_estimate}
 \alias{plot.see_rope}
-\alias{print.see_check_model}
 \title{Prepare objects for plotting or plot objects}
 \usage{
 data_plot(x, data = NULL, ...)
@@ -46,8 +45,6 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
   rope_color = "cadetblue", show_intercept = FALSE, ...)
-
-\method{print}{see_check_model}(x, check = "all", ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -86,13 +83,6 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
-
-\item{check}{Character vector, indicating which checks for \code{performance::check_model()}
-should be performed and plotted. May be one or more of
-\code{"all", "vif", "qq", "normality", "ncv", "homogeneity", "outliers", "reqq"}.
-\code{"reqq"} is a QQ-plot for random effects and only available for mixed models.
-\code{"ncv"} checks for non-constant variance, i.e. for heteroscedasticity.
-By default, all possible checks are performed and plotted.}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object
