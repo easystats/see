@@ -43,9 +43,9 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
   # Separate labels
   edges <- edges %>%
     dplyr::mutate(
-      Label_Regression = ifelse(.data$Type=='Regression', .data$Label, ''),
-      Label_Correlation = ifelse(.data$Type=='Correlation', .data$Label, ''),
-      Label_Loading = ifelse(.data$Type=='Loading', .data$Label, '')
+      Label_Regression = ifelse(.data$Type == 'Regression', .data$Label, ''),
+      Label_Correlation = ifelse(.data$Type == 'Correlation', .data$Label, ''),
+      Label_Loading = ifelse(.data$Type == 'Loading', .data$Label, '')
     )
   edges <- edges[colSums(!is.na(edges)) > 0]
 
@@ -72,7 +72,11 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
 
 # Plot --------------------------------------------------------------------
+#' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
+#' @param threshold_p Numeric, threshold at which value p-values will be displayed.
+#' @param ci Logical, whether confidence intervals should be added to the plot.
 #' @importFrom rlang .data
+#' @rdname data_plot
 #' @export
 plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "correlation", "loading"), threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...){
   if (!"data_plot" %in% class(x)) {
@@ -92,23 +96,28 @@ plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "corr
     ggraph::geom_edge_arc(aes(alpha = as.numeric(.data$Type == "Correlation"),
                       label = .data$Label_Correlation,
                       color = .data$Coefficient),
-                  curvature=0.1,
-                  label_dodge=unit(2, "mm"),
-                  linetype = 2, angle_calc = "along",
-                  label_size = 3,
-                  start_cap = ggraph::circle(12, 'mm'), end_cap = ggraph::circle(12, 'mm')) +
+                      curvature = 0.1,
+                      label_dodge = unit(2, "mm"),
+                      linetype = 2, angle_calc = "along",
+                      label_size = 3,
+                      start_cap = ggraph::circle(12, 'mm'), end_cap = ggraph::circle(12, 'mm')) +
     ggraph::geom_edge_link(aes(alpha = as.numeric(.data$Type == "Loading"),
                        label = .data$Label_Loading,
                        color = .data$Coefficient),
-                   label_dodge=unit(2, "mm"),
-                   angle_calc = "along", edge_width=1,
-                   label_size = 3,
-                   check_overlap=TRUE,
-                   arrow = arrow(type = "closed", length = unit(3, "mm")),
-                   start_cap = ggraph::circle(12, 'mm'), end_cap = ggraph::circle(12, 'mm')) +
-    ggraph::geom_node_point(aes(colour = .data$Latent), size=30) +
+                       label_dodge = unit(2, "mm"),
+                       angle_calc = "along", edge_width = 1,
+                       label_size = 3,
+                       check_overlap = TRUE,
+                       arrow = arrow(type = "closed", length = unit(3, "mm")),
+                       start_cap = ggraph::circle(12, 'mm'), end_cap = ggraph::circle(12, 'mm')) +
+    ggraph::geom_node_point(aes(colour = .data$Latent), size = 30) +
     ggraph::geom_node_text(aes(label = .data$Name))  +
-    ggraph::scale_edge_colour_gradient2(guide = FALSE,  high = "#4CAF50", mid="#FFF9C4", low="#E91E63") +
+    ggraph::scale_edge_colour_gradient2(
+      guide = FALSE,
+      high = "#4CAF50",
+      mid = "#FFF9C4",
+      low = "#E91E63"
+    ) +
     scale_alpha(guide = FALSE, range = c(0, 1)) +
     ggraph::scale_edge_alpha(guide = FALSE, range = c(0, 1)) +
     scale_x_continuous(expand = expand_scale(c(.10, .10))) +

@@ -3,7 +3,7 @@
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R,
-%   R/plot.point_estimates.R, R/plot.rope.R
+%   R/plot.parameters_sem.R, R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
 \alias{plot.see_bayesfactor_models}
@@ -13,6 +13,7 @@
 \alias{plot.see_check_outliers}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
+\alias{plot.see_parameters_sem}
 \alias{plot.see_point_estimate}
 \alias{plot.see_rope}
 \title{Prepare objects for plotting or plot objects}
@@ -39,6 +40,10 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, ...)
+
+\method{plot}{see_parameters_sem}(x, data = NULL,
+  type = c("regression", "correlation", "loading"),
+  threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...)
 
 \method{plot}{see_point_estimate}(x, data = NULL, point_size = 2,
   text_size = 3.5, panel = TRUE, show_intercept = FALSE, ...)
@@ -72,7 +77,8 @@ custom \code{prior_odds} will change the slices' size.}
 \item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else, single plots are returned.}
 
 \item{type}{Character vector, indicating the type of plot (for
-\code{\link[performance]{check_normality}}).}
+\code{\link[performance]{check_normality}} or
+\code{\link[parameters]{model_parameters.lavaan}}).}
 
 \item{text_size}{Size of text labels.}
 
@@ -83,6 +89,12 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
+
+\item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
+
+\item{threshold_p}{Numeric, threshold at which value p-values will be displayed.}
+
+\item{ci}{Logical, whether confidence intervals should be added to the plot.}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object
