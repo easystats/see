@@ -3,7 +3,8 @@
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R,
-%   R/plot.parameters_sem.R, R/plot.point_estimates.R, R/plot.rope.R
+%   R/plot.parameters_model.R, R/plot.parameters_sem.R,
+%   R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
 \alias{plot.see_bayesfactor_models}
@@ -13,6 +14,7 @@
 \alias{plot.see_check_outliers}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
+\alias{plot.see_parameters_model}
 \alias{plot.see_parameters_sem}
 \alias{plot.see_point_estimate}
 \alias{plot.see_rope}
@@ -40,6 +42,9 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, ...)
+
+\method{plot}{see_parameters_model}(x, show_intercept = FALSE,
+  dot_size = 0.8, ...)
 
 \method{plot}{see_parameters_sem}(x, data = NULL,
   type = c("regression", "correlation", "loading"),
