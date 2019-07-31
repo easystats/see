@@ -51,16 +51,18 @@ Imports:
 	rlang,
 	scales
 Suggests:
-	covr,
-	emmeans,
-	ggraph,
-	ggrepel,
-	MASS,
-	rmarkdown,
-	rstanarm,
-	stringr,
-	testthat,
-	tidygraph,
-	tidyr
+    covr,
+    emmeans,
+    ggraph,
+    ggrepel,
+    MASS,
+    rmarkdown,
+    rstanarm,
+    stringr,
+    testthat,
+    tidygraph,
+    tidyr,
+    knitr
 RoxygenNote: 6.1.1
 Language: en-GB
+VignetteBuilder: knitr

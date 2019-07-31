@@ -24,17 +24,17 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
     dat <- as.data.frame(stats::density(dist, n = 256))
     dat$group <- i
 
-    if (centrality %in% c("all", "mean")) {
+    if (any(centrality %in% c("all", "mean"))) {
       attr(dat, "mean_x") <- pe$Mean
       attr(dat, "mean_y") <- dat$y[which.min(abs(dat$x - pe$Mean))]
     }
 
-    if (centrality %in% c("all", "median")) {
+    if (any(centrality %in% c("all", "median"))) {
       attr(dat, "median_x") <- pe$Median
       attr(dat, "median_y") <- dat$y[which.min(abs(dat$x - pe$Median))]
     }
 
-    if (centrality %in% c("all", "map")) {
+    if (any(centrality %in% c("all", "map"))) {
       attr(dat, "map_x") <- pe$MAP
       attr(dat, "map_y") <- dat$y[which.min(abs(dat$x - pe$MAP))]
     }
@@ -75,6 +75,15 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     else
       x_lab <- "Parameter Value"
 
+    if (!show_intercept && x_lab %in% c("Intercept", "(Intercept)", "b_Intercept")) return(NULL)
+
+    label_mean_x <- mean_x
+    label_mean_y <- max_y * 1.05
+    label_median_x <- median_x
+    label_median_y <- max_y * 1.05
+    label_map_x <- map_x
+    label_map_y <- max_y * 1.05
+
     p_object <- ggplot(i, aes(x = .data$x, y = .data$y, group = .data$group)) +
       geom_ribbon(aes(ymin = 0, ymax = .data$y), fill = "#FFC107")
 
@@ -82,21 +91,21 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
       p_object <- p_object +
         geom_segment(x = mean_x, xend = mean_x, y = 0, yend = mean_y, color = "#E91E63", size = 1) +
         geom_point(x = mean_x, y = mean_y, color = "#E91E63", size = point_size) +
-        geom_text(x = mean_x, y = max_y * 1.05, label = "Mean", color = "#E91E63", size = text_size)
+        geom_text(x = label_mean_x, y = label_mean_y, label = "Mean", color = "#E91E63", size = text_size)
     }
 
     if (!is.null(median_x) && !is.null(median_y)) {
       p_object <- p_object +
         geom_segment(x = median_x, xend = median_x, y = 0, yend = median_y, color = "#2196F3", size = 1) +
         geom_point(x = median_x, y = median_y, color = "#2196F3", size = point_size) +
-        geom_text(x = median_x, y = max_y * 1.05, label = "Median", color = "#2196F3", size = text_size)
+        geom_text(x = label_median_x, y = label_median_y, label = "Median", color = "#2196F3", size = text_size)
     }
 
     if (!is.null(map_x) && !is.null(map_y)) {
       p_object <- p_object +
         geom_segment(x = map_x, xend = map_x, y = 0, yend = map_y, color = "#4CAF50", size = 1) +
         geom_point(x = map_x, y = map_y, color = "#4CAF50", size = point_size) +
-        geom_text(inherit.aes = FALSE, x = map_x, y = max_y * 1.05, label = "MAP", color = "#4CAF50", size = text_size)
+        geom_text(x = label_map_x, y = label_map_y, label = "MAP", color = "#4CAF50", size = text_size)
     }
 
     p_object <- p_object +
@@ -107,6 +116,8 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
 
     p_object
   })
+
+  p <- .compact_list(p)
 
   if (length(x) == 1) {
     p[[1]]
