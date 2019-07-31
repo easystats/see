@@ -1,5 +1,6 @@
 pandoc: 2.7.2
 pkgdown: 1.3.0
 pkgdown_sha: ~
-articles: []
+articles:
+  bayestestR: bayestestR.html
 

@@ -74,7 +74,7 @@ functions from different packages of the easystats-project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -88,6 +88,18 @@ functions from different packages of the easystats-project." />
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -128,8 +140,9 @@ functions from different packages of the <a href='https://github.com/easystats'>
   <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"BF"</span>, <span class='st'>"probability"</span>), <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>prior_odds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for see_bayesfactor_savagedickey</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>...</span>)
+<span class='co'># S3 method for see_bayesfactor_parameters</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>rope_color</span> <span class='kw'>=</span> <span class='st'>"#0171D3"</span>, <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_check_distribution</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>panel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -149,6 +162,19 @@ functions from different packages of the <a href='https://github.com/easystats'>
 <span class='co'># S3 method for see_estimate_density</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>stack</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for see_parameters_model</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dot_size</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for see_parameters_sem</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"regression"</span>, <span class='st'>"correlation"</span>, <span class='st'>"loading"</span>),
+  <span class='kw'>threshold_coefficient</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>threshold_p</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for see_point_estimate</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>panel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_rope</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
@@ -192,25 +218,26 @@ custom <code>prior_odds</code> will change the slices' size.</p></td>
       <td><p>Size of point-geoms.</p></td>
     </tr>
     <tr>
-      <th>panel</th>
-      <td><p>Logical, if <code>TRUE</code>, plots are arranged as panels; else, single plots are returned.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>Character vector, indicating the type of plot (for
-<code><a href='https://www.rdocumentation.org/packages/performance/topics/check_normality'>check_normality</a></code>).</p></td>
-    </tr>
-    <tr>
-      <th>text_size</th>
-      <td><p>Size of text labels.</p></td>
-    </tr>
-    <tr>
       <th>rope_color</th>
       <td><p>Color of ROPE ribbon.</p></td>
     </tr>
     <tr>
       <th>rope_alpha</th>
       <td><p>Transparency level of ROPE ribbon.</p></td>
+    </tr>
+    <tr>
+      <th>panel</th>
+      <td><p>Logical, if <code>TRUE</code>, plots are arranged as panels; else, single plots are returned.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Character vector, indicating the type of plot (for
+<code><a href='https://www.rdocumentation.org/packages/performance/topics/check_normality'>check_normality</a></code> or
+<code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lavaan'>model_parameters.lavaan</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>text_size</th>
+      <td><p>Size of text labels.</p></td>
     </tr>
     <tr>
       <th>show_intercept</th>
@@ -223,6 +250,18 @@ posterior distributions for other parameters are hardly visible.</p></td>
       <th>stack</th>
       <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.</p></td>
+    </tr>
+    <tr>
+      <th>threshold_coefficient</th>
+      <td><p>Numeric, threshold at which value coefficients will be displayed.</p></td>
+    </tr>
+    <tr>
+      <th>threshold_p</th>
+      <td><p>Numeric, threshold at which value p-values will be displayed.</p></td>
+    </tr>
+    <tr>
+      <th>ci</th>
+      <td><p>Logical, whether confidence intervals should be added to the plot.</p></td>
     </tr>
     </table>
     
@@ -245,14 +284,19 @@ Plot-functions are available for objects from following functions (note that
 functions from packages might be listed here that are currently still in
 development and probably not yet available):</p><ul>
 <li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_models'>bayestestR::bayesfactor_models()</a></code></p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_savagedickey'>bayestestR::bayesfactor_savagedickey()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_parameters'>bayestestR::bayesfactor_parameters()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_parameters'>bayestestR::bayesfactor_savagedickey()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/ci'>bayestestR::ci()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/equivalence_test'>bayestestR::equivalence_test()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/estimate_density'>bayestestR::estimate_density()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/eti'>bayestestR::eti()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>bayestestR::hdi()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/map_estimate'>bayestestR::map_estimate()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/p_direction'>bayestestR::p_direction()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/point_estimate'>bayestestR::point_estimate()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>bayestestR::rope()</a></code></p></li>
-<li><p><code>estimate::estimateContrasts()</code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/estimate/topics/estimate_contrasts'>estimate::estimate_contrasts()</a></code></p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters'>parameters::model_parameters()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/binned_residuals'>performance::binned_residuals()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_collinearity'>performance::check_collinearity()</a></code></p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/check_distribution'>performance::check_distribution()</a></code></p></li>
@@ -303,9 +347,9 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.087 seconds (Warm-up)
-#&gt; Chain 1:                0.101 seconds (Sampling)
-#&gt; Chain 1:                0.188 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.066 seconds (Warm-up)
+#&gt; Chain 1:                0.072 seconds (Sampling)
+#&gt; Chain 1:                0.138 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
@@ -336,10 +380,16 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.103 seconds (Warm-up)
-#&gt; Chain 2:                0.093 seconds (Sampling)
-#&gt; Chain 2:                0.196 seconds (Total)
-#&gt; Chain 2: </div><div class='input'>
+#&gt; Chain 2:  Elapsed Time: 0.072 seconds (Warm-up)
+#&gt; Chain 2:                0.068 seconds (Sampling)
+#&gt; Chain 2:                0.14 seconds (Total)
+#&gt; Chain 2: </div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.1, indicating chains have not mixed.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>rope</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.88), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.73), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.82). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>model</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>

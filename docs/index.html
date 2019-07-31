@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -53,6 +53,18 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
@@ -116,10 +128,10 @@
 <a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(estimate)</a>
 <a class="sourceLine" id="cb5-3" title="3"></a>
 <a class="sourceLine" id="cb5-4" title="4">dat &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Width <span class="op">~</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/poly">poly</a></span>(Petal.Length, <span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb5-5" title="5">    <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span>estimate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/estimate/topics/estimate_response">estimate_fit</a></span>(<span class="dt">keep_draws =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span>estimate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/estimate/topics/estimate_response">estimate_link</a></span>(<span class="dt">keep_draws =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb5-6" title="6">    <span class="dt">length =</span> <span class="dv">100</span>, <span class="dt">draws =</span> <span class="dv">250</span>) <span class="op">%&gt;%</span><span class="st"> </span>estimate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/estimate/topics/reshape_draws">reshape_draws</a></span>()</a>
 <a class="sourceLine" id="cb5-7" title="7"></a>
-<a class="sourceLine" id="cb5-8" title="8">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Draw, <span class="dt">group =</span> Draw_Index)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Draw, <span class="dt">group =</span> Draw_Group)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-9" title="9"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">"white"</span>, <span class="dt">alpha =</span> <span class="fl">0.05</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, </a>
 <a class="sourceLine" id="cb5-10" title="10">    <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb5-11" title="11"></a>
@@ -221,7 +233,7 @@
 <a class="sourceLine" id="cb15-6" title="6"><span class="co">##   ggplot(aes(x = x, y = y, height = height, group = y, fill = fill)) +</span></a>
 <a class="sourceLine" id="cb15-7" title="7"><span class="co">##   ggridges::geom_ridgeline_gradient() +</span></a>
 <a class="sourceLine" id="cb15-8" title="8"><span class="co">##   add_plot_attributes(x) +</span></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co">##   geom_vline(aes(xintercept = 0))</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co">##   geom_vline(aes(xintercept = 0), lintype = "dotted")</span></a></code></pre></div>
 </div>
 <div id="highest-density-interval-hdi" class="section level4">
 <h4 class="hasAnchor">
@@ -279,6 +291,26 @@
 <p><img src="reference/figures/unnamed-chunk-28-2.png" width="3600"></p>
 </div>
 </div>
+<div id="parameters" class="section level3">
+<h3 class="hasAnchor">
+<a href="#parameters" class="anchor"></a><a href="https://github.com/easystats/parameters">parameters</a>
+</h3>
+<div id="sem-cfa-lavaan-graphs" class="section level4">
+<h4 class="hasAnchor">
+<a href="#sem-cfa-lavaan-graphs" class="anchor"></a>SEM / CFA lavaan graphs</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lavaan)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(parameters)</a>
+<a class="sourceLine" id="cb23-3" title="3"></a>
+<a class="sourceLine" id="cb23-4" title="4">structure &lt;-<span class="st"> " visual  =~ x1 + x2 + x3</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="st">               textual =~ x4 + x5 + x6</span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="st">               speed   =~ x7 + x8 + x9 "</span></a>
+<a class="sourceLine" id="cb23-7" title="7"></a>
+<a class="sourceLine" id="cb23-8" title="8">model &lt;-<span class="st"> </span>lavaan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/lavaan/topics/cfa">cfa</a></span>(structure, <span class="dt">data =</span> HolzingerSwineford1939)</a>
+<a class="sourceLine" id="cb23-9" title="9">params &lt;-<span class="st"> </span>parameters<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/parameters/topics/model_parameters">model_parameters</a></span>(model)</a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(params)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-29-1.png" width="2187.5"></p>
+</div>
+</div>
 <div id="estimate" class="section level3">
 <h3 class="hasAnchor">
 <a href="#estimate" class="anchor"></a><a href="https://github.com/easystats/estimate">estimate</a>
@@ -286,16 +318,16 @@
 <div id="pairwise-contrasts" class="section level4">
 <h4 class="hasAnchor">
 <a href="#pairwise-contrasts" class="anchor"></a>Pairwise Contrasts</h4>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(estimate)</a>
-<a class="sourceLine" id="cb23-3" title="3"></a>
-<a class="sourceLine" id="cb23-4" title="4">model &lt;-<span class="st"> </span><span class="kw">stan_glm</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a>
-<a class="sourceLine" id="cb23-5" title="5"></a>
-<a class="sourceLine" id="cb23-6" title="6">contrasts &lt;-<span class="st"> </span><span class="kw">estimate_contrasts</span>(model)</a>
-<a class="sourceLine" id="cb23-7" title="7">means &lt;-<span class="st"> </span><span class="kw">estimate_means</span>(model)</a>
-<a class="sourceLine" id="cb23-8" title="8"></a>
-<a class="sourceLine" id="cb23-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(contrasts, means)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-30-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(estimate)</a>
+<a class="sourceLine" id="cb24-3" title="3"></a>
+<a class="sourceLine" id="cb24-4" title="4">model &lt;-<span class="st"> </span><span class="kw">stan_glm</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb24-5" title="5"></a>
+<a class="sourceLine" id="cb24-6" title="6">contrasts &lt;-<span class="st"> </span><span class="kw">estimate_contrasts</span>(model)</a>
+<a class="sourceLine" id="cb24-7" title="7">means &lt;-<span class="st"> </span><span class="kw">estimate_means</span>(model)</a>
+<a class="sourceLine" id="cb24-8" title="8"></a>
+<a class="sourceLine" id="cb24-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(contrasts, means) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-31-1.png" width="2187.5"></p>
 </div>
 </div>
 </div>
@@ -335,8 +367,6 @@
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=see"><img src="http://www.r-pkg.org/badges/version/see" alt="CRAN"></a></li>
 <li><a href="https://cran.r-project.org/package=see"><img src="http://cranlogs.r-pkg.org/badges/see" alt="downloads"></a></li>
-<li><a href="https://travis-ci.org/easystats/see"><img src="https://travis-ci.org/easystats/see.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://codecov.io/gh/easystats/see"><img src="https://codecov.io/gh/easystats/see/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://easystats.github.io/see/"><img src="https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63" alt="Documentation"></a></li>
 </ul>
 </div>

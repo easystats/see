@@ -70,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -84,6 +84,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -108,6 +120,27 @@
       
     </div>
 
+    <div id="see-021" class="section level1">
+<h1 class="page-header">
+<a href="#see-021" class="anchor"></a>see 0.2.1<small> Unreleased </small>
+</h1>
+<div id="new-plot-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-plot-functions" class="anchor"></a>New plot-functions</h2>
+<ul>
+<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/parameters/topics/model_parameters">parameters::model_parameters()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/bayestestR/topics/point_estimate">bayestestR::point_estimate()</a></code>.</li>
+</ul>
+</div>
+<div id="changes-to-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
+<ul>
+<li>The <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot()</a></code>-method for <code><a href="https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_parameters">bayestestR::bayesfactor_savagedickey()</a></code> gets a <code>rope_color</code> and a <code>rope_alpha</code>-argument to plot the “null”-interval, when the null-hypothesis is a <em>region of practical equivalence</em>, and not just the point-null.</li>
+<li>The <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot()</a></code>-method for <code><a href="https://www.rdocumentation.org/packages/performance/topics/binned_residuals">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://www.rdocumentation.org/packages/performance/topics/binned_residuals">performance::binned_residuals()</a></code>).</li>
+</ul>
+</div>
+</div>
     <div id="see-020" class="section level1">
 <h1 class="page-header">
 <a href="#see-020" class="anchor"></a>see 0.2.0<small> 2019-06-19 </small>
@@ -131,9 +164,9 @@
 <code><a href="../reference/theme_lucid.html">theme_lucid()</a></code>, a light and clear theme.</li>
 </ul>
 </div>
-<div id="new-plot-functions" class="section level2">
+<div id="new-plot-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-1" class="anchor"></a>New plot-functions</h2>
 <ul>
 <li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_model">performance::check_model()</a></code>.</li>
 <li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_normality">performance::check_normality()</a></code>.</li>
@@ -166,6 +199,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#see-021">0.2.1</a></li>
         <li><a href="#see-020">0.2.0</a></li>
       </ul>
     </div>

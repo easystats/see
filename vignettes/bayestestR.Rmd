@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
   fig.width = 7, 
   fig.height = 5,
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  eval = packageVersion("bayestestR") >= "0.2.5"
 )
 ```
 
@@ -124,7 +125,7 @@ plot(result) +
 
 ### Bayes Factors for Parameters
 
-```{r eval=TRUE}
+```{r}
 result <- bayesfactor_parameters(model)
 
 plot(result) +
@@ -134,7 +135,7 @@ plot(result) +
 
 ### Bayes Factors for Model Comparison
 
-```{r eval=TRUE}
+```{r}
 lm0 <- lm(qsec ~ 1, data = mtcars)
 lm1 <- lm(qsec ~ drat, data = mtcars)
 lm2 <- lm(qsec ~ wt, data = mtcars)
