@@ -25,7 +25,9 @@ reference:
   contents:
   - scale_color_flat
   - scale_color_material
+  - scale_color_metro
   - scale_color_pizza
+  - scale_color_social
 
 - title: "Themes"
   contents:
@@ -38,10 +40,14 @@ reference:
   contents:
   - flat_colors
   - material_colors
+  - metro_colors
   - pizza_colors
+  - social_colors
   - palette_flat
   - palette_material
+  - palette_metro
   - palette_pizza
+  - palette_social
 
 - title: "Miscellaneous"
   contents:

@@ -1,18 +1,13 @@
 # Scales -----------------------------------------------------------------
 
-
-
 #' Pizza color palette
 #'
 #' The palette based on authentic neapolitan pizzas.
-#' Use \code{scale_color_pizza_d} for \emph{discrete} categories and
-#' \code{scale_color_pizza_c} for a \emph{continuous} scale.
+#' Use \code{scale_color_pizza_d()} for \emph{discrete} categories and
+#' \code{scale_color_pizza_c()} for a \emph{continuous} scale.
 #'
 #' @inheritParams palette_pizza
-#' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_color_gradientn(), used respectively when discrete is TRUE or FALSE.
-#'
+#' @inheritParams scale_color_flat
 #'
 #' @examples
 #' library(ggplot2)
@@ -155,7 +150,8 @@ pizza_palettes <- list(
 #'
 #' The palette based on authentic neapolitan pizzas.
 #'
-#' @param palette Pizza type. Can be "margherita" (default) or "diavola".
+#' @param palette Pizza type. Can be "margherita" (default), "margherita_crust",
+#'  "diavola" or "diavola_crust".
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'

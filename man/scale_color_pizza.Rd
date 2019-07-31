@@ -40,19 +40,19 @@ scale_fill_pizza_c(palette = "margherita", discrete = FALSE,
   reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Pizza type. Can be "margherita" (default) or "diavola".}
+\item{palette}{Pizza type. Can be "margherita" (default), "margherita_crust",
+"diavola" or "diavola_crust".}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{...}{Additional arguments passed to discrete_scale() or
-scale_color_gradientn(), used respectively when discrete is TRUE or FALSE.}
+\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
 The palette based on authentic neapolitan pizzas.
-Use \code{scale_color_pizza_d} for \emph{discrete} categories and
-\code{scale_color_pizza_c} for a \emph{continuous} scale.
+Use \code{scale_color_pizza_d()} for \emph{discrete} categories and
+\code{scale_color_pizza_c()} for a \emph{continuous} scale.
 }
 \examples{
 library(ggplot2)

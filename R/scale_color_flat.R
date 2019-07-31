@@ -6,9 +6,9 @@
 #'
 #' @inheritParams palette_flat
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_color_gradientn(), used respectively when discrete is TRUE or FALSE.
-#'
+#' @param ... Additional arguments passed to \code{discrete_scale()} or
+#'  \code{scale_color_gradientn()}, used respectively when discrete is
+#'  \code{TRUE} or \code{FALSE}.
 #'
 #' @examples
 #' library(ggplot2)
@@ -136,7 +136,7 @@ flat_colors_list <- c(
 #'
 #' Can be used to get the hex code of specific colors from the Flat UI color palette. Use \code{flat_colors()} to see all available color.
 #'
-#' @param ... Character names of \href{https://www.materialui.co/flatuicolors}{material design colors}.
+#' @param ... Character names of colors.
 #'
 #' @return A character vector with color-codes.
 #'
@@ -163,7 +163,8 @@ flat_palettes <- list(
   `full`  = flat_colors(),
   `ice`  = flat_colors("purple", "deep purple", "blue", "light blue"),
   `rainbow` = flat_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
-  `contrast` = flat_colors("blue", "green", "amber", "purple", "red")
+  `contrast` = flat_colors("blue", "green", "amber", "purple", "red"),
+  `complement` = flat_colors("blue", "yellow", "green", "red", "teal", "blue grey", "amber")
 )
 
 
@@ -175,7 +176,7 @@ flat_palettes <- list(
 #'
 #' The palette based on Flat UI colors (https://www.materialui.co/flatuicolors).
 #'
-#' @param palette Character name of palette in flat_palettes. Can be "full", "ice", "rainbow" or "contrast" (default).
+#' @param palette Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast" (default).
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'

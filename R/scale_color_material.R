@@ -1,14 +1,11 @@
 #' Material design color palette
 #'
 #' The palette based on material design colors (https://www.materialui.co/color).
-#' Use \code{scale_color_material_d} for \emph{discrete} categories and
-#' \code{scale_color_material_c} for a \emph{continuous} scale.
+#' Use \code{scale_color_material_d()} for \emph{discrete} categories and
+#' \code{scale_color_material_c()} for a \emph{continuous} scale.
 #'
 #' @inheritParams palette_material
-#' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_color_gradientn(), used respectively when discrete is TRUE or FALSE.
-#'
+#' @inheritParams scale_color_flat
 #'
 #' @examples
 #' library(ggplot2)
@@ -139,7 +136,7 @@ material_colors_list <- c(
 #'
 #' Can be used to get the hex code of specific colors from the material design color palette. Use \code{material_colors()} to see all available color.
 #'
-#' @param ... Character names of \href{https://www.materialui.co/colors}{material design colors}.
+#' @inheritParams flat_colors
 #'
 #' @return A character vector with color-codes.
 #'
@@ -166,7 +163,8 @@ material_palettes <- list(
   `full`  = material_colors(),
   `ice`  = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
   `rainbow` = material_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "deep orange" ,"red", "pink"),
-  `contrast` = material_colors("blue", "green", "amber", "purple", "red")
+  `contrast` = material_colors("blue", "green", "amber", "purple", "red"),
+  `complement` = material_colors("blue", "yellow", "green", "red", "teal", "blue grey", "amber")
 )
 
 
@@ -178,9 +176,7 @@ material_palettes <- list(
 #'
 #' The palette based on material design colors (https://www.materialui.co/colors).
 #'
-#' @param palette Character name of palette in material_palettes. Can be "full", "ice", "rainbow" or "contrast" (default).
-#' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
+#' @inheritParams palette_flat
 #'
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_material]{scale_color_material()}}.

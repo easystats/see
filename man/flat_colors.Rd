@@ -7,7 +7,7 @@
 flat_colors(...)
 }
 \arguments{
-\item{...}{Character names of \href{https://www.materialui.co/flatuicolors}{material design colors}.}
+\item{...}{Character names of colors.}
 }
 \value{
 A character vector with color-codes.

@@ -3,6 +3,7 @@
 ## General
 
 * More comprehensive examples available from the [package-website](https://easystats.github.io/see/).
+* Added new color-palettes.
 
 ## New plot-functions
 

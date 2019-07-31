@@ -40,19 +40,18 @@ scale_fill_material_c(palette = "contrast", discrete = FALSE,
   reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Character name of palette in material_palettes. Can be "full", "ice", "rainbow" or "contrast" (default).}
+\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast" (default).}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{...}{Additional arguments passed to discrete_scale() or
-scale_color_gradientn(), used respectively when discrete is TRUE or FALSE.}
+\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
 The palette based on material design colors (https://www.materialui.co/color).
-Use \code{scale_color_material_d} for \emph{discrete} categories and
-\code{scale_color_material_c} for a \emph{continuous} scale.
+Use \code{scale_color_material_d()} for \emph{discrete} categories and
+\code{scale_color_material_c()} for a \emph{continuous} scale.
 }
 \examples{
 library(ggplot2)
