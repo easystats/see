@@ -136,8 +136,22 @@ plot(result) +
 
 ### Bayes Factors for Model Parameters
 
+Plotting the result of a call to `bayesfactor_parameters` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:
+
 ```{r}
 result <- bayesfactor_parameters(model)
+
+result
+
+plot(result) +
+  scale_color_material() +
+  scale_fill_material()
+```
+
+When an interval null was tested, two dashed lines mark the edges of the null interval at the value - the Bayes factor represents the degree by which the distribution mass of the posterior has shifted outside or inside the null interval relative to the prior distribution:
+
+```{r}
+result <- bayesfactor_parameters(model, null = rope_range(model))
 
 result
 
@@ -157,10 +171,18 @@ lm3 <- lm(qsec ~ drat + wt, data = mtcars)
 result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 
 result
+```
 
+*Pizza plots* are a visual way of representing the posterior probabilities of several models, with ratio of the areas of any two models corresponding to their posterior odds.^[When all models are given equal prior probabilities, then all prior odds are 1, and the posterior odds are equal to the Bayes factor.] It is possible to plot all compared models on one (pizza) pie:
+
+```{r}
 plot(result, n_pies = "one", value = "probability") +
   scale_fill_pizza(reverse = TRUE) 
+```
 
+But it is also possible to plot one pizza for each model and the denominator model (and who doesn't like ***more*** pizza?):
+
+```{r}
 plot(result, n_pies = "many", value = "BF") +
   scale_fill_flat(palette = "rainbow", reverse = TRUE)
 ```
