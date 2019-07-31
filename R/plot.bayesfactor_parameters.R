@@ -13,8 +13,8 @@ plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#01
       nrow(d_points) > length(intercepts_points) &&
       !show_intercept) {
     intercepts_data <- which(plot_data$ind %in% c("Intercept", "(Intercept)", "b_Intercept"))
-    plot_data <- plot_data[-intercepts, ]
-    d_points <- d_points[-intercepts, ]
+    plot_data <- plot_data[-intercepts_data, ]
+    d_points <- d_points[-intercepts_points, ]
   }
 
   # make sure point outline matches theme
