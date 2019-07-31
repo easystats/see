@@ -74,7 +74,7 @@ functions from different packages of the easystats-project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -98,6 +98,9 @@ functions from different packages of the easystats-project." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
+    </li>
+    <li>
+      <a href="../articles/performance.html">Plotting Functions for the performance Package</a>
     </li>
   </ul>
 </li>
@@ -233,7 +236,7 @@ custom <code>prior_odds</code> will change the slices' size.</p></td>
       <th>type</th>
       <td><p>Character vector, indicating the type of plot (for
 <code><a href='https://www.rdocumentation.org/packages/performance/topics/check_normality'>check_normality</a></code> or
-<code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lavaan'>model_parameters.lavaan</a></code>).</p></td>
+<code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lavaan'>parameters::model_parameters.lavaan</a></code>).</p></td>
     </tr>
     <tr>
       <th>text_size</th>
@@ -262,6 +265,10 @@ Else, densities are plotted for each parameter among each other.</p></td>
     <tr>
       <th>ci</th>
       <td><p>Logical, whether confidence intervals should be added to the plot.</p></td>
+    </tr>
+    <tr>
+      <th>doz_size</th>
+      <td><p>Size of point geoms.</p></td>
     </tr>
     </table>
     
@@ -308,6 +315,10 @@ development and probably not yet available):</p><ul>
 <li><p><code><a href='https://www.rdocumentation.org/packages/performance/topics/performance_roc'>performance::performance_roc()</a></code></p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://easystats.github.io/see/articles/'>Package-Vignettes</a></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>bayestestR</span>)
@@ -317,7 +328,7 @@ development and probably not yet available):</p><ul>
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm'>stan_glm</a></span>(
   <span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Width</span> * <span class='no'>Species</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
-  <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>200</span>
+  <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>150</span>
 )</div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
 #&gt; Chain 1: 
@@ -330,26 +341,26 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 1:          three stages of adaptation as currently configured.
 #&gt; Chain 1:          Reducing each adaptation stage to 15%/75%/10% of
 #&gt; Chain 1:          the given number of warmup iterations:
-#&gt; Chain 1:            init_buffer = 15
-#&gt; Chain 1:            adapt_window = 75
-#&gt; Chain 1:            term_buffer = 10
+#&gt; Chain 1:            init_buffer = 11
+#&gt; Chain 1:            adapt_window = 57
+#&gt; Chain 1:            term_buffer = 7
 #&gt; Chain 1: 
-#&gt; Chain 1: Iteration:   1 / 200 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  20 / 200 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration:  40 / 200 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration:  60 / 200 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration:  80 / 200 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 100 / 200 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 101 / 200 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 120 / 200 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 140 / 200 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 160 / 200 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
+#&gt; Chain 1: Iteration:   1 / 150 [  0%]  (Warmup)
+#&gt; Chain 1: Iteration:  15 / 150 [ 10%]  (Warmup)
+#&gt; Chain 1: Iteration:  30 / 150 [ 20%]  (Warmup)
+#&gt; Chain 1: Iteration:  45 / 150 [ 30%]  (Warmup)
+#&gt; Chain 1: Iteration:  60 / 150 [ 40%]  (Warmup)
+#&gt; Chain 1: Iteration:  75 / 150 [ 50%]  (Warmup)
+#&gt; Chain 1: Iteration:  76 / 150 [ 50%]  (Sampling)
+#&gt; Chain 1: Iteration:  90 / 150 [ 60%]  (Sampling)
+#&gt; Chain 1: Iteration: 105 / 150 [ 70%]  (Sampling)
+#&gt; Chain 1: Iteration: 120 / 150 [ 80%]  (Sampling)
+#&gt; Chain 1: Iteration: 135 / 150 [ 90%]  (Sampling)
+#&gt; Chain 1: Iteration: 150 / 150 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.066 seconds (Warm-up)
-#&gt; Chain 1:                0.072 seconds (Sampling)
-#&gt; Chain 1:                0.138 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.052 seconds (Warm-up)
+#&gt; Chain 1:                0.065 seconds (Sampling)
+#&gt; Chain 1:                0.117 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
@@ -363,34 +374,32 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 2:          three stages of adaptation as currently configured.
 #&gt; Chain 2:          Reducing each adaptation stage to 15%/75%/10% of
 #&gt; Chain 2:          the given number of warmup iterations:
-#&gt; Chain 2:            init_buffer = 15
-#&gt; Chain 2:            adapt_window = 75
-#&gt; Chain 2:            term_buffer = 10
+#&gt; Chain 2:            init_buffer = 11
+#&gt; Chain 2:            adapt_window = 57
+#&gt; Chain 2:            term_buffer = 7
 #&gt; Chain 2: 
-#&gt; Chain 2: Iteration:   1 / 200 [  0%]  (Warmup)
-#&gt; Chain 2: Iteration:  20 / 200 [ 10%]  (Warmup)
-#&gt; Chain 2: Iteration:  40 / 200 [ 20%]  (Warmup)
-#&gt; Chain 2: Iteration:  60 / 200 [ 30%]  (Warmup)
-#&gt; Chain 2: Iteration:  80 / 200 [ 40%]  (Warmup)
-#&gt; Chain 2: Iteration: 100 / 200 [ 50%]  (Warmup)
-#&gt; Chain 2: Iteration: 101 / 200 [ 50%]  (Sampling)
-#&gt; Chain 2: Iteration: 120 / 200 [ 60%]  (Sampling)
-#&gt; Chain 2: Iteration: 140 / 200 [ 70%]  (Sampling)
-#&gt; Chain 2: Iteration: 160 / 200 [ 80%]  (Sampling)
-#&gt; Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
-#&gt; Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
+#&gt; Chain 2: Iteration:   1 / 150 [  0%]  (Warmup)
+#&gt; Chain 2: Iteration:  15 / 150 [ 10%]  (Warmup)
+#&gt; Chain 2: Iteration:  30 / 150 [ 20%]  (Warmup)
+#&gt; Chain 2: Iteration:  45 / 150 [ 30%]  (Warmup)
+#&gt; Chain 2: Iteration:  60 / 150 [ 40%]  (Warmup)
+#&gt; Chain 2: Iteration:  75 / 150 [ 50%]  (Warmup)
+#&gt; Chain 2: Iteration:  76 / 150 [ 50%]  (Sampling)
+#&gt; Chain 2: Iteration:  90 / 150 [ 60%]  (Sampling)
+#&gt; Chain 2: Iteration: 105 / 150 [ 70%]  (Sampling)
+#&gt; Chain 2: Iteration: 120 / 150 [ 80%]  (Sampling)
+#&gt; Chain 2: Iteration: 135 / 150 [ 90%]  (Sampling)
+#&gt; Chain 2: Iteration: 150 / 150 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.072 seconds (Warm-up)
-#&gt; Chain 2:                0.068 seconds (Sampling)
-#&gt; Chain 2:                0.14 seconds (Total)
-#&gt; Chain 2: </div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.1, indicating chains have not mixed.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+#&gt; Chain 2:  Elapsed Time: 0.049 seconds (Warm-up)
+#&gt; Chain 2:                0.061 seconds (Sampling)
+#&gt; Chain 2:                0.11 seconds (Total)
+#&gt; Chain 2: </div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='input'>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>rope</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.88), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.73), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.82). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/rope'>rope</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.89), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.76), Petal.Width:Speciesvirginica and Speciesvirginica (r = 0.75), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.83). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/bayestestR/topics/hdi'>hdi</a></span>(<span class='no'>model</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error: Failed at retrieving data :( Please provide original model or data through the `data` argument</span></div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
@@ -432,6 +441,8 @@ development and probably not yet available):</p><ul>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

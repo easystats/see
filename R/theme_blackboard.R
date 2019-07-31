@@ -52,7 +52,8 @@ theme_blackboard <-
         legend.background = element_rect(fill = "#0d0d0d"),
         axis.line = element_line(color = "#E0E0E0"),
         text = element_text(color = "#E0E0E0"),
-        axis.text = element_text(color = "#E0E0E0")
+        axis.text = element_text(color = "#E0E0E0"),
+        strip.text = element_text(color = "#E0E0E0")
       )
 
 }

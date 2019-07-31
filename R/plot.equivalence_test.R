@@ -79,7 +79,10 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-  x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
+  if (length(unique(tmp$HDI)) > 1)
+    x.title <- "Highest Density Region of Posterior Samples"
+  else
+    x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
   legend.title <- "Decision on H0"
   labels <- levels(tmp$predictor)
   names(labels) <- labels

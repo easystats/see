@@ -54,5 +54,6 @@ theme_abyss <-
       text = element_text(color = "#f2f2f2"),
       axis.text = element_text(color = "#f2f2f2"),
       panel.grid.major = element_line(color = "#465463"),
+      strip.text = element_text(color = "#f2f2f2")
     )
 }

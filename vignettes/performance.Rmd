@@ -1,0 +1,151 @@
+---
+title: "Plotting Functions for the performance Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{performance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, 
+  fig.height = 5,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+```{r setup}
+library(performance)
+library(lme4)
+library(see)
+```
+
+# Checking Model Assumptions
+
+## Binned Residuals
+
+```{r message=TRUE}
+model <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
+binned_residuals(model)
+```
+
+## Check for Multicollinearity - Variance Inflation Factor
+
+```{r}
+m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+result <- check_collinearity(m)
+
+result
+plot(result)
+```
+
+```{r}
+library(glmmTMB)
+data(Salamanders)
+
+# create highly correlated pseudo-variable
+set.seed(1)
+Salamanders$cover2 <-
+  Salamanders$cover * runif(n = nrow(Salamanders), min = .7, max = 1.5)
+
+# fit mixed model with zero-inflation
+model <- glmmTMB(
+  count ~ spp + mined + cover + cover2 + (1 | site), 
+  ziformula = ~ spp + mined, 
+  family = truncated_poisson, 
+  data = Salamanders
+)
+
+result <- check_collinearity(model)
+
+result
+plot(result)
+```
+
+## Check for Outliers
+
+```{r}
+# select only mpg and disp (continuous)
+mt1 <- mtcars[, c(1, 3, 4)]
+# create some fake outliers and attach outliers to main df
+mt2 <- rbind(mt1, data.frame(mpg = c(37, 40), disp = c(300, 400), hp = c(110, 120)))
+# fit model with outliers
+model <- lm(disp ~ mpg + hp, data = mt2)
+result <- check_outliers(model)
+
+result
+plot(result)
+```
+
+## Check for Normal Distributed Residuals
+
+```{r}
+model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+result <- check_normality(model)
+```
+
+### Density Plot
+
+```{r}
+plot(result)
+```
+
+### QQ Plot
+
+```{r}
+plot(result, type = "qq")
+```
+
+### PP Plot
+
+```{r}
+plot(result, type = "pp")
+```
+
+## Check for Heteroscedasticity
+
+```{r}
+model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+result <- check_heteroscedasticity(model)
+plot(result)
+```
+
+## Check for Homogeneity
+
+```{r}
+model <- lm(len ~ supp + dose, data = ToothGrowth)
+result <- check_homogeneity(model)
+plot(result)
+```
+
+# Overall Model Check
+
+```{r fig.height=12}
+model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+check_model(model)
+
+check_model(model, panel = FALSE)
+```
+
+# Model and Vector Properties
+
+```{r}
+model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+result <- check_distribution(model)
+
+result
+plot(result)
+```
+
+```{r}
+vec <- bayestestR::distribution_poisson(n = 500, lambda = 2.5)
+result <- check_distribution(vec)
+
+result
+plot(result)
+```
+

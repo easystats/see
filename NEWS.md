@@ -10,6 +10,10 @@
 * The `plot()`-method for `bayestestR::bayesfactor_savagedickey()` gets a `rope_color` and a `rope_alpha`-argument to plot the "null"-interval, when the null-hypothesis is a _region of practical equivalence_, and not just the point-null.
 * The `plot()`-method for `performance::binned_residuals()` now also allows to modify size and colors of geoms (related arguments are in `performance::binned_residuals()`).
 
+## Bug fixes
+
+* Fixed issue with dark themes and text color in facet headings.
+
 # see 0.2.0
 
 ## General

@@ -15,4 +15,5 @@
 ^paper.*$
 ^man/figures/.
 ^revdep$
+^vignettes$
 ^.github$

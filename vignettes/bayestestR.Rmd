@@ -14,8 +14,7 @@ knitr::opts_chunk$set(
   fig.width = 7, 
   fig.height = 5,
   warning = FALSE,
-  message = FALSE,
-  eval = packageVersion("bayestestR") >= "0.2.5"
+  message = FALSE
 )
 ```
 
@@ -41,6 +40,7 @@ plot(result)
 library(bayestestR)
 library(rstanarm)
 
+set.seed(123)
 junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
 result <- estimate_density(model)
 
@@ -56,6 +56,9 @@ plot(result, stack = FALSE)
 
 ```{r}
 result <- p_direction(model)
+
+result
+
 plot(result)
 ```
 
@@ -64,10 +67,16 @@ plot(result)
 
 ```{r fig.height=10}
 result <- point_estimate(model)
+
+result
+
 plot(result)
 ```
 ```{r}
 result <- point_estimate(model, centrality = c("map", "mean"))
+
+result
+
 plot(result, panel = FALSE)[[5]]
 ```
 
@@ -76,14 +85,19 @@ plot(result, panel = FALSE)[[5]]
 
 ```{r}
 result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
+
+result
+
 plot(result) + scale_fill_flat()
 ```
 
 
 ## Region of Practical Equivalence (ROPE)
 
-```{r echo=FALSE}
+```{r}
 result <- rope(model, ci = c(0.9, 0.95))
+
+result
 
 plot(result, data = model, rope_color = "red") +
   scale_fill_brewer(palette = "Greens", direction = -1)
@@ -91,29 +105,26 @@ plot(result, data = model, rope_color = "red") +
 
 ## Test for Practical Equivalence
 
+```{r echo=FALSE}
+junk <- capture.output(model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars))
+```
 ```{r eval=FALSE}
 model <- rstanarm::stan_glm(
   mpg ~ wt + gear + cyl + disp, data = mtcars
 )
+``` 
+```{r}
 result <- equivalence_test(model)
+
+result
 
 plot(result) +
   theme_blackboard() +
   scale_fill_material()
-```
-```{r echo=FALSE}
-junk <- capture.output(model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars))
 
-result <- equivalence_test(model)
-
-plot(result) +
-  theme_blackboard() +
-  scale_fill_material()
-```
-
-
-```{r message=FALSE}
 result <- equivalence_test(model, ci = c(.89, .95))
+
+result
 
 plot(result) +
   theme_abyss() +
@@ -123,10 +134,12 @@ plot(result) +
 
 ## Bayes Factors (BFs)
 
-### Bayes Factors for Parameters
+### Bayes Factors for Model Parameters
 
 ```{r}
 result <- bayesfactor_parameters(model)
+
+result
 
 plot(result) +
   scale_color_material() +
@@ -142,6 +155,8 @@ lm2 <- lm(qsec ~ wt, data = mtcars)
 lm3 <- lm(qsec ~ drat + wt, data = mtcars)
 
 result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
+
+result
 
 plot(result, n_pies = "one", value = "probability") +
   scale_fill_pizza(reverse = TRUE) 

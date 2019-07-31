@@ -55,6 +55,8 @@
 #'   \item \code{performance::performance_roc()}
 #' }
 #'
+#' @seealso \href{https://easystats.github.io/see/articles/}{Package-Vignettes}
+#'
 #' @examples
 #' library(bayestestR)
 #' library(rstanarm)
@@ -62,7 +64,7 @@
 #' model <- stan_glm(
 #'   Sepal.Length ~ Petal.Width * Species,
 #'   data = iris,
-#'   chains = 2, iter = 200
+#'   chains = 2, iter = 150
 #' )
 #'
 #' x <- rope(model)

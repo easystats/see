@@ -83,7 +83,7 @@ custom \code{prior_odds} will change the slices' size.}
 
 \item{type}{Character vector, indicating the type of plot (for
 \code{\link[performance]{check_normality}} or
-\code{\link[parameters]{model_parameters.lavaan}}).}
+\code{parameters::model_parameters.lavaan}).}
 
 \item{text_size}{Size of text labels.}
 
@@ -100,6 +100,8 @@ Else, densities are plotted for each parameter among each other.}
 \item{threshold_p}{Numeric, threshold at which value p-values will be displayed.}
 
 \item{ci}{Logical, whether confidence intervals should be added to the plot.}
+
+\item{doz_size}{Size of point geoms.}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object
@@ -156,7 +158,7 @@ library(rstanarm)
 model <- stan_glm(
   Sepal.Length ~ Petal.Width * Species,
   data = iris,
-  chains = 2, iter = 200
+  chains = 2, iter = 150
 )
 
 x <- rope(model)
@@ -197,4 +199,7 @@ plot(result, n_pies = "one", value = "probability") + theme_modern() +
   scale_fill_pizza(reverse = TRUE)
 }
 
+}
+\seealso{
+\href{https://easystats.github.io/see/articles/}{Package-Vignettes}
 }
