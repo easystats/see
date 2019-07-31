@@ -27,7 +27,8 @@ data_plot(x, data = NULL, ...)
   prior_odds = NULL, ...)
 
 \method{plot}{see_bayesfactor_parameters}(x, point_size = 2,
-  rope_color = "#0171D3", rope_alpha = 0.2, ...)
+  rope_color = "#0171D3", rope_alpha = 0.2, show_intercept = FALSE,
+  ...)
 
 \method{plot}{see_check_distribution}(x, point_size = 2, panel = TRUE,
   ...)
@@ -79,6 +80,11 @@ custom \code{prior_odds} will change the slices' size.}
 
 \item{rope_alpha}{Transparency level of ROPE ribbon.}
 
+\item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
+in the plot. By default, it is hidden because in many cases the intercept-parameter
+has a posterior distribution on a very different location, so density curves of
+posterior distributions for other parameters are hardly visible.}
+
 \item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else, single plots are returned.}
 
 \item{type}{Character vector, indicating the type of plot (for
@@ -86,11 +92,6 @@ custom \code{prior_odds} will change the slices' size.}
 \code{parameters::model_parameters.lavaan}).}
 
 \item{text_size}{Size of text labels.}
-
-\item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.}
 
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
