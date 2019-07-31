@@ -124,10 +124,12 @@ plot(result)
 
 # Overall Model Check
 
-```{r fig.height=12}
+```{r fig.height=10}
 model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 check_model(model)
+```
 
+```{r}
 check_model(model, panel = FALSE)
 ```
 

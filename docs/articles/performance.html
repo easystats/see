@@ -241,10 +241,9 @@
 <a class="sourceLine" id="cb12-2" title="2"><span class="kw">check_model</span>(model)</a>
 <a class="sourceLine" id="cb12-3" title="3"><span class="co">#&gt; Not enough model terms in the conditional part of the model to check for multicollinearity.</span></a></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw">check_model</span>(model, <span class="dt">panel =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="co">#&gt; Not enough model terms in the conditional part of the model to check for multicollinearity.</span></a></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-12-2.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-12-3.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-12-4.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-12-5.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-12-6.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-12-7.png" width="672"></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">check_model</span>(model, <span class="dt">panel =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">#&gt; Not enough model terms in the conditional part of the model to check for multicollinearity.</span></a></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-13-1.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-2.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-3.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-4.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-5.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-6.png" width="672"></p>
 </div>
 <div id="model-and-vector-properties" class="section level1">
 <h1 class="hasAnchor">
@@ -269,7 +268,7 @@
 <a class="sourceLine" id="cb14-18" title="18"><span class="co">#&gt;         gamma         12%</span></a>
 <a class="sourceLine" id="cb14-19" title="19"><span class="co">#&gt;   exponential          9%</span></a>
 <a class="sourceLine" id="cb14-20" title="20"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result)</a></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">vec &lt;-<span class="st"> </span>bayestestR<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/bayestestR/topics/distribution">distribution_poisson</a></span>(<span class="dt">n =</span> <span class="dv">500</span>, <span class="dt">lambda =</span> <span class="fl">2.5</span>)</a>
 <a class="sourceLine" id="cb15-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_distribution</span>(vec)</a>
 <a class="sourceLine" id="cb15-3" title="3"></a>
@@ -281,7 +280,7 @@
 <a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt;     negative binomial         38%</span></a>
 <a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt;  poisson (zero-infl.)          6%</span></a>
 <a class="sourceLine" id="cb15-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result)</a></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 </div>
   </div>
 
