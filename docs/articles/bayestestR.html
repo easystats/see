@@ -296,6 +296,7 @@
 <div id="bayes-factors-for-model-parameters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factors-for-model-parameters" class="anchor"></a>Bayes Factors for Model Parameters</h3>
+<p>Plotting the result of a call to <code>bayesfactor_parameters</code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model)</a>
 <a class="sourceLine" id="cb12-2" title="2"></a>
 <a class="sourceLine" id="cb12-3" title="3">result</a>
@@ -314,36 +315,61 @@
 <a class="sourceLine" id="cb12-16" title="16"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb12-17" title="17"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+<p>When an interval null was tested, two dashed lines mark the edges of the null interval at the value - the Bayes factor represents the degree by which the distribution mass of the posterior has shifted outside or inside the null interval relative to the prior distribution:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model, <span class="dt">null =</span> <span class="kw">rope_range</span>(model))</a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">result</a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">#&gt; # Bayes Factor (Null-Interval)</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co">#&gt;    Parameter Bayes Factor</span></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="co">#&gt;  (Intercept)     1.72e+05</span></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="co">#&gt;           wt        13.87</span></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt;         gear         0.03</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt;          cyl         2.29</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt;         disp     0.00e+00</span></a>
+<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt; * Evidence Against The Null: [-0.6, 0.6]</span></a>
+<a class="sourceLine" id="cb13-14" title="14"></a>
+<a class="sourceLine" id="cb13-15" title="15"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-16" title="16"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-17" title="17"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 </div>
 <div id="bayes-factors-for-model-comparison" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factors-for-model-comparison" class="anchor"></a>Bayes Factors for Model Comparison</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">lm0 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mtcars)</a>
-<a class="sourceLine" id="cb13-2" title="2">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)</a>
-<a class="sourceLine" id="cb13-3" title="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
-<a class="sourceLine" id="cb13-4" title="4">lm3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat <span class="op">+</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
-<a class="sourceLine" id="cb13-5" title="5"></a>
-<a class="sourceLine" id="cb13-6" title="6">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_models</span>(lm1, lm2, lm3, <span class="dt">denominator =</span> lm0)</a>
-<a class="sourceLine" id="cb13-7" title="7"></a>
-<a class="sourceLine" id="cb13-8" title="8">result</a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt; # Bayes Factors for Model Comparison</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt;   Model         Bayes Factor</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt;   [1] drat               0.2</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt;   [2] wt                0.29</span></a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt;   [3] drat + wt         0.05</span></a>
-<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-16" title="16"><span class="co">#&gt; * Against Denominator: [4] (Intercept only)</span></a>
-<a class="sourceLine" id="cb13-17" title="17"><span class="co">#&gt; *   Bayes Factor Type: BIC approximation</span></a>
-<a class="sourceLine" id="cb13-18" title="18"></a>
-<a class="sourceLine" id="cb13-19" title="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"one"</span>, <span class="dt">value =</span> <span class="st">"probability"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-20" title="20"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>) </a></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"many"</span>, <span class="dt">value =</span> <span class="st">"BF"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>, <span class="dt">reverse =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-14-2.png" width="672"></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">lm0 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb14-2" title="2">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb14-3" title="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb14-4" title="4">lm3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat <span class="op">+</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb14-5" title="5"></a>
+<a class="sourceLine" id="cb14-6" title="6">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_models</span>(lm1, lm2, lm3, <span class="dt">denominator =</span> lm0)</a>
+<a class="sourceLine" id="cb14-7" title="7"></a>
+<a class="sourceLine" id="cb14-8" title="8">result</a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt; # Bayes Factors for Model Comparison</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt;   Model         Bayes Factor</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt;   [1] drat               0.2</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt;   [2] wt                0.29</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt;   [3] drat + wt         0.05</span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt; * Against Denominator: [4] (Intercept only)</span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="co">#&gt; *   Bayes Factor Type: BIC approximation</span></a></code></pre></div>
+<p><em>Pizza plots</em> are a visual way of representing the posterior probabilities of several models, with ratio of the areas of any two models corresponding to their posterior odds.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is possible to plot all compared models on one (pizza) pie:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"one"</span>, <span class="dt">value =</span> <span class="st">"probability"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>) </a></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+<p>But it is also possible to plot one pizza for each model and the denominator model (and who doesn’t like <strong><em>more</em></strong> pizza?):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"many"</span>, <span class="dt">value =</span> <span class="st">"BF"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>, <span class="dt">reverse =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
 </div>
+</div>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>When all models are given equal prior probabilities, then all prior odds are 1, and the posterior odds are equal to the Bayes factor.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
   </div>
 
