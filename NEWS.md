@@ -1,5 +1,9 @@
 # see 0.2.1
 
+## General
+
+* More comprehensive examples available from the [package-website](https://easystats.github.io/see/).
+
 ## New plot-functions
 
 * Added plot-function for `parameters::model_parameters()`.
