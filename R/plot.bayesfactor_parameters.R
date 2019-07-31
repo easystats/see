@@ -2,10 +2,20 @@
 #' @param point_size Size of point-geoms.
 #' @importFrom rlang .data
 #' @export
-plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#0171D3", rope_alpha = .2, ...) {
+plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {
   plot_data <- attr(x, "plot_data")$plot_data
   d_points <- attr(x, "plot_data")$d_points
   hypothesis <- attr(x, "hypothesis")
+
+  # if we have intercept-only models, keep at least the intercept
+  intercepts_points <- which(d_points$ind %in% c("Intercept", "(Intercept)", "b_Intercept"))
+  if (length(intercepts_points) &&
+      nrow(d_points) > length(intercepts_points) &&
+      !show_intercept) {
+    intercepts_data <- which(plot_data$ind %in% c("Intercept", "(Intercept)", "b_Intercept"))
+    plot_data <- plot_data[-intercepts, ]
+    d_points <- d_points[-intercepts, ]
+  }
 
   # make sure point outline matches theme
   t <- theme_get()
