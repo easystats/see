@@ -52,7 +52,8 @@ data_plot(x, data = NULL, ...)
   threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...)
 
 \method{plot}{see_point_estimate}(x, data = NULL, point_size = 2,
-  text_size = 3.5, panel = TRUE, show_intercept = FALSE, ...)
+  text_size = 3.5, panel = TRUE, show_labels = TRUE,
+  show_intercept = FALSE, ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
   rope_color = "cadetblue", show_intercept = FALSE, ...)
@@ -103,6 +104,11 @@ Else, densities are plotted for each parameter among each other.}
 \item{threshold_p}{Numeric, threshold at which value p-values will be displayed.}
 
 \item{ci}{Logical, whether confidence intervals should be added to the plot.}
+
+\item{show_labels}{Logical, if \code{TRUE}, the text labels for the point
+estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
+You may set \code{show_labels = FALSE} in case of overlapping labels, and
+add your own legend or footnote to the plot.}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object

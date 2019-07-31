@@ -54,9 +54,13 @@ data_plot.map_estimate <- data_plot.point_estimate
 
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
+#' @param show_labels Logical, if \code{TRUE}, the text labels for the point
+#'   estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
+#'   You may set \code{show_labels = FALSE} in case of overlapping labels, and
+#'   add your own legend or footnote to the plot.
 #' @rdname data_plot
 #' @export
-plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 3.5, panel = TRUE, show_intercept = FALSE, ...){
+plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 3.5, panel = TRUE, show_labels = TRUE, show_intercept = FALSE, ...){
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -90,22 +94,31 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     if (!is.null(mean_x) && !is.null(mean_y)) {
       p_object <- p_object +
         geom_segment(x = mean_x, xend = mean_x, y = 0, yend = mean_y, color = "#E91E63", size = 1) +
-        geom_point(x = mean_x, y = mean_y, color = "#E91E63", size = point_size) +
-        geom_text(x = label_mean_x, y = label_mean_y, label = "Mean", color = "#E91E63", size = text_size)
+        geom_point(x = mean_x, y = mean_y, color = "#E91E63", size = point_size)
+      if (show_labels) {
+        p_object <- p_object +
+          geom_text(x = label_mean_x, y = label_mean_y, label = "Mean", color = "#E91E63", size = text_size)
+      }
     }
 
     if (!is.null(median_x) && !is.null(median_y)) {
       p_object <- p_object +
         geom_segment(x = median_x, xend = median_x, y = 0, yend = median_y, color = "#2196F3", size = 1) +
-        geom_point(x = median_x, y = median_y, color = "#2196F3", size = point_size) +
-        geom_text(x = label_median_x, y = label_median_y, label = "Median", color = "#2196F3", size = text_size)
+        geom_point(x = median_x, y = median_y, color = "#2196F3", size = point_size)
+      if (show_labels) {
+        p_object <- p_object +
+          geom_text(x = label_median_x, y = label_median_y, label = "Median", color = "#2196F3", size = text_size)
+      }
     }
 
     if (!is.null(map_x) && !is.null(map_y)) {
       p_object <- p_object +
         geom_segment(x = map_x, xend = map_x, y = 0, yend = map_y, color = "#4CAF50", size = 1) +
-        geom_point(x = map_x, y = map_y, color = "#4CAF50", size = point_size) +
-        geom_text(x = label_map_x, y = label_map_y, label = "MAP", color = "#4CAF50", size = text_size)
+        geom_point(x = map_x, y = map_y, color = "#4CAF50", size = point_size)
+      if (show_labels) {
+        p_object <- p_object +
+          geom_text(x = label_map_x, y = label_map_y, label = "MAP", color = "#4CAF50", size = text_size)
+      }
     }
 
     p_object <- p_object +
