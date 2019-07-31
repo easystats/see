@@ -95,13 +95,13 @@ posterior distributions for other parameters are hardly visible.}
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
 
+\item{dot_size}{Size of point geoms.}
+
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 
 \item{threshold_p}{Numeric, threshold at which value p-values will be displayed.}
 
 \item{ci}{Logical, whether confidence intervals should be added to the plot.}
-
-\item{doz_size}{Size of point geoms.}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object

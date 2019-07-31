@@ -1,5 +1,5 @@
 #' @importFrom bayestestR reshape_ci
-#' @param doz_size Size of point geoms.
+#' @param dot_size Size of point geoms.
 #' @rdname data_plot
 #' @export
 plot.see_parameters_model <- function(x, show_intercept = FALSE, dot_size = .8, ...) {
