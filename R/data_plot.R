@@ -70,10 +70,10 @@
 #' x <- rope(model)
 #' plot(x)
 #'
+#' \dontrun{
 #' x <- hdi(model)
 #' plot(x) + theme_modern()
 #'
-#' \dontrun{
 #' data <- rnorm(1000, 1)
 #' x <- p_direction(data)
 #' plot(x)
