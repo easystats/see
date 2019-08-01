@@ -159,19 +159,19 @@ development and probably not yet available):
 }
 }
 \examples{
+\dontrun{
 library(bayestestR)
 library(rstanarm)
 
 model <- stan_glm(
   Sepal.Length ~ Petal.Width * Species,
   data = iris,
-  chains = 1, iter = 150
+  chains = 2, iter = 200
 )
 
 x <- rope(model)
 plot(x)
 
-\dontrun{
 x <- hdi(model)
 plot(x) + theme_modern()
 
@@ -191,7 +191,6 @@ model <- stan_glm(
 x <- equivalence_test(model)
 plot(x)}
 
-\dontrun{
 library(bayestestR)
 library(see)
 
@@ -204,7 +203,6 @@ result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 
 plot(result, n_pies = "one", value = "probability") + theme_modern() +
   scale_fill_pizza(reverse = TRUE)
-}
 
 }
 \seealso{

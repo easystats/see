@@ -58,19 +58,19 @@
 #' @seealso \href{https://easystats.github.io/see/articles/}{Package-Vignettes}
 #'
 #' @examples
+#' \dontrun{
 #' library(bayestestR)
 #' library(rstanarm)
 #'
 #' model <- stan_glm(
 #'   Sepal.Length ~ Petal.Width * Species,
 #'   data = iris,
-#'   chains = 1, iter = 150
+#'   chains = 2, iter = 200
 #' )
 #'
 #' x <- rope(model)
 #' plot(x)
 #'
-#' \dontrun{
 #' x <- hdi(model)
 #' plot(x) + theme_modern()
 #'

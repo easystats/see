@@ -7,7 +7,6 @@
 #' custom \code{prior_odds} will change the slices' size.
 #'
 #' @examples
-#' \dontrun{
 #' library(bayestestR)
 #' library(see)
 #'
@@ -20,7 +19,6 @@
 #'
 #' plot(result, n_pies = "one", value = "probability") + theme_modern() +
 #'   scale_fill_pizza(reverse = TRUE)
-#' }
 #'
 #' @export
 plot.see_bayesfactor_models <-
