@@ -27,7 +27,7 @@
 #'   scale_color_social_c(palette = "rainbow")
 #'
 #' @export
-scale_color_social <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_social <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_social(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -44,13 +44,13 @@ scale_color_social <- function(palette = "contrast", discrete = TRUE, reverse = 
 
 #' @rdname scale_color_social
 #' @export
-scale_color_social_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_social_d <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   scale_color_social(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
 #' @rdname scale_color_social
 #' @export
-scale_color_social_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
+scale_color_social_c <- function(palette = "complement", discrete = FALSE, reverse = FALSE, ...) {
   scale_color_social(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
@@ -76,7 +76,7 @@ scale_colour_social_d <- scale_color_social_d
 
 #' @rdname scale_color_social
 #' @export
-scale_fill_social <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_social <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_social(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -89,13 +89,13 @@ scale_fill_social <- function(palette = "contrast", discrete = TRUE, reverse = F
 
 #' @rdname scale_color_social
 #' @export
-scale_fill_social_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_social_d <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   scale_fill_social(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
 #' @rdname scale_color_social
 #' @export
-scale_fill_social_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
+scale_fill_social_c <- function(palette = "complement", discrete = FALSE, reverse = FALSE, ...) {
   scale_fill_social(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
@@ -161,7 +161,7 @@ social_palettes <- list(
   `ice`  = social_colors("purple", "deep purple", "blue", "light blue"),
   `rainbow` = social_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
   `contrast` = social_colors("blue", "green", "amber", "purple", "red"),
-  `complement` = social_colors("blue", "yellow", "green", "red", "teal", "blue grey", "amber")
+  `complement` = social_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
 )
 
 
@@ -180,7 +180,7 @@ social_palettes <- list(
 #'
 #' @importFrom grDevices colorRampPalette
 #' @export
-palette_social <- function(palette = "contrast", reverse = FALSE, ...) {
+palette_social <- function(palette = "complement", reverse = FALSE, ...) {
   pal <- social_palettes[[palette]]
 
   if (reverse) pal <- rev(pal)

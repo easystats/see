@@ -102,6 +102,9 @@ functions from different packages of the easystats-project." />
     <li>
       <a href="../articles/performance.html">Plotting Functions for the performance Package</a>
     </li>
+    <li>
+      <a href="../articles/seecolorscales.html">Color Scales</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -178,7 +181,8 @@ functions from different packages of the <a href='https://github.com/easystats'>
 
 <span class='co'># S3 method for see_point_estimate</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>panel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>panel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_rope</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
@@ -271,6 +275,13 @@ Else, densities are plotted for each parameter among each other.</p></td>
       <th>ci</th>
       <td><p>Logical, whether confidence intervals should be added to the plot.</p></td>
     </tr>
+    <tr>
+      <th>show_labels</th>
+      <td><p>Logical, if <code>TRUE</code>, the text labels for the point
+estimates (i.e. <em>"Mean"</em>, <em>"Median"</em> and/or <em>"MAP"</em>) are shown.
+You may set <code>show_labels = FALSE</code> in case of overlapping labels, and
+add your own legend or footnote to the plot.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -359,8 +370,8 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 1: Iteration: 135 / 150 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 150 / 150 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.05 seconds (Warm-up)
-#&gt; Chain 1:                0.065 seconds (Sampling)
+#&gt; Chain 1:  Elapsed Time: 0.051 seconds (Warm-up)
+#&gt; Chain 1:                0.064 seconds (Sampling)
 #&gt; Chain 1:                0.115 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
@@ -392,9 +403,9 @@ development and probably not yet available):</p><ul>
 #&gt; Chain 2: Iteration: 135 / 150 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 150 / 150 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.052 seconds (Warm-up)
-#&gt; Chain 2:                0.06 seconds (Sampling)
-#&gt; Chain 2:                0.112 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 0.049 seconds (Warm-up)
+#&gt; Chain 2:                0.062 seconds (Sampling)
+#&gt; Chain 2:                0.111 seconds (Total)
 #&gt; Chain 2: </div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>

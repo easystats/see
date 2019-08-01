@@ -27,7 +27,7 @@
 #'   scale_color_metro_c(palette = "rainbow")
 #'
 #' @export
-scale_color_metro <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_metro <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_metro(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -44,13 +44,13 @@ scale_color_metro <- function(palette = "contrast", discrete = TRUE, reverse = F
 
 #' @rdname scale_color_metro
 #' @export
-scale_color_metro_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_metro_d <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   scale_color_metro(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
 #' @rdname scale_color_metro
 #' @export
-scale_color_metro_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
+scale_color_metro_c <- function(palette = "complement", discrete = FALSE, reverse = FALSE, ...) {
   scale_color_metro(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
@@ -76,7 +76,7 @@ scale_colour_metro_d <- scale_color_metro_d
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_metro <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_metro(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -89,13 +89,13 @@ scale_fill_metro <- function(palette = "contrast", discrete = TRUE, reverse = FA
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_metro_d <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   scale_fill_metro(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
+scale_fill_metro_c <- function(palette = "complement", discrete = FALSE, reverse = FALSE, ...) {
   scale_fill_metro(palette = palette, discrete = discrete, reverse = reverse, ...)
 }
 
@@ -159,7 +159,7 @@ metro_palettes <- list(
   `ice`  = metro_colors("purple", "deep purple", "blue", "light blue"),
   `rainbow` = metro_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
   `contrast` = metro_colors("blue", "green", "amber", "purple", "red"),
-  `complement` = metro_colors("blue", "yellow", "green", "red", "teal", "blue grey", "amber")
+  `complement` = metro_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
 )
 
 
@@ -178,7 +178,7 @@ metro_palettes <- list(
 #'
 #' @importFrom grDevices colorRampPalette
 #' @export
-palette_metro <- function(palette = "contrast", reverse = FALSE, ...) {
+palette_metro <- function(palette = "complement", reverse = FALSE, ...) {
   pal <- metro_palettes[[palette]]
 
   if (reverse) pal <- rev(pal)

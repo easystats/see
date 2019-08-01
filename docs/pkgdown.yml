@@ -4,4 +4,5 @@ pkgdown_sha: ~
 articles:
   bayestestR: bayestestR.html
   performance: performance.html
+  seecolorscales: seecolorscales.html
 

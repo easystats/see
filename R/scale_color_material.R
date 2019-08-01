@@ -164,7 +164,7 @@ material_palettes <- list(
   `ice`  = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
   `rainbow` = material_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "deep orange" ,"red", "pink"),
   `contrast` = material_colors("blue", "green", "amber", "purple", "red"),
-  `complement` = material_colors("blue", "yellow", "green", "red", "teal", "blue grey", "amber")
+  `complement` = material_colors("blue", "blue grey", "teal", "green", "light green","yellow", "amber", "red")
 )
 
 

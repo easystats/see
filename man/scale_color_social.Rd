@@ -12,35 +12,35 @@
 \alias{scale_fill_social_c}
 \title{Social color palette}
 \usage{
-scale_color_social(palette = "contrast", discrete = TRUE,
+scale_color_social(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_color_social_d(palette = "contrast", discrete = TRUE,
+scale_color_social_d(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_color_social_c(palette = "contrast", discrete = FALSE,
+scale_color_social_c(palette = "complement", discrete = FALSE,
   reverse = FALSE, ...)
 
-scale_colour_social(palette = "contrast", discrete = TRUE,
+scale_colour_social(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_colour_social_c(palette = "contrast", discrete = FALSE,
+scale_colour_social_c(palette = "complement", discrete = FALSE,
   reverse = FALSE, ...)
 
-scale_colour_social_d(palette = "contrast", discrete = TRUE,
+scale_colour_social_d(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_fill_social(palette = "contrast", discrete = TRUE,
+scale_fill_social(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_fill_social_d(palette = "contrast", discrete = TRUE,
+scale_fill_social_d(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_fill_social_c(palette = "contrast", discrete = FALSE,
+scale_fill_social_c(palette = "complement", discrete = FALSE,
   reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast" (default).}
+\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 

@@ -4,10 +4,10 @@
 \alias{palette_metro}
 \title{Metro color palette}
 \usage{
-palette_metro(palette = "contrast", reverse = FALSE, ...)
+palette_metro(palette = "complement", reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast" (default).}
+\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 

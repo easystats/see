@@ -1,0 +1,391 @@
+---
+title: "Color Scales"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{seecolorscales}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 8, 
+  fig.height = 5.5,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+Before we start, we create some data sets with three, four and five groups; one is useful to demonstrate line-geoms, the iris-dataset is used for point-geoms.
+
+```{r setup}
+library(ggplot2)
+library(see)
+
+data(iris)
+iris$group4 <- as.factor(sample(1:4, size = nrow(iris), replace = TRUE))
+iris$group5 <- as.factor(sample(1:5, size = nrow(iris), replace = TRUE))
+
+d1 <- data.frame(
+  x = rep(1:20, 3),
+  y = c(
+    seq(2, 4, length.out = 20),
+    seq(3, 6, length.out = 20),
+    seq(5, 3, length.out = 20)
+  ),
+  group = rep(factor(1:3), each = 20)
+)
+
+d2 <- data.frame(
+  x = rep(1:20, 4),
+  y = c(
+    seq(2, 4, length.out = 20),
+    seq(3, 6, length.out = 20),
+    seq(5, 3, length.out = 20),
+    seq(4, 2.5, length.out = 20)
+  ),
+  group = rep(factor(1:4), each = 20)
+)
+
+d3 <- data.frame(
+  x = rep(1:20, 5),
+  y = c(
+    seq(2, 4, length.out = 20),
+    seq(3, 6, length.out = 20),
+    seq(5, 3, length.out = 20),
+    seq(4, 2.5, length.out = 20),
+    seq(3.5, 4.5, length.out = 20)
+  ),
+  group = rep(factor(1:5), each = 20)
+)
+
+theme_set(theme_modern(legend.position = "bottom"))
+```
+
+# The *see* Color Scales
+
+There are several different [color scales available](https://easystats.github.io/see/reference/index.html#section-scales) in the *see* package, most of them having some pre-defined palettes like `"full"`, `"ice"`, `"rainbow"`, `"complement"`, or `"contrast"` - an exception is the [pizza color scale](https://easystats.github.io/see/reference/scale_color_pizza.html).
+
+In this vignettes, we show the default palettes for the different color scales to give an impression how these scales work with different type of data.
+
+# Social Colors
+
+## Social Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_social()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_social()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Social Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_social()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_social()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Social Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_social()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_social()
+
+plots(p1, p2, nrow = 1)
+```
+
+
+# Material Colors
+
+## Material Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_material()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_material()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Material Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_material()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_material()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Material Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_material()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_material()
+
+plots(p1, p2, nrow = 1)
+```
+
+
+# Flat Colors
+
+## Flat Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_flat()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_flat()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Flat Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_flat()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_flat()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Flat Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_flat()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_flat()
+
+plots(p1, p2, nrow = 1)
+```
+
+
+# Metro Colors
+
+## Metro Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_metro()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_metro()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Metro Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_metro()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_metro()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Metro Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_metro()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_metro()
+
+plots(p1, p2, nrow = 1)
+```
+
+
+# Pizza Colors
+
+## Pizza Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_pizza()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_pizza()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Pizza Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_pizza()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_pizza()
+
+plots(p1, p2, nrow = 1)
+```
+
+## Pizza Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_pizza()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_pizza()
+
+plots(p1, p2, nrow = 1)
+```
+
+
+
+# Overview of Palette Colors
+
+```{r fig.height=12,echo=FALSE}
+theme_set(theme_minimal())
+
+d <- data.frame(
+  x = names(social_colors())
+)
+
+p1 <- ggplot(d, aes(x, fill = x)) + 
+  geom_bar(width = .9) + 
+  scale_fill_manual(values = social_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+  
+
+d <- data.frame(
+  x = names(flat_colors())
+)
+
+p2 <- ggplot(d, aes(x, fill = x)) + 
+  geom_bar(width = .9) + 
+  scale_fill_manual(values = flat_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+d <- data.frame(
+  x = names(material_colors())
+)
+
+p3 <- ggplot(d, aes(x, fill = x)) + 
+  geom_bar(width = .9) + 
+  scale_fill_manual(values = material_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+
+
+d <- data.frame(
+  x = names(metro_colors())
+)
+
+p4 <- ggplot(d, aes(x, fill = x)) + 
+  geom_bar(width = .9) + 
+  scale_fill_manual(values = metro_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+
+d <- data.frame(
+  x = names(pizza_colors())
+)
+
+p5 <- ggplot(d, aes(x, fill = x)) + 
+  geom_bar(width = .9) + 
+  scale_fill_manual(values = pizza_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+
+plots(p1, p2, p3, p4, p5, ncol = 1, tags = c("Social", "Flat", "Material", "Metro", "Pizza"))
+```

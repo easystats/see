@@ -12,35 +12,35 @@
 \alias{scale_fill_metro_c}
 \title{Metro color palette}
 \usage{
-scale_color_metro(palette = "contrast", discrete = TRUE,
+scale_color_metro(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_color_metro_d(palette = "contrast", discrete = TRUE,
+scale_color_metro_d(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_color_metro_c(palette = "contrast", discrete = FALSE,
+scale_color_metro_c(palette = "complement", discrete = FALSE,
   reverse = FALSE, ...)
 
-scale_colour_metro(palette = "contrast", discrete = TRUE,
+scale_colour_metro(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_colour_metro_c(palette = "contrast", discrete = FALSE,
+scale_colour_metro_c(palette = "complement", discrete = FALSE,
   reverse = FALSE, ...)
 
-scale_colour_metro_d(palette = "contrast", discrete = TRUE,
+scale_colour_metro_d(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_fill_metro(palette = "contrast", discrete = TRUE,
+scale_fill_metro(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_fill_metro_d(palette = "contrast", discrete = TRUE,
+scale_fill_metro_d(palette = "complement", discrete = TRUE,
   reverse = FALSE, ...)
 
-scale_fill_metro_c(palette = "contrast", discrete = FALSE,
+scale_fill_metro_c(palette = "complement", discrete = FALSE,
   reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast" (default).}
+\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 

@@ -40,8 +40,8 @@
 <meta property="og:title" content="Pizza color palette — scale_color_pizza" />
 
 <meta property="og:description" content="The palette based on authentic neapolitan pizzas.
-Use scale_color_pizza_d for discrete categories and
-scale_color_pizza_c for a continuous scale." />
+Use scale_color_pizza_d() for discrete categories and
+scale_color_pizza_c() for a continuous scale." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -102,6 +102,9 @@ scale_color_pizza_c for a continuous scale." />
     <li>
       <a href="../articles/performance.html">Plotting Functions for the performance Package</a>
     </li>
+    <li>
+      <a href="../articles/seecolorscales.html">Color Scales</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -131,8 +134,8 @@ scale_color_pizza_c for a continuous scale." />
     <div class="ref-description">
     
     <p>The palette based on authentic neapolitan pizzas.
-Use <code>scale_color_pizza_d</code> for <em>discrete</em> categories and
-<code>scale_color_pizza_c</code> for a <em>continuous</em> scale.</p>
+Use <code>scale_color_pizza_d()</code> for <em>discrete</em> categories and
+<code>scale_color_pizza_c()</code> for a <em>continuous</em> scale.</p>
     
     </div>
 
@@ -168,7 +171,8 @@ Use <code>scale_color_pizza_d</code> for <em>discrete</em> categories and
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>palette</th>
-      <td><p>Pizza type. Can be "margherita" (default) or "diavola".</p></td>
+      <td><p>Pizza type. Can be "margherita" (default), "margherita_crust",
+"diavola" or "diavola_crust".</p></td>
     </tr>
     <tr>
       <th>discrete</th>
@@ -180,8 +184,7 @@ Use <code>scale_color_pizza_d</code> for <em>discrete</em> categories and
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to discrete_scale() or
-scale_color_gradientn(), used respectively when discrete is TRUE or FALSE.</p></td>
+      <td><p>Additional arguments to pass to <code><a href='https://www.rdocumentation.org/packages/grDevices/topics/colorRamp'>colorRampPalette()</a></code>.</p></td>
     </tr>
     </table>
     
