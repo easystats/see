@@ -165,7 +165,7 @@ library(rstanarm)
 model <- stan_glm(
   Sepal.Length ~ Petal.Width * Species,
   data = iris,
-  chains = 2, iter = 150
+  chains = 1, iter = 150
 )
 
 x <- rope(model)
