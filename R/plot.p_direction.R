@@ -90,7 +90,7 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
     )) +
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x) +
-    geom_vline(aes(xintercept = 0), lintype = "dotted")
+    geom_vline(aes(xintercept = 0), linetype = "dotted")
 
   p
 }
