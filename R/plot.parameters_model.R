@@ -1,4 +1,5 @@
 #' @param dot_size Size of point geoms.
+#' @importFrom bayestestR reshape_ci
 #' @rdname data_plot
 #' @export
 plot.see_parameters_model <- function(x, show_intercept = FALSE, dot_size = .8, ...) {
@@ -10,7 +11,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, dot_size = .8, 
   }
 
   if (sum(grepl("^CI_low", colnames(x))) > 1) {
-    x <- .reshape_ci(x)
+    x <- bayestestR::reshape_ci(x)
     x$CI <- as.character(x$CI)
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$CI)) +
       geom_hline(aes(yintercept = 0), linetype = "dotted") +
