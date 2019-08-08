@@ -1,3 +1,10 @@
+# see 0.2.2
+
+## Changes to functions
+
+* `plot()` for `bayestestR::bayesfactor_parameters()` only plots facets when necessary.
+
+
 # see 0.2.1
 
 ## General
