@@ -18,11 +18,11 @@ plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#01
   }
 
   # make sure point outline matches theme
-  t <- theme_get()
-  if (is.null(t$panel.grid.major$colour))
+  .theme <- theme_get()
+  if (is.null(.theme$panel.grid.major$colour))
     null_point_outline <- "white"
   else
-    null_point_outline <- t$panel.grid.major$colour
+    null_point_outline <- .theme$panel.grid.major$colour
 
   p <- plot_data %>%
     ggplot(aes(
@@ -34,12 +34,15 @@ plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#01
     geom_line(size = 1) +
     geom_area(alpha = 0.15) +
     geom_vline(xintercept = hypothesis, linetype = "dashed", colour = "grey50") +
-    facet_wrap(~ind, scales = "free") +
     labs(y = "Density",
          color = "Distribution",
          fill = "Distribution",
          x = "") +
     theme(legend.position = "bottom")
+
+  if (length(unique(plot_data$ind)) > 1) {
+    p <- p + facet_wrap(~ind, scales = "free")
+  }
 
   if (length(hypothesis) > 1) {
     rope <- range(hypothesis)
