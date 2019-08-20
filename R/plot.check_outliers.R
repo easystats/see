@@ -7,8 +7,7 @@ plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
   if (length(methods == 1)) {
     .plot_diag_outliers(x, text_size)
   } else {
-    d <- data_plot(x)
-    .plot_outliers_multimethod(d)
+    .plot_outliers_multimethod(x)
   }
 }
 
@@ -83,15 +82,16 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 }
 
 
-.plot_outliers_multimethod <- function(d) {
+.plot_outliers_multimethod <- function(x) {
+  d <- data_plot(x)
   ggplot(data = d, aes(x = .data$Obs, y = .data$Distance, fill = .data$Method, group = .data$Method)) +
     # geom_vline(xintercept = as.character(c(1, 2))) +
     geom_bar(position = "dodge", stat = "identity") +
     scale_fill_viridis_d() +
     theme_modern() +
-    labs(x = "Observation", y = "Distance", fill = "Method")
-    # theme(
-    #   axis.text.x = element_text(colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")),
-    #   panel.grid.major.x = element_line(linetype = "dashed", colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey"))
-    # )
+    labs(x = "Observation", y = "Distance", fill = "Method") +
+    theme(
+      axis.text.x = element_text(colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")),
+      panel.grid.major.x = element_line(linetype = "dashed", colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey"))
+    )
 }
