@@ -4,6 +4,8 @@ data_plot.eti <- function(x, data = NULL, ...){
   .data_plot_eti(x, data)
 }
 
+#' @export
+data_plot.bayestestR_eti <- data_plot.eti
 
 
 #' @keywords internal

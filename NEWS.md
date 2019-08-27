@@ -3,7 +3,7 @@
 ## Changes to functions
 
 * `plot()` for `bayestestR::bayesfactor_parameters()` only plots facets when necessary.
-
+* `plot()` for `performance::check_outliers()` now also plot multiple methods in one plot.
 
 # see 0.2.1
 
