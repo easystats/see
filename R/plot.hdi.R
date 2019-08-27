@@ -4,6 +4,9 @@ data_plot.hdi <- function(x, data = NULL, ...){
   .data_plot_hdi(x, data)
 }
 
+#' @export
+data_plot.bayestestR_hdi <- data_plot.hdi
+
 
 #' @keywords internal
 .data_plot_hdi <- function(x, data=NULL, ...){
