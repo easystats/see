@@ -33,5 +33,10 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, dot_size = .8, 
       scale_color_material()
   }
 
+
+  if ("Component" %in% colnames(x) && length(unique(x$Component)) > 1) {
+    p <- p + facet_wrap(~Component, ncol = 1, scales = "free")
+  }
+
   p + labs(x = "Estimate", y = "Parameter", colour = "CI")
 }
