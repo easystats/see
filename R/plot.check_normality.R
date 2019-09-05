@@ -1,5 +1,5 @@
 #' @importFrom bayestestR estimate_density
-#' @importFrom stats residuals sd dnorm rstudent ppoints pnorm
+#' @importFrom stats residuals sd dnorm rstudent ppoints pnorm fitted
 #' @param type Character vector, indicating the type of plot (for
 #'   \code{\link[performance]{check_normality}} or
 #'   \code{parameters::model_parameters.lavaan}).
