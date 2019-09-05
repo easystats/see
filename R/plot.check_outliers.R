@@ -40,9 +40,12 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 
 
 .plot_diag_outliers <- function(x, text_size = 3.5) {
-  x$.id <- 1:nrow(x)
-  x$.id[!x$.outliers] <- NA
-  threshold <- attr(x, "threshold", exact = TRUE)
+  d <- data_plot(x)
+  d$Id <- 1:nrow(d)
+  d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
+  d$Id[d$Outliers == "0"] <- NA
+  d$Distance <- parameters::normalize(d$Distance)
+
   method <- switch(
     attr(x, "method", exact = TRUE),
     "cook" = "Cook's Distance",
@@ -55,9 +58,11 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
     "Cook's Distance"
   )
 
+  threshold <- attr(x, "threshold", exact = TRUE)[[method]]
+
   if (is.null(text_size)) text_size <- 3.5
 
-  p <- ggplot(x, aes(x = .data$.distance, fill = .data$.outliers, label = .data$.id)) +
+  p <- ggplot(d, aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)) +
     geom_histogram() +
     labs(
       title = "Check for Influential Observations",
