@@ -1,6 +1,6 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.estimate_density <- function(x, ...){
+data_plot.estimate_density <- function(x, ...) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
