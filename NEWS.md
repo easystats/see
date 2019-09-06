@@ -1,5 +1,9 @@
 # see 0.2.2
 
+## New plot-functions
+
+* Added plot-function for `parameters::parameters_simulate()`.
+
 ## Changes to functions
 
 * `plot()` for `bayestestR::bayesfactor_parameters()` only plots facets when necessary.

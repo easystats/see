@@ -147,6 +147,7 @@ development and probably not yet available):
   \item \code{bayestestR::rope()}
   \item \code{estimate::estimate_contrasts()}
   \item \code{parameters::model_parameters()}
+  \item \code{parameters::parameters_simulate()}
   \item \code{performance::binned_residuals()}
   \item \code{performance::check_collinearity()}
   \item \code{performance::check_distribution()}
