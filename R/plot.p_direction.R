@@ -95,9 +95,11 @@ data_plot.p_direction <- function(x, data = NULL, ...){
 
 
 # Plot --------------------------------------------------------------------
+#' @param grid Logical, if \code{TRUE}, model components like random effects or a zero-inflation component are plotted in a grid-layout.
 #' @importFrom rlang .data
+#' @rdname data_plot
 #' @export
-plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
+plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -117,7 +119,7 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
     add_plot_attributes(x) +
     geom_vline(aes(xintercept = 0), linetype = "dotted")
 
-  if ("Effects" %in% names(x)) {
+  if ("Effects" %in% names(x) && isTRUE(grid)) {
     if ("Component" %in% names(x))
       p <- p + facet_wrap(~ Effects + Component, scales = "free")
     else

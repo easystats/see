@@ -31,7 +31,12 @@ theme_set(theme_modern())
 
 ```{r eval=FALSE}
 set.seed(123)
+# model with fixed effects only
 model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+
+# model with fixed and random effects as well as zero-inflation component
+model2 <- insight::download_model("brms_zi_3")
+
 result <- estimate_density(model)
 
 plot(result)
@@ -39,9 +44,11 @@ plot(result)
 ```{r echo=FALSE}
 library(bayestestR)
 library(rstanarm)
+library(insight)
 
 set.seed(123)
 junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
+model2 <- insight::download_model("brms_zi_3")
 result <- estimate_density(model)
 
 plot(result)
@@ -62,6 +69,15 @@ result
 plot(result)
 ```
 
+```{r}
+result <- p_direction(model2)
+
+result
+
+plot(result)
+
+plot(result, grid = FALSE)
+```
 
 ## Point Estimates
 
