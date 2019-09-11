@@ -9,12 +9,15 @@ data_plot.bayestestR_hdi <- data_plot.hdi
 
 
 #' @keywords internal
-.data_plot_hdi <- function(x, data = NULL, grid = TRUE, ...) {
+.data_plot_hdi <- function(x, data = NULL, grid = TRUE, parms = NULL, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
 
-  params <- NULL
+  if (!is.null(parms))
+    params <- parms
+  else
+    params <- NULL
 
   if (inherits(data, "emmGrid")) {
     if (!requireNamespace("emmeans", quietly = TRUE)) {
@@ -65,8 +68,9 @@ data_plot.bayestestR_hdi <- data_plot.hdi
     dataplot <- .compute_densities_hdi(x = data[, 1], hdi = x, name = "Posterior")
   }
 
+  cn <- intersect(c("x", "y", "height", "fill", "Effects", "Component"), colnames(dataplot))
   dataplot <- dataplot %>%
-    dplyr::select(dplyr::one_of("x", "y", "height", "fill", "Effects", "Component"))
+    dplyr::select(dplyr::one_of(cn))
 
   # clean cryptic names
   if (grid) {

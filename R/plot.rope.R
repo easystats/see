@@ -1,15 +1,20 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.rope <- function(x, data = NULL, ...){
+data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
+
+  params <- NULL
 
   if (inherits(data, "emmGrid")) {
     if (!requireNamespace("emmeans", quietly = TRUE)) {
       stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
     }
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+  } else if (inherits(data, c("stanreg", "brmsfit"))) {
+    params <- insight::clean_parameters(data)
+    data <- as.data.frame(data)
   } else {
     data <- as.data.frame(data)
   }
@@ -25,7 +30,7 @@ data_plot.rope <- function(x, data = NULL, ...){
   }
 
   # Extract data HDI
-  dataplot <- .data_plot_hdi(hdi, data)
+  dataplot <- .data_plot_hdi(hdi, data, grid, parms = params)
   rope_range <- unique(c(x$ROPE_low, x$ROPE_high))
   if (length(rope_range) != 2) {
     stop("Only one ROPE range accepted.")
@@ -52,8 +57,9 @@ data_plot.rope <- function(x, data = NULL, ...){
 #' @importFrom rlang .data
 #' @param rope_alpha Transparency level of ROPE ribbon.
 #' @param rope_color Color of ROPE ribbon.
+#' @inheritParams plot.see_p_direction
 #' @export
-plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, ...) {
+plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -80,6 +86,15 @@ plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetb
       alpha = rope_alpha
     ) +
     add_plot_attributes(x)
+
+
+  if ("Effects" %in% names(x) && isTRUE(grid)) {
+    if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Effects + Component, scales = "free")
+    else
+      p <- p + facet_wrap(~ Effects, scales = "free")
+  }
+
   p
 }
 

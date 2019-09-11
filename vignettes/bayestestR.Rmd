@@ -106,10 +106,11 @@ result
 plot(result) + scale_fill_flat()
 ```
 
-```{r}
+```{r fig.width=9, fig.height=6}
 result <- hdi(model2, ci = c(0.5, 0.75, 0.89), effects = "all", component = "all")
 
 plot(result) + scale_fill_metro()
+plot(result, grid = FALSE) + scale_fill_material()
 ```
 
 ## Region of Practical Equivalence (ROPE)
@@ -121,6 +122,15 @@ result
 
 plot(result, data = model, rope_color = "red") +
   scale_fill_brewer(palette = "Greens", direction = -1)
+```
+
+```{r}
+result <- rope(model2, ci = c(0.9, 0.95), effects = "all", component = "all")
+
+result 
+
+plot(result, data = model, rope_color = "grey70") +
+  scale_fill_social()
 ```
 
 ## Test for Practical Equivalence

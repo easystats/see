@@ -64,7 +64,7 @@ data_plot(x, data = NULL, ...)
   show_intercept = FALSE, ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
-  rope_color = "cadetblue", show_intercept = FALSE, ...)
+  rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...)
 }
 \arguments{
 \item{x}{An object.}
