@@ -34,16 +34,19 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
             "Component" = params$Component[params$Parameter == i]
           )
         )
-        levels(dataplot$Effects) <- unique(dataplot$Effects)
-        levels(dataplot$Component) <- unique(dataplot$Component)
       } else {
         dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i))
       }
     }
-    if ("Effects" %in% names(dataplot) && length(unique(dataplot$Effects)) == 1 &&
-        "Component" %in% names(dataplot) && length(unique(dataplot$Component)) == 1) {
-      dataplot$Effects <- NULL
-      dataplot$Component <- NULL
+
+    if ("Effects" %in% names(dataplot) && "Component" %in% names(dataplot)) {
+      if (length(unique(dataplot$Effects)) == 1 && length(unique(dataplot$Component)) == 1) {
+        dataplot$Effects <- NULL
+        dataplot$Component <- NULL
+      } else {
+        dataplot$Effects <- factor(dataplot$Effects, levels = sort(levels(dataplot$Effects)))
+        dataplot$Component <- factor(dataplot$Component, levels = sort(levels(dataplot$Component)))
+      }
     }
 
   } else {

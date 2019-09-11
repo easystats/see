@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_plot.R, R/plot.bayesfactor_models.R,
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
-%   R/plot.equivalence_test.R, R/plot.estimate_density.R,
+%   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
 %   R/plot.p_direction.R, R/plot.parameters_model.R, R/plot.parameters_sem.R,
 %   R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
@@ -14,6 +14,7 @@
 \alias{plot.see_check_outliers}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
+\alias{plot.see_hdi}
 \alias{plot.see_p_direction}
 \alias{plot.see_parameters_model}
 \alias{plot.see_parameters_sem}
@@ -44,6 +45,9 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, ...)
+
+\method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
+  grid = TRUE, ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
   grid = TRUE, ...)

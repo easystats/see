@@ -1,7 +1,7 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.hdi <- function(x, data = NULL, ...){
-  .data_plot_hdi(x, data)
+data_plot.hdi <- function(x, data = NULL, grid = TRUE, ...) {
+  .data_plot_hdi(x, data, grid)
 }
 
 #' @export
@@ -9,16 +9,21 @@ data_plot.bayestestR_hdi <- data_plot.hdi
 
 
 #' @keywords internal
-.data_plot_hdi <- function(x, data=NULL, ...){
+.data_plot_hdi <- function(x, data = NULL, grid = TRUE, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
+
+  params <- NULL
 
   if (inherits(data, "emmGrid")) {
     if (!requireNamespace("emmeans", quietly = TRUE)) {
       stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
     }
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+  } else if (inherits(data, c("stanreg", "brmsfit"))) {
+    params <- insight::clean_parameters(data)
+    data <- as.data.frame(data)
   } else {
     data <- as.data.frame(data)
   }
@@ -28,18 +33,46 @@ data_plot.bayestestR_hdi <- data_plot.hdi
     data <- data[, levels_order]
     dataplot <- data.frame()
     for (i in names(data)) {
-      dataplot <- rbind(
-        dataplot,
-        .compute_densities_hdi(data[[i]], hdi = as.data.frame(x[x$Parameter == i, ]), name = i)
-      )
+      if (!is.null(params)) {
+        dataplot <- rbind(
+          dataplot,
+          cbind(
+            .compute_densities_hdi(data[[i]], hdi = as.data.frame(x[x$Parameter == i, ]), name = i),
+            "Effects" = params$Effects[params$Parameter == i],
+            "Component" = params$Component[params$Parameter == i]
+          )
+        )
+      } else {
+        dataplot <- rbind(
+          dataplot,
+          .compute_densities_hdi(data[[i]], hdi = as.data.frame(x[x$Parameter == i, ]), name = i)
+        )
+      }
     }
+
+    if ("Effects" %in% names(dataplot) && "Component" %in% names(dataplot)) {
+      if (length(unique(dataplot$Effects)) == 1 && length(unique(dataplot$Component)) == 1) {
+        dataplot$Effects <- NULL
+        dataplot$Component <- NULL
+      } else {
+        dataplot$Effects <- factor(dataplot$Effects, levels = sort(levels(dataplot$Effects)))
+        dataplot$Component <- factor(dataplot$Component, levels = sort(levels(dataplot$Component)))
+      }
+    }
+
   } else {
     levels_order <- NULL
     dataplot <- .compute_densities_hdi(x = data[, 1], hdi = x, name = "Posterior")
   }
 
   dataplot <- dataplot %>%
-    dplyr::select(dplyr::one_of("x", "y", "height", "fill"))
+    dplyr::select(dplyr::one_of("x", "y", "height", "fill", "Effects", "Component"))
+
+  # clean cryptic names
+  if (grid) {
+    dataplot$y <- .clean_parameter_names(dataplot$y)
+    if (!is.null(levels_order)) levels_order <- .clean_parameter_names(levels_order)
+  }
 
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
@@ -101,8 +134,10 @@ data_plot.bayestestR_hdi <- data_plot.hdi
 # Plot --------------------------------------------------------------------
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
+#' @inheritParams plot.see_p_direction
+#' @rdname data_plot
 #' @export
-plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, ...) {
+plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -121,6 +156,14 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, ...) {
     ggridges::geom_ridgeline_gradient() +
     geom_vline(xintercept = 0, linetype = "dotted") +
     add_plot_attributes(x)
+
+
+  if ("Effects" %in% names(x) && isTRUE(grid)) {
+    if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Effects + Component, scales = "free")
+    else
+      p <- p + facet_wrap(~ Effects, scales = "free")
+  }
 
   p
 }
