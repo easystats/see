@@ -8,6 +8,7 @@
 
 * `plot()` for `bayestestR::bayesfactor_parameters()` only plots facets when necessary.
 * `plot()` for `performance::check_outliers()` now also plot multiple methods in one plot.
+* `plot.p_direction()` plots facets for effects/components
 
 # see 0.2.1
 
