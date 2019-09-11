@@ -1,3 +1,4 @@
+#' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.p_direction <- function(x, data = NULL, ...){
@@ -5,11 +6,16 @@ data_plot.p_direction <- function(x, data = NULL, ...){
     data <- .retrieve_data(x)
   }
 
+  params <- NULL
+
   if (inherits(data, "emmGrid")) {
     if (!requireNamespace("emmeans", quietly = TRUE)) {
       stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
     }
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+  } else if (inherits(data, c("stanreg", "brmsfit"))) {
+    params <- insight::clean_parameters(data)
+    data <- as.data.frame(data)
   } else {
     data <- as.data.frame(data)
   }
@@ -19,8 +25,27 @@ data_plot.p_direction <- function(x, data = NULL, ...){
     data <- data[, x$Parameter]
     dataplot <- data.frame()
     for (i in names(data)) {
-      dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i))
+      if (!is.null(params)) {
+        dataplot <- rbind(
+          dataplot,
+          cbind(
+            .compute_densities_pd(data[[i]], name = i),
+            "Effects" = params$Effects[params$Parameter == i],
+            "Component" = params$Component[params$Parameter == i]
+          )
+        )
+        levels(dataplot$Effects) <- unique(dataplot$Effects)
+        levels(dataplot$Component) <- unique(dataplot$Component)
+      } else {
+        dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i))
+      }
     }
+    if ("Effects" %in% names(dataplot) && length(unique(dataplot$Effects)) == 1 &&
+        "Component" %in% names(dataplot) && length(unique(dataplot$Component)) == 1) {
+      dataplot$Effects <- NULL
+      dataplot$Component <- NULL
+    }
+
   } else {
     levels_order <- NULL
     dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
@@ -72,7 +97,7 @@ data_plot.p_direction <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @importFrom rlang .data
 #' @export
-plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
+plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
@@ -91,6 +116,13 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x) +
     geom_vline(aes(xintercept = 0), linetype = "dotted")
+
+  if ("Effects" %in% names(x)) {
+    if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Effects + Component, scales = "free")
+    else
+      p <- p + facet_wrap(~ Effects, scales = "free")
+  }
 
   p
 }
