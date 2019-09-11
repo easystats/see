@@ -69,8 +69,7 @@ data_plot.bayestestR_hdi <- data_plot.hdi
   }
 
   cn <- intersect(c("x", "y", "height", "fill", "Effects", "Component"), colnames(dataplot))
-  dataplot <- dataplot %>%
-    dplyr::select(dplyr::one_of(cn))
+  dataplot <- dataplot[, cn, drop = FALSE]
 
   # clean cryptic names
   if (grid) {
