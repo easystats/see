@@ -30,7 +30,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   }
 
   # if we have intercept-only models, keep at least the intercept
-  intercepts <- which(x$Parameter %in% c("Intercept", "(Intercept)", "b_Intercept"))
+  intercepts <- which(x$Parameter %in% c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept"))
   if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
     x <- x[-intercepts, ]
   }
