@@ -67,3 +67,21 @@ magrittr::`%>%`
 
   as.numeric(as.character(x))
 }
+
+
+
+.clean_parameter_names <- function(params) {
+  # clean parameters names
+  params <- gsub("(b_|bs_|bsp_|bcs_)(.*)", "\\2", params, perl = TRUE)
+  # clean random effect parameters names
+  params <- gsub("r_(.*)\\.(.*)\\.", "\\1", params)
+  params <- gsub("b\\[\\(Intercept\\) (.*)\\]", "\\1", params)
+  params <- gsub("b\\[(.*) (.*)\\]", "\\2", params)
+  # clean smooth terms
+  params <- gsub("^smooth_sd\\[(.*)\\]", "\\1", params)
+  params <- gsub("^sds_", "\\1", params)
+  # remove ".1" etc. suffix
+  params <- gsub("(.*)(\\.)(\\d)$", "\\1 \\3", params)
+
+  params
+}

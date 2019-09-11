@@ -69,13 +69,12 @@ result
 plot(result)
 ```
 
-```{r}
-result <- p_direction(model2)
+```{r fig.width=9, fig.height=6}
+result <- p_direction(model2, effects = "all", component = "all")
 
 result
 
 plot(result)
-
 plot(result, grid = FALSE)
 ```
 

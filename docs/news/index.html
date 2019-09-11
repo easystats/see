@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,10 +41,11 @@
 
 
 
-<meta property="og:title" content="Changelog" />
 
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -52,6 +57,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -70,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -78,7 +84,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,7 +113,6 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -117,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -126,9 +132,33 @@
       
     </div>
 
+    <div id="see-022" class="section level1">
+<h1 class="page-header">
+<a href="#see-022" class="anchor"></a>see 0.2.2<small> Unreleased </small>
+</h1>
+<div id="new-plot-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-plot-functions" class="anchor"></a>New plot-functions</h2>
+<ul>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/parameters_simulate.html">parameters::parameters_simulate()</a></code>.</li>
+</ul>
+</div>
+<div id="changes-to-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/bayestestR/man/bayesfactor_parameters.html">bayestestR::bayesfactor_parameters()</a></code> only plots facets when necessary.</li>
+<li>
+<code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/performance/man/check_outliers.html">performance::check_outliers()</a></code> now also plot multiple methods in one plot.</li>
+<li>
+<code>plot.p_direction()</code> plots facets for effects/components</li>
+</ul>
+</div>
+</div>
     <div id="see-021" class="section level1">
 <h1 class="page-header">
-<a href="#see-021" class="anchor"></a>see 0.2.1<small> Unreleased </small>
+<a href="#see-021" class="anchor"></a>see 0.2.1<small> 2019-08-01 </small>
 </h1>
 <div id="general" class="section level2">
 <h2 class="hasAnchor">
@@ -138,20 +168,20 @@
 <li>Added new color-palettes.</li>
 </ul>
 </div>
-<div id="new-plot-functions" class="section level2">
+<div id="new-plot-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-1" class="anchor"></a>New plot-functions</h2>
 <ul>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/parameters/topics/model_parameters">parameters::model_parameters()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/bayestestR/topics/point_estimate">bayestestR::point_estimate()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">parameters::model_parameters()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/point_estimate.html">bayestestR::point_estimate()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions" class="section level2">
+<div id="changes-to-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-1" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>The <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot()</a></code>-method for <code><a href="https://www.rdocumentation.org/packages/bayestestR/topics/bayesfactor_parameters">bayestestR::bayesfactor_savagedickey()</a></code> gets a <code>rope_color</code> and a <code>rope_alpha</code>-argument to plot the “null”-interval, when the null-hypothesis is a <em>region of practical equivalence</em>, and not just the point-null.</li>
-<li>The <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot()</a></code>-method for <code><a href="https://www.rdocumentation.org/packages/performance/topics/binned_residuals">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://www.rdocumentation.org/packages/performance/topics/binned_residuals">performance::binned_residuals()</a></code>).</li>
+<li>The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method for <code><a href="https://rdrr.io/pkg/bayestestR/man/bayesfactor_parameters.html">bayestestR::bayesfactor_savagedickey()</a></code> gets a <code>rope_color</code> and a <code>rope_alpha</code>-argument to plot the “null”-interval, when the null-hypothesis is a <em>region of practical equivalence</em>, and not just the point-null.</li>
+<li>The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method for <code><a href="https://rdrr.io/pkg/performance/man/binned_residuals.html">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://rdrr.io/pkg/performance/man/binned_residuals.html">performance::binned_residuals()</a></code>).</li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
@@ -174,7 +204,7 @@
 <code><a href="../reference/geom_point2.html">geom_point2()</a></code> now accepts <code>size</code>-aesthetics when mapped to data.</li>
 <li>Themes now get a <code>base_size</code> and <code>base_family</code> argument, in line with <strong>ggplot</strong> themes, to set the default size and family for plots.</li>
 <li>
-<code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot()</a></code>-methods now work for <strong>bayestestR</strong> functions that work on <code>emmGrid</code>-objects (created from pairwise comparison with package <strong>emmeans</strong>).</li>
+<code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-methods now work for <strong>bayestestR</strong> functions that work on <code>emmGrid</code>-objects (created from pairwise comparison with package <strong>emmeans</strong>).</li>
 </ul>
 </div>
 <div id="new-themes" class="section level2">
@@ -185,17 +215,17 @@
 <code><a href="../reference/theme_lucid.html">theme_lucid()</a></code>, a light and clear theme.</li>
 </ul>
 </div>
-<div id="new-plot-functions-1" class="section level2">
+<div id="new-plot-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-1" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-2" class="anchor"></a>New plot-functions</h2>
 <ul>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_model">performance::check_model()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_normality">performance::check_normality()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_heteroscedasticity">performance::check_heteroscedasticity()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_outliers">performance::check_outliers()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_distribution">performance::check_distribution()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_collinearity">performance::check_collinearity()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://www.rdocumentation.org/packages/performance/topics/check_homogeneity">performance::check_homogeneity()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_model.html">performance::check_model()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_normality.html">performance::check_normality()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_heteroscedasticity.html">performance::check_heteroscedasticity()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_outliers.html">performance::check_outliers()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_distribution.html">performance::check_distribution()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_collinearity.html">performance::check_collinearity()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_homogeneity.html">performance::check_homogeneity()</a></code>.</li>
 </ul>
 </div>
 <div id="new-geoms" class="section level2">
@@ -220,6 +250,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#see-022">0.2.2</a></li>
         <li><a href="#see-021">0.2.1</a></li>
         <li><a href="#see-020">0.2.0</a></li>
       </ul>
@@ -228,19 +259,23 @@
 
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>, <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, Philip Waggoner, Mattan S. Ben-Shachar.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

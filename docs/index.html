@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2' • see</title>
+<title>Visualisation Toolbox for easystats and Extra Geoms, Themes and Color Palettes for ggplot2 • see</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -13,11 +13,12 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Visualisation Toolbox for easystats and Extra Geoms, Themes and Color Palettes for ggplot2">
 <meta property="og:description" content="Provides plotting utilities supporting easystats-packages (&lt;https://github.com/easystats/easystats&gt;) 
-    and some extra themes, geoms, and scales for 'ggplot2'. Color scales are 
+    and some extra themes, geoms, and scales for ggplot2. Color scales are 
     based on &lt;https://www.materialui.co/colors&gt;.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -27,7 +28,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -39,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -47,7 +48,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -85,15 +86,12 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<div id="see" class="section level1">
+      </header><div class="row">
+  <div class="contents col-md-9">
+<div id="see-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#see" class="anchor"></a>see <img src="reference/figures/logo.png" align="right" height="139">
+<a href="#see-" class="anchor"></a>see <img src="reference/figures/logo.png" align="right" height="139">
 </h1></div>
 
 <p><strong><em>“Damned are those who believe without seeing”</em></strong></p>
@@ -101,9 +99,9 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Run the following:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"easystats/see"</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"see"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"easystats/see"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"see"</span>)</a></code></pre></div>
 </div>
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
@@ -114,39 +112,39 @@
 <ul>
 <li><strong>Modern</strong></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<!-- end list --><div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Sepal.Width, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-4-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --></p>
 <ul>
 <li><strong>Lucid</strong></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<!-- end list --><div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb4-2" title="2"></a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Sepal.Width, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-4" title="4"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_lucid.html">theme_lucid</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-5-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-5-1.png"><!-- --></p>
 <ul>
 <li><strong>Blackboard</strong></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(estimate)</a>
+<!-- end list --><div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(estimate)</a>
 <a class="sourceLine" id="cb5-3" title="3"></a>
-<a class="sourceLine" id="cb5-4" title="4">dat &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Width <span class="op">~</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/poly">poly</a></span>(Petal.Length, <span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb5-5" title="5">    <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span>estimate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/estimate/topics/estimate_response">estimate_link</a></span>(<span class="dt">keep_draws =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb5-6" title="6">    <span class="dt">length =</span> <span class="dv">100</span>, <span class="dt">draws =</span> <span class="dv">250</span>) <span class="op">%&gt;%</span><span class="st"> </span>estimate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/estimate/topics/reshape_draws">reshape_draws</a></span>()</a>
+<a class="sourceLine" id="cb5-4" title="4">dat &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rstanarm/man/stan_glm.html">stan_glm</a></span>(Sepal.Width <span class="op">~</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(Petal.Length, <span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span>estimate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/estimate/man/estimate_response.html">estimate_link</a></span>(<span class="dt">keep_draws =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="dt">length =</span> <span class="dv">100</span>, <span class="dt">draws =</span> <span class="dv">250</span>) <span class="op">%&gt;%</span><span class="st"> </span>estimate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/estimate/man/reshape_draws.html">reshape_draws</a></span>()</a>
 <a class="sourceLine" id="cb5-7" title="7"></a>
 <a class="sourceLine" id="cb5-8" title="8">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Draw, <span class="dt">group =</span> Draw_Group)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">"white"</span>, <span class="dt">alpha =</span> <span class="fl">0.05</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb5-10" title="10">    <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">"white"</span>, <span class="dt">alpha =</span> <span class="fl">0.05</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb5-11" title="11"></a>
 <a class="sourceLine" id="cb5-12" title="12">p <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_blackboard.html">theme_blackboard</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-7-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-7-1.png"><!-- --></p>
 <ul>
 <li><strong>Abyss</strong></li>
 </ul>
-<p><img src="reference/figures/unnamed-chunk-8-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-8-1.png"><!-- --></p>
 </div>
 <div id="palettes" class="section level3">
 <h3 class="hasAnchor">
@@ -154,7 +152,7 @@
 <ul>
 <li><strong>Material design</strong></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<!-- end list --><div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>(<span class="dt">axis.text.angle =</span> <span class="dv">45</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a>
 <a class="sourceLine" id="cb6-3" title="3"></a>
 <a class="sourceLine" id="cb6-4" title="4">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
@@ -164,14 +162,14 @@
 <a class="sourceLine" id="cb6-8" title="8"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>)</a></code></pre></div>
 <p>The <code><a href="reference/plots.html">plots()</a></code> function allows us to plot the figures side by side.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-10-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-10-1.png"><!-- --></p>
 </div>
 <div id="multiple-plots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#multiple-plots" class="anchor"></a>Multiple plots</h3>
 <p>The <code><a href="reference/plots.html">plots()</a></code> function can also be used to add <strong>tags</strong> (<em>i.e.</em>, labels for subfigures).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">tags =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Fig. "</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>))</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-11-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="reference/plots.html">plots</a></span>(p1, p2, p3, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">tags =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Fig. "</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>))</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-11-1.png"><!-- --></p>
 </div>
 <div id="better-looking-points" class="section level3">
 <h3 class="hasAnchor">
@@ -184,7 +182,7 @@
 <a class="sourceLine" id="cb9-5" title="5"><span class="st">    </span><span class="kw"><a href="reference/geom_point2.html">geom_point2</a></span>(<span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a>
 <a class="sourceLine" id="cb9-6" title="6"></a>
 <a class="sourceLine" id="cb9-7" title="7"><span class="kw"><a href="reference/plots.html">plots</a></span>(normal, new, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-12-1.png" width="2850"></p>
+<p><img src="reference/figures/unnamed-chunk-12-1.png"><!-- --></p>
 </div>
 <div id="half-violin-half-dot-plot" class="section level3">
 <h3 class="hasAnchor">
@@ -192,15 +190,15 @@
 <p>Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_violindot.html">geom_violindot</a></span>(<span class="dt">fill_dots =</span> <span class="st">"black"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-13-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-13-1.png"><!-- --></p>
 </div>
 <div id="pool-ball-points" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pool-ball-points" class="anchor"></a>Pool ball points</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Sepal.Width, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_poolpoint.html">geom_pooljitter</a></span>(<span class="dt">label =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/row.names">row.names</a></span>(iris)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_flat.html">scale_color_flat_d</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_poolpoint.html">geom_pooljitter</a></span>(<span class="dt">label =</span> <span class="kw"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span>(iris)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_flat.html">scale_color_flat_d</a></span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="st">    </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-14-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-14-1.png"><!-- --></p>
 </div>
 <div id="bayestestr" class="section level3">
 <h3 class="hasAnchor">
@@ -209,27 +207,27 @@
 <div id="density-estimation" class="section level4">
 <h4 class="hasAnchor">
 <a href="#density-estimation" class="anchor"></a>Density Estimation</h4>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(bayestestR)</a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(bayestestR)</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rstanarm)</a>
 <a class="sourceLine" id="cb12-3" title="3"></a>
-<a class="sourceLine" id="cb12-4" title="4">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
+<a class="sourceLine" id="cb12-4" title="4">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rstanarm/man/stan_glm.html">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
 <a class="sourceLine" id="cb12-5" title="5">    <span class="dt">data =</span> iris)</a>
 <a class="sourceLine" id="cb12-6" title="6"></a>
 <a class="sourceLine" id="cb12-7" title="7">result &lt;-<span class="st"> </span><span class="kw">estimate_density</span>(model)</a>
 <a class="sourceLine" id="cb12-8" title="8"></a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-16-1.png" width="2187.5"></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">stack =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-17-1.png" width="2187.5"></p>
+<a class="sourceLine" id="cb12-9" title="9"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-16-1.png"><!-- --></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">stack =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-17-1.png"><!-- --></p>
 </div>
 <div id="probability-of-direction-pd" class="section level4">
 <h4 class="hasAnchor">
 <a href="#probability-of-direction-pd" class="anchor"></a>Probability of Direction (pd)</h4>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">result &lt;-<span class="st"> </span><span class="kw">p_direction</span>(model)</a>
 <a class="sourceLine" id="cb14-2" title="2"></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"red"</span>, </a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"red"</span>, </a>
 <a class="sourceLine" id="cb14-4" title="4">    <span class="st">"green"</span>))</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-18-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-18-1.png"><!-- --></p>
 <p>Most of our plots can be easily <em>opened</em> via the <code>how_to_plot</code> function. This gives us the actual code used for plotting, that can then be easily extracted and tweaked to your needs.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="reference/how_to_plot.html">how_to_plot</a></span>(result)</a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="co">## # Assuming that the input object is `x`:</span></a>
@@ -239,82 +237,82 @@
 <a class="sourceLine" id="cb15-6" title="6"><span class="co">##   ggplot(aes(x = x, y = y, height = height, group = y, fill = fill)) +</span></a>
 <a class="sourceLine" id="cb15-7" title="7"><span class="co">##   ggridges::geom_ridgeline_gradient() +</span></a>
 <a class="sourceLine" id="cb15-8" title="8"><span class="co">##   add_plot_attributes(x) +</span></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co">##   geom_vline(aes(xintercept = 0), lintype = "dotted")</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co">##   geom_vline(aes(xintercept = 0))</span></a></code></pre></div>
 </div>
 <div id="highest-density-interval-hdi" class="section level4">
 <h4 class="hasAnchor">
 <a href="#highest-density-interval-hdi" class="anchor"></a>Highest Density Interval (HDI)</h4>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rstanarm)</a>
 <a class="sourceLine" id="cb16-2" title="2"></a>
-<a class="sourceLine" id="cb16-3" title="3">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
+<a class="sourceLine" id="cb16-3" title="3">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rstanarm/man/stan_glm.html">stan_glm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Width <span class="op">*</span><span class="st"> </span>Species, </a>
 <a class="sourceLine" id="cb16-4" title="4">    <span class="dt">data =</span> iris)</a>
-<a class="sourceLine" id="cb16-5" title="5">result &lt;-<span class="st"> </span><span class="kw">hdi</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>, <span class="fl">0.95</span>))</a>
+<a class="sourceLine" id="cb16-5" title="5">result &lt;-<span class="st"> </span><span class="kw">hdi</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>, <span class="fl">0.95</span>))</a>
 <a class="sourceLine" id="cb16-6" title="6"></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Purples"</span>, </a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Purples"</span>, </a>
 <a class="sourceLine" id="cb16-8" title="8">    <span class="dt">direction =</span> <span class="dv">-1</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-21-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-21-1.png"><!-- --></p>
 </div>
 <div id="region-of-practical-equivalence-rope" class="section level4">
 <h4 class="hasAnchor">
 <a href="#region-of-practical-equivalence-rope" class="anchor"></a>Region of Practical Equivalence (ROPE)</h4>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">result &lt;-<span class="st"> </span><span class="kw">rope</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">result &lt;-<span class="st"> </span><span class="kw">rope</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
 <a class="sourceLine" id="cb17-2" title="2"></a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">data =</span> model, <span class="dt">rope_color =</span> <span class="st">"red"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">data =</span> model, <span class="dt">rope_color =</span> <span class="st">"red"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb17-4" title="4"><span class="st">    </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Greens"</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-23-1.png" width="2187.5"></p>
+<p><img src="reference/figures/unnamed-chunk-23-1.png"><!-- --></p>
 </div>
 <div id="test-for-practical-equivalence" class="section level4">
 <h4 class="hasAnchor">
 <a href="#test-for-practical-equivalence" class="anchor"></a>Test for Practical Equivalence</h4>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm">stan_glm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">model &lt;-<span class="st"> </span>rstanarm<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rstanarm/man/stan_glm.html">stan_glm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)</a>
 <a class="sourceLine" id="cb18-2" title="2">result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model)</a>
 <a class="sourceLine" id="cb18-3" title="3"></a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_blackboard.html">theme_blackboard</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-25-1.png" width="2187.5"></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.89</span>, <span class="fl">0.95</span>))</a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_abyss.html">theme_abyss</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_flat.html">scale_fill_flat</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-26-1.png" width="2187.5"></p>
+<a class="sourceLine" id="cb18-4" title="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_blackboard.html">theme_blackboard</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-25-1.png"><!-- --></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.89</span>, <span class="fl">0.95</span>))</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_abyss.html">theme_abyss</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_flat.html">scale_fill_flat</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-26-1.png"><!-- --></p>
 </div>
 <div id="bayes-factors-bfs" class="section level4">
 <h4 class="hasAnchor">
 <a href="#bayes-factors-bfs" class="anchor"></a>Bayes Factors (BFs)</h4>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_savagedickey</span>(model)</a>
 <a class="sourceLine" id="cb20-2" title="2"></a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-27-1.png" width="2187.5"></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">lm0 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mtcars)</a>
-<a class="sourceLine" id="cb21-2" title="2">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)</a>
-<a class="sourceLine" id="cb21-3" title="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
-<a class="sourceLine" id="cb21-4" title="4">lm3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat <span class="op">+</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-27-1.png"><!-- --></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">lm0 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb21-2" title="2">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb21-3" title="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb21-4" title="4">lm3 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat <span class="op">+</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
 <a class="sourceLine" id="cb21-5" title="5"></a>
 <a class="sourceLine" id="cb21-6" title="6">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_models</span>(lm1, lm2, lm3, <span class="dt">denominator =</span> lm0)</a>
 <a class="sourceLine" id="cb21-7" title="7"></a>
-<a class="sourceLine" id="cb21-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"one"</span>, <span class="dt">value =</span> <span class="st">"probability"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_pizza.html">scale_fill_pizza</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-28-1.png" width="3600"></p>
+<a class="sourceLine" id="cb21-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"one"</span>, <span class="dt">value =</span> <span class="st">"probability"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_pizza.html">scale_fill_pizza</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-28-1.png"><!-- --></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"many"</span>, <span class="dt">value =</span> <span class="st">"BF"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_flat.html">scale_fill_flat</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>, </a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"many"</span>, <span class="dt">value =</span> <span class="st">"BF"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/scale_color_flat.html">scale_fill_flat</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>, </a>
 <a class="sourceLine" id="cb22-3" title="3">    <span class="dt">reverse =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-28-2.png" width="3600"></p>
+<p><img src="reference/figures/unnamed-chunk-28-2.png"><!-- --></p>
 </div>
 </div>
 <div id="parameters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#parameters" class="anchor"></a><a href="https://github.com/easystats/parameters">parameters</a>
 </h3>
-<div id="sem-cfa-lavaan-graphs" class="section level4">
+<div id="sem--cfa-lavaan-graphs" class="section level4">
 <h4 class="hasAnchor">
-<a href="#sem-cfa-lavaan-graphs" class="anchor"></a>SEM / CFA lavaan graphs</h4>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lavaan)</a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(parameters)</a>
+<a href="#sem--cfa-lavaan-graphs" class="anchor"></a>SEM / CFA lavaan graphs</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(lavaan)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(parameters)</a>
 <a class="sourceLine" id="cb23-3" title="3"></a>
 <a class="sourceLine" id="cb23-4" title="4">structure &lt;-<span class="st"> " visual  =~ x1 + x2 + x3</span></a>
 <a class="sourceLine" id="cb23-5" title="5"><span class="st">               textual =~ x4 + x5 + x6</span></a>
 <a class="sourceLine" id="cb23-6" title="6"><span class="st">               speed   =~ x7 + x8 + x9 "</span></a>
 <a class="sourceLine" id="cb23-7" title="7"></a>
-<a class="sourceLine" id="cb23-8" title="8">model &lt;-<span class="st"> </span>lavaan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/lavaan/topics/cfa">cfa</a></span>(structure, <span class="dt">data =</span> HolzingerSwineford1939)</a>
-<a class="sourceLine" id="cb23-9" title="9">params &lt;-<span class="st"> </span>parameters<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/parameters/topics/model_parameters">model_parameters</a></span>(model)</a>
-<a class="sourceLine" id="cb23-10" title="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(params)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-29-1.png" width="2187.5"></p>
+<a class="sourceLine" id="cb23-8" title="8">model &lt;-<span class="st"> </span>lavaan<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html">cfa</a></span>(structure, <span class="dt">data =</span> HolzingerSwineford1939)</a>
+<a class="sourceLine" id="cb23-9" title="9">params &lt;-<span class="st"> </span>parameters<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(model)</a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(params)</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-29-1.png"><!-- --></p>
 </div>
 </div>
 <div id="estimate" class="section level3">
@@ -324,16 +322,16 @@
 <div id="pairwise-contrasts" class="section level4">
 <h4 class="hasAnchor">
 <a href="#pairwise-contrasts" class="anchor"></a>Pairwise Contrasts</h4>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(estimate)</a>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(estimate)</a>
 <a class="sourceLine" id="cb24-3" title="3"></a>
 <a class="sourceLine" id="cb24-4" title="4">model &lt;-<span class="st"> </span><span class="kw">stan_glm</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris)</a>
 <a class="sourceLine" id="cb24-5" title="5"></a>
 <a class="sourceLine" id="cb24-6" title="6">contrasts &lt;-<span class="st"> </span><span class="kw">estimate_contrasts</span>(model)</a>
 <a class="sourceLine" id="cb24-7" title="7">means &lt;-<span class="st"> </span><span class="kw">estimate_means</span>(model)</a>
 <a class="sourceLine" id="cb24-8" title="8"></a>
-<a class="sourceLine" id="cb24-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(contrasts, means) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-31-1.png" width="2187.5"></p>
+<a class="sourceLine" id="cb24-9" title="9"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(contrasts, means) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-31-1.png"><!-- --></p>
 </div>
 </div>
 </div>
@@ -356,19 +354,26 @@
 <li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://github.com/strengejacke">Daniel Lüdecke</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8895-3206" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<a href="https://github.com/strengejacke">Daniel Lüdecke</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8895-3206" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li>
-<a href="https://dominiquemakowski.github.io/">Dominique Makowski</a> <br><small class="roles"> Author, inventor </small> <a href="https://orcid.org/0000-0001-5375-9967" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li>Philip Waggoner <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-7825-7573" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li>Mattan S. Ben-Shachar <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4287-4801" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<a href="https://dominiquemakowski.github.io/">Dominique Makowski</a> <br><small class="roles"> Author, inventor </small> <a href="https://orcid.org/0000-0001-5375-9967" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Philip Waggoner <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-7825-7573" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Mattan S. Ben-Shachar <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4287-4801" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=see"><img src="http://www.r-pkg.org/badges/version/see" alt="CRAN"></a></li>
@@ -377,7 +382,6 @@
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -386,12 +390,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

@@ -1,7 +1,7 @@
 #' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.p_direction <- function(x, data = NULL, ...){
+data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -61,6 +61,12 @@ data_plot.p_direction <- function(x, data = NULL, ...){
     dplyr::mutate(fill2 = ifelse(.data$prop >= .5, "Most probable", "Less probable")) %>%
     dplyr::select(-dplyr::one_of("n", "prop"))
 
+  # clean cryptic names
+  if (grid) {
+    dataplot$y <- .clean_parameter_names(dataplot$y)
+    if (!is.null(levels_order)) levels_order <- .clean_parameter_names(levels_order)
+  }
+
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
@@ -101,7 +107,7 @@ data_plot.p_direction <- function(x, data = NULL, ...){
 #' @export
 plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data)
+    x <- data_plot(x, data = data, grid = grid)
   }
 
   x <- .remove_intercept(x, column = "y", show_intercept)
