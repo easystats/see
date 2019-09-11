@@ -120,16 +120,16 @@ result <- rope(model, ci = c(0.9, 0.95))
 
 result
 
-plot(result, data = model, rope_color = "red") +
+plot(result, rope_color = "red") +
   scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 
-```{r}
+```{r fig.width=9, fig.height=6}
 result <- rope(model2, ci = c(0.9, 0.95), effects = "all", component = "all")
 
 result 
 
-plot(result, data = model, rope_color = "grey70") +
+plot(result, rope_color = "grey70") +
   scale_fill_social()
 ```
 
