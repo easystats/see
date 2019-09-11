@@ -8,7 +8,7 @@
 
 * `plot()` for `bayestestR::bayesfactor_parameters()` only plots facets when necessary.
 * `plot()` for `performance::check_outliers()` now also plot multiple methods in one plot.
-* `plot.p_direction()` plots facets for effects/components
+* Following `plot()` methods get a `grid`-argument, so model components like random effects or a zero-inflation component are plotted in a grid-layout: `bayestestR::p_direction()`
 
 # see 0.2.1
 
