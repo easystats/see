@@ -75,7 +75,7 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     max_y <- max(i$y)
 
     if ("group" %in% colnames(i))
-      x_lab <- unique(i$group)
+      x_lab <- .clean_parameter_names(unique(i$group))
     else
       x_lab <- "Parameter Value"
 
