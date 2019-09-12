@@ -1,3 +1,5 @@
+#' @importFrom parameters model_simulate
+#' @importFrom bayestestR estimate_density
 #' @export
 data_plot.parameters_simulate <- function(x, data = NULL, ...) {
   if (is.null(data)) {
@@ -12,10 +14,10 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
 
 # Plot --------------------------------------------------------------------
 #' @export
-plot.see_parameters_simulate <- function(x, data = NULL, show_intercept = FALSE, ...) {
+plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
 
-  plot.see_estimate_density(x)
+  plot.see_estimate_density(x, stack = stack, show_intercept = show_intercept, ...)
 }

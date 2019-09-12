@@ -1,0 +1,63 @@
+---
+title: "Plotting Functions for the parameters Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bayestestR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, 
+  fig.height = 5,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+## Setup and Model Fitting
+
+```{r setup}
+library(parameters)
+library(insight)
+library(see)
+library(glmmTMB)
+library(ggplot2)
+data("Salamanders")
+
+theme_set(theme_modern())
+```
+
+```{r}
+# fit example model
+model <- glmmTMB(
+  count ~ spp + mined + (1 | site),
+  ziformula =  ~ mined,
+  family = poisson(),
+  data = Salamanders
+)
+```
+
+## Simulated Model Parameters
+
+```{r}
+result <- parameters_simulate(model)
+
+plot(result)
+```
+
+```{r}
+plot(result, stack = FALSE)
+```
+
+
+## Model Parameters
+
+```{r}
+result <- model_parameters(model)
+
+plot(result)
+```
