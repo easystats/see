@@ -41,6 +41,14 @@ model <- glmmTMB(
 )
 ```
 
+## Model Parameters
+
+```{r}
+result <- model_parameters(model)
+
+plot(result)
+```
+
 ## Simulated Model Parameters
 
 ```{r}
@@ -53,11 +61,10 @@ plot(result)
 plot(result, stack = FALSE)
 ```
 
-
-## Model Parameters
+```{r}
+plot(result, grid = TRUE)
+```
 
 ```{r}
-result <- model_parameters(model)
-
-plot(result)
+plot(result, grid = TRUE, stack = FALSE)
 ```

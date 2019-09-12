@@ -4,7 +4,7 @@
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
 %   R/plot.p_direction.R, R/plot.parameters_model.R, R/plot.parameters_sem.R,
-%   R/plot.point_estimates.R, R/plot.rope.R
+%   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
 \alias{plot.see_bayesfactor_models}
@@ -18,6 +18,7 @@
 \alias{plot.see_p_direction}
 \alias{plot.see_parameters_model}
 \alias{plot.see_parameters_sem}
+\alias{plot.see_parameters_simulate}
 \alias{plot.see_point_estimate}
 \alias{plot.see_rope}
 \title{Prepare objects for plotting or plot objects}
@@ -44,7 +45,7 @@ data_plot(x, data = NULL, ...)
   rope_alpha = 0.2, show_intercept = FALSE, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
-  show_intercept = FALSE, ...)
+  show_intercept = FALSE, grid = FALSE, ...)
 
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
   grid = TRUE, ...)
@@ -58,6 +59,9 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_parameters_sem}(x, data = NULL,
   type = c("regression", "correlation", "loading"),
   threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...)
+
+\method{plot}{see_parameters_simulate}(x, data = NULL, stack = TRUE,
+  show_intercept = FALSE, grid = FALSE, ...)
 
 \method{plot}{see_point_estimate}(x, data = NULL, point_size = 2,
   text_size = 3.5, panel = TRUE, show_labels = TRUE,

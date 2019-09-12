@@ -27,7 +27,7 @@ data_plot.estimate_density <- function(x, ...) {
 #'   Else, densities are plotted for each parameter among each other.
 #' @importFrom rlang .data
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, ...){
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, ...)
   }
@@ -52,6 +52,13 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, .
       )) +
       ggridges::geom_ridgeline_gradient() +
       add_plot_attributes(x)
+  }
+
+  if ("Effects" %in% names(x) && isTRUE(grid)) {
+    if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Effects + Component, scales = "free")
+    else
+      p <- p + facet_wrap(~ Effects, scales = "free")
   }
 
   p
