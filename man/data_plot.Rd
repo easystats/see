@@ -45,13 +45,14 @@ data_plot(x, data = NULL, ...)
   rope_alpha = 0.2, show_intercept = FALSE, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
-  show_intercept = FALSE, grid = FALSE, ...)
+  show_intercept = FALSE, grid = FALSE, show_priors = FALSE,
+  priors_alpha = 0.4, ...)
 
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
   grid = TRUE, ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
-  grid = TRUE, ...)
+  show_priors = FALSE, priors_alpha = 0.5, grid = TRUE, ...)
 
 \method{plot}{see_parameters_model}(x, show_intercept = FALSE,
   dot_size = 0.8, ...)
@@ -65,7 +66,8 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_point_estimate}(x, data = NULL, point_size = 2,
   text_size = 3.5, panel = TRUE, show_labels = TRUE,
-  show_intercept = FALSE, ...)
+  show_intercept = FALSE, show_priors = FALSE, priors_alpha = 0.5,
+  ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
   rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...)
@@ -110,6 +112,10 @@ posterior distributions for other parameters are hardly visible.}
 Else, densities are plotted for each parameter among each other.}
 
 \item{grid}{Logical, if \code{TRUE}, model components like random effects or a zero-inflation component are plotted in a grid-layout.}
+
+\item{show_priors}{Logical, if \code{TRUE}, prior distributions are simulated (using \code{link[bayestestR]{simulate_prior}}) and added to the plot.}
+
+\item{priors_alpha}{Alpha value of the prior distributions.}
 
 \item{dot_size}{Size of point geoms.}
 

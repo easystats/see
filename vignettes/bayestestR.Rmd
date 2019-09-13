@@ -57,6 +57,12 @@ plot(result)
 plot(result, stack = FALSE)
 ```
 
+### Adding Prior Samples
+
+```{r}
+plot(result, stack = FALSE, show_priors = TRUE)
+```
+
 
 ## Probability of Direction (pd)
 
@@ -77,6 +83,14 @@ plot(result)
 plot(result, grid = FALSE)
 ```
 
+### Adding Prior Samples
+
+```{r}
+result <- p_direction(model)
+plot(result, show_priors = TRUE)
+```
+
+
 ## Point Estimates
 
 ```{r fig.height=10}
@@ -93,6 +107,14 @@ result <- point_estimate(model, centrality = c("map", "mean"))
 result
 
 plot(result, panel = FALSE)[[5]]
+```
+
+
+### Addin Prior Samples
+
+```{r fig.height=10}
+result <- point_estimate(model)
+plot(result, show_priors = TRUE)
 ```
 
 

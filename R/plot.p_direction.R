@@ -105,16 +105,24 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
 
 # Plot --------------------------------------------------------------------
 #' @param grid Logical, if \code{TRUE}, model components like random effects or a zero-inflation component are plotted in a grid-layout.
+#' @inheritParams plot.see_point_estimate
 #' @importFrom rlang .data
+#' @importFrom ggridges geom_ridgeline_gradient
 #' @rdname data_plot
 #' @export
-plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ...) {
+plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, show_priors = FALSE, priors_alpha = .5, grid = TRUE, ...) {
+  # save model for later use
+  model <- .retrieve_data(x)
+
+  # retrieve and prepare data for plotting
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, grid = grid)
   }
 
+  # remove intercept from output, if requested
   x <- .remove_intercept(x, column = "y", show_intercept)
 
+  # base setup
   p <- x %>%
     as.data.frame() %>%
     ggplot(aes(
@@ -125,8 +133,18 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, grid = 
       fill = .data$fill
     )) +
     ggridges::geom_ridgeline_gradient() +
-    add_plot_attributes(x) +
-    geom_vline(aes(xintercept = 0), linetype = "dotted")
+    add_plot_attributes(x)
+
+  # add prior layer
+  if (show_priors) {
+    p <- p + .add_prior_layer_ridgeline(
+      model,
+      show_intercept = show_intercept,
+      priors_alpha = priors_alpha
+    )
+  }
+
+  p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
 
   if ("Effects" %in% names(x) && isTRUE(grid)) {
     if ("Component" %in% names(x))
