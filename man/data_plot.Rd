@@ -74,7 +74,8 @@ data_plot(x, data = NULL, ...)
 \arguments{
 \item{x}{An object.}
 
-\item{data}{The original data used to create this object. Can be a statistical model or such.}
+\item{data}{The original data used to create this object. Can be a
+statistical model or such.}
 
 \item{...}{Arguments passed to or from other methods.}
 
@@ -84,8 +85,9 @@ data_plot(x, data = NULL, ...)
 
 \item{log}{Show log-transformed Bayes factors.}
 
-\item{prior_odds}{optional vector of prior odds for the models. See \code{BayesFactor::priorOdds}.
-As the size of the pizza slices corresponds to posterior probability (which is a function of prior probability and the BF),
+\item{prior_odds}{optional vector of prior odds for the models. See
+\code{BayesFactor::priorOdds}. As the size of the pizza slices corresponds
+to posterior probability (which is a function of prior probability and the BF),
 custom \code{prior_odds} will change the slices' size.}
 
 \item{point_size}{Size of point-geoms.}
@@ -99,7 +101,8 @@ in the plot. By default, it is hidden because in many cases the intercept-parame
 has a posterior distribution on a very different location, so density curves of
 posterior distributions for other parameters are hardly visible.}
 
-\item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else, single plots are returned.}
+\item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else,
+single plots are returned.}
 
 \item{type}{Character vector, indicating the type of plot (for
 \code{\link[performance]{check_normality}} or
@@ -110,9 +113,11 @@ posterior distributions for other parameters are hardly visible.}
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
 
-\item{grid}{Logical, if \code{TRUE}, model components like random effects or a zero-inflation component are plotted in a grid-layout.}
+\item{grid}{Logical, if \code{TRUE}, model components like random effects
+or a zero-inflation component are plotted in a grid-layout.}
 
-\item{priors}{Logical, if \code{TRUE}, prior distributions are simulated (using \code{link[bayestestR]{simulate_prior}}) and added to the plot.}
+\item{priors}{Logical, if \code{TRUE}, prior distributions are simulated
+(using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
 

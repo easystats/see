@@ -1,11 +1,4 @@
 #' @rdname data_plot
-#' @param n_pies Number of pies.
-#' @param value What value to display.
-#' @param log Show log-transformed Bayes factors.
-#' @param prior_odds optional vector of prior odds for the models. See \code{BayesFactor::priorOdds}.
-#' As the size of the pizza slices corresponds to posterior probability (which is a function of prior probability and the BF),
-#' custom \code{prior_odds} will change the slices' size.
-#'
 #' @examples
 #' library(bayestestR)
 #' library(see)

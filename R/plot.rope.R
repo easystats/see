@@ -55,9 +55,6 @@ data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
 #' @importFrom rlang .data
-#' @param rope_alpha Transparency level of ROPE ribbon.
-#' @param rope_color Color of ROPE ribbon.
-#' @inheritParams plot.see_p_direction
 #' @export
 plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...) {
   if (!"data_plot" %in% class(x)) {

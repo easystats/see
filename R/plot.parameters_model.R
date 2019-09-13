@@ -1,4 +1,3 @@
-#' @param dot_size Size of point geoms.
 #' @importFrom bayestestR reshape_ci
 #' @rdname data_plot
 #' @export

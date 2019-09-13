@@ -72,9 +72,6 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
 
 # Plot --------------------------------------------------------------------
-#' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
-#' @param threshold_p Numeric, threshold at which value p-values will be displayed.
-#' @param ci Logical, whether confidence intervals should be added to the plot.
 #' @importFrom rlang .data
 #' @rdname data_plot
 #' @export

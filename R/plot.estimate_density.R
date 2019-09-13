@@ -23,9 +23,6 @@ data_plot.estimate_density <- function(x, ...) {
 
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
-#' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
-#'   Else, densities are plotted for each parameter among each other.
-#' @inheritParams plot.see_point_estimate
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export

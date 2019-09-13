@@ -137,7 +137,6 @@ data_plot.bayestestR_hdi <- data_plot.hdi
 # Plot --------------------------------------------------------------------
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
-#' @inheritParams plot.see_p_direction
 #' @rdname data_plot
 #' @export
 plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ...) {

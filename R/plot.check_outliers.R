@@ -1,4 +1,3 @@
-#' @param text_size Size of text labels.
 #' @rdname data_plot
 #' @export
 plot.see_check_outliers <- function(x, text_size = 3.5, ...) {

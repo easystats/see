@@ -2,7 +2,6 @@
 #' @importFrom insight get_response
 #' @importFrom stats residuals density
 #' @importFrom gridExtra grid.arrange
-#' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else, single plots are returned.
 #' @rdname data_plot
 #' @export
 plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {

@@ -1,8 +1,5 @@
 #' @importFrom bayestestR estimate_density
 #' @importFrom stats residuals sd dnorm rstudent ppoints pnorm fitted
-#' @param type Character vector, indicating the type of plot (for
-#'   \code{\link[performance]{check_normality}} or
-#'   \code{parameters::model_parameters.lavaan}).
 #' @rdname data_plot
 #' @export
 plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = NULL, ...) {

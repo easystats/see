@@ -104,8 +104,6 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
 
 
 # Plot --------------------------------------------------------------------
-#' @param grid Logical, if \code{TRUE}, model components like random effects or a zero-inflation component are plotted in a grid-layout.
-#' @inheritParams plot.see_point_estimate
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @rdname data_plot

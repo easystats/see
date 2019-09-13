@@ -1,5 +1,4 @@
 #' @rdname data_plot
-#' @param point_size Size of point-geoms.
 #' @importFrom rlang .data
 #' @export
 plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {
