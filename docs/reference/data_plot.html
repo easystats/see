@@ -174,7 +174,8 @@ functions from different packages of the <a href='https://github.com/easystats'>
 
 <span class='co'># S3 method for see_estimate_density</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>stack</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_priors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>priors_alpha</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_hdi</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -182,7 +183,7 @@ functions from different packages of the <a href='https://github.com/easystats'>
 
 <span class='co'># S3 method for see_p_direction</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='kw'>show_priors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>priors_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_parameters_model</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -200,7 +201,8 @@ functions from different packages of the <a href='https://github.com/easystats'>
 <span class='co'># S3 method for see_point_estimate</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>panel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_priors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>priors_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_rope</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
@@ -280,6 +282,14 @@ Else, densities are plotted for each parameter among each other.</p></td>
     <tr>
       <th>grid</th>
       <td><p>Logical, if <code>TRUE</code>, model components like random effects or a zero-inflation component are plotted in a grid-layout.</p></td>
+    </tr>
+    <tr>
+      <th>show_priors</th>
+      <td><p>Logical, if <code>TRUE</code>, prior distributions are simulated (using <code>link[bayestestR]{simulate_prior}</code>) and added to the plot.</p></td>
+    </tr>
+    <tr>
+      <th>priors_alpha</th>
+      <td><p>Alpha value of the prior distributions.</p></td>
     </tr>
     <tr>
       <th>dot_size</th>
