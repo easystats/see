@@ -100,6 +100,7 @@ data_plot.bayestestR_eti <- data_plot.eti
 # Plot --------------------------------------------------------------------
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
+#' @rdname data_plot
 #' @export
 plot.see_eti <- function(x, data = NULL, show_intercept = FALSE, ...) {
   if (!"data_plot" %in% class(x)) {

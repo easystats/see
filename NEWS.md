@@ -1,4 +1,8 @@
-# see 0.2.2
+# see 0.3.0
+
+## Breaking changes
+
+* `how_to_plot()` was removed for the time being, due to its inadequate maintainace effort. It might be re-implemented sometime in the future...
 
 ## New plot-functions
 
