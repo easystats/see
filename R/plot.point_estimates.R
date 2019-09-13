@@ -68,11 +68,11 @@ data_plot.map_estimate <- data_plot.point_estimate
 #'   estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
 #'   You may set \code{show_labels = FALSE} in case of overlapping labels, and
 #'   add your own legend or footnote to the plot.
-#' @param show_priors Logical, if \code{TRUE}, prior distributions are simulated (using \code{link[bayestestR]{simulate_prior}}) and added to the plot.
+#' @param priors Logical, if \code{TRUE}, prior distributions are simulated (using \code{link[bayestestR]{simulate_prior}}) and added to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.
 #' @rdname data_plot
 #' @export
-plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 3.5, panel = TRUE, show_labels = TRUE, show_intercept = FALSE, show_priors = FALSE, priors_alpha = .5, ...){
+plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 3.5, panel = TRUE, show_labels = TRUE, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, ...){
   # save model for later use
   model <- .retrieve_data(x)
 
@@ -106,7 +106,7 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     p_object <- ggplot(i, aes(x = .data$x, y = .data$y, group = .data$group))
 
     # add prior layer
-    if (show_priors) {
+    if (priors) {
       p_object <- p_object + .add_prior_layer_ribbon(
         model,
         parameter = x_lab,

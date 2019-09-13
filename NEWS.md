@@ -9,7 +9,7 @@
 * `plot()` for `bayestestR::bayesfactor_parameters()` only plots facets when necessary.
 * `plot()` for `performance::check_outliers()` now also plot multiple methods in one plot.
 * Following `plot()` methods get a `grid`-argument, so model components like random effects or a zero-inflation component are plotted in a grid-layout: `bayestestR::p_direction()`, `bayestestR::hdi()`, `bayestestR::rope()`
-* Following `plot()` methods get a `show_priors`-argument, to add a layer with prior samples to the plot: `bayestestR::p_direction()`, `bayestestR::estimate_density()`, `bayestestR::point_estimate()`
+* Following `plot()` methods get `priors` and `priors_alpha` arguments, to add a layer with prior samples to the plot: `bayestestR::p_direction()`, `bayestestR::estimate_density()`, `bayestestR::point_estimate()`
 
 # see 0.2.1
 

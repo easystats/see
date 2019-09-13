@@ -60,7 +60,7 @@ plot(result, stack = FALSE)
 ### Adding Prior Samples
 
 ```{r}
-plot(result, stack = FALSE, show_priors = TRUE)
+plot(result, stack = FALSE, priors = TRUE)
 ```
 
 
@@ -87,7 +87,7 @@ plot(result, grid = FALSE)
 
 ```{r}
 result <- p_direction(model)
-plot(result, show_priors = TRUE)
+plot(result, priors = TRUE)
 ```
 
 
@@ -114,7 +114,7 @@ plot(result, panel = FALSE)[[5]]
 
 ```{r fig.height=10}
 result <- point_estimate(model)
-plot(result, show_priors = TRUE)
+plot(result, priors = TRUE)
 ```
 
 

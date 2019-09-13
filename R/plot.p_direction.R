@@ -110,7 +110,7 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @rdname data_plot
 #' @export
-plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, show_priors = FALSE, priors_alpha = .5, grid = TRUE, ...) {
+plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, grid = TRUE, ...) {
   # save model for later use
   model <- .retrieve_data(x)
 
@@ -136,7 +136,7 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, show_pr
     add_plot_attributes(x)
 
   # add prior layer
-  if (show_priors) {
+  if (priors) {
     p <- p + .add_prior_layer_ridgeline(
       model,
       show_intercept = show_intercept,

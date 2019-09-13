@@ -29,14 +29,14 @@ data_plot.estimate_density <- function(x, ...) {
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, show_priors = FALSE, priors_alpha = .4, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, priors = FALSE, priors_alpha = .4, ...) {
   # save model for later use
   model <- tryCatch(
     {
       .retrieve_data(x)
     },
     error = function(e) {
-      show_priors <- FALSE
+      priors <- FALSE
       NULL
     }
   )
@@ -67,7 +67,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, g
       ))
 
     # add prior layer
-    if (show_priors) {
+    if (priors) {
       p <- p +
         .add_prior_layer_ridgeline(
           model,
