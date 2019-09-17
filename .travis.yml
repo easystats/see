@@ -1,13 +1,15 @@
 language: r
 
-os:
-  # - windows
-  - linux
-  - osx
-
-r:
-  - release
-  - devel
+matrix:
+  include:
+    - os: linux
+      dist: release
+    - os: linux
+      dist: devel
+    - os: osx
+      dist: oldrel
+    - os: osx
+      dist: release
 
 # Copied from broom
 # sudo: required
