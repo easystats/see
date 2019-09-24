@@ -7,6 +7,7 @@
 ## New plot-functions
 
 * Added plot-function for `parameters::parameters_simulate()`.
+* Added plot-function for `parameters::n_factors()`.
 
 ## Changes to functions
 

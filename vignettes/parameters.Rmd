@@ -68,3 +68,13 @@ plot(result, grid = TRUE)
 ```{r}
 plot(result, grid = TRUE, stack = FALSE)
 ```
+
+## Number of Components/Factors to Retain
+
+```{r}
+data(mtcars)
+result <- n_factors(mtcars, type = "PCA")
+
+plot(result)
+```
+
