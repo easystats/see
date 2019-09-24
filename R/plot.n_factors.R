@@ -1,7 +1,7 @@
 #' @export
 data_plot.n_factors <- function(x, data = NULL, ...){
   s1 <- summary(x)
-  s2 <- data.frame(n_Factors = factor(1:max(nfactors$n_Factors)), n_Methods = 0)
+  s2 <- data.frame(n_Factors = factor(1:max(x$n_Factors)), n_Methods = 0)
   dataplot <- rbind(s1, s2[!s2$n_Factors %in% s1$n_Factors, ])
 
   dataplot$n_Factors <- factor(dataplot$n_Factors, levels = rev(sort(levels(dataplot$n_Factors))))
