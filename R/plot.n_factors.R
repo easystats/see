@@ -2,19 +2,24 @@
 data_plot.n_factors <- function(x, data = NULL, type = "line", ...){
   s1 <- summary(x)
 
-  s2 <- if (type == "line")
-    data.frame(n_Factors = factor(1:max(x$n_Factors)), n_Methods = 0)
-  else
-    data.frame(n_Factors = 1:max(x$n_Factors), n_Methods = 0)
+  if (type == "line") {
+    s1$n_Factors <- as.factor(s1$n_Factors)
+    s2 <- data.frame(n_Factors = factor(1:max(x$n_Factors)), n_Methods = 0)
+  } else {
+    s2 <- data.frame(n_Factors = 1:max(x$n_Factors), n_Methods = 0)
+  }
 
   dataplot <- rbind(s1, s2[!s2$n_Factors %in% s1$n_Factors, ])
 
-  dataplot$x <- dataplot$n_Factors
+  if (type == "line") {
+    dataplot$x <- factor(dataplot$n_Factors, levels = rev(sort(levels(dataplot$n_Factors))))
+    dataplot$group <- "0"
+    dataplot$group[which.max(dataplot$n_Methods)] <- "1"
+  } else {
+    dataplot$x <- dataplot$n_Factors
+  }
+
   dataplot$y <- dataplot$n_Methods / sum(dataplot$n_Methods)
-
-  dataplot$group <- "0"
-  dataplot$group[which.max(dataplot$n_Methods)] <- "1"
-
   attr(dataplot, "info") <- list("xlab" = "Number of Factors",
                                  "ylab" = "Agreement between methods",
                                  "title" = "How many factors to retain")
@@ -47,8 +52,8 @@ plot.see_n_factors <- function(x, data = NULL, type = c("line", "area"), ...) {
       scale_x_continuous(breaks = 1:max(x$x)) +
       add_plot_attributes(x)
   } else {
-    ggplot(x, aes(x = .data$n_Factors, y = .data$n_Methods, colour = .data$group)) +
-      geom_segment(aes(y = 0, xend = .data$n_Factors, yend = .data$n_Methods)) +
+    ggplot(x, aes(x = .data$x, y = .data$y, colour = .data$group)) +
+      geom_segment(aes(y = 0, xend = .data$x, yend = .data$y)) +
       geom_point() +
       coord_flip() +
       guides(colour = FALSE) +
