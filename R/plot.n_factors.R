@@ -35,8 +35,8 @@ plot.see_n_factors <- function(x, data = NULL, ...) {
     # geom_segment(aes(y = 0, xend = .data$x, yend = .data$y, color = .data$group)) +
     # geom_point(aes(color = .data$group)) +
     # guides(colour = FALSE) +
-    geom_segment(aes(x = which.max(.data$y), xend = which.max(.data$y), y = 0, yend = max(.data$y)), color = "#E91E63", linetype = "dashed") +
-    geom_point(aes(x = which.max(.data$y), y = max(.data$y)), color = "#E91E63") +
+    geom_segment(aes(x = .data$x[which.max(.data$y)], xend = .data$x[which.max(.data$y)], y = 0, yend = max(.data$y)), color = "#E91E63", linetype = "dashed") +
+    geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)), color = "#E91E63") +
     scale_color_manual(values = c("black", "#E91E63")) +
     scale_y_continuous(labels = scales::percent) +
     scale_x_continuous(breaks = 1:max(x$x)) +
