@@ -56,7 +56,8 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
   grid = TRUE, ...)
 
-\method{plot}{see_n_factors}(x, data = NULL, ...)
+\method{plot}{see_n_factors}(x, data = NULL, type = c("line", "area"),
+  ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
   priors = FALSE, priors_alpha = 0.4, grid = TRUE, ...)
@@ -112,8 +113,8 @@ posterior distributions for other parameters are hardly visible.}
 single plots are returned.}
 
 \item{type}{Character vector, indicating the type of plot (for
-\code{\link[performance]{check_normality}} or
-\code{parameters::model_parameters.lavaan}).}
+\code{\link[performance]{check_normality}}, \code{parameters::model_parameters.lavaan}
+or \code{\link[parameters]{n_factors}}).}
 
 \item{text_size}{Size of text labels.}
 
