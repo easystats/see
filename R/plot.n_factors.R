@@ -11,12 +11,13 @@ data_plot.n_factors <- function(x, data = NULL, ...){
     lab <- "clusters"
   }
 
-  s2 <- data.frame(n_Factors = 1:max(x[[var]]), n_Methods = 0)
+  s2 <- data.frame(n_Methods = rep(0, max(x[[var]])))
+  s2[[var]] <- 1:max(x[[var]])
   dataplot <- rbind(s1, s2[!s2[[var]] %in% s1[[var]], ])
 
   # Format and reorder
   rownames(dataplot) <- NULL
-  dataplot <- dataplot[order(dataplot$n_Factors), ]
+  dataplot <- dataplot[order(dataplot[[var]]), ]
 
   # Add aes
   dataplot$x <- dataplot[[var]]
