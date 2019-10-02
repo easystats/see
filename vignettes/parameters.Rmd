@@ -76,6 +76,16 @@ data(mtcars)
 result <- n_factors(mtcars, type = "PCA")
 
 plot(result)
-plot(result, type = "area")
+plot(result, type = "line")
+```
+
+## Number of Clusters to Retain
+
+```{r}
+data(iris)
+result <- n_clusters(standardize(iris[, 1:4]))
+
+plot(result)
+plot(result, type = "line")
 ```
 
