@@ -23,11 +23,11 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...){
   dataplot <- rbind(s1, s2[!s2[[var]] %in% s1[[var]], ])
 
   if (type == "line") {
-    dataplot$x <- factor(dataplot$n_Factors, levels = rev(sort(levels(dataplot$n_Factors))))
+    dataplot$x <- factor(dataplot[[var]], levels = rev(sort(levels(dataplot[[var]]))))
     dataplot$group <- "0"
     dataplot$group[which.max(dataplot$n_Methods)] <- "1"
   } else if (type == "area") {
-    dataplot$x <- dataplot$n_Factors
+    dataplot$x <- dataplot[[var]]
   } else {
     dataplot <- dataplot[order(dataplot[[var]]), ]
     dataplot$x <- dataplot[[var]]
