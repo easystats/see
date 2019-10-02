@@ -93,7 +93,7 @@ plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "corr
     ggraph::geom_edge_arc(aes(alpha = as.numeric(.data$Type == "Correlation"),
                       label = .data$Label_Correlation,
                       color = .data$Coefficient),
-                      curvature = 0.1,
+                      strength = 0.1,
                       label_dodge = unit(2, "mm"),
                       linetype = 2, angle_calc = "along",
                       label_size = 3,
