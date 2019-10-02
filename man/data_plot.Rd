@@ -56,8 +56,7 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
   grid = TRUE, ...)
 
-\method{plot}{see_n_factors}(x, data = NULL, type = c("line", "area"),
-  ...)
+\method{plot}{see_n_factors}(x, data = NULL, ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
   priors = FALSE, priors_alpha = 0.4, grid = TRUE, ...)
