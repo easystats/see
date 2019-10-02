@@ -150,8 +150,19 @@
 <a class="sourceLine" id="cb8-3" title="3"></a>
 <a class="sourceLine" id="cb8-4" title="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"area"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-8-2.png" width="672"></p>
+</div>
+<div id="number-of-clusters-to-retain" class="section level2">
+<h2 class="hasAnchor">
+<a href="#number-of-clusters-to-retain" class="anchor"></a>Number of Clusters to Retain</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
+<a class="sourceLine" id="cb10-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_clusters</span>(<span class="kw">standardize</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-9-2.png" width="672"></p>
 </div>
   </div>
 
@@ -165,6 +176,7 @@
       <li><a href="#model-parameters">Model Parameters</a></li>
       <li><a href="#simulated-model-parameters">Simulated Model Parameters</a></li>
       <li><a href="#number-of-componentsfactors-to-retain">Number of Components/Factors to Retain</a></li>
+      <li><a href="#number-of-clusters-to-retain">Number of Clusters to Retain</a></li>
       </ul>
 </div>
       </div>
