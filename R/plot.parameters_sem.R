@@ -35,7 +35,7 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
         "% CI [",
         sprintf("%.2f, %.2f]", .data$CI_low, .data$CI_high)))
   } else {
-    edges <- dplyr::mutate(edges, Label = sprintf("%.2f, ", .data$Coefficient))
+    edges <- dplyr::mutate(edges, Label = sprintf("%.2f", .data$Coefficient))
   }
 
 

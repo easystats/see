@@ -180,13 +180,24 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-### Pool ball points
+### Radar chart (Spider plot)
 
 ```{r warning=FALSE, message=FALSE}
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_pooljitter(label = row.names(iris)) +
-  scale_color_flat_d() +
-  theme_modern()
+library(dplyr)
+library(tidyr)
+
+data <- iris %>%
+  group_by(Species) %>%
+  summarise_all(mean) %>%
+  pivot_longer(-Species)
+
+data %>%
+  ggplot(aes(x = name, y = value, color = Species, group = Species)) +
+  # The polygon geom is a trick go connect endpoints
+  geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
+  geom_line() +
+  coord_radar(start = -pi/4) +
+  theme_minimal()
 ```
 
 ### [BayestestR](https://github.com/easystats/bayestestR)
@@ -229,11 +240,11 @@ plot(result) +
   scale_fill_manual(values = c("red", "green"))
 ```
 
-Most of our plots can be easily *opened* via the `how_to_plot` function. This gives us the actual code used for plotting, that can then be easily extracted and tweaked to your needs.
+<!-- Most of our plots can be easily *opened* via the `how_to_plot` function. This gives us the actual code used for plotting, that can then be easily extracted and tweaked to your needs. -->
 
-```{r warning=FALSE, message=FALSE, eval=TRUE}
-how_to_plot(result)
-```
+<!-- ```{r warning=FALSE, message=FALSE, eval=TRUE} -->
+<!-- how_to_plot(result) -->
+<!-- ``` -->
 
 
 #### Highest Density Interval (HDI)
