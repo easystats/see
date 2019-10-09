@@ -42,6 +42,7 @@ Depends:
 Imports:
 	bayestestR,
 	dplyr,
+	effectsize,
 	ggplot2,
 	ggridges,
 	grid,
