@@ -49,7 +49,7 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, grid = FALSE, priors = FALSE,
-  priors_alpha = 0.4, ...)
+  priors_alpha = 0.4, size = 1, ...)
 
 \method{plot}{see_eti}(x, data = NULL, show_intercept = FALSE, ...)
 
