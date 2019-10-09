@@ -12,7 +12,7 @@ plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
 
 
 #' @importFrom stats reshape
-#' @importFrom parameters normalize
+#' @importFrom effectsize normalize
 #' @export
 data_plot.check_outliers <- function(x, data = NULL, ...) {
   data <- attributes(x)$data
@@ -20,7 +20,7 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 
   # Extract distances
   d <- data[grepl("Distance_", names(data))]
-  d <- parameters::normalize(d)
+  d <- effectsize::normalize(d)
 
   d_long <- stats::reshape(
     d,
@@ -43,7 +43,7 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
   d$Id <- 1:nrow(d)
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
   d$Id[d$Outliers == "0"] <- NA
-  d$Distance <- parameters::normalize(d$Distance)
+  d$Distance <- effectsize::normalize(d$Distance)
 
   method <- switch(
     attr(x, "method", exact = TRUE),
