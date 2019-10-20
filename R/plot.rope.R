@@ -36,6 +36,10 @@ data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
     stop("Only one ROPE range accepted.")
   }
 
+  if (length(unique(dataplot$y)) == 1) {
+    dataplot$y <- 0
+  }
+
   dataplot$xmin <- rope_range[1]
   dataplot$xmax <- rope_range[2]
   dataplot$color <- ifelse(dataplot$x >= dataplot$xmin & dataplot$x <= dataplot$xmax, "Negligible", "Significant")
@@ -84,6 +88,9 @@ plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetb
     ) +
     add_plot_attributes(x)
 
+  if (length(unique(x$y)) == 1) {
+    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  }
 
   if ("Effects" %in% names(x) && isTRUE(grid)) {
     if ("Component" %in% names(x))
