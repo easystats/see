@@ -168,8 +168,22 @@
 <a href="#principal-component-analysis" class="anchor"></a>Principal Component Analysis</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
 <a class="sourceLine" id="cb8-2" title="2">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dt">n =</span> <span class="st">"all"</span>, <span class="dt">threshold =</span> <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb8-3" title="3"></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<a class="sourceLine" id="cb8-3" title="3">result</a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; # Loadings from Principal Component Analysis (no rotation)</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; -------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; mpg      | -0.93 |       |      | -0.30 |      |       |       1.30</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; cyl      |  0.96 |       |      |       |      | -0.21 |       1.18</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; disp     |  0.95 |       |      | -0.23 |      |       |       1.16</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; hp       |  0.87 |  0.36 |      |       | 0.30 |       |       1.64</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; drat     | -0.75 |  0.48 | 0.44 |       |      |       |       2.47</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; wt       |  0.88 | -0.35 | 0.26 |       |      |       |       1.54</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; qsec     | -0.54 | -0.81 |      |       |      |       |       1.96</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span></a>
+<a class="sourceLine" id="cb8-17" title="17"></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(</a>
 <a class="sourceLine" id="cb9-2" title="2">  mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], </a>
@@ -179,7 +193,22 @@
 <a class="sourceLine" id="cb9-6" title="6">  <span class="dt">sort =</span> <span class="ot">TRUE</span></a>
 <a class="sourceLine" id="cb9-7" title="7">)</a>
 <a class="sourceLine" id="cb9-8" title="8"></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<a class="sourceLine" id="cb9-9" title="9">result</a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; # Rotated loadings from Principal Component Analysis (varimax-rotation)</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt; Variable |   RC1 |   RC2 |   RC3 | Complexity | Uniqueness</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt; ----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt; wt       |  0.91 |       |       |       1.31 |       0.03</span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt; mpg      | -0.82 |       |       |       1.70 |       0.11</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="co">#&gt; disp     |  0.79 |       |       |       1.95 |       0.08</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="co">#&gt; cyl      |  0.64 |       |       |       2.84 |       0.06</span></a>
+<a class="sourceLine" id="cb9-18" title="18"><span class="co">#&gt; qsec     |       | -0.98 |       |       1.02 |       0.03</span></a>
+<a class="sourceLine" id="cb9-19" title="19"><span class="co">#&gt; hp       |       |  0.69 |       |       2.09 |       0.09</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="co">#&gt; drat     |       |       | -0.90 |       1.43 |       0.01</span></a>
+<a class="sourceLine" id="cb9-21" title="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-22" title="22"><span class="co">#&gt; The 3 principal components (varimax rotation) accounted for 94.11% of the total variance of the original data (RC1 = 45.02%, RC2 = 27.79%, RC3 = 21.30%).</span></a>
+<a class="sourceLine" id="cb9-23" title="23"></a>
+<a class="sourceLine" id="cb9-24" title="24"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
 <div id="number-of-componentsfactors-to-retain" class="section level2">
@@ -187,8 +216,12 @@
 <a href="#number-of-componentsfactors-to-retain" class="anchor"></a>Number of Components/Factors to Retain</h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
 <a class="sourceLine" id="cb10-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_factors</span>(mtcars, <span class="dt">type =</span> <span class="st">"PCA"</span>)</a>
-<a class="sourceLine" id="cb10-3" title="3"></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<a class="sourceLine" id="cb10-3" title="3">result</a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span></a>
+<a class="sourceLine" id="cb10-7" title="7"></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-10-2.png" width="672"></p>
@@ -198,8 +231,12 @@
 <a href="#number-of-clusters-to-retain" class="anchor"></a>Number of Clusters to Retain</h2>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
 <a class="sourceLine" id="cb12-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_clusters</span>(<span class="kw">standardize</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a>
-<a class="sourceLine" id="cb12-3" title="3"></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<a class="sourceLine" id="cb12-3" title="3">result</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; The choice of 2 clusters is supported by 14 (43.75%) methods out of 32 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, APN, ADM, Connectivity).</span></a>
+<a class="sourceLine" id="cb12-7" title="7"></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-11-2.png" width="672"></p>

@@ -76,6 +76,7 @@ plot(result, grid = TRUE, stack = FALSE)
 ```{r}
 data(mtcars)
 result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
+result
 
 plot(result)
 ```
@@ -89,6 +90,8 @@ result <- principal_components(
   sort = TRUE
 )
 
+result
+
 plot(result)
 ```
 
@@ -97,6 +100,7 @@ plot(result)
 ```{r}
 data(mtcars)
 result <- n_factors(mtcars, type = "PCA")
+result
 
 plot(result)
 plot(result, type = "line")
@@ -107,6 +111,7 @@ plot(result, type = "line")
 ```{r}
 data(iris)
 result <- n_clusters(standardize(iris[, 1:4]))
+result
 
 plot(result)
 plot(result, type = "line")
