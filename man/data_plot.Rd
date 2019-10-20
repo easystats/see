@@ -3,8 +3,8 @@
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
-%   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.parameters_model.R,
-%   R/plot.parameters_pca.R, R/plot.parameters_sem.R,
+%   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
+%   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
 %   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
@@ -18,6 +18,7 @@
 \alias{plot.see_hdi}
 \alias{plot.see_n_factors}
 \alias{plot.see_p_direction}
+\alias{plot.see_p_significance}
 \alias{plot.see_parameters_model}
 \alias{plot.see_parameters_pca}
 \alias{plot.see_parameters_sem}
@@ -59,6 +60,10 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
   priors = FALSE, priors_alpha = 0.4, grid = TRUE, ...)
+
+\method{plot}{see_p_significance}(x, data = NULL,
+  show_intercept = FALSE, priors = FALSE, priors_alpha = 0.4,
+  grid = TRUE, ...)
 
 \method{plot}{see_parameters_model}(x, show_intercept = FALSE,
   point_size = 0.8, ...)
@@ -173,6 +178,7 @@ development and probably not yet available):
   \item \code{bayestestR::hdi()}
   \item \code{bayestestR::map_estimate()}
   \item \code{bayestestR::p_direction()}
+  \item \code{bayestestR::p_significance()()}
   \item \code{bayestestR::point_estimate()}
   \item \code{bayestestR::rope()}
   \item \code{estimate::estimate_contrasts()}

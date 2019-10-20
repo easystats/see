@@ -1,0 +1,179 @@
+#' @importFrom insight clean_parameters
+#' @importFrom dplyr group_by mutate ungroup select one_of n
+#' @export
+data_plot.p_significance <- function(x, data = NULL, grid = TRUE, show_intercept = FALSE, ...){
+  if (is.null(data)) {
+    data <- .retrieve_data(x)
+  }
+
+  params <- NULL
+
+  if (inherits(data, "emmGrid")) {
+    if (!requireNamespace("emmeans", quietly = TRUE)) {
+      stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
+    }
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+  } else if (inherits(data, c("stanreg", "brmsfit"))) {
+    params <- insight::clean_parameters(data)
+    data <- as.data.frame(data)
+  } else {
+    data <- as.data.frame(data)
+  }
+
+  if (ncol(data) > 1) {
+    levels_order <- rev(x$Parameter)
+    data <- data[, x$Parameter]
+    dataplot <- data.frame()
+    for (i in names(data)) {
+      if (!is.null(params)) {
+        dataplot <- rbind(
+          dataplot,
+          cbind(
+            .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold")),
+            "Effects" = params$Effects[params$Parameter == i],
+            "Component" = params$Component[params$Parameter == i]
+          )
+        )
+      } else {
+        dataplot <- rbind(dataplot, .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold")))
+      }
+    }
+
+    if ("Effects" %in% names(dataplot) && "Component" %in% names(dataplot)) {
+      if (length(unique(dataplot$Effects)) == 1 && length(unique(dataplot$Component)) == 1) {
+        dataplot$Effects <- NULL
+        dataplot$Component <- NULL
+      } else {
+        dataplot$Effects <- factor(dataplot$Effects, levels = sort(levels(dataplot$Effects)))
+        dataplot$Component <- factor(dataplot$Component, levels = sort(levels(dataplot$Component)))
+      }
+    }
+
+  } else {
+    levels_order <- NULL
+    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
+  }
+
+  dataplot <- dataplot %>%
+    dplyr::group_by(.data$y, .data$fill) %>%
+    dplyr::mutate(n = dplyr::n()) %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(.data$y) %>%
+    dplyr::mutate(prop = .data$n / dplyr::n()) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(fill2 = ifelse(.data$prop >= .5, "Most probable", "Less probable")) %>%
+    dplyr::select(-dplyr::one_of("n", "prop"))
+
+  # clean cryptic names
+  if (grid) {
+    dataplot$y <- .clean_parameter_names(dataplot$y)
+    if (!is.null(levels_order)) levels_order <- .clean_parameter_names(levels_order)
+  }
+
+  if (!is.null(levels_order)) {
+    dataplot$y <- factor(dataplot$y, levels = levels_order)
+  }
+
+  groups <- unique(dataplot$y)
+  if (!show_intercept) {
+    dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
+    groups <- unique(setdiff(
+      groups,
+      c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept")
+    ))
+  }
+
+  if (length(groups) == 1) {
+    ylab <- groups
+    dataplot$y <- 0
+  } else {
+    ylab <- "Parameters"
+  }
+
+
+
+  attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
+                                 "ylab" = ylab,
+                                 "legend_fill" = "Probability",
+                                 "title" = "Practical Significance")
+
+  class(dataplot) <- c("data_plot", "see_p_significance", class(dataplot))
+  dataplot
+}
+
+
+
+#' @importFrom rlang .data
+#' @importFrom stats density
+#' @importFrom dplyr mutate
+#' @keywords internal
+.compute_densities_ps <- function(x, name = "Y", threshold = 0) {
+  out <- x %>%
+    stats::density() %>%
+    .as.data.frame_density()
+
+  fifty_cents <- sum(out$y[out$x > threshold]) > (sum(out$y) / 2)
+
+  out$fill <- "Less Probable"
+  out$fill[abs(out$x) < threshold] <- "ROPE"
+  out$fill[(out$x > threshold)] <- ifelse(fifty_cents, "Significant", "Less Probable")
+  out$fill[out$x < (-1 * threshold)] <- ifelse(fifty_cents, "Less Probable", "Significant")
+
+  out$height <- out$y
+  out$y <- name
+
+  # normalize
+  out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
+  out
+}
+
+
+
+# Plot --------------------------------------------------------------------
+#' @importFrom rlang .data
+#' @importFrom ggridges geom_ridgeline_gradient
+#' @rdname data_plot
+#' @export
+plot.see_p_significance <- function(x, data = NULL, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, grid = TRUE, ...) {
+  # save model for later use
+  model <- .retrieve_data(x)
+
+  # retrieve and prepare data for plotting
+  if (!"data_plot" %in% class(x)) {
+    x <- data_plot(x, data = data, grid = grid, show_intercept = show_intercept)
+  }
+
+  # base setup
+  p <- x %>%
+    as.data.frame() %>%
+    ggplot(aes(
+      x = .data$x,
+      y = .data$y,
+      height = .data$height,
+      group = .data$y,
+      fill = .data$fill
+    )) +
+    ggridges::geom_ridgeline_gradient() +
+    add_plot_attributes(x)
+
+  # add prior layer
+  if (priors) {
+    p <- p + .add_prior_layer_ridgeline(
+      model,
+      show_intercept = show_intercept,
+      priors_alpha = priors_alpha
+    )
+  }
+
+  p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
+
+  if ("Effects" %in% names(x) && isTRUE(grid)) {
+    if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Effects + Component, scales = "free")
+    else
+      p <- p + facet_wrap(~ Effects, scales = "free")
+  }
+
+  p
+}
+

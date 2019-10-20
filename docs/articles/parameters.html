@@ -118,7 +118,28 @@
 <a class="sourceLine" id="cb2-4" title="4">  <span class="dt">ziformula =</span>  <span class="op">~</span><span class="st"> </span>mined,</a>
 <a class="sourceLine" id="cb2-5" title="5">  <span class="dt">family =</span> <span class="kw"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span>(),</a>
 <a class="sourceLine" id="cb2-6" title="6">  <span class="dt">data =</span> Salamanders</a>
-<a class="sourceLine" id="cb2-7" title="7">)</a></code></pre></div>
+<a class="sourceLine" id="cb2-7" title="7">)</a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="kw">model_parameters</span>(model)</a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; # Conditional component</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |      p</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; ----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; (Intercept) |       -0.36 | 0.28 | [-0.90,  0.18] | &gt; .1  </span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; spp (PR)    |       -1.27 | 0.24 | [-1.74, -0.80] | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; spp (DM)    |        0.27 | 0.14 | [ 0.00,  0.54] | 0.05  </span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; spp (EC-A)  |       -0.57 | 0.21 | [-0.97, -0.16] | &lt; .01 </span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; spp (EC-L)  |        0.67 | 0.13 | [ 0.41,  0.92] | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; spp (DES-L) |        0.63 | 0.13 | [ 0.38,  0.87] | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; spp (DF)    |        0.12 | 0.15 | [-0.17,  0.40] | &gt; .1  </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt; mined (no)  |        1.27 | 0.27 | [ 0.74,  1.80] | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; # Zero-Inflated component</span></a>
+<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |      p</span></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; ----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt; (Intercept) |        0.79 | 0.27 | [ 0.26,  1.32] | &lt; .01 </span></a>
+<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt; mined (no)  |       -1.84 | 0.31 | [-2.46, -1.23] | &lt; .001</span></a></code></pre></div>
 </div>
 <div id="model-parameters" class="section level2">
 <h2 class="hasAnchor">

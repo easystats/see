@@ -177,9 +177,6 @@ functions from different packages of the <a href='https://github.com/easystats'>
   <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>priors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>priors_alpha</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for see_eti</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
 <span class='co'># S3 method for see_hdi</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
@@ -191,6 +188,11 @@ functions from different packages of the <a href='https://github.com/easystats'>
 <span class='co'># S3 method for see_p_direction</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>priors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>priors_alpha</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for see_p_significance</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>priors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>priors_alpha</span> <span class='kw'>=</span> <span class='fl'>0.4</span>,
+  <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_parameters_model</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -354,6 +356,7 @@ development and probably not yet available):</p><ul>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/hdi.html'>bayestestR::hdi()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/map_estimate.html'>bayestestR::map_estimate()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/p_direction.html'>bayestestR::p_direction()</a></code></p></li>
+<li><p><code>bayestestR::p_significance()()</code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/point_estimate.html'>bayestestR::point_estimate()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/rope.html'>bayestestR::rope()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/estimate/man/estimate_contrasts.html'>estimate::estimate_contrasts()</a></code></p></li>

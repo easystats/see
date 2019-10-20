@@ -10,6 +10,7 @@
 * Added plot-function for `parameters::principal_components()`.
 * Added plot-function for `parameters::parameters_simulate()`.
 * Added plot-function for `parameters::n_factors()`.
+* Added plot-function for `bayestestR::p_significance()`.
 
 ## Changes to functions
 

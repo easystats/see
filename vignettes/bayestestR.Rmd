@@ -91,6 +91,33 @@ plot(result, priors = TRUE)
 ```
 
 
+## Practical Significance
+
+```{r}
+result <- p_significance(model)
+
+result
+
+plot(result)
+```
+
+```{r fig.width=9, fig.height=6}
+result <- p_significance(model2, effects = "all", component = "all")
+
+result
+
+plot(result)
+plot(result, grid = FALSE)
+```
+
+### Adding Prior Samples
+
+```{r}
+result <- p_significance(model)
+plot(result, priors = TRUE)
+```
+
+
 ## Point Estimates
 
 ```{r fig.height=10}
