@@ -39,6 +39,8 @@ model <- glmmTMB(
   family = poisson(),
   data = Salamanders
 )
+
+model_parameters(model)
 ```
 
 ## Model Parameters
