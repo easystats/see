@@ -2,8 +2,11 @@
 #' @export
 data_plot.parameters_pca <- function(x, data = NULL, ...){
   x$Variable <- factor(x$Variable, levels = unique(x$Variable))
+
   dataplot <- as.data.frame(x)
   dataplot$Complexity <- NULL
+  dataplot$Uniqueness <- NULL
+
   dataplot <- .reshape_to_long(dataplot, names_to = "Component", values_to = "y", columns = 2:ncol(dataplot))
 
   rotation_name <- attr(x, "rotation", exact = TRUE)
@@ -11,7 +14,7 @@ data_plot.parameters_pca <- function(x, data = NULL, ...){
   if (rotation_name == "none") {
     title <- "Loadings from Principal Component Analysis (no rotation)"
   } else {
-    title <- sprintf("Rotated loadings from Principal Component Analysis (%s-rotation)")
+    title <- sprintf("Rotated loadings from Principal Component Analysis (%s-rotation)", rotation_name)
   }
 
   attr(dataplot, "info") <- list(
@@ -24,7 +27,8 @@ data_plot.parameters_pca <- function(x, data = NULL, ...){
   dataplot
 }
 
-
+#' @export
+data_plot.parameters_efa <- data_plot.parameters_pca
 
 
 
@@ -60,3 +64,6 @@ plot.see_parameters_pca <- function(x, text_size = 3.5, ...) {
     add_plot_attributes(x)
 }
 
+
+#' @export
+plot.see_parameters_efa <- plot.see_parameters_pca

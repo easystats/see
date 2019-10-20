@@ -64,9 +64,9 @@ data_plot(x, data = NULL, ...)
   priors = FALSE, priors_alpha = 0.4, grid = TRUE, ...)
 
 \method{plot}{see_parameters_model}(x, show_intercept = FALSE,
-  dot_size = 0.8, ...)
+  point_size = 0.8, ...)
 
-\method{plot}{see_parameters_pca}(x, ...)
+\method{plot}{see_parameters_pca}(x, text_size = 3.5, ...)
 
 \method{plot}{see_parameters_sem}(x, data = NULL,
   type = c("regression", "correlation", "loading"),
@@ -132,8 +132,6 @@ or a zero-inflation component are plotted in a grid-layout.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
 
-\item{dot_size}{Size of point geoms.}
-
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 
 \item{threshold_p}{Numeric, threshold at which value p-values will be displayed.}
@@ -184,6 +182,7 @@ development and probably not yet available):
   \item \code{parameters::model_parameters()}
   \item \code{parameters::n_factors()}
   \item \code{parameters::parameters_simulate()}
+  \item \code{parameters::principal_components()}
   \item \code{performance::binned_residuals()}
   \item \code{performance::check_collinearity()}
   \item \code{performance::check_distribution()}

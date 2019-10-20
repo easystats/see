@@ -69,6 +69,27 @@ plot(result, grid = TRUE)
 plot(result, grid = TRUE, stack = FALSE)
 ```
 
+## Principal Component Analysis
+
+```{r}
+data(mtcars)
+result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
+
+plot(result)
+```
+
+```{r}
+result <- principal_components(
+  mtcars[, 1:7], 
+  n = 3, 
+  rotation = "varimax", 
+  threshold = "max", 
+  sort = TRUE
+)
+
+plot(result)
+```
+
 ## Number of Components/Factors to Retain
 
 ```{r}
