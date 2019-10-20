@@ -1,7 +1,7 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.hdi <- function(x, data = NULL, grid = TRUE, ...) {
-  .data_plot_hdi(x, data, grid)
+data_plot.hdi <- function(x, data = NULL, grid = TRUE, show_intercept = FALSE, ...) {
+  .data_plot_hdi(x = x, data = data, grid = grid, show_intercept = show_intercept)
 }
 
 #' @export
@@ -13,7 +13,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
 
 #' @keywords internal
-.data_plot_hdi <- function(x, data = NULL, grid = TRUE, parms = NULL, ...) {
+.data_plot_hdi <- function(x, data = NULL, grid = TRUE, parms = NULL, show_intercept = FALSE, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -93,8 +93,17 @@ data_plot.bayestestR_eti <- data_plot.hdi
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
-  if (length(unique(dataplot$y)) == 1) {
-    ylab <- unique(dataplot$y)
+  groups <- unique(dataplot$y)
+  if (!show_intercept) {
+    dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
+    groups <- unique(setdiff(
+      groups,
+      c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept")
+    ))
+  }
+
+  if (length(groups) == 1) {
+    ylab <- groups
     dataplot$y <- 0
   } else {
     ylab <- "Parameters"
@@ -161,10 +170,8 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' @export
 plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data)
+    x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
-
-  x <- .remove_intercept(x, column = "y", show_intercept)
 
   p <- x %>%
     as.data.frame() %>%

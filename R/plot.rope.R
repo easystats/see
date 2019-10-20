@@ -1,6 +1,6 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
+data_plot.rope <- function(x, data = NULL, grid = TRUE, show_intercept = FALSE, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -36,7 +36,17 @@ data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
     stop("Only one ROPE range accepted.")
   }
 
-  if (length(unique(dataplot$y)) == 1) {
+  groups <- unique(dataplot$y)
+  if (!show_intercept) {
+    dataplot <- .remove_intercept(dataplot, column = "y", show_intercept = show_intercept)
+
+    groups <- unique(setdiff(
+      groups,
+      c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept")
+    ))
+  }
+
+  if (length(groups) == 1) {
     dataplot$y <- 0
   }
 
@@ -62,10 +72,8 @@ data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
 #' @export
 plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data)
+    x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
-
-  x <- .remove_intercept(x, column = "y", show_intercept = show_intercept)
 
   p <- x %>%
     as.data.frame() %>%
