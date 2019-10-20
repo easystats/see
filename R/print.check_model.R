@@ -6,7 +6,7 @@ print.see_check_model <- function(x, ...) {
 
   panel <- attr(x, "panel")
   check <- attr(x, "check")
-  point_size <- attr(x, "point_size")
+  point_size <- attr(x, "dot_size")
   line_size <- attr(x, "line_size")
   text_size <- attr(x, "text_size")
 
