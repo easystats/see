@@ -30,7 +30,6 @@
 #' @param value What value to display.
 #' @param log Show log-transformed Bayes factors.
 #' @param text_size Size of text labels.
-#' @param dot_size Size of point geoms.
 #' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
 #' @param threshold_p Numeric, threshold at which value p-values will be displayed.
 #' @param ci Logical, whether confidence intervals should be added to the plot.
@@ -78,6 +77,7 @@
 #'   \item \code{parameters::model_parameters()}
 #'   \item \code{parameters::n_factors()}
 #'   \item \code{parameters::parameters_simulate()}
+#'   \item \code{parameters::principal_components()}
 #'   \item \code{performance::binned_residuals()}
 #'   \item \code{performance::check_collinearity()}
 #'   \item \code{performance::check_distribution()}

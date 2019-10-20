@@ -7,6 +7,7 @@
 ## New plot-functions
 
 * Added `coord_radar` for radar charts.
+* Added plot-function for `parameters::principal_components()`.
 * Added plot-function for `parameters::parameters_simulate()`.
 * Added plot-function for `parameters::n_factors()`.
 

@@ -1,7 +1,7 @@
 #' @importFrom bayestestR reshape_ci
 #' @rdname data_plot
 #' @export
-plot.see_parameters_model <- function(x, show_intercept = FALSE, dot_size = .8, ...) {
+plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, ...) {
   ## TODO check for brms models, "Intercept" may be named differently
   if (!show_intercept) x <- x[x$Parameter != "(Intercept)", ]
 
@@ -16,7 +16,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, dot_size = .8, 
       geom_hline(aes(yintercept = 0), linetype = "dotted") +
       geom_pointrange(
         aes(ymin = .data$CI_low, ymax = .data$CI_high),
-        size = dot_size,
+        size = point_size,
         position = position_dodge(1 / length(unique(x$CI)))
       ) +
       coord_flip() +
@@ -26,7 +26,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, dot_size = .8, 
     x$group <- as.factor(x$Coefficient < 0)
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
       geom_hline(aes(yintercept = 0), linetype = "dotted") +
-      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = dot_size) +
+      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = point_size) +
       coord_flip() +
       theme_modern(legend.position = "none") +
       scale_color_material()
