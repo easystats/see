@@ -45,8 +45,15 @@ data_plot.bayestestR_eti <- data_plot.eti
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
+  if (length(unique(dataplot$y)) == 1) {
+    ylab <- unique(dataplot$y)
+    dataplot$y <- 0
+  } else {
+    ylab <- "Parameters"
+  }
+
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
-                                 "ylab" = "Parameters",
+                                 "ylab" = ylab,
                                  "legend_fill" = "CI",
                                  "title" = "Credible Interval (CI)")
 
@@ -120,6 +127,10 @@ plot.see_eti <- function(x, data = NULL, show_intercept = FALSE, ...) {
     )) +
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x)
+
+  if (length(unique(x$y)) == 1) {
+    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  }
 
   p
 }

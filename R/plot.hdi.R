@@ -81,8 +81,15 @@ data_plot.bayestestR_hdi <- data_plot.hdi
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
+  if (length(unique(dataplot$y)) == 1) {
+    ylab <- unique(dataplot$y)
+    dataplot$y <- 0
+  } else {
+    ylab <- "Parameters"
+  }
+
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
-                                 "ylab" = "Parameters",
+                                 "ylab" = ylab,
                                  "legend_fill" = "HDI",
                                  "title" = "Highest Density Interval (HDI)")
 
@@ -159,6 +166,9 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ..
     geom_vline(xintercept = 0, linetype = "dotted") +
     add_plot_attributes(x)
 
+  if (length(unique(x$y)) == 1) {
+    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  }
 
   if ("Effects" %in% names(x) && isTRUE(grid)) {
     if ("Component" %in% names(x))
