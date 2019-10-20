@@ -1,7 +1,7 @@
 #' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
+data_plot.p_direction <- function(x, data = NULL, grid = TRUE, show_intercept = FALSE, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -74,8 +74,26 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
+  groups <- unique(dataplot$y)
+  if (!show_intercept) {
+    dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
+    groups <- unique(setdiff(
+      groups,
+      c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept")
+    ))
+  }
+
+  if (length(groups) == 1) {
+    ylab <- groups
+    dataplot$y <- 0
+  } else {
+    ylab <- "Parameters"
+  }
+
+
+
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
-                                  "ylab" = "Parameters",
+                                  "ylab" = ylab,
                                   "legend_fill" = "Effect direction",
                                   "title" = "Probability of Direction")
 
@@ -114,11 +132,8 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
 
   # retrieve and prepare data for plotting
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data, grid = grid)
+    x <- data_plot(x, data = data, grid = grid, show_intercept = show_intercept)
   }
-
-  # remove intercept from output, if requested
-  x <- .remove_intercept(x, column = "y", show_intercept)
 
   # base setup
   p <- x %>%
