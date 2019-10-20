@@ -7,11 +7,23 @@ data_plot.hdi <- function(x, data = NULL, grid = TRUE, ...) {
 #' @export
 data_plot.bayestestR_hdi <- data_plot.hdi
 
+#' @export
+data_plot.bayestestR_eti <- data_plot.hdi
+
+
 
 #' @keywords internal
 .data_plot_hdi <- function(x, data = NULL, grid = TRUE, parms = NULL, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
+  }
+
+  if (inherits(x, "bayestestR_hdi")) {
+    legend_title <- "HDI"
+    plot_title <- "Highest Density Interval (HDI)"
+  } else {
+    legend_title <- "CI"
+    plot_title <- "Credible Interval (CI)"
   }
 
   if (!is.null(parms))
@@ -90,12 +102,13 @@ data_plot.bayestestR_hdi <- data_plot.hdi
 
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
                                  "ylab" = ylab,
-                                 "legend_fill" = "HDI",
-                                 "title" = "Highest Density Interval (HDI)")
+                                 "legend_fill" = legend_title,
+                                 "title" = plot_title)
 
   class(dataplot) <- c("data_plot", "see_hdi", class(dataplot))
   dataplot
 }
+
 
 
 
@@ -180,3 +193,6 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ..
   p
 }
 
+
+#' @export
+plot.see_eti <- plot.see_hdi
