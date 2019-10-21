@@ -106,7 +106,8 @@ result <- principal_components(
 
 result
 
-plot(result)
+plot(result, type = "line", text_color = "white") +
+  theme_abyss()
 ```
 
 ## Number of Components/Factors to Retain

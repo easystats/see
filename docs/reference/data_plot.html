@@ -202,7 +202,8 @@ functions from different packages of the <a href='https://github.com/easystats'>
   <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_parameters_pca</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bar"</span>, <span class='st'>"line"</span>),
+  <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>text_color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_parameters_sem</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -309,6 +310,10 @@ or a zero-inflation component are plotted in a grid-layout.</p></td>
     <tr>
       <th>priors_alpha</th>
       <td><p>Alpha value of the prior distributions.</p></td>
+    </tr>
+    <tr>
+      <th>text_color</th>
+      <td><p>Color of text labels.</p></td>
     </tr>
     <tr>
       <th>threshold_coefficient</th>

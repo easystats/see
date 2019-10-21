@@ -68,7 +68,8 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_parameters_model}(x, show_intercept = FALSE,
   point_size = 0.8, ...)
 
-\method{plot}{see_parameters_pca}(x, text_size = 3.5, ...)
+\method{plot}{see_parameters_pca}(x, type = c("bar", "line"),
+  text_size = 3.5, text_color = "black", ...)
 
 \method{plot}{see_parameters_sem}(x, data = NULL,
   type = c("regression", "correlation", "loading"),
@@ -133,6 +134,8 @@ or a zero-inflation component are plotted in a grid-layout.}
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
+
+\item{text_color}{Color of text labels.}
 
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 

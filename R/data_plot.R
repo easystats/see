@@ -30,6 +30,7 @@
 #' @param value What value to display.
 #' @param log Show log-transformed Bayes factors.
 #' @param text_size Size of text labels.
+#' @param text_color Color of text labels.
 #' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
 #' @param threshold_p Numeric, threshold at which value p-values will be displayed.
 #' @param ci Logical, whether confidence intervals should be added to the plot.
