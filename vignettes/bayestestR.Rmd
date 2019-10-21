@@ -133,7 +133,7 @@ result <- point_estimate(model, centrality = c("map", "mean"))
 
 result
 
-plot(result, panel = FALSE)[[5]]
+plot(result, panel = FALSE)[[2]]
 ```
 
 
