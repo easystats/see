@@ -55,10 +55,19 @@ data_plot.n_clusters <- data_plot.n_factors
 #' @importFrom rlang .data
 #' @rdname data_plot
 #' @export
-plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), ...) {
+plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), size = 1, ...) {
   type <- match.arg(type)
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, type = type)
+  }
+
+  if (missing(size)) {
+    size <- switch(
+      type,
+      "bar" = .7,
+      "line" = 1,
+      1
+    )
   }
 
   if (type == "area") {
@@ -72,7 +81,7 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
       add_plot_attributes(x)
   } else if (type == "line") {
     ggplot(x, aes(x = .data$x, y = .data$y, colour = .data$group)) +
-      geom_segment(aes(y = 0, xend = .data$x, yend = .data$y)) +
+      geom_segment(aes(y = 0, xend = .data$x, yend = .data$y), size = size) +
       geom_point() +
       coord_flip() +
       guides(colour = FALSE) +
@@ -80,7 +89,7 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
       add_plot_attributes(x)
   } else {
     ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$fill)) +
-      geom_bar(stat = "identity") +
+      geom_bar(stat = "identity", width = size) +
       guides(fill = FALSE) +
       scale_y_continuous(labels = scales::percent) +
       add_plot_attributes(x) +

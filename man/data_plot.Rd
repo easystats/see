@@ -50,13 +50,13 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, grid = FALSE, priors = FALSE,
-  priors_alpha = 0.4, ...)
+  priors_alpha = 0.4, size = 1, ...)
 
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
   grid = TRUE, ...)
 
 \method{plot}{see_n_factors}(x, data = NULL, type = c("bar", "line",
-  "area"), ...)
+  "area"), size = 1, ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
   priors = FALSE, priors_alpha = 0.4, grid = TRUE, ...)
@@ -69,7 +69,7 @@ data_plot(x, data = NULL, ...)
   point_size = 0.8, ...)
 
 \method{plot}{see_parameters_pca}(x, type = c("bar", "line"),
-  text_size = 3.5, text_color = "black", ...)
+  text_size = 3.5, text_color = "black", size = 1, ...)
 
 \method{plot}{see_parameters_sem}(x, data = NULL,
   type = c("regression", "correlation", "loading"),
@@ -134,6 +134,9 @@ or a zero-inflation component are plotted in a grid-layout.}
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
+
+\item{size}{Size of geoms. Ddepends on the context of the \code{plot()} function,
+so this argument may change size of points, lines or bars.}
 
 \item{text_color}{Color of text labels.}
 

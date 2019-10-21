@@ -34,6 +34,8 @@
 #' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
 #' @param threshold_p Numeric, threshold at which value p-values will be displayed.
 #' @param ci Logical, whether confidence intervals should be added to the plot.
+#' @param size Size of geoms. Ddepends on the context of the \code{plot()} function,
+#'   so this argument may change size of points, lines or bars.
 #' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else,
 #'   single plots are returned.
 #' @param type Character vector, indicating the type of plot (for

@@ -38,10 +38,19 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' @rdname data_plot
 #' @importFrom rlang .data
 #' @export
-plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5, text_color = "black", ...) {
+plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5, text_color = "black", size = 1, ...) {
   type <- match.arg(type)
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
+  }
+
+  if (missing(size)) {
+    size <- switch(
+      type,
+      "bar" = .6,
+      "line" = 1,
+      1
+    )
   }
 
   p <- x %>%
@@ -55,11 +64,11 @@ plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5,
 
   if (type == "bar") {
     p <- p +
-      geom_bar(stat = "identity", width = .6, colour = NA) +
+      geom_bar(stat = "identity", width = size, colour = NA) +
       scale_fill_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   } else {
     p <- p +
-      geom_segment(aes(y = 0, xend = .data$Variable, yend = abs(.data$y))) +
+      geom_segment(aes(y = 0, xend = .data$Variable, yend = abs(.data$y)), size = size) +
       geom_point() +
       scale_color_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   }

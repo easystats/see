@@ -26,7 +26,7 @@ data_plot.estimate_density <- function(x, ...) {
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, priors = FALSE, priors_alpha = .4, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, priors = FALSE, priors_alpha = .4, size = 1, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -53,7 +53,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, g
         y = .data$y,
         color = .data$Parameter
       )) +
-      geom_line() +
+      geom_line(size = size) +
       add_plot_attributes(x)
   } else {
     p <- x %>%
