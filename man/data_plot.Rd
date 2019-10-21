@@ -50,7 +50,7 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, grid = FALSE, priors = FALSE,
-  priors_alpha = 0.4, size = 1, ...)
+  priors_alpha = 0.4, size = 0.9, ...)
 
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
   grid = TRUE, ...)

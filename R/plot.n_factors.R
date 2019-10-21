@@ -82,7 +82,7 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
   } else if (type == "line") {
     ggplot(x, aes(x = .data$x, y = .data$y, colour = .data$group)) +
       geom_segment(aes(y = 0, xend = .data$x, yend = .data$y), size = size) +
-      geom_point() +
+      geom_point(size = 2 * size) +
       coord_flip() +
       guides(colour = FALSE) +
       scale_y_continuous(labels = scales::percent) +

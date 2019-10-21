@@ -26,7 +26,7 @@ data_plot.estimate_density <- function(x, ...) {
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, priors = FALSE, priors_alpha = .4, size = 1, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, priors = FALSE, priors_alpha = .4, size = .9, ...) {
   # save model for later use
   model <- tryCatch(
     {

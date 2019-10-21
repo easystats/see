@@ -69,7 +69,7 @@ plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5,
   } else {
     p <- p +
       geom_segment(aes(y = 0, xend = .data$Variable, yend = abs(.data$y)), size = size) +
-      geom_point() +
+      geom_point(size = 2 * size) +
       scale_color_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   }
 
