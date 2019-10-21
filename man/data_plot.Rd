@@ -73,7 +73,8 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_parameters_sem}(x, data = NULL,
   type = c("regression", "correlation", "loading"),
-  threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...)
+  threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE,
+  size = 22, ...)
 
 \method{plot}{see_parameters_simulate}(x, data = NULL, stack = TRUE,
   show_intercept = FALSE, grid = FALSE, ...)
