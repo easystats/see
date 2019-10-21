@@ -49,11 +49,11 @@ library("see")
 ```
 
 
-## Features
+# Features
 
-### Themes
+## Themes
 
-#### Modern
+### Modern
 
 ```{r warning=FALSE, message=FALSE}
 library(ggplot2)
@@ -64,7 +64,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ```
 
 
-#### Lucid
+### Lucid
 
 ```{r warning=FALSE, message=FALSE}
 library(ggplot2)
@@ -75,7 +75,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ```
 
 
-#### Blackboard
+### Blackboard
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 library(rstanarm)
@@ -107,17 +107,17 @@ p <- estimate_link(model, keep_draws = TRUE, length = 100, draws = 250) %>%
 p + theme_blackboard()
 ```
 
-#### Abyss
+### Abyss
 
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
 p + theme_abyss() 
 ```
 
-### Palettes
+## Palettes
 
 This is just one example of the available palettes. See [this vignette](https://easystats.github.io/see/articles/seecolorscales.html) for a detailed overview of palettes and color scales.
 
-#### Material design
+### Material design
 
 ```{r warning=FALSE, message=FALSE}
 p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
@@ -136,13 +136,13 @@ p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length))
   scale_color_material_c(palette = "rainbow")
 ```
 
+## Multiple plots
+
 The `plots()` function allows us to plot the figures side by side.
 
 ```{r warning=FALSE, message=FALSE}
 plots(p1, p2, p3, ncol = 2)
 ```
-
-### Multiple plots
 
 The `plots()` function can also be used to add **tags** (*i.e.*, labels for subfigures).
 
@@ -153,7 +153,7 @@ plots(p1, p2, p3, ncol = 2,
 
 
 
-### Better looking points
+## Better looking points
 
 `geom_points2()` and `geom_jitter2()` allow points without borders and contour.
 
@@ -171,7 +171,7 @@ plots(normal, new, ncol = 2)
 
 
 
-### Half-violin Half-dot plot
+## Half-violin Half-dot plot
 
 Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.
 
@@ -182,7 +182,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-### Radar chart (Spider plot)
+## Radar chart (Spider plot)
 
 ```{r warning=FALSE, message=FALSE}
 library(dplyr)
@@ -201,6 +201,8 @@ data %>%
   coord_radar(start = -pi/4) +
   theme_minimal()
 ```
+
+## Plot functions for easystats packages
 
 ### [BayestestR](https://github.com/easystats/bayestestR)
 
