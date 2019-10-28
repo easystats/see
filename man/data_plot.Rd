@@ -66,7 +66,7 @@ data_plot(x, data = NULL, ...)
   grid = TRUE, ...)
 
 \method{plot}{see_parameters_model}(x, show_intercept = FALSE,
-  point_size = 0.8, ...)
+  point_size = 0.8, sort = NULL, ...)
 
 \method{plot}{see_parameters_pca}(x, type = c("bar", "line"),
   text_size = 3.5, text_color = "black", size = 1, ...)
@@ -138,6 +138,8 @@ or a zero-inflation component are plotted in a grid-layout.}
 
 \item{size}{Size of geoms. Ddepends on the context of the \code{plot()} function,
 so this argument may change size of points, lines or bars.}
+
+\item{sort}{If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.}
 
 \item{text_color}{Color of text labels.}
 

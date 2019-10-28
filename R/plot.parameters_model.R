@@ -1,13 +1,26 @@
 #' @importFrom bayestestR reshape_ci
+#' @param sort If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
 #' @rdname data_plot
 #' @export
-plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, ...) {
+plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, sort = NULL, ...) {
   ## TODO check for brms models, "Intercept" may be named differently
   if (!show_intercept) x <- x[x$Parameter != "(Intercept)", ]
 
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(c("Median", "Mean", "Map") %in% colnames(x))] <- "Coefficient"
   }
+
+
+  if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
+    x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)[order(x$Coefficient)]))
+      x$Parameter[order(x$Coefficient)]
+  } else if (!is.null(sort) && sort == "descending") {
+    x$Parameter <- factor(x$Parameter, levels = unique(x$Parameter)[order(x$Coefficient)])
+  } else {
+    # sort coefficients as they appear in the classical summary output by default
+    x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
+  }
+
 
   if (sum(grepl("^CI_low", colnames(x))) > 1) {
     x <- bayestestR::reshape_ci(x)
