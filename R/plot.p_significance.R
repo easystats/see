@@ -158,11 +158,16 @@ plot.see_p_significance <- function(x, data = NULL, show_intercept = FALSE, prio
 
   # add prior layer
   if (priors) {
-    p <- p + .add_prior_layer_ridgeline(
-      model,
-      show_intercept = show_intercept,
-      priors_alpha = priors_alpha
-    )
+    p <- p +
+      .add_prior_layer_ridgeline(
+        model,
+        show_intercept = show_intercept,
+        priors_alpha = priors_alpha
+      ) +
+      scale_fill_manual(values = c("white", "#FFFC00", "#cd201f", "#0077B5"))
+  } else {
+    p <- p +
+      scale_fill_manual(values = c("white", "#cd201f", "#0077B5"))
   }
 
   p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
