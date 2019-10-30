@@ -3,13 +3,27 @@
 #' @rdname data_plot
 #' @export
 plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, sort = NULL, ...) {
-  ## TODO check for brms models, "Intercept" may be named differently
-  if (!show_intercept) x <- x[x$Parameter != "(Intercept)", ]
-
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(c("Median", "Mean", "Map") %in% colnames(x))] <- "Coefficient"
   }
 
+  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
+  has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
+
+  # if we have a model with multiple responses or response levels
+  # remove name of level from parameter name, as we split the plot
+  # by response level anyway...
+
+  if (has_response) {
+    for (i in rev(sort(unique(x$Response)))) {
+      x$Parameter <- gsub(i, "", x$Parameter)
+    }
+    x$Parameter <- gsub("^\\:(.*)", "\\1", x$Parameter)
+  }
+
+
+  ## TODO check for brms models, "Intercept" may be named differently
+  if (!show_intercept) x <- x[x$Parameter != "(Intercept)", ]
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)[order(x$Coefficient)]))
@@ -46,8 +60,12 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   }
 
 
-  if ("Component" %in% colnames(x) && length(unique(x$Component)) > 1) {
+  if (has_component && has_response) {
+    p <- p + facet_wrap(~Response + Component, ncol = 1, scales = "free")
+  } else if (has_component) {
     p <- p + facet_wrap(~Component, ncol = 1, scales = "free")
+  } else if (has_response) {
+    p <- p + facet_wrap(~Response, ncol = 1, scales = "free")
   }
 
   p + labs(x = "Estimate", y = "Parameter", colour = "CI")
