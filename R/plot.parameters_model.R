@@ -22,6 +22,13 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   }
 
 
+  # make sure components are sorted in original order, not alphabetically
+
+  if (has_component) {
+    x$Component <- factor(x$Component, levels = unique(x$Component))
+  }
+
+
   ## TODO check for brms models, "Intercept" may be named differently
   if (!show_intercept) x <- x[x$Parameter != "(Intercept)", ]
 
