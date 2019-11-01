@@ -170,7 +170,9 @@ plot.see_p_significance <- function(x, data = NULL, show_intercept = FALSE, prio
       scale_fill_manual(values = c("white", "#cd201f", "#0077B5"))
   }
 
-  p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
+  p <- p +
+    geom_vline(aes(xintercept = 0), linetype = "dotted") +
+    guides(fill = FALSE, color = FALSE, group = FALSE)
 
   if ("Effects" %in% names(x) && isTRUE(grid)) {
     if ("Component" %in% names(x))
