@@ -1,14 +1,24 @@
 #' @importFrom bayestestR reshape_ci
 #' @param sort If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+#' @param n_columns For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout.
 #' @rdname data_plot
 #' @export
-plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, sort = NULL, ...) {
+plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, sort = NULL, n_columns = NULL, ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
-    colnames(x)[which.min(c("Median", "Mean", "Map") %in% colnames(x))] <- "Coefficient"
+    colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }
 
+  has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
+
+
+  mc <- attributes(x)$model_class
+  cp <- attributes(x)$cleaned_parameters
+  if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
+    x$Parameter <- cp
+  }
+
 
   # if we have a model with multiple responses or response levels
   # remove name of level from parameter name, as we split the plot
@@ -24,6 +34,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
 
   # make sure components are sorted in original order, not alphabetically
 
+  if (has_effects) {
+    x$Effects <- factor(x$Effects, levels = unique(x$Effects))
+  }
   if (has_component) {
     x$Component <- factor(x$Component, levels = unique(x$Component))
   }
@@ -66,13 +79,22 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
       scale_color_material()
   }
 
+  if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
 
-  if (has_component && has_response) {
-    p <- p + facet_wrap(~Response + Component, ncol = 1, scales = "free")
+  if (has_component && has_response && has_effects) {
+    p <- p + facet_wrap(~Response + Effects + Component, ncol = n_columns, scales = "free")
+  } else if (has_component && has_effects) {
+    p <- p + facet_wrap(~Effects + Component, ncol = n_columns, scales = "free")
+  } else if (has_component && has_response) {
+    p <- p + facet_wrap(~Response + Component, ncol = n_columns, scales = "free")
+  } else if (has_effects && has_response) {
+    p <- p + facet_wrap(~Response + Effects , ncol = n_columns, scales = "free")
   } else if (has_component) {
-    p <- p + facet_wrap(~Component, ncol = 1, scales = "free")
+    p <- p + facet_wrap(~Component, ncol = n_columns, scales = "free")
+  } else if (has_effects) {
+    p <- p + facet_wrap(~Effects, ncol = n_columns, scales = "free")
   } else if (has_response) {
-    p <- p + facet_wrap(~Response, ncol = 1, scales = "free")
+    p <- p + facet_wrap(~Response, ncol = n_columns, scales = "free")
   }
 
   p + labs(x = "Estimate", y = "Parameter", colour = "CI")

@@ -85,6 +85,32 @@ result <- parameters::model_parameters(model)
 plot(result)
 ```
 
+## Model Parameters of Bayesian models
+
+```{r}
+# We download the model to save computation time. Here is the code
+# to refit the exact model used below...
+
+# zinb <- read.csv("http://stats.idre.ucla.edu/stat/data/fish.csv")
+# set.seed(123)
+# model <- brm(bf(
+#     count ~ persons + child + camper + (1 | persons),
+#     zi ~ child + camper + (1 | persons)
+#   ),
+#   data = zinb,
+#   family = zero_inflated_poisson()
+# )
+brms_model <- insight::download_model("brms_zi_2")
+result <- model_parameters(brms_model, effects = "all", component = "all")
+
+plot(result)
+```
+
+```{r fig.width=6, fig.height=7}
+plot(result, n_column = 1)
+```
+
+
 ## Principal Component Analysis
 
 ```{r}
