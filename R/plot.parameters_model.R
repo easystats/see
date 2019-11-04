@@ -14,6 +14,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
 
+  x <- .fix_facet_names(x)
+
   mc <- attributes(x)$model_class
   cp <- attributes(x)$cleaned_parameters
   is_meta <- !is.null(mc) && mc %in% c("rma", "rma.uni")

@@ -7,6 +7,8 @@ data_plot.estimate_density <- function(x, ...) {
     dataplot$Parameter <- "Distribution"
   }
 
+  dataplot <- .fix_facet_names(dataplot)
+
   attr(dataplot, "info") <- list("xlab" = "Values",
                                  "ylab" = "Density",
                                  "legend_fill" = "Parameter",
