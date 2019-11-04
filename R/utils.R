@@ -90,10 +90,12 @@ magrittr::`%>%`
 
 .fix_facet_names <- function(x) {
   if ("Component" %in% names(x)) {
+    x$Component <- as.character(x$Component)
     x$Component[x$Component == "conditional"] <- "(Conditional)"
     x$Component[x$Component == "zero_inflated"] <- "(Zero-Inflated)"
   }
   if ("Effects" %in% names(x)) {
+    x$Effects <- as.character(x$Effects)
     x$Effects[x$Effects == "fixed"] <- "Fixed Effects"
     x$Effects[x$Effects == "random"] <- "Random Effects"
   }
