@@ -8,6 +8,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }
 
+  # remember components
+
   has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
@@ -16,9 +18,15 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   cp <- attributes(x)$cleaned_parameters
   is_meta <- !is.null(mc) && mc %in% c("rma", "rma.uni")
 
+
+  # minor fixes for Bayesian models
+
   if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
     x$Parameter <- cp
   }
+
+
+  # data preparation for metafor-objects
 
   if (is_meta) {
     overall <- which(x$Parameter == "(Intercept)")
@@ -30,6 +38,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
     x$shape <- 19
     x$shape[overall] <- 18
   }
+
 
   # if we have a model with multiple responses or response levels
   # remove name of level from parameter name, as we split the plot
@@ -67,6 +76,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
 
 
   if (is_meta) {
+
+    # plot setup for metafor-objects
+
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
       geom_hline(aes(yintercept = 0), linetype = "dotted") +
       geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = point_size, fatten = x$point_size, shape = x$shape) +
@@ -76,6 +88,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
       guides(color = FALSE, size = FALSE, shape = FALSE)
   }
   else if (sum(grepl("^CI_low", colnames(x))) > 1) {
+
+    # plot setup for model parameters with multiple CIs
+
     x <- bayestestR::reshape_ci(x)
     x$CI <- as.character(x$CI)
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$CI)) +
@@ -89,6 +104,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
       theme_modern() +
       scale_color_material()
   } else {
+
+    # plot setup for regular model parameters
+
     x$group <- as.factor(x$Coefficient < 0)
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
       geom_hline(aes(yintercept = 0), linetype = "dotted") +
@@ -97,6 +115,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
       theme_modern(legend.position = "none") +
       scale_color_material()
   }
+
+
+  # wrap plot into facets, depending on the components
 
   if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
 
