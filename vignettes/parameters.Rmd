@@ -27,6 +27,7 @@ library(insight)
 library(see)
 library(glmmTMB)
 library(lavaan)
+library(metafor)
 library(ggplot2)
 data("Salamanders")
 
@@ -108,6 +109,22 @@ plot(result)
 
 ```{r fig.width=6, fig.height=7}
 plot(result, n_column = 1)
+```
+
+
+## Model Parameters of Meta-Analysis models
+
+```{r, warning=FALSE, message=FALSE}
+mydat <- data.frame(
+  effectsize = c(-0.393, 0.675, 0.282, -1.398),
+  standarderror = c(0.317, 0.317, 0.13, 0.36)
+)
+
+ma <- rma(yi = effectsize, sei = standarderror, method = "REML", data = mydat)
+result <- model_parameters(ma)
+
+result
+plot(result)
 ```
 
 

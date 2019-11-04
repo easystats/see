@@ -15,6 +15,7 @@
 ## Changes to functions
 
 * `plot()` for `parameters::model_parameters()` gets a `sort`-argument to sort coefficients.
+* `plot()` for `parameters::model_parameters()` now also create forest plots for meta-analysis.
 * `plot()` for `bayestestR::bayesfactor_parameters()` only plots facets when necessary.
 * `plot()` for `performance::check_outliers()` now also plot multiple methods in one plot.
 * Following `plot()` methods get a `grid`-argument, so model components like random effects or a zero-inflation component are plotted in a grid-layout: `bayestestR::p_direction()`, `bayestestR::hdi()`, `bayestestR::rope()`

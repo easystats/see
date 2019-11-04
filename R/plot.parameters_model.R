@@ -12,13 +12,24 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
 
-
   mc <- attributes(x)$model_class
   cp <- attributes(x)$cleaned_parameters
+  is_meta <- !is.null(mc) && mc %in% c("rma", "rma.uni")
+
   if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
     x$Parameter <- cp
   }
 
+  if (is_meta) {
+    overall <- which(x$Parameter == "(Intercept)")
+    x$Parameter[overall] <- "Overall"
+    x$group <- "study"
+    x$group[overall] <- "Overall"
+    x$point_size <- sqrt(x$Weight)
+    x$point_size[overall] <- 8
+    x$shape <- 19
+    x$shape[overall] <- 18
+  }
 
   # if we have a model with multiple responses or response levels
   # remove name of level from parameter name, as we split the plot
@@ -47,7 +58,6 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)[order(x$Coefficient)]))
-      x$Parameter[order(x$Coefficient)]
   } else if (!is.null(sort) && sort == "descending") {
     x$Parameter <- factor(x$Parameter, levels = unique(x$Parameter)[order(x$Coefficient)])
   } else {
@@ -56,7 +66,16 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   }
 
 
-  if (sum(grepl("^CI_low", colnames(x))) > 1) {
+  if (is_meta) {
+    p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
+      geom_hline(aes(yintercept = 0), linetype = "dotted") +
+      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = point_size, fatten = x$point_size, shape = x$shape) +
+      coord_flip() +
+      theme_modern(legend.position = "none") +
+      scale_color_material() +
+      guides(color = FALSE, size = FALSE, shape = FALSE)
+  }
+  else if (sum(grepl("^CI_low", colnames(x))) > 1) {
     x <- bayestestR::reshape_ci(x)
     x$CI <- as.character(x$CI)
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$CI)) +
