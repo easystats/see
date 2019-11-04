@@ -90,7 +90,7 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, show_intercept = 
     ylab <- "Parameters"
   }
 
-
+  dataplot <- .fix_facet_names(dataplot)
 
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
                                   "ylab" = ylab,
@@ -159,11 +159,13 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
 
   p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
 
-  if ("Effects" %in% names(x) && isTRUE(grid)) {
-    if ("Component" %in% names(x))
+  if (isTRUE(grid)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x))
       p <- p + facet_wrap(~ Effects + Component, scales = "free")
-    else
+    else if ("Effects" %in% names(x))
       p <- p + facet_wrap(~ Effects, scales = "free")
+    else if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Component, scales = "free")
   }
 
   p

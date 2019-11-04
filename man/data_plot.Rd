@@ -46,7 +46,7 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
 
 \method{plot}{see_equivalence_test}(x, rope_color = "#0171D3",
-  rope_alpha = 0.2, show_intercept = FALSE, ...)
+  rope_alpha = 0.2, show_intercept = FALSE, grid = TRUE, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
   show_intercept = FALSE, grid = FALSE, priors = FALSE,
@@ -125,11 +125,11 @@ or \code{\link[parameters]{n_factors}}).}
 
 \item{text_size}{Size of text labels.}
 
-\item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
-Else, densities are plotted for each parameter among each other.}
-
 \item{grid}{Logical, if \code{TRUE}, model components like random effects
 or a zero-inflation component are plotted in a grid-layout.}
+
+\item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
+Else, densities are plotted for each parameter among each other.}
 
 \item{priors}{Logical, if \code{TRUE}, prior distributions are simulated
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}

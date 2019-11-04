@@ -109,6 +109,8 @@ data_plot.bayestestR_eti <- data_plot.hdi
     ylab <- "Parameters"
   }
 
+  dataplot <- .fix_facet_names(dataplot)
+
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
                                  "ylab" = ylab,
                                  "legend_fill" = legend_title,
@@ -190,11 +192,13 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ..
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   }
 
-  if ("Effects" %in% names(x) && isTRUE(grid)) {
-    if ("Component" %in% names(x))
+  if (isTRUE(grid)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x))
       p <- p + facet_wrap(~ Effects + Component, scales = "free")
-    else
+    else if ("Effects" %in% names(x))
       p <- p + facet_wrap(~ Effects, scales = "free")
+    else if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Component, scales = "free")
   }
 
   p

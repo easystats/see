@@ -184,14 +184,6 @@ plot(result, rope_color = "grey70") +
 
 ## Test for Practical Equivalence
 
-```{r echo=FALSE}
-junk <- capture.output(model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars))
-```
-```{r eval=FALSE}
-model <- rstanarm::stan_glm(
-  mpg ~ wt + gear + cyl + disp, data = mtcars
-)
-``` 
 ```{r}
 result <- equivalence_test(model)
 
@@ -208,6 +200,12 @@ result
 plot(result) +
   theme_abyss() +
   scale_fill_flat()
+
+result <- equivalence_test(model, ci = c(.89, .95), effects = "all", component = "all")
+
+result
+
+plot(result) + theme_modern()
 ```
 
 

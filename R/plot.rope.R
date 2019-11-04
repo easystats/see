@@ -50,6 +50,8 @@ data_plot.rope <- function(x, data = NULL, grid = TRUE, show_intercept = FALSE, 
     dataplot$y <- 0
   }
 
+  dataplot <- .fix_facet_names(dataplot)
+
   dataplot$xmin <- rope_range[1]
   dataplot$xmax <- rope_range[2]
   dataplot$color <- ifelse(dataplot$x >= dataplot$xmin & dataplot$x <= dataplot$xmax, "Negligible", "Significant")
@@ -100,11 +102,13 @@ plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetb
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   }
 
-  if ("Effects" %in% names(x) && isTRUE(grid)) {
-    if ("Component" %in% names(x))
+  if (isTRUE(grid)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x))
       p <- p + facet_wrap(~ Effects + Component, scales = "free")
-    else
+    else if ("Effects" %in% names(x))
       p <- p + facet_wrap(~ Effects, scales = "free")
+    else if ("Component" %in% names(x))
+      p <- p + facet_wrap(~ Component, scales = "free")
   }
 
   p

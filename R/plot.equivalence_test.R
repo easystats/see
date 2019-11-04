@@ -1,7 +1,9 @@
+#' @importFrom stats setNames
+#' @importFrom insight clean_parameters
 #' @importFrom ggridges geom_density_ridges2
 #' @rdname data_plot
 #' @export
-plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {
+plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, grid = TRUE, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -32,6 +34,12 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   intercepts <- which(x$Parameter %in% c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept"))
   if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
     x <- x[-intercepts, ]
+  }
+
+  cp <- insight::clean_parameters(model)
+  intercepts <- which(cp$Parameter %in% c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept"))
+  if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
+    cp <- cp[-intercepts, ]
   }
 
   .rope <- c(x$ROPE_low[1], x$ROPE_high[1])
@@ -74,6 +82,12 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   })
 
   tmp <- do.call(rbind, result)
+  colnames(cp)[1] <- "predictor"
+  tmp <- merge(tmp, cp, by = "predictor")
+  tmp$predictor <- factor(tmp$predictor, levels = rev(unique(tmp$predictor)))
+
+  if (length(unique(tmp$Effects)) <= 1 && length(unique(tmp$Component)) <= 1) grid <- FALSE
+  tmp <- .fix_facet_names(tmp)
 
   # check for user defined arguments
 
@@ -83,8 +97,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   else
     x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
   legend.title <- "Decision on H0"
-  labels <- levels(tmp$predictor)
-  names(labels) <- labels
+  labels <- stats::setNames(cp$Cleaned_Parameter, cp$predictor)
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
@@ -107,8 +120,30 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
     scale_y_discrete(labels = labels) +
     theme(legend.position = "bottom")
 
-  if (length(unique(tmp$HDI)) > 1) {
-    p <- p + facet_wrap(~HDI, scales = "free")
+  if (isTRUE(grid)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x)) {
+      if (length(unique(tmp$HDI)) > 1) {
+        p <- p + facet_wrap(~Effects + Component + HDI, scales = "free")
+      } else {
+        p <- p + facet_wrap(~ Effects + Component, scales = "free")
+      }
+    } else if ("Effects" %in% names(x)) {
+      if (length(unique(tmp$HDI)) > 1) {
+        p <- p + facet_wrap(~Effects + HDI, scales = "free")
+      } else {
+        p <- p + facet_wrap(~ Effects, scales = "free")
+      }
+    } else if ("Component" %in% names(x)) {
+      if (length(unique(tmp$HDI)) > 1) {
+        p <- p + facet_wrap(~Component + HDI, scales = "free")
+      } else {
+        p <- p + facet_wrap(~ Component, scales = "free")
+      }
+    }
+  } else {
+    if (length(unique(tmp$HDI)) > 1) {
+      p <- p + facet_wrap(~HDI, scales = "free")
+    }
   }
 
   p

@@ -173,7 +173,7 @@ functions from different packages of the <a href='https://github.com/easystats'>
 
 <span class='co'># S3 method for see_equivalence_test</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>rope_color</span> <span class='kw'>=</span> <span class='st'>"#0171D3"</span>,
-  <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>rope_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_estimate_density</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>stack</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -294,14 +294,14 @@ or <code><a href='https://rdrr.io/pkg/parameters/man/n_factors.html'>n_factors</
       <td><p>Size of text labels.</p></td>
     </tr>
     <tr>
-      <th>stack</th>
-      <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
-Else, densities are plotted for each parameter among each other.</p></td>
-    </tr>
-    <tr>
       <th>grid</th>
       <td><p>Logical, if <code>TRUE</code>, model components like random effects
 or a zero-inflation component are plotted in a grid-layout.</p></td>
+    </tr>
+    <tr>
+      <th>stack</th>
+      <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
+Else, densities are plotted for each parameter among each other.</p></td>
     </tr>
     <tr>
       <th>priors</th>
