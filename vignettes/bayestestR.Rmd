@@ -192,7 +192,9 @@ result
 plot(result) +
   theme_blackboard() +
   scale_fill_material()
+```
 
+```{r fig.width=9, fig.height=6}
 result <- equivalence_test(model, ci = c(.89, .95))
 
 result
@@ -200,8 +202,10 @@ result
 plot(result) +
   theme_abyss() +
   scale_fill_flat()
+```
 
-result <- equivalence_test(model, ci = c(.89, .95), effects = "all", component = "all")
+```{r fig.width=11, fig.height=9}
+result <- equivalence_test(model2, ci = c(.89, .95), effects = "all", component = "all")
 
 result
 
