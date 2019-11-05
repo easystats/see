@@ -88,12 +88,6 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
   }
 
 
-  if (length(unique(x$y)) == 1) {
-    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
-  } else {
-    p <- p + scale_y_discrete(labels = labels)
-  }
-
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)

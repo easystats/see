@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-##Setup and Model Fitting
+## Setup and Model Fitting
 
 ```{r setup}
 library(bayestestR)
@@ -74,13 +74,13 @@ result
 plot(result)
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=9, fig.height=9}
 result <- p_direction(model2, effects = "all", component = "all")
 
 result
 
 plot(result)
-plot(result, grid = FALSE)
+plot(result, n_columns = NULL)
 ```
 
 ### Adding Prior Samples
