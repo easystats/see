@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.1</span>
       </span>
     </div>
 
@@ -104,7 +104,9 @@
 
     
     
-<p>##Setup and Model Fitting</p>
+<div id="setup-and-model-fitting" class="section level2">
+<h2 class="hasAnchor">
+<a href="#setup-and-model-fitting" class="anchor"></a>Setup and Model Fitting</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(bayestestR)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(insight)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(see)</a>
@@ -118,6 +120,7 @@
 <a class="sourceLine" id="cb2-4" title="4"></a>
 <a class="sourceLine" id="cb2-5" title="5"><span class="co"># model with fixed and random effects as well as zero-inflation component</span></a>
 <a class="sourceLine" id="cb2-6" title="6">model2 &lt;-<span class="st"> </span>insight<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/insight/man/download_model.html">download_model</a></span>(<span class="st">"brms_zi_3"</span>)</a></code></pre></div>
+</div>
 <div id="density-estimation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#density-estimation" class="anchor"></a>Density Estimation</h2>
@@ -189,7 +192,7 @@
 <a class="sourceLine" id="cb7-35" title="35"></a>
 <a class="sourceLine" id="cb7-36" title="36"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-8-1.png" width="864"></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">grid =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="ot">NULL</span>)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-8-2.png" width="864"></p>
 <div id="adding-prior-samples-1" class="section level3">
 <h3 class="hasAnchor">
@@ -254,7 +257,7 @@
 <a class="sourceLine" id="cb11-35" title="35"></a>
 <a class="sourceLine" id="cb11-36" title="36"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-11-1.png" width="864"></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">grid =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="ot">NULL</span>)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-11-2.png" width="864"></p>
 <div id="adding-prior-samples-2" class="section level3">
 <h3 class="hasAnchor">
@@ -352,9 +355,9 @@
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">result &lt;-<span class="st"> </span><span class="kw">hdi</span>(model2, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>), <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</a>
 <a class="sourceLine" id="cb18-2" title="2"></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb18-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span>()</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-17-1.png" width="864"></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">grid =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-17-2.png" width="864"></p>
 </div>
 <div id="region-of-practical-equivalence-rope" class="section level2">
@@ -581,7 +584,7 @@
 <a class="sourceLine" id="cb24-66" title="66"><span class="co">#&gt;  persons 3 Undecided     13.39 % [-1.50  1.42]</span></a>
 <a class="sourceLine" id="cb24-67" title="67"><span class="co">#&gt;  persons 4 Undecided      1.67 % [-2.92  0.16]</span></a>
 <a class="sourceLine" id="cb24-68" title="68"></a>
-<a class="sourceLine" id="cb24-69" title="69"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb24-69" title="69"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/theme_modern.html">theme_modern</a></span>()</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-22-1.png" width="1056"></p>
 </div>
 <div id="bayes-factors-bfs" class="section level2">
@@ -675,7 +678,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#density-estimation">Density Estimation</a></li>
+<li><a href="#setup-and-model-fitting">Setup and Model Fitting</a></li>
+      <li><a href="#density-estimation">Density Estimation</a></li>
       <li><a href="#probability-of-direction-pd">Probability of Direction (pd)</a></li>
       <li><a href="#practical-significance">Practical Significance</a></li>
       <li><a href="#point-estimates">Point Estimates</a></li>

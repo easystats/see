@@ -101,7 +101,7 @@ result
 plot(result)
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=9, fig.height=9}
 result <- p_significance(model2, effects = "all", component = "all")
 
 result
@@ -155,10 +155,10 @@ result
 plot(result) + scale_fill_flat()
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=9, fig.height=9}
 result <- hdi(model2, ci = c(0.5, 0.75, 0.89), effects = "all", component = "all")
 
-plot(result) + scale_fill_metro()
+plot(result, n_columns = 2) + scale_fill_metro()
 plot(result, n_columns = NULL) + scale_fill_material()
 ```
 
@@ -173,7 +173,7 @@ plot(result, rope_color = "red") +
   scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=9, fig.height=9}
 result <- rope(model2, ci = c(0.9, 0.95), effects = "all", component = "all")
 
 result 

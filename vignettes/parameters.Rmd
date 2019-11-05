@@ -66,8 +66,8 @@ plot(result)
 plot(result, stack = FALSE)
 ```
 
-```{r}
-plot(result, grid = TRUE)
+```{r fig.height=8, fig.width=8}
+plot(result, n_columns = 3)
 ```
 
 ```{r}
