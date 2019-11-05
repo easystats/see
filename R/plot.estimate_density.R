@@ -1,6 +1,7 @@
+#' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.estimate_density <- function(x, ...) {
+data_plot.estimate_density <- function(x, model = NULL, ...) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
@@ -8,6 +9,11 @@ data_plot.estimate_density <- function(x, ...) {
   }
 
   dataplot <- .fix_facet_names(dataplot)
+
+  # add component and effects columns
+  if (!is.null(model)) {
+    dataplot <- merge(dataplot, insight::clean_parameters(model), by = "Parameter")
+  }
 
   attr(dataplot, "info") <- list("xlab" = "Values",
                                  "ylab" = "Density",
@@ -42,14 +48,14 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
 
 
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, ...)
+    x <- data_plot(x, model = model, ...)
   }
 
   if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
       (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
 
   # get labels
-  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
+  labels <- .clean_parameter_names(x$Parameter, grid = !is.null(n_columns))
 
   # remove intercept from output, if requested
   x <- .remove_intercept(x, show_intercept = show_intercept)
@@ -85,6 +91,13 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
     }
 
     p <- p + add_plot_attributes(x)
+  }
+
+
+  if (length(unique(x$y)) == 1) {
+    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  } else {
+    p <- p + scale_y_discrete(labels = labels)
   }
 
 
