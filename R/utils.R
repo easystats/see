@@ -11,7 +11,10 @@ magrittr::`%>%`
 
 .remove_intercept <- function(x, column = "Parameter", show_intercept) {
   if (!show_intercept) {
-    remove <- which(x[[column]] %in% c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept"))
+    remove <- which(tolower(x[[column]]) %in% c("intercept (zero-inflated)", "intercept", "zi_intercept", "(intercept)", "b_intercept", "b_zi_intercept"))
+    if (length(remove)) x <- x[-remove, ]
+    # cross check
+    remove <- which(grepl("^intercept", tolower(x[[column]])))
     if (length(remove)) x <- x[-remove, ]
   }
   x
@@ -70,9 +73,10 @@ magrittr::`%>%`
 
 
 
-.clean_parameter_names <- function(params) {
+.clean_parameter_names <- function(params, grid = FALSE) {
   # clean parameters names
   params <- gsub("(b_|bs_|bsp_|bcs_)(.*)", "\\2", params, perl = TRUE)
+  params <- gsub("^zi_(.*)", "\\1 (zero-inflated)", params, perl = TRUE)
   # clean random effect parameters names
   params <- gsub("r_(.*)\\.(.*)\\.", "\\1", params)
   params <- gsub("b\\[\\(Intercept\\) (.*)\\]", "\\1", params)
@@ -82,6 +86,12 @@ magrittr::`%>%`
   params <- gsub("^sds_", "\\1", params)
   # remove ".1" etc. suffix
   params <- gsub("(.*)(\\.)(\\d)$", "\\1 \\3", params)
+  # fix zero-inflation part in random effects
+  params <- gsub("(.*)__zi\\s(.*)", "\\1 \\2 (zero-inflated)", params, perl = TRUE)
+
+  if (grid) {
+    params <- gsub("(zero-inflated)", "(zi)", params, fixed = TRUE)
+  }
 
   params
 }
@@ -100,4 +110,8 @@ magrittr::`%>%`
     x$Effects[x$Effects == "random"] <- "Random Effects"
   }
   x
+}
+
+.has_intercept <- function(x) {
+  tolower(x) %in% c("intercept (zero-inflated)", "intercept", "zi_intercept", "(intercept)", "b_intercept", "b_zi_intercept")
 }

@@ -66,8 +66,8 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, show_intercept = 
 
   # clean cryptic names
   if (grid) {
-    dataplot$y <- .clean_parameter_names(dataplot$y)
-    if (!is.null(levels_order)) levels_order <- .clean_parameter_names(levels_order)
+    dataplot$y <- .clean_parameter_names(dataplot$y, grid = TRUE)
+    if (!is.null(levels_order)) levels_order <- .clean_parameter_names(levels_order, grid = TRUE)
   }
 
   if (!is.null(levels_order)) {
