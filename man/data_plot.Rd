@@ -46,24 +46,24 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
 
 \method{plot}{see_equivalence_test}(x, rope_color = "#0171D3",
-  rope_alpha = 0.2, show_intercept = FALSE, grid = TRUE, ...)
+  rope_alpha = 0.2, show_intercept = FALSE, n_columns = 1, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
-  show_intercept = FALSE, grid = FALSE, priors = FALSE,
+  show_intercept = FALSE, n_columns = 1, priors = FALSE,
   priors_alpha = 0.4, size = 0.9, ...)
 
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
-  grid = TRUE, ...)
+  n_columns = 1, ...)
 
 \method{plot}{see_n_factors}(x, data = NULL, type = c("bar", "line",
   "area"), size = 1, ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
-  priors = FALSE, priors_alpha = 0.4, grid = TRUE, ...)
+  priors = FALSE, priors_alpha = 0.4, n_columns = 1, ...)
 
 \method{plot}{see_p_significance}(x, data = NULL,
   show_intercept = FALSE, priors = FALSE, priors_alpha = 0.4,
-  grid = TRUE, ...)
+  n_columns = 1, ...)
 
 \method{plot}{see_parameters_model}(x, show_intercept = FALSE,
   point_size = 0.8, sort = NULL, n_columns = NULL, ...)
@@ -77,14 +77,15 @@ data_plot(x, data = NULL, ...)
   size = 22, ...)
 
 \method{plot}{see_parameters_simulate}(x, data = NULL, stack = TRUE,
-  show_intercept = FALSE, grid = FALSE, ...)
+  show_intercept = FALSE, n_columns = NULL, ...)
 
 \method{plot}{see_point_estimate}(x, data = NULL, point_size = 2,
   text_size = 3.5, panel = TRUE, show_labels = TRUE,
   show_intercept = FALSE, priors = FALSE, priors_alpha = 0.4, ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
-  rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...)
+  rope_color = "cadetblue", show_intercept = FALSE, n_columns = 1,
+  ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -125,8 +126,7 @@ or \code{\link[parameters]{n_factors}}).}
 
 \item{text_size}{Size of text labels.}
 
-\item{grid}{Logical, if \code{TRUE}, model components like random effects
-or a zero-inflation component are plotted in a grid-layout.}
+\item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
@@ -140,8 +140,6 @@ Else, densities are plotted for each parameter among each other.}
 so this argument may change size of points, lines or bars.}
 
 \item{sort}{If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.}
-
-\item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout.}
 
 \item{text_color}{Color of text labels.}
 

@@ -1,7 +1,7 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.hdi <- function(x, data = NULL, grid = TRUE, show_intercept = FALSE, ...) {
-  .data_plot_hdi(x = x, data = data, grid = grid, show_intercept = show_intercept)
+data_plot.hdi <- function(x, data = NULL, show_intercept = FALSE, ...) {
+  .data_plot_hdi(x = x, data = data, show_intercept = show_intercept)
 }
 
 #' @export
@@ -13,7 +13,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
 
 #' @keywords internal
-.data_plot_hdi <- function(x, data = NULL, grid = TRUE, parms = NULL, show_intercept = FALSE, ...) {
+.data_plot_hdi <- function(x, data = NULL, parms = NULL, show_intercept = FALSE, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -82,12 +82,6 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
   cn <- intersect(c("x", "y", "height", "fill", "Effects", "Component"), colnames(dataplot))
   dataplot <- dataplot[, cn, drop = FALSE]
-
-  # clean cryptic names
-  if (grid) {
-    dataplot$y <- .clean_parameter_names(dataplot$y, grid = TRUE)
-    if (!is.null(levels_order)) levels_order <- .clean_parameter_names(levels_order, grid = TRUE)
-  }
 
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
@@ -170,10 +164,17 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' @importFrom rlang .data
 #' @rdname data_plot
 #' @export
-plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ...) {
+plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, n_columns = 1, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
+
+  # check if we have multiple panels
+  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
+      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
+
+  # get labels
+  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   p <- x %>%
     as.data.frame() %>%
@@ -190,15 +191,19 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, grid = TRUE, ..
 
   if (length(unique(x$y)) == 1) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  } else {
+    p <- p + scale_y_discrete(labels = labels)
   }
 
-  if (isTRUE(grid)) {
-    if ("Component" %in% names(x) && "Effects" %in% names(x))
-      p <- p + facet_wrap(~ Effects + Component, scales = "free")
-    else if ("Effects" %in% names(x))
-      p <- p + facet_wrap(~ Effects, scales = "free")
-    else if ("Component" %in% names(x))
-      p <- p + facet_wrap(~ Component, scales = "free")
+
+  if (!is.null(n_columns)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+    } else if ("Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+    } else if ("Component" %in% names(x)) {
+      p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+    }
   }
 
   p

@@ -28,7 +28,7 @@ data_plot.estimate_density <- function(x, ...) {
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, grid = FALSE, priors = FALSE, priors_alpha = .4, size = .9, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, size = .9, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -44,6 +44,12 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, g
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, ...)
   }
+
+  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
+      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
+
+  # get labels
+  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   # remove intercept from output, if requested
   x <- .remove_intercept(x, show_intercept = show_intercept)
@@ -81,11 +87,21 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, g
     p <- p + add_plot_attributes(x)
   }
 
-  if ("Effects" %in% names(x) && isTRUE(grid)) {
-    if ("Component" %in% names(x))
-      p <- p + facet_wrap(~ Effects + Component, scales = "free")
-    else
-      p <- p + facet_wrap(~ Effects, scales = "free")
+
+  if (length(unique(x$y)) == 1) {
+    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  } else {
+    p <- p + scale_y_discrete(labels = labels)
+  }
+
+  if (!is.null(n_columns)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+    } else if ("Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+    } else if ("Component" %in% names(x)) {
+      p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+    }
   }
 
   p

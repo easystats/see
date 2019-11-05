@@ -88,7 +88,7 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     else
       x_lab <- "Parameter Value"
 
-    if (!show_intercept && .has_intercept(xlab)) return(NULL)
+    if (!show_intercept && .has_intercept(x_lab)) return(NULL)
 
     label_mean_x <- mean_x
     label_mean_y <- max_y * 1.05

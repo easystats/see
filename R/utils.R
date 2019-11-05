@@ -73,27 +73,37 @@ magrittr::`%>%`
 
 
 
+#' @importFrom stats setNames
 .clean_parameter_names <- function(params, grid = FALSE) {
+
+  params <- unique(params)
+  labels <- params
+
   # clean parameters names
   params <- gsub("(b_|bs_|bsp_|bcs_)(.*)", "\\2", params, perl = TRUE)
-  params <- gsub("^zi_(.*)", "\\1 (zero-inflated)", params, perl = TRUE)
+  params <- gsub("^zi_(.*)", "\\1 (Zero-Inflated)", params, perl = TRUE)
   # clean random effect parameters names
-  params <- gsub("r_(.*)\\.(.*)\\.", "\\1", params)
-  params <- gsub("b\\[\\(Intercept\\) (.*)\\]", "\\1", params)
-  params <- gsub("b\\[(.*) (.*)\\]", "\\2", params)
+  params <- gsub("r_(.*)\\.(.*)\\.", "(re) \\1", params)
+  params <- gsub("b\\[\\(Intercept\\) (.*)\\]", "(re) \\1", params)
+  params <- gsub("b\\[(.*) (.*)\\]", "(re) \\2", params)
   # clean smooth terms
-  params <- gsub("^smooth_sd\\[(.*)\\]", "\\1", params)
-  params <- gsub("^sds_", "\\1", params)
+  params <- gsub("^smooth_sd\\[(.*)\\]", "\\1 (smooth)", params)
+  params <- gsub("^sds_", "\\1 (Smooth)", params)
   # remove ".1" etc. suffix
   params <- gsub("(.*)(\\.)(\\d)$", "\\1 \\3", params)
   # fix zero-inflation part in random effects
-  params <- gsub("(.*)__zi\\s(.*)", "\\1 \\2 (zero-inflated)", params, perl = TRUE)
+  params <- gsub("(.*)__zi\\s(.*)", "\\1 \\2 (Zero-Inflated)", params, perl = TRUE)
+  # fix temporary random effects token
+  params <- gsub("\\(re\\)\\s(.*)", "\\1 (Random)", params, perl = TRUE)
 
   if (grid) {
-    params <- gsub("(zero-inflated)", "(zi)", params, fixed = TRUE)
+    params <- trimws(gsub("(Zero-Inflated)", "", params, fixed = TRUE))
+    params <- trimws(gsub("(Random)", "", params, fixed = TRUE))
+  } else {
+    params <- gsub("(Zero-Inflated) (Random)", "(Random, Zero-Inflated)", params, fixed = TRUE)
   }
 
-  params
+  stats::setNames(params, labels)
 }
 
 

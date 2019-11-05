@@ -3,7 +3,7 @@
 #' @importFrom ggridges geom_density_ridges2
 #' @rdname data_plot
 #' @export
-plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, grid = TRUE, ...) {
+plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -86,7 +86,13 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   tmp <- merge(tmp, cp, by = "predictor")
   tmp$predictor <- factor(tmp$predictor, levels = rev(unique(tmp$predictor)))
 
-  if (length(unique(tmp$Effects)) <= 1 && length(unique(tmp$Component)) <= 1) grid <- FALSE
+  # check if we have multiple panels
+  if ((!"Effects" %in% names(tmp) || length(unique(tmp$Effects)) <= 1) &&
+      (!"Component" %in% names(tmp) || length(unique(tmp$Component)) <= 1)) n_columns <- NULL
+
+  # get labels
+  labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
+
   tmp <- .fix_facet_names(tmp)
 
   # check for user defined arguments
@@ -97,7 +103,6 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   else
     x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
   legend.title <- "Decision on H0"
-  labels <- stats::setNames(cp$Cleaned_Parameter, cp$predictor)
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
@@ -120,29 +125,29 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
     scale_y_discrete(labels = labels) +
     theme(legend.position = "bottom")
 
-  if (isTRUE(grid)) {
+  if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1) {
-        p <- p + facet_wrap(~Effects + Component + HDI, scales = "free")
+        p <- p + facet_wrap(~Effects + Component + HDI, scales = "free", ncol = n_columns)
       } else {
-        p <- p + facet_wrap(~ Effects + Component, scales = "free")
+        p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
       }
     } else if ("Effects" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1) {
-        p <- p + facet_wrap(~Effects + HDI, scales = "free")
+        p <- p + facet_wrap(~Effects + HDI, scales = "free", ncol = n_columns)
       } else {
-        p <- p + facet_wrap(~ Effects, scales = "free")
+        p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
       }
     } else if ("Component" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1) {
-        p <- p + facet_wrap(~Component + HDI, scales = "free")
+        p <- p + facet_wrap(~Component + HDI, scales = "free", ncol = n_columns)
       } else {
-        p <- p + facet_wrap(~ Component, scales = "free")
+        p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
       }
     }
   } else {
     if (length(unique(tmp$HDI)) > 1) {
-      p <- p + facet_wrap(~HDI, scales = "free")
+      p <- p + facet_wrap(~HDI, scales = "free", ncol = n_columns)
     }
   }
 

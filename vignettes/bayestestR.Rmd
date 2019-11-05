@@ -107,7 +107,7 @@ result <- p_significance(model2, effects = "all", component = "all")
 result
 
 plot(result)
-plot(result, grid = FALSE)
+plot(result, n_columns = NULL)
 ```
 
 ### Adding Prior Samples
@@ -159,7 +159,7 @@ plot(result) + scale_fill_flat()
 result <- hdi(model2, ci = c(0.5, 0.75, 0.89), effects = "all", component = "all")
 
 plot(result) + scale_fill_metro()
-plot(result, grid = FALSE) + scale_fill_material()
+plot(result, n_columns = NULL) + scale_fill_material()
 ```
 
 ## Region of Practical Equivalence (ROPE)
@@ -209,7 +209,7 @@ result <- equivalence_test(model2, ci = c(.89, .95), effects = "all", component 
 
 result
 
-plot(result) + theme_modern()
+plot(result, n_columns = 3) + theme_modern()
 ```
 
 
