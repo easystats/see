@@ -68,7 +68,8 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
         color = .data$Parameter
       )) +
       geom_line(size = size) +
-      add_plot_attributes(x)
+      add_plot_attributes(x) +
+      scale_color_flat(labels = labels)
   } else {
     p <- x %>%
       ggplot(aes(
