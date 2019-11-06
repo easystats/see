@@ -64,7 +64,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
 
 
   ## TODO check for brms models, "Intercept" may be named differently
-  if (!show_intercept) x <- x[x$Parameter != "(Intercept)", ]
+  if (!show_intercept) {
+    x <- x[!.in_intercepts(x$Parameter), ]
+  }
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)[order(x$Coefficient)]))

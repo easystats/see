@@ -71,10 +71,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
   groups <- unique(dataplot$y)
   if (!show_intercept) {
     dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
-    groups <- unique(setdiff(
-      groups,
-      c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept")
-    ))
+    groups <- unique(setdiff(groups, .intercepts()))
   }
 
   if (length(groups) == 1) {

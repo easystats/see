@@ -9,19 +9,6 @@ magrittr::`%>%`
 
 
 
-.remove_intercept <- function(x, column = "Parameter", show_intercept) {
-  if (!show_intercept) {
-    remove <- which(tolower(x[[column]]) %in% c("intercept (zero-inflated)", "intercept", "zi_intercept", "(intercept)", "b_intercept", "b_zi_intercept"))
-    if (length(remove)) x <- x[-remove, ]
-    # cross check
-    remove <- which(grepl("^intercept", tolower(x[[column]])))
-    if (length(remove)) x <- x[-remove, ]
-  }
-  x
-}
-
-
-
 .normalize <- function(x) {
   as.vector((x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE), na.rm = TRUE))
 }
@@ -82,6 +69,7 @@ magrittr::`%>%`
   # clean parameters names
   params <- gsub("(b_|bs_|bsp_|bcs_)(.*)", "\\2", params, perl = TRUE)
   params <- gsub("^zi_(.*)", "\\1 (Zero-Inflated)", params, perl = TRUE)
+  params <- gsub("(.*)_zi$", "\\1 (Zero-Inflated)", params, perl = TRUE)
   # clean random effect parameters names
   params <- gsub("r_(.*)\\.(.*)\\.", "(re) \\1", params)
   params <- gsub("b\\[\\(Intercept\\) (.*)\\]", "(re) \\1", params)
@@ -111,8 +99,13 @@ magrittr::`%>%`
 .fix_facet_names <- function(x) {
   if ("Component" %in% names(x)) {
     x$Component <- as.character(x$Component)
-    x$Component[x$Component == "conditional"] <- "(Conditional)"
-    x$Component[x$Component == "zero_inflated"] <- "(Zero-Inflated)"
+    if (!"Effects" %in% names(x)) {
+      x$Component[x$Component == "conditional"] <- "Conditional"
+      x$Component[x$Component == "zero_inflated"] <- "Zero-Inflated"
+    } else {
+      x$Component[x$Component == "conditional"] <- "(Conditional)"
+      x$Component[x$Component == "zero_inflated"] <- "(Zero-Inflated)"
+    }
   }
   if ("Effects" %in% names(x)) {
     x$Effects <- as.character(x$Effects)
@@ -122,6 +115,27 @@ magrittr::`%>%`
   x
 }
 
+
+
+.intercepts <- function() {
+  c("(intercept)_zi", "intercept (zero-inflated)", "intercept", "zi_intercept", "(intercept)", "b_intercept", "b_zi_intercept")
+}
+
+
 .has_intercept <- function(x) {
-  tolower(x) %in% c("intercept (zero-inflated)", "intercept", "zi_intercept", "(intercept)", "b_intercept", "b_zi_intercept")
+  tolower(x) %in% .intercepts() | grepl("^intercept", tolower(x))
+}
+
+
+.in_intercepts <- function(x) {
+  tolower(x) %in% .intercepts() | grepl("^intercept", tolower(x))
+}
+
+
+.remove_intercept <- function(x, column = "Parameter", show_intercept) {
+  if (!show_intercept) {
+    remove <- which(.in_intercepts(x[[column]]))
+    if (length(remove)) x <- x[-remove, ]
+  }
+  x
 }
