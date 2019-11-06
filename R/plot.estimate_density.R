@@ -95,7 +95,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
   }
 
 
-  if (length(unique(x$y)) == 1) {
+  if (length(unique(x$Parameter)) == 1) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
     p <- p + scale_y_discrete(labels = labels)
