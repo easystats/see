@@ -158,7 +158,7 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
   p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
 
 
-  if (length(unique(x$y)) == 1) {
+  if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
     p <- p + scale_y_discrete(labels = labels)

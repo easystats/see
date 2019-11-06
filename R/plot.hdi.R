@@ -186,7 +186,7 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, n_columns = 1, 
     geom_vline(xintercept = 0, linetype = "dotted") +
     add_plot_attributes(x)
 
-  if (length(unique(x$y)) == 1) {
+  if (length(unique(x$y)) == 1  && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
     p <- p + scale_y_discrete(labels = labels)

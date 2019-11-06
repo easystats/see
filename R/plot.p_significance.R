@@ -173,7 +173,7 @@ plot.see_p_significance <- function(x, data = NULL, show_intercept = FALSE, prio
     guides(fill = FALSE, color = FALSE, group = FALSE)
 
 
-  if (length(unique(x$y)) == 1) {
+  if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
     p <- p + scale_y_discrete(labels = labels)
