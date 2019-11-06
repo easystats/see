@@ -8,12 +8,12 @@ data_plot.estimate_density <- function(x, model = NULL, ...) {
     dataplot$Parameter <- "Distribution"
   }
 
-  dataplot <- .fix_facet_names(dataplot)
-
   # add component and effects columns
   if (!is.null(model)) {
     dataplot <- merge(dataplot, insight::clean_parameters(model), by = "Parameter")
   }
+
+  dataplot <- .fix_facet_names(dataplot)
 
   attr(dataplot, "info") <- list("xlab" = "Values",
                                  "ylab" = "Density",
