@@ -187,7 +187,7 @@ development and probably not yet available):
   \item \code{bayestestR::hdi()}
   \item \code{bayestestR::map_estimate()}
   \item \code{bayestestR::p_direction()}
-  \item \code{bayestestR::p_significance()()}
+  \item \code{bayestestR::p_significance()}
   \item \code{bayestestR::point_estimate()}
   \item \code{bayestestR::rope()}
   \item \code{estimate::estimate_contrasts()}

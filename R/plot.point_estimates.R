@@ -149,7 +149,6 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     p_object <- p_object +
       geom_vline(xintercept = 0, linetype = "dotted") +
       scale_y_continuous(expand = c(0, 0), limits = c(0, max_y * 1.15)) +
-      see::theme_lucid() +
       labs(title = "Bayesian Point Estimates", x = x_lab, y = "Probability Density")
 
     p_object

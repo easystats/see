@@ -66,12 +66,12 @@ plot(result)
 plot(result, stack = FALSE)
 ```
 
-```{r fig.height=8, fig.width=8}
-plot(result, n_columns = 3)
+```{r fig.height=6, fig.width=8}
+plot(result, n_columns = 2)
 ```
 
 ```{r}
-plot(result, grid = TRUE, stack = FALSE)
+plot(result, n_columns = 2, stack = FALSE)
 ```
 
 ## Model Parameters of SEM models
@@ -107,7 +107,7 @@ result <- model_parameters(brms_model, effects = "all", component = "all")
 plot(result)
 ```
 
-```{r fig.width=6, fig.height=7}
+```{r fig.width=6, fig.height=8}
 plot(result, n_column = 1)
 ```
 
