@@ -52,7 +52,6 @@ data_plot(x, data = NULL, ...)
   show_intercept = FALSE, n_columns = 1, priors = FALSE,
   priors_alpha = 0.4, size = 0.9, ...)
 
-
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
   n_columns = 1, ...)
 
