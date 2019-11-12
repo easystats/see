@@ -20,86 +20,75 @@ devtools::install_github("easystats/see")
 library("see")
 ```
 
-## Features
+# Features
 
-### Themes
+## Themes
 
-  - **Modern**
-
-<!-- end list -->
+### Modern
 
 ``` r
 library(ggplot2)
 
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point2() +
-  theme_modern()
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
+    geom_point2() + theme_modern()
 ```
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
-  - **Lucid**
-
-<!-- end list -->
+### Lucid
 
 ``` r
 library(ggplot2)
 
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point2() +
-  theme_lucid()
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
+    geom_point2() + theme_lucid()
 ```
 
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
-  - **Blackboard**
-
-<!-- end list -->
+### Blackboard
 
 ``` r
 library(rstanarm)
 library(estimate)
 
-dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
-  estimate::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>% 
-  estimate::reshape_draws()
+dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), 
+    data = iris) %>% estimate::estimate_link(keep_draws = TRUE, 
+    length = 100, draws = 250) %>% estimate::reshape_draws()
 
-p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
-  geom_line(color = "white", alpha = 0.05) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))
+p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) + 
+    geom_line(color = "white", alpha = 0.05) + scale_x_continuous(expand = c(0, 
+    0)) + scale_y_continuous(expand = c(0, 0))
 
-p + theme_blackboard() 
+p + theme_blackboard()
 ```
 
 ![](man/figures/unnamed-chunk-7-1.png)<!-- -->
 
-  - **Abyss**
+### Abyss
 
 ![](man/figures/unnamed-chunk-8-1.png)<!-- -->
 
-### Palettes
+## Palettes
 
-  - **Material design**
+This is just one example of the available palettes. See [this
+vignette](https://easystats.github.io/see/articles/seecolorscales.html)
+for a detailed overview of palettes and color scales.
 
-<!-- end list -->
+### Material design
 
 ``` r
-p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_boxplot() +
-  theme_modern(axis.text.angle = 45) +
-  scale_fill_material_d()
+p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
+    geom_boxplot() + theme_modern(axis.text.angle = 45) + scale_fill_material_d()
 
-p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_violin() +
-  theme_modern(axis.text.angle = 45) +
-  scale_fill_material_d(palette = "ice")
+p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
+    geom_violin() + theme_modern(axis.text.angle = 45) + scale_fill_material_d(palette = "ice")
 
-p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
-  geom_point2() +
-  theme_modern() +
-  scale_color_material_c(palette = "rainbow")
+p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) + 
+    geom_point2() + theme_modern() + scale_color_material_c(palette = "rainbow")
 ```
+
+## Multiple plots
 
 The `plots()` function allows us to plot the figures side by side.
 
@@ -109,235 +98,82 @@ plots(p1, p2, p3, ncol = 2)
 
 ![](man/figures/unnamed-chunk-10-1.png)<!-- -->
 
-### Multiple plots
-
 The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
 
 ``` r
-plots(p1, p2, p3, ncol = 2, 
-      tags = paste("Fig. ", 1:3))
+plots(p1, p2, p3, ncol = 2, tags = paste("Fig. ", 1:3))
 ```
 
 ![](man/figures/unnamed-chunk-11-1.png)<!-- -->
 
-### Better looking points
+## Better looking points
 
 `geom_points2()` and `geom_jitter2()` allow points without borders and
 contour.
 
 ``` r
-normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-  geom_point(size = 8, alpha = 0.3) +
-  theme_modern()
+normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
+    geom_point(size = 8, alpha = 0.3) + theme_modern()
 
-new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-  geom_point2(size = 8, alpha = 0.3) +
-  theme_modern()
+new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
+    geom_point2(size = 8, alpha = 0.3) + theme_modern()
 
 plots(normal, new, ncol = 2)
 ```
 
 ![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
-### Half-violin Half-dot plot
+## Half-violin Half-dot plot
 
 Create a half-violin half-dot plot, useful for visualising the
 distribution and the sample size at the same time.
 
 ``` r
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_violindot(fill_dots = "black") +
-  theme_modern() +
-  scale_fill_material_d()
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
+    geom_violindot(fill_dots = "black") + theme_modern() + scale_fill_material_d()
 ```
 
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
-### Radar chart (Spider plot)
+## Radar chart (Spider plot)
 
 ``` r
 library(dplyr)
 library(tidyr)
 
-data <- iris %>%
-  group_by(Species) %>%
-  summarise_all(mean) %>%
-  pivot_longer(-Species)
+data <- iris %>% group_by(Species) %>% summarise_all(mean) %>% 
+    pivot_longer(-Species)
 
-data %>%
-  ggplot(aes(x = name, y = value, color = Species, group = Species)) +
-  # The polygon geom is a trick go connect endpoints
-  geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
-  geom_line() +
-  coord_radar(start = -pi/4) +
-  theme_minimal()
+data %>% ggplot(aes(x = name, y = value, color = Species, group = Species)) + 
+    # The polygon geom is a trick go connect endpoints
+geom_polygon(fill = NA, size = 2, show.legend = FALSE) + geom_line() + 
+    coord_radar(start = -pi/4) + theme_minimal()
 ```
 
 ![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
+## Plot functions for easystats packages
+
 ### [BayestestR](https://github.com/easystats/bayestestR)
 
-#### Density Estimation
-
-``` r
-library(bayestestR)
-library(rstanarm)
-
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
-
-result <- estimate_density(model)
-
-plot(result)
-```
-
-![](man/figures/unnamed-chunk-16-1.png)<!-- -->
-
-``` r
-plot(result, stack = FALSE)
-```
-
-![](man/figures/unnamed-chunk-17-1.png)<!-- -->
-
-#### Probability of Direction (pd)
-
-``` r
-result <- p_direction(model)
-
-plot(result) +
-  theme_modern() +
-  scale_fill_manual(values = c("red", "green"))
-```
-
-![](man/figures/unnamed-chunk-18-1.png)<!-- -->
-
-<!-- Most of our plots can be easily *opened* via the `how_to_plot` function. This gives us the actual code used for plotting, that can then be easily extracted and tweaked to your needs. -->
-
-<!-- ```{r warning=FALSE, message=FALSE, eval=TRUE} -->
-
-<!-- how_to_plot(result) -->
-
-<!-- ``` -->
-
-#### Highest Density Interval (HDI)
-
-``` r
-library(rstanarm)
-
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
-result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
-
-plot(result) +
-  theme_modern() +
-  scale_fill_brewer(palette = "Purples", direction = -1)
-```
-
-![](man/figures/unnamed-chunk-20-1.png)<!-- -->
-
-#### Region of Practical Equivalence (ROPE)
-
-``` r
-result <- rope(model, ci = c(0.9, 0.95))
-
-plot(result, data = model, rope_color = "red") +
-  theme_modern() +
-  scale_fill_brewer(palette = "Greens", direction = -1)
-```
-
-![](man/figures/unnamed-chunk-22-1.png)<!-- -->
-
-#### Test for Practical Equivalence
-
-``` r
-model <- rstanarm::stan_glm(
-  mpg ~ wt + gear + cyl + disp, data = mtcars
-)
-result <- equivalence_test(model)
-
-plot(result) +
-  theme_blackboard() +
-  scale_fill_material()
-```
-
-![](man/figures/unnamed-chunk-24-1.png)<!-- -->
-
-``` r
-result <- equivalence_test(model, ci = c(.89, .95))
-plot(result) +
-    theme_abyss() +
-    scale_fill_flat()
-```
-
-![](man/figures/unnamed-chunk-25-1.png)<!-- -->
-
-#### Bayes Factors (BFs)
-
-``` r
-result <- bayesfactor_savagedickey(model)
-
-plot(result) +
-  theme_modern() +
-  scale_color_material() +
-  scale_fill_material()
-```
-
-![](man/figures/unnamed-chunk-26-1.png)<!-- -->
-
-``` r
-lm0 <- lm(qsec ~ 1, data = mtcars)
-lm1 <- lm(qsec ~ drat, data = mtcars)
-lm2 <- lm(qsec ~ wt, data = mtcars)
-lm3 <- lm(qsec ~ drat + wt, data = mtcars)
-
-result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
-
-plot(result, n_pies = "one", value = "probability") +
-  scale_fill_pizza(reverse = TRUE) 
-```
-
-![](man/figures/unnamed-chunk-27-1.png)<!-- -->
-
-``` r
-
-plot(result, n_pies = "many", value = "BF") +
-  scale_fill_flat(palette = "rainbow", reverse = TRUE)
-```
-
-![](man/figures/unnamed-chunk-27-2.png)<!-- -->
+Plotting functions for the **bayestestR** package are demonstrated [in
+this
+vignette](https://easystats.github.io/see/articles/bayestestR.html).
 
 ### [parameters](https://github.com/easystats/parameters)
 
-#### SEM / CFA lavaan graphs
+Plotting functions for the **parameters** package are demonstrated [in
+this
+vignette](https://easystats.github.io/see/articles/parameters.html).
 
-``` r
-library(lavaan)
-library(parameters)
+### [performance](https://github.com/easystats/performance)
 
-structure <- ' visual  =~ x1 + x2 + x3
-               textual =~ x4 + x5 + x6
-               speed   =~ x7 + x8 + x9 '
-
-model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
-params <- parameters::model_parameters(model)
-plot(params)
-```
-
-![](man/figures/unnamed-chunk-28-1.png)<!-- -->
+Plotting functions for the **performance** package are demonstrated [in
+this
+vignette](https://easystats.github.io/see/articles/performance.html).
 
 ### [estimate](https://github.com/easystats/estimate)
 
-#### Pairwise Contrasts
-
-``` r
-library(rstanarm)
-library(estimate)
-
-model <- stan_glm(Sepal.Width ~ Species, data = iris)
-
-contrasts <- estimate_contrasts(model)
-means <- estimate_means(model)
-
-plot(contrasts, means) + theme_modern()
-```
-
-![](man/figures/unnamed-chunk-30-1.png)<!-- -->
+Plotting functions for the **estimate** package are demonstrated [in
+this vignette](https://easystats.github.io/see/articles/estimate.html).

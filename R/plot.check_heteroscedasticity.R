@@ -11,6 +11,6 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
     x = stats::fitted(model),
     y = stats::residuals(model)
   )
-  .plot_diag_ncv(dat, dot_size = 2, line_size = .8)
+  .plot_diag_ncv(dat, point_size = 2, line_size = .8)
 }
 

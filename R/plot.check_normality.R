@@ -20,7 +20,7 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
 
     fitted_ <- sort(stats::fitted(model), na.last = NA)
     dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
-    .plot_diag_qq(dat, dot_size = 2, line_size = .8)
+    .plot_diag_qq(dat, point_size = 2, line_size = .8)
   } else if (type == "density") {
     r <- stats::residuals(model)
     dat <- as.data.frame(bayestestR::estimate_density(r))
@@ -39,7 +39,7 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
     dparms <- MASS::fitdistr(x, densfun = "normal")
     y <- do.call(stats::pnorm, c(list(q = x), dparms$estimate))
     dat <- data.frame(x = probs, y = y)
-    .plot_diag_pp(dat, dot_size = 2, line_size = .8)
+    .plot_diag_pp(dat, point_size = 2, line_size = .8)
   }
 }
 

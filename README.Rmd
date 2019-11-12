@@ -49,11 +49,11 @@ library("see")
 ```
 
 
-## Features
+# Features
 
-### Themes
+## Themes
 
-- **Modern**
+### Modern
 
 ```{r warning=FALSE, message=FALSE}
 library(ggplot2)
@@ -64,7 +64,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ```
 
 
-- **Lucid**
+### Lucid
 
 ```{r warning=FALSE, message=FALSE}
 library(ggplot2)
@@ -75,7 +75,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ```
 
 
-- **Blackboard**
+### Blackboard
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 library(rstanarm)
@@ -107,15 +107,17 @@ p <- estimate_link(model, keep_draws = TRUE, length = 100, draws = 250) %>%
 p + theme_blackboard()
 ```
 
-- **Abyss**
+### Abyss
 
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
 p + theme_abyss() 
 ```
 
-### Palettes
+## Palettes
 
-- **Material design**
+This is just one example of the available palettes. See [this vignette](https://easystats.github.io/see/articles/seecolorscales.html) for a detailed overview of palettes and color scales.
+
+### Material design
 
 ```{r warning=FALSE, message=FALSE}
 p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
@@ -134,13 +136,13 @@ p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length))
   scale_color_material_c(palette = "rainbow")
 ```
 
+## Multiple plots
+
 The `plots()` function allows us to plot the figures side by side.
 
 ```{r warning=FALSE, message=FALSE}
 plots(p1, p2, p3, ncol = 2)
 ```
-
-### Multiple plots
 
 The `plots()` function can also be used to add **tags** (*i.e.*, labels for subfigures).
 
@@ -151,7 +153,7 @@ plots(p1, p2, p3, ncol = 2,
 
 
 
-### Better looking points
+## Better looking points
 
 `geom_points2()` and `geom_jitter2()` allow points without borders and contour.
 
@@ -169,7 +171,7 @@ plots(normal, new, ncol = 2)
 
 
 
-### Half-violin Half-dot plot
+## Half-violin Half-dot plot
 
 Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.
 
@@ -180,7 +182,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-### Radar chart (Spider plot)
+## Radar chart (Spider plot)
 
 ```{r warning=FALSE, message=FALSE}
 library(dplyr)
@@ -200,200 +202,21 @@ data %>%
   theme_minimal()
 ```
 
+## Plot functions for easystats packages
+
 ### [BayestestR](https://github.com/easystats/bayestestR)
 
-#### Density Estimation
-
-```{r warning=FALSE, message=FALSE, eval=FALSE}
-library(bayestestR)
-library(rstanarm)
-
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
-
-result <- estimate_density(model)
-
-plot(result)
-```
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-library(bayestestR)
-library(rstanarm)
-
-junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
-
-result <- estimate_density(model)
-
-plot(result)
-```
-
-```{r warning=FALSE, message=FALSE, eval=TRUE}
-plot(result, stack = FALSE)
-```
-
-
-#### Probability of Direction (pd)
-
-```{r warning=FALSE, message=FALSE, eval=TRUE}
-result <- p_direction(model)
-
-plot(result) +
-  theme_modern() +
-  scale_fill_manual(values = c("red", "green"))
-```
-
-<!-- Most of our plots can be easily *opened* via the `how_to_plot` function. This gives us the actual code used for plotting, that can then be easily extracted and tweaked to your needs. -->
-
-<!-- ```{r warning=FALSE, message=FALSE, eval=TRUE} -->
-<!-- how_to_plot(result) -->
-<!-- ``` -->
-
-
-#### Highest Density Interval (HDI)
-
-```{r warning=FALSE, message=FALSE, eval=FALSE}
-library(rstanarm)
-
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
-result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
-
-plot(result) +
-  theme_modern() +
-  scale_fill_brewer(palette = "Purples", direction = -1)
-```
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-library(rstanarm)
-library(bayestestR)
-
-junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
-result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
-
-plot(result) +
-  theme_modern() +
-  scale_fill_brewer(palette = "Purples", direction = -1)
-```
-
-
-#### Region of Practical Equivalence (ROPE)
-
-```{r warning=FALSE, message=FALSE, eval=FALSE}
-result <- rope(model, ci = c(0.9, 0.95))
-
-plot(result, data = model, rope_color = "red") +
-  theme_modern() +
-  scale_fill_brewer(palette = "Greens", direction = -1)
-```
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-result <- rope(model, ci = c(0.9, 0.95))
-
-plot(result, data = model, rope_color = "red") +
-  theme_modern() +
-  scale_fill_brewer(palette = "Greens", direction = -1)
-```
-
-
-#### Test for Practical Equivalence
-
-```{r warning=FALSE, message=FALSE, eval=FALSE}
-model <- rstanarm::stan_glm(
-  mpg ~ wt + gear + cyl + disp, data = mtcars
-)
-result <- equivalence_test(model)
-
-plot(result) +
-  theme_blackboard() +
-  scale_fill_material()
-```
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-junk <- capture.output(model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars))
-
-result <- equivalence_test(model)
-
-plot(result) +
-  theme_blackboard() +
-  scale_fill_material()
-```
-
-
-```{r warning=FALSE, message=FALSE, eval=TRUE}
-result <- equivalence_test(model, ci = c(.89, .95))
-plot(result) +
-    theme_abyss() +
-    scale_fill_flat()
-```
-
-
-#### Bayes Factors (BFs)
-
-```{r warning=FALSE, message=FALSE, eval=TRUE}
-result <- bayesfactor_savagedickey(model)
-
-plot(result) +
-  theme_modern() +
-  scale_color_material() +
-  scale_fill_material()
-```
-
-```{r warning=FALSE, message=FALSE, eval=TRUE, fig.width=12, fig.height=7.2}
-lm0 <- lm(qsec ~ 1, data = mtcars)
-lm1 <- lm(qsec ~ drat, data = mtcars)
-lm2 <- lm(qsec ~ wt, data = mtcars)
-lm3 <- lm(qsec ~ drat + wt, data = mtcars)
-
-result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
-
-plot(result, n_pies = "one", value = "probability") +
-  scale_fill_pizza(reverse = TRUE) 
-
-plot(result, n_pies = "many", value = "BF") +
-  scale_fill_flat(palette = "rainbow", reverse = TRUE)
-```
-
+Plotting functions for the **bayestestR** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/bayestestR.html).
 
 ### [parameters](https://github.com/easystats/parameters)
 
-#### SEM / CFA lavaan graphs
+Plotting functions for the **parameters** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/parameters.html).
 
+### [performance](https://github.com/easystats/performance)
 
-```{r warning=FALSE, message=FALSE}
-library(lavaan)
-library(parameters)
-
-structure <- ' visual  =~ x1 + x2 + x3
-               textual =~ x4 + x5 + x6
-               speed   =~ x7 + x8 + x9 '
-
-model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
-params <- parameters::model_parameters(model)
-plot(params)
-```
-
+Plotting functions for the **performance** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/performance.html).
 
 ### [estimate](https://github.com/easystats/estimate)
 
-#### Pairwise Contrasts
-
-
-```{r warning=FALSE, message=FALSE, eval=FALSE}
-library(rstanarm)
-library(estimate)
-
-model <- stan_glm(Sepal.Width ~ Species, data = iris)
-
-contrasts <- estimate_contrasts(model)
-means <- estimate_means(model)
-
-plot(contrasts, means) + theme_modern()
-```
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-library(rstanarm)
-library(estimate)
-
-
-junk <- capture.output(model <- stan_glm(Sepal.Width ~ Species, data = iris))
-
-contrasts <- estimate_contrasts(model)
-means <- estimate_means(model)
-
-plot(contrasts, means) +
-  theme_modern()
-```
+Plotting functions for the **estimate** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/estimate.html).
 

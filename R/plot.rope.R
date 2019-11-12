@@ -1,6 +1,6 @@
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
+data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -30,11 +30,23 @@ data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
   }
 
   # Extract data HDI
-  dataplot <- .data_plot_hdi(hdi, data, grid, parms = params)
+  dataplot <- .data_plot_hdi(hdi, data, parms = params)
   rope_range <- unique(c(x$ROPE_low, x$ROPE_high))
   if (length(rope_range) != 2) {
     stop("Only one ROPE range accepted.")
   }
+
+  groups <- unique(dataplot$y)
+  if (!show_intercept) {
+    dataplot <- .remove_intercept(dataplot, column = "y", show_intercept = show_intercept)
+    groups <- unique(setdiff(groups, .intercepts()))
+  }
+
+  if (length(groups) == 1) {
+    dataplot$y <- 0
+  }
+
+  dataplot <- .fix_facet_names(dataplot)
 
   dataplot$xmin <- rope_range[1]
   dataplot$xmax <- rope_range[2]
@@ -56,12 +68,17 @@ data_plot.rope <- function(x, data = NULL, grid = TRUE, ...){
 #' @rdname data_plot
 #' @importFrom rlang .data
 #' @export
-plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...) {
+plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, n_columns = 1, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data)
+    x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 
-  x <- .remove_intercept(x, column = "y", show_intercept = show_intercept)
+  # check if we have multiple panels
+  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
+      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
+
+  # get labels
+  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   p <- x %>%
     as.data.frame() %>%
@@ -84,12 +101,20 @@ plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetb
     ) +
     add_plot_attributes(x)
 
+  if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
+    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  } else {
+    p <- p + scale_y_discrete(labels = labels)
+  }
 
-  if ("Effects" %in% names(x) && isTRUE(grid)) {
-    if ("Component" %in% names(x))
-      p <- p + facet_wrap(~ Effects + Component, scales = "free")
-    else
-      p <- p + facet_wrap(~ Effects, scales = "free")
+  if (!is.null(n_columns)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+    } else if ("Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+    } else if ("Component" %in% names(x)) {
+      p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+    }
   }
 
   p

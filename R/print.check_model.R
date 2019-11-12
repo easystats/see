@@ -6,17 +6,17 @@ print.see_check_model <- function(x, ...) {
 
   panel <- attr(x, "panel")
   check <- attr(x, "check")
-  dot_size <- attr(x, "dot_size")
+  point_size <- attr(x, "dot_size")
   line_size <- attr(x, "line_size")
   text_size <- attr(x, "text_size")
 
   if (is.null(check)) check <- all
 
   if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF)
-  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, dot_size, line_size)
+  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, point_size, line_size)
   if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, line_size)
-  if ("NCV" %in% names(x) && any(c("ncv", "all") %in% check)) p$NCV <- .plot_diag_ncv(x$NCV, dot_size, line_size)
-  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, dot_size, line_size)
+  if ("NCV" %in% names(x) && any(c("ncv", "all") %in% check)) p$NCV <- .plot_diag_ncv(x$NCV, point_size, line_size)
+  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, point_size, line_size)
   if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
     p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, text_size)
     p$OUTLIERS <- p$OUTLIERS +
@@ -28,7 +28,7 @@ print.see_check_model <- function(x, ...) {
   }
 
   if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
-    ps <- .plot_diag_reqq(x$REQQ, dot_size, line_size)
+    ps <- .plot_diag_reqq(x$REQQ, point_size, line_size)
     for (i in 1:length(ps)) {
       p[[length(p) + 1]] <- ps[[i]]
     }
@@ -92,10 +92,10 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_qq <- function(x, dot_size, line_size) {
+.plot_diag_qq <- function(x, point_size, line_size) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
     stat_smooth(method = "lm", size = line_size, colour = unname(flat_colors("teal"))) +
-    geom_point2(colour = "#2c3e50", size = dot_size) +
+    geom_point2(colour = "#2c3e50", size = point_size) +
     labs(
       title = "Non-normality of Residuals and Outliers",
       subtitle = "Dots should be plotted along the line",
@@ -108,10 +108,10 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_pp <- function(x, dot_size, line_size) {
+.plot_diag_pp <- function(x, point_size, line_size) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
     stat_smooth(method = "lm", size = line_size, colour = unname(flat_colors("teal"))) +
-    geom_point2(colour = "#2c3e50", size = dot_size) +
+    geom_point2(colour = "#2c3e50", size = point_size) +
     labs(
       title = "Non-normality of Residuals and Outliers (PP plot)",
       subtitle = "Dots should be plotted along the line",
@@ -124,9 +124,9 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_homogeneity <- function(x, dot_size, line_size) {
+.plot_diag_homogeneity <- function(x, point_size, line_size) {
   ggplot(x, aes(x = .data$x, .data$y)) +
-    geom_point2(colour = "#2c3e50", size = dot_size) +
+    geom_point2(colour = "#2c3e50", size = point_size) +
     stat_smooth(method = "loess", se = FALSE, size = line_size, colour = unname(flat_colors("dark red"))) +
     labs(
       title = "Homogeneity of Variance (Scale-Location)",
@@ -139,9 +139,9 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_ncv <- function(x, dot_size, line_size) {
+.plot_diag_ncv <- function(x, point_size, line_size) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = "#2c3e50", size = dot_size) +
+    geom_point2(colour = "#2c3e50", size = point_size) +
     geom_smooth(method = "loess", se = FALSE, size = line_size, colour = unname(flat_colors("dark red"))) +
     labs(
       x = "Fitted values",
@@ -154,7 +154,7 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_reqq <- function(x, dot_size, line_size) {
+.plot_diag_reqq <- function(x, point_size, line_size) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
     p <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
@@ -169,7 +169,7 @@ print.see_check_model <- function(x, ...) {
         width = 0,
         colour = "#2c3e50"
       ) +
-      geom_point2(colour = "#2c3e50", size = dot_size) +
+      geom_point2(colour = "#2c3e50", size = point_size) +
       stat_smooth(
         method = "lm",
         alpha = .2,

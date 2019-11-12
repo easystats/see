@@ -1,7 +1,7 @@
 #' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
+data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -64,18 +64,27 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
     dplyr::mutate(fill2 = ifelse(.data$prop >= .5, "Most probable", "Less probable")) %>%
     dplyr::select(-dplyr::one_of("n", "prop"))
 
-  # clean cryptic names
-  if (grid) {
-    dataplot$y <- .clean_parameter_names(dataplot$y)
-    if (!is.null(levels_order)) levels_order <- .clean_parameter_names(levels_order)
-  }
-
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
+  groups <- unique(dataplot$y)
+  if (!show_intercept) {
+    dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
+    groups <- unique(setdiff(groups, .intercepts()))
+  }
+
+  if (length(groups) == 1) {
+    ylab <- groups
+    dataplot$y <- 0
+  } else {
+    ylab <- "Parameters"
+  }
+
+  dataplot <- .fix_facet_names(dataplot)
+
   attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
-                                  "ylab" = "Parameters",
+                                  "ylab" = ylab,
                                   "legend_fill" = "Effect direction",
                                   "title" = "Probability of Direction")
 
@@ -108,17 +117,21 @@ data_plot.p_direction <- function(x, data = NULL, grid = TRUE, ...){
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @rdname data_plot
 #' @export
-plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, grid = TRUE, ...) {
+plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, n_columns = 1, ...) {
   # save model for later use
   model <- .retrieve_data(x)
 
   # retrieve and prepare data for plotting
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data, grid = grid)
+    x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 
-  # remove intercept from output, if requested
-  x <- .remove_intercept(x, column = "y", show_intercept)
+  # check if we have multiple panels
+  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
+      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
+
+  # get labels
+  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   # base setup
   p <- x %>%
@@ -144,11 +157,22 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
 
   p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
 
-  if ("Effects" %in% names(x) && isTRUE(grid)) {
-    if ("Component" %in% names(x))
-      p <- p + facet_wrap(~ Effects + Component, scales = "free")
-    else
-      p <- p + facet_wrap(~ Effects, scales = "free")
+
+  if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
+    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+  } else {
+    p <- p + scale_y_discrete(labels = labels)
+  }
+
+
+  if (!is.null(n_columns)) {
+    if ("Component" %in% names(x) && "Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+    } else if ("Effects" %in% names(x)) {
+      p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+    } else if ("Component" %in% names(x)) {
+      p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+    }
   }
 
   p

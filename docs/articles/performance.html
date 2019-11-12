@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.1</span>
       </span>
     </div>
 
@@ -62,6 +62,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
+    </li>
+    <li>
+      <a href="../articles/estimate.html">Plotting Functions for the estimate Package</a>
     </li>
     <li>
       <a href="../articles/parameters.html">Plotting Functions for the parameters Package</a>
@@ -290,6 +293,25 @@
 <a class="sourceLine" id="cb15-11" title="11"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 </div>
+<div id="roc-curves" class="section level1">
+<h1 class="hasAnchor">
+<a href="#roc-curves" class="anchor"></a>ROC curves</h1>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb16-3" title="3">iris<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris), <span class="dt">size =</span> <span class="dv">1</span>, <span class="fl">.3</span>)</a>
+<a class="sourceLine" id="cb16-4" title="4"></a>
+<a class="sourceLine" id="cb16-5" title="5">folds &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris), <span class="dt">size =</span> <span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris) <span class="op">/</span><span class="st"> </span><span class="dv">8</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb16-6" title="6">test_data &lt;-<span class="st"> </span>iris[folds, ]</a>
+<a class="sourceLine" id="cb16-7" title="7">train_data &lt;-<span class="st"> </span>iris[<span class="op">-</span>folds, ]</a>
+<a class="sourceLine" id="cb16-8" title="8"></a>
+<a class="sourceLine" id="cb16-9" title="9">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(y <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data =</span> train_data, <span class="dt">family =</span> <span class="st">"binomial"</span>)</a>
+<a class="sourceLine" id="cb16-10" title="10">result &lt;-<span class="st"> </span><span class="kw">performance_roc</span>(model, <span class="dt">new_data =</span> test_data)</a>
+<a class="sourceLine" id="cb16-11" title="11"></a>
+<a class="sourceLine" id="cb16-12" title="12">result</a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt; AUC: 62.34%</span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -310,6 +332,7 @@
 </li>
       <li><a href="#overall-model-check">Overall Model Check</a></li>
       <li><a href="#model-and-vector-properties">Model and Vector Properties</a></li>
+      <li><a href="#roc-curves">ROC curves</a></li>
       </ul>
 </div>
       </div>

@@ -3,6 +3,7 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   bayestestR: bayestestR.html
+  estimate: estimate.html
   parameters: parameters.html
   performance: performance.html
   seecolorscales: seecolorscales.html

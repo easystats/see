@@ -1,0 +1,92 @@
+#' @importFrom dplyr group_by mutate ungroup select one_of n
+#' @export
+data_plot.parameters_pca <- function(x, data = NULL, ...){
+  dataplot <- as.data.frame(x)
+  dataplot$Complexity <- NULL
+  dataplot$Uniqueness <- NULL
+
+  dataplot <- .reshape_to_long(dataplot, names_to = "Component", values_to = "y", columns = 2:ncol(dataplot))
+  dataplot$Variable <- factor(dataplot$Variable, levels = rev(unique(dataplot$Variable)))
+
+  rotation_name <- attr(x, "rotation", exact = TRUE)
+
+  if (rotation_name == "none") {
+    title <- "Loadings from Principal Component Analysis (no rotation)"
+  } else {
+    title <- sprintf("Rotated loadings from Principal Component Analysis (%s-rotation)", rotation_name)
+  }
+
+  attr(dataplot, "info") <- list(
+    "xlab" = "",
+    "ylab" = "",
+    "title" = title
+  )
+
+  class(dataplot) <- c("data_plot", "see_parameters_pca", "data.frame")
+  dataplot
+}
+
+#' @export
+data_plot.parameters_efa <- data_plot.parameters_pca
+
+
+
+
+
+# Plot --------------------------------------------------------------------
+#' @rdname data_plot
+#' @importFrom rlang .data
+#' @export
+plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5, text_color = "black", size = 1, ...) {
+  type <- match.arg(type)
+  if (!"data_plot" %in% class(x)) {
+    x <- data_plot(x)
+  }
+
+  if (missing(size)) {
+    size <- switch(
+      type,
+      "bar" = .6,
+      "line" = 1,
+      1
+    )
+  }
+
+  p <- x %>%
+    as.data.frame() %>%
+    ggplot(aes(
+      x = .data$Variable,
+      y = abs(.data$y),
+      fill = .data$y,
+      color = .data$y
+    ))
+
+  if (type == "bar") {
+    p <- p +
+      geom_bar(stat = "identity", width = size, colour = NA) +
+      scale_fill_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
+  } else {
+    p <- p +
+      geom_segment(aes(y = 0, xend = .data$Variable, yend = abs(.data$y)), size = size) +
+      geom_point(size = 2 * size) +
+      scale_color_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
+  }
+
+  p <- p +
+    geom_text(aes(y = abs(.data$y), label = round(.data$y, 2)), color = text_color, size = text_size, nudge_y = .15) +
+    coord_flip() +
+    guides(fill = FALSE, color = FALSE) +
+    scale_y_continuous(
+      limits = c(0, 1.25),
+      breaks = c(0, .25, .5, .75, 1, 1.25),
+      labels = c("0", "0.25", "0.5", "0.75", "1", "")
+    ) +
+    facet_wrap(~ Component) +
+    add_plot_attributes(x)
+
+  p
+}
+
+
+#' @export
+plot.see_parameters_efa <- plot.see_parameters_pca

@@ -7,11 +7,11 @@ plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#01
   hypothesis <- attr(x, "hypothesis")
 
   # if we have intercept-only models, keep at least the intercept
-  intercepts_points <- which(d_points$ind %in% c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept"))
+  intercepts_points <- which(.in_intercepts(d_points$ind))
   if (length(intercepts_points) &&
       nrow(d_points) > length(intercepts_points) &&
       !show_intercept) {
-    intercepts_data <- which(plot_data$ind %in% c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept"))
+    intercepts_data <- which(.in_intercepts(plot_data$ind))
     plot_data <- plot_data[-intercepts_data, ]
     d_points <- d_points[-intercepts_points, ]
   }

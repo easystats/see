@@ -88,7 +88,7 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     else
       x_lab <- "Parameter Value"
 
-    if (!show_intercept && x_lab %in% c("Intercept", "zi_Intercept", "(Intercept)", "b_Intercept", "b_zi_Intercept")) return(NULL)
+    if (!show_intercept && .has_intercept(x_lab)) return(NULL)
 
     label_mean_x <- mean_x
     label_mean_y <- max_y * 1.05
@@ -149,7 +149,6 @@ plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 
     p_object <- p_object +
       geom_vline(xintercept = 0, linetype = "dotted") +
       scale_y_continuous(expand = c(0, 0), limits = c(0, max_y * 1.15)) +
-      see::theme_lucid() +
       labs(title = "Bayesian Point Estimates", x = x_lab, y = "Probability Density")
 
     p_object

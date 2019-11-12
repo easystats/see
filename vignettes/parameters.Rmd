@@ -22,9 +22,12 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(parameters)
+library(effectsize)
 library(insight)
 library(see)
 library(glmmTMB)
+library(lavaan)
+library(metafor)
 library(ggplot2)
 data("Salamanders")
 
@@ -39,6 +42,8 @@ model <- glmmTMB(
   family = poisson(),
   data = Salamanders
 )
+
+model_parameters(model)
 ```
 
 ## Model Parameters
@@ -61,12 +66,91 @@ plot(result)
 plot(result, stack = FALSE)
 ```
 
-```{r}
-plot(result, grid = TRUE)
+```{r fig.height=6, fig.width=8}
+plot(result, n_columns = 2)
 ```
 
 ```{r}
-plot(result, grid = TRUE, stack = FALSE)
+plot(result, n_columns = 2, stack = FALSE)
+```
+
+## Model Parameters of SEM models
+
+```{r}
+structure <- ' visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6
+               speed   =~ x7 + x8 + x9 '
+
+model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
+result <- parameters::model_parameters(model)
+plot(result)
+```
+
+## Model Parameters of Bayesian models
+
+```{r}
+# We download the model to save computation time. Here is the code
+# to refit the exact model used below...
+
+# zinb <- read.csv("http://stats.idre.ucla.edu/stat/data/fish.csv")
+# set.seed(123)
+# model <- brm(bf(
+#     count ~ persons + child + camper + (1 | persons),
+#     zi ~ child + camper + (1 | persons)
+#   ),
+#   data = zinb,
+#   family = zero_inflated_poisson()
+# )
+brms_model <- insight::download_model("brms_zi_2")
+result <- model_parameters(brms_model, effects = "all", component = "all")
+
+plot(result)
+```
+
+```{r fig.width=6, fig.height=8}
+plot(result, n_column = 1)
+```
+
+
+## Model Parameters of Meta-Analysis models
+
+```{r, warning=FALSE, message=FALSE}
+mydat <- data.frame(
+  effectsize = c(-0.393, 0.675, 0.282, -1.398),
+  standarderror = c(0.317, 0.317, 0.13, 0.36)
+)
+
+ma <- rma(yi = effectsize, sei = standarderror, method = "REML", data = mydat)
+result <- model_parameters(ma)
+
+result
+plot(result)
+```
+
+
+## Principal Component Analysis
+
+```{r}
+data(mtcars)
+result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
+result
+
+plot(result)
+```
+
+```{r}
+result <- principal_components(
+  mtcars[, 1:7], 
+  n = 3, 
+  rotation = "varimax", 
+  threshold = "max", 
+  sort = TRUE
+)
+
+result
+
+plot(result, type = "line", text_color = "white") +
+  theme_abyss()
 ```
 
 ## Number of Components/Factors to Retain
@@ -74,6 +158,7 @@ plot(result, grid = TRUE, stack = FALSE)
 ```{r}
 data(mtcars)
 result <- n_factors(mtcars, type = "PCA")
+result
 
 plot(result)
 plot(result, type = "line")
@@ -84,6 +169,7 @@ plot(result, type = "line")
 ```{r}
 data(iris)
 result <- n_clusters(standardize(iris[, 1:4]))
+result
 
 plot(result)
 plot(result, type = "line")

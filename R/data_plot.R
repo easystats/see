@@ -22,18 +22,19 @@
 #' @param point_size Size of point-geoms.
 #' @param rope_alpha Transparency level of ROPE ribbon.
 #' @param rope_color Color of ROPE ribbon.
-#' @param grid Logical, if \code{TRUE}, model components like random effects
-#'   or a zero-inflation component are plotted in a grid-layout.
+#' @param n_columns For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.
 #' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
 #'   Else, densities are plotted for each parameter among each other.
 #' @param n_pies Number of pies.
 #' @param value What value to display.
 #' @param log Show log-transformed Bayes factors.
 #' @param text_size Size of text labels.
-#' @param dot_size Size of point geoms.
+#' @param text_color Color of text labels.
 #' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
 #' @param threshold_p Numeric, threshold at which value p-values will be displayed.
 #' @param ci Logical, whether confidence intervals should be added to the plot.
+#' @param size Size of geoms. Ddepends on the context of the \code{plot()} function,
+#'   so this argument may change size of points, lines or bars.
 #' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else,
 #'   single plots are returned.
 #' @param type Character vector, indicating the type of plot (for
@@ -72,12 +73,14 @@
 #'   \item \code{bayestestR::hdi()}
 #'   \item \code{bayestestR::map_estimate()}
 #'   \item \code{bayestestR::p_direction()}
+#'   \item \code{bayestestR::p_significance()}
 #'   \item \code{bayestestR::point_estimate()}
 #'   \item \code{bayestestR::rope()}
 #'   \item \code{estimate::estimate_contrasts()}
 #'   \item \code{parameters::model_parameters()}
 #'   \item \code{parameters::n_factors()}
 #'   \item \code{parameters::parameters_simulate()}
+#'   \item \code{parameters::principal_components()}
 #'   \item \code{performance::binned_residuals()}
 #'   \item \code{performance::check_collinearity()}
 #'   \item \code{performance::check_distribution()}

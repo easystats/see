@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-##Setup and Model Fitting
+## Setup and Model Fitting
 
 ```{r setup}
 library(bayestestR)
@@ -74,19 +74,46 @@ result
 plot(result)
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=9, fig.height=9}
 result <- p_direction(model2, effects = "all", component = "all")
 
 result
 
 plot(result)
-plot(result, grid = FALSE)
+plot(result, n_columns = NULL)
 ```
 
 ### Adding Prior Samples
 
 ```{r}
 result <- p_direction(model)
+plot(result, priors = TRUE)
+```
+
+
+## Practical Significance
+
+```{r}
+result <- p_significance(model)
+
+result
+
+plot(result)
+```
+
+```{r fig.width=8, fig.height=10}
+result <- p_significance(model2, effects = "all", component = "all")
+
+result
+
+plot(result)
+plot(result, n_columns = NULL)
+```
+
+### Adding Prior Samples
+
+```{r}
+result <- p_significance(model)
 plot(result, priors = TRUE)
 ```
 
@@ -106,7 +133,7 @@ result <- point_estimate(model, centrality = c("map", "mean"))
 
 result
 
-plot(result, panel = FALSE)[[5]]
+plot(result, panel = FALSE)[[2]]
 ```
 
 
@@ -128,11 +155,11 @@ result
 plot(result) + scale_fill_flat()
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=9, fig.height=9}
 result <- hdi(model2, ci = c(0.5, 0.75, 0.89), effects = "all", component = "all")
 
-plot(result) + scale_fill_metro()
-plot(result, grid = FALSE) + scale_fill_material()
+plot(result, n_columns = 2) + scale_fill_metro()
+plot(result, n_columns = NULL) + scale_fill_material()
 ```
 
 ## Region of Practical Equivalence (ROPE)
@@ -146,7 +173,7 @@ plot(result, rope_color = "red") +
   scale_fill_brewer(palette = "Greens", direction = -1)
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=8, fig.height=10}
 result <- rope(model2, ci = c(0.9, 0.95), effects = "all", component = "all")
 
 result 
@@ -157,14 +184,6 @@ plot(result, rope_color = "grey70") +
 
 ## Test for Practical Equivalence
 
-```{r echo=FALSE}
-junk <- capture.output(model <- rstanarm::stan_glm(mpg ~ wt + gear + cyl + disp, data = mtcars))
-```
-```{r eval=FALSE}
-model <- rstanarm::stan_glm(
-  mpg ~ wt + gear + cyl + disp, data = mtcars
-)
-``` 
 ```{r}
 result <- equivalence_test(model)
 
@@ -173,7 +192,9 @@ result
 plot(result) +
   theme_blackboard() +
   scale_fill_material()
+```
 
+```{r fig.width=9, fig.height=6}
 result <- equivalence_test(model, ci = c(.89, .95))
 
 result
@@ -181,6 +202,14 @@ result
 plot(result) +
   theme_abyss() +
   scale_fill_flat()
+```
+
+```{r fig.width=11, fig.height=9}
+result <- equivalence_test(model2, ci = c(.89, .95), effects = "all", component = "all")
+
+result
+
+plot(result, n_columns = 3) + theme_modern()
 ```
 
 

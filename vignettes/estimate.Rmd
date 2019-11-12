@@ -1,0 +1,41 @@
+---
+title: "Plotting Functions for the estimate Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{estimate}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, 
+  fig.height = 5,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+## Setup and Model Fitting
+
+```{r setup}
+library(estimate)
+library(rstanarm)
+library(ggplot2)
+library(see)
+
+theme_set(theme_modern())
+
+model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+```
+
+## Pairwise Contrasts
+
+```{r}
+contrasts <- estimate_contrasts(model)
+means <- estimate_means(model)
+
+plot(contrasts, means)
+```

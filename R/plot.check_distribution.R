@@ -26,7 +26,7 @@ plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
 
   p1 <- ggplot(dat, aes(x = .data$x, y = .data$y, colour = .data$group)) +
     geom_linerange(aes(ymin = 0, ymax = .data$y), position = position_dodge(.4), size = .8) +
-    geom_point(size = 2, position = position_dodge(.4)) +
+    geom_point(size = point_size, position = position_dodge(.4)) +
     coord_flip() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Residuals and Response") +
     scale_y_continuous(labels = scales::percent, expand = c(0, 0), limits = c(0, max_y)) +
@@ -82,7 +82,7 @@ plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE,
 
   p1 <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
     geom_linerange(aes(ymin = 0, ymax = .data$y), position = position_dodge(.4), size = .8) +
-    geom_point(size = 2, position = position_dodge(.4)) +
+    geom_point(size = point_size, position = position_dodge(.4)) +
     coord_flip() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
     scale_y_continuous(labels = scales::percent, expand = c(0, 0), limits = c(0, max_y)) +

@@ -43,10 +43,10 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
 #' @export
-plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, grid = FALSE, ...) {
+plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, n_columns = NULL, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
 
-  plot.see_estimate_density(x, stack = stack, show_intercept = show_intercept, grid = grid, ...)
+  plot.see_estimate_density(x, stack = stack, show_intercept = show_intercept, n_columns = n_columns, ...)
 }

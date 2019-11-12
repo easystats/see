@@ -2,9 +2,9 @@
 % Please edit documentation in R/data_plot.R, R/plot.bayesfactor_models.R,
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
-%   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.eti.R,
-%   R/plot.hdi.R, R/plot.n_factors.R, R/plot.p_direction.R,
-%   R/plot.parameters_model.R, R/plot.parameters_sem.R,
+%   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
+%   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
+%   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
 %   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
@@ -15,11 +15,12 @@
 \alias{plot.see_check_outliers}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
-\alias{plot.see_eti}
 \alias{plot.see_hdi}
 \alias{plot.see_n_factors}
 \alias{plot.see_p_direction}
+\alias{plot.see_p_significance}
 \alias{plot.see_parameters_model}
+\alias{plot.see_parameters_pca}
 \alias{plot.see_parameters_sem}
 \alias{plot.see_parameters_simulate}
 \alias{plot.see_point_estimate}
@@ -45,39 +46,47 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
 
 \method{plot}{see_equivalence_test}(x, rope_color = "#0171D3",
-  rope_alpha = 0.2, show_intercept = FALSE, ...)
+  rope_alpha = 0.2, show_intercept = FALSE, n_columns = 1, ...)
 
 \method{plot}{see_estimate_density}(x, stack = TRUE,
-  show_intercept = FALSE, grid = FALSE, priors = FALSE,
-  priors_alpha = 0.4, size = 1, ...)
+  show_intercept = FALSE, n_columns = 1, priors = FALSE,
+  priors_alpha = 0.4, size = 0.9, ...)
 
-\method{plot}{see_eti}(x, data = NULL, show_intercept = FALSE, ...)
 
 \method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
-  grid = TRUE, ...)
+  n_columns = 1, ...)
 
 \method{plot}{see_n_factors}(x, data = NULL, type = c("bar", "line",
-  "area"), ...)
+  "area"), size = 1, ...)
 
 \method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
-  priors = FALSE, priors_alpha = 0.4, grid = TRUE, ...)
+  priors = FALSE, priors_alpha = 0.4, n_columns = 1, ...)
+
+\method{plot}{see_p_significance}(x, data = NULL,
+  show_intercept = FALSE, priors = FALSE, priors_alpha = 0.4,
+  n_columns = 1, ...)
 
 \method{plot}{see_parameters_model}(x, show_intercept = FALSE,
-  dot_size = 0.8, ...)
+  point_size = 0.8, sort = NULL, n_columns = NULL, ...)
+
+\method{plot}{see_parameters_pca}(x, type = c("bar", "line"),
+  text_size = 3.5, text_color = "black", size = 1, ...)
 
 \method{plot}{see_parameters_sem}(x, data = NULL,
   type = c("regression", "correlation", "loading"),
-  threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...)
+  threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE,
+  size = 22, ...)
 
 \method{plot}{see_parameters_simulate}(x, data = NULL, stack = TRUE,
-  show_intercept = FALSE, grid = FALSE, ...)
+  show_intercept = FALSE, n_columns = NULL, ...)
 
 \method{plot}{see_point_estimate}(x, data = NULL, point_size = 2,
   text_size = 3.5, panel = TRUE, show_labels = TRUE,
   show_intercept = FALSE, priors = FALSE, priors_alpha = 0.4, ...)
 
 \method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
-  rope_color = "cadetblue", show_intercept = FALSE, grid = TRUE, ...)
+  rope_color = "cadetblue", show_intercept = FALSE, n_columns = 1,
+  ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -118,18 +127,22 @@ or \code{\link[parameters]{n_factors}}).}
 
 \item{text_size}{Size of text labels.}
 
+\item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
+
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
-
-\item{grid}{Logical, if \code{TRUE}, model components like random effects
-or a zero-inflation component are plotted in a grid-layout.}
 
 \item{priors}{Logical, if \code{TRUE}, prior distributions are simulated
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
 
-\item{dot_size}{Size of point geoms.}
+\item{size}{Size of geoms. Ddepends on the context of the \code{plot()} function,
+so this argument may change size of points, lines or bars.}
+
+\item{sort}{If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.}
+
+\item{text_color}{Color of text labels.}
 
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 
@@ -175,12 +188,14 @@ development and probably not yet available):
   \item \code{bayestestR::hdi()}
   \item \code{bayestestR::map_estimate()}
   \item \code{bayestestR::p_direction()}
+  \item \code{bayestestR::p_significance()}
   \item \code{bayestestR::point_estimate()}
   \item \code{bayestestR::rope()}
   \item \code{estimate::estimate_contrasts()}
   \item \code{parameters::model_parameters()}
   \item \code{parameters::n_factors()}
   \item \code{parameters::parameters_simulate()}
+  \item \code{parameters::principal_components()}
   \item \code{performance::binned_residuals()}
   \item \code{performance::check_collinearity()}
   \item \code{performance::check_distribution()}
