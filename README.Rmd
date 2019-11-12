@@ -195,9 +195,7 @@ data <- iris %>%
 
 data %>%
   ggplot(aes(x = name, y = value, color = Species, group = Species)) +
-  # The polygon geom is a trick go connect endpoints
   geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
-  geom_line() +
   coord_radar(start = -pi/4) +
   theme_minimal()
 ```
