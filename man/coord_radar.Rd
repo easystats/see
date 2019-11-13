@@ -9,7 +9,7 @@ coord_radar(theta = "x", start = 0, direction = 1)
 \arguments{
 \item{theta}{Can be 'x' or 'y'.}
 
-\item{start}{Starting position. For instance, \code{-pi/4}}
+\item{start}{Starting position. Best expressed in terms of \code{pi} (e.g., \code{-pi/4}).}
 
 \item{direction}{The direction of plotting. Can be 1 or -1.}
 }
@@ -29,9 +29,7 @@ data <- iris \%>\%
 
 data \%>\%
   ggplot(aes(x = name, y = value, color = Species, group = Species)) +
-  # The polygon geom is a trick go connect endpoints
-  geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
-  geom_line() +
+  geom_polygon(fill = NA, size = 2) +
   coord_radar(start = -pi/4)
 
 }

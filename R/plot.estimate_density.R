@@ -1,7 +1,7 @@
 #' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.estimate_density <- function(x, model = NULL, ...) {
+data_plot.estimate_density <- function(x, data = NULL, ...) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
@@ -9,8 +9,8 @@ data_plot.estimate_density <- function(x, model = NULL, ...) {
   }
 
   # add component and effects columns
-  if (!is.null(model)) {
-    dataplot <- merge(dataplot, insight::clean_parameters(model), by = "Parameter")
+  if (!is.null(data)) {
+    dataplot <- merge(dataplot, insight::clean_parameters(data), by = "Parameter")
   }
 
   dataplot <- .fix_facet_names(dataplot)
@@ -48,7 +48,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
 
 
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, model = model, ...)
+    x <- data_plot(x, data = model, ...)
   }
 
   if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
