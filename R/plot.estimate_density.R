@@ -48,7 +48,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
 
 
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, model = model, ...)
+    x <- data_plot(x, data = model, ...)
   }
 
   if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
