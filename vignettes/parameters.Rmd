@@ -29,13 +29,15 @@ library(glmmTMB)
 library(lavaan)
 library(metafor)
 library(ggplot2)
+library(splines)
 data("Salamanders")
+data("iris")
 
 theme_set(theme_modern())
 ```
 
 ```{r}
-# fit example model
+# fit two example model
 model <- glmmTMB(
   count ~ spp + mined + (1 | site),
   ziformula =  ~ mined,
@@ -44,12 +46,22 @@ model <- glmmTMB(
 )
 
 model_parameters(model)
+
+
+model2 <- lm(Sepal.Length ~ Species * bs(Petal.Width, degree = 2), data = iris)
+model_parameters(model2)
 ```
 
 ## Model Parameters
 
 ```{r}
 result <- model_parameters(model)
+
+plot(result)
+```
+
+```{r}
+result <- model_parameters(model2)
 
 plot(result)
 ```

@@ -16,6 +16,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
 
+  # do we have prettified names?
+  pretty_names <- attributes(x)$pretty_names
+
   x <- .fix_facet_names(x)
 
   mc <- attributes(x)$model_class
@@ -58,7 +61,6 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   }
 
 
-  ## TODO check for brms models, "Intercept" may be named differently
   if (!show_intercept) {
     x <- x[!.in_intercepts(x$Parameter), ]
   }
@@ -106,6 +108,10 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
       scale_color_material()
   }
 
+
+  if (!is.null(pretty_names)) {
+    p <- p + scale_x_discrete(labels = pretty_names)
+  }
 
   # check for exponentiated estimates. in such cases, we transform the y-axis
   # to log-scale, to get proper proportion of exponentiated estimates. to

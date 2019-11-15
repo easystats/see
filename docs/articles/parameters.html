@@ -115,10 +115,12 @@
 <a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(lavaan)</a>
 <a class="sourceLine" id="cb1-7" title="7"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(metafor)</a>
 <a class="sourceLine" id="cb1-8" title="8"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"Salamanders"</span>)</a>
-<a class="sourceLine" id="cb1-10" title="10"></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="kw">theme_set</span>(<span class="kw"><a href="../reference/theme_modern.html">theme_modern</a></span>())</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># fit example model</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(splines)</a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"Salamanders"</span>)</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"iris"</span>)</a>
+<a class="sourceLine" id="cb1-12" title="12"></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="kw">theme_set</span>(<span class="kw"><a href="../reference/theme_modern.html">theme_modern</a></span>())</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># fit two example model</span></a>
 <a class="sourceLine" id="cb2-2" title="2">model &lt;-<span class="st"> </span><span class="kw">glmmTMB</span>(</a>
 <a class="sourceLine" id="cb2-3" title="3">  count <span class="op">~</span><span class="st"> </span>spp <span class="op">+</span><span class="st"> </span>mined <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>site),</a>
 <a class="sourceLine" id="cb2-4" title="4">  <span class="dt">ziformula =</span>  <span class="op">~</span><span class="st"> </span>mined,</a>
@@ -132,20 +134,35 @@
 <a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |     z |  df |      p</span></a>
 <a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; ------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; (Intercept) |       -0.36 | 0.28 | [-0.90,  0.18] | -1.30 | 633 | 0.194 </span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; spp (PR)    |       -1.27 | 0.24 | [-1.74, -0.80] | -5.27 | 633 | &lt; .001</span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; spp (DM)    |        0.27 | 0.14 | [ 0.00,  0.54] |  1.95 | 633 | 0.051 </span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; spp (EC-A)  |       -0.57 | 0.21 | [-0.97, -0.16] | -2.75 | 633 | 0.006 </span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; spp (EC-L)  |        0.67 | 0.13 | [ 0.41,  0.92] |  5.20 | 633 | &lt; .001</span></a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; spp (DES-L) |        0.63 | 0.13 | [ 0.38,  0.87] |  4.96 | 633 | &lt; .001</span></a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; spp (DF)    |        0.12 | 0.15 | [-0.17,  0.40] |  0.78 | 633 | 0.435 </span></a>
-<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt; mined (no)  |        1.27 | 0.27 | [ 0.74,  1.80] |  4.72 | 633 | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; spp [PR]    |       -1.27 | 0.24 | [-1.74, -0.80] | -5.27 | 633 | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; spp [DM]    |        0.27 | 0.14 | [ 0.00,  0.54] |  1.95 | 633 | 0.051 </span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; spp [EC-A]  |       -0.57 | 0.21 | [-0.97, -0.16] | -2.75 | 633 | 0.006 </span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; spp [EC-L]  |        0.67 | 0.13 | [ 0.41,  0.92] |  5.20 | 633 | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; spp [DES-L] |        0.63 | 0.13 | [ 0.38,  0.87] |  4.96 | 633 | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; spp [DF]    |        0.12 | 0.15 | [-0.17,  0.40] |  0.78 | 633 | 0.435 </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt; mined [no]  |        1.27 | 0.27 | [ 0.74,  1.80] |  4.72 | 633 | &lt; .001</span></a>
 <a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; # Zero-Inflated component</span></a>
 <a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |     z |  df |      p</span></a>
 <a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; ------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt; (Intercept) |        0.79 | 0.27 | [ 0.26,  1.32] |  2.90 | 633 | 0.004 </span></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt; mined (no)  |       -1.84 | 0.31 | [-2.46, -1.23] | -5.87 | 633 | &lt; .001</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt; mined [no]  |       -1.84 | 0.31 | [-2.46, -1.23] | -5.87 | 633 | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-29" title="29"></a>
+<a class="sourceLine" id="cb2-30" title="30"></a>
+<a class="sourceLine" id="cb2-31" title="31">model2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species <span class="op">*</span><span class="st"> </span><span class="kw">bs</span>(Petal.Width, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb2-32" title="32"><span class="kw">model_parameters</span>(model2)</a>
+<a class="sourceLine" id="cb2-33" title="33"><span class="co">#&gt; Parameter                                       | Coefficient |    SE |          95% CI |     t |  df |      p</span></a>
+<a class="sourceLine" id="cb2-34" title="34"><span class="co">#&gt; --------------------------------------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb2-35" title="35"><span class="co">#&gt; (Intercept)                                     |        4.79 |  0.17 | [  4.45,  5.13] | 27.66 | 141 | &lt; .001</span></a>
+<a class="sourceLine" id="cb2-36" title="36"><span class="co">#&gt; Species [versicolor]                            |       -3.73 |  2.14 | [ -7.96,  0.50] | -1.74 | 141 | 0.083 </span></a>
+<a class="sourceLine" id="cb2-37" title="37"><span class="co">#&gt; Species [virginica]                             |       -2.67 |  2.88 | [ -8.36,  3.03] | -0.93 | 141 | 0.356 </span></a>
+<a class="sourceLine" id="cb2-38" title="38"><span class="co">#&gt; Petal.Width [1st degree]                        |        2.53 |  2.36 | [ -2.13,  7.20] |  1.07 | 141 | 0.285 </span></a>
+<a class="sourceLine" id="cb2-39" title="39"><span class="co">#&gt; Petal.Width [2nd degree]                        |      -11.18 | 21.14 | [-52.98, 30.62] | -0.53 | 141 | 0.598 </span></a>
+<a class="sourceLine" id="cb2-40" title="40"><span class="co">#&gt; Species [versicolor] * Petal.Width [1st degree] |        5.48 |  4.84 | [ -4.09, 15.05] |  1.13 | 141 | 0.260 </span></a>
+<a class="sourceLine" id="cb2-41" title="41"><span class="co">#&gt; Species [virginica] * Petal.Width [1st degree]  |        2.37 |  4.35 | [ -6.22, 10.96] |  0.54 | 141 | 0.587 </span></a>
+<a class="sourceLine" id="cb2-42" title="42"><span class="co">#&gt; Species [versicolor] * Petal.Width [2nd degree] |       14.84 | 21.16 | [-26.99, 56.68] |  0.70 | 141 | 0.484 </span></a>
+<a class="sourceLine" id="cb2-43" title="43"><span class="co">#&gt; Species [virginica] * Petal.Width [2nd degree]  |       15.81 | 21.32 | [-26.35, 57.96] |  0.74 | 141 | 0.460</span></a></code></pre></div>
 </div>
 <div id="model-parameters" class="section level2">
 <h2 class="hasAnchor">
@@ -154,156 +171,160 @@
 <a class="sourceLine" id="cb3-2" title="2"></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">result &lt;-<span class="st"> </span><span class="kw">model_parameters</span>(model2)</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 </div>
 <div id="simulated-model-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#simulated-model-parameters" class="anchor"></a>Simulated Model Parameters</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">result &lt;-<span class="st"> </span><span class="kw">parameters_simulate</span>(model)</a>
-<a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">stack =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">result &lt;-<span class="st"> </span><span class="kw">parameters_simulate</span>(model)</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>, <span class="dt">stack =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">stack =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>, <span class="dt">stack =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
 <div id="model-parameters-of-sem-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#model-parameters-of-sem-models" class="anchor"></a>Model Parameters of SEM models</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">structure &lt;-<span class="st"> ' visual  =~ x1 + x2 + x3</span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="st">               textual =~ x4 + x5 + x6</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="st">               speed   =~ x7 + x8 + x9 '</span></a>
-<a class="sourceLine" id="cb8-4" title="4"></a>
-<a class="sourceLine" id="cb8-5" title="5">model &lt;-<span class="st"> </span>lavaan<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html">cfa</a></span>(structure, <span class="dt">data =</span> HolzingerSwineford1939)</a>
-<a class="sourceLine" id="cb8-6" title="6">result &lt;-<span class="st"> </span>parameters<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(model)</a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">structure &lt;-<span class="st"> ' visual  =~ x1 + x2 + x3</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">               textual =~ x4 + x5 + x6</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">               speed   =~ x7 + x8 + x9 '</span></a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5">model &lt;-<span class="st"> </span>lavaan<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html">cfa</a></span>(structure, <span class="dt">data =</span> HolzingerSwineford1939)</a>
+<a class="sourceLine" id="cb9-6" title="6">result &lt;-<span class="st"> </span>parameters<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(model)</a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
 <div id="model-parameters-of-bayesian-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#model-parameters-of-bayesian-models" class="anchor"></a>Model Parameters of Bayesian models</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># We download the model to save computation time. Here is the code</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="co"># to refit the exact model used below...</span></a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co"># zinb &lt;- read.csv("http://stats.idre.ucla.edu/stat/data/fish.csv")</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co"># set.seed(123)</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="co"># model &lt;- brm(bf(</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#     count ~ persons + child + camper + (1 | persons),</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co">#     zi ~ child + camper + (1 | persons)</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="co">#   ),</span></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="co">#   data = zinb,</span></a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="co">#   family = zero_inflated_poisson()</span></a>
-<a class="sourceLine" id="cb9-12" title="12"><span class="co"># )</span></a>
-<a class="sourceLine" id="cb9-13" title="13">brms_model &lt;-<span class="st"> </span>insight<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/insight/man/download_model.html">download_model</a></span>(<span class="st">"brms_zi_2"</span>)</a>
-<a class="sourceLine" id="cb9-14" title="14">result &lt;-<span class="st"> </span><span class="kw">model_parameters</span>(brms_model, <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</a>
-<a class="sourceLine" id="cb9-15" title="15"></a>
-<a class="sourceLine" id="cb9-16" title="16"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_column =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># We download the model to save computation time. Here is the code</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co"># to refit the exact model used below...</span></a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co"># zinb &lt;- read.csv("http://stats.idre.ucla.edu/stat/data/fish.csv")</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co"># set.seed(123)</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co"># model &lt;- brm(bf(</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#     count ~ persons + child + camper + (1 | persons),</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">#     zi ~ child + camper + (1 | persons)</span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#   ),</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#   data = zinb,</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="co">#   family = zero_inflated_poisson()</span></a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="co"># )</span></a>
+<a class="sourceLine" id="cb10-13" title="13">brms_model &lt;-<span class="st"> </span>insight<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/insight/man/download_model.html">download_model</a></span>(<span class="st">"brms_zi_2"</span>)</a>
+<a class="sourceLine" id="cb10-14" title="14">result &lt;-<span class="st"> </span><span class="kw">model_parameters</span>(brms_model, <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</a>
+<a class="sourceLine" id="cb10-15" title="15"></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_column =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
 </div>
 <div id="model-parameters-of-meta-analysis-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#model-parameters-of-meta-analysis-models" class="anchor"></a>Model Parameters of Meta-Analysis models</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">mydat &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb11-2" title="2">  <span class="dt">effectsize =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">0.393</span>, <span class="fl">0.675</span>, <span class="fl">0.282</span>, <span class="fl">-1.398</span>),</a>
-<a class="sourceLine" id="cb11-3" title="3">  <span class="dt">standarderror =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.317</span>, <span class="fl">0.317</span>, <span class="fl">0.13</span>, <span class="fl">0.36</span>)</a>
-<a class="sourceLine" id="cb11-4" title="4">)</a>
-<a class="sourceLine" id="cb11-5" title="5"></a>
-<a class="sourceLine" id="cb11-6" title="6">ma &lt;-<span class="st"> </span><span class="kw">rma</span>(<span class="dt">yi =</span> effectsize, <span class="dt">sei =</span> standarderror, <span class="dt">method =</span> <span class="st">"REML"</span>, <span class="dt">data =</span> mydat)</a>
-<a class="sourceLine" id="cb11-7" title="7">result &lt;-<span class="st"> </span><span class="kw">model_parameters</span>(ma)</a>
-<a class="sourceLine" id="cb11-8" title="8"></a>
-<a class="sourceLine" id="cb11-9" title="9">result</a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |     z |      p | Weight</span></a>
-<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt; ---------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb11-12" title="12"><span class="co">#&gt; Study 1     |       -0.39 | 0.32 | [-1.01,  0.23] | -1.24 | 0.215  |   9.95</span></a>
-<a class="sourceLine" id="cb11-13" title="13"><span class="co">#&gt; Study 2     |        0.68 | 0.32 | [ 0.05,  1.30] |  2.13 | 0.033  |   9.95</span></a>
-<a class="sourceLine" id="cb11-14" title="14"><span class="co">#&gt; Study 3     |        0.28 | 0.13 | [ 0.03,  0.54] |  2.17 | 0.030  |  59.17</span></a>
-<a class="sourceLine" id="cb11-15" title="15"><span class="co">#&gt; Study 4     |       -1.40 | 0.36 | [-2.10, -0.69] | -3.88 | &lt; .001 |   7.72</span></a>
-<a class="sourceLine" id="cb11-16" title="16"><span class="co">#&gt; (Intercept) |       -0.18 | 0.44 | [-1.05,  0.68] | -0.42 | 0.676  |</span></a>
-<a class="sourceLine" id="cb11-17" title="17"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">mydat &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="dt">effectsize =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">0.393</span>, <span class="fl">0.675</span>, <span class="fl">0.282</span>, <span class="fl">-1.398</span>),</a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="dt">standarderror =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.317</span>, <span class="fl">0.317</span>, <span class="fl">0.13</span>, <span class="fl">0.36</span>)</a>
+<a class="sourceLine" id="cb12-4" title="4">)</a>
+<a class="sourceLine" id="cb12-5" title="5"></a>
+<a class="sourceLine" id="cb12-6" title="6">ma &lt;-<span class="st"> </span><span class="kw">rma</span>(<span class="dt">yi =</span> effectsize, <span class="dt">sei =</span> standarderror, <span class="dt">method =</span> <span class="st">"REML"</span>, <span class="dt">data =</span> mydat)</a>
+<a class="sourceLine" id="cb12-7" title="7">result &lt;-<span class="st"> </span><span class="kw">model_parameters</span>(ma)</a>
+<a class="sourceLine" id="cb12-8" title="8"></a>
+<a class="sourceLine" id="cb12-9" title="9">result</a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |     z |      p | Weight</span></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="co">#&gt; ---------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt; Study 1     |       -0.39 | 0.32 | [-1.01,  0.23] | -1.24 | 0.215  |   9.95</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="co">#&gt; Study 2     |        0.68 | 0.32 | [ 0.05,  1.30] |  2.13 | 0.033  |   9.95</span></a>
+<a class="sourceLine" id="cb12-14" title="14"><span class="co">#&gt; Study 3     |        0.28 | 0.13 | [ 0.03,  0.54] |  2.17 | 0.030  |  59.17</span></a>
+<a class="sourceLine" id="cb12-15" title="15"><span class="co">#&gt; Study 4     |       -1.40 | 0.36 | [-2.10, -0.69] | -3.88 | &lt; .001 |   7.72</span></a>
+<a class="sourceLine" id="cb12-16" title="16"><span class="co">#&gt; (Intercept) |       -0.18 | 0.44 | [-1.05,  0.68] | -0.42 | 0.676  |</span></a>
+<a class="sourceLine" id="cb12-17" title="17"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 </div>
 <div id="principal-component-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#principal-component-analysis" class="anchor"></a>Principal Component Analysis</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
-<a class="sourceLine" id="cb12-2" title="2">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dt">n =</span> <span class="st">"all"</span>, <span class="dt">threshold =</span> <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb12-3" title="3">result</a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="co">#&gt; # Loadings from Principal Component Analysis (no rotation)</span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity</span></a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="co">#&gt; -------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="co">#&gt; mpg      | -0.93 |       |      | -0.30 |      |       |       1.30</span></a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="co">#&gt; cyl      |  0.96 |       |      |       |      | -0.21 |       1.18</span></a>
-<a class="sourceLine" id="cb12-10" title="10"><span class="co">#&gt; disp     |  0.95 |       |      | -0.23 |      |       |       1.16</span></a>
-<a class="sourceLine" id="cb12-11" title="11"><span class="co">#&gt; hp       |  0.87 |  0.36 |      |       | 0.30 |       |       1.64</span></a>
-<a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt; drat     | -0.75 |  0.48 | 0.44 |       |      |       |       2.47</span></a>
-<a class="sourceLine" id="cb12-13" title="13"><span class="co">#&gt; wt       |  0.88 | -0.35 | 0.26 |       |      |       |       1.54</span></a>
-<a class="sourceLine" id="cb12-14" title="14"><span class="co">#&gt; qsec     | -0.54 | -0.81 |      |       |      |       |       1.96</span></a>
-<a class="sourceLine" id="cb12-15" title="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb12-16" title="16"><span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span></a>
-<a class="sourceLine" id="cb12-17" title="17"></a>
-<a class="sourceLine" id="cb12-18" title="18"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(</a>
-<a class="sourceLine" id="cb13-2" title="2">  mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], </a>
-<a class="sourceLine" id="cb13-3" title="3">  <span class="dt">n =</span> <span class="dv">3</span>, </a>
-<a class="sourceLine" id="cb13-4" title="4">  <span class="dt">rotation =</span> <span class="st">"varimax"</span>, </a>
-<a class="sourceLine" id="cb13-5" title="5">  <span class="dt">threshold =</span> <span class="st">"max"</span>, </a>
-<a class="sourceLine" id="cb13-6" title="6">  <span class="dt">sort =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb13-7" title="7">)</a>
-<a class="sourceLine" id="cb13-8" title="8"></a>
-<a class="sourceLine" id="cb13-9" title="9">result</a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt; # Rotated loadings from Principal Component Analysis (varimax-rotation)</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt; Variable |   RC1 |   RC2 |   RC3 | Complexity | Uniqueness</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt; ----------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt; wt       |  0.91 |       |       |       1.31 |       0.03</span></a>
-<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; mpg      | -0.82 |       |       |       1.70 |       0.11</span></a>
-<a class="sourceLine" id="cb13-16" title="16"><span class="co">#&gt; disp     |  0.79 |       |       |       1.95 |       0.08</span></a>
-<a class="sourceLine" id="cb13-17" title="17"><span class="co">#&gt; cyl      |  0.64 |       |       |       2.84 |       0.06</span></a>
-<a class="sourceLine" id="cb13-18" title="18"><span class="co">#&gt; qsec     |       | -0.98 |       |       1.02 |       0.03</span></a>
-<a class="sourceLine" id="cb13-19" title="19"><span class="co">#&gt; hp       |       |  0.69 |       |       2.09 |       0.09</span></a>
-<a class="sourceLine" id="cb13-20" title="20"><span class="co">#&gt; drat     |       |       | -0.90 |       1.43 |       0.01</span></a>
-<a class="sourceLine" id="cb13-21" title="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-22" title="22"><span class="co">#&gt; The 3 principal components (varimax rotation) accounted for 94.11% of the total variance of the original data (RC1 = 45.02%, RC2 = 27.79%, RC3 = 21.30%).</span></a>
-<a class="sourceLine" id="cb13-23" title="23"></a>
-<a class="sourceLine" id="cb13-24" title="24"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>, <span class="dt">text_color =</span> <span class="st">"white"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-25" title="25"><span class="st">  </span><span class="kw"><a href="../reference/theme_abyss.html">theme_abyss</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
+<a class="sourceLine" id="cb13-2" title="2">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dt">n =</span> <span class="st">"all"</span>, <span class="dt">threshold =</span> <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3">result</a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">#&gt; # Loadings from Principal Component Analysis (no rotation)</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co">#&gt; Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity</span></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="co">#&gt; -------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="co">#&gt; mpg      | -0.93 |       |      | -0.30 |      |       |       1.30</span></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt; cyl      |  0.96 |       |      |       |      | -0.21 |       1.18</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt; disp     |  0.95 |       |      | -0.23 |      |       |       1.16</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt; hp       |  0.87 |  0.36 |      |       | 0.30 |       |       1.64</span></a>
+<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt; drat     | -0.75 |  0.48 | 0.44 |       |      |       |       2.47</span></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt; wt       |  0.88 | -0.35 | 0.26 |       |      |       |       1.54</span></a>
+<a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt; qsec     | -0.54 | -0.81 |      |       |      |       |       1.96</span></a>
+<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-16" title="16"><span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span></a>
+<a class="sourceLine" id="cb13-17" title="17"></a>
+<a class="sourceLine" id="cb13-18" title="18"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(</a>
+<a class="sourceLine" id="cb14-2" title="2">  mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], </a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">n =</span> <span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">rotation =</span> <span class="st">"varimax"</span>, </a>
+<a class="sourceLine" id="cb14-5" title="5">  <span class="dt">threshold =</span> <span class="st">"max"</span>, </a>
+<a class="sourceLine" id="cb14-6" title="6">  <span class="dt">sort =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb14-7" title="7">)</a>
+<a class="sourceLine" id="cb14-8" title="8"></a>
+<a class="sourceLine" id="cb14-9" title="9">result</a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; # Rotated loadings from Principal Component Analysis (varimax-rotation)</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; Variable |   RC1 |   RC2 |   RC3 | Complexity | Uniqueness</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt; ----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt; wt       |  0.91 |       |       |       1.31 |       0.03</span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; mpg      | -0.82 |       |       |       1.70 |       0.11</span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt; disp     |  0.79 |       |       |       1.95 |       0.08</span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="co">#&gt; cyl      |  0.64 |       |       |       2.84 |       0.06</span></a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="co">#&gt; qsec     |       | -0.98 |       |       1.02 |       0.03</span></a>
+<a class="sourceLine" id="cb14-19" title="19"><span class="co">#&gt; hp       |       |  0.69 |       |       2.09 |       0.09</span></a>
+<a class="sourceLine" id="cb14-20" title="20"><span class="co">#&gt; drat     |       |       | -0.90 |       1.43 |       0.01</span></a>
+<a class="sourceLine" id="cb14-21" title="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb14-22" title="22"><span class="co">#&gt; The 3 principal components (varimax rotation) accounted for 94.11% of the total variance of the original data (RC1 = 45.02%, RC2 = 27.79%, RC3 = 21.30%).</span></a>
+<a class="sourceLine" id="cb14-23" title="23"></a>
+<a class="sourceLine" id="cb14-24" title="24"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>, <span class="dt">text_color =</span> <span class="st">"white"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-25" title="25"><span class="st">  </span><span class="kw"><a href="../reference/theme_abyss.html">theme_abyss</a></span>()</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 </div>
 <div id="number-of-componentsfactors-to-retain" class="section level2">
 <h2 class="hasAnchor">
 <a href="#number-of-componentsfactors-to-retain" class="anchor"></a>Number of Components/Factors to Retain</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
-<a class="sourceLine" id="cb14-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_factors</span>(mtcars, <span class="dt">type =</span> <span class="st">"PCA"</span>)</a>
-<a class="sourceLine" id="cb14-3" title="3">result</a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span></a>
-<a class="sourceLine" id="cb14-7" title="7"></a>
-<a class="sourceLine" id="cb14-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-14-2.png" width="672"></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
+<a class="sourceLine" id="cb15-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_factors</span>(mtcars, <span class="dt">type =</span> <span class="st">"PCA"</span>)</a>
+<a class="sourceLine" id="cb15-3" title="3">result</a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span></a>
+<a class="sourceLine" id="cb15-7" title="7"></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-15-2.png" width="672"></p>
 </div>
 <div id="number-of-clusters-to-retain" class="section level2">
 <h2 class="hasAnchor">
 <a href="#number-of-clusters-to-retain" class="anchor"></a>Number of Clusters to Retain</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
-<a class="sourceLine" id="cb16-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_clusters</span>(<span class="kw">standardize</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a>
-<a class="sourceLine" id="cb16-3" title="3">result</a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
-<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; The choice of 2 clusters is supported by 14 (43.75%) methods out of 32 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, APN, ADM, Connectivity).</span></a>
-<a class="sourceLine" id="cb16-7" title="7"></a>
-<a class="sourceLine" id="cb16-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-15-2.png" width="672"></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
+<a class="sourceLine" id="cb17-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_clusters</span>(<span class="kw">standardize</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a>
+<a class="sourceLine" id="cb17-3" title="3">result</a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co">#&gt; The choice of 2 clusters is supported by 15 (45.45%) methods out of 33 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, APN, ADM, Connectivity, Tibs2001SEmax).</span></a>
+<a class="sourceLine" id="cb17-7" title="7"></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-16-2.png" width="672"></p>
 </div>
   </div>
 
