@@ -77,6 +77,7 @@
 #'   \item \code{bayestestR::point_estimate()}
 #'   \item \code{bayestestR::rope()}
 #'   \item \code{estimate::estimate_contrasts()}
+#'   \item \code{parameters::cluster_analysis()}
 #'   \item \code{parameters::model_parameters()}
 #'   \item \code{parameters::n_factors()}
 #'   \item \code{parameters::parameters_simulate()}

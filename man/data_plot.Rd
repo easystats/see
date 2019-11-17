@@ -2,9 +2,10 @@
 % Please edit documentation in R/data_plot.R, R/plot.bayesfactor_models.R,
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
-%   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
-%   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
-%   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
+%   R/plot.cluster_analysis.R, R/plot.equivalence_test.R,
+%   R/plot.estimate_density.R, R/plot.hdi.R, R/plot.n_factors.R,
+%   R/plot.p_direction.R, R/plot.p_significance.R, R/plot.parameters_model.R,
+%   R/plot.parameters_pca.R, R/plot.parameters_sem.R,
 %   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
@@ -13,6 +14,7 @@
 \alias{plot.see_check_distribution}
 \alias{plot.see_check_normality}
 \alias{plot.see_check_outliers}
+\alias{plot.see_cluster_analysis}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
 \alias{plot.see_hdi}
@@ -44,6 +46,9 @@ data_plot(x, data = NULL, ...)
   data = NULL, ...)
 
 \method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
+
+\method{plot}{see_cluster_analysis}(x, data = NULL, n_columns = NULL,
+  size = 0.6, ...)
 
 \method{plot}{see_equivalence_test}(x, rope_color = "#0171D3",
   rope_alpha = 0.2, show_intercept = FALSE, n_columns = 1, ...)
@@ -128,6 +133,9 @@ or \code{\link[parameters]{n_factors}}).}
 
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
+\item{size}{Size of geoms. Ddepends on the context of the \code{plot()} function,
+so this argument may change size of points, lines or bars.}
+
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
 
@@ -135,9 +143,6 @@ Else, densities are plotted for each parameter among each other.}
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
-
-\item{size}{Size of geoms. Ddepends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
 
 \item{sort}{If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.}
 
@@ -191,6 +196,7 @@ development and probably not yet available):
   \item \code{bayestestR::point_estimate()}
   \item \code{bayestestR::rope()}
   \item \code{estimate::estimate_contrasts()}
+  \item \code{parameters::cluster_analysis()}
   \item \code{parameters::model_parameters()}
   \item \code{parameters::n_factors()}
   \item \code{parameters::parameters_simulate()}

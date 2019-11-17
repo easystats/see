@@ -165,6 +165,17 @@ plot(result, type = "line", text_color = "white") +
   theme_abyss()
 ```
 
+## Cluster Analysis
+
+```{r}
+data(iris)
+result <- cluster_analysis(iris[, 1:4], n_clusters = 3)
+result
+
+plot(result)
+plot(result, n_columns = 3) + ggplot2::coord_flip()
+```
+
 ## Number of Components/Factors to Retain
 
 ```{r}
