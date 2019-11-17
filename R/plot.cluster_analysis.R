@@ -15,9 +15,9 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
   dataplot$Group <- as.factor(dataplot$Group)
   dataplot$Term <- factor(dataplot$Term, levels = unique(dat$Term))
 
-  attr(dataplot, "info") <- list("xlab" = NULL,
+  attr(dataplot, "info") <- list("xlab" = "Cluster Group",
                                  "ylab" = "Mean Z-Score",
-                                 "legend_fill" = "Cluster",
+                                 "legend_fill" = "Variable",
                                  "title" = "Cluster Analysis")
 
   class(dataplot) <- c("data_plot", "see_cluster_analysis", class(dataplot))
@@ -34,7 +34,7 @@ plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size = .
     x <- data_plot(x, data = data)
   }
 
-  p <- ggplot(x, aes(x = .data$Term, y = .data$Z_Score, fill = .data$Group)) +
+  p <- ggplot(x, aes(x = .data$Group, y = .data$Z_Score, fill = .data$Term)) +
     geom_bar(stat = "identity", position = position_dodge(size + .1), width = size) +
     geom_hline(aes(yintercept = 0), linetype = "dotted") +
     add_plot_attributes(x)
