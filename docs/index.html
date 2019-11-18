@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -216,9 +216,8 @@
 <a class="sourceLine" id="cb11-5" title="5"><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="op">-</span>Species)</a>
 <a class="sourceLine" id="cb11-6" title="6"></a>
 <a class="sourceLine" id="cb11-7" title="7">data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> name, <span class="dt">y =</span> value, <span class="dt">color =</span> Species, <span class="dt">group =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="st">    </span><span class="co"># The polygon geom is a trick go connect endpoints</span></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="st">    </span><span class="kw"><a href="reference/coord_radar.html">coord_radar</a></span>(<span class="dt">start =</span> <span class="op">-</span>pi<span class="op">/</span><span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
+<a class="sourceLine" id="cb11-8" title="8"><span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="st">    </span><span class="kw"><a href="reference/coord_radar.html">coord_radar</a></span>(<span class="dt">start =</span> <span class="op">-</span>pi<span class="op">/</span><span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-14-1.png"><!-- --></p>
 </div>
 <div id="plot-functions-for-easystats-packages" class="section level2">
@@ -226,7 +225,7 @@
 <a href="#plot-functions-for-easystats-packages" class="anchor"></a>Plot functions for easystats packages</h2>
 <div id="bayestestr" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bayestestr" class="anchor"></a><a href="https://github.com/easystats/bayestestR">BayestestR</a>
+<a href="#bayestestr" class="anchor"></a><a href="https://github.com/easystats/bayestestR">bayestestR</a>
 </h3>
 <p>Plotting functions for the <strong>bayestestR</strong> package are demonstrated <a href="https://easystats.github.io/see/articles/bayestestR.html">in this vignette</a>.</p>
 </div>
