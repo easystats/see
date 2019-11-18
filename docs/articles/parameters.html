@@ -321,7 +321,9 @@
 <a class="sourceLine" id="cb15-20" title="20"></a>
 <a class="sourceLine" id="cb15-21" title="21"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"></a>
+<a class="sourceLine" id="cb16-2" title="2">result &lt;-<span class="st"> </span><span class="kw">cluster_analysis</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">n_clusters =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-15-2.png" width="672"></p>
 </div>
 <div id="number-of-componentsfactors-to-retain" class="section level2">
