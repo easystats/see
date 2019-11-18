@@ -173,7 +173,9 @@ result <- cluster_analysis(iris[, 1:4], n_clusters = 3)
 result
 
 plot(result)
-plot(result, n_columns = 3) + coord_flip()
+
+result <- cluster_analysis(iris[, 1:4], n_clusters = 4)
+plot(result, n_columns = 2)
 ```
 
 ## Number of Components/Factors to Retain
