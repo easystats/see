@@ -1,16 +1,7 @@
-#' @importFrom stats reshape
 #' @export
 data_plot.cluster_analysis <- function(x, data = NULL, ...) {
   dat <- .retrieve_data(x)
-
-  dataplot <- stats::reshape(
-    dat,
-    idvar = ".id",
-    timevar = "Group",
-    v.names = "Z_Score",
-    varying = 2:ncol(dat),
-    direction = "long"
-  )
+  dataplot <- .reshape_to_long(dat, names_to = "Group", values_to = "Z_Score", columns = 2:ncol(dat))
 
   dataplot$Group <- as.factor(dataplot$Group)
   dataplot$Term <- factor(dataplot$Term, levels = unique(dat$Term))
@@ -40,7 +31,7 @@ plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size = .
     add_plot_attributes(x)
 
   if (!is.null(n_columns)) {
-    p <- p + facet_wrap(~ Group, ncol = n_columns)
+    p <- p + facet_wrap(~ Group, ncol = n_columns, scales = "free_x")
   }
 
   p

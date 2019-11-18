@@ -5,6 +5,11 @@ data_plot.parameters_pca <- function(x, data = NULL, ...){
   dataplot$Complexity <- NULL
   dataplot$Uniqueness <- NULL
 
+  if ("Label" %in% colnames(dataplot)) {
+    dataplot$Variable <- dataplot$Label
+    dataplot$Label <- NULL
+  }
+
   dataplot <- .reshape_to_long(dataplot, names_to = "Component", values_to = "y", columns = 2:ncol(dataplot))
   dataplot$Variable <- factor(dataplot$Variable, levels = rev(unique(dataplot$Variable)))
 
