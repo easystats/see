@@ -202,7 +202,7 @@ data %>%
 
 ## Plot functions for easystats packages
 
-### [BayestestR](https://github.com/easystats/bayestestR)
+### [bayestestR](https://github.com/easystats/bayestestR)
 
 Plotting functions for the **bayestestR** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/bayestestR.html).
 

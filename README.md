@@ -146,8 +146,7 @@ data <- iris %>% group_by(Species) %>% summarise_all(mean) %>%
     pivot_longer(-Species)
 
 data %>% ggplot(aes(x = name, y = value, color = Species, group = Species)) + 
-    # The polygon geom is a trick go connect endpoints
-geom_polygon(fill = NA, size = 2, show.legend = FALSE) + geom_line() + 
+    geom_polygon(fill = NA, size = 2, show.legend = FALSE) + 
     coord_radar(start = -pi/4) + theme_minimal()
 ```
 
@@ -155,7 +154,7 @@ geom_polygon(fill = NA, size = 2, show.legend = FALSE) + geom_line() +
 
 ## Plot functions for easystats packages
 
-### [BayestestR](https://github.com/easystats/bayestestR)
+### [bayestestR](https://github.com/easystats/bayestestR)
 
 Plotting functions for the **bayestestR** package are demonstrated [in
 this
