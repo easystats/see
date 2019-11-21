@@ -51,7 +51,7 @@ plot.see_compare_performance <- function(x, size = 1, ...) {
     group = .data$Model,
     fill = .data$Model
   )) +
-    geom_polygon(size = size, alpha = .1) +
+    geom_polygon(size = size, alpha = .05) +
     coord_radar() +
     scale_y_continuous(limits = c(0, 1), labels = NULL) +
     add_plot_attributes(x) +
