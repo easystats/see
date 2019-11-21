@@ -1,8 +1,14 @@
 #' @importFrom effectsize change_scale
 #' @export
 data_plot.compare_performance <- function(x, data = NULL, ...){
-  x <- effectsize::change_scale(x, exclude = c("Model", "Type"), to = c(.1, 1))
+  x$Model <- sprintf("%s (%s)", x$Model, x$Type)
   x$Type <- NULL
+
+  # set reference for Bayes factors to 1
+  if ("BF" %in% colnames(x)) x$BF[is.na(x$BF)] <- 1
+
+  # normalize indices, for better comparison
+  x <- effectsize::change_scale(x, exclude = "Model", to = c(.1, 1))
 
   # recode some indices, so higher values = better fit
   for (i in c("AIC", "BIC", "RMSE")) {
@@ -18,7 +24,8 @@ data_plot.compare_performance <- function(x, data = NULL, ...){
   attr(dataplot, "info") <- list(
     "xlab" = "",
     "ylab" = "",
-    "title" = "Comparison of Model Indices"
+    "title" = "Comparison of Model Indices",
+    "legend_color" = "Models"
   )
 
   class(dataplot) <- c("data_plot", "see_compare_performance", "data.frame")
@@ -47,7 +54,9 @@ plot.see_compare_performance <- function(x, size = 1, ...) {
     geom_polygon(size = size, alpha = .1) +
     coord_radar() +
     scale_y_continuous(limits = c(0, 1), labels = NULL) +
-    add_plot_attributes(x)
+    add_plot_attributes(x) +
+    guides(fill = "none") +
+    theme_radar()
 
   p
 }
