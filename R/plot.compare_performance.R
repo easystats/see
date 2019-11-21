@@ -13,7 +13,7 @@ data_plot.compare_performance <- function(x, data = NULL, ...){
   # recode some indices, so higher values = better fit
   for (i in c("AIC", "BIC", "RMSE")) {
     if (i %in% colnames(x)) {
-      x[[i]] <- 1 - x[[i]]
+      x[[i]] <- 1.1 - x[[i]]
     }
   }
 
