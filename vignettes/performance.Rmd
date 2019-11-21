@@ -133,6 +133,23 @@ check_model(model)
 check_model(model, panel = FALSE)
 ```
 
+# Compare Model Performances
+
+`compare_performance()` computes indices of model performance for different models at once and hence allows comparison of indices across models. The `plot()`-method creates a "spiderweb" plot, where the different indices are normalized and larger values indicate better model performance. Hence, points closer to the center indicate worse fit indices.
+
+```{r}
+data(iris)
+lm1 <- lm(Sepal.Length ~ Species, data = iris)
+lm2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
+lm3 <- lm(Sepal.Length ~ Species * Sepal.Width, data = iris)
+lm4 <- lm(Sepal.Length ~ Species * Sepal.Width + Petal.Length + Petal.Width, data = iris)
+result <- compare_performance(lm1, lm2, lm3, lm4)
+
+result
+
+plot(result)
+```
+
 # Model and Vector Properties
 
 ```{r}

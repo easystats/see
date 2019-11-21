@@ -35,6 +35,7 @@ reference:
   - theme_blackboard
   - theme_lucid
   - theme_modern
+  - theme_radar
 
 - title: "Color Palettes"
   contents:

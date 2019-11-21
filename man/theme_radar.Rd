@@ -2,7 +2,8 @@
 % Please edit documentation in R/theme_radar.R
 \name{theme_radar}
 \alias{theme_radar}
-\title{A lucid theme for radar plots}
+\alias{theme_radar_dark}
+\title{Themes for radar plots}
 \usage{
 theme_radar(
   base_size = 11,
@@ -11,7 +12,25 @@ theme_radar(
   plot.title.face = "plain",
   plot.title.space = 15,
   legend.position = "right",
-  axis.title.space = 10,
+  axis.title.space = 15,
+  legend.title.size = 11,
+  legend.text.size = 10,
+  axis.title.size = 11,
+  axis.title.face = "plain",
+  axis.text.size = 10,
+  axis.text.angle = NULL,
+  tags.size = 11,
+  tags.face = "plain"
+)
+
+theme_radar_dark(
+  base_size = 11,
+  base_family = "",
+  plot.title.size = 12,
+  plot.title.face = "plain",
+  plot.title.space = 15,
+  legend.position = "right",
+  axis.title.space = 15,
   legend.title.size = 11,
   legend.text.size = 10,
   axis.title.size = 11,
@@ -55,7 +74,7 @@ theme_radar(
 \item{tags.face}{Tags font face ("plain", "italic", "bold", "bold.italic").}
 }
 \description{
-A light, clear theme for ggplot.
+\code{theme_radar()} is a light, clear theme for ggplot radar-plots, while \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
 }
 \examples{
 library(ggplot2)
@@ -79,4 +98,7 @@ data \%>\%
   geom_polygon(size = 1, alpha = .1) +
   coord_radar() +
   theme_radar()
+}
+\seealso{
+\code{\link{coord_radar}}
 }

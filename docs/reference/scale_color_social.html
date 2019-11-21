@@ -79,7 +79,7 @@ scale_color_social_c for a continuous scale." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.1</span>
       </span>
     </div>
 
@@ -148,32 +148,68 @@ Use <code>scale_color_social_d</code> for <em>discrete</em> categories and
 <code>scale_color_social_c</code> for a <em>continuous</em> scale.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scale_color_social</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>scale_color_social</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_color_social_d</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>scale_color_social_d</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_color_social_c</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>scale_color_social_c</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_colour_social</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>scale_colour_social</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_colour_social_c</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>scale_colour_social_c</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_colour_social_d</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>scale_colour_social_d</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_fill_social</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>scale_fill_social</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_fill_social_d</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>scale_fill_social_d</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>scale_fill_social_c</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>scale_fill_social_c</span>(
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"complement"</span>,
+  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

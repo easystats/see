@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.1</span>
       </span>
     </div>
 
@@ -256,61 +256,82 @@
 <a class="sourceLine" id="cb13-2" title="2"><span class="co">#&gt; Not enough model terms in the conditional part of the model to check for multicollinearity.</span></a></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-13-1.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-2.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-3.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-4.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-5.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-13-6.png" width="672"></p>
 </div>
+<div id="compare-model-performances" class="section level1">
+<h1 class="hasAnchor">
+<a href="#compare-model-performances" class="anchor"></a>Compare Model Performances</h1>
+<p><code>compare_performance()</code> computes indices of model performance for different models at once and hence allows comparison of indices across models. The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method creates a “spiderweb” plot, where the different indices are normalized and larger values indicate better model performance. Hence, points closer to the center indicate worse fit indices.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
+<a class="sourceLine" id="cb14-2" title="2">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb14-3" title="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Petal.Length, <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb14-4" title="4">lm3 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species <span class="op">*</span><span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb14-5" title="5">lm4 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species <span class="op">*</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width, <span class="dt">data =</span> iris)</a>
+<a class="sourceLine" id="cb14-6" title="6">result &lt;-<span class="st"> </span><span class="kw">compare_performance</span>(lm1, lm2, lm3, lm4)</a>
+<a class="sourceLine" id="cb14-7" title="7"></a>
+<a class="sourceLine" id="cb14-8" title="8">result</a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt;   Model Type       AIC      BIC        R2 R2_adjusted      RMSE           BF</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; 1   lm1   lm 231.45196 243.4945 0.6187057   0.6135181 0.5096155           NA</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt; 2   lm2   lm 106.23274 121.2859 0.8367238   0.8333688 0.3334832 3.445528e+26</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; 3   lm3   lm 187.09220 208.1666 0.7274452   0.7179815 0.4308632 4.691860e+07</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt; 4   lm4   lm  78.79678 105.8925 0.8710785   0.8647232 0.2963297 7.583929e+29</span></a>
+<a class="sourceLine" id="cb14-14" title="14"></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+</div>
 <div id="model-and-vector-properties" class="section level1">
 <h1 class="hasAnchor">
 <a href="#model-and-vector-properties" class="anchor"></a>Model and Vector Properties</h1>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days <span class="op">|</span><span class="st"> </span>Subject), sleepstudy)</a>
-<a class="sourceLine" id="cb14-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_distribution</span>(model)</a>
-<a class="sourceLine" id="cb14-3" title="3"></a>
-<a class="sourceLine" id="cb14-4" title="4">result</a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="co">#&gt; # Distribution of Model Family</span></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="co">#&gt; Predicted Distribution of Residuals</span></a>
-<a class="sourceLine" id="cb14-8" title="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt;                Distribution Probability</span></a>
-<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt;                      normal         50%</span></a>
-<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt;  neg. binomial (zero-infl.)         16%</span></a>
-<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt;                       gamma         12%</span></a>
-<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt; Predicted Distribution of Response</span></a>
-<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt;  Distribution Probability</span></a>
-<a class="sourceLine" id="cb14-17" title="17"><span class="co">#&gt;     lognormal         75%</span></a>
-<a class="sourceLine" id="cb14-18" title="18"><span class="co">#&gt;         gamma         12%</span></a>
-<a class="sourceLine" id="cb14-19" title="19"><span class="co">#&gt;   exponential          9%</span></a>
-<a class="sourceLine" id="cb14-20" title="20"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">vec &lt;-<span class="st"> </span>bayestestR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/bayestestR/man/distribution.html">distribution_poisson</a></span>(<span class="dt">n =</span> <span class="dv">500</span>, <span class="dt">lambda =</span> <span class="fl">2.5</span>)</a>
-<a class="sourceLine" id="cb15-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_distribution</span>(vec)</a>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days <span class="op">|</span><span class="st"> </span>Subject), sleepstudy)</a>
+<a class="sourceLine" id="cb15-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_distribution</span>(model)</a>
 <a class="sourceLine" id="cb15-3" title="3"></a>
 <a class="sourceLine" id="cb15-4" title="4">result</a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; # Predicted Distribution of Vector</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; # Distribution of Model Family</span></a>
 <a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt;          Distribution Probability</span></a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt;               poisson         56%</span></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt;     negative binomial         38%</span></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt;  poisson (zero-infl.)          6%</span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt; Predicted Distribution of Residuals</span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt;                Distribution Probability</span></a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt;                      normal         50%</span></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt;  neg. binomial (zero-infl.)         16%</span></a>
+<a class="sourceLine" id="cb15-12" title="12"><span class="co">#&gt;                       gamma         12%</span></a>
+<a class="sourceLine" id="cb15-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-14" title="14"><span class="co">#&gt; Predicted Distribution of Response</span></a>
+<a class="sourceLine" id="cb15-15" title="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-16" title="16"><span class="co">#&gt;  Distribution Probability</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="co">#&gt;     lognormal         75%</span></a>
+<a class="sourceLine" id="cb15-18" title="18"><span class="co">#&gt;         gamma         12%</span></a>
+<a class="sourceLine" id="cb15-19" title="19"><span class="co">#&gt;   exponential          9%</span></a>
+<a class="sourceLine" id="cb15-20" title="20"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">vec &lt;-<span class="st"> </span>bayestestR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/bayestestR/man/distribution.html">distribution_poisson</a></span>(<span class="dt">n =</span> <span class="dv">500</span>, <span class="dt">lambda =</span> <span class="fl">2.5</span>)</a>
+<a class="sourceLine" id="cb16-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_distribution</span>(vec)</a>
+<a class="sourceLine" id="cb16-3" title="3"></a>
+<a class="sourceLine" id="cb16-4" title="4">result</a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; # Predicted Distribution of Vector</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt;          Distribution Probability</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt;               poisson         56%</span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt;     negative binomial         38%</span></a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt;  poisson (zero-infl.)          6%</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
 </div>
 <div id="roc-curves" class="section level1">
 <h1 class="hasAnchor">
 <a href="#roc-curves" class="anchor"></a>ROC curves</h1>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb16-3" title="3">iris<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris), <span class="dt">size =</span> <span class="dv">1</span>, <span class="fl">.3</span>)</a>
-<a class="sourceLine" id="cb16-4" title="4"></a>
-<a class="sourceLine" id="cb16-5" title="5">folds &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris), <span class="dt">size =</span> <span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris) <span class="op">/</span><span class="st"> </span><span class="dv">8</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb16-6" title="6">test_data &lt;-<span class="st"> </span>iris[folds, ]</a>
-<a class="sourceLine" id="cb16-7" title="7">train_data &lt;-<span class="st"> </span>iris[<span class="op">-</span>folds, ]</a>
-<a class="sourceLine" id="cb16-8" title="8"></a>
-<a class="sourceLine" id="cb16-9" title="9">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(y <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data =</span> train_data, <span class="dt">family =</span> <span class="st">"binomial"</span>)</a>
-<a class="sourceLine" id="cb16-10" title="10">result &lt;-<span class="st"> </span><span class="kw">performance_roc</span>(model, <span class="dt">new_data =</span> test_data)</a>
-<a class="sourceLine" id="cb16-11" title="11"></a>
-<a class="sourceLine" id="cb16-12" title="12">result</a>
-<a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt; AUC: 62.34%</span></a>
-<a class="sourceLine" id="cb16-14" title="14"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb17-3" title="3">iris<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris), <span class="dt">size =</span> <span class="dv">1</span>, <span class="fl">.3</span>)</a>
+<a class="sourceLine" id="cb17-4" title="4"></a>
+<a class="sourceLine" id="cb17-5" title="5">folds &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris), <span class="dt">size =</span> <span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris) <span class="op">/</span><span class="st"> </span><span class="dv">8</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb17-6" title="6">test_data &lt;-<span class="st"> </span>iris[folds, ]</a>
+<a class="sourceLine" id="cb17-7" title="7">train_data &lt;-<span class="st"> </span>iris[<span class="op">-</span>folds, ]</a>
+<a class="sourceLine" id="cb17-8" title="8"></a>
+<a class="sourceLine" id="cb17-9" title="9">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(y <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data =</span> train_data, <span class="dt">family =</span> <span class="st">"binomial"</span>)</a>
+<a class="sourceLine" id="cb17-10" title="10">result &lt;-<span class="st"> </span><span class="kw">performance_roc</span>(model, <span class="dt">new_data =</span> test_data)</a>
+<a class="sourceLine" id="cb17-11" title="11"></a>
+<a class="sourceLine" id="cb17-12" title="12">result</a>
+<a class="sourceLine" id="cb17-13" title="13"><span class="co">#&gt; AUC: 62.34%</span></a>
+<a class="sourceLine" id="cb17-14" title="14"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
 </div>
   </div>
 
@@ -331,6 +352,7 @@
       </ul>
 </li>
       <li><a href="#overall-model-check">Overall Model Check</a></li>
+      <li><a href="#compare-model-performances">Compare Model Performances</a></li>
       <li><a href="#model-and-vector-properties">Model and Vector Properties</a></li>
       <li><a href="#roc-curves">ROC curves</a></li>
       </ul>
