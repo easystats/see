@@ -4,13 +4,23 @@
 \alias{theme_abyss}
 \title{Abyss theme}
 \usage{
-theme_abyss(base_size = 11, base_family = "", plot.title.size = 15,
-  plot.title.face = "plain", plot.title.space = 20,
-  legend.position = "right", axis.title.space = 20,
-  legend.title.size = 13, legend.text.size = 12,
-  axis.title.size = 13, axis.title.face = "plain",
-  axis.text.size = 12, axis.text.angle = NULL, tags.size = 15,
-  tags.face = "bold")
+theme_abyss(
+  base_size = 11,
+  base_family = "",
+  plot.title.size = 15,
+  plot.title.face = "plain",
+  plot.title.space = 20,
+  legend.position = "right",
+  axis.title.space = 20,
+  legend.title.size = 13,
+  legend.text.size = 12,
+  axis.title.size = 13,
+  axis.title.face = "plain",
+  axis.text.size = 12,
+  axis.text.angle = NULL,
+  tags.size = 15,
+  tags.face = "bold"
+)
 }
 \arguments{
 \item{base_size}{base font size}

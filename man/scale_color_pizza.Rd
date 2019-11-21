@@ -12,32 +12,63 @@
 \alias{scale_fill_pizza_c}
 \title{Pizza color palette}
 \usage{
-scale_color_pizza(palette = "margherita", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_color_pizza(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_color_pizza_d(palette = "margherita", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_color_pizza_d(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_color_pizza_c(palette = "margherita", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_color_pizza_c(
+  palette = "margherita",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_pizza(palette = "margherita", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_colour_pizza(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_pizza_c(palette = "margherita", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_colour_pizza_c(
+  palette = "margherita",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_pizza_d(palette = "margherita", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_colour_pizza_d(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_fill_pizza(palette = "margherita", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_fill_pizza(palette = "margherita", discrete = TRUE, reverse = FALSE, ...)
 
-scale_fill_pizza_d(palette = "margherita", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_fill_pizza_d(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_fill_pizza_c(palette = "margherita", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_fill_pizza_c(
+  palette = "margherita",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 }
 \arguments{
 \item{palette}{Pizza type. Can be "margherita" (default), "margherita_crust",

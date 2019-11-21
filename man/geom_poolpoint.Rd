@@ -5,11 +5,22 @@
 \alias{geom_pooljitter}
 \title{Pool ball points}
 \usage{
-geom_poolpoint(label, size_text = 3.88, size_background = size_text *
-  2, size_point = size_text * 3.5, ...)
+geom_poolpoint(
+  label,
+  size_text = 3.88,
+  size_background = size_text * 2,
+  size_point = size_text * 3.5,
+  ...
+)
 
-geom_pooljitter(label, size_text = 3.88, size_background = size_text *
-  2, size_point = size_text * 3.5, jitter = 0.1, ...)
+geom_pooljitter(
+  label,
+  size_text = 3.88,
+  size_background = size_text * 2,
+  size_point = size_text * 3.5,
+  jitter = 0.1,
+  ...
+)
 }
 \arguments{
 \item{label}{Label to add inside the points.}

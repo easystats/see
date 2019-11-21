@@ -12,32 +12,68 @@
 \alias{scale_fill_material_c}
 \title{Material design color palette}
 \usage{
-scale_color_material(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_color_material(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_color_material_d(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_color_material_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_color_material_c(palette = "contrast", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_color_material_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_material(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_colour_material(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_material_c(palette = "contrast", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_colour_material_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_material_d(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_colour_material_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_fill_material(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_fill_material(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_fill_material_d(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_fill_material_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_fill_material_c(palette = "contrast", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_fill_material_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 }
 \arguments{
 \item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".}

@@ -12,32 +12,38 @@
 \alias{scale_fill_flat_c}
 \title{Flat UI color palette}
 \usage{
-scale_color_flat(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_color_flat(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
 
-scale_color_flat_d(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_color_flat_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
 
-scale_color_flat_c(palette = "contrast", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_color_flat_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_flat(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_colour_flat(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
 
-scale_colour_flat_c(palette = "contrast", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_colour_flat_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_flat_d(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_colour_flat_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+)
 
-scale_fill_flat(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_fill_flat(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
 
-scale_fill_flat_d(palette = "contrast", discrete = TRUE,
-  reverse = FALSE, ...)
+scale_fill_flat_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
 
-scale_fill_flat_c(palette = "contrast", discrete = FALSE,
-  reverse = FALSE, ...)
+scale_fill_flat_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
 }
 \arguments{
 \item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".}

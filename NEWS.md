@@ -1,3 +1,9 @@
+# see 0.3.1
+
+## New plot-functions
+
+* Added plot-function for `performance::compare_performance()`.
+
 # see 0.3.0
 
 ## Breaking changes

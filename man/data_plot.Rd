@@ -2,10 +2,10 @@
 % Please edit documentation in R/data_plot.R, R/plot.bayesfactor_models.R,
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
-%   R/plot.cluster_analysis.R, R/plot.equivalence_test.R,
-%   R/plot.estimate_density.R, R/plot.hdi.R, R/plot.n_factors.R,
-%   R/plot.p_direction.R, R/plot.p_significance.R, R/plot.parameters_model.R,
-%   R/plot.parameters_pca.R, R/plot.parameters_sem.R,
+%   R/plot.cluster_analysis.R, R/plot.compare_performance.R,
+%   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
+%   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
+%   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
 %   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R
 \name{data_plot}
 \alias{data_plot}
@@ -15,6 +15,7 @@
 \alias{plot.see_check_normality}
 \alias{plot.see_check_outliers}
 \alias{plot.see_cluster_analysis}
+\alias{plot.see_compare_performance}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
 \alias{plot.see_hdi}
@@ -31,66 +32,138 @@
 \usage{
 data_plot(x, data = NULL, ...)
 
-\method{plot}{see_bayesfactor_models}(x, n_pies = c("one", "many"),
-  value = c("none", "BF", "probability"), log = FALSE,
-  prior_odds = NULL, ...)
+\method{plot}{see_bayesfactor_models}(
+  x,
+  n_pies = c("one", "many"),
+  value = c("none", "BF", "probability"),
+  log = FALSE,
+  prior_odds = NULL,
+  ...
+)
 
-\method{plot}{see_bayesfactor_parameters}(x, point_size = 2,
-  rope_color = "#0171D3", rope_alpha = 0.2, show_intercept = FALSE,
-  ...)
+\method{plot}{see_bayesfactor_parameters}(
+  x,
+  point_size = 2,
+  rope_color = "#0171D3",
+  rope_alpha = 0.2,
+  show_intercept = FALSE,
+  ...
+)
 
-\method{plot}{see_check_distribution}(x, point_size = 2, panel = TRUE,
-  ...)
+\method{plot}{see_check_distribution}(x, point_size = 2, panel = TRUE, ...)
 
-\method{plot}{see_check_normality}(x, type = c("density", "qq", "pp"),
-  data = NULL, ...)
+\method{plot}{see_check_normality}(x, type = c("density", "qq", "pp"), data = NULL, ...)
 
 \method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
 
-\method{plot}{see_cluster_analysis}(x, data = NULL, n_columns = NULL,
-  size = 0.6, ...)
+\method{plot}{see_cluster_analysis}(x, data = NULL, n_columns = NULL, size = 0.6, ...)
 
-\method{plot}{see_equivalence_test}(x, rope_color = "#0171D3",
-  rope_alpha = 0.2, show_intercept = FALSE, n_columns = 1, ...)
+\method{plot}{see_compare_performance}(x, size = 1, ...)
 
-\method{plot}{see_estimate_density}(x, stack = TRUE,
-  show_intercept = FALSE, n_columns = 1, priors = FALSE,
-  priors_alpha = 0.4, size = 0.9, ...)
+\method{plot}{see_equivalence_test}(
+  x,
+  rope_color = "#0171D3",
+  rope_alpha = 0.2,
+  show_intercept = FALSE,
+  n_columns = 1,
+  ...
+)
 
-\method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE,
-  n_columns = 1, ...)
+\method{plot}{see_estimate_density}(
+  x,
+  stack = TRUE,
+  show_intercept = FALSE,
+  n_columns = 1,
+  priors = FALSE,
+  priors_alpha = 0.4,
+  size = 0.9,
+  ...
+)
 
-\method{plot}{see_n_factors}(x, data = NULL, type = c("bar", "line",
-  "area"), size = 1, ...)
+\method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE, n_columns = 1, ...)
 
-\method{plot}{see_p_direction}(x, data = NULL, show_intercept = FALSE,
-  priors = FALSE, priors_alpha = 0.4, n_columns = 1, ...)
+\method{plot}{see_n_factors}(x, data = NULL, type = c("bar", "line", "area"), size = 1, ...)
 
-\method{plot}{see_p_significance}(x, data = NULL,
-  show_intercept = FALSE, priors = FALSE, priors_alpha = 0.4,
-  n_columns = 1, ...)
+\method{plot}{see_p_direction}(
+  x,
+  data = NULL,
+  show_intercept = FALSE,
+  priors = FALSE,
+  priors_alpha = 0.4,
+  n_columns = 1,
+  ...
+)
 
-\method{plot}{see_parameters_model}(x, show_intercept = FALSE,
-  point_size = 0.8, sort = NULL, n_columns = NULL, ...)
+\method{plot}{see_p_significance}(
+  x,
+  data = NULL,
+  show_intercept = FALSE,
+  priors = FALSE,
+  priors_alpha = 0.4,
+  n_columns = 1,
+  ...
+)
 
-\method{plot}{see_parameters_pca}(x, type = c("bar", "line"),
-  text_size = 3.5, text_color = "black", size = 1, ...)
+\method{plot}{see_parameters_model}(
+  x,
+  show_intercept = FALSE,
+  point_size = 0.8,
+  sort = NULL,
+  n_columns = NULL,
+  ...
+)
 
-\method{plot}{see_parameters_sem}(x, data = NULL,
+\method{plot}{see_parameters_pca}(
+  x,
+  type = c("bar", "line"),
+  text_size = 3.5,
+  text_color = "black",
+  size = 1,
+  ...
+)
+
+\method{plot}{see_parameters_sem}(
+  x,
+  data = NULL,
   type = c("regression", "correlation", "loading"),
-  threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE,
-  size = 22, ...)
+  threshold_coefficient = NULL,
+  threshold_p = NULL,
+  ci = TRUE,
+  size = 22,
+  ...
+)
 
-\method{plot}{see_parameters_simulate}(x, data = NULL, stack = TRUE,
-  show_intercept = FALSE, n_columns = NULL, ...)
+\method{plot}{see_parameters_simulate}(
+  x,
+  data = NULL,
+  stack = TRUE,
+  show_intercept = FALSE,
+  n_columns = NULL,
+  ...
+)
 
-\method{plot}{see_point_estimate}(x, data = NULL, point_size = 2,
-  text_size = 3.5, panel = TRUE, show_labels = TRUE,
-  show_intercept = FALSE, priors = FALSE, priors_alpha = 0.4, ...)
+\method{plot}{see_point_estimate}(
+  x,
+  data = NULL,
+  point_size = 2,
+  text_size = 3.5,
+  panel = TRUE,
+  show_labels = TRUE,
+  show_intercept = FALSE,
+  priors = FALSE,
+  priors_alpha = 0.4,
+  ...
+)
 
-\method{plot}{see_rope}(x, data = NULL, rope_alpha = 0.5,
-  rope_color = "cadetblue", show_intercept = FALSE, n_columns = 1,
-  ...)
+\method{plot}{see_rope}(
+  x,
+  data = NULL,
+  rope_alpha = 0.5,
+  rope_color = "cadetblue",
+  show_intercept = FALSE,
+  n_columns = 1,
+  ...
+)
 }
 \arguments{
 \item{x}{An object.}
@@ -209,6 +282,7 @@ development and probably not yet available):
   \item \code{performance::check_model()}
   \item \code{performance::check_normality()}
   \item \code{performance::check_outliers()}
+  \item \code{performance::compare_performance()}
   \item \code{performance::performance_roc()}
 }
 }

@@ -4,9 +4,17 @@
 \alias{geom_violinhalf}
 \title{Half-violin plot}
 \usage{
-geom_violinhalf(mapping = NULL, data = NULL, stat = "ydensity",
-  position = "dodge", trim = TRUE, scale = "area",
-  show.legend = NA, inherit.aes = TRUE, ...)
+geom_violinhalf(
+  mapping = NULL,
+  data = NULL,
+  stat = "ydensity",
+  position = "dodge",
+  trim = TRUE,
+  scale = "area",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or

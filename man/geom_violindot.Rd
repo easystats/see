@@ -4,11 +4,20 @@
 \alias{geom_violindot}
 \title{Half-violin Half-dot plot}
 \usage{
-geom_violindot(mapping = NULL, data = NULL, trim = TRUE,
-  scale = "area", show.legend = NA, inherit.aes = TRUE,
-  size_dots = 0.7, color_dots = NULL, fill_dots = NULL,
-  binwidth = 0.05, position_dots = ggplot2::position_nudge(x = -0.025,
-  y = 0), ...)
+geom_violindot(
+  mapping = NULL,
+  data = NULL,
+  trim = TRUE,
+  scale = "area",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  size_dots = 0.7,
+  color_dots = NULL,
+  fill_dots = NULL,
+  binwidth = 0.05,
+  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
+  ...
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
