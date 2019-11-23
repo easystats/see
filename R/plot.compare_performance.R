@@ -41,23 +41,34 @@ data_plot.compare_performance <- function(x, data = NULL, ...){
 #' @importFrom rlang .data
 #' @export
 plot.see_compare_performance <- function(x, size = 1, ...) {
-  if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x)
-  }
+  if ("Performance_Score" %in% colnames(x)) {
+    if (missing(size)) size <- .7
+    x$Model <- sprintf("%s (%s)", x$Model, x$Type)
+    p <- ggplot(x, aes(
+      x = .data$Model,
+      y = .data$Performance_Score
+    )) +
+      geom_col() +
+      scale_y_continuous(limits = c(0, 1), labels = NULL)
+  } else {
+    if (!"data_plot" %in% class(x)) {
+      x <- data_plot(x)
+    }
 
-  p <- ggplot(x, aes(
-    x = .data$name,
-    y = .data$values,
-    colour = .data$Model,
-    group = .data$Model,
-    fill = .data$Model
-  )) +
-    geom_polygon(size = size, alpha = .05) +
-    coord_radar() +
-    scale_y_continuous(limits = c(0, 1), labels = NULL) +
-    add_plot_attributes(x) +
-    guides(fill = "none") +
-    theme_radar()
+    p <- ggplot(x, aes(
+      x = .data$name,
+      y = .data$values,
+      colour = .data$Model,
+      group = .data$Model,
+      fill = .data$Model
+    )) +
+      geom_polygon(size = size, alpha = .05) +
+      coord_radar() +
+      scale_y_continuous(limits = c(0, 1), labels = NULL) +
+      add_plot_attributes(x) +
+      guides(fill = "none") +
+      theme_radar()
+  }
 
   p
 }
