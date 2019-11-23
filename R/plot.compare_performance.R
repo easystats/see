@@ -49,7 +49,7 @@ plot.see_compare_performance <- function(x, size = 1, ...) {
       x = .data$Model,
       y = .data$Performance_Score
     )) +
-      geom_col() +
+      geom_col(width = size) +
       scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
       labs(x = "Model", y = "Performance Score")
   } else {
