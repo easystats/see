@@ -15,6 +15,10 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
 
   dataplot <- .fix_facet_names(dataplot)
 
+  dataplot$Parameter <- factor(dataplot$Parameter)
+  dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(levels(dataplot$Parameter)))
+
+
   attr(dataplot, "info") <- list("xlab" = "Values",
                                  "ylab" = "Density",
                                  "legend_fill" = "Parameter",
