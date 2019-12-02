@@ -51,8 +51,10 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   if (has_response) {
     for (i in rev(sort(unique(x$Response)))) {
       x$Parameter <- gsub(i, "", x$Parameter)
+      names(pretty_names) <- gsub(i, "", names(pretty_names))
     }
     x$Parameter <- gsub("^\\:(.*)", "\\1", x$Parameter)
+    names(pretty_names) <- gsub("^\\:(.*)", "\\1", names(pretty_names))
   }
 
   # make sure components are sorted in original order, not alphabetically
