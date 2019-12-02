@@ -4,6 +4,14 @@
 
 * Added plot-function for `performance::compare_performance()`.
 
+## Changes to functions
+
+* `plot()` for `parameters::model_parameters()` now uses fixed axis for facets when model is an ordinal or cumulative link model (because all facets are on the same scale, and thus parameters are easier to compare).
+
+## Bug fixes
+
+* Fixed issue with group coloring for `parameters::model_parameters()` when `exponentiate = TRUE`.
+
 # see 0.3.0
 
 ## Breaking changes

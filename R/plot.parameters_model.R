@@ -11,6 +11,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   exponentiated_coefs <- isTRUE(attributes(x)$exponentiate)
   y_intercept <- ifelse(exponentiated_coefs, 1, 0)
 
+  # ordinal model? needed for free facet scales later...
+  ordinal_model <- isTRUE(attributes(x)$ordinal_model)
+
   # remember components
   has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
@@ -99,7 +102,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
       scale_color_material()
   } else {
     # plot setup for regular model parameters
-    x$group <- as.factor(x$Coefficient < 0)
+    x$group <- as.factor(x$Coefficient < y_intercept)
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
       geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
       geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = point_size) +
@@ -132,20 +135,25 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   # wrap plot into facets, depending on the components
   if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
 
+  if (ordinal_model)
+    facet_scales <- "free_y"
+  else
+    facet_scales <- "free"
+
   if (has_component && has_response && has_effects) {
-    p <- p + facet_wrap(~Response + Effects + Component, ncol = n_columns, scales = "free")
+    p <- p + facet_wrap(~Response + Effects + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_component && has_effects) {
-    p <- p + facet_wrap(~Effects + Component, ncol = n_columns, scales = "free")
+    p <- p + facet_wrap(~Effects + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_component && has_response) {
-    p <- p + facet_wrap(~Response + Component, ncol = n_columns, scales = "free")
+    p <- p + facet_wrap(~Response + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_effects && has_response) {
-    p <- p + facet_wrap(~Response + Effects , ncol = n_columns, scales = "free")
+    p <- p + facet_wrap(~Response + Effects , ncol = n_columns, scales = facet_scales)
   } else if (has_component) {
-    p <- p + facet_wrap(~Component, ncol = n_columns, scales = "free")
+    p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales)
   } else if (has_effects) {
-    p <- p + facet_wrap(~Effects, ncol = n_columns, scales = "free")
+    p <- p + facet_wrap(~Effects, ncol = n_columns, scales = facet_scales)
   } else if (has_response) {
-    p <- p + facet_wrap(~Response, ncol = n_columns, scales = "free")
+    p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
   }
 
   p + labs(
