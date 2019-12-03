@@ -161,7 +161,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' @importFrom rlang .data
 #' @rdname data_plot
 #' @export
-plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, n_columns = 1, show_zero = TRUE, ...) {
+plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRUE, show_title = TRUE, n_columns = 1, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
@@ -185,8 +185,13 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, n_columns = 1, 
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x)
 
+  # Show
   if(show_zero){
     p <- p + geom_vline(xintercept = 0, linetype = "dotted")
+  }
+
+  if(show_title == FALSE){
+    p <- p + ggtitle("")
   }
 
   if (length(unique(x$y)) == 1  && is.numeric(x$y)) {

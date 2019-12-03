@@ -17,6 +17,7 @@
 #'   You may set \code{show_labels = FALSE} in case of overlapping labels, and
 #'   add your own legend or footnote to the plot.
 #' @param show_zero Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.
+#' @param show_title Logical, if \code{TRUE}, will show the title of the plot.
 #' @param priors Logical, if \code{TRUE}, prior distributions are simulated
 #'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.

@@ -84,8 +84,9 @@ data_plot(x, data = NULL, ...)
   x,
   data = NULL,
   show_intercept = FALSE,
-  n_columns = 1,
   show_zero = TRUE,
+  show_title = TRUE,
+  n_columns = 1,
   ...
 )
 
@@ -225,6 +226,8 @@ Else, densities are plotted for each parameter among each other.}
 \item{priors_alpha}{Alpha value of the prior distributions.}
 
 \item{show_zero}{Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.}
+
+\item{show_title}{Logical, if \code{TRUE}, will show the title of the plot.}
 
 \item{sort}{If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.}
 
