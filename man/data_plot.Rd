@@ -80,7 +80,14 @@ data_plot(x, data = NULL, ...)
   ...
 )
 
-\method{plot}{see_hdi}(x, data = NULL, show_intercept = FALSE, n_columns = 1, ...)
+\method{plot}{see_hdi}(
+  x,
+  data = NULL,
+  show_intercept = FALSE,
+  n_columns = 1,
+  show_zero = TRUE,
+  ...
+)
 
 \method{plot}{see_n_factors}(x, data = NULL, type = c("bar", "line", "area"), size = 1, ...)
 
@@ -216,6 +223,8 @@ Else, densities are plotted for each parameter among each other.}
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
+
+\item{show_zero}{Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.}
 
 \item{sort}{If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.}
 
