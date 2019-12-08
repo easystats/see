@@ -93,7 +93,7 @@ p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length))
 The `plots()` function allows us to plot the figures side by side.
 
 ``` r
-plots(p1, p2, p3, ncol = 2)
+plots(p1, p2, p3, n_columns = 2)
 ```
 
 ![](man/figures/unnamed-chunk-10-1.png)<!-- -->
@@ -102,7 +102,7 @@ The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
 
 ``` r
-plots(p1, p2, p3, ncol = 2, tags = paste("Fig. ", 1:3))
+plots(p1, p2, p3, n_columns = 2, tags = paste("Fig. ", 1:3))
 ```
 
 ![](man/figures/unnamed-chunk-11-1.png)<!-- -->
@@ -119,7 +119,7 @@ normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
     geom_point2(size = 8, alpha = 0.3) + theme_modern()
 
-plots(normal, new, ncol = 2)
+plots(normal, new, n_columns = 2)
 ```
 
 ![](man/figures/unnamed-chunk-12-1.png)<!-- -->

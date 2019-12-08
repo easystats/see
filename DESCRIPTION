@@ -60,5 +60,5 @@ Suggests:
     rstanarm,
     tidygraph,
     tidyr
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2
 Language: en-GB

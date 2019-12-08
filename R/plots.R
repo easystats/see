@@ -4,20 +4,22 @@
 #'
 #' @inheritParams gridExtra::grid.arrange
 #' @param tags Add tags to your subfigures. Can be \code{FALSE} (no tags), \code{TRUE} (letter tags) or character vector containing tags labels.
+#' @param n_columns Number of columns to align plots.
+#' @param n_rows Number of rows to align plots.
 #' @examples
 #' library(ggplot2)
 #' library(see)
 #'
-#' p1 <- ggplot(iris, aes(x=Petal.Length, y=Sepal.Width)) + geom_point()
-#' p2 <- ggplot(iris, aes(x=Petal.Length)) + geom_density()
+#' p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) + geom_point()
+#' p2 <- ggplot(iris, aes(x = Petal.Length)) + geom_density()
 #'
 #' plots(p1, p2)
-#' plots(p1, p2, ncol=2, tags=TRUE)
-#' plots(p1, p2, ncol=2, tags=c("Fig. 1", "Fig. 2"))
+#' plots(p1, p2, n_columns = 2, tags = TRUE)
+#' plots(p1, p2, n_columns = 2, tags = c("Fig. 1", "Fig. 2"))
 #'
 #' @importFrom gridExtra grid.arrange
 #' @export
-plots <- function(..., nrow = NULL, ncol = NULL, tags = FALSE) {
+plots <- function(..., n_rows = NULL, n_columns = NULL, tags = FALSE) {
 
   plot_list <- list(...)
 
@@ -44,5 +46,5 @@ plots <- function(..., nrow = NULL, ncol = NULL, tags = FALSE) {
     }
   }
 
-  gridExtra::grid.arrange(grobs = plot_list, nrow = nrow, ncol = ncol)
+  gridExtra::grid.arrange(grobs = plot_list, nrow = n_rows, ncol = n_columns)
 }

@@ -1,5 +1,9 @@
 # see 0.3.1
 
+## Breaking changes
+
+* Arguments `ncol` and `nrow` in `plots()` were renamed into `n_columns` and `n_rows` to be consistent with arguments from other functions in the **see**-package.
+
 ## New plot-functions
 
 * Added plot-function for `performance::compare_performance()`.

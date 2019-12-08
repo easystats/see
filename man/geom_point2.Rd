@@ -33,6 +33,6 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
   geom_point2(size = 8, alpha = 0.3) +
   theme_modern()
 
-plots(normal, new, ncol=2)
+plots(normal, new, n_columns = 2)
 
 }

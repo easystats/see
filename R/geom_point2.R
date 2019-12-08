@@ -19,7 +19,7 @@
 #'   geom_point2(size = 8, alpha = 0.3) +
 #'   theme_modern()
 #'
-#' plots(normal, new, ncol=2)
+#' plots(normal, new, n_columns = 2)
 #'
 #' @export
 geom_point2 <- function(..., stroke = 0, shape = 16) {

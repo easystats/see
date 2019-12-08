@@ -4,14 +4,14 @@
 \alias{plots}
 \title{Multiple plots side by side}
 \usage{
-plots(..., nrow = NULL, ncol = NULL, tags = FALSE)
+plots(..., n_rows = NULL, n_columns = NULL, tags = FALSE)
 }
 \arguments{
 \item{...}{grobs, gtables, ggplot or trellis objects}
 
-\item{nrow}{argument of gtable}
+\item{n_rows}{Number of rows to align plots.}
 
-\item{ncol}{argument of gtable}
+\item{n_columns}{Number of columns to align plots.}
 
 \item{tags}{Add tags to your subfigures. Can be \code{FALSE} (no tags), \code{TRUE} (letter tags) or character vector containing tags labels.}
 }
@@ -22,11 +22,11 @@ A wrapper around gridExtra::grid.arrange to plot multiple figures side by side o
 library(ggplot2)
 library(see)
 
-p1 <- ggplot(iris, aes(x=Petal.Length, y=Sepal.Width)) + geom_point()
-p2 <- ggplot(iris, aes(x=Petal.Length)) + geom_density()
+p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) + geom_point()
+p2 <- ggplot(iris, aes(x = Petal.Length)) + geom_density()
 
 plots(p1, p2)
-plots(p1, p2, ncol=2, tags=TRUE)
-plots(p1, p2, ncol=2, tags=c("Fig. 1", "Fig. 2"))
+plots(p1, p2, n_columns = 2, tags = TRUE)
+plots(p1, p2, n_columns = 2, tags = c("Fig. 1", "Fig. 2"))
 
 }
