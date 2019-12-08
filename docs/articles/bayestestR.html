@@ -124,15 +124,19 @@
 <div id="density-estimation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#density-estimation" class="anchor"></a>Density Estimation</h2>
+<p>Plotting density estimations of Bayesian regression models will produce plots of the posterior distributions from model parameters, i.e. posterior interval estimates from MCMC draws.</p>
+<p>By default, all distributions are “stacked”, i.e. overlaying each other.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">result &lt;-<span class="st"> </span><span class="kw">estimate_density</span>(model)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<p>To get ridge lines separated by parameters, use <code>stack = FALSE</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">stack =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <div id="adding-prior-samples" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples" class="anchor"></a>Adding Prior Samples</h3>
+<p>For many plots, when the model has defined priors, you can add a layer from the prior distribution for the parameters with <code>priors = TRUE</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">stack =</span> <span class="ot">FALSE</span>, <span class="dt">priors =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
@@ -140,6 +144,8 @@
 <div id="probability-of-direction-pd" class="section level2">
 <h2 class="hasAnchor">
 <a href="#probability-of-direction-pd" class="anchor"></a>Probability of Direction (pd)</h2>
+<p>The probability of direction (also known as the maximum probability of effect - MPE) varies between 50% and 100% (i.e., 0.5 and 1) and can be interpreted as the probability (expressed in percentage) that a parameter (described by its posterior distribution) is strictly positive or negative (whichever is the most probable).</p>
+<p>It is mathematically defined as the proportion of the posterior distribution that is of the median’s sign. Altough differently expressed, this index is fairly similar (i.e., is strongly correlated) to the frequentist p-value</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">result &lt;-<span class="st"> </span><span class="kw">p_direction</span>(model)</a>
 <a class="sourceLine" id="cb6-2" title="2"></a>
 <a class="sourceLine" id="cb6-3" title="3">result</a>
@@ -155,6 +161,7 @@
 <a class="sourceLine" id="cb6-13" title="13"></a>
 <a class="sourceLine" id="cb6-14" title="14"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p>For more complex models with different components, each component is displayed in a separate facet. Use <code>n_columns</code> to define the layout, i.e. how many columns are used to display the facets.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">result &lt;-<span class="st"> </span><span class="kw">p_direction</span>(model2, <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</a>
 <a class="sourceLine" id="cb7-2" title="2"></a>
 <a class="sourceLine" id="cb7-3" title="3">result</a>
@@ -205,6 +212,8 @@
 <div id="practical-significance" class="section level2">
 <h2 class="hasAnchor">
 <a href="#practical-significance" class="anchor"></a>Practical Significance</h2>
+<p>The probability of practical significance is conceptualized as a unidirectional equivalence test. It returns the probability that an effect is above a given threshold corresponding to a negligible effect in the median’s direction.</p>
+<p>Mathematically, it is defined as the proportion of the posterior distribution of the median sign above the threshold.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">result &lt;-<span class="st"> </span><span class="kw">p_significance</span>(model)</a>
 <a class="sourceLine" id="cb10-2" title="2"></a>
 <a class="sourceLine" id="cb10-3" title="3">result</a>
@@ -270,6 +279,7 @@
 <div id="point-estimates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#point-estimates" class="anchor"></a>Point Estimates</h2>
+<p><code>point_estimate()</code> computes various point-estimates, such as the mean, the median or the MAP, to describe posterior distributions. The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method shows the posterior distribution of related parameters and emphasizes the point estimate within the plot.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">result &lt;-<span class="st"> </span><span class="kw">point_estimate</span>(model)</a>
 <a class="sourceLine" id="cb14-2" title="2"></a>
 <a class="sourceLine" id="cb14-3" title="3">result</a>
@@ -311,6 +321,8 @@
 <div id="highest-density-interval-hdi" class="section level2">
 <h2 class="hasAnchor">
 <a href="#highest-density-interval-hdi" class="anchor"></a>Highest Density Interval (HDI)</h2>
+<p><code>hdi()</code> computes the Highest Density Interval (HDI) of posterior distributions. All points within this interval have a higher probability density than points outside the interval.</p>
+<p>The HDI can be used in the context of uncertainty characterisation of posterior distributions as Credible Interval (CI).</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">result &lt;-<span class="st"> </span><span class="kw">hdi</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>, <span class="fl">0.95</span>))</a>
 <a class="sourceLine" id="cb17-2" title="2"></a>
 <a class="sourceLine" id="cb17-3" title="3">result</a>
@@ -363,6 +375,8 @@
 <div id="region-of-practical-equivalence-rope" class="section level2">
 <h2 class="hasAnchor">
 <a href="#region-of-practical-equivalence-rope" class="anchor"></a>Region of Practical Equivalence (ROPE)</h2>
+<p><code>rope()</code> computes the proportion (in percentage) of the HDI of a posterior distribution that lies within a region of practical equivalence (<em>ROPE</em>).</p>
+<p>The related <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method plots posterior distributions, coloring different HDI levels, and adds a “rope” region to the plot that indicates which portion of the posterior distributions lies inside (and outside) the ROPE.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">result &lt;-<span class="st"> </span><span class="kw">rope</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
 <a class="sourceLine" id="cb20-2" title="2"></a>
 <a class="sourceLine" id="cb20-3" title="3">result</a>
@@ -469,6 +483,7 @@
 <div id="test-for-practical-equivalence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-for-practical-equivalence" class="anchor"></a>Test for Practical Equivalence</h2>
+<p>The test for practical equivalence is based on the “HDI+ROPE decision rule” to check whether parameter values should be accepted or rejected against an explicitly formulated “null hypothesis” (i.e., a ROPE). In other words, it checks the percentage of the 89% HDI that is the null region (the ROPE). If this percentage is sufficiently low, the null hypothesis is rejected. If this percentage is sufficiently high, the null hypothesis is accepted.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model)</a>
 <a class="sourceLine" id="cb22-2" title="2"></a>
 <a class="sourceLine" id="cb22-3" title="3">result</a>
@@ -593,7 +608,7 @@
 <div id="bayes-factors-for-model-parameters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factors-for-model-parameters" class="anchor"></a>Bayes Factors for Model Parameters</h3>
-<p>Plotting the result of a call to <code>bayesfactor_parameters</code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:</p>
+<p>Plotting the result of a call to <code>bayesfactor_parameters()</code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model)</a>
 <a class="sourceLine" id="cb25-2" title="2"></a>
 <a class="sourceLine" id="cb25-3" title="3">result</a>

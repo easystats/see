@@ -47,17 +47,25 @@ model2 <- insight::download_model("brms_zi_3")
 
 ## Density Estimation
 
+Plotting density estimations of Bayesian regression models will produce plots of the posterior distributions from model parameters, i.e. posterior interval estimates from MCMC draws.
+
+By default, all distributions are "stacked", i.e. overlaying each other.
+
 ```{r}
 result <- estimate_density(model)
 
 plot(result)
 ```
 
+To get ridge lines separated by parameters, use `stack = FALSE`.
+
 ```{r}
 plot(result, stack = FALSE)
 ```
 
 ### Adding Prior Samples
+
+For many plots, when the model has defined priors, you can add a layer from the prior distribution for the parameters with `priors = TRUE`.
 
 ```{r}
 plot(result, stack = FALSE, priors = TRUE)
@@ -66,6 +74,10 @@ plot(result, stack = FALSE, priors = TRUE)
 
 ## Probability of Direction (pd)
 
+The probability of direction (also known as the maximum probability of effect - MPE) varies between 50% and 100% (i.e., 0.5 and 1) and can be interpreted as the probability (expressed in percentage) that a parameter (described by its posterior distribution) is strictly positive or negative (whichever is the most probable).
+
+It is mathematically defined as the proportion of the posterior distribution that is of the median's sign. Altough differently expressed, this index is fairly similar (i.e., is strongly correlated) to the frequentist p-value
+
 ```{r}
 result <- p_direction(model)
 
@@ -73,6 +85,8 @@ result
 
 plot(result)
 ```
+
+For more complex models with different components, each component is displayed in a separate facet. Use `n_columns` to define the layout, i.e. how many columns are used to display the facets.
 
 ```{r fig.width=9, fig.height=9}
 result <- p_direction(model2, effects = "all", component = "all")
@@ -92,6 +106,10 @@ plot(result, priors = TRUE)
 
 
 ## Practical Significance
+
+The probability of practical significance is conceptualized as a unidirectional equivalence test. It returns the probability that an effect is above a given threshold corresponding to a negligible effect in the median's direction.
+
+Mathematically, it is defined as the proportion of the posterior distribution of the median sign above the threshold.
 
 ```{r}
 result <- p_significance(model)
@@ -120,6 +138,8 @@ plot(result, priors = TRUE)
 
 ## Point Estimates
 
+`point_estimate()` computes various point-estimates, such as the mean, the median or the MAP, to describe posterior distributions. The `plot()`-method shows the posterior distribution of related parameters and emphasizes the point estimate within the plot.
+
 ```{r fig.height=10}
 result <- point_estimate(model)
 
@@ -147,6 +167,10 @@ plot(result, priors = TRUE)
 
 ## Highest Density Interval (HDI)
 
+`hdi()` computes the Highest Density Interval (HDI) of posterior distributions. All points within this interval have a higher probability density than points outside the interval.
+
+The HDI can be used in the context of uncertainty characterisation of posterior distributions as Credible Interval (CI).
+
 ```{r}
 result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
 
@@ -163,6 +187,10 @@ plot(result, n_columns = NULL) + scale_fill_material()
 ```
 
 ## Region of Practical Equivalence (ROPE)
+
+`rope()` computes the proportion (in percentage) of the HDI of a posterior distribution that lies within a region of practical equivalence (*ROPE*).
+
+The related `plot()`-method plots posterior distributions, coloring different HDI levels, and adds a "rope" region to the plot that indicates which portion of the posterior distributions lies inside (and outside) the ROPE.
 
 ```{r}
 result <- rope(model, ci = c(0.9, 0.95))
@@ -183,6 +211,8 @@ plot(result, rope_color = "grey70") +
 ```
 
 ## Test for Practical Equivalence
+
+The test for practical equivalence is based on the "HDI+ROPE decision rule" to check whether parameter values should be accepted or rejected against an explicitly formulated "null hypothesis" (i.e., a ROPE). In other words, it checks the percentage of the 89% HDI that is the null region (the ROPE). If this percentage is sufficiently low, the null hypothesis is rejected. If this percentage is sufficiently high, the null hypothesis is accepted.
 
 ```{r}
 result <- equivalence_test(model)
@@ -217,7 +247,7 @@ plot(result, n_columns = 3) + theme_modern()
 
 ### Bayes Factors for Model Parameters
 
-Plotting the result of a call to `bayesfactor_parameters` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:
+Plotting the result of a call to `bayesfactor_parameters()` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:
 
 ```{r}
 result <- bayesfactor_parameters(model)
