@@ -83,7 +83,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_social()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Social Colors - Four Groups
@@ -97,7 +97,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
   scale_color_social()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Social Colors - Five Groups
@@ -111,7 +111,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
   scale_color_social()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 
@@ -128,7 +128,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_material()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Material Colors - Four Groups
@@ -142,7 +142,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
   scale_color_material()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Material Colors - Five Groups
@@ -156,7 +156,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
   scale_color_material()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 
@@ -173,7 +173,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_flat()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Flat Colors - Four Groups
@@ -187,7 +187,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
   scale_color_flat()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Flat Colors - Five Groups
@@ -201,7 +201,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
   scale_color_flat()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 
@@ -218,7 +218,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_metro()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Metro Colors - Four Groups
@@ -232,7 +232,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
   scale_color_metro()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Metro Colors - Five Groups
@@ -246,7 +246,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
   scale_color_metro()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 
@@ -263,7 +263,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_pizza()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Pizza Colors - Four Groups
@@ -277,7 +277,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
   scale_color_pizza()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 ## Pizza Colors - Five Groups
@@ -291,7 +291,7 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
   scale_color_pizza()
 
-plots(p1, p2, nrow = 1)
+plots(p1, p2, n_rows = 1)
 ```
 
 
@@ -387,5 +387,5 @@ p5 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
-plots(p1, p2, p3, p4, p5, ncol = 1, tags = c("Social", "Flat", "Material", "Metro", "Pizza"))
+plots(p1, p2, p3, p4, p5, n_columns = 1, tags = c("Social", "Flat", "Material", "Metro", "Pizza"))
 ```

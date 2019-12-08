@@ -268,13 +268,16 @@
 <a class="sourceLine" id="cb14-6" title="6">result &lt;-<span class="st"> </span><span class="kw">compare_performance</span>(lm1, lm2, lm3, lm4)</a>
 <a class="sourceLine" id="cb14-7" title="7"></a>
 <a class="sourceLine" id="cb14-8" title="8">result</a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt;   Model Type       AIC      BIC        R2 R2_adjusted      RMSE           BF</span></a>
-<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; 1   lm1   lm 231.45196 243.4945 0.6187057   0.6135181 0.5096155           NA</span></a>
-<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt; 2   lm2   lm 106.23274 121.2859 0.8367238   0.8333688 0.3334832 3.445528e+26</span></a>
-<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; 3   lm3   lm 187.09220 208.1666 0.7274452   0.7179815 0.4308632 4.691860e+07</span></a>
-<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt; 4   lm4   lm  78.79678 105.8925 0.8710785   0.8647232 0.2963297 7.583929e+29</span></a>
-<a class="sourceLine" id="cb14-14" title="14"></a>
-<a class="sourceLine" id="cb14-15" title="15"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt; # Comparison of Model Performance Indices</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt; Model | Type |    AIC |    BIC |   R2 | R2_adjusted | RMSE |                                BF</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; ----------------------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt; lm1   |   lm | 231.45 | 243.49 | 0.62 |        0.61 | 0.51 |                                  </span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt; lm2   |   lm | 106.23 | 121.29 | 0.84 |        0.83 | 0.33 |    344552828468688161088206000.00</span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; lm3   |   lm | 187.09 | 208.17 | 0.73 |        0.72 | 0.43 |                       46918598.05</span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt; lm4   |   lm |  78.80 | 105.89 | 0.87 |        0.86 | 0.30 | 758392867066562633684884406602.00</span></a>
+<a class="sourceLine" id="cb14-17" title="17"></a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 </div>
 <div id="model-and-vector-properties" class="section level1">
