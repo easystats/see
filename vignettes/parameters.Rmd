@@ -54,11 +54,15 @@ model_parameters(model2)
 
 ## Model Parameters
 
+The `plot()`-method for `model_parameters()` creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.
+
 ```{r}
 result <- model_parameters(model)
 
 plot(result)
 ```
+
+As compared to the classical `summary()`-output, `model_parameters()`, and hence the `plot()`-method, tries to create human readable, prettier parameters names.
 
 ```{r}
 result <- model_parameters(model2)
@@ -67,6 +71,10 @@ plot(result)
 ```
 
 ## Simulated Model Parameters
+
+`parameters_simulate()` computes simulated draws of parameters and their related indices such as Confidence Intervals (CI) and p-values. Simulating parameter draws can be seen as a (computationally faster) alternative to bootstrapping.
+
+As `parameters_simulate()` is based on `model_simulate()` and thus simulates many draws for each parameter, `plot()` will produce similar plots as the density estimation plots [from Bayesian models](https://easystats.github.io/see/articles/bayestestR.html).
 
 ```{r}
 result <- parameters_simulate(model)
@@ -99,6 +107,8 @@ plot(result)
 ```
 
 ## Model Parameters of Bayesian models
+
+`model_parameters()` for Bayesian models will produce "forest plots" (instead of [density estimations](https://easystats.github.io/see/articles/bayestestR.html)).
 
 ```{r}
 # We download the model to save computation time. Here is the code
