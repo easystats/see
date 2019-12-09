@@ -4,6 +4,7 @@ data_plot.parameters_pca <- function(x, data = NULL, ...){
   dataplot <- as.data.frame(x)
   dataplot$Complexity <- NULL
   dataplot$Uniqueness <- NULL
+  dataplot$MSA <- NULL
 
   if ("Label" %in% colnames(dataplot)) {
     dataplot$Variable <- dataplot$Label
