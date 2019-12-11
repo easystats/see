@@ -28,7 +28,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
 
   if (ncol(data) > 1) {
     levels_order <- rev(x$Parameter)
-    data <- data[, x$Parameter]
+    data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
     for (i in names(data)) {
       if (!is.null(params)) {
