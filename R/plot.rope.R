@@ -15,6 +15,8 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...){
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
     data <- as.data.frame(data)
+  } else if (inherits(data, "BFBayesFactor")) {
+    data <- insight::get_parameters(data)
   } else {
     data <- as.data.frame(data)
   }

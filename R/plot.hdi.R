@@ -39,6 +39,8 @@ data_plot.bayestestR_eti <- data_plot.hdi
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
     data <- as.data.frame(data)
+  } else if (inherits(data, "BFBayesFactor")) {
+    data <- insight::get_parameters(data)
   } else {
     data <- as.data.frame(data)
   }
