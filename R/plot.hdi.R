@@ -42,6 +42,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
   } else if (inherits(data, "BFBayesFactor")) {
     data <- insight::get_parameters(data)
   } else if (inherits(data, "MCMCglmm")) {
+    params <- insight::clean_parameters(data)
     nF <- data$Fixed$nfl
     data <- as.data.frame(data$Sol[, 1:nF, drop = FALSE])
   } else {
