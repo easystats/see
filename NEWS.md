@@ -10,6 +10,7 @@
 
 ## Changes to functions
 
+* `plot()`-functions for the [**bayestestR**-package](https://easystats.github.io/see/articles/bayestestR.html) now also support `BFBayesFactor` and `MCMCglmm` objects.
 * `plot()` for `parameters::model_parameters()` now uses fixed axis for facets when model is an ordinal or cumulative link model (because all facets are on the same scale, and thus parameters are easier to compare).
 
 ## Bug fixes
