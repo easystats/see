@@ -106,6 +106,11 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
   }
 
 
+  if (length(unique(x$Parameter)) == 1) {
+    p <- p + guides(color = FALSE)
+  }
+
+
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
