@@ -22,8 +22,8 @@
 #'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.
 #' @param point_size Size of point-geoms.
-#' @param rope_alpha Transparency level of ROPE ribbon.
-#' @param rope_color Color of ROPE ribbon.
+#' @param rope_alpha,si_alpha Transparency level of ROPE/SI ribbon.
+#' @param rope_color,si_color Color of ROPE/SI ribbon.
 #' @param n_columns For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.
 #' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
 #'   Else, densities are plotted for each parameter among each other.

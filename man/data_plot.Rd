@@ -6,7 +6,8 @@
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
 %   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
 %   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
-%   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R
+%   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R,
+%   R/plot.si.R
 \name{data_plot}
 \alias{data_plot}
 \alias{plot.see_bayesfactor_models}
@@ -28,6 +29,7 @@
 \alias{plot.see_parameters_simulate}
 \alias{plot.see_point_estimate}
 \alias{plot.see_rope}
+\alias{plot.see_si}
 \title{Prepare objects for plotting or plot objects}
 \usage{
 data_plot(x, data = NULL, ...)
@@ -172,6 +174,8 @@ data_plot(x, data = NULL, ...)
   n_columns = 1,
   ...
 )
+
+\method{plot}{see_si}(x, si_color = "#0171D3", si_alpha = 0.2, show_intercept = FALSE, ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -194,9 +198,9 @@ custom \code{prior_odds} will change the slices' size.}
 
 \item{point_size}{Size of point-geoms.}
 
-\item{rope_color}{Color of ROPE ribbon.}
+\item{rope_color, si_color}{Color of ROPE/SI ribbon.}
 
-\item{rope_alpha}{Transparency level of ROPE ribbon.}
+\item{rope_alpha, si_alpha}{Transparency level of ROPE/SI ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the intercept-parameter
