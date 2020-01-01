@@ -284,6 +284,7 @@ development and probably not yet available):
   \item \code{bayestestR::p_significance()}
   \item \code{bayestestR::point_estimate()}
   \item \code{bayestestR::rope()}
+  \item \code{bayestestR::si()}
   \item \code{estimate::estimate_contrasts()}
   \item \code{parameters::cluster_analysis()}
   \item \code{parameters::model_parameters()}
