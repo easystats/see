@@ -297,3 +297,13 @@ But it is also possible to plot one pizza for each model and the denominator mod
 plot(result, n_pies = "many", value = "BF") +
   scale_fill_flat(palette = "rainbow", reverse = TRUE)
 ```
+
+### Support Interval
+
+```{r}
+model <- stan_glm(mpg ~ gear + wt + cyl, data = mtcars, refresh = 0)
+result <- si(model)
+result
+
+plot(result) + ggplot2::coord_cartesian(xlim = c(-10, 10))
+```

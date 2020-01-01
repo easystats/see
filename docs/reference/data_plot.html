@@ -308,7 +308,10 @@ functions from different packages of the <a href='https://github.com/easystats'>
   <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>n_columns</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='no'>...</span>
-)</pre>
+)
+
+<span class='co'># S3 method for see_si</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>si_color</span> <span class='kw'>=</span> <span class='st'>"#0171D3"</span>, <span class='kw'>si_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -350,12 +353,12 @@ custom <code>prior_odds</code> will change the slices' size.</p></td>
       <td><p>Size of point-geoms.</p></td>
     </tr>
     <tr>
-      <th>rope_color</th>
-      <td><p>Color of ROPE ribbon.</p></td>
+      <th>rope_color, si_color</th>
+      <td><p>Color of ROPE/SI ribbon.</p></td>
     </tr>
     <tr>
-      <th>rope_alpha</th>
-      <td><p>Transparency level of ROPE ribbon.</p></td>
+      <th>rope_alpha, si_alpha</th>
+      <td><p>Transparency level of ROPE/SI ribbon.</p></td>
     </tr>
     <tr>
       <th>show_intercept</th>
@@ -470,6 +473,7 @@ development and probably not yet available):</p><ul>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/p_significance.html'>bayestestR::p_significance()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/point_estimate.html'>bayestestR::point_estimate()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/rope.html'>bayestestR::rope()</a></code></p></li>
+<li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>bayestestR::si()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/estimate/man/estimate_contrasts.html'>estimate::estimate_contrasts()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/parameters/man/cluster_analysis.html'>parameters::cluster_analysis()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.html'>parameters::model_parameters()</a></code></p></li>

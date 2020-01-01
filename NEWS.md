@@ -7,6 +7,7 @@
 ## New plot-functions
 
 * Added plot-function for `performance::compare_performance()`.
+* Added plot-function for `bayestestR::si()`.
 
 ## Changes to functions
 
