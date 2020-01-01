@@ -4,7 +4,7 @@
 \alias{coord_radar}
 \title{Radar coordinate system}
 \usage{
-coord_radar(theta = "x", start = 0, direction = 1)
+coord_radar(theta = "x", start = 0, direction = 1, ...)
 }
 \arguments{
 \item{theta}{Can be 'x' or 'y'.}
@@ -12,6 +12,8 @@ coord_radar(theta = "x", start = 0, direction = 1)
 \item{start}{Starting position. Best expressed in terms of \code{pi} (e.g., \code{-pi/4}).}
 
 \item{direction}{The direction of plotting. Can be 1 or -1.}
+
+\item{...}{Other arguments to be passed to \code{ggproto}.}
 }
 \description{
 Add a radar coordinate system useful for radar charts.

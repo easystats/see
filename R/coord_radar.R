@@ -5,6 +5,7 @@
 #' @param theta Can be 'x' or 'y'.
 #' @param start Starting position. Best expressed in terms of \code{pi} (e.g., \code{-pi/4}).
 #' @param direction The direction of plotting. Can be 1 or -1.
+#' @param ... Other arguments to be passed to \code{ggproto}.
 #'
 #' @examples
 #' # Create a radar/spider chart with ggplot:
@@ -23,11 +24,12 @@
 #'   coord_radar(start = -pi/4)
 #'
 #' @export
-coord_radar <- function (theta = "x", start = 0, direction = 1) {
+coord_radar <- function (theta = "x", start = 0, direction = 1, ...) {
   theta <- match.arg(theta, c("x", "y"))
   r <- ifelse(theta == "x", "y", "x")
 
   ggplot2::ggproto("CordRadar", CoordPolar, theta = theta, r = r, start = start,
                    direction = sign(direction),
-                   is_linear = function(coord) TRUE)
+                   is_linear = function(coord) TRUE,
+                   ...)
 }
