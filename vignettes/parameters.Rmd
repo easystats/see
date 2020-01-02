@@ -54,6 +54,8 @@ model_parameters(model2)
 
 ## Model Parameters
 
+_([related function documentation](https://easystats.github.io/parameters/reference/model_parameters.html))_
+
 The `plot()`-method for `model_parameters()` creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.
 
 ```{r}
@@ -152,6 +154,8 @@ plot(result)
 
 ## Principal Component Analysis
 
+_([related function documentation](https://easystats.github.io/parameters/reference/principal_components.html))_
+
 ```{r}
 data(mtcars)
 result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
@@ -177,6 +181,8 @@ plot(result, type = "line", text_color = "white") +
 
 ## Cluster Analysis
 
+_([related function documentation](https://easystats.github.io/parameters/reference/cluster_analysis.html))_
+
 ```{r}
 data(iris)
 result <- cluster_analysis(iris[, 1:4], n_clusters = 3)
@@ -190,6 +196,8 @@ plot(result, n_columns = 2)
 
 ## Number of Components/Factors to Retain
 
+_([related function documentation](https://easystats.github.io/parameters/reference/n_factors.html))_
+
 ```{r}
 data(mtcars)
 result <- n_factors(mtcars, type = "PCA")
@@ -200,6 +208,8 @@ plot(result, type = "line")
 ```
 
 ## Number of Clusters to Retain
+
+_([related function documentation](https://easystats.github.io/parameters/reference/n_clusters.html))_
 
 ```{r}
 data(iris)
