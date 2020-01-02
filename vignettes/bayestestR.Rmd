@@ -300,10 +300,12 @@ plot(result, n_pies = "many", value = "BF") +
 
 ### Support Interval
 
+Plotting the result of a call to `si()` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). The support interval will be denoted by a shaded border. 
+
 ```{r}
-model <- stan_glm(mpg ~ gear + wt + cyl, data = mtcars, refresh = 0)
 result <- si(model)
 result
 
-plot(result) + ggplot2::coord_cartesian(xlim = c(-10, 10))
-```
+plot(result) + 
+  scale_color_metro(palette = "ice") +
+  scale_fill_metro(palette = "ice")
