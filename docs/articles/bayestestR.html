@@ -681,18 +681,22 @@
 <div id="support-interval" class="section level3">
 <h3 class="hasAnchor">
 <a href="#support-interval" class="anchor"></a>Support Interval</h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">model &lt;-<span class="st"> </span><span class="kw">stan_glm</span>(mpg <span class="op">~</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars, <span class="dt">refresh =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb30-2" title="2">result &lt;-<span class="st"> </span><span class="kw">si</span>(model)</a>
-<a class="sourceLine" id="cb30-3" title="3">result</a>
-<a class="sourceLine" id="cb30-4" title="4"><span class="co">#&gt; # Support Interval</span></a>
-<a class="sourceLine" id="cb30-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb30-6" title="6"><span class="co">#&gt;    Parameter      BF = 1 SI</span></a>
-<a class="sourceLine" id="cb30-7" title="7"><span class="co">#&gt;  (Intercept) [30.77, 53.46]</span></a>
-<a class="sourceLine" id="cb30-8" title="8"><span class="co">#&gt;         gear [-2.49,  1.49]</span></a>
-<a class="sourceLine" id="cb30-9" title="9"><span class="co">#&gt;           wt [-5.38, -1.34]</span></a>
-<a class="sourceLine" id="cb30-10" title="10"><span class="co">#&gt;          cyl [-2.58, -0.50]</span></a>
-<a class="sourceLine" id="cb30-11" title="11"></a>
-<a class="sourceLine" id="cb30-12" title="12"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>))</a></code></pre></div>
+<p>Plotting the result of a call to <code>si()</code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). The support interval will be denoted by a shaded border.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">result &lt;-<span class="st"> </span><span class="kw">si</span>(model)</a>
+<a class="sourceLine" id="cb30-2" title="2">result</a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="co">#&gt; # Support Interval</span></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="co">#&gt;                      Parameter     BF = 1 SI</span></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="co">#&gt;                    (Intercept) [ 4.35, 5.24]</span></a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="co">#&gt;                    Petal.Width [-0.11, 1.92]</span></a>
+<a class="sourceLine" id="cb30-8" title="8"><span class="co">#&gt;              Speciesversicolor [-1.58, 0.08]</span></a>
+<a class="sourceLine" id="cb30-9" title="9"><span class="co">#&gt;               Speciesvirginica [-0.44, 1.36]</span></a>
+<a class="sourceLine" id="cb30-10" title="10"><span class="co">#&gt;  Petal.Width:Speciesversicolor [-0.61, 1.67]</span></a>
+<a class="sourceLine" id="cb30-11" title="11"><span class="co">#&gt;   Petal.Width:Speciesvirginica [-1.22, 0.77]</span></a>
+<a class="sourceLine" id="cb30-12" title="12"></a>
+<a class="sourceLine" id="cb30-13" title="13"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-14" title="14"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-15" title="15"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</a></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
 </div>
 </div>
