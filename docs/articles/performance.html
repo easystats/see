@@ -113,6 +113,7 @@
 <div id="binned-residuals" class="section level2">
 <h2 class="hasAnchor">
 <a href="#binned-residuals" class="anchor"></a>Binned Residuals</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/binned_residuals.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(vs <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>mpg, <span class="dt">data =</span> mtcars, <span class="dt">family =</span> <span class="st">"binomial"</span>)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">binned_residuals</span>(model)</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; Warning: Probably bad model fit. Only about 50% of the residuals are inside the error bounds.</span></a></code></pre></div>
@@ -121,6 +122,7 @@
 <div id="check-for-multicollinearity---variance-inflation-factor" class="section level2">
 <h2 class="hasAnchor">
 <a href="#check-for-multicollinearity---variance-inflation-factor" class="anchor"></a>Check for Multicollinearity - Variance Inflation Factor</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_collinearity.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">m &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)</a>
 <a class="sourceLine" id="cb3-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_collinearity</span>(m)</a>
 <a class="sourceLine" id="cb3-3" title="3"></a>
@@ -188,6 +190,7 @@
 <div id="check-for-outliers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#check-for-outliers" class="anchor"></a>Check for Outliers</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_outliers.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># select only mpg and disp (continuous)</span></a>
 <a class="sourceLine" id="cb5-2" title="2">mt1 &lt;-<span class="st"> </span>mtcars[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)]</a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="co"># create some fake outliers and attach outliers to main df</span></a>
@@ -204,6 +207,7 @@
 <div id="check-for-normal-distributed-residuals" class="section level2">
 <h2 class="hasAnchor">
 <a href="#check-for-normal-distributed-residuals" class="anchor"></a>Check for Normal Distributed Residuals</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)</a>
 <a class="sourceLine" id="cb6-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_normality</span>(model)</a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; OK: Residuals appear as normally distributed (p = 0.230).</span></a></code></pre></div>
@@ -229,6 +233,7 @@
 <div id="check-for-heteroscedasticity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#check-for-heteroscedasticity" class="anchor"></a>Check for Heteroscedasticity</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)</a>
 <a class="sourceLine" id="cb10-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_heteroscedasticity</span>(model)</a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.042).</span></a>
@@ -238,6 +243,7 @@
 <div id="check-for-homogeneity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#check-for-homogeneity" class="anchor"></a>Check for Homogeneity</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_homogeneity.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(len <span class="op">~</span><span class="st"> </span>supp <span class="op">+</span><span class="st"> </span>dose, <span class="dt">data =</span> ToothGrowth)</a>
 <a class="sourceLine" id="cb11-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_homogeneity</span>(model)</a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt; OK: Variances in each of the groups are the same (Bartlett Test, p = 0.226).</span></a>
@@ -248,6 +254,7 @@
 <div id="overall-model-check" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overall-model-check" class="anchor"></a>Overall Model Check</h1>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_model.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days <span class="op">|</span><span class="st"> </span>Subject), sleepstudy)</a>
 <a class="sourceLine" id="cb12-2" title="2"><span class="kw">check_model</span>(model)</a>
 <a class="sourceLine" id="cb12-3" title="3"><span class="co">#&gt; Not enough model terms in the conditional part of the model to check for multicollinearity.</span></a></code></pre></div>
@@ -259,6 +266,7 @@
 <div id="compare-model-performances" class="section level1">
 <h1 class="hasAnchor">
 <a href="#compare-model-performances" class="anchor"></a>Compare Model Performances</h1>
+<p><em>(<a href="https://easystats.github.io/performance/reference/model_performance.html">related function documentation</a>)</em></p>
 <p><code>compare_performance()</code> computes indices of model performance for different models at once and hence allows comparison of indices across models. The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method creates a “spiderweb” plot, where the different indices are normalized and larger values indicate better model performance. Hence, points closer to the center indicate worse fit indices.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
 <a class="sourceLine" id="cb14-2" title="2">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris)</a>
@@ -283,6 +291,7 @@
 <div id="model-and-vector-properties" class="section level1">
 <h1 class="hasAnchor">
 <a href="#model-and-vector-properties" class="anchor"></a>Model and Vector Properties</h1>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_distribution.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days <span class="op">|</span><span class="st"> </span>Subject), sleepstudy)</a>
 <a class="sourceLine" id="cb15-2" title="2">result &lt;-<span class="st"> </span><span class="kw">check_distribution</span>(model)</a>
 <a class="sourceLine" id="cb15-3" title="3"></a>
@@ -320,6 +329,7 @@
 <div id="roc-curves" class="section level1">
 <h1 class="hasAnchor">
 <a href="#roc-curves" class="anchor"></a>ROC curves</h1>
+<p><em>(<a href="https://easystats.github.io/performance/reference/performance_roc.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
 <a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">123</span>)</a>
 <a class="sourceLine" id="cb17-3" title="3">iris<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(iris), <span class="dt">size =</span> <span class="dv">1</span>, <span class="fl">.3</span>)</a>
