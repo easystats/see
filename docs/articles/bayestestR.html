@@ -124,6 +124,7 @@
 <div id="density-estimation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#density-estimation" class="anchor"></a>Density Estimation</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">related function documentation</a>)</em></p>
 <p>Plotting density estimations of Bayesian regression models will produce plots of the posterior distributions from model parameters, i.e. posterior interval estimates from MCMC draws.</p>
 <p>By default, all distributions are “stacked”, i.e. overlaying each other.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">result &lt;-<span class="st"> </span><span class="kw">estimate_density</span>(model)</a>
@@ -144,6 +145,7 @@
 <div id="probability-of-direction-pd" class="section level2">
 <h2 class="hasAnchor">
 <a href="#probability-of-direction-pd" class="anchor"></a>Probability of Direction (pd)</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/p_direction.html">related function documentation</a>)</em></p>
 <p>The probability of direction (also known as the maximum probability of effect - MPE) varies between 50% and 100% (i.e., 0.5 and 1) and can be interpreted as the probability (expressed in percentage) that a parameter (described by its posterior distribution) is strictly positive or negative (whichever is the most probable).</p>
 <p>It is mathematically defined as the proportion of the posterior distribution that is of the median’s sign. Altough differently expressed, this index is fairly similar (i.e., is strongly correlated) to the frequentist p-value</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">result &lt;-<span class="st"> </span><span class="kw">p_direction</span>(model)</a>
@@ -212,6 +214,7 @@
 <div id="practical-significance" class="section level2">
 <h2 class="hasAnchor">
 <a href="#practical-significance" class="anchor"></a>Practical Significance</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/p_significance.html">related function documentation</a>)</em></p>
 <p>The probability of practical significance is conceptualized as a unidirectional equivalence test. It returns the probability that an effect is above a given threshold corresponding to a negligible effect in the median’s direction.</p>
 <p>Mathematically, it is defined as the proportion of the posterior distribution of the median sign above the threshold.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">result &lt;-<span class="st"> </span><span class="kw">p_significance</span>(model)</a>
@@ -279,6 +282,7 @@
 <div id="point-estimates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#point-estimates" class="anchor"></a>Point Estimates</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">related function documentation</a>)</em></p>
 <p><code>point_estimate()</code> computes various point-estimates, such as the mean, the median or the MAP, to describe posterior distributions. The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method shows the posterior distribution of related parameters and emphasizes the point estimate within the plot.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">result &lt;-<span class="st"> </span><span class="kw">point_estimate</span>(model)</a>
 <a class="sourceLine" id="cb14-2" title="2"></a>
@@ -321,6 +325,7 @@
 <div id="highest-density-interval-hdi" class="section level2">
 <h2 class="hasAnchor">
 <a href="#highest-density-interval-hdi" class="anchor"></a>Highest Density Interval (HDI)</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/hdi.html">related function documentation</a>)</em></p>
 <p><code>hdi()</code> computes the Highest Density Interval (HDI) of posterior distributions. All points within this interval have a higher probability density than points outside the interval.</p>
 <p>The HDI can be used in the context of uncertainty characterisation of posterior distributions as Credible Interval (CI).</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">result &lt;-<span class="st"> </span><span class="kw">hdi</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>, <span class="fl">0.95</span>))</a>
@@ -375,6 +380,7 @@
 <div id="region-of-practical-equivalence-rope" class="section level2">
 <h2 class="hasAnchor">
 <a href="#region-of-practical-equivalence-rope" class="anchor"></a>Region of Practical Equivalence (ROPE)</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/rope.html">related function documentation</a>)</em></p>
 <p><code>rope()</code> computes the proportion (in percentage) of the HDI of a posterior distribution that lies within a region of practical equivalence (<em>ROPE</em>).</p>
 <p>The related <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method plots posterior distributions, coloring different HDI levels, and adds a “rope” region to the plot that indicates which portion of the posterior distributions lies inside (and outside) the ROPE.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">result &lt;-<span class="st"> </span><span class="kw">rope</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
@@ -483,6 +489,7 @@
 <div id="test-for-practical-equivalence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-for-practical-equivalence" class="anchor"></a>Test for Practical Equivalence</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">related function documentation</a>)</em></p>
 <p>The test for practical equivalence is based on the “HDI+ROPE decision rule” to check whether parameter values should be accepted or rejected against an explicitly formulated “null hypothesis” (i.e., a ROPE). In other words, it checks the percentage of the 89% HDI that is the null region (the ROPE). If this percentage is sufficiently low, the null hypothesis is rejected. If this percentage is sufficiently high, the null hypothesis is accepted.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model)</a>
 <a class="sourceLine" id="cb22-2" title="2"></a>
@@ -608,6 +615,7 @@
 <div id="bayes-factors-for-model-parameters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factors-for-model-parameters" class="anchor"></a>Bayes Factors for Model Parameters</h3>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">related function documentation</a>)</em></p>
 <p>Plotting the result of a call to <code>bayesfactor_parameters()</code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model)</a>
 <a class="sourceLine" id="cb25-2" title="2"></a>
@@ -652,6 +660,7 @@
 <div id="bayes-factors-for-model-comparison" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factors-for-model-comparison" class="anchor"></a>Bayes Factors for Model Comparison</h3>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/bayesfactor_models.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">lm0 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mtcars)</a>
 <a class="sourceLine" id="cb27-2" title="2">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)</a>
 <a class="sourceLine" id="cb27-3" title="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</a>
@@ -681,6 +690,7 @@
 <div id="support-interval" class="section level3">
 <h3 class="hasAnchor">
 <a href="#support-interval" class="anchor"></a>Support Interval</h3>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/si.html">related function documentation</a>)</em></p>
 <p>Plotting the result of a call to <code>si()</code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). The support interval will be denoted by a shaded border.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">result &lt;-<span class="st"> </span><span class="kw">si</span>(model)</a>
 <a class="sourceLine" id="cb30-2" title="2">result</a>

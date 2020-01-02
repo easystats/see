@@ -47,6 +47,8 @@ model2 <- insight::download_model("brms_zi_3")
 
 ## Density Estimation
 
+_([related function documentation](https://easystats.github.io/bayestestR/reference/estimate_density.html))_
+
 Plotting density estimations of Bayesian regression models will produce plots of the posterior distributions from model parameters, i.e. posterior interval estimates from MCMC draws.
 
 By default, all distributions are "stacked", i.e. overlaying each other.
@@ -73,6 +75,8 @@ plot(result, stack = FALSE, priors = TRUE)
 
 
 ## Probability of Direction (pd)
+
+_([related function documentation](https://easystats.github.io/bayestestR/reference/p_direction.html))_
 
 The probability of direction (also known as the maximum probability of effect - MPE) varies between 50% and 100% (i.e., 0.5 and 1) and can be interpreted as the probability (expressed in percentage) that a parameter (described by its posterior distribution) is strictly positive or negative (whichever is the most probable).
 
@@ -107,6 +111,8 @@ plot(result, priors = TRUE)
 
 ## Practical Significance
 
+_([related function documentation](https://easystats.github.io/bayestestR/reference/p_significance.html))_
+
 The probability of practical significance is conceptualized as a unidirectional equivalence test. It returns the probability that an effect is above a given threshold corresponding to a negligible effect in the median's direction.
 
 Mathematically, it is defined as the proportion of the posterior distribution of the median sign above the threshold.
@@ -138,6 +144,8 @@ plot(result, priors = TRUE)
 
 ## Point Estimates
 
+_([related function documentation](https://easystats.github.io/bayestestR/reference/point_estimate.html))_
+
 `point_estimate()` computes various point-estimates, such as the mean, the median or the MAP, to describe posterior distributions. The `plot()`-method shows the posterior distribution of related parameters and emphasizes the point estimate within the plot.
 
 ```{r fig.height=10}
@@ -167,6 +175,8 @@ plot(result, priors = TRUE)
 
 ## Highest Density Interval (HDI)
 
+_([related function documentation](https://easystats.github.io/bayestestR/reference/hdi.html))_
+
 `hdi()` computes the Highest Density Interval (HDI) of posterior distributions. All points within this interval have a higher probability density than points outside the interval.
 
 The HDI can be used in the context of uncertainty characterisation of posterior distributions as Credible Interval (CI).
@@ -187,6 +197,8 @@ plot(result, n_columns = NULL) + scale_fill_material()
 ```
 
 ## Region of Practical Equivalence (ROPE)
+
+_([related function documentation](https://easystats.github.io/bayestestR/reference/rope.html))_
 
 `rope()` computes the proportion (in percentage) of the HDI of a posterior distribution that lies within a region of practical equivalence (*ROPE*).
 
@@ -211,6 +223,8 @@ plot(result, rope_color = "grey70") +
 ```
 
 ## Test for Practical Equivalence
+
+_([related function documentation](https://easystats.github.io/bayestestR/reference/equivalence_test.html))_
 
 The test for practical equivalence is based on the "HDI+ROPE decision rule" to check whether parameter values should be accepted or rejected against an explicitly formulated "null hypothesis" (i.e., a ROPE). In other words, it checks the percentage of the 89% HDI that is the null region (the ROPE). If this percentage is sufficiently low, the null hypothesis is rejected. If this percentage is sufficiently high, the null hypothesis is accepted.
 
@@ -247,6 +261,8 @@ plot(result, n_columns = 3) + theme_modern()
 
 ### Bayes Factors for Model Parameters
 
+_([related function documentation](https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html))_
+
 Plotting the result of a call to `bayesfactor_parameters()` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:
 
 ```{r}
@@ -272,6 +288,8 @@ plot(result) +
 ```
 
 ### Bayes Factors for Model Comparison
+
+_([related function documentation](https://easystats.github.io/bayestestR/reference/bayesfactor_models.html))_
 
 ```{r}
 lm0 <- lm(qsec ~ 1, data = mtcars)
@@ -299,6 +317,8 @@ plot(result, n_pies = "many", value = "BF") +
 ```
 
 ### Support Interval
+
+_([related function documentation](https://easystats.github.io/bayestestR/reference/si.html))_
 
 Plotting the result of a call to `si()` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). The support interval will be denoted by a shaded border. 
 
