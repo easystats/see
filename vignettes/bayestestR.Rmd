@@ -196,6 +196,22 @@ plot(result, n_columns = 2) + scale_fill_metro()
 plot(result, n_columns = NULL) + scale_fill_material()
 ```
 
+## Support Interval
+
+_([related function documentation](https://easystats.github.io/bayestestR/reference/si.html))_
+
+Plotting the result of a call to `si()` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). The support interval will be denoted by a shaded border. 
+
+```{r}
+result <- si(model)
+result
+
+plot(result) + 
+  scale_color_metro(palette = "ice") +
+  scale_fill_metro(palette = "ice")
+```
+
+
 ## Region of Practical Equivalence (ROPE)
 
 _([related function documentation](https://easystats.github.io/bayestestR/reference/rope.html))_
@@ -315,17 +331,3 @@ But it is also possible to plot one pizza for each model and the denominator mod
 plot(result, n_pies = "many", value = "BF") +
   scale_fill_flat(palette = "rainbow", reverse = TRUE)
 ```
-
-### Support Interval
-
-_([related function documentation](https://easystats.github.io/bayestestR/reference/si.html))_
-
-Plotting the result of a call to `si()` results in a plot presenting the prior and posterior distributions for each parameter (note that by default `show_intercept = FALSE`). The support interval will be denoted by a shaded border. 
-
-```{r}
-result <- si(model)
-result
-
-plot(result) + 
-  scale_color_metro(palette = "ice") +
-  scale_fill_metro(palette = "ice")
