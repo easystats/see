@@ -22,7 +22,13 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
   }
 
   data <- tryCatch(
-    {data[, x$Parameter, drop = FALSE]},
+    {
+      if (!is.null(x$Parameter)) {
+        data[, x$Parameter, drop = FALSE]
+      } else {
+        data
+      }
+    },
     error = function(e) {data}
   )
 

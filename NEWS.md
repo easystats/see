@@ -17,6 +17,7 @@
 ## Bug fixes
 
 * Fixed issue with group coloring for `parameters::model_parameters()` when `exponentiate = TRUE`.
+* Fixes issue with `plot.point_estimate()` for vectors.
 
 # see 0.3.0
 
