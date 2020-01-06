@@ -1,5 +1,5 @@
 ---
-title: "Plotting Functions for the estimate Package"
+title: "Plotting Functions for the modelbased Package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{estimate}
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 ## Setup and Model Fitting
 
 ```{r setup}
-library(estimate)
+library(modelbased)
 library(rstanarm)
 library(ggplot2)
 library(see)

@@ -214,7 +214,7 @@ Plotting functions for the **parameters** package are demonstrated [in this vign
 
 Plotting functions for the **performance** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/performance.html).
 
-### [estimate](https://github.com/easystats/estimate)
+### [modelbased](https://github.com/easystats/modelbased)
 
-Plotting functions for the **estimate** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/estimate.html).
+Plotting functions for the **modelbased** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/modelbased.html).
 
