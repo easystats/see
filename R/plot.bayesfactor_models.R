@@ -18,6 +18,7 @@ plot.see_bayesfactor_models <-
   function(x,
            n_pies = c("one", "many"),
            value = c("none", "BF", "probability"),
+           sort_slices = FALSE,
            log = FALSE,
            prior_odds = NULL,
            ...) {
@@ -35,11 +36,18 @@ plot.see_bayesfactor_models <-
     po_txt <- "NOTE: Slice sizes based on custom prior odds"
   }
 
+  if (isTRUE(sort_slices)) {
+    one_pie_sort <- "PostProb"
+  } else {
+    one_pie_sort <- NULL
+  }
+
   # Prep data and bar position:
   one_pie_data <- as.data.frame(x) %>%
     dplyr::ungroup() %>%
+    dplyr::mutate(PostProb = (.data$BF / sum(.data$BF)) * priorOdds) %>%
+    dplyr::arrange_at(.vars = one_pie_sort, .funs = dplyr::desc) %>%
     dplyr::mutate(
-      PostProb = (.data$BF / sum(.data$BF)) * priorOdds,
       pos_txt  = sum(.data$PostProb) + .data$PostProb / 2 - cumsum(.data$PostProb),
       Model    = factor(.data$Model, levels = unique(.data$Model))
     )

@@ -38,6 +38,7 @@ data_plot(x, data = NULL, ...)
   x,
   n_pies = c("one", "many"),
   value = c("none", "BF", "probability"),
+  sort_slices = FALSE,
   log = FALSE,
   prior_odds = NULL,
   ...
@@ -188,6 +189,8 @@ statistical model or such.}
 \item{n_pies}{Number of pies.}
 
 \item{value}{What value to display.}
+
+\item{sort_slices}{Sort pie-slices by posterior probability (descending)?}
 
 \item{log}{Show log-transformed Bayes factors.}
 
