@@ -15,7 +15,7 @@ data_plot.p_significance <- function(x, data = NULL, grid = TRUE, show_intercept
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
-    data <- as.data.frame(data)
+    data <- as.data.frame(data, optional = FALSE)
   } else if (inherits(data, "BFBayesFactor")) {
     data <- insight::get_parameters(data)
   } else if (inherits(data, "MCMCglmm")) {

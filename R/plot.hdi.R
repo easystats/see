@@ -38,7 +38,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
-    data <- as.data.frame(data)
+    data <- as.data.frame(data, optional = FALSE)
   } else if (inherits(data, "BFBayesFactor")) {
     data <- insight::get_parameters(data)
   } else if (inherits(data, "MCMCglmm")) {
@@ -192,11 +192,11 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRU
     add_plot_attributes(x)
 
   # Show
-  if(show_zero){
+  if (show_zero) {
     p <- p + geom_vline(xintercept = 0, linetype = "dotted")
   }
 
-  if(show_title == FALSE){
+  if (show_title == FALSE) {
     p <- p + ggtitle("")
   }
 

@@ -52,7 +52,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
     if (inherits(model, "emmGrid"))
       tmp <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(model, names = FALSE)))[, i$Parameter, drop = FALSE]
     else
-      tmp <- as.data.frame(model, stringsAsFactors = FALSE)[, i$Parameter, drop = FALSE]
+      tmp <- as.data.frame(model, stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
 
     tmp2 <- lapply(1:nrow(i), function(j) {
       p <- i$Parameter[j]
