@@ -38,7 +38,7 @@ data_plot(x, data = NULL, ...)
   x,
   n_pies = c("one", "many"),
   value = c("none", "BF", "probability"),
-  sort_slices = FALSE,
+  sort = FALSE,
   log = FALSE,
   prior_odds = NULL,
   ...
@@ -190,7 +190,14 @@ statistical model or such.}
 
 \item{value}{What value to display.}
 
-\item{sort_slices}{Sort pie-slices by posterior probability (descending)?}
+\item{sort}{\describe{
+  \item{Plotting model parameters}{
+  If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+  }
+  \item{Plotting Bayes factors}{
+  Sort pie-slices by posterior probability (descending)?
+  }
+}}
 
 \item{log}{Show log-transformed Bayes factors.}
 
@@ -235,8 +242,6 @@ Else, densities are plotted for each parameter among each other.}
 \item{show_zero}{Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.}
 
 \item{show_title}{Logical, if \code{TRUE}, will show the title of the plot.}
-
-\item{sort}{If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.}
 
 \item{text_color}{Color of text labels.}
 

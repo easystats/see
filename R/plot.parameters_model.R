@@ -1,5 +1,4 @@
 #' @importFrom bayestestR reshape_ci
-#' @param sort If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
 #' @rdname data_plot
 #' @export
 plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, sort = NULL, n_columns = NULL, ...) {

@@ -29,7 +29,14 @@
 #'   Else, densities are plotted for each parameter among each other.
 #' @param n_pies Number of pies.
 #' @param value What value to display.
-#' @param sort_slices Sort pie-slices by posterior probability (descending)?
+#' @param sort \describe{
+#'   \item{Plotting model parameters}{
+#'   If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+#'   }
+#'   \item{Plotting Bayes factors}{
+#'   Sort pie-slices by posterior probability (descending)?
+#'   }
+#' }
 #' @param log Show log-transformed Bayes factors.
 #' @param text_size Size of text labels.
 #' @param text_color Color of text labels.
