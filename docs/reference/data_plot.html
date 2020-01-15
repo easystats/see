@@ -79,7 +79,7 @@ functions from different packages of the easystats-project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -155,6 +155,7 @@ functions from different packages of the <a href='https://github.com/easystats'>
   <span class='no'>x</span>,
   <span class='kw'>n_pies</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"one"</span>, <span class='st'>"many"</span>),
   <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"BF"</span>, <span class='st'>"probability"</span>),
+  <span class='kw'>sort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>prior_odds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='no'>...</span>
@@ -338,6 +339,14 @@ statistical model or such.</p></td>
       <td><p>What value to display.</p></td>
     </tr>
     <tr>
+      <th>sort</th>
+      <td><dl class='dl-horizontal'>
+  <dt>Plotting model parameters</dt><dd><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></dd>
+  <dt>Plotting Bayes factors</dt><dd><p>Sort pie-slices by posterior probability (descending)?</p></dd>
+
+</dl></td>
+    </tr>
+    <tr>
       <th>log</th>
       <td><p>Show log-transformed Bayes factors.</p></td>
     </tr>
@@ -412,10 +421,6 @@ Else, densities are plotted for each parameter among each other.</p></td>
     <tr>
       <th>show_title</th>
       <td><p>Logical, if <code>TRUE</code>, will show the title of the plot.</p></td>
-    </tr>
-    <tr>
-      <th>sort</th>
-      <td><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></td>
     </tr>
     <tr>
       <th>text_color</th>
