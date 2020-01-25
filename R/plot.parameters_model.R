@@ -35,6 +35,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   # data preparation for metafor-objects
   if (is_meta) {
     overall <- which(x$Parameter == "(Intercept)")
+    if (length(overall) == 0) overall <- which(x$Parameter == "Overall")
     x$Parameter[overall] <- "Overall"
     x$group <- "study"
     x$group[overall] <- "Overall"
