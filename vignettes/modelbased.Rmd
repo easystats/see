@@ -16,6 +16,11 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+if (!requireNamespace("rstanarm", quietly = TRUE) ||
+    !requireNamespace("ggplot2", quietly = TRUE) ||
+    !requireNamespace("modelbased", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 ## Setup and Model Fitting
