@@ -50,7 +50,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 
 ``` r
 library(rstanarm)
-library(estimate)
+library(modelbased)
 
 dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), 
     data = iris) %>% estimate::estimate_link(keep_draws = TRUE, 

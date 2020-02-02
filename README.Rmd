@@ -79,7 +79,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 library(rstanarm)
-library(estimate)
+library(modelbased)
 
 dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
   estimate::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>% 
@@ -93,7 +93,7 @@ p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
 p + theme_blackboard() 
 ```
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
-library(estimate)
+library(modelbased)
 library(rstanarm)
 
 model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris, refresh = 0)
