@@ -1,4 +1,3 @@
-#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.parameters_pca <- function(x, data = NULL, ...){
   dataplot <- as.data.frame(x)

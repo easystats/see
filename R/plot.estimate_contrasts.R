@@ -1,4 +1,3 @@
-#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.estimate_contrasts <- function(x, data = NULL, ...){
   .data_plot_estimate_contrasts(x, data)

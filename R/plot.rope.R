@@ -1,4 +1,3 @@
-#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...){
   if (is.null(data)) {

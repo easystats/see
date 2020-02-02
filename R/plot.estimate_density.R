@@ -1,5 +1,4 @@
 #' @importFrom insight clean_parameters
-#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.estimate_density <- function(x, data = NULL, ...) {
   dataplot <- x

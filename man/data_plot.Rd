@@ -313,35 +313,36 @@ development and probably not yet available):
 \examples{
 \dontrun{
 library(bayestestR)
-library(rstanarm)
+if (require("rstanarm")) {
+  model <- stan_glm(
+    Sepal.Length ~ Petal.Width * Species,
+    data = iris,
+    chains = 2, iter = 200
+  )
 
-model <- stan_glm(
-  Sepal.Length ~ Petal.Width * Species,
-  data = iris,
-  chains = 2, iter = 200
-)
+  x <- rope(model)
+  plot(x)
 
-x <- rope(model)
-plot(x)
+  x <- hdi(model)
+  plot(x) + theme_modern()
 
-x <- hdi(model)
-plot(x) + theme_modern()
+  data <- rnorm(1000, 1)
+  x <- p_direction(data)
+  plot(x)
 
-data <- rnorm(1000, 1)
-x <- p_direction(data)
-plot(x)
+  x <- p_direction(model)
+  plot(x)
 
-x <- p_direction(model)
-plot(x)
-
-model <- stan_glm(
-  mpg ~ wt + gear + cyl + disp,
-  chains = 2,
-  iter = 200,
-  data = mtcars
-)
-x <- equivalence_test(model)
-plot(x)}
+  model <- stan_glm(
+    mpg ~ wt + gear + cyl + disp,
+    chains = 2,
+    iter = 200,
+    data = mtcars
+  )
+  x <- equivalence_test(model)
+  plot(x)
+}
+}
 
 library(bayestestR)
 library(see)

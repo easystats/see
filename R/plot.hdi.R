@@ -1,4 +1,3 @@
-#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.hdi <- function(x, data = NULL, show_intercept = FALSE, ...) {
   .data_plot_hdi(x = x, data = data, show_intercept = show_intercept)
