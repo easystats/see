@@ -28,5 +28,4 @@ p2 <- ggplot(iris, aes(x = Petal.Length)) + geom_density()
 plots(p1, p2)
 plots(p1, p2, n_columns = 2, tags = TRUE)
 plots(p1, p2, n_columns = 2, tags = c("Fig. 1", "Fig. 2"))
-
 }

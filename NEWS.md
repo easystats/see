@@ -1,3 +1,9 @@
+# see 0.4.0.1
+
+## General
+
+* Reduce package dependencies.
+
 # see 0.4.0
 
 ## Breaking changes

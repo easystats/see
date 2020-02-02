@@ -1,7 +1,7 @@
 Package: see
 Type: Package
 Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'
-Version: 0.4.0
+Version: 0.4.0.1
 Authors@R: c(
 	person("Daniel", 
 		"Lüdecke", 
@@ -44,20 +44,20 @@ Imports:
 	effectsize,
 	ggplot2,
 	ggridges,
-	grid,
-	gridExtra,
 	insight,
 	magrittr,
 	parameters,
 	rlang
 Suggests:
-    emmeans,
-    ggraph,
-    ggrepel,
-    MASS,
-    rmarkdown,
-    rstanarm,
-    tidygraph,
-    tidyr
+  emmeans,
+  ggraph,
+  ggrepel,
+	grid,
+	gridExtra,
+  MASS,
+  rmarkdown,
+  rstanarm,
+  tidygraph,
+  tidyr
 RoxygenNote: 7.0.2
 Language: en-GB

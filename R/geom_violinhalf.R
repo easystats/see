@@ -97,9 +97,11 @@ GeomViolinHalf <-
 "%||%" <- function(a, b) if (!is.null(a)) a else b
 
 
-#' @importFrom grid grobName
 #' @keywords internal
 .grobName <- function(prefix, grob) {
+  if (!requireNamespace("grid", quietly = TRUE)) {
+    stop("Package 'grid' required for this function to work. Please install it.", call. = FALSE)
+  }
   grob$name <- grid::grobName(grob, prefix)
   grob
 }

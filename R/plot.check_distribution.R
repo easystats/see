@@ -1,7 +1,6 @@
 #' @importFrom graphics plot
 #' @importFrom insight get_response
 #' @importFrom stats residuals density
-#' @importFrom gridExtra grid.arrange
 #' @rdname data_plot
 #' @export
 plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
@@ -53,6 +52,9 @@ plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
   p <- list(p1, p2, p3)
 
   if (panel) {
+    if (!requireNamespace("gridExtra", quietly = TRUE)) {
+      stop("Package 'gridExtra' required for this function to work. Please install it.", call. = FALSE)
+    }
     gridExtra::grid.arrange(p1, p2, p3, layout_matrix = rbind(c(1, 1), c(2, 3)))
   } else {
     lapply(p, graphics::plot)
@@ -104,6 +106,9 @@ plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE,
   p <- list(p1, p2, p3)
 
   if (panel) {
+    if (!requireNamespace("gridExtra", quietly = TRUE)) {
+      stop("Package 'gridExtra' required for this function to work. Please install it.", call. = FALSE)
+    }
     gridExtra::grid.arrange(p1, p2, p3, layout_matrix = rbind(c(1, 1), c(2, 3)))
   } else {
     lapply(p, graphics::plot)
