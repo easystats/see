@@ -139,3 +139,11 @@ magrittr::`%>%`
   }
   x
 }
+
+
+
+
+#' @importFrom insight format_value
+.percents <- function(x) {
+  insight::format_value(x = x, as_percent = TRUE, digits = 0)
+}

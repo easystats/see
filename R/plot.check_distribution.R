@@ -29,7 +29,7 @@ plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
     geom_point(size = point_size, position = position_dodge(.4)) +
     coord_flip() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Residuals and Response") +
-    scale_y_continuous(labels = scales::percent, expand = c(0, 0), limits = c(0, max_y)) +
+    scale_y_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
     scale_color_material_d() +
     theme_lucid(legend.position = lp)
 
@@ -85,7 +85,7 @@ plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE,
     geom_point(size = point_size, position = position_dodge(.4)) +
     coord_flip() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
-    scale_y_continuous(labels = scales::percent, expand = c(0, 0), limits = c(0, max_y)) +
+    scale_y_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(vec))

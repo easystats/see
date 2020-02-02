@@ -1,6 +1,5 @@
 #' @importFrom rlang .data
 #' @importFrom graphics plot
-#' @importFrom scales percent
 #' @export
 print.see_binned_residuals <- function(x, ...) {
   x$se.lo <- -x$se
@@ -53,7 +52,7 @@ print.see_binned_residuals <- function(x, ...) {
     )
 
   if (is.null(term)) {
-    p <- p + scale_x_continuous(labels = scales::percent)
+    p <- p + scale_x_continuous(labels = .percents)
   }
 
   if (is.null(ltitle)) {

@@ -49,8 +49,7 @@ Imports:
 	insight,
 	magrittr,
 	parameters,
-	rlang,
-	scales
+	rlang
 Suggests:
     emmeans,
     ggraph,

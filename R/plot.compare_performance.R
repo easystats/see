@@ -42,7 +42,6 @@ data_plot.compare_performance <- function(x, data = NULL, ...){
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
 #' @importFrom rlang .data
-#' @importFrom scales percent
 #' @export
 plot.see_compare_performance <- function(x, size = 1, ...) {
 
@@ -60,7 +59,7 @@ plot.see_compare_performance <- function(x, size = 1, ...) {
   #     y = .data$Performance_Score
   #   )) +
   #     geom_col(width = size) +
-  #     scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
+  #     scale_y_continuous(limits = c(0, 1), labels = .percents) +
   #     labs(x = "Model", y = "Performance Score")
   # } else {
 

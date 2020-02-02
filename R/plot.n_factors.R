@@ -76,7 +76,7 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
       geom_segment(aes(x = .data$x[which.max(.data$y)], xend = .data$x[which.max(.data$y)], y = 0, yend = max(.data$y)), color = "#E91E63", linetype = "dashed") +
       geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)), color = "#E91E63") +
       scale_color_manual(values = c("black", "#E91E63")) +
-      scale_y_continuous(labels = scales::percent) +
+      scale_y_continuous(labels = .percents) +
       scale_x_continuous(breaks = 1:max(x$x)) +
       add_plot_attributes(x)
   } else if (type == "line") {
@@ -85,13 +85,13 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
       geom_point(size = 2 * size) +
       coord_flip() +
       guides(colour = FALSE) +
-      scale_y_continuous(labels = scales::percent) +
+      scale_y_continuous(labels = .percents) +
       add_plot_attributes(x)
   } else {
     ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$fill)) +
       geom_bar(stat = "identity", width = size) +
       guides(fill = FALSE) +
-      scale_y_continuous(labels = scales::percent) +
+      scale_y_continuous(labels = .percents) +
       add_plot_attributes(x) +
       scale_x_continuous(breaks = 1:max(x$x)) +
       scale_fill_manual(values = c("black", "red"))
