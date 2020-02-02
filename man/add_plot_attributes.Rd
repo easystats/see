@@ -34,6 +34,4 @@ p <- data \%>\%
 
 p
 p + add_plot_attributes(data)}
-
-
 }

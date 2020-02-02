@@ -140,9 +140,9 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   # base setup
-  p <- x %>%
-    as.data.frame() %>%
-    ggplot(aes(
+  p <- ggplot(
+    as.data.frame(x),
+    aes(
       x = .data$x,
       y = .data$y,
       height = .data$height,

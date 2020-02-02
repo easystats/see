@@ -9,22 +9,19 @@
 #'
 #' @examples
 #' # Create a radar/spider chart with ggplot:
-#' library(dplyr)
-#' library(tidyr)
-#' library(ggplot2)
+#' if (require("dplyr") && require("tidyr") && require("ggplot2")) {
+#'   data <- iris %>%
+#'     group_by(Species) %>%
+#'     summarise_all(mean) %>%
+#'     pivot_longer(-Species)
 #'
-#' data <- iris %>%
-#'   group_by(Species) %>%
-#'   summarise_all(mean) %>%
-#'   pivot_longer(-Species)
-#'
-#' data %>%
-#'   ggplot(aes(x = name, y = value, color = Species, group = Species)) +
-#'   geom_polygon(fill = NA, size = 2) +
-#'   coord_radar(start = -pi/4)
-#'
+#'   data %>%
+#'     ggplot(aes(x = name, y = value, color = Species, group = Species)) +
+#'     geom_polygon(fill = NA, size = 2) +
+#'     coord_radar(start = -pi/4)
+#' }
 #' @export
-coord_radar <- function (theta = "x", start = 0, direction = 1, ...) {
+coord_radar <- function(theta = "x", start = 0, direction = 1, ...) {
   theta <- match.arg(theta, c("x", "y"))
   r <- ifelse(theta == "x", "y", "x")
 

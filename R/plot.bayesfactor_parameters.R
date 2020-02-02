@@ -23,8 +23,9 @@ plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#01
   else
     null_point_outline <- .theme$panel.grid.major$colour
 
-  p <- plot_data %>%
-    ggplot(aes(
+  p <- ggplot(
+    plot_data,
+    aes(
       x = .data$x,
       y = .data$y,
       color = .data$Distribution,

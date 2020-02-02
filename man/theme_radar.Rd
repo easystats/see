@@ -77,27 +77,24 @@ theme_radar_dark(
 \code{theme_radar()} is a light, clear theme for ggplot radar-plots, while \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
 }
 \examples{
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(see)
+if (require("ggplot2") && require("dplyr") && require("tidyr")) {
+  data <- iris \%>\%
+    group_by(Species) \%>\%
+    summarise_all(mean) \%>\%
+    pivot_longer(-Species)
 
-data <- iris \%>\%
-  group_by(Species) \%>\%
-  summarise_all(mean) \%>\%
-  pivot_longer(-Species)
-
-data \%>\%
-  ggplot(aes(
-    x = name,
-    y = value,
-    color = Species,
-    group = Species,
-    fill = Species
-  )) +
-  geom_polygon(size = 1, alpha = .1) +
-  coord_radar() +
-  theme_radar()
+  data \%>\%
+    ggplot(aes(
+      x = name,
+      y = value,
+      color = Species,
+      group = Species,
+      fill = Species
+    )) +
+    geom_polygon(size = 1, alpha = .1) +
+    coord_radar() +
+    theme_radar()
+}
 }
 \seealso{
 \code{\link{coord_radar}}

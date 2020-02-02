@@ -86,9 +86,9 @@ plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetb
   # get labels
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
-  p <- x %>%
-    as.data.frame() %>%
-    ggplot(aes(
+  p <- ggplot(
+    as.data.frame(x),
+    aes(
       x = .data$x,
       y = .data$y,
       height = .data$height,

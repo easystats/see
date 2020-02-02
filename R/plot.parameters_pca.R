@@ -58,9 +58,9 @@ plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5,
     )
   }
 
-  p <- x %>%
-    as.data.frame() %>%
-    ggplot(aes(
+  p <- ggplot(
+    as.data.frame(x),
+    aes(
       x = .data$Variable,
       y = abs(.data$y),
       fill = .data$y,

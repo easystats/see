@@ -182,8 +182,6 @@ print.data_plot <- function(x, ...){
 #'
 #' p
 #' p + add_plot_attributes(data)}
-#'
-#'
 #' @export
 add_plot_attributes <- function(x){
   info <- attributes(x)$info
