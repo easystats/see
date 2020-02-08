@@ -161,6 +161,26 @@ result
 plot(result)
 ```
 
+### Model Parameters of Meta-Analysis models with Subgroups
+
+```{r, warning=FALSE, message=FALSE}
+data(dat.bcg)
+dat <- escalc(
+  measure = "RR",
+  ai = tpos,
+  bi = tneg,
+  ci = cpos,
+  di = cneg,
+  data = dat.bcg
+)
+dat$alloc <- ifelse(dat$alloc == "random", "random", "other")
+model <- rma(yi, vi, mods = ~ alloc, data = dat, digits = 3, slab = author)
+result <- model_parameters(model)
+
+result
+plot(result)
+```
+
 
 ## Principal Component Analysis
 

@@ -245,126 +245,174 @@
 <a class="sourceLine" id="cb12-9" title="9">result</a>
 <a class="sourceLine" id="cb12-10" title="10"><span class="co">#&gt; Parameter | Coefficient |   SE |         95% CI |     z |      p | Weight</span></a>
 <a class="sourceLine" id="cb12-11" title="11"><span class="co">#&gt; -------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt; Study 1   |       -0.39 | 0.32 | [-1.01,  0.23] | -1.24 | 0.215  |   9.95</span></a>
-<a class="sourceLine" id="cb12-13" title="13"><span class="co">#&gt; Study 2   |        0.68 | 0.32 | [ 0.05,  1.30] |  2.13 | 0.033  |   9.95</span></a>
-<a class="sourceLine" id="cb12-14" title="14"><span class="co">#&gt; Study 3   |        0.28 | 0.13 | [ 0.03,  0.54] |  2.17 | 0.030  |  59.17</span></a>
-<a class="sourceLine" id="cb12-15" title="15"><span class="co">#&gt; Study 4   |       -1.40 | 0.36 | [-2.10, -0.69] | -3.88 | &lt; .001 |   7.72</span></a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt; 1         |       -0.39 | 0.32 | [-1.01,  0.23] | -1.24 | 0.215  |   9.95</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="co">#&gt; 2         |        0.68 | 0.32 | [ 0.05,  1.30] |  2.13 | 0.033  |   9.95</span></a>
+<a class="sourceLine" id="cb12-14" title="14"><span class="co">#&gt; 3         |        0.28 | 0.13 | [ 0.03,  0.54] |  2.17 | 0.030  |  59.17</span></a>
+<a class="sourceLine" id="cb12-15" title="15"><span class="co">#&gt; 4         |       -1.40 | 0.36 | [-2.10, -0.69] | -3.88 | &lt; .001 |   7.72</span></a>
 <a class="sourceLine" id="cb12-16" title="16"><span class="co">#&gt; Overall   |       -0.18 | 0.44 | [-1.05,  0.68] | -0.42 | 0.676  |</span></a>
 <a class="sourceLine" id="cb12-17" title="17"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+<div id="model-parameters-of-meta-analysis-models-with-subgroups" class="section level3">
+<h3 class="hasAnchor">
+<a href="#model-parameters-of-meta-analysis-models-with-subgroups" class="anchor"></a>Model Parameters of Meta-Analysis models with Subgroups</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(dat.bcg)</a>
+<a class="sourceLine" id="cb13-2" title="2">dat &lt;-<span class="st"> </span><span class="kw">escalc</span>(</a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="dt">measure =</span> <span class="st">"RR"</span>,</a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="dt">ai =</span> tpos,</a>
+<a class="sourceLine" id="cb13-5" title="5">  <span class="dt">bi =</span> tneg,</a>
+<a class="sourceLine" id="cb13-6" title="6">  <span class="dt">ci =</span> cpos,</a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="dt">di =</span> cneg,</a>
+<a class="sourceLine" id="cb13-8" title="8">  <span class="dt">data =</span> dat.bcg</a>
+<a class="sourceLine" id="cb13-9" title="9">)</a>
+<a class="sourceLine" id="cb13-10" title="10">dat<span class="op">$</span>alloc &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(dat<span class="op">$</span>alloc <span class="op">==</span><span class="st"> "random"</span>, <span class="st">"random"</span>, <span class="st">"other"</span>)</a>
+<a class="sourceLine" id="cb13-11" title="11">model &lt;-<span class="st"> </span><span class="kw">rma</span>(yi, vi, <span class="dt">mods =</span> <span class="op">~</span><span class="st"> </span>alloc, <span class="dt">data =</span> dat, <span class="dt">digits =</span> <span class="dv">3</span>, <span class="dt">slab =</span> author)</a>
+<a class="sourceLine" id="cb13-12" title="12">result &lt;-<span class="st"> </span><span class="kw">model_parameters</span>(model)</a>
+<a class="sourceLine" id="cb13-13" title="13"></a>
+<a class="sourceLine" id="cb13-14" title="14">result</a>
+<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; # Random Effects </span></a>
+<a class="sourceLine" id="cb13-16" title="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-17" title="17"><span class="co">#&gt; Parameter         | Coefficient |   SE |         95% CI |      z |      p | Weight</span></a>
+<a class="sourceLine" id="cb13-18" title="18"><span class="co">#&gt; ----------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb13-19" title="19"><span class="co">#&gt; Aronson           |       -0.89 | 0.57 | [-2.01,  0.23] |  -1.56 | 0.119  |   3.07</span></a>
+<a class="sourceLine" id="cb13-20" title="20"><span class="co">#&gt; Ferguson &amp; Simes  |       -1.59 | 0.44 | [-2.45, -0.72] |  -3.59 | &lt; .001 |   5.14</span></a>
+<a class="sourceLine" id="cb13-21" title="21"><span class="co">#&gt; Rosenthal et al.1 |       -1.35 | 0.64 | [-2.61, -0.08] |  -2.09 | 0.036  |   2.41</span></a>
+<a class="sourceLine" id="cb13-22" title="22"><span class="co">#&gt; Hart &amp; Sutherland |       -1.44 | 0.14 | [-1.72, -1.16] | -10.19 | &lt; .001 |  49.97</span></a>
+<a class="sourceLine" id="cb13-23" title="23"><span class="co">#&gt; Vandiviere et al  |       -1.62 | 0.47 | [-2.55, -0.70] |  -3.43 | &lt; .001 |   4.48</span></a>
+<a class="sourceLine" id="cb13-24" title="24"><span class="co">#&gt; TPT Madras        |        0.01 | 0.06 | [-0.11,  0.14] |   0.19 | 0.849  | 252.42</span></a>
+<a class="sourceLine" id="cb13-25" title="25"><span class="co">#&gt; Coetzee &amp; Berjak  |       -0.47 | 0.24 | [-0.94,  0.00] |  -1.98 | 0.048  |  17.72</span></a>
+<a class="sourceLine" id="cb13-26" title="26"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-27" title="27"><span class="co">#&gt; # other </span></a>
+<a class="sourceLine" id="cb13-28" title="28"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-29" title="29"><span class="co">#&gt; Parameter            | Coefficient |   SE |         95% CI |     z |      p | Weight</span></a>
+<a class="sourceLine" id="cb13-30" title="30"><span class="co">#&gt; ------------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb13-31" title="31"><span class="co">#&gt; Frimodt-Moller et al |       -0.22 | 0.23 | [-0.66,  0.23] | -0.96 | 0.336  |  19.53</span></a>
+<a class="sourceLine" id="cb13-32" title="32"><span class="co">#&gt; Stein &amp; Aronson      |       -0.79 | 0.08 | [-0.95, -0.62] | -9.46 | &lt; .001 | 144.81</span></a>
+<a class="sourceLine" id="cb13-33" title="33"><span class="co">#&gt; Rosenthal et al.2    |       -1.37 | 0.27 | [-1.90, -0.84] | -5.07 | &lt; .001 |  13.69</span></a>
+<a class="sourceLine" id="cb13-34" title="34"><span class="co">#&gt; Comstock et al.1     |       -0.34 | 0.11 | [-0.56, -0.12] | -3.05 | 0.002  |  80.57</span></a>
+<a class="sourceLine" id="cb13-35" title="35"><span class="co">#&gt; Comstock &amp; Webster   |        0.45 | 0.73 | [-0.98,  1.88] |  0.61 | 0.541  |   1.88</span></a>
+<a class="sourceLine" id="cb13-36" title="36"><span class="co">#&gt; Comstock et al.2     |       -0.02 | 0.27 | [-0.54,  0.51] | -0.06 | 0.948  |  14.00</span></a>
+<a class="sourceLine" id="cb13-37" title="37"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-38" title="38"><span class="co">#&gt; # Overall </span></a>
+<a class="sourceLine" id="cb13-39" title="39"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb13-40" title="40"><span class="co">#&gt; Parameter | Coefficient |   SE |        95% CI |     z |     p</span></a>
+<a class="sourceLine" id="cb13-41" title="41"><span class="co">#&gt; --------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb13-42" title="42"><span class="co">#&gt; Overall   |       -0.47 | 0.26 | [-0.97, 0.04] | -1.82 | 0.069</span></a>
+<a class="sourceLine" id="cb13-43" title="43"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+</div>
 </div>
 <div id="principal-component-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#principal-component-analysis" class="anchor"></a>Principal Component Analysis</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/principal_components.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
-<a class="sourceLine" id="cb13-2" title="2">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dt">n =</span> <span class="st">"all"</span>, <span class="dt">threshold =</span> <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb13-3" title="3">result</a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co">#&gt; # Loadings from Principal Component Analysis (no rotation)</span></a>
-<a class="sourceLine" id="cb13-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="co">#&gt; Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity</span></a>
-<a class="sourceLine" id="cb13-7" title="7"><span class="co">#&gt; -------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="co">#&gt; mpg      | -0.93 |       |      | -0.30 |      |       |       1.30</span></a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt; cyl      |  0.96 |       |      |       |      | -0.21 |       1.18</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt; disp     |  0.95 |       |      | -0.23 |      |       |       1.16</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt; hp       |  0.87 |  0.36 |      |       | 0.30 |       |       1.64</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt; drat     | -0.75 |  0.48 | 0.44 |       |      |       |       2.47</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt; wt       |  0.88 | -0.35 | 0.26 |       |      |       |       1.54</span></a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt; qsec     | -0.54 | -0.81 |      |       |      |       |       1.96</span></a>
-<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-16" title="16"><span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span></a>
-<a class="sourceLine" id="cb13-17" title="17"></a>
-<a class="sourceLine" id="cb13-18" title="18"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(</a>
-<a class="sourceLine" id="cb14-2" title="2">  mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], </a>
-<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">n =</span> <span class="dv">3</span>, </a>
-<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">rotation =</span> <span class="st">"varimax"</span>, </a>
-<a class="sourceLine" id="cb14-5" title="5">  <span class="dt">threshold =</span> <span class="st">"max"</span>, </a>
-<a class="sourceLine" id="cb14-6" title="6">  <span class="dt">sort =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb14-7" title="7">)</a>
-<a class="sourceLine" id="cb14-8" title="8"></a>
-<a class="sourceLine" id="cb14-9" title="9">result</a>
-<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; # Rotated loadings from Principal Component Analysis (varimax-rotation)</span></a>
-<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; Variable |   RC1 |   RC2 |   RC3 | Complexity | Uniqueness |  MSA</span></a>
-<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt; -----------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt; wt       |  0.91 |       |       |       1.31 |       0.03 | 0.77</span></a>
-<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; mpg      | -0.82 |       |       |       1.70 |       0.11 | 0.87</span></a>
-<a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt; disp     |  0.79 |       |       |       1.95 |       0.08 | 0.85</span></a>
-<a class="sourceLine" id="cb14-17" title="17"><span class="co">#&gt; cyl      |  0.64 |       |       |       2.84 |       0.06 | 0.87</span></a>
-<a class="sourceLine" id="cb14-18" title="18"><span class="co">#&gt; qsec     |       | -0.98 |       |       1.02 |       0.03 | 0.61</span></a>
-<a class="sourceLine" id="cb14-19" title="19"><span class="co">#&gt; hp       |       |  0.69 |       |       2.09 |       0.09 | 0.90</span></a>
-<a class="sourceLine" id="cb14-20" title="20"><span class="co">#&gt; drat     |       |       | -0.90 |       1.43 |       0.01 | 0.85</span></a>
-<a class="sourceLine" id="cb14-21" title="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb14-22" title="22"><span class="co">#&gt; The 3 principal components (varimax rotation) accounted for 94.11% of the total variance of the original data (RC1 = 45.02%, RC2 = 27.79%, RC3 = 21.30%).</span></a>
-<a class="sourceLine" id="cb14-23" title="23"></a>
-<a class="sourceLine" id="cb14-24" title="24"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>, <span class="dt">text_color =</span> <span class="st">"white"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-25" title="25"><span class="st">  </span><span class="kw"><a href="../reference/theme_abyss.html">theme_abyss</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
+<a class="sourceLine" id="cb14-2" title="2">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dt">n =</span> <span class="st">"all"</span>, <span class="dt">threshold =</span> <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3">result</a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="co">#&gt; # Loadings from Principal Component Analysis (no rotation)</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="co">#&gt; Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="co">#&gt; -------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="co">#&gt; mpg      | -0.93 |       |      | -0.30 |      |       |       1.30</span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt; cyl      |  0.96 |       |      |       |      | -0.21 |       1.18</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; disp     |  0.95 |       |      | -0.23 |      |       |       1.16</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt; hp       |  0.87 |  0.36 |      |       | 0.30 |       |       1.64</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; drat     | -0.75 |  0.48 | 0.44 |       |      |       |       2.47</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt; wt       |  0.88 | -0.35 | 0.26 |       |      |       |       1.54</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt; qsec     | -0.54 | -0.81 |      |       |      |       |       1.96</span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span></a>
+<a class="sourceLine" id="cb14-17" title="17"></a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">result &lt;-<span class="st"> </span><span class="kw">principal_components</span>(</a>
+<a class="sourceLine" id="cb15-2" title="2">  mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], </a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="dt">n =</span> <span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="dt">rotation =</span> <span class="st">"varimax"</span>, </a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="dt">threshold =</span> <span class="st">"max"</span>, </a>
+<a class="sourceLine" id="cb15-6" title="6">  <span class="dt">sort =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb15-7" title="7">)</a>
+<a class="sourceLine" id="cb15-8" title="8"></a>
+<a class="sourceLine" id="cb15-9" title="9">result</a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt; # Rotated loadings from Principal Component Analysis (varimax-rotation)</span></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-12" title="12"><span class="co">#&gt; Variable |   RC1 |   RC2 |   RC3 | Complexity | Uniqueness |  MSA</span></a>
+<a class="sourceLine" id="cb15-13" title="13"><span class="co">#&gt; -----------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb15-14" title="14"><span class="co">#&gt; wt       |  0.91 |       |       |       1.31 |       0.03 | 0.77</span></a>
+<a class="sourceLine" id="cb15-15" title="15"><span class="co">#&gt; mpg      | -0.82 |       |       |       1.70 |       0.11 | 0.87</span></a>
+<a class="sourceLine" id="cb15-16" title="16"><span class="co">#&gt; disp     |  0.79 |       |       |       1.95 |       0.08 | 0.85</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="co">#&gt; cyl      |  0.64 |       |       |       2.84 |       0.06 | 0.87</span></a>
+<a class="sourceLine" id="cb15-18" title="18"><span class="co">#&gt; qsec     |       | -0.98 |       |       1.02 |       0.03 | 0.61</span></a>
+<a class="sourceLine" id="cb15-19" title="19"><span class="co">#&gt; hp       |       |  0.69 |       |       2.09 |       0.09 | 0.90</span></a>
+<a class="sourceLine" id="cb15-20" title="20"><span class="co">#&gt; drat     |       |       | -0.90 |       1.43 |       0.01 | 0.85</span></a>
+<a class="sourceLine" id="cb15-21" title="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-22" title="22"><span class="co">#&gt; The 3 principal components (varimax rotation) accounted for 94.11% of the total variance of the original data (RC1 = 45.02%, RC2 = 27.79%, RC3 = 21.30%).</span></a>
+<a class="sourceLine" id="cb15-23" title="23"></a>
+<a class="sourceLine" id="cb15-24" title="24"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>, <span class="dt">text_color =</span> <span class="st">"white"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-25" title="25"><span class="st">  </span><span class="kw"><a href="../reference/theme_abyss.html">theme_abyss</a></span>()</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 </div>
 <div id="cluster-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cluster-analysis" class="anchor"></a>Cluster Analysis</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
-<a class="sourceLine" id="cb15-2" title="2">result &lt;-<span class="st"> </span><span class="kw">cluster_analysis</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">n_clusters =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb15-3" title="3">result</a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt; # Cluster Analysis (mean z-score by cluster)</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt;          Term Group 1 Group 2 Group 3</span></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt;  Sepal.Length   -1.01    0.09    1.24</span></a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt;   Sepal.Width    0.85   -0.70    0.07</span></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt;  Petal.Length   -1.30    0.38    1.14</span></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt;   Petal.Width   -1.25    0.31    1.19</span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb15-12" title="12"><span class="co">#&gt; # Accuracy of Cluster Group Classification</span></a>
-<a class="sourceLine" id="cb15-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb15-14" title="14"><span class="co">#&gt;  Group Accuracy</span></a>
-<a class="sourceLine" id="cb15-15" title="15"><span class="co">#&gt;      1  100.00%</span></a>
-<a class="sourceLine" id="cb15-16" title="16"><span class="co">#&gt;      2   95.31%</span></a>
-<a class="sourceLine" id="cb15-17" title="17"><span class="co">#&gt;      3   97.22%</span></a>
-<a class="sourceLine" id="cb15-18" title="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb15-19" title="19"><span class="co">#&gt; Overall accuracy of classification: 97.33%</span></a>
-<a class="sourceLine" id="cb15-20" title="20"></a>
-<a class="sourceLine" id="cb15-21" title="21"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"></a>
-<a class="sourceLine" id="cb16-2" title="2">result &lt;-<span class="st"> </span><span class="kw">cluster_analysis</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">n_clusters =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-15-2.png" width="672"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
+<a class="sourceLine" id="cb16-2" title="2">result &lt;-<span class="st"> </span><span class="kw">cluster_analysis</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">n_clusters =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb16-3" title="3">result</a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt; # Cluster Analysis (mean z-score by cluster)</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt;          Term Group 1 Group 2 Group 3</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt;  Sepal.Length   -1.01    0.09    1.24</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt;   Sepal.Width    0.85   -0.70    0.07</span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt;  Petal.Length   -1.30    0.38    1.14</span></a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt;   Petal.Width   -1.25    0.31    1.19</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; # Accuracy of Cluster Group Classification</span></a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt;  Group Accuracy</span></a>
+<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt;      1  100.00%</span></a>
+<a class="sourceLine" id="cb16-16" title="16"><span class="co">#&gt;      2   95.31%</span></a>
+<a class="sourceLine" id="cb16-17" title="17"><span class="co">#&gt;      3   97.22%</span></a>
+<a class="sourceLine" id="cb16-18" title="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb16-19" title="19"><span class="co">#&gt; Overall accuracy of classification: 97.33%</span></a>
+<a class="sourceLine" id="cb16-20" title="20"></a>
+<a class="sourceLine" id="cb16-21" title="21"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"></a>
+<a class="sourceLine" id="cb17-2" title="2">result &lt;-<span class="st"> </span><span class="kw">cluster_analysis</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">n_clusters =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-16-2.png" width="672"></p>
 </div>
 <div id="number-of-componentsfactors-to-retain" class="section level2">
 <h2 class="hasAnchor">
 <a href="#number-of-componentsfactors-to-retain" class="anchor"></a>Number of Components/Factors to Retain</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_factors.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
-<a class="sourceLine" id="cb17-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_factors</span>(mtcars, <span class="dt">type =</span> <span class="st">"PCA"</span>)</a>
-<a class="sourceLine" id="cb17-3" title="3">result</a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
-<a class="sourceLine" id="cb17-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb17-6" title="6"><span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span></a>
-<a class="sourceLine" id="cb17-7" title="7"></a>
-<a class="sourceLine" id="cb17-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-16-2.png" width="672"></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
+<a class="sourceLine" id="cb18-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_factors</span>(mtcars, <span class="dt">type =</span> <span class="st">"PCA"</span>)</a>
+<a class="sourceLine" id="cb18-3" title="3">result</a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span></a>
+<a class="sourceLine" id="cb18-7" title="7"></a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-17-2.png" width="672"></p>
 </div>
 <div id="number-of-clusters-to-retain" class="section level2">
 <h2 class="hasAnchor">
 <a href="#number-of-clusters-to-retain" class="anchor"></a>Number of Clusters to Retain</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_clusters.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
-<a class="sourceLine" id="cb19-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_clusters</span>(<span class="kw">standardize</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a>
-<a class="sourceLine" id="cb19-3" title="3">result</a>
-<a class="sourceLine" id="cb19-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
-<a class="sourceLine" id="cb19-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb19-6" title="6"><span class="co">#&gt; The choice of 2 clusters is supported by 12 (42.86%) methods out of 28 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, Tibs2001SEmax).</span></a>
-<a class="sourceLine" id="cb19-7" title="7"></a>
-<a class="sourceLine" id="cb19-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-17-2.png" width="672"></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(iris)</a>
+<a class="sourceLine" id="cb20-2" title="2">result &lt;-<span class="st"> </span><span class="kw">n_clusters</span>(<span class="kw">standardize</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a>
+<a class="sourceLine" id="cb20-3" title="3">result</a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="co">#&gt; # Method Agreement Procedure:</span></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-6" title="6"><span class="co">#&gt; The choice of 2 clusters is supported by 12 (42.86%) methods out of 28 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, Tibs2001SEmax).</span></a>
+<a class="sourceLine" id="cb20-7" title="7"></a>
+<a class="sourceLine" id="cb20-8" title="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">type =</span> <span class="st">"line"</span>)</a></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-18-2.png" width="672"></p>
 </div>
   </div>
 
