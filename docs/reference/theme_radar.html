@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.1</span>
       </span>
     </div>
 
@@ -251,27 +251,24 @@
     <div class='dont-index'><p><code><a href='coord_radar.html'>coord_radar</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>see</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"ggplot2"</span>) <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"dplyr"</span>) <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"tidyr"</span>)) {
+  <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise_all.html'>summarise_all</a></span>(<span class='no'>mean</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span>(-<span class='no'>Species</span>)
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise_all.html'>summarise_all</a></span>(<span class='no'>mean</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span>(-<span class='no'>Species</span>)
-
-<span class='no'>data</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>name</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>value</span>,
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>,
-    <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>Species</span>,
-    <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>
-  )) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>geom_polygon</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.1</span>) +
-  <span class='fu'><a href='coord_radar.html'>coord_radar</a></span>() +
-  <span class='fu'>theme_radar</span>()</div><div class='img'><img src='theme_radar-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='no'>data</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(
+      <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>name</span>,
+      <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>value</span>,
+      <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>,
+      <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>Species</span>,
+      <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>
+    )) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>geom_polygon</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.1</span>) +
+    <span class='fu'><a href='coord_radar.html'>coord_radar</a></span>() +
+    <span class='fu'>theme_radar</span>()
+}</div><div class='img'><img src='theme_radar-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

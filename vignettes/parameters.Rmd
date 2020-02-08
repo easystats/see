@@ -84,12 +84,12 @@ plot(result)
 
 ## Simulated Model Parameters
 
-`parameters_simulate()` computes simulated draws of parameters and their related indices such as Confidence Intervals (CI) and p-values. Simulating parameter draws can be seen as a (computationally faster) alternative to bootstrapping.
+`simulate_parameters()` computes simulated draws of parameters and their related indices such as Confidence Intervals (CI) and p-values. Simulating parameter draws can be seen as a (computationally faster) alternative to bootstrapping.
 
-As `parameters_simulate()` is based on `model_simulate()` and thus simulates many draws for each parameter, `plot()` will produce similar plots as the density estimation plots [from Bayesian models](https://easystats.github.io/see/articles/bayestestR.html).
+As `simulate_parameters()` is based on `simulate_model()` and thus simulates many draws for each parameter, `plot()` will produce similar plots as the density estimation plots [from Bayesian models](https://easystats.github.io/see/articles/bayestestR.html).
 
 ```{r}
-result <- parameters_simulate(model)
+result <- simulate_parameters(model)
 
 plot(result)
 ```
