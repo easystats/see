@@ -12,7 +12,6 @@
 #'
 #' plot(result, n_pies = "one", value = "probability") + theme_modern() +
 #'   scale_fill_pizza(reverse = TRUE)
-#'
 #' @export
 plot.see_bayesfactor_models <-
   function(x,
@@ -49,20 +48,40 @@ plot.see_bayesfactor_models <-
   one_pie_data$pos_txt <- sum(one_pie_data$PostProb) + one_pie_data$PostProb / 2 - cumsum(one_pie_data$PostProb)
   one_pie_data$Model <- factor(one_pie_data$Model, levels = unique(one_pie_data$Model))
 
-  many_pies_data <- suppressWarnings(
-    rbind(one_pie_data %>%
-            dplyr::mutate(Type     = denominator_name,
-                          BF       = .data$BF[denominator],
-                          PostProb = .data$PostProb[denominator]),
-          one_pie_data %>%
-            dplyr::mutate(Type = .data$Model)) %>%
-      dplyr::group_by(.data$Model) %>%
-      dplyr::mutate(pos_bar = .data$PostProb / sum(.data$PostProb),
-                    pos_txt = sum(.data$pos_bar) + .data$pos_bar / 2 - cumsum(.data$pos_bar)) %>%
-      dplyr::filter(.data$Model != denominator_name) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(Type = factor(.data$Type, levels = unique(.data$Type)))
-  )
+
+
+  opd1 <- opd2 <- one_pie_data
+
+  opd1$Type <- denominator_name
+  opd1$BF <- one_pie_data$BF[denominator]
+  opd1$PostProb <- one_pie_data$PostProb[denominator]
+
+  opd2$Type <- one_pie_data$Model
+
+  many_pies_data <- rbind(opd1, opd2)
+  many_pies_data <- do.call(rbind, lapply(split(many_pies_data, many_pies_data$Model), function(.i) {
+    .i$pos_bar <- .i$PostProb / sum(.i$PostProb)
+    .i$pos_txt <- sum(.i$pos_bar) + .i$pos_bar / 2 - cumsum(.i$pos_bar)
+    .i[.i$Model != denominator_name, ]
+  }))
+  many_pies_data$Type <- factor(many_pies_data$Type, levels = unique(many_pies_data$Type))
+
+
+
+  # many_pies_data <- suppressWarnings(
+  #   rbind(one_pie_data %>%
+  #           dplyr::mutate(Type     = denominator_name,
+  #                         BF       = .data$BF[denominator],
+  #                         PostProb = .data$PostProb[denominator]),
+  #         one_pie_data %>%
+  #           dplyr::mutate(Type = .data$Model)) %>%
+  #     dplyr::group_by(.data$Model) %>%
+  #     dplyr::mutate(pos_bar = .data$PostProb / sum(.data$PostProb),
+  #                   pos_txt = sum(.data$pos_bar) + .data$pos_bar / 2 - cumsum(.data$pos_bar)) %>%
+  #     dplyr::filter(.data$Model != denominator_name) %>%
+  #     dplyr::ungroup() %>%
+  #     dplyr::mutate(Type = factor(.data$Type, levels = unique(.data$Type)))
+  # )
 
 
   if (value == "BF") {

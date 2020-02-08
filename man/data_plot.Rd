@@ -356,7 +356,6 @@ result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 
 plot(result, n_pies = "one", value = "probability") + theme_modern() +
   scale_fill_pizza(reverse = TRUE)
-
 }
 \seealso{
 \href{https://easystats.github.io/see/articles/}{Package-Vignettes}
