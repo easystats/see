@@ -17,6 +17,12 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
+  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
+
+  if ("Subgroup" %in% colnames(x)) {
+    x$Subgroup[is.na(x$Subgroup)] <- ""
+    x$Subgroup <- factor(x$Subgroup, levels = unique(x$Subgroup))
+  }
 
   # do we have prettified names?
   pretty_names <- attributes(x)$pretty_names
@@ -156,6 +162,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
     p <- p + facet_wrap(~Effects, ncol = n_columns, scales = facet_scales)
   } else if (has_response) {
     p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
+  } else if (has_subgroups) {
+    suppressWarnings(p <- p + facet_grid(Subgroup~., scales = "free", space = "free"))
   }
 
   p + labs(
