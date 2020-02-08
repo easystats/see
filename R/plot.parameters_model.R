@@ -21,6 +21,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
 
   if ("Subgroup" %in% colnames(x)) {
     x$Subgroup[is.na(x$Subgroup)] <- ""
+    x$Subgroup[x$Subgroup == "Overall"] <- ""
     x$Subgroup <- factor(x$Subgroup, levels = unique(x$Subgroup))
   }
 
