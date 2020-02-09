@@ -13,6 +13,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   # ordinal model? needed for free facet scales later...
   ordinal_model <- isTRUE(attributes(x)$ordinal_model)
 
+  # do we have a measure for meta analysis (to label axis)
+  meta_measure <- attributes(x)$measure
+
   # remember components
   has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
   has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
@@ -20,8 +23,6 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
 
   if ("Subgroup" %in% colnames(x)) {
-    x$Subgroup[is.na(x$Subgroup)] <- ""
-    x$Subgroup[x$Subgroup == "Overall"] <- ""
     x$Subgroup <- factor(x$Subgroup, levels = unique(x$Subgroup))
   }
 
@@ -167,9 +168,26 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
     suppressWarnings(p <- p + facet_grid(Subgroup~., scales = "free", space = "free"))
   }
 
-  p + labs(
-    x = "Parameter",
-    y = ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
-    colour = "CI"
-  )
+  if (isTRUE(is_meta)) {
+    measure <- switch(
+      meta_measure,
+      "RR" = "Log Risk Ratio",
+      "OR" = "Log Odds Ratio",
+      "RD" = "Risk Difference",
+      "AS" = "Root Transformed Risk Difference",
+      "PETO" = "Peto's Log Odds Ratio",
+      "Estimate"
+    )
+    p + labs(
+      x = "",
+      y = measure,
+      colour = "CI"
+    )
+  } else {
+    p + labs(
+      x = "Parameter",
+      y = ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
+      colour = "CI"
+    )
+  }
 }
