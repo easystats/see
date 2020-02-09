@@ -161,9 +161,10 @@ result
 plot(result)
 ```
 
-### Model Parameters of Meta-Analysis models with Subgroups
+### Model Parameters of Meta-Analysis Models with Subgroups
 
 ```{r, warning=FALSE, message=FALSE}
+set.seed(123)
 data(dat.bcg)
 dat <- escalc(
   measure = "RR",
@@ -173,8 +174,8 @@ dat <- escalc(
   di = cneg,
   data = dat.bcg
 )
-dat$alloc <- ifelse(dat$alloc == "random", "random", "other")
-model <- rma(yi, vi, mods = ~ alloc, data = dat, digits = 3, slab = author)
+dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
+model <- rma(yi, vi, mods = ~ disease, data = dat, digits = 3, slab = author)
 result <- model_parameters(model)
 
 result
