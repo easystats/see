@@ -7,6 +7,7 @@
 ## Changes to functions
 
 * `plot()` for `model_parameters.rma()` now arranges facets by subgroups (see vignettes).
+* minor improvements to `plot()` for `parameters::cluster_analysis()`.
 
 # see 0.4.0
 
