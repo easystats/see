@@ -31,7 +31,9 @@ plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size = .
     add_plot_attributes(x)
 
   if (!is.null(n_columns)) {
-    p <- p + facet_wrap(~ Group, ncol = n_columns, scales = "free_x")
+    p <- p +
+      facet_wrap(~ Group, ncol = n_columns, scales = "free_x") +
+      labs(x = NULL)
   }
 
   p
