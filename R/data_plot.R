@@ -90,7 +90,7 @@
 #'   \item \code{parameters::cluster_analysis()}
 #'   \item \code{parameters::model_parameters()}
 #'   \item \code{parameters::n_factors()}
-#'   \item \code{parameters::parameters_simulate()}
+#'   \item \code{parameters::simulate_parameters()}
 #'   \item \code{parameters::principal_components()}
 #'   \item \code{performance::binned_residuals()}
 #'   \item \code{performance::check_collinearity()}

@@ -1,4 +1,4 @@
-#' @importFrom parameters model_simulate
+#' @importFrom parameters simulate_model
 #' @importFrom bayestestR estimate_density
 #' @export
 data_plot.parameters_simulate <- function(x, data = NULL, ...) {
@@ -7,7 +7,7 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
   }
 
   n_sims <- attr(x, "n_sims")
-  dat <- parameters::model_simulate(model = data, n_sims = n_sims)
+  dat <- parameters::simulate_model(model = data, n_sims = n_sims)
   params <- insight::clean_parameters(data)
 
   out <- bayestestR::estimate_density(dat)
