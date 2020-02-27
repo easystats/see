@@ -37,13 +37,14 @@
 #'   Sort pie-slices by posterior probability (descending)?
 #'   }
 #' }
+#' @param node_color Color of node- or circle-geoms.
 #' @param log Show log-transformed Bayes factors.
 #' @param text_size Size of text labels.
 #' @param text_color Color of text labels.
 #' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
 #' @param threshold_p Numeric, threshold at which value p-values will be displayed.
 #' @param ci Logical, whether confidence intervals should be added to the plot.
-#' @param size Size of geoms. Ddepends on the context of the \code{plot()} function,
+#' @param size Size of geoms. Depends on the context of the \code{plot()} function,
 #'   so this argument may change size of points, lines or bars.
 #' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else,
 #'   single plots are returned.
@@ -86,6 +87,7 @@
 #'   \item \code{bayestestR::point_estimate()}
 #'   \item \code{bayestestR::rope()}
 #'   \item \code{bayestestR::si()}
+#'   \item \code{correlation::correlation()}
 #'   \item \code{modelbased::estimate_contrasts()}
 #'   \item \code{parameters::cluster_analysis()}
 #'   \item \code{parameters::model_parameters()}

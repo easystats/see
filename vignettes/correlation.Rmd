@@ -1,0 +1,41 @@
+---
+title: "Plotting Functions for the correlation Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{correlation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, 
+  fig.height = 5,
+  warning = FALSE,
+  message = FALSE
+)
+if (!requireNamespace("ggplot2", quietly = TRUE) ||
+    !requireNamespace("correlation", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+## Setup
+
+```{r setup}
+library(correlation)
+library(see)
+data(mtcars)
+```
+
+## Gaussian Graphical Models (GGMs)
+
+```{r}
+result <- correlation(mtcars, partial = TRUE)
+
+result
+
+plot(result)
+```

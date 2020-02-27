@@ -105,6 +105,9 @@ functions from different packages of the easystats-project." />
       <a href="../articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
     </li>
     <li>
+      <a href="../articles/correlation.html">Plotting Functions for the correlation Package</a>
+    </li>
+    <li>
       <a href="../articles/modelbased.html">Plotting Functions for the modelbased Package</a>
     </li>
     <li>
@@ -185,6 +188,9 @@ functions from different packages of the <a href='https://github.com/easystats'>
 
 <span class='co'># S3 method for see_compare_performance</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for see_easycorrelation</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>22</span>, <span class='kw'>text_color</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>node_color</span> <span class='kw'>=</span> <span class='st'>"#647687"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for see_equivalence_test</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(
@@ -397,8 +403,16 @@ or <code><a href='https://rdrr.io/pkg/parameters/man/n_factors.html'>n_factors</
     </tr>
     <tr>
       <th>size</th>
-      <td><p>Size of geoms. Ddepends on the context of the <code><a href='https://rdrr.io/r/graphics/plot.html'>plot()</a></code> function,
+      <td><p>Size of geoms. Depends on the context of the <code><a href='https://rdrr.io/r/graphics/plot.html'>plot()</a></code> function,
 so this argument may change size of points, lines or bars.</p></td>
+    </tr>
+    <tr>
+      <th>text_color</th>
+      <td><p>Color of text labels.</p></td>
+    </tr>
+    <tr>
+      <th>node_color</th>
+      <td><p>Color of node- or circle-geoms.</p></td>
     </tr>
     <tr>
       <th>stack</th>
@@ -421,10 +435,6 @@ Else, densities are plotted for each parameter among each other.</p></td>
     <tr>
       <th>show_title</th>
       <td><p>Logical, if <code>TRUE</code>, will show the title of the plot.</p></td>
-    </tr>
-    <tr>
-      <th>text_color</th>
-      <td><p>Color of text labels.</p></td>
     </tr>
     <tr>
       <th>threshold_coefficient</th>
@@ -478,11 +488,12 @@ development and probably not yet available):</p><ul>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/point_estimate.html'>bayestestR::point_estimate()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/rope.html'>bayestestR::rope()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>bayestestR::si()</a></code></p></li>
+<li><p><code><a href='https://rdrr.io/pkg/correlation/man/correlation.html'>correlation::correlation()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/modelbased/man/estimate_contrasts.html'>modelbased::estimate_contrasts()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/parameters/man/cluster_analysis.html'>parameters::cluster_analysis()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.html'>parameters::model_parameters()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/parameters/man/n_factors.html'>parameters::n_factors()</a></code></p></li>
-<li><p><code><a href='https://rdrr.io/pkg/parameters/man/simulate_parameters.html'>parameters::parameters_simulate()</a></code></p></li>
+<li><p><code><a href='https://rdrr.io/pkg/parameters/man/simulate_parameters.html'>parameters::simulate_parameters()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/parameters/man/principal_components.html'>parameters::principal_components()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/performance/man/binned_residuals.html'>performance::binned_residuals()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/pkg/performance/man/check_collinearity.html'>performance::check_collinearity()</a></code></p></li>

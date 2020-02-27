@@ -3,9 +3,10 @@
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.cluster_analysis.R, R/plot.compare_performance.R,
-%   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
-%   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
-%   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
+%   R/plot.easycorrelation.R, R/plot.equivalence_test.R,
+%   R/plot.estimate_density.R, R/plot.hdi.R, R/plot.n_factors.R,
+%   R/plot.p_direction.R, R/plot.p_significance.R, R/plot.parameters_model.R,
+%   R/plot.parameters_pca.R, R/plot.parameters_sem.R,
 %   R/plot.parameters_simulate.R, R/plot.point_estimates.R, R/plot.rope.R,
 %   R/plot.si.R
 \name{data_plot}
@@ -17,6 +18,7 @@
 \alias{plot.see_check_outliers}
 \alias{plot.see_cluster_analysis}
 \alias{plot.see_compare_performance}
+\alias{plot.see_easycorrelation}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
 \alias{plot.see_hdi}
@@ -62,6 +64,8 @@ data_plot(x, data = NULL, ...)
 \method{plot}{see_cluster_analysis}(x, data = NULL, n_columns = NULL, size = 0.6, ...)
 
 \method{plot}{see_compare_performance}(x, size = 1, ...)
+
+\method{plot}{see_easycorrelation}(x, size = 22, text_color = "white", node_color = "#647687", ...)
 
 \method{plot}{see_equivalence_test}(
   x,
@@ -228,8 +232,12 @@ or \code{\link[parameters]{n_factors}}).}
 
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
-\item{size}{Size of geoms. Ddepends on the context of the \code{plot()} function,
+\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
 so this argument may change size of points, lines or bars.}
+
+\item{text_color}{Color of text labels.}
+
+\item{node_color}{Color of node- or circle-geoms.}
 
 \item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.}
@@ -242,8 +250,6 @@ Else, densities are plotted for each parameter among each other.}
 \item{show_zero}{Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.}
 
 \item{show_title}{Logical, if \code{TRUE}, will show the title of the plot.}
-
-\item{text_color}{Color of text labels.}
 
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 
@@ -292,6 +298,7 @@ development and probably not yet available):
   \item \code{bayestestR::point_estimate()}
   \item \code{bayestestR::rope()}
   \item \code{bayestestR::si()}
+  \item \code{correlation::correlation()}
   \item \code{modelbased::estimate_contrasts()}
   \item \code{parameters::cluster_analysis()}
   \item \code{parameters::model_parameters()}

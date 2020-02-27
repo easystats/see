@@ -4,6 +4,10 @@
 
 * Reduce package dependencies.
 
+## New plot-functions
+
+* Added plot-function for `correlation::correlation()`.
+
 ## Changes to functions
 
 * `plot()` for `model_parameters.rma()` now arranges facets by subgroups (see vignettes).

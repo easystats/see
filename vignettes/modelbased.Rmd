@@ -2,7 +2,7 @@
 title: "Plotting Functions for the modelbased Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{estimate}
+  %\VignetteIndexEntry{modelbased}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
