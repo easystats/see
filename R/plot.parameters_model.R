@@ -13,14 +13,24 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   # ordinal model? needed for free facet scales later...
   ordinal_model <- isTRUE(attributes(x)$ordinal_model)
 
+  # brms has some special handling...
+  is_brms <- inherits(x, "parameters_brms")
+
   # do we have a measure for meta analysis (to label axis)
   meta_measure <- attributes(x)$measure
 
-  # remember components
-  has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
-  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
-  has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
-  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
+  if (is_brms) {
+    cleaned_parameters <- attributes(x)$parameter_info
+    if (!is.null(cleaned_parameters)) {
+      x <- merge(x, cleaned_parameters, sort = FALSE)
+      x$Parameter <- x$Cleaned_Parameter
+      if (all(x$Group == "")) {
+        x$Group <- NULL
+      } else {
+        x <- x[x$Group != "SD/Cor", , drop = FALSE]
+      }
+    }
+  }
 
   if ("Subgroup" %in% colnames(x)) {
     x$Subgroup <- factor(x$Subgroup, levels = unique(x$Subgroup))
@@ -31,13 +41,25 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
 
   x <- .fix_facet_names(x)
 
+  if (is_brms && "Group" %in% colnames(x)) {
+    x$Effects[x$Group != ""] <- paste0(x$Effects[x$Group != ""], " (", x$Group[x$Group != ""], ")")
+  }
+
+  # remember components
+  has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
+  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
+  has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
+  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
+
   mc <- attributes(x)$model_class
   cp <- attributes(x)$cleaned_parameters
   is_meta <- !is.null(mc) && mc %in% c("rma", "rma.uni")
 
   # minor fixes for Bayesian models
   if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
-    x$Parameter <- cp
+    if (length(cp) == length(x$Parameter)) {
+      x$Parameter <- cp
+    }
   }
 
   # data preparation for metafor-objects
