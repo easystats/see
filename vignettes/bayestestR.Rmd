@@ -217,6 +217,10 @@ result
 plot(result) + 
   scale_color_metro(palette = "ice") +
   scale_fill_metro(palette = "ice")
+
+plot(result, support_only = TRUE) + 
+  scale_color_metro(palette = "ice") +
+  scale_fill_metro(palette = "ice")
 ```
 
 
