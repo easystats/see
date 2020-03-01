@@ -24,6 +24,7 @@
 #' @param point_size Size of point-geoms.
 #' @param rope_alpha,si_alpha Transparency level of ROPE/SI ribbon.
 #' @param rope_color,si_color Color of ROPE/SI ribbon.
+#' @param support_only Plot only the support data, or show the "raw" prior and posterior distributions?
 #' @param n_columns For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.
 #' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
 #'   Else, densities are plotted for each parameter among each other.
