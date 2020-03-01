@@ -72,7 +72,7 @@ plot.see_si <- function(x, si_color = "#0171D3", si_alpha = .2, show_intercept =
       # distributions
       geom_line(size = 1, data = support_data) +
       geom_area(alpha = 0.15, data = support_data) +
-      geom_hline(yintercept = x$CI[1]) +
+      geom_hline(yintercept = x$CI[1], colour = "grey30", linetype = "dotted") +
       labs(y = "Updating Factor")
   } else {
     p <- p +
