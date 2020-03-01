@@ -269,7 +269,7 @@ estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
 You may set \code{show_labels = FALSE} in case of overlapping labels, and
 add your own legend or footnote to the plot.}
 
-\item{support_only}{Plot only the support data, or show the "raw" prior and posterior distributions?}
+\item{support_only}{Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting \code{\link[bayestestR]{si}}.}
 }
 \description{
 \code{data_plot()} attempts to extract and tranform an object

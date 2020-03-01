@@ -13,6 +13,7 @@
 * `plot()` for `model_parameters.rma()` now arranges facets by subgroups (see vignettes).
 * minor improvements to `plot()` for `parameters::cluster_analysis()`.
 * minor improvements to `plot()` for `parameters::model_parameters.brmsfit()`.
+* Plot-function for `bayestestR::si()` gets a `support_only` argument, to lot only the support data or the "raw" prior and posterior distributions.
 
 # see 0.4.0
 
