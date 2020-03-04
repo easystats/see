@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
+    !requireNamespace("ggraph", quietly = TRUE) ||
     !requireNamespace("correlation", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -26,6 +27,7 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 
 ```{r setup}
 library(correlation)
+library(ggraph)
 library(see)
 data(mtcars)
 ```

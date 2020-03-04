@@ -1,9 +1,17 @@
 # Plot --------------------------------------------------------------------
 #' @rdname data_plot
+#' @importFrom utils sessionInfo
 #' @export
 plot.see_easycorrelation <- function(x, size = 22, text_color = "white", node_color = "#647687", ...) {
-  if (!require("ggraph", quietly = TRUE)) {
+  if (!requireNamespace("ggraph", quietly = TRUE)) {
     stop("Package 'ggraph' required for this function to work. Please install it.", call. = FALSE)
+  } else {
+    si <- utils::sessionInfo()
+    other_packages <- names(si$otherPkgs)
+    if (!is.null(other_packages) && !("ggraph" %in% other_packages)) {
+      message("Package 'ggraph' needs to be loaded. Please load it by typing 'library(ggraph)' into the console.")
+      return(NULL)
+    }
   }
   if (!requireNamespace("tidygraph", quietly = TRUE)) {
     stop("Package 'tidygraph' required for this function to work. Please install it.", call. = FALSE)
