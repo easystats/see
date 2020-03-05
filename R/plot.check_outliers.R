@@ -70,12 +70,17 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
       fill = NULL
     ) +
     scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
-    geom_vline(
-      xintercept = threshold,
-      linetype = "dashed",
-      color = "#c0392b"
-    ) +
     guides(fill = FALSE, color = FALSE, label = FALSE)
+
+  if (!is.null(threshold) && !is.na(threshold)) {
+    p <- p +
+      geom_vline(
+        xintercept = threshold,
+        linetype = "dashed",
+        color = "#c0392b"
+      )
+  }
+
 
   if (requireNamespace("ggrepel", quietly = TRUE))
     p <- p + ggrepel::geom_text_repel(y = 2.5, size = text_size)
