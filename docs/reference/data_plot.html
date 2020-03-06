@@ -79,7 +79,7 @@ functions from different packages of the easystats-project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -318,7 +318,14 @@ functions from different packages of the <a href='https://github.com/easystats'>
 )
 
 <span class='co'># S3 method for see_si</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>si_color</span> <span class='kw'>=</span> <span class='st'>"#0171D3"</span>, <span class='kw'>si_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(
+  <span class='no'>x</span>,
+  <span class='kw'>si_color</span> <span class='kw'>=</span> <span class='st'>"#0171D3"</span>,
+  <span class='kw'>si_alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
+  <span class='kw'>show_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>support_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -454,6 +461,10 @@ Else, densities are plotted for each parameter among each other.</p></td>
 estimates (i.e. <em>"Mean"</em>, <em>"Median"</em> and/or <em>"MAP"</em>) are shown.
 You may set <code>show_labels = FALSE</code> in case of overlapping labels, and
 add your own legend or footnote to the plot.</p></td>
+    </tr>
+    <tr>
+      <th>support_only</th>
+      <td><p>Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting <code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>si</a></code>.</p></td>
     </tr>
     </table>
 

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -418,6 +418,11 @@
 <span id="cb20-15"><a href="#cb20-15"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>) <span class="op">+</span></span>
 <span id="cb20-16"><a href="#cb20-16"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">support_only =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>) <span class="op">+</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span>(<span class="dt">palette =</span> <span class="st">"ice"</span>)</span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-2.png" width="672"></p>
 </div>
 <div id="region-of-practical-equivalence-rope" class="section level2">
 <h2 class="hasAnchor">
@@ -425,117 +430,117 @@
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/rope.html">related function documentation</a>)</em></p>
 <p><code>rope()</code> computes the proportion (in percentage) of the HDI of a posterior distribution that lies within a region of practical equivalence (<em>ROPE</em>).</p>
 <p>The related <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method plots posterior distributions, coloring different HDI levels, and adds a “rope” region to the plot that indicates which portion of the posterior distributions lies inside (and outside) the ROPE.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>result &lt;-<span class="st"> </span><span class="kw">rope</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a>result</span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt; # Proportions of samples inside the ROPE [-0.08, 0.08]:</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; </span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; ROPE for the 90% HDI:</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co">#&gt; </span></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="co">#&gt; Parameter                     | inside ROPE</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; -------------------------------------------</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt; (Intercept)                   |      0.00 %</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="co">#&gt; Petal.Width                   |      4.14 %</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a><span class="co">#&gt; Speciesversicolor             |      5.25 %</span></span>
-<span id="cb21-13"><a href="#cb21-13"></a><span class="co">#&gt; Speciesvirginica              |     10.08 %</span></span>
-<span id="cb21-14"><a href="#cb21-14"></a><span class="co">#&gt; Petal.Width:Speciesversicolor |      8.89 %</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |     11.44 %</span></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="co">#&gt; </span></span>
-<span id="cb21-17"><a href="#cb21-17"></a><span class="co">#&gt; </span></span>
-<span id="cb21-18"><a href="#cb21-18"></a><span class="co">#&gt; ROPE for the 95% HDI:</span></span>
-<span id="cb21-19"><a href="#cb21-19"></a><span class="co">#&gt; </span></span>
-<span id="cb21-20"><a href="#cb21-20"></a><span class="co">#&gt; Parameter                     | inside ROPE</span></span>
-<span id="cb21-21"><a href="#cb21-21"></a><span class="co">#&gt; -------------------------------------------</span></span>
-<span id="cb21-22"><a href="#cb21-22"></a><span class="co">#&gt; (Intercept)                   |      0.00 %</span></span>
-<span id="cb21-23"><a href="#cb21-23"></a><span class="co">#&gt; Petal.Width                   |      3.92 %</span></span>
-<span id="cb21-24"><a href="#cb21-24"></a><span class="co">#&gt; Speciesversicolor             |      4.97 %</span></span>
-<span id="cb21-25"><a href="#cb21-25"></a><span class="co">#&gt; Speciesvirginica              |      9.55 %</span></span>
-<span id="cb21-26"><a href="#cb21-26"></a><span class="co">#&gt; Petal.Width:Speciesversicolor |      8.42 %</span></span>
-<span id="cb21-27"><a href="#cb21-27"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |     10.84 %</span></span>
-<span id="cb21-28"><a href="#cb21-28"></a></span>
-<span id="cb21-29"><a href="#cb21-29"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">rope_color =</span> <span class="st">"red"</span>) <span class="op">+</span></span>
-<span id="cb21-30"><a href="#cb21-30"></a><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Greens"</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>result &lt;-<span class="st"> </span><span class="kw">rope</span>(model2, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>), <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>result &lt;-<span class="st"> </span><span class="kw">rope</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>))</span>
 <span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>result </span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="co">#&gt; # Proportions of samples inside the ROPE [-0.10, 0.10]:</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>result</span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">#&gt; # Proportions of samples inside the ROPE [-0.08, 0.08]:</span></span>
 <span id="cb22-5"><a href="#cb22-5"></a><span class="co">#&gt; </span></span>
 <span id="cb22-6"><a href="#cb22-6"></a><span class="co">#&gt; ROPE for the 90% HDI:</span></span>
 <span id="cb22-7"><a href="#cb22-7"></a><span class="co">#&gt; </span></span>
-<span id="cb22-8"><a href="#cb22-8"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a><span class="co">#&gt; </span></span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a><span class="co">#&gt; Intercept |      2.65 %</span></span>
-<span id="cb22-13"><a href="#cb22-13"></a><span class="co">#&gt; child     |      0.00 %</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
-<span id="cb22-15"><a href="#cb22-15"></a><span class="co">#&gt; </span></span>
-<span id="cb22-16"><a href="#cb22-16"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="co">#&gt; Parameter                     | inside ROPE</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="co">#&gt; -------------------------------------------</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co">#&gt; (Intercept)                   |      0.00 %</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="co">#&gt; Petal.Width                   |      4.14 %</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="co">#&gt; Speciesversicolor             |      5.25 %</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="co">#&gt; Speciesvirginica              |     10.08 %</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="co">#&gt; Petal.Width:Speciesversicolor |      8.89 %</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |     11.44 %</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co">#&gt; </span></span>
 <span id="cb22-17"><a href="#cb22-17"></a><span class="co">#&gt; </span></span>
-<span id="cb22-18"><a href="#cb22-18"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-19"><a href="#cb22-19"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-20"><a href="#cb22-20"></a><span class="co">#&gt; Intercept |      6.19 %</span></span>
-<span id="cb22-21"><a href="#cb22-21"></a><span class="co">#&gt; child     |      0.00 %</span></span>
-<span id="cb22-22"><a href="#cb22-22"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
-<span id="cb22-23"><a href="#cb22-23"></a><span class="co">#&gt; </span></span>
-<span id="cb22-24"><a href="#cb22-24"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
-<span id="cb22-25"><a href="#cb22-25"></a><span class="co">#&gt; </span></span>
-<span id="cb22-26"><a href="#cb22-26"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-27"><a href="#cb22-27"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-28"><a href="#cb22-28"></a><span class="co">#&gt; persons 1 |      1.33 %</span></span>
-<span id="cb22-29"><a href="#cb22-29"></a><span class="co">#&gt; persons 2 |      8.41 %</span></span>
-<span id="cb22-30"><a href="#cb22-30"></a><span class="co">#&gt; persons 3 |     11.95 %</span></span>
-<span id="cb22-31"><a href="#cb22-31"></a><span class="co">#&gt; persons 4 |      0.00 %</span></span>
-<span id="cb22-32"><a href="#cb22-32"></a><span class="co">#&gt; </span></span>
-<span id="cb22-33"><a href="#cb22-33"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
-<span id="cb22-34"><a href="#cb22-34"></a><span class="co">#&gt; </span></span>
-<span id="cb22-35"><a href="#cb22-35"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-36"><a href="#cb22-36"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-37"><a href="#cb22-37"></a><span class="co">#&gt; persons 1 |      0.00 %</span></span>
-<span id="cb22-38"><a href="#cb22-38"></a><span class="co">#&gt; persons 2 |     11.95 %</span></span>
-<span id="cb22-39"><a href="#cb22-39"></a><span class="co">#&gt; persons 3 |     14.16 %</span></span>
-<span id="cb22-40"><a href="#cb22-40"></a><span class="co">#&gt; persons 4 |      1.33 %</span></span>
-<span id="cb22-41"><a href="#cb22-41"></a><span class="co">#&gt; </span></span>
-<span id="cb22-42"><a href="#cb22-42"></a><span class="co">#&gt; </span></span>
-<span id="cb22-43"><a href="#cb22-43"></a><span class="co">#&gt; ROPE for the 95% HDI:</span></span>
-<span id="cb22-44"><a href="#cb22-44"></a><span class="co">#&gt; </span></span>
-<span id="cb22-45"><a href="#cb22-45"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
-<span id="cb22-46"><a href="#cb22-46"></a><span class="co">#&gt; </span></span>
-<span id="cb22-47"><a href="#cb22-47"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-48"><a href="#cb22-48"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-49"><a href="#cb22-49"></a><span class="co">#&gt; Intercept |      2.51 %</span></span>
-<span id="cb22-50"><a href="#cb22-50"></a><span class="co">#&gt; child     |      0.00 %</span></span>
-<span id="cb22-51"><a href="#cb22-51"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
-<span id="cb22-52"><a href="#cb22-52"></a><span class="co">#&gt; </span></span>
-<span id="cb22-53"><a href="#cb22-53"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
-<span id="cb22-54"><a href="#cb22-54"></a><span class="co">#&gt; </span></span>
-<span id="cb22-55"><a href="#cb22-55"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-56"><a href="#cb22-56"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-57"><a href="#cb22-57"></a><span class="co">#&gt; Intercept |      5.86 %</span></span>
-<span id="cb22-58"><a href="#cb22-58"></a><span class="co">#&gt; child     |      0.00 %</span></span>
-<span id="cb22-59"><a href="#cb22-59"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
-<span id="cb22-60"><a href="#cb22-60"></a><span class="co">#&gt; </span></span>
-<span id="cb22-61"><a href="#cb22-61"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
-<span id="cb22-62"><a href="#cb22-62"></a><span class="co">#&gt; </span></span>
-<span id="cb22-63"><a href="#cb22-63"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-64"><a href="#cb22-64"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-65"><a href="#cb22-65"></a><span class="co">#&gt; persons 1 |      2.09 %</span></span>
-<span id="cb22-66"><a href="#cb22-66"></a><span class="co">#&gt; persons 2 |      7.95 %</span></span>
-<span id="cb22-67"><a href="#cb22-67"></a><span class="co">#&gt; persons 3 |     11.30 %</span></span>
-<span id="cb22-68"><a href="#cb22-68"></a><span class="co">#&gt; persons 4 |      0.84 %</span></span>
-<span id="cb22-69"><a href="#cb22-69"></a><span class="co">#&gt; </span></span>
-<span id="cb22-70"><a href="#cb22-70"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
-<span id="cb22-71"><a href="#cb22-71"></a><span class="co">#&gt; </span></span>
-<span id="cb22-72"><a href="#cb22-72"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
-<span id="cb22-73"><a href="#cb22-73"></a><span class="co">#&gt; -----------------------</span></span>
-<span id="cb22-74"><a href="#cb22-74"></a><span class="co">#&gt; persons 1 |      1.67 %</span></span>
-<span id="cb22-75"><a href="#cb22-75"></a><span class="co">#&gt; persons 2 |     11.30 %</span></span>
-<span id="cb22-76"><a href="#cb22-76"></a><span class="co">#&gt; persons 3 |     13.39 %</span></span>
-<span id="cb22-77"><a href="#cb22-77"></a><span class="co">#&gt; persons 4 |      1.67 %</span></span>
-<span id="cb22-78"><a href="#cb22-78"></a></span>
-<span id="cb22-79"><a href="#cb22-79"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">rope_color =</span> <span class="st">"grey70"</span>) <span class="op">+</span></span>
-<span id="cb22-80"><a href="#cb22-80"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_social.html">scale_fill_social</a></span>()</span></code></pre></div>
+<span id="cb22-18"><a href="#cb22-18"></a><span class="co">#&gt; ROPE for the 95% HDI:</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="co">#&gt; </span></span>
+<span id="cb22-20"><a href="#cb22-20"></a><span class="co">#&gt; Parameter                     | inside ROPE</span></span>
+<span id="cb22-21"><a href="#cb22-21"></a><span class="co">#&gt; -------------------------------------------</span></span>
+<span id="cb22-22"><a href="#cb22-22"></a><span class="co">#&gt; (Intercept)                   |      0.00 %</span></span>
+<span id="cb22-23"><a href="#cb22-23"></a><span class="co">#&gt; Petal.Width                   |      3.92 %</span></span>
+<span id="cb22-24"><a href="#cb22-24"></a><span class="co">#&gt; Speciesversicolor             |      4.97 %</span></span>
+<span id="cb22-25"><a href="#cb22-25"></a><span class="co">#&gt; Speciesvirginica              |      9.55 %</span></span>
+<span id="cb22-26"><a href="#cb22-26"></a><span class="co">#&gt; Petal.Width:Speciesversicolor |      8.42 %</span></span>
+<span id="cb22-27"><a href="#cb22-27"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |     10.84 %</span></span>
+<span id="cb22-28"><a href="#cb22-28"></a></span>
+<span id="cb22-29"><a href="#cb22-29"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">rope_color =</span> <span class="st">"red"</span>) <span class="op">+</span></span>
+<span id="cb22-30"><a href="#cb22-30"></a><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">"Greens"</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>result &lt;-<span class="st"> </span><span class="kw">rope</span>(model2, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>), <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a>result </span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#&gt; # Proportions of samples inside the ROPE [-0.10, 0.10]:</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; </span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt; ROPE for the 90% HDI:</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="co">#&gt; </span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="co">#&gt; </span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a><span class="co">#&gt; Intercept |      2.65 %</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="co">#&gt; child     |      0.00 %</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a><span class="co">#&gt; </span></span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="co">#&gt; </span></span>
+<span id="cb23-18"><a href="#cb23-18"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a><span class="co">#&gt; Intercept |      6.19 %</span></span>
+<span id="cb23-21"><a href="#cb23-21"></a><span class="co">#&gt; child     |      0.00 %</span></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
+<span id="cb23-23"><a href="#cb23-23"></a><span class="co">#&gt; </span></span>
+<span id="cb23-24"><a href="#cb23-24"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
+<span id="cb23-25"><a href="#cb23-25"></a><span class="co">#&gt; </span></span>
+<span id="cb23-26"><a href="#cb23-26"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-27"><a href="#cb23-27"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-28"><a href="#cb23-28"></a><span class="co">#&gt; persons 1 |      1.33 %</span></span>
+<span id="cb23-29"><a href="#cb23-29"></a><span class="co">#&gt; persons 2 |      8.41 %</span></span>
+<span id="cb23-30"><a href="#cb23-30"></a><span class="co">#&gt; persons 3 |     11.95 %</span></span>
+<span id="cb23-31"><a href="#cb23-31"></a><span class="co">#&gt; persons 4 |      0.00 %</span></span>
+<span id="cb23-32"><a href="#cb23-32"></a><span class="co">#&gt; </span></span>
+<span id="cb23-33"><a href="#cb23-33"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
+<span id="cb23-34"><a href="#cb23-34"></a><span class="co">#&gt; </span></span>
+<span id="cb23-35"><a href="#cb23-35"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-36"><a href="#cb23-36"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-37"><a href="#cb23-37"></a><span class="co">#&gt; persons 1 |      0.00 %</span></span>
+<span id="cb23-38"><a href="#cb23-38"></a><span class="co">#&gt; persons 2 |     11.95 %</span></span>
+<span id="cb23-39"><a href="#cb23-39"></a><span class="co">#&gt; persons 3 |     14.16 %</span></span>
+<span id="cb23-40"><a href="#cb23-40"></a><span class="co">#&gt; persons 4 |      1.33 %</span></span>
+<span id="cb23-41"><a href="#cb23-41"></a><span class="co">#&gt; </span></span>
+<span id="cb23-42"><a href="#cb23-42"></a><span class="co">#&gt; </span></span>
+<span id="cb23-43"><a href="#cb23-43"></a><span class="co">#&gt; ROPE for the 95% HDI:</span></span>
+<span id="cb23-44"><a href="#cb23-44"></a><span class="co">#&gt; </span></span>
+<span id="cb23-45"><a href="#cb23-45"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
+<span id="cb23-46"><a href="#cb23-46"></a><span class="co">#&gt; </span></span>
+<span id="cb23-47"><a href="#cb23-47"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-48"><a href="#cb23-48"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-49"><a href="#cb23-49"></a><span class="co">#&gt; Intercept |      2.51 %</span></span>
+<span id="cb23-50"><a href="#cb23-50"></a><span class="co">#&gt; child     |      0.00 %</span></span>
+<span id="cb23-51"><a href="#cb23-51"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
+<span id="cb23-52"><a href="#cb23-52"></a><span class="co">#&gt; </span></span>
+<span id="cb23-53"><a href="#cb23-53"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span id="cb23-54"><a href="#cb23-54"></a><span class="co">#&gt; </span></span>
+<span id="cb23-55"><a href="#cb23-55"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-56"><a href="#cb23-56"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-57"><a href="#cb23-57"></a><span class="co">#&gt; Intercept |      5.86 %</span></span>
+<span id="cb23-58"><a href="#cb23-58"></a><span class="co">#&gt; child     |      0.00 %</span></span>
+<span id="cb23-59"><a href="#cb23-59"></a><span class="co">#&gt; camper    |      0.00 %</span></span>
+<span id="cb23-60"><a href="#cb23-60"></a><span class="co">#&gt; </span></span>
+<span id="cb23-61"><a href="#cb23-61"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
+<span id="cb23-62"><a href="#cb23-62"></a><span class="co">#&gt; </span></span>
+<span id="cb23-63"><a href="#cb23-63"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-64"><a href="#cb23-64"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-65"><a href="#cb23-65"></a><span class="co">#&gt; persons 1 |      2.09 %</span></span>
+<span id="cb23-66"><a href="#cb23-66"></a><span class="co">#&gt; persons 2 |      7.95 %</span></span>
+<span id="cb23-67"><a href="#cb23-67"></a><span class="co">#&gt; persons 3 |     11.30 %</span></span>
+<span id="cb23-68"><a href="#cb23-68"></a><span class="co">#&gt; persons 4 |      0.84 %</span></span>
+<span id="cb23-69"><a href="#cb23-69"></a><span class="co">#&gt; </span></span>
+<span id="cb23-70"><a href="#cb23-70"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
+<span id="cb23-71"><a href="#cb23-71"></a><span class="co">#&gt; </span></span>
+<span id="cb23-72"><a href="#cb23-72"></a><span class="co">#&gt; Parameter | inside ROPE</span></span>
+<span id="cb23-73"><a href="#cb23-73"></a><span class="co">#&gt; -----------------------</span></span>
+<span id="cb23-74"><a href="#cb23-74"></a><span class="co">#&gt; persons 1 |      1.67 %</span></span>
+<span id="cb23-75"><a href="#cb23-75"></a><span class="co">#&gt; persons 2 |     11.30 %</span></span>
+<span id="cb23-76"><a href="#cb23-76"></a><span class="co">#&gt; persons 3 |     13.39 %</span></span>
+<span id="cb23-77"><a href="#cb23-77"></a><span class="co">#&gt; persons 4 |      1.67 %</span></span>
+<span id="cb23-78"><a href="#cb23-78"></a></span>
+<span id="cb23-79"><a href="#cb23-79"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">rope_color =</span> <span class="st">"grey70"</span>) <span class="op">+</span></span>
+<span id="cb23-80"><a href="#cb23-80"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_social.html">scale_fill_social</a></span>()</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-20-1.png" width="768"></p>
 </div>
 <div id="test-for-practical-equivalence" class="section level2">
@@ -543,27 +548,7 @@
 <a href="#test-for-practical-equivalence" class="anchor"></a>Test for Practical Equivalence</h2>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">related function documentation</a>)</em></p>
 <p>The test for practical equivalence is based on the “HDI+ROPE decision rule” to check whether parameter values should be accepted or rejected against an explicitly formulated “null hypothesis” (i.e., a ROPE). In other words, it checks the percentage of the 89% HDI that is the null region (the ROPE). If this percentage is sufficiently low, the null hypothesis is rejected. If this percentage is sufficiently high, the null hypothesis is accepted.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model)</span>
-<span id="cb23-2"><a href="#cb23-2"></a></span>
-<span id="cb23-3"><a href="#cb23-3"></a>result</span>
-<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#&gt; # Test for Practical Equivalence</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; </span></span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt;   ROPE: [-0.08 0.08]</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a><span class="co">#&gt; </span></span>
-<span id="cb23-8"><a href="#cb23-8"></a><span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      89% HDI</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
-<span id="cb23-10"><a href="#cb23-10"></a><span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.54 5.04]</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a><span class="co">#&gt; Petal.Width                   | Undecided |      3.82 % | [-0.07 1.80]</span></span>
-<span id="cb23-12"><a href="#cb23-12"></a><span class="co">#&gt; Speciesversicolor             | Undecided |      5.31 % | [-1.42 0.11]</span></span>
-<span id="cb23-13"><a href="#cb23-13"></a><span class="co">#&gt; Speciesvirginica              | Undecided |     10.19 % | [-0.34 1.29]</span></span>
-<span id="cb23-14"><a href="#cb23-14"></a><span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.99 % | [-0.46 1.62]</span></span>
-<span id="cb23-15"><a href="#cb23-15"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     11.57 % | [-1.23 0.75]</span></span>
-<span id="cb23-16"><a href="#cb23-16"></a></span>
-<span id="cb23-17"><a href="#cb23-17"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span></span>
-<span id="cb23-18"><a href="#cb23-18"></a><span class="st">  </span><span class="kw"><a href="../reference/theme_blackboard.html">theme_blackboard</a></span>() <span class="op">+</span></span>
-<span id="cb23-19"><a href="#cb23-19"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(.<span class="dv">89</span>, <span class="fl">.95</span>))</span>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model)</span>
 <span id="cb24-2"><a href="#cb24-2"></a></span>
 <span id="cb24-3"><a href="#cb24-3"></a>result</span>
 <span id="cb24-4"><a href="#cb24-4"></a><span class="co">#&gt; # Test for Practical Equivalence</span></span>
@@ -578,98 +563,118 @@
 <span id="cb24-13"><a href="#cb24-13"></a><span class="co">#&gt; Speciesvirginica              | Undecided |     10.19 % | [-0.34 1.29]</span></span>
 <span id="cb24-14"><a href="#cb24-14"></a><span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.99 % | [-0.46 1.62]</span></span>
 <span id="cb24-15"><a href="#cb24-15"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     11.57 % | [-1.23 0.75]</span></span>
-<span id="cb24-16"><a href="#cb24-16"></a><span class="co">#&gt; </span></span>
-<span id="cb24-17"><a href="#cb24-17"></a><span class="co">#&gt; </span></span>
-<span id="cb24-18"><a href="#cb24-18"></a><span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      95% HDI</span></span>
-<span id="cb24-19"><a href="#cb24-19"></a><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
-<span id="cb24-20"><a href="#cb24-20"></a><span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.50 5.12]</span></span>
-<span id="cb24-21"><a href="#cb24-21"></a><span class="co">#&gt; Petal.Width                   | Undecided |      3.92 % | [-0.31 1.98]</span></span>
-<span id="cb24-22"><a href="#cb24-22"></a><span class="co">#&gt; Speciesversicolor             | Undecided |      4.97 % | [-1.65 0.19]</span></span>
-<span id="cb24-23"><a href="#cb24-23"></a><span class="co">#&gt; Speciesvirginica              | Undecided |      9.55 % | [-0.57 1.43]</span></span>
-<span id="cb24-24"><a href="#cb24-24"></a><span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.42 % | [-0.78 1.80]</span></span>
-<span id="cb24-25"><a href="#cb24-25"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     10.84 % | [-1.37 1.04]</span></span>
-<span id="cb24-26"><a href="#cb24-26"></a></span>
-<span id="cb24-27"><a href="#cb24-27"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span></span>
-<span id="cb24-28"><a href="#cb24-28"></a><span class="st">  </span><span class="kw"><a href="../reference/theme_abyss.html">theme_abyss</a></span>() <span class="op">+</span></span>
-<span id="cb24-29"><a href="#cb24-29"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span>()</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-22-1.png" width="864"></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model2, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(.<span class="dv">89</span>, <span class="fl">.95</span>), <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</span>
+<span id="cb24-16"><a href="#cb24-16"></a></span>
+<span id="cb24-17"><a href="#cb24-17"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a><span class="st">  </span><span class="kw"><a href="../reference/theme_blackboard.html">theme_blackboard</a></span>() <span class="op">+</span></span>
+<span id="cb24-19"><a href="#cb24-19"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(.<span class="dv">89</span>, <span class="fl">.95</span>))</span>
 <span id="cb25-2"><a href="#cb25-2"></a></span>
 <span id="cb25-3"><a href="#cb25-3"></a>result</span>
 <span id="cb25-4"><a href="#cb25-4"></a><span class="co">#&gt; # Test for Practical Equivalence</span></span>
 <span id="cb25-5"><a href="#cb25-5"></a><span class="co">#&gt; </span></span>
-<span id="cb25-6"><a href="#cb25-6"></a><span class="co">#&gt;   ROPE: [-0.10 0.10]</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="co">#&gt;   ROPE: [-0.08 0.08]</span></span>
 <span id="cb25-7"><a href="#cb25-7"></a><span class="co">#&gt; </span></span>
-<span id="cb25-8"><a href="#cb25-8"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
-<span id="cb25-9"><a href="#cb25-9"></a><span class="co">#&gt; </span></span>
-<span id="cb25-10"><a href="#cb25-10"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a><span class="co">#&gt; Intercept | Undecided |      2.23 % | [ 0.05  2.27]</span></span>
-<span id="cb25-13"><a href="#cb25-13"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.32 -0.98]</span></span>
-<span id="cb25-14"><a href="#cb25-14"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.59  0.86]</span></span>
-<span id="cb25-15"><a href="#cb25-15"></a><span class="co">#&gt; </span></span>
-<span id="cb25-16"><a href="#cb25-16"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      89% HDI</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.54 5.04]</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="co">#&gt; Petal.Width                   | Undecided |      3.82 % | [-0.07 1.80]</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="co">#&gt; Speciesversicolor             | Undecided |      5.31 % | [-1.42 0.11]</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="co">#&gt; Speciesvirginica              | Undecided |     10.19 % | [-0.34 1.29]</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.99 % | [-0.46 1.62]</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     11.57 % | [-1.23 0.75]</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a><span class="co">#&gt; </span></span>
 <span id="cb25-17"><a href="#cb25-17"></a><span class="co">#&gt; </span></span>
-<span id="cb25-18"><a href="#cb25-18"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
-<span id="cb25-19"><a href="#cb25-19"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-20"><a href="#cb25-20"></a><span class="co">#&gt; Intercept | Undecided |      6.25 % | [-1.89  0.22]</span></span>
-<span id="cb25-21"><a href="#cb25-21"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.30  2.30]</span></span>
-<span id="cb25-22"><a href="#cb25-22"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [-1.34 -0.23]</span></span>
-<span id="cb25-23"><a href="#cb25-23"></a><span class="co">#&gt; </span></span>
-<span id="cb25-24"><a href="#cb25-24"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
-<span id="cb25-25"><a href="#cb25-25"></a><span class="co">#&gt; </span></span>
-<span id="cb25-26"><a href="#cb25-26"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
-<span id="cb25-27"><a href="#cb25-27"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-28"><a href="#cb25-28"></a><span class="co">#&gt; persons 1 | Undecided |      1.79 % | [-2.55 -0.03]</span></span>
-<span id="cb25-29"><a href="#cb25-29"></a><span class="co">#&gt; persons 2 | Undecided |      8.48 % | [-1.45  1.01]</span></span>
-<span id="cb25-30"><a href="#cb25-30"></a><span class="co">#&gt; persons 3 | Undecided |     12.05 % | [-0.73  1.59]</span></span>
-<span id="cb25-31"><a href="#cb25-31"></a><span class="co">#&gt; persons 4 |  Rejected |      0.00 % | [ 0.29  2.54]</span></span>
-<span id="cb25-32"><a href="#cb25-32"></a><span class="co">#&gt; </span></span>
-<span id="cb25-33"><a href="#cb25-33"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
-<span id="cb25-34"><a href="#cb25-34"></a><span class="co">#&gt; </span></span>
-<span id="cb25-35"><a href="#cb25-35"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
-<span id="cb25-36"><a href="#cb25-36"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-37"><a href="#cb25-37"></a><span class="co">#&gt; persons 1 |  Rejected |      0.00 % | [ 0.37  2.66]</span></span>
-<span id="cb25-38"><a href="#cb25-38"></a><span class="co">#&gt; persons 2 | Undecided |     12.05 % | [-0.73  1.49]</span></span>
-<span id="cb25-39"><a href="#cb25-39"></a><span class="co">#&gt; persons 3 | Undecided |     14.29 % | [-1.16  1.13]</span></span>
-<span id="cb25-40"><a href="#cb25-40"></a><span class="co">#&gt; persons 4 | Undecided |      1.34 % | [-2.46 -0.06]</span></span>
-<span id="cb25-41"><a href="#cb25-41"></a><span class="co">#&gt; </span></span>
-<span id="cb25-42"><a href="#cb25-42"></a><span class="co">#&gt; </span></span>
-<span id="cb25-43"><a href="#cb25-43"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
-<span id="cb25-44"><a href="#cb25-44"></a><span class="co">#&gt; </span></span>
-<span id="cb25-45"><a href="#cb25-45"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
-<span id="cb25-46"><a href="#cb25-46"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-47"><a href="#cb25-47"></a><span class="co">#&gt; Intercept | Undecided |      2.51 % | [-0.59  2.95]</span></span>
-<span id="cb25-48"><a href="#cb25-48"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.40 -0.97]</span></span>
-<span id="cb25-49"><a href="#cb25-49"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.59  0.92]</span></span>
-<span id="cb25-50"><a href="#cb25-50"></a><span class="co">#&gt; </span></span>
-<span id="cb25-51"><a href="#cb25-51"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
-<span id="cb25-52"><a href="#cb25-52"></a><span class="co">#&gt; </span></span>
-<span id="cb25-53"><a href="#cb25-53"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
-<span id="cb25-54"><a href="#cb25-54"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-55"><a href="#cb25-55"></a><span class="co">#&gt; Intercept | Undecided |      5.86 % | [-2.31  0.61]</span></span>
-<span id="cb25-56"><a href="#cb25-56"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.25  2.48]</span></span>
-<span id="cb25-57"><a href="#cb25-57"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [-1.50 -0.23]</span></span>
-<span id="cb25-58"><a href="#cb25-58"></a><span class="co">#&gt; </span></span>
-<span id="cb25-59"><a href="#cb25-59"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
-<span id="cb25-60"><a href="#cb25-60"></a><span class="co">#&gt; </span></span>
-<span id="cb25-61"><a href="#cb25-61"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
-<span id="cb25-62"><a href="#cb25-62"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-63"><a href="#cb25-63"></a><span class="co">#&gt; persons 1 | Undecided |      2.09 % | [-3.24  0.30]</span></span>
-<span id="cb25-64"><a href="#cb25-64"></a><span class="co">#&gt; persons 2 | Undecided |      7.95 % | [-1.90  1.59]</span></span>
-<span id="cb25-65"><a href="#cb25-65"></a><span class="co">#&gt; persons 3 | Undecided |     11.30 % | [-1.41  2.13]</span></span>
-<span id="cb25-66"><a href="#cb25-66"></a><span class="co">#&gt; persons 4 | Undecided |      0.84 % | [-0.69  2.87]</span></span>
-<span id="cb25-67"><a href="#cb25-67"></a><span class="co">#&gt; </span></span>
-<span id="cb25-68"><a href="#cb25-68"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
-<span id="cb25-69"><a href="#cb25-69"></a><span class="co">#&gt; </span></span>
-<span id="cb25-70"><a href="#cb25-70"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
-<span id="cb25-71"><a href="#cb25-71"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
-<span id="cb25-72"><a href="#cb25-72"></a><span class="co">#&gt; persons 1 | Undecided |      1.67 % | [-0.09  2.81]</span></span>
-<span id="cb25-73"><a href="#cb25-73"></a><span class="co">#&gt; persons 2 | Undecided |     11.30 % | [-0.93  1.93]</span></span>
-<span id="cb25-74"><a href="#cb25-74"></a><span class="co">#&gt; persons 3 | Undecided |     13.39 % | [-1.50  1.42]</span></span>
-<span id="cb25-75"><a href="#cb25-75"></a><span class="co">#&gt; persons 4 | Undecided |      1.67 % | [-2.92  0.16]</span></span>
-<span id="cb25-76"><a href="#cb25-76"></a></span>
-<span id="cb25-77"><a href="#cb25-77"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/theme_modern.html">theme_modern</a></span>()</span></code></pre></div>
+<span id="cb25-18"><a href="#cb25-18"></a><span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      95% HDI</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
+<span id="cb25-20"><a href="#cb25-20"></a><span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.50 5.12]</span></span>
+<span id="cb25-21"><a href="#cb25-21"></a><span class="co">#&gt; Petal.Width                   | Undecided |      3.92 % | [-0.31 1.98]</span></span>
+<span id="cb25-22"><a href="#cb25-22"></a><span class="co">#&gt; Speciesversicolor             | Undecided |      4.97 % | [-1.65 0.19]</span></span>
+<span id="cb25-23"><a href="#cb25-23"></a><span class="co">#&gt; Speciesvirginica              | Undecided |      9.55 % | [-0.57 1.43]</span></span>
+<span id="cb25-24"><a href="#cb25-24"></a><span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.42 % | [-0.78 1.80]</span></span>
+<span id="cb25-25"><a href="#cb25-25"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     10.84 % | [-1.37 1.04]</span></span>
+<span id="cb25-26"><a href="#cb25-26"></a></span>
+<span id="cb25-27"><a href="#cb25-27"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span></span>
+<span id="cb25-28"><a href="#cb25-28"></a><span class="st">  </span><span class="kw"><a href="../reference/theme_abyss.html">theme_abyss</a></span>() <span class="op">+</span></span>
+<span id="cb25-29"><a href="#cb25-29"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span>()</span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-22-1.png" width="864"></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>result &lt;-<span class="st"> </span><span class="kw">equivalence_test</span>(model2, <span class="dt">ci =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(.<span class="dv">89</span>, <span class="fl">.95</span>), <span class="dt">effects =</span> <span class="st">"all"</span>, <span class="dt">component =</span> <span class="st">"all"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a>result</span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co">#&gt; # Test for Practical Equivalence</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#&gt; </span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#&gt;   ROPE: [-0.10 0.10]</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="co">#&gt; </span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="co">#&gt; </span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="co">#&gt; Intercept | Undecided |      2.23 % | [ 0.05  2.27]</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.32 -0.98]</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.59  0.86]</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a><span class="co">#&gt; </span></span>
+<span id="cb26-16"><a href="#cb26-16"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a><span class="co">#&gt; </span></span>
+<span id="cb26-18"><a href="#cb26-18"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-20"><a href="#cb26-20"></a><span class="co">#&gt; Intercept | Undecided |      6.25 % | [-1.89  0.22]</span></span>
+<span id="cb26-21"><a href="#cb26-21"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.30  2.30]</span></span>
+<span id="cb26-22"><a href="#cb26-22"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [-1.34 -0.23]</span></span>
+<span id="cb26-23"><a href="#cb26-23"></a><span class="co">#&gt; </span></span>
+<span id="cb26-24"><a href="#cb26-24"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
+<span id="cb26-25"><a href="#cb26-25"></a><span class="co">#&gt; </span></span>
+<span id="cb26-26"><a href="#cb26-26"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
+<span id="cb26-27"><a href="#cb26-27"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-28"><a href="#cb26-28"></a><span class="co">#&gt; persons 1 | Undecided |      1.79 % | [-2.55 -0.03]</span></span>
+<span id="cb26-29"><a href="#cb26-29"></a><span class="co">#&gt; persons 2 | Undecided |      8.48 % | [-1.45  1.01]</span></span>
+<span id="cb26-30"><a href="#cb26-30"></a><span class="co">#&gt; persons 3 | Undecided |     12.05 % | [-0.73  1.59]</span></span>
+<span id="cb26-31"><a href="#cb26-31"></a><span class="co">#&gt; persons 4 |  Rejected |      0.00 % | [ 0.29  2.54]</span></span>
+<span id="cb26-32"><a href="#cb26-32"></a><span class="co">#&gt; </span></span>
+<span id="cb26-33"><a href="#cb26-33"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
+<span id="cb26-34"><a href="#cb26-34"></a><span class="co">#&gt; </span></span>
+<span id="cb26-35"><a href="#cb26-35"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
+<span id="cb26-36"><a href="#cb26-36"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-37"><a href="#cb26-37"></a><span class="co">#&gt; persons 1 |  Rejected |      0.00 % | [ 0.37  2.66]</span></span>
+<span id="cb26-38"><a href="#cb26-38"></a><span class="co">#&gt; persons 2 | Undecided |     12.05 % | [-0.73  1.49]</span></span>
+<span id="cb26-39"><a href="#cb26-39"></a><span class="co">#&gt; persons 3 | Undecided |     14.29 % | [-1.16  1.13]</span></span>
+<span id="cb26-40"><a href="#cb26-40"></a><span class="co">#&gt; persons 4 | Undecided |      1.34 % | [-2.46 -0.06]</span></span>
+<span id="cb26-41"><a href="#cb26-41"></a><span class="co">#&gt; </span></span>
+<span id="cb26-42"><a href="#cb26-42"></a><span class="co">#&gt; </span></span>
+<span id="cb26-43"><a href="#cb26-43"></a><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
+<span id="cb26-44"><a href="#cb26-44"></a><span class="co">#&gt; </span></span>
+<span id="cb26-45"><a href="#cb26-45"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
+<span id="cb26-46"><a href="#cb26-46"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-47"><a href="#cb26-47"></a><span class="co">#&gt; Intercept | Undecided |      2.51 % | [-0.59  2.95]</span></span>
+<span id="cb26-48"><a href="#cb26-48"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.40 -0.97]</span></span>
+<span id="cb26-49"><a href="#cb26-49"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.59  0.92]</span></span>
+<span id="cb26-50"><a href="#cb26-50"></a><span class="co">#&gt; </span></span>
+<span id="cb26-51"><a href="#cb26-51"></a><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span id="cb26-52"><a href="#cb26-52"></a><span class="co">#&gt; </span></span>
+<span id="cb26-53"><a href="#cb26-53"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
+<span id="cb26-54"><a href="#cb26-54"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-55"><a href="#cb26-55"></a><span class="co">#&gt; Intercept | Undecided |      5.86 % | [-2.31  0.61]</span></span>
+<span id="cb26-56"><a href="#cb26-56"></a><span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.25  2.48]</span></span>
+<span id="cb26-57"><a href="#cb26-57"></a><span class="co">#&gt; camper    |  Rejected |      0.00 % | [-1.50 -0.23]</span></span>
+<span id="cb26-58"><a href="#cb26-58"></a><span class="co">#&gt; </span></span>
+<span id="cb26-59"><a href="#cb26-59"></a><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
+<span id="cb26-60"><a href="#cb26-60"></a><span class="co">#&gt; </span></span>
+<span id="cb26-61"><a href="#cb26-61"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
+<span id="cb26-62"><a href="#cb26-62"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-63"><a href="#cb26-63"></a><span class="co">#&gt; persons 1 | Undecided |      2.09 % | [-3.24  0.30]</span></span>
+<span id="cb26-64"><a href="#cb26-64"></a><span class="co">#&gt; persons 2 | Undecided |      7.95 % | [-1.90  1.59]</span></span>
+<span id="cb26-65"><a href="#cb26-65"></a><span class="co">#&gt; persons 3 | Undecided |     11.30 % | [-1.41  2.13]</span></span>
+<span id="cb26-66"><a href="#cb26-66"></a><span class="co">#&gt; persons 4 | Undecided |      0.84 % | [-0.69  2.87]</span></span>
+<span id="cb26-67"><a href="#cb26-67"></a><span class="co">#&gt; </span></span>
+<span id="cb26-68"><a href="#cb26-68"></a><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
+<span id="cb26-69"><a href="#cb26-69"></a><span class="co">#&gt; </span></span>
+<span id="cb26-70"><a href="#cb26-70"></a><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
+<span id="cb26-71"><a href="#cb26-71"></a><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span id="cb26-72"><a href="#cb26-72"></a><span class="co">#&gt; persons 1 | Undecided |      1.67 % | [-0.09  2.81]</span></span>
+<span id="cb26-73"><a href="#cb26-73"></a><span class="co">#&gt; persons 2 | Undecided |     11.30 % | [-0.93  1.93]</span></span>
+<span id="cb26-74"><a href="#cb26-74"></a><span class="co">#&gt; persons 3 | Undecided |     13.39 % | [-1.50  1.42]</span></span>
+<span id="cb26-75"><a href="#cb26-75"></a><span class="co">#&gt; persons 4 | Undecided |      1.67 % | [-2.92  0.16]</span></span>
+<span id="cb26-76"><a href="#cb26-76"></a></span>
+<span id="cb26-77"><a href="#cb26-77"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_columns =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/theme_modern.html">theme_modern</a></span>()</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-23-1.png" width="1056"></p>
 </div>
 <div id="bayes-factors-bfs" class="section level2">
@@ -680,76 +685,76 @@
 <a href="#bayes-factors-for-model-parameters" class="anchor"></a>Bayes Factors for Model Parameters</h3>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">related function documentation</a>)</em></p>
 <p>Plotting the result of a call to <code>bayesfactor_parameters()</code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model)</span>
-<span id="cb26-2"><a href="#cb26-2"></a></span>
-<span id="cb26-3"><a href="#cb26-3"></a>result</span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co">#&gt; # Bayes Factor (Savage-Dickey density ratio)</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#&gt; </span></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#&gt; Parameter                     |       BF</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co">#&gt; ----------------------------------------</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a><span class="co">#&gt; (Intercept)                   | 3.19e+32</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a><span class="co">#&gt; Petal.Width                   |     0.63</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="co">#&gt; Speciesversicolor             |     0.71</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a><span class="co">#&gt; Speciesvirginica              |     0.36</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a><span class="co">#&gt; Petal.Width:Speciesversicolor |     0.26</span></span>
-<span id="cb26-13"><a href="#cb26-13"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |     0.31</span></span>
-<span id="cb26-14"><a href="#cb26-14"></a><span class="co">#&gt; </span></span>
-<span id="cb26-15"><a href="#cb26-15"></a><span class="co">#&gt; * Evidence Against The Null: [0]</span></span>
-<span id="cb26-16"><a href="#cb26-16"></a></span>
-<span id="cb26-17"><a href="#cb26-17"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span></span>
-<span id="cb26-18"><a href="#cb26-18"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span></span>
-<span id="cb26-19"><a href="#cb26-19"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
-<p>When an interval null was tested, two dashed lines mark the edges of the null interval at the value - the Bayes factor represents the degree by which the distribution mass of the posterior has shifted outside or inside the null interval relative to the prior distribution:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model, <span class="dt">null =</span> <span class="kw">rope_range</span>(model))</span>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model)</span>
 <span id="cb27-2"><a href="#cb27-2"></a></span>
 <span id="cb27-3"><a href="#cb27-3"></a>result</span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="co">#&gt; # Bayes Factor (Null-Interval)</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co">#&gt; # Bayes Factor (Savage-Dickey density ratio)</span></span>
 <span id="cb27-5"><a href="#cb27-5"></a><span class="co">#&gt; </span></span>
 <span id="cb27-6"><a href="#cb27-6"></a><span class="co">#&gt; Parameter                     |       BF</span></span>
 <span id="cb27-7"><a href="#cb27-7"></a><span class="co">#&gt; ----------------------------------------</span></span>
-<span id="cb27-8"><a href="#cb27-8"></a><span class="co">#&gt; (Intercept)                   | 2.24e+32</span></span>
-<span id="cb27-9"><a href="#cb27-9"></a><span class="co">#&gt; Petal.Width                   |      0.6</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="co">#&gt; (Intercept)                   | 3.19e+32</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="co">#&gt; Petal.Width                   |     0.63</span></span>
 <span id="cb27-10"><a href="#cb27-10"></a><span class="co">#&gt; Speciesversicolor             |     0.71</span></span>
-<span id="cb27-11"><a href="#cb27-11"></a><span class="co">#&gt; Speciesvirginica              |     0.33</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="co">#&gt; Speciesvirginica              |     0.36</span></span>
 <span id="cb27-12"><a href="#cb27-12"></a><span class="co">#&gt; Petal.Width:Speciesversicolor |     0.26</span></span>
-<span id="cb27-13"><a href="#cb27-13"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |      0.3</span></span>
+<span id="cb27-13"><a href="#cb27-13"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |     0.31</span></span>
 <span id="cb27-14"><a href="#cb27-14"></a><span class="co">#&gt; </span></span>
-<span id="cb27-15"><a href="#cb27-15"></a><span class="co">#&gt; * Evidence Against The Null: [-0.08, 0.08]</span></span>
+<span id="cb27-15"><a href="#cb27-15"></a><span class="co">#&gt; * Evidence Against The Null: [0]</span></span>
 <span id="cb27-16"><a href="#cb27-16"></a></span>
 <span id="cb27-17"><a href="#cb27-17"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span></span>
 <span id="cb27-18"><a href="#cb27-18"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span></span>
 <span id="cb27-19"><a href="#cb27-19"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<p>When an interval null was tested, two dashed lines mark the edges of the null interval at the value - the Bayes factor represents the degree by which the distribution mass of the posterior has shifted outside or inside the null interval relative to the prior distribution:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>result &lt;-<span class="st"> </span><span class="kw">bayesfactor_parameters</span>(model, <span class="dt">null =</span> <span class="kw">rope_range</span>(model))</span>
+<span id="cb28-2"><a href="#cb28-2"></a></span>
+<span id="cb28-3"><a href="#cb28-3"></a>result</span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="co">#&gt; # Bayes Factor (Null-Interval)</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="co">#&gt; </span></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="co">#&gt; Parameter                     |       BF</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="co">#&gt; ----------------------------------------</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="co">#&gt; (Intercept)                   | 2.24e+32</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="co">#&gt; Petal.Width                   |      0.6</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a><span class="co">#&gt; Speciesversicolor             |     0.71</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a><span class="co">#&gt; Speciesvirginica              |     0.33</span></span>
+<span id="cb28-12"><a href="#cb28-12"></a><span class="co">#&gt; Petal.Width:Speciesversicolor |     0.26</span></span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="co">#&gt; Petal.Width:Speciesvirginica  |      0.3</span></span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="co">#&gt; </span></span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="co">#&gt; * Evidence Against The Null: [-0.08, 0.08]</span></span>
+<span id="cb28-16"><a href="#cb28-16"></a></span>
+<span id="cb28-17"><a href="#cb28-17"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result) <span class="op">+</span></span>
+<span id="cb28-18"><a href="#cb28-18"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span></span>
+<span id="cb28-19"><a href="#cb28-19"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_material.html">scale_fill_material</a></span>()</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
 </div>
 <div id="bayes-factors-for-model-comparison" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factors-for-model-comparison" class="anchor"></a>Bayes Factors for Model Comparison</h3>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/bayesfactor_models.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>lm0 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mtcars)</span>
-<span id="cb28-2"><a href="#cb28-2"></a>lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)</span>
-<span id="cb28-3"><a href="#cb28-3"></a>lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</span>
-<span id="cb28-4"><a href="#cb28-4"></a>lm3 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat <span class="op">+</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</span>
-<span id="cb28-5"><a href="#cb28-5"></a></span>
-<span id="cb28-6"><a href="#cb28-6"></a>result &lt;-<span class="st"> </span><span class="kw">bayesfactor_models</span>(lm1, lm2, lm3, <span class="dt">denominator =</span> lm0)</span>
-<span id="cb28-7"><a href="#cb28-7"></a></span>
-<span id="cb28-8"><a href="#cb28-8"></a>result</span>
-<span id="cb28-9"><a href="#cb28-9"></a><span class="co">#&gt; # Bayes Factors for Model Comparison</span></span>
-<span id="cb28-10"><a href="#cb28-10"></a><span class="co">#&gt; </span></span>
-<span id="cb28-11"><a href="#cb28-11"></a><span class="co">#&gt;   Model           BF</span></span>
-<span id="cb28-12"><a href="#cb28-12"></a><span class="co">#&gt;   [1] drat       0.2</span></span>
-<span id="cb28-13"><a href="#cb28-13"></a><span class="co">#&gt;   [2] wt        0.29</span></span>
-<span id="cb28-14"><a href="#cb28-14"></a><span class="co">#&gt;   [3] drat + wt 0.05</span></span>
-<span id="cb28-15"><a href="#cb28-15"></a><span class="co">#&gt; </span></span>
-<span id="cb28-16"><a href="#cb28-16"></a><span class="co">#&gt; * Against Denominator: [4] (Intercept only)</span></span>
-<span id="cb28-17"><a href="#cb28-17"></a><span class="co">#&gt; *   Bayes Factor Type: BIC approximation</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>lm0 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mtcars)</span>
+<span id="cb29-2"><a href="#cb29-2"></a>lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)</span>
+<span id="cb29-3"><a href="#cb29-3"></a>lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</span>
+<span id="cb29-4"><a href="#cb29-4"></a>lm3 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(qsec <span class="op">~</span><span class="st"> </span>drat <span class="op">+</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)</span>
+<span id="cb29-5"><a href="#cb29-5"></a></span>
+<span id="cb29-6"><a href="#cb29-6"></a>result &lt;-<span class="st"> </span><span class="kw">bayesfactor_models</span>(lm1, lm2, lm3, <span class="dt">denominator =</span> lm0)</span>
+<span id="cb29-7"><a href="#cb29-7"></a></span>
+<span id="cb29-8"><a href="#cb29-8"></a>result</span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="co">#&gt; # Bayes Factors for Model Comparison</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="co">#&gt; </span></span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="co">#&gt;   Model           BF</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a><span class="co">#&gt;   [1] drat       0.2</span></span>
+<span id="cb29-13"><a href="#cb29-13"></a><span class="co">#&gt;   [2] wt        0.29</span></span>
+<span id="cb29-14"><a href="#cb29-14"></a><span class="co">#&gt;   [3] drat + wt 0.05</span></span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="co">#&gt; </span></span>
+<span id="cb29-16"><a href="#cb29-16"></a><span class="co">#&gt; * Against Denominator: [4] (Intercept only)</span></span>
+<span id="cb29-17"><a href="#cb29-17"></a><span class="co">#&gt; *   Bayes Factor Type: BIC approximation</span></span></code></pre></div>
 <p><em>Pizza plots</em> are a visual way of representing the posterior probabilities of several models, with ratio of the areas of any two models corresponding to their posterior odds.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is possible to plot all compared models on one (pizza) pie:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"one"</span>, <span class="dt">value =</span> <span class="st">"probability"</span>) <span class="op">+</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"one"</span>, <span class="dt">value =</span> <span class="st">"probability"</span>) <span class="op">+</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>) </span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
 <p>But it is also possible to plot one pizza for each model and the denominator model (and who doesn’t like <strong><em>more</em></strong> pizza?):</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"many"</span>, <span class="dt">value =</span> <span class="st">"BF"</span>) <span class="op">+</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>, <span class="dt">reverse =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(result, <span class="dt">n_pies =</span> <span class="st">"many"</span>, <span class="dt">value =</span> <span class="st">"BF"</span>) <span class="op">+</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="st">  </span><span class="kw"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span>(<span class="dt">palette =</span> <span class="st">"rainbow"</span>, <span class="dt">reverse =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
 </div>
 </div>
