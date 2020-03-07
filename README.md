@@ -177,3 +177,9 @@ vignette](https://easystats.github.io/see/articles/performance.html).
 Plotting functions for the **modelbased** package are demonstrated [in
 this
 vignette](https://easystats.github.io/see/articles/modelbased.html).
+
+### [correlation](https://github.com/easystats/correlation)
+
+Plotting functions for the **correlation** package are demonstrated [in
+this
+vignette](https://easystats.github.io/see/articles/correlation.html).
