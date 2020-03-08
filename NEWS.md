@@ -1,3 +1,9 @@
+# see 0.4.2
+
+## Changes to functions
+
+- `plot.estimate_density()` now also works for density estimation of data frames.
+
 # see 0.4.1
 
 ## General
