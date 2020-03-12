@@ -1,6 +1,6 @@
 #' @importFrom insight clean_parameters
 #' @export
-data_plot.estimate_density <- function(x, data = NULL, ...) {
+data_plot.see_estimate_density <- function(x, data = NULL, ...) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
@@ -27,7 +27,6 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
   class(dataplot) <- c("data_plot", "see_estimate_density", class(dataplot))
   dataplot
 }
-
 
 
 
@@ -128,7 +127,12 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
 
 
 
-# Plot --------------------------------------------------------------------
+# Density df --------------------------------------------------------------------
+
+#' @export
+data_plot.see_estimate_density_df <- data_plot.see_estimate_density
+
+
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @importFrom stats setNames
