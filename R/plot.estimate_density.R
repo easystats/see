@@ -1,6 +1,6 @@
 #' @importFrom insight clean_parameters
 #' @export
-data_plot.see_estimate_density <- function(x, data = NULL, ...) {
+data_plot.estimate_density <- function(x, data = NULL, ...) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
@@ -130,7 +130,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
 # Density df --------------------------------------------------------------------
 
 #' @export
-data_plot.see_estimate_density_df <- data_plot.see_estimate_density
+data_plot.estimate_density_df <- data_plot.estimate_density
 
 
 #' @importFrom rlang .data
