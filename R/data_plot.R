@@ -22,6 +22,7 @@
 #'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.
 #' @param point_size Size of point-geoms.
+#' @param digits Number of decimals used for values.
 #' @param rope_alpha,si_alpha Transparency level of ROPE/SI ribbon.
 #' @param rope_color,si_color Color of ROPE/SI ribbon.
 #' @param support_only Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting \code{\link[bayestestR]{si}}.

@@ -1,5 +1,5 @@
 #' @export
-data_plot.see_easycormatrix <- function(x, data = NULL, ...) {
+data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, ...) {
   data <- as.data.frame(x)
   dataplot <- .reshape_to_long(data, names_to = "Parameter", values_to = "r", columns = 2:ncol(data))
 
@@ -21,7 +21,7 @@ data_plot.see_easycormatrix <- function(x, data = NULL, ...) {
   dataplot$r[abs(dataplot$r) > .99999] <- NA
   dataplot$p <- dataplot_p$p
 
-  dataplot$labels <- sprintf("%.3f", dataplot$r)
+  dataplot$labels <- sprintf("%.*f", digits, dataplot$r)
   dataplot$labels[dataplot$labels == "NA"] <- ""
 
   class(dataplot) <- unique(c("data_plot", "see_easycormatrix", class(dataplot)))
@@ -35,9 +35,9 @@ data_plot.see_easycormatrix <- function(x, data = NULL, ...) {
 #' @rdname data_plot
 #' @importFrom parameters format_p
 #' @export
-plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_legend = TRUE, text_size = 3.5, ...) {
+plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_legend = TRUE, text_size = 3.5, digits = 3, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, sort = sort)
+    x <- data_plot(x, digits = digits)
   }
 
   if (show_p) {

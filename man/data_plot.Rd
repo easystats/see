@@ -72,6 +72,7 @@ data_plot(x, data = NULL, ...)
   show_p = FALSE,
   show_legend = TRUE,
   text_size = 3.5,
+  digits = 3,
   ...
 )
 
@@ -257,6 +258,8 @@ so this argument may change size of points, lines or bars.}
 \item{show_p}{Logical, if \code{TRUE}, p-values or significant level is displayed.}
 
 \item{show_legend}{Logical, show or hide legend.}
+
+\item{digits}{Number of decimals used for values.}
 
 \item{text_color}{Color of text labels.}
 
