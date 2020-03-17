@@ -6,16 +6,17 @@ data_plot.see_easycormatrix <- function(x, data = NULL, ...) {
   data <- as.data.frame(attr(x, "p", exact = TRUE))
   dataplot_p <- .reshape_to_long(data, names_to = "Parameter", values_to = "p", columns = 2:ncol(data))
 
-  n_param <- length(unique(dataplot$Parameter))
+  unique_param <- unique(dataplot$Parameter)
+  n_param <- length(unique_param)
   x <- rep(1:n_param, length.out = nrow(dataplot))
   y <- rep(1:n_param, each = n_param)
 
-  dataplot$x <- unique(dataplot$Parameter)[x]
-  dataplot$y <- unique(dataplot$Parameter)[y]
+  dataplot$x <- unique_param[x]
+  dataplot$y <- unique_param[y]
 
-  dataplot$Parameter <- factor(dataplot$Parameter, levels = unique(dataplot$Parameter))
-  dataplot$x <- factor(dataplot$x, levels = unique(dataplot$x))
-  dataplot$y <- factor(dataplot$y, levels = unique(dataplot$y))
+  dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(unique_param))
+  dataplot$x <- factor(dataplot$x, levels = unique_param)
+  dataplot$y <- factor(dataplot$y, levels = rev(unique_param))
 
   dataplot$r[abs(dataplot$r) > .99999] <- NA
   dataplot$p <- dataplot_p$p
@@ -36,7 +37,7 @@ data_plot.see_easycormatrix <- function(x, data = NULL, ...) {
 #' @export
 plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_legend = TRUE, text_size = 3.5, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x)
+    x <- data_plot(x, sort = sort)
   }
 
   if (show_p) {
