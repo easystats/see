@@ -2,7 +2,8 @@
 
 ## Changes to functions
 
-- `plot.estimate_density()` now also works for density estimation of data frames.
+* `plot.estimate_density()` now also works for density estimation of data frames.
+* Added plot-function for `correlation::as.table()`.
 
 # see 0.4.1
 

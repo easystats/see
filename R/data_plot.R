@@ -42,6 +42,9 @@
 #' @param log Show log-transformed Bayes factors.
 #' @param text_size Size of text labels.
 #' @param text_color Color of text labels.
+#' @param show_values Logical, if \code{TRUE}, values are displayed.
+#' @param show_p Logical, if \code{TRUE}, p-values or significant level is displayed.
+#' @param show_legend Logical, show or hide legend.
 #' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
 #' @param threshold_p Numeric, threshold at which value p-values will be displayed.
 #' @param ci Logical, whether confidence intervals should be added to the plot.

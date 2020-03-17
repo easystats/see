@@ -27,14 +27,41 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 
 ```{r setup}
 library(correlation)
-library(ggraph)
 library(see)
 data(mtcars)
+data(iris)
+```
+
+## Correlation Matrix
+
+_([related function documentation](https://easystats.github.io/correlation/reference/correlation.html))_
+
+The default output for `correlation()` is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using `summary()` or `as.table()`.
+
+```{r}
+result <- correlation(iris)
+
+result
+as.table(result)
+```
+
+The result from `as.table()` can be used to create a plot.
+ 
+```{r}
+m <- as.table(result)
+plot(m)
+```
+
+```{r}
+plot(m, show_values = TRUE, show_p = TRUE, show_legend = FALSE)
 ```
 
 ## Gaussian Graphical Models (GGMs)
 
+To create a Gaussian Graphical Models plot, the library *ggraph*  needs to be loaded first.
+
 ```{r}
+library(ggraph)
 result <- correlation(mtcars, partial = TRUE)
 
 result
