@@ -131,17 +131,19 @@
 <a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; Sepal.Width  | Petal.Length | -0.43 | -5.77 | 148 | &lt; .001 | [-0.55, -0.29] | Pearson |   150</span></a>
 <a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; Sepal.Width  |  Petal.Width | -0.37 | -4.79 | 148 | &lt; .001 | [-0.50, -0.22] | Pearson |   150</span></a>
 <a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; Petal.Length |  Petal.Width |  0.96 | 43.39 | 148 | &lt; .001 | [ 0.95,  0.97] | Pearson |   150</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="kw"><a href="https://rdrr.io/r/base/table.html">as.table</a></span>(result)</a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; Parameter    | Sepal.Length | Sepal.Width | Petal.Length | Petal.Width</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; Sepal.Length |      1.00*** |       -0.12 |      0.87*** |     0.82***</span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; Sepal.Width  |        -0.12 |     1.00*** |     -0.43*** |    -0.37***</span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; Petal.Length |      0.87*** |    -0.43*** |      1.00*** |     0.96***</span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |     1.00***</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-12" title="12"></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="kw"><a href="https://rdrr.io/r/base/table.html">as.table</a></span>(result)</a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; Parameter    | Sepal.Length | Sepal.Width | Petal.Length | Petal.Width</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; Sepal.Length |      1.00*** |       -0.12 |      0.87*** |     0.82***</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; Sepal.Width  |        -0.12 |     1.00*** |     -0.43*** |    -0.37***</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; Petal.Length |      0.87*** |    -0.43*** |      1.00*** |     0.96***</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |     1.00***</span></a></code></pre></div>
 <p>The result from <code><a href="https://rdrr.io/r/base/table.html">as.table()</a></code> can be used to create a plot.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">m &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/table.html">as.table</a></span>(result)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(m)</a></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<p>It is also possible to add correlation coefficients and p-values.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(m, <span class="dt">show_values =</span> <span class="ot">TRUE</span>, <span class="dt">show_p =</span> <span class="ot">TRUE</span>, <span class="dt">show_legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 </div>
