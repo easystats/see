@@ -1,5 +1,9 @@
 # see 0.4.2
 
+## New functions
+
+ `golden_ratio()` was added as a helper to get nice proportions.
+ 
 ## Changes to functions
 
 * `plot.estimate_density()` now also works for density estimation of data frames.
