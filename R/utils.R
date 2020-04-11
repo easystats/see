@@ -149,3 +149,11 @@ magrittr::`%>%`
 .percents <- function(x) {
   insight::format_value(x = x, as_percent = TRUE, digits = 0)
 }
+
+
+
+#' @importFrom stats na.omit
+.n_unique <- function(x, na.rm = TRUE) {
+  if (isTRUE(na.rm)) x <- stats::na.omit(x)
+  length(unique(x))
+}
