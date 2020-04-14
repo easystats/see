@@ -182,8 +182,10 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
     return(x)
   }
 
-  params <- insight::get_parameters(model, effects = "fixed", component = "conditional")
-  x <- merge(x, params, sort = FALSE)
+  if (!"Estimate" %in% colnames(x)) {
+    params <- insight::get_parameters(model, effects = "fixed", component = "conditional")
+    x <- merge(x, params, sort = FALSE)
+  }
 
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
 
@@ -217,7 +219,7 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
     geom_hline(yintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
     geom_pointrange(size = point_size) +
     scale_colour_manual(values = fill.color) +
-    labs(x = x.title, y = NULL, fill = legend.title) +
+    labs(x = x.title, y = NULL, colour = legend.title) +
     theme(legend.position = "bottom") +
     coord_flip() +
     scale_x_discrete()
