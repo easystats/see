@@ -156,6 +156,93 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
 
 
+
+
+#' @export
+plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
+  model_name <- attr(x, "object_name", exact = TRUE)
+
+  if (is.null(model_name)) {
+    warning("plot() only works for equivalence_test() with model-objects.", call. = FALSE)
+    return(x)
+  }
+
+
+  # retrieve model
+  model <- tryCatch({
+    get(model_name, envir = parent.frame())
+  },
+  error = function(e) {
+    NULL
+  }
+  )
+
+  if (is.null(model)) {
+    warning(sprintf("Can't find object '%s'.", model_name))
+    return(x)
+  }
+
+  params <- insight::get_parameters(model, effects = "fixed", component = "conditional")
+  x <- merge(x, params, sort = FALSE)
+
+  x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
+
+  # if we have intercept-only models, keep at least the intercept
+  intercepts <- which(.in_intercepts(x$Parameter))
+  if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
+    x <- x[-intercepts, ]
+  }
+
+  .rope <- c(x$ROPE_low[1], x$ROPE_high[1])
+
+  # check for user defined arguments
+
+  fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
+
+  if (length(unique(x$CI)) > 1)
+    x.title <- "Confidence Interval"
+  else
+    x.title <- sprintf("%i%% Confidence Interval", round(100 * x$CI[1]))
+
+  legend.title <- "Decision on H0"
+
+  fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
+
+  add.args <- lapply(match.call(expand.dots = F)$`...`, function(x) x)
+  if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
+  if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
+  if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
+  if ("labels" %in% names(add.args)) labels <- eval(add.args[["labels"]])
+
+  rope.line.alpha <- 1.25 * rope_alpha
+  if (rope.line.alpha > 1) rope.line.alpha <- 1
+
+  p <- ggplot(x, aes_string(x = "Parameter", y = "Estimate", ymin = "CI_low", ymax = "CI_high", colour = "ROPE_Equivalence")) +
+    annotate("rect", ymin = .rope[1], ymax = .rope[2], xmin = 0, xmax = Inf, fill = rope_color, alpha = rope_alpha) +
+    geom_hline(yintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
+    geom_pointrange(size = point_size) +
+    scale_colour_manual(values = fill.color) +
+    labs(x = x.title, y = NULL, fill = legend.title) +
+    theme(legend.position = "bottom") +
+    coord_flip() +
+    scale_x_discrete()
+
+  if (length(unique(x$CI)) > 1) {
+    p <- p + facet_wrap(~CI, scales = "free", ncol = n_columns)
+  }
+
+  p
+}
+
+
+
+
+
+
+
+# helper ----------------------------
+
+
 #' @importFrom stats reshape
 #' @keywords internal
 .to_long <- function(x, names_to = "key", values_to = "value", columns = colnames(x)) {
