@@ -14,7 +14,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
   ordinal_model <- isTRUE(attributes(x)$ordinal_model)
 
   # brms has some special handling...
-  is_brms <- inherits(x, "parameters_brms")
+  is_brms <- inherits(x, c("parameters_stan", "parameters_brms"))
 
   # do we have a measure for meta analysis (to label axis)
   meta_measure <- attributes(x)$measure

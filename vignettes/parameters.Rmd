@@ -20,6 +20,7 @@ if (!requireNamespace("parameters", quietly = TRUE) ||
     !requireNamespace("effectsize", quietly = TRUE) ||
     !requireNamespace("insight", quietly = TRUE) ||
     !requireNamespace("glmmTMB", quietly = TRUE) ||
+    !requireNamespace("lme4", quietly = TRUE) ||
     !requireNamespace("lavaan", quietly = TRUE) ||
     !requireNamespace("metafor", quietly = TRUE) ||
     !requireNamespace("ggplot2", quietly = TRUE) ||
@@ -36,30 +37,40 @@ library(effectsize)
 library(insight)
 library(see)
 library(glmmTMB)
+library(lme4)
 library(lavaan)
 library(metafor)
 library(ggplot2)
 library(splines)
 data("Salamanders")
 data("iris")
+data("sleepstudy")
+
+set.seed(12345)
+sleepstudy$grp <- sample(1:5, size = 180, replace = TRUE)
 
 theme_set(theme_modern())
 ```
 
 ```{r}
-# fit two example model
+# fit three example model
 model <- glmmTMB(
   count ~ spp + mined + (1 | site),
   ziformula =  ~ mined,
   family = poisson(),
   data = Salamanders
 )
-
 model_parameters(model)
 
 
 model2 <- lm(Sepal.Length ~ Species * bs(Petal.Width, degree = 2), data = iris)
 model_parameters(model2)
+
+
+model3 <- lmer(
+  Reaction ~ Days + (1 | grp ) + (1 | Subject),
+  data = sleepstudy
+)
 ```
 
 ## Model Parameters
@@ -182,6 +193,28 @@ result
 plot(result)
 ```
 
+
+## Equivalence Testing
+
+_([related function documentation](https://easystats.github.io/parameters/reference/equivalence_test.lm.html))_
+
+### For fixed effects
+
+```{r}
+result <- equivalence_test(model3)
+result
+
+plot(result)
+```
+
+### For random effects
+
+```{r fig.height=8}
+result <- equivalence_test(model3, effects = "random")
+result
+
+plot(result)
+```
 
 ## Principal Component Analysis
 

@@ -159,7 +159,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
 
 #' @export
-plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {
+plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -188,6 +188,10 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
   }
 
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
+
+  if ("Group" %in% colnames(x)) {
+    x$Group <- factor(x$Group, levels = rev(unique(x$Group)))
+  }
 
   # if we have intercept-only models, keep at least the intercept
   intercepts <- which(.in_intercepts(x$Parameter))
@@ -223,6 +227,10 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
     theme(legend.position = "bottom") +
     coord_flip() +
     scale_x_discrete()
+
+  if ("Group" %in% colnames(x)) {
+    p <- p + facet_wrap(~Group, scales = "free", ncol = n_columns)
+  }
 
   p
 }
