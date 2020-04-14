@@ -7,6 +7,7 @@
 ## Changes to functions
 
 * `plot.estimate_density()` now also works for density estimation of data frames.
+* `plot.equivalence_test()` now also works for frequentist models (see `parameters::equivalence_test()`).
 * Added plot-function for `correlation::as.table()`.
 
 # see 0.4.1

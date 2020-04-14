@@ -159,7 +159,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
 
 #' @export
-plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
+plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -198,13 +198,8 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-
-  if (length(unique(x$CI)) > 1)
-    x.title <- "Confidence Interval"
-  else
-    x.title <- sprintf("%i%% Confidence Interval", round(100 * x$CI[1]))
-
   legend.title <- "Decision on H0"
+  x.title <- NULL
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
@@ -226,10 +221,6 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
     theme(legend.position = "bottom") +
     coord_flip() +
     scale_x_discrete()
-
-  if (length(unique(x$CI)) > 1) {
-    p <- p + facet_wrap(~CI, scales = "free", ncol = n_columns)
-  }
 
   p
 }
