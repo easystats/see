@@ -216,6 +216,16 @@ result
 plot(result)
 ```
 
+### From simulated model parameters
+
+```{r fig.height=8}
+simulated_parameters <- simulate_model(model, component = "conditional")
+result <- equivalence_test(simulated_parameters)
+result
+
+plot(result)
+```
+
 ## Principal Component Analysis
 
 _([related function documentation](https://easystats.github.io/parameters/reference/principal_components.html))_
