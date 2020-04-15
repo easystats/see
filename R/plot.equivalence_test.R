@@ -51,6 +51,8 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
     if (inherits(model, "emmGrid"))
       tmp <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(model, names = FALSE)))[, i$Parameter, drop = FALSE]
+    else if (inherits(x, "equivalence_test_simulate_model"))
+      tmp <- as.data.frame(attr(x, "data"), stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
     else
       tmp <- as.data.frame(model, stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
 
