@@ -54,13 +54,13 @@ theme_set(theme_modern())
 
 ```{r}
 # fit three example model
-model <- glmmTMB(
+model1 <- glmmTMB(
   count ~ spp + mined + (1 | site),
   ziformula =  ~ mined,
   family = poisson(),
   data = Salamanders
 )
-model_parameters(model)
+model_parameters(model1)
 
 
 model2 <- lm(Sepal.Length ~ Species * bs(Petal.Width, degree = 2), data = iris)
@@ -80,7 +80,7 @@ _([related function documentation](https://easystats.github.io/parameters/refere
 The `plot()`-method for `model_parameters()` creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.
 
 ```{r}
-result <- model_parameters(model)
+result <- model_parameters(model1)
 
 plot(result)
 ```
@@ -100,7 +100,7 @@ plot(result)
 As `simulate_parameters()` is based on `simulate_model()` and thus simulates many draws for each parameter, `plot()` will produce similar plots as the density estimation plots [from Bayesian models](https://easystats.github.io/see/articles/bayestestR.html).
 
 ```{r}
-result <- simulate_parameters(model)
+result <- simulate_parameters(model1)
 
 plot(result)
 ```
@@ -219,7 +219,7 @@ plot(result)
 ### From simulated model parameters
 
 ```{r fig.height=8}
-simulated_parameters <- simulate_model(model, component = "conditional")
+simulated_parameters <- simulate_model(model1, component = "conditional")
 result <- equivalence_test(simulated_parameters)
 result
 

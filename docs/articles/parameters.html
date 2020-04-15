@@ -136,13 +136,13 @@
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="../reference/theme_modern.html">theme_modern</a></span>())</pre></body></html></div>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># fit three example model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB</a></span>(
+<span class="no">model1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB</a></span>(
   <span class="no">count</span> ~ <span class="no">spp</span> + <span class="no">mined</span> + (<span class="fl">1</span> <span class="kw">|</span> <span class="no">site</span>),
   <span class="kw">ziformula</span> <span class="kw">=</span>  ~ <span class="no">mined</span>,
   <span class="kw">family</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span>(),
   <span class="kw">data</span> <span class="kw">=</span> <span class="no">Salamanders</span>
 )
-<span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">model</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">model1</span>)
 <span class="co">#&gt; # Fixed Effects component</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |     z |  df |      p</span>
@@ -189,7 +189,7 @@
 <a href="#model-parameters" class="anchor"></a>Model Parameters</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/model_parameters.html">related function documentation</a>)</em></p>
 <p>The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters()</a></code> creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">model</span>)
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">model1</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
@@ -204,7 +204,7 @@
 <a href="#simulated-model-parameters" class="anchor"></a>Simulated Model Parameters</h2>
 <p><code><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters()</a></code> computes simulated draws of parameters and their related indices such as Confidence Intervals (CI) and p-values. Simulating parameter draws can be seen as a (computationally faster) alternative to bootstrapping.</p>
 <p>As <code><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters()</a></code> is based on <code><a href="https://rdrr.io/pkg/parameters/man/simulate_model.html">simulate_model()</a></code> and thus simulates many draws for each parameter, <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> will produce similar plots as the density estimation plots <a href="https://easystats.github.io/see/articles/bayestestR.html">from Bayesian models</a>.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters</a></span>(<span class="no">model</span>)
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters</a></span>(<span class="no">model1</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
@@ -390,18 +390,23 @@
 <div id="from-simulated-model-parameters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#from-simulated-model-parameters" class="anchor"></a>From simulated model parameters</h3>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">simulated_parameters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/simulate_model.html">simulate_model</a></span>(<span class="no">model</span>, <span class="kw">component</span> <span class="kw">=</span> <span class="st">"conditional"</span>)
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">simulated_parameters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/simulate_model.html">simulate_model</a></span>(<span class="no">model1</span>, <span class="kw">component</span> <span class="kw">=</span> <span class="st">"conditional"</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/reexports.html">equivalence_test</a></span>(<span class="no">simulated_parameters</span>)
 <span class="no">result</span>
 <span class="co">#&gt; # Test for Practical Equivalence</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   ROPE: [-0.10 0.10]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter         |        H0 | inside ROPE |      95% HDI</span>
-<span class="co">#&gt; ----------------------------------------------------------</span>
-<span class="co">#&gt; (Intercept)       | Undecided |      5.57 % | [-1.58 0.31]</span>
-<span class="co">#&gt; diseaseCVD        | Undecided |     15.25 % | [-1.27 1.01]</span>
-<span class="co">#&gt; diseaseDepression | Undecided |     15.35 % | [-1.34 0.90]</span>
+<span class="co">#&gt; Parameter   |        H0 | inside ROPE |       95% HDI</span>
+<span class="co">#&gt; -----------------------------------------------------</span>
+<span class="co">#&gt; (Intercept) | Undecided |     12.41 % | [-0.86  0.23]</span>
+<span class="co">#&gt; sppPR       |  Rejected |      0.00 % | [-1.74 -0.84]</span>
+<span class="co">#&gt; sppDM       | Undecided |     10.94 % | [-0.01  0.51]</span>
+<span class="co">#&gt; sppEC-A     |  Rejected |      0.00 % | [-0.96 -0.19]</span>
+<span class="co">#&gt; sppEC-L     |  Rejected |      0.00 % | [ 0.41  0.91]</span>
+<span class="co">#&gt; sppDES-L    |  Rejected |      0.00 % | [ 0.39  0.86]</span>
+<span class="co">#&gt; sppDF       | Undecided |     38.70 % | [-0.16  0.38]</span>
+<span class="co">#&gt; minedno     |  Rejected |      0.00 % | [ 0.67  1.77]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
