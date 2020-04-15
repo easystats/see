@@ -387,12 +387,31 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 </div>
+<div id="from-simulated-model-parameters" class="section level3">
+<h3 class="hasAnchor">
+<a href="#from-simulated-model-parameters" class="anchor"></a>From simulated model parameters</h3>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">simulated_parameters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/simulate_model.html">simulate_model</a></span>(<span class="no">model</span>, <span class="kw">component</span> <span class="kw">=</span> <span class="st">"conditional"</span>)
+<span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/reexports.html">equivalence_test</a></span>(<span class="no">simulated_parameters</span>)
+<span class="no">result</span>
+<span class="co">#&gt; # Test for Practical Equivalence</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   ROPE: [-0.10 0.10]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter         |        H0 | inside ROPE |      95% HDI</span>
+<span class="co">#&gt; ----------------------------------------------------------</span>
+<span class="co">#&gt; (Intercept)       | Undecided |      5.57 % | [-1.58 0.31]</span>
+<span class="co">#&gt; diseaseCVD        | Undecided |     15.25 % | [-1.27 1.01]</span>
+<span class="co">#&gt; diseaseDepression | Undecided |     15.35 % | [-1.34 0.90]</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+</div>
 </div>
 <div id="principal-component-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#principal-component-analysis" class="anchor"></a>Principal Component Analysis</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/principal_components.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/principal_components.html">principal_components</a></span>(<span class="no">mtcars</span>[, <span class="fl">1</span>:<span class="fl">7</span>], <span class="kw">n</span> <span class="kw">=</span> <span class="st">"all"</span>, <span class="kw">threshold</span> <span class="kw">=</span> <span class="fl">0.2</span>)
 <span class="no">result</span>
 <span class="co">#&gt; # Loadings from Principal Component Analysis (no rotation)</span>
@@ -410,8 +429,8 @@
 <span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/principal_components.html">principal_components</a></span>(
+<p><img src="parameters_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/principal_components.html">principal_components</a></span>(
   <span class="no">mtcars</span>[, <span class="fl">1</span>:<span class="fl">7</span>],
   <span class="kw">n</span> <span class="kw">=</span> <span class="fl">3</span>,
   <span class="kw">rotation</span> <span class="kw">=</span> <span class="st">"varimax"</span>,
@@ -436,13 +455,13 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>, <span class="kw">text_color</span> <span class="kw">=</span> <span class="st">"white"</span>) +
   <span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span>()</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
 </div>
 <div id="cluster-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cluster-analysis" class="anchor"></a>Cluster Analysis</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">iris</span>)
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">iris</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/cluster_analysis.html">cluster_analysis</a></span>(<span class="no">iris</span>[, <span class="fl">1</span>:<span class="fl">4</span>], <span class="kw">n_clusters</span> <span class="kw">=</span> <span class="fl">3</span>)
 <span class="no">result</span>
 <span class="co">#&gt; # Cluster Analysis (mean z-score by cluster)</span>
@@ -463,17 +482,17 @@
 <span class="co">#&gt; Overall accuracy of classification: 97.33%</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<div class="sourceCode" id="cb20"><html><body><pre class="r">
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/cluster_analysis.html">cluster_analysis</a></span>(<span class="no">iris</span>[, <span class="fl">1</span>:<span class="fl">4</span>], <span class="kw">n_clusters</span> <span class="kw">=</span> <span class="fl">4</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-18-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-19-2.png" width="672"></p>
 </div>
 <div id="number-of-componentsfactors-to-retain" class="section level2">
 <h2 class="hasAnchor">
 <a href="#number-of-componentsfactors-to-retain" class="anchor"></a>Number of Components/Factors to Retain</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_factors.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/n_factors.html">n_factors</a></span>(<span class="no">mtcars</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"PCA"</span>)
 <span class="no">result</span>
 <span class="co">#&gt; # Method Agreement Procedure:</span>
@@ -481,15 +500,15 @@
 <span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-19-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-20-2.png" width="672"></p>
 </div>
 <div id="number-of-clusters-to-retain" class="section level2">
 <h2 class="hasAnchor">
 <a href="#number-of-clusters-to-retain" class="anchor"></a>Number of Clusters to Retain</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_clusters.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">iris</span>)
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">iris</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/n_clusters.html">n_clusters</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/effectsize/man/standardize.html">standardize</a></span>(<span class="no">iris</span>[, <span class="fl">1</span>:<span class="fl">4</span>]))
 <span class="no">result</span>
 <span class="co">#&gt; # Method Agreement Procedure:</span>
@@ -497,9 +516,9 @@
 <span class="co">#&gt; The choice of 2 clusters is supported by 12 (42.86%) methods out of 28 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, Tibs2001SEmax).</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-20-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-21-2.png" width="672"></p>
 </div>
   </div>
 
