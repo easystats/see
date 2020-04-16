@@ -182,7 +182,7 @@ data_plot <- function(x, data = NULL, ...){
 #' p
 #' p + add_plot_attributes(data)}
 #' @export
-add_plot_attributes <- function(x){
+add_plot_attributes <- function(x) {
   info <- attributes(x)$info
   out <- list(ylab(info$ylab), xlab(info$xlab))
 

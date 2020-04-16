@@ -1,5 +1,7 @@
 #' @export
 data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, ...) {
+  legend_fill <- attr(x, "coefficient_name")
+
   data <- as.data.frame(x)
   dataplot <- .reshape_to_long(data, names_to = "Parameter", values_to = "r", columns = 2:ncol(data))
 
@@ -24,6 +26,7 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, ...) {
   dataplot$labels <- sprintf("%.*f", digits, dataplot$r)
   dataplot$labels[dataplot$labels == "NA"] <- ""
 
+  attr(dataplot, "info") <- list("legend_fill" = legend_fill)
   class(dataplot) <- unique(c("data_plot", "see_easycormatrix", class(dataplot)))
   dataplot
 }
@@ -57,7 +60,8 @@ plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_
     ) +
     labs(x = NULL, y = NULL) +
     theme_modern() +
-    theme(axis.line = element_blank())
+    theme(axis.line = element_blank()) +
+    add_plot_attributes(x)
 
   if (show_values) {
     p <- p + geom_text(aes(label = .data$labels), size = text_size, colour = "black")
