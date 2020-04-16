@@ -154,15 +154,6 @@ data_plot <- function(x, data = NULL, ...){
 
 
 
-#' @method print data_plot
-#' @importFrom graphics plot
-#' @export
-print.data_plot <- function(x, ...){
-  print(as.data.frame(x))
-}
-
-
-
 #' Complete figure with its attributes
 #'
 #' The \link{data_plot} function usually stores information (such as title, axes labels etc.) as attributes. This function adds those information to the plot.

@@ -2,6 +2,7 @@
 #' @importFrom graphics plot
 #' @export
 print.see_binned_residuals <- function(x, ...) {
+  orig_x <- x
   x$se.lo <- -x$se
   if (length(unique(x$group)) > 1)
     ltitle <- "Within error bounds"
@@ -62,5 +63,5 @@ print.see_binned_residuals <- function(x, ...) {
   }
 
   suppressWarnings(graphics::plot(p))
-
+  invisible(orig_x)
 }

@@ -2,6 +2,7 @@
 #' @importFrom graphics plot
 #' @export
 print.see_check_model <- function(x, ...) {
+  orig_x <- x
   p <- list()
 
   panel <- attr(x, "panel")
@@ -39,6 +40,7 @@ print.see_check_model <- function(x, ...) {
   } else {
     lapply(p, graphics::plot)
   }
+  invisible(orig_x)
 }
 
 
