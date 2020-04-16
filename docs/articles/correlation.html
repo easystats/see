@@ -126,7 +126,7 @@
 <h2 class="hasAnchor">
 <a href="#correlation-matrix" class="anchor"></a>Correlation Matrix</h2>
 <p><em>(<a href="https://easystats.github.io/correlation/reference/correlation.html">related function documentation</a>)</em></p>
-<p>The default output for <code><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation()</a></code> is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> or <code><a href="https://rdrr.io/r/base/table.html">as.table()</a></code>.</p>
+<p>The default output for <code><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation()</a></code> is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation</a></span>(<span class="no">iris</span>)
 
 <span class="no">result</span>
@@ -139,26 +139,38 @@
 <span class="co">#&gt; Sepal.Width  |  Petal.Width | -0.37 | [-0.50, -0.22] | -4.79 | 148 | &lt; .001 | Pearson |   150</span>
 <span class="co">#&gt; Petal.Length |  Petal.Width |  0.96 | [ 0.95,  0.97] | 43.39 | 148 | &lt; .001 | Pearson |   150</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">as.table</a></span>(<span class="no">result</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">result</span>)
+<span class="co">#&gt; Parameter    | Petal.Width | Petal.Length | Sepal.Width</span>
+<span class="co">#&gt; -------------------------------------------------------</span>
+<span class="co">#&gt; Sepal.Length |     0.82*** |      0.87*** |       -0.12</span>
+<span class="co">#&gt; Sepal.Width  |    -0.37*** |     -0.43*** |            </span>
+<span class="co">#&gt; Petal.Length |     0.96*** |              |</span></pre></body></html></div>
+<p>The result from <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> can be used to create a plot.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">s</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">result</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">s</span>)</pre></body></html></div>
+<p><img src="correlation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<p>It is also possible to add correlation coefficients and p-values.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">s</span>, <span class="kw">show_values</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_p</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<p><img src="correlation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<p>And a “redundant” summary can be plotted as well:</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">s</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">result</span>, <span class="kw">redundant</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+
+<span class="no">s</span>
 <span class="co">#&gt; Parameter    | Sepal.Length | Sepal.Width | Petal.Length | Petal.Width</span>
 <span class="co">#&gt; ----------------------------------------------------------------------</span>
 <span class="co">#&gt; Sepal.Length |      1.00*** |       -0.12 |      0.87*** |     0.82***</span>
 <span class="co">#&gt; Sepal.Width  |        -0.12 |     1.00*** |     -0.43*** |    -0.37***</span>
 <span class="co">#&gt; Petal.Length |      0.87*** |    -0.43*** |      1.00*** |     0.96***</span>
-<span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |     1.00***</span></pre></body></html></div>
-<p>The result from <code><a href="https://rdrr.io/r/base/table.html">as.table()</a></code> can be used to create a plot.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">as.table</a></span>(<span class="no">result</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">m</span>)</pre></body></html></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<p>It is also possible to add correlation coefficients and p-values.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">m</span>, <span class="kw">show_values</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_p</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |     1.00***</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">s</span>)</pre></body></html></div>
+<p><img src="correlation_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 </div>
 <div id="gaussian-graphical-models-ggms" class="section level2">
 <h2 class="hasAnchor">
 <a href="#gaussian-graphical-models-ggms" class="anchor"></a>Gaussian Graphical Models (GGMs)</h2>
 <p>To create a Gaussian Graphical Models plot, the library <em>ggraph</em> needs to be loaded first.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggraph</span>)
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggraph</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation</a></span>(<span class="no">mtcars</span>, <span class="kw">partial</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 
 <span class="no">result</span>
@@ -221,7 +233,7 @@
 <span class="co">#&gt; gear       |       carb |  0.43 | [ 0.09,  0.68] |  2.59 | 30 | 0.727  | Pearson |    32</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
   </div>
 
