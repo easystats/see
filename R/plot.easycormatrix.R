@@ -1,32 +1,42 @@
 #' @export
 data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, ...) {
   legend_fill <- attr(x, "coefficient_name")
+  redundant <- attr(x, "redundant")
 
   data <- as.data.frame(x)
   dataplot <- .reshape_to_long(data, names_to = "Parameter", values_to = "r", columns = 2:ncol(data))
 
+  if (!redundant) {
+    dataplot$y <- rep(data$Parameter, times = nrow(data))
+    dataplot$y <- factor(dataplot$y, levels = rev(unique(dataplot$y)))
+    dataplot$x <- dataplot$Parameter <- factor(dataplot$Parameter, levels = unique(dataplot$Parameter))
+  } else {
+    unique_param <- unique(dataplot$Parameter)
+    n_param <- length(unique_param)
+    x_lab <- rep(1:n_param, length.out = nrow(dataplot))
+    y_lab <- rep(1:n_param, each = n_param)
+
+    dataplot$x <- unique_param[x_lab]
+    dataplot$y <- unique_param[y_lab]
+
+    dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(unique_param))
+    dataplot$x <- factor(dataplot$x, levels = unique_param)
+    dataplot$y <- factor(dataplot$y, levels = rev(unique_param))
+  }
+
   data <- as.data.frame(attr(x, "p", exact = TRUE))
-  dataplot_p <- .reshape_to_long(data, names_to = "Parameter", values_to = "p", columns = 2:ncol(data))
-
-  unique_param <- unique(dataplot$Parameter)
-  n_param <- length(unique_param)
-  x <- rep(1:n_param, length.out = nrow(dataplot))
-  y <- rep(1:n_param, each = n_param)
-
-  dataplot$x <- unique_param[x]
-  dataplot$y <- unique_param[y]
-
-  dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(unique_param))
-  dataplot$x <- factor(dataplot$x, levels = unique_param)
-  dataplot$y <- factor(dataplot$y, levels = rev(unique_param))
+  if (nrow(data) > 0) {
+    dataplot_p <- .reshape_to_long(data, names_to = "Parameter", values_to = "p", columns = 2:ncol(data))
+    dataplot$p <- dataplot_p$p
+  }
 
   dataplot$r[abs(dataplot$r) > .99999] <- NA
-  dataplot$p <- dataplot_p$p
 
   dataplot$labels <- sprintf("%.*f", digits, dataplot$r)
   dataplot$labels[dataplot$labels == "NA"] <- ""
 
   attr(dataplot, "info") <- list("legend_fill" = legend_fill)
+  attr(dataplot, "redundant") <- redundant
   class(dataplot) <- unique(c("data_plot", "see_easycormatrix", class(dataplot)))
   dataplot
 }
@@ -69,6 +79,10 @@ plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_
 
   if (!show_legend) {
     p <- p + guides(fill = "none")
+  }
+
+  if (!isTRUE(attributes(x)$redundant)) {
+    p <- p + scale_x_discrete(position = "top")
   }
 
   p
