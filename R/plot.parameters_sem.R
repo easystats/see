@@ -44,25 +44,21 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
   # Labels
   if (ci == TRUE) {
-    edges <- edges %>%
-      dplyr::mutate(Label = paste0(
-        sprintf("%.2f, ", .data$Coefficient),
-        attributes(x)$ci * 100,
-        "% CI [",
-        sprintf("%.2f, %.2f]", .data$CI_low, .data$CI_high)))
+    edges$Label = paste0(
+      sprintf("%.2f, ", .data$Coefficient),
+      attributes(x)$ci * 100,
+      "% CI [",
+      sprintf("%.2f, %.2f]", .data$CI_low, .data$CI_high))
   } else {
-    edges <- dplyr::mutate(edges, Label = sprintf("%.2f", .data$Coefficient))
+    edges$Label <- sprintf("%.2f", .data$Coefficient)
   }
 
 
 
   # Separate labels
-  edges <- edges %>%
-    dplyr::mutate(
-      Label_Regression = ifelse(.data$Type == 'Regression', .data$Label, ''),
-      Label_Correlation = ifelse(.data$Type == 'Correlation', .data$Label, ''),
-      Label_Loading = ifelse(.data$Type == 'Loading', .data$Label, '')
-    )
+  edges$Label_Regression <- ifelse(edges$Type == 'Regression', edges$Label, '')
+  edges$Label_Correlation <- ifelse(edges$Type == 'Correlation', edges$Label, '')
+  edges$Label_Loading <- ifelse(edges$Type == 'Loading', edges$Label, '')
   edges <- edges[colSums(!is.na(edges)) > 0]
 
   # Identify latent variables for nodes
