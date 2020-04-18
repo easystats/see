@@ -44,13 +44,13 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
   # Labels
   if (ci == TRUE) {
-    edges$Label = paste0(
-      sprintf("%.2f, ", .data$Coefficient),
+    edges$Label <- paste0(
+      sprintf("%.2f, ", edges$Coefficient),
       attributes(x)$ci * 100,
       "% CI [",
-      sprintf("%.2f, %.2f]", .data$CI_low, .data$CI_high))
+      sprintf("%.2f, %.2f]", edges$CI_low, edges$CI_high))
   } else {
-    edges$Label <- sprintf("%.2f", .data$Coefficient)
+    edges$Label <- sprintf("%.2f", edges$Coefficient)
   }
 
 
