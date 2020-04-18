@@ -119,7 +119,7 @@ plot(result, n_columns = 2, stack = FALSE)
 
 ## Model Parameters of SEM models
 
-```{r}
+```{r fig.width=9, fig.height=7}
 structure <- ' visual  =~ x1 + x2 + x3
                textual =~ x4 + x5 + x6
                speed   =~ x7 + x8 + x9 '
