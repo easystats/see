@@ -59,7 +59,7 @@ aov(mpg ~ factor(am) * factor(cyl), data = mtcars) %>%
 
 t_to_d(t = c(1,-1.3,-3,2.3), 
       df_error = c(40,35,40,85)) %>% 
-  equivalence_test(res1, range = 1) %>% 
+  equivalence_test(range = 1) %>% 
   plot()
 ```
 
