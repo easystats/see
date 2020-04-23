@@ -119,7 +119,8 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
 
   p <- ggplot(tmp, aes_string(x = "estimate", y = "predictor", fill = "grp")) +
-    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope_color, alpha = rope_alpha) +
+    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope_color, alpha = (rope_alpha / 3)) +
+    geom_vline(xintercept = .rope, linetype = "dashed", colour = rope_color, alpha = rope.line.alpha) +
     geom_vline(xintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
     ggridges::geom_density_ridges2(rel_min_height = 0.01, scale = 2, alpha = .5) +
     scale_fill_manual(values = fill.color) +
@@ -233,7 +234,8 @@ plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha =
 
 
   p <- ggplot(tmp, aes_string(x = "estimate", y = "predictor", fill = "grp")) +
-    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope_color, alpha = rope_alpha) +
+    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope_color, alpha = (rope_alpha / 3)) +
+    geom_vline(xintercept = .rope, linetype = "dashed", colour = rope_color, alpha = rope.line.alpha) +
     geom_vline(xintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
     ggridges::geom_density_ridges2(rel_min_height = 0.01, scale = 2, alpha = .5) +
     scale_fill_manual(values = fill.color) +
@@ -279,6 +281,12 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
     return(x)
   }
 
+  if (!is.null(attr(x, "narrow_ci"))) {
+    nci <- as.data.frame(t(attr(x, "narrow_ci")))
+    colnames(nci) <- c("narrow_low", "narrow_high")
+    x <- cbind(x, nci)
+  }
+
   if (!"Estimate" %in% colnames(x)) {
     params <- insight::get_parameters(model, effects = "fixed", component = "conditional")
     x <- merge(x, params, sort = FALSE)
@@ -316,8 +324,18 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
   if (rope.line.alpha > 1) rope.line.alpha <- 1
 
   p <- ggplot(x, aes_string(x = "Parameter", y = "Estimate", ymin = "CI_low", ymax = "CI_high", colour = "ROPE_Equivalence")) +
-    annotate("rect", ymin = .rope[1], ymax = .rope[2], xmin = 0, xmax = Inf, fill = rope_color, alpha = rope_alpha) +
-    geom_hline(yintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
+    annotate("rect", ymin = .rope[1], ymax = .rope[2], xmin = 0, xmax = Inf, fill = rope_color, alpha = (rope_alpha / 3)) +
+    geom_hline(yintercept = .rope, linetype = "dashed", colour = rope_color, size = .8, alpha = rope.line.alpha) +
+    geom_hline(yintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha)
+
+  ## TODO plot narrow CIs?
+
+  # if ("narrow_low" %in% colnames(x)) {
+  #   p <- p +
+  #     geom_errorbar(data = x, mapping = aes_string(ymin = "narrow_low", ymax = "narrow_high"), size = point_size, width = .1, color = "#FFC107")
+  # }
+
+  p <- p +
     geom_pointrange(size = point_size) +
     scale_colour_manual(values = fill.color) +
     labs(x = x.title, y = NULL, colour = legend.title) +
