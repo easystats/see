@@ -53,8 +53,8 @@ plot.see_equivalence_test_effectsize <- function(x) {
     geom_point(aes(x = .data$.es), size = 2) +
     geom_vline(xintercept = 0) +
     geom_vline(xintercept = unique(attr(x, "rope")), linetype = "dashed") +
-    scale_color_manual(values = c(Accepted = "#CD423F",
-                                  Rejected = "#018F77",
+    scale_color_manual(values = c(Accepted = "#018F77",
+                                  Rejected = "#CD423F",
                                   Undecided = "#FCDA3B")) +
     labs(x = es_lab, color = "H0",
          title = title,
