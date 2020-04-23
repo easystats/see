@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
+    !requireNamespace("dpylr", quietly = TRUE) ||
     !requireNamespace("effectsize", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -25,6 +26,7 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 ## Setup
 
 ```{r setup}
+library(dplyr)
 library(effectsize)
 library(see)
 data(mtcars)
