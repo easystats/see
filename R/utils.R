@@ -103,7 +103,7 @@ magrittr::`%>%`
     if (any(rand_cor)) {
       params[which(cor_sd)[rand_cor]] <- paste0(parm1[rand_cor], " ~ ", parm2[rand_cor])
     }
-    params[cor_sd] <- paste("SD/Cor: ", params[cor_sd])
+    params[cor_sd] <- paste("SD: ", params[cor_sd])
   }
 
 
