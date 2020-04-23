@@ -1,0 +1,64 @@
+---
+title: "Plotting Functions for the effectsize Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{correlation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, 
+  fig.height = 5,
+  warning = FALSE,
+  message = FALSE
+)
+if (!requireNamespace("ggplot2", quietly = TRUE) ||
+    !requireNamespace("ggraph", quietly = TRUE) ||
+    !requireNamespace("effectsize", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+## Setup
+
+```{r setup}
+library(effectsize)
+library(see)
+data(mtcars)
+data(iris)
+```
+
+## Effect size tables
+
+```{r}
+aov(mpg ~ factor(am) * factor(cyl), data = mtcars) %>% 
+  eta_squared() %>% 
+  plot()
+
+
+t_to_d(t = c(1,-1.3,-3,2.3), 
+      df_error = c(40,35,40,85)) %>% 
+  plot()
+```
+
+
+
+## Equivalence tests
+
+```{r}
+aov(mpg ~ factor(am) * factor(cyl), data = mtcars) %>% 
+  eta_squared() %>% 
+  equivalence_test(range = 0.3) %>% 
+  plot()
+
+
+t_to_d(t = c(1,-1.3,-3,2.3), 
+      df_error = c(40,35,40,85)) %>% 
+  equivalence_test(res1, range = 1) %>% 
+  plot()
+```
+

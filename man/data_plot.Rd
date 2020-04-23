@@ -3,7 +3,7 @@
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.cluster_analysis.R, R/plot.compare_performance.R,
-%   R/plot.easycormatrix.R, R/plot.easycorrelation.R,
+%   R/plot.easycormatrix.R, R/plot.easycorrelation.R, R/plot.effectsize_table.R,
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
 %   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
 %   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
@@ -20,6 +20,8 @@
 \alias{plot.see_compare_performance}
 \alias{plot.see_easycormatrix}
 \alias{plot.see_easycorrelation}
+\alias{plot.see_effectsize_table}
+\alias{plot.see_equivalence_test_effectsize}
 \alias{plot.see_equivalence_test}
 \alias{plot.see_estimate_density}
 \alias{plot.see_hdi}
@@ -77,6 +79,10 @@ data_plot(x, data = NULL, ...)
 )
 
 \method{plot}{see_easycorrelation}(x, size = 22, text_color = "white", node_color = "#647687", ...)
+
+\method{plot}{see_effectsize_table}(x)
+
+\method{plot}{see_equivalence_test_effectsize}(x)
 
 \method{plot}{see_equivalence_test}(
   x,

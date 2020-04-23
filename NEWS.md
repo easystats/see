@@ -2,7 +2,8 @@
 
 ## New functions
 
- `golden_ratio()` was added as a helper to get nice proportions.
+- `golden_ratio()` was added as a helper to get nice proportions.
+- New plotting functions for the `effectsize` package.
  
 ## Changes to functions
 
