@@ -23,11 +23,25 @@ plot.see_effectsize_table <- function(x) {
 }
 
 #' @rdname data_plot
+#' @importFrom effectsize is_effectsize_name
 #' @export
 plot.see_equivalence_test_effectsize <- function(x) {
   if (!"Parameter" %in% colnames(x)) {
     x$Parameter <- factor(seq_len(nrow(x)))
   }
+
+  if (attr(x, "rule", exact = TRUE) == "cet") {
+    title <- "Conditional Test for Practical Equivalence"
+  } else {
+    title <- "Test for Practical Equivalence"
+  }
+
+  if (attr(x, "rule", exact = TRUE) == "bayes") {
+    subtitle <- "(Using Bayesian guidlines)"
+  } else {
+    subtitle <- ""
+  }
+
   es_name <- colnames(x)[effectsize::is_effectsize_name(colnames(x))]
   es_lab <- gsub("_", " ", es_name)
   es_lab <- gsub("partial", "(partial)", es_lab)
@@ -42,6 +56,8 @@ plot.see_equivalence_test_effectsize <- function(x) {
     scale_color_manual(values = c(Accepted = "blue",
                                   Rejected = "green",
                                   Undecided = "orange")) +
-    labs(x = es_lab, color = "H0") +
+    labs(x = es_lab, color = "H0",
+         title = title,
+         subtitle = subtitle) +
     theme_modern()
 }
