@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
-    !requireNamespace("dpylr", quietly = TRUE) ||
+    !requireNamespace("dplyr", quietly = TRUE) ||
     !requireNamespace("effectsize", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
