@@ -8,6 +8,7 @@
 ## New plot functions
 
 * Added plot-function for `correlation::summary()`.
+* Added plot-function for `parameters::describe_distribution()`.
 * Added plot-function for `effectsize::equivalence_test()`.
 * Added plot-function for various effectsize-functions, like `effectsize::eta_squared()`.
 

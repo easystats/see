@@ -568,6 +568,32 @@
 <div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-24-2.png" width="672"></p>
 </div>
+<div id="description-of-variable-distributions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#description-of-variable-distributions" class="anchor"></a>Description of Variable Distributions</h2>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/describe_distribution.html">related function documentation</a>)</em></p>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">qol_cancer</span>)
+<span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">describe_distribution</a></span>(<span class="no">qol_cancer</span>$<span class="no">age</span>)
+<span class="no">result</span>
+<span class="co">#&gt; Mean |   SD |   SE |          Range | Skewness | Kurtosis |   n | n_Missing</span>
+<span class="co">#&gt; ---------------------------------------------------------------------------</span>
+<span class="co">#&gt; 0.22 | 4.84 | 0.20 | [-15.60, 7.40] |    -0.73 |     0.23 | 564 |         0</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+<div id="add-range-of-dispersion-sd-or-mad" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-range-of-dispersion-sd-or-mad" class="anchor"></a>Add Range of Dispersion (SD or MAD)</h3>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-26-1.png" width="672"></p>
+</div>
+<div id="use-a-normal-curve-instead-of-ribbon" class="section level3">
+<h3 class="hasAnchor">
+<a href="#use-a-normal-curve-instead-of-ribbon" class="anchor"></a>Use a Normal Curve instead of Ribbon</h3>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">dispersion_style</span> <span class="kw">=</span> <span class="st">"curve"</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

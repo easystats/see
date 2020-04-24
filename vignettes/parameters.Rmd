@@ -322,3 +322,26 @@ plot(result)
 plot(result, type = "line")
 ```
 
+## Description of Variable Distributions
+
+_([related function documentation](https://easystats.github.io/parameters/reference/describe_distribution.html))_
+
+```{r}
+data(qol_cancer)
+result <- describe_distribution(qol_cancer$age)
+result
+
+plot(result)
+```
+
+### Add Range of Dispersion (SD or MAD)
+
+```{r}
+plot(result, dispersion = TRUE)
+```
+
+### Use a Normal Curve instead of Ribbon
+
+```{r}
+plot(result, dispersion = TRUE, dispersion_style = "curve")
+```
