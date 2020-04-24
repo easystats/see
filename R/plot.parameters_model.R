@@ -53,7 +53,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
 
   mc <- attributes(x)$model_class
   cp <- attributes(x)$cleaned_parameters
-  is_meta <- !is.null(mc) && mc %in% c("rma", "rma.uni")
+  is_meta <- !is.null(mc) && mc %in% c("rma", "rma.mv", "rma.uni")
 
   # minor fixes for Bayesian models
   if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
