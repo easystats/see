@@ -155,10 +155,27 @@ result <- model_parameters(brms_model, effects = "all", component = "all")
 plot(result)
 ```
 
+### Including group levels of random effects
+
+```{r}
+result <- model_parameters(brms_model, effects = "all", 
+                           component = "all", group_level = TRUE)
+plot(result)
+```
+
+
+### One-column Layout
+
 ```{r fig.width=6, fig.height=8}
 plot(result, n_column = 1)
 ```
 
+
+### Including Intercepts and Variance Estimates for Random Intercepts
+
+```{r fig.width=6, fig.height=8}
+plot(result, show_intercept = TRUE)
+```
 
 ## Model Parameters of Meta-Analysis models
 
