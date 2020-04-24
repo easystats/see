@@ -1,10 +1,9 @@
-# see 0.4.2
+# see 0.5.0
 
 ## New functions
 
-- `golden_ratio()` was added as a helper to get nice proportions.
-- New plotting functions for the `effectsize` package.
- 
+* `golden_ratio()` was added as a helper to get nice proportions.
+
 ## New plot functions
 
 * Added plot-function for `correlation::summary()`.
