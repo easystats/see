@@ -45,6 +45,7 @@ library(splines)
 data("Salamanders")
 data("iris")
 data("sleepstudy")
+data("qol_cancer")
 
 set.seed(12345)
 sleepstudy$grp <- sample(1:5, size = 180, replace = TRUE)
@@ -71,6 +72,8 @@ model3 <- lmer(
   Reaction ~ Days + (1 | grp ) + (1 | Subject),
   data = sleepstudy
 )
+
+model4 <- lm(QoL ~ time + age + education, data = qol_cancer)
 ```
 
 ## Model Parameters
@@ -201,7 +204,15 @@ _([related function documentation](https://easystats.github.io/parameters/refere
 ### For fixed effects
 
 ```{r}
-result <- equivalence_test(model3)
+# default rules, like in bayestestR::equivalence_test()
+result <- equivalence_test(model4)
+result
+
+plot(result)
+```
+
+```{r}
+result <- equivalence_test(model4, rule = "cet")
 result
 
 plot(result)

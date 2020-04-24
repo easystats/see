@@ -330,13 +330,16 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
 
   ## TODO plot narrow CIs?
 
-  # if ("narrow_low" %in% colnames(x)) {
-  #   p <- p +
-  #     geom_errorbar(data = x, mapping = aes_string(ymin = "narrow_low", ymax = "narrow_high"), size = point_size, width = .1, color = "#FFC107")
-  # }
+  if ("narrow_low" %in% colnames(x)) {
+    p <- p +
+      geom_pointrange(size = point_size, alpha = .8, color = "#3498db") +
+      geom_pointrange(data = x, mapping = aes_string(ymin = "narrow_low", ymax = "narrow_high"), size = point_size)
+  } else {
+    p <- p +
+      geom_pointrange(size = point_size)
+  }
 
   p <- p +
-    geom_pointrange(size = point_size) +
     scale_colour_manual(values = fill.color) +
     labs(x = x.title, y = NULL, colour = legend.title) +
     theme(legend.position = "bottom") +
