@@ -1,6 +1,6 @@
 #' @rdname data_plot
 #' @export
-plot.see_effectsize_table <- function(x) {
+plot.see_effectsize_table <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
     x$Parameter <- factor(seq_len(nrow(x)))
   }
@@ -23,7 +23,7 @@ plot.see_effectsize_table <- function(x) {
 
 #' @rdname data_plot
 #' @export
-plot.see_equivalence_test_effectsize <- function(x) {
+plot.see_equivalence_test_effectsize <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
     x$Parameter <- factor(seq_len(nrow(x)))
   }

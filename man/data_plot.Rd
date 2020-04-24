@@ -80,9 +80,9 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_easycorrelation}(x, size = 22, text_color = "white", node_color = "#647687", ...)
 
-\method{plot}{see_effectsize_table}(x)
+\method{plot}{see_effectsize_table}(x, ...)
 
-\method{plot}{see_equivalence_test_effectsize}(x)
+\method{plot}{see_equivalence_test_effectsize}(x, ...)
 
 \method{plot}{see_equivalence_test}(
   x,
