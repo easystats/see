@@ -183,3 +183,9 @@ vignette](https://easystats.github.io/see/articles/modelbased.html).
 Plotting functions for the **correlation** package are demonstrated [in
 this
 vignette](https://easystats.github.io/see/articles/correlation.html).
+
+### [effectsize](https://github.com/easystats/effectsize)
+
+Plotting functions for the **effectsize** package are demonstrated [in
+this
+vignette](https://easystats.github.io/see/articles/effectsize.html).

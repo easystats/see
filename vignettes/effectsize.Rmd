@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
+    !requireNamespace("dplyr", quietly = TRUE) ||
     !requireNamespace("effectsize", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -25,6 +26,7 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 ## Setup
 
 ```{r setup}
+library(dplyr)
 library(effectsize)
 library(see)
 data(mtcars)
@@ -33,20 +35,21 @@ data(iris)
 
 ## Effect size tables
 
+_([related function documentation](https://easystats.github.io/effectsize/reference/eta_squared.html))_
+
 ```{r}
 aov(mpg ~ factor(am) * factor(cyl), data = mtcars) %>% 
   eta_squared() %>% 
   plot()
 
 
-t_to_d(t = c(1,-1.3,-3,2.3), 
-      df_error = c(40,35,40,85)) %>% 
+t_to_d(t = c(1,-1.3,-3,2.3), df_error = c(40,35,40,85)) %>% 
   plot()
 ```
 
-
-
 ## Equivalence tests
+
+_([related function documentation](https://easystats.github.io/effectsize/reference/equivalence_test.effectsize_table.html))_
 
 ```{r}
 aov(mpg ~ factor(am) * factor(cyl), data = mtcars) %>% 
@@ -55,9 +58,8 @@ aov(mpg ~ factor(am) * factor(cyl), data = mtcars) %>%
   plot()
 
 
-t_to_d(t = c(1,-1.3,-3,2.3), 
-      df_error = c(40,35,40,85)) %>% 
-  equivalence_test(res1, range = 1) %>% 
+t_to_d(t = c(1,-1.3,-3,2.3), df_error = c(40,35,40,85)) %>% 
+  equivalence_test(range = 1) %>% 
   plot()
 ```
 

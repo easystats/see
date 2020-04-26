@@ -1,15 +1,21 @@
-# see 0.4.2
+# see 0.5.0
 
 ## New functions
 
-- `golden_ratio()` was added as a helper to get nice proportions.
-- New plotting functions for the `effectsize` package.
- 
+* `golden_ratio()` was added as a helper to get nice proportions.
+
+## New plot functions
+
+* Added plot-function for `correlation::summary()`.
+* Added plot-function for `parameters::describe_distribution()`.
+* Added plot-function for `effectsize::equivalence_test()`.
+* Added plot-function for various effectsize-functions, like `effectsize::eta_squared()`.
+
 ## Changes to functions
 
 * `plot.estimate_density()` now also works for density estimation of data frames.
 * `plot.equivalence_test()` now also works for frequentist models and data frames (see `parameters::equivalence_test()`).
-* Added plot-function for `correlation::summary()`.
+* Slightly changed plotting-style for `plot.equivalence_test()`.
 
 # see 0.4.1
 

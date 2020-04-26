@@ -72,44 +72,8 @@
 #' \cr \cr
 #' Most \code{plot()}-functions work out-of-the-box, i.e. you don't need to do
 #' much more than calling \code{plot(<object>)} (see 'Examples'). Some plot-functions
-#' allow to specify arguments to modify the transparancy or color of geoms, these
+#' allow to specify arguments to modify the transparency or color of geoms, these
 #' are shown in the 'Usage' section.
-#' \cr \cr
-#' Plot-functions are available for objects from following functions (note that
-#' functions from packages might be listed here that are currently still in
-#' development and probably not yet available):
-#' \itemize{
-#'   \item \code{bayestestR::bayesfactor_models()}
-#'   \item \code{bayestestR::bayesfactor_parameters()}
-#'   \item \code{bayestestR::ci()}
-#'   \item \code{bayestestR::equivalence_test()}
-#'   \item \code{bayestestR::estimate_density()}
-#'   \item \code{bayestestR::eti()}
-#'   \item \code{bayestestR::hdi()}
-#'   \item \code{bayestestR::map_estimate()}
-#'   \item \code{bayestestR::p_direction()}
-#'   \item \code{bayestestR::p_significance()}
-#'   \item \code{bayestestR::point_estimate()}
-#'   \item \code{bayestestR::rope()}
-#'   \item \code{bayestestR::si()}
-#'   \item \code{correlation::correlation()}
-#'   \item \code{modelbased::estimate_contrasts()}
-#'   \item \code{parameters::cluster_analysis()}
-#'   \item \code{parameters::model_parameters()}
-#'   \item \code{parameters::n_factors()}
-#'   \item \code{parameters::simulate_parameters()}
-#'   \item \code{parameters::principal_components()}
-#'   \item \code{performance::binned_residuals()}
-#'   \item \code{performance::check_collinearity()}
-#'   \item \code{performance::check_distribution()}
-#'   \item \code{performance::check_heteroscedasticity()}
-#'   \item \code{performance::check_homogeneity()}
-#'   \item \code{performance::check_model()}
-#'   \item \code{performance::check_normality()}
-#'   \item \code{performance::check_outliers()}
-#'   \item \code{performance::compare_performance()}
-#'   \item \code{performance::performance_roc()}
-#' }
 #'
 #' @seealso \href{https://easystats.github.io/see/articles/}{Package-Vignettes}
 #'

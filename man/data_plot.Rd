@@ -3,7 +3,8 @@
 %   R/plot.bayesfactor_parameters.R, R/plot.check_distribution.R,
 %   R/plot.check_normality.R, R/plot.check_outliers.R,
 %   R/plot.cluster_analysis.R, R/plot.compare_performance.R,
-%   R/plot.easycormatrix.R, R/plot.easycorrelation.R, R/plot.effectsize_table.R,
+%   R/plot.describe_distribution.R, R/plot.easycormatrix.R,
+%   R/plot.easycorrelation.R, R/plot.effectsize_table.R,
 %   R/plot.equivalence_test.R, R/plot.estimate_density.R, R/plot.hdi.R,
 %   R/plot.n_factors.R, R/plot.p_direction.R, R/plot.p_significance.R,
 %   R/plot.parameters_model.R, R/plot.parameters_pca.R, R/plot.parameters_sem.R,
@@ -18,6 +19,7 @@
 \alias{plot.see_check_outliers}
 \alias{plot.see_cluster_analysis}
 \alias{plot.see_compare_performance}
+\alias{plot.see_parameters_distribution}
 \alias{plot.see_easycormatrix}
 \alias{plot.see_easycorrelation}
 \alias{plot.see_effectsize_table}
@@ -68,6 +70,15 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_compare_performance}(x, size = 1, ...)
 
+\method{plot}{see_parameters_distribution}(
+  x,
+  dispersion = FALSE,
+  dispersion_alpha = 0.3,
+  dispersion_color = "#3498db",
+  dispersion_style = c("ribbon", "curve"),
+  ...
+)
+
 \method{plot}{see_easycormatrix}(
   x,
   show_values = FALSE,
@@ -80,9 +91,9 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_easycorrelation}(x, size = 22, text_color = "white", node_color = "#647687", ...)
 
-\method{plot}{see_effectsize_table}(x)
+\method{plot}{see_effectsize_table}(x, ...)
 
-\method{plot}{see_equivalence_test_effectsize}(x)
+\method{plot}{see_equivalence_test_effectsize}(x, ...)
 
 \method{plot}{see_equivalence_test}(
   x,
@@ -259,6 +270,14 @@ or \code{\link[parameters]{n_factors}}).}
 \item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
 so this argument may change size of points, lines or bars.}
 
+\item{dispersion}{Logical, if \code{TRUE}, will add range of dispersion for each variable to the plot.}
+
+\item{dispersion_alpha}{Transparency level of dispersion ribbon.}
+
+\item{dispersion_color}{Color of dispersion ribbon.}
+
+\item{dispersion_style}{Character, style of dispersion area. \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.}
+
 \item{show_values}{Logical, if \code{TRUE}, values are displayed.}
 
 \item{show_p}{Logical, if \code{TRUE}, p-values or significant level is displayed.}
@@ -312,44 +331,8 @@ such cases, \code{plot()} gives an error and asks for providing data or models.
 \cr \cr
 Most \code{plot()}-functions work out-of-the-box, i.e. you don't need to do
 much more than calling \code{plot(<object>)} (see 'Examples'). Some plot-functions
-allow to specify arguments to modify the transparancy or color of geoms, these
+allow to specify arguments to modify the transparency or color of geoms, these
 are shown in the 'Usage' section.
-\cr \cr
-Plot-functions are available for objects from following functions (note that
-functions from packages might be listed here that are currently still in
-development and probably not yet available):
-\itemize{
-  \item \code{bayestestR::bayesfactor_models()}
-  \item \code{bayestestR::bayesfactor_parameters()}
-  \item \code{bayestestR::ci()}
-  \item \code{bayestestR::equivalence_test()}
-  \item \code{bayestestR::estimate_density()}
-  \item \code{bayestestR::eti()}
-  \item \code{bayestestR::hdi()}
-  \item \code{bayestestR::map_estimate()}
-  \item \code{bayestestR::p_direction()}
-  \item \code{bayestestR::p_significance()}
-  \item \code{bayestestR::point_estimate()}
-  \item \code{bayestestR::rope()}
-  \item \code{bayestestR::si()}
-  \item \code{correlation::correlation()}
-  \item \code{modelbased::estimate_contrasts()}
-  \item \code{parameters::cluster_analysis()}
-  \item \code{parameters::model_parameters()}
-  \item \code{parameters::n_factors()}
-  \item \code{parameters::simulate_parameters()}
-  \item \code{parameters::principal_components()}
-  \item \code{performance::binned_residuals()}
-  \item \code{performance::check_collinearity()}
-  \item \code{performance::check_distribution()}
-  \item \code{performance::check_heteroscedasticity()}
-  \item \code{performance::check_homogeneity()}
-  \item \code{performance::check_model()}
-  \item \code{performance::check_normality()}
-  \item \code{performance::check_outliers()}
-  \item \code{performance::compare_performance()}
-  \item \code{performance::performance_roc()}
-}
 }
 \examples{
 \dontrun{

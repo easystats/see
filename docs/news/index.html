@@ -108,6 +108,9 @@
       <a href="../articles/correlation.html">Plotting Functions for the correlation Package</a>
     </li>
     <li>
+      <a href="../articles/effectsize.html">Plotting Functions for the effectsize Package</a>
+    </li>
+    <li>
       <a href="../articles/modelbased.html">Plotting Functions for the modelbased Package</a>
     </li>
     <li>
@@ -156,7 +159,21 @@
 <div id="new-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h2>
-<p><code><a href="../reference/golden_ratio.html">golden_ratio()</a></code> was added as a helper to get nice proportions.</p>
+<ul>
+<li>
+<code><a href="../reference/golden_ratio.html">golden_ratio()</a></code> was added as a helper to get nice proportions.</li>
+<li>New plotting functions for the <code>effectsize</code> package.</li>
+</ul>
+</div>
+<div id="new-plot-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-plot-functions" class="anchor"></a>New plot functions</h2>
+<ul>
+<li>Added plot-function for <code>correlation::summary()</code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">parameters::describe_distribution()</a></code>.</li>
+<li>Added plot-function for <code><a href="https://rdrr.io/pkg/effectsize/man/reexports.html">effectsize::equivalence_test()</a></code>.</li>
+<li>Added plot-function for various effectsize-functions, like <code><a href="https://rdrr.io/pkg/effectsize/man/eta_squared.html">effectsize::eta_squared()</a></code>.</li>
+</ul>
 </div>
 <div id="changes-to-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -166,7 +183,7 @@
 <code>plot.estimate_density()</code> now also works for density estimation of data frames.</li>
 <li>
 <code>plot.equivalence_test()</code> now also works for frequentist models and data frames (see <code><a href="https://rdrr.io/pkg/parameters/man/reexports.html">parameters::equivalence_test()</a></code>).</li>
-<li>Added plot-function for <code>correlation::summary()</code>.</li>
+<li>Slightly changed plotting-style for <code>plot.equivalence_test()</code>.</li>
 </ul>
 </div>
 </div>
@@ -181,9 +198,9 @@
 <li>Reduce package dependencies.</li>
 </ul>
 </div>
-<div id="new-plot-functions" class="section level2">
+<div id="new-plot-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-1" class="anchor"></a>New plot-functions</h2>
 <ul>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation::correlation()</a></code>.</li>
 </ul>
@@ -211,9 +228,9 @@
 <li>Arguments <code>ncol</code> and <code>nrow</code> in <code><a href="../reference/plots.html">plots()</a></code> were renamed into <code>n_columns</code> and <code>n_rows</code> to be consistent with arguments from other functions in the <strong>see</strong>-package.</li>
 </ul>
 </div>
-<div id="new-plot-functions-1" class="section level2">
+<div id="new-plot-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-1" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-2" class="anchor"></a>New plot-functions</h2>
 <ul>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/compare_performance.html">performance::compare_performance()</a></code>.</li>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/si.html">bayestestR::si()</a></code>.</li>
@@ -258,9 +275,9 @@
 <li>Labels and plot annotations are now more “human readable”, and labelling is more context sensitive.</li>
 </ul>
 </div>
-<div id="new-plot-functions-2" class="section level2">
+<div id="new-plot-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-2" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-3" class="anchor"></a>New plot-functions</h2>
 <ul>
 <li>Added <code>coord_radar</code> for radar charts.</li>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/cluster_analysis.html">parameters::cluster_analysis()</a></code>.</li>
@@ -301,9 +318,9 @@
 <li>Added new color-palettes.</li>
 </ul>
 </div>
-<div id="new-plot-functions-3" class="section level2">
+<div id="new-plot-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-3" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-4" class="anchor"></a>New plot-functions</h2>
 <ul>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">parameters::model_parameters()</a></code>.</li>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/point_estimate.html">bayestestR::point_estimate()</a></code>.</li>
@@ -348,9 +365,9 @@
 <code><a href="../reference/theme_lucid.html">theme_lucid()</a></code>, a light and clear theme.</li>
 </ul>
 </div>
-<div id="new-plot-functions-4" class="section level2">
+<div id="new-plot-functions-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-4" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-5" class="anchor"></a>New plot-functions</h2>
 <ul>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_model.html">performance::check_model()</a></code>.</li>
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/performance/man/check_normality.html">performance::check_normality()</a></code>.</li>

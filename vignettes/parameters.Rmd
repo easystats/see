@@ -45,6 +45,7 @@ library(splines)
 data("Salamanders")
 data("iris")
 data("sleepstudy")
+data("qol_cancer")
 
 set.seed(12345)
 sleepstudy$grp <- sample(1:5, size = 180, replace = TRUE)
@@ -71,6 +72,8 @@ model3 <- lmer(
   Reaction ~ Days + (1 | grp ) + (1 | Subject),
   data = sleepstudy
 )
+
+model4 <- lm(QoL ~ time + age + education, data = qol_cancer)
 ```
 
 ## Model Parameters
@@ -152,10 +155,27 @@ result <- model_parameters(brms_model, effects = "all", component = "all")
 plot(result)
 ```
 
+### Including group levels of random effects
+
+```{r}
+result <- model_parameters(brms_model, effects = "all", 
+                           component = "all", group_level = TRUE)
+plot(result)
+```
+
+
+### One-column Layout
+
 ```{r fig.width=6, fig.height=8}
 plot(result, n_column = 1)
 ```
 
+
+### Including Intercepts and Variance Estimates for Random Intercepts
+
+```{r fig.width=6, fig.height=8}
+plot(result, show_intercept = TRUE)
+```
 
 ## Model Parameters of Meta-Analysis models
 
@@ -201,7 +221,15 @@ _([related function documentation](https://easystats.github.io/parameters/refere
 ### For fixed effects
 
 ```{r}
-result <- equivalence_test(model3)
+# default rules, like in bayestestR::equivalence_test()
+result <- equivalence_test(model4)
+result
+
+plot(result)
+```
+
+```{r}
+result <- equivalence_test(model4, rule = "cet")
 result
 
 plot(result)
@@ -294,3 +322,26 @@ plot(result)
 plot(result, type = "line")
 ```
 
+## Description of Variable Distributions
+
+_([related function documentation](https://easystats.github.io/parameters/reference/describe_distribution.html))_
+
+```{r}
+data(qol_cancer)
+result <- describe_distribution(qol_cancer$age)
+result
+
+plot(result)
+```
+
+### Add Range of Dispersion (SD or MAD)
+
+```{r}
+plot(result, dispersion = TRUE)
+```
+
+### Use a Normal Curve instead of Ribbon
+
+```{r}
+plot(result, dispersion = TRUE, dispersion_style = "curve")
+```
