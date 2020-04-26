@@ -11,9 +11,15 @@ plot.see_effectsize_table <- function(x) {
 
   x$.es <- x[, es_name]
 
+  if (all(c("CI_low","CI_high") %in% colnames(x))) {
+    CIs <- geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0.1)
+  } else {
+    NULL
+  }
+
 
   ggplot(x, aes(y = .data$Parameter, color = .data$.es > 0)) +
-    geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0.1) +
+    CIs +
     geom_point(aes(x = .data$.es), size = 2) +
     geom_vline(xintercept = 0) +
     scale_color_manual(values = c("FALSE" = "green", "TRUE" = "blue"),
