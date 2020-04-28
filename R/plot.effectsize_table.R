@@ -2,17 +2,26 @@
 #' @export
 plot.see_effectsize_table <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
-    x$Parameter <- factor(seq_len(nrow(x)))
+    x$Parameter <- seq_len(nrow(x))
   }
+
+  x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
+
   es_name <- colnames(x)[.is_effectsize_name(colnames(x))]
   es_lab <- gsub("_", " ", es_name)
   es_lab <- gsub("partial", "(partial)", es_lab)
 
   x$.es <- x[, es_name]
 
+  if (all(c("CI_low","CI_high") %in% colnames(x))) {
+    CIs <- geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0)
+  } else {
+    NULL
+  }
+
 
   ggplot(x, aes(y = .data$Parameter, color = .data$.es > 0)) +
-    geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0) +
+    CIs +
     geom_point(aes(x = .data$.es), size = 2) +
     geom_vline(xintercept = 0) +
     scale_color_manual(values = c("FALSE" = "green", "TRUE" = "blue"),
@@ -25,8 +34,10 @@ plot.see_effectsize_table <- function(x, ...) {
 #' @export
 plot.see_equivalence_test_effectsize <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
-    x$Parameter <- factor(seq_len(nrow(x)))
+    x$Parameter <- seq_len(nrow(x))
   }
+
+  x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
 
   if (attr(x, "rule", exact = TRUE) == "cet") {
     title <- "Conditional Test for Practical Equivalence"
