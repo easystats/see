@@ -4,6 +4,9 @@ plot.see_effectsize_table <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
     x$Parameter <- factor(seq_len(nrow(x)))
   }
+
+  x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
+
   es_name <- colnames(x)[.is_effectsize_name(colnames(x))]
   es_lab <- gsub("_", " ", es_name)
   es_lab <- gsub("partial", "(partial)", es_lab)
@@ -33,6 +36,8 @@ plot.see_equivalence_test_effectsize <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
     x$Parameter <- factor(seq_len(nrow(x)))
   }
+
+  x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
 
   if (attr(x, "rule", exact = TRUE) == "cet") {
     title <- "Conditional Test for Practical Equivalence"
