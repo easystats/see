@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.1</span>
       </span>
     </div>
 
@@ -194,31 +194,31 @@
 <h2 class="hasAnchor">
 <a href="#model-parameters" class="anchor"></a>Model Parameters</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/model_parameters.html">related function documentation</a>)</em></p>
-<p>The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters()</a></code> creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.</p>
+<p>The <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code>-method for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters()</a></code> creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">model1</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<p>As compared to the classical <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>-output, <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters()</a></code>, and hence the <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>-method, tries to create human readable, prettier parameters names.</p>
+<p>As compared to the classical <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>-output, <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters()</a></code>, and hence the <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code>-method, tries to create human readable, prettier parameters names.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">model2</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 </div>
 <div id="simulated-model-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#simulated-model-parameters" class="anchor"></a>Simulated Model Parameters</h2>
 <p><code><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters()</a></code> computes simulated draws of parameters and their related indices such as Confidence Intervals (CI) and p-values. Simulating parameter draws can be seen as a (computationally faster) alternative to bootstrapping.</p>
-<p>As <code><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters()</a></code> is based on <code><a href="https://rdrr.io/pkg/parameters/man/simulate_model.html">simulate_model()</a></code> and thus simulates many draws for each parameter, <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> will produce similar plots as the density estimation plots <a href="https://easystats.github.io/see/articles/bayestestR.html">from Bayesian models</a>.</p>
+<p>As <code><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters()</a></code> is based on <code><a href="https://rdrr.io/pkg/parameters/man/simulate_model.html">simulate_model()</a></code> and thus simulates many draws for each parameter, <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> will produce similar plots as the density estimation plots <a href="https://easystats.github.io/see/articles/bayestestR.html">from Bayesian models</a>.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/simulate_parameters.html">simulate_parameters</a></span>(<span class="no">model1</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">stack</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">stack</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">stack</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">stack</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
 <div id="model-parameters-of-sem-models" class="section level2">
@@ -230,7 +230,7 @@
 
 <span class="no">model</span> <span class="kw">&lt;-</span> <span class="kw pkg">lavaan</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html">cfa</a></span>(<span class="no">structure</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">HolzingerSwineford1939</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="kw pkg">parameters</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">model</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="864"></p>
 </div>
 <div id="model-parameters-of-bayesian-models" class="section level2">
@@ -252,26 +252,26 @@
 <span class="no">brms_model</span> <span class="kw">&lt;-</span> <span class="kw pkg">insight</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/insight/man/download_model.html">download_model</a></span>(<span class="st">"brms_zi_2"</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">brms_model</span>, <span class="kw">effects</span> <span class="kw">=</span> <span class="st">"all"</span>, <span class="kw">component</span> <span class="kw">=</span> <span class="st">"all"</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <div id="including-group-levels-of-random-effects" class="section level3">
 <h3 class="hasAnchor">
 <a href="#including-group-levels-of-random-effects" class="anchor"></a>Including group levels of random effects</h3>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="no">brms_model</span>, <span class="kw">effects</span> <span class="kw">=</span> <span class="st">"all"</span>,
                            <span class="kw">component</span> <span class="kw">=</span> <span class="st">"all"</span>, <span class="kw">group_level</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
 <div id="one-column-layout" class="section level3">
 <h3 class="hasAnchor">
 <a href="#one-column-layout" class="anchor"></a>One-column Layout</h3>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_column</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_column</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
 </div>
 <div id="including-intercepts-and-variance-estimates-for-random-intercepts" class="section level3">
 <h3 class="hasAnchor">
 <a href="#including-intercepts-and-variance-estimates-for-random-intercepts" class="anchor"></a>Including Intercepts and Variance Estimates for Random Intercepts</h3>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">show_intercept</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">show_intercept</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 </div>
 </div>
@@ -294,7 +294,7 @@
 <span class="co">#&gt; Study 3   |        0.28 | 0.13 | [ 0.03,  0.54] |  2.17 | 0.030  |  59.17</span>
 <span class="co">#&gt; Study 4   |       -1.40 | 0.36 | [-2.10, -0.69] | -3.88 | &lt; .001 |   7.72</span>
 <span class="co">#&gt; Overall   |       -0.18 | 0.44 | [-1.05,  0.68] | -0.42 | 0.676  |</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <div id="model-parameters-of-meta-analysis-models-with-subgroups" class="section level3">
 <h3 class="hasAnchor">
@@ -344,7 +344,7 @@
 <span class="co">#&gt; Rosenthal et al.2 |       -1.37 | 0.27 | [-1.90, -0.84] | -5.07 | &lt; .001 |  13.69</span>
 <span class="co">#&gt; Comstock et al.2  |       -0.02 | 0.27 | [-0.54,  0.51] | -0.06 | 0.948  |  14.00</span>
 <span class="co">#&gt; Overall           |       -0.69 | 0.49 | [-1.65,  0.26] | -1.42 | 0.155  |</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 </div>
 </div>
@@ -369,7 +369,7 @@
 <span class="co">#&gt;   educationmid  Rejected      0.00 % [ 4.43 13.09]</span>
 <span class="co">#&gt;  educationhigh  Rejected      0.00 % [ 9.33 19.38]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
 <div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/reexports.html">equivalence_test</a></span>(<span class="no">model4</span>, <span class="kw">rule</span> <span class="kw">=</span> <span class="st">"cet"</span>)
 <span class="no">result</span>
@@ -384,7 +384,7 @@
 <span class="co">#&gt;   educationmid  Rejected      0.00 % [ 5.13 12.39]</span>
 <span class="co">#&gt;  educationhigh  Rejected      0.00 % [10.14 18.57]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
 </div>
 <div id="for-random-effects" class="section level3">
@@ -427,7 +427,7 @@
 <span class="co">#&gt;        371 Undecided     30.25 % [-21.96  15.28]</span>
 <span class="co">#&gt;        372 Undecided     16.26 % [ -0.43  36.84]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
 </div>
 <div id="from-simulated-model-parameters" class="section level3">
@@ -451,7 +451,7 @@
 <span class="co">#&gt; sppDF       | Undecided |     38.70 % | [-0.16  0.38]</span>
 <span class="co">#&gt; minedno     |  Rejected |      0.00 % | [ 0.67  1.77]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 </div>
 </div>
@@ -476,7 +476,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
 <div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/principal_components.html">principal_components</a></span>(
   <span class="no">mtcars</span>[, <span class="fl">1</span>:<span class="fl">7</span>],
@@ -501,7 +501,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; The 3 principal components (varimax rotation) accounted for 94.11% of the total variance of the original data (RC1 = 45.02%, RC2 = 27.79%, RC3 = 21.30%).</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>, <span class="kw">text_color</span> <span class="kw">=</span> <span class="st">"white"</span>) +
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>, <span class="kw">text_color</span> <span class="kw">=</span> <span class="st">"white"</span>) +
   <span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span>()</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 </div>
@@ -529,11 +529,11 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Overall accuracy of classification: 97.33%</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
 <div class="sourceCode" id="cb23"><html><body><pre class="r">
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/cluster_analysis.html">cluster_analysis</a></span>(<span class="no">iris</span>[, <span class="fl">1</span>:<span class="fl">4</span>], <span class="kw">n_clusters</span> <span class="kw">=</span> <span class="fl">4</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-22-2.png" width="672"></p>
 </div>
 <div id="number-of-componentsfactors-to-retain" class="section level2">
@@ -547,9 +547,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-23-1.png" width="672"></p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-23-2.png" width="672"></p>
 </div>
 <div id="number-of-clusters-to-retain" class="section level2">
@@ -563,9 +563,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; The choice of 2 clusters is supported by 12 (42.86%) methods out of 28 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, Tibs2001SEmax).</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-24-2.png" width="672"></p>
 </div>
 <div id="description-of-variable-distributions" class="section level2">
@@ -575,23 +575,37 @@
 <div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">qol_cancer</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">describe_distribution</a></span>(<span class="no">qol_cancer</span>$<span class="no">age</span>)
 <span class="no">result</span>
-<span class="co">#&gt; Mean |   SD |   SE |          Range | Skewness | Kurtosis |   n | n_Missing</span>
-<span class="co">#&gt; ---------------------------------------------------------------------------</span>
-<span class="co">#&gt; 0.22 | 4.84 | 0.20 | [-15.60, 7.40] |    -0.73 |     0.23 | 564 |         0</span>
+<span class="co">#&gt; Mean |   SD | IQR |          Range | Skewness | Kurtosis |   n | n_Missing</span>
+<span class="co">#&gt; --------------------------------------------------------------------------</span>
+<span class="co">#&gt; 0.22 | 4.84 |   7 | [-15.60, 7.40] |    -0.73 |     0.23 | 564 |         0</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
 <div id="add-range-of-dispersion-sd-or-mad" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-range-of-dispersion-sd-or-mad" class="anchor"></a>Add Range of Dispersion (SD or MAD)</h3>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-26-1.png" width="672"></p>
 </div>
 <div id="use-a-normal-curve-instead-of-ribbon" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-a-normal-curve-instead-of-ribbon" class="anchor"></a>Use a Normal Curve instead of Ribbon</h3>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">dispersion_style</span> <span class="kw">=</span> <span class="st">"curve"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">dispersion_style</span> <span class="kw">=</span> <span class="st">"curve"</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+</div>
+<div id="highlighting-categories" class="section level3">
+<h3 class="hasAnchor">
+<a href="#highlighting-categories" class="anchor"></a>Highlighting Categories</h3>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
+<span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">describe_distribution</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="no">LETTERS</span>[<span class="fl">1</span>:<span class="fl">10</span>], <span class="fl">1000</span>, <span class="fl">TRUE</span>))
+
+<span class="co"># highlight one category</span>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">highlight</span> <span class="kw">=</span> <span class="st">"D"</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
+<div class="sourceCode" id="cb32"><html><body><pre class="r">
+<span class="co"># highlight multiple categories</span>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">highlight</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"H"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.4</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-28-2.png" width="672"></p>
 </div>
 </div>
   </div>

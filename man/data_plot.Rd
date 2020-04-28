@@ -76,6 +76,9 @@ data_plot(x, data = NULL, ...)
   dispersion_alpha = 0.3,
   dispersion_color = "#3498db",
   dispersion_style = c("ribbon", "curve"),
+  size = 0.7,
+  highlight = NULL,
+  highlight_color = NULL,
   ...
 )
 
@@ -277,6 +280,10 @@ so this argument may change size of points, lines or bars.}
 \item{dispersion_color}{Color of dispersion ribbon.}
 
 \item{dispersion_style}{Character, style of dispersion area. \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.}
+
+\item{highlight}{Vector with names of categories in \code{x} that should be highlighted.}
+
+\item{highlight_color}{Vector of color values for highlighted categories. The remaining (non-highlighted) categories will be filled with a lighter grey.}
 
 \item{show_values}{Logical, if \code{TRUE}, values are displayed.}
 

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.1</span>
       </span>
     </div>
 
@@ -150,10 +150,10 @@
 <span class="co">#&gt; Petal.Length |     0.96*** |              |</span></pre></body></html></div>
 <p>The result from <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> can be used to create a plot.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">s</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">result</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">s</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">s</span>)</pre></body></html></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>It is also possible to add correlation coefficients and p-values.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">s</span>, <span class="kw">show_values</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_p</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">s</span>, <span class="kw">show_values</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_p</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">show_legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>And a “redundant” summary can be plotted as well:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">s</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">result</span>, <span class="kw">redundant</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
@@ -166,7 +166,7 @@
 <span class="co">#&gt; Petal.Length |      0.87*** |    -0.43*** |      1.00*** |     0.96***</span>
 <span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |     1.00***</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">s</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">s</span>)</pre></body></html></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 </div>
 <div id="gaussian-graphical-models-ggms" class="section level2">
@@ -235,7 +235,7 @@
 <span class="co">#&gt; am         |       carb | -0.05 | [-0.39,  0.31] | -0.25 | 30 | 1.000  | Pearson |    32</span>
 <span class="co">#&gt; gear       |       carb |  0.43 | [ 0.09,  0.68] |  2.59 | 30 | 0.727  | Pearson |    32</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
   </div>

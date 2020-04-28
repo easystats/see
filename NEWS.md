@@ -1,3 +1,9 @@
+# see 0.5.1
+
+## Changes to functions
+
+* Plot-function for `parameters::describe_distribution()` gains `highlight`, `highlight_color` and `size` arguments.
+
 # see 0.5.0
 
 ## New functions

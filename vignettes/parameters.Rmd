@@ -345,3 +345,20 @@ plot(result, dispersion = TRUE)
 ```{r}
 plot(result, dispersion = TRUE, dispersion_style = "curve")
 ```
+
+### Highlighting Categories
+
+```{r}
+set.seed(123)
+result <- describe_distribution(sample(LETTERS[1:10], 1000, TRUE))
+
+# highlight one category
+plot(result, highlight = "D")
+
+# highlight multiple categories
+plot(result, highlight = c("D", "H"), size = .4)
+
+# own color scales - pass a named vector to 'scale_fill_manual()' 
+# the name of the non-highlighted color is "no_highlight".
+plot(result, highlight = c("D", "H", "A"), size = .4) + ggplot2::scale_fill_manual(values = c(D = "red", H = "green", A = "gold", no_highlight = "steelblue"))
+```
