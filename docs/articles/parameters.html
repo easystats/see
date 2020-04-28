@@ -606,6 +606,12 @@
 <span class="co"># highlight multiple categories</span>
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">highlight</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"H"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.4</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-28-2.png" width="672"></p>
+<div class="sourceCode" id="cb33"><html><body><pre class="r">
+<span class="co"># own color scales - pass a named vector to 'scale_fill_manual()' </span>
+<span class="co"># the name of the non-highlighted color is "no_highlight".</span>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">highlight</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"H"</span>, <span class="st">"A"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.4</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">D</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">H</span> <span class="kw">=</span> <span class="st">"green"</span>, <span class="kw">A</span> <span class="kw">=</span> <span class="st">"gold"</span>, <span class="kw">no_highlight</span> <span class="kw">=</span> <span class="st">"steelblue"</span>))</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-28-3.png" width="672"></p>
 </div>
 </div>
   </div>
