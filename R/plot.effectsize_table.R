@@ -2,7 +2,7 @@
 #' @export
 plot.see_effectsize_table <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
-    x$Parameter <- factor(seq_len(nrow(x)))
+    x$Parameter <- seq_len(nrow(x))
   }
 
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
@@ -34,7 +34,7 @@ plot.see_effectsize_table <- function(x, ...) {
 #' @export
 plot.see_equivalence_test_effectsize <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
-    x$Parameter <- factor(seq_len(nrow(x)))
+    x$Parameter <- seq_len(nrow(x))
   }
 
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
