@@ -5,16 +5,16 @@ plot.see_performance_roc <- function(x, ...) {
     p <- ggplot(
       x,
       aes(
-        x = .data$Sensivity,
-        y = .data$Specifity,
+        x = .data$Specifity,
+        y = .data$Sensivity,
         colour = .data$Model
       ))
   } else {
     p <- ggplot(
       x,
       aes(
-        x = .data$Sensivity,
-        y = .data$Specifity
+        x = .data$Specifity,
+        y = .data$Sensivity,
       ))
   }
 
@@ -25,8 +25,8 @@ plot.see_performance_roc <- function(x, ...) {
     ylim(c(0, 1)) +
     xlim(c(0, 1)) +
     labs(
-      x = "Sensivity (False Positive Rate)",
-      y = "Specifity (True Positive Rate)",
+      x = "Specifity (True Positive Rate)",
+      y = "Sensivity (False Positive Rate)",
       colour = NULL
     )
 }

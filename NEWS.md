@@ -4,6 +4,10 @@
 
 * Plot-function for `parameters::describe_distribution()` gains `highlight`, `highlight_color` and `size` arguments.
 
+## Bug fixes
+
+* Fixed issue in `plot.performance_roc()` with swapped x/y axes.
+
 # see 0.5.0
 
 ## New functions
