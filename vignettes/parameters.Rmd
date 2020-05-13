@@ -326,9 +326,11 @@ plot(result, type = "line")
 
 _([related function documentation](https://easystats.github.io/parameters/reference/describe_distribution.html))_
 
+### Histogram for Numbers with Fractional Part
+
 ```{r}
-data(qol_cancer)
-result <- describe_distribution(qol_cancer$age)
+data(iris)
+result <- describe_distribution(iris$Sepal.Length)
 result
 
 plot(result)
@@ -338,6 +340,17 @@ plot(result)
 
 ```{r}
 plot(result, dispersion = TRUE)
+```
+
+### Thin Bars for Integer Values
+
+```{r}
+set.seed(333)
+x <- sample(1:100, 1000, replace = TRUE)
+result <- describe_distribution(x)
+result
+
+plot(result)
 ```
 
 ### Use a Normal Curve instead of Ribbon

@@ -88,8 +88,12 @@ plot.see_parameters_distribution <- function(x, dispersion = FALSE, dispersion_a
     p <- ggplot(x, aes(x = .data$x))
   }
 
-  if (is.factor(x$x) || .n_unique(x$x) <= 12) {
+  if (is.factor(x$x) || is.character(x$x) || .n_unique(x$x) <= 12) {
     p <- p + geom_bar(width = size)
+  } else if (.is_integer(x$x)) {
+    p <- p +
+      geom_bar(width = size) +
+      scale_x_continuous(n.breaks = round(.n_unique(x$x) / 4))
   } else {
     p <- p + geom_histogram()
   }

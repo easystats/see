@@ -180,3 +180,9 @@ magrittr::`%>%`
   if (isTRUE(na.rm)) x <- stats::na.omit(x)
   length(unique(x))
 }
+
+
+
+.is_integer <- function(x) {
+  is.numeric(x) && all(floor(x) == x, na.rm = T)
+}
