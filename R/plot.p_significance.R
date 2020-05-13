@@ -50,8 +50,16 @@ data_plot.p_significance <- function(x, data = NULL, grid = TRUE, show_intercept
         dataplot$Effects <- NULL
         dataplot$Component <- NULL
       } else {
-        dataplot$Effects <- factor(dataplot$Effects, levels = sort(levels(dataplot$Effects)))
-        dataplot$Component <- factor(dataplot$Component, levels = sort(levels(dataplot$Component)))
+        if (is.factor(dataplot$Effects)) {
+          dataplot$Effects <- factor(dataplot$Effects, levels = sort(levels(dataplot$Effects)))
+        } else {
+          dataplot$Effects <- factor(dataplot$Effects, levels = unique(dataplot$Effects))
+        }
+        if (is.factor(dataplot$Component)) {
+          dataplot$Component <- factor(dataplot$Component, levels = sort(levels(dataplot$Component)))
+        } else {
+          dataplot$Component <- factor(dataplot$Component, levels = unique(dataplot$Component))
+        }
       }
     }
 

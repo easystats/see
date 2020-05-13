@@ -6,6 +6,7 @@
 
 ## Bug fixes
 
+* Fixed issue with argument `n_column` in `plot.p_significant()`, `plot.hdi()`, and  `plot.p_direction()`, which stopped working since R 4.0.0.
 * Fixed issue in `plot.performance_roc()` with swapped x/y axes.
 
 # see 0.5.0
