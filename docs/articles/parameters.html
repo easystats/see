@@ -572,46 +572,64 @@
 <h2 class="hasAnchor">
 <a href="#description-of-variable-distributions" class="anchor"></a>Description of Variable Distributions</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/describe_distribution.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">qol_cancer</span>)
-<span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">describe_distribution</a></span>(<span class="no">qol_cancer</span>$<span class="no">age</span>)
+<div id="histogram-for-numbers-with-fractional-part" class="section level3">
+<h3 class="hasAnchor">
+<a href="#histogram-for-numbers-with-fractional-part" class="anchor"></a>Histogram for Numbers with Fractional Part</h3>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">iris</span>)
+<span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">describe_distribution</a></span>(<span class="no">iris</span>$<span class="no">Sepal.Length</span>)
 <span class="no">result</span>
-<span class="co">#&gt; Mean |   SD | IQR |          Range | Skewness | Kurtosis |   n | n_Missing</span>
-<span class="co">#&gt; --------------------------------------------------------------------------</span>
-<span class="co">#&gt; 0.22 | 4.84 |   7 | [-15.60, 7.40] |    -0.73 |     0.23 | 564 |         0</span>
+<span class="co">#&gt; Mean |   SD |  IQR |        Range | Skewness | Kurtosis |   n | n_Missing</span>
+<span class="co">#&gt; -------------------------------------------------------------------------</span>
+<span class="co">#&gt; 5.84 | 0.83 | 1.30 | [4.30, 7.90] |     0.31 |    -0.55 | 150 |         0</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+</div>
 <div id="add-range-of-dispersion-sd-or-mad" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-range-of-dispersion-sd-or-mad" class="anchor"></a>Add Range of Dispersion (SD or MAD)</h3>
 <div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-26-1.png" width="672"></p>
 </div>
+<div id="thin-bars-for-integer-values" class="section level3">
+<h3 class="hasAnchor">
+<a href="#thin-bars-for-integer-values" class="anchor"></a>Thin Bars for Integer Values</h3>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">333</span>)
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fl">100</span>, <span class="fl">1000</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">describe_distribution</a></span>(<span class="no">x</span>)
+<span class="no">result</span>
+<span class="co">#&gt;  Mean |    SD |   IQR |          Range | Skewness | Kurtosis |    n | n_Missing</span>
+<span class="co">#&gt; -------------------------------------------------------------------------------</span>
+<span class="co">#&gt; 50.18 | 28.66 | 48.75 | [1.00, 100.00] |     0.02 |    -1.16 | 1000 |         0</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+</div>
 <div id="use-a-normal-curve-instead-of-ribbon" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-a-normal-curve-instead-of-ribbon" class="anchor"></a>Use a Normal Curve instead of Ribbon</h3>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">dispersion_style</span> <span class="kw">=</span> <span class="st">"curve"</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">dispersion</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">dispersion_style</span> <span class="kw">=</span> <span class="st">"curve"</span>)</pre></body></html></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
 </div>
 <div id="highlighting-categories" class="section level3">
 <h3 class="hasAnchor">
 <a href="#highlighting-categories" class="anchor"></a>Highlighting Categories</h3>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">describe_distribution</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="no">LETTERS</span>[<span class="fl">1</span>:<span class="fl">10</span>], <span class="fl">1000</span>, <span class="fl">TRUE</span>))
 
 <span class="co"># highlight one category</span>
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">highlight</span> <span class="kw">=</span> <span class="st">"D"</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
-<div class="sourceCode" id="cb32"><html><body><pre class="r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-29-1.png" width="672"></p>
+<div class="sourceCode" id="cb33"><html><body><pre class="r">
 <span class="co"># highlight multiple categories</span>
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">highlight</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"H"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.4</span>)</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-28-2.png" width="672"></p>
-<div class="sourceCode" id="cb33"><html><body><pre class="r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-29-2.png" width="672"></p>
+<div class="sourceCode" id="cb34"><html><body><pre class="r">
 <span class="co"># own color scales - pass a named vector to 'scale_fill_manual()' </span>
 <span class="co"># the name of the non-highlighted color is "no_highlight".</span>
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>, <span class="kw">highlight</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"H"</span>, <span class="st">"A"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.4</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">D</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">H</span> <span class="kw">=</span> <span class="st">"green"</span>, <span class="kw">A</span> <span class="kw">=</span> <span class="st">"gold"</span>, <span class="kw">no_highlight</span> <span class="kw">=</span> <span class="st">"steelblue"</span>))</pre></body></html></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-28-3.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-29-3.png" width="672"></p>
 </div>
 </div>
   </div>
