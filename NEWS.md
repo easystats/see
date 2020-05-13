@@ -3,6 +3,7 @@
 ## Changes to functions
 
 * Plot-function for `parameters::describe_distribution()` gains `highlight`, `highlight_color` and `size` arguments.
+* Plot-function for `parameters::describe_distribution()` now uses thin bars for variables with integer values (instead of less precise histogram).
 
 ## Bug fixes
 
