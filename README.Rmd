@@ -19,8 +19,6 @@ editor_options:
 knitr::opts_chunk$set(
   dpi = 300,
   collapse = TRUE,
-  tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE,
   fig.path = "man/figures/"
 )
 options(knitr.kable.NA = '', digits = 4)
@@ -81,9 +79,9 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 library(rstanarm)
 library(modelbased)
 
-dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>% 
-  estimate::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>% 
-  estimate::reshape_draws()
+dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>%
+  modelbased::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>%
+  modelbased::reshape_draws()
 
 p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
   geom_line(color = "white", alpha = 0.05) +

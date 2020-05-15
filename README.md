@@ -29,8 +29,9 @@ library("see")
 ``` r
 library(ggplot2)
 
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
-    geom_point2() + theme_modern()
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point2() +
+  theme_modern()
 ```
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
@@ -40,8 +41,9 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ``` r
 library(ggplot2)
 
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + 
-    geom_point2() + theme_lucid()
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point2() +
+  theme_lucid()
 ```
 
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
@@ -52,15 +54,16 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 library(rstanarm)
 library(modelbased)
 
-dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), 
-    data = iris) %>% estimate::estimate_link(keep_draws = TRUE, 
-    length = 100, draws = 250) %>% estimate::reshape_draws()
+dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>%
+  modelbased::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>%
+  modelbased::reshape_draws()
 
-p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) + 
-    geom_line(color = "white", alpha = 0.05) + scale_x_continuous(expand = c(0, 
-    0)) + scale_y_continuous(expand = c(0, 0))
+p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
+  geom_line(color = "white", alpha = 0.05) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0))
 
-p + theme_blackboard()
+p + theme_blackboard() 
 ```
 
 ![](man/figures/unnamed-chunk-7-1.png)<!-- -->
@@ -78,14 +81,20 @@ for a detailed overview of palettes and color scales.
 ### Material design
 
 ``` r
-p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_boxplot() + theme_modern(axis.text.angle = 45) + scale_fill_material_d()
+p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  theme_modern(axis.text.angle = 45) +
+  scale_fill_material_d()
 
-p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_violin() + theme_modern(axis.text.angle = 45) + scale_fill_material_d(palette = "ice")
+p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violin() +
+  theme_modern(axis.text.angle = 45) +
+  scale_fill_material_d(palette = "ice")
 
-p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) + 
-    geom_point2() + theme_modern() + scale_color_material_c(palette = "rainbow")
+p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+  geom_point2() +
+  theme_modern() +
+  scale_color_material_c(palette = "rainbow")
 ```
 
 ## Multiple plots
@@ -102,7 +111,8 @@ The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
 
 ``` r
-plots(p1, p2, p3, n_columns = 2, tags = paste("Fig. ", 1:3))
+plots(p1, p2, p3, n_columns = 2, 
+      tags = paste("Fig. ", 1:3))
 ```
 
 ![](man/figures/unnamed-chunk-11-1.png)<!-- -->
@@ -113,11 +123,13 @@ plots(p1, p2, p3, n_columns = 2, tags = paste("Fig. ", 1:3))
 contour.
 
 ``` r
-normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
-    geom_point(size = 8, alpha = 0.3) + theme_modern()
+normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
+  geom_point(size = 8, alpha = 0.3) +
+  theme_modern()
 
-new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
-    geom_point2(size = 8, alpha = 0.3) + theme_modern()
+new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
+  geom_point2(size = 8, alpha = 0.3) +
+  theme_modern()
 
 plots(normal, new, n_columns = 2)
 ```
@@ -130,8 +142,10 @@ Create a half-violin half-dot plot, useful for visualising the
 distribution and the sample size at the same time.
 
 ``` r
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-    geom_violindot(fill_dots = "black") + theme_modern() + scale_fill_material_d()
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violindot(fill_dots = "black") +
+  theme_modern() +
+  scale_fill_material_d()
 ```
 
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
@@ -142,12 +156,16 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 library(dplyr)
 library(tidyr)
 
-data <- iris %>% group_by(Species) %>% summarise_all(mean) %>% 
-    pivot_longer(-Species)
+data <- iris %>%
+  group_by(Species) %>%
+  summarise_all(mean) %>%
+  pivot_longer(-Species)
 
-data %>% ggplot(aes(x = name, y = value, color = Species, group = Species)) + 
-    geom_polygon(fill = NA, size = 2, show.legend = FALSE) + 
-    coord_radar(start = -pi/4) + theme_minimal()
+data %>%
+  ggplot(aes(x = name, y = value, color = Species, group = Species)) +
+  geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
+  coord_radar(start = -pi/4) +
+  theme_minimal()
 ```
 
 ![](man/figures/unnamed-chunk-14-1.png)<!-- -->
