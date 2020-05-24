@@ -16,25 +16,47 @@ plot.see_si <- function(x, si_color = "#0171D3", si_alpha = .2, show_intercept =
   }
 
 
-  # Basic plot
-  p <- ggplot(mapping = aes(
-    x = .data$x,
-  )) +
-    # SI
-    geom_rect(
-      aes(xmin = .data$CI_low, xmax = .data$CI_high),
-      ymin = 0, ymax = Inf,
-      data = x,
-      fill = si_color, alpha = si_alpha,
-      linetype = "dashed", colour = "grey50",
-      inherit.aes = FALSE
-    ) +
+  if (length(unique(x$CI)) > 1) {
+    p <- ggplot(mapping = aes(
+      x = .data$x,
+    )) +
+      # SI
+      geom_rect(
+        aes(xmin = .data$CI_low, xmax = .data$CI_high, alpha = .data$CI),
+        ymin = 0, ymax = Inf,
+        data = x,
+        fill = si_color,
+        inherit.aes = FALSE
+      ) +
+      scale_alpha_continuous(breaks = unique(x$CI)) +
+      labs(
+        x = "",
+        title = "Support Interval",
+        alpha = "BF level"
+      ) +
+      theme(legend.position = "bottom")
+  } else {
+    # Basic plot
+    p <- ggplot(mapping = aes(
+      x = .data$x,
+    )) +
+      # SI
+      geom_rect(
+        aes(xmin = .data$CI_low, xmax = .data$CI_high),
+        ymin = 0, ymax = Inf,
+        data = x,
+        fill = si_color, alpha = si_alpha,
+        linetype = "dashed", colour = "grey50",
+        inherit.aes = FALSE
+      ) +
 
-    labs(
-      x = "",
-      title = paste0("Support Interval (BF = ", x$CI[1], " SI)")
-    ) +
-    theme(legend.position = "bottom")
+      labs(
+        x = "",
+        title = paste0("Support Interval (BF = ", x$CI[1], " SI)")
+      ) +
+      theme(legend.position = "bottom")
+  }
+
 
   if (isTRUE(support_only)) {
     support_data <- split(plot_data, as.character(plot_data$ind))
@@ -72,7 +94,7 @@ plot.see_si <- function(x, si_color = "#0171D3", si_alpha = .2, show_intercept =
       # distributions
       geom_line(size = 1, data = support_data) +
       geom_area(alpha = 0.15, data = support_data) +
-      geom_hline(yintercept = x$CI[1], colour = "grey30", linetype = "dotted") +
+      geom_hline(yintercept = unique(x$CI), colour = "grey30", linetype = "dotted") +
       labs(y = "Updating Factor")
   } else {
     p <- p +
