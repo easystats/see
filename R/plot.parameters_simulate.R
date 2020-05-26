@@ -10,6 +10,11 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
   dat <- parameters::simulate_model(model = data, n_sims = n_sims)
   params <- insight::clean_parameters(data)
 
+  # remove dispersion
+  if (!is.null(params$Component) && "dispersion" %in% params$Component) {
+    params <- params[params$Component != "dispersion", ]
+  }
+
   out <- bayestestR::estimate_density(dat)
 
   if (length(unique(params$Effects)) > 1) {
