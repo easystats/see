@@ -10,11 +10,6 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
   dat <- parameters::simulate_model(model = data, n_sims = n_sims)
   params <- insight::clean_parameters(data)
 
-  # remove dispersion
-  if (!is.null(params$Component) && "dispersion" %in% params$Component) {
-    params <- params[params$Component != "dispersion", ]
-  }
-
   out <- bayestestR::estimate_density(dat)
 
   if (length(unique(params$Effects)) > 1) {
@@ -23,6 +18,8 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
     if (length(unique(params$Component)) > 1) {
       zi_comp <- params$Component == "zero_inflated"
       params$Parameter[zi_comp] <- paste0(params$Parameter[zi_comp], "_zi")
+      disp_comp <- params$Component == "dispersion"
+      params$Parameter[disp_comp] <- paste0(params$Parameter[disp_comp], "_disp")
     }
 
     for (i in names(dat)) {

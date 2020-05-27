@@ -70,6 +70,7 @@ magrittr::`%>%`
   params <- gsub("(b_|bs_|bsp_|bcs_)(.*)", "\\2", params, perl = TRUE)
   params <- gsub("^zi_(.*)", "\\1 (Zero-Inflated)", params, perl = TRUE)
   params <- gsub("(.*)_zi$", "\\1 (Zero-Inflated)", params, perl = TRUE)
+  params <- gsub("(.*)_disp$", "\\1 (Dispersion)", params, perl = TRUE)
   # clean random effect parameters names
   params <- gsub("r_(.*)\\.(.*)\\.", "(re) \\1", params)
   params <- gsub("b\\[\\(Intercept\\) (.*)\\]", "(re) \\1", params)
@@ -110,6 +111,7 @@ magrittr::`%>%`
   if (grid) {
     params <- trimws(gsub("(Zero-Inflated)", "", params, fixed = TRUE))
     params <- trimws(gsub("(Random)", "", params, fixed = TRUE))
+    params <- trimws(gsub("(Dispersion)", "", params, fixed = TRUE))
   } else {
     params <- gsub("(Zero-Inflated) (Random)", "(Random, Zero-Inflated)", params, fixed = TRUE)
   }
