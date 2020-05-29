@@ -140,6 +140,9 @@ data_plot.bayestestR_eti <- data_plot.hdi
                   HDI_high = sapply(x, .classify_hdi, rev(hdi$CI_high), c(rev(hdi$CI), 100)),
                   fill = as.factor(ifelse(.data$HDI_low > .data$HDI_high, .data$HDI_low, .data$HDI_high)),
                   height = .data$y, y = name)
+
+  levels(out$fill) <- sprintf("%s%%", levels(out$fill))
+
   # normalize
   out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
   out
