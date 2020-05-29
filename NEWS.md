@@ -4,6 +4,7 @@
 
 * Plot-function for `parameters::describe_distribution()` gains `highlight`, `highlight_color` and `size` arguments.
 * Plot-function for `parameters::describe_distribution()` now uses thin bars for variables with integer values (instead of less precise histogram).
+* Legend labels nopw show a percentage-sign where applicable (for instance, for `plot.hdi()`).
 
 ## Bug fixes
 
