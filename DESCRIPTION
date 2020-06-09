@@ -54,6 +54,7 @@ Suggests:
   emmeans,
   ggraph,
   ggrepel,
+  glmmTMB,
 	grid,
 	gridExtra,
   MASS,
