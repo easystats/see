@@ -49,12 +49,15 @@ Imports:
 	parameters,
 	rlang
 Suggests:
+  correlation,
   emmeans,
   ggraph,
   ggrepel,
 	grid,
 	gridExtra,
   MASS,
+  modelbased,
+  performance,
   rmarkdown,
   rstanarm,
   tidygraph,
