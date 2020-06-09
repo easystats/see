@@ -60,6 +60,7 @@ Suggests:
   MASS,
   modelbased,
   performance,
+  randomForest,
   rmarkdown,
   rstanarm,
   tidygraph,
