@@ -65,6 +65,7 @@ Suggests:
   metafor,
   modelbased,
   performance,
+  psych,
   randomForest,
   rmarkdown,
   rstanarm,
