@@ -62,6 +62,7 @@ Suggests:
 	logspline,
 	lme4,
   MASS,
+  mclust,
   metafor,
   modelbased,
   NbClust,
