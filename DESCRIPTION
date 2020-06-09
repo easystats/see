@@ -49,6 +49,7 @@ Imports:
 	parameters,
 	rlang
 Suggests:
+  brms,
   coda,
   correlation,
   emmeans,
@@ -57,12 +58,16 @@ Suggests:
   glmmTMB,
 	grid,
 	gridExtra,
+	lavaan,
+	lme4,
   MASS,
+  metafor,
   modelbased,
   performance,
   randomForest,
   rmarkdown,
   rstanarm,
+  splines,
   tidygraph,
   tidyr
 RoxygenNote: 7.1.0
