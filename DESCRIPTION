@@ -64,6 +64,7 @@ Suggests:
   MASS,
   metafor,
   modelbased,
+  NbClust,
   nFactors,
   performance,
   psych,
