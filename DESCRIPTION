@@ -49,6 +49,7 @@ Imports:
 	parameters,
 	rlang
 Suggests:
+  coda,
   correlation,
   emmeans,
   ggraph,
