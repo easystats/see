@@ -59,6 +59,7 @@ Suggests:
 	grid,
 	gridExtra,
 	lavaan,
+	logspline,
 	lme4,
   MASS,
   metafor,
