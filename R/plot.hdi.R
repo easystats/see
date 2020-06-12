@@ -130,6 +130,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' @importFrom rlang .data
 #' @importFrom stats density
 #' @importFrom dplyr mutate arrange desc
+#' @importFrom magrittr "%>%"
 #' @keywords internal
 .compute_densities_hdi <- function(x, hdi, name = "Y"){
   hdi <- dplyr::arrange(hdi, dplyr::desc(.data$CI))
