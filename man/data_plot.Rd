@@ -62,7 +62,14 @@ data_plot(x, data = NULL, ...)
 
 \method{plot}{see_check_distribution}(x, point_size = 2, panel = TRUE, ...)
 
-\method{plot}{see_check_normality}(x, type = c("density", "qq", "pp"), data = NULL, ...)
+\method{plot}{see_check_normality}(
+  x,
+  type = c("density", "qq", "pp"),
+  data = NULL,
+  size = 0.8,
+  point_size = 2,
+  ...
+)
 
 \method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
 
@@ -266,12 +273,12 @@ single plots are returned.}
 \code{\link[performance]{check_normality}}, \code{parameters::model_parameters.lavaan}
 or \code{\link[parameters]{n_factors}}).}
 
+\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
+so this argument may change size of points, lines or bars.}
+
 \item{text_size}{Size of text labels.}
 
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
-
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
 
 \item{dispersion}{Logical, if \code{TRUE}, will add range of dispersion for each variable to the plot.}
 

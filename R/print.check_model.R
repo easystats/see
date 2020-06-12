@@ -156,7 +156,7 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_reqq <- function(x, point_size, line_size) {
+.plot_diag_reqq <- function(x, point_size, line_size, panel = TRUE) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
     p <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
@@ -180,7 +180,7 @@ print.see_check_model <- function(x, ...) {
       ) +
       theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 
-    if (nlevels(dat$facet) > 1) {
+    if (nlevels(dat$facet) > 1 && isTRUE(panel)) {
       p <- p + facet_wrap(~facet, scales = "free")
     }
 
