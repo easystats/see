@@ -26,22 +26,6 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
   rownames(edges) <- NULL
 
-  # edges <- x %>%
-  #   dplyr::mutate(Coefficient_abs = abs(.data$Coefficient),
-  #                 From = as.character(.data$From),
-  #                 To = as.character(.data$To)) %>%
-  #   dplyr::filter(
-  #     tolower(.data$Type) %in% c(type),
-  #     .data$From != .data$To,
-  #     .data$Coefficient_abs >= threshold_coefficient,
-  #     .data$p < threshold_p
-  #   ) %>%
-  #   dplyr::select(-dplyr::one_of("Coefficient_abs")) %>%
-  #   dplyr::rename(
-  #     "to" = "To",
-  #     "from" = "From"
-  #   )
-
   # Labels
   if (ci == TRUE) {
     edges$Label <- paste0(

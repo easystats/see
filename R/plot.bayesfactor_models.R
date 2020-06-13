@@ -67,23 +67,6 @@ plot.see_bayesfactor_models <-
   many_pies_data$Type <- factor(many_pies_data$Type, levels = unique(many_pies_data$Type))
 
 
-
-  # many_pies_data <- suppressWarnings(
-  #   rbind(one_pie_data %>%
-  #           dplyr::mutate(Type     = denominator_name,
-  #                         BF       = .data$BF[denominator],
-  #                         PostProb = .data$PostProb[denominator]),
-  #         one_pie_data %>%
-  #           dplyr::mutate(Type = .data$Model)) %>%
-  #     dplyr::group_by(.data$Model) %>%
-  #     dplyr::mutate(pos_bar = .data$PostProb / sum(.data$PostProb),
-  #                   pos_txt = sum(.data$pos_bar) + .data$pos_bar / 2 - cumsum(.data$pos_bar)) %>%
-  #     dplyr::filter(.data$Model != denominator_name) %>%
-  #     dplyr::ungroup() %>%
-  #     dplyr::mutate(Type = factor(.data$Type, levels = unique(.data$Type)))
-  # )
-
-
   if (value == "BF") {
     if (log) {
       one_pie_data$label <- round(log(one_pie_data$BF), 2)
