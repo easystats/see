@@ -251,7 +251,10 @@
 <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/performance/man/check_normality.html">check_normality</a></span>(<span class="no">model</span>, <span class="kw">effects</span> <span class="kw">=</span> <span class="st">"random"</span>)
 <span class="co">#&gt; Group: Subject</span>
 <span class="co">#&gt; (Intercept) OK: random effects appear as normally distributed (p = 0.428).</span>
-<span class="co">#&gt;        Days OK: random effects appear as normally distributed (p = 0.898).</span></pre></body></html></div>
+<span class="co">#&gt;        Days OK: random effects appear as normally distributed (p = 0.898).</span>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>)
+<span class="co">#&gt; [[1]]</span></pre></body></html></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
 <div id="check-for-heteroscedasticity" class="section level2">
 <h2 class="hasAnchor">
