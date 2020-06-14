@@ -121,6 +121,7 @@ _([related function documentation](https://easystats.github.io/performance/refer
 ```{r}
 model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 result <- check_normality(model, effects = "random")
+plot(result)
 ```
 
 ## Check for Heteroscedasticity
