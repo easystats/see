@@ -114,6 +114,15 @@ plot(result, type = "qq")
 plot(result, type = "pp")
 ```
 
+## Check for Normal Distributed Random Effects
+
+_([related function documentation](https://easystats.github.io/performance/reference/check_normality.html))_
+
+```{r}
+model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+result <- check_normality(model, effects = "random")
+```
+
 ## Check for Heteroscedasticity
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_heteroscedasticity.html))_
