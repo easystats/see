@@ -23,10 +23,12 @@ reference:
 
 - title: "Scales"
   contents:
+  - scale_color_bluebrown
   - scale_color_flat
   - scale_color_material
   - scale_color_metro
   - scale_color_pizza
+  - scale_color_see
   - scale_color_social
 
 - title: "Themes"

@@ -159,6 +159,21 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
+## Material Colors - Five Groups - Dark Theme
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_material(palette = "light") +
+  theme_abyss()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_material(palette = "light") +
+  theme_abyss()
+
+plots(p1, p2, n_rows = 1)
+```
 
 # Flat Colors
 
@@ -172,6 +187,22 @@ p1 <- ggplot(d1, aes(x, y, colour = group)) +
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_flat()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## Flat Colors - Three Groups - Dark Theme
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_flat(palette = "light") +
+  theme_abyss()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_flat(palette = "light") +
+  theme_abyss()
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -262,6 +293,22 @@ p1 <- ggplot(d1, aes(x, y, colour = group)) +
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_see()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## See Colors - Three Groups - Dark Theme
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_see_d(palette = "light") +
+  theme_abyss()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_see(palette = "light") +
+  theme_abyss()
 
 plots(p1, p2, n_rows = 1)
 ```

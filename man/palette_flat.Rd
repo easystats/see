@@ -7,7 +7,7 @@
 palette_flat(palette = "contrast", reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".}
+\item{palette}{Character name of palette. Depending on the color scale, can be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"} or \code{"light"} (for dark themes).}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 

@@ -164,6 +164,7 @@ flat_palettes <- list(
   `ice`  = flat_colors("purple", "deep purple", "blue", "light blue"),
   `rainbow` = flat_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
   `contrast` = flat_colors("blue", "green", "amber", "purple", "red"),
+  `light` = flat_colors("light blue", "purple", "yellow", "light green", "orange"),
   `complement` = flat_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
 )
 
@@ -176,7 +177,7 @@ flat_palettes <- list(
 #'
 #' The palette based on Flat UI colors (https://www.materialui.co/flatuicolors).
 #'
-#' @param palette Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".
+#' @param palette Character name of palette. Depending on the color scale, can be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"} or \code{"light"} (for dark themes).
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'

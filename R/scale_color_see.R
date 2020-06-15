@@ -15,10 +15,10 @@
 #'   theme_modern() +
 #'   scale_fill_see_d()
 #'
-#' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-#'   geom_violin() +
-#'   theme_modern() +
-#'   scale_fill_see_d(palette = "ice")
+#' ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+#'   geom_point() +
+#'   theme_abyss() +
+#'   scale_colour_see(palette = "light")
 #'
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
@@ -157,7 +157,8 @@ see_palettes <- list(
   `ice`  = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
   `rainbow` = see_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "red", "pink"),
   `contrast` = see_colors("blue", "orange", "yellow", "green", "red"),
-  `complement` = see_colors("blue", "blue grey", "green", "light green","yellow", "amber", "red")
+  `complement` = see_colors("blue", "blue grey", "green", "light green","yellow", "amber", "red"),
+  `light` = see_colors("light blue", "pink", "lime", "light green", "orange")
 )
 
 
