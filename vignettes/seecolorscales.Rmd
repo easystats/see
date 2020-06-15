@@ -250,6 +250,51 @@ plots(p1, p2, n_rows = 1)
 ```
 
 
+# See Colors
+
+## See Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_see()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_see()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## See Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_see()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_see()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## See Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_see()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_see()
+
+plots(p1, p2, n_rows = 1)
+```
+
+
 # Pizza Colors
 
 ## Pizza Colors - Three Groups
@@ -413,10 +458,27 @@ p4 <- ggplot(d, aes(x, fill = x)) +
 
 
 d <- data.frame(
-  x = names(pizza_colors())
+  x = names(see_colors())
 )
 
 p5 <- ggplot(d, aes(x, fill = x)) + 
+  geom_bar(width = .9) + 
+  scale_fill_manual(values = see_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+
+d <- data.frame(
+  x = names(pizza_colors())
+)
+
+p6 <- ggplot(d, aes(x, fill = x)) + 
   geom_bar(width = .9) + 
   scale_fill_manual(values = pizza_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0,0)) +
@@ -433,7 +495,7 @@ d <- data.frame(
   x = names(bluebrown_colors())
 )
 
-p6 <- ggplot(d, aes(x, fill = x)) + 
+p7 <- ggplot(d, aes(x, fill = x)) + 
   geom_bar(width = .9) + 
   scale_fill_manual(values = bluebrown_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0,0)) +
@@ -446,5 +508,5 @@ p6 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
-plots(p1, p2, p3, p4, p5, p6, n_columns = 1, tags = c("Social", "Flat", "Material", "Metro", "Pizza", "Bluebrown"))
+plots(p1, p2, p3, p4, p5, p6, p7, n_columns = 1, tags = c("Social", "Flat", "Material", "Metro", "See", "Pizza", "Bluebrown"))
 ```
