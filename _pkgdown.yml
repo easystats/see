@@ -39,11 +39,13 @@ reference:
 
 - title: "Color Palettes"
   contents:
+  - bluebrown_colors
   - flat_colors
   - material_colors
   - metro_colors
   - pizza_colors
   - social_colors
+  - palette_bluebrown
   - palette_flat
   - palette_material
   - palette_metro
