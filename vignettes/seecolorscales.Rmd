@@ -165,12 +165,12 @@ plots(p1, p2, n_rows = 1)
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
   geom_line(size = 1) +
   scale_color_material(palette = "light") +
-  theme_abyss()
+  theme_abyss(legend.position = "bottom")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
   scale_color_material(palette = "light") +
-  theme_abyss()
+  theme_abyss(legend.position = "bottom")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -197,12 +197,12 @@ plots(p1, p2, n_rows = 1)
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
   geom_line(size = 1) +
   scale_color_flat(palette = "light") +
-  theme_abyss()
+  theme_abyss(legend.position = "bottom")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_flat(palette = "light") +
-  theme_abyss()
+  theme_abyss(legend.position = "bottom")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -303,12 +303,12 @@ plots(p1, p2, n_rows = 1)
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
   geom_line(size = 1) +
   scale_color_see_d(palette = "light") +
-  theme_abyss()
+  theme_abyss(legend.position = "bottom")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
   scale_color_see(palette = "light") +
-  theme_abyss()
+  theme_abyss(legend.position = "bottom")
 
 plots(p1, p2, n_rows = 1)
 ```
