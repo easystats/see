@@ -188,7 +188,7 @@ categories and <code>scale_color_see_c()</code> for a <em>continuous</em> scale.
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>palette</th>
-      <td><p>Character name of palette. Can be "full", "ice", "rainbow", "complement", or "contrast".</p></td>
+      <td><p>Character name of palette. Depending on the color scale, can be <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>, <code>"contrast"</code> or <code>"light"</code> (for dark themes).</p></td>
     </tr>
     <tr>
       <th>discrete</th>
@@ -213,10 +213,10 @@ categories and <code>scale_color_see_c()</code> for a <em>continuous</em> scale.
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>() +
   <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>() +
   <span class='fu'>scale_fill_see_d</span>()</div><div class='img'><img src='scale_color_see-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Species</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_violin.html'>geom_violin</a></span>() +
-  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>() +
-  <span class='fu'>scale_fill_see_d</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"ice"</span>)</div><div class='img'><img src='scale_color_see-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Width</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>Species</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
+  <span class='fu'><a href='theme_abyss.html'>theme_abyss</a></span>() +
+  <span class='fu'>scale_colour_see</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"light"</span>)</div><div class='img'><img src='scale_color_see-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Petal.Length</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Petal.Width</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>() +
