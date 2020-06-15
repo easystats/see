@@ -1,3 +1,9 @@
+# see 0.5.2
+
+## General
+
+* Added new color-palettes.
+
 # see 0.5.1
 
 ## Changes to functions
