@@ -154,9 +154,9 @@ see_colors <- function(...) {
 
 see_palettes <- list(
   `full`  = see_colors(),
-  `ice`  = see_colors("purple", "deep purple", "indigo", "blue", "light blue"),
+  `ice`  = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
   `rainbow` = see_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "red", "pink"),
-  `contrast` = see_colors("blue", "green", "amber", "indigo", "red"),
+  `contrast` = see_colors("blue", "green", "amber", "grey", "red"),
   `complement` = see_colors("blue", "blue grey", "green", "light green","yellow", "amber", "red")
 )
 
