@@ -44,12 +44,14 @@ reference:
   - material_colors
   - metro_colors
   - pizza_colors
+  - see_colors
   - social_colors
   - palette_bluebrown
   - palette_flat
   - palette_material
   - palette_metro
   - palette_pizza
+  - palette_see
   - palette_social
 
 - title: "Miscellaneous"
