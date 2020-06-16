@@ -38,6 +38,7 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' @param highlight Vector with names of categories in \code{x} that should be highlighted.
 #' @param highlight_color Vector of color values for highlighted categories. The remaining (non-highlighted) categories will be filled with a lighter grey.
 #' @inheritParams data_plot
+#' @inheritParams plot.see_check_normality
 #'
 #' @return A ggplot2-object.
 #'

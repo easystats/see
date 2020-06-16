@@ -36,12 +36,23 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{point_size}{Size of point-geoms.}
 
+\item{sort}{\describe{
+  \item{Plotting model parameters}{
+  If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+  }
+  \item{Plotting Bayes factors}{
+  Sort pie-slices by posterior probability (descending)?
+  }
+}}
+
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{...}{Arguments passed to or from other methods.}
 
 \item{data}{The original data used to create this object. Can be a
 statistical model or such.}
+
+\item{type}{Character vector, indicating the type of plot.}
 
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 

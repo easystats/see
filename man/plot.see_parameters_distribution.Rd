@@ -27,6 +27,9 @@
 
 \item{dispersion_style}{Character, style of dispersion area. \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.}
 
+\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
+so this argument may change size of points, lines or bars.}
+
 \item{highlight}{Vector with names of categories in \code{x} that should be highlighted.}
 
 \item{highlight_color}{Vector of color values for highlighted categories. The remaining (non-highlighted) categories will be filled with a lighter grey.}

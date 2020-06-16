@@ -12,7 +12,31 @@ reference:
 - title: "Plotting Functions"
   contents:
   - data_plot
-  - plot
+  - plot.see_bayesfactor_models
+  - plot.see_bayesfactor_parameters
+  - plot.see_equivalence_test
+  - plot.see_estimate_density
+  - plot.see_hdi
+  - plot.see_p_direction
+  - plot.see_p_significance
+  - plot.see_si
+  - plot.see_easycormatrix
+  - plot.see_easycorrelation
+  - plot.see_effectsize_table
+  - plot.see_estimate_contrasts
+  - plot.see_cluster_analysis
+  - plot.see_parameters_distribution
+  - plot.see_parameters_model
+  - plot.see_parameters_pca]{parameters::principal_components()}}
+  - plot.see_n_factors
+  - plot.see_parameters_simulate
+  - plot.see_check_collinearity
+  - plot.see_check_heteroscedasticity
+  - plot.see_check_homogeneity
+  - plot.see_check_normality
+  - plot.see_check_outliers
+  - plot.see_compare_performance
+  - plot.see_performance_roc
   - plots
 
 - title: "Geoms"

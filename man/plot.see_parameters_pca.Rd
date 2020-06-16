@@ -16,6 +16,10 @@
 \arguments{
 \item{x}{An object.}
 
+\item{type}{Character vector, indicating the type of plot.}
+
+\item{text_size}{Size of text labels.}
+
 \item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
 so this argument may change size of points, lines or bars.}
 
