@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' library(performance)
-#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 #' result <- check_normality(m)
 #' plot(result)
 #' @importFrom bayestestR estimate_density
