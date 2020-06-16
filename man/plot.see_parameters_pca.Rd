@@ -20,6 +20,8 @@
 
 \item{text_size}{Size of text labels.}
 
+\item{text_color}{Color of text labels.}
+
 \item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
 so this argument may change size of points, lines or bars.}
 

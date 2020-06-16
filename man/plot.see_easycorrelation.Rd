@@ -25,8 +25,10 @@ A ggplot2-object.
 The \code{plot()} method for the \code{correlation::correlation()} function.
 }
 \examples{
+\dontrun{
 library(correlation)
 library(ggraph)
 result <- correlation(mtcars, partial = TRUE)
 plot(result)
+}
 }
