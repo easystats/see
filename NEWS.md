@@ -1,8 +1,10 @@
 # see 0.5.2
 
-## General
+## Color Scales and Palettes
 
 * Added new color-palettes.
+* Palettes for existing color scales have been revamped.
+* Added `"light"` palettes for dark themes.
 
 # see 0.5.1
 
