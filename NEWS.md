@@ -1,5 +1,9 @@
 # see 0.5.2
 
+## Changes to functions
+
+* `plot()` for `correlation::correlation()` gains a `type` and `size` argument, to plot correlation matrices either as tiles or circles.
+
 ## Color Scales and Palettes
 
 * Added new color-palettes.

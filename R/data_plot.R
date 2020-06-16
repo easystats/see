@@ -53,9 +53,7 @@
 #'   so this argument may change size of points, lines or bars.
 #' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else,
 #'   single plots are returned.
-#' @param type Character vector, indicating the type of plot (for
-#'   \code{\link[performance]{check_normality}}, \code{parameters::model_parameters.lavaan}
-#'   or \code{\link[parameters]{n_factors}}).
+#' @param type Character vector, indicating the type of plot.
 #' @param prior_odds optional vector of prior odds for the models. See
 #'   \code{BayesFactor::priorOdds}. As the size of the pizza slices corresponds
 #'   to posterior probability (which is a function of prior probability and the BF),

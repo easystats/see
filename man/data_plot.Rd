@@ -94,8 +94,10 @@ data_plot(x, data = NULL, ...)
   show_values = FALSE,
   show_p = FALSE,
   show_legend = TRUE,
+  size = 1,
   text_size = 3.5,
   digits = 3,
+  type = c("circle", "tile"),
   ...
 )
 
@@ -269,9 +271,7 @@ posterior distributions for other parameters are hardly visible.}
 \item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else,
 single plots are returned.}
 
-\item{type}{Character vector, indicating the type of plot (for
-\code{\link[performance]{check_normality}}, \code{parameters::model_parameters.lavaan}
-or \code{\link[parameters]{n_factors}}).}
+\item{type}{Character vector, indicating the type of plot.}
 
 \item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
 so this argument may change size of points, lines or bars.}
