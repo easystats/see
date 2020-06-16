@@ -123,6 +123,9 @@
     <li>
       <a href="../articles/seecolorscales.html">Color Scales</a>
     </li>
+    <li>
+      <a href="../articles/seecolorscales_dark.html">Color Scales for Dark Themes</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -158,16 +161,16 @@
     <p>Create a half-violin plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_violinhalf</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"ydensity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"dodge"</span>,
-  <span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"area"</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/see/man/geom_violinhalf.html'>geom_violinhalf</a></span>(
+  mapping = <span class='kw'>NULL</span>,
+  data = <span class='kw'>NULL</span>,
+  stat = <span class='st'>"ydensity"</span>,
+  position = <span class='st'>"dodge"</span>,
+  trim = <span class='fl'>TRUE</span>,
+  scale = <span class='st'>"area"</span>,
+  show.legend = <span class='fl'>NA</span>,
+  inherit.aes = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -244,14 +247,13 @@ to the paired geom/stat.</p></td>
     <div class='dont-index'><p>https://stackoverflow.com/questions/52034747/plot-only-one-side-half-of-the-violin-plot</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>see</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/see'>see</a></span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Species</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>)) +
-  <span class='fu'>geom_violinhalf</span>() +
-  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>() +
-  <span class='fu'><a href='scale_color_material.html'>scale_fill_material_d</a></span>()</div><div class='img'><img src='geom_violinhalf-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Species</span>, y = <span class='kw'>Sepal.Length</span>, fill = <span class='kw'>Species</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/see/man/geom_violinhalf.html'>geom_violinhalf</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/see/man/theme_modern.html'>theme_modern</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/see/man/scale_color_material.html'>scale_fill_material_d</a></span>()</div><div class='img'><img src='geom_violinhalf-1.png' alt='' width='700' height='433' /></div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

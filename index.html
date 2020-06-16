@@ -83,6 +83,9 @@
     <li>
       <a href="articles/seecolorscales.html">Color Scales</a>
     </li>
+    <li>
+      <a href="articles/seecolorscales_dark.html">Color Scales for Dark Themes</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -119,9 +122,13 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Run the following:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"easystats/see"</span>)</pre></div>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"see"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"easystats/see"</span>)
+</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://easystats.github.io/see">"see"</a></span>)
+</pre></div>
 </div>
 </div>
 <div id="features" class="section level1">
@@ -133,39 +140,45 @@
 <div id="modern" class="section level3">
 <h3 class="hasAnchor">
 <a href="#modern" class="anchor"></a>Modern</h3>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Sepal.Width</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>() +
-  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>()</pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Sepal.Width</span>, y = <span class="kw">Sepal.Length</span>, color = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>()
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --></p>
 </div>
 <div id="lucid" class="section level3">
 <h3 class="hasAnchor">
 <a href="#lucid" class="anchor"></a>Lucid</h3>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Sepal.Width</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>() +
-  <span class="fu"><a href="reference/theme_lucid.html">theme_lucid</a></span>()</pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Sepal.Width</span>, y = <span class="kw">Sepal.Length</span>, color = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="reference/theme_lucid.html">theme_lucid</a></span>()
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-5-1.png"><!-- --></p>
 </div>
 <div id="blackboard" class="section level3">
 <h3 class="hasAnchor">
 <a href="#blackboard" class="anchor"></a>Blackboard</h3>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rstanarm</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">modelbased</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://mc-stan.org/rstanarm">rstanarm</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/easystats/modelbased">modelbased</a></span>)
 
-<span class="no">dat</span> <span class="kw">&lt;-</span> <span class="kw pkg">rstanarm</span><span class="kw ns">::</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span>(<span class="no">Sepal.Width</span> ~ <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="no">Petal.Length</span>, <span class="fl">2</span>), <span class="kw">data</span> <span class="kw">=</span> <span class="no">iris</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">modelbased</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/estimate_response.html">estimate_link</a></span>(<span class="kw">keep_draws</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">length</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">draws</span> <span class="kw">=</span> <span class="fl">250</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">modelbased</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/reshape_draws.html">reshape_draws</a></span>()
+<span class="kw">dat</span> <span class="op">&lt;-</span> <span class="kw">rstanarm</span>::<span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span>(<span class="kw">Sepal.Width</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="kw">Petal.Length</span>, <span class="fl">2</span>), data = <span class="kw">iris</span>) <span class="op">%&gt;%</span>
+  <span class="kw">modelbased</span>::<span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/estimate_response.html">estimate_link</a></span>(keep_draws = <span class="fl">TRUE</span>, length = <span class="fl">100</span>, draws = <span class="fl">250</span>) <span class="op">%&gt;%</span>
+  <span class="kw">modelbased</span>::<span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/reshape_draws.html">reshape_draws</a></span>()
 
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Petal.Length</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Draw</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">Draw_Group</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.05</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="kw">expand</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="kw">expand</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>))
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Petal.Length</span>, y = <span class="kw">Draw</span>, group = <span class="kw">Draw_Group</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">"white"</span>, alpha = <span class="fl">0.05</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(expand = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(expand = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>))
 
-<span class="no">p</span> + <span class="fu"><a href="reference/theme_blackboard.html">theme_blackboard</a></span>()</pre></div>
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="reference/theme_blackboard.html">theme_blackboard</a></span>() 
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-7-1.png"><!-- --></p>
 </div>
 <div id="abyss" class="section level3">
@@ -181,74 +194,86 @@
 <div id="material-design" class="section level3">
 <h3 class="hasAnchor">
 <a href="#material-design" class="anchor"></a>Material design</h3>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Species</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>() +
-  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>(<span class="kw">axis.text.angle</span> <span class="kw">=</span> <span class="fl">45</span>) +
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Species</span>, y = <span class="kw">Sepal.Length</span>, fill = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>(axis.text.angle = <span class="fl">45</span>) <span class="op">+</span>
   <span class="fu"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()
 
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Species</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span>() +
-  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>(<span class="kw">axis.text.angle</span> <span class="kw">=</span> <span class="fl">45</span>) +
-  <span class="fu"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"ice"</span>)
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Species</span>, y = <span class="kw">Sepal.Length</span>, fill = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>(axis.text.angle = <span class="fl">45</span>) <span class="op">+</span>
+  <span class="fu"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>(palette = <span class="st">"ice"</span>)
 
-<span class="no">p3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Petal.Length</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Petal.Width</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>)) +
-  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>() +
-  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>() +
-  <span class="fu"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"rainbow"</span>)</pre></div>
+<span class="kw">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Petal.Length</span>, y = <span class="kw">Petal.Width</span>, color = <span class="kw">Sepal.Length</span>)) <span class="op">+</span>
+  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="reference/scale_color_material.html">scale_color_material_c</a></span>(palette = <span class="st">"rainbow"</span>)
+</pre></div>
 </div>
 </div>
 <div id="multiple-plots" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multiple-plots" class="anchor"></a>Multiple plots</h2>
 <p>The <code><a href="reference/plots.html">plots()</a></code> function allows us to plot the figures side by side.</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/plots.html">plots</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="no">p3</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, <span class="kw">p3</span>, n_columns = <span class="fl">2</span>)
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-10-1.png"><!-- --></p>
 <p>The <code><a href="reference/plots.html">plots()</a></code> function can also be used to add <strong>tags</strong> (<em>i.e.</em>, labels for subfigures).</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="reference/plots.html">plots</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="no">p3</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>,
-      <span class="kw">tags</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Fig. "</span>, <span class="fl">1</span>:<span class="fl">3</span>))</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, <span class="kw">p3</span>, n_columns = <span class="fl">2</span>, 
+      tags = <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Fig. "</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>))
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-11-1.png"><!-- --></p>
 </div>
 <div id="better-looking-points" class="section level2">
 <h2 class="hasAnchor">
 <a href="#better-looking-points" class="anchor"></a>Better looking points</h2>
 <p><code>geom_points2()</code> and <code><a href="reference/geom_point2.html">geom_jitter2()</a></code> allow points without borders and contour.</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="no">normal</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Petal.Width</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">8</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.3</span>) +
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">normal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Petal.Width</span>, y = <span class="kw">Sepal.Length</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(size = <span class="fl">8</span>, alpha = <span class="fl">0.3</span>) <span class="op">+</span>
   <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>()
 
-<span class="no">new</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Petal.Width</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>)) +
-  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">8</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.3</span>) +
+<span class="kw">new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Petal.Width</span>, y = <span class="kw">Sepal.Length</span>)) <span class="op">+</span>
+  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">8</span>, alpha = <span class="fl">0.3</span>) <span class="op">+</span>
   <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>()
 
-<span class="fu"><a href="reference/plots.html">plots</a></span>(<span class="no">normal</span>, <span class="no">new</span>, <span class="kw">n_columns</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></div>
+<span class="fu"><a href="reference/plots.html">plots</a></span>(<span class="kw">normal</span>, <span class="kw">new</span>, n_columns = <span class="fl">2</span>)
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-12-1.png"><!-- --></p>
 </div>
 <div id="half-violin-half-dot-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#half-violin-half-dot-plot" class="anchor"></a>Half-violin Half-dot plot</h2>
 <p>Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Species</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">Sepal.Length</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="reference/geom_violindot.html">geom_violindot</a></span>(<span class="kw">fill_dots</span> <span class="kw">=</span> <span class="st">"black"</span>) +
-  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>() +
-  <span class="fu"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()</pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Species</span>, y = <span class="kw">Sepal.Length</span>, fill = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="reference/geom_violindot.html">geom_violindot</a></span>(fill_dots = <span class="st">"black"</span>) <span class="op">+</span>
+  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span>()
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-13-1.png"><!-- --></p>
 </div>
 <div id="radar-chart-spider-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#radar-chart-spider-plot" class="anchor"></a>Radar chart (Spider plot)</h2>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tidyr.tidyverse.org">tidyr</a></span>)
 
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="no">iris</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">Species</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_all</a></span>(<span class="no">mean</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span>(-<span class="no">Species</span>)
+<span class="kw">data</span> <span class="op">&lt;-</span> <span class="kw">iris</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="kw">Species</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_all</a></span>(<span class="kw">mean</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span>(<span class="op">-</span><span class="kw">Species</span>)
 
-<span class="no">data</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">name</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">value</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">Species</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="fl">NA</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">show.legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
-  <span class="fu"><a href="reference/coord_radar.html">coord_radar</a></span>(<span class="kw">start</span> <span class="kw">=</span> -<span class="no">pi</span>/<span class="fl">4</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()</pre></div>
+<span class="kw">data</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">name</span>, y = <span class="kw">value</span>, color = <span class="kw">Species</span>, group = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a></span>(fill = <span class="fl">NA</span>, size = <span class="fl">2</span>, show.legend = <span class="fl">FALSE</span>) <span class="op">+</span>
+  <span class="fu"><a href="reference/coord_radar.html">coord_radar</a></span>(start = <span class="op">-</span><span class="kw">pi</span><span class="op">/</span><span class="fl">4</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
+</pre></div>
 <p><img src="reference/figures/unnamed-chunk-14-1.png"><!-- --></p>
 </div>
 <div id="plot-functions-for-easystats-packages" class="section level2">

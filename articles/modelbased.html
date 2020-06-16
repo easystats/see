@@ -81,6 +81,9 @@
     <li>
       <a href="../articles/seecolorscales.html">Color Scales</a>
     </li>
+    <li>
+      <a href="../articles/seecolorscales_dark.html">Color Scales for Dark Themes</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -120,22 +123,26 @@
 <div id="setup-and-model-fitting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup-and-model-fitting" class="anchor"></a>Setup and Model Fitting</h2>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">modelbased</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rstanarm</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">see</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/easystats/modelbased">modelbased</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://mc-stan.org/rstanarm">rstanarm</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://easystats.github.io/see">see</a></span>)
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="../reference/theme_modern.html">theme_modern</a></span>())
 
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span>(<span class="no">Sepal.Width</span> ~ <span class="no">Species</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">iris</span>, <span class="kw">refresh</span> <span class="kw">=</span> <span class="fl">0</span>)</pre></body></html></div>
+<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span>(<span class="kw">Sepal.Width</span> <span class="op">~</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>, refresh = <span class="fl">0</span>)
+</pre></div>
 </div>
 <div id="pairwise-contrasts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pairwise-contrasts" class="anchor"></a>Pairwise Contrasts</h2>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">contrasts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/estimate_contrasts.html">estimate_contrasts</a></span>(<span class="no">model</span>)
-<span class="no">means</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/estimate_means.html">estimate_means</a></span>(<span class="no">model</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/estimate_contrasts.html">estimate_contrasts</a></span>(<span class="kw">model</span>)
+<span class="kw">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modelbased/man/estimate_means.html">estimate_means</a></span>(<span class="kw">model</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">contrasts</span>, <span class="no">means</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">contrasts</span>, <span class="kw">means</span>)
+</pre></div>
 <p><img src="modelbased_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 </div>
   </div>
