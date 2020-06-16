@@ -196,12 +196,15 @@ so this argument may change size of points, lines or bars.</p></td>
     <p>A ggplot2-object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/parameters'>parameters</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mtcars</span>)
-<span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/parameters/man/n_factors.html'>n_factors</a></span>(<span class='kw'>mtcars</span>, type = <span class='st'>"PCA"</span>)
-<span class='kw'>result</span></div><div class='output co'>#&gt; <span style='color: #0000BB;'># Method Agreement Procedure:
-#&gt; 
-#&gt; </span><span>The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>, type = <span class='st'>"line"</span>)</div><div class='img'><img src='plot.see_n_factors-1.png' alt='' width='700' height='433' /></div></span></pre>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'><a href='https://easystats.github.io/parameters'>"parameters"</a></span>) <span class='op'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"nFactors"</span>)) {
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mtcars</span>)
+  <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/parameters/man/n_factors.html'>n_factors</a></span>(<span class='kw'>mtcars</span>, type = <span class='st'>"PCA"</span>)
+  <span class='kw'>result</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>, type = <span class='st'>"line"</span>)
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: nFactors</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘nFactors’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:lattice’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    parallel</span></div><div class='img'><img src='plot.see_n_factors-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
