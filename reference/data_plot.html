@@ -47,9 +47,38 @@
 
 
 <meta property="og:title" content="Prepare objects for plotting or plot objects — data_plot" />
-<meta property="og:description" content="data_plot() attempts to extract and tranform an object
+<meta property="og:description" content="data_plot() attempts to extract and transform an object
 to be further plotted, while plot() tries to visualize results of
-functions from different packages of the easystats-project." />
+functions from different packages of the easystats-project.
+See the documentation for your object's class:
+bayestestR::bayesfactor_models()
+bayestestR::bayesfactor_parameters()
+bayestestR::equivalence_test()
+bayestestR::estimate_density()
+bayestestR::hdi()
+bayestestR::p_direction()
+bayestestR::p_significance()
+bayestestR::si()
+correlation::correlation()
+correlation::correlation() (Gaussian Graphical Models)
+effectsize::effectsize()
+modelbased::estimate_contrasts()
+parameters::cluster_analysis()
+parameters::describe_distribution()
+parameters::model_parameters()
+parameters::principal_components()
+parameters::n_clusters()
+parameters::n_factors()
+parameters::simulate_parameters()
+performance::check_collinearity()
+performance::check_heteroscedasticity()
+performance::check_homogeneity()
+performance::check_normality()
+performance::check_outliers()
+performance::compare_performance()
+performance::performance_roc()
+
+" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -155,230 +184,46 @@ functions from different packages of the easystats-project." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Prepare objects for plotting or plot objects</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/see/blob/master/R/data_plot.R'><code>R/data_plot.R</code></a>, <a href='https://github.com/easystats/see/blob/master/R/plot.bayesfactor_models.R'><code>R/plot.bayesfactor_models.R</code></a>, <a href='https://github.com/easystats/see/blob/master/R/plot.bayesfactor_parameters.R'><code>R/plot.bayesfactor_parameters.R</code></a>, and 22 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/see/blob/master/R/data_plot.R'><code>R/data_plot.R</code></a></small>
     <div class="hidden name"><code>data_plot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='https://rdrr.io/pkg/see/man/data_plot.html'>data_plot()</a></code> attempts to extract and tranform an object
+    <p><code><a href='https://rdrr.io/pkg/see/man/data_plot.html'>data_plot()</a></code> attempts to extract and transform an object
 to be further plotted, while <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> tries to visualize results of
-functions from different packages of the <a href='https://github.com/easystats'>easystats-project</a>.</p>
+functions from different packages of the <a href='https://github.com/easystats'>easystats-project</a>.
+See the documentation for your object's class:</p><ul>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_bayesfactor_models.html'>bayestestR::bayesfactor_models()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_bayesfactor_parameters.html'>bayestestR::bayesfactor_parameters()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_equivalence_test.html'>bayestestR::equivalence_test()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_estimate_density.html'>bayestestR::estimate_density()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_hdi.html'>bayestestR::hdi()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_p_direction.html'>bayestestR::p_direction()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_p_significance.html'>bayestestR::p_significance()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_si.html'>bayestestR::si()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_easycormatrix.html'>correlation::correlation()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_easycorrelation.html'>correlation::correlation()</a> (Gaussian Graphical Models)</p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_effectsize_table.html'>effectsize::effectsize()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_estimate_contrasts.html'>modelbased::estimate_contrasts()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_cluster_analysis.html'>parameters::cluster_analysis()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_parameters_distribution.html'>parameters::describe_distribution()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_parameters_model.html'>parameters::model_parameters()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_parameters_pca.html'>parameters::principal_components()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_n_factors.html'>parameters::n_clusters()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_n_factors.html'>parameters::n_factors()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_parameters_simulate.html'>parameters::simulate_parameters()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_check_collinearity.html'>performance::check_collinearity()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_check_heteroscedasticity.html'>performance::check_heteroscedasticity()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_check_homogeneity.html'>performance::check_homogeneity()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_check_normality.html'>performance::check_normality()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_check_outliers.html'>performance::check_outliers()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_compare_performance.html'>performance::compare_performance()</a></p></li>
+<li><p><a href='https://rdrr.io/pkg/see/man/plot.see_performance_roc.html'>performance::performance_roc()</a></p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/see/man/data_plot.html'>data_plot</a></span>(<span class='kw'>x</span>, data = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_bayesfactor_models</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  n_pies = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"one"</span>, <span class='st'>"many"</span>),
-  value = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"BF"</span>, <span class='st'>"probability"</span>),
-  sort = <span class='fl'>FALSE</span>,
-  log = <span class='fl'>FALSE</span>,
-  prior_odds = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_bayesfactor_parameters</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  point_size = <span class='fl'>2</span>,
-  rope_color = <span class='st'>"#0171D3"</span>,
-  rope_alpha = <span class='fl'>0.2</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_check_distribution</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, point_size = <span class='fl'>2</span>, panel = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_check_normality</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"density"</span>, <span class='st'>"qq"</span>, <span class='st'>"pp"</span>),
-  data = <span class='kw'>NULL</span>,
-  size = <span class='fl'>0.8</span>,
-  point_size = <span class='fl'>2</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_check_outliers</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, text_size = <span class='fl'>3.5</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_cluster_analysis</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, data = <span class='kw'>NULL</span>, n_columns = <span class='kw'>NULL</span>, size = <span class='fl'>0.6</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_compare_performance</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, size = <span class='fl'>1</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_parameters_distribution</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  dispersion = <span class='fl'>FALSE</span>,
-  dispersion_alpha = <span class='fl'>0.3</span>,
-  dispersion_color = <span class='st'>"#3498db"</span>,
-  dispersion_style = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ribbon"</span>, <span class='st'>"curve"</span>),
-  size = <span class='fl'>0.7</span>,
-  highlight = <span class='kw'>NULL</span>,
-  highlight_color = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_easycormatrix</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  show_values = <span class='fl'>FALSE</span>,
-  show_p = <span class='fl'>FALSE</span>,
-  show_legend = <span class='fl'>TRUE</span>,
-  size = <span class='fl'>1</span>,
-  text_size = <span class='fl'>3.5</span>,
-  digits = <span class='fl'>3</span>,
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"circle"</span>, <span class='st'>"tile"</span>),
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_easycorrelation</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, size = <span class='fl'>22</span>, text_color = <span class='st'>"white"</span>, node_color = <span class='st'>"#647687"</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_effectsize_table</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_equivalence_test_effectsize</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_equivalence_test</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  rope_color = <span class='st'>"#0171D3"</span>,
-  rope_alpha = <span class='fl'>0.2</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  n_columns = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_estimate_density</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  stack = <span class='fl'>TRUE</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  n_columns = <span class='fl'>1</span>,
-  priors = <span class='fl'>FALSE</span>,
-  priors_alpha = <span class='fl'>0.4</span>,
-  size = <span class='fl'>0.9</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_hdi</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  data = <span class='kw'>NULL</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  show_zero = <span class='fl'>TRUE</span>,
-  show_title = <span class='fl'>TRUE</span>,
-  n_columns = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_n_factors</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, data = <span class='kw'>NULL</span>, type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bar"</span>, <span class='st'>"line"</span>, <span class='st'>"area"</span>), size = <span class='fl'>1</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for see_p_direction</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  data = <span class='kw'>NULL</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  priors = <span class='fl'>FALSE</span>,
-  priors_alpha = <span class='fl'>0.4</span>,
-  n_columns = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_p_significance</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  data = <span class='kw'>NULL</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  priors = <span class='fl'>FALSE</span>,
-  priors_alpha = <span class='fl'>0.4</span>,
-  n_columns = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_parameters_model</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  point_size = <span class='fl'>0.8</span>,
-  sort = <span class='kw'>NULL</span>,
-  n_columns = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_parameters_pca</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bar"</span>, <span class='st'>"line"</span>),
-  text_size = <span class='fl'>3.5</span>,
-  text_color = <span class='st'>"black"</span>,
-  size = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_parameters_sem</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  data = <span class='kw'>NULL</span>,
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"regression"</span>, <span class='st'>"correlation"</span>, <span class='st'>"loading"</span>),
-  threshold_coefficient = <span class='kw'>NULL</span>,
-  threshold_p = <span class='kw'>NULL</span>,
-  ci = <span class='fl'>TRUE</span>,
-  size = <span class='fl'>22</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_parameters_simulate</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  data = <span class='kw'>NULL</span>,
-  stack = <span class='fl'>TRUE</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  n_columns = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_point_estimate</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  data = <span class='kw'>NULL</span>,
-  point_size = <span class='fl'>2</span>,
-  text_size = <span class='fl'>3.5</span>,
-  panel = <span class='fl'>TRUE</span>,
-  show_labels = <span class='fl'>TRUE</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  priors = <span class='fl'>FALSE</span>,
-  priors_alpha = <span class='fl'>0.4</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_rope</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  data = <span class='kw'>NULL</span>,
-  rope_alpha = <span class='fl'>0.5</span>,
-  rope_color = <span class='st'>"cadetblue"</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  n_columns = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for see_si</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  si_color = <span class='st'>"#0171D3"</span>,
-  si_alpha = <span class='fl'>0.2</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  support_only = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/see/man/data_plot.html'>data_plot</a></span>(<span class='kw'>x</span>, data = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -395,167 +240,6 @@ statistical model or such.</p></td>
     <tr>
       <th>...</th>
       <td><p>Arguments passed to or from other methods.</p></td>
-    </tr>
-    <tr>
-      <th>n_pies</th>
-      <td><p>Number of pies.</p></td>
-    </tr>
-    <tr>
-      <th>value</th>
-      <td><p>What value to display.</p></td>
-    </tr>
-    <tr>
-      <th>sort</th>
-      <td><dl>
-  <dt>Plotting model parameters</dt><dd><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></dd>
-  <dt>Plotting Bayes factors</dt><dd><p>Sort pie-slices by posterior probability (descending)?</p></dd>
-
-</dl></td>
-    </tr>
-    <tr>
-      <th>log</th>
-      <td><p>Show log-transformed Bayes factors.</p></td>
-    </tr>
-    <tr>
-      <th>prior_odds</th>
-      <td><p>optional vector of prior odds for the models. See
-<code>BayesFactor::priorOdds</code>. As the size of the pizza slices corresponds
-to posterior probability (which is a function of prior probability and the BF),
-custom <code>prior_odds</code> will change the slices' size.</p></td>
-    </tr>
-    <tr>
-      <th>point_size</th>
-      <td><p>Size of point-geoms.</p></td>
-    </tr>
-    <tr>
-      <th>rope_color, si_color</th>
-      <td><p>Color of ROPE/SI ribbon.</p></td>
-    </tr>
-    <tr>
-      <th>rope_alpha, si_alpha</th>
-      <td><p>Transparency level of ROPE/SI ribbon.</p></td>
-    </tr>
-    <tr>
-      <th>show_intercept</th>
-      <td><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.</p></td>
-    </tr>
-    <tr>
-      <th>panel</th>
-      <td><p>Logical, if <code>TRUE</code>, plots are arranged as panels; else,
-single plots are returned.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>Character vector, indicating the type of plot.</p></td>
-    </tr>
-    <tr>
-      <th>size</th>
-      <td><p>Size of geoms. Depends on the context of the <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> function,
-so this argument may change size of points, lines or bars.</p></td>
-    </tr>
-    <tr>
-      <th>text_size</th>
-      <td><p>Size of text labels.</p></td>
-    </tr>
-    <tr>
-      <th>n_columns</th>
-      <td><p>For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></td>
-    </tr>
-    <tr>
-      <th>dispersion</th>
-      <td><p>Logical, if <code>TRUE</code>, will add range of dispersion for each variable to the plot.</p></td>
-    </tr>
-    <tr>
-      <th>dispersion_alpha</th>
-      <td><p>Transparency level of dispersion ribbon.</p></td>
-    </tr>
-    <tr>
-      <th>dispersion_color</th>
-      <td><p>Color of dispersion ribbon.</p></td>
-    </tr>
-    <tr>
-      <th>dispersion_style</th>
-      <td><p>Character, style of dispersion area. <code>"ribbon"</code> for a ribbon, <code>"curve"</code> for a normal-curve.</p></td>
-    </tr>
-    <tr>
-      <th>highlight</th>
-      <td><p>Vector with names of categories in <code>x</code> that should be highlighted.</p></td>
-    </tr>
-    <tr>
-      <th>highlight_color</th>
-      <td><p>Vector of color values for highlighted categories. The remaining (non-highlighted) categories will be filled with a lighter grey.</p></td>
-    </tr>
-    <tr>
-      <th>show_values</th>
-      <td><p>Logical, if <code>TRUE</code>, values are displayed.</p></td>
-    </tr>
-    <tr>
-      <th>show_p</th>
-      <td><p>Logical, if <code>TRUE</code>, p-values or significant level is displayed.</p></td>
-    </tr>
-    <tr>
-      <th>show_legend</th>
-      <td><p>Logical, show or hide legend.</p></td>
-    </tr>
-    <tr>
-      <th>digits</th>
-      <td><p>Number of decimals used for values.</p></td>
-    </tr>
-    <tr>
-      <th>text_color</th>
-      <td><p>Color of text labels.</p></td>
-    </tr>
-    <tr>
-      <th>node_color</th>
-      <td><p>Color of node- or circle-geoms.</p></td>
-    </tr>
-    <tr>
-      <th>stack</th>
-      <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
-Else, densities are plotted for each parameter among each other.</p></td>
-    </tr>
-    <tr>
-      <th>priors</th>
-      <td><p>Logical, if <code>TRUE</code>, prior distributions are simulated
-(using <code><a href='https://rdrr.io/pkg/bayestestR/man/simulate_prior.html'>simulate_prior</a></code>) and added to the plot.</p></td>
-    </tr>
-    <tr>
-      <th>priors_alpha</th>
-      <td><p>Alpha value of the prior distributions.</p></td>
-    </tr>
-    <tr>
-      <th>show_zero</th>
-      <td><p>Logical, if <code>TRUE</code>, will add a vertical (dotted) line at 0.</p></td>
-    </tr>
-    <tr>
-      <th>show_title</th>
-      <td><p>Logical, if <code>TRUE</code>, will show the title of the plot.</p></td>
-    </tr>
-    <tr>
-      <th>threshold_coefficient</th>
-      <td><p>Numeric, threshold at which value coefficients will be displayed.</p></td>
-    </tr>
-    <tr>
-      <th>threshold_p</th>
-      <td><p>Numeric, threshold at which value p-values will be displayed.</p></td>
-    </tr>
-    <tr>
-      <th>ci</th>
-      <td><p>Logical, whether confidence intervals should be added to the plot.</p></td>
-    </tr>
-    <tr>
-      <th>show_labels</th>
-      <td><p>Logical, if <code>TRUE</code>, the text labels for the point
-estimates (i.e. <em>"Mean"</em>, <em>"Median"</em> and/or <em>"MAP"</em>) are shown.
-You may set <code>show_labels = FALSE</code> in case of overlapping labels, and
-add your own legend or footnote to the plot.</p></td>
-    </tr>
-    <tr>
-      <th>support_only</th>
-      <td><p>Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting <code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>si</a></code>.</p></td>
     </tr>
     </table>
 
@@ -584,7 +268,7 @@ are shown in the 'Usage' section.</p>
   <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span>(
     <span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Width</span> <span class='op'>*</span> <span class='kw'>Species</span>,
     data = <span class='kw'>iris</span>,
-    chains = <span class='fl'>2</span>, iter = <span class='fl'>200</span>
+    chains = <span class='fl'>2</span>, iter = <span class='fl'>200</span>, refresh = <span class='fl'>0</span>
   )
 
   <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/rope.html'>rope</a></span>(<span class='kw'>model</span>)
@@ -604,25 +288,14 @@ are shown in the 'Usage' section.</p>
     <span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>wt</span> <span class='op'>+</span> <span class='kw'>gear</span> <span class='op'>+</span> <span class='kw'>cyl</span> <span class='op'>+</span> <span class='kw'>disp</span>,
     chains = <span class='fl'>2</span>,
     iter = <span class='fl'>200</span>,
+    refresh = <span class='fl'>0</span>,
     data = <span class='kw'>mtcars</span>
   )
   <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/equivalence_test.html'>equivalence_test</a></span>(<span class='kw'>model</span>)
   <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>)
 }
 }
-
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/bayestestR'>bayestestR</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/see'>see</a></span>)
-
-<span class='kw'>lm0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>qsec</span> <span class='op'>~</span> <span class='fl'>1</span>, data = <span class='kw'>mtcars</span>)
-<span class='kw'>lm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>qsec</span> <span class='op'>~</span> <span class='kw'>drat</span>, data = <span class='kw'>mtcars</span>)
-<span class='kw'>lm2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>qsec</span> <span class='op'>~</span> <span class='kw'>wt</span>, data = <span class='kw'>mtcars</span>)
-<span class='kw'>lm3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>qsec</span> <span class='op'>~</span> <span class='kw'>drat</span> <span class='op'>+</span> <span class='kw'>wt</span>, data = <span class='kw'>mtcars</span>)
-
-<span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/bayesfactor_models.html'>bayesfactor_models</a></span>(<span class='kw'>lm1</span>, <span class='kw'>lm2</span>, <span class='kw'>lm3</span>, denominator = <span class='kw'>lm0</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>, n_pies = <span class='st'>"one"</span>, value = <span class='st'>"probability"</span>) <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/see/man/theme_modern.html'>theme_modern</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/see/man/scale_color_pizza.html'>scale_fill_pizza</a></span>(reverse = <span class='fl'>TRUE</span>)</div><div class='img'><img src='data_plot-1.png' alt='' width='700' height='433' /></div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
