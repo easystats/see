@@ -229,7 +229,7 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRU
     }
   }
 
-  p
+  p + scale_fill_flat(reverse = TRUE)
 }
 
 

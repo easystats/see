@@ -166,18 +166,18 @@ print.see_check_model <- function(x, ...) {
         title = sprintf("Normality of Random Effects (%s)", i),
         subtitle = "Dots should be plotted along the line"
       ) +
-      geom_errorbar(
-        aes(ymin = .data$conf.low, ymax = .data$conf.high),
-        width = 0,
-        colour = "#2c3e50"
-      ) +
-      geom_point2(colour = "#2c3e50", size = point_size) +
       stat_smooth(
         method = "lm",
         alpha = .2,
         size = line_size,
         colour = unname(flat_colors("teal"))
       ) +
+      geom_errorbar(
+        aes(ymin = .data$conf.low, ymax = .data$conf.high),
+        width = 0,
+        colour = "#2c3e50"
+      ) +
+      geom_point2(colour = "#2c3e50", size = point_size) +
       theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 
     if (nlevels(dat$facet) > 1 && isTRUE(panel)) {

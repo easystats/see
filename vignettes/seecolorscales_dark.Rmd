@@ -1,8 +1,8 @@
 ---
-title: "Color Scales"
+title: "Color Scales for Dark Themes"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{seecolorscales}
+  %\VignetteIndexEntry{seecolorscalesdark}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -61,25 +61,25 @@ d3 <- data.frame(
   group = rep(factor(1:5), each = 20)
 )
 
-theme_set(theme_modern(legend.position = "bottom"))
+theme_set(theme_abyss(legend.position = "bottom"))
 ```
 
 # The *see* Color Scales
 
 There are several different [color scales available](https://easystats.github.io/see/reference/index.html#section-scales) in the *see* package, most of them having some pre-defined palettes like `"full"`, `"ice"`, `"rainbow"`, `"complement"`, `"contrast"`, or `"light"` - exceptions are the [pizza color scale](https://easystats.github.io/see/reference/scale_color_pizza.html) and [bluebrown color scale](https://easystats.github.io/see/reference/scale_color_blubrown.html).
 
-In this vignettes, we show the default palettes for the different color scales to give an impression how these scales work with different type of data.
+In this vignettes, we show the `"light"` palettes for the different color scales to give an impression how these scales work with different type of data, especially for *dark themes*.
 
 ## Social Colors - Three Groups
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_social()
+  scale_color_social(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
-  scale_color_social()
+  scale_color_social(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -89,11 +89,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_social()
+  scale_color_social(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
-  scale_color_social()
+  scale_color_social(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -103,11 +103,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_social()
+  scale_color_social(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
-  scale_color_social()
+  scale_color_social(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -120,11 +120,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_material()
+  scale_color_material(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
-  scale_color_material()
+  scale_color_material(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -134,11 +134,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_material()
+  scale_color_material(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
-  scale_color_material()
+  scale_color_material(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -148,11 +148,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_material()
+  scale_color_material(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
-  scale_color_material()
+  scale_color_material(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -164,11 +164,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_flat()
+  scale_color_flat(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
-  scale_color_flat()
+  scale_color_flat(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -178,11 +178,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_flat()
+  scale_color_flat(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
-  scale_color_flat()
+  scale_color_flat(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -192,11 +192,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_flat()
+  scale_color_flat(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
-  scale_color_flat()
+  scale_color_flat(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -209,11 +209,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_metro()
+  scale_color_metro(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
-  scale_color_metro()
+  scale_color_metro(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -223,11 +223,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_metro()
+  scale_color_metro(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
-  scale_color_metro()
+  scale_color_metro(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -237,11 +237,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_metro()
+  scale_color_metro(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
-  scale_color_metro()
+  scale_color_metro(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -254,11 +254,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_see()
+  scale_color_see(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
   geom_point2(size = 2.5) +
-  scale_color_see()
+  scale_color_see(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -268,11 +268,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_see()
+  scale_color_see(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
   geom_point2(size = 2.5) +
-  scale_color_see()
+  scale_color_see(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -282,11 +282,11 @@ plots(p1, p2, n_rows = 1)
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
   geom_line(size = 1) +
-  scale_color_see()
+  scale_color_see(palette = "light")
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
   geom_point2(size = 2.5) +
-  scale_color_see()
+  scale_color_see(palette = "light")
 
 plots(p1, p2, n_rows = 1)
 ```
@@ -336,49 +336,6 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
-# Bluebrown Colors
-
-## Bluebrown Colors - Three Groups
-
-```{r}
-p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
-  scale_color_bluebrown()
-
-p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
-  geom_point2(size = 2.5) +
-  scale_color_bluebrown()
-
-plots(p1, p2, n_rows = 1)
-```
-
-## Bluebrown Colors - Four Groups
-
-```{r}
-p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
-  scale_color_bluebrown()
-
-p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
-  geom_point2(size = 2.5) +
-  scale_color_bluebrown()
-
-plots(p1, p2, n_rows = 1)
-```
-
-## Bluebrown Colors - Five Groups
-
-```{r}
-p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
-  scale_color_bluebrown()
-
-p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
-  geom_point2(size = 2.5) +
-  scale_color_bluebrown()
-
-plots(p1, p2, n_rows = 1)
-```
 
 # Overview of Palette Colors
 

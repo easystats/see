@@ -36,5 +36,5 @@ plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size = .
       scale_x_discrete(labels = NULL, breaks = NULL)
   }
 
-  p
+  p + scale_fill_flat()
 }

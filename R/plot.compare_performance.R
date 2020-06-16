@@ -79,7 +79,8 @@ plot.see_compare_performance <- function(x, size = 1, ...) {
     scale_y_continuous(limits = c(0, 1), labels = NULL) +
     add_plot_attributes(x) +
     guides(fill = "none") +
-    theme_radar()
+    theme_radar() +
+    scale_color_see()
 
   p
 }

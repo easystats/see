@@ -189,6 +189,6 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
     }
   }
 
-  p
+  p + scale_fill_flat(reverse = TRUE)
 }
 

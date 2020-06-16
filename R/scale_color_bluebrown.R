@@ -102,9 +102,9 @@ bluebrown_colors_list <- c(
   `blue` = "#5B93AE",
   `darkblue` = "#1F4454",
   `grey` = "#dbdbdb",
-  `darkbrown` = "#391D07",
+  `lightbrown` = "#92673C",
   `brown` = "#61381A",
-  `lightbrown` = "#92673C"
+  `darkbrown` = "#391D07"
 )
 
 
@@ -136,7 +136,7 @@ bluebrown_colors <- function(...) {
 
 bluebrown_palettes <- list(
   `full`  = bluebrown_colors(),
-  `contrast` = bluebrown_colors("lightblue", "lightbrown", "blue", "grey", "brown", "darkblue", "darkbrown")
+  `contrast` = bluebrown_colors("lightblue", "blue", "darkblue", "grey", "darkbrown", "brown", "lightbrown")
 )
 
 

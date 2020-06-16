@@ -159,6 +159,7 @@ metro_palettes <- list(
   `ice`  = metro_colors("purple", "deep purple", "blue", "light blue"),
   `rainbow` = metro_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
   `contrast` = metro_colors("blue", "green", "amber", "purple", "red"),
+  `light` = material_colors("light blue", "red", "yellow", "light green", "orange"),
   `complement` = metro_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
 )
 

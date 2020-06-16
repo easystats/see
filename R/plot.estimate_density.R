@@ -90,7 +90,8 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
           show_intercept = show_intercept,
           priors_alpha = priors_alpha
         ) +
-        ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = .7)
+        ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = .7) +
+        scale_fill_flat(reverse = TRUE)
     } else {
       p <- p + ggridges::geom_ridgeline()
     }
