@@ -12,6 +12,7 @@ reference:
 - title: "Plotting Functions"
   contents:
   - data_plot
+  - plot
   - plots
 
 - title: "Geoms"
