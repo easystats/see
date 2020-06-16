@@ -56,7 +56,7 @@ plot(s, size = 2)
 To change the style of geoms, use the `type`-argument.
  
 ```{r}
-plot(s, type = "square")
+plot(s, type = "tile")
 ```
 
 It is also possible to add correlation coefficients and p-values.
