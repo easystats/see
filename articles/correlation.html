@@ -158,16 +158,21 @@
 <p>The result from <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> can be used to create a plot.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">result</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">s</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">s</span>, size = <span class="fl">2</span>)
 </pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<p>It is also possible to add correlation coefficients and p-values.</p>
+<p>To change the style of geoms, use the <code>type</code>-argument.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">s</span>, show_values = <span class="fl">TRUE</span>, show_p = <span class="fl">TRUE</span>, show_legend = <span class="fl">FALSE</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">s</span>, type = <span class="st">"tile"</span>)
 </pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<p>And a “redundant” summary can be plotted as well:</p>
+<p>It is also possible to add correlation coefficients and p-values.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">s</span>, show_values = <span class="fl">TRUE</span>, show_p = <span class="fl">TRUE</span>, show_legend = <span class="fl">FALSE</span>)
+</pre></div>
+<p><img src="correlation_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p>And a “redundant” summary can be plotted as well:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="kw">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">result</span>, redundant = <span class="fl">TRUE</span>)
 
 <span class="kw">s</span>
@@ -180,13 +185,60 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">s</span>)
 </pre></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p>For larger correlation matrices, the <code>size</code> argument can be used to adjust size of point geoms.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation</a></span>(<span class="kw">mtcars</span>[, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">8</span><span class="op">:</span><span class="fl">9</span>)])
+<span class="kw">result</span>
+<span class="co">#&gt; Parameter1 | Parameter2 |     r |         95% CI |     t | df |      p |  Method | n_Obs</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; mpg        |        cyl | -0.85 | [-0.93, -0.72] | -8.92 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; mpg        |       disp | -0.85 | [-0.92, -0.71] | -8.75 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; mpg        |         hp | -0.78 | [-0.89, -0.59] | -6.74 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; mpg        |       drat |  0.68 | [ 0.44,  0.83] |  5.10 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; mpg        |         wt | -0.87 | [-0.93, -0.74] | -9.56 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; mpg        |       qsec |  0.42 | [ 0.08,  0.67] |  2.53 | 30 | 0.137  | Pearson |    32</span>
+<span class="co">#&gt; mpg        |       gear |  0.48 | [ 0.16,  0.71] |  3.00 | 30 | 0.065  | Pearson |    32</span>
+<span class="co">#&gt; mpg        |       carb | -0.55 | [-0.75, -0.25] | -3.62 | 30 | 0.016  | Pearson |    32</span>
+<span class="co">#&gt; cyl        |       disp |  0.90 | [ 0.81,  0.95] | 11.45 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; cyl        |         hp |  0.83 | [ 0.68,  0.92] |  8.23 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; cyl        |       drat | -0.70 | [-0.84, -0.46] | -5.37 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; cyl        |         wt |  0.78 | [ 0.60,  0.89] |  6.88 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; cyl        |       qsec | -0.59 | [-0.78, -0.31] | -4.02 | 30 | 0.007  | Pearson |    32</span>
+<span class="co">#&gt; cyl        |       gear | -0.49 | [-0.72, -0.17] | -3.10 | 30 | 0.054  | Pearson |    32</span>
+<span class="co">#&gt; cyl        |       carb |  0.53 | [ 0.22,  0.74] |  3.40 | 30 | 0.027  | Pearson |    32</span>
+<span class="co">#&gt; disp       |         hp |  0.79 | [ 0.61,  0.89] |  7.08 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; disp       |       drat | -0.71 | [-0.85, -0.48] | -5.53 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; disp       |         wt |  0.89 | [ 0.78,  0.94] | 10.58 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; disp       |       qsec | -0.43 | [-0.68, -0.10] | -2.64 | 30 | 0.131  | Pearson |    32</span>
+<span class="co">#&gt; disp       |       gear | -0.56 | [-0.76, -0.26] | -3.66 | 30 | 0.015  | Pearson |    32</span>
+<span class="co">#&gt; disp       |       carb |  0.39 | [ 0.05,  0.65] |  2.35 | 30 | 0.177  | Pearson |    32</span>
+<span class="co">#&gt; hp         |       drat | -0.45 | [-0.69, -0.12] | -2.75 | 30 | 0.110  | Pearson |    32</span>
+<span class="co">#&gt; hp         |         wt |  0.66 | [ 0.40,  0.82] |  4.80 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; hp         |       qsec | -0.71 | [-0.85, -0.48] | -5.49 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; hp         |       gear | -0.13 | [-0.45,  0.23] | -0.69 | 30 | 1.000  | Pearson |    32</span>
+<span class="co">#&gt; hp         |       carb |  0.75 | [ 0.54,  0.87] |  6.21 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; drat       |         wt | -0.71 | [-0.85, -0.48] | -5.56 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; drat       |       qsec |  0.09 | [-0.27,  0.43] |  0.50 | 30 | 1.000  | Pearson |    32</span>
+<span class="co">#&gt; drat       |       gear |  0.70 | [ 0.46,  0.84] |  5.36 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; drat       |       carb | -0.09 | [-0.43,  0.27] | -0.50 | 30 | 1.000  | Pearson |    32</span>
+<span class="co">#&gt; wt         |       qsec | -0.17 | [-0.49,  0.19] | -0.97 | 30 | 1.000  | Pearson |    32</span>
+<span class="co">#&gt; wt         |       gear | -0.58 | [-0.77, -0.29] | -3.93 | 30 | 0.008  | Pearson |    32</span>
+<span class="co">#&gt; wt         |       carb |  0.43 | [ 0.09,  0.68] |  2.59 | 30 | 0.132  | Pearson |    32</span>
+<span class="co">#&gt; qsec       |       gear | -0.21 | [-0.52,  0.15] | -1.19 | 30 | 1.000  | Pearson |    32</span>
+<span class="co">#&gt; qsec       |       carb | -0.66 | [-0.82, -0.40] | -4.76 | 30 | &lt; .001 | Pearson |    32</span>
+<span class="co">#&gt; gear       |       carb |  0.27 | [-0.08,  0.57] |  1.56 | 30 | 0.774  | Pearson |    32</span>
+
+<span class="kw">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">result</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">s</span>, size = <span class="fl">.8</span>)
+</pre></div>
+<p><img src="correlation_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 </div>
 <div id="gaussian-graphical-models-ggms" class="section level2">
 <h2 class="hasAnchor">
 <a href="#gaussian-graphical-models-ggms" class="anchor"></a>Gaussian Graphical Models (GGMs)</h2>
 <p>To create a Gaussian Graphical Models plot, the library <em>ggraph</em> needs to be loaded first.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggraph.data-imaginist.com">ggraph</a></span>)
 <span class="kw">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation</a></span>(<span class="kw">mtcars</span>, partial = <span class="fl">TRUE</span>)
 
@@ -251,7 +303,7 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>)
 </pre></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
   </div>
 

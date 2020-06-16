@@ -159,6 +159,14 @@
 <h1 class="page-header" data-toc-text="0.5.2">
 <a href="#see-052" class="anchor"></a>see 0.5.2<small> Unreleased </small>
 </h1>
+<div id="changes-to-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation::correlation()</a></code> gains a <code>type</code> and <code>size</code> argument, to plot correlation matrices either as tiles or circles.</li>
+</ul>
+</div>
 <div id="color-scales-and-palettes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#color-scales-and-palettes" class="anchor"></a>Color Scales and Palettes</h2>
@@ -173,9 +181,9 @@
 <h1 class="page-header" data-toc-text="0.5.1">
 <a href="#see-051" class="anchor"></a>see 0.5.1<small> 2020-06-13 </small>
 </h1>
-<div id="changes-to-functions" class="section level2">
+<div id="changes-to-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-1" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>Plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">parameters::describe_distribution()</a></code> gains <code>highlight</code>, <code>highlight_color</code> and <code>size</code> arguments.</li>
 <li>Plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">parameters::describe_distribution()</a></code> now uses thin bars for variables with integer values (instead of less precise histogram).</li>
@@ -215,9 +223,9 @@
 <li>Added plot-function for various effectsize-functions, like <code><a href="https://rdrr.io/pkg/effectsize/man/eta_squared.html">effectsize::eta_squared()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-1" class="section level2">
+<div id="changes-to-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-1" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-2" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code>plot.estimate_density()</code> now also works for density estimation of data frames.</li>
@@ -245,9 +253,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation::correlation()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-2" class="section level2">
+<div id="changes-to-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-2" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-3" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.rma.html">model_parameters.rma()</a></code> now arranges facets by subgroups (see vignettes).</li>
@@ -276,9 +284,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/si.html">bayestestR::si()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-3" class="section level2">
+<div id="changes-to-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-3" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-4" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-functions for the <a href="https://easystats.github.io/see/articles/bayestestR.html"><strong>bayestestR</strong>-package</a> now also support <code>BFBayesFactor</code> and <code>MCMCglmm</code> objects.</li>
@@ -327,9 +335,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/p_significance.html">bayestestR::p_significance()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-4" class="section level2">
+<div id="changes-to-functions-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-4" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-5" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">parameters::model_parameters()</a></code> gets a <code>sort</code>-argument to sort coefficients.</li>
@@ -366,9 +374,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/point_estimate.html">bayestestR::point_estimate()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-5" class="section level2">
+<div id="changes-to-functions-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-5" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-6" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code>bayestestR::bayesfactor_savagedickey()</code> gets a <code>rope_color</code> and a <code>rope_alpha</code>-argument to plot the “null”-interval, when the null-hypothesis is a <em>region of practical equivalence</em>, and not just the point-null.</li>
 <li>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code><a href="https://rdrr.io/pkg/performance/man/binned_residuals.html">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://rdrr.io/pkg/performance/man/binned_residuals.html">performance::binned_residuals()</a></code>).</li>
