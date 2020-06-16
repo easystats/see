@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' library(performance)
-#' model <- lm(len ~ supp + dose, data = ToothGrowth)
+#' model <<- lm(len ~ supp + dose, data = ToothGrowth)
 #' result <- check_homogeneity(model)
 #' result
 #' plot(result)

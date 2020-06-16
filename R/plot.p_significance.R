@@ -151,7 +151,7 @@ data_plot.p_significance <- function(x, data = NULL, grid = TRUE, show_intercept
 #' \donttest{
 #' if (require("bayestestR") && require("rstanarm")) {
 #'   set.seed(123)
-#'   m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#'   m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 #'   result <- p_significance(m)
 #'   plot(result)
 #' }
