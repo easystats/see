@@ -1,6 +1,22 @@
+#' Plot method for check model for (non-)normality of residuals
+#'
+#' The \code{plot()} method for the \code{performance::check_normality()} function.
+#'
+#' @param type Character vector, indicating the type of plot.
+#' @param size Size of geoms. Depends on the context of the \code{plot()} function,
+#'   so this argument may change size of points, lines or bars.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(performance)
+#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' result <- check_normality(m)
+#' plot(result)
 #' @importFrom bayestestR estimate_density
 #' @importFrom stats residuals sd dnorm rstudent ppoints pnorm fitted
-#' @rdname data_plot
 #' @export
 plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = NULL, size = .8, point_size = 2, ...) {
   type <- match.arg(type)

@@ -1,63 +1,42 @@
 #' @title Prepare objects for plotting or plot objects
 #' @name data_plot
 #'
-#' @description \code{data_plot()} attempts to extract and tranform an object
+#' @description \code{data_plot()} attempts to extract and transform an object
 #' to be further plotted, while \code{plot()} tries to visualize results of
 #' functions from different packages of the \href{https://github.com/easystats}{easystats-project}.
+#' See the documentation for your object's class:
+#' \itemize{
+#'  \item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
+#'  \item{\link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}}
+#'  \item{\link[=plot.see_equivalence_test]{bayestestR::equivalence_test()}}
+#'  \item{\link[=plot.see_estimate_density]{bayestestR::estimate_density()}}
+#'  \item{\link[=plot.see_hdi]{bayestestR::hdi()}}
+#'  \item{\link[=plot.see_p_direction]{bayestestR::p_direction()}}
+#'  \item{\link[=plot.see_p_significance]{bayestestR::p_significance()}}
+#'  \item{\link[=plot.see_si]{bayestestR::si()}}
+#'  \item{\link[=plot.see_easycormatrix]{correlation::correlation()}}
+#'  \item{\link[=plot.see_easycorrelation]{correlation::correlation()} (Gaussian Graphical Models)}
+#'  \item{\link[=plot.see_effectsize_table]{effectsize::effectsize()}}
+#'  \item{\link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}}
+#'  \item{\link[=plot.see_cluster_analysis]{parameters::cluster_analysis()}}
+#'  \item{\link[=plot.see_parameters_distribution]{parameters::describe_distribution()}}
+#'  \item{\link[=plot.see_parameters_model]{parameters::model_parameters()}}
+#'  \item{\link[=plot.see_parameters_pca]{parameters::principal_components()}}
+#'  \item{\link[=plot.see_n_factors]{parameters::n_clusters()}}
+#'  \item{\link[=plot.see_n_factors]{parameters::n_factors()}}
+#'  \item{\link[=plot.see_parameters_simulate]{parameters::simulate_parameters()}}
+#'  \item{\link[=plot.see_check_collinearity]{performance::check_collinearity()}}
+#'  \item{\link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}}
+#'  \item{\link[=plot.see_check_homogeneity]{performance::check_homogeneity()}}
+#'  \item{\link[=plot.see_check_normality]{performance::check_normality()}}
+#'  \item{\link[=plot.see_check_outliers]{performance::check_outliers()}}
+#'  \item{\link[=plot.see_compare_performance]{performance::compare_performance()}}
+#'  \item{\link[=plot.see_performance_roc]{performance::performance_roc()}}
+#'  }
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a
 #'   statistical model or such.
-#' @param show_intercept Logical, if \code{TRUE}, the intercept-parameter is included
-#'   in the plot. By default, it is hidden because in many cases the intercept-parameter
-#'   has a posterior distribution on a very different location, so density curves of
-#'   posterior distributions for other parameters are hardly visible.
-#' @param show_labels Logical, if \code{TRUE}, the text labels for the point
-#'   estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
-#'   You may set \code{show_labels = FALSE} in case of overlapping labels, and
-#'   add your own legend or footnote to the plot.
-#' @param show_zero Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.
-#' @param show_title Logical, if \code{TRUE}, will show the title of the plot.
-#' @param priors Logical, if \code{TRUE}, prior distributions are simulated
-#'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
-#' @param priors_alpha Alpha value of the prior distributions.
-#' @param point_size Size of point-geoms.
-#' @param digits Number of decimals used for values.
-#' @param rope_alpha,si_alpha Transparency level of ROPE/SI ribbon.
-#' @param rope_color,si_color Color of ROPE/SI ribbon.
-#' @param support_only Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting \code{\link[bayestestR]{si}}.
-#' @param n_columns For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.
-#' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
-#'   Else, densities are plotted for each parameter among each other.
-#' @param n_pies Number of pies.
-#' @param value What value to display.
-#' @param sort \describe{
-#'   \item{Plotting model parameters}{
-#'   If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
-#'   }
-#'   \item{Plotting Bayes factors}{
-#'   Sort pie-slices by posterior probability (descending)?
-#'   }
-#' }
-#' @param node_color Color of node- or circle-geoms.
-#' @param log Show log-transformed Bayes factors.
-#' @param text_size Size of text labels.
-#' @param text_color Color of text labels.
-#' @param show_values Logical, if \code{TRUE}, values are displayed.
-#' @param show_p Logical, if \code{TRUE}, p-values or significant level is displayed.
-#' @param show_legend Logical, show or hide legend.
-#' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
-#' @param threshold_p Numeric, threshold at which value p-values will be displayed.
-#' @param ci Logical, whether confidence intervals should be added to the plot.
-#' @param size Size of geoms. Depends on the context of the \code{plot()} function,
-#'   so this argument may change size of points, lines or bars.
-#' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else,
-#'   single plots are returned.
-#' @param type Character vector, indicating the type of plot.
-#' @param prior_odds optional vector of prior odds for the models. See
-#'   \code{BayesFactor::priorOdds}. As the size of the pizza slices corresponds
-#'   to posterior probability (which is a function of prior probability and the BF),
-#'   custom \code{prior_odds} will change the slices' size.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @details \code{data_plot()} is in most situation not needed when the purpose
@@ -82,7 +61,7 @@
 #'   model <- stan_glm(
 #'     Sepal.Length ~ Petal.Width * Species,
 #'     data = iris,
-#'     chains = 2, iter = 200
+#'     chains = 2, iter = 200, refresh = 0
 #'   )
 #'
 #'   x <- rope(model)
@@ -102,6 +81,7 @@
 #'     mpg ~ wt + gear + cyl + disp,
 #'     chains = 2,
 #'     iter = 200,
+#'     refresh = 0,
 #'     data = mtcars
 #'   )
 #'   x <- equivalence_test(model)

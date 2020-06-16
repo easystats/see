@@ -66,6 +66,24 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
 
 
 # Plot --------------------------------------------------------------------
+
+#' Plot method for estimating contrasts
+#'
+#' The \code{plot()} method for the \code{modelbased::estimate_contrasts()} function.
+#'
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' \dontrun{
+#' library(modelbased)
+#' library(rstanarm)
+#' model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+#' contrasts <- estimate_contrasts(model)
+#' means <- estimate_means(model)
+#' plot(contrasts, means)
+#' }
 #' @importFrom rlang .data
 #' @export
 plot.see_estimate_contrasts <- function(x, data = NULL, ...){

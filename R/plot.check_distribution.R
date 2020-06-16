@@ -1,7 +1,23 @@
+#' Plot method for classifying the distribution of a model-family
+#'
+#' The \code{plot()} method for the \code{performance::check_distribution()} function.
+#'
+#' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else,
+#'   single plots are returned.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(performance)
+#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' result <- check_distribution(m)
+#' result
+#' plot(result)
 #' @importFrom graphics plot
 #' @importFrom insight get_response
 #' @importFrom stats residuals density
-#' @rdname data_plot
 #' @export
 plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
 

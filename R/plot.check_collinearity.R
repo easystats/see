@@ -1,3 +1,18 @@
+#' Plot method for multicollinearity checks
+#'
+#' The \code{plot()} method for the \code{performance::check_collinearity()} function.
+#'
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(performance)
+#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' result <- check_collinearity(m)
+#' result
+#' plot(result)
+#' @importFrom rlang .data
 #' @export
 plot.see_check_collinearity <- function(x, data = NULL, ...) {
   if (is.null(data)) {

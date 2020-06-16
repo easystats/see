@@ -1,4 +1,19 @@
-#' @rdname data_plot
+#' Plot method for Bayes Factors for a Single Parameter
+#'
+#' The \code{plot()} method for the \code{bayestestR::bayesfactor_parameters()} function.
+#'
+#' @param point_size Size of point-geoms.
+#' @param rope_alpha Transparency level of ROPE ribbon.
+#' @param rope_color Color of ROPE ribbon.
+#' @param show_intercept Logical, if \code{TRUE}, the intercept-parameter is included
+#'   in the plot. By default, it is hidden because in many cases the intercept-parameter
+#'   has a posterior distribution on a very different location, so density curves of
+#'   posterior distributions for other parameters are hardly visible.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_models
+#'
+#' @return A ggplot2-object.
+#'
 #' @importFrom rlang .data
 #' @export
 plot.see_bayesfactor_parameters <- function(x, point_size = 2, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {

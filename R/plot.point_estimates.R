@@ -73,8 +73,34 @@ data_plot.map_estimate <- data_plot.point_estimate
 
 
 # Plot --------------------------------------------------------------------
+
+#' Plot method for point estimates of posterior samples
+#'
+#' The \code{plot()} method for the \code{bayestestR::point_estimate()}.
+#'
+#' @param show_labels Logical, if \code{TRUE}, the text labels for the point
+#'   estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
+#'   You may set \code{show_labels = FALSE} in case of overlapping labels, and
+#'   add your own legend or footnote to the plot.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_check_outliers
+#' @inheritParams plot.see_check_distribution
+#' @inheritParams plot.see_estimate_density
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' library(rstanarm)
+#' set.seed(123)
+#' m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- point_estimate(m, centrality = "median")
+#' result
+#' plot(result)
+#' }
 #' @importFrom rlang .data
-#' @rdname data_plot
 #' @export
 plot.see_point_estimate <- function(x, data = NULL, point_size = 2, text_size = 3.5, panel = TRUE, show_labels = TRUE, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, ...){
   # save model for later use

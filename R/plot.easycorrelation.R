@@ -1,5 +1,19 @@
-# Plot --------------------------------------------------------------------
-#' @rdname data_plot
+#' Plot method for Gaussian Graphical Models
+#'
+#' The \code{plot()} method for the \code{correlation::correlation()} function.
+#'
+#' @param node_color Color of node- or circle-geoms.
+#' @param text_color Color of text labels.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_check_normality
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(correlation)
+#' library(ggraph)
+#' result <- correlation(mtcars, partial = TRUE)
+#' plot(result)
 #' @importFrom utils sessionInfo
 #' @export
 plot.see_easycorrelation <- function(x, size = 22, text_color = "white", node_color = "#647687", ...) {

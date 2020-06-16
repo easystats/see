@@ -27,13 +27,27 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
+#' Plot method for describing distributions of vectors
+#'
+#' The \code{plot()} method for the \code{parameters::describe_distribution()} function.
+#'
 #' @param dispersion Logical, if \code{TRUE}, will add range of dispersion for each variable to the plot.
 #' @param dispersion_alpha Transparency level of dispersion ribbon.
 #' @param dispersion_color Color of dispersion ribbon.
 #' @param dispersion_style Character, style of dispersion area. \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.
 #' @param highlight Vector with names of categories in \code{x} that should be highlighted.
 #' @param highlight_color Vector of color values for highlighted categories. The remaining (non-highlighted) categories will be filled with a lighter grey.
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(parameters)
+#' set.seed(333)
+#' x <- sample(1:100, 1000, replace = TRUE)
+#' result <- describe_distribution(x)
+#' result
+#' plot(result)
 #' @export
 plot.see_parameters_distribution <- function(x, dispersion = FALSE, dispersion_alpha = .3, dispersion_color = "#3498db", dispersion_style = c("ribbon", "curve"), size = .7, highlight = NULL, highlight_color = NULL, ...) {
   # get data

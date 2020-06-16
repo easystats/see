@@ -52,8 +52,23 @@ data_plot.n_clusters <- data_plot.n_factors
 
 
 # Plot --------------------------------------------------------------------
+
+#' Plot method for numbers of clusters to extract or factors to retain
+#'
+#' The \code{plot()} method for the \code{parameters::n_factors()} and \code{parameters::n_clusters()}
+#'
+#' @inheritParams data_plot
+#' @inheritParams plot.see_check_normality
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(parameters)
+#' data(mtcars)
+#' result <- n_factors(mtcars, type = "PCA")
+#' result
+#' plot(result, type = "line")
 #' @importFrom rlang .data
-#' @rdname data_plot
 #' @export
 plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), size = 1, ...) {
   type <- match.arg(type)

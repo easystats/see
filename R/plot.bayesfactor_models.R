@@ -1,4 +1,26 @@
-#' @rdname data_plot
+#' Plot method for Bayes Factors for model comparison
+#'
+#' The \code{plot()} method for the \code{bayestestR::bayesfactor_models()} function.
+#'
+#' @param n_pies Number of pies.
+#' @param value What value to display.
+#' @param sort \describe{
+#'   \item{Plotting model parameters}{
+#'   If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+#'   }
+#'   \item{Plotting Bayes factors}{
+#'   Sort pie-slices by posterior probability (descending)?
+#'   }
+#' }
+#' @param log Show log-transformed Bayes factors.
+#' @param prior_odds optional vector of prior odds for the models. See
+#'   \code{BayesFactor::priorOdds}. As the size of the pizza slices corresponds
+#'   to posterior probability (which is a function of prior probability and the BF),
+#'   custom \code{prior_odds} will change the slices' size.
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
 #' @examples
 #' library(bayestestR)
 #' library(see)

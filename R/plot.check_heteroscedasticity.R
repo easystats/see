@@ -1,4 +1,17 @@
-#' @importFrom bayestestR estimate_density
+#' Plot method for (non-)constant error variance checks
+#'
+#' The \code{plot()} method for the \code{performance::check_heteroscedasticity()} function.
+#'
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(performance)
+#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' result <- check_heteroscedasticity(m)
+#' result
+#' plot(result)
 #' @importFrom stats residuals sd dnorm
 #' @export
 plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {

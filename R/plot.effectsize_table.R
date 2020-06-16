@@ -1,4 +1,16 @@
-#' @rdname data_plot
+#' Plot method for effect size tables
+#'
+#' The \code{plot()} method for the \code{effectsize::effectsize()} function.
+#'
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(effectsize)
+#' m <- aov(mpg ~ factor(am) * factor(cyl), data = mtcars)
+#' result <- eta_squared(m)
+#' plot(result)
 #' @export
 plot.see_effectsize_table <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {
@@ -30,7 +42,8 @@ plot.see_effectsize_table <- function(x, ...) {
     theme_modern()
 }
 
-#' @rdname data_plot
+
+#' @rdname plot.see_equivalence_test
 #' @export
 plot.see_equivalence_test_effectsize <- function(x, ...) {
   if (!"Parameter" %in% colnames(x)) {

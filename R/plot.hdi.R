@@ -174,9 +174,31 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
 
 # Plot --------------------------------------------------------------------
+
+#' Plot method for uncertainty or credible intervals
+#'
+#' The \code{plot()} method for the \code{bayestestR::hdi()} and related function.
+#'
+#' @param show_zero Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.
+#' @param show_title Logical, if \code{TRUE}, will show the title of the plot.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' library(rstanarm)
+#' set.seed(123)
+#' m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- hdi(m)
+#' result
+#' plot(result)
+#' }
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
-#' @rdname data_plot
 #' @export
 plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRUE, show_title = TRUE, n_columns = 1, ...) {
   if (!"data_plot" %in% class(x)) {

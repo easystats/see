@@ -1,7 +1,21 @@
+#' Plot method for (conditional) equivalence testing
+#'
+#' The \code{plot()} method for the \code{bayestestR::equivalence_test()} function.
+#'
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(effectsize)
+#' m <- aov(mpg ~ factor(am) * factor(cyl), data = mtcars)
+#' result <- eta_squared(m)
+#' plot(result)
 #' @importFrom stats setNames
 #' @importFrom insight clean_parameters
 #' @importFrom ggridges geom_density_ridges2
-#' @rdname data_plot
 #' @export
 plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
@@ -257,6 +271,7 @@ plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha =
 
 # freq models method --------------------------------
 
+#' @rdname plot.see_equivalence_test
 #' @export
 plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)

@@ -70,7 +70,27 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...){
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
+
+#' Plot method for Region of Practical Equivalence
+#'
+#' The \code{plot()} method for the \code{bayestestR::rope()}.
+#'
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' library(rstanarm)
+#' set.seed(123)
+#' m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- rope(m)
+#' result
+#' plot(result)
+#' }
 #' @importFrom rlang .data
 #' @export
 plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, n_columns = 1, ...) {

@@ -1,3 +1,17 @@
+#' Plot method for homogeneity of variances checks
+#'
+#' The \code{plot()} method for the \code{performance::check_homogeneity()} function.
+#'
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(performance)
+#' model <- lm(len ~ supp + dose, data = ToothGrowth)
+#' result <- check_homogeneity(model)
+#' result
+#' plot(result)
 #' @importFrom insight get_data find_predictors get_response
 #' @importFrom rlang .data
 #' @export

@@ -18,7 +18,21 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
+
+#' Plot method for computing cluster analysis
+#'
+#' The \code{plot()} method for the \code{parameters::cluster_analysis()} function.
+#'
+#' @param n_columns For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_check_normality
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(parameters)
+#' groups <- cluster_analysis(iris[, 1:4], 3)
+#' plot(groups)
 #' @export
 plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size = .6, ...) {
   if (!"data_plot" %in% class(x)) {

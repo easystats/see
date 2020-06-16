@@ -127,9 +127,29 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
 
 
 # Plot --------------------------------------------------------------------
+
+#' Plot method for probability of direction
+#'
+#' The \code{plot()} method for the \code{bayestestR::p_direction()} function.
+#'
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_estimate_density
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' library(rstanarm)
+#' set.seed(123)
+#' m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- p_direction(m)
+#' plot(result)
+#' }
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline_gradient
-#' @rdname data_plot
 #' @export
 plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, n_columns = 1, ...) {
   # save model for later use

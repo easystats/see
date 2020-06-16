@@ -39,7 +39,23 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
+
+#' Plot method for principal component analysis
+#'
+#' The \code{plot()} method for the \code{parameters::principal_components()} function.
+#'
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(parameters)
+#' data(mtcars)
+#' result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
+#' result
+#' plot(result)
 #' @importFrom rlang .data
 #' @export
 plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5, text_color = "black", size = 1, ...) {

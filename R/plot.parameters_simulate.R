@@ -43,7 +43,24 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
+
+#' Plot method for simulated model parameters
+#'
+#' The \code{plot()} method for the \code{parameters::simulate_parameters()} function.
+#'
+#' @inheritParams data_plot
+#' @inheritParams plot.see_estimate_density
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(parameters)
+#' m <- lm(mpg ~ wt + cyl + gear, data = mtcars)
+#' result <- simulate_parameters(m)
+#' result
+#' plot(result)
 #' @export
 plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, n_columns = NULL, ...) {
   if (!"data_plot" %in% class(x)) {

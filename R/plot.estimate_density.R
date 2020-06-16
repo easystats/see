@@ -32,7 +32,31 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
 
 
 # Plot --------------------------------------------------------------------
-#' @rdname data_plot
+
+#' Plot method for density estimation of posterior samples
+#'
+#' The \code{plot()} method for the \code{bayestestR::estimate_density()} function.
+#'
+#' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
+#'   Else, densities are plotted for each parameter among each other.
+#' @param priors Logical, if \code{TRUE}, prior distributions are simulated
+#'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
+#' @param priors_alpha Alpha value of the prior distributions.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' library(rstanarm)
+#' set.seed(123)
+#' m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- estimate_density(m)
+#' plot(result)
+#' }
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export

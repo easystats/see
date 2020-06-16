@@ -1,5 +1,20 @@
+#' Plot method for model parameters
+#'
+#' The \code{plot()} method for the \code{parameters::model_parameters()} function.
+#'
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_cluster_analysis
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(parameters)
+#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' result <- model_parameters(m)
+#' result
+#' plot(result)
 #' @importFrom bayestestR reshape_ci
-#' @rdname data_plot
 #' @export
 plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, sort = NULL, n_columns = NULL, ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
