@@ -63,11 +63,12 @@ data_plot.n_clusters <- data_plot.n_factors
 #' @return A ggplot2-object.
 #'
 #' @examples
-#' library(parameters)
-#' data(mtcars)
-#' result <- n_factors(mtcars, type = "PCA")
-#' result
-#' plot(result, type = "line")
+#' if (require("parameters") && require("nFactors")) {
+#'   data(mtcars)
+#'   result <- n_factors(mtcars, type = "PCA")
+#'   result
+#'   plot(result, type = "line")
+#' }
 #' @importFrom rlang .data
 #' @export
 plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), size = 1, ...) {

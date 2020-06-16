@@ -21,12 +21,12 @@ A ggplot2-object.
 The \code{plot()} method for the \code{modelbased::estimate_contrasts()} function.
 }
 \examples{
-\dontrun{
-library(modelbased)
-library(rstanarm)
-model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
-contrasts <- estimate_contrasts(model)
-means <- estimate_means(model)
-plot(contrasts, means)
+\donttest{
+if (require("modelbased") && require("rstanarm")) {
+  model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+  contrasts <- estimate_contrasts(model)
+  means <- estimate_means(model)
+  plot(contrasts, means)
+}
 }
 }

@@ -10,7 +10,7 @@
 \alias{scale_fill_see}
 \alias{scale_fill_see_d}
 \alias{scale_fill_see_c}
-\title{see color palette}
+\title{See color palette}
 \usage{
 scale_color_see(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
 
@@ -45,7 +45,7 @@ scale_fill_see_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The see color palette. Use \code{scale_color_see_d()} for \emph{discrete}
+The See color palette. Use \code{scale_color_see_d()} for \emph{discrete}
 categories and \code{scale_color_see_c()} for a \emph{continuous} scale.
 }
 \examples{

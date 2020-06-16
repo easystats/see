@@ -26,9 +26,10 @@ A ggplot2-object.
 The \code{plot()} method for the \code{parameters::n_factors()} and \code{parameters::n_clusters()}
 }
 \examples{
-library(parameters)
-data(mtcars)
-result <- n_factors(mtcars, type = "PCA")
-result
-plot(result, type = "line")
+if (require("parameters") && require("nFactors")) {
+  data(mtcars)
+  result <- n_factors(mtcars, type = "PCA")
+  result
+  plot(result, type = "line")
+}
 }

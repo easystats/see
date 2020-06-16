@@ -1,6 +1,6 @@
-#' see color palette
+#' See color palette
 #'
-#' The see color palette. Use \code{scale_color_see_d()} for \emph{discrete}
+#' The See color palette. Use \code{scale_color_see_d()} for \emph{discrete}
 #' categories and \code{scale_color_see_c()} for a \emph{continuous} scale.
 #'
 #' @inheritParams palette_see
@@ -126,9 +126,9 @@ see_colors_list <- c(
 )
 
 
-#' Extract see colors as hex codes
+#' Extract See colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the see color palette. Use \code{see_colors()} to see all available color.
+#' Can be used to get the hex code of specific colors from the See color palette. Use \code{see_colors()} to see all available color.
 #'
 #' @inheritParams flat_colors
 #'
@@ -166,9 +166,9 @@ see_palettes <- list(
 
 
 
-#' see design color palette
+#' See design color palette
 #'
-#' see design color palette.
+#' See design color palette.
 #'
 #' @inheritParams palette_flat
 #'

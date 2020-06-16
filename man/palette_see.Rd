@@ -2,7 +2,7 @@
 % Please edit documentation in R/scale_color_see.R
 \name{palette_see}
 \alias{palette_see}
-\title{see design color palette}
+\title{See design color palette}
 \usage{
 palette_see(palette = "contrast", reverse = FALSE, ...)
 }
@@ -14,7 +14,7 @@ palette_see(palette = "contrast", reverse = FALSE, ...)
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-see design color palette.
+See design color palette.
 }
 \details{
 This function is usually not called directly, but from within

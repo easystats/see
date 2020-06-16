@@ -2,7 +2,7 @@
 % Please edit documentation in R/scale_color_see.R
 \name{see_colors}
 \alias{see_colors}
-\title{Extract see colors as hex codes}
+\title{Extract See colors as hex codes}
 \usage{
 see_colors(...)
 }
@@ -13,7 +13,7 @@ see_colors(...)
 A character vector with color-codes.
 }
 \description{
-Can be used to get the hex code of specific colors from the see color palette. Use \code{see_colors()} to see all available color.
+Can be used to get the hex code of specific colors from the See color palette. Use \code{see_colors()} to see all available color.
 }
 \examples{
 see_colors()

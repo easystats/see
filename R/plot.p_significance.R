@@ -148,13 +148,13 @@ data_plot.p_significance <- function(x, data = NULL, grid = TRUE, show_intercept
 #' @return A ggplot2-object.
 #'
 #' @examples
-#' \dontrun{
-#' library(bayestestR)
-#' library(rstanarm)
-#' set.seed(123)
-#' m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-#' result <- p_significance(m)
-#' plot(result)
+#' \donttest{
+#' if (require("bayestestR") && require("rstanarm")) {
+#'   set.seed(123)
+#'   m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#'   result <- p_significance(m)
+#'   plot(result)
+#' }
 #' }
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline_gradient

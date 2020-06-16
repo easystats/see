@@ -36,13 +36,13 @@ A ggplot2-object.
 The \code{plot()} method for the \code{bayestestR::si()}.
 }
 \examples{
-\dontrun{
-library(bayestestR)
-library(rstanarm)
-set.seed(123)
-m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-result <- si(m)
-result
-plot(result)
+\donttest{
+if (require("bayestestR") && require("rstanarm")) {
+  set.seed(123)
+  m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+  result <- si(m)
+  result
+  plot(result)
+}
 }
 }
