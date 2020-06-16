@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.bayesfactor_parameters.R
 \name{plot.see_bayesfactor_parameters}
 \alias{plot.see_bayesfactor_parameters}
-\title{Plot method for Bayes Factors for a Single Parameter}
+\title{Plot method for Bayes Factors for a single parameter}
 \usage{
 \method{plot}{see_bayesfactor_parameters}(
   x,

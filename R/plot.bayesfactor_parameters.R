@@ -1,4 +1,4 @@
-#' Plot method for Bayes Factors for a Single Parameter
+#' Plot method for Bayes Factors for a single parameter
 #'
 #' The \code{plot()} method for the \code{bayestestR::bayesfactor_parameters()} function.
 #'
