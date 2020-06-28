@@ -107,7 +107,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="bayestestR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Plotting Functions for the bayestestR Package</h1>
@@ -695,23 +695,23 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; # Random Effects (Conditional Model)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |        H0 | inside ROPE |       89% HDI</span>
-<span class="co">#&gt; ----------------------------------------------------------------</span>
-<span class="co">#&gt; persons 1              | Undecided |      1.79 % | [-2.55 -0.03]</span>
-<span class="co">#&gt; persons 2              | Undecided |      8.48 % | [-1.45  1.01]</span>
-<span class="co">#&gt; persons 3              | Undecided |     12.05 % | [-0.73  1.59]</span>
-<span class="co">#&gt; persons 4              |  Rejected |      0.00 % | [ 0.29  2.54]</span>
-<span class="co">#&gt; SD persons (Intercept) |  Rejected |      0.00 % | [ 0.61  3.10]</span>
+<span class="co">#&gt; Parameter           |        H0 | inside ROPE |       89% HDI</span>
+<span class="co">#&gt; -------------------------------------------------------------</span>
+<span class="co">#&gt; persons 1           | Undecided |      1.79 % | [-2.55 -0.03]</span>
+<span class="co">#&gt; persons 2           | Undecided |      8.48 % | [-1.45  1.01]</span>
+<span class="co">#&gt; persons 3           | Undecided |     12.05 % | [-0.73  1.59]</span>
+<span class="co">#&gt; persons 4           |  Rejected |      0.00 % | [ 0.29  2.54]</span>
+<span class="co">#&gt; SD/Cor: (Intercept) |  Rejected |      0.00 % | [ 0.61  3.10]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |        H0 | inside ROPE |       89% HDI</span>
-<span class="co">#&gt; ----------------------------------------------------------------</span>
-<span class="co">#&gt; persons 1              |  Rejected |      0.00 % | [ 0.37  2.66]</span>
-<span class="co">#&gt; persons 2              | Undecided |     12.05 % | [-0.73  1.49]</span>
-<span class="co">#&gt; persons 3              | Undecided |     14.29 % | [-1.16  1.13]</span>
-<span class="co">#&gt; persons 4              | Undecided |      1.34 % | [-2.46 -0.06]</span>
-<span class="co">#&gt; SD persons (Intercept) |  Rejected |      0.00 % | [ 0.46  3.09]</span>
+<span class="co">#&gt; Parameter           |        H0 | inside ROPE |       89% HDI</span>
+<span class="co">#&gt; -------------------------------------------------------------</span>
+<span class="co">#&gt; persons 1           |  Rejected |      0.00 % | [ 0.37  2.66]</span>
+<span class="co">#&gt; persons 2           | Undecided |     12.05 % | [-0.73  1.49]</span>
+<span class="co">#&gt; persons 3           | Undecided |     14.29 % | [-1.16  1.13]</span>
+<span class="co">#&gt; persons 4           | Undecided |      1.34 % | [-2.46 -0.06]</span>
+<span class="co">#&gt; SD/Cor: (Intercept) |  Rejected |      0.00 % | [ 0.46  3.09]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; # Fixed Effects (Conditional Model)</span>
@@ -768,14 +768,14 @@
 <span class="kw">result</span>
 <span class="co">#&gt; # Bayes Factor (Savage-Dickey density ratio)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |       BF</span>
-<span class="co">#&gt; ----------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | 9.66e+32</span>
-<span class="co">#&gt; Petal.Width                   |     0.68</span>
-<span class="co">#&gt; Speciesversicolor             |     0.74</span>
-<span class="co">#&gt; Speciesvirginica              |     0.39</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor |     0.29</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  |      0.3</span>
+<span class="co">#&gt; Parameter                     |        BF</span>
+<span class="co">#&gt; -----------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   | 9.665e+32</span>
+<span class="co">#&gt; Petal.Width                   |     0.676</span>
+<span class="co">#&gt; Speciesversicolor             |     0.738</span>
+<span class="co">#&gt; Speciesvirginica              |     0.393</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor |     0.295</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  |     0.297</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; * Evidence Against The Null: [0]</span>
 
@@ -791,16 +791,16 @@
 <span class="kw">result</span>
 <span class="co">#&gt; # Bayes Factor (Null-Interval)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |       BF</span>
-<span class="co">#&gt; ----------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | 7.48e+32</span>
-<span class="co">#&gt; Petal.Width                   |     0.63</span>
-<span class="co">#&gt; Speciesversicolor             |     0.68</span>
-<span class="co">#&gt; Speciesvirginica              |     0.36</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor |     0.29</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  |     0.28</span>
+<span class="co">#&gt; Parameter                     |        BF</span>
+<span class="co">#&gt; -----------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   | 7.476e+32</span>
+<span class="co">#&gt; Petal.Width                   |     0.631</span>
+<span class="co">#&gt; Speciesversicolor             |     0.678</span>
+<span class="co">#&gt; Speciesvirginica              |     0.356</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor |     0.289</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  |     0.278</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; * Evidence Against The Null: [-0.08, 0.08]</span>
+<span class="co">#&gt; * Evidence Against The Null: [-0.083, 0.083]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>) <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span>() <span class="op">+</span>
@@ -823,10 +823,10 @@
 <span class="kw">result</span>
 <span class="co">#&gt; # Bayes Factors for Model Comparison</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;   Model           BF</span>
-<span class="co">#&gt;   [1] drat       0.2</span>
-<span class="co">#&gt;   [2] wt        0.29</span>
-<span class="co">#&gt;   [3] drat + wt 0.05</span>
+<span class="co">#&gt;   Model            BF</span>
+<span class="co">#&gt;   [1] drat      0.202</span>
+<span class="co">#&gt;   [2] wt        0.290</span>
+<span class="co">#&gt;   [3] drat + wt 0.053</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; * Against Denominator: [4] (Intercept only)</span>
 <span class="co">#&gt; *   Bayes Factor Type: BIC approximation</span>
