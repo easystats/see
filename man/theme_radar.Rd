@@ -42,7 +42,7 @@ theme_radar_dark(
 )
 }
 \arguments{
-\item{base_size}{base font size}
+\item{base_size}{base font size, given in pts.}
 
 \item{base_family}{base font family}
 

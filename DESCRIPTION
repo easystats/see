@@ -75,5 +75,5 @@ Suggests:
   splines,
   tidygraph,
   tidyr
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Language: en-GB
