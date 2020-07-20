@@ -1,0 +1,17 @@
+bibentry(
+  bibtype="Article",
+  title="Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'",
+  author=c(person("Daniel", "Lüdecke"), person("Mattan S.", "Ben-Shachar"), person("Philip", "Waggoner"), person("Dominique", "Makowski")),
+  journal="CRAN",
+  year="2020",
+  note="R package",
+  doi="10.5281/zenodo.3952153",
+  url="https://easystats.github.io/see",
+
+  textVersion =
+    paste("Lüdecke, Ben-Shachar, Waggoner & Makowski (2020). Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'. CRAN.",
+          "Available from https://easystats.github.io/see"
+    ),
+  mheader = "To cite see in publications use:"
+)
+
