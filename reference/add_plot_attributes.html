@@ -158,10 +158,10 @@
     </div>
 
     <div class="ref-description">
-    <p>The <a href='https://rdrr.io/pkg/see/man/data_plot.html'>data_plot</a> function usually stores information (such as title, axes labels etc.) as attributes. This function adds those information to the plot.</p>
+    <p>The <a href='data_plot.html'>data_plot</a> function usually stores information (such as title, axes labels etc.) as attributes. This function adds those information to the plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/see/man/add_plot_attributes.html'>add_plot_attributes</a></span>(<span class='kw'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>add_plot_attributes</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,14 +187,14 @@
 )
 
 <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/hdi.html'>hdi</a></span>(<span class='kw'>model</span>, ci = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/see/man/data_plot.html'>data_plot</a></span>(<span class='kw'>result</span>, data = <span class='kw'>model</span>)
+<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='data_plot.html'>data_plot</a></span>(<span class='kw'>result</span>, data = <span class='kw'>model</span>)
 
 <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='kw'>data</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>x</span>, y = <span class='kw'>y</span>, height = <span class='kw'>height</span>, group = <span class='kw'>y</span>, fill = <span class='kw'>fill</span>)) <span class='op'>+</span>
   <span class='kw'>ggridges</span>::<span class='fu'><a href='https://rdrr.io/pkg/ggridges/man/geom_ridgeline_gradient.html'>geom_ridgeline_gradient</a></span>()
 
 <span class='kw'>p</span>
-<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/see/man/add_plot_attributes.html'>add_plot_attributes</a></span>(<span class='kw'>data</span>)}</div></pre>
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>add_plot_attributes</span>(<span class='kw'>data</span>)}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

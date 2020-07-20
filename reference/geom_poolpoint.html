@@ -161,7 +161,7 @@
     <p>Points labelled with the observation name.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/see/man/geom_poolpoint.html'>geom_poolpoint</a></span>(
+    <pre class="usage"><span class='fu'>geom_poolpoint</span>(
   <span class='kw'>label</span>,
   size_text = <span class='fl'>3.88</span>,
   size_background = <span class='kw'>size_text</span> <span class='op'>*</span> <span class='fl'>2</span>,
@@ -169,7 +169,7 @@
   <span class='kw'>...</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/see/man/geom_poolpoint.html'>geom_pooljitter</a></span>(
+<span class='fu'>geom_pooljitter</span>(
   <span class='kw'>label</span>,
   size_text = <span class='fl'>3.88</span>,
   size_background = <span class='kw'>size_text</span> <span class='op'>*</span> <span class='fl'>2</span>,
@@ -213,14 +213,14 @@
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/see'>see</a></span>)
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Petal.Width</span>, y = <span class='kw'>Sepal.Length</span>, color = <span class='kw'>Species</span> )) <span class='op'>+</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/see/man/geom_poolpoint.html'>geom_poolpoint</a></span>(label = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>iris</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/see/man/scale_color_flat.html'>scale_color_flat_d</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/see/man/theme_modern.html'>theme_modern</a></span>()</div><div class='img'><img src='geom_poolpoint-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='fu'>geom_poolpoint</span>(label = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>iris</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='scale_color_flat.html'>scale_color_flat_d</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='img'><img src='geom_poolpoint-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Petal.Width</span>, y = <span class='kw'>Sepal.Length</span>, color = <span class='kw'>Species</span> )) <span class='op'>+</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/see/man/geom_poolpoint.html'>geom_pooljitter</a></span>(label = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>iris</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/see/man/scale_color_flat.html'>scale_color_flat_d</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/see/man/theme_modern.html'>theme_modern</a></span>()</div><div class='img'><img src='geom_poolpoint-2.png' alt='' width='700' height='433' /></div><div class='input'></div></pre>
+  <span class='fu'>geom_pooljitter</span>(label = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>iris</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='scale_color_flat.html'>scale_color_flat_d</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span>()</div><div class='img'><img src='geom_poolpoint-2.png' alt='' width='700' height='433' /></div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
