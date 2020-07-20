@@ -1,6 +1,6 @@
 bibentry(
   bibtype="Article",
-  title="Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'",
+  title="see: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'",
   author=c(person("Daniel", "Lüdecke"), person("Mattan S.", "Ben-Shachar"), person("Philip", "Waggoner"), person("Dominique", "Makowski")),
   journal="CRAN",
   year="2020",
