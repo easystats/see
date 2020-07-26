@@ -27,7 +27,7 @@ reference:
   - plot.see_cluster_analysis
   - plot.see_parameters_distribution
   - plot.see_parameters_model
-  - plot.see_parameters_pca]{parameters::principal_components()}}
+  - plot.see_parameters_pca
   - plot.see_n_factors
   - plot.see_parameters_simulate
   - plot.see_check_collinearity
