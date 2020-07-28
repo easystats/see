@@ -1,3 +1,9 @@
+# see 0.5.3
+
+## New plot functions
+
+* Added plot-function for `parameters::model_parameters()` for brms-meta-analysis models.
+
 # see 0.5.2
 
 ## Changes to functions
