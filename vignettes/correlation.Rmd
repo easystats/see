@@ -50,7 +50,7 @@ The result from `summary()` can be used to create a plot.
  
 ```{r}
 s <- summary(result)
-plot(s, size = 2)
+plot(s, size_point = 2)
 ```
 
 To change the style of geoms, use the `type`-argument.
@@ -75,14 +75,14 @@ s
 plot(s)
 ```
 
-For larger correlation matrices, the `size` argument can be used to adjust size of point geoms.
+For larger correlation matrices, the `size_point` argument can be used to adjust size of point geoms.
 
 ```{r}
 result <- correlation(mtcars[, -c(8:9)])
 result
 
 s <- summary(result)
-plot(s, size = .8)
+plot(s, size_point = .8)
 ```
 
 
