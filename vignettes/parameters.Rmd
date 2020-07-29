@@ -199,6 +199,14 @@ If `size_text` is not `NULL`, estimates and confidence intervals are included in
 plot(result, size_text = 4)
 ```
 
+### Funnel plots
+
+If `type = "funnel"`, a funnel plot is created.
+
+```{r, warning=FALSE, message=FALSE}
+plot(result, type = "funnel")
+```
+
 ### Model Parameters of Meta-Analysis Models with Subgroups
 
 ```{r, warning=FALSE, message=FALSE}

@@ -2,6 +2,7 @@
 #'
 #' The \code{plot()} method for the \code{parameters::model_parameters()} function.
 #'
+#' @param type Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_bayesfactor_models
@@ -19,7 +20,7 @@
 #' plot(result)
 #' @importFrom bayestestR reshape_ci
 #' @export
-plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, sort = NULL, n_columns = NULL, ...) {
+plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, sort = NULL, n_columns = NULL, type = c("forest", "funnel"), ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }
@@ -92,6 +93,12 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     x$shape <- 19
     x$shape[overall] <- 18
     x$Estimate_CI <- sprintf("%.2f %s", x$Coefficient, insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2))
+
+    type <- match.arg(type)
+
+    if (type == "funnel") {
+      return(.funnel_plot(x))
+    }
   }
 
   # if we have a model with multiple responses or response levels
@@ -258,4 +265,35 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
       colour = "CI"
     )
   }
+}
+
+
+
+#' @importFrom effectsize change_scale
+#' @importFrom stats qnorm
+.funnel_plot <- function(x) {
+  max_y <- max(x$SE) * 1.05
+
+  dat_funnel <- data.frame(
+    se_range = effectsize::change_scale(1:(nrow(x) * 10), to = c(0, max_y))
+  )
+  estimate <- x$Coefficient[x$Parameter == "Overall"]
+
+  dat_funnel$ci_low <- estimate - stats::qnorm(.975) * dat_funnel$se_range
+  dat_funnel$ci_high <- estimate + stats::qnorm(.975) * dat_funnel$se_range
+
+  d_polygon <- data.frame(
+    x = c(min(dat_funnel$ci_low), estimate, max(dat_funnel$ci_high)),
+    y = c(max(dat_funnel$se_range), 0, max(dat_funnel$se_range))
+  )
+
+  ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
+    scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
+    geom_polygon(data = d_polygon, aes(x, y), fill = "grey80", alpha = .3) +
+    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_low, y = .data$se_range), linetype = "dotted", color = "grey50") +
+    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_high, y = .data$se_range), linetype = "dotted", color = "grey50") +
+    theme_modern() +
+    geom_vline(xintercept = estimate, colour = "grey80") +
+    geom_point() +
+    labs(y = "Standard Error", x = "Estimate")
 }

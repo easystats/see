@@ -13,6 +13,7 @@
   size_text = NULL,
   sort = NULL,
   n_columns = NULL,
+  type = c("forest", "funnel"),
   ...
 )
 
@@ -50,12 +51,12 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
+\item{type}{Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).}
+
 \item{...}{Arguments passed to or from other methods.}
 
 \item{data}{The original data used to create this object. Can be a
 statistical model or such.}
-
-\item{type}{Character vector, indicating the type of plot.}
 
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 
