@@ -45,7 +45,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 
   attr(dataplot, "summary") <- summary
   attr(dataplot, "info") <- list("xlab" = "Standardized Mean Difference",
-                                 "ylab" = "Study",
+                                 "ylab" = NULL,
                                  "legend_fill" = NULL,
                                  "legend_color" = NULL,
                                  "title" = "Bayesian Meta-Analysis")

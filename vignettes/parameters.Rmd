@@ -192,6 +192,12 @@ result
 plot(result)
 ```
 
+If `size_text` is not `NULL`, estimates and confidence intervals are included in the plot.
+
+```{r, warning=FALSE, message=FALSE}
+plot(result, size_text = 4)
+```
+
 ### Model Parameters of Meta-Analysis Models with Subgroups
 
 ```{r, warning=FALSE, message=FALSE}
