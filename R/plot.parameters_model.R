@@ -97,7 +97,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     type <- match.arg(type)
 
     if (type == "funnel") {
-      return(.funnel_plot(x))
+      if (missing(size_point)) size_point <- 2.5
+      return(.funnel_plot(x, size_point, meta_measure))
     }
   }
 
@@ -227,32 +228,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   }
 
   if (isTRUE(is_meta)) {
-    measure <- switch(
-      meta_measure,
-      "MD" = "Raw Mean Difference",
-      "SMDH" = ,
-      "SMD" = "Standardized Mean Difference",
-      "ROM" = "Log transformed Ratio of Means",
-      "D2ORL" = ,
-      "D2ORN" = "Transformed Standardized Mean Difference",
-      "UCOR" = ,
-      "COR" = "Raw Correlation Coefficient",
-      "ZCOR" = "Z transformed Correlation Coefficient",
-      "PHI" = "Phi Coefficient",
-      "RR" = "Log Risk Ratio",
-      "OR" = "Log Odds Ratio",
-      "RD" = "Risk Difference",
-      "AS" = "Root transformed Risk Difference",
-      "PETO" = "Peto's Log Odds Ratio",
-      "PBIT" = "Standardized Mean Difference (Probit-transformed)",
-      "OR2DL" = ,
-      "OR2DN" = "Standardized Mean Difference (Odds Ratio-transformed)",
-      "IRR" = "Log Incidence Rate Ratio",
-      "IRD" = "Incidence Rate Difference",
-      "IRSD" = "Square Root transformed Incidence Rate Difference",
-      "GEN" = "Generic Estimate",
-      "Estimate"
-    )
+    measure <- .meta_measure(meta_measure)
     p + labs(
       x = "",
       y = measure,
@@ -271,8 +247,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
 
 #' @importFrom effectsize change_scale
 #' @importFrom stats qnorm
-.funnel_plot <- function(x) {
+.funnel_plot <- function(x, size_point = 3, meta_measure = NULL) {
   max_y <- max(pretty(max(x$SE) * 105)) / 100
+  measure <- .meta_measure(meta_measure)
 
   dat_funnel <- data.frame(
     se_range = effectsize::change_scale(1:(nrow(x) * 10), to = c(0, max_y))
@@ -290,10 +267,41 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
     scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
     geom_polygon(data = d_polygon, aes(x, y), fill = "grey80", alpha = .3) +
-    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_low, y = .data$se_range), linetype = "dotted", color = "grey50") +
-    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_high, y = .data$se_range), linetype = "dotted", color = "grey50") +
+    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_low, y = .data$se_range), linetype = "dashed", color = "grey70") +
+    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_high, y = .data$se_range), linetype = "dashed", color = "grey70") +
     theme_modern() +
-    geom_vline(xintercept = estimate, colour = "grey80") +
-    geom_point() +
-    labs(y = "Standard Error", x = "Estimate")
+    geom_vline(xintercept = estimate, colour = "grey70") +
+    geom_point(size = size_point) +
+    labs(y = "Standard Error", x = measure)
+}
+
+
+
+.meta_measure <- function(meta_measure) {
+  switch(
+    meta_measure,
+    "MD" = "Raw Mean Difference",
+    "SMDH" = ,
+    "SMD" = "Standardized Mean Difference",
+    "ROM" = "Log transformed Ratio of Means",
+    "D2ORL" = ,
+    "D2ORN" = "Transformed Standardized Mean Difference",
+    "UCOR" = ,
+    "COR" = "Raw Correlation Coefficient",
+    "ZCOR" = "Z transformed Correlation Coefficient",
+    "PHI" = "Phi Coefficient",
+    "RR" = "Log Risk Ratio",
+    "OR" = "Log Odds Ratio",
+    "RD" = "Risk Difference",
+    "AS" = "Root transformed Risk Difference",
+    "PETO" = "Peto's Log Odds Ratio",
+    "PBIT" = "Standardized Mean Difference (Probit-transformed)",
+    "OR2DL" = ,
+    "OR2DN" = "Standardized Mean Difference (Odds Ratio-transformed)",
+    "IRR" = "Log Incidence Rate Ratio",
+    "IRD" = "Incidence Rate Difference",
+    "IRSD" = "Square Root transformed Incidence Rate Difference",
+    "GEN" = "Generic Estimate",
+    "Estimate"
+  )
 }
