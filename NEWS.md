@@ -8,6 +8,10 @@
 
 * Added plot-function for `parameters::model_parameters()` for brms-meta-analysis models.
 
+## Changes to functions
+
+* `plot()` for `parameters::model_parameters()` from meta-analysis models (e.g. from *metafor*) gains a `size_text`-argument, to add text values for estimates and confidence intervals to the plot (see also vignette).
+
 # see 0.5.2
 
 ## Changes to functions
