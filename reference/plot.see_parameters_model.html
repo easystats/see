@@ -169,6 +169,7 @@
   size_text = <span class='kw'>NULL</span>,
   sort = <span class='kw'>NULL</span>,
   n_columns = <span class='kw'>NULL</span>,
+  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"forest"</span>, <span class='st'>"funnel"</span>),
   <span class='kw'>...</span>
 )
 
@@ -219,6 +220,10 @@ posterior distributions for other parameters are hardly visible.</p></td>
       <td><p>For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></td>
     </tr>
     <tr>
+      <th>type</th>
+      <td><p>Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. <span class="pkg">metafor</span>).</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
@@ -226,10 +231,6 @@ posterior distributions for other parameters are hardly visible.</p></td>
       <th>data</th>
       <td><p>The original data used to create this object. Can be a
 statistical model or such.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>Character vector, indicating the type of plot.</p></td>
     </tr>
     <tr>
       <th>threshold_coefficient</th>

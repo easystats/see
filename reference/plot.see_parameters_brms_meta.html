@@ -228,26 +228,7 @@ very flat mcmc-areas. In such cases, set <code>normalize_height = FALSE</code>.<
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'><a href='https://easystats.github.io/bayestestR'>"bayestestR"</a></span>) <span class='op'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'><a href='https://github.com/paul-buerkner/brms'>"brms"</a></span>)) {
-  <span class='co'># download data from:</span>
-  <span class='co'># https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/</span>
-  <span class='co'># blob/master/_data/Meta_Analysis_Data.RData</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
-  <span class='kw'>priors</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>prior</a></span>(<span class='fu'><a href='https://mc-stan.org/rstanarm/reference/priors.html'>normal</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), class = <span class='kw'>Intercept</span>),
-  <span class='fu'><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>prior</a></span>(<span class='fu'><a href='https://mc-stan.org/rstanarm/reference/priors.html'>cauchy</a></span>(<span class='fl'>0</span>,<span class='fl'>0.5</span>), class = <span class='kw'>sd</span>))
-
-  <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/brm.html'>brm</a></span>(
-    <span class='kw'>TE</span> <span class='op'>|</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/se.html'>se</a></span>(<span class='kw'>seTE</span>) <span class='op'>~</span> <span class='fl'>1</span> <span class='op'>+</span> (<span class='fl'>1</span><span class='op'>|</span><span class='kw'>Author</span>),
-    data = <span class='kw'>Meta_Analysis_Data</span>,
-    prior = <span class='kw'>priors</span>,
-    iter = <span class='fl'>4000</span>
-  )
-
-  <span class='kw'>mp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/parameters/man/model_parameters.html'>model_parameters</a></span>(<span class='kw'>model</span>)
-  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>mp</span>)
-}
-}</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
