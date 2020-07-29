@@ -272,7 +272,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
 #' @importFrom effectsize change_scale
 #' @importFrom stats qnorm
 .funnel_plot <- function(x) {
-  max_y <- max(x$SE) * 1.05
+  max_y <- max(pretty(max(x$SE) * 105)) / 100
 
   dat_funnel <- data.frame(
     se_range = effectsize::change_scale(1:(nrow(x) * 10), to = c(0, max_y))
