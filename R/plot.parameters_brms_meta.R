@@ -2,7 +2,7 @@
 #' @importFrom bayestestR estimate_density
 #' @importFrom effectsize change_scale
 #' @export
-data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
+data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TRUE, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -17,7 +17,9 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
   dataplot$Study <- factor(dataplot$Study, levels = rev(unique(dataplot$Study)))
 
   # normalize height
-  dataplot$y <- effectsize::change_scale(dataplot$y, to = c(0, .9))
+  if (isTRUE(normalize_height)) {
+    dataplot$y <- effectsize::change_scale(dataplot$y, to = c(0, .9))
+  }
 
   # summary
   summary <- x[, 1:6]
@@ -63,6 +65,10 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 #'
 #' The \code{plot()} method for the \code{parameters::model_parameters()} function when used with brms-meta-analysis models.
 #'
+#' @param normalize_height Logical, if \code{TRUE}, height of mcmc-areas is
+#'   "normalized", to avoid overlap. In certain cases when the range of a
+#'   posterior distribution is narrow for some parameters, this may result in
+#'   very flat mcmc-areas. In such cases, set \code{normalize_height = FALSE}.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_rope
 #' @inheritParams plot.see_check_normality
@@ -104,7 +110,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 #' }
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, size_text = 3.5, rope_alpha = 0.15, rope_color = "cadetblue", ...) {
+plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, size_text = 3.5, rope_alpha = 0.15, rope_color = "cadetblue", normalize_height = TRUE, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -118,7 +124,7 @@ plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, 
 
 
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = model, ...)
+    x <- data_plot(x, data = model, normalize_height = normalize_height, ...)
   }
 
   summary <- attributes(x)$summary
@@ -145,7 +151,13 @@ plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, 
     geom_point(data = summary, mapping = aes(x = .data$Estimate, color = .data$Color), size = size_point, alpha = 0.8)
 
   if (!is.null(size_text) && !is.na(size_text)) {
-    p <- p + geom_text(data = summary, mapping = aes(label = .data$Estimate_CI, x = Inf), hjust = "inward", size = size_text)
+    # add some space to the right panel for text
+    space_factor <- sqrt(ceiling(diff(c(min(x$x), max(x$x)))) / 5)
+    new_range <- pretty(c(min(x$x), max(x$x) + space_factor))
+
+    p <- p +
+      geom_text(data = summary, mapping = aes(label = .data$Estimate_CI, x = Inf), hjust = "inward", size = size_text) +
+      xlim(c(min(new_range), max(new_range)))
   }
 
   p <- p +
@@ -155,6 +167,11 @@ plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, 
     scale_colour_manual(values = c("Errorbar" = unname(metro_colors("blue grey")))) +
     guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
+
+  # no panel grids when we have text
+  if (!is.null(size_text) && !is.na(size_text)) {
+    p <- p + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+  }
 
   p
 }

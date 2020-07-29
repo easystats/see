@@ -11,6 +11,7 @@
   size_text = 3.5,
   rope_alpha = 0.15,
   rope_color = "cadetblue",
+  normalize_height = TRUE,
   ...
 )
 }
@@ -26,6 +27,11 @@
 \item{rope_alpha}{Transparency level of ROPE ribbon.}
 
 \item{rope_color}{Color of ROPE ribbon.}
+
+\item{normalize_height}{Logical, if \code{TRUE}, height of mcmc-areas is
+"normalized", to avoid overlap. In certain cases when the range of a
+posterior distribution is narrow for some parameters, this may result in
+very flat mcmc-areas. In such cases, set \code{normalize_height = FALSE}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

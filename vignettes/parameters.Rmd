@@ -21,6 +21,7 @@ if (!requireNamespace("parameters", quietly = TRUE) ||
     !requireNamespace("insight", quietly = TRUE) ||
     !requireNamespace("glmmTMB", quietly = TRUE) ||
     !requireNamespace("lme4", quietly = TRUE) ||
+    !requireNamespace("brms", quietly = TRUE) ||
     !requireNamespace("lavaan", quietly = TRUE) ||
     !requireNamespace("metafor", quietly = TRUE) ||
     !requireNamespace("ggplot2", quietly = TRUE) ||
@@ -211,6 +212,7 @@ dat <- escalc(
   di = cneg,
   data = dat.bcg
 )
+dat$author <- make.unique(dat$author)
 dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
 model <- rma(yi, vi, mods = ~ disease, data = dat, digits = 3, slab = author)
 result <- model_parameters(model)
@@ -219,6 +221,28 @@ result
 plot(result)
 ```
 
+## Bayesian Meta-Analysis using brms
+
+```{r, warning=FALSE, message=FALSE}
+library(brms)
+set.seed(123)
+data(dat.bcg)
+dat <- escalc(
+  measure = "RR",
+  ai = tpos,
+  bi = tneg,
+  ci = cpos,
+  di = cneg,
+  data = dat.bcg
+)
+dat$author <- make.unique(dat$author)
+dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
+model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
+result <- model_parameters(model)
+
+result
+plot(result)
+```
 
 ## Equivalence Testing
 
