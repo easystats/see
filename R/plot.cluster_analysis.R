@@ -41,7 +41,7 @@ plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size_bar
   }
 
   p <- ggplot(x, aes(x = .data$Group, y = .data$Z_Score, fill = .data$Term)) +
-    geom_bar(stat = "identity", position = position_dodge(size + .1), width = size_bar) +
+    geom_bar(stat = "identity", position = position_dodge(size_bar + .1), width = size_bar) +
     geom_hline(aes(yintercept = 0), linetype = "dotted") +
     add_plot_attributes(x)
 
