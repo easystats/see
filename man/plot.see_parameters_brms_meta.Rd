@@ -53,21 +53,26 @@ The \code{plot()} method for the \code{parameters::model_parameters()} function 
 }
 \examples{
 \dontrun{
-if (require("bayestestR") && require("brms")) {
-  # download data from:
-  # https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/
-  # blob/master/_data/Meta_Analysis_Data.RData
+if (require("bayestestR") && require("brms") && require("metafor")) {+
+  # data
+  data(dat.bcg)
+  dat <- escalc(
+    measure = "RR",
+    ai = tpos,
+    bi = tneg
+    ci = cpos,
+    di = cneg
+    data = dat.bcg
+  )
+  dat$author <- make.unique(dat$author)
+
+  # model
   set.seed(123)
   priors <- c(prior(normal(0,1), class = Intercept),
   prior(cauchy(0,0.5), class = sd))
+  model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
 
-  model <- brm(
-    TE | se(seTE) ~ 1 + (1|Author),
-    data = Meta_Analysis_Data,
-    prior = priors,
-    iter = 4000
-  )
-
+  # result
   mp <- model_parameters(model)
   plot(mp)
 }
