@@ -33,6 +33,8 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
 
+\item{size_line}{Size of line geoms.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{

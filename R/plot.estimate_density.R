@@ -45,6 +45,7 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis
+#' @inheritParams plot.see_check_normality
 #'
 #' @return A ggplot2-object.
 #'

@@ -22,6 +22,8 @@
 
 \item{text_color}{Color of text labels.}
 
+\item{size}{Depending on \code{type}, size of bars, lines or segments.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{

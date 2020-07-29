@@ -26,6 +26,7 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
 #' @param n_columns For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams plot.see_parameters_distribution
 #'
 #' @return A ggplot2-object.
 #'
@@ -34,13 +35,13 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
 #' groups <- cluster_analysis(iris[, 1:4], 3)
 #' plot(groups)
 #' @export
-plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size = .6, ...) {
+plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size_bar = .6, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
 
   p <- ggplot(x, aes(x = .data$Group, y = .data$Z_Score, fill = .data$Term)) +
-    geom_bar(stat = "identity", position = position_dodge(size + .1), width = size) +
+    geom_bar(stat = "identity", position = position_dodge(size + .1), width = size_bar) +
     geom_hline(aes(yintercept = 0), linetype = "dotted") +
     add_plot_attributes(x)
 

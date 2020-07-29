@@ -50,6 +50,7 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' @inheritParams plot.see_check_outliers
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_easycorrelation
+#' @inheritParams plot.see_n_factors
 #'
 #' @return A ggplot2-object.
 #'

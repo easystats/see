@@ -7,7 +7,7 @@
 \method{plot}{see_parameters_brms_meta}(
   x,
   size_point = 1.5,
-  size = 0.8,
+  size_line = 0.8,
   size_text = 3.5,
   rope_alpha = 0.15,
   rope_color = "cadetblue",
@@ -16,6 +16,12 @@
 }
 \arguments{
 \item{x}{An object.}
+
+\item{size_point}{Size of point-geoms.}
+
+\item{size_line}{Size of line geoms.}
+
+\item{size_text}{Size of text labels.}
 
 \item{rope_alpha}{Transparency level of ROPE ribbon.}
 
@@ -43,7 +49,8 @@ The \code{plot()} method for the \code{parameters::model_parameters()} function 
 \dontrun{
 if (require("bayestestR") && require("brms")) {
   # download data from:
-  # https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/blob/master/_data/Meta_Analysis_Data.RData
+  # https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/
+  # blob/master/_data/Meta_Analysis_Data.RData
   set.seed(123)
   priors <- c(prior(normal(0,1), class = Intercept),
   prior(cauchy(0,0.5), class = sd))

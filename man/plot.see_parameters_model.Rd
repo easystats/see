@@ -37,6 +37,8 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{size_point}{Size of point-geoms.}
 
+\item{size_text}{Size of text labels.}
+
 \item{sort}{\describe{
   \item{Plotting model parameters}{
   If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.

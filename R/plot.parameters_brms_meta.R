@@ -65,6 +65,9 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_rope
+#' @inheritParams plot.see_check_normality
+#' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_check_outliers
 #'
 #' @return A ggplot2-object.
 #'
@@ -82,7 +85,8 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 #' \dontrun{
 #' if (require("bayestestR") && require("brms")) {
 #'   # download data from:
-#'   # https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/blob/master/_data/Meta_Analysis_Data.RData
+#'   # https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/
+#'   # blob/master/_data/Meta_Analysis_Data.RData
 #'   set.seed(123)
 #'   priors <- c(prior(normal(0,1), class = Intercept),
 #'   prior(cauchy(0,0.5), class = sd))
@@ -100,7 +104,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 #' }
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size = 0.8, size_text = 3.5, rope_alpha = 0.15, rope_color = "cadetblue", ...) {
+plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, size_text = 3.5, rope_alpha = 0.15, rope_color = "cadetblue", ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -137,7 +141,7 @@ plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size = 0.8, size_
 
   p <- p +
     ggridges::geom_ridgeline(mapping = aes(fill = .data$Group), color = NA, scale = 1, alpha = 0.7) +
-    geom_errorbarh(data = summary, mapping = aes(xmin = .data$CI_low, xmax = .data$CI_high, color = .data$Color), size = size, alpha = 0.8) +
+    geom_errorbarh(data = summary, mapping = aes(xmin = .data$CI_low, xmax = .data$CI_high, color = .data$Color), size = size_line, alpha = 0.8) +
     geom_point(data = summary, mapping = aes(x = .data$Estimate, color = .data$Color), size = size_point, alpha = 0.8)
 
   if (!is.null(size_text) && !is.na(size_text)) {

@@ -60,7 +60,7 @@ data_plot.compare_performance <- function(x, data = NULL, ...){
 #' plot(result)
 #' @importFrom rlang .data
 #' @export
-plot.see_compare_performance <- function(x, size = 1, ...) {
+plot.see_compare_performance <- function(x, size_line = 1, ...) {
 
   # We may think of plotting the "performance scores" as bar plots,
   # however, the "worst" model always has a score of zero, so no bar
@@ -91,7 +91,7 @@ plot.see_compare_performance <- function(x, size = 1, ...) {
     group = .data$Model,
     fill = .data$Model
   )) +
-    geom_polygon(size = size, alpha = .05) +
+    geom_polygon(size = size_line, alpha = .05) +
     coord_radar() +
     scale_y_continuous(limits = c(0, 1), labels = NULL) +
     add_plot_attributes(x) +
