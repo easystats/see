@@ -403,6 +403,6 @@ plot(result, highlight = c("D", "H"), size = .4)
 
 # own color scales - pass a named vector to 'scale_fill_manual()' 
 # the name of the non-highlighted color is "no_highlight".
-plot(result, highlight = c("D", "H", "A"), size = .4) + 
+plot(result, highlight = c("D", "H", "A"), size_bar = .4) + 
   scale_fill_manual(values = c(D = "red", H = "green", A = "gold", no_highlight = "steelblue"))
 ```
