@@ -271,7 +271,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     geom_line(data = dat_funnel, mapping = aes(x = .data$ci_high, y = .data$se_range), linetype = "dashed", color = "grey70") +
     theme_modern() +
     geom_vline(xintercept = estimate, colour = "grey70") +
-    geom_point(size = size_point) +
+    geom_point(size = size_point, colour = "#34465d") +
     labs(y = "Standard Error", x = measure)
 }
 
