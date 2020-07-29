@@ -159,6 +159,13 @@
 <h1 class="page-header" data-toc-text="0.5.3">
 <a href="#see-053" class="anchor"></a>see 0.5.3<small> Unreleased </small>
 </h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>Harmonized spelling of arguments. Formerly, we had <code>text_size</code> and <code>size_text</code>, or just <code>size</code> even if only in the context of text labels. We now tried to harmonize these kind of arguments to gain more consistency throughout the different <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> methods.</li>
+</ul>
+</div>
 <div id="new-plot-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-plot-functions" class="anchor"></a>New plot functions</h2>
@@ -166,14 +173,22 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">parameters::model_parameters()</a></code> for brms-meta-analysis models.</li>
 </ul>
 </div>
+<div id="changes-to-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">parameters::model_parameters()</a></code> from meta-analysis models (e.g. from <em>metafor</em>) gains a <code>size_text</code>-argument, to add text values for estimates and confidence intervals to the plot (see also vignette).</li>
+</ul>
+</div>
 </div>
     <div id="see-052" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.2">
 <a href="#see-052" class="anchor"></a>see 0.5.2<small> 2020-07-27 </small>
 </h1>
-<div id="changes-to-functions" class="section level2">
+<div id="changes-to-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-1" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation::correlation()</a></code> gains a <code>type</code> and <code>size</code> argument, to plot correlation matrices either as tiles or circles.</li>
@@ -193,9 +208,9 @@
 <h1 class="page-header" data-toc-text="0.5.1">
 <a href="#see-051" class="anchor"></a>see 0.5.1<small> 2020-06-13 </small>
 </h1>
-<div id="changes-to-functions-1" class="section level2">
+<div id="changes-to-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-1" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-2" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>Plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">parameters::describe_distribution()</a></code> gains <code>highlight</code>, <code>highlight_color</code> and <code>size</code> arguments.</li>
 <li>Plot-function for <code><a href="https://rdrr.io/pkg/parameters/man/describe_distribution.html">parameters::describe_distribution()</a></code> now uses thin bars for variables with integer values (instead of less precise histogram).</li>
@@ -235,9 +250,9 @@
 <li>Added plot-function for various effectsize-functions, like <code><a href="https://rdrr.io/pkg/effectsize/man/eta_squared.html">effectsize::eta_squared()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-2" class="section level2">
+<div id="changes-to-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-2" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-3" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code>plot.estimate_density()</code> now also works for density estimation of data frames.</li>
@@ -265,9 +280,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/correlation/man/correlation.html">correlation::correlation()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-3" class="section level2">
+<div id="changes-to-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-3" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-4" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.rma.html">model_parameters.rma()</a></code> now arranges facets by subgroups (see vignettes).</li>
@@ -281,9 +296,9 @@
 <h1 class="page-header" data-toc-text="0.4.0">
 <a href="#see-040" class="anchor"></a>see 0.4.0<small> 2020-01-15 </small>
 </h1>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Arguments <code>ncol</code> and <code>nrow</code> in <code><a href="../reference/plots.html">plots()</a></code> were renamed into <code>n_columns</code> and <code>n_rows</code> to be consistent with arguments from other functions in the <strong>see</strong>-package.</li>
 </ul>
@@ -296,9 +311,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/si.html">bayestestR::si()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-4" class="section level2">
+<div id="changes-to-functions-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-4" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-5" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-functions for the <a href="https://easystats.github.io/see/articles/bayestestR.html"><strong>bayestestR</strong>-package</a> now also support <code>BFBayesFactor</code> and <code>MCMCglmm</code> objects.</li>
@@ -319,9 +334,9 @@
 <h1 class="page-header" data-toc-text="0.3.0">
 <a href="#see-030" class="anchor"></a>see 0.3.0<small> 2019-11-19 </small>
 </h1>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
 <code>how_to_plot()</code> was removed for the time being, due to its inadequate maintainace effort. It might be re-implemented sometime in the future…</li>
@@ -347,9 +362,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/p_significance.html">bayestestR::p_significance()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-5" class="section level2">
+<div id="changes-to-functions-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-5" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-6" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">parameters::model_parameters()</a></code> gets a <code>sort</code>-argument to sort coefficients.</li>
@@ -386,9 +401,9 @@
 <li>Added plot-function for <code><a href="https://rdrr.io/pkg/bayestestR/man/point_estimate.html">bayestestR::point_estimate()</a></code>.</li>
 </ul>
 </div>
-<div id="changes-to-functions-6" class="section level2">
+<div id="changes-to-functions-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-to-functions-6" class="anchor"></a>Changes to functions</h2>
+<a href="#changes-to-functions-7" class="anchor"></a>Changes to functions</h2>
 <ul>
 <li>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code>bayestestR::bayesfactor_savagedickey()</code> gets a <code>rope_color</code> and a <code>rope_alpha</code>-argument to plot the “null”-interval, when the null-hypothesis is a <em>region of practical equivalence</em>, and not just the point-null.</li>
 <li>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code><a href="https://rdrr.io/pkg/performance/man/binned_residuals.html">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://rdrr.io/pkg/performance/man/binned_residuals.html">performance::binned_residuals()</a></code>).</li>

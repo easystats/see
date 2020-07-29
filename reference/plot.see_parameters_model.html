@@ -165,7 +165,8 @@
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
   <span class='kw'>x</span>,
   show_intercept = <span class='fl'>FALSE</span>,
-  point_size = <span class='fl'>0.8</span>,
+  size_point = <span class='fl'>0.8</span>,
+  size_text = <span class='kw'>NULL</span>,
   sort = <span class='kw'>NULL</span>,
   n_columns = <span class='kw'>NULL</span>,
   <span class='kw'>...</span>
@@ -179,7 +180,7 @@
   threshold_coefficient = <span class='kw'>NULL</span>,
   threshold_p = <span class='kw'>NULL</span>,
   ci = <span class='fl'>TRUE</span>,
-  size = <span class='fl'>22</span>,
+  size_point = <span class='fl'>22</span>,
   <span class='kw'>...</span>
 )</pre>
 
@@ -198,14 +199,18 @@ has a posterior distribution on a very different location, so density curves of
 posterior distributions for other parameters are hardly visible.</p></td>
     </tr>
     <tr>
-      <th>point_size</th>
+      <th>size_point</th>
       <td><p>Size of point-geoms.</p></td>
+    </tr>
+    <tr>
+      <th>size_text</th>
+      <td><p>Size of text labels.</p></td>
     </tr>
     <tr>
       <th>sort</th>
       <td><dl>
-  <dt>Plotting model parameters</dt><dd><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></dd>
-  <dt>Plotting Bayes factors</dt><dd><p>Sort pie-slices by posterior probability (descending)?</p></dd>
+  <dt><em>Plotting model parameters</em></dt><dd><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></dd>
+  <dt><em>Plotting Bayes factors</em></dt><dd><p>Sort pie-slices by posterior probability (descending)?</p></dd>
 
 </dl></td>
     </tr>
@@ -237,11 +242,6 @@ statistical model or such.</p></td>
     <tr>
       <th>ci</th>
       <td><p>Logical, whether confidence intervals should be added to the plot.#'</p></td>
-    </tr>
-    <tr>
-      <th>size</th>
-      <td><p>Size of geoms. Depends on the context of the <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> function,
-so this argument may change size of points, lines or bars.</p></td>
     </tr>
     </table>
 
