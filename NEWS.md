@@ -1,5 +1,9 @@
 # see 0.5.3
 
+## Breaking changes
+
+* Harmonized spelling of arguments. Formerly, we had `text_size` and `size_text`, or just `size` even if only in the context of text labels. We now tried to harmonize these kind of arguments to gain more consistency throughout the different `plot()` methods.
+
 ## New plot functions
 
 * Added plot-function for `parameters::model_parameters()` for brms-meta-analysis models.

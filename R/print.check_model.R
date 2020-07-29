@@ -7,19 +7,19 @@ print.see_check_model <- function(x, ...) {
 
   panel <- attr(x, "panel")
   check <- attr(x, "check")
-  point_size <- attr(x, "dot_size")
-  line_size <- attr(x, "line_size")
-  text_size <- attr(x, "text_size")
+  size_point <- attr(x, "dot_size")
+  size_line <- attr(x, "line_size")
+  size_text <- attr(x, "text_size")
 
   if (is.null(check)) check <- all
 
   if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF)
-  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, point_size, line_size)
-  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, line_size)
-  if ("NCV" %in% names(x) && any(c("ncv", "all") %in% check)) p$NCV <- .plot_diag_ncv(x$NCV, point_size, line_size)
-  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, point_size, line_size)
+  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line)
+  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line)
+  if ("NCV" %in% names(x) && any(c("ncv", "all") %in% check)) p$NCV <- .plot_diag_ncv(x$NCV, size_point, size_line)
+  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, size_point, size_line)
   if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
-    p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, text_size)
+    p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, size_text)
     p$OUTLIERS <- p$OUTLIERS +
       theme_lucid(
         base_size = 10,
@@ -29,7 +29,7 @@ print.see_check_model <- function(x, ...) {
   }
 
   if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
-    ps <- .plot_diag_reqq(x$REQQ, point_size, line_size)
+    ps <- .plot_diag_reqq(x$REQQ, size_point, size_line)
     for (i in 1:length(ps)) {
       p[[length(p) + 1]] <- ps[[i]]
     }
@@ -70,7 +70,7 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_norm <- function(x, line_size) {
+.plot_diag_norm <- function(x, size_line) {
   ggplot(x, aes(x = .data$x)) +
     geom_ribbon(
       mapping = aes(ymin = 0, ymax = .data$y),
@@ -81,7 +81,7 @@ print.see_check_model <- function(x, ...) {
     geom_line(
       mapping = aes(y = .data$curve),
       colour = unname(flat_colors("teal")),
-      size = line_size
+      size = size_line
     ) +
     labs(
       x = "Residuals",
@@ -94,10 +94,10 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_qq <- function(x, point_size, line_size) {
+.plot_diag_qq <- function(x, size_point, size_line) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    stat_smooth(method = "lm", size = line_size, colour = unname(flat_colors("teal"))) +
-    geom_point2(colour = "#2c3e50", size = point_size) +
+    stat_smooth(method = "lm", size = size_line, colour = unname(flat_colors("teal"))) +
+    geom_point2(colour = "#2c3e50", size = size_point) +
     labs(
       title = "Non-normality of Residuals and Outliers",
       subtitle = "Dots should be plotted along the line",
@@ -110,10 +110,10 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_pp <- function(x, point_size, line_size) {
+.plot_diag_pp <- function(x, size_point, size_line) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    stat_smooth(method = "lm", size = line_size, colour = unname(flat_colors("teal"))) +
-    geom_point2(colour = "#2c3e50", size = point_size) +
+    stat_smooth(method = "lm", size = size_line, colour = unname(flat_colors("teal"))) +
+    geom_point2(colour = "#2c3e50", size = size_point) +
     labs(
       title = "Non-normality of Residuals and Outliers (PP plot)",
       subtitle = "Dots should be plotted along the line",
@@ -126,10 +126,10 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_homogeneity <- function(x, point_size, line_size) {
+.plot_diag_homogeneity <- function(x, size_point, size_line) {
   ggplot(x, aes(x = .data$x, .data$y)) +
-    geom_point2(colour = "#2c3e50", size = point_size) +
-    stat_smooth(method = "loess", se = FALSE, size = line_size, colour = unname(flat_colors("dark red"))) +
+    geom_point2(colour = "#2c3e50", size = size_point) +
+    stat_smooth(method = "loess", se = FALSE, size = size_line, colour = unname(flat_colors("dark red"))) +
     labs(
       title = "Homogeneity of Variance (Scale-Location)",
       subtitle = "Dots should spread equally around horizontal line",
@@ -141,10 +141,10 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_ncv <- function(x, point_size, line_size) {
+.plot_diag_ncv <- function(x, size_point, size_line) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = "#2c3e50", size = point_size) +
-    geom_smooth(method = "loess", se = FALSE, size = line_size, colour = unname(flat_colors("dark red"))) +
+    geom_point2(colour = "#2c3e50", size = size_point) +
+    geom_smooth(method = "loess", se = FALSE, size = size_line, colour = unname(flat_colors("dark red"))) +
     labs(
       x = "Fitted values",
       y = "Residuals",
@@ -156,7 +156,7 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_reqq <- function(x, point_size, line_size, panel = TRUE) {
+.plot_diag_reqq <- function(x, size_point, size_line, panel = TRUE) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
     p <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
@@ -169,7 +169,7 @@ print.see_check_model <- function(x, ...) {
       stat_smooth(
         method = "lm",
         alpha = .2,
-        size = line_size,
+        size = size_line,
         colour = unname(flat_colors("teal"))
       ) +
       geom_errorbar(
@@ -177,7 +177,7 @@ print.see_check_model <- function(x, ...) {
         width = 0,
         colour = "#2c3e50"
       ) +
-      geom_point2(colour = "#2c3e50", size = point_size) +
+      geom_point2(colour = "#2c3e50", size = size_point) +
       theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 
     if (nlevels(dat$facet) > 1 && isTRUE(panel)) {

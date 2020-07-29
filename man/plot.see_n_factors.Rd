@@ -14,8 +14,7 @@ statistical model or such.}
 
 \item{type}{Character vector, indicating the type of plot.}
 
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
+\item{size}{Depending on \code{type}, size of bars, lines or segments.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

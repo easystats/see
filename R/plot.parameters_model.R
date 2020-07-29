@@ -7,6 +7,7 @@
 #' @inheritParams plot.see_bayesfactor_models
 #' @inheritParams plot.see_cluster_analysis
 #' @inheritParams plot.see_check_normality
+#' @inheritParams plot.see_parameters_brms_meta
 #'
 #' @return A ggplot2-object.
 #'
@@ -18,7 +19,7 @@
 #' plot(result)
 #' @importFrom bayestestR reshape_ci
 #' @export
-plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8, sort = NULL, n_columns = NULL, ...) {
+plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, sort = NULL, n_columns = NULL, ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }
@@ -86,10 +87,11 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
     x$Parameter[overall] <- "Overall"
     x$group <- "study"
     x$group[overall] <- "Overall"
-    x$point_size <- sqrt(x$Weight)
-    x$point_size[overall] <- 8
+    x$size_point <- sqrt(x$Weight)
+    x$size_point[overall] <- 8
     x$shape <- 19
     x$shape[overall] <- 18
+    x$Estimate_CI <- sprintf("%.2f %s", x$Coefficient, insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2))
   }
 
   # if we have a model with multiple responses or response levels
@@ -130,11 +132,21 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
     # plot setup for metafor-objects
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
       geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = point_size, fatten = x$point_size, shape = x$shape) +
+      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = size_point, fatten = x$size_point, shape = x$shape) +
       coord_flip() +
       theme_modern(legend.position = "none") +
       scale_color_material() +
       guides(color = FALSE, size = FALSE, shape = FALSE)
+
+    if (!is.null(size_text) && !is.na(size_text)) {
+      # add some space to the right panel for text
+      space_factor <- sqrt(ceiling(diff(c(min(x$CI_low), max(x$CI_high)))) / 5)
+      new_range <- pretty(c(min(x$CI_low), max(x$CI_high) + space_factor))
+
+      p <- p +
+        geom_text(mapping = aes(label = .data$Estimate_CI, y = Inf), colour = "black", hjust = "inward", size = size_text) +
+        ylim(c(min(new_range), max(new_range)))
+    }
   } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
     # plot setup for model parameters with multiple CIs
     x <- bayestestR::reshape_ci(x)
@@ -143,7 +155,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
       geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
       geom_pointrange(
         aes(ymin = .data$CI_low, ymax = .data$CI_high),
-        size = point_size,
+        size = size_point,
         position = position_dodge(1 / length(unique(x$CI)))
       ) +
       coord_flip() +
@@ -154,7 +166,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, point_size = .8
     x$group <- as.factor(x$Coefficient < y_intercept)
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
       geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = point_size) +
+      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = size_point) +
       coord_flip() +
       theme_modern(legend.position = "none") +
       scale_color_material()

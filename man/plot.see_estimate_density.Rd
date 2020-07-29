@@ -11,7 +11,7 @@
   n_columns = 1,
   priors = FALSE,
   priors_alpha = 0.4,
-  size = 0.9,
+  size_line = 0.9,
   ...
 )
 }
@@ -32,9 +32,6 @@ posterior distributions for other parameters are hardly visible.}
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
-
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

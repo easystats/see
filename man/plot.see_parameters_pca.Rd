@@ -7,7 +7,7 @@
 \method{plot}{see_parameters_pca}(
   x,
   type = c("bar", "line"),
-  text_size = 3.5,
+  size_text = 3.5,
   text_color = "black",
   size = 1,
   ...
@@ -18,12 +18,9 @@
 
 \item{type}{Character vector, indicating the type of plot.}
 
-\item{text_size}{Size of text labels.}
+\item{size_text}{Size of text labels.}
 
 \item{text_color}{Color of text labels.}
-
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

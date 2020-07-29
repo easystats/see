@@ -6,6 +6,7 @@
 #' @param text_color Color of text labels.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams plot.see_bayesfactor_parameters
 #'
 #' @return A ggplot2-object.
 #'
@@ -18,7 +19,7 @@
 #' }
 #' @importFrom utils sessionInfo
 #' @export
-plot.see_easycorrelation <- function(x, size = 22, text_color = "white", node_color = "#647687", ...) {
+plot.see_easycorrelation <- function(x, size_point = 22, text_color = "white", node_color = "#647687", ...) {
   if (!requireNamespace("ggraph", quietly = TRUE)) {
     stop("Package 'ggraph' required for this function to work. Please install it.", call. = FALSE)
   } else {
@@ -38,7 +39,7 @@ plot.see_easycorrelation <- function(x, size = 22, text_color = "white", node_co
   suppressWarnings(
     ggraph::ggraph(data, layout = "kk") +
       ggraph::geom_edge_arc(aes(colour = .data$r, edge_width = abs(.data$r)), strength = 0.1) +
-      ggraph::geom_node_point(color = node_color, size = size) +
+      ggraph::geom_node_point(color = node_color, size = size_point) +
       ggraph::geom_node_text(aes(label = .data$name), colour = text_color) +
       ggraph::scale_edge_color_gradient2(low = "#a20025", high = "#008a00", name = "r") +
       ggraph::theme_graph() +

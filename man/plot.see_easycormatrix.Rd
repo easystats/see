@@ -9,8 +9,8 @@
   show_values = FALSE,
   show_p = FALSE,
   show_legend = TRUE,
-  size = 1,
-  text_size = 3.5,
+  size_point = 1,
+  size_text = 3.5,
   digits = 3,
   type = c("circle", "tile"),
   ...
@@ -25,10 +25,9 @@
 
 \item{show_legend}{Logical, show or hide legend.}
 
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
+\item{size_point}{Size of point-geoms.}
 
-\item{text_size}{Size of text labels.}
+\item{size_text}{Size of text labels.}
 
 \item{digits}{Number of decimals used for values.}
 

@@ -4,13 +4,12 @@
 \alias{plot.see_easycorrelation}
 \title{Plot method for Gaussian Graphical Models}
 \usage{
-\method{plot}{see_easycorrelation}(x, size = 22, text_color = "white", node_color = "#647687", ...)
+\method{plot}{see_easycorrelation}(x, size_point = 22, text_color = "white", node_color = "#647687", ...)
 }
 \arguments{
 \item{x}{An object.}
 
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
+\item{size_point}{Size of point-geoms.}
 
 \item{text_color}{Color of text labels.}
 

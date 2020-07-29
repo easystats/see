@@ -8,8 +8,8 @@
   x,
   type = c("density", "qq", "pp"),
   data = NULL,
-  size = 0.8,
-  point_size = 2,
+  size_line = 0.8,
+  size_point = 2,
   ...
 )
 }
@@ -21,10 +21,9 @@
 \item{data}{The original data used to create this object. Can be a
 statistical model or such.}
 
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
+\item{size_line}{Size of line geoms.}
 
-\item{point_size}{Size of point-geoms.}
+\item{size_point}{Size of point-geoms.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

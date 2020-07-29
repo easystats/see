@@ -2,7 +2,7 @@
 #'
 #' The \code{plot()} method for the \code{performance::check_outliers()} function.
 #'
-#' @param text_size Size of text labels.
+#' @param size_text Size of text labels.
 #' @inheritParams data_plot
 #'
 #' @return A ggplot2-object.
@@ -18,11 +18,11 @@
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
 #' @export
-plot.see_check_outliers <- function(x, text_size = 3.5, ...) {
+plot.see_check_outliers <- function(x, size_text = 3.5, ...) {
   methods <- attr(x, "methods", exact = TRUE)
 
   if (length(methods == 1)) {
-    .plot_diag_outliers(x, text_size)
+    .plot_diag_outliers(x, size_text)
   } else {
     .plot_outliers_multimethod(x)
   }
@@ -56,7 +56,7 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 }
 
 
-.plot_diag_outliers <- function(x, text_size = 3.5) {
+.plot_diag_outliers <- function(x, size_text = 3.5) {
   d <- data_plot(x)
   d$Id <- 1:nrow(d)
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
@@ -77,7 +77,7 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 
   threshold <- attr(x, "threshold", exact = TRUE)[[method]]
 
-  if (is.null(text_size)) text_size <- 3.5
+  if (is.null(size_text)) size_text <- 3.5
 
   p <- ggplot(d, aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)) +
     geom_histogram() +
@@ -101,9 +101,9 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 
 
   if (requireNamespace("ggrepel", quietly = TRUE))
-    p <- p + ggrepel::geom_text_repel(y = 2.5, size = text_size)
+    p <- p + ggrepel::geom_text_repel(y = 2.5, size = size_text)
   else
-    p <- p + geom_text(y = 2.5, size = text_size)
+    p <- p + geom_text(y = 2.5, size = size_text)
 
   p
 }

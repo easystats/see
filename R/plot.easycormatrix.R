@@ -59,6 +59,7 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ..
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_check_outliers
+#' @inheritParams plot.see_bayesfactor_parameters
 #'
 #' @return A ggplot2-object.
 #'
@@ -70,9 +71,9 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ..
 #' plot(s)
 #' @importFrom parameters format_p
 #' @export
-plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_legend = TRUE, size = 1, text_size = 3.5, digits = 3, type = c("circle", "tile"), ...) {
+plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_legend = TRUE, size_point = 1, size_text = 3.5, digits = 3, type = c("circle", "tile"), ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, digits = digits, size = size)
+    x <- data_plot(x, digits = digits, size = size_point)
   }
 
   type <- match.arg(type)
@@ -110,7 +111,7 @@ plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_
     add_plot_attributes(x)
 
   if (show_values) {
-    p <- p + geom_text(aes(label = .data$labels), size = text_size, color = "black")
+    p <- p + geom_text(aes(label = .data$labels), size = size_text, color = "black")
   }
 
   if (!show_legend) {

@@ -20,7 +20,7 @@
 
 \method{plot}{see_equivalence_test_lm}(
   x,
-  point_size = 0.7,
+  size_point = 0.7,
   rope_color = "#0171D3",
   rope_alpha = 0.2,
   show_intercept = FALSE,
@@ -44,7 +44,7 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
-\item{point_size}{Size of point-geoms.}
+\item{size_point}{Size of point-geoms.}
 }
 \value{
 A ggplot2-object.

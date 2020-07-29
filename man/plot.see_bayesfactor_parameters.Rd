@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{see_bayesfactor_parameters}(
   x,
-  point_size = 2,
+  size_point = 2,
   rope_color = "#0171D3",
   rope_alpha = 0.2,
   show_intercept = FALSE,
@@ -16,7 +16,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{point_size}{Size of point-geoms.}
+\item{size_point}{Size of point-geoms.}
 
 \item{rope_color}{Color of ROPE ribbon.}
 

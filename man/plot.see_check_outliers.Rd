@@ -4,12 +4,12 @@
 \alias{plot.see_check_outliers}
 \title{Plot method for checking outliers}
 \usage{
-\method{plot}{see_check_outliers}(x, text_size = 3.5, ...)
+\method{plot}{see_check_outliers}(x, size_text = 3.5, ...)
 }
 \arguments{
 \item{x}{An object.}
 
-\item{text_size}{Size of text labels.}
+\item{size_text}{Size of text labels.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

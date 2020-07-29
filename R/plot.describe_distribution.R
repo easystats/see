@@ -37,6 +37,7 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' @param dispersion_style Character, style of dispersion area. \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.
 #' @param highlight Vector with names of categories in \code{x} that should be highlighted.
 #' @param highlight_color Vector of color values for highlighted categories. The remaining (non-highlighted) categories will be filled with a lighter grey.
+#' @param size_bar Size of bar geoms.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'
@@ -50,7 +51,7 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_distribution <- function(x, dispersion = FALSE, dispersion_alpha = .3, dispersion_color = "#3498db", dispersion_style = c("ribbon", "curve"), size = .7, highlight = NULL, highlight_color = NULL, ...) {
+plot.see_parameters_distribution <- function(x, dispersion = FALSE, dispersion_alpha = .3, dispersion_color = "#3498db", dispersion_style = c("ribbon", "curve"), size_bar = .7, highlight = NULL, highlight_color = NULL, ...) {
   # get data
   data <- .retrieve_data(x)
 
@@ -66,16 +67,16 @@ plot.see_parameters_distribution <- function(x, dispersion = FALSE, dispersion_a
   dispersion_style <- match.arg(dispersion_style)
 
   if (is.list(x) && !is.data.frame(x)) {
-    lapply(x, .plot_see_parameters_distribution, dispersion_alpha, dispersion_color, dispersion_style, show_dispersion = dispersion, size = size, highlight = highlight, highlight_color = highlight_color)
+    lapply(x, .plot_see_parameters_distribution, dispersion_alpha, dispersion_color, dispersion_style, show_dispersion = dispersion, size_bar = size_bar, highlight = highlight, highlight_color = highlight_color)
   } else {
-    .plot_see_parameters_distribution(x, dispersion_alpha, dispersion_color, dispersion_style, show_dispersion = dispersion, size = size, highlight = highlight, highlight_color = highlight_color)
+    .plot_see_parameters_distribution(x, dispersion_alpha, dispersion_color, dispersion_style, show_dispersion = dispersion, size_bar = size_bar, highlight = highlight, highlight_color = highlight_color)
   }
 }
 
 
 
 #' @importFrom stats dnorm
-.plot_see_parameters_distribution <- function(x, dispersion_alpha, dispersion_color, dispersion_style, show_dispersion, size, highlight, highlight_color) {
+.plot_see_parameters_distribution <- function(x, dispersion_alpha, dispersion_color, dispersion_style, show_dispersion, size_bar, highlight, highlight_color) {
   centrality <- attributes(x)$centrality
   dispersion <- attributes(x)$dispersion
 
@@ -104,10 +105,10 @@ plot.see_parameters_distribution <- function(x, dispersion = FALSE, dispersion_a
   }
 
   if (is.factor(x$x) || is.character(x$x) || .n_unique(x$x) <= 12) {
-    p <- p + geom_bar(width = size)
+    p <- p + geom_bar(width = size_bar)
   } else if (.is_integer(x$x)) {
     p <- p +
-      geom_bar(width = size) +
+      geom_bar(width = size_bar) +
       scale_x_continuous(n.breaks = round(.n_unique(x$x) / 4))
   } else {
     p <- p + geom_histogram()

@@ -10,7 +10,7 @@
   dispersion_alpha = 0.3,
   dispersion_color = "#3498db",
   dispersion_style = c("ribbon", "curve"),
-  size = 0.7,
+  size_bar = 0.7,
   highlight = NULL,
   highlight_color = NULL,
   ...
@@ -27,8 +27,7 @@
 
 \item{dispersion_style}{Character, style of dispersion area. \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.}
 
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
+\item{size_bar}{Size of bar geoms.}
 
 \item{highlight}{Vector with names of categories in \code{x} that should be highlighted.}
 

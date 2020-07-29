@@ -57,6 +57,7 @@ data_plot.n_clusters <- data_plot.n_factors
 #'
 #' The \code{plot()} method for the \code{parameters::n_factors()} and \code{parameters::n_clusters()}
 #'
+#' @param size Depending on \code{type}, size of bars, lines or segments.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'

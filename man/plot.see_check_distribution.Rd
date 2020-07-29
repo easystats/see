@@ -4,12 +4,12 @@
 \alias{plot.see_check_distribution}
 \title{Plot method for classifying the distribution of a model-family}
 \usage{
-\method{plot}{see_check_distribution}(x, point_size = 2, panel = TRUE, ...)
+\method{plot}{see_check_distribution}(x, size_point = 2, panel = TRUE, ...)
 }
 \arguments{
 \item{x}{An object.}
 
-\item{point_size}{Size of point-geoms.}
+\item{size_point}{Size of point-geoms.}
 
 \item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else,
 single plots are returned.}

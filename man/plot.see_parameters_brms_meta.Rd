@@ -6,9 +6,9 @@
 \usage{
 \method{plot}{see_parameters_brms_meta}(
   x,
-  point_size = 1.5,
+  size_point = 1.5,
   size = 0.8,
-  text_size = 3.5,
+  size_text = 3.5,
   rope_alpha = 0.15,
   rope_color = "cadetblue",
   ...
@@ -36,7 +36,7 @@ The \code{plot()} method for the \code{parameters::model_parameters()} function 
   To change the color of the error bars, use \code{scale_color_manual(values = c("Errorbar" = "red"))}.
 }
 \subsection{Show or hide estimates and CI}{
-  Use \code{text_size = NULL} or \code{text_size = NA} to hide the textual output of estimates and credible intervals.
+  Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual output of estimates and credible intervals.
 }
 }
 \examples{

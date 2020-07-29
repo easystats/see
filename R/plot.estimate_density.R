@@ -60,7 +60,7 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, size = .9, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, size_line = .9, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -94,7 +94,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
         y = .data$y,
         color = .data$Parameter
       )) +
-      geom_line(size = size) +
+      geom_line(size = size_line) +
       add_plot_attributes(x) +
       scale_color_flat(labels = labels)
   } else {
@@ -162,7 +162,7 @@ data_plot.estimate_density_df <- data_plot.estimate_density
 #' @importFrom ggridges geom_ridgeline
 #' @importFrom stats setNames
 #' @export
-plot.see_estimate_density_df <- function(x, stack = TRUE, n_columns = 1, size = .9, ...) {
+plot.see_estimate_density_df <- function(x, stack = TRUE, n_columns = 1, size_line = .9, ...) {
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
@@ -174,7 +174,7 @@ plot.see_estimate_density_df <- function(x, stack = TRUE, n_columns = 1, size = 
         y = .data$y,
         color = .data$Parameter
       )) +
-      geom_line(size = size)
+      geom_line(size = size_line)
   } else {
     p <- ggplot(
       x,

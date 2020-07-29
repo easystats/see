@@ -23,7 +23,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
   summary <- x[, 1:6]
   summary$Parameter <- attributes(x)$cleaned_parameters
   colnames(summary)[2] <- "Estimate"
-  summary$Estimate_CI <- sprintf("%.2f %s", summary$Estimate, insight::format_ci(summary$CI_low, summary$CI_high, ci = NULL, digits = 2, width = "auto"))
+  summary$Estimate_CI <- sprintf("%.2f %s", summary$Estimate, insight::format_ci(summary$CI_low, summary$CI_high, ci = NULL, digits = 2))
 
   summary$Parameter <- factor(summary$Parameter, levels = rev(unique(summary$Parameter)))
   colnames(summary)[match("Parameter", colnames(summary))] <- "Study"
@@ -75,7 +75,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 #'   To change the color of the error bars, use \code{scale_color_manual(values = c("Errorbar" = "red"))}.
 #' }
 #' \subsection{Show or hide estimates and CI}{
-#'   Use \code{text_size = NULL} or \code{text_size = NA} to hide the textual output of estimates and credible intervals.
+#'   Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual output of estimates and credible intervals.
 #' }
 #'
 #' @examples
@@ -100,7 +100,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, ...) {
 #' }
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_parameters_brms_meta <- function(x, point_size = 1.5, size = 0.8, text_size = 3.5, rope_alpha = 0.15, rope_color = "cadetblue", ...) {
+plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size = 0.8, size_text = 3.5, rope_alpha = 0.15, rope_color = "cadetblue", ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -138,10 +138,10 @@ plot.see_parameters_brms_meta <- function(x, point_size = 1.5, size = 0.8, text_
   p <- p +
     ggridges::geom_ridgeline(mapping = aes(fill = .data$Group), color = NA, scale = 1, alpha = 0.7) +
     geom_errorbarh(data = summary, mapping = aes(xmin = .data$CI_low, xmax = .data$CI_high, color = .data$Color), size = size, alpha = 0.8) +
-    geom_point(data = summary, mapping = aes(x = .data$Estimate, color = .data$Color), size = point_size, alpha = 0.8)
+    geom_point(data = summary, mapping = aes(x = .data$Estimate, color = .data$Color), size = size_point, alpha = 0.8)
 
-  if (!is.null(text_size) && !is.na(text_size)) {
-    p <- p + geom_text(data = summary, mapping = aes(label = .data$Estimate_CI, x = Inf), hjust = "inward", size = text_size)
+  if (!is.null(size_text) && !is.na(size_text)) {
+    p <- p + geom_text(data = summary, mapping = aes(label = .data$Estimate_CI, x = Inf), hjust = "inward", size = size_text)
   }
 
   p <- p +

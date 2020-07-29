@@ -9,9 +9,6 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size}{Size of geoms. Depends on the context of the \code{plot()} function,
-so this argument may change size of points, lines or bars.}
-
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{

@@ -19,7 +19,7 @@
 #' @importFrom insight get_response
 #' @importFrom stats residuals density
 #' @export
-plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
+plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
 
   model <- .retrieve_data(x)
   x <- x[-which(x$p_Residuals == 0 & x$p_Response == 0), ]
@@ -41,7 +41,7 @@ plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
 
   p1 <- ggplot(dat, aes(x = .data$x, y = .data$y, colour = .data$group)) +
     geom_linerange(aes(ymin = 0, ymax = .data$y), position = position_dodge(.4), size = .8) +
-    geom_point(size = point_size, position = position_dodge(.4)) +
+    geom_point(size = size_point, position = position_dodge(.4)) +
     coord_flip() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Residuals and Response") +
     scale_y_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
@@ -80,7 +80,7 @@ plot.see_check_distribution <- function(x, point_size = 2, panel = TRUE, ...) {
 
 
 #' @export
-plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE, ...) {
+plot.see_check_distribution_numeric <- function(x, size_point = 2, panel = TRUE, ...) {
   vec <- .retrieve_data(x)
   x <- x[-which(x$p_Vector == 0), ]
 
@@ -100,7 +100,7 @@ plot.see_check_distribution_numeric <- function(x, point_size = 2, panel = TRUE,
 
   p1 <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
     geom_linerange(aes(ymin = 0, ymax = .data$y), position = position_dodge(.4), size = .8) +
-    geom_point(size = point_size, position = position_dodge(.4)) +
+    geom_point(size = size_point, position = position_dodge(.4)) +
     coord_flip() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
     scale_y_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +

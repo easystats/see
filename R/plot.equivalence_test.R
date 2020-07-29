@@ -273,7 +273,7 @@ plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha =
 
 #' @rdname plot.see_equivalence_test
 #' @export
-plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
+plot.see_equivalence_test_lm <- function(x, size_point = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -336,7 +336,7 @@ plot.see_equivalence_test_lm <- function(x, point_size = .7, rope_color = "#0171
     annotate("rect", ymin = .rope[1], ymax = .rope[2], xmin = 0, xmax = Inf, fill = rope_color, alpha = (rope_alpha / 3)) +
     geom_hline(yintercept = .rope, linetype = "dashed", colour = rope_color, size = .8, alpha = rope.line.alpha) +
     geom_hline(yintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
-    geom_pointrange(size = point_size) +
+    geom_pointrange(size = size_point) +
     scale_colour_manual(values = fill.color) +
     labs(x = x.title, y = NULL, colour = legend.title) +
     theme(legend.position = "bottom") +

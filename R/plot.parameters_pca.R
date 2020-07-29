@@ -61,7 +61,7 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' plot(result)
 #' @importFrom rlang .data
 #' @export
-plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5, text_color = "black", size = 1, ...) {
+plot.see_parameters_pca <- function(x, type = c("bar", "line"), size_text = 3.5, text_color = "black", size = 1, ...) {
   type <- match.arg(type)
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
@@ -97,7 +97,7 @@ plot.see_parameters_pca <- function(x, type = c("bar", "line"), text_size = 3.5,
   }
 
   p <- p +
-    geom_text(aes(y = abs(.data$y), label = round(.data$y, 2)), color = text_color, size = text_size, nudge_y = .15) +
+    geom_text(aes(y = abs(.data$y), label = round(.data$y, 2)), color = text_color, size = size_text, nudge_y = .15) +
     coord_flip() +
     guides(fill = FALSE, color = FALSE) +
     scale_y_continuous(
