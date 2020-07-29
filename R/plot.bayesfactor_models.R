@@ -6,10 +6,10 @@
 #' @param n_pies Number of pies.
 #' @param value What value to display.
 #' @param sort \describe{
-#'   \item{Plotting model parameters}{
+#'   \item{\emph{Plotting model parameters}}{
 #'   If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
 #'   }
-#'   \item{Plotting Bayes factors}{
+#'   \item{\emph{Plotting Bayes factors}}{
 #'   Sort pie-slices by posterior probability (descending)?
 #'   }
 #' }

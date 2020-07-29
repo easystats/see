@@ -74,7 +74,7 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 #' @importFrom rlang .data
 #' @rdname plot.see_parameters_model
 #' @export
-plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "correlation", "loading"), threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, size = 22, ...) {
+plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "correlation", "loading"), threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, size_point = 22, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, type = type, threshold_coefficient = threshold_coefficient, threshold_p = threshold_p, ci = ci, ...)
   }
@@ -106,7 +106,7 @@ plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "corr
                        check_overlap = TRUE,
                        arrow = arrow(type = "closed", length = unit(3, "mm")),
                        start_cap = ggraph::circle(12, 'mm'), end_cap = ggraph::circle(12, 'mm')) +
-    ggraph::geom_node_point(aes(colour = .data$Latent), size = size) +
+    ggraph::geom_node_point(aes(colour = .data$Latent), size = size_point) +
     ggraph::geom_node_text(aes(label = .data$Name))  +
     ggraph::scale_edge_colour_gradient2(
       guide = FALSE,

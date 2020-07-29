@@ -23,7 +23,7 @@
   threshold_coefficient = NULL,
   threshold_p = NULL,
   ci = TRUE,
-  size = 22,
+  size_point = 22,
   ...
 )
 }
@@ -40,10 +40,10 @@ posterior distributions for other parameters are hardly visible.}
 \item{size_text}{Size of text labels.}
 
 \item{sort}{\describe{
-  \item{Plotting model parameters}{
+  \item{\emph{Plotting model parameters}}{
   If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
   }
-  \item{Plotting Bayes factors}{
+  \item{\emph{Plotting Bayes factors}}{
   Sort pie-slices by posterior probability (descending)?
   }
 }}
