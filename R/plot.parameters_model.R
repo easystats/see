@@ -207,7 +207,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     x_high <- which.max(max(x$CI_high) < range)
     if (add_values) {
       # add some space to the right panel for text
-      x_high <- 2 * x_high
+      new_range <- pretty(2 * max(x$CI_high))
+      x_high <- which.max(max(new_range) < range)
     }
     p <- p + scale_y_log10(
       breaks = range[x_low:x_high],
