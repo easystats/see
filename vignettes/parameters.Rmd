@@ -89,6 +89,19 @@ result <- model_parameters(model1)
 plot(result)
 ```
 
+When `size_text` is given, coefficients and confidence intervals are added to the plot.
+
+```{r}
+plot(result, size_text = 4)
+```
+
+This also works for exponentiated coefficients.
+
+```{r}
+result <- model_parameters(model1, exponentiate = TRUE)
+plot(result, size_text = 4)
+```
+
 As compared to the classical `summary()`-output, `model_parameters()`, and hence the `plot()`-method, tries to create human readable, prettier parameters names.
 
 ```{r}

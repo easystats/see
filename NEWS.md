@@ -10,7 +10,8 @@
 
 ## Changes to functions
 
-* `plot()` for `parameters::model_parameters()` from meta-analysis models (e.g. from *metafor*) gains a `size_text`-argument, to add text values for estimates and confidence intervals to the plot (see also vignette). Furthermore, a `type` argument was added, to create funnel plots with `type = "funnel"`.
+* `plot()` for `parameters::model_parameters()` gains a `size_text`-argument, to add text values for estimates and confidence intervals to the plot (see also vignette). 
+* `plot()` for `parameters::model_parameters()` from meta-analysis models (e.g. from *metafor*) gains a `type` argument, to create funnel plots with `type = "funnel"`.
 
 # see 0.5.2
 

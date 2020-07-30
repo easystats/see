@@ -25,15 +25,25 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }
 
+  # retrieve settings ----------------
+
   # is exp?
   exponentiated_coefs <- isTRUE(attributes(x)$exponentiate)
   y_intercept <- ifelse(exponentiated_coefs, 1, 0)
+
+  # add coefficients and CIs?
+  add_values <- !is.null(size_text) && !is.na(size_text)
 
   # ordinal model? needed for free facet scales later...
   ordinal_model <- isTRUE(attributes(x)$ordinal_model)
 
   # brms has some special handling...
   is_brms <- inherits(x, c("parameters_stan", "parameters_brms"))
+
+  # create text string for estimate and CI
+  x$Estimate_CI <- sprintf("%.2f %s",
+                           x$Coefficient,
+                           insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2))
 
   # do we have a measure for meta analysis (to label axis)
   meta_measure <- attributes(x)$measure
@@ -92,7 +102,6 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     x$size_point[overall] <- 8
     x$shape <- 19
     x$shape[overall] <- 18
-    x$Estimate_CI <- sprintf("%.2f %s", x$Coefficient, insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2))
 
     type <- match.arg(type)
 
@@ -145,16 +154,6 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
       theme_modern(legend.position = "none") +
       scale_color_material() +
       guides(color = FALSE, size = FALSE, shape = FALSE)
-
-    if (!is.null(size_text) && !is.na(size_text)) {
-      # add some space to the right panel for text
-      space_factor <- sqrt(ceiling(diff(c(min(x$CI_low), max(x$CI_high)))) / 5)
-      new_range <- pretty(c(min(x$CI_low), max(x$CI_high) + space_factor))
-
-      p <- p +
-        geom_text(mapping = aes(label = .data$Estimate_CI, y = Inf), colour = "black", hjust = "inward", size = size_text) +
-        ylim(c(min(new_range), max(new_range)))
-    }
   } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
     # plot setup for model parameters with multiple CIs
     x <- bayestestR::reshape_ci(x)
@@ -185,6 +184,18 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     p <- p + scale_x_discrete(labels = pretty_names)
   }
 
+  # add coefficients and CIs?
+  if (add_values) {
+    # add some space to the right panel for text
+    space_factor <- sqrt(ceiling(diff(c(min(x$CI_low), max(x$CI_high)))) / 5)
+    new_range <- pretty(c(min(x$CI_low), max(x$CI_high) + space_factor))
+
+    p <- p +
+      geom_text(mapping = aes(label = .data$Estimate_CI, y = Inf),
+                colour = "black", hjust = "inward", size = size_text) +
+      ylim(c(min(new_range), max(new_range)))
+  }
+
   # check for exponentiated estimates. in such cases, we transform the y-axis
   # to log-scale, to get proper proportion of exponentiated estimates. to
   # do this, we create a pretty range of values, and then look for lowest and
@@ -194,6 +205,10 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     range <- 2^c(-24:16)
     x_low <- which.min(min(x$CI_low) > range) - 1
     x_high <- which.max(max(x$CI_high) < range)
+    if (add_values) {
+      # add some space to the right panel for text
+      x_high <- 2 * x_high
+    }
     p <- p + scale_y_log10(
       breaks = range[x_low:x_high],
       limits = c(range[x_low], range[x_high]),
