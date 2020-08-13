@@ -40,6 +40,11 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   # brms has some special handling...
   is_brms <- inherits(x, c("parameters_stan", "parameters_brms"))
 
+  # check column names, differs for standardized models
+  if ("Std_Coefficient" %in% colnames(x)) {
+    colnames(x)[which(colnames(x) == "Std_Coefficient")] <- "Coefficient"
+  }
+
   # create text string for estimate and CI
   x$Estimate_CI <- sprintf("%.2f %s",
                            x$Coefficient,

@@ -13,6 +13,10 @@
 * `plot()` for `parameters::model_parameters()` gains a `size_text`-argument, to add text values for estimates and confidence intervals to the plot (see also vignette). 
 * `plot()` for `parameters::model_parameters()` from meta-analysis models (e.g. from *metafor*) gains a `type` argument, to create funnel plots with `type = "funnel"`.
 
+## Bug fixes
+
+* Fixed bug in `plot.model_parameters()` when `standardize` was `"basic"`, `"smart"` or `"posthoc"`.
+
 # see 0.5.2
 
 ## Changes to functions
