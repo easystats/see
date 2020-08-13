@@ -19,7 +19,7 @@ plot.see_effectsize_table <- function(x, ...) {
 
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
 
-  es_name <- colnames(x)[.is_effectsize_name(colnames(x))]
+  es_name <- colnames(x)[effectsize::is_effectsize_name(colnames(x))]
   es_lab <- gsub("_", " ", es_name)
   es_lab <- gsub("partial", "(partial)", es_lab)
 
@@ -64,7 +64,7 @@ plot.see_equivalence_test_effectsize <- function(x, ...) {
     subtitle <- ""
   }
 
-  es_name <- colnames(x)[.is_effectsize_name(colnames(x))]
+  es_name <- colnames(x)[effectsize::is_effectsize_name(colnames(x))]
   es_lab <- gsub("_", " ", es_name)
   es_lab <- gsub("partial", "(partial)", es_lab)
 
