@@ -76,6 +76,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_check_outliers
+#' @inheritParams plot.see_estimate_density
 #'
 #' @return A ggplot2-object.
 #'

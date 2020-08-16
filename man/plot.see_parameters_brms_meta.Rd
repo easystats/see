@@ -25,6 +25,8 @@
 
 \item{size_text}{Size of text labels.}
 
+\item{posteriors_alpha}{Alpha value of the posterior distributions.}
+
 \item{rope_alpha}{Transparency level of ROPE ribbon.}
 
 \item{rope_color}{Color of ROPE ribbon.}
