@@ -17,6 +17,9 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
   dataplot$Parameter <- factor(dataplot$Parameter)
   dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(levels(dataplot$Parameter)))
 
+  # summary
+  summary <- dataplot
+
 
   attr(dataplot, "info") <- list("xlab" = "Values",
                                  "ylab" = "Density",
@@ -42,6 +45,7 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
 #' @param priors Logical, if \code{TRUE}, prior distributions are simulated
 #'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.
+#' @param posteriors_alpha Alpha value of the posterior distributions.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis
@@ -61,7 +65,7 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, size_line = .9, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, posteriors_alpha = 0.7, size_line = .9, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -88,24 +92,12 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
   x <- .remove_intercept(x, show_intercept = show_intercept)
 
   if (stack == TRUE) {
-    p <- ggplot(
-      x,
-      aes(
-        x = .data$x,
-        y = .data$y,
-        color = .data$Parameter
-      )) +
+    p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
       geom_line(size = size_line) +
       add_plot_attributes(x) +
       scale_color_flat(labels = labels)
   } else {
-    p <- ggplot(
-      x,
-      aes(
-        x = .data$x,
-        y = .data$Parameter,
-        height = .data$y
-      ))
+    p <- ggplot(x, aes(x = .data$x, y = .data$Parameter, height = .data$y))
 
     # add prior layer
     if (priors) {
@@ -113,12 +105,16 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
         .add_prior_layer_ridgeline(
           model,
           show_intercept = show_intercept,
-          priors_alpha = priors_alpha
+          priors_alpha = priors_alpha,
+          show_ridge_line = FALSE
         ) +
-        ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = .7) +
+        ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = posteriors_alpha, color = NA) +
         scale_fill_flat(reverse = TRUE)
     } else {
-      p <- p + ggridges::geom_ridgeline()
+      p <- p +
+        ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = posteriors_alpha, color = NA) +
+        guides(fill = "none") +
+        scale_fill_flat(reverse = TRUE)
     }
 
     p <- p + add_plot_attributes(x)
@@ -168,22 +164,10 @@ plot.see_estimate_density_df <- function(x, stack = TRUE, n_columns = 1, size_li
   labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
   if (stack == TRUE) {
-    p <- ggplot(
-      x,
-      aes(
-        x = .data$x,
-        y = .data$y,
-        color = .data$Parameter
-      )) +
+    p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
       geom_line(size = size_line)
   } else {
-    p <- ggplot(
-      x,
-      aes(
-        x = .data$x,
-        y = .data$Parameter,
-        height = .data$y
-      )) +
+    p <- ggplot(x, aes(x = .data$x, y = .data$Parameter, height = .data$y)) +
       ggridges::geom_ridgeline()
   }
 

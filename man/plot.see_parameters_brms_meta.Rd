@@ -6,9 +6,10 @@
 \usage{
 \method{plot}{see_parameters_brms_meta}(
   x,
-  size_point = 1.5,
+  size_point = 2,
   size_line = 0.8,
   size_text = 3.5,
+  posteriors_alpha = 0.7,
   rope_alpha = 0.15,
   rope_color = "cadetblue",
   normalize_height = TRUE,

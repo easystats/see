@@ -1,7 +1,7 @@
 #' @importFrom parameters simulate_model
 #' @importFrom bayestestR estimate_density
 #' @export
-data_plot.parameters_simulate <- function(x, data = NULL, ...) {
+data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FALSE, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -11,6 +11,11 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
   params <- insight::clean_parameters(data)
 
   out <- bayestestR::estimate_density(dat)
+
+  # normalize height
+  if (isTRUE(normalize_height)) {
+    out$y <- effectsize::change_scale(out$y, to = c(0, .9))
+  }
 
   if (length(unique(params$Effects)) > 1) {
     out$Effects <- NA
@@ -48,6 +53,10 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
 #'
 #' The \code{plot()} method for the \code{parameters::simulate_parameters()} function.
 #'
+#' @param normalize_height Logical, if \code{TRUE}, height of density-areas is
+#'   "normalized", to avoid overlap. In certain cases when the range of a
+#'   distribution of simulated draws is narrow for some parameters, this may result in
+#'   very flat density-areas. In such cases, set \code{normalize_height = FALSE}.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_estimate_density
 #' @inheritParams plot.see_bayesfactor_parameters
@@ -62,10 +71,10 @@ data_plot.parameters_simulate <- function(x, data = NULL, ...) {
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, n_columns = NULL, ...) {
+plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, n_columns = NULL, normalize_height = FALSE, size_line = .9, posteriors_alpha = 0.7, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data)
+    x <- data_plot(x, data = data, normalize_height = normalize_height)
   }
 
-  plot.see_estimate_density(x, stack = stack, show_intercept = show_intercept, n_columns = n_columns, ...)
+  plot.see_estimate_density(x, stack = stack, show_intercept = show_intercept, n_columns = n_columns, size_line = size_line, posteriors_alpha = posteriors_alpha, ...)
 }

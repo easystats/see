@@ -11,6 +11,7 @@
   n_columns = 1,
   priors = FALSE,
   priors_alpha = 0.4,
+  posteriors_alpha = 0.7,
   size_line = 0.9,
   ...
 )
@@ -32,6 +33,8 @@ posterior distributions for other parameters are hardly visible.}
 (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
+
+\item{posteriors_alpha}{Alpha value of the posterior distributions.}
 
 \item{size_line}{Size of line geoms.}
 

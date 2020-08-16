@@ -1,7 +1,7 @@
 #' @importFrom ggridges geom_ridgeline
 #' @importFrom stats median mad
 #' @importFrom bayestestR simulate_prior estimate_density
-.add_prior_layer_ridgeline <- function(model, parameter = NULL, show_intercept = FALSE, priors_alpha = .5, fill_color = NULL) {
+.add_prior_layer_ridgeline <- function(model, parameter = NULL, show_intercept = FALSE, priors_alpha = .5, fill_color = NULL, show_ridge_line = TRUE) {
   dat <- tryCatch(
     {
       priors <- bayestestR::simulate_prior(model)
@@ -26,29 +26,59 @@
 
   if (!is.null(dat)) {
     if (!is.null(fill_color)) {
-      ggridges::geom_ridgeline(
-        data = dat,
-        mapping = aes(
-          x = .data$x,
-          y = as.factor(.data$Parameter),
-          height = .data$y,
-          group = as.factor(.data$Parameter),
-        ),
-        fill = fill_color,
-        alpha = priors_alpha
-      )
+      if (isTRUE(show_ridge_line)) {
+        ggridges::geom_ridgeline(
+          data = dat,
+          mapping = aes(
+            x = .data$x,
+            y = as.factor(.data$Parameter),
+            height = .data$y,
+            group = as.factor(.data$Parameter),
+          ),
+          fill = fill_color,
+          alpha = priors_alpha
+        )
+      } else {
+        ggridges::geom_ridgeline(
+          data = dat,
+          mapping = aes(
+            x = .data$x,
+            y = as.factor(.data$Parameter),
+            height = .data$y,
+            group = as.factor(.data$Parameter),
+          ),
+          fill = fill_color,
+          alpha = priors_alpha,
+          color = NA
+        )
+      }
     } else {
-      ggridges::geom_ridgeline(
-        data = dat,
-        mapping = aes(
-          x = .data$x,
-          y = as.factor(.data$Parameter),
-          height = .data$y,
-          group = as.factor(.data$Parameter),
-          fill = "Priors"
-        ),
-        alpha = priors_alpha
-      )
+      if (isTRUE(show_ridge_line)) {
+        ggridges::geom_ridgeline(
+          data = dat,
+          mapping = aes(
+            x = .data$x,
+            y = as.factor(.data$Parameter),
+            height = .data$y,
+            group = as.factor(.data$Parameter),
+            fill = "Priors"
+          ),
+          alpha = priors_alpha
+        )
+      } else {
+        ggridges::geom_ridgeline(
+          data = dat,
+          mapping = aes(
+            x = .data$x,
+            y = as.factor(.data$Parameter),
+            height = .data$y,
+            group = as.factor(.data$Parameter),
+            fill = "Priors"
+          ),
+          alpha = priors_alpha,
+          color = NA
+        )
+      }
     }
   }
 }

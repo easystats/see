@@ -32,7 +32,8 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 
   summary$x <- as.numeric(NA)
   summary$y <- as.numeric(NA)
-  summary$Color <- "Errorbar"
+  summary$Color <- "Study"
+  summary$Color[summary$Study == "Overall"] <- "Overall"
 
   if ("ROPE_low" %in% names(x) && "ROPE_high" %in% names(x)) {
     attr(summary, "rope") <- c(x$ROPE_low[1], x$ROPE_high[1])
@@ -43,7 +44,8 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 
   dataplot$Group <- "Study"
   dataplot$Group[dataplot$Study == "Overall"] <- "Overall"
-  dataplot$Color <- "Errorbar"
+  dataplot$Color <- "Study"
+  dataplot$Color[dataplot$Study == "Overall"] <- "Overall"
 
   attr(dataplot, "summary") <- summary
   attr(dataplot, "info") <- list("xlab" = "Standardized Mean Difference",
@@ -115,7 +117,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' }
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, size_text = 3.5, rope_alpha = 0.15, rope_color = "cadetblue", normalize_height = TRUE, ...) {
+plot.see_parameters_brms_meta <- function(x, size_point = 2, size_line = 0.8, size_text = 3.5, posteriors_alpha = 0.7, rope_alpha = 0.15, rope_color = "cadetblue", normalize_height = TRUE, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -151,9 +153,9 @@ plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, 
   }
 
   p <- p +
-    ggridges::geom_ridgeline(mapping = aes(fill = .data$Group), color = NA, scale = 1, alpha = 0.7) +
-    geom_errorbarh(data = summary, mapping = aes(xmin = .data$CI_low, xmax = .data$CI_high, color = .data$Color), size = size_line, alpha = 0.8) +
-    geom_point(data = summary, mapping = aes(x = .data$Estimate, color = .data$Color), size = size_point, alpha = 0.8)
+    ggridges::geom_ridgeline(mapping = aes(fill = .data$Group), color = NA, scale = 1, alpha = posteriors_alpha) +
+    geom_errorbarh(data = summary, mapping = aes(xmin = .data$CI_low, xmax = .data$CI_high, color = .data$Color), size = size_line) +
+    geom_point(data = summary, mapping = aes(x = .data$Estimate, color = .data$Color), size = size_point, fill = "white", shape = 21)
 
   if (!is.null(size_text) && !is.na(size_text)) {
     # add some space to the right panel for text
@@ -169,7 +171,7 @@ plot.see_parameters_brms_meta <- function(x, size_point = 1.5, size_line = 0.8, 
     theme_lucid() +
     scale_y_discrete() +
     scale_fill_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
-    scale_colour_manual(values = c("Errorbar" = unname(metro_colors("blue grey")))) +
+    scale_colour_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
     guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
 

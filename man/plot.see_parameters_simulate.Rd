@@ -10,6 +10,9 @@
   stack = TRUE,
   show_intercept = FALSE,
   n_columns = NULL,
+  normalize_height = FALSE,
+  size_line = 0.9,
+  posteriors_alpha = 0.7,
   ...
 )
 }
@@ -28,6 +31,15 @@ has a posterior distribution on a very different location, so density curves of
 posterior distributions for other parameters are hardly visible.}
 
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
+
+\item{normalize_height}{Logical, if \code{TRUE}, height of density-areas is
+"normalized", to avoid overlap. In certain cases when the range of a
+distribution of simulated draws is narrow for some parameters, this may result in
+very flat density-areas. In such cases, set \code{normalize_height = FALSE}.}
+
+\item{size_line}{Size of line geoms.}
+
+\item{posteriors_alpha}{Alpha value of the posterior distributions.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
