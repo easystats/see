@@ -171,6 +171,8 @@
   normalize_height = <span class='fl'>FALSE</span>,
   size_line = <span class='fl'>0.9</span>,
   posteriors_alpha = <span class='fl'>0.7</span>,
+  centrality = <span class='st'>"median"</span>,
+  ci = <span class='fl'>0.95</span>,
   <span class='kw'>...</span>
 )</pre>
 
@@ -188,8 +190,7 @@ statistical model or such.</p></td>
     </tr>
     <tr>
       <th>stack</th>
-      <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
-Else, densities are plotted for each parameter among each other.</p></td>
+      <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines. Else, densities are plotted for each parameter among each other.</p></td>
     </tr>
     <tr>
       <th>show_intercept</th>
@@ -216,6 +217,14 @@ very flat density-areas. In such cases, set <code>normalize_height = FALSE</code
     <tr>
       <th>posteriors_alpha</th>
       <td><p>Alpha value of the posterior distributions.</p></td>
+    </tr>
+    <tr>
+      <th>centrality</th>
+      <td><p>The point-estimate (centrality index) to compute. May be <code>"median"</code>, <code>"mean"</code> or <code>"MAP"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>ci</th>
+      <td><p>Value of probability of the CI (between 0 and 1) to be estimated. Default to .95.</p></td>
     </tr>
     <tr>
       <th>...</th>
