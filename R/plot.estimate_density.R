@@ -20,24 +20,28 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ci
   # summary
   split_columns <- intersect(c("Parameter", "Effects", "Component"), colnames(dataplot))
   datasplit <- split(dataplot, dataplot[split_columns])
-  summary <- do.call(rbind, lapply(datasplit, function(i) {
-    Estimate <- as.numeric(bayestestR::point_estimate(i$x, centrality = centrality))
-    CI <- as.numeric(bayestestR::ci(i$x, ci = ci))
-    out <- data.frame(
-      Parameter = unique(i$Parameter),
-      x = Estimate,
-      CI_low = CI[2],
-      CI_high = CI[3],
-      stringsAsFactors = FALSE
-    )
-    if ("Effects" %in% colnames(i)) {
-      out$Effects <- unique(i$Effects)
-    }
-    if ("Component" %in% colnames(i)) {
-      out$Component <- unique(i$Component)
+  summary <- do.call(rbind, .compact_list(lapply(datasplit, function(i) {
+    if (length(i$x) > 0) {
+      Estimate <- as.numeric(bayestestR::point_estimate(i$x, centrality = centrality))
+      CI <- as.numeric(bayestestR::ci(i$x, ci = ci))
+      out <- data.frame(
+        Parameter = unique(i$Parameter),
+        x = Estimate,
+        CI_low = CI[2],
+        CI_high = CI[3],
+        stringsAsFactors = FALSE
+      )
+      if ("Effects" %in% colnames(i)) {
+        out$Effects <- unique(i$Effects)
+      }
+      if ("Component" %in% colnames(i)) {
+        out$Component <- unique(i$Component)
+      }
+    } else {
+      out <- NULL
     }
     out
-  }))
+  })))
 
   summary$Parameter <- factor(summary$Parameter)
   summary$Parameter <- factor(summary$Parameter, levels = levels(dataplot$Parameter))

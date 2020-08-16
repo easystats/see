@@ -126,6 +126,13 @@ plot(result)
 plot(result, stack = FALSE)
 ```
 
+To avoid vertical overlapping, use `normalize_height`.
+
+```{r}
+plot(result, stack = FALSE, normalize_height = TRUE)
+```
+
+
 ```{r fig.height=6, fig.width=8}
 plot(result, n_columns = 2)
 ```
