@@ -13,6 +13,8 @@
   normalize_height = FALSE,
   size_line = 0.9,
   posteriors_alpha = 0.7,
+  centrality = "median",
+  ci = 0.95,
   ...
 )
 }
@@ -40,6 +42,10 @@ very flat density-areas. In such cases, set \code{normalize_height = FALSE}.}
 \item{size_line}{Size of line geoms.}
 
 \item{posteriors_alpha}{Alpha value of the posterior distributions.}
+
+\item{centrality}{The point-estimate (centrality index) to compute. May be \code{"median"}, \code{"mean"} or \code{"MAP"}.}
+
+\item{ci}{Value of probability of the CI (between 0 and 1) to be estimated. Default to .95 (95%).}
 
 \item{...}{Arguments passed to or from other methods.}
 }

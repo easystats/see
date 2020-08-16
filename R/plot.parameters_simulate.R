@@ -71,10 +71,10 @@ data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FAL
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, n_columns = NULL, normalize_height = FALSE, size_line = .9, posteriors_alpha = 0.7, ...) {
+plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, n_columns = NULL, normalize_height = FALSE, size_line = .9, posteriors_alpha = 0.7, centrality = "median", ci = 0.95, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, normalize_height = normalize_height)
   }
 
-  plot.see_estimate_density(x, stack = stack, show_intercept = show_intercept, n_columns = n_columns, size_line = size_line, posteriors_alpha = posteriors_alpha, ...)
+  plot.see_estimate_density(x, stack = stack, show_intercept = show_intercept, n_columns = n_columns, size_line = size_line, posteriors_alpha = posteriors_alpha, centrality = centrality, ci = ci, ...)
 }

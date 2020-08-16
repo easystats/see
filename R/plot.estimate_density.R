@@ -1,6 +1,6 @@
 #' @importFrom insight clean_parameters
 #' @export
-data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ...) {
+data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ci = 0.95, ...) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
@@ -18,7 +18,26 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ..
   dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(levels(dataplot$Parameter)))
 
   # summary
-  summary <- data.frame(Estimate = as.numeric(bayestestR::point_estimate(dataplot$x, centrality = centrality)))
+  split_columns <- intersect(c("Parameter", "Effects", "Component"), colnames(dataplot))
+  datasplit <- split(data_plot, list(dataplot[split_columns]))
+  summary <- do.call(rbind, lapply(datasplit, function(i) {
+    Estimate <- as.numeric(bayestestR::point_estimate(i$x, centrality = centrality))
+    CI <- as.numeric(bayestestR::ci(i$x, ci = ci))
+    out <- data.frame(
+      Parameter = unique(i$Parameter),
+      Estimate = Estimate,
+      CI_low = CI[2],
+      CI_low = CI[3],
+      stringsAsFactors = FALSE
+    )
+    if ("Effects" %in% colnames(i)) {
+      out$Effects <- unique(i$Effects)
+    }
+    if ("Component" %in% colnames(i)) {
+      out$Component <- unique(i$Component)
+    }
+    out
+  }))
 
 
   attr(dataplot, "info") <- list("xlab" = "Values",
@@ -46,6 +65,8 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ..
 #'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.
 #' @param posteriors_alpha Alpha value of the posterior distributions.
+#' @param centrality The point-estimate (centrality index) to compute. May be \code{"median"}, \code{"mean"} or \code{"MAP"}.
+#' @param ci Value of probability of the CI (between 0 and 1) to be estimated. Default to .95 (95%).
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis
@@ -65,7 +86,7 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ..
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, posteriors_alpha = 0.7, size_line = .9, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, posteriors_alpha = 0.7, size_line = .9, centrality = "median", ci = 0.95, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -79,7 +100,7 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
 
 
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = model, ...)
+    x <- data_plot(x, data = model, centrality = centrality, ci = ci, ...)
   }
 
   if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
