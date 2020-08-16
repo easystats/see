@@ -1,6 +1,6 @@
 #' @importFrom insight clean_parameters
 #' @export
-data_plot.estimate_density <- function(x, data = NULL, ...) {
+data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ...) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
@@ -18,7 +18,7 @@ data_plot.estimate_density <- function(x, data = NULL, ...) {
   dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(levels(dataplot$Parameter)))
 
   # summary
-  summary <- dataplot
+  summary <- data.frame(Estimate = as.numeric(bayestestR::point_estimate(dataplot$x, centrality = centrality)))
 
 
   attr(dataplot, "info") <- list("xlab" = "Values",
