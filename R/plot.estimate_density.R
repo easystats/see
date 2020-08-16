@@ -19,15 +19,15 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ci
 
   # summary
   split_columns <- intersect(c("Parameter", "Effects", "Component"), colnames(dataplot))
-  datasplit <- split(data_plot, list(dataplot[split_columns]))
+  datasplit <- split(dataplot, dataplot[split_columns])
   summary <- do.call(rbind, lapply(datasplit, function(i) {
     Estimate <- as.numeric(bayestestR::point_estimate(i$x, centrality = centrality))
     CI <- as.numeric(bayestestR::ci(i$x, ci = ci))
     out <- data.frame(
       Parameter = unique(i$Parameter),
-      Estimate = Estimate,
+      x = Estimate,
       CI_low = CI[2],
-      CI_low = CI[3],
+      CI_high = CI[3],
       stringsAsFactors = FALSE
     )
     if ("Effects" %in% colnames(i)) {
@@ -39,7 +39,10 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ci
     out
   }))
 
+  summary$Parameter <- factor(summary$Parameter)
+  summary$Parameter <- factor(summary$Parameter, levels = levels(dataplot$Parameter))
 
+  attr(dataplot, "summary") <- summary
   attr(dataplot, "info") <- list("xlab" = "Values",
                                  "ylab" = "Density",
                                  "legend_fill" = "Parameter",
@@ -59,14 +62,12 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ci
 #'
 #' The \code{plot()} method for the \code{bayestestR::estimate_density()} function.
 #'
-#' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
-#'   Else, densities are plotted for each parameter among each other.
-#' @param priors Logical, if \code{TRUE}, prior distributions are simulated
-#'   (using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.
+#' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines. Else, densities are plotted for each parameter among each other.
+#' @param priors Logical, if \code{TRUE}, prior distributions are simulated (using \code{\link[bayestestR:simulate_prior]{simulate_prior()}}) and added to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.
 #' @param posteriors_alpha Alpha value of the posterior distributions.
 #' @param centrality The point-estimate (centrality index) to compute. May be \code{"median"}, \code{"mean"} or \code{"MAP"}.
-#' @param ci Value of probability of the CI (between 0 and 1) to be estimated. Default to .95 (95%).
+#' @param ci Value of probability of the CI (between 0 and 1) to be estimated. Default to .95.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis
@@ -86,7 +87,7 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ci
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, posteriors_alpha = 0.7, size_line = .9, centrality = "median", ci = 0.95, ...) {
+plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n_columns = 1, priors = FALSE, priors_alpha = .4, posteriors_alpha = 0.7, size_line = .9, size_point = 2, centrality = "median", ci = 0.95, ...) {
   # save model for later use
   model <- tryCatch(
     {
@@ -130,13 +131,24 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
           show_ridge_line = FALSE
         ) +
         ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = posteriors_alpha, color = NA) +
-        scale_fill_flat(reverse = TRUE)
+        guides(color = "none") +
+        scale_fill_flat(reverse = TRUE) +
+        scale_colour_flat(reverse = TRUE)
     } else {
       p <- p +
         ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = posteriors_alpha, color = NA) +
-        guides(fill = "none") +
-        scale_fill_flat(reverse = TRUE)
+        guides(fill = "none", color = "none") +
+        scale_fill_manual(values = unname(flat_colors("blue"))) +
+        scale_color_manual(values = unname(flat_colors("blue")))
     }
+
+    summary <- attributes(x)$summary
+    summary <- .remove_intercept(summary, show_intercept = show_intercept)
+    summary$y <- NA
+
+    p <- p +
+      geom_errorbarh(data = summary, mapping = aes(xmin = .data$CI_low, xmax = .data$CI_high, color = "Posterior"), size = size_line) +
+      geom_point(data = summary, mapping = aes(x = .data$x, color = "Posterior"), size = size_point, fill = "white", shape = 21)
 
     p <- p + add_plot_attributes(x)
   }

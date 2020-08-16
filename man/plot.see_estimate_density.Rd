@@ -13,6 +13,7 @@
   priors_alpha = 0.4,
   posteriors_alpha = 0.7,
   size_line = 0.9,
+  size_point = 2,
   centrality = "median",
   ci = 0.95,
   ...
@@ -21,8 +22,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
-Else, densities are plotted for each parameter among each other.}
+\item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines. Else, densities are plotted for each parameter among each other.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the intercept-parameter
@@ -31,8 +31,7 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
-\item{priors}{Logical, if \code{TRUE}, prior distributions are simulated
-(using \code{\link[bayestestR]{simulate_prior}}) and added to the plot.}
+\item{priors}{Logical, if \code{TRUE}, prior distributions are simulated (using \code{\link[bayestestR:simulate_prior]{simulate_prior()}}) and added to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}
 
@@ -40,9 +39,11 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{size_line}{Size of line geoms.}
 
+\item{size_point}{Size of point-geoms.}
+
 \item{centrality}{The point-estimate (centrality index) to compute. May be \code{"median"}, \code{"mean"} or \code{"MAP"}.}
 
-\item{ci}{Value of probability of the CI (between 0 and 1) to be estimated. Default to .95 (95%).}
+\item{ci}{Value of probability of the CI (between 0 and 1) to be estimated. Default to .95.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

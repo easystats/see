@@ -24,8 +24,7 @@
 \item{data}{The original data used to create this object. Can be a
 statistical model or such.}
 
-\item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines.
-Else, densities are plotted for each parameter among each other.}
+\item{stack}{Logical, if \code{TRUE}, densities are plotted as stacked lines. Else, densities are plotted for each parameter among each other.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the intercept-parameter
@@ -45,7 +44,7 @@ very flat density-areas. In such cases, set \code{normalize_height = FALSE}.}
 
 \item{centrality}{The point-estimate (centrality index) to compute. May be \code{"median"}, \code{"mean"} or \code{"MAP"}.}
 
-\item{ci}{Value of probability of the CI (between 0 and 1) to be estimated. Default to .95 (95%).}
+\item{ci}{Value of probability of the CI (between 0 and 1) to be estimated. Default to .95.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
