@@ -28,6 +28,7 @@ reference:
   - plot.see_parameters_distribution
   - plot.see_parameters_model
   - plot.see_parameters_pca
+  - plot.see_parameters_brms_meta
   - plot.see_n_factors
   - plot.see_parameters_simulate
   - plot.see_check_collinearity
@@ -37,6 +38,9 @@ reference:
   - plot.see_check_outliers
   - plot.see_compare_performance
   - plot.see_performance_roc
+  - plot.see_check_distribution
+  - plot.see_point_estimate
+  - plot.see_rope
   - plots
 
 - title: "Geoms"
