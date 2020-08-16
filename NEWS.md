@@ -12,7 +12,7 @@
 
 * `plot()` for `parameters::model_parameters()` gains a `size_text`-argument, to add text values for estimates and confidence intervals to the plot (see also vignette). 
 * `plot()` for `parameters::model_parameters()` from meta-analysis models (e.g. from *metafor*) gains a `type` argument, to create funnel plots with `type = "funnel"`.
-* `plot()` for `bayestestR::estimate_density()` and `parameters::simulate_parameters()` were revised, and now also include the point-estimate and error bar. Therefore, arguments `centrylity` and `ci` were added.
+* `plot()` for `bayestestR::estimate_density()` and `parameters::simulate_parameters()` were revised, and now also include the point-estimate and error bar. Therefore, arguments `centrality` and `ci` were added.
 
 ## Bug fixes
 
