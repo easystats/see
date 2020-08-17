@@ -142,8 +142,8 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
       p <- p +
         ggridges::geom_ridgeline(aes(fill = "Posterior"), alpha = posteriors_alpha, color = NA) +
         guides(fill = "none", color = "none") +
-        scale_fill_manual(values = unname(flat_colors("blue"))) +
-        scale_color_manual(values = unname(flat_colors("blue")))
+        scale_fill_manual(values = unname(social_colors("grey"))) +
+        scale_color_manual(values = unname(social_colors("grey")))
     }
 
     summary <- attributes(x)$summary
