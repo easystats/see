@@ -111,14 +111,18 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 
 .plot_outliers_multimethod <- function(x) {
   d <- data_plot(x)
-  ggplot(data = d, aes(x = .data$Obs, y = .data$Distance, fill = .data$Method, group = .data$Method)) +
-    # geom_vline(xintercept = as.character(c(1, 2))) +
-    geom_bar(position = "dodge", stat = "identity") +
-    scale_fill_viridis_d() +
-    theme_modern() +
-    labs(x = "Observation", y = "Distance", fill = "Method") +
-    theme(
-      axis.text.x = element_text(colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")),
-      panel.grid.major.x = element_line(linetype = "dashed", colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey"))
-    )
+  suppressWarnings(
+    ggplot(data = d, aes(x = .data$Obs, y = .data$Distance, fill = .data$Method, group = .data$Method)) +
+      # geom_vline(xintercept = as.character(c(1, 2))) +
+      geom_bar(position = "dodge", stat = "identity") +
+      scale_fill_viridis_d() +
+      theme_modern() +
+      labs(x = "Observation", y = "Distance", fill = "Method") +
+      # Warning: Vectorized input to `element_text()` is not officially supported.
+      # Results may be unexpected or may change in future versions of ggplot2.
+      theme(
+        axis.text.x = element_text(colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")),
+        panel.grid.major.x = element_line(linetype = "dashed", colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey"))
+      )
+  )
 }
