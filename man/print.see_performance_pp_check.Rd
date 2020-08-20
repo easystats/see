@@ -2,9 +2,12 @@
 % Please edit documentation in R/plot.performance_pp_check.R
 \name{print.see_performance_pp_check}
 \alias{print.see_performance_pp_check}
+\alias{plot.see_performance_pp_check}
 \title{Plot method for posterior predictive checks}
 \usage{
 \method{print}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, ...)
+
+\method{plot}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, ...)
 }
 \arguments{
 \item{x}{An object.}

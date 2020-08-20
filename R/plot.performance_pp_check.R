@@ -19,6 +19,12 @@ data_plot.performance_pp_check <- function(x, ...) {
   dataplot$key[dataplot$key != "y"] <- "yrep"
   dataplot$grp <- rep(1:ncol(x), each = nrow(x))
 
+  attr(dataplot, "info") <- list("xlab" = NULL,
+                                 "ylab" = NULL,
+                                 "legend_fill" = NULL,
+                                 "legend_color" = NULL,
+                                 "title" = "Posterior Predictive Check")
+
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
   dataplot
 }
@@ -41,12 +47,35 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' pp_check(model)
 #' @export
 print.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, ...) {
+  orig_x <- x
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
   }
 
+  p <- .plot_pp_check(x, size_line, line_alpha)
+
+  suppressWarnings(graphics::plot(p))
+  invisible(orig_x)
+}
+
+
+#' @rdname print.see_performance_pp_check
+#' @export
+plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, ...) {
+  if (!"data_plot" %in% class(x)) {
+    x <- data_plot(x)
+  }
+  .plot_pp_check(x, size_line, line_alpha)
+}
+
+
+
+.plot_pp_check <- function(x, size_line, line_alpha) {
   ggplot() +
     stat_density(data = x[x$key != "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", alpha = line_alpha, size = size_line) +
-    stat_density(data = x[x$key == "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", size = size_line) +
-    scale_color_material()
+    stat_density(data = x[x$key == "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", size = size_line * 1.1) +
+    scale_y_continuous(labels = NULL) +
+    scale_color_material() +
+    labs(color = NULL) +
+    add_plot_attributes(x)
 }
