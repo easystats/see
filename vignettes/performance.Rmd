@@ -144,6 +144,15 @@ result <- check_homogeneity(model)
 plot(result)
 ```
 
+## Posterior Predictive Checks
+
+_([related function documentation](https://easystats.github.io/performance/reference/pp_check.html))_
+
+```{r}
+model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+pp_check(model)
+```
+
 # Overall Model Check
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_model.html))_

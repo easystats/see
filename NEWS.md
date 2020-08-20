@@ -7,6 +7,7 @@
 ## New plot functions
 
 * Added plot-function for `parameters::model_parameters()` for brms-meta-analysis models.
+* Added plot-function for `performance::pp_check()`.
 
 ## Changes to functions
 

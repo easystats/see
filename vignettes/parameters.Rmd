@@ -251,7 +251,7 @@ plot(result)
 
 ## Bayesian Meta-Analysis using brms
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(brms)
 set.seed(123)
 data(dat.bcg)
