@@ -18,6 +18,8 @@ data_plot.performance_pp_check <- function(x, ...) {
   dataplot <- dataplot[, 1:(ncol(dataplot) - 1), drop = FALSE]
   dataplot$key[dataplot$key != "y"] <- "yrep"
   dataplot$grp <- rep(1:ncol(x), each = nrow(x))
+  dataplot$alpha[dataplot$key != "y"] <- .3
+  dataplot$alpha[dataplot$key == "y"] <- 1
 
   attr(dataplot, "info") <- list("xlab" = NULL,
                                  "ylab" = NULL,
@@ -92,10 +94,10 @@ plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, s
 
 .plot_pp_check <- function(x, size_line, line_alpha) {
   ggplot() +
-    stat_density(data = x[x$key != "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", alpha = line_alpha, size = size_line) +
+    stat_density(data = x[x$key != "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", size = size_line, alpha = line_alpha) +
     stat_density(data = x[x$key == "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", size = size_line * 1.1) +
     scale_y_continuous(labels = NULL) +
-    scale_color_material() +
+    scale_color_manual(values = c("y" = unname(flat_colors("dark red")), "yrep" = unname(flat_colors("grey")))) +
     labs(color = NULL) +
     add_plot_attributes(x)
 }
@@ -115,16 +117,16 @@ plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, s
     facet_wrap(~group, scales = "free_x")
 
   if (.n_unique(replicated$x) <= 12) {
-    p <- p + geom_bar(width = size_bar)
+    p <- p + geom_bar(width = size_bar, fill = unname(flat_colors("grey")), color = NA)
   } else if (.is_integer(replicated$x)) {
     p <- p +
-      geom_bar(width = size_bar) +
+      geom_bar(width = size_bar, fill = unname(flat_colors("grey")), color = NA) +
       scale_x_continuous(n.breaks = round(.n_unique(replicated$x) / 4))
   } else {
-    p <- p + geom_histogram(binwidth = size_bar)
+    p <- p + geom_histogram(binwidth = size_bar, fill = unname(flat_colors("grey")), color = NA)
   }
 
   p +
-    geom_vline(data = original, mapping = aes(xintercept = .data$x), color = "#2196F3", size = 1) +
+    geom_vline(data = original, mapping = aes(xintercept = .data$x), color = unname(flat_colors("dark red")), size = 1) +
     labs(x = NULL, y = NULL)
 }
