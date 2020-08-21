@@ -153,6 +153,13 @@ model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 pp_check(model)
 ```
 
+To check if the model properly captures the variation in the data, use `check_range = TRUE`:
+
+```{r}
+model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+pp_check(model, check_range = TRUE)
+```
+
 # Overall Model Check
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_model.html))_
