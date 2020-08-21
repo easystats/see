@@ -5,9 +5,9 @@
 \alias{plot.see_performance_pp_check}
 \title{Plot method for posterior predictive checks}
 \usage{
-\method{print}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, ...)
+\method{print}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, size_bar = 0.7, ...)
 
-\method{plot}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, ...)
+\method{plot}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, size_bar = 0.7, ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -15,6 +15,8 @@
 \item{size_line}{Size of line geoms.}
 
 \item{line_alpha}{Alpha value of lines indicating \code{yrep}.}
+
+\item{size_bar}{Size of bar geoms.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

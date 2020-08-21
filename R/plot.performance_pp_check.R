@@ -39,6 +39,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' @param line_alpha Alpha value of lines indicating \code{yrep}.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams plot.see_parameters_distribution
 #'
 #' @return A ggplot2-object.
 #'
@@ -46,26 +47,45 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
 #' pp_check(model)
 #' @export
-print.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, ...) {
+print.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, size_bar = 0.7, ...) {
   orig_x <- x
+  check_range <- isTRUE(attributes(x)$check_range)
+
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
   }
 
-  p <- .plot_pp_check(x, size_line, line_alpha)
+  p1 <- .plot_pp_check(x, size_line, line_alpha)
 
-  suppressWarnings(graphics::plot(p))
+  if (isTRUE(check_range)) {
+    p2 <- .plot_pp_check_range(orig_x, size_bar)
+    plots(p1, p2)
+  } else {
+    suppressWarnings(graphics::plot(p1))
+  }
+
   invisible(orig_x)
 }
 
 
 #' @rdname print.see_performance_pp_check
 #' @export
-plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, ...) {
+plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, size_bar = 0.7, ...) {
+  orig_x <- x
+  check_range <- isTRUE(attributes(x)$check_range)
+
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
   }
-  .plot_pp_check(x, size_line, line_alpha)
+
+  p1 <- .plot_pp_check(x, size_line, line_alpha)
+
+  if (isTRUE(check_range)) {
+    p2 <- .plot_pp_check_range(orig_x, size_bar)
+    plots(p1, p2)
+  } else {
+    p1
+  }
 }
 
 
@@ -78,4 +98,33 @@ plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, .
     scale_color_material() +
     labs(color = NULL) +
     add_plot_attributes(x)
+}
+
+
+.plot_pp_check_range <- function(x, size_bar = .7) {
+  original <- data.frame(x = c(min(x$y), max(x$y)), group = c("minimum", "maximum"), color = "y", stringsAsFactors = FALSE)
+  replicated <- rbind(
+    data.frame(x = sapply(x[which(names(x) != "y")], min), group = "minimum", color = "yrep", stringsAsFactors = FALSE),
+    data.frame(x = sapply(x[which(names(x) != "y")], max), group = "maximum", color = "yrep", stringsAsFactors = FALSE)
+  )
+
+  replicated$group <- factor(replicated$group, levels = c("minimum", "maximum"))
+  original$group <- factor(original$group, levels = c("minimum", "maximum"))
+
+  p <- ggplot(replicated, aes(x = .data$x, group = .data$group)) +
+    facet_wrap(~group, scales = "free_x")
+
+  if (.n_unique(replicated$x) <= 12) {
+    p <- p + geom_bar(width = size_bar)
+  } else if (.is_integer(replicated$x)) {
+    p <- p +
+      geom_bar(width = size_bar) +
+      scale_x_continuous(n.breaks = round(.n_unique(replicated$x) / 4))
+  } else {
+    p <- p + geom_histogram()
+  }
+
+  p +
+    geom_vline(data = original, mapping = aes(xintercept = .data$x), color = "#2196F3", size = 1) +
+    labs(x = NULL, y = NULL)
 }
