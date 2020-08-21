@@ -121,7 +121,7 @@ plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, s
       geom_bar(width = size_bar) +
       scale_x_continuous(n.breaks = round(.n_unique(replicated$x) / 4))
   } else {
-    p <- p + geom_histogram()
+    p <- p + geom_histogram(binwidth = size_bar)
   }
 
   p +
