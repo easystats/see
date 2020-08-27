@@ -287,7 +287,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
 
   ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
     scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
-    geom_polygon(data = d_polygon, aes(x, y), fill = "grey80", alpha = .3) +
+    geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = .3) +
     geom_line(data = dat_funnel, mapping = aes(x = .data$ci_low, y = .data$se_range), linetype = "dashed", color = "grey70") +
     geom_line(data = dat_funnel, mapping = aes(x = .data$ci_high, y = .data$se_range), linetype = "dashed", color = "grey70") +
     theme_modern() +
