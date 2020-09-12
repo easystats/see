@@ -47,8 +47,8 @@ plot.see_performance_roc <- function(x, ...) {
     ylim(c(0, 1)) +
     xlim(c(0, 1)) +
     labs(
-      x = "Specifity (True Positive Rate)",
-      y = "Sensivity (False Positive Rate)",
+      x = "1 - Specifity (False Positive Rate)",
+      y = "Sensivity (True Positive Rate)",
       colour = NULL
     )
 }

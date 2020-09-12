@@ -18,6 +18,7 @@
 ## Bug fixes
 
 * Fixed bug in `plot.model_parameters()` when `standardize` was `"basic"`, `"smart"` or `"posthoc"`.
+* Fixed wrong axis labelling for ROC-curves (from `performance::performance_roc()`).
 
 # see 0.5.2
 
