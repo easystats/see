@@ -208,7 +208,8 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/parameters'>parameters</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mtcars</span>)
 <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/parameters/man/principal_components.html'>principal_components</a></span>(<span class='kw'>mtcars</span>[, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span>], n = <span class='st'>"all"</span>, threshold = <span class='fl'>0.2</span>)
-<span class='kw'>result</span></div><div class='output co'>#&gt; <span style='color: #0000BB;'># Loadings from Principal Component Analysis (no rotation)
+<span class='kw'>result</span>
+</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Loadings from Principal Component Analysis (no rotation)
 #&gt; 
 #&gt; </span><span>Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity
 #&gt; -------------------------------------------------------------------
@@ -220,7 +221,8 @@
 #&gt; wt       |  0.88 | -0.35 | 0.26 |       |      |       |       1.54
 #&gt; qsec     | -0.54 | -0.81 |      |       |      |       |       1.96
 #&gt; 
-#&gt; </span><span style='color: #BBBB00;'>The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 25 rows containing missing values (position_stack).</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 25 rows containing missing values (geom_text).</span></div><div class='img'><img src='plot.see_parameters_pca-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </span><span style='color: #BBBB00;'>The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 25 rows containing missing values (position_stack).</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 25 rows containing missing values (geom_text).</span></div><div class='img'><img src='plot.see_parameters_pca-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -236,7 +238,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

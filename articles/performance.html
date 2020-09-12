@@ -303,29 +303,45 @@
 </pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 </div>
+<div id="posterior-predictive-checks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#posterior-predictive-checks" class="anchor"></a>Posterior Predictive Checks</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/pp_check.html">related function documentation</a>)</em></p>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">wt</span> <span class="op">+</span> <span class="kw">cyl</span> <span class="op">+</span> <span class="kw">gear</span> <span class="op">+</span> <span class="kw">disp</span>, data = <span class="kw">mtcars</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/performance/man/pp_check.html">pp_check</a></span>(<span class="kw">model</span>)
+</pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+<p>To check if the model properly captures the variation in the data, use <code>check_range = TRUE</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">wt</span> <span class="op">+</span> <span class="kw">cyl</span> <span class="op">+</span> <span class="kw">gear</span> <span class="op">+</span> <span class="kw">disp</span>, data = <span class="kw">mtcars</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/performance/man/pp_check.html">pp_check</a></span>(<span class="kw">model</span>, check_range = <span class="fl">TRUE</span>)
+</pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+</div>
 </div>
 <div id="overall-model-check" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overall-model-check" class="anchor"></a>Overall Model Check</h1>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_model.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
+<div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(<span class="kw">Reaction</span> <span class="op">~</span> <span class="kw">Days</span> <span class="op">+</span> (<span class="kw">Days</span> <span class="op">|</span> <span class="kw">Subject</span>), <span class="kw">sleepstudy</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/performance/man/check_model.html">check_model</a></span>(<span class="kw">model</span>)
 <span class="co">#&gt; Not enough model terms in the conditional part of the model to check for multicollinearity.</span>
 </pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
+<p><img src="performance_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
+<div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/performance/man/check_model.html">check_model</a></span>(<span class="kw">model</span>, panel = <span class="fl">FALSE</span>)
 <span class="co">#&gt; Not enough model terms in the conditional part of the model to check for multicollinearity.</span>
 </pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-14-2.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-14-3.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-14-4.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-14-5.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-14-6.png" width="672"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-16-2.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-16-3.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-16-4.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-16-5.png" width="672"><img src="performance_files/figure-html/unnamed-chunk-16-6.png" width="672"></p>
 </div>
 <div id="compare-model-performances" class="section level1">
 <h1 class="hasAnchor">
 <a href="#compare-model-performances" class="anchor"></a>Compare Model Performances</h1>
 <p><em>(<a href="https://easystats.github.io/performance/reference/model_performance.html">related function documentation</a>)</em></p>
 <p><code><a href="https://rdrr.io/pkg/performance/man/compare_performance.html">compare_performance()</a></code> computes indices of model performance for different models at once and hence allows comparison of indices across models. The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method creates a “spiderweb” plot, where the different indices are normalized and larger values indicate better model performance. Hence, points closer to the center indicate worse fit indices.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
+<div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">iris</span>)
 <span class="kw">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>)
 <span class="kw">lm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Species</span> <span class="op">+</span> <span class="kw">Petal.Length</span>, data = <span class="kw">iris</span>)
@@ -345,13 +361,13 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>)
 </pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
 </div>
 <div id="model-and-vector-properties" class="section level1">
 <h1 class="hasAnchor">
 <a href="#model-and-vector-properties" class="anchor"></a>Model and Vector Properties</h1>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_distribution.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb16"><pre class="downlit">
+<div class="sourceCode" id="cb18"><pre class="downlit">
 <span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(<span class="kw">Reaction</span> <span class="op">~</span> <span class="kw">Days</span> <span class="op">+</span> (<span class="kw">Days</span> <span class="op">|</span> <span class="kw">Subject</span>), <span class="kw">sleepstudy</span>)
 <span class="kw">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/performance/man/check_distribution.html">check_distribution</a></span>(<span class="kw">model</span>)
 
@@ -373,8 +389,8 @@
 <span class="co">#&gt;           chi          3%</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>)
 </pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
+<p><img src="performance_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="kw">vec</span> <span class="op">&lt;-</span> <span class="kw">bayestestR</span>::<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/distribution.html">distribution_poisson</a></span>(n = <span class="fl">500</span>, lambda = <span class="fl">2.5</span>)
 <span class="kw">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/performance/man/check_distribution.html">check_distribution</a></span>(<span class="kw">vec</span>)
 
@@ -387,13 +403,13 @@
 <span class="co">#&gt;           binomial          3%</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>)
 </pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 </div>
 <div id="roc-curves" class="section level1">
 <h1 class="hasAnchor">
 <a href="#roc-curves" class="anchor"></a>ROC curves</h1>
 <p><em>(<a href="https://easystats.github.io/performance/reference/performance_roc.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb18"><pre class="downlit">
+<div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">iris</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
 <span class="kw">iris</span><span class="op">$</span><span class="kw">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">iris</span>), size = <span class="fl">1</span>, <span class="fl">.3</span>)
@@ -409,7 +425,7 @@
 <span class="co">#&gt; AUC: 37.66%</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>)
 </pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
 </div>
   </div>
 
@@ -428,7 +444,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

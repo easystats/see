@@ -190,7 +190,8 @@ statistical model or such.</p></td>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/performance'>performance</a></span>)
 <span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>wt</span> <span class='op'>+</span> <span class='kw'>cyl</span> <span class='op'>+</span> <span class='kw'>gear</span> <span class='op'>+</span> <span class='kw'>disp</span>, data = <span class='kw'>mtcars</span>)
 <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/performance/man/check_collinearity.html'>check_collinearity</a></span>(<span class='kw'>m</span>)
-<span class='kw'>result</span></div><div class='output co'>#&gt; <span style='color: #0000BB;'># Check for Multicollinearity
+<span class='kw'>result</span>
+</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Check for Multicollinearity
 #&gt; </span><span>
 #&gt; </span><span style='color: #00BB00;'>Low Correlation
 #&gt; 
@@ -202,7 +203,8 @@ statistical model or such.</p></td>
 #&gt; </span><span> Parameter  VIF Increased SE
 #&gt;         wt 5.05         2.25
 #&gt;        cyl 5.41         2.33
-#&gt;       disp 9.97         3.16</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>)</div><div class='img'><img src='plot.see_check_collinearity-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt;       disp 9.97         3.16</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>)
+</div><div class='img'><img src='plot.see_check_collinearity-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -218,7 +220,7 @@ statistical model or such.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

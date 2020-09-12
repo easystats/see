@@ -1,6 +1,14 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1.9000
-pkgdown_sha: eae56f08694abebf93cdfc0dd8e9ede06d8c815f
-articles: []
-last_built: 2020-08-20T18:30Z
+pkgdown: 1.6.0.9000
+pkgdown_sha: 2c210e86c82ea19f74c122c7329dad11a647e956
+articles:
+  bayestestR: bayestestR.html
+  correlation: correlation.html
+  effectsize: effectsize.html
+  modelbased: modelbased.html
+  parameters: parameters.html
+  performance: performance.html
+  seecolorscales: seecolorscales.html
+  seecolorscales_dark: seecolorscales_dark.html
+last_built: 2020-09-12T11:51Z
 

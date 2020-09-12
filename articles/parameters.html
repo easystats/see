@@ -153,8 +153,6 @@
   data = <span class="kw">Salamanders</span>
 )
 <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="kw">model1</span>)
-<span class="co">#&gt; # Fixed Effects component</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |     z |      p</span>
 <span class="co">#&gt; ------------------------------------------------------------------</span>
 <span class="co">#&gt; (Intercept) |       -0.36 | 0.28 | [-0.90,  0.18] | -1.30 | 0.194 </span>
@@ -165,11 +163,6 @@
 <span class="co">#&gt; spp [DES-L] |        0.63 | 0.13 | [ 0.38,  0.87] |  4.96 | &lt; .001</span>
 <span class="co">#&gt; spp [DF]    |        0.12 | 0.15 | [-0.17,  0.40] |  0.78 | 0.435 </span>
 <span class="co">#&gt; mined [no]  |        1.27 | 0.27 | [ 0.74,  1.80] |  4.72 | &lt; .001</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Zero-Inflated component</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter   | Coefficient |   SE |         95% CI |     z |      p</span>
-<span class="co">#&gt; ------------------------------------------------------------------</span>
 <span class="co">#&gt; (Intercept) |        0.79 | 0.27 | [ 0.26,  1.32] |  2.90 | 0.004 </span>
 <span class="co">#&gt; mined [no]  |       -1.84 | 0.31 | [-2.46, -1.23] | -5.87 | &lt; .001</span>
 
@@ -263,8 +256,6 @@
 <span class="kw">structure</span> <span class="op">&lt;-</span> <span class="st">' visual  =~ x1 + x2 + x3
                textual =~ x4 + x5 + x6
                speed   =~ x7 + x8 + x9 '</span>
-               textual =~ x4 + x5 + x6
-               speed   =~ x7 + x8 + x9 '
 
 <span class="kw">model</span> <span class="op">&lt;-</span> <span class="kw">lavaan</span>::<span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html">cfa</a></span>(<span class="kw">structure</span>, data = <span class="kw">HolzingerSwineford1939</span>)
 <span class="kw">result</span> <span class="op">&lt;-</span> <span class="kw">parameters</span>::<span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="kw">model</span>)
@@ -432,11 +423,136 @@
 <span class="kw">dat</span><span class="op">$</span><span class="kw">author</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/make.unique.html">make.unique</a></span>(<span class="kw">dat</span><span class="op">$</span><span class="kw">author</span>)
 <span class="kw">dat</span><span class="op">$</span><span class="kw">disease</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Cancer"</span>, <span class="st">"CVD"</span>, <span class="st">"Depression"</span>), size = <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">dat</span>), replace = <span class="fl">TRUE</span>)
 <span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(<span class="kw">yi</span> <span class="op">|</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/se.html">se</a></span>(<span class="kw">vi</span>) <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">author</span>), data = <span class="kw">dat</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; SAMPLING FOR MODEL '94a36a601ac8f8c29b151ecc3e8c8743' NOW (CHAIN 1).</span>
+<span class="co">#&gt; Chain 1: </span>
+<span class="co">#&gt; Chain 1: Gradient evaluation took 3.6e-05 seconds</span>
+<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.36 seconds.</span>
+<span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span>
+<span class="co">#&gt; Chain 1: </span>
+<span class="co">#&gt; Chain 1: </span>
+<span class="co">#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class="co">#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class="co">#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class="co">#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class="co">#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class="co">#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class="co">#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class="co">#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class="co">#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class="co">#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class="co">#&gt; Chain 1: </span>
+<span class="co">#&gt; Chain 1:  Elapsed Time: 2.47973 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 1:                2.45426 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 1:                4.93399 seconds (Total)</span>
+<span class="co">#&gt; Chain 1: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; SAMPLING FOR MODEL '94a36a601ac8f8c29b151ecc3e8c8743' NOW (CHAIN 2).</span>
+<span class="co">#&gt; Chain 2: </span>
+<span class="co">#&gt; Chain 2: Gradient evaluation took 1e-05 seconds</span>
+<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.</span>
+<span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span>
+<span class="co">#&gt; Chain 2: </span>
+<span class="co">#&gt; Chain 2: </span>
+<span class="co">#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class="co">#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class="co">#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class="co">#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class="co">#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class="co">#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class="co">#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class="co">#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class="co">#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class="co">#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class="co">#&gt; Chain 2: </span>
+<span class="co">#&gt; Chain 2:  Elapsed Time: 2.04285 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 2:                2.95871 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 2:                5.00156 seconds (Total)</span>
+<span class="co">#&gt; Chain 2: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; SAMPLING FOR MODEL '94a36a601ac8f8c29b151ecc3e8c8743' NOW (CHAIN 3).</span>
+<span class="co">#&gt; Chain 3: </span>
+<span class="co">#&gt; Chain 3: Gradient evaluation took 1e-05 seconds</span>
+<span class="co">#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.</span>
+<span class="co">#&gt; Chain 3: Adjust your expectations accordingly!</span>
+<span class="co">#&gt; Chain 3: </span>
+<span class="co">#&gt; Chain 3: </span>
+<span class="co">#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class="co">#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class="co">#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class="co">#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class="co">#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class="co">#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class="co">#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class="co">#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class="co">#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class="co">#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class="co">#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class="co">#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class="co">#&gt; Chain 3: </span>
+<span class="co">#&gt; Chain 3:  Elapsed Time: 2.10955 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 3:                2.74444 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 3:                4.85398 seconds (Total)</span>
+<span class="co">#&gt; Chain 3: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; SAMPLING FOR MODEL '94a36a601ac8f8c29b151ecc3e8c8743' NOW (CHAIN 4).</span>
+<span class="co">#&gt; Chain 4: </span>
+<span class="co">#&gt; Chain 4: Gradient evaluation took 1e-05 seconds</span>
+<span class="co">#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.</span>
+<span class="co">#&gt; Chain 4: Adjust your expectations accordingly!</span>
+<span class="co">#&gt; Chain 4: </span>
+<span class="co">#&gt; Chain 4: </span>
+<span class="co">#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class="co">#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class="co">#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class="co">#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class="co">#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class="co">#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class="co">#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class="co">#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class="co">#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class="co">#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class="co">#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class="co">#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class="co">#&gt; Chain 4: </span>
+<span class="co">#&gt; Chain 4:  Elapsed Time: 1.97742 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 4:                2.38133 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 4:                4.35875 seconds (Total)</span>
+<span class="co">#&gt; Chain 4:</span>
 <span class="kw">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">model_parameters</a></span>(<span class="kw">model</span>)
 
 <span class="kw">result</span>
+<span class="co">#&gt; # Studies component</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter            | Median |         89% CI | Weight |     pd | % in ROPE |  Rhat |     ESS</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; Aronson              |  -0.86 | [-1.35, -0.39] |   3.07 | 99.83% |     0.53% | 1.003 | 1543.23</span>
+<span class="co">#&gt; Coetzee   Berjak     |  -0.47 | [-0.56, -0.38] |   5.14 |   100% |        0% | 1.009 |  675.52</span>
+<span class="co">#&gt; Comstock   Webster   |  -0.02 | [-0.75,  0.67] |   2.41 | 51.75% |    18.50% | 1.002 | 1683.64</span>
+<span class="co">#&gt; Comstock et al       |  -0.34 | [-0.36, -0.32] |  49.97 |   100% |        0% | 1.010 |  632.67</span>
+<span class="co">#&gt; Comstock et al 1     |  -0.03 | [-0.14,  0.09] |  19.53 | 63.32% |    80.08% | 1.010 |  655.15</span>
+<span class="co">#&gt; Ferguson   Simes     |  -1.52 | [-1.81, -1.21] | 144.81 |   100% |        0% | 1.006 | 1037.59</span>
+<span class="co">#&gt; Frimodt Moller et al |  -0.22 | [-0.31, -0.15] |   4.48 |   100% |     1.10% | 1.010 |  664.60</span>
+<span class="co">#&gt; Hart   Sutherland    |  -1.44 | [-1.47, -1.41] | 252.42 |   100% |        0% | 1.010 |  618.89</span>
+<span class="co">#&gt; Rosenthal et al      |  -1.17 | [-1.77, -0.59] |  17.72 | 99.95% |     0.10% | 1.002 | 2016.59</span>
+<span class="co">#&gt; Rosenthal et al 1    |  -1.36 | [-1.47, -1.24] |  13.69 |   100% |        0% | 1.011 |  653.69</span>
+<span class="co">#&gt; Stein   Aronson      |  -0.79 | [-0.80, -0.77] |  80.57 |   100% |        0% | 1.010 |  625.43</span>
+<span class="co">#&gt; TPT Madras           |   0.01 | [ 0.01,  0.02] |   1.88 | 99.88% |      100% | 1.010 |  625.72</span>
+<span class="co">#&gt; Vandiviere et al     |  -1.53 | [-1.88, -1.20] |  14.00 |   100% |        0% | 1.004 | 1209.30</span>
+<span class="co">#&gt; Overall              |  -0.75 | [-1.05, -0.42] |        | 99.92% |     0.20% | 1.010 |  627.39</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; # Tau component</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter | Median |       89% CI |   pd | % in ROPE</span>
+<span class="co">#&gt; ----------------------------------------------------</span>
+<span class="co">#&gt; tau       |   0.68 | [0.45, 0.99] | 100% |        0%</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>)
 </pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 </div>
 <div id="equivalence-testing" class="section level2">
 <h2 class="hasAnchor">
@@ -539,14 +655,14 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter   |        H0 | inside ROPE |       95% HDI</span>
 <span class="co">#&gt; -----------------------------------------------------</span>
-<span class="co">#&gt; (Intercept) | Undecided |     11.99 % | [-0.86  0.24]</span>
-<span class="co">#&gt; sppPR       |  Rejected |      0.00 % | [-1.74 -0.84]</span>
-<span class="co">#&gt; sppDM       | Undecided |     10.30 % | [-0.00  0.52]</span>
-<span class="co">#&gt; sppEC-A     |  Rejected |      0.00 % | [-0.96 -0.19]</span>
+<span class="co">#&gt; (Intercept) | Undecided |     13.67 % | [-0.91  0.18]</span>
+<span class="co">#&gt; sppPR       |  Rejected |      0.00 % | [-1.69 -0.74]</span>
+<span class="co">#&gt; sppDM       | Undecided |      8.20 % | [ 0.02  0.56]</span>
+<span class="co">#&gt; sppEC-A     |  Rejected |      0.00 % | [-0.95 -0.18]</span>
 <span class="co">#&gt; sppEC-L     |  Rejected |      0.00 % | [ 0.41  0.90]</span>
-<span class="co">#&gt; sppDES-L    |  Rejected |      0.00 % | [ 0.40  0.89]</span>
-<span class="co">#&gt; sppDF       | Undecided |     38.80 % | [-0.15  0.38]</span>
-<span class="co">#&gt; minedno     |  Rejected |      0.00 % | [ 0.72  1.81]</span>
+<span class="co">#&gt; sppDES-L    |  Rejected |      0.00 % | [ 0.39  0.86]</span>
+<span class="co">#&gt; sppDF       | Undecided |     38.91 % | [-0.19  0.39]</span>
+<span class="co">#&gt; minedno     |  Rejected |      0.00 % | [ 0.74  1.80]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">result</span>)
 </pre></div>
@@ -777,7 +893,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

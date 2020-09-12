@@ -189,14 +189,17 @@ statistical model or such.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/performance'>performance</a></span>)
 <span class='kw'>model</span> <span class='op'>&lt;&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>len</span> <span class='op'>~</span> <span class='kw'>supp</span> <span class='op'>+</span> <span class='kw'>dose</span>, data = <span class='kw'>ToothGrowth</span>)
-<span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/performance/man/check_homogeneity.html'>check_homogeneity</a></span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; <span style='color: #00BB00;'>OK: Variances in each of the groups are the same (Bartlett Test, p = 0.226).
-#&gt; </span><span></div><div class='input'><span class='kw'>result</span></div><div class='output co'>#&gt; [1] 0.2260997
+<span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/performance/man/check_homogeneity.html'>check_homogeneity</a></span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; <span style='color: #00BB00;'>OK: Variances in each of the groups are the same (Bartlett Test, p = 0.226).
+#&gt; </span><span></div><div class='input'><span class='kw'>result</span>
+</div><div class='output co'>#&gt; [1] 0.2260997
 #&gt; attr(,"object_name")
 #&gt; [1] "model"
 #&gt; attr(,"method")
 #&gt; [1] "Bartlett Test"
 #&gt; attr(,"class")
-#&gt; [1] "check_homogeneity"     "see_check_homogeneity" "numeric"              </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>)</div><div class='img'><img src='plot.see_check_homogeneity-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; [1] "check_homogeneity"     "see_check_homogeneity" "numeric"              </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>)
+</div><div class='img'><img src='plot.see_check_homogeneity-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -212,7 +215,7 @@ statistical model or such.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>
