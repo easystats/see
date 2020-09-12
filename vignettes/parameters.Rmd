@@ -261,11 +261,12 @@ dat <- escalc(
   bi = tneg,
   ci = cpos,
   di = cneg,
-  data = dat.bcg
+  # we remove some data points with extreme values here...
+  data = dat.bcg[c(-4, -6, -8, -11), ]
 )
 dat$author <- make.unique(dat$author)
 dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
-model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
+model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat, refresh = 0)
 result <- model_parameters(model)
 
 result
