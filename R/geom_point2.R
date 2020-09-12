@@ -5,7 +5,7 @@
 #' @param size Size of points.
 #' @param stroke Stroke thickness.
 #' @param shape Shape of points.
-#' @param ... Other arguments to be passed to \code{\link[ggplot2::geom_point]{ggplot2::geom_point}}, \code{\link[ggplot2::geom_jitter]{ggplot2::geom_jitter}}, \code{\link[ggplot2::geom_pointrange]{ggplot2::geom_pointrange}}, or \code{\link[ggplot2::geom_count]{ggplot2::geom_count}}.
+#' @param ... Other arguments to be passed to \code{\link[ggplot2:geom_point]{geom_point}}, \code{\link[ggplot2:geom_jitter]{geom_jitter}}, \code{\link[ggplot2:geom_pointrange]{geom_pointrange}}, or \code{\link[ggplot2:geom_count]{ggplot2::geom_count}}.
 #'
 #' @examples
 #' library(ggplot2)
