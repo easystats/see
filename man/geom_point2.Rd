@@ -2,15 +2,33 @@
 % Please edit documentation in R/geom_point2.R
 \name{geom_point2}
 \alias{geom_point2}
+\alias{geom_point_borderless}
 \alias{geom_jitter2}
+\alias{geom_jitter_borderless}
+\alias{geom_pointrange2}
+\alias{geom_pointrange_borderless}
+\alias{geom_count2}
+\alias{geom_count_borderless}
 \title{Better looking points}
 \usage{
 geom_point2(..., stroke = 0, shape = 16)
 
+geom_point_borderless(..., stroke = 0, shape = 16)
+
 geom_jitter2(..., size = 2, stroke = 0, shape = 16)
+
+geom_jitter_borderless(..., size = 2, stroke = 0, shape = 16)
+
+geom_pointrange2(..., stroke = 0)
+
+geom_pointrange_borderless(..., stroke = 0)
+
+geom_count2(..., stroke = 0)
+
+geom_count_borderless(..., stroke = 0)
 }
 \arguments{
-\item{...}{Other arguments to be passed to \code{geom_point}.}
+\item{...}{Other arguments to be passed to \code{\link[ggplot2::geom_point]{ggplot2::geom_point}}, \code{\link[ggplot2::geom_jitter]{ggplot2::geom_jitter}}, \code{\link[ggplot2::geom_pointrange]{ggplot2::geom_pointrange}}, or \code{\link[ggplot2::geom_count]{ggplot2::geom_count}}.}
 
 \item{stroke}{Stroke thickness.}
 
@@ -19,7 +37,7 @@ geom_jitter2(..., size = 2, stroke = 0, shape = 16)
 \item{size}{Size of points.}
 }
 \description{
-Somewhat nicer points (especially in case of transparency) without borders and contour.
+Somewhat nicer points (especially in case of transparency) without outline strokes (borders, contours) by default.
 }
 \examples{
 library(ggplot2)

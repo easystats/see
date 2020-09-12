@@ -27,6 +27,8 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::pp_check()} function.
 }
 \examples{
-model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-pp_check(model)
+if (require("performance")) {
+  model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
+  pp_check(model)
+}
 }
