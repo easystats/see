@@ -1,4 +1,4 @@
-# see 0.5.3
+# see 0.6.0
 
 ## Breaking changes
 
