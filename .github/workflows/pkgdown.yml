@@ -39,6 +39,7 @@ jobs:
           remotes::install_cran("devtools")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_dev("pkgdown")
+          options(rmarkdown.html_vignette.check_title = FALSE)
         shell: Rscript {0}
 
       - name: Install package
