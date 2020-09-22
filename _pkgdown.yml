@@ -38,6 +38,7 @@ reference:
   - plot.see_check_outliers
   - plot.see_compare_performance
   - plot.see_performance_roc
+  - plot.see_performance_pp_check
   - plot.see_check_distribution
   - plot.see_point_estimate
   - plot.see_rope
