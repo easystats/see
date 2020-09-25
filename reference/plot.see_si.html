@@ -87,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -158,18 +152,18 @@
     </div>
 
     <div class="ref-description">
-    <p>The <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> method for the <code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>bayestestR::si()</a></code>.</p>
+    <p>The <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> method for the <code><a href='https://easystats.github.io/bayestestR/reference/si.html'>bayestestR::si()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for see_si</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
-  <span class='kw'>x</span>,
-  si_color = <span class='st'>"#0171D3"</span>,
-  si_alpha = <span class='fl'>0.2</span>,
-  show_intercept = <span class='fl'>FALSE</span>,
-  support_only = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  si_color <span class='op'>=</span> <span class='st'>"#0171D3"</span>,
+  si_alpha <span class='op'>=</span> <span class='fl'>0.2</span>,
+  show_intercept <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  support_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,7 +189,7 @@ posterior distributions for other parameters are hardly visible.</p></td>
     </tr>
     <tr>
       <th>support_only</th>
-      <td><p>Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting <code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>si</a></code>.</p></td>
+      <td><p>Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting <code><a href='https://easystats.github.io/bayestestR/reference/si.html'>si</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -209,13 +203,13 @@ posterior distributions for other parameters are hardly visible.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'><a href='https://easystats.github.io/bayestestR'>"bayestestR"</a></span>) <span class='op'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'><a href='https://mc-stan.org/rstanarm'>"rstanarm"</a></span>)) {
-  <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
-  <span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Width</span> <span class='op'>*</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>, refresh = <span class='fl'>0</span>)
-  <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>si</a></span>(<span class='kw'>m</span>)
-  <span class='kw'>result</span>
-  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span>)
-}
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://easystats.github.io/bayestestR/'>"bayestestR"</a></span><span class='op'>)</span> <span class='op'>&amp;&amp;</span> <span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
+  <span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Width</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span>, refresh <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+  <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://easystats.github.io/bayestestR/reference/si.html'>si</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+  <span class='va'>result</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Computation of Bayes factors: sampling priors, please wait...</span></div><div class='output co'>#&gt; <span class='message'>Loading required namespace: logspline</span></div><div class='img'><img src='plot.see_si-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>

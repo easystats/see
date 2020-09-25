@@ -87,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -158,14 +152,14 @@
     </div>
 
     <div class="ref-description">
-    <p>The <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> method for the <code><a href='https://rdrr.io/pkg/performance/man/pp_check.html'>performance::pp_check()</a></code> function.</p>
+    <p>The <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> method for the <code><a href='https://easystats.github.io/performance/reference/pp_check.html'>performance::pp_check()</a></code> function.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for see_performance_pp_check</span>
-<span class='fu'><a href='https://rdrr.io/pkg/parameters/man/print.html'>print</a></span>(<span class='kw'>x</span>, size_line = <span class='fl'>0.7</span>, line_alpha = <span class='fl'>0.25</span>, size_bar = <span class='fl'>0.7</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://easystats.github.io/parameters/reference/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, size_line <span class='op'>=</span> <span class='fl'>0.7</span>, line_alpha <span class='op'>=</span> <span class='fl'>0.25</span>, size_bar <span class='op'>=</span> <span class='fl'>0.7</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for see_performance_pp_check</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, size_line = <span class='fl'>0.7</span>, line_alpha = <span class='fl'>0.25</span>, size_bar = <span class='fl'>0.7</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, size_line <span class='op'>=</span> <span class='fl'>0.7</span>, line_alpha <span class='op'>=</span> <span class='fl'>0.25</span>, size_bar <span class='op'>=</span> <span class='fl'>0.7</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,10 +191,10 @@
     <p>A ggplot2-object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'><a href='https://easystats.github.io/performance'>"performance"</a></span>)) {
-  <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span> <span class='op'>*</span> <span class='kw'>Petal.Width</span> <span class='op'>+</span> <span class='kw'>Petal.Length</span>, data = <span class='kw'>iris</span>)
-  <span class='fu'><a href='https://rdrr.io/pkg/performance/man/pp_check.html'>pp_check</a></span>(<span class='kw'>model</span>)
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://easystats.github.io/performance/'>"performance"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span> <span class='op'>*</span> <span class='va'>Petal.Width</span> <span class='op'>+</span> <span class='va'>Petal.Length</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+  <span class='fu'><a href='https://easystats.github.io/performance/reference/pp_check.html'>pp_check</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in pp_check.default(model): argument "fun" is missing, with no default</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

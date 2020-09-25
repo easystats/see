@@ -87,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -161,23 +155,23 @@
     <p>A modern, sleek and dark theme for ggplot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>theme_blackboard</span>(
-  base_size = <span class='fl'>11</span>,
-  base_family = <span class='st'>""</span>,
-  plot.title.size = <span class='fl'>15</span>,
-  plot.title.face = <span class='st'>"plain"</span>,
-  plot.title.space = <span class='fl'>20</span>,
-  legend.position = <span class='st'>"right"</span>,
-  axis.title.space = <span class='fl'>20</span>,
-  legend.title.size = <span class='fl'>13</span>,
-  legend.text.size = <span class='fl'>12</span>,
-  axis.title.size = <span class='fl'>13</span>,
-  axis.title.face = <span class='st'>"plain"</span>,
-  axis.text.size = <span class='fl'>12</span>,
-  axis.text.angle = <span class='kw'>NULL</span>,
-  tags.size = <span class='fl'>15</span>,
-  tags.face = <span class='st'>"bold"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>theme_blackboard</span><span class='op'>(</span>
+  base_size <span class='op'>=</span> <span class='fl'>11</span>,
+  base_family <span class='op'>=</span> <span class='st'>""</span>,
+  plot.title.size <span class='op'>=</span> <span class='fl'>15</span>,
+  plot.title.face <span class='op'>=</span> <span class='st'>"plain"</span>,
+  plot.title.space <span class='op'>=</span> <span class='fl'>20</span>,
+  legend.position <span class='op'>=</span> <span class='st'>"right"</span>,
+  axis.title.space <span class='op'>=</span> <span class='fl'>20</span>,
+  legend.title.size <span class='op'>=</span> <span class='fl'>13</span>,
+  legend.text.size <span class='op'>=</span> <span class='fl'>12</span>,
+  axis.title.size <span class='op'>=</span> <span class='fl'>13</span>,
+  axis.title.face <span class='op'>=</span> <span class='st'>"plain"</span>,
+  axis.text.size <span class='op'>=</span> <span class='fl'>12</span>,
+  axis.text.angle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tags.size <span class='op'>=</span> <span class='fl'>15</span>,
+  tags.face <span class='op'>=</span> <span class='st'>"bold"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -247,12 +241,12 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/see'>see</a></span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/see/'>see</a></span><span class='op'>)</span>
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Sepal.Width</span>, y = <span class='kw'>Sepal.Length</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(color=<span class='st'>"white"</span>) <span class='op'>+</span>
-  <span class='fu'>theme_blackboard</span>()
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Sepal.Width</span>, y <span class='op'>=</span> <span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>color<span class='op'>=</span><span class='st'>"white"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_blackboard</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='img'><img src='theme_blackboard-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -45,12 +45,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -122,48 +116,47 @@
     
 <p>Before we start, we create some data sets with three, four and five groups; one is useful to demonstrate line-geoms, the iris-dataset is used for point-geoms.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://easystats.github.io/see">see</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">iris</span>)
-<span class="kw">iris</span><span class="op">$</span><span class="kw">group4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, size = <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">iris</span>), replace = <span class="fl">TRUE</span>))
-<span class="kw">iris</span><span class="op">$</span><span class="kw">group5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, size = <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">iris</span>), replace = <span class="fl">TRUE</span>))
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
+<span class="va">iris</span><span class="op">$</span><span class="va">group4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="va">iris</span><span class="op">$</span><span class="va">group5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 
-<span class="kw">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-  x = <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">3</span>),
-  y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">2</span>, <span class="fl">4</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">3</span>, <span class="fl">6</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">5</span>, <span class="fl">3</span>, length.out = <span class="fl">20</span>)
-  ),
-  group = <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>), each = <span class="fl">20</span>)
-)
+<span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">3</span><span class="op">)</span>,
+  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+  <span class="op">)</span>,
+  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="kw">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-  x = <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">4</span>),
-  y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">2</span>, <span class="fl">4</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">3</span>, <span class="fl">6</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">5</span>, <span class="fl">3</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">4</span>, <span class="fl">2.5</span>, length.out = <span class="fl">20</span>)
-  ),
-  group = <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>), each = <span class="fl">20</span>)
-)
+<span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">4</span><span class="op">)</span>,
+  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2.5</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+  <span class="op">)</span>,
+  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="kw">d3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-  x = <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">5</span>),
-  y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">2</span>, <span class="fl">4</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">3</span>, <span class="fl">6</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">5</span>, <span class="fl">3</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">4</span>, <span class="fl">2.5</span>, length.out = <span class="fl">20</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">3.5</span>, <span class="fl">4.5</span>, length.out = <span class="fl">20</span>)
-  ),
-  group = <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>), each = <span class="fl">20</span>)
-)
+<span class="va">d3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span>,
+  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2.5</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">3.5</span>, <span class="fl">4.5</span>, length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+  <span class="op">)</span>,
+  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span>(legend.position = <span class="st">"bottom"</span>))
-</pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <div id="the-see-color-scales" class="section level1">
 <h1 class="hasAnchor">
 <a href="#the-see-color-scales" class="anchor"></a>The <em>see</em> Color Scales</h1>
@@ -173,48 +166,45 @@
 <h2 class="hasAnchor">
 <a href="#social-colors---three-groups" class="anchor"></a>Social Colors - Three Groups</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">Species</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-2-1.png" width="768"></p>
 </div>
 <div id="social-colors---four-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#social-colors---four-groups" class="anchor"></a>Social Colors - Four Groups</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group4</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-3-1.png" width="768"></p>
 </div>
 <div id="social-colors---five-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#social-colors---five-groups" class="anchor"></a>Social Colors - Five Groups</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group5</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_social.html">scale_color_social</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
 </div>
 </div>
@@ -225,48 +215,45 @@
 <h2 class="hasAnchor">
 <a href="#material-colors---three-groups" class="anchor"></a>Material Colors - Three Groups</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">Species</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 </div>
 <div id="material-colors---four-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#material-colors---four-groups" class="anchor"></a>Material Colors - Four Groups</h2>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group4</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
 </div>
 <div id="material-colors---five-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#material-colors---five-groups" class="anchor"></a>Material Colors - Five Groups</h2>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group5</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 </div>
 </div>
@@ -277,48 +264,45 @@
 <h2 class="hasAnchor">
 <a href="#flat-colors---three-groups" class="anchor"></a>Flat Colors - Three Groups</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">Species</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-8-1.png" width="768"></p>
 </div>
 <div id="flat-colors---four-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#flat-colors---four-groups" class="anchor"></a>Flat Colors - Four Groups</h2>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group4</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
 </div>
 <div id="flat-colors---five-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#flat-colors---five-groups" class="anchor"></a>Flat Colors - Five Groups</h2>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group5</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_flat.html">scale_color_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
 </div>
 </div>
@@ -329,48 +313,45 @@
 <h2 class="hasAnchor">
 <a href="#metro-colors---three-groups" class="anchor"></a>Metro Colors - Three Groups</h2>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">Species</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-11-1.png" width="768"></p>
 </div>
 <div id="metro-colors---four-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#metro-colors---four-groups" class="anchor"></a>Metro Colors - Four Groups</h2>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group4</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-12-1.png" width="768"></p>
 </div>
 <div id="metro-colors---five-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#metro-colors---five-groups" class="anchor"></a>Metro Colors - Five Groups</h2>
 <div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group5</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-13-1.png" width="768"></p>
 </div>
 </div>
@@ -381,48 +362,45 @@
 <h2 class="hasAnchor">
 <a href="#see-colors---three-groups" class="anchor"></a>See Colors - Three Groups</h2>
 <div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">Species</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-14-1.png" width="768"></p>
 </div>
 <div id="see-colors---four-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#see-colors---four-groups" class="anchor"></a>See Colors - Four Groups</h2>
 <div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group4</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-15-1.png" width="768"></p>
 </div>
 <div id="see-colors---five-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#see-colors---five-groups" class="anchor"></a>See Colors - Five Groups</h2>
 <div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group5</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span>(palette = <span class="st">"light"</span>)
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_see.html">scale_color_see</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-16-1.png" width="768"></p>
 </div>
 </div>
@@ -433,48 +411,45 @@
 <h2 class="hasAnchor">
 <a href="#pizza-colors---three-groups" class="anchor"></a>Pizza Colors - Three Groups</h2>
 <div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span>()
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">Species</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span>()
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
 </div>
 <div id="pizza-colors---four-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pizza-colors---four-groups" class="anchor"></a>Pizza Colors - Four Groups</h2>
 <div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span>()
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group4</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span>()
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-18-1.png" width="768"></p>
 </div>
 <div id="pizza-colors---five-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pizza-colors---five-groups" class="anchor"></a>Pizza Colors - Five Groups</h2>
 <div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, colour = <span class="kw">group</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(size = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span>()
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, colour = <span class="kw">group5</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span>(size = <span class="fl">2.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span>()
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">group5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_point2.html">geom_point2</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_color_pizza</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plots.html">plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, n_rows = <span class="fl">1</span>)
-</pre></div>
+<span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="seecolorscales_dark_files/figure-html/unnamed-chunk-19-1.png" width="768"></p>
 </div>
 </div>
