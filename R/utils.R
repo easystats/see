@@ -12,7 +12,7 @@
 
 .compact_list <- function(x) {
   if (!is.null(x) && length(x) > 0 && is.list(x)) {
-    x[!sapply(x, function(i) length(i) == 0 || is.null(i) || any(i == "NULL"))]
+    x[!sapply(x, function(i) length(i) == 0 || is.null(i) || any(i == "NULL", na.rm = TRUE))]
   } else {
     x
   }
