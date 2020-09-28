@@ -47,6 +47,7 @@ result
 plot(result)
 ```
 
+<!--
 ```{r}
 library(glmmTMB)
 data(Salamanders)
@@ -69,6 +70,7 @@ result <- check_collinearity(model)
 result
 plot(result)
 ```
+-->
 
 ## Check for Outliers
 
