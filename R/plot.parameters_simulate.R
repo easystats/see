@@ -43,6 +43,14 @@ data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FAL
     }
   }
 
+  if (!is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class) {
+    out$Component <- NA
+    for (i in params$Response) {
+      out$Component[grepl(paste0(i, "$"), out$Parameter)] <- i
+      out$Parameter <- gsub(paste0(i, "$"), "", out$Parameter)
+    }
+  }
+
   out
 }
 
