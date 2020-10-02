@@ -45,7 +45,7 @@ data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FAL
 
   if (!is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class) {
     out$Component <- NA
-    for (i in params$Response) {
+    for (i in unique(params$Response)) {
       out$Component[grepl(paste0(i, "$"), out$Parameter)] <- i
       out$Parameter <- gsub(paste0(i, "$"), "", out$Parameter)
     }
@@ -80,6 +80,9 @@ data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FAL
 #' plot(result)
 #' @export
 plot.see_parameters_simulate <- function(x, data = NULL, stack = TRUE, show_intercept = FALSE, n_columns = NULL, normalize_height = FALSE, size_line = .9, posteriors_alpha = 0.7, centrality = "median", ci = 0.95, ...) {
+  is_mlm <- !is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class
+  if (is.null(n_columns) && isTRUE(is_mlm)) n_columns <- 1
+
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, normalize_height = normalize_height)
   }
