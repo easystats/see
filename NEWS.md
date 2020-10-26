@@ -1,3 +1,9 @@
+# see 0.6.1
+
+## Changes to functions
+
+* `plot()` for `parameters::model_parameters()` now supports models from package *metaBMA*
+
 # see 0.6.0
 
 ## Breaking changes

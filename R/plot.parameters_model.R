@@ -87,7 +87,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
 
   mc <- attributes(x)$model_class
   cp <- attributes(x)$cleaned_parameters
-  is_meta <- !is.null(mc) && mc %in% c("rma", "rma.mv", "rma.uni", "metaplus", "meta_random", "meta_fixed", "meta_bma")
+  is_meta <- !is.null(mc) && mc %in% c("rma", "rma.mv", "rma.uni", "metaplus")
+  is_meta_bma <- !is.null(mc) && mc %in% c("meta_random", "meta_fixed", "meta_bma")
 
   # minor fixes for Bayesian models
   if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
@@ -114,6 +115,19 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
       if (missing(size_point)) size_point <- 2.5
       return(.funnel_plot(x, size_point, meta_measure))
     }
+  }
+
+  # data preparation for metaBMA-objects
+  if (is_meta_bma) {
+    overall <- which(x$Component == "meta")
+    x$group <- "study"
+    x$group[overall] <- "Overall"
+    x$size_point <- sqrt(x$Weight)
+    x$size_point[overall] <- 8
+    x$shape <- 19
+    x$shape[overall] <- 18
+    x$Component <- NULL
+    has_component <- FALSE
   }
 
   # if we have a model with multiple responses or response levels
@@ -154,7 +168,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   }
 
-  if (is_meta) {
+  if (is_meta || is_meta_bma) {
     # plot setup for metafor-objects
     p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
       geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
