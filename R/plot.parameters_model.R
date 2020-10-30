@@ -30,6 +30,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   # is exp?
   exponentiated_coefs <- isTRUE(attributes(x)$exponentiate)
   y_intercept <- ifelse(exponentiated_coefs, 1, 0)
+  coefficient_name <- attributes(x)$coefficient_name
 
   # add coefficients and CIs?
   add_values <- !is.null(size_text) && !is.na(size_text)
@@ -276,7 +277,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   } else {
     p + labs(
       x = "Parameter",
-      y = ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
+      y = ifelse(is.null(coefficient_name), ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), coefficient_name),
       colour = "CI"
     )
   }

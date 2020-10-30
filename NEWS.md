@@ -3,6 +3,7 @@
 ## Changes to functions
 
 * `plot()` for `parameters::model_parameters()` now supports models from package *metaBMA*
+* `plot()` for `parameters::model_parameters()` now labels the x-axis depending on model-type (i.e. "Odds Ratio" instead of "Exp(Estimate)") when this information is available.
 
 # see 0.6.0
 
