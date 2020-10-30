@@ -176,31 +176,7 @@
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_collinearity.html">check_collinearity</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Check for Multicollinearity</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; * conditional component:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Low Correlation</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Parameter  VIF Increased SE</span>
-<span class="co">#&gt;        spp 1.07         1.04</span>
-<span class="co">#&gt;      mined 1.17         1.08</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; High Correlation</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Parameter   VIF Increased SE</span>
-<span class="co">#&gt;      cover 13.45         3.67</span>
-<span class="co">#&gt;     cover2 13.28         3.64</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; * zero inflated component:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Low Correlation</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Parameter  VIF Increased SE</span>
-<span class="co">#&gt;        spp 1.08         1.04</span>
-<span class="co">#&gt;      mined 1.08         1.04</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 </div>
 <div id="check-for-outliers" class="section level2">
 <h2 class="hasAnchor">
@@ -331,12 +307,12 @@
 <span class="va">result</span>
 <span class="co">#&gt; # Comparison of Model Performance Indices</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Model | Type |    AIC |    BIC |   R2 | R2_adjusted | RMSE |       BF</span>
-<span class="co">#&gt; ---------------------------------------------------------------------</span>
-<span class="co">#&gt; lm1   |   lm | 231.45 | 243.49 | 0.62 |        0.61 | 0.51 |         </span>
-<span class="co">#&gt; lm2   |   lm | 106.23 | 121.29 | 0.84 |        0.83 | 0.33 | 3.45e+26</span>
-<span class="co">#&gt; lm3   |   lm | 187.09 | 208.17 | 0.73 |        0.72 | 0.43 | 4.69e+07</span>
-<span class="co">#&gt; lm4   |   lm |  78.80 | 105.89 | 0.87 |        0.86 | 0.30 | 7.58e+29</span>
+<span class="co">#&gt; Model | Type |    AIC |    BIC |   R2 | R2_adjusted | RMSE | Sigma |        BF</span>
+<span class="co">#&gt; ------------------------------------------------------------------------------</span>
+<span class="co">#&gt; lm1   |   lm | 231.45 | 243.49 | 0.62 |        0.61 | 0.51 |  0.52 | BF = 1.00</span>
+<span class="co">#&gt; lm2   |   lm | 106.23 | 121.29 | 0.84 |        0.83 | 0.33 |  0.34 | BF &gt; 1000</span>
+<span class="co">#&gt; lm3   |   lm | 187.09 | 208.17 | 0.73 |        0.72 | 0.43 |  0.44 | BF &gt; 1000</span>
+<span class="co">#&gt; lm4   |   lm |  78.80 | 105.89 | 0.87 |        0.86 | 0.30 |  0.30 | BF &gt; 1000</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
