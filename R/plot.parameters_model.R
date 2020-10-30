@@ -30,7 +30,10 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   # is exp?
   exponentiated_coefs <- isTRUE(attributes(x)$exponentiate)
   y_intercept <- ifelse(exponentiated_coefs, 1, 0)
+
+  # label for coefficient scale
   coefficient_name <- attributes(x)$coefficient_name
+  zi_coefficient_name <- attributes(x)$zi_coefficient_name
 
   # add coefficients and CIs?
   add_values <- !is.null(size_text) && !is.na(size_text)
@@ -249,6 +252,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   else
     facet_scales <- "free"
 
+  axis_title_in_facet <- FALSE
+
   if (has_component && has_response && has_effects) {
     p <- p + facet_wrap(~Response + Effects + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_component && has_effects) {
@@ -258,7 +263,15 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   } else if (has_effects && has_response) {
     p <- p + facet_wrap(~Response + Effects , ncol = n_columns, scales = facet_scales)
   } else if (has_component) {
-    p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales)
+    if (!is.null(zi_coefficient_name) && !is.null(coefficient_name) && zi_coefficient_name != coefficient_name) {
+      coef_labeller <- function(string) {
+        paste0(string, " (", c(coefficient_name, zi_coefficient_name), ")")
+      }
+      p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales, labeller = as_labeller(coef_labeller))
+      axis_title_in_facet <- TRUE
+    } else {
+      p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales)
+    }
   } else if (has_effects) {
     p <- p + facet_wrap(~Effects, ncol = n_columns, scales = facet_scales)
   } else if (has_response) {
@@ -275,11 +288,19 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
       colour = "CI"
     )
   } else {
-    p + labs(
-      x = "Parameter",
-      y = ifelse(is.null(coefficient_name), ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), coefficient_name),
-      colour = "CI"
-    )
+    if (isTRUE(axis_title_in_facet)) {
+      p + labs(
+        x = "Parameter",
+        y = NULL,
+        colour = "CI"
+      )
+    } else {
+      p + labs(
+        x = "Parameter",
+        y = ifelse(is.null(coefficient_name), ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), coefficient_name),
+        colour = "CI"
+      )
+    }
   }
 }
 
