@@ -47,7 +47,7 @@ result
 plot(result)
 ```
 
-```{r}
+```{r eval=FALSE}
 library(glmmTMB)
 data(Salamanders)
 
