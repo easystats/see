@@ -102,6 +102,13 @@ result <- model_parameters(model1, exponentiate = TRUE)
 plot(result, size_text = 4)
 ```
 
+It is also possible to plot only the count-model component. This is done in `model_parameters()` via the `component` argument. In easystats-functions, the count-component has the more generic name `"conditional"`.
+
+```{r}
+result <- model_parameters(model1, exponentiate = TRUE, component = "conditional")
+plot(result)
+```
+
 As compared to the classical `summary()`-output, `model_parameters()`, and hence the `plot()`-method, tries to create human readable, prettier parameters names.
 
 ```{r}
