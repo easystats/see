@@ -182,7 +182,31 @@
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_collinearity.html">check_collinearity</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
+<span class="co">#&gt; # Check for Multicollinearity</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; * conditional component:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Low Correlation</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Parameter  VIF Increased SE</span>
+<span class="co">#&gt;        spp 1.07         1.04</span>
+<span class="co">#&gt;      mined 1.17         1.08</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; High Correlation</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Parameter   VIF Increased SE</span>
+<span class="co">#&gt;      cover 13.45         3.67</span>
+<span class="co">#&gt;     cover2 13.28         3.64</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; * zero inflated component:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Low Correlation</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Parameter  VIF Increased SE</span>
+<span class="co">#&gt;        spp 1.08         1.04</span>
+<span class="co">#&gt;      mined 1.08         1.04</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 </div>
 <div id="check-for-outliers" class="section level2">
 <h2 class="hasAnchor">
