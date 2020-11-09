@@ -126,6 +126,7 @@
       x$Component[x$Component == "simplex"] <- "Monotonic Effects"
     } else {
       x$Component[x$Component == "conditional"] <- "(Conditional)"
+      x$Component[x$Component == "zero_inflated"] <- "(Zero-Inflated)"
       x$Component[x$Component == "dispersion"] <- "(Dispersion)"
       x$Component[x$Component == "simplex"] <- "(Monotonic Effects)"
     }

@@ -65,7 +65,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
       if (all(x$Group == "")) {
         x$Group <- NULL
       } else {
-        x <- x[x$Group != "SD/Cor", , drop = FALSE]
+        x <- x[!grepl("^SD/Cor", x$Group), , drop = FALSE]
       }
     }
   }
@@ -265,7 +265,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   } else if (has_component) {
     if (!is.null(zi_coefficient_name) && !is.null(coefficient_name) && zi_coefficient_name != coefficient_name) {
       coef_labeller <- function(string) {
-        paste0(string, " (", c(coefficient_name, zi_coefficient_name), ")")
+        paste0(gsub("(\\(|\\))", "", string), " (", c(coefficient_name, zi_coefficient_name), ")")
       }
       p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales, labeller = as_labeller(coef_labeller))
       axis_title_in_facet <- TRUE
