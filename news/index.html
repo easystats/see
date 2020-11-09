@@ -170,6 +170,13 @@
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now labels the x-axis depending on model-type (i.e. “Odds Ratio” instead of “Exp(Estimate)”) when this information is available.</li>
 </ul>
 </div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Minor fix in <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> for <code>brmsfit</code> models.</li>
+</ul>
+</div>
 </div>
     <div id="see-060" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
@@ -202,9 +209,9 @@
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">bayestestR::estimate_density()</a></code> and <code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html">parameters::simulate_parameters()</a></code> were revised, and now also include the point-estimate and error bar. Therefore, arguments <code>centrality</code> and <code>ci</code> were added.</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed bug in <code>plot.model_parameters()</code> when <code>standardize</code> was <code>"basic"</code>, <code>"smart"</code> or <code>"posthoc"</code>.</li>
 <li>Fixed wrong axis labelling for ROC-curves (from <code><a href="https://easystats.github.io/performance/reference/performance_roc.html">performance::performance_roc()</a></code>).</li>
@@ -248,9 +255,9 @@
 <li>Legend labels nopw show a percentage-sign where applicable (for instance, for <code>plot.hdi()</code>).</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed issue with argument <code>n_column</code> in <code>plot.p_significant()</code>, <code>plot.hdi()</code>, and <code>plot.p_direction()</code>, which stopped working since R 4.0.0.</li>
 <li>Fixed issue in <code>plot.performance_roc()</code> with swapped x/y axes.</li>
@@ -350,9 +357,9 @@
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now uses fixed axis for facets when model is an ordinal or cumulative link model (because all facets are on the same scale, and thus parameters are easier to compare).</li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed issue with group coloring for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> when <code>exponentiate = TRUE</code>.</li>
 <li>Fixes issue with <code>plot.point_estimate()</code> for vectors.</li>
@@ -438,9 +445,9 @@
 <li>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code><a href="https://easystats.github.io/performance/reference/binned_residuals.html">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://easystats.github.io/performance/reference/binned_residuals.html">performance::binned_residuals()</a></code>).</li>
 </ul>
 </div>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed issue with dark themes and text color in facet headings.</li>
 </ul>
@@ -490,9 +497,9 @@
 <code><a href="../reference/geom_poolpoint.html">geom_poolpoint()</a></code> and <code><a href="../reference/geom_poolpoint.html">geom_pooljitter()</a></code> to draw pool ball points (points labelled with the observation name).</li>
 </ul>
 </div>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed issues with color codes in the flat-ui palette.</li>
 </ul>
