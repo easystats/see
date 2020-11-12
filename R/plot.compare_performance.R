@@ -12,7 +12,7 @@ data_plot.compare_performance <- function(x, data = NULL, ...){
   x <- effectsize::change_scale(x, exclude = "Model", to = c(.1, 1))
 
   # recode some indices, so higher values = better fit
-  for (i in c("AIC", "BIC", "RMSE")) {
+  for (i in c("AIC", "BIC", "RMSE", "Sigma")) {
     if (i %in% colnames(x)) {
       x[[i]] <- 1.1 - x[[i]]
     }
