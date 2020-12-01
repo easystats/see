@@ -209,9 +209,9 @@
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://easystats.github.io/parameters/reference/principal_components.html'>principal_components</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>]</span>, n <span class='op'>=</span> <span class='st'>"all"</span>, threshold <span class='op'>=</span> <span class='fl'>0.2</span><span class='op'>)</span>
 <span class='va'>result</span>
-</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Loadings from Principal Component Analysis (no rotation)
+</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Loadings from Principal Component Analysis (no rotation)</span><span>
 #&gt; 
-#&gt; </span><span>Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity
+#&gt; Variable |   PC1 |   PC2 |  PC3 |   PC4 |  PC5 |   PC6 | Complexity
 #&gt; -------------------------------------------------------------------
 #&gt; mpg      | -0.93 |       |      | -0.30 |      |       |       1.30
 #&gt; cyl      |  0.96 |       |      |       |      | -0.21 |       1.18
@@ -220,8 +220,8 @@
 #&gt; drat     | -0.75 |  0.48 | 0.44 |       |      |       |       2.47
 #&gt; wt       |  0.88 | -0.35 | 0.26 |       |      |       |       1.54
 #&gt; qsec     | -0.54 | -0.81 |      |       |      |       |       1.96
-#&gt; 
-#&gt; </span><span style='color: #BBBB00;'>The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
+#&gt; </span><span style='color: #BBBB00;'>
+#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 25 rows containing missing values (position_stack).</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 25 rows containing missing values (geom_text).</span></div><div class='img'><img src='plot.see_parameters_pca-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

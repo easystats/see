@@ -241,12 +241,12 @@ very flat density-areas. In such cases, set <code>normalize_height = FALSE</code
 <span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>gear</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://easystats.github.io/parameters/reference/simulate_parameters.html'>simulate_parameters</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 <span class='va'>result</span>
-</div><div class='output co'>#&gt; Parameter   | Coefficient |         95% CI |      p
+</div><div class='output co'>#&gt; Parameter   | Coefficient | CI_low | CI_high |    p
 #&gt; ---------------------------------------------------
-#&gt; (Intercept) |       42.19 | [33.75, 51.65] | &lt; .001
-#&gt; wt          |       -3.39 | [-4.99, -1.75] | &lt; .001
-#&gt; cyl         |       -1.54 | [-2.40, -0.70] | &lt; .001
-#&gt; gear        |       -0.47 | [-2.11,  1.07] | 0.531 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
+#&gt; (Intercept) |       42.19 |   33.8 |    51.6 | 0.00
+#&gt; wt          |       -3.39 |   -5.0 |    -1.7 | 0.00
+#&gt; cyl         |       -1.54 |   -2.4 |    -0.7 | 0.00
+#&gt; gear        |       -0.47 |   -2.1 |     1.1 | 0.53</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in MASS::mvrnorm(n = iterations, mu = beta, Sigma = varcov): incompatible arguments</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
