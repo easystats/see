@@ -97,7 +97,7 @@ print.see_check_model <- function(x, ...) {
 .plot_diag_qq <- function(x, size_point, size_line) {
   if (requireNamespace("qqplotr")) {
     qq_stuff <- list(
-      qqplotr::stat_qq_band(alpha = 0.5),
+      qqplotr::stat_qq_band(alpha = 0.2),
       qqplotr::stat_qq_line(size = size_line,
                             colour = unname(flat_colors("teal"))),
       qqplotr::stat_qq_point(shape = 16, stroke = 0,
@@ -131,7 +131,7 @@ print.see_check_model <- function(x, ...) {
 .plot_diag_pp <- function(x, size_point, size_line) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot(x, aes(sample = .data$res)) +
-      qqplotr::stat_pp_band(alpha = 0.5) +
+      qqplotr::stat_pp_band(alpha = 0.2) +
       qqplotr::stat_pp_line(size = size_line,
                             colour = unname(flat_colors("teal"))) +
       qqplotr::stat_pp_point(shape = 16, stroke = 0,
