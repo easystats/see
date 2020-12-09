@@ -1,5 +1,9 @@
 # see 0.6.1.1
 
+## Changes to functions
+
+* `plot()` for `performance::check_normality()` gains a `alpha`-argument, to change the alpha-level of confidence bands.
+
 ## Bug fixes
 
 * `plot()` for `performance::check_normality()` shows more accurate QQ-plots.

@@ -10,6 +10,7 @@
   data = NULL,
   size_line = 0.8,
   size_point = 2,
+  alpha = 0.2,
   ...
 )
 }
@@ -24,6 +25,8 @@ statistical model or such.}
 \item{size_line}{Size of line geoms.}
 
 \item{size_point}{Size of point-geoms.}
+
+\item{alpha}{ALpha level of the confidence bands.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
