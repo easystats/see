@@ -1,7 +1,7 @@
 Package: see
 Type: Package
 Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'
-Version: 0.6.1
+Version: 0.6.1.1
 Authors@R: c(
 	person("Daniel", 
 		"Lüdecke", 
@@ -58,6 +58,7 @@ Suggests:
   coda,
   correlation,
   emmeans,
+  qqplotr,
   ggraph,
   ggrepel,
   glmmTMB,

@@ -37,8 +37,7 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
         res_ <- sort(stats::rstudent(model), na.last = NA)
       }
 
-      fitted_ <- sort(stats::fitted(model), na.last = NA)
-      dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
+      dat <- stats::na.omit(data.frame(y = res_))
       .plot_diag_qq(dat, size_point = size_point, size_line = size_line)
     } else if (type == "density") {
       r <- stats::residuals(model)
@@ -50,14 +49,8 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
       )
       .plot_diag_norm(dat, size_line = size_line)
     } else if (type == "pp") {
-      if (!requireNamespace("MASS", quietly = TRUE)) {
-        stop("Package 'MASS' required for PP-plots. Please install it.", call. = FALSE)
-      }
       x <- sort(stats::residuals(model), na.last = NA)
-      probs <- stats::ppoints(x)
-      dparms <- MASS::fitdistr(x, densfun = "normal")
-      y <- do.call(stats::pnorm, c(list(q = x), dparms$estimate))
-      dat <- data.frame(x = probs, y = y)
+      dat <- data.frame(res = x)
       .plot_diag_pp(dat, size_point = size_point, size_line = size_line)
     }
   }

@@ -1,3 +1,13 @@
+# see 0.6.1.1
+
+## Changes to functions
+
+* `plot()` for `performance::check_normality()` provides confidence bands (when possible) for QQ- and PP-plots.
+
+## Bug fixes
+
+* `plot()` for `performance::check_normality()` shows more accurate QQ-plots.
+
 # see 0.6.1
 
 ## Changes to functions
