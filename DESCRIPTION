@@ -83,3 +83,4 @@ Suggests:
   tidyr
 RoxygenNote: 7.1.1
 Language: en-GB
+Remotes: easystats/insight, easystats/bayestestR, easystats/parameters, easystats/performance, easystats/effectsize
