@@ -39,7 +39,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends:
-  R (>= 3.5),
+  R (>= 3.6),
   graphics,
   grDevices,
   stats
