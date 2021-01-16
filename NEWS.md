@@ -14,6 +14,7 @@
 ## Changes to functions
 
 * `plot()` for `parameters::model_parameters()` now supports models from package *metaBMA*
+* `plot()` for `parameters::model_parameters()` gains a `weight_points` argument, to adjust the point-size depending on study-weights for meta-analysis models.
 * `plot()` for `parameters::model_parameters()` now labels the x-axis depending on model-type (i.e. "Odds Ratio" instead of "Exp(Estimate)") when this information is available.
 
 ## Bug fixes

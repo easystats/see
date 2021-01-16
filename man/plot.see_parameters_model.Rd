@@ -14,6 +14,7 @@
   sort = NULL,
   n_columns = NULL,
   type = c("forest", "funnel"),
+  weight_points = TRUE,
   ...
 )
 
@@ -52,6 +53,8 @@ posterior distributions for other parameters are hardly visible.}
 \item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{type}{Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).}
+
+\item{weight_points}{Logical, if \code{TRUE}, for meta-analysis objects, point size will be adjusted according to the study-weights.}
 
 \item{...}{Arguments passed to or from other methods.}
 

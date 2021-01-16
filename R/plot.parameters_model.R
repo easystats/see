@@ -3,6 +3,7 @@
 #' The \code{plot()} method for the \code{parameters::model_parameters()} function.
 #'
 #' @param type Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).
+#' @param weight_points Logical, if \code{TRUE}, for meta-analysis objects, point size will be adjusted according to the study-weights.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_bayesfactor_models
@@ -20,7 +21,7 @@
 #' plot(result)
 #' @importFrom bayestestR reshape_ci
 #' @export
-plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, sort = NULL, n_columns = NULL, type = c("forest", "funnel"), ...) {
+plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, sort = NULL, n_columns = NULL, type = c("forest", "funnel"), weight_points = TRUE, ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }
@@ -108,8 +109,12 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     x$Parameter[overall] <- "Overall"
     x$group <- "study"
     x$group[overall] <- "Overall"
-    x$size_point <- sqrt(x$Weight)
-    x$size_point[overall] <- 8
+    if (isTRUE(weight_points)) {
+      x$size_point <- sqrt(x$Weight)
+      x$size_point[overall] <- 8
+    } else {
+      x$size_point <- 2.5
+    }
     x$shape <- 19
     x$shape[overall] <- 18
 
