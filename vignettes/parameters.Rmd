@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 if (!requireNamespace("parameters", quietly = TRUE) ||
     !requireNamespace("effectsize", quietly = TRUE) ||
     !requireNamespace("insight", quietly = TRUE) ||
+    !requireNamespace("httr", quietly = TRUE) ||
     !requireNamespace("glmmTMB", quietly = TRUE) ||
     !requireNamespace("lme4", quietly = TRUE) ||
     !requireNamespace("brms", quietly = TRUE) ||
@@ -259,21 +260,21 @@ plot(result)
 ## Bayesian Meta-Analysis using brms
 
 ```{r, warning=FALSE, message=FALSE}
+# We download the model to save computation time. Here is the code
+# to refit the exact model used below...
+
+# Data from
+# https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/blob/master/_data/Meta_Analysis_Data.RData
+# set.seed(123)
+# priors <- c(prior(normal(0,1), class = Intercept),
+#             prior(cauchy(0,0.5), class = sd))
+# 
+# brm(TE|se(seTE) ~ 1 + (1|Author),
+#    data = Meta_Analysis_Data,
+#    prior = priors,
+#    iter = 4000)
 library(brms)
-set.seed(123)
-data(dat.bcg)
-dat <- escalc(
-  measure = "RR",
-  ai = tpos,
-  bi = tneg,
-  ci = cpos,
-  di = cneg,
-  # we remove some data points with extreme values here...
-  data = dat.bcg[c(-4, -6, -8, -11), ]
-)
-dat$author <- make.unique(dat$author)
-dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
-model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat, refresh = 0)
+model <- insight::download_model("brms_meta_1")
 result <- model_parameters(model)
 
 result

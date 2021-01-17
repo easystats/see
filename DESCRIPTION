@@ -64,6 +64,7 @@ Suggests:
   glmmTMB,
 	grid,
 	gridExtra,
+	httr,
 	lavaan,
 	logspline,
 	lme4,
