@@ -1,13 +1,16 @@
 
 # see <img src='man/figures/logo.png' align="right" height="139" />
 
-[![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
+[![publication](https://img.shields.io/badge/Cite-Unpublished-yellow)](https://github.com/easystats/see/blob/master/inst/CITATION)
 [![downloads](http://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
-[![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/see)](https://cranlogs.r-pkg.org/)
 
 ***“Damned are those who believe without seeing”***
 
 ## Installation
+
+[![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
+![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
 
 Run the following:
 
@@ -20,7 +23,11 @@ devtools::install_github("easystats/see")
 library("see")
 ```
 
-# Features
+# Documentation
+
+[![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+[![Features](https://img.shields.io/badge/features-see-orange.svg?colorB=2196F3)](https://easystats.github.io/see/reference/index.html)
 
 ## Themes
 
