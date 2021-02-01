@@ -27,7 +27,12 @@ Authors@R: c(
 		"Wiernik", 
 		email = "brenton@wiernik.org",
 		role = c("ctb"), 
-		comment = c(ORCID = "0000-0001-9560-6336"))
+		comment = c(ORCID = "0000-0001-9560-6336")),
+	person("Jeffrey R.", 
+		"Stevens", 
+		email = "jeffrey.r.stevens@gmail.com",
+		role = c("ctb"), 
+		comment = c(ORCID = "0000-0003-2375-1360"))
 	)
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
 URL: https://easystats.github.io/see/
