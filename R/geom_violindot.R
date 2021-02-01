@@ -81,14 +81,15 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
 
   list(
     geom_violinhalf(mapping=mapping,
-                   data=data,
-                   stat="ydensity",
-                   position="dodge",
-                   trim=trim,
-                   scale=scale,
-                   show.legend=show.legend,
-                   inherit.aes=inherit.aes),
+                    data=data,
+                    stat="ydensity",
+                    position="dodge",
+                    trim=trim,
+                    scale=scale,
+                    show.legend=show.legend,
+                    inherit.aes=inherit.aes,
+                    ...),
     dotplot
-    )
+  )
 
 }
