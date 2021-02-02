@@ -20,9 +20,9 @@
 #' @import ggplot2
 #' @export
 geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "area",
-                           show.legend = NA, inherit.aes = TRUE, size_dots = 0.7, dots_color = NULL, dots_fill = NULL,
+                           show.legend = NA, inherit.aes = TRUE, dots_size = 0.7, dots_color = NULL, dots_fill = NULL,
                            binwidth = 0.05, position_dots = ggplot2::position_nudge(x = -0.025, y = 0), ...,
-                           color_dots = dots_color, fill_dots = dots_fill) {
+                           size_dots = dots_size, color_dots = dots_color, fill_dots = dots_fill) {
 
   if(is.null(color_dots) & is.null(fill_dots)){
     dotplot <- geom_dotplot(
