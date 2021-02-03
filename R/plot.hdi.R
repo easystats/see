@@ -132,15 +132,6 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' @importFrom magrittr "%>%"
 #' @keywords internal
 .compute_densities_hdi <- function(x, hdi, name = "Y"){
-  # hdi <- dplyr::arrange(hdi, dplyr::desc(.data$CI))
-  # out <- x %>%
-  #   stats::density() %>%
-  #   .as.data.frame_density() %>%
-  #   dplyr::mutate(HDI_low = sapply(x, .classify_hdi, hdi$CI_low, c(100, hdi$CI)),
-  #                 HDI_high = sapply(x, .classify_hdi, rev(hdi$CI_high), c(rev(hdi$CI), 100)),
-  #                 fill = as.factor(ifelse(.data$HDI_low > .data$HDI_high, .data$HDI_low, .data$HDI_high)),
-  #                 height = .data$y, y = name)
-
   hdi <- hdi[order(hdi$CI, decreasing = TRUE), ]
 
   out <- x %>%

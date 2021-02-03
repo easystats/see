@@ -60,26 +60,12 @@ GeomViolinHalf <-
               .group$xmax <- .group$x + .group$width / 2
               .group
             }))
-
-            # data <- dplyr::group_by(data, .data$group)
-            # data <- dplyr::mutate(
-            #   data,
-            #   ymin = min(.data$y),
-            #   ymax = max(.data$y),
-            #   xmin = .data$x,
-            #   xmax = .data$x + .data$width / 2
-            # )
           },
 
           draw_group = function(data, panel_scales, coord) {
             # Find the points for the line to go all the way around
             data$xminv <- data$x
             data$xmaxv <- data$x + data$violinwidth * (data$xmax - data$x)
-            # data <- dplyr::mutate(
-            #   data,
-            #   xminv = .data$x,
-            #   xmaxv = .data$x + .data$violinwidth * (.data$xmax - .data$x)
-            # )
 
             # Make sure it's sorted properly to draw the outline
             newdata <- rbind(
