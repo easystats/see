@@ -1,8 +1,8 @@
 #' @importFrom effectsize change_scale
 #' @export
 data_plot.compare_performance <- function(x, data = NULL, ...){
-  x$Model <- sprintf("%s (%s)", x$Model, x$Type)
-  x$Type <- NULL
+  x$Model <- sprintf("%s (%s)", x$Name, x$Model)
+  x$Name <- NULL
   x$Performance_Score <- NULL
 
   # set reference for Bayes factors to 1
