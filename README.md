@@ -10,7 +10,8 @@
 ## Installation
 
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
-![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
+[![R
+check](https://github.com/easystats/see/workflows/R-check/badge.svg?branch=master)](https://github.com/easystats/see/actions)
 
 Run the following:
 
