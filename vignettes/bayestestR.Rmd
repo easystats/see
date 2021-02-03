@@ -173,7 +173,7 @@ plot(result, panel = FALSE)[[2]]
 ```
 
 
-### Addin Prior Samples
+### Adding Prior Samples
 
 ```{r fig.height=10}
 result <- point_estimate(model)
