@@ -1,8 +1,10 @@
-# see 0.6.1.1
+# see 0.6.2
 
 ## Changes to functions
 
 * `plot()` for `performance::check_normality()` gains a `alpha`-argument, to change the alpha-level of confidence bands.
+* The `...` argument for `geom_violindot()` is now also passed to to `geom_violinhalf()`, allowing, e.g., to change the alpha value of the violin-geoms as well.
+* Reorganized order of arguments in `geom_violindot()`, so aesthetics arguments like `fill` are not absorbed by partial matching for arguments like `fill_dots`.
 
 ## Bug fixes
 
