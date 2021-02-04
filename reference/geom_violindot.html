@@ -168,12 +168,15 @@
   scale <span class='op'>=</span> <span class='st'>"area"</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  size_dots <span class='op'>=</span> <span class='fl'>0.7</span>,
-  color_dots <span class='op'>=</span> <span class='cn'>NULL</span>,
-  fill_dots <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dots_size <span class='op'>=</span> <span class='fl'>0.7</span>,
+  dots_color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dots_fill <span class='op'>=</span> <span class='cn'>NULL</span>,
   binwidth <span class='op'>=</span> <span class='fl'>0.05</span>,
   position_dots <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_nudge.html'>position_nudge</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='op'>-</span><span class='fl'>0.025</span>, y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>,
-  <span class='va'>...</span>
+  <span class='va'>...</span>,
+  size_dots <span class='op'>=</span> <span class='va'>dots_size</span>,
+  color_dots <span class='op'>=</span> <span class='va'>dots_color</span>,
+  fill_dots <span class='op'>=</span> <span class='va'>dots_fill</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -227,18 +230,6 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>borders()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>size_dots</th>
-      <td><p>Size adjustment for dots.</p></td>
-    </tr>
-    <tr>
-      <th>color_dots</th>
-      <td><p>Color adjustment for dots.</p></td>
-    </tr>
-    <tr>
-      <th>fill_dots</th>
-      <td><p>Fill adjustment for dots.</p></td>
-    </tr>
-    <tr>
       <th>binwidth</th>
       <td><p>When <code>method</code> is "dotdensity", this specifies maximum bin
 width. When <code>method</code> is "histodot", this specifies bin width.
@@ -254,6 +245,18 @@ Defaults to 1/30 of the range of the data</p></td>
 often aesthetics, used to set an aesthetic to a fixed value, like
 <code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
 to the paired geom/stat.</p></td>
+    </tr>
+    <tr>
+      <th>size_dots, dots_size</th>
+      <td><p>Size adjustment for dots.</p></td>
+    </tr>
+    <tr>
+      <th>color_dots, dots_color</th>
+      <td><p>Color adjustment for dots.</p></td>
+    </tr>
+    <tr>
+      <th>fill_dots, dots_fill</th>
+      <td><p>Fill adjustment for dots.</p></td>
     </tr>
     </table>
 
