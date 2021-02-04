@@ -11,12 +11,15 @@ geom_violindot(
   scale = "area",
   show.legend = NA,
   inherit.aes = TRUE,
-  size_dots = 0.7,
-  color_dots = NULL,
-  fill_dots = NULL,
+  dots_size = 0.7,
+  dots_color = NULL,
+  dots_fill = NULL,
   binwidth = 0.05,
   position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
-  ...
+  ...,
+  size_dots = dots_size,
+  color_dots = dots_color,
+  fill_dots = dots_fill
 )
 }
 \arguments{
@@ -58,12 +61,6 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{size_dots}{Size adjustment for dots.}
-
-\item{color_dots}{Color adjustment for dots.}
-
-\item{fill_dots}{Fill adjustment for dots.}
-
 \item{binwidth}{When \code{method} is "dotdensity", this specifies maximum bin
 width. When \code{method} is "histodot", this specifies bin width.
 Defaults to 1/30 of the range of the data}
@@ -74,6 +71,12 @@ Defaults to 1/30 of the range of the data}
 often aesthetics, used to set an aesthetic to a fixed value, like
 \code{colour = "red"} or \code{size = 3}. They may also be parameters
 to the paired geom/stat.}
+
+\item{size_dots, dots_size}{Size adjustment for dots.}
+
+\item{color_dots, dots_color}{Color adjustment for dots.}
+
+\item{fill_dots, dots_fill}{Fill adjustment for dots.}
 }
 \description{
 Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.

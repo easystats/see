@@ -5,9 +5,9 @@
 #' @inheritParams geom_violinhalf
 #' @inheritParams ggplot2::geom_dotplot
 #' @param position_dots Position adjustment for dots, either as a string, or the result of a call to a position adjustment function.
-#' @param size_dots Size adjustment for dots.
-#' @param color_dots Color adjustment for dots.
-#' @param fill_dots Fill adjustment for dots.
+#' @param size_dots,dots_size Size adjustment for dots.
+#' @param color_dots,dots_color Color adjustment for dots.
+#' @param fill_dots,dots_fill Fill adjustment for dots.
 #' @examples
 #' library(ggplot2)
 #' library(see)
@@ -24,7 +24,7 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
                            binwidth = 0.05, position_dots = ggplot2::position_nudge(x = -0.025, y = 0), ...,
                            size_dots = dots_size, color_dots = dots_color, fill_dots = dots_fill) {
 
-  if(is.null(color_dots) & is.null(fill_dots)){
+  if (is.null(color_dots) & is.null(fill_dots)) {
     dotplot <- geom_dotplot(
       binaxis = "y",
       mapping = mapping,
@@ -36,9 +36,9 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
       show.legend = FALSE,
       ...
     )
-  } else if(!is.null(color_dots) & is.null(fill_dots)){
+  } else if (!is.null(color_dots) & is.null(fill_dots)) {
     dotplot <- geom_dotplot(
-      color=color_dots,
+      color = color_dots,
       mapping = mapping,
       data = data,
       binaxis = "y",
@@ -49,9 +49,9 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
       show.legend = FALSE,
       ...
     )
-  } else if(is.null(color_dots) & !is.null(fill_dots)){
+  } else if (is.null(color_dots) & !is.null(fill_dots)) {
     dotplot <- geom_dotplot(
-      fill=fill_dots,
+      fill = fill_dots,
       mapping = mapping,
       data = data,
       binaxis = "y",
@@ -62,10 +62,10 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
       show.legend = FALSE,
       ...
     )
-  } else{
+  } else {
     dotplot <- geom_dotplot(
-      color=color_dots,
-      fill=fill_dots,
+      color = color_dots,
+      fill = fill_dots,
       mapping = mapping,
       data = data,
       binaxis = "y",
@@ -81,14 +81,14 @@ geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "ar
 
 
   list(
-    geom_violinhalf(mapping=mapping,
-                    data=data,
-                    stat="ydensity",
-                    position="dodge",
-                    trim=trim,
-                    scale=scale,
-                    show.legend=show.legend,
-                    inherit.aes=inherit.aes,
+    geom_violinhalf(mapping = mapping,
+                    data = data,
+                    stat = "ydensity",
+                    position = "dodge",
+                    trim = trim,
+                    scale = scale,
+                    show.legend = show.legend,
+                    inherit.aes = inherit.aes,
                     ...),
     dotplot
   )
