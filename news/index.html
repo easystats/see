@@ -155,9 +155,9 @@
       <small>Source: <a href='https://github.com/easystats/see/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="see-0611" class="section level1">
-<h1 class="page-header" data-toc-text="0.6.1.1">
-<a href="#see-0611" class="anchor"></a>see 0.6.1.1<small> Unreleased </small>
+    <div id="see-062" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.2">
+<a href="#see-062" class="anchor"></a>see 0.6.2<small> Unreleased </small>
 </h1>
 <div id="changes-to-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -165,6 +165,8 @@
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> gains a <code>alpha</code>-argument, to change the alpha-level of confidence bands.</li>
+<li>The <code>...</code> argument for <code><a href="../reference/geom_violindot.html">geom_violindot()</a></code> is now also passed to to <code><a href="../reference/geom_violinhalf.html">geom_violinhalf()</a></code>, allowing, e.g., to change the alpha value of the violin-geoms as well.</li>
+<li>Reorganized order of arguments in <code><a href="../reference/geom_violindot.html">geom_violindot()</a></code>, so aesthetics arguments like <code>fill</code> are not absorbed by partial matching for arguments like <code>fill_dots</code>.</li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
