@@ -19,5 +19,4 @@ Can be used to get the hex code of specific colors from the Social color palette
 social_colors()
 
 social_colors("dark red", "teal")
-
 }

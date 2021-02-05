@@ -52,5 +52,4 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
   theme_modern()
 
 plots(normal, new, n_columns = 2)
-
 }

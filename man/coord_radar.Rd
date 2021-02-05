@@ -29,6 +29,6 @@ if (require("dplyr") && require("tidyr") && require("ggplot2")) {
   data \%>\%
     ggplot(aes(x = name, y = value, color = Species, group = Species)) +
     geom_polygon(fill = NA, size = 2) +
-    coord_radar(start = -pi/4)
+    coord_radar(start = -pi / 4)
 }
 }

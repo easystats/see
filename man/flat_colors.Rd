@@ -19,5 +19,4 @@ Can be used to get the hex code of specific colors from the Flat UI color palett
 flat_colors()
 
 flat_colors("dark red", "teal")
-
 }

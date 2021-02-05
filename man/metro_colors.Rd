@@ -19,5 +19,4 @@ Can be used to get the hex code of specific colors from the Metro color palette.
 metro_colors()
 
 metro_colors("dark red", "teal")
-
 }

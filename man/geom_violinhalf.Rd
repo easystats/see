@@ -77,7 +77,6 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violinhalf() +
   theme_modern() +
   scale_fill_material_d()
-
 }
 \seealso{
 https://stackoverflow.com/questions/52034747/plot-only-one-side-half-of-the-violin-plot
