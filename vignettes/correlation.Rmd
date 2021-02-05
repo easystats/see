@@ -11,14 +11,14 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7, 
+  fig.width = 7,
   fig.height = 5,
   warning = FALSE,
   message = FALSE
 )
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
-    !requireNamespace("ggraph", quietly = TRUE) ||
-    !requireNamespace("correlation", quietly = TRUE)) {
+  !requireNamespace("ggraph", quietly = TRUE) ||
+  !requireNamespace("correlation", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
@@ -36,7 +36,9 @@ data(iris)
 
 _([related function documentation](https://easystats.github.io/correlation/reference/correlation.html))_
 
-The default output for `correlation()` is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using `summary()`.
+The default output for `correlation()` is a detailed overview including test
+statistic, p-values and confidence intervals. A shorter summary in matrix-layout
+can be obtained by using `summary()`.
 
 ```{r}
 result <- correlation(iris)
@@ -47,14 +49,14 @@ summary(result)
 ```
 
 The result from `summary()` can be used to create a plot.
- 
+
 ```{r}
 s <- summary(result)
 plot(s, size_point = 2)
 ```
 
 To change the style of geoms, use the `type`-argument.
- 
+
 ```{r}
 plot(s, type = "tile")
 ```
@@ -75,7 +77,8 @@ s
 plot(s)
 ```
 
-For larger correlation matrices, the `size_point` argument can be used to adjust size of point geoms.
+For larger correlation matrices, the `size_point` argument can be used to adjust
+size of point geoms.
 
 ```{r}
 result <- correlation(mtcars[, -c(8:9)])
@@ -85,10 +88,10 @@ s <- summary(result)
 plot(s, size_point = .8)
 ```
 
-
 ## Gaussian Graphical Models (GGMs)
 
-To create a Gaussian Graphical Models plot, the library *ggraph*  needs to be loaded first.
+To create a Gaussian Graphical Models plot, the library *ggraph* needs to be
+loaded first.
 
 ```{r}
 library(ggraph)

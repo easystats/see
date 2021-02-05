@@ -11,14 +11,15 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 8, 
+  fig.width = 8,
   fig.height = 5.5,
   warning = FALSE,
   message = FALSE
 )
 ```
 
-Before we start, we create some data sets with three, four and five groups; one is useful to demonstrate line-geoms, the iris-dataset is used for point-geoms.
+Before we start, we create some data sets with three, four and five groups; one
+is useful to demonstrate line-geoms, the iris-dataset is used for point-geoms.
 
 ```{r setup}
 library(ggplot2)
@@ -66,9 +67,14 @@ theme_set(theme_modern(legend.position = "bottom"))
 
 # The *see* Color Scales
 
-There are several different [color scales available](https://easystats.github.io/see/reference/index.html#section-scales) in the *see* package, most of them having some pre-defined palettes like `"full"`, `"ice"`, `"rainbow"`, `"complement"`, `"contrast"`, or `"light"` - exceptions are the [pizza color scale](https://easystats.github.io/see/reference/scale_color_pizza.html) and [bluebrown color scale](https://easystats.github.io/see/reference/scale_color_blubrown.html).
+There are several different [color scales available](https://easystats.github.io/see/reference/index.html#section-scales)
+in the *see* package, most of them having some pre-defined palettes like
+`"full"`, `"ice"`, `"rainbow"`, `"complement"`, `"contrast"`, or `"light"` -
+exceptions are the [pizza color scale](https://easystats.github.io/see/reference/scale_color_pizza.html) and
+[bluebrown color scale](https://easystats.github.io/see/reference/scale_color_blubrown.html).
 
-In this vignettes, we show the default palettes for the different color scales to give an impression how these scales work with different type of data.
+In this vignettes, we show the default palettes for the different color scales
+to give an impression how these scales work with different type of data.
 
 ## Social Colors - Three Groups
 
@@ -111,7 +117,6 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 
 plots(p1, p2, n_rows = 1)
 ```
-
 
 # Material Colors
 
@@ -201,7 +206,6 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
-
 # Metro Colors
 
 ## Metro Colors - Three Groups
@@ -246,7 +250,6 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
-
 # See Colors
 
 ## See Colors - Three Groups
@@ -290,7 +293,6 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 
 plots(p1, p2, n_rows = 1)
 ```
-
 
 # Pizza Colors
 
@@ -389,10 +391,10 @@ d <- data.frame(
   x = names(social_colors())
 )
 
-p1 <- ggplot(d, aes(x, fill = x)) + 
-  geom_bar(width = .9) + 
+p1 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
   scale_fill_manual(values = social_colors()) +
-  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
   ylab(NULL) +
   xlab(NULL) +
@@ -401,16 +403,16 @@ p1 <- ggplot(d, aes(x, fill = x)) +
     panel.grid = element_blank()
   )
 
-  
+
 
 d <- data.frame(
   x = names(flat_colors())
 )
 
-p2 <- ggplot(d, aes(x, fill = x)) + 
-  geom_bar(width = .9) + 
+p2 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
   scale_fill_manual(values = flat_colors()) +
-  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
   ylab(NULL) +
   xlab(NULL) +
@@ -423,10 +425,10 @@ d <- data.frame(
   x = names(material_colors())
 )
 
-p3 <- ggplot(d, aes(x, fill = x)) + 
-  geom_bar(width = .9) + 
+p3 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
   scale_fill_manual(values = material_colors()) +
-  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
   ylab(NULL) +
   xlab(NULL) +
@@ -441,10 +443,10 @@ d <- data.frame(
   x = names(metro_colors())
 )
 
-p4 <- ggplot(d, aes(x, fill = x)) + 
-  geom_bar(width = .9) + 
+p4 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
   scale_fill_manual(values = metro_colors()) +
-  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
   ylab(NULL) +
   xlab(NULL) +
@@ -458,10 +460,10 @@ d <- data.frame(
   x = names(see_colors())
 )
 
-p5 <- ggplot(d, aes(x, fill = x)) + 
-  geom_bar(width = .9) + 
+p5 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
   scale_fill_manual(values = see_colors()) +
-  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
   ylab(NULL) +
   xlab(NULL) +
@@ -475,10 +477,10 @@ d <- data.frame(
   x = names(pizza_colors())
 )
 
-p6 <- ggplot(d, aes(x, fill = x)) + 
-  geom_bar(width = .9) + 
+p6 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
   scale_fill_manual(values = pizza_colors()) +
-  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
   ylab(NULL) +
   xlab(NULL) +
@@ -492,10 +494,10 @@ d <- data.frame(
   x = names(bluebrown_colors())
 )
 
-p7 <- ggplot(d, aes(x, fill = x)) + 
-  geom_bar(width = .9) + 
+p7 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
   scale_fill_manual(values = bluebrown_colors()) +
-  scale_y_continuous(labels = NULL, expand = c(0,0)) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
   ylab(NULL) +
   xlab(NULL) +

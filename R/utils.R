@@ -24,8 +24,12 @@
 .is_empty_object <- function(x) {
   if (is.list(x)) {
     x <- tryCatch(
-      {.compact_list(x)},
-      error = function(x) { x }
+      {
+        .compact_list(x)
+      },
+      error = function(x) {
+        x
+      }
     )
   }
   # this is an ugly fix because of ugly tibbles
@@ -40,8 +44,9 @@
 # safe conversion from factor to numeric
 #' @importFrom stats na.omit
 .factor_to_numeric <- function(x) {
-  if (is.numeric(x))
+  if (is.numeric(x)) {
     return(x)
+  }
 
   if (anyNA(suppressWarnings(as.numeric(as.character(stats::na.omit(x)))))) {
     if (is.character(x)) {
@@ -57,7 +62,6 @@
 
 #' @importFrom stats setNames
 .clean_parameter_names <- function(params, grid = FALSE) {
-
   params <- unique(params)
   labels <- params
 

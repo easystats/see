@@ -13,8 +13,9 @@
     direction = "long"
   )
 
-  if (is.factor(dat[[values_to]]))
+  if (is.factor(dat[[values_to]])) {
     dat[[values_to]] <- as.character(dat[[values_to]])
+  }
 
   dat[, 1:(ncol(dat) - 1), drop = FALSE]
 }

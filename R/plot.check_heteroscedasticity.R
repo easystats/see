@@ -26,4 +26,3 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
   )
   .plot_diag_ncv(dat, size_point = 2, size_line = .8)
 }
-

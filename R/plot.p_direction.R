@@ -1,7 +1,7 @@
 #' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
+data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -62,7 +62,6 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
         }
       }
     }
-
   } else {
     levels_order <- NULL
     dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
@@ -97,10 +96,12 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
 
   dataplot <- .fix_facet_names(dataplot)
 
-  attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
-                                  "ylab" = ylab,
-                                  "legend_fill" = "Effect direction",
-                                  "title" = "Probability of Direction")
+  attr(dataplot, "info") <- list(
+    "xlab" = "Possible parameter values",
+    "ylab" = ylab,
+    "legend_fill" = "Effect direction",
+    "title" = "Probability of Direction"
+  )
 
   class(dataplot) <- c("data_plot", "see_p_direction", class(dataplot))
   dataplot
@@ -112,7 +113,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...){
 #' @importFrom stats density
 #' @importFrom dplyr mutate
 #' @keywords internal
-.compute_densities_pd <- function(x, name = "Y"){
+.compute_densities_pd <- function(x, name = "Y") {
   out <- x %>%
     stats::density() %>%
     .as.data.frame_density() %>%
@@ -162,7 +163,9 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
 
   # check if we have multiple panels
   if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
+    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+    n_columns <- NULL
+  }
 
   # get labels
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
@@ -176,7 +179,8 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
       height = .data$height,
       group = .data$y,
       fill = .data$fill
-    )) +
+    )
+  ) +
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x)
 
@@ -203,12 +207,11 @@ plot.see_p_direction <- function(x, data = NULL, show_intercept = FALSE, priors 
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
     } else if ("Effects" %in% names(x)) {
-      p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+      p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
     } else if ("Component" %in% names(x)) {
-      p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+      p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
     }
   }
 
   p + scale_fill_flat(reverse = TRUE)
 }
-

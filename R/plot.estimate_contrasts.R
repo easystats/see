@@ -1,5 +1,5 @@
 #' @export
-data_plot.estimate_contrasts <- function(x, data = NULL, ...){
+data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   .data_plot_estimate_contrasts(x, data)
 }
 
@@ -8,11 +8,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
 
 
 #' @keywords internal
-.data_plot_estimate_contrasts <- function(x, means = NULL, ...){
-
+.data_plot_estimate_contrasts <- function(x, means = NULL, ...) {
   if (is.null(means)) {
     stop("Please provide the estimated means data obtained via 'estimate_means()'.")
-  } else{
+  } else {
     x_name <- names(means)[1]
   }
 
@@ -35,8 +34,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
 
 
 #' @keywords internal
-.data_contrasts_and_means <- function(contrasts, means, x_name, y_name){
-
+.data_contrasts_and_means <- function(contrasts, means, x_name, y_name) {
   polygons <- contrasts
   polygons$group <- 1:nrow(polygons)
 
@@ -54,11 +52,13 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
   polygons <- rbind(
     cbind(polygons, data.frame("x" = polygons$Level1, "y" = polygons$Mean1)),
     cbind(polygons, data.frame("x" = polygons$Level2, "y" = polygons$Mean1 - polygons$CI_low)),
-    cbind(polygons, data.frame("x" = polygons$Level2, "y" = polygons$Mean1 - polygons$CI_high)))
+    cbind(polygons, data.frame("x" = polygons$Level2, "y" = polygons$Mean1 - polygons$CI_high))
+  )
 
-  list(geom_polygon = polygons,
-       geom_pointrange = data_means)
-
+  list(
+    geom_polygon = polygons,
+    geom_pointrange = data_means
+  )
 }
 
 
@@ -86,7 +86,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...){
 #' }
 #' @importFrom rlang .data
 #' @export
-plot.see_estimate_contrasts <- function(x, data = NULL, ...){
+plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }

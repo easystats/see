@@ -1,6 +1,5 @@
 #' @export
-data_plot.n_factors <- function(x, data = NULL, type = "bar", ...){
-
+data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   s1 <- summary(x)
 
   if ("n_Factors" %in% names(x)) {
@@ -38,9 +37,11 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...){
   dataplot$y <- dataplot$n_Methods / sum(dataplot$n_Methods)
   rownames(dataplot) <- NULL
 
-  attr(dataplot, "info") <- list("xlab" = paste("Number of", lab),
-                                 "ylab" = "Agreement between methods",
-                                 "title" = paste("How many", lab, "to retain"))
+  attr(dataplot, "info") <- list(
+    "xlab" = paste("Number of", lab),
+    "ylab" = "Agreement between methods",
+    "title" = paste("How many", lab, "to retain")
+  )
 
   class(dataplot) <- unique(c("data_plot", "see_n_factors", class(dataplot)))
   dataplot
@@ -79,8 +80,7 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
   }
 
   if (missing(size)) {
-    size <- switch(
-      type,
+    size <- switch(type,
       "bar" = .7,
       "line" = 1,
       1

@@ -25,7 +25,6 @@
 #'   geom_point() +
 #'   theme_modern() +
 #'   scale_color_metro_c(palette = "rainbow")
-#'
 #' @export
 scale_color_metro <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_metro(palette = palette, reverse = reverse)
@@ -139,7 +138,6 @@ metro_colors_list <- c(
 #' metro_colors()
 #'
 #' metro_colors("dark red", "teal")
-#'
 #' @export
 metro_colors <- function(...) {
   cols <- c(...)
@@ -155,9 +153,9 @@ metro_colors <- function(...) {
 
 
 metro_palettes <- list(
-  `full`  = metro_colors(),
-  `ice`  = metro_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = metro_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
+  `full` = metro_colors(),
+  `ice` = metro_colors("purple", "deep purple", "blue", "light blue"),
+  `rainbow` = metro_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange", "red"),
   `contrast` = metro_colors("blue", "green", "amber", "purple", "red"),
   `light` = material_colors("light blue", "red", "yellow", "light green", "orange"),
   `complement` = metro_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
@@ -186,5 +184,3 @@ palette_metro <- function(palette = "complement", reverse = FALSE, ...) {
 
   grDevices::colorRampPalette(pal, ...)
 }
-
-

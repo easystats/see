@@ -42,75 +42,75 @@ theme_modern <-
            tags.size = 15,
            tags.face = "bold") {
 
-  # Remove legend title if necessary
-  if (is.null(plot.title.size)) {
-    plot.title.size <-
-      element_text(
-        size = plot.title.size,
-        face = plot.title.face,
-        margin = margin(0, 0, plot.title.space, 0)
+    # Remove legend title if necessary
+    if (is.null(plot.title.size)) {
+      plot.title.size <-
+        element_text(
+          size = plot.title.size,
+          face = plot.title.face,
+          margin = margin(0, 0, plot.title.space, 0)
+        )
+    } else if (plot.title.size == "none") {
+      plot.title.size <- element_blank()
+    } else {
+      plot.title.size <-
+        element_text(
+          size = plot.title.size,
+          face = plot.title.face,
+          margin = margin(0, 0, plot.title.space, 0)
+        )
+    }
+
+    # Remove legend title if necessary
+    if (is.null(legend.title.size)) {
+      legend.title.size <- element_text(size = legend.title.size)
+    } else if (legend.title.size == "none") {
+      legend.title.size <- element_blank()
+    } else {
+      legend.title.size <- element_text(size = legend.title.size)
+    }
+
+    # Remove axis title if necessary
+    if (is.null(axis.title.size)) {
+      axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
+    } else if (axis.title.size == "none") {
+      axis.title.size <- element_blank()
+    } else {
+      axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
+    }
+
+    # Remove axis text if necessary
+    if (is.null(axis.text.size)) {
+      axis.text.size <- element_text(size = axis.text.size)
+    } else if (axis.text.size == "none") {
+      axis.text.size <- element_blank()
+    } else {
+      axis.text.size <- element_text(size = axis.text.size)
+    }
+
+    # Rotate
+    if (!is.null(axis.text.angle)) {
+      hjust <- 1
+    } else {
+      hjust <- NULL
+    }
+
+    theme_classic(base_size = base_size, base_family = base_family) +
+      theme(
+        plot.title = plot.title.size,
+        legend.position = legend.position,
+        legend.text = element_text(size = legend.text.size),
+        legend.title = legend.title.size,
+        legend.key = element_blank(),
+        legend.spacing.x = unit(2, "pt"),
+        axis.title.y = element_text(margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)),
+        axis.title.x = element_text(margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)),
+        axis.title = axis.title.size,
+        axis.text.x = element_text(angle = axis.text.angle, hjust = hjust),
+        axis.text = axis.text.size,
+        axis.ticks = element_blank(),
+        plot.tag = element_text(size = tags.size, face = tags.face),
+        strip.background = element_blank(),
+        strip.text = element_text(face = "bold")
       )
-  } else if (plot.title.size == "none") {
-    plot.title.size <- element_blank()
-  } else {
-    plot.title.size <-
-      element_text(
-        size = plot.title.size,
-        face = plot.title.face,
-        margin = margin(0, 0, plot.title.space, 0)
-      )
   }
-
-  # Remove legend title if necessary
-  if (is.null(legend.title.size)) {
-    legend.title.size <- element_text(size = legend.title.size)
-  } else if (legend.title.size == "none") {
-    legend.title.size <- element_blank()
-  } else {
-    legend.title.size <- element_text(size = legend.title.size)
-  }
-
-  # Remove axis title if necessary
-  if (is.null(axis.title.size)) {
-    axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
-  } else if (axis.title.size == "none") {
-    axis.title.size <- element_blank()
-  } else {
-    axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
-  }
-
-  # Remove axis text if necessary
-  if (is.null(axis.text.size)) {
-    axis.text.size <- element_text(size = axis.text.size)
-  } else if (axis.text.size == "none") {
-    axis.text.size <- element_blank()
-  } else {
-    axis.text.size <- element_text(size = axis.text.size)
-  }
-
-  # Rotate
-  if (!is.null(axis.text.angle)) {
-    hjust <- 1
-  } else{
-    hjust <- NULL
-  }
-
-  theme_classic(base_size = base_size, base_family = base_family) +
-    theme(
-      plot.title = plot.title.size,
-      legend.position = legend.position,
-      legend.text = element_text(size = legend.text.size),
-      legend.title = legend.title.size,
-      legend.key = element_blank(),
-      legend.spacing.x = unit(2, "pt"),
-      axis.title.y = element_text(margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)),
-      axis.title.x = element_text(margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)),
-      axis.title = axis.title.size,
-      axis.text.x = element_text(angle = axis.text.angle, hjust = hjust),
-      axis.text = axis.text.size,
-      axis.ticks = element_blank(),
-      plot.tag = element_text(size = tags.size, face = tags.face),
-      strip.background = element_blank(),
-      strip.text = element_text(face = "bold")
-    )
-}

@@ -11,22 +11,22 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7, 
+  fig.width = 7,
   fig.height = 5,
   warning = FALSE,
   message = FALSE
 )
 if (!requireNamespace("parameters", quietly = TRUE) ||
-    !requireNamespace("effectsize", quietly = TRUE) ||
-    !requireNamespace("insight", quietly = TRUE) ||
-    !requireNamespace("httr", quietly = TRUE) ||
-    !requireNamespace("glmmTMB", quietly = TRUE) ||
-    !requireNamespace("lme4", quietly = TRUE) ||
-    !requireNamespace("brms", quietly = TRUE) ||
-    !requireNamespace("lavaan", quietly = TRUE) ||
-    !requireNamespace("metafor", quietly = TRUE) ||
-    !requireNamespace("ggplot2", quietly = TRUE) ||
-    !requireNamespace("splines", quietly = TRUE)) {
+  !requireNamespace("effectsize", quietly = TRUE) ||
+  !requireNamespace("insight", quietly = TRUE) ||
+  !requireNamespace("httr", quietly = TRUE) ||
+  !requireNamespace("glmmTMB", quietly = TRUE) ||
+  !requireNamespace("lme4", quietly = TRUE) ||
+  !requireNamespace("brms", quietly = TRUE) ||
+  !requireNamespace("lavaan", quietly = TRUE) ||
+  !requireNamespace("metafor", quietly = TRUE) ||
+  !requireNamespace("ggplot2", quietly = TRUE) ||
+  !requireNamespace("splines", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
@@ -59,7 +59,7 @@ theme_set(theme_modern())
 # fit three example model
 model1 <- glmmTMB(
   count ~ spp + mined + (1 | site),
-  ziformula =  ~ mined,
+  ziformula =  ~mined,
   family = poisson(),
   data = Salamanders
 )
@@ -71,7 +71,7 @@ model_parameters(model2)
 
 
 model3 <- lmer(
-  Reaction ~ Days + (1 | grp ) + (1 | Subject),
+  Reaction ~ Days + (1 | grp) + (1 | Subject),
   data = sleepstudy
 )
 
@@ -82,7 +82,9 @@ model4 <- lm(QoL ~ time + age + education, data = qol_cancer)
 
 _([related function documentation](https://easystats.github.io/parameters/reference/model_parameters.html))_
 
-The `plot()`-method for `model_parameters()` creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.
+The `plot()`-method for `model_parameters()` creates a so called “forest plot”.
+In case of models with multiple components, parameters are separated into facets
+by model component.
 
 ```{r}
 result <- model_parameters(model1)
@@ -90,7 +92,8 @@ result <- model_parameters(model1)
 plot(result)
 ```
 
-When `size_text` is given, coefficients and confidence intervals are added to the plot.
+When `size_text` is given, coefficients and confidence intervals are added to
+the plot.
 
 ```{r}
 plot(result, size_text = 4)
@@ -103,14 +106,17 @@ result <- model_parameters(model1, exponentiate = TRUE)
 plot(result, size_text = 4)
 ```
 
-It is also possible to plot only the count-model component. This is done in `model_parameters()` via the `component` argument. In easystats-functions, the count-component has the more generic name `"conditional"`.
+It is also possible to plot only the count-model component. This is done in
+`model_parameters()` via the `component` argument. In easystats-functions, the
+count-component has the more generic name `"conditional"`.
 
 ```{r}
 result <- model_parameters(model1, exponentiate = TRUE, component = "conditional")
 plot(result)
 ```
 
-As compared to the classical `summary()`-output, `model_parameters()`, and hence the `plot()`-method, tries to create human readable, prettier parameters names.
+As compared to the classical `summary()`-output, `model_parameters()`, and hence
+the `plot()`-method, tries to create human readable, prettier parameters names.
 
 ```{r}
 result <- model_parameters(model2)
@@ -120,9 +126,14 @@ plot(result)
 
 ## Simulated Model Parameters
 
-`simulate_parameters()` computes simulated draws of parameters and their related indices such as Confidence Intervals (CI) and p-values. Simulating parameter draws can be seen as a (computationally faster) alternative to bootstrapping.
+`simulate_parameters()` computes simulated draws of parameters and their related
+indices such as Confidence Intervals (CI) and p-values. Simulating parameter
+draws can be seen as a (computationally faster) alternative to bootstrapping.
 
-As `simulate_parameters()` is based on `simulate_model()` and thus simulates many draws for each parameter, `plot()` will produce similar plots as the density estimation plots [from Bayesian models](https://easystats.github.io/see/articles/bayestestR.html).
+As `simulate_parameters()` is based on `simulate_model()` and thus simulates
+many draws for each parameter, `plot()` will produce similar plots as the
+density estimation plots [from Bayesian
+models](https://easystats.github.io/see/articles/bayestestR.html).
 
 ```{r}
 result <- simulate_parameters(model1)
@@ -140,7 +151,6 @@ To avoid vertical overlapping, use `normalize_height`.
 plot(result, stack = FALSE, normalize_height = TRUE)
 ```
 
-
 ```{r fig.height=6, fig.width=8}
 plot(result, n_columns = 2)
 ```
@@ -152,9 +162,9 @@ plot(result, n_columns = 2, stack = FALSE)
 ## Model Parameters of SEM models
 
 ```{r fig.width=9, fig.height=7}
-structure <- ' visual  =~ x1 + x2 + x3
+structure <- " visual  =~ x1 + x2 + x3
                textual =~ x4 + x5 + x6
-               speed   =~ x7 + x8 + x9 '
+               speed   =~ x7 + x8 + x9 "
 
 model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
 result <- parameters::model_parameters(model)
@@ -163,7 +173,9 @@ plot(result)
 
 ## Model Parameters of Bayesian models
 
-`model_parameters()` for Bayesian models will produce "forest plots" (instead of [density estimations](https://easystats.github.io/see/articles/bayestestR.html)).
+`model_parameters()` for Bayesian models will produce "forest plots" (instead of
+[density
+estimations](https://easystats.github.io/see/articles/bayestestR.html)).
 
 ```{r}
 # We download the model to save computation time. Here is the code
@@ -187,18 +199,18 @@ plot(result)
 ### Including group levels of random effects
 
 ```{r}
-result <- model_parameters(brms_model, effects = "all", 
-                           component = "all", group_level = TRUE)
+result <- model_parameters(brms_model,
+  effects = "all",
+  component = "all", group_level = TRUE
+)
 plot(result)
 ```
-
 
 ### One-column Layout
 
 ```{r fig.width=6, fig.height=8}
 plot(result, n_column = 1)
 ```
-
 
 ### Including Intercepts and Variance Estimates for Random Intercepts
 
@@ -221,7 +233,8 @@ result
 plot(result)
 ```
 
-If `size_text` is not `NULL`, estimates and confidence intervals are included in the plot.
+If `size_text` is not `NULL`, estimates and confidence intervals are included in
+the plot.
 
 ```{r, warning=FALSE, message=FALSE}
 plot(result, size_text = 4)
@@ -250,7 +263,7 @@ dat <- escalc(
 )
 dat$author <- make.unique(dat$author)
 dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
-model <- rma(yi, vi, mods = ~ disease, data = dat, digits = 3, slab = author)
+model <- rma(yi, vi, mods = ~disease, data = dat, digits = 3, slab = author)
 result <- model_parameters(model)
 
 result
@@ -268,7 +281,7 @@ plot(result)
 # set.seed(123)
 # priors <- c(prior(normal(0,1), class = Intercept),
 #             prior(cauchy(0,0.5), class = sd))
-# 
+#
 # brm(TE|se(seTE) ~ 1 + (1|Author),
 #    data = Meta_Analysis_Data,
 #    prior = priors,
@@ -335,10 +348,10 @@ plot(result)
 
 ```{r}
 result <- principal_components(
-  mtcars[, 1:7], 
-  n = 3, 
-  rotation = "varimax", 
-  threshold = "max", 
+  mtcars[, 1:7],
+  n = 3,
+  rotation = "varimax",
+  threshold = "max",
   sort = TRUE
 )
 
@@ -438,8 +451,8 @@ plot(result, highlight = "D")
 # highlight multiple categories
 plot(result, highlight = c("D", "H"), size_bar = .4)
 
-# own color scales - pass a named vector to 'scale_fill_manual()' 
+# own color scales - pass a named vector to 'scale_fill_manual()'
 # the name of the non-highlighted color is "no_highlight".
-plot(result, highlight = c("D", "H", "A"), size_bar = .4) + 
+plot(result, highlight = c("D", "H", "A"), size_bar = .4) +
   scale_fill_manual(values = c(D = "red", H = "green", A = "gold", no_highlight = "steelblue"))
 ```

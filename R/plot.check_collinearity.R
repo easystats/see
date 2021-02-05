@@ -21,7 +21,9 @@ plot.see_check_collinearity <- function(x, data = NULL, ...) {
     dat <- data
   }
 
-  if (is.null(dat)) return(NULL)
+  if (is.null(dat)) {
+    return(NULL)
+  }
 
   dat$group <- "low"
   dat$group[dat$VIF >= 5 & dat$VIF < 10] <- "moderate"
@@ -41,4 +43,3 @@ plot.see_check_collinearity <- function(x, data = NULL, ...) {
 
   .plot_diag_vif(dat)
 }
-

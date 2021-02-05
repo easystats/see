@@ -47,77 +47,76 @@ plot.see_bayesfactor_models <-
            log = FALSE,
            prior_odds = NULL,
            ...) {
+    n_pies <- match.arg(n_pies)
+    value <- match.arg(value)
 
-  n_pies <- match.arg(n_pies)
-  value <- match.arg(value)
+    denominator <- attr(x, "denominator")
+    denominator_name <- x$Model[denominator]
 
-  denominator <- attr(x, "denominator")
-  denominator_name <- x$Model[denominator]
-
-  priorOdds <- rep(1, nrow(x))
-  po_txt <- ""
-  if (!is.null(prior_odds)) {
-    priorOdds[-denominator] <- prior_odds
-    po_txt <- "NOTE: Slice sizes based on custom prior odds"
-  }
-
-  ## Prep data
-  # One pie data
-  one_pie_data <- as.data.frame(x)
-  one_pie_data$postOdds <- priorOdds * one_pie_data$BF
-  one_pie_data$PostProb <- (one_pie_data$postOdds / sum(one_pie_data$postOdds))
-  if (isTRUE(sort)) one_pie_data <- one_pie_data[order(one_pie_data$PostProb, decreasing = TRUE), ]
-  one_pie_data$Model <- factor(one_pie_data$Model, levels = one_pie_data$Model)
-
-  # Two pie data
-  many_pies_data <- one_pie_data[one_pie_data$Model != denominator_name, ]
-  many_pies_data <- split(many_pies_data, many_pies_data$Model)
-  many_pies_data <- lapply(many_pies_data, function(m) {
-    m <- rbind(one_pie_data[one_pie_data$Model == denominator_name, ], m)
-    m$panel <- m$Model[2]
-    m$bar_pos <- m$PostProb / sum(m$PostProb)
-    m
-  })
-  many_pies_data <- many_pies_data[names(many_pies_data) != denominator_name]
-  many_pies_data <- do.call(rbind,many_pies_data)
-  many_pies_data$Model <- factor(many_pies_data$Model, levels = levels(one_pie_data$Model))
-  many_pies_data$panel <- factor(many_pies_data$panel, levels = levels(one_pie_data$Model))
-  many_pies_data$panel <- droplevels(many_pies_data$panel)
-
-
-  ## Labels
-  if (value == "BF") {
-    if (log) {
-      one_pie_data$label <- insight::format_value(log(one_pie_data$BF), 2)
-      many_pies_data$label <- insight::format_value(log(many_pies_data$BF), 2)
-      po_txt <- paste0(po_txt, "\nLabels are log(BF).")
-    } else {
-      one_pie_data$label <- insight::format_value(one_pie_data$BF, 2)
-      many_pies_data$label <- insight::format_value(many_pies_data$BF, 2)
+    priorOdds <- rep(1, nrow(x))
+    po_txt <- ""
+    if (!is.null(prior_odds)) {
+      priorOdds[-denominator] <- prior_odds
+      po_txt <- "NOTE: Slice sizes based on custom prior odds"
     }
-  } else if (value == "probability") {
-    one_pie_data$label <- insight::format_value(one_pie_data$PostProb, 1, as_percent = TRUE)
-    many_pies_data$label <- insight::format_value(many_pies_data$PostProb, 1, as_percent = TRUE)
-  } else {
-    one_pie_data$label <- ""
-    many_pies_data$label <- ""
+
+    ## Prep data
+    # One pie data
+    one_pie_data <- as.data.frame(x)
+    one_pie_data$postOdds <- priorOdds * one_pie_data$BF
+    one_pie_data$PostProb <- (one_pie_data$postOdds / sum(one_pie_data$postOdds))
+    if (isTRUE(sort)) one_pie_data <- one_pie_data[order(one_pie_data$PostProb, decreasing = TRUE), ]
+    one_pie_data$Model <- factor(one_pie_data$Model, levels = one_pie_data$Model)
+
+    # Two pie data
+    many_pies_data <- one_pie_data[one_pie_data$Model != denominator_name, ]
+    many_pies_data <- split(many_pies_data, many_pies_data$Model)
+    many_pies_data <- lapply(many_pies_data, function(m) {
+      m <- rbind(one_pie_data[one_pie_data$Model == denominator_name, ], m)
+      m$panel <- m$Model[2]
+      m$bar_pos <- m$PostProb / sum(m$PostProb)
+      m
+    })
+    many_pies_data <- many_pies_data[names(many_pies_data) != denominator_name]
+    many_pies_data <- do.call(rbind, many_pies_data)
+    many_pies_data$Model <- factor(many_pies_data$Model, levels = levels(one_pie_data$Model))
+    many_pies_data$panel <- factor(many_pies_data$panel, levels = levels(one_pie_data$Model))
+    many_pies_data$panel <- droplevels(many_pies_data$panel)
+
+
+    ## Labels
+    if (value == "BF") {
+      if (log) {
+        one_pie_data$label <- insight::format_value(log(one_pie_data$BF), 2)
+        many_pies_data$label <- insight::format_value(log(many_pies_data$BF), 2)
+        po_txt <- paste0(po_txt, "\nLabels are log(BF).")
+      } else {
+        one_pie_data$label <- insight::format_value(one_pie_data$BF, 2)
+        many_pies_data$label <- insight::format_value(many_pies_data$BF, 2)
+      }
+    } else if (value == "probability") {
+      one_pie_data$label <- insight::format_value(one_pie_data$PostProb, 1, as_percent = TRUE)
+      many_pies_data$label <- insight::format_value(many_pies_data$PostProb, 1, as_percent = TRUE)
+    } else {
+      one_pie_data$label <- ""
+      many_pies_data$label <- ""
+    }
+
+
+    ## Plot
+    if (n_pies == "one") {
+      p <- ggplot(one_pie_data, aes(x = "", y = .data$PostProb, fill = .data$Model))
+    } else {
+      p <- ggplot(many_pies_data, aes(x = "", y = .data$bar_pos, fill = .data$Model)) +
+        facet_wrap(~ .data$panel)
+    }
+
+    p +
+      geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
+      geom_text(aes(label = .data$label), position = position_stack(vjust = 0.5)) +
+      coord_polar("y", start = 0) +
+      scale_y_continuous(expand = c(0, 0)) +
+      labs(x = "", y = "", fill = "Model") +
+      theme_void() +
+      labs(caption = po_txt)
   }
-
-
-  ## Plot
-  if (n_pies == "one") {
-    p <- ggplot(one_pie_data, aes(x = "", y = .data$PostProb, fill = .data$Model))
-  } else {
-    p <- ggplot(many_pies_data, aes(x = "", y = .data$bar_pos, fill = .data$Model)) +
-      facet_wrap( ~ .data$panel)
-  }
-
-  p +
-    geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
-    geom_text(aes(label = .data$label), position = position_stack(vjust = 0.5)) +
-    coord_polar("y", start = 0) +
-    scale_y_continuous(expand = c(0, 0)) +
-    labs(x = "", y = "", fill = "Model") +
-    theme_void() +
-    labs(caption = po_txt)
-}

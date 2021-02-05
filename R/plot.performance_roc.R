@@ -22,7 +22,6 @@
 #' plot(result)
 #' @export
 plot.see_performance_roc <- function(x, ...) {
-
   if (length(unique(x$Model)) > 1) {
     p <- ggplot(
       x,
@@ -30,14 +29,16 @@ plot.see_performance_roc <- function(x, ...) {
         x = .data$Specifity,
         y = .data$Sensivity,
         colour = .data$Model
-      ))
+      )
+    )
   } else {
     p <- ggplot(
       x,
       aes(
         x = .data$Specifity,
         y = .data$Sensivity,
-      ))
+      )
+    )
   }
 
 

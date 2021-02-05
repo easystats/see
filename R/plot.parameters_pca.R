@@ -1,5 +1,5 @@
 #' @export
-data_plot.parameters_pca <- function(x, data = NULL, ...){
+data_plot.parameters_pca <- function(x, data = NULL, ...) {
   dataplot <- as.data.frame(x)
   dataplot$Complexity <- NULL
   dataplot$Uniqueness <- NULL
@@ -69,8 +69,7 @@ plot.see_parameters_pca <- function(x, type = c("bar", "line"), size_text = 3.5,
   }
 
   if (missing(size)) {
-    size <- switch(
-      type,
+    size <- switch(type,
       "bar" = .6,
       "line" = 1,
       1
@@ -84,7 +83,8 @@ plot.see_parameters_pca <- function(x, type = c("bar", "line"), size_text = 3.5,
       y = abs(.data$y),
       fill = .data$y,
       color = .data$y
-    ))
+    )
+  )
 
   if (type == "bar") {
     p <- p +
@@ -106,7 +106,7 @@ plot.see_parameters_pca <- function(x, type = c("bar", "line"), size_text = 3.5,
       breaks = c(0, .25, .5, .75, 1, 1.25),
       labels = c("0", "0.25", "0.5", "0.75", "1", "")
     ) +
-    facet_wrap(~ Component) +
+    facet_wrap(~Component) +
     add_plot_attributes(x)
 
   p

@@ -21,11 +21,13 @@ data_plot.performance_pp_check <- function(x, ...) {
   dataplot$alpha[dataplot$key != "y"] <- .3
   dataplot$alpha[dataplot$key == "y"] <- 1
 
-  attr(dataplot, "info") <- list("xlab" = NULL,
-                                 "ylab" = NULL,
-                                 "legend_fill" = NULL,
-                                 "legend_color" = NULL,
-                                 "title" = "Posterior Predictive Check")
+  attr(dataplot, "info") <- list(
+    "xlab" = NULL,
+    "ylab" = NULL,
+    "legend_fill" = NULL,
+    "legend_color" = NULL,
+    "title" = "Posterior Predictive Check"
+  )
 
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
   dataplot

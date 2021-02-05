@@ -25,7 +25,7 @@ plot.see_effectsize_table <- function(x, ...) {
 
   x$.es <- x[, es_name]
 
-  if (all(c("CI_low","CI_high") %in% colnames(x))) {
+  if (all(c("CI_low", "CI_high") %in% colnames(x))) {
     CIs <- geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0)
   } else {
     NULL
@@ -36,8 +36,10 @@ plot.see_effectsize_table <- function(x, ...) {
     CIs +
     geom_point(aes(x = .data$.es), size = 2) +
     geom_vline(xintercept = 0) +
-    scale_color_manual(values = c("FALSE" = "green", "TRUE" = "blue"),
-                       guide = FALSE) +
+    scale_color_manual(
+      values = c("FALSE" = "green", "TRUE" = "blue"),
+      guide = FALSE
+    ) +
     labs(x = es_lab) +
     theme_modern()
 }
@@ -75,12 +77,16 @@ plot.see_equivalence_test_effectsize <- function(x, ...) {
     geom_point(aes(x = .data$.es), size = 2) +
     geom_vline(xintercept = 0) +
     geom_vline(xintercept = unique(attr(x, "rope")), linetype = "dashed") +
-    scale_color_manual(values = c(Accepted = "#CD423F",
-                                  Rejected = "#018F77",
-                                  Undecided = "#FCDA3B")) +
-    labs(x = es_lab, color = "H0",
-         title = title,
-         subtitle = subtitle) +
+    scale_color_manual(values = c(
+      Accepted = "#CD423F",
+      Rejected = "#018F77",
+      Undecided = "#FCDA3B"
+    )) +
+    labs(
+      x = es_lab, color = "H0",
+      title = title,
+      subtitle = subtitle
+    ) +
     theme_modern()
 }
 

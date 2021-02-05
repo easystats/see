@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7, 
+  fig.width = 7,
   fig.height = 5,
   warning = FALSE,
   message = FALSE
@@ -37,7 +37,8 @@ binned_residuals(model)
 
 ## Check for Multicollinearity - Variance Inflation Factor
 
-_([related function documentation](https://easystats.github.io/performance/reference/check_collinearity.html))_
+_([related function
+documentation](https://easystats.github.io/performance/reference/check_collinearity.html))_
 
 ```{r}
 m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
@@ -58,9 +59,9 @@ Salamanders$cover2 <-
 
 # fit mixed model with zero-inflation
 model <- glmmTMB(
-  count ~ spp + mined + cover + cover2 + (1 | site), 
-  ziformula = ~ spp + mined, 
-  family = truncated_poisson, 
+  count ~ spp + mined + cover + cover2 + (1 | site),
+  ziformula = ~ spp + mined,
+  family = truncated_poisson,
   data = Salamanders
 )
 
@@ -153,7 +154,8 @@ model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 pp_check(model)
 ```
 
-To check if the model properly captures the variation in the data, use `check_range = TRUE`:
+To check if the model properly captures the variation in the data, use
+`check_range = TRUE`:
 
 ```{r}
 model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
@@ -177,7 +179,11 @@ check_model(model, panel = FALSE)
 
 _([related function documentation](https://easystats.github.io/performance/reference/model_performance.html))_
 
-`compare_performance()` computes indices of model performance for different models at once and hence allows comparison of indices across models. The `plot()`-method creates a "spiderweb" plot, where the different indices are normalized and larger values indicate better model performance. Hence, points closer to the center indicate worse fit indices.
+`compare_performance()` computes indices of model performance for different
+models at once and hence allows comparison of indices across models. The
+`plot()`-method creates a "spiderweb" plot, where the different indices are
+normalized and larger values indicate better model performance. Hence, points
+closer to the center indicate worse fit indices.
 
 ```{r}
 data(iris)

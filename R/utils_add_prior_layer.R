@@ -21,7 +21,9 @@
       # remove intercept from output, if requested
       .remove_intercept(dens, column = "Parameter", show_intercept)
     },
-    error = function(e) { NULL }
+    error = function(e) {
+      NULL
+    }
   )
 
   if (!is.null(dat)) {
@@ -110,7 +112,9 @@
       # remove intercept from output, if requested
       .remove_intercept(dens, column = "Parameter", show_intercept)
     },
-    error = function(e) { NULL }
+    error = function(e) {
+      NULL
+    }
   )
 
   if (!is.null(dat)) {

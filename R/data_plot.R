@@ -90,7 +90,7 @@
 #' }
 #'
 #' @export
-data_plot <- function(x, data = NULL, ...){
+data_plot <- function(x, data = NULL, ...) {
   UseMethod("data_plot")
 }
 
@@ -122,7 +122,8 @@ data_plot <- function(x, data = NULL, ...){
 #'   ggridges::geom_ridgeline_gradient()
 #'
 #' p
-#' p + add_plot_attributes(data)}
+#' p + add_plot_attributes(data)
+#' }
 #' @export
 add_plot_attributes <- function(x) {
   info <- attributes(x)$info
@@ -152,20 +153,25 @@ add_plot_attributes <- function(x) {
 
   if (!is.null(obj_name)) {
     # first try, parent frame
-    dat <- tryCatch({
-      get(obj_name, envir = parent.frame())
-    },
-    error = function(e) { NULL }
+    dat <- tryCatch(
+      {
+        get(obj_name, envir = parent.frame())
+      },
+      error = function(e) {
+        NULL
+      }
     )
 
     if (is.null(dat)) {
       # second try, global env
-      dat <- tryCatch({
-        get(obj_name, envir = globalenv())
-      },
-      error = function(e) { NULL }
+      dat <- tryCatch(
+        {
+          get(obj_name, envir = globalenv())
+        },
+        error = function(e) {
+          NULL
+        }
       )
-
     }
   }
 

@@ -10,6 +10,6 @@
 #' golden_ratio()
 #' golden_ratio(10)
 #' @export
-golden_ratio <- function(x = 1){
+golden_ratio <- function(x = 1) {
   x * (1 + sqrt(5)) / 2
 }

@@ -47,11 +47,13 @@ data_plot.estimate_density <- function(x, data = NULL, centrality = "median", ci
   summary$Parameter <- factor(summary$Parameter, levels = levels(dataplot$Parameter))
 
   attr(dataplot, "summary") <- summary
-  attr(dataplot, "info") <- list("xlab" = "Values",
-                                 "ylab" = "Density",
-                                 "legend_fill" = "Parameter",
-                                 "legend_color" = "Parameter",
-                                 "title" = "Estimated Density Function")
+  attr(dataplot, "info") <- list(
+    "xlab" = "Values",
+    "ylab" = "Density",
+    "legend_fill" = "Parameter",
+    "legend_color" = "Parameter",
+    "title" = "Estimated Density Function"
+  )
 
   class(dataplot) <- c("data_plot", "see_estimate_density", class(dataplot))
   dataplot
@@ -109,7 +111,9 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
   }
 
   if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
+    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+    n_columns <- NULL
+  }
 
   # get labels
   labels <- .clean_parameter_names(x$Parameter, grid = !is.null(n_columns))
@@ -174,9 +178,9 @@ plot.see_estimate_density <- function(x, stack = TRUE, show_intercept = FALSE, n
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
     } else if ("Effects" %in% names(x)) {
-      p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+      p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
     } else if ("Component" %in% names(x)) {
-      p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+      p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
     }
   }
 
@@ -222,9 +226,8 @@ plot.see_estimate_density_df <- function(x, stack = TRUE, n_columns = 1, size_li
 
 
   if ("Group" %in% names(x)) {
-    p <- p + facet_wrap(~ Group, scales = "free", ncol = n_columns)
+    p <- p + facet_wrap(~Group, scales = "free", ncol = n_columns)
   }
 
   p
 }
-

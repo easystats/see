@@ -4,10 +4,11 @@
 print.see_binned_residuals <- function(x, ...) {
   orig_x <- x
   x$se.lo <- -x$se
-  if (length(unique(x$group)) > 1)
+  if (length(unique(x$group)) > 1) {
     ltitle <- "Within error bounds"
-  else
+  } else {
     ltitle <- NULL
+  }
 
   # set defaults
 
@@ -16,10 +17,11 @@ print.see_binned_residuals <- function(x, ...) {
   geom_size <- attr(x, "geom_size", exact = TRUE)
 
 
-  if (is.null(term))
+  if (is.null(term)) {
     xtitle <- sprintf("Estimated Probability of %s", attr(x, "resp_var", exact = TRUE))
-  else
-    xtitle = term
+  } else {
+    xtitle <- term
+  }
 
   if (is.null(geom_color)) geom_color <- c("#d11141", "#00aedb")
   if (is.null(geom_size)) geom_size <- 2
@@ -40,8 +42,8 @@ print.see_binned_residuals <- function(x, ...) {
   }
 
   p <- p +
-    geom_ribbon(aes(ymin = -Inf, ymax = .data$se.lo), alpha = .1 , fill = "grey70") +
-    geom_ribbon(aes(ymin = .data$se, ymax = Inf), alpha = .1 , fill = "grey70") +
+    geom_ribbon(aes(ymin = -Inf, ymax = .data$se.lo), alpha = .1, fill = "grey70") +
+    geom_ribbon(aes(ymin = .data$se, ymax = Inf), alpha = .1, fill = "grey70") +
     geom_line(aes(y = .data$se), colour = "grey70") +
     geom_line(aes(y = .data$se.lo), colour = "grey70") +
     theme_bw() +

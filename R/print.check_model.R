@@ -103,20 +103,28 @@ print.see_check_model <- function(x, ...) {
   if (requireNamespace("qqplotr")) {
     qq_stuff <- list(
       qqplotr::stat_qq_band(alpha = alpha_level),
-      qqplotr::stat_qq_line(size = size_line,
-                            colour = unname(flat_colors("teal"))),
-      qqplotr::stat_qq_point(shape = 16, stroke = 0,
-                             size = size_point,
-                             colour = "#2c3e50")
+      qqplotr::stat_qq_line(
+        size = size_line,
+        colour = unname(flat_colors("teal"))
+      ),
+      qqplotr::stat_qq_point(
+        shape = 16, stroke = 0,
+        size = size_point,
+        colour = "#2c3e50"
+      )
     )
   } else {
     message("For confidence bands, please install `qqplotr`.")
     qq_stuff <- list(
-      geom_qq(shape = 16, stroke = 0,
-              size = size_point,
-              colour = "#2c3e50"),
-      geom_qq_line(size = size_line,
-                   colour = unname(flat_colors("teal")))
+      geom_qq(
+        shape = 16, stroke = 0,
+        size = size_point,
+        colour = "#2c3e50"
+      ),
+      geom_qq_line(
+        size = size_line,
+        colour = unname(flat_colors("teal"))
+      )
     )
   }
   ggplot(x, aes(sample = .data$y)) +
@@ -137,11 +145,15 @@ print.see_check_model <- function(x, ...) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot(x, aes(sample = .data$res)) +
       qqplotr::stat_pp_band(alpha = alpha_level) +
-      qqplotr::stat_pp_line(size = size_line,
-                            colour = unname(flat_colors("teal"))) +
-      qqplotr::stat_pp_point(shape = 16, stroke = 0,
-                             size = size_point,
-                             colour = "#2c3e50")
+      qqplotr::stat_pp_line(
+        size = size_line,
+        colour = unname(flat_colors("teal"))
+      ) +
+      qqplotr::stat_pp_point(
+        shape = 16, stroke = 0,
+        size = size_point,
+        colour = "#2c3e50"
+      )
   } else if (requireNamespace("MASS", quietly = TRUE)) {
     message("For confidence bands, please install `qqplotr`.")
 
@@ -150,9 +162,11 @@ print.see_check_model <- function(x, ...) {
     x$y <- do.call(stats::pnorm, c(list(q = x$res), dparms$estimate))
 
     p_plot <- ggplot(x, aes(x = .data$probs, y = .data$y)) +
-      geom_abline(slope = 1,
-                  size = size_line,
-                  colour = unname(flat_colors("teal"))) +
+      geom_abline(
+        slope = 1,
+        size = size_line,
+        colour = unname(flat_colors("teal"))
+      ) +
       geom_point2(colour = "#2c3e50", size = size_point)
   } else {
     stop("Package 'qqplotr' OR 'MASS' required for PP-plots. Please install one of them.", call. = FALSE)
