@@ -56,4 +56,3 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
     }
   }
 }
-

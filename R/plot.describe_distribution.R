@@ -121,7 +121,7 @@ plot.see_parameters_distribution <- function(x, dispersion = FALSE, dispersion_a
     }
     if (!is.null(dispersion)) {
       if (dispersion_style == "ribbon") {
-        .range <- centrality  + c(-1, 1) * dispersion
+        .range <- centrality + c(-1, 1) * dispersion
         p <- p +
           geom_vline(xintercept = .range, linetype = "dashed", colour = dispersion_color, alpha = dispersion_alpha) +
           annotate("rect", xmin = .range[1], xmax = .range[2], ymin = 0, ymax = Inf, fill = dispersion_color, alpha = (dispersion_alpha / 3))

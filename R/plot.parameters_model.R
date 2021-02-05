@@ -51,9 +51,11 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   }
 
   # create text string for estimate and CI
-  x$Estimate_CI <- sprintf("%.2f %s",
-                           x$Coefficient,
-                           insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2))
+  x$Estimate_CI <- sprintf(
+    "%.2f %s",
+    x$Coefficient,
+    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2)
+  )
 
   # do we have a measure for meta analysis (to label axis)
   meta_measure <- attributes(x)$measure
@@ -223,8 +225,10 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     new_range <- pretty(c(min(x$CI_low), max(x$CI_high) + space_factor))
 
     p <- p +
-      geom_text(mapping = aes(label = .data$Estimate_CI, y = Inf),
-                colour = "black", hjust = "inward", size = size_text) +
+      geom_text(
+        mapping = aes(label = .data$Estimate_CI, y = Inf),
+        colour = "black", hjust = "inward", size = size_text
+      ) +
       ylim(c(min(new_range), max(new_range)))
   }
 
@@ -252,21 +256,22 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   # wrap plot into facets, depending on the components
   if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
 
-  if (ordinal_model)
+  if (ordinal_model) {
     facet_scales <- "free_y"
-  else
+  } else {
     facet_scales <- "free"
+  }
 
   axis_title_in_facet <- FALSE
 
   if (has_component && has_response && has_effects) {
-    p <- p + facet_wrap(~Response + Effects + Component, ncol = n_columns, scales = facet_scales)
+    p <- p + facet_wrap(~ Response + Effects + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_component && has_effects) {
-    p <- p + facet_wrap(~Effects + Component, ncol = n_columns, scales = facet_scales)
+    p <- p + facet_wrap(~ Effects + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_component && has_response) {
-    p <- p + facet_wrap(~Response + Component, ncol = n_columns, scales = facet_scales)
+    p <- p + facet_wrap(~ Response + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_effects && has_response) {
-    p <- p + facet_wrap(~Response + Effects , ncol = n_columns, scales = facet_scales)
+    p <- p + facet_wrap(~ Response + Effects, ncol = n_columns, scales = facet_scales)
   } else if (has_component) {
     if (!is.null(zi_coefficient_name) && !is.null(coefficient_name) && zi_coefficient_name != coefficient_name) {
       coef_labeller <- function(string) {
@@ -282,7 +287,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   } else if (has_response) {
     p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
   } else if (has_subgroups) {
-    suppressWarnings(p <- p + facet_grid(Subgroup~., scales = "free", space = "free"))
+    suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free"))
   }
 
   if (isTRUE(is_meta)) {
@@ -344,8 +349,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
 
 
 .meta_measure <- function(meta_measure) {
-  switch(
-    meta_measure,
+  switch(meta_measure,
     "MD" = "Raw Mean Difference",
     "SMDH" = ,
     "SMD" = "Standardized Mean Difference",

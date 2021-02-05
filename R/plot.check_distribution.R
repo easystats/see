@@ -20,7 +20,6 @@
 #' @importFrom stats residuals density
 #' @export
 plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
-
   model <- .retrieve_data(x)
   x <- x[-which(x$p_Residuals == 0 & x$p_Response == 0), ]
 
@@ -130,4 +129,3 @@ plot.see_check_distribution_numeric <- function(x, size_point = 2, panel = TRUE,
     lapply(p, graphics::plot)
   }
 }
-

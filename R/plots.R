@@ -10,8 +10,10 @@
 #' library(ggplot2)
 #' library(see)
 #'
-#' p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) + geom_point()
-#' p2 <- ggplot(iris, aes(x = Petal.Length)) + geom_density()
+#' p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) +
+#'   geom_point()
+#' p2 <- ggplot(iris, aes(x = Petal.Length)) +
+#'   geom_density()
 #'
 #' plots(p1, p2)
 #' plots(p1, p2, n_columns = 2, tags = TRUE)
@@ -27,16 +29,16 @@ plots <- function(..., n_rows = NULL, n_columns = NULL, tags = FALSE) {
   # Add tags
   if (length(tags) == 1) {
     if (tags == TRUE) {
-      tags_labels = LETTERS
-    } else{
-      tags_labels = NULL
+      tags_labels <- LETTERS
+    } else {
+      tags_labels <- NULL
     }
-  } else{
+  } else {
     if (length(tags) < length(plot_list)) {
       warning("Not enough tags labels in list. Using letters instead.")
-      tags_labels = LETTERS
-    } else{
-      tags_labels = tags
+      tags_labels <- LETTERS
+    } else {
+      tags_labels <- tags
     }
   }
 

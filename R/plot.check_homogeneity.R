@@ -48,10 +48,13 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   )
 
 
-  p <- if (length(pred) > 1)
-    ggplot(data = dat, aes(x = .data$x, y = .data$y, fill = .data$group)) + geom_violin()
-  else
-    ggplot(data = dat, aes(x = .data$x, y = .data$y)) + geom_violin(fill = "#2980b9")
+  p <- if (length(pred) > 1) {
+    ggplot(data = dat, aes(x = .data$x, y = .data$y, fill = .data$group)) +
+      geom_violin()
+  } else {
+    ggplot(data = dat, aes(x = .data$x, y = .data$y)) +
+      geom_violin(fill = "#2980b9")
+  }
 
   p +
     scale_fill_flat_d() +

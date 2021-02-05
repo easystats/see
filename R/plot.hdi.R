@@ -25,10 +25,11 @@ data_plot.bayestestR_eti <- data_plot.hdi
     plot_title <- "Credible Interval (CI)"
   }
 
-  if (!is.null(parms))
+  if (!is.null(parms)) {
     params <- parms
-  else
+  } else {
     params <- NULL
+  }
 
   if (inherits(data, "emmGrid")) {
     if (!requireNamespace("emmeans", quietly = TRUE)) {
@@ -87,7 +88,6 @@ data_plot.bayestestR_eti <- data_plot.hdi
         }
       }
     }
-
   } else {
     levels_order <- NULL
     dataplot <- .compute_densities_hdi(x = data[, 1], hdi = x, name = "Posterior")
@@ -115,10 +115,12 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
   dataplot <- .fix_facet_names(dataplot)
 
-  attr(dataplot, "info") <- list("xlab" = "Possible parameter values",
-                                 "ylab" = ylab,
-                                 "legend_fill" = legend_title,
-                                 "title" = plot_title)
+  attr(dataplot, "info") <- list(
+    "xlab" = "Possible parameter values",
+    "ylab" = ylab,
+    "legend_fill" = legend_title,
+    "title" = plot_title
+  )
 
   class(dataplot) <- c("data_plot", "see_hdi", class(dataplot))
   dataplot
@@ -131,7 +133,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' @importFrom stats density
 #' @importFrom magrittr "%>%"
 #' @keywords internal
-.compute_densities_hdi <- function(x, hdi, name = "Y"){
+.compute_densities_hdi <- function(x, hdi, name = "Y") {
   hdi <- hdi[order(hdi$CI, decreasing = TRUE), ]
 
   out <- x %>%
@@ -209,7 +211,9 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRU
 
   # check if we have multiple panels
   if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) n_columns <- NULL
+    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+    n_columns <- NULL
+  }
 
   # get labels
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
@@ -235,7 +239,7 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRU
     p <- p + ggtitle("")
   }
 
-  if (length(unique(x$y)) == 1  && is.numeric(x$y)) {
+  if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
     p <- p + scale_y_discrete(labels = labels)
@@ -247,9 +251,9 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRU
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
     } else if ("Effects" %in% names(x)) {
-      p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+      p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
     } else if ("Component" %in% names(x)) {
-      p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+      p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
     }
   }
 

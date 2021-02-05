@@ -9,7 +9,7 @@
 #' library(see)
 #'
 #' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
-#'   geom_point(color="white") +
+#'   geom_point(color = "white") +
 #'   theme_blackboard()
 #' @export
 theme_blackboard <-
@@ -28,7 +28,6 @@ theme_blackboard <-
            axis.text.angle = NULL,
            tags.size = 15,
            tags.face = "bold") {
-
     theme_modern(
       base_size = base_size,
       base_family = base_family,
@@ -55,5 +54,4 @@ theme_blackboard <-
         axis.text = element_text(color = "#E0E0E0"),
         strip.text = element_text(color = "#E0E0E0")
       )
-
-}
+  }

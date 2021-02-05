@@ -22,7 +22,6 @@
 #'   geom_point() +
 #'   theme_modern() +
 #'   scale_color_pizza_c()
-#'
 #' @export
 scale_color_pizza <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_pizza(palette = palette, reverse = reverse)
@@ -167,4 +166,3 @@ palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {
 
   grDevices::colorRampPalette(pal, ...)
 }
-

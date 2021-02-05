@@ -23,41 +23,41 @@
 #' how_to_plot(results)
 #' }
 #' @export
-how_to_plot  <- function(x, ...) {
+how_to_plot <- function(x, ...) {
   UseMethod("how_to_plot")
 }
 
 
 #' @export
-how_to_plot.hdi  <- function(x, ...) {
+how_to_plot.hdi <- function(x, ...) {
   cat(.how_to_plode_cleaner("plot.see_hdi"))
 }
 #' @export
 how_to_plot.see_hdi <- how_to_plot.hdi
 
 #' @export
-how_to_plot.ci  <- function(x, ...) {
+how_to_plot.ci <- function(x, ...) {
   cat(.how_to_plode_cleaner("plot.see_ci"))
 }
 #' @export
 how_to_plot.see_ci <- how_to_plot.ci
 
 #' @export
-how_to_plot.p_direction  <- function(x, ...) {
+how_to_plot.p_direction <- function(x, ...) {
   cat(.how_to_plode_cleaner("plot.see_p_direction"))
 }
 #' @export
 how_to_plot.see_p_direction <- how_to_plot.p_direction
 
 #' @export
-how_to_plot.rope  <- function(x, ...) {
+how_to_plot.rope <- function(x, ...) {
   cat(.how_to_plode_cleaner("plot.see_rope"))
 }
 #' @export
 how_to_plot.see_rope <- how_to_plot.rope
 
 #' @export
-how_to_plot.estimate_density  <- function(x, ...) {
+how_to_plot.estimate_density <- function(x, ...) {
   cat(.how_to_plode_cleaner("plot.see_estimate_density"))
 }
 #' @export
@@ -67,7 +67,7 @@ how_to_plot.see_estimate_density <- how_to_plot.estimate_density
 #' @importFrom insight print_color
 #' @importFrom utils head tail getAnywhere
 #' @keywords internal
-.how_to_plode_cleaner <- function(name){
+.how_to_plode_cleaner <- function(name) {
   sourcecode <- utils::getAnywhere(name)
   code <- sourcecode$objs[sourcecode$dups == FALSE]
   code <- as.character(code)
@@ -76,8 +76,9 @@ how_to_plot.see_estimate_density <- how_to_plot.estimate_density
 
   # Remove beginning and end of function
   code <- utils::tail(utils::head(code, -2), -5)
-  if (grepl(".remove_intercept", code[1], fixed = TRUE))
+  if (grepl(".remove_intercept", code[1], fixed = TRUE)) {
     code <- utils::tail(code, -1)
+  }
   # Replace begining
   code <- gsub("p <- x", "data_plot(x)", code, fixed = TRUE)
   # Remove .data$
@@ -92,4 +93,3 @@ how_to_plot.see_estimate_density <- how_to_plot.estimate_density
   insight::print_color("# Assuming that the input object is `x`:\n\n", "cyan")
   cat(trimws(code))
 }
-

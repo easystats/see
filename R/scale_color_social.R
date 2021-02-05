@@ -25,7 +25,6 @@
 #'   geom_point() +
 #'   theme_modern() +
 #'   scale_color_social_c(palette = "rainbow")
-#'
 #' @export
 scale_color_social <- function(palette = "complement", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_social(palette = palette, reverse = reverse)
@@ -141,7 +140,6 @@ social_colors_list <- c(
 #' social_colors()
 #'
 #' social_colors("dark red", "teal")
-#'
 #' @export
 social_colors <- function(...) {
   cols <- c(...)
@@ -157,9 +155,9 @@ social_colors <- function(...) {
 
 
 social_palettes <- list(
-  `full`  = social_colors(),
-  `ice`  = social_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = social_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
+  `full` = social_colors(),
+  `ice` = social_colors("purple", "deep purple", "blue", "light blue"),
+  `rainbow` = social_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange", "red"),
   `contrast` = social_colors("blue", "green", "amber", "purple", "red"),
   `light` = material_colors("light blue", "purple", "yellow", "light green", "deep orange"),
   `complement` = social_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
@@ -188,5 +186,3 @@ palette_social <- function(palette = "complement", reverse = FALSE, ...) {
 
   grDevices::colorRampPalette(pal, ...)
 }
-
-

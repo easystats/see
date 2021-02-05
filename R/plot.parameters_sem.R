@@ -1,5 +1,5 @@
 #' @export
-data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "correlation", "loading"), threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...){
+data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "correlation", "loading"), threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...) {
 
   # Deal with thresholds
   if (is.null(threshold_coefficient)) {
@@ -16,9 +16,9 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
   edges$to <- as.character(x$To)
 
   edges <- edges[tolower(edges$Type) %in% type &
-                   edges$from != edges$to &
-                   edges$Coefficient_abs >= threshold_coefficient &
-                   edges$p < threshold_p, ]
+    edges$from != edges$to &
+    edges$Coefficient_abs >= threshold_coefficient &
+    edges$p < threshold_p, ]
 
   edges$Coefficient_abs <- NULL
   edges$From <- NULL
@@ -32,7 +32,8 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
       sprintf("%.2f, ", edges$Coefficient),
       attributes(x)$ci * 100,
       "% CI [",
-      sprintf("%.2f, %.2f]", edges$CI_low, edges$CI_high))
+      sprintf("%.2f, %.2f]", edges$CI_low, edges$CI_high)
+    )
   } else {
     edges$Label <- sprintf("%.2f", edges$Coefficient)
   }
@@ -40,9 +41,9 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
 
   # Separate labels
-  edges$Label_Regression <- ifelse(edges$Type == 'Regression', edges$Label, '')
-  edges$Label_Correlation <- ifelse(edges$Type == 'Correlation', edges$Label, '')
-  edges$Label_Loading <- ifelse(edges$Type == 'Loading', edges$Label, '')
+  edges$Label_Regression <- ifelse(edges$Type == "Regression", edges$Label, "")
+  edges$Label_Correlation <- ifelse(edges$Type == "Correlation", edges$Label, "")
+  edges$Label_Loading <- ifelse(edges$Type == "Loading", edges$Label, "")
   edges <- edges[colSums(!is.na(edges)) > 0]
 
   # Identify latent variables for nodes
@@ -89,25 +90,31 @@ plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "corr
 
   p <- tidygraph::tbl_graph(x$nodes, x$edges) %>%
     ggraph::ggraph(layout = "nicely") +
-    ggraph::geom_edge_arc(aes(alpha = as.numeric(.data$Type == "Correlation"),
-                      label = .data$Label_Correlation,
-                      color = .data$Coefficient),
-                      strength = 0.1,
-                      label_dodge = unit(2, "mm"),
-                      linetype = 2, angle_calc = "along",
-                      label_size = 3,
-                      start_cap = ggraph::circle(12, 'mm'), end_cap = ggraph::circle(12, 'mm')) +
-    ggraph::geom_edge_link(aes(alpha = as.numeric(.data$Type == "Loading"),
-                       label = .data$Label_Loading,
-                       color = .data$Coefficient),
-                       label_dodge = unit(2, "mm"),
-                       angle_calc = "along", edge_width = 1,
-                       label_size = 3,
-                       check_overlap = TRUE,
-                       arrow = arrow(type = "closed", length = unit(3, "mm")),
-                       start_cap = ggraph::circle(12, 'mm'), end_cap = ggraph::circle(12, 'mm')) +
+    ggraph::geom_edge_arc(aes(
+      alpha = as.numeric(.data$Type == "Correlation"),
+      label = .data$Label_Correlation,
+      color = .data$Coefficient
+    ),
+    strength = 0.1,
+    label_dodge = unit(2, "mm"),
+    linetype = 2, angle_calc = "along",
+    label_size = 3,
+    start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+    ) +
+    ggraph::geom_edge_link(aes(
+      alpha = as.numeric(.data$Type == "Loading"),
+      label = .data$Label_Loading,
+      color = .data$Coefficient
+    ),
+    label_dodge = unit(2, "mm"),
+    angle_calc = "along", edge_width = 1,
+    label_size = 3,
+    check_overlap = TRUE,
+    arrow = arrow(type = "closed", length = unit(3, "mm")),
+    start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+    ) +
     ggraph::geom_node_point(aes(colour = .data$Latent), size = size_point) +
-    ggraph::geom_node_text(aes(label = .data$Name))  +
+    ggraph::geom_node_text(aes(label = .data$Name)) +
     ggraph::scale_edge_colour_gradient2(
       guide = FALSE,
       high = "#4CAF50",
@@ -123,4 +130,3 @@ plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "corr
 
   p
 }
-

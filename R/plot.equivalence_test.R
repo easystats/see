@@ -27,12 +27,13 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
 
   # retrieve model
-  model <- tryCatch({
-    get(model_name, envir = parent.frame())
-  },
-  error = function(e) {
-    NULL
-  }
+  model <- tryCatch(
+    {
+      get(model_name, envir = parent.frame())
+    },
+    error = function(e) {
+      NULL
+    }
   )
 
   if (is.null(model)) {
@@ -62,13 +63,13 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   tests <- split(x, x$CI)
 
   result <- lapply(tests, function(i) {
-
-    if (inherits(model, "emmGrid"))
+    if (inherits(model, "emmGrid")) {
       tmp <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(model, names = FALSE)))[, i$Parameter, drop = FALSE]
-    else if (inherits(x, "equivalence_test_simulate_model"))
+    } else if (inherits(x, "equivalence_test_simulate_model")) {
       tmp <- as.data.frame(attr(x, "data"), stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
-    else
+    } else {
       tmp <- as.data.frame(model, stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
+    }
 
     tmp2 <- lapply(1:nrow(i), function(j) {
       p <- i$Parameter[j]
@@ -104,7 +105,9 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
   # check if we have multiple panels
   if ((!"Effects" %in% names(tmp) || length(unique(tmp$Effects)) <= 1) &&
-      (!"Component" %in% names(tmp) || length(unique(tmp$Component)) <= 1)) n_columns <- NULL
+    (!"Component" %in% names(tmp) || length(unique(tmp$Component)) <= 1)) {
+    n_columns <- NULL
+  }
 
   # get labels
   labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
@@ -114,10 +117,11 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-  if (length(unique(tmp$HDI)) > 1)
+  if (length(unique(tmp$HDI)) > 1) {
     x.title <- "Highest Density Region of Posterior Samples"
-  else
+  } else {
     x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
+  }
   legend.title <- "Decision on H0"
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
@@ -145,21 +149,21 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1) {
-        p <- p + facet_wrap(~Effects + Component + HDI, scales = "free", ncol = n_columns)
+        p <- p + facet_wrap(~ Effects + Component + HDI, scales = "free", ncol = n_columns)
       } else {
         p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
       }
     } else if ("Effects" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1) {
-        p <- p + facet_wrap(~Effects + HDI, scales = "free", ncol = n_columns)
+        p <- p + facet_wrap(~ Effects + HDI, scales = "free", ncol = n_columns)
       } else {
-        p <- p + facet_wrap(~ Effects, scales = "free", ncol = n_columns)
+        p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
       }
     } else if ("Component" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1) {
-        p <- p + facet_wrap(~Component + HDI, scales = "free", ncol = n_columns)
+        p <- p + facet_wrap(~ Component + HDI, scales = "free", ncol = n_columns)
       } else {
-        p <- p + facet_wrap(~ Component, scales = "free", ncol = n_columns)
+        p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
       }
     }
   } else {
@@ -191,7 +195,6 @@ plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha =
   tests <- split(x, x$CI)
 
   result <- lapply(tests, function(i) {
-
     tmp <- data[, i$Parameter, drop = FALSE]
 
     tmp2 <- lapply(1:nrow(i), function(j) {
@@ -229,10 +232,11 @@ plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha =
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-  if (length(unique(tmp$HDI)) > 1)
+  if (length(unique(tmp$HDI)) > 1) {
     x.title <- "Highest Density Region of Posterior Samples"
-  else
+  } else {
     x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
+  }
   legend.title <- "Decision on H0"
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
@@ -283,12 +287,13 @@ plot.see_equivalence_test_lm <- function(x, size_point = .7, rope_color = "#0171
 
 
   # retrieve model
-  model <- tryCatch({
-    get(model_name, envir = parent.frame())
-  },
-  error = function(e) {
-    NULL
-  }
+  model <- tryCatch(
+    {
+      get(model_name, envir = parent.frame())
+    },
+    error = function(e) {
+      NULL
+    }
   )
 
   if (is.null(model)) {
@@ -349,4 +354,3 @@ plot.see_equivalence_test_lm <- function(x, size_point = .7, rope_color = "#0171
 
   p
 }
-

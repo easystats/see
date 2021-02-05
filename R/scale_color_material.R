@@ -25,7 +25,6 @@
 #'   geom_point() +
 #'   theme_modern() +
 #'   scale_color_material_c(palette = "rainbow")
-#'
 #' @export
 scale_color_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_material(palette = palette, reverse = reverse)
@@ -144,7 +143,6 @@ material_colors_list <- c(
 #' material_colors()
 #'
 #' material_colors("indigo", "lime")
-#'
 #' @export
 material_colors <- function(...) {
   cols <- c(...)
@@ -160,12 +158,12 @@ material_colors <- function(...) {
 
 
 material_palettes <- list(
-  `full`  = material_colors(),
-  `ice`  = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
-  `rainbow` = material_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "deep orange" ,"red", "pink"),
+  `full` = material_colors(),
+  `ice` = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
+  `rainbow` = material_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "deep orange", "red", "pink"),
   `contrast` = material_colors("blue", "green", "amber", "purple", "red"),
   `light` = material_colors("light blue", "pink", "yellow", "light green", "orange"),
-  `complement` = material_colors("blue", "blue grey", "teal", "green", "light green","yellow", "amber", "red")
+  `complement` = material_colors("blue", "blue grey", "teal", "green", "light green", "yellow", "amber", "red")
 )
 
 
@@ -191,5 +189,3 @@ palette_material <- function(palette = "contrast", reverse = FALSE, ...) {
 
   grDevices::colorRampPalette(pal, ...)
 }
-
-

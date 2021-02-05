@@ -29,7 +29,9 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
         data
       }
     },
-    error = function(e) {data}
+    error = function(e) {
+      data
+    }
   )
 
   centrality <- tolower(attr(x, "centrality", exact = TRUE))
@@ -102,7 +104,7 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' }
 #' @importFrom rlang .data
 #' @export
-plot.see_point_estimate <- function(x, data = NULL, size_point = 2, size_text = 3.5, panel = TRUE, show_labels = TRUE, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, ...){
+plot.see_point_estimate <- function(x, data = NULL, size_point = 2, size_text = 3.5, panel = TRUE, show_labels = TRUE, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, ...) {
   # save model for later use
   model <- .retrieve_data(x)
 
@@ -119,12 +121,15 @@ plot.see_point_estimate <- function(x, data = NULL, size_point = 2, size_text = 
     map_y <- attr(i, "map_y")
     max_y <- max(i$y)
 
-    if ("group" %in% colnames(i))
+    if ("group" %in% colnames(i)) {
       x_lab <- .clean_parameter_names(unique(i$group))
-    else
+    } else {
       x_lab <- "Parameter Value"
+    }
 
-    if (!show_intercept && .has_intercept(x_lab)) return(NULL)
+    if (!show_intercept && .has_intercept(x_lab)) {
+      return(NULL)
+    }
 
     label_mean_x <- mean_x
     label_mean_y <- max_y * 1.05
@@ -201,4 +206,3 @@ plot.see_point_estimate <- function(x, data = NULL, size_point = 2, size_text = 
     p
   }
 }
-

@@ -63,8 +63,7 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
   d$Id[d$Outliers == "0"] <- NA
   d$Distance <- effectsize::normalize(d$Distance, verbose = FALSE)
 
-  method <- switch(
-    attr(x, "method", exact = TRUE),
+  method <- switch(attr(x, "method", exact = TRUE),
     "cook" = "Cook's Distance",
     "pareto" = "Pareto",
     "mahalanobis" = "Mahalanobis Distance",
@@ -100,10 +99,11 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
   }
 
 
-  if (requireNamespace("ggrepel", quietly = TRUE))
+  if (requireNamespace("ggrepel", quietly = TRUE)) {
     p <- p + ggrepel::geom_text_repel(y = 2.5, size = size_text)
-  else
+  } else {
     p <- p + geom_text(y = 2.5, size = size_text)
+  }
 
   p
 }

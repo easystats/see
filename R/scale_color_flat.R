@@ -28,7 +28,6 @@
 #'   geom_point() +
 #'   theme_modern() +
 #'   scale_color_flat_c(palette = "rainbow")
-#'
 #' @export
 scale_color_flat <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
   pal <- palette_flat(palette = palette, reverse = reverse)
@@ -144,7 +143,6 @@ flat_colors_list <- c(
 #' flat_colors()
 #'
 #' flat_colors("dark red", "teal")
-#'
 #' @export
 flat_colors <- function(...) {
   cols <- c(...)
@@ -160,9 +158,9 @@ flat_colors <- function(...) {
 
 
 flat_palettes <- list(
-  `full`  = flat_colors(),
-  `ice`  = flat_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = flat_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange" ,"red"),
+  `full` = flat_colors(),
+  `ice` = flat_colors("purple", "deep purple", "blue", "light blue"),
+  `rainbow` = flat_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange", "red"),
   `contrast` = flat_colors("blue", "green", "amber", "purple", "red"),
   `light` = flat_colors("light blue", "purple", "yellow", "light green", "orange"),
   `complement` = flat_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
@@ -193,5 +191,3 @@ palette_flat <- function(palette = "contrast", reverse = FALSE, ...) {
 
   grDevices::colorRampPalette(pal, ...)
 }
-
-

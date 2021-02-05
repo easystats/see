@@ -153,11 +153,11 @@ see_colors <- function(...) {
 
 
 see_palettes <- list(
-  `full`  = see_colors(),
-  `ice`  = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
+  `full` = see_colors(),
+  `ice` = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
   `rainbow` = see_colors("purple", "deep purple", "indigo", "blue", "light blue", "green", "light green", "lime", "amber", "orange", "red", "pink"),
   `contrast` = see_colors("blue", "orange", "yellow", "green", "red"),
-  `complement` = see_colors("blue", "blue grey", "green", "light green","yellow", "amber", "red"),
+  `complement` = see_colors("blue", "blue grey", "green", "light green", "yellow", "amber", "red"),
   `light` = see_colors("light blue", "pink", "lime", "light green", "orange")
 )
 
@@ -184,5 +184,3 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
 
   grDevices::colorRampPalette(pal, ...)
 }
-
-

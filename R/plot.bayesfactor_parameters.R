@@ -24,8 +24,8 @@ plot.see_bayesfactor_parameters <- function(x, size_point = 2, rope_color = "#01
   # if we have intercept-only models, keep at least the intercept
   intercepts_points <- which(.in_intercepts(d_points$ind))
   if (length(intercepts_points) &&
-      nrow(d_points) > length(intercepts_points) &&
-      !show_intercept) {
+    nrow(d_points) > length(intercepts_points) &&
+    !show_intercept) {
     intercepts_data <- which(.in_intercepts(plot_data$ind))
     plot_data <- plot_data[-intercepts_data, ]
     d_points <- d_points[-intercepts_points, ]
@@ -33,10 +33,11 @@ plot.see_bayesfactor_parameters <- function(x, size_point = 2, rope_color = "#01
 
   # make sure point outline matches theme
   .theme <- theme_get()
-  if (is.null(.theme$panel.grid.major$colour))
+  if (is.null(.theme$panel.grid.major$colour)) {
     null_point_outline <- "white"
-  else
+  } else {
     null_point_outline <- .theme$panel.grid.major$colour
+  }
 
   p <- ggplot(
     plot_data,
@@ -45,14 +46,17 @@ plot.see_bayesfactor_parameters <- function(x, size_point = 2, rope_color = "#01
       y = .data$y,
       color = .data$Distribution,
       fill = .data$Distribution
-    )) +
+    )
+  ) +
     geom_line(size = 1) +
     geom_area(alpha = 0.15, position = "identity") +
     geom_vline(xintercept = hypothesis, linetype = "dashed", colour = "grey50") +
-    labs(y = "Density",
-         color = "Distribution",
-         fill = "Distribution",
-         x = "") +
+    labs(
+      y = "Density",
+      color = "Distribution",
+      fill = "Distribution",
+      x = ""
+    ) +
     theme(legend.position = "bottom")
 
   if (length(unique(plot_data$ind)) > 1) {

@@ -6,10 +6,12 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
   dataplot$Group <- as.factor(dataplot$Group)
   dataplot$Term <- factor(dataplot$Term, levels = unique(dat$Term))
 
-  attr(dataplot, "info") <- list("xlab" = "Cluster Group",
-                                 "ylab" = "Mean Z-Score",
-                                 "legend_fill" = "Variable",
-                                 "title" = "Cluster Analysis")
+  attr(dataplot, "info") <- list(
+    "xlab" = "Cluster Group",
+    "ylab" = "Mean Z-Score",
+    "legend_fill" = "Variable",
+    "title" = "Cluster Analysis"
+  )
 
   class(dataplot) <- c("data_plot", "see_cluster_analysis", class(dataplot))
   dataplot
@@ -47,7 +49,7 @@ plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size_bar
 
   if (!is.null(n_columns)) {
     p <- p +
-      facet_wrap(~ Group, ncol = n_columns, scales = "free_x") +
+      facet_wrap(~Group, ncol = n_columns, scales = "free_x") +
       scale_x_discrete(labels = NULL, breaks = NULL)
   }
 
