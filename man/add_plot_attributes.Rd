@@ -33,5 +33,6 @@ p <- data \%>\%
   ggridges::geom_ridgeline_gradient()
 
 p
-p + add_plot_attributes(data)}
+p + add_plot_attributes(data)
+}
 }

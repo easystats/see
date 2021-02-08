@@ -98,5 +98,4 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
   geom_point() +
   theme_modern() +
   scale_color_pizza_c()
-
 }

@@ -19,5 +19,4 @@ Can be used to get the hex code of specific colors from the material design colo
 material_colors()
 
 material_colors("indigo", "lime")
-
 }

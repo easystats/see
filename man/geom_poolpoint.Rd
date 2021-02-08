@@ -42,15 +42,14 @@ Points labelled with the observation name.
 library(ggplot2)
 library(see)
 
-ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species )) +
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species)) +
   geom_poolpoint(label = rownames(iris)) +
   scale_color_flat_d() +
   theme_modern()
 
 
-ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species )) +
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species)) +
   geom_pooljitter(label = rownames(iris)) +
   scale_color_flat_d() +
   theme_modern()
-
 }

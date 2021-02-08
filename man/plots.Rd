@@ -22,8 +22,10 @@ A wrapper around gridExtra::grid.arrange to plot multiple figures side by side o
 library(ggplot2)
 library(see)
 
-p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) + geom_point()
-p2 <- ggplot(iris, aes(x = Petal.Length)) + geom_density()
+p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) +
+  geom_point()
+p2 <- ggplot(iris, aes(x = Petal.Length)) +
+  geom_density()
 
 plots(p1, p2)
 plots(p1, p2, n_columns = 2, tags = TRUE)

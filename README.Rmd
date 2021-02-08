@@ -37,6 +37,7 @@ options(knitr.kable.NA = '', digits = 4)
 
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
 ![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
+![Codecov](https://codecov.io/gh/easystats/see/branch/main/graph/badge.svg)](https://codecov.io/gh/easystats/see?branch=main)
 
 Run the following:
 

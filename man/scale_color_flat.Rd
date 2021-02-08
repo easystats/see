@@ -79,5 +79,4 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
   geom_point() +
   theme_modern() +
   scale_color_flat_c(palette = "rainbow")
-
 }
