@@ -45,7 +45,7 @@ plot.see_compare_parameters <- function(x, show_intercept = FALSE, size_point = 
   x$Estimate_CI <- trimws(sprintf(
     "%.2f %s",
     x$Coefficient,
-    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2)
+    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2, zap_small = TRUE)
   ))
   x$Estimate_CI[x$Estimate_CI == "NA"] <- ""
 

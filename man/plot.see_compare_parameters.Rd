@@ -9,7 +9,7 @@
   show_intercept = FALSE,
   size_point = 0.8,
   size_text = NULL,
-  dodge_position = 0.5,
+  dodge_position = 0.8,
   sort = NULL,
   n_columns = NULL,
   ...

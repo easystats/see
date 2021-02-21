@@ -25,7 +25,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
   summary <- x[, 1:6]
   summary$Parameter <- attributes(x)$cleaned_parameters
   colnames(summary)[2] <- "Estimate"
-  summary$Estimate_CI <- sprintf("%.2f %s", summary$Estimate, insight::format_ci(summary$CI_low, summary$CI_high, ci = NULL, digits = 2))
+  summary$Estimate_CI <- sprintf("%.2f %s", summary$Estimate, insight::format_ci(summary$CI_low, summary$CI_high, ci = NULL, digits = 2, zap_small = TRUE))
 
   summary$Parameter <- factor(summary$Parameter, levels = rev(unique(summary$Parameter)))
   colnames(summary)[match("Parameter", colnames(summary))] <- "Study"
