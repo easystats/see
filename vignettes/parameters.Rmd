@@ -309,7 +309,9 @@ plot(result)
 ```
 
 ```{r}
-plot(result, size_text = 3)
+plot(result, size_text = 3.5) + 
+  labs(y = NULL) + 
+  theme(legend.position = "bottom")
 ```
 
 ## Equivalence Testing
