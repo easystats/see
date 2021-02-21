@@ -1,3 +1,9 @@
+# see 0.6.3
+
+## New plot functions
+
+* Added plot-function for `parameters::compatre_parameters()`.
+
 # see 0.6.2
 
 ## Changes to functions
