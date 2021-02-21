@@ -24,7 +24,7 @@
 #' @export
 plot.see_compare_parameters <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, dodge_position = .5, sort = NULL, n_columns = NULL, ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, data = data)
+    x <- data_plot(x)
   }
 
   # retrieve settings ----------------
@@ -172,7 +172,7 @@ plot.see_compare_parameters <- function(x, show_intercept = FALSE, size_point = 
 
 
 #' @export
-data_plot.see_compare_parameters <- function(x, data = NULL, show_intercept = FALSE, ...) {
+data_plot.see_compare_parameters <- function(x, ...) {
   col_coefficient <- which(grepl("^Coefficient\\.", colnames(x)))
   col_ci_low <- which(grepl("^CI_low\\.", colnames(x)))
   col_ci_high <- which(grepl("^CI_high\\.", colnames(x)))
