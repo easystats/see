@@ -92,7 +92,8 @@ Suggests:
     tidygraph,
     tidyr,
     spelling,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    vdiffr
 Encoding: UTF-8
 Language: en-US
 LazyData: true
