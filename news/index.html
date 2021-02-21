@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2.1</span>
       </span>
     </div>
 
@@ -155,28 +155,37 @@
       <small>Source: <a href='https://github.com/easystats/see/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="see-063" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.3">
+<a href="#see-063" class="anchor"></a>see 0.6.3<small> Unreleased </small>
+</h1>
+<div id="new-plot-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-plot-functions" class="anchor"></a>New plot functions</h2>
+<ul>
+<li>Added plot-function for <code>parameters::compatre_parameters()</code>.</li>
+</ul>
+</div>
+</div>
     <div id="see-062" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.2">
-<a href="#see-062" class="anchor"></a>see 0.6.2<small> Unreleased </small>
+<a href="#see-062" class="anchor"></a>see 0.6.2<small> 2021-02-04 </small>
 </h1>
 <div id="changes-to-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-to-functions" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> gains a <code>alpha</code>-argument, to change the alpha-level of confidence bands.</li>
-<li>The <code>...</code> argument for <code><a href="../reference/geom_violindot.html">geom_violindot()</a></code> is now also passed to to <code><a href="../reference/geom_violinhalf.html">geom_violinhalf()</a></code>, allowing, e.g., to change the alpha value of the violin-geoms as well.</li>
-<li>Reorganized order of arguments in <code><a href="../reference/geom_violindot.html">geom_violindot()</a></code>, so aesthetics arguments like <code>fill</code> are not absorbed by partial matching for arguments like <code>fill_dots</code>.</li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> gains a <code>alpha</code>-argument, to change the alpha-level of confidence bands.</p></li>
+<li><p>The <code>...</code> argument for <code><a href="../reference/geom_violindot.html">geom_violindot()</a></code> is now also passed to to <code><a href="../reference/geom_violinhalf.html">geom_violinhalf()</a></code>, allowing, e.g., to change the alpha value of the violin-geoms as well.</p></li>
+<li><p>Reorganized order of arguments in <code><a href="../reference/geom_violindot.html">geom_violindot()</a></code>, so aesthetics arguments like <code>fill</code> are not absorbed by partial matching for arguments like <code>fill_dots</code>.</p></li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> shows more accurate QQ-plots.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> show correct confidence bands for QQ- and PP-plots (with <code>qqplotr</code>). Previous bands were extremely narrow!</li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> shows more accurate QQ-plots.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> show correct confidence bands for QQ- and PP-plots (with <code>qqplotr</code>). Previous bands were extremely narrow!</p></li>
 </ul>
 </div>
 </div>
@@ -188,13 +197,9 @@
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-1" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now supports models from package <em>metaBMA</em>
-</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> gains a <code>weight_points</code> argument, to adjust the point-size depending on study-weights for meta-analysis models.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now labels the x-axis depending on model-type (i.e. “Odds Ratio” instead of “Exp(Estimate)”) when this information is available.</li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now supports models from package <em>metaBMA</em></p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> gains a <code>weight_points</code> argument, to adjust the point-size depending on study-weights for meta-analysis models.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now labels the x-axis depending on model-type (i.e. “Odds Ratio” instead of “Exp(Estimate)”) when this information is available.</p></li>
 </ul>
 </div>
 <div id="bug-fixes-1" class="section level2">
@@ -216,32 +221,29 @@
 <li>Harmonized spelling of arguments. Formerly, we had <code>text_size</code> and <code>size_text</code>, or just <code>size</code> even if only in the context of text labels. We now tried to harmonize these kind of arguments to gain more consistency throughout the different <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> methods.</li>
 </ul>
 </div>
-<div id="new-plot-functions" class="section level2">
+<div id="new-plot-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions" class="anchor"></a>New plot functions</h2>
+<a href="#new-plot-functions-1" class="anchor"></a>New plot functions</h2>
 <ul>
-<li>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> for brms-meta-analysis models.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/pp_check.html">performance::pp_check()</a></code>.</li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> for brms-meta-analysis models.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/pp_check.html">performance::pp_check()</a></code>.</p></li>
 </ul>
 </div>
 <div id="changes-to-functions-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-2" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> gains a <code>size_text</code>-argument, to add text values for estimates and confidence intervals to the plot (see also vignette).</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> from meta-analysis models (e.g. from <em>metafor</em>) gains a <code>type</code> argument, to create funnel plots with <code>type = "funnel"</code>.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">bayestestR::estimate_density()</a></code> and <code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html">parameters::simulate_parameters()</a></code> were revised, and now also include the point-estimate and error bar. Therefore, arguments <code>centrality</code> and <code>ci</code> were added.</li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> gains a <code>size_text</code>-argument, to add text values for estimates and confidence intervals to the plot (see also vignette).</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> from meta-analysis models (e.g. from <em>metafor</em>) gains a <code>type</code> argument, to create funnel plots with <code>type = "funnel"</code>.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">bayestestR::estimate_density()</a></code> and <code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html">parameters::simulate_parameters()</a></code> were revised, and now also include the point-estimate and error bar. Therefore, arguments <code>centrality</code> and <code>ci</code> were added.</p></li>
 </ul>
 </div>
 <div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Fixed bug in <code>plot.model_parameters()</code> when <code>standardize</code> was <code>"basic"</code>, <code>"smart"</code> or <code>"posthoc"</code>.</li>
-<li>Fixed wrong axis labelling for ROC-curves (from <code><a href="https://easystats.github.io/performance/reference/performance_roc.html">performance::performance_roc()</a></code>).</li>
+<li><p>Fixed bug in <code>plot.model_parameters()</code> when <code>standardize</code> was <code>"basic"</code>, <code>"smart"</code> or <code>"posthoc"</code>.</p></li>
+<li><p>Fixed wrong axis labelling for ROC-curves (from <code><a href="https://easystats.github.io/performance/reference/performance_roc.html">performance::performance_roc()</a></code>).</p></li>
 </ul>
 </div>
 </div>
@@ -261,9 +263,9 @@
 <h2 class="hasAnchor">
 <a href="#color-scales-and-palettes" class="anchor"></a>Color Scales and Palettes</h2>
 <ul>
-<li>Added new color-palettes.</li>
-<li>Palettes for existing color scales have been revamped.</li>
-<li>Added <code>"light"</code> palettes for dark themes.</li>
+<li><p>Added new color-palettes.</p></li>
+<li><p>Palettes for existing color scales have been revamped.</p></li>
+<li><p>Added <code>"light"</code> palettes for dark themes.</p></li>
 </ul>
 </div>
 </div>
@@ -275,19 +277,19 @@
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-4" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>Plot-function for <code><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">parameters::describe_distribution()</a></code> gains <code>highlight</code>, <code>highlight_color</code> and <code>size</code> arguments.</li>
-<li>Plot-function for <code><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">parameters::describe_distribution()</a></code> now uses thin bars for variables with integer values (instead of less precise histogram).</li>
-<li>Plot-function for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> gains <code>size</code> and <code>point_size</code> arguments.</li>
-<li>Plot-function for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> now also plots normality of random effects, when <code><a href="https://easystats.github.io/performance/reference/check_normality.html">check_normality(effects = "random")</a></code> was called.</li>
-<li>Legend labels nopw show a percentage-sign where applicable (for instance, for <code>plot.hdi()</code>).</li>
+<li><p>Plot-function for <code><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">parameters::describe_distribution()</a></code> gains <code>highlight</code>, <code>highlight_color</code> and <code>size</code> arguments.</p></li>
+<li><p>Plot-function for <code><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">parameters::describe_distribution()</a></code> now uses thin bars for variables with integer values (instead of less precise histogram).</p></li>
+<li><p>Plot-function for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> gains <code>size</code> and <code>point_size</code> arguments.</p></li>
+<li><p>Plot-function for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code> now also plots normality of random effects, when <code><a href="https://easystats.github.io/performance/reference/check_normality.html">check_normality(effects = "random")</a></code> was called.</p></li>
+<li><p>Legend labels nopw show a percentage-sign where applicable (for instance, for <code>plot.hdi()</code>).</p></li>
 </ul>
 </div>
 <div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Fixed issue with argument <code>n_column</code> in <code>plot.p_significant()</code>, <code>plot.hdi()</code>, and <code>plot.p_direction()</code>, which stopped working since R 4.0.0.</li>
-<li>Fixed issue in <code>plot.performance_roc()</code> with swapped x/y axes.</li>
+<li><p>Fixed issue with argument <code>n_column</code> in <code>plot.p_significant()</code>, <code>plot.hdi()</code>, and <code>plot.p_direction()</code>, which stopped working since R 4.0.0.</p></li>
+<li><p>Fixed issue in <code>plot.performance_roc()</code> with swapped x/y axes.</p></li>
 </ul>
 </div>
 </div>
@@ -303,25 +305,23 @@
 <code><a href="../reference/golden_ratio.html">golden_ratio()</a></code> was added as a helper to get nice proportions.</li>
 </ul>
 </div>
-<div id="new-plot-functions-1" class="section level2">
+<div id="new-plot-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-1" class="anchor"></a>New plot functions</h2>
+<a href="#new-plot-functions-2" class="anchor"></a>New plot functions</h2>
 <ul>
-<li>Added plot-function for <code>correlation::summary()</code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">parameters::describe_distribution()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">effectsize::equivalence_test()</a></code>.</li>
-<li>Added plot-function for various effectsize-functions, like <code><a href="https://easystats.github.io/effectsize/reference/eta_squared.html">effectsize::eta_squared()</a></code>.</li>
+<li><p>Added plot-function for <code>correlation::summary()</code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">parameters::describe_distribution()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">effectsize::equivalence_test()</a></code>.</p></li>
+<li><p>Added plot-function for various effectsize-functions, like <code><a href="https://easystats.github.io/effectsize/reference/eta_squared.html">effectsize::eta_squared()</a></code>.</p></li>
 </ul>
 </div>
 <div id="changes-to-functions-5" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-5" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>
-<code>plot.estimate_density()</code> now also works for density estimation of data frames.</li>
-<li>
-<code>plot.equivalence_test()</code> now also works for frequentist models and data frames (see <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">parameters::equivalence_test()</a></code>).</li>
-<li>Slightly changed plotting-style for <code>plot.equivalence_test()</code>.</li>
+<li><p><code>plot.estimate_density()</code> now also works for density estimation of data frames.</p></li>
+<li><p><code>plot.equivalence_test()</code> now also works for frequentist models and data frames (see <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">parameters::equivalence_test()</a></code>).</p></li>
+<li><p>Slightly changed plotting-style for <code>plot.equivalence_test()</code>.</p></li>
 </ul>
 </div>
 </div>
@@ -336,9 +336,9 @@
 <li>Reduce package dependencies.</li>
 </ul>
 </div>
-<div id="new-plot-functions-2" class="section level2">
+<div id="new-plot-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-2" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-3" class="anchor"></a>New plot-functions</h2>
 <ul>
 <li>Added plot-function for <code><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation::correlation()</a></code>.</li>
 </ul>
@@ -347,11 +347,10 @@
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-6" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.rma.html">model_parameters.rma()</a></code> now arranges facets by subgroups (see vignettes).</li>
-<li>minor improvements to <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">parameters::cluster_analysis()</a></code>.</li>
-<li>minor improvements to <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.stanreg.html">parameters::model_parameters.brmsfit()</a></code>.</li>
-<li>Plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/si.html">bayestestR::si()</a></code> gets a <code>support_only</code> argument, to plot only the support data or the “raw” prior and posterior distributions.</li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.rma.html">model_parameters.rma()</a></code> now arranges facets by subgroups (see vignettes).</p></li>
+<li><p>minor improvements to <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">parameters::cluster_analysis()</a></code>.</p></li>
+<li><p>minor improvements to <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.stanreg.html">parameters::model_parameters.brmsfit()</a></code>.</p></li>
+<li><p>Plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/si.html">bayestestR::si()</a></code> gets a <code>support_only</code> argument, to plot only the support data or the “raw” prior and posterior distributions.</p></li>
 </ul>
 </div>
 </div>
@@ -366,30 +365,28 @@
 <li>Arguments <code>ncol</code> and <code>nrow</code> in <code><a href="../reference/plots.html">plots()</a></code> were renamed into <code>n_columns</code> and <code>n_rows</code> to be consistent with arguments from other functions in the <strong>see</strong>-package.</li>
 </ul>
 </div>
-<div id="new-plot-functions-3" class="section level2">
+<div id="new-plot-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-3" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-4" class="anchor"></a>New plot-functions</h2>
 <ul>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/compare_performance.html">performance::compare_performance()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/si.html">bayestestR::si()</a></code>.</li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/compare_performance.html">performance::compare_performance()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/si.html">bayestestR::si()</a></code>.</p></li>
 </ul>
 </div>
 <div id="changes-to-functions-7" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-7" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-functions for the <a href="https://easystats.github.io/see/articles/bayestestR.html"><strong>bayestestR</strong>-package</a> now also support <code>BFBayesFactor</code> and <code>MCMCglmm</code> objects.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now uses fixed axis for facets when model is an ordinal or cumulative link model (because all facets are on the same scale, and thus parameters are easier to compare).</li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-functions for the <a href="https://easystats.github.io/see/articles/bayestestR.html"><strong>bayestestR</strong>-package</a> now also support <code>BFBayesFactor</code> and <code>MCMCglmm</code> objects.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now uses fixed axis for facets when model is an ordinal or cumulative link model (because all facets are on the same scale, and thus parameters are easier to compare).</p></li>
 </ul>
 </div>
 <div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Fixed issue with group coloring for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> when <code>exponentiate = TRUE</code>.</li>
-<li>Fixes issue with <code>plot.point_estimate()</code> for vectors.</li>
+<li><p>Fixed issue with group coloring for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> when <code>exponentiate = TRUE</code>.</p></li>
+<li><p>Fixes issue with <code>plot.point_estimate()</code> for vectors.</p></li>
 </ul>
 </div>
 </div>
@@ -402,45 +399,39 @@
 <a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
-<code>how_to_plot()</code> was removed for the time being, due to its inadequate maintainace effort. It might be re-implemented sometime in the future…</li>
+<code>how_to_plot()</code> was removed for the time being, due to its inadequate maintenance effort. It might be re-implemented sometime in the future…</li>
 </ul>
 </div>
 <div id="general-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#general-1" class="anchor"></a>General</h2>
 <ul>
-<li>Improved layout (vertical alignment) for some plotting-functions for the <strong>bayestestR</strong>-package, when there was only one parameter. Plots now are closer to the x-axis, removing unnecessary empty space.</li>
-<li>Labels and plot annotations are now more “human readable”, and labelling is more context sensitive.</li>
+<li><p>Improved layout (vertical alignment) for some plotting-functions for the <strong>bayestestR</strong>-package, when there was only one parameter. Plots now are closer to the x-axis, removing unnecessary empty space.</p></li>
+<li><p>Labels and plot annotations are now more “human readable”, and labelling is more context sensitive.</p></li>
 </ul>
 </div>
-<div id="new-plot-functions-4" class="section level2">
+<div id="new-plot-functions-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-4" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-5" class="anchor"></a>New plot-functions</h2>
 <ul>
-<li>Added <code>coord_radar</code> for radar charts.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">parameters::cluster_analysis()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/principal_components.html">parameters::principal_components()</a></code>.</li>
-<li>Added plot-function for <code>parameters::parameters_simulate()</code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/n_factors.html">parameters::n_factors()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">bayestestR::p_significance()</a></code>.</li>
+<li><p>Added <code>coord_radar</code> for radar charts.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">parameters::cluster_analysis()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/principal_components.html">parameters::principal_components()</a></code>.</p></li>
+<li><p>Added plot-function for <code>parameters::parameters_simulate()</code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/n_factors.html">parameters::n_factors()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">bayestestR::p_significance()</a></code>.</p></li>
 </ul>
 </div>
 <div id="changes-to-functions-8" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-8" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> gets a <code>sort</code>-argument to sort coefficients.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now also create forest plots for meta-analysis.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">bayestestR::bayesfactor_parameters()</a></code> only plots facets when necessary.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_outliers.html">performance::check_outliers()</a></code> now also plot multiple methods in one plot.</li>
-<li>Following <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> methods get a <code>n_columns</code>-argument, so model components like random effects or a zero-inflation component can be plotted in a multi-column layout: <code><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">bayestestR::p_direction()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/hdi.html">bayestestR::hdi()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/rope.html">bayestestR::rope()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">bayestestR::equivalence_test()</a></code>, <code>parameters::model_parameter()</code>, <code>parameters::parameters_simulate()</code>
-</li>
-<li>Following <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> methods get <code>priors</code> and <code>priors_alpha</code> arguments, to add a layer with prior samples to the plot: <code><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">bayestestR::p_direction()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">bayestestR::estimate_density()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">bayestestR::point_estimate()</a></code>
-</li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> gets a <code>sort</code>-argument to sort coefficients.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> now also create forest plots for meta-analysis.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">bayestestR::bayesfactor_parameters()</a></code> only plots facets when necessary.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_outliers.html">performance::check_outliers()</a></code> now also plot multiple methods in one plot.</p></li>
+<li><p>Following <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> methods get a <code>n_columns</code>-argument, so model components like random effects or a zero-inflation component can be plotted in a multi-column layout: <code><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">bayestestR::p_direction()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/hdi.html">bayestestR::hdi()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/rope.html">bayestestR::rope()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">bayestestR::equivalence_test()</a></code>, <code>parameters::model_parameter()</code>, <code>parameters::parameters_simulate()</code></p></li>
+<li><p>Following <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> methods get <code>priors</code> and <code>priors_alpha</code> arguments, to add a layer with prior samples to the plot: <code><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">bayestestR::p_direction()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">bayestestR::estimate_density()</a></code>, <code><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">bayestestR::point_estimate()</a></code></p></li>
 </ul>
 </div>
 </div>
@@ -452,24 +443,24 @@
 <h2 class="hasAnchor">
 <a href="#general-2" class="anchor"></a>General</h2>
 <ul>
-<li>More comprehensive examples available from the <a href="https://easystats.github.io/see/">package-website</a>.</li>
-<li>Added new color-palettes.</li>
+<li><p>More comprehensive examples available from the <a href="https://easystats.github.io/see/">package-website</a>.</p></li>
+<li><p>Added new color-palettes.</p></li>
 </ul>
 </div>
-<div id="new-plot-functions-5" class="section level2">
+<div id="new-plot-functions-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-5" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-6" class="anchor"></a>New plot-functions</h2>
 <ul>
-<li>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">bayestestR::point_estimate()</a></code>.</li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">bayestestR::point_estimate()</a></code>.</p></li>
 </ul>
 </div>
 <div id="changes-to-functions-9" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-to-functions-9" class="anchor"></a>Changes to functions</h2>
 <ul>
-<li>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code>bayestestR::bayesfactor_savagedickey()</code> gets a <code>rope_color</code> and a <code>rope_alpha</code>-argument to plot the “null”-interval, when the null-hypothesis is a <em>region of practical equivalence</em>, and not just the point-null.</li>
-<li>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code><a href="https://easystats.github.io/performance/reference/binned_residuals.html">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://easystats.github.io/performance/reference/binned_residuals.html">performance::binned_residuals()</a></code>).</li>
+<li><p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code>bayestestR::bayesfactor_savagedickey()</code> gets a <code>rope_color</code> and a <code>rope_alpha</code>-argument to plot the “null”-interval, when the null-hypothesis is a <em>region of practical equivalence</em>, and not just the point-null.</p></li>
+<li><p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method for <code><a href="https://easystats.github.io/performance/reference/binned_residuals.html">performance::binned_residuals()</a></code> now also allows to modify size and colors of geoms (related arguments are in <code><a href="https://easystats.github.io/performance/reference/binned_residuals.html">performance::binned_residuals()</a></code>).</p></li>
 </ul>
 </div>
 <div id="bug-fixes-5" class="section level2">
@@ -488,11 +479,9 @@
 <h2 class="hasAnchor">
 <a href="#general-3" class="anchor"></a>General</h2>
 <ul>
-<li>
-<code><a href="../reference/geom_point2.html">geom_point2()</a></code> now accepts <code>size</code>-aesthetics when mapped to data.</li>
-<li>Themes now get a <code>base_size</code> and <code>base_family</code> argument, in line with <strong>ggplot</strong> themes, to set the default size and family for plots.</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-methods now work for <strong>bayestestR</strong> functions that work on <code>emmGrid</code>-objects (created from pairwise comparison with package <strong>emmeans</strong>).</li>
+<li><p><code><a href="../reference/geom_point2.html">geom_point2()</a></code> now accepts <code>size</code>-aesthetics when mapped to data.</p></li>
+<li><p>Themes now get a <code>base_size</code> and <code>base_family</code> argument, in line with <strong>ggplot</strong> themes, to set the default size and family for plots.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-methods now work for <strong>bayestestR</strong> functions that work on <code>emmGrid</code>-objects (created from pairwise comparison with package <strong>emmeans</strong>).</p></li>
 </ul>
 </div>
 <div id="new-themes" class="section level2">
@@ -503,17 +492,17 @@
 <code><a href="../reference/theme_lucid.html">theme_lucid()</a></code>, a light and clear theme.</li>
 </ul>
 </div>
-<div id="new-plot-functions-6" class="section level2">
+<div id="new-plot-functions-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-plot-functions-6" class="anchor"></a>New plot-functions</h2>
+<a href="#new-plot-functions-7" class="anchor"></a>New plot-functions</h2>
 <ul>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_model.html">performance::check_model()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html">performance::check_heteroscedasticity()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_outliers.html">performance::check_outliers()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_distribution.html">performance::check_distribution()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_collinearity.html">performance::check_collinearity()</a></code>.</li>
-<li>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_homogeneity.html">performance::check_homogeneity()</a></code>.</li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_model.html">performance::check_model()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_normality.html">performance::check_normality()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html">performance::check_heteroscedasticity()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_outliers.html">performance::check_outliers()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_distribution.html">performance::check_distribution()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_collinearity.html">performance::check_collinearity()</a></code>.</p></li>
+<li><p>Added plot-function for <code><a href="https://easystats.github.io/performance/reference/check_homogeneity.html">performance::check_homogeneity()</a></code>.</p></li>
 </ul>
 </div>
 <div id="new-geoms" class="section level2">
@@ -545,7 +534,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>, <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, Philip Waggoner, Mattan S. Ben-Shachar.</p>
+  <p>Developed by <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>, <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, Philip Waggoner, <a href='https://github.com/mattansb'>Mattan S. Ben-Shachar</a>, <a href='https://sites.google.com/site/indrajeetspatilmorality/'>Indrajeet Patil</a>.</p>
 </div>
 
 <div class="pkgdown">

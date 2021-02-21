@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2.1</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@
 <a href="#probability-of-direction-pd" class="anchor"></a>Probability of Direction (pd)</h2>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/p_direction.html">related function documentation</a>)</em></p>
 <p>The probability of direction (also known as the maximum probability of effect - MPE) varies between 50% and 100% (i.e., 0.5 and 1) and can be interpreted as the probability (expressed in percentage) that a parameter (described by its posterior distribution) is strictly positive or negative (whichever is the most probable).</p>
-<p>It is mathematically defined as the proportion of the posterior distribution that is of the median’s sign. Altough differently expressed, this index is fairly similar (i.e., is strongly correlated) to the frequentist p-value</p>
+<p>It is mathematically defined as the proportion of the posterior distribution that is of the median’s sign. Although differently expressed, this index is fairly similar (i.e., is strongly correlated) to the frequentist p-value</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">p_direction</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
@@ -451,13 +451,13 @@
 <span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.53, 1.73]</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.21, 0.77]</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span> 
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, support_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> 
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, support_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-18-2.png" width="672"></p>
@@ -503,7 +503,7 @@
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html">rope</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
-<span class="va">result</span> 
+<span class="va">result</span>
 <span class="co">#&gt; # Proportions of samples inside the ROPE [-0.10, 0.10]:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ROPE for the 90% HDI:</span>
@@ -805,7 +805,7 @@
 <p><em>Pizza plots</em> are a visual way of representing the posterior probabilities of several models, with ratio of the areas of any two models corresponding to their posterior odds.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is possible to plot all compared models on one (pizza) pie:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_pies <span class="op">=</span> <span class="st">"one"</span>, value <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </code></pre></div>
+  <span class="fu"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
 <p>But it is also possible to plot one pizza for each model and the denominator model (and who doesn’t like <strong><em>more</em></strong> pizza?):</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
@@ -833,7 +833,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://github.com/strengejacke">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a>, Philip Waggoner, Mattan S. Ben-Shachar.</p>
+  <p>Developed by <a href="https://github.com/strengejacke">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a>, Philip Waggoner, <a href="https://github.com/mattansb">Mattan S. Ben-Shachar</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/">Indrajeet Patil</a>.</p>
 </div>
 
 <div class="pkgdown">
