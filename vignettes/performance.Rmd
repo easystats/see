@@ -175,6 +175,15 @@ check_model(model)
 check_model(model, panel = FALSE)
 ```
 
+Note that not all checks supported in `performance` will be reported in this
+unified **visual** check. For example, for linear models, one needs to check the
+assumption that errors are not autocorrelated, but this check will not be shown
+in the visual check.
+
+```{r message=TRUE}
+check_autocorrelation(lm(formula = wt ~ mpg, data = mtcars))
+```
+
 # Compare Model Performances
 
 _([related function documentation](https://easystats.github.io/performance/reference/model_performance.html))_
