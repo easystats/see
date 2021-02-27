@@ -1,4 +1,20 @@
 library(testthat)
 library(see)
 
-test_check("see")
+osx <- tryCatch(
+  {
+    si <- Sys.info()
+    if (!is.null(si["sysname"])) {
+      si["sysname"] == "Darwin" || grepl("^darwin", R.version$os)
+    } else {
+      FALSE
+    }
+  },
+  error = function(e) {
+    FALSE
+  }
+)
+
+if (!osx) {
+  test_check("see")
+}
