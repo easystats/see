@@ -2,7 +2,16 @@
 
 ## New plot functions
 
-* Added plot-function for `parameters::compatre_parameters()`.
+* Added plot-function for `parameters::compare_parameters()`.
+
+## Minor changes
+
+* The `check_heteroscedasticity()` plot contains a dashed horizontal line, which
+  makes it to assess the homoscedasticity assumption.
+
+* The Y-axis label for `check_collinearity()` plot clarifies that the measure
+  being plotted is VIF. This was unclear when this plot was embedded in a grid
+  of plots from `check_model` containing multiple checks.
 
 # see 0.6.2
 

@@ -61,7 +61,12 @@ print.see_check_model <- function(x, ...) {
 
   p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
-    labs(title = "Check for Multicollinearity", x = NULL, y = NULL, fill = "Correlation") +
+    labs(
+      title = "Check for Multicollinearity",
+      x = NULL,
+      y = "Variance Inflation Factor",
+      fill = "Correlation"
+    ) +
     scale_fill_manual(values = colors) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
     ylim(c(0, ylim))
@@ -188,14 +193,23 @@ print.see_check_model <- function(x, ...) {
 .plot_diag_homogeneity <- function(x, size_point, size_line) {
   ggplot(x, aes(x = .data$x, .data$y)) +
     geom_point2(colour = "#2c3e50", size = size_point) +
-    stat_smooth(method = "loess", se = FALSE, size = size_line, colour = unname(flat_colors("dark red"))) +
+    stat_smooth(
+      method = "loess",
+      se = FALSE,
+      size = size_line,
+      colour = unname(flat_colors("dark red"))
+    ) +
     labs(
       title = "Homogeneity of Variance (Scale-Location)",
       subtitle = "Dots should spread equally around horizontal line",
       y = "Std. Residuals (sqrt)",
       x = "Fitted values"
     ) +
-    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
+    theme_lucid(
+      base_size = 10,
+      plot.title.space = 3,
+      axis.title.space = 5
+    )
 }
 
 
@@ -203,7 +217,13 @@ print.see_check_model <- function(x, ...) {
 .plot_diag_ncv <- function(x, size_point, size_line) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
     geom_point2(colour = "#2c3e50", size = size_point) +
-    geom_smooth(method = "loess", se = FALSE, size = size_line, colour = unname(flat_colors("dark red"))) +
+    geom_smooth(
+      method = "loess",
+      se = FALSE,
+      size = size_line,
+      colour = unname(flat_colors("dark red"))
+    ) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
     labs(
       x = "Fitted values",
       y = "Residuals",
