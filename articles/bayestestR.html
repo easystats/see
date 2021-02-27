@@ -381,45 +381,6 @@
 
 <span class="va">result</span>
 <span class="co">#&gt; # Highest Density Intervals</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        50% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.69,  4.90]</span>
-<span class="co">#&gt; Petal.Width                   | [ 0.41,  1.20]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.09, -0.44]</span>
-<span class="co">#&gt; Speciesvirginica              | [ 0.07,  0.77]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [ 0.02,  0.94]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-0.64,  0.22]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        75% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.59,  4.96]</span>
-<span class="co">#&gt; Petal.Width                   | [ 0.19,  1.56]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.22, -0.13]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.11,  1.11]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.19,  1.36]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-0.92,  0.52]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        89% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.52,  5.04]</span>
-<span class="co">#&gt; Petal.Width                   | [-0.07,  1.83]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.46,  0.06]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.36,  1.29]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.60,  1.53]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.21,  0.84]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        95% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.47,  5.10]</span>
-<span class="co">#&gt; Petal.Width                   | [-0.34,  1.96]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.65,  0.23]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.55,  1.49]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.67,  1.90]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.45,  1.03]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
@@ -441,15 +402,6 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/si.html">si</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="va">result</span>
 <span class="co">#&gt; # Support Interval</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |     BF = 1 SI</span>
-<span class="co">#&gt; ---------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.38, 5.21]</span>
-<span class="co">#&gt; Petal.Width                   | [-0.17, 1.92]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.71, 0.20]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.56, 1.48]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.53, 1.73]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.21, 0.77]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
