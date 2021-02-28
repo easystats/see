@@ -124,7 +124,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><a href="https://cran.r-project.org/package=see"><img src="http://www.r-pkg.org/badges/version/see" alt="CRAN"></a> <a href="https://github.com/easystats/see/actions"><img src="https://github.com/easystats/see/workflows/R-check/badge.svg?branch=master" alt="R check"></a></p>
+<p><a href="https://cran.r-project.org/package=see"><img src="http://www.r-pkg.org/badges/version/see" alt="CRAN"></a> <img src="https://github.com/easystats/see/workflows/R-check/badge.svg" alt="R-check"></p>
 <p>Run the following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
@@ -157,34 +157,23 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/theme_lucid.html">theme_lucid</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/theme_lucid.html">theme_lucid</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-5-1.png"><!-- --></p>
 </div>
 <div id="blackboard" class="section level3">
 <h3 class="hasAnchor">
 <a href="#blackboard" class="anchor"></a>Blackboard</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/">rstanarm</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/modelbased/">modelbased</a></span><span class="op">)</span>
-
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">rstanarm</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">Petal.Length</span>, <span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">modelbased</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_response.html">estimate_link</a></span><span class="op">(</span>keep_draws <span class="op">=</span> <span class="cn">TRUE</span>, length <span class="op">=</span> <span class="fl">100</span>, draws <span class="op">=</span> <span class="fl">250</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">modelbased</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/modelbased/reference/reshape_draws.html">reshape_draws</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Petal.Length</span>, y <span class="op">=</span> <span class="va">Draw</span>, group <span class="op">=</span> <span class="va">Draw_Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/theme_blackboard.html">theme_blackboard</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-7-1.png"><!-- --></p>
+<code class="sourceCode R"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/theme_blackboard.html">theme_blackboard</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-6-1.png"><!-- --></p>
 </div>
 <div id="abyss" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abyss" class="anchor"></a>Abyss</h3>
-<p><img src="reference/figures/unnamed-chunk-8-1.png"><!-- --></p>
+<p><img src="reference/figures/unnamed-chunk-7-1.png"><!-- --></p>
 </div>
 </div>
 <div id="palettes" class="section level2">
@@ -217,12 +206,12 @@
 <p>The <code><a href="reference/plots.html">plots()</a></code> function allows us to plot the figures side by side.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-10-1.png"><!-- --></p>
+<p><img src="reference/figures/unnamed-chunk-9-1.png"><!-- --></p>
 <p>The <code><a href="reference/plots.html">plots()</a></code> function can also be used to add <strong>tags</strong> (<em>i.e.</em>, labels for subfigures).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, n_columns <span class="op">=</span> <span class="fl">2</span>, 
       tags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Fig. "</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-11-1.png"><!-- --></p>
+<p><img src="reference/figures/unnamed-chunk-10-1.png"><!-- --></p>
 </div>
 <div id="better-looking-points" class="section level2">
 <h2 class="hasAnchor">
@@ -238,7 +227,7 @@
   <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">normal</span>, <span class="va">new</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-12-1.png"><!-- --></p>
+<p><img src="reference/figures/unnamed-chunk-11-1.png"><!-- --></p>
 </div>
 <div id="half-violin-half-dot-plot" class="section level2">
 <h2 class="hasAnchor">
@@ -249,7 +238,7 @@
   <span class="fu"><a href="reference/geom_violindot.html">geom_violindot</a></span><span class="op">(</span>fill_dots <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-13-1.png"><!-- --></p>
+<p><img src="reference/figures/unnamed-chunk-12-1.png"><!-- --></p>
 </div>
 <div id="radar-chart-spider-plot" class="section level2">
 <h2 class="hasAnchor">
@@ -268,7 +257,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, size <span class="op">=</span> <span class="fl">2</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="reference/coord_radar.html">coord_radar</a></span><span class="op">(</span>start <span class="op">=</span> <span class="op">-</span><span class="va">pi</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-14-1.png"><!-- --></p>
+<p><img src="reference/figures/unnamed-chunk-13-1.png"><!-- --></p>
 </div>
 <div id="plot-functions-for-easystats-packages" class="section level2">
 <h2 class="hasAnchor">
