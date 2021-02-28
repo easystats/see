@@ -37,7 +37,6 @@ options(knitr.kable.NA = '', digits = 4)
 
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
 ![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
-![Codecov](https://codecov.io/gh/easystats/see/branch/main/graph/badge.svg)](https://codecov.io/gh/easystats/see?branch=main)
 
 Run the following:
 
@@ -74,42 +73,17 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ```{r warning=FALSE, message=FALSE}
 library(ggplot2)
 
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point2() +
-  theme_lucid()
+p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point2()
+
+p + theme_lucid()
 ```
 
 
 ### Blackboard
 
-```{r warning=FALSE, message=FALSE, eval=FALSE}
-library(rstanarm)
-library(modelbased)
-
-dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>%
-  modelbased::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>%
-  modelbased::reshape_draws()
-
-p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
-  geom_line(color = "white", alpha = 0.05) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))
-
+```{r warning=FALSE, message=FALSE}
 p + theme_blackboard() 
-```
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-library(modelbased)
-library(rstanarm)
-
-model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris, refresh = 0)
-
-p <- estimate_link(model, keep_draws = TRUE, length = 100, draws = 250) %>% 
-  reshape_draws() %>% 
-  ggplot(aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
-  geom_line(color = "white", alpha = 0.05) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))
-p + theme_blackboard()
 ```
 
 ### Abyss
