@@ -30,8 +30,24 @@ library(see)
 
 _([related function documentation](https://easystats.github.io/performance/reference/binned_residuals.html))_
 
+Example where model is **not** a good fit.
+
 ```{r message=TRUE}
 model <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
+binned_residuals(model)
+```
+
+Example where model **is** a good fit.
+
+```{r message=TRUE}
+model <- glm(
+  formula = Survived ~ Class + Sex,
+  data = as.data.frame(Titanic),
+  weights = Freq,
+  family = "binomial"
+)
+
+# modifying the plot further using `see`
 binned_residuals(model)
 ```
 
