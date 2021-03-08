@@ -61,7 +61,6 @@ Imports:
     insight,
     magrittr,
     parameters,
-    performance (>= 0.7.0.1),
     rlang
 Suggests:
     brms,
@@ -83,6 +82,7 @@ Suggests:
     modelbased,
     NbClust,
     nFactors,
+    performance,
     psych,
     qqplotr,
     randomForest,
@@ -95,8 +95,7 @@ Suggests:
     testthat (>= 3.0.0)
 Remtotes:
     easystats/insight,
-    easystats/parameters,
-    easystats/performance
+    easystats/parameters
 Encoding: UTF-8
 Language: en-US
 LazyData: true
