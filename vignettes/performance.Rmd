@@ -1,5 +1,5 @@
 ---
-title: "Plotting Functions for the performance Package"
+title: "Plotting Functions for the 'performance' Package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{performance}
@@ -9,6 +9,8 @@ vignette: >
 
 ```{r, include = FALSE, echo=FALSE}
 knitr::opts_chunk$set(
+  dpi = 300,
+  out.width = "100%",
   collapse = TRUE,
   comment = "#>",
   fig.width = 7,
@@ -182,7 +184,7 @@ pp_check(model, check_range = TRUE)
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_model.html))_
 
-```{r fig.height=10}
+```{r fig.height=12, fig.width=10}
 model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 check_model(model)
 ```

@@ -28,7 +28,7 @@ Authors@R:
              family = "Patil",
              role = "aut",
              email = "patilindrajeet.science@gmail.com",
-             comment = c(ORCID = "0000-0003-1995-6531", Twitter = "@patilindrajeets")),     
+             comment = c(ORCID = "0000-0003-1995-6531", Twitter = "@patilindrajeets")),
       person(given = "Brenton M.",
              family = "Wiernik",
              role = "ctb",
@@ -61,6 +61,7 @@ Imports:
     insight,
     magrittr,
     parameters,
+    performance (>= 0.7.0.1),
     rlang
 Suggests:
     brms,
@@ -82,7 +83,6 @@ Suggests:
     modelbased,
     NbClust,
     nFactors,
-    performance,
     psych,
     qqplotr,
     randomForest,
@@ -93,9 +93,12 @@ Suggests:
     tidyr,
     spelling,
     testthat (>= 3.0.0)
+Remtotes:
+    easystats/insight,
+    easystats/parameters,
+    easystats/performance
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 RoxygenNote: 7.1.1
 Config/testthat/edition: 3
-Remotes: easystats/insight, easystats/parameters
