@@ -42,7 +42,7 @@ binned_residuals(model)
 Example where model **is** a good fit.
 
 ```{r message=TRUE}
-mod <- glm(am ~ mpg + vs + cyl, family = binomial(), data = mtcars)
+mod <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
 binned_residuals(mod)
 ```
 
@@ -258,4 +258,18 @@ result <- performance_roc(model, new_data = test_data)
 result
 plot(result)
 }
+```
+
+You can also compare ROC curves for different models. 
+
+```{r}
+set.seed(123)
+library(bayestestR)
+
+# creating models
+m1 <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
+m2 <- glm(vs ~ wt + am + mpg, data = mtcars, family = "binomial")
+
+# comparing their performances using the AUC curve
+plot(performance_roc(m1, m2))
 ```
