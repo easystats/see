@@ -50,8 +50,8 @@ The \code{plot()} method for the \code{parameters::compare_parameters()} functio
 }
 \examples{
 if (require("insight") &&
-    require("parameters") &&
-    packageVersion("insight") >= "0.13.0") {
+  require("parameters") &&
+  packageVersion("insight") >= "0.13.0") {
   data(iris)
   lm1 <- lm(Sepal.Length ~ Species, data = iris)
   lm2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)

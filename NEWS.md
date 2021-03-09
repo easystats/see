@@ -13,10 +13,12 @@
   being plotted is VIF. This was unclear when this plot was embedded in a grid
   of plots from `check_model` containing multiple checks.
 
+* Plotting methods for `performance_roc` and `performance_accuracy` show correct
+  labels now.
+
 ## Bug fixes
 
 * Fixed issue with wrong labelling of CI-levels for `plot.see_hdi()`.
-
 
 # see 0.6.2
 
