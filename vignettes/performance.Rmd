@@ -42,15 +42,8 @@ binned_residuals(model)
 Example where model **is** a good fit.
 
 ```{r message=TRUE}
-model <- glm(
-  formula = Survived ~ Class + Sex,
-  data = as.data.frame(Titanic),
-  weights = Freq,
-  family = "binomial"
-)
-
-# modifying the plot further using `see`
-binned_residuals(model)
+mod <- glm(am ~ mpg + vs + cyl, family = binomial(), data = mtcars)
+binned_residuals(mod)
 ```
 
 ## Check for Multicollinearity - Variance Inflation Factor
