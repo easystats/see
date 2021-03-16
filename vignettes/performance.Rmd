@@ -1,5 +1,5 @@
 ---
-title: "Plotting Functions for the performance Package"
+title: "Plotting Functions for the 'performance' Package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{performance}
@@ -9,6 +9,8 @@ vignette: >
 
 ```{r, include = FALSE, echo=FALSE}
 knitr::opts_chunk$set(
+  dpi = 300,
+  out.width = "100%",
   collapse = TRUE,
   comment = "#>",
   fig.width = 7,
@@ -30,9 +32,18 @@ library(see)
 
 _([related function documentation](https://easystats.github.io/performance/reference/binned_residuals.html))_
 
+Example where model is **not** a good fit.
+
 ```{r message=TRUE}
 model <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
 binned_residuals(model)
+```
+
+Example where model **is** a good fit.
+
+```{r message=TRUE}
+mod <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
+binned_residuals(mod)
 ```
 
 ## Check for Multicollinearity - Variance Inflation Factor
@@ -166,13 +177,22 @@ pp_check(model, check_range = TRUE)
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_model.html))_
 
-```{r fig.height=10}
+```{r fig.height=12, fig.width=10}
 model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 check_model(model)
 ```
 
 ```{r}
 check_model(model, panel = FALSE)
+```
+
+Note that not all checks supported in `performance` will be reported in this
+unified **visual** check. For example, for linear models, one needs to check the
+assumption that errors are not autocorrelated, but this check will not be shown
+in the visual check.
+
+```{r message=TRUE}
+check_autocorrelation(lm(formula = wt ~ mpg, data = mtcars))
 ```
 
 # Compare Model Performances
@@ -223,17 +243,35 @@ plot(result)
 _([related function documentation](https://easystats.github.io/performance/reference/performance_roc.html))_
 
 ```{r}
-data(iris)
-set.seed(123)
-iris$y <- rbinom(nrow(iris), size = 1, .3)
+if (packageVersion("performance") > "0.7.0") {
+  data(iris)
+  set.seed(123)
+  iris$y <- rbinom(nrow(iris), size = 1, .3)
 
-folds <- sample(nrow(iris), size = nrow(iris) / 8, replace = FALSE)
-test_data <- iris[folds, ]
-train_data <- iris[-folds, ]
+  folds <- sample(nrow(iris), size = nrow(iris) / 8, replace = FALSE)
+  test_data <- iris[folds, ]
+  train_data <- iris[-folds, ]
 
-model <- glm(y ~ Sepal.Length + Sepal.Width, data = train_data, family = "binomial")
-result <- performance_roc(model, new_data = test_data)
+  model <- glm(y ~ Sepal.Length + Sepal.Width, data = train_data, family = "binomial")
+  result <- performance_roc(model, new_data = test_data)
 
-result
-plot(result)
+  result
+  plot(result)
+}
+```
+
+You can also compare ROC curves for different models. 
+
+```{r}
+if (packageVersion("performance") > "0.7.0") {
+  set.seed(123)
+  library(bayestestR)
+
+  # creating models
+  m1 <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
+  m2 <- glm(vs ~ wt + am + mpg, data = mtcars, family = "binomial")
+
+  # comparing their performances using the AUC curve
+  plot(performance_roc(m1, m2))
+}
 ```

@@ -30,6 +30,7 @@ reference:
   - plot.see_estimate_contrasts
   - plot.see_cluster_analysis
   - plot.see_parameters_distribution
+  - plot.see_compare_parameters
   - plot.see_parameters_model
   - plot.see_parameters_pca
   - plot.see_parameters_brms_meta

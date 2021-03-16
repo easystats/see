@@ -9,7 +9,9 @@ MPE
 Multicollinearity
 SEM
 UI
+VIF
 Visualisation
+autocorrelated
 bayestestR
 behaviour
 bluebrown
@@ -29,6 +31,7 @@ grey
 gridExtra
 gtables
 histodot
+homoscedasticity
 https
 jitter
 labelled

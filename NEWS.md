@@ -1,3 +1,25 @@
+# see 0.6.3
+
+## New plot functions
+
+* Added plot-function for `parameters::compare_parameters()`.
+
+## Minor changes
+
+* The `check_heteroscedasticity()` plot contains a dashed horizontal line, which
+  makes it to assess the homoscedasticity assumption.
+
+* The Y-axis label for `check_collinearity()` plot clarifies that the measure
+  being plotted is VIF. This was unclear when this plot was embedded in a grid
+  of plots from `check_model` containing multiple checks.
+
+* Plotting methods for `performance_roc` and `performance_accuracy` show correct
+  labels now.
+
+## Bug fixes
+
+* Fixed issue with wrong labelling of CI-levels for `plot.see_hdi()`.
+
 # see 0.6.2
 
 ## Changes to functions

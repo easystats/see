@@ -294,6 +294,28 @@ result
 plot(result)
 ```
 
+## Comparison of Models
+
+_([related function documentation](https://easystats.github.io/parameters/reference/compare_parameters.html))_
+
+```{r}
+data(iris)
+# shorter variable name
+iris$Length <- iris$Petal.Length
+lm1 <- lm(Sepal.Length ~ Species, data = iris)
+lm2 <- lm(Sepal.Length ~ Species + Length, data = iris)
+lm3 <- lm(Sepal.Length ~ Species * Length, data = iris)
+
+result <- compare_parameters(lm1, lm2, lm3)
+plot(result)
+```
+
+```{r fig.width = 8}
+plot(result, size_text = 3.8) + 
+  labs(y = NULL) + 
+  theme(legend.position = "bottom")
+```
+
 ## Equivalence Testing
 
 _([related function documentation](https://easystats.github.io/parameters/reference/equivalence_test.lm.html))_

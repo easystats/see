@@ -1,4 +1,5 @@
 test_that("`plot.see_performance_roc()` works", {
+  if (packageVersion("performance") > "0.7.0") {
   library(performance)
   set.seed(123)
   iris$y <- rbinom(nrow(iris), size = 1, 0.3)
@@ -12,4 +13,5 @@ test_that("`plot.see_performance_roc()` works", {
   result <- performance_roc(model, new_data = test_data)
 
   expect_s3_class(plot(result), "gg")
+  }
 })

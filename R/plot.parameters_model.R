@@ -54,7 +54,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   x$Estimate_CI <- sprintf(
     "%.2f %s",
     x$Coefficient,
-    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2)
+    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2, zap_small = TRUE)
   )
 
   # do we have a measure for meta analysis (to label axis)

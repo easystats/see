@@ -10,8 +10,7 @@
 ## Installation
 
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
-[![R
-check](https://github.com/easystats/see/workflows/R-check/badge.svg?branch=master)](https://github.com/easystats/see/actions)
+![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
 
 Run the following:
 
@@ -49,9 +48,10 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ``` r
 library(ggplot2)
 
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point2() +
-  theme_lucid()
+p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point2()
+
+p + theme_lucid()
 ```
 
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
@@ -59,26 +59,14 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 ### Blackboard
 
 ``` r
-library(rstanarm)
-library(modelbased)
-
-dat <- rstanarm::stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris) %>%
-  modelbased::estimate_link(keep_draws = TRUE, length = 100, draws = 250) %>%
-  modelbased::reshape_draws()
-
-p <- ggplot(dat, aes(x = Petal.Length, y = Draw, group = Draw_Group)) +
-  geom_line(color = "white", alpha = 0.05) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))
-
 p + theme_blackboard() 
 ```
 
-![](man/figures/unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/unnamed-chunk-6-1.png)<!-- -->
 
 ### Abyss
 
-![](man/figures/unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/unnamed-chunk-7-1.png)<!-- -->
 
 ## Palettes
 
@@ -113,7 +101,7 @@ The `plots()` function allows us to plot the figures side by side.
 plots(p1, p2, p3, n_columns = 2)
 ```
 
-![](man/figures/unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/unnamed-chunk-9-1.png)<!-- -->
 
 The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
@@ -123,7 +111,7 @@ plots(p1, p2, p3, n_columns = 2,
       tags = paste("Fig. ", 1:3))
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-10-1.png)<!-- -->
 
 ## Better looking points
 
@@ -142,7 +130,7 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, n_columns = 2)
 ```
 
-![](man/figures/unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/unnamed-chunk-11-1.png)<!-- -->
 
 ## Half-violin Half-dot plot
 
@@ -156,7 +144,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
 ## Radar chart (Spider plot)
 
@@ -176,7 +164,7 @@ data %>%
   theme_minimal()
 ```
 
-![](man/figures/unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 ## Plot functions for easystats packages
 

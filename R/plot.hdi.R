@@ -140,8 +140,8 @@ data_plot.bayestestR_eti <- data_plot.hdi
     stats::density() %>%
     .as.data.frame_density()
 
-  out$HDI_low <- sapply(out$x, .classify_hdi, hdi$CI_low, c(100, hdi$CI))
-  out$HDI_high <- sapply(out$x, .classify_hdi, rev(hdi$CI_high), c(rev(hdi$CI), 100))
+  out$HDI_low <- sapply(out$x, .classify_hdi, hdi$CI_low, c(100, 100 * hdi$CI))
+  out$HDI_high <- sapply(out$x, .classify_hdi, rev(hdi$CI_high), c(rev(100 * hdi$CI), 100))
   out$fill <- as.factor(ifelse(out$HDI_low > out$HDI_high, out$HDI_low, out$HDI_high))
   out$height <- out$y
   out$y <- name
