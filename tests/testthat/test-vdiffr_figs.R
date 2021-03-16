@@ -1,6 +1,9 @@
-if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2")) {
+if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2") &&
+  require("bayestestR")) {
   test_that("plots are rendered correctly", {
     skip_on_cran()
+
+    # coord_radar() ------------------
 
     data <- iris %>%
       dplyr::group_by(Species) %>%
@@ -9,7 +12,7 @@ if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2")) {
 
     set.seed(123)
     vdiffr::expect_doppelganger(
-      title = "coord_radar()` works",
+      title = "coord_radar() works",
       fig = data %>% ggplot(aes(
         x = name, y = value, color = Species,
         group = Species
@@ -17,6 +20,8 @@ if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2")) {
         geom_polygon(fill = NA, size = 2) +
         coord_radar(start = -pi / 4)
     )
+
+    # geom_point2() ----------------------
 
     normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
       geom_point(size = 8, alpha = 0.3) +
@@ -30,6 +35,8 @@ if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2")) {
       title = "geom_point2()` works",
       fig = plots(normal, new, n_columns = 2)
     )
+
+    # `geom_poolpoint()` works ----------------
 
     set.seed(123)
     vdiffr::expect_doppelganger(
@@ -49,26 +56,28 @@ if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2")) {
         theme_modern()
     )
 
+    # geom_violindot() ----------------------------
+
     set.seed(123)
     vdiffr::expect_doppelganger(
-      title = "geom_violindot()` works",
+      title = "geom_violindot() works",
       fig = ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
         geom_violindot() +
         theme_modern()
     )
 
+    # geom_violinhalf() ---------------------
 
     set.seed(123)
     vdiffr::expect_doppelganger(
-      title = "geom_violinhalf()` works",
+      title = "geom_violinhalf() works",
       fig = ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
         geom_violinhalf() +
         theme_modern() +
         scale_fill_material_d()
     )
 
-    library(bayestestR)
-    library(see)
+    # plot.see_bayesfactor_models() --------------------
 
     lm0 <- lm(qsec ~ 1, data = mtcars)
     lm1 <- lm(qsec ~ drat, data = mtcars)
@@ -89,6 +98,5 @@ if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2")) {
       fig = plot(result, n_pies = "many", value = "BF", log = TRUE) +
         scale_fill_pizza(reverse = FALSE)
     )
-  }
-  )
+  })
 }
