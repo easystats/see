@@ -92,7 +92,8 @@ Suggests:
     tidygraph,
     tidyr,
     spelling,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    vdiffr
 Remtotes:
     easystats/insight,
     easystats/parameters
