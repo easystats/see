@@ -55,9 +55,10 @@ print.see_check_model <- function(x, ...) {
   if (ylim < 10) ylim <- 10
 
   # make sure legend is properly sorted
-  x$group <- factor(x$group, levels = c("low (< 5)", "moderate (< 10)", "high (>= 10)"))
+  x$group <- factor(x$group, levels = c("low", "moderate", "high"))
+  levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
   colors <- unname(flat_colors("green", "orange", "red"))
-  names(colors) <- c("low", "moderate", "high")
+  names(colors) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
 
   p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
@@ -99,7 +100,8 @@ print.see_check_model <- function(x, ...) {
       title = "Normality of Residuals",
       subtitle = "Distribution should be close to the green normal curve"
     ) +
-    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
+    theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
+    scale_y_continuous(labels = NULL)
 }
 
 
