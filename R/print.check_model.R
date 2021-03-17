@@ -55,17 +55,17 @@ print.see_check_model <- function(x, ...) {
   if (ylim < 10) ylim <- 10
 
   # make sure legend is properly sorted
-  x$group <- factor(x$group, levels = c("low", "moderate", "high"))
+  x$group <- factor(x$group, levels = c("low (< 5)", "moderate (< 10)", "high (>= 10)"))
   colors <- unname(flat_colors("green", "orange", "red"))
   names(colors) <- c("low", "moderate", "high")
 
   p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
     labs(
-      title = "Check for Multicollinearity",
+      title = "Multicollinearity",
       x = NULL,
-      y = "Variance Inflation Factor",
-      fill = "Correlation"
+      y = NULL,
+      fill = "VIF"
     ) +
     scale_fill_manual(values = colors) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
@@ -95,9 +95,9 @@ print.see_check_model <- function(x, ...) {
     ) +
     labs(
       x = "Residuals",
-      y = "Density",
-      title = "Non-Normality of Residuals",
-      subtitle = "Distribution should look like a normal curve"
+      y = NULL,
+      title = "Normality of Residuals",
+      subtitle = "Distribution should be close to the green normal curve"
     ) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
@@ -135,10 +135,10 @@ print.see_check_model <- function(x, ...) {
   ggplot(x, aes(sample = .data$y)) +
     qq_stuff +
     labs(
-      title = "Non-normality of Residuals",
-      subtitle = "Dots should be plotted along the line",
+      title = "Normality of Residuals",
+      subtitle = "Dots should fall along the line",
       y = "Sample Quantiles",
-      x = "Theoretical Quantiles"
+      x = "Standard Normal Distribution Quantiles"
     ) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
@@ -179,8 +179,8 @@ print.see_check_model <- function(x, ...) {
 
   p_plot +
     labs(
-      title = "Non-normality of Residuals (PP plot)",
-      subtitle = "Dots should be plotted along the line",
+      title = "Normality of Residuals (PP plot)",
+      subtitle = "Dots should fall along the line",
       y = "Cummulative Probability",
       x = "Probability Points"
     ) +
@@ -200,8 +200,8 @@ print.see_check_model <- function(x, ...) {
       colour = unname(flat_colors("dark red"))
     ) +
     labs(
-      title = "Homogeneity of Variance (Scale-Location)",
-      subtitle = "Dots should spread equally around horizontal line",
+      title = "Homogeneity of Variance",
+      subtitle = "Red line should be flat and horizontal, dots should spread equally around it",
       y = "Std. Residuals (sqrt)",
       x = "Fitted values"
     ) +
@@ -227,8 +227,8 @@ print.see_check_model <- function(x, ...) {
     labs(
       x = "Fitted values",
       y = "Residuals",
-      title = "Homoscedasticity (Linear Relationship)",
-      subtitle = "Dots should spread equally around horizontal line"
+      title = "Homoscedasticity (Linearity)",
+      subtitle = "Red line should be flat and horizontal, dots should spread equally around it"
     ) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
