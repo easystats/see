@@ -40,9 +40,9 @@ print.see_check_model <- function(x, ...) {
   }
 
   if (panel) {
-    do.call(plots, p)
+    suppressWarnings(suppressMessages(do.call(plots, p)))
   } else {
-    lapply(p, graphics::plot)
+    suppressWarnings(suppressMessages(lapply(p, graphics::plot)))
   }
   invisible(orig_x)
 }

@@ -101,9 +101,9 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 
 
   if (requireNamespace("ggrepel", quietly = TRUE)) {
-    p <- p + ggrepel::geom_text_repel(y = 2.5, size = size_text)
+    p <- p + ggrepel::geom_text_repel(y = 2.5, size = size_text, na.rm = TRUE)
   } else {
-    p <- p + geom_text(y = 2.5, size = size_text)
+    p <- p + geom_text(y = 2.5, size = size_text, na.rm = TRUE)
   }
 
   p
