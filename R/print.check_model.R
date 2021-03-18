@@ -11,6 +11,7 @@ print.see_check_model <- function(x, ...) {
   size_line <- attr(x, "line_size")
   size_text <- attr(x, "text_size")
   alpha_level <- attr(x, "alpha")
+  detrend <- attr(x, "detrend")
 
   if (is.null(alpha_level)) {
     alpha_level <- .2
@@ -30,7 +31,7 @@ print.see_check_model <- function(x, ...) {
         axis.title.space = 5
       )
   }
-  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line, alpha_level = alpha_level)
+  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line, alpha_level = alpha_level, detrend = detrend)
   if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line, alpha_level = alpha_level)
   if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
     ps <- .plot_diag_reqq(x$REQQ, size_point, size_line, alpha_level = alpha_level)
@@ -107,22 +108,28 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_qq <- function(x, size_point, size_line, alpha_level = .2) {
+.plot_diag_qq <- function(x, size_point, size_line, alpha_level = .2, detrend = FALSE) {
   if (requireNamespace("qqplotr")) {
     qq_stuff <- list(
-      qqplotr::stat_qq_band(alpha = alpha_level),
+      qqplotr::stat_qq_band(alpha = alpha_level, detrend = detrend),
       qqplotr::stat_qq_line(
         size = size_line,
-        colour = unname(flat_colors("teal"))
+        colour = unname(flat_colors("teal")),
+        detrend = detrend
       ),
       qqplotr::stat_qq_point(
         shape = 16, stroke = 0,
         size = size_point,
-        colour = "#2c3e50"
+        colour = "#2c3e50",
+        detrend = detrend
       )
     )
+    y_lab <- "Sample - Normal Distribution Quantiles"
   } else {
-    message("For confidence bands, please install `qqplotr`.")
+    message("For confidence bands",
+            if (isTRUE(detrend)) " and detrending",
+            ", please install `qqplotr`.")
+
     qq_stuff <- list(
       geom_qq(
         shape = 16, stroke = 0,
@@ -134,13 +141,14 @@ print.see_check_model <- function(x, ...) {
         colour = unname(flat_colors("teal"))
       )
     )
+    y_lab <- "Sample Quantiles"
   }
   ggplot(x, aes(sample = .data$y)) +
     qq_stuff +
     labs(
       title = "Normality of Residuals",
       subtitle = "Dots should fall along the line",
-      y = "Sample Quantiles",
+      y = y_lab,
       x = "Standard Normal Distribution Quantiles"
     ) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
@@ -149,21 +157,26 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_pp <- function(x, size_point, size_line, alpha_level = .2) {
+.plot_diag_pp <- function(x, size_point, size_line, alpha_level = .2, detrend = FALSE) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot(x, aes(sample = .data$res)) +
-      qqplotr::stat_pp_band(alpha = alpha_level) +
+      qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
       qqplotr::stat_pp_line(
         size = size_line,
-        colour = unname(flat_colors("teal"))
+        colour = unname(flat_colors("teal")),
+        detrend = detrend
       ) +
       qqplotr::stat_pp_point(
         shape = 16, stroke = 0,
         size = size_point,
-        colour = "#2c3e50"
+        colour = "#2c3e50",
+        detrend = detrend
       )
   } else if (requireNamespace("MASS", quietly = TRUE)) {
-    message("For confidence bands, please install `qqplotr`.")
+    message("For confidence bands",
+            if (isTRUE(detrend)) " and detrending",
+            ", please install `qqplotr`.")
+
 
     x$probs <- stats::ppoints(x$res)
     dparms <- MASS::fitdistr(x$res, densfun = "normal")
