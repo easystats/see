@@ -1,7 +1,11 @@
 #' @importFrom insight clean_parameters
 #' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
-data_plot.p_significance <- function(x, data = NULL, grid = TRUE, show_intercept = FALSE, ...) {
+data_plot.p_significance <- function(x,
+                                     data = NULL,
+                                     grid = TRUE,
+                                     show_intercept = FALSE,
+                                     ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -160,7 +164,14 @@ data_plot.p_significance <- function(x, data = NULL, grid = TRUE, show_intercept
 #' @importFrom rlang .data
 #' @importFrom ggridges geom_ridgeline_gradient
 #' @export
-plot.see_p_significance <- function(x, data = NULL, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, n_columns = 1, ...) {
+plot.see_p_significance <- function(x,
+                                    data = NULL,
+                                    show_intercept = FALSE,
+                                    priors = FALSE,
+                                    priors_alpha = .4,
+                                    n_columns = 1,
+                                    ...) {
+
   # save model for later use
   model <- .retrieve_data(x)
 

@@ -1,6 +1,7 @@
 #' Plot method for checking outliers
 #'
-#' The \code{plot()} method for the \code{performance::check_outliers()} function.
+#' The \code{plot()} method for the \code{performance::check_outliers()}
+#' function.
 #'
 #' @param size_text Size of text labels.
 #' @inheritParams data_plot
@@ -112,7 +113,15 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
 .plot_outliers_multimethod <- function(x) {
   d <- data_plot(x)
   suppressWarnings(
-    ggplot(data = d, aes(x = .data$Obs, y = .data$Distance, fill = .data$Method, group = .data$Method)) +
+    ggplot(
+      data = d,
+      aes(
+        x = .data$Obs,
+        y = .data$Distance,
+        fill = .data$Method,
+        group = .data$Method
+      )
+    ) +
       # geom_vline(xintercept = as.character(c(1, 2))) +
       geom_bar(position = "dodge", stat = "identity") +
       scale_fill_viridis_d() +
@@ -122,7 +131,10 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
       # Results may be unexpected or may change in future versions of ggplot2.
       theme(
         axis.text.x = element_text(colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")),
-        panel.grid.major.x = element_line(linetype = "dashed", colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey"))
+        panel.grid.major.x = element_line(
+          linetype = "dashed",
+          colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey")
+        )
       )
   )
 }

@@ -4,7 +4,9 @@
 #'
 #' @param si_alpha Transparency level of SI ribbon.
 #' @param si_color Color of SI ribbon.
-#' @param support_only Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting \code{\link[bayestestR]{si}}.
+#' @param support_only Plot only the support data, or show the "raw" prior and
+#'   posterior distributions? Only applies when plotting
+#'   \code{\link[bayestestR]{si}}.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis
@@ -23,7 +25,11 @@
 #' }
 #' @importFrom rlang .data
 #' @export
-plot.see_si <- function(x, si_color = "#0171D3", si_alpha = .2, show_intercept = FALSE, support_only = FALSE, ...) {
+plot.see_si <- function(x,
+                        si_color = "#0171D3",
+                        si_alpha = .2,
+                        show_intercept = FALSE,
+                        support_only = FALSE, ...) {
   plot_data <- attr(x, "plot_data")
   x$ind <- x$Parameter
 

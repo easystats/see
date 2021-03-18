@@ -16,9 +16,15 @@
 #'
 #' @import ggplot2
 #' @export
-geom_violinhalf <- function(mapping = NULL, data = NULL, stat = "ydensity",
-                            position = "dodge", trim = TRUE, scale = "area",
-                            show.legend = NA, inherit.aes = TRUE, ...) {
+geom_violinhalf <- function(mapping = NULL,
+                            data = NULL,
+                            stat = "ydensity",
+                            position = "dodge",
+                            trim = TRUE,
+                            scale = "area",
+                            show.legend = NA,
+                            inherit.aes = TRUE,
+                            ...) {
   layer(
     data = data,
     mapping = mapping,

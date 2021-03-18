@@ -93,7 +93,13 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' }
 #' @importFrom rlang .data
 #' @export
-plot.see_rope <- function(x, data = NULL, rope_alpha = 0.5, rope_color = "cadetblue", show_intercept = FALSE, n_columns = 1, ...) {
+plot.see_rope <- function(x,
+                          data = NULL,
+                          rope_alpha = 0.5,
+                          rope_color = "cadetblue",
+                          show_intercept = FALSE,
+                          n_columns = 1,
+                          ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }

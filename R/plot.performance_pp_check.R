@@ -53,7 +53,12 @@ data_plot.performance_pp_check <- function(x, ...) {
 #'   pp_check(model)
 #' }
 #' @export
-print.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, size_bar = 0.7, ...) {
+print.see_performance_pp_check <- function(x,
+           size_line = .7,
+           line_alpha = .25,
+           size_bar = 0.7,
+           ...) {
+
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
 
@@ -76,7 +81,12 @@ print.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, 
 
 #' @rdname print.see_performance_pp_check
 #' @export
-plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, size_bar = 0.7, ...) {
+plot.see_performance_pp_check <- function(x,
+           size_line = .7,
+           line_alpha = .25,
+           size_bar = 0.7,
+           ...) {
+
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
 
@@ -98,20 +108,53 @@ plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, s
 
 .plot_pp_check <- function(x, size_line, line_alpha) {
   ggplot() +
-    stat_density(data = x[x$key != "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", size = size_line, alpha = line_alpha) +
-    stat_density(data = x[x$key == "y", ], mapping = aes(x = .data$values, group = .data$grp, color = .data$key), geom = "line", position = "identity", size = size_line * 1.1) +
+    stat_density(
+      data = x[x$key != "y",],
+      mapping = aes(x = .data$values, group = .data$grp, color = .data$key),
+      geom = "line",
+      position = "identity",
+      size = size_line,
+      alpha = line_alpha
+    ) +
+    stat_density(
+      data = x[x$key == "y",],
+      mapping = aes(x = .data$values, group = .data$grp, color = .data$key),
+      geom = "line",
+      position = "identity",
+      size = size_line * 1.1
+    ) +
     scale_y_continuous(labels = NULL) +
-    scale_color_manual(values = c("y" = unname(flat_colors("dark red")), "yrep" = unname(flat_colors("grey")))) +
+    scale_color_manual(values = c(
+      "y" = unname(flat_colors("dark red")),
+      "yrep" = unname(flat_colors("grey"))
+    )) +
     labs(color = NULL) +
     add_plot_attributes(x)
 }
 
 
 .plot_pp_check_range <- function(x, size_bar = .7) {
-  original <- data.frame(x = c(min(x$y), max(x$y)), group = c("minimum", "maximum"), color = "y", stringsAsFactors = FALSE)
+  original <-
+    data.frame(
+      x = c(min(x$y), max(x$y)),
+      group = c("minimum", "maximum"),
+      color = "y",
+      stringsAsFactors = FALSE
+    )
+
   replicated <- rbind(
-    data.frame(x = sapply(x[which(names(x) != "y")], min), group = "minimum", color = "yrep", stringsAsFactors = FALSE),
-    data.frame(x = sapply(x[which(names(x) != "y")], max), group = "maximum", color = "yrep", stringsAsFactors = FALSE)
+    data.frame(
+      x = sapply(x[which(names(x) != "y")], min),
+      group = "minimum",
+      color = "yrep",
+      stringsAsFactors = FALSE
+    ),
+    data.frame(
+      x = sapply(x[which(names(x) != "y")], max),
+      group = "maximum",
+      color = "yrep",
+      stringsAsFactors = FALSE
+    )
   )
 
   replicated$group <- factor(replicated$group, levels = c("minimum", "maximum"))
@@ -131,6 +174,11 @@ plot.see_performance_pp_check <- function(x, size_line = .7, line_alpha = .25, s
   }
 
   p +
-    geom_vline(data = original, mapping = aes(xintercept = .data$x), color = unname(flat_colors("dark red")), size = 1) +
+    geom_vline(
+      data = original,
+      mapping = aes(xintercept = .data$x),
+      color = unname(flat_colors("dark red")),
+      size = 1
+    ) +
     labs(x = NULL, y = NULL)
 }
