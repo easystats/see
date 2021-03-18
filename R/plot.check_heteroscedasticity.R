@@ -25,5 +25,5 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
     x = stats::fitted(model),
     y = stats::residuals(model)
   )
-  .plot_diag_ncv(dat, size_point = 2, size_line = .8)
+  .plot_diag_linearity(dat, size_point = 2, size_line = .8)
 }

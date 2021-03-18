@@ -18,11 +18,9 @@ print.see_check_model <- function(x, ...) {
 
   if (is.null(check)) check <- "all"
 
-  if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF)
-  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line, alpha_level = alpha_level)
-  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line, alpha_level = alpha_level)
-  if ("NCV" %in% names(x) && any(c("ncv", "all") %in% check)) p$NCV <- .plot_diag_ncv(x$NCV, size_point, size_line)
+  if ("NCV" %in% names(x) && any(c("ncv", "linearity", "all") %in% check)) p$NCV <- .plot_diag_linearity(x$NCV, size_point, size_line)
   if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, size_point, size_line)
+  if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF)
   if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
     p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, size_text)
     p$OUTLIERS <- p$OUTLIERS +
@@ -32,7 +30,8 @@ print.see_check_model <- function(x, ...) {
         axis.title.space = 5
       )
   }
-
+  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line, alpha_level = alpha_level)
+  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line, alpha_level = alpha_level)
   if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
     ps <- .plot_diag_reqq(x$REQQ, size_point, size_line, alpha_level = alpha_level)
     for (i in 1:length(ps)) {
@@ -52,7 +51,7 @@ print.see_check_model <- function(x, ...) {
 
 .plot_diag_vif <- function(x) {
   ylim <- max(x$y, na.rm = TRUE)
-  if (ylim < 10) ylim <- 10
+  if (ylim < 10) ylim <- 11
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
@@ -63,12 +62,14 @@ print.see_check_model <- function(x, ...) {
   p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
     geom_col(width = 0.7) +
     labs(
-      title = "Multicollinearity",
+      title = "Collinearity",
+      subtitle = "Low (VIF <= 5); Moderate (5 < VIF < 10); High (VIF >= 10)",
       x = NULL,
       y = NULL,
-      fill = "VIF"
+      fill = NULL
     ) +
-    scale_fill_manual(values = colors) +
+    geom_text(aes(label = round(.data$y, 1)), nudge_y = 1) +
+    scale_fill_manual(values = colors, guide = FALSE) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
     ylim(c(0, ylim))
 
@@ -203,7 +204,7 @@ print.see_check_model <- function(x, ...) {
     ) +
     labs(
       title = "Homogeneity of Variance",
-      subtitle = "Red line should be flat and horizontal, dots should spread equally around it",
+      subtitle = "Red line should be flat and horizontal",
       y = "Std. Residuals (sqrt)",
       x = "Fitted values"
     ) +
@@ -216,7 +217,7 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_ncv <- function(x, size_point, size_line) {
+.plot_diag_linearity <- function(x, size_point, size_line) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
     geom_point2(colour = "#2c3e50", size = size_point) +
     geom_smooth(
@@ -229,8 +230,8 @@ print.see_check_model <- function(x, ...) {
     labs(
       x = "Fitted values",
       y = "Residuals",
-      title = "Homoscedasticity (Linearity)",
-      subtitle = "Red line should be flat and horizontal, dots should spread equally around it"
+      title = "Linearity",
+      subtitle = "Red line should be flat and horizontal"
     ) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
