@@ -205,7 +205,7 @@ print.see_check_model <- function(x, ...) {
     labs(
       title = "Homogeneity of Variance",
       subtitle = "Red line should be flat and horizontal",
-      y = "Std. Residuals (sqrt)",
+      y = expression(sqrt(" | Std. residuals | ")),
       x = "Fitted values"
     ) +
     theme_lucid(
