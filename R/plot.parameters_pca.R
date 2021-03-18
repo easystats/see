@@ -10,7 +10,12 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
     dataplot$Label <- NULL
   }
 
-  dataplot <- .reshape_to_long(dataplot, names_to = "Component", values_to = "y", columns = 2:ncol(dataplot))
+  dataplot <- .reshape_to_long(
+    dataplot,
+    names_to = "Component",
+    values_to = "y",
+    columns = 2:ncol(dataplot)
+  )
   dataplot$Variable <- factor(dataplot$Variable, levels = rev(unique(dataplot$Variable)))
 
   rotation_name <- attr(x, "rotation", exact = TRUE)
@@ -62,7 +67,12 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' plot(result)
 #' @importFrom rlang .data
 #' @export
-plot.see_parameters_pca <- function(x, type = c("bar", "line"), size_text = 3.5, text_color = "black", size = 1, ...) {
+plot.see_parameters_pca <- function(x,
+                                    type = c("bar", "line"),
+                                    size_text = 3.5,
+                                    text_color = "black",
+                                    size = 1,
+                                    ...) {
   type <- match.arg(type)
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)

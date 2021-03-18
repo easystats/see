@@ -5,7 +5,12 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ..
   redundant <- attr(x, "redundant")
 
   data <- as.data.frame(x)
-  dataplot <- .reshape_to_long(data, names_to = "Parameter", values_to = "r", columns = 2:ncol(data))
+  dataplot <- .reshape_to_long(
+    data,
+    names_to = "Parameter",
+    values_to = "r",
+    columns = 2:ncol(data)
+  )
 
   if (!redundant) {
     dataplot$y <- rep(data$Parameter, times = nrow(data))
@@ -27,7 +32,12 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ..
 
   data <- as.data.frame(attr(x, "p", exact = TRUE))
   if (nrow(data) > 0) {
-    dataplot_p <- .reshape_to_long(data, names_to = "Parameter", values_to = "p", columns = 2:ncol(data))
+    dataplot_p <- .reshape_to_long(
+      data,
+      names_to = "Parameter",
+      values_to = "p",
+      columns = 2:ncol(data)
+    )
     dataplot$p <- dataplot_p$p
   }
 

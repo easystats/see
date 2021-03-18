@@ -48,11 +48,13 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
   dataplot$Color[dataplot$Study == "Overall"] <- "Overall"
 
   attr(dataplot, "summary") <- summary
-  attr(dataplot, "info") <- list("xlab" = "Standardized Mean Difference",
-                                 "ylab" = NULL,
-                                 "legend_fill" = NULL,
-                                 "legend_color" = NULL,
-                                 "title" = "Bayesian Meta-Analysis")
+  attr(dataplot, "info") <- list(
+    "xlab" = "Standardized Mean Difference",
+    "ylab" = NULL,
+    "legend_fill" = NULL,
+    "legend_color" = NULL,
+    "title" = "Bayesian Meta-Analysis"
+  )
 
   class(dataplot) <- unique(c("data_plot", "see_parameters_brms_meta", class(dataplot)))
   dataplot
@@ -65,7 +67,8 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 
 #' Plot method for Model Parameters from Bayesian Meta-Analysis
 #'
-#' The \code{plot()} method for the \code{parameters::model_parameters()} function when used with brms-meta-analysis models.
+#' The \code{plot()} method for the \code{parameters::model_parameters()}
+#' function when used with brms-meta-analysis models.
 #'
 #' @param normalize_height Logical, if \code{TRUE}, height of mcmc-areas is
 #'   "normalized", to avoid overlap. In certain cases when the range of a
@@ -83,32 +86,38 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' @details
 #' \subsection{Colors of density areas and errorbars}{
 #'   To change the colors of the density areas, use \code{scale_fill_manual()}
-#'   with named color-values, e.g. \code{scale_fill_manual(values = c("Study" = "blue", "Overall" = "green"))}.
-#'   To change the color of the error bars, use \code{scale_color_manual(values = c("Errorbar" = "red"))}.
+#'   with named color-values, e.g. \code{scale_fill_manual(values = c("Study" =
+#'   "blue", "Overall" = "green"))}.
+#'   To change the color of the error bars, use \code{scale_color_manual(values
+#'   = c("Errorbar" = "red"))}.
 #' }
 #' \subsection{Show or hide estimates and CI}{
-#'   Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual output of estimates and credible intervals.
+#'   Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual
+#'   output of estimates and credible intervals.
 #' }
 #'
 #' @examples
 #' \dontrun{
-#' if (require("bayestestR") && require("brms") && require("metafor")) {+
-#'   # data
-#'   data(dat.bcg)
+#' if (require("bayestestR") && require("brms") && require("metafor")) {
+#'   +
+#'     # data
+#'     data(dat.bcg)
 #'   dat <- escalc(
 #'     measure = "RR",
 #'     ai = tpos,
-#'     bi = tneg
+#'     bi = tneg,
 #'     ci = cpos,
-#'     di = cneg
+#'     di = cneg,
 #'     data = dat.bcg
 #'   )
 #'   dat$author <- make.unique(dat$author)
 #'
 #'   # model
 #'   set.seed(123)
-#'   priors <- c(prior(normal(0,1), class = Intercept),
-#'   prior(cauchy(0,0.5), class = sd))
+#'   priors <- c(
+#'     prior(normal(0, 1), class = Intercept),
+#'     prior(cauchy(0, 0.5), class = sd)
+#'   )
 #'   model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
 #'
 #'   # result
@@ -118,7 +127,16 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' }
 #' @importFrom ggridges geom_ridgeline
 #' @export
-plot.see_parameters_brms_meta <- function(x, size_point = 2, size_line = 0.8, size_text = 3.5, posteriors_alpha = 0.7, rope_alpha = 0.15, rope_color = "cadetblue", normalize_height = TRUE, ...) {
+plot.see_parameters_brms_meta <- function(x,
+                                          size_point = 2,
+                                          size_line = 0.8,
+                                          size_text = 3.5,
+                                          posteriors_alpha = 0.7,
+                                          rope_alpha = 0.15,
+                                          rope_color = "cadetblue",
+                                          normalize_height = TRUE,
+                                          ...) {
+
   # save model for later use
   model <- tryCatch(
     {
@@ -154,9 +172,28 @@ plot.see_parameters_brms_meta <- function(x, size_point = 2, size_line = 0.8, si
   }
 
   p <- p +
-    ggridges::geom_ridgeline(mapping = aes(fill = .data$Group), color = NA, scale = 1, alpha = posteriors_alpha) +
-    geom_errorbarh(data = summary, mapping = aes(xmin = .data$CI_low, xmax = .data$CI_high, color = .data$Color), size = size_line) +
-    geom_point(data = summary, mapping = aes(x = .data$Estimate, color = .data$Color), size = size_point, fill = "white", shape = 21)
+    ggridges::geom_ridgeline(
+      mapping = aes(fill = .data$Group),
+      color = NA,
+      scale = 1,
+      alpha = posteriors_alpha
+    ) +
+    geom_errorbarh(
+      data = summary,
+      mapping = aes(
+        xmin = .data$CI_low,
+        xmax = .data$CI_high,
+        color = .data$Color
+      ),
+      size = size_line
+    ) +
+    geom_point(
+      data = summary,
+      mapping = aes(x = .data$Estimate, color = .data$Color),
+      size = size_point,
+      fill = "white",
+      shape = 21
+    )
 
   if (!is.null(size_text) && !is.na(size_text)) {
     # add some space to the right panel for text
@@ -164,7 +201,12 @@ plot.see_parameters_brms_meta <- function(x, size_point = 2, size_line = 0.8, si
     new_range <- pretty(c(min(x$x), max(x$x) + space_factor))
 
     p <- p +
-      geom_text(data = summary, mapping = aes(label = .data$Estimate_CI, x = Inf), hjust = "inward", size = size_text) +
+      geom_text(
+        data = summary,
+        mapping = aes(label = .data$Estimate_CI, x = Inf),
+        hjust = "inward",
+        size = size_text
+      ) +
       xlim(c(min(new_range), max(new_range)))
   }
 
@@ -183,5 +225,3 @@ plot.see_parameters_brms_meta <- function(x, size_point = 2, size_line = 0.8, si
 
   p
 }
-
-

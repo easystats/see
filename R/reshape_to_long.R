@@ -1,6 +1,10 @@
 #' @importFrom stats reshape
 #' @keywords internal
-.reshape_to_long <- function(x, names_to = "group", values_to = "values", columns = colnames(x), id = "id") {
+.reshape_to_long <- function(x,
+                             names_to = "group",
+                             values_to = "values",
+                             columns = colnames(x),
+                             id = "id") {
   if (is.numeric(columns)) columns <- colnames(x)[columns]
   dat <- stats::reshape(
     as.data.frame(x),

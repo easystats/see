@@ -3,7 +3,8 @@
 #' Add a radar coordinate system useful for radar charts.
 #'
 #' @param theta Can be 'x' or 'y'.
-#' @param start Starting position. Best expressed in terms of \code{pi} (e.g., \code{-pi/4}).
+#' @param start Starting position. Best expressed in terms of \code{pi} (e.g.,
+#'   \code{-pi/4}).
 #' @param direction The direction of plotting. Can be 1 or -1.
 #' @param ... Other arguments to be passed to \code{ggproto}.
 #'

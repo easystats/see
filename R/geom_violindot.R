@@ -1,10 +1,12 @@
 #' Half-violin Half-dot plot
 #'
-#' Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.
+#' Create a half-violin half-dot plot, useful for visualising the distribution
+#' and the sample size at the same time.
 #'
 #' @inheritParams geom_violinhalf
 #' @inheritParams ggplot2::geom_dotplot
-#' @param position_dots Position adjustment for dots, either as a string, or the result of a call to a position adjustment function.
+#' @param position_dots Position adjustment for dots, either as a string, or the
+#'   result of a call to a position adjustment function.
 #' @param size_dots,dots_size Size adjustment for dots.
 #' @param color_dots,dots_color Color adjustment for dots.
 #' @param fill_dots,dots_fill Fill adjustment for dots.
@@ -17,10 +19,21 @@
 #'   theme_modern()
 #' @import ggplot2
 #' @export
-geom_violindot <- function(mapping = NULL, data = NULL, trim = TRUE, scale = "area",
-                           show.legend = NA, inherit.aes = TRUE, dots_size = 0.7, dots_color = NULL, dots_fill = NULL,
-                           binwidth = 0.05, position_dots = ggplot2::position_nudge(x = -0.025, y = 0), ...,
-                           size_dots = dots_size, color_dots = dots_color, fill_dots = dots_fill) {
+geom_violindot <- function(mapping = NULL,
+                           data = NULL,
+                           trim = TRUE,
+                           scale = "area",
+                           show.legend = NA,
+                           inherit.aes = TRUE,
+                           dots_size = 0.7,
+                           dots_color = NULL,
+                           dots_fill = NULL,
+                           binwidth = 0.05,
+                           position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
+                           ...,
+                           size_dots = dots_size,
+                           color_dots = dots_color,
+                           fill_dots = dots_fill) {
   if (is.null(color_dots) & is.null(fill_dots)) {
     dotplot <- geom_dotplot(
       binaxis = "y",
