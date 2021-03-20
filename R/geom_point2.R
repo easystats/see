@@ -20,15 +20,18 @@
 #'   theme_modern()
 #'
 #' plots(normal, new, n_columns = 2)
+#'
+#' ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+#'   geom_point_borderless(size = 4) +
+#'   theme_modern()
+#'
+#' theme_set(theme_abyss())
+#' ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+#'   geom_point_borderless(size = 4)
 #' @export
 geom_point2 <- function(..., stroke = 0, shape = 16) {
   geom_point(stroke = stroke, shape = shape, ...)
 }
-
-#' @rdname geom_point2
-#' @export
-geom_point_borderless <- geom_point2
-
 
 #' @rdname geom_point2
 #' @export
@@ -38,19 +41,9 @@ geom_jitter2 <- function(..., size = 2, stroke = 0, shape = 16) {
 
 #' @rdname geom_point2
 #' @export
-geom_jitter_borderless <- geom_jitter2
-
-
-#' @rdname geom_point2
-#' @export
 geom_pointrange2 <- function(..., stroke = 0) {
   geom_pointrange(stroke = stroke, ...)
 }
-
-#' @rdname geom_point2
-#' @export
-geom_pointrange_borderless <- geom_pointrange2
-
 
 #' @rdname geom_point2
 #' @export
@@ -61,3 +54,38 @@ geom_count2 <- function(..., stroke = 0) {
 #' @rdname geom_point2
 #' @export
 geom_count_borderless <- geom_count2
+
+
+#' @rdname geom_point2
+#' @export
+geom_point_borderless <- function(...) {
+  geom_point(pch = 21, color = .get_theme_bg_color(), ...)
+}
+
+
+#' @rdname geom_point2
+#' @export
+geom_jitter_borderless <- function(...) {
+  geom_jitter(pch = 21, color = .get_theme_bg_color(), ...)
+}
+
+
+#' @rdname geom_point2
+#' @export
+geom_pointrange_borderless <- function(...) {
+  geom_pointrange(pch = 21, color = .get_theme_bg_color(), ...)
+}
+
+
+
+
+.get_theme_bg_color <- function() {
+  current_theme <- ggplot2::theme_get()
+  if (is.null(current_theme$panel.grid.major)) {
+    current_theme$panel.grid.major <- current_theme$panel.grid
+  }
+  bg_color <- ifelse(is.null(current_theme$panel.grid.major$colour),
+                     "white",
+                     current_theme$panel.grid.major$colour)
+  bg_color
+}

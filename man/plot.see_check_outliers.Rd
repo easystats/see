@@ -17,7 +17,8 @@
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{performance::check_outliers()} function.
+The \code{plot()} method for the \code{performance::check_outliers()}
+function.
 }
 \examples{
 library(performance)

@@ -50,7 +50,9 @@ posterior distributions for other parameters are hardly visible.}
   }
 }}
 
-\item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
+\item{n_columns}{For models with multiple components (like fixed and random,
+count and zero-inflated), defines the number of columns for the
+panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{type}{Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).}
 

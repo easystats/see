@@ -65,7 +65,8 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 width. When \code{method} is "histodot", this specifies bin width.
 Defaults to 1/30 of the range of the data}
 
-\item{position_dots}{Position adjustment for dots, either as a string, or the result of a call to a position adjustment function.}
+\item{position_dots}{Position adjustment for dots, either as a string, or the
+result of a call to a position adjustment function.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
@@ -79,7 +80,8 @@ to the paired geom/stat.}
 \item{fill_dots, dots_fill}{Fill adjustment for dots.}
 }
 \description{
-Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.
+Create a half-violin half-dot plot, useful for visualising the distribution
+and the sample size at the same time.
 }
 \examples{
 library(ggplot2)

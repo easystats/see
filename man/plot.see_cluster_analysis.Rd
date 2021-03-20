@@ -12,7 +12,9 @@
 \item{data}{The original data used to create this object. Can be a
 statistical model or such.}
 
-\item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
+\item{n_columns}{For models with multiple components (like fixed and random,
+count and zero-inflated), defines the number of columns for the
+panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{size_bar}{Size of bar geoms.}
 

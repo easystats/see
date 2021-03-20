@@ -25,7 +25,9 @@ in the plot. By default, it is hidden because in many cases the intercept-parame
 has a posterior distribution on a very different location, so density curves of
 posterior distributions for other parameters are hardly visible.}
 
-\item{support_only}{Plot only the support data, or show the "raw" prior and posterior distributions? Only applies when plotting \code{\link[bayestestR]{si}}.}
+\item{support_only}{Plot only the support data, or show the "raw" prior and
+posterior distributions? Only applies when plotting
+\code{\link[bayestestR]{si}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

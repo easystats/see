@@ -9,7 +9,8 @@ coord_radar(theta = "x", start = 0, direction = 1, ...)
 \arguments{
 \item{theta}{Can be 'x' or 'y'.}
 
-\item{start}{Starting position. Best expressed in terms of \code{pi} (e.g., \code{-pi/4}).}
+\item{start}{Starting position. Best expressed in terms of \code{pi} (e.g.,
+\code{-pi/4}).}
 
 \item{direction}{The direction of plotting. Can be 1 or -1.}
 

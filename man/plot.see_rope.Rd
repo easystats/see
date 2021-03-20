@@ -29,7 +29,9 @@ in the plot. By default, it is hidden because in many cases the intercept-parame
 has a posterior distribution on a very different location, so density curves of
 posterior distributions for other parameters are hardly visible.}
 
-\item{n_columns}{For models with multiple components (like fixed and random, count and zero-inflated), defines the number of columns for the panel-layout. If \code{NULL}, a single, integrated plot is shown.}
+\item{n_columns}{For models with multiple components (like fixed and random,
+count and zero-inflated), defines the number of columns for the
+panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

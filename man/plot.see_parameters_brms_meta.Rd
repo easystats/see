@@ -42,37 +42,44 @@ very flat mcmc-areas. In such cases, set \code{normalize_height = FALSE}.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{parameters::model_parameters()} function when used with brms-meta-analysis models.
+The \code{plot()} method for the \code{parameters::model_parameters()}
+function when used with brms-meta-analysis models.
 }
 \details{
 \subsection{Colors of density areas and errorbars}{
   To change the colors of the density areas, use \code{scale_fill_manual()}
-  with named color-values, e.g. \code{scale_fill_manual(values = c("Study" = "blue", "Overall" = "green"))}.
-  To change the color of the error bars, use \code{scale_color_manual(values = c("Errorbar" = "red"))}.
+  with named color-values, e.g. \code{scale_fill_manual(values = c("Study" =
+  "blue", "Overall" = "green"))}.
+  To change the color of the error bars, use \code{scale_color_manual(values
+  = c("Errorbar" = "red"))}.
 }
 \subsection{Show or hide estimates and CI}{
-  Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual output of estimates and credible intervals.
+  Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual
+  output of estimates and credible intervals.
 }
 }
 \examples{
 \dontrun{
-if (require("bayestestR") && require("brms") && require("metafor")) {+
-  # data
-  data(dat.bcg)
+if (require("bayestestR") && require("brms") && require("metafor")) {
+  +
+    # data
+    data(dat.bcg)
   dat <- escalc(
     measure = "RR",
     ai = tpos,
-    bi = tneg
+    bi = tneg,
     ci = cpos,
-    di = cneg
+    di = cneg,
     data = dat.bcg
   )
   dat$author <- make.unique(dat$author)
 
   # model
   set.seed(123)
-  priors <- c(prior(normal(0,1), class = Intercept),
-  prior(cauchy(0,0.5), class = sd))
+  priors <- c(
+    prior(normal(0, 1), class = Intercept),
+    prior(cauchy(0, 0.5), class = sd)
+  )
   model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
 
   # result
