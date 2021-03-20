@@ -7,6 +7,9 @@
 #' @param shape Shape of points.
 #' @param ... Other arguments to be passed to \code{\link[ggplot2:geom_point]{geom_point}}, \code{\link[ggplot2:geom_jitter]{geom_jitter}}, \code{\link[ggplot2:geom_pointrange]{geom_pointrange}}, or \code{\link[ggplot2:geom_count]{ggplot2::geom_count}}.
 #'
+#' @note The color aesthetics for \code{geom_point_borderless()} is \code{"fill"},
+#' not \code{color}. See 'Examples'.
+#'
 #' @examples
 #' library(ggplot2)
 #' library(see)
