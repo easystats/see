@@ -64,15 +64,18 @@ print.see_check_model <- function(x, ...) {
     geom_col(width = 0.7) +
     labs(
       title = "Collinearity",
-      subtitle = "Low (VIF <= 5); Moderate (5 < VIF < 10); High (VIF >= 10)",
+      subtitle = "Orange or red bars indicate potential collinearity issues",
       x = NULL,
-      y = NULL,
+      y = "Variance Inflation Factor (VIF)",
       fill = NULL
     ) +
     geom_text(aes(label = round(.data$y, 1)), nudge_y = 1) +
-    scale_fill_manual(values = colors, guide = FALSE) +
+    scale_fill_manual(values = colors) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
-    ylim(c(0, ylim))
+    ylim(c(0, ylim)) +
+    theme(legend.position = "bottom",
+          legend.margin = margin(0, 0, 0, 0),
+          legend.box.margin = margin(-5, -5, -5, -5))
 
   if ("facet" %in% colnames(x)) {
     p <- p + facet_wrap(~facet, nrow = 1, scales = "free")

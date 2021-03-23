@@ -82,7 +82,8 @@ data_plot.check_outliers <- function(x, data = NULL, ...) {
   p <- ggplot(d, aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)) +
     geom_histogram() +
     labs(
-      title = "Check for Influential Observations",
+      title = "Influential Observations",
+      subtitle = "High Cook's distance might reflect potential outliers",
       x = method,
       y = "Count",
       fill = NULL
