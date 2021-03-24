@@ -4,7 +4,15 @@
   na.rm = TRUE,
   ref.color = "darkgray",
   ref.linetype = "dashed",
-  smooth.color = "blue") {
+  size_line = NULL,
+  size_text = NULL) {
+
+  if (is.null(size_line)) {
+    size_line <- .7
+  }
+  if (is.null(size_text)) {
+    size_text <- 3
+  }
 
   plot_data <- x
   cook.levels <- attributes(x)$cook_levels
@@ -15,18 +23,18 @@
   label.n <- ifelse(n_above < 5, 5, n_above)
 
   p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals)) +
-    geom_point(na.rm = na.rm) +
-    stat_smooth(formula = y ~ x,
-                method = "loess",
-                na.rm = na.rm,
-                se = FALSE,
-                color = smooth.color) +
+    geom_point2(colour = "#2c3e50", na.rm = na.rm, alpha = .8) +
     geom_vline(xintercept = 0,
                color = ref.color,
                linetype = ref.linetype) +
     geom_hline(yintercept = 0,
                color = ref.color,
                linetype = ref.linetype) +
+    stat_smooth(formula = y ~ x,
+                method = "loess",
+                na.rm = na.rm,
+                se = FALSE,
+                color = unname(flat_colors("dark red"))) +
     labs(x = expression("Leverage (" * h[ii] * ")"),
          y = "Std. Residuals",
          title = "Influential Observations",
@@ -34,7 +42,7 @@
     ggrepel::geom_text_repel(
       data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
       aes(label = .data$Index),
-      size = 2)
+      size = size_text)
 
   if (length(cook.levels)) {
     .hat <- sort(plot_data$Hat)
@@ -50,8 +58,9 @@
           geom = "line",
           x = .hat,
           y = .cook_ref[[.level]],
-          color = ref.color,
-          linetype = ref.linetype
+          color = unname(flat_colors("teal")),
+          linetype = ref.linetype,
+          size = size_line
         )
       }),
       lapply(1:length(cook.levels), function(.level) {
@@ -59,34 +68,33 @@
           geom = "line",
           x = .hat,
           y = -1 * .cook_ref[[.level]],
-          color = ref.color,
-          linetype = ref.linetype
+          color = unname(flat_colors("teal")),
+          linetype = ref.linetype,
+          size = size_line
         )
       }),
       lapply(1:length(cook.levels), function(.level) {
         annotate(
-          geom = ggrepel::GeomLabelRepel,
+          geom = "text",
           label = insight::format_value(cook.levels[.level], digits = 1),
           x = .hat80,
           y = sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
           hjust = "right",
-          color = ref.color,
-          label.size = 0,
-          fill = NA,
-          size = 3
+          vjust = "bottom",
+          color = unname(flat_colors("teal")),
+          size = size_text
         )
       }),
       lapply(1:length(cook.levels), function(.level) {
         annotate(
-          geom = ggrepel::GeomLabelRepel,
+          geom = "text",
           label = insight::format_value(cook.levels[.level], digits = 1),
           x = .hat80,
           y = -1 * sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
-          color = ref.color,
+          color = unname(flat_colors("teal")),
           hjust = "right",
-          label.size = 0,
-          fill = NA,
-          size = 3
+          vjust = "top",
+          size = size_text
         )
       })
     )

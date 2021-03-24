@@ -19,8 +19,8 @@ print.see_check_model <- function(x, ...) {
 
   if (is.null(check)) check <- "all"
 
-  if ("NCV" %in% names(x) && any(c("ncv", "linearity", "all") %in% check)) p$NCV <- .plot_diag_linearity(x$NCV, size_point, size_line)
-  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, size_point, size_line)
+  if ("NCV" %in% names(x) && any(c("ncv", "linearity", "all") %in% check)) p$NCV <- .plot_diag_linearity(x$NCV, size_point, size_line, alpha_level)
+  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, size_point, size_line, alpha_level)
   if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF)
   # if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
   #   p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, size_text)
@@ -31,7 +31,7 @@ print.see_check_model <- function(x, ...) {
   #       axis.title.space = 5
   #     )
   # }
-  if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) p$OUTLIERS <- .plot_diag_outliers_new(x$INFLUENTIAL)
+  if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) p$OUTLIERS <- .plot_diag_outliers_new(x$INFLUENTIAL, size_text = size_text, size_line = size_line)
   if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line, alpha_level = alpha_level, detrend = detrend)
   if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line, alpha_level = alpha_level)
   if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
@@ -58,7 +58,8 @@ print.see_check_model <- function(x, ...) {
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
   levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
-  colors <- unname(flat_colors("green", "orange", "red"))
+  # colors <- unname(flat_colors("green", "orange", "red"))
+  colors <- c("#B2DF8A", "#FDBF6F", "#FB9A99")
   names(colors) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
 
   p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
@@ -125,6 +126,7 @@ print.see_check_model <- function(x, ...) {
         shape = 16, stroke = 0,
         size = size_point,
         colour = "#2c3e50",
+        alpha = .8,
         detrend = detrend
       )
     )
@@ -174,6 +176,7 @@ print.see_check_model <- function(x, ...) {
         shape = 16, stroke = 0,
         size = size_point,
         colour = "#2c3e50",
+        alpha = .8,
         detrend = detrend
       )
   } else if (requireNamespace("MASS", quietly = TRUE)) {
@@ -192,7 +195,7 @@ print.see_check_model <- function(x, ...) {
         size = size_line,
         colour = unname(flat_colors("teal"))
       ) +
-      geom_point2(colour = "#2c3e50", size = size_point)
+      geom_point2(colour = "#2c3e50", size = size_point, alpha = .8)
   } else {
     stop("Package 'qqplotr' OR 'MASS' required for PP-plots. Please install one of them.", call. = FALSE)
   }
@@ -210,12 +213,13 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_homogeneity <- function(x, size_point, size_line) {
+.plot_diag_homogeneity <- function(x, size_point, size_line, alpha_level = .2) {
   ggplot(x, aes(x = .data$x, .data$y)) +
-    geom_point2(colour = "#2c3e50", size = size_point) +
+    geom_point2(colour = "#2c3e50", size = size_point, alpha = .8) +
     stat_smooth(
       method = "loess",
-      se = FALSE,
+      se = TRUE,
+      alpha = alpha_level,
       size = size_line,
       colour = unname(flat_colors("dark red"))
     ) +
@@ -234,12 +238,13 @@ print.see_check_model <- function(x, ...) {
 
 
 
-.plot_diag_linearity <- function(x, size_point, size_line) {
+.plot_diag_linearity <- function(x, size_point, size_line, alpha_level = .2) {
   ggplot(x, aes(x = .data$x, y = .data$y)) +
-    geom_point2(colour = "#2c3e50", size = size_point) +
+    geom_point2(colour = "#2c3e50", size = size_point, alpha = .8) +
     geom_smooth(
       method = "loess",
-      se = FALSE,
+      se = TRUE,
+      alpha = alpha_level,
       size = size_line,
       colour = unname(flat_colors("dark red"))
     ) +
@@ -276,7 +281,7 @@ print.see_check_model <- function(x, ...) {
         width = 0,
         colour = "#2c3e50"
       ) +
-      geom_point2(colour = "#2c3e50", size = size_point) +
+      geom_point2(colour = "#2c3e50", size = size_point, alpha = .8) +
       theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 
     if (nlevels(dat$facet) > 1 && isTRUE(panel)) {
