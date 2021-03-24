@@ -5,17 +5,22 @@
 * Added plot-function for `parameters::compare_parameters()`.
 * Added option to detrend QQ/PP plots.
 
-## Minor changes
+## changes
+
+* The `plot()` method for `check_model()` was revised and should now be more
+  consistent regarding titles and subtitles, as well as color schemes and plot
+  order. Furthermore, the plot for influential observation was changed in order
+  to better catch the potential influential observations.
 
 * The `check_heteroscedasticity()` plot contains a dashed horizontal line, which
   makes it to assess the homoscedasticity assumption.
 
-* The Y-axis label for `check_collinearity()` plot clarifies that the measure
+* The y-axis label for `check_collinearity()` plot clarifies that the measure
   being plotted is VIF. This was unclear when this plot was embedded in a grid
-  of plots from `check_model` containing multiple checks.
+  of plots from `check_model()` containing multiple checks.
 
-* Plotting methods for `performance_roc` and `performance_accuracy` show correct
-  labels now.
+* Plotting methods for `performance_roc()` and `performance_accuracy()` show 
+  correct labels now.
 
 ## Bug fixes
 
