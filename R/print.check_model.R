@@ -22,15 +22,16 @@ print.see_check_model <- function(x, ...) {
   if ("NCV" %in% names(x) && any(c("ncv", "linearity", "all") %in% check)) p$NCV <- .plot_diag_linearity(x$NCV, size_point, size_line)
   if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) p$HOMOGENEITY <- .plot_diag_homogeneity(x$HOMOGENEITY, size_point, size_line)
   if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF)
-  if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
-    p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, size_text)
-    p$OUTLIERS <- p$OUTLIERS +
-      theme_lucid(
-        base_size = 10,
-        plot.title.space = 3,
-        axis.title.space = 5
-      )
-  }
+  # if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
+  #   p$OUTLIERS <- .plot_diag_outliers(x$OUTLIERS, size_text)
+  #   p$OUTLIERS <- p$OUTLIERS +
+  #     theme_lucid(
+  #       base_size = 10,
+  #       plot.title.space = 3,
+  #       axis.title.space = 5
+  #     )
+  # }
+  if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) p$OUTLIERS <- .plot_diag_outliers_new(x$INFLUENTIAL)
   if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line, alpha_level = alpha_level, detrend = detrend)
   if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line, alpha_level = alpha_level)
   if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
