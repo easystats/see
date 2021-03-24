@@ -4,7 +4,14 @@
 \alias{plot.see_check_outliers}
 \title{Plot method for checking outliers}
 \usage{
-\method{plot}{see_check_outliers}(x, size_text = 3.5, size_line = 0.8, type = c("bars", "dots"), ...)
+\method{plot}{see_check_outliers}(
+  x,
+  size_text = 3.5,
+  size_line = 0.8,
+  rescale_distance = TRUE,
+  type = c("bars", "dots"),
+  ...
+)
 }
 \arguments{
 \item{x}{An object.}
@@ -12,6 +19,10 @@
 \item{size_text}{Size of text labels.}
 
 \item{size_line}{Size of line geoms.}
+
+\item{rescale_distance}{Logical, if \code{TRUE}, distance values are rescaled
+to a range from 0 to 1. This is mainly due to better catch the differences
+between distance values.}
 
 \item{type}{Character vector, indicating the type of plot.}
 
