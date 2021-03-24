@@ -23,16 +23,14 @@
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
 #' @export
-plot.see_check_outliers <- function(x, size_text = 3.5, size_line = .8, rescale_distance = TRUE, type = c("bars", "dots"), ...) {
+plot.see_check_outliers <- function(x, size_text = 3.5, size_line = .8, rescale_distance = TRUE, type = c("dots", "bars"), ...) {
   type <- match.arg(type)
   influential_obs <- attributes(x)$influential_obs
+  methods <- attr(x, "methods", exact = TRUE)
 
-
-  if (type == "dots" && !is.null(influential_obs)) {
+  if (type == "dots" && !is.null(influential_obs) && (is.null(methods) || length(methods) == 1)) {
     .plot_diag_outliers_new(influential_obs, size_text = size_text, size_line = size_line)
   } else {
-    methods <- attr(x, "methods", exact = TRUE)
-
     if (length(methods == 1)) {
       .plot_diag_outliers(x, size_text, rescale_distance)
     } else {

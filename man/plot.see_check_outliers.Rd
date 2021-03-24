@@ -9,7 +9,7 @@
   size_text = 3.5,
   size_line = 0.8,
   rescale_distance = TRUE,
-  type = c("bars", "dots"),
+  type = c("dots", "bars"),
   ...
 )
 }

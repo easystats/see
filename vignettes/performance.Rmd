@@ -98,7 +98,7 @@ model <- lm(disp ~ mpg + hp, data = mt2)
 result <- check_outliers(model)
 
 result
-plot(result)
+plot(result, type = "bars")
 ```
 
 ### Dot-plot with contour lines
