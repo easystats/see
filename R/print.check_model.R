@@ -53,25 +53,37 @@ print.see_check_model <- function(x, ...) {
 
 .plot_diag_vif <- function(x) {
   ylim <- max(x$y, na.rm = TRUE)
-  if (ylim < 10) ylim <- 11
+  if (ylim < 10) ylim <- 10
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
   levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
   # colors <- unname(flat_colors("green", "orange", "red"))
-  colors <- c("#B2DF8A", "#FDBF6F", "#FB9A99")
+  # colors <- c("#B2DF8A", "#FDBF6F", "#FB9A99")
+  colors <- unname(social_colors(c("green", "blue", "red")))
   names(colors) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
 
-  p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group)) +
+  p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group))
+
+  if (ylim > 5) {
+    p <- p + geom_rect(xmin = -Inf, xmax = Inf, ymin = 0, ymax = 5, fill = colors[1], color = NA, alpha = .025)
+    p <- p + geom_rect(xmin = -Inf, xmax = Inf, ymin = 5, ymax = ifelse(ylim > 10, 10, ylim), fill = colors[2], color = NA, alpha = .025)
+  }
+
+  if (ylim > 10) {
+    p <- p + geom_rect(xmin = -Inf, xmax = Inf, ymin = 10, ymax = ylim, fill = colors[3], color = NA, alpha = .025)
+  }
+
+  p <- p +
     geom_col(width = 0.7) +
     labs(
       title = "Collinearity",
-      subtitle = "Orange or red bars indicate potential collinearity issues",
+      subtitle = "Blue or red bars indicate potential collinearity issues",
       x = NULL,
       y = "Variance Inflation Factor (VIF)",
       fill = NULL
     ) +
-    geom_text(aes(label = round(.data$y, 1)), nudge_y = 1) +
+    # geom_text(aes(label = round(.data$y, 1)), nudge_y = 1) +
     scale_fill_manual(values = colors) +
     theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
     ylim(c(0, ylim)) +
