@@ -5,6 +5,7 @@
 #'
 #' @param size_text Size of text labels.
 #' @inheritParams data_plot
+#' @inheritParams plot.see_check_normality
 #'
 #' @return A ggplot2-object.
 #'
@@ -19,13 +20,21 @@
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
 #' @export
-plot.see_check_outliers <- function(x, size_text = 3.5, ...) {
-  methods <- attr(x, "methods", exact = TRUE)
+plot.see_check_outliers <- function(x, size_text = 3.5, size_line = .8, type = c("bars", "dots"), ...) {
+  type <- match.arg(type)
+  influential_obs <- attributes(x)$influential_obs
 
-  if (length(methods == 1)) {
-    .plot_diag_outliers(x, size_text)
+
+  if (type == "dots" && !is.null(influential_obs)) {
+    .plot_diag_outliers_new(influential_obs, size_text = size_text, size_line = size_line)
   } else {
-    .plot_outliers_multimethod(x)
+    methods <- attr(x, "methods", exact = TRUE)
+
+    if (length(methods == 1)) {
+      .plot_diag_outliers(x, size_text)
+    } else {
+      .plot_outliers_multimethod(x)
+    }
   }
 }
 

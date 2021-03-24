@@ -23,7 +23,7 @@
   label.n <- ifelse(n_above < 5, 5, n_above)
 
   p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals)) +
-    geom_point2(colour = "#2c3e50", na.rm = na.rm, alpha = .8) +
+    geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = .8) +
     geom_vline(xintercept = 0,
                color = ref.color,
                linetype = ref.linetype) +
@@ -35,14 +35,16 @@
                 na.rm = na.rm,
                 se = FALSE,
                 color = unname(flat_colors("dark red"))) +
+    scale_colour_manual(values = c("OK" = "#2c3e50", "Influential" = unname(metro_colors("dark red")))) +
+    ggrepel::geom_text_repel(
+      data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
+      aes(label = .data$Index, colour = .data$Influential),
+      size = size_text) +
     labs(x = expression("Leverage (" * h[ii] * ")"),
          y = "Std. Residuals",
          title = "Influential Observations",
-         subtitle = "Points should be inside the contour lines") +
-    ggrepel::geom_text_repel(
-      data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
-      aes(label = .data$Index),
-      size = size_text)
+         subtitle = "Points should be inside the contour lines",
+         colour = NULL)
 
   if (length(cook.levels)) {
     .hat <- sort(plot_data$Hat)
@@ -80,7 +82,7 @@
           x = .hat80,
           y = sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
           hjust = "right",
-          vjust = "bottom",
+          vjust = -1,
           color = unname(flat_colors("teal")),
           size = size_text
         )
@@ -93,13 +95,16 @@
           y = -1 * sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
           color = unname(flat_colors("teal")),
           hjust = "right",
-          vjust = "top",
+          vjust = 1.5,
           size = size_text
         )
       })
     )
 
-    p <- p + .cook_lines + theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5)
+    p <- p +
+      .cook_lines +
+      theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
+      guides(colour = FALSE, text = FALSE)
   }
 
   p

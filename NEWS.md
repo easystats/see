@@ -3,7 +3,8 @@
 ## New plot functions
 
 * Added plot-function for `parameters::compare_parameters()`.
-* Added option to detrend QQ/PP plots.
+
+* Added option to `detrend` QQ/PP plots.
 
 ## changes
 
