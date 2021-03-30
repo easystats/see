@@ -41,7 +41,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
   if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) p$VIF <- .plot_diag_vif(x$VIF, theme_style = style, colors = colors)
   if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) p$OUTLIERS <- .plot_diag_outliers_new(x$INFLUENTIAL, size_text = size_text, size_line = size_line, theme_style = style, colors = colors, dot_alpha_level = dot_alpha_level)
   if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) p$QQ <- .plot_diag_qq(x$QQ, size_point, size_line, alpha_level = alpha_level, detrend = detrend, theme_style = style, colors = colors, dot_alpha_level = dot_alpha_level)
-  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line, alpha_level = alpha_level, theme_style = style, colors = colors, dot_alpha_level = dot_alpha_level)
+  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) p$NORM <- .plot_diag_norm(x$NORM, size_line, alpha_level = alpha_level, theme_style = style, colors = colors)
   if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
     ps <- .plot_diag_reqq(x$REQQ, size_point, size_line, alpha_level = alpha_level, theme_style = style, colors = colors, dot_alpha_level = dot_alpha_level)
     for (i in 1:length(ps)) {
