@@ -16,7 +16,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
 
   if (missing(style) && !is.null(attr(x, "theme"))) {
     theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
-    style <- get(theme_style[2], asNamespace(theme_style[2]))
+    style <- get(theme_style[2], asNamespace(theme_style[1]))
   }
 
   if (missing(colors)) {
