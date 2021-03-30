@@ -29,10 +29,10 @@ plot.see_check_outliers <- function(x, size_text = 3.5, size_line = .8, dot_alph
   methods <- attr(x, "methods", exact = TRUE)
 
   if (type == "dots" && !is.null(influential_obs) && (is.null(methods) || length(methods) == 1)) {
-    .plot_diag_outliers_new(influential_obs, size_text = size_text, size_line = size_line)
+    .plot_diag_outliers_new(influential_obs, size_text = size_text, size_line = size_line, dot_alpha_level = dot_alpha, colors = colors)
   } else {
     if (length(methods == 1)) {
-      .plot_diag_outliers(x, size_text, rescale_distance, dot_alpha_level = dot_alpha, colors = colors)
+      .plot_diag_outliers(x, size_text, rescale_distance)
     } else {
       .plot_outliers_multimethod(x, rescale_distance)
     }
