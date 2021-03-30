@@ -5,7 +5,10 @@
   ref.color = "darkgray",
   ref.linetype = "dashed",
   size_line = NULL,
-  size_text = NULL) {
+  size_text = NULL,
+  theme_style = theme_lucid,
+  colors = unname(social_colors(c("green", "blue grey", "red"))),
+  dot_alpha_level = .8) {
 
   if (is.null(size_line)) {
     size_line <- .7
@@ -23,7 +26,7 @@
   label.n <- ifelse(n_above < 5, 5, n_above)
 
   p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals)) +
-    geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = .8) +
+    geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = dot_alpha_level) +
     geom_vline(xintercept = 0,
                color = ref.color,
                linetype = ref.linetype) +
@@ -34,8 +37,8 @@
                 method = "loess",
                 na.rm = na.rm,
                 se = FALSE,
-                color = unname(flat_colors("dark red"))) +
-    scale_colour_manual(values = c("OK" = "#2c3e50", "Influential" = unname(metro_colors("dark red")))) +
+                color = colors[1]) +
+    scale_colour_manual(values = c("OK" = colors[2], "Influential" = colors[3])) +
     ggrepel::geom_text_repel(
       data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
       aes(label = .data$Index, colour = .data$Influential),
@@ -60,7 +63,7 @@
           geom = "line",
           x = .hat,
           y = .cook_ref[[.level]],
-          color = unname(flat_colors("teal")),
+          color = colors[1],
           linetype = ref.linetype,
           size = size_line
         )
@@ -70,7 +73,7 @@
           geom = "line",
           x = .hat,
           y = -1 * .cook_ref[[.level]],
-          color = unname(flat_colors("teal")),
+          color = colors[1],
           linetype = ref.linetype,
           size = size_line
         )
@@ -83,7 +86,7 @@
           y = sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
           hjust = "right",
           vjust = -1,
-          color = unname(flat_colors("teal")),
+          color = colors[1],
           size = size_text
         )
       }),
@@ -93,7 +96,7 @@
           label = insight::format_value(cook.levels[.level], digits = 1),
           x = .hat80,
           y = -1 * sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
-          color = unname(flat_colors("teal")),
+          color = colors[1],
           hjust = "right",
           vjust = 1.5,
           size = size_text
@@ -103,7 +106,7 @@
 
     p <- p +
       .cook_lines +
-      theme_lucid(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
+      theme_style(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
       guides(colour = FALSE, text = FALSE)
   }
 

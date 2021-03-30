@@ -125,7 +125,7 @@ plot.see_performance_pp_check <- function(x,
     ) +
     scale_y_continuous(labels = NULL) +
     scale_color_manual(values = c(
-      "y" = unname(flat_colors("dark red")),
+      "y" = unname(social_colors("blue")),
       "yrep" = unname(flat_colors("grey"))
     )) +
     labs(color = NULL) +
@@ -177,7 +177,7 @@ plot.see_performance_pp_check <- function(x,
     geom_vline(
       data = original,
       mapping = aes(xintercept = .data$x),
-      color = unname(flat_colors("dark red")),
+      color = unname(social_colors("blue")),
       size = 1
     ) +
     labs(x = NULL, y = NULL)
