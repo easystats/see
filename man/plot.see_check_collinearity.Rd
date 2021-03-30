@@ -4,13 +4,16 @@
 \alias{plot.see_check_collinearity}
 \title{Plot method for multicollinearity checks}
 \usage{
-\method{plot}{see_check_collinearity}(x, data = NULL, ...)
+\method{plot}{see_check_collinearity}(x, data = NULL, colors = c("#3aaf85", "#1b6ca8", "#cd201f"), ...)
 }
 \arguments{
 \item{x}{An object.}
 
 \item{data}{The original data used to create this object. Can be a
 statistical model or such.}
+
+\item{colors}{Character vector of length two, indicating the colors (in
+hex-format) for points and line.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

@@ -11,6 +11,8 @@
   size_line = 0.8,
   size_point = 2,
   alpha = 0.2,
+  dot_alpha = 0.8,
+  colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   ...
 )
@@ -27,7 +29,10 @@ statistical model or such.}
 
 \item{size_point}{Size of point-geoms.}
 
-\item{alpha}{ALpha level of the confidence bands.}
+\item{dot_alpha, alpha}{ALpha level of the confidence bands and point-geoms.}
+
+\item{colors}{Character vector of length two, indicating the colors (in
+hex-format) for points and line.}
 
 \item{detrend}{Should the plot be detrended?}
 
