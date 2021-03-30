@@ -83,7 +83,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
     geom_col(width = 0.7) +
     labs(
       title = "Collinearity",
-      subtitle = "Blue or red bars indicate potential collinearity issues",
+      subtitle = "Higher bars (>5) indicate potential collinearity issues",
       x = NULL,
       y = "Variance Inflation Factor (VIF)",
       fill = NULL
@@ -242,7 +242,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
     ) +
     labs(
       title = "Homogeneity of Variance",
-      subtitle = "Green line should be flat and horizontal",
+      subtitle = "Reference line should be flat and horizontal",
       y = expression(sqrt("|Std. residuals|")),
       x = "Fitted values"
     ) +
@@ -270,7 +270,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
       x = "Fitted values",
       y = "Residuals",
       title = "Linearity",
-      subtitle = "Green line should be flat and horizontal"
+      subtitle = "Reference line should be flat and horizontal"
     ) +
     theme_style(base_size = 10, plot.title.space = 3, axis.title.space = 5)
 }
