@@ -2,7 +2,7 @@
 title: "Color Scales"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{seecolorscales}
+  %\VignetteIndexEntry{Color Scales}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -1,8 +1,8 @@
 ---
-title: "Plotting Functions for the bayestestR Package"
+title: "Plotting Functions for the 'bayestestR' Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{bayestestR}
+  %\VignetteIndexEntry{Plotting Functions for the 'bayestestR' Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

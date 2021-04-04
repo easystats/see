@@ -1,8 +1,8 @@
 ---
-title: "Plotting Functions for the effectsize Package"
+title: "Plotting Functions for the 'effectsize' Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{correlation}
+  %\VignetteIndexEntry{Plotting Functions for the 'effectsize' Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
