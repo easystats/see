@@ -1,8 +1,8 @@
 ---
-title: "Plotting Functions for the correlation Package"
+title: "Plotting Functions for the 'correlation' Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{correlation}
+  %\VignetteIndexEntry{Plotting Functions for the 'correlation' Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

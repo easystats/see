@@ -2,7 +2,7 @@
 title: "Plotting Functions for the 'performance' Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{performance}
+  %\VignetteIndexEntry{Plotting Functions for the 'performance' Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -59,7 +59,7 @@ result
 plot(result)
 ```
 
-```{r}
+```{r, eval=FALSE}
 library(glmmTMB)
 data(Salamanders)
 

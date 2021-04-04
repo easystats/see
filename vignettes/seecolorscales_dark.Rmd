@@ -2,7 +2,7 @@
 title: "Color Scales for Dark Themes"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{seecolorscalesdark}
+  %\VignetteIndexEntry{Color Scales for Dark Themes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

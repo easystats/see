@@ -1,8 +1,8 @@
 ---
-title: "Plotting Functions for the modelbased Package"
+title: "Plotting Functions for the 'modelbased' Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{modelbased}
+  %\VignetteIndexEntry{Plotting Functions for the 'modelbased' Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
