@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plotting Functions for the bayestestR Package • see</title>
+<title>Plotting Functions for the 'bayestestR' Package • see</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Plotting Functions for the bayestestR Package">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Plotting Functions for the 'bayestestR' Package">
 <meta property="og:description" content="see">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -61,19 +61,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
+      <a href="../articles/bayestestR.html">Plotting Functions for the 'bayestestR' Package</a>
     </li>
     <li>
-      <a href="../articles/correlation.html">Plotting Functions for the correlation Package</a>
+      <a href="../articles/correlation.html">Plotting Functions for the 'correlation' Package</a>
     </li>
     <li>
-      <a href="../articles/effectsize.html">Plotting Functions for the effectsize Package</a>
+      <a href="../articles/effectsize.html">Plotting Functions for the 'effectsize' Package</a>
     </li>
     <li>
-      <a href="../articles/modelbased.html">Plotting Functions for the modelbased Package</a>
+      <a href="../articles/modelbased.html">Plotting Functions for the 'modelbased' Package</a>
     </li>
     <li>
-      <a href="../articles/parameters.html">Plotting Functions for the parameters Package</a>
+      <a href="../articles/parameters.html">Plotting Functions for the 'parameters' Package</a>
     </li>
     <li>
       <a href="../articles/performance.html">Plotting Functions for the 'performance' Package</a>
@@ -110,7 +110,7 @@
       </header><script src="bayestestR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Plotting Functions for the bayestestR Package</h1>
+      <h1 data-toc-skip>Plotting Functions for the ‘bayestestR’ Package</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/master/vignettes/bayestestR.Rmd"><code>vignettes/bayestestR.Rmd</code></a></small>
@@ -134,7 +134,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 <span class="co"># model with fixed effects only</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">rstanarm</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">rstanarm</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 
 <span class="co"># model with fixed and random effects as well as zero-inflation component</span>
 <span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu">insight</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/insight/reference/download_model.html">download_model</a></span><span class="op">(</span><span class="st">"brms_zi_3"</span><span class="op">)</span></code></pre></div>
@@ -149,18 +149,18 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">estimate_density</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-3-1.png" width="100%"></p>
 <p>To get ridge lines separated by parameters, use <code>stack = FALSE</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, stack <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-4-1.png" width="100%"></p>
 <div id="adding-prior-samples" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples" class="anchor"></a>Adding Prior Samples</h3>
 <p>For many plots, when the model has defined priors, you can add a layer from the prior distribution for the parameters with <code>priors = TRUE</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, stack <span class="op">=</span> <span class="cn">FALSE</span>, priors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-5-1.png" width="100%"></p>
 </div>
 </div>
 <div id="probability-of-direction-pd" class="section level2">
@@ -173,74 +173,82 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">p_direction</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Probability of Direction (pd)</span>
+<span class="co">#&gt; Probability of Direction</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |      pd</span>
-<span class="co">#&gt; ---------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | 100.00%</span>
-<span class="co">#&gt; Petal.Width                   |  92.30%</span>
-<span class="co">#&gt; Speciesversicolor             |  94.20%</span>
-<span class="co">#&gt; Speciesvirginica              |  80.47%</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor |  79.20%</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  |  62.20%</span>
+<span class="co">#&gt; Parameter                     |     pd</span>
+<span class="co">#&gt; --------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   |   100%</span>
+<span class="co">#&gt; Petal.Width                   | 92.30%</span>
+<span class="co">#&gt; Speciesversicolor             | 94.20%</span>
+<span class="co">#&gt; Speciesvirginica              | 80.47%</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor | 79.20%</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  | 62.20%</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
 <p>For more complex models with different components, each component is displayed in a separate facet. Use <code>n_columns</code> to define the layout, i.e. how many columns are used to display the facets.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">p_direction</a></span><span class="op">(</span><span class="va">model2</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Probability of Direction (pd)</span>
+<span class="co">#&gt; Probability of Direction</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Conditional Model)</span>
+<span class="co">#&gt; Parameter   |     pd</span>
+<span class="co">#&gt; --------------------</span>
+<span class="co">#&gt; (Intercept) | 90.00%</span>
+<span class="co">#&gt; child       |   100%</span>
+<span class="co">#&gt; camper      |   100%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |      pd</span>
-<span class="co">#&gt; -------------------</span>
-<span class="co">#&gt; Intercept |  90.00%</span>
-<span class="co">#&gt; child     | 100.00%</span>
-<span class="co">#&gt; camper    | 100.00%</span>
+<span class="co">#&gt; # Fixed effects (zero-inflated)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span>
+<span class="co">#&gt; Parameter   |     pd</span>
+<span class="co">#&gt; --------------------</span>
+<span class="co">#&gt; (Intercept) | 78.00%</span>
+<span class="co">#&gt; child       |   100%</span>
+<span class="co">#&gt; camper      | 98.40%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |      pd</span>
-<span class="co">#&gt; -------------------</span>
-<span class="co">#&gt; Intercept |  78.00%</span>
-<span class="co">#&gt; child     | 100.00%</span>
-<span class="co">#&gt; camper    |  98.40%</span>
+<span class="co">#&gt; # Random effects (conditional) Intercept: persons</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Conditional Model)</span>
+<span class="co">#&gt; Parameter |     pd</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; persons.1 | 92.00%</span>
+<span class="co">#&gt; persons.2 | 50.00%</span>
+<span class="co">#&gt; persons.3 | 79.60%</span>
+<span class="co">#&gt; persons.4 | 96.80%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |      pd</span>
-<span class="co">#&gt; --------------------------------</span>
-<span class="co">#&gt; persons 1              |  92.00%</span>
-<span class="co">#&gt; persons 2              |  50.00%</span>
-<span class="co">#&gt; persons 3              |  79.60%</span>
-<span class="co">#&gt; persons 4              |  96.80%</span>
-<span class="co">#&gt; SD persons (Intercept) | 100.00%</span>
+<span class="co">#&gt; # Random effects (zero-inflated) Intercept: persons</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span>
+<span class="co">#&gt; Parameter |     pd</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; persons.1 | 94.80%</span>
+<span class="co">#&gt; persons.2 | 63.20%</span>
+<span class="co">#&gt; persons.3 | 64.00%</span>
+<span class="co">#&gt; persons.4 | 98.00%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |      pd</span>
-<span class="co">#&gt; --------------------------------</span>
-<span class="co">#&gt; persons 1              |  94.80%</span>
-<span class="co">#&gt; persons 2              |  63.20%</span>
-<span class="co">#&gt; persons 3              |  64.00%</span>
-<span class="co">#&gt; persons 4              |  98.00%</span>
-<span class="co">#&gt; SD persons (Intercept) | 100.00%</span>
+<span class="co">#&gt; # Random effects (conditional) SD/Cor: persons</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter   |   pd</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; (Intercept) | 100%</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; # Random effects (zero-inflated) SD/Cor: persons</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter   |   pd</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; (Intercept) | 100%</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-8-1.png" width="864"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-7-1.png" width="100%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-8-2.png" width="864"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-7-2.png" width="100%"></p>
 <div id="adding-prior-samples-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples-1" class="anchor"></a>Adding Prior Samples</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">p_direction</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, priors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
 </div>
 </div>
 <div id="practical-significance" class="section level2">
@@ -253,73 +261,81 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">p_significance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Probability of Significance (ps [0.08])</span>
+<span class="co">#&gt; Practical Significance (threshold: 0.08)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |      ps</span>
-<span class="co">#&gt; ---------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | 100.00%</span>
-<span class="co">#&gt; Petal.Width                   |  90.03%</span>
-<span class="co">#&gt; Speciesversicolor             |  91.72%</span>
-<span class="co">#&gt; Speciesvirginica              |  75.92%</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor |  75.40%</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  |  57.55%</span>
+<span class="co">#&gt; Parameter                     |   ps</span>
+<span class="co">#&gt; ------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   | 1.00</span>
+<span class="co">#&gt; Petal.Width                   | 0.90</span>
+<span class="co">#&gt; Speciesversicolor             | 0.92</span>
+<span class="co">#&gt; Speciesvirginica              | 0.76</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor | 0.75</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  | 0.58</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-9-1.png" width="100%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">p_significance</a></span><span class="op">(</span><span class="va">model2</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Probability of Significance (ps [0.10])</span>
+<span class="co">#&gt; Practical Significance (threshold: 0.10)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Conditional Model)</span>
+<span class="co">#&gt; Parameter   |   ps</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; (Intercept) | 0.88</span>
+<span class="co">#&gt; child       | 1.00</span>
+<span class="co">#&gt; camper      | 1.00</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |      ps</span>
-<span class="co">#&gt; -------------------</span>
-<span class="co">#&gt; Intercept |  88.40%</span>
-<span class="co">#&gt; child     | 100.00%</span>
-<span class="co">#&gt; camper    | 100.00%</span>
+<span class="co">#&gt; # Fixed effects (zero-inflated)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span>
+<span class="co">#&gt; Parameter   |   ps</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; (Intercept) | 0.73</span>
+<span class="co">#&gt; child       | 1.00</span>
+<span class="co">#&gt; camper      | 0.96</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |      ps</span>
-<span class="co">#&gt; -------------------</span>
-<span class="co">#&gt; Intercept |  73.20%</span>
-<span class="co">#&gt; child     | 100.00%</span>
-<span class="co">#&gt; camper    |  96.40%</span>
+<span class="co">#&gt; # Random effects (conditional) Intercept: persons</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Conditional Model)</span>
+<span class="co">#&gt; Parameter |   ps</span>
+<span class="co">#&gt; ----------------</span>
+<span class="co">#&gt; persons.1 | 0.90</span>
+<span class="co">#&gt; persons.2 | 0.45</span>
+<span class="co">#&gt; persons.3 | 0.78</span>
+<span class="co">#&gt; persons.4 | 0.96</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |      ps</span>
-<span class="co">#&gt; --------------------------------</span>
-<span class="co">#&gt; persons 1              |  90.40%</span>
-<span class="co">#&gt; persons 2              |  45.20%</span>
-<span class="co">#&gt; persons 3              |  77.60%</span>
-<span class="co">#&gt; persons 4              |  96.00%</span>
-<span class="co">#&gt; SD persons (Intercept) | 100.00%</span>
+<span class="co">#&gt; # Random effects (zero-inflated) Intercept: persons</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span>
+<span class="co">#&gt; Parameter |   ps</span>
+<span class="co">#&gt; ----------------</span>
+<span class="co">#&gt; persons.1 | 0.93</span>
+<span class="co">#&gt; persons.2 | 0.54</span>
+<span class="co">#&gt; persons.3 | 0.59</span>
+<span class="co">#&gt; persons.4 | 0.97</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |      ps</span>
-<span class="co">#&gt; --------------------------------</span>
-<span class="co">#&gt; persons 1              |  93.20%</span>
-<span class="co">#&gt; persons 2              |  54.40%</span>
-<span class="co">#&gt; persons 3              |  58.80%</span>
-<span class="co">#&gt; persons 4              |  97.20%</span>
-<span class="co">#&gt; SD persons (Intercept) | 100.00%</span>
+<span class="co">#&gt; # Random effects (conditional) SD/Cor: persons</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter   |   ps</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; (Intercept) | 1.00</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; # Random effects (zero-inflated) SD/Cor: persons</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter   |   ps</span>
+<span class="co">#&gt; ------------------</span>
+<span class="co">#&gt; (Intercept) | 1.00</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-11-1.png" width="768"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-10-1.png" width="100%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-11-2.png" width="768"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-10-2.png" width="100%"></p>
 <div id="adding-prior-samples-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples-2" class="anchor"></a>Adding Prior Samples</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">p_significance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, priors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
 </div>
 </div>
 <div id="point-estimates" class="section level2">
@@ -331,7 +347,7 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Point Estimates</span>
+<span class="co">#&gt; Point Estimate</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter                     | Median |  Mean |   MAP</span>
 <span class="co">#&gt; ------------------------------------------------------</span>
@@ -343,12 +359,12 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  |  -0.21 | -0.20 | -0.24</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-12-1.png" width="100%"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">model</span>, centrality <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"map"</span>, <span class="st">"mean"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Point Estimates</span>
+<span class="co">#&gt; Point Estimate</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter                     |  Mean |   MAP</span>
 <span class="co">#&gt; ---------------------------------------------</span>
@@ -360,14 +376,14 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | -0.20 | -0.24</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, panel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-13-1.png" width="100%"></p>
 <div id="adding-prior-samples-3" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples-3" class="anchor"></a>Adding Prior Samples</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, priors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
 </div>
 </div>
 <div id="highest-density-interval-hdi" class="section level2">
@@ -380,57 +396,27 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/hdi.html">hdi</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Highest Density Intervals</span>
+<span class="co">#&gt; Highest Density Interval</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        50% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.69,  4.90]</span>
-<span class="co">#&gt; Petal.Width                   | [ 0.41,  1.20]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.09, -0.44]</span>
-<span class="co">#&gt; Speciesvirginica              | [ 0.07,  0.77]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [ 0.02,  0.94]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-0.64,  0.22]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        75% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.59,  4.96]</span>
-<span class="co">#&gt; Petal.Width                   | [ 0.19,  1.56]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.22, -0.13]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.11,  1.11]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.19,  1.36]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-0.92,  0.52]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        89% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.52,  5.04]</span>
-<span class="co">#&gt; Petal.Width                   | [-0.07,  1.83]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.46,  0.06]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.36,  1.29]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.60,  1.53]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.21,  0.84]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        95% HDI</span>
-<span class="co">#&gt; ----------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.47,  5.10]</span>
-<span class="co">#&gt; Petal.Width                   | [-0.34,  1.96]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.65,  0.23]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.55,  1.49]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.67,  1.90]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.45,  1.03]</span>
+<span class="co">#&gt; Parameter                     |        50% HDI |        75% HDI |       89% HDI |       95% HDI</span>
+<span class="co">#&gt; -----------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   | [ 4.69,  4.90] | [ 4.59,  4.96] | [ 4.52, 5.04] | [ 4.47, 5.10]</span>
+<span class="co">#&gt; Petal.Width                   | [ 0.41,  1.20] | [ 0.19,  1.56] | [-0.07, 1.83] | [-0.34, 1.96]</span>
+<span class="co">#&gt; Speciesversicolor             | [-1.09, -0.44] | [-1.22, -0.13] | [-1.46, 0.06] | [-1.65, 0.23]</span>
+<span class="co">#&gt; Speciesvirginica              | [ 0.07,  0.77] | [-0.11,  1.11] | [-0.36, 1.29] | [-0.55, 1.49]</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor | [ 0.02,  0.94] | [-0.19,  1.36] | [-0.60, 1.53] | [-0.67, 1.90]</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-0.64,  0.22] | [-0.92,  0.52] | [-1.21, 0.84] | [-1.45, 1.03]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-15-1.png" width="100%"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/hdi.html">hdi</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-1.png" width="864"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-2.png" width="864"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-16-2.png" width="100%"></p>
 </div>
 <div id="support-interval" class="section level2">
 <h2 class="hasAnchor">
@@ -440,27 +426,27 @@
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/si.html">si</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="va">result</span>
-<span class="co">#&gt; # Support Interval</span>
+<span class="co">#&gt; Support Interval</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |     BF = 1 SI</span>
-<span class="co">#&gt; ---------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | [ 4.38, 5.21]</span>
-<span class="co">#&gt; Petal.Width                   | [-0.17, 1.92]</span>
-<span class="co">#&gt; Speciesversicolor             | [-1.71, 0.20]</span>
-<span class="co">#&gt; Speciesvirginica              | [-0.56, 1.48]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.53, 1.73]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.21, 0.77]</span>
+<span class="co">#&gt; Parameter                     |     BF = 1 SI | Effects |   Component</span>
+<span class="co">#&gt; ---------------------------------------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   | [ 4.38, 5.21] |   fixed | conditional</span>
+<span class="co">#&gt; Petal.Width                   | [-0.17, 1.92] |   fixed | conditional</span>
+<span class="co">#&gt; Speciesversicolor             | [-1.71, 0.20] |   fixed | conditional</span>
+<span class="co">#&gt; Speciesvirginica              | [-0.56, 1.48] |   fixed | conditional</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.53, 1.73] |   fixed | conditional</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.21, 0.77] |   fixed | conditional</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-1.png" width="100%"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, support_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-2.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-2.png" width="100%"></p>
 </div>
 <div id="region-of-practical-equivalence-rope" class="section level2">
 <h2 class="hasAnchor">
@@ -499,7 +485,7 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, rope_color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Greens"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-1.png" width="100%"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html">rope</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
@@ -585,7 +571,7 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, rope_color <span class="op">=</span> <span class="st">"grey70"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_social.html">scale_fill_social</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-20-1.png" width="768"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-19-1.png" width="100%"></p>
 </div>
 <div id="test-for-practical-equivalence" class="section level2">
 <h2 class="hasAnchor">
@@ -600,37 +586,6 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   ROPE: [-0.08 0.08]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      89% HDI</span>
-<span class="co">#&gt; ----------------------------------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.52 5.04]</span>
-<span class="co">#&gt; Petal.Width                   | Undecided |      4.41 % | [-0.07 1.83]</span>
-<span class="co">#&gt; Speciesversicolor             | Undecided |      4.47 % | [-1.46 0.06]</span>
-<span class="co">#&gt; Speciesvirginica              | Undecided |      9.77 % | [-0.36 1.29]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.37 % | [-0.60 1.53]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     10.03 % | [-1.21 0.84]</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/theme_blackboard.html">theme_blackboard</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.89</span>, <span class="fl">.95</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">result</span>
-<span class="co">#&gt; # Test for Practical Equivalence</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   ROPE: [-0.08 0.08]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      89% HDI</span>
-<span class="co">#&gt; ----------------------------------------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.52 5.04]</span>
-<span class="co">#&gt; Petal.Width                   | Undecided |      4.41 % | [-0.07 1.83]</span>
-<span class="co">#&gt; Speciesversicolor             | Undecided |      4.47 % | [-1.46 0.06]</span>
-<span class="co">#&gt; Speciesvirginica              | Undecided |      9.77 % | [-0.36 1.29]</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.37 % | [-0.60 1.53]</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     10.03 % | [-1.21 0.84]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      95% HDI</span>
 <span class="co">#&gt; ----------------------------------------------------------------------</span>
 <span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.47 5.10]</span>
@@ -641,92 +596,23 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |      9.39 % | [-1.45 1.03]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_blackboard.html">theme_blackboard</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.89</span>, <span class="fl">.95</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">result</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-22-1.png" width="864"></p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.89</span>, <span class="fl">.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Test for Practical Equivalence</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   ROPE: [-0.10 0.10]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Conditional Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span>
-<span class="co">#&gt; ---------------------------------------------------</span>
-<span class="co">#&gt; Intercept | Undecided |      2.68 % | [-0.34  2.29]</span>
-<span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.32 -1.00]</span>
-<span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.57  0.87]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span>
-<span class="co">#&gt; ---------------------------------------------------</span>
-<span class="co">#&gt; Intercept | Undecided |     11.16 % | [-1.69  0.43]</span>
-<span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.37  2.47]</span>
-<span class="co">#&gt; camper    |  Rejected |      0.00 % | [-1.47 -0.22]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Conditional Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter           |        H0 | inside ROPE |       89% HDI</span>
-<span class="co">#&gt; -------------------------------------------------------------</span>
-<span class="co">#&gt; persons 1           | Undecided |      2.23 % | [-2.25  0.38]</span>
-<span class="co">#&gt; persons 2           | Undecided |     14.73 % | [-1.64  0.95]</span>
-<span class="co">#&gt; persons 3           | Undecided |      5.36 % | [-0.58  2.08]</span>
-<span class="co">#&gt; persons 4           | Undecided |      0.89 % | [ 0.09  2.72]</span>
-<span class="co">#&gt; SD/Cor: (Intercept) |  Rejected |      0.00 % | [ 0.66  2.49]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter           |        H0 | inside ROPE |       89% HDI</span>
-<span class="co">#&gt; -------------------------------------------------------------</span>
-<span class="co">#&gt; persons 1           | Undecided |      3.57 % | [-0.06  2.07]</span>
-<span class="co">#&gt; persons 2           | Undecided |     15.62 % | [-0.83  1.12]</span>
-<span class="co">#&gt; persons 3           | Undecided |     12.95 % | [-1.44  0.57]</span>
-<span class="co">#&gt; persons 4           | Undecided |      0.45 % | [-2.44 -0.09]</span>
-<span class="co">#&gt; SD/Cor: (Intercept) |  Rejected |      0.00 % | [ 0.61  2.67]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Conditional Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span>
-<span class="co">#&gt; ---------------------------------------------------</span>
-<span class="co">#&gt; Intercept | Undecided |      2.51 % | [-0.64  2.74]</span>
-<span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.39 -0.97]</span>
-<span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.51  0.89]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span>
-<span class="co">#&gt; ---------------------------------------------------</span>
-<span class="co">#&gt; Intercept | Undecided |     10.46 % | [-1.75  1.16]</span>
-<span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.28  2.61]</span>
-<span class="co">#&gt; camper    | Undecided |      1.67 % | [-1.61 -0.04]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Conditional Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |        H0 | inside ROPE |       95% HDI</span>
-<span class="co">#&gt; ----------------------------------------------------------------</span>
-<span class="co">#&gt; persons 1              | Undecided |      2.09 % | [-2.71  0.78]</span>
-<span class="co">#&gt; persons 2              | Undecided |     13.81 % | [-1.73  1.54]</span>
-<span class="co">#&gt; persons 3              | Undecided |      5.02 % | [-1.06  2.28]</span>
-<span class="co">#&gt; persons 4              | Undecided |      2.09 % | [-0.22  3.12]</span>
-<span class="co">#&gt; SD persons (Intercept) |  Rejected |      0.00 % | [ 0.60  3.07]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter              |        H0 | inside ROPE |       95% HDI</span>
-<span class="co">#&gt; ----------------------------------------------------------------</span>
-<span class="co">#&gt; persons 1              | Undecided |      3.35 % | [-0.29  2.73]</span>
-<span class="co">#&gt; persons 2              | Undecided |     14.64 % | [-0.94  1.60]</span>
-<span class="co">#&gt; persons 3              | Undecided |     12.13 % | [-1.54  1.17]</span>
-<span class="co">#&gt; persons 4              |  Rejected |      0.00 % | [-3.03 -0.13]</span>
-<span class="co">#&gt; SD persons (Intercept) |  Rejected |      0.00 % | [ 0.47  2.90]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-23-1.png" width="1056"></p>
 </div>
 <div id="bayes-factors-bfs" class="section level2">
 <h2 class="hasAnchor">
@@ -740,45 +626,45 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">bayesfactor_parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Bayes Factor (Savage-Dickey density ratio)</span>
+<span class="co">#&gt; Bayes Factor (Savage-Dickey density ratio)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        BF</span>
-<span class="co">#&gt; -----------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | 1.428e+33</span>
-<span class="co">#&gt; Petal.Width                   |     0.594</span>
-<span class="co">#&gt; Speciesversicolor             |     0.360</span>
-<span class="co">#&gt; Speciesvirginica              |     0.174</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor |     0.284</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  |     0.321</span>
+<span class="co">#&gt; Parameter                     |     BF</span>
+<span class="co">#&gt; --------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   | &gt; 1000</span>
+<span class="co">#&gt; Petal.Width                   |  0.594</span>
+<span class="co">#&gt; Speciesversicolor             |  0.360</span>
+<span class="co">#&gt; Speciesvirginica              |  0.174</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor |  0.284</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  |  0.321</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; * Evidence Against The Null: [0]</span>
+<span class="co">#&gt; * Evidence Against The Null: 0</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-23-1.png" width="100%"></p>
 <p>When an interval null was tested, two dashed lines mark the edges of the null interval at the value - the Bayes factor represents the degree by which the distribution mass of the posterior has shifted outside or inside the null interval relative to the prior distribution:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">bayesfactor_parameters</a></span><span class="op">(</span><span class="va">model</span>, null <span class="op">=</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope_range.html">rope_range</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Bayes Factor (Null-Interval)</span>
+<span class="co">#&gt; Bayes Factor (Null-Interval)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter                     |        BF</span>
-<span class="co">#&gt; -----------------------------------------</span>
-<span class="co">#&gt; (Intercept)                   | 1.001e+33</span>
-<span class="co">#&gt; Petal.Width                   |     0.598</span>
-<span class="co">#&gt; Speciesversicolor             |     0.337</span>
-<span class="co">#&gt; Speciesvirginica              |     0.167</span>
-<span class="co">#&gt; Petal.Width:Speciesversicolor |     0.271</span>
-<span class="co">#&gt; Petal.Width:Speciesvirginica  |     0.295</span>
+<span class="co">#&gt; Parameter                     |     BF</span>
+<span class="co">#&gt; --------------------------------------</span>
+<span class="co">#&gt; (Intercept)                   | &gt; 1000</span>
+<span class="co">#&gt; Petal.Width                   |  0.598</span>
+<span class="co">#&gt; Speciesversicolor             |  0.337</span>
+<span class="co">#&gt; Speciesvirginica              |  0.167</span>
+<span class="co">#&gt; Petal.Width:Speciesversicolor |  0.271</span>
+<span class="co">#&gt; Petal.Width:Speciesvirginica  |  0.295</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; * Evidence Against The Null: [-0.083, 0.083]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-24-1.png" width="100%"></p>
 </div>
 <div id="bayes-factors-for-model-comparison" class="section level3">
 <h3 class="hasAnchor">
@@ -793,25 +679,25 @@
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_models.html">bayesfactor_models</a></span><span class="op">(</span><span class="va">lm1</span>, <span class="va">lm2</span>, <span class="va">lm3</span>, denominator <span class="op">=</span> <span class="va">lm0</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Bayes Factors for Model Comparison</span>
+<span class="co">#&gt; Bayes Factors for Model Comparison</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Model            BF</span>
-<span class="co">#&gt; [1] drat      0.202</span>
-<span class="co">#&gt; [2] wt        0.290</span>
-<span class="co">#&gt; [3] drat + wt 0.053</span>
+<span class="co">#&gt;       Model        BF</span>
+<span class="co">#&gt; [lm1] drat      0.202</span>
+<span class="co">#&gt; [lm2] wt        0.290</span>
+<span class="co">#&gt; [lm3] drat + wt 0.053</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; * Against Denominator: [4] (Intercept only)</span>
+<span class="co">#&gt; * Against Denominator: [lm0] (Intercept only)</span>
 <span class="co">#&gt; *   Bayes Factor Type: BIC approximation</span></code></pre></div>
 <p><em>Pizza plots</em> are a visual way of representing the posterior probabilities of several models, with ratio of the areas of any two models corresponding to their posterior odds.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is possible to plot all compared models on one (pizza) pie:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_pies <span class="op">=</span> <span class="st">"one"</span>, value <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-26-1.png" width="100%"></p>
 <p>But it is also possible to plot one pizza for each model and the denominator model (and who doesn’t like <strong><em>more</em></strong> pizza?):</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_pies <span class="op">=</span> <span class="st">"many"</span>, value <span class="op">=</span> <span class="st">"BF"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"rainbow"</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-27-1.png" width="100%"></p>
 </div>
 </div>
 <div class="footnotes">

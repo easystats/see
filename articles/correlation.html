@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plotting Functions for the correlation Package • see</title>
+<title>Plotting Functions for the 'correlation' Package • see</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Plotting Functions for the correlation Package">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Plotting Functions for the 'correlation' Package">
 <meta property="og:description" content="see">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -61,19 +61,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/bayestestR.html">Plotting Functions for the bayestestR Package</a>
+      <a href="../articles/bayestestR.html">Plotting Functions for the 'bayestestR' Package</a>
     </li>
     <li>
-      <a href="../articles/correlation.html">Plotting Functions for the correlation Package</a>
+      <a href="../articles/correlation.html">Plotting Functions for the 'correlation' Package</a>
     </li>
     <li>
-      <a href="../articles/effectsize.html">Plotting Functions for the effectsize Package</a>
+      <a href="../articles/effectsize.html">Plotting Functions for the 'effectsize' Package</a>
     </li>
     <li>
-      <a href="../articles/modelbased.html">Plotting Functions for the modelbased Package</a>
+      <a href="../articles/modelbased.html">Plotting Functions for the 'modelbased' Package</a>
     </li>
     <li>
-      <a href="../articles/parameters.html">Plotting Functions for the parameters Package</a>
+      <a href="../articles/parameters.html">Plotting Functions for the 'parameters' Package</a>
     </li>
     <li>
       <a href="../articles/performance.html">Plotting Functions for the 'performance' Package</a>
@@ -110,7 +110,7 @@
       </header><script src="correlation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Plotting Functions for the correlation Package</h1>
+      <h1 data-toc-skip>Plotting Functions for the ‘correlation’ Package</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/master/vignettes/correlation.Rmd"><code>vignettes/correlation.Rmd</code></a></small>
@@ -138,7 +138,7 @@
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Correlation table (pearson-method)</span>
+<span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter1   |   Parameter2 |     r |         95% CI | t(148) |         p</span>
 <span class="co">#&gt; -------------------------------------------------------------------------</span>
@@ -197,7 +197,7 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="va">result</span>
-<span class="co">#&gt; # Correlation table (pearson-method)</span>
+<span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter1 | Parameter2 |     r |         95% CI | t(30) |         p</span>
 <span class="co">#&gt; --------------------------------------------------------------------</span>
@@ -208,19 +208,19 @@
 <span class="co">#&gt; mpg        |         wt | -0.87 | [-0.93, -0.74] | -9.56 | &lt; .001***</span>
 <span class="co">#&gt; mpg        |       qsec |  0.42 | [ 0.08,  0.67] |  2.53 | 0.137    </span>
 <span class="co">#&gt; mpg        |       gear |  0.48 | [ 0.16,  0.71] |  3.00 | 0.065    </span>
-<span class="co">#&gt; mpg        |       carb | -0.55 | [-0.75, -0.25] | -3.62 | 0.016*   </span>
+<span class="co">#&gt; mpg        |       carb | -0.55 | [-0.75, -0.25] | -3.62 | &lt; .05*   </span>
 <span class="co">#&gt; cyl        |       disp |  0.90 | [ 0.81,  0.95] | 11.45 | &lt; .001***</span>
 <span class="co">#&gt; cyl        |         hp |  0.83 | [ 0.68,  0.92] |  8.23 | &lt; .001***</span>
 <span class="co">#&gt; cyl        |       drat | -0.70 | [-0.84, -0.46] | -5.37 | &lt; .001***</span>
 <span class="co">#&gt; cyl        |         wt |  0.78 | [ 0.60,  0.89] |  6.88 | &lt; .001***</span>
-<span class="co">#&gt; cyl        |       qsec | -0.59 | [-0.78, -0.31] | -4.02 | 0.007**  </span>
+<span class="co">#&gt; cyl        |       qsec | -0.59 | [-0.78, -0.31] | -4.02 | &lt; .01**  </span>
 <span class="co">#&gt; cyl        |       gear | -0.49 | [-0.72, -0.17] | -3.10 | 0.054    </span>
-<span class="co">#&gt; cyl        |       carb |  0.53 | [ 0.22,  0.74] |  3.40 | 0.027*   </span>
+<span class="co">#&gt; cyl        |       carb |  0.53 | [ 0.22,  0.74] |  3.40 | &lt; .05*   </span>
 <span class="co">#&gt; disp       |         hp |  0.79 | [ 0.61,  0.89] |  7.08 | &lt; .001***</span>
 <span class="co">#&gt; disp       |       drat | -0.71 | [-0.85, -0.48] | -5.53 | &lt; .001***</span>
 <span class="co">#&gt; disp       |         wt |  0.89 | [ 0.78,  0.94] | 10.58 | &lt; .001***</span>
 <span class="co">#&gt; disp       |       qsec | -0.43 | [-0.68, -0.10] | -2.64 | 0.131    </span>
-<span class="co">#&gt; disp       |       gear | -0.56 | [-0.76, -0.26] | -3.66 | 0.015*   </span>
+<span class="co">#&gt; disp       |       gear | -0.56 | [-0.76, -0.26] | -3.66 | &lt; .05*   </span>
 <span class="co">#&gt; disp       |       carb |  0.39 | [ 0.05,  0.65] |  2.35 | 0.177    </span>
 <span class="co">#&gt; hp         |       drat | -0.45 | [-0.69, -0.12] | -2.75 | 0.110    </span>
 <span class="co">#&gt; hp         |         wt |  0.66 | [ 0.40,  0.82] |  4.80 | &lt; .001***</span>
@@ -232,7 +232,7 @@
 <span class="co">#&gt; drat       |       gear |  0.70 | [ 0.46,  0.84] |  5.36 | &lt; .001***</span>
 <span class="co">#&gt; drat       |       carb | -0.09 | [-0.43,  0.27] | -0.50 | &gt; .999   </span>
 <span class="co">#&gt; wt         |       qsec | -0.17 | [-0.49,  0.19] | -0.97 | &gt; .999   </span>
-<span class="co">#&gt; wt         |       gear | -0.58 | [-0.77, -0.29] | -3.93 | 0.008**  </span>
+<span class="co">#&gt; wt         |       gear | -0.58 | [-0.77, -0.29] | -3.93 | &lt; .01**  </span>
 <span class="co">#&gt; wt         |       carb |  0.43 | [ 0.09,  0.68] |  2.59 | 0.132    </span>
 <span class="co">#&gt; qsec       |       gear | -0.21 | [-0.52,  0.15] | -1.19 | &gt; .999   </span>
 <span class="co">#&gt; qsec       |       carb | -0.66 | [-0.82, -0.40] | -4.76 | &lt; .001***</span>
@@ -254,7 +254,7 @@
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span><span class="va">mtcars</span>, partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="va">result</span>
-<span class="co">#&gt; # Correlation table (pearson-method)</span>
+<span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter1 | Parameter2 |     r |         95% CI | t(30) |         p</span>
 <span class="co">#&gt; --------------------------------------------------------------------</span>
@@ -284,7 +284,7 @@
 <span class="co">#&gt; disp       |         vs | -0.10 | [-0.44,  0.25] | -0.57 | &gt; .999   </span>
 <span class="co">#&gt; disp       |         am | -0.07 | [-0.41,  0.29] | -0.37 | &gt; .999   </span>
 <span class="co">#&gt; disp       |       gear |  0.06 | [-0.29,  0.40] |  0.34 | &gt; .999   </span>
-<span class="co">#&gt; disp       |       carb | -0.66 | [-0.82, -0.40] | -4.77 | 0.002**  </span>
+<span class="co">#&gt; disp       |       carb | -0.66 | [-0.82, -0.40] | -4.77 | &lt; .01**  </span>
 <span class="co">#&gt; hp         |       drat | -0.06 | [-0.40,  0.29] | -0.34 | &gt; .999   </span>
 <span class="co">#&gt; hp         |         wt | -0.30 | [-0.59,  0.06] | -1.72 | &gt; .999   </span>
 <span class="co">#&gt; hp         |       qsec | -0.05 | [-0.39,  0.30] | -0.29 | &gt; .999   </span>
@@ -302,7 +302,7 @@
 <span class="co">#&gt; wt         |         vs | -0.06 | [-0.40,  0.29] | -0.36 | &gt; .999   </span>
 <span class="co">#&gt; wt         |         am |  0.02 | [-0.33,  0.36] |  0.10 | &gt; .999   </span>
 <span class="co">#&gt; wt         |       gear | -0.13 | [-0.46,  0.23] | -0.71 | &gt; .999   </span>
-<span class="co">#&gt; wt         |       carb |  0.62 | [ 0.34,  0.80] |  4.30 | 0.009**  </span>
+<span class="co">#&gt; wt         |       carb |  0.62 | [ 0.34,  0.80] |  4.30 | &lt; .01**  </span>
 <span class="co">#&gt; qsec       |         vs |  0.35 | [ 0.00,  0.62] |  2.02 | &gt; .999   </span>
 <span class="co">#&gt; qsec       |         am | -0.32 | [-0.60,  0.03] | -1.84 | &gt; .999   </span>
 <span class="co">#&gt; qsec       |       gear | -0.10 | [-0.43,  0.26] | -0.56 | &gt; .999   </span>
