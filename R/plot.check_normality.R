@@ -22,7 +22,6 @@
 #' @importFrom stats residuals sd dnorm rstudent ppoints pnorm fitted
 #' @export
 plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = NULL, size_line = .8, size_point = 2, alpha = .2, dot_alpha = .8, colors = c("#3aaf85", "#1b6ca8"), detrend = FALSE, ...) {
-
   type <- match.arg(type)
 
   if (is.null(data)) {

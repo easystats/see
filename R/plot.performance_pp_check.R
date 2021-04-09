@@ -54,11 +54,10 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' }
 #' @export
 print.see_performance_pp_check <- function(x,
-           size_line = .7,
-           line_alpha = .25,
-           size_bar = 0.7,
-           ...) {
-
+                                           size_line = .7,
+                                           line_alpha = .25,
+                                           size_bar = 0.7,
+                                           ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
 
@@ -82,11 +81,10 @@ print.see_performance_pp_check <- function(x,
 #' @rdname print.see_performance_pp_check
 #' @export
 plot.see_performance_pp_check <- function(x,
-           size_line = .7,
-           line_alpha = .25,
-           size_bar = 0.7,
-           ...) {
-
+                                          size_line = .7,
+                                          line_alpha = .25,
+                                          size_bar = 0.7,
+                                          ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
 
@@ -109,7 +107,7 @@ plot.see_performance_pp_check <- function(x,
 .plot_pp_check <- function(x, size_line, line_alpha) {
   ggplot() +
     stat_density(
-      data = x[x$key != "y",],
+      data = x[x$key != "y", ],
       mapping = aes(x = .data$values, group = .data$grp, color = .data$key),
       geom = "line",
       position = "identity",
@@ -117,7 +115,7 @@ plot.see_performance_pp_check <- function(x,
       alpha = line_alpha
     ) +
     stat_density(
-      data = x[x$key == "y",],
+      data = x[x$key == "y", ],
       mapping = aes(x = .data$values, group = .data$grp, color = .data$key),
       geom = "line",
       position = "identity",
