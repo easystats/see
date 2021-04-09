@@ -276,9 +276,7 @@ checks the percentage of the 89% HDI that is the null region (the ROPE). If this
 percentage is sufficiently low, the null hypothesis is rejected. If this
 percentage is sufficiently high, the null hypothesis is accepted.
 
-<!-- TODO: turn on evaluation once issue #108 is fixed -->
-
-```{r, eval=FALSE}
+```{r}
 result <- equivalence_test(model)
 
 result
