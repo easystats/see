@@ -95,7 +95,6 @@ Suggests:
     testthat (>= 3.0.0),
     vdiffr
 Remtotes:
-    easystats/parameters,
     easystats/performance
 Encoding: UTF-8
 Language: en-US
