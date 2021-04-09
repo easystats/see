@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.width = 7,
   fig.height = 5,
+  out.width = "100%",
   warning = FALSE,
   message = FALSE
 )
@@ -38,18 +39,12 @@ library(ggplot2)
 theme_set(theme_modern())
 ```
 
-```{r eval=FALSE}
+```{r}
 set.seed(123)
 # model with fixed effects only
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris)
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 
 # model with fixed and random effects as well as zero-inflation component
-model2 <- insight::download_model("brms_zi_3")
-```
-
-```{r echo=FALSE}
-set.seed(123)
-junk <- capture.output(model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris))
 model2 <- insight::download_model("brms_zi_3")
 ```
 
@@ -281,7 +276,9 @@ checks the percentage of the 89% HDI that is the null region (the ROPE). If this
 percentage is sufficiently low, the null hypothesis is rejected. If this
 percentage is sufficiently high, the null hypothesis is accepted.
 
-```{r}
+<!-- TODO: turn on evaluation once issue #108 is fixed -->
+
+```{r, eval=FALSE}
 result <- equivalence_test(model)
 
 result
@@ -291,7 +288,7 @@ plot(result) +
   scale_fill_material()
 ```
 
-```{r fig.width=9, fig.height=6}
+```{r fig.width=9, fig.height=6, eval=FALSE}
 result <- equivalence_test(model, ci = c(.89, .95))
 
 result
@@ -301,7 +298,7 @@ plot(result) +
   scale_fill_flat()
 ```
 
-```{r fig.width=11, fig.height=9}
+```{r fig.width=11, fig.height=9, eval=FALSE}
 result <- equivalence_test(model2, ci = c(.89, .95), effects = "all", component = "all")
 
 result
