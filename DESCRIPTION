@@ -60,7 +60,7 @@ Imports:
     ggridges,
     insight,
     magrittr,
-    parameters,
+    parameters (>= 0.13.0),
     rlang
 Suggests:
     brms,
@@ -82,7 +82,7 @@ Suggests:
     modelbased,
     NbClust,
     nFactors,
-    performance,
+    performance (>= 0.7.1),
     psych,
     qqplotr,
     randomForest,

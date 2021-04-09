@@ -15,7 +15,7 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
   edges$from <- as.character(x$From)
   edges$to <- as.character(x$To)
 
-  edges <- edges[tolower(edges$Type) %in% type &
+  edges <- edges[tolower(edges$Component) %in% type &
     edges$from != edges$to &
     edges$Coefficient_abs >= threshold_coefficient &
     edges$p < threshold_p, ]
@@ -41,14 +41,14 @@ data_plot.parameters_sem <- function(x, data = NULL, type = c("regression", "cor
 
 
   # Separate labels
-  edges$Label_Regression <- ifelse(edges$Type == "Regression", edges$Label, "")
-  edges$Label_Correlation <- ifelse(edges$Type == "Correlation", edges$Label, "")
-  edges$Label_Loading <- ifelse(edges$Type == "Loading", edges$Label, "")
+  edges$Label_Regression <- ifelse(edges$Component == "Regression", edges$Label, "")
+  edges$Label_Correlation <- ifelse(edges$Component == "Correlation", edges$Label, "")
+  edges$Label_Loading <- ifelse(edges$Component == "Loading", edges$Label, "")
   edges <- edges[colSums(!is.na(edges)) > 0]
 
   # Identify latent variables for nodes
   latent_nodes <- edges %>%
-    dplyr::filter(.data$Type == "Loading") %>%
+    dplyr::filter(.data$Component == "Loading") %>%
     dplyr::distinct(.data$to) %>%
     dplyr::transmute(Name = as.character(.data$to), Latent = TRUE)
 
@@ -91,7 +91,7 @@ plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "corr
   p <- tidygraph::tbl_graph(x$nodes, x$edges) %>%
     ggraph::ggraph(layout = "nicely") +
     ggraph::geom_edge_arc(aes(
-      alpha = as.numeric(.data$Type == "Correlation"),
+      alpha = as.numeric(.data$Component == "Correlation"),
       label = .data$Label_Correlation,
       color = .data$Coefficient
     ),
@@ -102,7 +102,7 @@ plot.see_parameters_sem <- function(x, data = NULL, type = c("regression", "corr
     start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
     ) +
     ggraph::geom_edge_link(aes(
-      alpha = as.numeric(.data$Type == "Loading"),
+      alpha = as.numeric(.data$Component == "Loading"),
       label = .data$Label_Loading,
       color = .data$Coefficient
     ),
