@@ -2,11 +2,11 @@
 data_plot.cluster_analysis <- function(x, data = NULL, ...) {
   dat <- .retrieve_data(x)
   dataplot <- .reshape_to_long(
-      dat,
-      names_to = "Group",
-      values_to = "Z_Score",
-      columns = 2:ncol(dat)
-    )
+    dat,
+    names_to = "Group",
+    values_to = "Z_Score",
+    columns = 2:ncol(dat)
+  )
 
   dataplot$Group <- as.factor(dataplot$Group)
   dataplot$Term <- factor(dataplot$Term, levels = unique(dat$Term))

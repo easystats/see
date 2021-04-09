@@ -1,15 +1,13 @@
 
-.plot_diag_outliers_new <- function(
-  x,
-  na.rm = TRUE,
-  ref.color = "darkgray",
-  ref.linetype = "dashed",
-  size_line = NULL,
-  size_text = NULL,
-  theme_style = theme_lucid,
-  colors = unname(social_colors(c("green", "blue grey", "red"))),
-  dot_alpha_level = .8) {
-
+.plot_diag_outliers_new <- function(x,
+                                    na.rm = TRUE,
+                                    ref.color = "darkgray",
+                                    ref.linetype = "dashed",
+                                    size_line = NULL,
+                                    size_text = NULL,
+                                    theme_style = theme_lucid,
+                                    colors = unname(social_colors(c("green", "blue grey", "red"))),
+                                    dot_alpha_level = .8) {
   if (is.null(size_line)) {
     size_line <- .7
   }
@@ -27,27 +25,36 @@
 
   p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals)) +
     geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = dot_alpha_level) +
-    geom_vline(xintercept = 0,
-               color = ref.color,
-               linetype = ref.linetype) +
-    geom_hline(yintercept = 0,
-               color = ref.color,
-               linetype = ref.linetype) +
-    stat_smooth(formula = y ~ x,
-                method = "loess",
-                na.rm = na.rm,
-                se = FALSE,
-                color = colors[1]) +
+    geom_vline(
+      xintercept = 0,
+      color = ref.color,
+      linetype = ref.linetype
+    ) +
+    geom_hline(
+      yintercept = 0,
+      color = ref.color,
+      linetype = ref.linetype
+    ) +
+    stat_smooth(
+      formula = y ~ x,
+      method = "loess",
+      na.rm = na.rm,
+      se = FALSE,
+      color = colors[1]
+    ) +
     scale_colour_manual(values = c("OK" = colors[2], "Influential" = colors[3])) +
     ggrepel::geom_text_repel(
       data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
       aes(label = .data$Index, colour = .data$Influential),
-      size = size_text) +
-    labs(x = expression("Leverage (" * h[ii] * ")"),
-         y = "Std. Residuals",
-         title = "Influential Observations",
-         subtitle = "Points should be inside the contour lines",
-         colour = NULL)
+      size = size_text
+    ) +
+    labs(
+      x = expression("Leverage (" * h[ii] * ")"),
+      y = "Std. Residuals",
+      title = "Influential Observations",
+      subtitle = "Points should be inside the contour lines",
+      colour = NULL
+    )
 
   if (length(cook.levels)) {
     .hat <- sort(plot_data$Hat)
