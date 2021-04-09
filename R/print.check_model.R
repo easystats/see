@@ -23,7 +23,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
     colors <- attr(x, "colors")
   }
   if (is.null(colors)) {
-    colors = c("#3aaf85", "#1b6ca8", "#cd201f")
+    colors <- c("#3aaf85", "#1b6ca8", "#cd201f")
   }
   colors <- unname(colors)
 
@@ -92,9 +92,11 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
     scale_fill_manual(values = colors) +
     theme_style(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
     ylim(c(0, ylim)) +
-    theme(legend.position = "bottom",
-          legend.margin = margin(0, 0, 0, 0),
-          legend.box.margin = margin(-5, -5, -5, -5))
+    theme(
+      legend.position = "bottom",
+      legend.margin = margin(0, 0, 0, 0),
+      legend.box.margin = margin(-5, -5, -5, -5)
+    )
 
   if ("facet" %in% colnames(x)) {
     p <- p + facet_wrap(~facet, nrow = 1, scales = "free")
@@ -149,9 +151,11 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
     )
     y_lab <- "Sample - Normal Distribution Quantiles"
   } else {
-    message("For confidence bands",
-            if (isTRUE(detrend)) " and detrending",
-            ", please install `qqplotr`.")
+    message(
+      "For confidence bands",
+      if (isTRUE(detrend)) " and detrending",
+      ", please install `qqplotr`."
+    )
 
     qq_stuff <- list(
       geom_qq(
@@ -192,14 +196,16 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
       qqplotr::stat_pp_point(
         shape = 16, stroke = 0,
         size = size_point,
-        colour = colors[2 ], #"#2c3e50",
+        colour = colors[2], # "#2c3e50",
         alpha = dot_alpha_level,
         detrend = detrend
       )
   } else if (requireNamespace("MASS", quietly = TRUE)) {
-    message("For confidence bands",
-            if (isTRUE(detrend)) " and detrending",
-            ", please install `qqplotr`.")
+    message(
+      "For confidence bands",
+      if (isTRUE(detrend)) " and detrending",
+      ", please install `qqplotr`."
+    )
 
 
     x$probs <- stats::ppoints(x$res)

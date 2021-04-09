@@ -79,18 +79,17 @@ data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FAL
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_simulate <-  function(x,
-           data = NULL,
-           stack = TRUE,
-           show_intercept = FALSE,
-           n_columns = NULL,
-           normalize_height = FALSE,
-           size_line = .9,
-           posteriors_alpha = 0.7,
-           centrality = "median",
-           ci = 0.95,
-           ...) {
-
+plot.see_parameters_simulate <- function(x,
+                                         data = NULL,
+                                         stack = TRUE,
+                                         show_intercept = FALSE,
+                                         n_columns = NULL,
+                                         normalize_height = FALSE,
+                                         size_line = .9,
+                                         posteriors_alpha = 0.7,
+                                         centrality = "median",
+                                         ci = 0.95,
+                                         ...) {
   is_mlm <- !is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class
   if (is.null(n_columns) && isTRUE(is_mlm)) n_columns <- 1
 
