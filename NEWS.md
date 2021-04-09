@@ -27,6 +27,8 @@
 
 * Fixed issue with wrong labelling of CI-levels for `plot.see_hdi()`.
 
+* Fixed minor issues due to breaking changes in other easystats-packages.
+
 # see 0.6.2
 
 ## Changes to functions

@@ -94,8 +94,6 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     vdiffr
-Remtotes:
-    easystats/performance
 Encoding: UTF-8
 Language: en-US
 RoxygenNote: 7.1.1
