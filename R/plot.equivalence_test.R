@@ -93,7 +93,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
     tmp$predictor <- factor(tmp$predictor)
     tmp$predictor <- factor(tmp$predictor, levels = rev(levels(tmp$predictor)))
 
-    tmp$HDI <- sprintf("%i%% HDI", i$CI[1])
+    tmp$HDI <- sprintf("%g%% HDI", 100 * i$CI[1])
 
     tmp
   })
@@ -120,7 +120,7 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
   if (length(unique(tmp$HDI)) > 1) {
     x.title <- "Highest Density Region of Posterior Samples"
   } else {
-    x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
+    x.title <- sprintf("%g%% Highest Density Region of Posterior Samples", 100 * x$CI[1])
   }
   legend.title <- "Decision on H0"
 
