@@ -21,7 +21,8 @@
 \method{plot}{see_parameters_sem}(
   x,
   data = NULL,
-  type = c("regression", "correlation", "loading"),
+  component = c("regression", "correlation", "loading"),
+  type = component,
   threshold_coefficient = NULL,
   threshold_p = NULL,
   ci = TRUE,

@@ -8,6 +8,9 @@
 
 ## changes
 
+* Plot for SEM models now has arrows pointing from the latent variables towards 
+  the manifest variables.
+
 * The `plot()` method for `check_model()` was revised and should now be more
   consistent regarding titles and subtitles, as well as color schemes and plot
   order. Furthermore, the plot for influential observation was changed in order
