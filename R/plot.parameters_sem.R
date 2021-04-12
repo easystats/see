@@ -132,7 +132,7 @@ plot.see_parameters_sem <- function(x, data = NULL, component = c("regression", 
     arrow = arrow(type = "closed", length = unit(3, "mm")),
     start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
     ) +
-    ggraph::geom_node_point(aes(colour = .data$Latent), size = size_point) +
+    ggraph::geom_node_point(aes(colour = .data$Latent, shape = .data$Latent), size = size_point) +
     ggraph::geom_node_text(aes(label = .data$Name)) +
     ggraph::scale_edge_colour_gradient2(
       guide = FALSE,
@@ -141,6 +141,7 @@ plot.see_parameters_sem <- function(x, data = NULL, component = c("regression", 
       low = "#E91E63"
     ) +
     scale_alpha(guide = FALSE, range = c(0, 1)) +
+    scale_shape_manual(values = c(`FALSE` = 15, `TRUE` = 19)) +
     ggraph::scale_edge_alpha(guide = FALSE, range = c(0, 1)) +
     scale_x_continuous(expand = expansion(c(.10, .10))) +
     scale_y_continuous(expand = expansion(c(.10, .10))) +
