@@ -3,6 +3,7 @@
 #' The \code{plot()} method for the \code{parameters::model_parameters()} function.
 #'
 #' @param type Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).
+#' @param component Indicate which component of the model should be plotted.
 #' @param weight_points Logical, if \code{TRUE}, for meta-analysis objects, point size will be adjusted according to the study-weights.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters

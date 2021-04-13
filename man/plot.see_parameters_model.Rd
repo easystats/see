@@ -64,6 +64,8 @@ panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 \item{data}{The original data used to create this object. Can be a
 statistical model or such.}
 
+\item{component}{Indicate which component of the model should be plotted.}
+
 \item{threshold_coefficient}{Numeric, threshold at which value coefficients will be displayed.}
 
 \item{threshold_p}{Numeric, threshold at which value p-values will be displayed.}
