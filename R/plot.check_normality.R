@@ -35,8 +35,8 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
     .plot_diag_reqq(attributes(x)$re_qq, size_point = size_point, size_line = size_line, alpha_level = alpha)
   } else {
     if (type == "qq") {
-      if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB"))) {
-        res_ <- sort(stats::residuals(model), na.last = NA)
+      if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov"))) {
+        res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
       } else {
         res_ <- sort(stats::rstudent(model), na.last = NA)
       }
@@ -44,7 +44,7 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
       dat <- stats::na.omit(data.frame(y = res_))
       .plot_diag_qq(dat, size_point = size_point, size_line = size_line, alpha_level = alpha, detrend = detrend, dot_alpha_level = dot_alpha)
     } else if (type == "density") {
-      r <- stats::residuals(model)
+      r <- suppressMessages(stats::residuals(model))
       dat <- as.data.frame(bayestestR::estimate_density(r))
       dat$curve <- stats::dnorm(
         seq(min(dat$x), max(dat$x), length.out = nrow(dat)),
@@ -53,7 +53,7 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
       )
       .plot_diag_norm(dat, size_line = size_line)
     } else if (type == "pp") {
-      x <- sort(stats::residuals(model), na.last = NA)
+      x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
       dat <- data.frame(res = x)
       .plot_diag_pp(dat, size_point = size_point, size_line = size_line, alpha_level = alpha, detrend = detrend, dot_alpha_level = dot_alpha)
     }
