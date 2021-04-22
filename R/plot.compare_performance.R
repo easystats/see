@@ -25,6 +25,9 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   x$name <- factor(x$name, levels = unique(x$name))
 
   dataplot <- as.data.frame(x)
+  # rounding issues here...
+  dataplot$values[dataplot$values > 1] <- 1
+
   attr(dataplot, "info") <- list(
     "xlab" = "",
     "ylab" = "",
