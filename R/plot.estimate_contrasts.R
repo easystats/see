@@ -4,9 +4,6 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 }
 
 
-
-
-
 #' @keywords internal
 .data_plot_estimate_contrasts <- function(x, means = NULL, ...) {
   if (is.null(means)) {
@@ -27,8 +24,6 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
   dataplot
 }
-
-
 
 
 
@@ -63,13 +58,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
 
 
-
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for estimating contrasts
 #'
-#' The \code{plot()} method for the \code{modelbased::estimate_contrasts()} function.
+#' The \code{plot()} method for the \code{modelbased::estimate_contrasts()}
+#' function.
 #'
 #' @inheritParams data_plot
 #'

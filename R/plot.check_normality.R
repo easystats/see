@@ -21,7 +21,16 @@
 #' @importFrom bayestestR estimate_density
 #' @importFrom stats residuals sd dnorm rstudent ppoints pnorm fitted
 #' @export
-plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = NULL, size_line = .8, size_point = 2, alpha = .2, dot_alpha = .8, colors = c("#3aaf85", "#1b6ca8"), detrend = FALSE, ...) {
+plot.see_check_normality <- function(x,
+                                     type = c("density", "qq", "pp"),
+                                     data = NULL,
+                                     size_line = .8,
+                                     size_point = 2,
+                                     alpha = .2,
+                                     dot_alpha = .8,
+                                     colors = c("#3aaf85", "#1b6ca8"),
+                                     detrend = FALSE,
+                                     ...) {
   type <- match.arg(type)
 
   if (is.null(data)) {
@@ -32,7 +41,12 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
 
   # check type
   if (!is.null(attributes(x)$effects) && attributes(x)$effects == "random") {
-    .plot_diag_reqq(attributes(x)$re_qq, size_point = size_point, size_line = size_line, alpha_level = alpha)
+    .plot_diag_reqq(
+      attributes(x)$re_qq,
+      size_point = size_point,
+      size_line = size_line,
+      alpha_level = alpha
+    )
   } else {
     if (type == "qq") {
       if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov"))) {
@@ -42,7 +56,14 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
       }
 
       dat <- stats::na.omit(data.frame(y = res_))
-      .plot_diag_qq(dat, size_point = size_point, size_line = size_line, alpha_level = alpha, detrend = detrend, dot_alpha_level = dot_alpha)
+      .plot_diag_qq(
+        dat,
+        size_point = size_point,
+        size_line = size_line,
+        alpha_level = alpha,
+        detrend = detrend,
+        dot_alpha_level = dot_alpha
+      )
     } else if (type == "density") {
       r <- suppressMessages(stats::residuals(model))
       dat <- as.data.frame(bayestestR::estimate_density(r))
@@ -55,7 +76,14 @@ plot.see_check_normality <- function(x, type = c("density", "qq", "pp"), data = 
     } else if (type == "pp") {
       x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
       dat <- data.frame(res = x)
-      .plot_diag_pp(dat, size_point = size_point, size_line = size_line, alpha_level = alpha, detrend = detrend, dot_alpha_level = dot_alpha)
+      .plot_diag_pp(
+        dat,
+        size_point = size_point,
+        size_line = size_line,
+        alpha_level = alpha,
+        detrend = detrend,
+        dot_alpha_level = dot_alpha
+      )
     }
   }
 }

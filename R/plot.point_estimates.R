@@ -104,7 +104,17 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' }
 #' @importFrom rlang .data
 #' @export
-plot.see_point_estimate <- function(x, data = NULL, size_point = 2, size_text = 3.5, panel = TRUE, show_labels = TRUE, show_intercept = FALSE, priors = FALSE, priors_alpha = .4, ...) {
+plot.see_point_estimate <- function(x,
+                                    data = NULL,
+                                    size_point = 2,
+                                    size_text = 3.5,
+                                    panel = TRUE,
+                                    show_labels = TRUE,
+                                    show_intercept = FALSE,
+                                    priors = FALSE,
+                                    priors_alpha = .4,
+                                    ...) {
+
   # save model for later use
   model <- .retrieve_data(x)
 
@@ -159,31 +169,91 @@ plot.see_point_estimate <- function(x, data = NULL, size_point = 2, size_text = 
 
     if (!is.null(mean_x) && !is.null(mean_y)) {
       p_object <- p_object +
-        geom_segment(x = mean_x, xend = mean_x, y = 0, yend = mean_y, color = "#E91E63", size = 1, alpha = posterior_alpha) +
-        geom_point(x = mean_x, y = mean_y, color = "#E91E63", size = size_point, alpha = posterior_alpha)
+        geom_segment(
+          x = mean_x,
+          xend = mean_x,
+          y = 0,
+          yend = mean_y,
+          color = "#E91E63",
+          size = 1,
+          alpha = posterior_alpha
+        ) +
+        geom_point(
+          x = mean_x,
+          y = mean_y,
+          color = "#E91E63",
+          size = size_point,
+          alpha = posterior_alpha
+        )
       if (show_labels) {
         p_object <- p_object +
-          geom_text(x = label_mean_x, y = label_mean_y, label = "Mean", color = "#E91E63", size = size_text)
+          geom_text(
+            x = label_mean_x,
+            y = label_mean_y,
+            label = "Mean",
+            color = "#E91E63",
+            size = size_text
+          )
       }
     }
 
     if (!is.null(median_x) && !is.null(median_y)) {
       p_object <- p_object +
-        geom_segment(x = median_x, xend = median_x, y = 0, yend = median_y, color = "#2196F3", size = 1, alpha = posterior_alpha) +
-        geom_point(x = median_x, y = median_y, color = "#2196F3", size = size_point, alpha = posterior_alpha)
+        geom_segment(
+          x = median_x,
+          xend = median_x,
+          y = 0,
+          yend = median_y,
+          color = "#2196F3",
+          size = 1,
+          alpha = posterior_alpha
+        ) +
+        geom_point(
+          x = median_x,
+          y = median_y,
+          color = "#2196F3",
+          size = size_point,
+          alpha = posterior_alpha
+        )
       if (show_labels) {
         p_object <- p_object +
-          geom_text(x = label_median_x, y = label_median_y, label = "Median", color = "#2196F3", size = size_text)
+          geom_text(
+            x = label_median_x,
+            y = label_median_y,
+            label = "Median",
+            color = "#2196F3",
+            size = size_text
+          )
       }
     }
 
     if (!is.null(map_x) && !is.null(map_y)) {
       p_object <- p_object +
-        geom_segment(x = map_x, xend = map_x, y = 0, yend = map_y, color = "#4CAF50", size = 1, alpha = posterior_alpha) +
-        geom_point(x = map_x, y = map_y, color = "#4CAF50", size = size_point, alpha = posterior_alpha)
+        geom_segment(
+          x = map_x,
+          xend = map_x,
+          y = 0,
+          yend = map_y,
+          color = "#4CAF50",
+          size = 1,
+          alpha = posterior_alpha
+        ) +
+        geom_point(
+          x = map_x,
+          y = map_y,
+          color = "#4CAF50",
+          size = size_point,
+          alpha = posterior_alpha
+        )
       if (show_labels) {
         p_object <- p_object +
-          geom_text(x = label_map_x, y = label_map_y, label = "MAP", color = "#4CAF50", size = size_text)
+          geom_text(
+            x = label_map_x,
+            y = label_map_y,
+            label = "MAP",
+            color = "#4CAF50",
+            size = size_text
+          )
       }
     }
 
