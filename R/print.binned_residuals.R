@@ -36,6 +36,7 @@ print.see_binned_residuals <- function(x, ...) {
         aes(y = .data$ybar),
         method = "loess",
         se = FALSE,
+        formula = y ~ x,
         colour = "#00b159",
         size = .6
       )

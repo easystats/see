@@ -142,7 +142,8 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
         detrend = detrend
       ),
       qqplotr::stat_qq_point(
-        shape = 16, stroke = 0,
+        shape = 16,
+        stroke = 0,
         size = size_point,
         colour = colors[2], # "#2c3e50",
         alpha = dot_alpha_level,
@@ -243,6 +244,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
       method = "loess",
       se = TRUE,
       alpha = alpha_level,
+      formula = y ~ x,
       size = size_line,
       colour = colors[1]
     ) +
@@ -267,6 +269,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
     geom_smooth(
       method = "loess",
       se = TRUE,
+      formula = y ~ x,
       alpha = alpha_level,
       size = size_line,
       colour = colors[1]
@@ -297,6 +300,7 @@ print.see_check_model <- function(x, style = theme_lucid, colors = c("#3aaf85", 
         method = "lm",
         alpha = alpha_level,
         size = size_line,
+        formula = y ~ x,
         colour = colors[1]
       ) +
       geom_errorbar(
