@@ -7,8 +7,8 @@ if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2") &&
     set.seed(123)
     m_lm <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
     result1 <- check_normality(m_lm)
-    result2 <- check_normality(m_lm, type = "qq")
-    result3 <- check_normality(m_lm, type = "pp")
+    result2 <- check_normality(m_lm)
+    result3 <- check_normality(m_lm)
 
     set.seed(123)
     m_lmer <<- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
@@ -23,12 +23,12 @@ if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2") &&
 
     vdiffr::expect_doppelganger(
       title = "check_normality works - lm - qq",
-      fig = plot(result2)
+      fig = plot(result2, type = "qq")
     )
 
     vdiffr::expect_doppelganger(
       title = "check_normality works - lm - pp",
-      fig = plot(result3)
+      fig = plot(result3, type = "pp")
     )
 
     set.seed(123)
