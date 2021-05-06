@@ -55,10 +55,14 @@ data_plot.parameters_sem <- function(x, data = NULL, component = c("regression",
   edges <- edges[colSums(!is.na(edges)) > 0]
 
   # Identify nodes
-  latent_nodes <- data.frame(Name = as.character(edges[edges$Component == "Loading", "to"]),
-                             Latent = TRUE)
-  manifest_nodes <- data.frame(Name = unique(c(edges$from, edges$to)),
-                               Latent = FALSE)
+  latent_nodes <- data.frame(
+    Name = as.character(edges[edges$Component == "Loading", "to"]),
+    Latent = TRUE
+  )
+  manifest_nodes <- data.frame(
+    Name = unique(c(edges$from, edges$to)),
+    Latent = FALSE
+  )
   manifest_nodes <- manifest_nodes[!manifest_nodes$Name %in% latent_nodes$Name, ]
   nodes <- rbind(manifest_nodes, latent_nodes)
 

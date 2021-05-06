@@ -65,8 +65,8 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
   }
   betad <- model$fit$par["betad"]
   switch(faminfo$family,
-         gaussian = exp(0.5 * betad),
-         Gamma = exp(-0.5 * betad),
-         exp(betad)
+    gaussian = exp(0.5 * betad),
+    Gamma = exp(-0.5 * betad),
+    exp(betad)
   )
 }
