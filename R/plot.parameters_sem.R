@@ -1,5 +1,13 @@
 #' @export
-data_plot.parameters_sem <- function(x, data = NULL, component = c("regression", "correlation", "loading"), type = component, threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, ...) {
+data_plot.parameters_sem <- function(x,
+                                     data = NULL,
+                                     component = c("regression", "correlation", "loading"),
+                                     type = component,
+                                     threshold_coefficient = NULL,
+                                     threshold_p = NULL,
+                                     ci = TRUE,
+                                     ...) {
+
 
   # Compatibility patch
   if (any(!type %in% component)) component <- type
@@ -81,9 +89,25 @@ data_plot.parameters_sem <- function(x, data = NULL, component = c("regression",
 #' @importFrom rlang .data
 #' @rdname plot.see_parameters_model
 #' @export
-plot.see_parameters_sem <- function(x, data = NULL, component = c("regression", "correlation", "loading"), type = component, threshold_coefficient = NULL, threshold_p = NULL, ci = TRUE, size_point = 22, ...) {
+plot.see_parameters_sem <- function(x,
+                                    data = NULL,
+                                    component = c("regression", "correlation", "loading"),
+                                    type = component,
+                                    threshold_coefficient = NULL,
+                                    threshold_p = NULL,
+                                    ci = TRUE,
+                                    size_point = 22,
+                                    ...) {
   if (!"data_plot" %in% class(x)) {
-    x <- data_plot(x, component = component, type = type, threshold_coefficient = threshold_coefficient, threshold_p = threshold_p, ci = ci, ...)
+    x <- data_plot(
+      x,
+      component = component,
+      type = type,
+      threshold_coefficient = threshold_coefficient,
+      threshold_p = threshold_p,
+      ci = ci,
+      ...
+    )
   }
 
   if (!requireNamespace("ggraph", quietly = TRUE)) {

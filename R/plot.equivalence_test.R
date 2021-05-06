@@ -17,7 +17,12 @@
 #' @importFrom insight clean_parameters
 #' @importFrom ggridges geom_density_ridges2
 #' @export
-plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
+plot.see_equivalence_test <- function(x,
+                                      rope_color = "#0171D3",
+                                      rope_alpha = .2,
+                                      show_intercept = FALSE,
+                                      n_columns = 1,
+                                      ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -137,10 +142,32 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 
 
   p <- ggplot(tmp, aes_string(x = "estimate", y = "predictor", fill = "grp")) +
-    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope_color, alpha = (rope_alpha / 3)) +
-    geom_vline(xintercept = .rope, linetype = "dashed", colour = rope_color, alpha = rope.line.alpha) +
-    geom_vline(xintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
-    ggridges::geom_density_ridges2(rel_min_height = 0.01, scale = 2, alpha = .5) +
+    annotate(
+      "rect",
+      xmin = .rope[1],
+      xmax = .rope[2],
+      ymin = 0,
+      ymax = Inf,
+      fill = rope_color,
+      alpha = (rope_alpha / 3)
+    ) +
+    geom_vline(
+      xintercept = .rope,
+      linetype = "dashed",
+      colour = rope_color,
+      alpha = rope.line.alpha
+    ) +
+    geom_vline(
+      xintercept = 0,
+      colour = rope_color,
+      size = .8,
+      alpha = rope.line.alpha
+    ) +
+    ggridges::geom_density_ridges2(
+      rel_min_height = 0.01,
+      scale = 2,
+      alpha = .5
+    ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
     scale_y_discrete(labels = labels) +
@@ -181,7 +208,12 @@ plot.see_equivalence_test <- function(x, rope_color = "#0171D3", rope_alpha = .2
 # data frame method --------------------------------
 
 #' @export
-plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha = .2, data = NULL, n_columns = 1, ...) {
+plot.see_equivalence_test_df <- function(x,
+                                         rope_color = "#0171D3",
+                                         rope_alpha = .2,
+                                         data = NULL,
+                                         n_columns = 1,
+                                         ...) {
   if (is.null(data)) data <- .retrieve_data(x)
 
   if (is.null(data)) {
@@ -248,14 +280,36 @@ plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha =
   if ("labels" %in% names(add.args)) labels <- eval(add.args[["labels"]])
 
   rope.line.alpha <- 1.25 * rope_alpha
+
   if (rope.line.alpha > 1) rope.line.alpha <- 1
 
-
   p <- ggplot(tmp, aes_string(x = "estimate", y = "predictor", fill = "grp")) +
-    annotate("rect", xmin = .rope[1], xmax = .rope[2], ymin = 0, ymax = Inf, fill = rope_color, alpha = (rope_alpha / 3)) +
-    geom_vline(xintercept = .rope, linetype = "dashed", colour = rope_color, alpha = rope.line.alpha) +
-    geom_vline(xintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
-    ggridges::geom_density_ridges2(rel_min_height = 0.01, scale = 2, alpha = .5) +
+    annotate(
+      "rect",
+      xmin = .rope[1],
+      xmax = .rope[2],
+      ymin = 0,
+      ymax = Inf,
+      fill = rope_color,
+      alpha = (rope_alpha / 3)
+    ) +
+    geom_vline(
+      xintercept = .rope,
+      linetype = "dashed",
+      colour = rope_color,
+      alpha = rope.line.alpha
+    ) +
+    geom_vline(
+      xintercept = 0,
+      colour = rope_color,
+      size = .8,
+      alpha = rope.line.alpha
+    ) +
+    ggridges::geom_density_ridges2(
+      rel_min_height = 0.01,
+      scale = 2,
+      alpha = .5
+    ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
     scale_y_discrete(labels = labels) +
@@ -270,14 +324,17 @@ plot.see_equivalence_test_df <- function(x, rope_color = "#0171D3", rope_alpha =
 
 
 
-
-
-
 # freq models method --------------------------------
 
 #' @rdname plot.see_equivalence_test
 #' @export
-plot.see_equivalence_test_lm <- function(x, size_point = .7, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, n_columns = 1, ...) {
+plot.see_equivalence_test_lm <- function(x,
+                                         size_point = .7,
+                                         rope_color = "#0171D3",
+                                         rope_alpha = .2,
+                                         show_intercept = FALSE,
+                                         n_columns = 1,
+                                         ...) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
@@ -337,10 +394,38 @@ plot.see_equivalence_test_lm <- function(x, size_point = .7, rope_color = "#0171
   rope.line.alpha <- 1.25 * rope_alpha
   if (rope.line.alpha > 1) rope.line.alpha <- 1
 
-  p <- ggplot(x, aes_string(x = "Parameter", y = "Estimate", ymin = "CI_low", ymax = "CI_high", colour = "ROPE_Equivalence")) +
-    annotate("rect", ymin = .rope[1], ymax = .rope[2], xmin = 0, xmax = Inf, fill = rope_color, alpha = (rope_alpha / 3)) +
-    geom_hline(yintercept = .rope, linetype = "dashed", colour = rope_color, size = .8, alpha = rope.line.alpha) +
-    geom_hline(yintercept = 0, colour = rope_color, size = .8, alpha = rope.line.alpha) +
+  p <- ggplot(
+    x,
+    aes_string(
+      x = "Parameter",
+      y = "Estimate",
+      ymin = "CI_low",
+      ymax = "CI_high",
+      colour = "ROPE_Equivalence"
+    )
+  ) +
+    annotate(
+      "rect",
+      ymin = .rope[1],
+      ymax = .rope[2],
+      xmin = 0,
+      xmax = Inf,
+      fill = rope_color,
+      alpha = (rope_alpha / 3)
+    ) +
+    geom_hline(
+      yintercept = .rope,
+      linetype = "dashed",
+      colour = rope_color,
+      size = .8,
+      alpha = rope.line.alpha
+    ) +
+    geom_hline(
+      yintercept = 0,
+      colour = rope_color,
+      size = .8,
+      alpha = rope.line.alpha
+    ) +
     geom_pointrange(size = size_point) +
     scale_colour_manual(values = fill.color) +
     labs(x = x.title, y = NULL, colour = legend.title) +

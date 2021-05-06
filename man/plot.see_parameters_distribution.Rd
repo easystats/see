@@ -19,19 +19,23 @@
 \arguments{
 \item{x}{An object.}
 
-\item{dispersion}{Logical, if \code{TRUE}, will add range of dispersion for each variable to the plot.}
+\item{dispersion}{Logical, if \code{TRUE}, will add range of dispersion for
+each variable to the plot.}
 
 \item{dispersion_alpha}{Transparency level of dispersion ribbon.}
 
 \item{dispersion_color}{Color of dispersion ribbon.}
 
-\item{dispersion_style}{Character, style of dispersion area. \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.}
+\item{dispersion_style}{Character, style of dispersion area. \code{"ribbon"}
+for a ribbon, \code{"curve"} for a normal-curve.}
 
 \item{size_bar}{Size of bar geoms.}
 
-\item{highlight}{Vector with names of categories in \code{x} that should be highlighted.}
+\item{highlight}{Vector with names of categories in \code{x} that should be
+highlighted.}
 
-\item{highlight_color}{Vector of color values for highlighted categories. The remaining (non-highlighted) categories will be filled with a lighter grey.}
+\item{highlight_color}{Vector of color values for highlighted categories. The
+remaining (non-highlighted) categories will be filled with a lighter grey.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -39,7 +43,8 @@
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{parameters::describe_distribution()} function.
+The \code{plot()} method for the \code{parameters::describe_distribution()}
+function.
 }
 \examples{
 library(parameters)

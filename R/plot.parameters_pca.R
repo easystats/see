@@ -41,8 +41,6 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 
 
 
-
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for principal component analysis
@@ -108,7 +106,12 @@ plot.see_parameters_pca <- function(x,
   }
 
   p <- p +
-    geom_text(aes(y = abs(.data$y), label = round(.data$y, 2)), color = text_color, size = size_text, nudge_y = .15) +
+    geom_text(
+      aes(y = abs(.data$y), label = round(.data$y, 2)),
+      color = text_color,
+      size = size_text,
+      nudge_y = .15
+    ) +
     coord_flip() +
     guides(fill = FALSE, color = FALSE) +
     scale_y_continuous(
