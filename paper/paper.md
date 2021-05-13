@@ -16,9 +16,12 @@ authors:
   name: Indrajeet Patil
   orcid: 0000-0003-1995-6531
 - affiliation: 4
+  name: Brenton M. Wiernik
+  orcid: 0000-0001-9560-6336
+- affiliation: 5
   name: Philip Waggoner
   orcid: 0000-0002-7825-7573
-- affiliation: 5
+- affiliation: 6
   name: Dominique Makowski
   orcid: 0000-0001-5375-9967
 affiliations:
@@ -29,11 +32,12 @@ affiliations:
 - index: 3
   name: Center for Humans and Machines, Max Planck Institute for Human Development, Berlin, Germany
 - index: 4
-  name: University of Chicago, USA  
+  name: Department of Psychology, University of South Florida, USA 
 - index: 5
+  name: University of Chicago, USA  
+- index: 6
   name: Nanyang Technological University, Singapore
-citation_author: Lüdecke
-date: "2021-03-27"
+date: "2021-05-13"
 bibliography: paper.bib
 output: rticles::joss_article
 csl: apa.csl
@@ -47,6 +51,8 @@ link-citations: yes
 
 
 # Featuers
+
+<!-- Possible structure -->
 
 ## Visualizing parameters of a model
 
@@ -64,6 +70,4 @@ link-citations: yes
 
 # References
 
-
-# References
 

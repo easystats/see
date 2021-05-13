@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.3.22)  27 MAR 2021 14:53
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.4.24)  13 MAY 2021 11:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -39,7 +39,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 105.
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2020/08/26 v5.0i Graphics/color driver for xetex
+File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
 ))
 \Gin@req@height=\dimen139
 \Gin@req@width=\dimen140
@@ -391,8 +391,9 @@ Package: hyperref 2021-02-27 v7.00k Hypertext links for LaTeX
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+) (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.st
+y
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
@@ -436,8 +437,6 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 \Hy@SavedSpaceFactor=\count281
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/hyperref.cfg
-File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Hyper figures OFF on input line 4192.
 Package hyperref Info: Link nesting OFF on input line 4197.
@@ -889,11 +888,12 @@ File: l3backend-xetex.def 2021-03-18 L3 backend support: XeTeX
 (|extractbb --version)
 \c__kernel_sys_dvipdfmx_version_int=\count436
 \l__color_backend_stack_int=\count437
-\g__graphics_track_int=\count438
+\g__color_backend_stack_int=\count438
+\g__graphics_track_int=\count439
 \l__pdf_internal_box=\box70
-\g__pdf_backend_object_int=\count439
-\g__pdf_backend_annotation_int=\count440
-\g__pdf_backend_link_int=\count441
+\g__pdf_backend_object_int=\count440
+\g__pdf_backend_annotation_int=\count441
+\g__pdf_backend_link_int=\count442
 ))
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse-202
 0-10-01.sty
@@ -903,17 +903,17 @@ Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
 X
-\l__fontspec_script_int=\count442
-\l__fontspec_language_int=\count443
-\l__fontspec_strnum_int=\count444
-\l__fontspec_tmp_int=\count445
-\l__fontspec_tmpa_int=\count446
-\l__fontspec_tmpb_int=\count447
-\l__fontspec_tmpc_int=\count448
-\l__fontspec_em_int=\count449
-\l__fontspec_emdef_int=\count450
-\l__fontspec_strong_int=\count451
-\l__fontspec_strongdef_int=\count452
+\l__fontspec_script_int=\count443
+\l__fontspec_language_int=\count444
+\l__fontspec_strnum_int=\count445
+\l__fontspec_tmp_int=\count446
+\l__fontspec_tmpa_int=\count447
+\l__fontspec_tmpb_int=\count448
+\l__fontspec_tmpc_int=\count449
+\l__fontspec_em_int=\count450
+\l__fontspec_emdef_int=\count451
+\l__fontspec_strong_int=\count452
+\l__fontspec_strongdef_int=\count453
 \l__fontspec_tmpa_dim=\dimen282
 \l__fontspec_tmpb_dim=\dimen283
 \l__fontspec_tmpc_dim=\dimen284
@@ -927,25 +927,20 @@ s/patil/Library/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks39
 \XKV@tempa@toks=\toks40
 )
-\XKV@depth=\count453
+\XKV@depth=\count454
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
-\c@eu@=\count454
-\c@eu@i=\count455
-\c@mkern=\count456
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
-tim
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
-Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-)) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
+\c@eu@=\count455
+\c@eu@i=\count456
+\c@mkern=\count457
+) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
 \MT@toks=\toks41
-\MT@count=\count457
+\MT@count=\count458
 LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen285
 LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
-\MT@listname@count=\count458
+\MT@listname@count=\count459
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype-xetex.de
 f
@@ -966,37 +961,37 @@ line 40.
 ) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
 )
-\@quotelevel=\count459
-\@quotereset=\count460
+\@quotelevel=\count460
+\@quotereset=\count461
 (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 201.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 204.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-01.
+04.
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 201.
-LaTeX Font Info:    ... okay on input line 201.
-Package hyperref Info: Link coloring ON on input line 201.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 204.
+LaTeX Font Info:    ... okay on input line 204.
+Package hyperref Info: Link coloring ON on input line 204.
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1006,11 +1001,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ing.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count461
+\c@section@level=\count462
 )
-LaTeX Info: Redefining \ref on input line 201.
-LaTeX Info: Redefining \pageref on input line 201.
-LaTeX Info: Redefining \nameref on input line 201.
+LaTeX Info: Redefining \ref on input line 204.
+LaTeX Info: Redefining \pageref on input line 204.
+LaTeX Info: Redefining \nameref on input line 204.
 (./paper.out) (./paper.out)
 \@outlinefile=\write7
 \openout7 = `paper.out'.
@@ -1039,8 +1034,8 @@ Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'paper.bbl' not found.
 No file paper.bbl.
-Package biblatex Info: Reference section=0 on input line 201.
-Package biblatex Info: Reference segment=0 on input line 201.
+Package biblatex Info: Reference section=0 on input line 204.
+Package biblatex Info: Reference segment=0 on input line 204.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1075,7 +1070,7 @@ Package biblatex Info: Reference segment=0 on input line 201.
 * \@reversemargintrue
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 201.
+LaTeX Info: Redefining \microtypecontext on input line 204.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1095,14 +1090,14 @@ Package microtype Info: Loading generic protrusion settings for font family
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 202
+LaTeX Font Info:    Trying to load font information for U+msa on input line 205
 .
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 202
+LaTeX Font Info:    Trying to load font information for U+msb on input line 205
 .
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1110,15 +1105,15 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-Package hyperref Warning: Suppressing link with empty target on input line 228.
+Package hyperref Warning: Suppressing link with empty target on input line 231.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 228.
+Package hyperref Warning: Suppressing link with empty target on input line 231.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 228.
+Package hyperref Warning: Suppressing link with empty target on input line 231.
 
 
 File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
@@ -1139,16 +1134,16 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
 
 ] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: C5425644BEFF3C5F336C5A30CA46FEED;1326.
+(rerunfilecheck)             Checksum: 991602CEB4CBF892EC9D9D2E48FE055B;1232.
 Package logreq Info: Writing requests to 'paper.run.xml'.
 \openout1 = `paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34416 strings out of 478922
- 694722 string characters out of 5866020
- 1491741 words of memory out of 5000000
- 53726 multiletter control sequences out of 15000+600000
+ 34383 strings out of 478918
+ 693904 string characters out of 5865955
+ 1476174 words of memory out of 5000000
+ 53703 multiletter control sequences out of 15000+600000
  410278 words of font info for 72 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  95i,12n,103p,1194b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
