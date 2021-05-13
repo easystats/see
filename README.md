@@ -19,11 +19,17 @@ install.packages("devtools")
 devtools::install_github("easystats/see")
 ```
 
+And then load it:
+
 ``` r
 library("see")
 ```
 
 # Documentation
+
+This package provides visualisation toolbox for R packages in the
+`easystats` ecosystem and extra `geom`s, themes and color palettes for
+`ggplot2`
 
 [![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
 [![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
@@ -59,12 +65,16 @@ p + theme_lucid()
 ### Blackboard
 
 ``` r
-p + theme_blackboard() 
+p + theme_blackboard()
 ```
 
 ![](man/figures/unnamed-chunk-6-1.png)<!-- -->
 
 ### Abyss
+
+``` r
+p + theme_abyss()
+```
 
 ![](man/figures/unnamed-chunk-7-1.png)<!-- -->
 
@@ -107,8 +117,10 @@ The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
 
 ``` r
-plots(p1, p2, p3, n_columns = 2, 
-      tags = paste("Fig. ", 1:3))
+plots(p1, p2, p3,
+  n_columns = 2,
+  tags = paste("Fig. ", 1:3)
+)
 ```
 
 ![](man/figures/unnamed-chunk-10-1.png)<!-- -->
@@ -160,7 +172,7 @@ data <- iris %>%
 data %>%
   ggplot(aes(x = name, y = value, color = Species, group = Species)) +
   geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
-  coord_radar(start = -pi/4) +
+  coord_radar(start = -pi / 4) +
   theme_minimal()
 ```
 

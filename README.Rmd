@@ -15,16 +15,18 @@ editor_options:
 
 # see <img src='man/figures/logo.png' align="right" height="139" />
 
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(dplyr)
 library(see)
 
 knitr::opts_chunk$set(
   dpi = 300,
   collapse = TRUE,
-  fig.path = "man/figures/"
+  fig.path = "man/figures/",
+  warning = FALSE,
+  message = FALSE
 )
-options(knitr.kable.NA = '', digits = 4)
+options(knitr.kable.NA = "", digits = 4)
 ```
 
 [![publication](https://img.shields.io/badge/Cite-Unpublished-yellow)](https://github.com/easystats/see/blob/master/inst/CITATION)
@@ -40,16 +42,20 @@ options(knitr.kable.NA = '', digits = 4)
 
 Run the following:
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
+```{r eval=FALSE}
 install.packages("devtools")
 devtools::install_github("easystats/see")
 ```
+
+And then load it:
+
 ```{r message=FALSE, warning=FALSE, eval=TRUE}
 library("see")
 ```
 
-
 # Documentation
+
+This package provides visualisation toolbox for R packages in the `easystats` ecosystem and extra `geom`s, themes and color palettes for `ggplot2`
 
 [![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
 [![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
@@ -59,7 +65,7 @@ library("see")
 
 ### Modern
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 library(ggplot2)
 
 ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
@@ -67,10 +73,9 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
   theme_modern()
 ```
 
-
 ### Lucid
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 library(ggplot2)
 
 p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
@@ -79,17 +84,16 @@ p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 p + theme_lucid()
 ```
 
-
 ### Blackboard
 
-```{r warning=FALSE, message=FALSE}
-p + theme_blackboard() 
+```{r}
+p + theme_blackboard()
 ```
 
 ### Abyss
 
-```{r warning=FALSE, message=FALSE, echo=FALSE}
-p + theme_abyss() 
+```{r}
+p + theme_abyss()
 ```
 
 ## Palettes
@@ -98,7 +102,7 @@ This is just one example of the available palettes. See [this vignette](https://
 
 ### Material design
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_boxplot() +
   theme_modern(axis.text.angle = 45) +
@@ -119,24 +123,24 @@ p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length))
 
 The `plots()` function allows us to plot the figures side by side.
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 plots(p1, p2, p3, n_columns = 2)
 ```
 
 The `plots()` function can also be used to add **tags** (*i.e.*, labels for subfigures).
 
-```{r warning=FALSE, message=FALSE}
-plots(p1, p2, p3, n_columns = 2, 
-      tags = paste("Fig. ", 1:3))
+```{r}
+plots(p1, p2, p3,
+  n_columns = 2,
+  tags = paste("Fig. ", 1:3)
+)
 ```
-
-
 
 ## Better looking points
 
 `geom_points2()` and `geom_jitter2()` allow points without borders and contour.
 
-```{r warning=FALSE, message=FALSE, fig.width=9.5, fig.height=5.8}
+```{r, fig.width=9.5, fig.height=5.8}
 normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
   geom_point(size = 8, alpha = 0.3) +
   theme_modern()
@@ -154,7 +158,7 @@ plots(normal, new, n_columns = 2)
 
 Create a half-violin half-dot plot, useful for visualising the distribution and the sample size at the same time.
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violindot(fill_dots = "black") +
   theme_modern() +
@@ -163,7 +167,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 
 ## Radar chart (Spider plot)
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 library(dplyr)
 library(tidyr)
 
@@ -175,7 +179,7 @@ data <- iris %>%
 data %>%
   ggplot(aes(x = name, y = value, color = Species, group = Species)) +
   geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
-  coord_radar(start = -pi/4) +
+  coord_radar(start = -pi / 4) +
   theme_minimal()
 ```
 

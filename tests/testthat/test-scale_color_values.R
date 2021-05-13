@@ -1,12 +1,16 @@
 test_that("`bluebrown_colors()` works", {
-  expect_equal(as.vector(bluebrown_colors("blue", "brown")),
-               c("#5B93AE", "#61381A"))
+  expect_equal(
+    as.vector(bluebrown_colors("blue", "brown")),
+    c("#5B93AE", "#61381A")
+  )
 })
 
 
 test_that("`material_colors()` works", {
-  expect_equal(as.vector(material_colors("indigo", "lime")),
-               c("#3F51B5", "#CDDC39"))
+  expect_equal(
+    as.vector(material_colors("indigo", "lime")),
+    c("#3F51B5", "#CDDC39")
+  )
 })
 
 
