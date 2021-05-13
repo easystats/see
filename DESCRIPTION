@@ -1,6 +1,6 @@
 Type: Package
 Package: see
-Title: Visualisation Toolbox for R packages in the 'easystats' ecosystem and Extra Geoms,
+Title: Visualisation Toolbox for 'easystats' and Extra Geoms,
     Themes and Color Palettes for 'ggplot2'
 Version: 0.6.3
 Authors@R: 
