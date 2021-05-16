@@ -34,7 +34,7 @@ affiliations:
 - index: 4
   name: Department of Psychology, University of South Florida, USA 
 - index: 5
-  name: University of Chicago, USA  
+  name: University of Chicago, USA
 - index: 6
   name: Nanyang Technological University, Singapore
 date: "`r Sys.Date()`"
@@ -58,11 +58,13 @@ knitr::opts_chunk$set(
 
 # Summary
 
-The *easystats* is a collection of R packages that operate in synergy to provide a consistent and intuitive syntax to work with statistical models. Although these packages return comprehensive numeric summaries of model parameters and performance, complementing them with graphical exploration can sometimes be more informative. The *see* package provides the necessary tools (*ggplot2* geoms, themes, etc.) to visualize the analytic methods supported in this ecosystem.
+The *easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax to work with statistical models in R programming language [@base2021]. Although these packages return comprehensive numeric summaries of model parameters and performance, complementing such summaries with graphical displays can be more informative. The *see* package provides the necessary tools (*ggplot2* geoms, themes, etc.) to visualize the analytic methods supported in this ecosystem.
 
 # Statement of Need
 
+A number of data visualization tools exist in the *ggplot2* framework [@Wickham2016] for graphically exploring statistical models^[For a comprehensive collection of available packages, see: <https://exts.ggplot2.tidyverse.org/gallery/>]. A few of them provide ready-made plots or geometric layers for conveniently preparing common visualizations, but without linking them to particular statistical analyses (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, etc.). A few other packages *do* provide visualizations linked with statistical analyses (e.g., *ggpubr*, *tidymv*, *ggstatsplot*, *survminer*, etc.), but they tend to be more specialized and focus only certain kind of statistical analysis. For example, the *ggstatsplot* package [@Patil2021] offers visualizations only for statistical analysis of one-way factorial designs. 
 
+The *see* package, on the other hand, is designed to work with statistical models and provides a much more comprehensive visualization toolbox that covers all stages of statistical analysis and reporting. Additionally, given that it is part of a larger *easystats*-universe, it also embodies a common syntax and philosophy of this ecosystem.
 
 # Features
 
