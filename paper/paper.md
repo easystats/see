@@ -34,10 +34,10 @@ affiliations:
 - index: 4
   name: Department of Psychology, University of South Florida, USA 
 - index: 5
-  name: University of Chicago, USA  
+  name: University of Chicago, USA
 - index: 6
   name: Nanyang Technological University, Singapore
-date: "2021-05-13"
+date: "2021-05-16"
 bibliography: paper.bib
 output: rticles::joss_article
 csl: apa.csl
@@ -49,16 +49,107 @@ link-citations: yes
 
 # Summary
 
+The *easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax to work with statistical models in R programming language [@base2021]. Although these packages return comprehensive numeric summaries of model parameters and performance, complementing such summaries with graphical displays can be more informative. The *see* package provides the necessary tools (*ggplot2* geoms, themes, etc.) to visualize the analytic methods supported in this ecosystem.
 
-# Featuers
+# Statement of Need
 
-<!-- Possible structure -->
+A number of data visualization tools exist in the *ggplot2* framework [@Wickham2016] for graphically exploring statistical models^[For a comprehensive collection of available packages, see: <https://exts.ggplot2.tidyverse.org/gallery/>]. A few of them provide ready-made plots or geometric layers for conveniently preparing common visualizations, but without linking them to any particular statistical analyses (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, etc.). A few other packages *do* provide visualizations linked to particular statistical analyses (e.g., *ggpubr*, *tidymv*, *ggstatsplot*, *survminer*, etc.), but they tend to be more specialized. For example, the *ggstatsplot* package [@Patil2021] offers visualizations only for statistical analysis of one-way factorial designs. 
+
+The *see* package, on the other hand, is designed to work with a wide range of statistical models and provides a much more comprehensive *ggplot2*-based visualization toolbox that covers all stages of statistical analysis and reporting. Additionally, as  a member of the larger *easystats*-universe, it also embodies a common syntax and philosophy of this ecosystem, lowering the visualization barrier for users of this ecosystem.
+
+# Features
+
+For the sake of brevity, we will discuss only one plotting method for each package. Several other methods are available and the readers are encouraged to see more examples on the package website: <https://easystats.github.io/see/>
 
 ## Visualizing parameters of a model
 
+The *parameters* package [@Lüdecke2020parameters] converts regression model objects into dataframes. The *see* package can then create dot-and-whisker plots for the extracted regression estimates:
+
+
+```r
+library(parameters)
+library(see)
+mod <- lm(wt ~ am * cyl, mtcars)
+plot(parameters(mod))
+```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-2-1} 
+
+In case of a Bayesian regression model, which are handled by the *bayestestR* package [@Makowski2019], the *see* package also provides special plotting methods relevant only for Bayesian models (e.g., Highest Density Interval or HDI).
+
+
+```r
+library(bayestestR)
+library(rstanarm)
+mod <- stan_glm(wt ~ mpg, data = mtcars, refresh = 0)
+result <- hdi(mod, ci = c(0.5, 0.75, 0.89, 0.95))
+plot(result)
+```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-3-1} 
+
 ## Visualizing model fit 
 
-## Visualizing comparison of multiple models
+The *performance* package [@Lüdecke2020performance] provides functions to check assumptions behind regression models. The *see* package can help visualize these assumptions checks (e.g., normality of residuals):
+
+
+```r
+library(performance)
+mod <- lm(wt ~ mpg, mtcars)
+plot(check_normality(mod))
+#> Warning: Non-normality of residuals detected (p = 0.016).
+```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-4-1} 
+
+## Visualizing effect sizes
+
+In addition to providing tabular summaries of regression model objects, the *easystats* ecosystem also provides the *effectsize* package [@Ben-Shachar2020] to assess practical importance of observed effects by computing appropriate effect size measures. The *see* package can then be used to visualize the magnitude and uncertainty of these effect sizes:
+
+
+```r
+library(effectsize)
+mod <- aov(wt ~ am * cyl, mtcars)
+plot(omega_squared(mod))
+```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-5-1} 
+
+## Visualizing marginal effects
+
+The *modelbased* package [@Makowski2020modelbased] can be used to compute marginal means for regression models and the *see* package provides functions to visualize these marginal effects.
+
+
+```r
+library(modelbased)
+
+mod <- stan_glm(wt ~ as.factor(cyl), data = mtcars, refresh = 0)
+contrasts <- estimate_contrasts(mod)
+means <- estimate_means(mod)
+
+plot(contrasts, means)
+```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-6-1} 
+
+## Visualizing correlation matrices
+
+The *correlation* package [@Makowski2020] provides a unified syntax to carry out various kinds of correlation analyses, and the *see* package can easily visualize these correlations in a matrix.
+
+
+```r
+library(correlation)
+result <- correlation(iris, type = "percentage")
+plot(summary(result))
+```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-7-1} 
 
 # Licensing and Availability
 
