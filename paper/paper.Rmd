@@ -70,7 +70,7 @@ The *see* package, on the other hand, is designed to work with a wide range of s
 
 Though we introduce only one plotting method for each *easystats* package, many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
 
-## Visualizing parameters of a model
+## Visualizing Model Parameters
 
 The *parameters* package converts regression model objects into dataframes [@Lüdecke2020parameters]. The *see* package can take this transformed object and, for example, create a dot-and-whisker plot for the extracted regression estimates simply by passing the `parameters` class object to `plot()`.
 
@@ -96,7 +96,7 @@ result <- hdi(mod, ci = c(0.5, 0.75, 0.89, 0.95))
 plot(result)
 ```
 
-## Visualizing model fit 
+## Visualizing Model Performance
 
 The *performance* package is primarily concerned with checking regression model assumptions [@Lüdecke2020performance]. The *see* package offers a number of tools to visualize these assumption checks, such as the normality of residuals. Similar to uses of *see* with *parameters* introduced in the previous section, users simply pass the fit model object to the relevant *performance* function (`check_normality()` in the example below). Then, this result can be passed to `plot()` to render a *ggplot2* visualization of the check on the normality of the residuals.
 
@@ -114,7 +114,7 @@ check <- check_normality(mod)
 plot(check)
 ```
 
-## Visualizing effect sizes
+## Visualizing Effect Sizes
 
 In addition to providing tabular summaries of regression model objects, the *easystats* ecosystem also provides several packages to assess various aspects of statistical models. Of note, the *effectsize* package assesses the practical importance of observed effects by computing appropriate effect size measures [@Ben-Shachar2020]. In conjunction with *see*, users are able to visualize the magnitude and uncertainty of effect sizes by passing the model object to the relevant `effectsize` function (`omega_squared()` in the following example), and then to `plot()` as before.
 
@@ -127,7 +127,7 @@ mod <- aov(wt ~ am * cyl, mtcars)
 plot(omega_squared(mod))
 ```
 
-## Visualizing marginal effects
+## Visualizing Marginal Effects
 
 The *modelbased* package computes a range of quantities from fit regression models [@Makowski2020modelbased]. With minimal and human-readable code, users start by passing the model object to the relevant *modelbased* function(s) (`estimate_contrasts()` and `estimate_means()` in the example to follow). Then, these new objects containing the *modelbased* quantities are then passed to `plot()` from the *see* package. Of note, in the following example *two* quantities (objects `contrasts` and `means`) are passed to `plot()`, demonstrating and deepening the flexibility of the package.
 
@@ -142,7 +142,7 @@ means <- estimate_means(mod)
 plot(contrasts, means)
 ```
 
-## Visualizing correlation matrices
+## Visualizing Correlation Matrices
 
 The *correlation* package provides a unified syntax and human-readable code to carry out many flavors of correlation analysis [@Makowski2020]. Results from the `correlation()` function call of class `easycorrelation` are passed to `plot()` from *see* to render these correlations in a matrix.
 
