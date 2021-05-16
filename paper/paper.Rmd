@@ -1,5 +1,5 @@
 ---
-title: "see: R Package for Visualizing Statistical Models"
+title: "see: An R Package for Visualizing Statistical Models"
 tags:
   - R
   - easystats
