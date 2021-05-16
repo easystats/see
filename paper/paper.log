@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.4.24)  16 MAY 2021 14:33
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.4.24)  16 MAY 2021 14:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1146,7 +1146,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 362.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 356.
 [1
 
 ]
@@ -1249,7 +1249,7 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 Here is how much of TeX's memory you used:
  34928 strings out of 478918
  703569 string characters out of 5865955
- 1493807 words of memory out of 5000000
+ 1492807 words of memory out of 5000000
  54224 multiletter control sequences out of 15000+600000
  410310 words of font info for 76 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
