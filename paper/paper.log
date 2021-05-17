@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.4.24)  16 MAY 2021 14:44
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.4.24)  17 MAY 2021 08:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1146,7 +1146,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 356.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 361.
 [1
 
 ]
@@ -1227,6 +1227,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [6]
+File: paper_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/unnamed-chunk-8-1.pdf>
 File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
 rces/JOSS-logo.png Graphic file (type bmp)
 </Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
@@ -1239,20 +1241,46 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[7] (./paper.aux)
+[7]
+File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
+rces/JOSS-logo.png Graphic file (type bmp)
+</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
+JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[8]
+File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
+rces/JOSS-logo.png Graphic file (type bmp)
+</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
+JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[9] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 11B86F7CE83241B2FC59B2C486E51A00;1706.
+(rerunfilecheck)             Checksum: E7D2EDCB62A4F0382B833E44B98EDBB2;1715.
 Package logreq Info: Writing requests to 'paper.run.xml'.
 \openout1 = `paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34928 strings out of 478918
- 703569 string characters out of 5865955
- 1492807 words of memory out of 5000000
- 54224 multiletter control sequences out of 15000+600000
+ 34935 strings out of 478918
+ 703893 string characters out of 5865955
+ 1493845 words of memory out of 5000000
+ 54230 multiletter control sequences out of 15000+600000
  410310 words of font info for 76 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 95i,12n,103p,1194b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 95i,13n,103p,1194b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paper.pdf (7 pages).
+Output written on paper.pdf (9 pages).
