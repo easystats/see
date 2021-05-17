@@ -91,7 +91,7 @@ library(see)
 
 mod <- lm(wt ~ am * cyl, mtcars)
 
-plot(parameters(mod)) + 
+plot(parameters(mod)) +
   ggplot2::labs(title = "A Dot-and-Whisker Plot")
 ```
 
@@ -117,10 +117,6 @@ library(performance)
 library(see)
 
 mod <- lm(wt ~ mpg, mtcars)
-
-plot(check_normality(mod))
-
-# or equivalently
 check <- check_normality(mod)
 
 plot(check)
@@ -141,7 +137,7 @@ plot(omega_squared(mod))
 
 ## Visualizing Marginal Effects
 
-The *modelbased* package computes a range of quantities from fit regression models [@Makowski2020modelbased]. With minimal and human-readable code, users start by passing the model object to the relevant *modelbased* function(s) (`estimate_contrasts()` and `estimate_means()` in the example to follow). Then, these new objects containing the *modelbased* quantities are then passed to `plot()` from the *see* package. Of note, in the following example *two* quantities (objects `contrasts` and `means`) are passed to `plot()`, demonstrating and deepening the flexibility of the package.
+The *modelbased* package computes a range of quantities from fit regression models [@Makowski2020modelbased]. With minimal and human-readable code, users start by passing the model object to the relevant *modelbased* function(s) (`estimate_contrasts()` and `estimate_means()` in the example to follow). Then, these new objects containing the *modelbased* quantities are passed to `plot()` from the *see* package. Of note, in the following example *two* quantities (objects `contrasts` and `means`) are passed to `plot()`, demonstrating and deepening the flexibility of the package.
 
 ```{r}
 library(modelbased)
@@ -176,5 +172,3 @@ plot(summary(result))
 *see* is part of the collaborative [*easystats*](https://github.com/easystats/easystats) ecosystem. Thus, we thank the [members of easystats](https://github.com/orgs/easystats/people) as well as the users.
 
 # References
-
-
