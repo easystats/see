@@ -95,7 +95,7 @@ plot(parameters(mod)) +
   ggplot2::labs(title = "A Dot-and-Whisker Plot")
 ```
 
-Similarly, for Bayesian regression model objects, which are handled by the *bayestestR* package [@Makowski2019], the *see* package can also provide special plotting methods relevant only for Bayesian models (e.g., Highest Density Interval, or *HDI*). Similarly, users can fit the model and pass the model results, extracted via `bayestestR`, to `plot()`.
+Similarly, for Bayesian regression model objects, which are handled by the *bayestestR* package [@Makowski2019], the *see* package can also provide special plotting methods relevant only for Bayesian models (e.g., Highest Density Interval, or *HDI*). Similarly, users can fit the model and pass the model results, extracted via *bayestestR*, to `plot()`.
 
 ```{r}
 library(bayestestR)
