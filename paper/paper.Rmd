@@ -72,7 +72,7 @@ Though we introduce only one plotting method for each *easystats* package, many 
 
 ## Visualizing Model Parameters
 
-The *parameters* package converts regression model objects into dataframes [@Lüdecke2020parameters]. The *see* package can take this transformed object and, for example, create a dot-and-whisker plot for the extracted regression estimates simply by passing the `parameters` class object to `plot()`.
+The *parameters* package converts summaries of regression model objects into dataframes [@Lüdecke2020parameters]. The *see* package can take this transformed object and, for example, create a dot-and-whisker plot for the extracted regression estimates simply by passing the `parameters` class object to `plot()`.
 
 ```{r}
 library(parameters)
