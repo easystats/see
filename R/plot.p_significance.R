@@ -119,13 +119,9 @@ data_plot.p_significance <- function(x,
 
 
 
-#' @importFrom rlang .data
-#' @importFrom stats density
 #' @keywords internal
 .compute_densities_ps <- function(x, name = "Y", threshold = 0) {
-  out <- x %>%
-    stats::density() %>%
-    .as.data.frame_density()
+  out <- .as.data.frame_density(stats::density(x))
 
   fifty_cents <- sum(out$y[out$x > threshold]) > (sum(out$y) / 2)
 
@@ -195,9 +191,9 @@ plot.see_p_significance <- function(x,
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   # base setup
-  p <- x %>%
-    as.data.frame() %>%
-    ggplot(aes(
+  p <- ggplot(
+    as.data.frame(x),
+    aes(
       x = .data$x,
       y = .data$y,
       height = .data$height,

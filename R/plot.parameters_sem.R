@@ -118,8 +118,7 @@ plot.see_parameters_sem <- function(x,
     stop("Package 'tidygraph' required for this function to work. Please install it by running `install.packages('tidygraph')`.")
   }
 
-  p <- tidygraph::tbl_graph(x$nodes, x$edges) %>%
-    ggraph::ggraph(...) +
+  p <- ggraph::ggraph(tidygraph::tbl_graph(x$nodes, x$edges), ...) +
 
     # Plot Correlations
     ggraph::geom_edge_arc(aes(

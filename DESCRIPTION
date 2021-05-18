@@ -58,7 +58,6 @@ Imports:
     ggplot2,
     ggridges,
     insight,
-    magrittr,
     parameters (>= 0.13.0),
     rlang
 Suggests:
@@ -76,6 +75,7 @@ Suggests:
     lavaan,
     lme4,
     logspline,
+    magrittr,
     MASS,
     mclust,
     metafor,

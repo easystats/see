@@ -129,16 +129,11 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
 
 
-#' @importFrom rlang .data
-#' @importFrom stats density
-#' @importFrom magrittr "%>%"
 #' @keywords internal
 .compute_densities_hdi <- function(x, hdi, name = "Y") {
   hdi <- hdi[order(hdi$CI, decreasing = TRUE), ]
 
-  out <- x %>%
-    stats::density() %>%
-    .as.data.frame_density()
+  out <-.as.data.frame_density(stats::density(x))
 
   out$HDI_low <- sapply(out$x, .classify_hdi, hdi$CI_low, c(100, 100 * hdi$CI))
   out$HDI_high <- sapply(out$x, .classify_hdi, rev(hdi$CI_high), c(rev(100 * hdi$CI), 100))
@@ -218,9 +213,9 @@ plot.see_hdi <- function(x, data = NULL, show_intercept = FALSE, show_zero = TRU
   # get labels
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
-  p <- x %>%
-    as.data.frame() %>%
-    ggplot(aes(
+  p <- ggplot(
+    as.data.frame(x),
+    aes(
       x = .data$x,
       y = .data$y,
       height = .data$height,
