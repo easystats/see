@@ -54,7 +54,6 @@ Depends:
     stats
 Imports:
     bayestestR,
-    dplyr,
     effectsize,
     ggplot2,
     ggridges,
@@ -66,6 +65,7 @@ Suggests:
     brms,
     coda,
     correlation,
+    dplyr,
     emmeans,
     ggraph,
     ggrepel,

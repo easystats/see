@@ -1,5 +1,4 @@
 #' @importFrom insight clean_parameters
-#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
   if (is.null(data)) {
@@ -67,15 +66,22 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
     dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
   }
 
-  dataplot <- dataplot %>%
-    dplyr::group_by(.data$y, .data$fill) %>%
-    dplyr::mutate(n = dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by(.data$y) %>%
-    dplyr::mutate(prop = .data$n / dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(fill2 = ifelse(.data$prop >= .5, "Most probable", "Less probable")) %>%
-    dplyr::select(-dplyr::one_of("n", "prop"))
+  dataplot <- do.call(
+    rbind,
+    by(dataplot,
+       list(dataplot$y, dataplot$fill),
+       function(df) {df$n <- nrow(df); return(df)}
+    )
+  )
+  dataplot <- do.call(
+    rbind,
+    by(dataplot,
+       dataplot$y,
+       function(df) {df$prop <- df$n / nrow(df); return(df)}
+    )
+  )
+  dataplot$fill2 <- with(dataplot, ifelse(prop >= .5, "Most probable", "Less probable"))
+  dataplot <- dataplot[,which(!names(dataplot) %in% c("n", "prop"))]
 
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
@@ -109,19 +115,18 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
 
 
-#' @importFrom rlang .data
-#' @importFrom stats density
-#' @importFrom dplyr mutate
 #' @keywords internal
 .compute_densities_pd <- function(x, name = "Y") {
-  out <- x %>%
-    stats::density() %>%
-    .as.data.frame_density() %>%
-    dplyr::mutate(fill = ifelse(.data$x < 0, "Negative", "Positive")) %>%
-    dplyr::mutate(height = .data$y, y = name)
+  out <- .as.data.frame_density(
+      stats::density(x)
+    )
+  out$fill <- ifelse(out$x < 0, "Negative", "Positive")
+  out$height <- as.vector(
+    (out$y - min(out$y, na.rm = TRUE)) /
+      diff(range(out$y, na.rm = TRUE), na.rm = TRUE)
+  )
+  out$y <- name
 
-  # normalize
-  out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
   out
 }
 

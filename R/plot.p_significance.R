@@ -1,5 +1,4 @@
 #' @importFrom insight clean_parameters
-#' @importFrom dplyr group_by mutate ungroup select one_of n
 #' @export
 data_plot.p_significance <- function(x,
                                      data = NULL,
@@ -71,15 +70,22 @@ data_plot.p_significance <- function(x,
     dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
   }
 
-  dataplot <- dataplot %>%
-    dplyr::group_by(.data$y, .data$fill) %>%
-    dplyr::mutate(n = dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by(.data$y) %>%
-    dplyr::mutate(prop = .data$n / dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(fill2 = ifelse(.data$prop >= .5, "Most probable", "Less probable")) %>%
-    dplyr::select(-dplyr::one_of("n", "prop"))
+  dataplot <- do.call(
+    rbind,
+    by(dataplot,
+       list(dataplot$y, dataplot$fill),
+       function(df) {df$n <- nrow(df); return(df)}
+    )
+  )
+  dataplot <- do.call(
+    rbind,
+    by(dataplot,
+       dataplot$y,
+       function(df) {df$prop <- df$n / nrow(df); return(df)}
+    )
+  )
+  dataplot$fill2 <- with(dataplot, ifelse(prop >= .5, "Most probable", "Less probable"))
+  dataplot <- dataplot[,which(!names(dataplot) %in% c("n", "prop"))]
 
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
@@ -115,7 +121,6 @@ data_plot.p_significance <- function(x,
 
 #' @importFrom rlang .data
 #' @importFrom stats density
-#' @importFrom dplyr mutate
 #' @keywords internal
 .compute_densities_ps <- function(x, name = "Y", threshold = 0) {
   out <- x %>%
