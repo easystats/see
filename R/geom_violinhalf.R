@@ -48,8 +48,6 @@ geom_violinhalf <- function(mapping = NULL,
 #' @format NULL
 #' @usage NULL
 #' @import ggplot2
-#' @importFrom dplyr mutate group_by arrange desc
-#' @importFrom rlang .data
 #' @keywords internal
 GeomViolinHalf <-
   ggproto("GeomViolinHalf", Geom,
@@ -72,10 +70,12 @@ GeomViolinHalf <-
       data$xmaxv <- data$x + data$violinwidth * (data$xmax - data$x)
 
       # Make sure it's sorted properly to draw the outline
-      newdata <- rbind(
-        dplyr::arrange(dplyr::mutate(data, x = .data$xminv), .data$y),
-        dplyr::arrange(dplyr::mutate(data, x = .data$xmaxv), dplyr::desc(.data$y))
-      )
+      mindata <- maxdata <- data
+      mindata$x <- mindata$xminv
+      mindata <- mindata[order(mindata$y), , drop = FALSE]
+      maxdata$x <- maxdata$xmaxv
+      maxdata <- maxdata[order(maxdata$y, decreasing = TRUE), , drop = FALSE]
+      newdata <- rbind(mindata, maxdata)
 
       # Close the polygon: set first and last point the same
       # Needed for coord_polar and such

@@ -28,8 +28,10 @@ model <- stan_glm(
 result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 data <- data_plot(result, data = model)
 
-p <- data \%>\%
-  ggplot(aes(x = x, y = y, height = height, group = y, fill = fill)) +
+p <- ggplot(,
+  data,
+  aes(x = x, y = y, height = height, group = y, fill = fill)
+) +
   ggridges::geom_ridgeline_gradient()
 
 p

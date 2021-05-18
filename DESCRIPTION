@@ -54,18 +54,17 @@ Depends:
     stats
 Imports:
     bayestestR,
-    dplyr,
     effectsize,
     ggplot2,
     ggridges,
     insight,
-    magrittr,
     parameters (>= 0.13.0),
     rlang
 Suggests:
     brms,
     coda,
     correlation,
+    dplyr,
     emmeans,
     ggraph,
     ggrepel,
@@ -76,6 +75,7 @@ Suggests:
     lavaan,
     lme4,
     logspline,
+    magrittr,
     MASS,
     mclust,
     metafor,
