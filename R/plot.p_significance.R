@@ -72,20 +72,28 @@ data_plot.p_significance <- function(x,
 
   dataplot <- do.call(
     rbind,
-    by(dataplot,
-       list(dataplot$y, dataplot$fill),
-       function(df) {df$n <- nrow(df); return(df)}
+    by(
+      dataplot,
+      list(dataplot$y, dataplot$fill),
+      function(df) {
+        df$n <- nrow(df)
+        return(df)
+      }
     )
   )
   dataplot <- do.call(
     rbind,
-    by(dataplot,
-       dataplot$y,
-       function(df) {df$prop <- df$n / nrow(df); return(df)}
+    by(
+      dataplot,
+      dataplot$y,
+      function(df) {
+        df$prop <- df$n / nrow(df)
+        return(df)
+      }
     )
   )
   dataplot$fill2 <- with(dataplot, ifelse(prop >= .5, "Most probable", "Less probable"))
-  dataplot <- dataplot[,which(!names(dataplot) %in% c("n", "prop"))]
+  dataplot <- dataplot[, which(!names(dataplot) %in% c("n", "prop"))]
 
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
@@ -199,7 +207,8 @@ plot.see_p_significance <- function(x,
       height = .data$height,
       group = .data$y,
       fill = .data$fill
-    )) +
+    )
+  ) +
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x)
 
