@@ -68,20 +68,28 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
   dataplot <- do.call(
     rbind,
-    by(dataplot,
-       list(dataplot$y, dataplot$fill),
-       function(df) {df$n <- nrow(df); return(df)}
+    by(
+      dataplot,
+      list(dataplot$y, dataplot$fill),
+      function(df) {
+        df$n <- nrow(df)
+        return(df)
+      }
     )
   )
   dataplot <- do.call(
     rbind,
-    by(dataplot,
-       dataplot$y,
-       function(df) {df$prop <- df$n / nrow(df); return(df)}
+    by(
+      dataplot,
+      dataplot$y,
+      function(df) {
+        df$prop <- df$n / nrow(df)
+        return(df)
+      }
     )
   )
   dataplot$fill2 <- with(dataplot, ifelse(prop >= .5, "Most probable", "Less probable"))
-  dataplot <- dataplot[,which(!names(dataplot) %in% c("n", "prop"))]
+  dataplot <- dataplot[, which(!names(dataplot) %in% c("n", "prop"))]
 
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
@@ -118,8 +126,8 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' @keywords internal
 .compute_densities_pd <- function(x, name = "Y") {
   out <- .as.data.frame_density(
-      stats::density(x)
-    )
+    stats::density(x)
+  )
   out$fill <- ifelse(out$x < 0, "Negative", "Positive")
   out$height <- as.vector(
     (out$y - min(out$y, na.rm = TRUE)) /

@@ -75,7 +75,6 @@ Suggests:
     lavaan,
     lme4,
     logspline,
-    magrittr,
     MASS,
     mclust,
     metafor,

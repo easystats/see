@@ -25,7 +25,8 @@ in the plot. By default, it is hidden because in many cases the intercept-parame
 has a posterior distribution on a very different location, so density curves of
 posterior distributions for other parameters are hardly visible.}
 
-\item{show_zero}{Logical, if \code{TRUE}, will add a vertical (dotted) line at 0.}
+\item{show_zero}{Logical, if \code{TRUE}, will add a vertical (dotted) line
+at 0.}
 
 \item{show_title}{Logical, if \code{TRUE}, will show the title of the plot.}
 
@@ -39,7 +40,8 @@ panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{bayestestR::hdi()} and related function.
+The \code{plot()} method for the \code{bayestestR::hdi()} and related
+function.
 }
 \examples{
 \donttest{
