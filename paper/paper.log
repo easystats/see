@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.4.24)  17 MAY 2021 08:05
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.4.24)  24 MAY 2021 23:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -107,14 +107,14 @@ x.def
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.
 tex (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex)
-Package: pgfrcs 2020/12/27 v3.1.8b (3.1.8b)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
 ))
-Package: pgf 2020/12/27 v3.1.8b (3.1.8b)
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (
 /Users/patil/Library/TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.cod
 e.tex
-Package: pgfsys 2020/12/27 v3.1.8b (3.1.8b)
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
 .tex
@@ -146,37 +146,37 @@ red.code.tex
 \t@pgf@tokc=\toks23
 \pgf@sys@id@count=\count195
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
-File: pgf.cfg 2020/12/27 v3.1.8b (3.1.8b)
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
 )
 Driver file for pgf: pgfsys-xetex.def
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-xet
 ex.def
-File: pgfsys-xetex.def 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfsys-xetex.def 2021/05/15 v3.1.9a (3.1.9a)
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvi
 pdfmx.def
-File: pgfsys-dvipdfmx.def 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfsys-dvipdfmx.def 2021/05/15 v3.1.9a (3.1.9a)
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-com
 mon-pdf.def
-File: pgfsys-common-pdf.def 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
 )
 \pgfsys@objnum=\count196
 )))
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoft
 path.code.tex
-File: pgfsyssoftpath.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfsyssoftpath@smallbuffer@items=\count197
 \pgfsyssoftpath@bigbuffer@items=\count198
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprot
 ocol.code.tex
-File: pgfsysprotocol.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ))
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.cod
 e.tex
-Package: pgfcore 2020/12/27 v3.1.8b (3.1.8b)
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.
 tex
@@ -216,7 +216,7 @@ integerarithmetics.code.tex)))
 x)
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoin
 ts.code.tex
-File: pgfcorepoints.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@picminx=\dimen161
 \pgf@picmaxx=\dimen162
 \pgf@picminy=\dimen163
@@ -234,19 +234,19 @@ File: pgfcorepoints.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
 construct.code.tex
-File: pgfcorepathconstruct.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@path@lastx=\dimen175
 \pgf@path@lasty=\dimen176
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
 usage.code.tex
-File: pgfcorepathusage.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@shorten@end@additional=\dimen177
 \pgf@shorten@start@additional=\dimen178
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescop
 es.code.tex
-File: pgfcorescopes.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfpic=\box50
 \pgf@hbox=\box51
 \pgf@layerbox@main=\box52
@@ -254,83 +254,83 @@ File: pgfcorescopes.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregrap
 hicstate.code.tex
-File: pgfcoregraphicstate.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgflinewidth=\dimen179
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
 sformations.code.tex
-File: pgfcoretransformations.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@pt@x=\dimen180
 \pgf@pt@y=\dimen181
 \pgf@pt@temp=\dimen182
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequic
 k.code.tex
-File: pgfcorequick.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobje
 cts.code.tex
-File: pgfcoreobjects.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
 processing.code.tex
-File: pgfcorepathprocessing.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearro
 ws.code.tex
-File: pgfcorearrows.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfarrowsep=\dimen183
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshad
 e.code.tex
-File: pgfcoreshade.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@max=\dimen184
 \pgf@sys@shading@range@num=\count268
 \pgf@shadingcount=\count269
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimag
 e.code.tex
-File: pgfcoreimage.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexte
 rnal.code.tex
-File: pgfcoreexternal.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfexternal@startupbox=\box53
 ))
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelaye
 rs.code.tex
-File: pgfcorelayers.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
 sparency.code.tex
-File: pgfcoretransparency.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatt
 erns.code.tex
-File: pgfcorepatterns.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.
 code.tex
-File: pgfcorerdf.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )))
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshape
 s.code.tex
-File: pgfmoduleshapes.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfnodeparttextbox=\box54
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.
 code.tex
-File: pgfmoduleplot.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
 rsion-0-65.sty
-Package: pgfcomp-version-0-65 2020/12/27 v3.1.8b (3.1.8b)
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@nodesepstart=\dimen185
 \pgf@nodesepend=\dimen186
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
 rsion-1-18.sty
-Package: pgfcomp-version-1-18 2020/12/27 v3.1.8b (3.1.8b)
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
 )) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
@@ -339,7 +339,7 @@ Package: pgfcomp-version-1-18 2020/12/27 v3.1.8b (3.1.8b)
 )
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.
 tex
-Package: pgffor 2020/12/27 v3.1.8b (3.1.8b)
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen187
 \pgffor@skip=\dimen188
@@ -348,11 +348,11 @@ Package: pgffor 2020/12/27 v3.1.8b (3.1.8b)
 ))
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tik
 z.code.tex
-Package: tikz 2020/12/27 v3.1.8b (3.1.8b)
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibrarypl
 othandlers.code.tex
-File: pgflibraryplothandlers.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@plot@mark@count=\count270
 \pgfplotmarksize=\dimen189
 )
@@ -375,7 +375,7 @@ File: pgflibraryplothandlers.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematri
 x.code.tex
-File: pgfmodulematrix.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfmatrixcurrentrow=\count275
 \pgfmatrixcurrentcolumn=\count276
 \pgf@matrix@numberofcolumns=\count277
@@ -384,7 +384,7 @@ File: pgfmodulematrix.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
 raries/tikzlibrarytopaths.code.tex
-File: tikzlibrarytopaths.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ))) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2021-02-27 v7.00k Hypertext links for LaTeX
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
@@ -528,7 +528,7 @@ Package caption Info: Standard document class detected.
 \c@continuedfloat=\count292
 Package caption Info: hyperref package is loaded.
 ) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
-Package: tcolorbox 2020/10/09 version 4.42 text color boxes
+Package: tcolorbox 2021/05/21 version 4.50 text color boxes
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks29
@@ -552,8 +552,10 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \tcb@temp=\box65
 \tcb@temp=\box66
 \tcb@temp=\box67
-\tcb@out=\write4
-\tcb@record@out=\write5
+
+LaTeX3 Info: Defining command \tcblistof with sig. 'O{\section }mom' on line
+(LaTeX3)     2149.
+
 ) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -694,7 +696,7 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \bibparsep=\skip66
 \bibhang=\skip67
 \blx@bcfin=\read4
-\blx@bcfout=\write6
+\blx@bcfout=\write4
 \blx@langwohyphens=\language3
 \c@mincomprange=\count351
 \c@maxcomprange=\count352
@@ -880,407 +882,27 @@ r XeLaTeX)
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2021-02-18 L3 programming layer (loader) 
+Package: expl3 2021-05-11 L3 programming layer (loader) 
 
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.de
-f
-File: l3backend-xetex.def 2021-03-18 L3 backend support: XeTeX
-(|extractbb --version)
-\c__kernel_sys_dvipdfmx_version_int=\count436
-\l__color_backend_stack_int=\count437
-\g__color_backend_stack_int=\count438
-\g__graphics_track_int=\count439
-\l__pdf_internal_box=\box70
-\g__pdf_backend_object_int=\count440
-\g__pdf_backend_annotation_int=\count441
-\g__pdf_backend_link_int=\count442
-))
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse-202
-0-10-01.sty
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse-gen
-eric.tex)))
-Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
-Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
-X
-\l__fontspec_script_int=\count443
-\l__fontspec_language_int=\count444
-\l__fontspec_strnum_int=\count445
-\l__fontspec_tmp_int=\count446
-\l__fontspec_tmpa_int=\count447
-\l__fontspec_tmpb_int=\count448
-\l__fontspec_tmpc_int=\count449
-\l__fontspec_em_int=\count450
-\l__fontspec_emdef_int=\count451
-\l__fontspec_strong_int=\count452
-\l__fontspec_strongdef_int=\count453
-\l__fontspec_tmpa_dim=\dimen282
-\l__fontspec_tmpb_dim=\dimen283
-\l__fontspec_tmpc_dim=\dimen284
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (
-/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/User
-s/patil/Library/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks39
-\XKV@tempa@toks=\toks40
-)
-\XKV@depth=\count454
-File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-))
-\c@eu@=\count455
-\c@eu@i=\count456
-\c@mkern=\count457
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
-Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
-\MT@toks=\toks41
-\MT@count=\count458
-LaTeX Info: Redefining \textls on input line 790.
-\MT@outer@kern=\dimen285
-LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
-\MT@listname@count=\count459
+! LaTeX3 Error: Mismatched LaTeX support files detected.
+(LaTeX3)        Loading 'expl3.sty' aborted!
+(LaTeX3)        
+(LaTeX3)        The L3 programming layer in the LaTeX format
+(LaTeX3)        is dated 2021-02-18, but in your TeX tree the files require
+(LaTeX3)        at least 2021-05-11.
 
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype-xetex.de
-f
-File: microtype-xetex.def 2021/03/14 v2.8c Definitions specific to xetex (RS)
-LaTeX Info: Redefining \lsstyle on input line 254.
-)
-Package microtype Info: Loading configuration file microtype.cfg.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
-File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
-))
-Package hyperref Info: Option `unicode' set `true' on input line 151.
-Package hyperref Info: Option `breaklinks' set `true' on input line 151.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2021/01/20 v3.7 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count460
-\FV@InFile=\read5
-\FV@TabBox=\box71
-\c@FancyVerbLine=\count461
-\FV@StepNumber=\count462
-\FV@OutFile=\write7
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
-Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip91
-\fb@frw=\dimen286
-\fb@frh=\dimen287
-\FrameRule=\dimen288
-\FrameSep=\dimen289
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/grffile/grffile.sty
-Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
-y)
-Package grffile Info: This package is an empty stub for compatibility on input 
-line 40.
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty
-Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
-)
-\csllabelwidth=\skip92
-\cslhangindent=\skip93
-\@quotelevel=\count463
-\@quotereset=\count464
-(./paper.aux)
-\openout1 = `paper.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 269.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-69.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
-File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 269.
-LaTeX Font Info:    ... okay on input line 269.
-Package hyperref Info: Link coloring ON on input line 269.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
-Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-)
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestr
-ing.sty
-Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-)
-\c@section@level=\count465
-)
-LaTeX Info: Redefining \ref on input line 269.
-LaTeX Info: Redefining \pageref on input line 269.
-LaTeX Info: Redefining \nameref on input line 269.
-(./paper.out) (./paper.out)
-\@outlinefile=\write8
-\openout8 = `paper.out'.
-
-Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: End \AtBeginDocument code.
-Package biblatex Info: Trying to load language 'english'...
-Package biblatex Info: ... file 'english.lbx' found.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/english.lbx
-File: english.lbx 2020/12/31 v3.16 biblatex localization (PK/MW)
-)
-Package biblatex Info: XeTeX detected.
-(biblatex)             Assuming input encoding 'utf8'.
-Package biblatex Info: Automatic encoding selection.
-(biblatex)             Assuming data encoding 'utf8'.
-Package biblatex Info: Document encoding is UTF8 ....
-Package biblatex Info: ... and expl3
-(biblatex)             2021-02-18 L3 programming layer (loader) 
-(biblatex)             is new enough (at least 2020/04/06),
-(biblatex)             setting 'casechanger=expl3'.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
-Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
-)
-\openout6 = `paper.bcf'.
-
-Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'paper.bbl' not found.
-No file paper.bbl.
-Package biblatex Info: Reference section=0 on input line 269.
-Package biblatex Info: Reference segment=0 on input line 269.
-*geometry* driver: auto-detecting
-*geometry* detected driver: xetex
-*geometry* verbose mode - [ preamble ] result:
-* driver: xetex
-* paper: a4paper
-* layout: <same size as paper>
-* layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: includemp 
-* h-part:(L,W,R)=(28.45274pt, 526.376pt, 42.67912pt)
-* v-part:(T,H,B)=(99.58464pt, 660.10394pt, 85.35826pt)
-* \paperwidth=597.50787pt
-* \paperheight=845.04684pt
-* \textwidth=387.33861pt
-* \textheight=660.10394pt
-* \oddsidemargin=95.22015pt
-* \evensidemargin=95.22015pt
-* \topmargin=-60.28131pt
-* \headheight=62.59596pt
-* \headsep=25.0pt
-* \topskip=10.0pt
-* \footskip=30.0pt
-* \marginparwidth=128.0374pt
-* \marginparsep=11.0pt
-* \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
-* \hoffset=0.0pt
-* \voffset=0.0pt
-* \mag=1000
-* \@twocolumnfalse
-* \@twosidefalse
-* \@mparswitchfalse
-* \@reversemargintrue
-* (1in=72.27pt=25.4mm, 1cm=28.453pt)
-
-LaTeX Info: Redefining \microtypecontext on input line 269.
-Package microtype Info: Character protrusion enabled (level 2).
-Package microtype Info: Using protrusion set `basicmath'.
-Package microtype Info: No adjustment of tracking.
-Package microtype Info: No adjustment of spacing.
-Package microtype Info: No adjustment of kerning.
-
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-LatinModernRoma
-n.cfg
-File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Mod
-ern Roman (RS)
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmss' (encoding: TU).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg
-File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
-(RS)
-)
-LaTeX Font Info:    Trying to load font information for U+msa on input line 270
-.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 270
-.
-(/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (/Users/patil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-
-Package hyperref Warning: Suppressing link with empty target on input line 296.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 296.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 296.
-
-
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 361.
-[1
-
-]
-File: paper_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-2-1.pdf>
-File: paper_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-3-1.pdf>
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[2]
-File: paper_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-4-1.pdf>
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[3]
-File: paper_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-5-1.pdf>
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[4]
-File: paper_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-6-1.pdf>
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[5]
-File: paper_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-7-1.pdf>
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[6]
-File: paper_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-8-1.pdf>
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[7]
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[8]
-File: /Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resou
-rces/JOSS-logo.png Graphic file (type bmp)
-</Users/patil/Library/R/4.0/library/rticles/rmarkdown/templates/joss/resources/
-JOSS-logo.png>
-
-Package fancyhdr Warning: \headheight is too small (62.59596pt): 
-(fancyhdr)                Make it at least 63.55022pt, for example:
-(fancyhdr)                \setlength{\headheight}{63.55022pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
-
-[9] (./paper.aux)
-Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: E7D2EDCB62A4F0382B833E44B98EDBB2;1715.
-Package logreq Info: Writing requests to 'paper.run.xml'.
-\openout1 = `paper.run.xml'.
-
- ) 
+For immediate help type H <return>.
+ ...                                              
+                                                  
+l.77      \ExplLoaderFileDate{expl3.sty}}
+                                         % 
 Here is how much of TeX's memory you used:
- 34935 strings out of 478918
- 703893 string characters out of 5865955
- 1493845 words of memory out of 5000000
- 54230 multiletter control sequences out of 15000+600000
- 410310 words of font info for 76 fonts, out of 8000000 for 9000
+ 28749 strings out of 478918
+ 544598 string characters out of 5865955
+ 994478 words of memory out of 5000000
+ 48236 multiletter control sequences out of 15000+600000
+ 403798 words of font info for 29 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 95i,13n,103p,1194b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,0n,88p,416b,134s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paper.pdf (9 pages).
+No pages of output.
