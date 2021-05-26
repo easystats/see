@@ -86,9 +86,9 @@ The *parameters* package converts summaries of regression model objects into dat
 library(parameters)
 library(see)
 
-mod <- lm(wt ~ am * cyl, mtcars)
+model <- lm(wt ~ am * cyl, mtcars)
 
-plot(parameters(mod))
+plot(parameters(model))
 ```
 
 As *see* outputs objects of class `ggplot`, *ggplot2* functions can be added as layers to the plot as with all other *ggplot2* visualizations. For example, we might add a title using `labs()` from *ggplot2*.
@@ -97,9 +97,9 @@ As *see* outputs objects of class `ggplot`, *ggplot2* functions can be added as 
 library(parameters)
 library(see)
 
-mod <- lm(wt ~ am * cyl, mtcars)
+model <- lm(wt ~ am * cyl, mtcars)
 
-plot(parameters(mod)) +
+plot(parameters(model)) +
   ggplot2::labs(title = "A Dot-and-Whisker Plot")
 ```
 
@@ -110,8 +110,8 @@ library(bayestestR)
 library(rstanarm)
 library(see)
 
-mod <- stan_glm(wt ~ mpg, data = mtcars, refresh = 0)
-result <- hdi(mod, ci = c(0.5, 0.75, 0.89, 0.95))
+model <- stan_glm(wt ~ mpg, data = mtcars, refresh = 0)
+result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
 
 plot(result)
 ```
@@ -124,8 +124,8 @@ The *performance* package is primarily concerned with checking regression model 
 library(performance)
 library(see)
 
-mod <- lm(wt ~ mpg, mtcars)
-check <- check_normality(mod)
+model <- lm(wt ~ mpg, mtcars)
+check <- check_normality(model)
 
 plot(check, type = "qq")
 ```
@@ -138,9 +138,9 @@ In addition to providing tabular summaries of regression model objects, the *eas
 library(effectsize)
 library(see)
 
-mod <- aov(wt ~ am * cyl, mtcars)
+model <- aov(wt ~ am * cyl, mtcars)
 
-plot(omega_squared(mod))
+plot(omega_squared(model))
 ```
 
 ## Visualizing Marginal Effects
@@ -152,9 +152,9 @@ library(modelbased)
 library(rstanarm)
 library(see)
 
-mod <- stan_glm(wt ~ as.factor(cyl), data = mtcars, refresh = 0)
-contrasts <- estimate_contrasts(mod)
-means <- estimate_means(mod)
+model <- stan_glm(wt ~ as.factor(cyl), data = mtcars, refresh = 0)
+contrasts <- estimate_contrasts(model)
+means <- estimate_means(model)
 
 plot(contrasts, means)
 ```
@@ -167,9 +167,9 @@ The *correlation* package provides a unified syntax and human-readable code to c
 library(correlation)
 library(see)
 
-result <- correlation(iris, type = "percentage")
+results <- correlation(iris, type = "percentage")
 
-plot(summary(result))
+plot(summary(results))
 ```
 
 # Licensing and Availability
