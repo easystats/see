@@ -246,7 +246,7 @@ Default to .95.</p></td>
 <span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>gear</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://easystats.github.io/parameters/reference/simulate_parameters.html'>simulate_parameters</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 <span class='va'>result</span>
-</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Fixed Effects</span><span>
+</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Fixed Effects</span>
 #&gt; 
 #&gt; Parameter   | Coefficient |         95% CI |      p
 #&gt; ---------------------------------------------------
@@ -254,7 +254,7 @@ Default to .95.</p></td>
 #&gt; wt          |       -3.39 | [-4.99, -1.75] | &lt; .001
 #&gt; cyl         |       -1.54 | [-2.40, -0.70] | &lt; .001
 #&gt; gear        |       -0.47 | [-2.11,  1.07] | 0.530 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in MASS::mvrnorm(n = iterations, mu = beta, Sigma = varcov): incompatible arguments</span></div></span></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in MASS::mvrnorm(n = iterations, mu = beta, Sigma = varcov): incompatible arguments</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

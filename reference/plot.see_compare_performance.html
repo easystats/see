@@ -193,14 +193,14 @@
 <span class='va'>lm3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span> <span class='op'>*</span> <span class='va'>Petal.Length</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://easystats.github.io/performance/reference/compare_performance.html'>compare_performance</a></span><span class='op'>(</span><span class='va'>lm1</span>, <span class='va'>lm2</span>, <span class='va'>lm3</span><span class='op'>)</span>
 <span class='va'>result</span>
-</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Comparison of Model Performance Indices</span><span>
+</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Comparison of Model Performance Indices</span>
 #&gt; 
 #&gt; Name | Model |     AIC |     BIC |    R2 | R2 (adj.) |  RMSE | Sigma
 #&gt; --------------------------------------------------------------------
 #&gt; lm1  |    lm | 231.452 | 243.494 | 0.619 |     0.614 | 0.510 | 0.515
 #&gt; lm2  |    lm | 106.233 | 121.286 | 0.837 |     0.833 | 0.333 | 0.338
 #&gt; lm3  |    lm | 106.767 | 127.842 | 0.840 |     0.835 | 0.330 | 0.336</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.see_compare_performance-1.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='plot.see_compare_performance-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
