@@ -58,17 +58,17 @@ knitr::opts_chunk$set(
 
 # Summary
 
-*Easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language [@base2021]. Though most of the packages return comprehensive numeric summaries of model parameters and performance, the ability to visulaize model output leads to more informative, well-rounded scientific reporting. As a core member of the *easystats* ecosystem and built on top of *ggplot2*, the *see* package offers a host of functions and tools for a range of publication-ready statistical visualizations.
+*Easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language [@base2021]. Though most of the packages return comprehensive numeric summaries of model parameters and performance, the ability to visualize model output leads to more informative, well-rounded scientific reporting. As a core member of the *easystats* ecosystem and built on top of *ggplot2*, the *see* package offers a host of functions and tools for a range of publication-ready statistical visualizations.
 
 # Statement of Need
 
 A number of data visualization tools built on *ggplot2* [@Wickham2016] exist for graphically exploring statistical models^[For a sampling of these packages, see: <https://exts.ggplot2.tidyverse.org/gallery/>]. A few of these packages provide ready-made plots or geometric layers for conveniently preparing common visualizations, but without linking them to any particular statistical analyses (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, etc.). A few other packages *do* provide visualizations linked to particular statistical analyses (e.g., *ggpubr*, *tidymv*, *ggstatsplot*, *survminer*, etc.), but they tend to be more specialized. For example, the *ggstatsplot* package [@Patil2021] offers visualizations only for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] offers *ggplot2* visualizations of specific types of mixture model objects. 
 
-The *see* package, on the other hand, is designed to work with a wide range of statistical models and provides a more comprehensive *ggplot2*-based visualization toolbox corresponding with all stages of statistical analysis, from model fitting to reporting. Additionally, as a core member of the *easystats* ecosystem, *see* is built upon, and in line with, the common syntax and philosophy of the ecosystem. The result is an efficient package with consistent syntax that minimizes the barrier to producing high-quality statistical visualizations in R.
+The *see* package, on the other hand, is designed to work with a wide range of statistical models <!-- MSB: but is true? The plotting methods are for the results from other easystats function... -->and provides a more comprehensive *ggplot2*-based visualization toolbox corresponding with all stages of statistical analysis, from model fitting to reporting. Additionally, as a core member of the *easystats* ecosystem, *see* is built upon, and in line with, the common syntax and philosophy of the ecosystem<!-- MSB: is this true? For the most park users will only use `plot()` and all the magic happens under the hood... -->. The result is an efficient package with consistent syntax that minimizes the barrier to producing high-quality statistical visualizations in R.
 
 # Features
 
-Though we introduce only one plotting method for each *easystats* package, many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
+Though we introduce here only one plotting method for each *easystats* package, many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
 
 ## Visualizing Model Parameters
 
@@ -119,7 +119,7 @@ library(see)
 mod <- lm(wt ~ mpg, mtcars)
 check <- check_normality(mod)
 
-plot(check)
+plot(check, type = "qq")
 ```
 
 ## Visualizing Effect Sizes
@@ -141,13 +141,14 @@ The *modelbased* package computes a range of quantities from fit regression mode
 
 ```{r}
 library(modelbased)
+library(rstanarm)
 library(see)
 
 mod <- stan_glm(wt ~ as.factor(cyl), data = mtcars, refresh = 0)
 contrasts <- estimate_contrasts(mod)
 means <- estimate_means(mod)
 
-plot(contrasts, means)
+plot(contrasts, data = means)
 ```
 
 ## Visualizing Correlation Matrices
