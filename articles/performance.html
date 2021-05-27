@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3-1</span>
       </span>
     </div>
 
@@ -314,7 +314,7 @@
 <p>Note that not all checks supported in <code>performance</code> will be reported in this unified <strong>visual</strong> check. For example, for linear models, one needs to check the assumption that errors are not autocorrelated, but this check will not be shown in the visual check.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://easystats.github.io/performance/reference/check_autocorrelation.html">check_autocorrelation</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.004).</span></code></pre></div>
+<span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.002).</span></code></pre></div>
 </div>
 <div id="compare-model-performances" class="section level1">
 <h1 class="hasAnchor">
@@ -431,7 +431,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://github.com/strengejacke">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a>, <a href="https://github.com/mattansb">Mattan S. Ben-Shachar</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/">Indrajeet Patil</a>, Philip Waggoner.</p>
+  <p>Developed by <a href="https://github.com/strengejacke">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/">Indrajeet Patil</a>, <a href="https://github.com/mattansb">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/">Brenton M. Wiernik</a>, Philip Waggoner.</p>
 </div>
 
 <div class="pkgdown">
