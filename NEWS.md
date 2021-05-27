@@ -1,4 +1,8 @@
-# see 0.6.3-1
+# see 0.6.4
+
+## General
+
+* Reduced/removed some package dependencies.
 
 ## New features
 
