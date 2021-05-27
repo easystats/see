@@ -1,7 +1,7 @@
 bibentry(
   bibtype="Article",
   title="see: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'",
-  author=c(person("Daniel", "Lüdecke"), person("Mattan S.", "Ben-Shachar"), person("Indrajeet", "Patil"), person("Philip", "Waggoner"), person("Dominique", "Makowski")),
+  author=c(person("Daniel", "Lüdecke"), person("Indrajeet", "Patil"), person("Mattan S.", "Ben-Shachar"), person("Brenton M.", "Wiernik"), person("Philip", "Waggoner"), person("Dominique", "Makowski")),
   journal="CRAN",
   year="2020",
   note="R package",
@@ -9,7 +9,7 @@ bibentry(
   url="https://easystats.github.io/see/",
 
   textVersion =
-    paste("Lüdecke, Ben-Shachar, Patil, Waggoner & Makowski (2020). Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'. CRAN.",
+    paste("Lüdecke, Patil, Ben-Shachar, Wiernik, Waggoner & Makowski (2020). Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and Color Palettes for 'ggplot2'. CRAN.",
           "Available from https://easystats.github.io/see/"
     ),
   mheader = "To cite see in publications use:"
