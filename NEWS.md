@@ -1,3 +1,9 @@
+# see 0.6.3-1
+
+## New features
+
+* Plotting for normality check is now supported for `afex_aov` models.
+
 # see 0.6.3
 
 ## New plot functions
