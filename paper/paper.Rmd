@@ -10,11 +10,11 @@ authors:
   name: Daniel Lüdecke
   orcid: 0000-0002-8895-3206
 - affiliation: 2
-  name: Mattan S. Ben-Shachar
-  orcid: 0000-0002-4287-4801
-- affiliation: 3
   name: Indrajeet Patil
   orcid: 0000-0003-1995-6531
+- affiliation: 3
+  name: Mattan S. Ben-Shachar
+  orcid: 0000-0002-4287-4801
 - affiliation: 4
   name: Brenton M. Wiernik
   orcid: 0000-0001-9560-6336
@@ -28,9 +28,9 @@ affiliations:
 - index: 1
   name:  University Medical Center Hamburg-Eppendorf, Germany
 - index: 2
-  name: Ben-Gurion University of the Negev, Israel
+  name: Center for Humans and Machines, Max Planck Institute for Human Development, Berlin, Germany  
 - index: 3
-  name: Center for Humans and Machines, Max Planck Institute for Human Development, Berlin, Germany
+  name: Ben-Gurion University of the Negev, Israel
 - index: 4
   name: Department of Psychology, University of South Florida, USA 
 - index: 5
