@@ -146,7 +146,7 @@ library(modelbased)
 library(rstanarm)
 library(see)
 
-model <- stan_glm(wt ~ as.factor(cyl), data = mtcars, refresh = 0)
+model <- lm(Sepal.Width ~ Species, data = iris)
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
 
