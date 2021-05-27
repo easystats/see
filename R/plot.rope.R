@@ -35,7 +35,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
   }
 
   # Extract data HDI
-  dataplot <- .data_plot_hdi(hdi, data, parms = params)
+  dataplot <- .data_plot_hdi(hdi, data, parms = params, show_intercept = show_intercept)
   rope_range <- unique(c(x$ROPE_low, x$ROPE_high))
   if (length(rope_range) != 2) {
     stop("Only one ROPE range accepted.")

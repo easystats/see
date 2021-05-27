@@ -8,6 +8,11 @@
 
 * Plotting for normality check is now supported for `afex_aov` models.
 
+## Bug fixes
+
+* Fixed issue that argument `show_intercept` is no longer ignored in `plot()` 
+  for `rope()`.
+
 # see 0.6.3
 
 ## New plot functions
