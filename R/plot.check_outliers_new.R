@@ -43,11 +43,20 @@
       color = colors[1]
     ) +
     scale_colour_manual(values = c("OK" = colors[2], "Influential" = colors[3])) +
-    ggrepel::geom_text_repel(
-      data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
-      aes(label = .data$Index, colour = .data$Influential),
-      size = size_text
-    ) +
+    (if (requireNamespace("ggrepel", quietly = TRUE)) {
+      ggrepel::geom_text_repel(
+        data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
+        aes(label = .data$Index, colour = .data$Influential),
+        size = size_text
+      )
+    } else {
+      geom_text(
+        data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
+        aes(label = .data$Index, colour = .data$Influential),
+        size = size_text, position = position_nudge(x = diff(range(plot_data$Hat)) / 40,
+                                                    y = diff(range(plot_data$Std_Residuals)) / 20)
+      )
+    }) +
     labs(
       x = expression("Leverage (" * h[ii] * ")"),
       y = "Std. Residuals",
