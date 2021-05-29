@@ -47,6 +47,10 @@ plot.see_bayesfactor_models <-
            log = FALSE,
            prior_odds = NULL,
            ...) {
+    if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
+      x$BF <- exp(x$log_BF)
+    }
+
     n_pies <- match.arg(n_pies)
     value <- match.arg(value)
 
