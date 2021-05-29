@@ -4,6 +4,9 @@
 
 * Reduced/removed some package dependencies.
 
+* Revise `plot()` for `bayestestR::bayesfactor()` to meet forthcoming changes
+  in the _bayestestR_ package.
+
 ## New features
 
 * Plotting for normality check is now supported for `afex_aov` models.
