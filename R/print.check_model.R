@@ -255,7 +255,7 @@ print.see_check_model <- function(x,
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = .8) {
-  if (requireNamespace("qqplotr")) {
+  if (requireNamespace("qqplotr", quietly = TRUE)) {
     qq_stuff <- list(
       qqplotr::stat_qq_band(alpha = alpha_level, detrend = detrend),
       qqplotr::stat_qq_line(
