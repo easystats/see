@@ -77,9 +77,7 @@ The central goal of *easystats* is to make the task of doing statistics in R as 
 
 # Features
 
-Below we present one or two plotting methods for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
-
-\newpage
+Below we present one plotting method for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
 
 ## Visualizing Model Parameters
 
@@ -98,8 +96,6 @@ plot(parameters(model))
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-3-1} 
 
-\newpage
-
 As *see* outputs objects of class `ggplot`, *ggplot2* functions can be added as layers to the plot the same as with all other *ggplot2* visualizations. For example, we might add a title using `labs()` from *ggplot2*.
 
 
@@ -115,8 +111,6 @@ plot(parameters(model)) +
 
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-4-1} 
-
-\newpage
 
 Similarly, for Bayesian regression model objects, which are handled by the *bayestestR* package [@Makowski2019], the *see* package provides special plotting methods relevant for Bayesian models (e.g., Highest Density Interval, or *HDI*). Users can fit the model and pass the model results, extracted via *bayestestR*, to `plot()`.
 
@@ -134,8 +128,6 @@ plot(result)
 
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-5-1} 
-
-\newpage
 
 ## Visualizing Model Performance and Diagnostic Checks
 
@@ -158,8 +150,6 @@ plot(check, type = "qq")
 
 <!-- If we don't want to add a predicted values line plot for modelbased, it would be nice to make the manual ggplot2 example match one of the see plots, so swapping in a check_heteroscedasticity() plot would be good. -->
 
-\newpage
-
 ## Visualizing Effect Sizes
 
 The *effectsize* package computes a variety of effect size metrics for fitted models to assesses the practical importance of observed effects [@Ben-Shachar2020]. In conjunction with *see*, users are able to visualize the magnitude and uncertainty of effect sizes by passing the model object to the relevant *effectsize* function (`omega_squared()` in the following example), and then to `plot()`.
@@ -176,8 +166,6 @@ plot(omega_squared(model))
 
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-7-1} 
-
-\newpage
 
 ## Visualizing Marginal Effects
 
@@ -203,26 +191,39 @@ plot(contrasts, means)
 
 <!-- We've been using mtcars the entire paper but now switch to iris? Why not keep using mtcars with one of the factor variables like `cyl` as the groups? -->
 
-\newpage
-
 ## Visualizing Correlation Matrices
 
-The *correlation* package provides a unified syntax and human-readable code to carry out many types of correlation analysis [@Makowski2020]. A user can run `summary(correlation(data))` to create a construct a correlation matrix for the variables in a dataframe. With *see*, this matrix can be passed to `plot()` to visualize these correlations in a corrgram..
+The *correlation* package provides a unified syntax and human-readable code to carry out many types of correlation analysis [@Makowski2020]. With *see* Results from the `correlation()` function can be passed to `plot()` to visualize these correlations in a network plot.
 
 
 ```r
 library(correlation)
 library(see)
 
-results <- summary(correlation(iris))
+results <- correlation(iris)
 
 plot(results)
+#> NULL
+```
+
+<!-- What did `type = "percentage"` do there? It didn't seem to have any effect removing it? -->
+
+Results from the `correlation()` function can also be passed first to `summary()` then to `plot()` to render these correlations in a corrgram.
+
+
+```r
+library(correlation)
+library(see)
+
+results <- correlation(iris)
+
+plot(summary(results))
 ```
 
 
-\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-9-1} 
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-10-1} 
 
-<!-- What did `type = "percentage"` do there? It didn't seem to have any effect removing it? -->
+<!-- Given the emphasis we place on 'just pass it to `plot()`, it seems odd to only present a figure that requires passing first to `summary()` then to `plot()`. -->
 
 # Licensing and Availability
 
