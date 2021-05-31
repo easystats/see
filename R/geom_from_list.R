@@ -1,9 +1,9 @@
-#' Create a ggplot2 geom from a list
+#' Create ggplot2 geom(s) from a list
 #'
-#' This helper function is built on top of \code{ggplot2::layer()} and can be used
-#' to add a geom which type and content is specified as a list.
+#' These helper functions are built on top of \code{ggplot2::layer()} and can be used
+#' to add geom(s) which type and content is specified as a list.
 #'
-#' @param x A list containing a geom type (e.g., \code{geom = "point"}), a list of aesthetics (as characters; e.g., \code{aes = list(x = "mpg", y = "wt")}), some data (e.g., \code{data = mtcars}) and some other parameters.
+#' @param x A list containing a geom type (e.g., \code{geom = "point"}), a list of aesthetics (as characters; e.g., \code{aes = list(x = "mpg", y = "wt")}), some data (e.g., \code{data = mtcars}) and some other parameters. For \code{geoms_from_list()} ("geoms" with an "s"), the input must be a list of lists, ideally named \code{"l1", "l2", "l3"}, etc.
 #'
 #' @examples
 #' library(ggplot2)
@@ -17,6 +17,10 @@
 #' ggplot() +
 #'   geom_from_list(l1) +
 #'   geom_from_list(l2)
+#'
+#' ggplot() +
+#'   geoms_from_list(list(l1 = l1, l2 = l2))
+#'
 #'
 #' @export
 geom_from_list <- function(x, ...) {
@@ -38,4 +42,20 @@ geom_from_list <- function(x, ...) {
                  data = x$data,
                  params = args,
                  ...)
+}
+
+
+#' @export
+geoms_from_list <- function(x, ...) {
+
+  # Get name of layers
+  n <- length(x)
+  l_names <- paste0("l", 1:n)
+  if(!all(l_names %in% names(x))) l_names <- names(x)
+
+  layers <- list()
+  for(i in l_names) {
+    layers[[i]] <- geom_from_list(x[[i]])
+  }
+  layers
 }
