@@ -50,7 +50,7 @@ geom_from_list <- function(x, ...) {
   # Position
   if("position" %in% names(x)) {
     if(is.character(x$position) && x$position == "dodge") {
-      position <- ggplot2::position_dodge(width = x$width, height = x$height)
+      position <- ggplot2::position_dodge(width = x$width)
     } else if (is.character(x$position) && x$position == "jitter") {
       position <- ggplot2::position_jitter(width = x$width, height = x$height)
     } else {
