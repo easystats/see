@@ -16,6 +16,7 @@ to add geom(s) which type and content is specified as a list.
 \examples{
 library(ggplot2)
 
+# Example 1
 l1 <- list(geom = "point",
            data = mtcars,
            aes = list(x = "mpg", y = "wt"))
@@ -29,5 +30,12 @@ ggplot() +
 ggplot() +
   geoms_from_list(list(l1 = l1, l2 = l2))
 
+# Example 2
+l1 <- list(geom = "jitter",
+           data = iris,
+           width = 0.1,
+           aes = list(x = "Species", y = "Sepal.Width"))
 
+ggplot() +
+  geom_from_list(l1)
 }

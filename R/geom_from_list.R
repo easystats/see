@@ -8,6 +8,7 @@
 #' @examples
 #' library(ggplot2)
 #'
+#' # Example 1
 #' l1 <- list(geom = "point",
 #'            data = mtcars,
 #'            aes = list(x = "mpg", y = "wt"))
@@ -21,12 +22,19 @@
 #' ggplot() +
 #'   geoms_from_list(list(l1 = l1, l2 = l2))
 #'
+#' # Example 2
+#' l1 <- list(geom = "jitter",
+#'            data = iris,
+#'            width = 0.1,
+#'            aes = list(x = "Species", y = "Sepal.Width"))
 #'
+#' ggplot() +
+#'   geom_from_list(l1)
 #' @export
 geom_from_list <- function(x, ...) {
 
   # Separate additional parameters
-  args <- x[!names(x) %in% c("geom", "aes", "data")]
+  args <- x[!names(x) %in% c("geom", "aes", "data", "width")]
 
   # If labs, return immediately
   if(x$geom == "labs") return(do.call(ggplot2::labs, args))
@@ -34,7 +42,7 @@ geom_from_list <- function(x, ...) {
   # Fix for geom_jitter (because geom cannot be 'jitter')
   if(x$geom == "jitter") {
     x$geom <- "point"
-    position <- "jitter"
+    position <- ggplot2::position_jitter(width = x$width, height = x$height)
   } else {
     position <- "identity"
   }
@@ -44,7 +52,7 @@ geom_from_list <- function(x, ...) {
 
   # Create layer
   ggplot2::layer(stat = "identity",
-                 position = "identity",
+                 position = position,
                  geom = x$geom,
                  mapping = aes_list,
                  data = x$data,
