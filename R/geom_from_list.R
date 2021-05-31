@@ -31,6 +31,14 @@ geom_from_list <- function(x, ...) {
   # If labs, return immediately
   if(x$geom == "labs") return(do.call(ggplot2::labs, args))
 
+  # Fix for geom_jitter (because geom cannot be 'jitter')
+  if(x$geom == "jitter") {
+    x$geom <- "point"
+    position <- "jitter"
+  } else {
+    position <- "identity"
+  }
+
   # Aesthetics
   aes_list <- do.call(ggplot2::aes_string, x$aes)
 
