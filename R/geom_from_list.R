@@ -34,7 +34,7 @@
 geom_from_list <- function(x, ...) {
 
   # Separate additional parameters
-  args <- x[!names(x) %in% c("geom", "aes", "data", "width")]
+  args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position")]
 
   # If labs, return immediately
   if(x$geom == "labs") return(do.call(ggplot2::labs, args))
@@ -45,6 +45,17 @@ geom_from_list <- function(x, ...) {
     position <- ggplot2::position_jitter(width = x$width, height = x$height)
   } else {
     position <- "identity"
+  }
+
+  # Position
+  if("position" %in% names(x)) {
+    if(is.character(x$position) && x$position == "dodge") {
+      position <- ggplot2::position_dodge(width = x$width, height = x$height)
+    } else if (is.character(x$position) && x$position == "jitter") {
+      position <- ggplot2::position_jitter(width = x$width, height = x$height)
+    } else {
+      position <- x$position
+    }
   }
 
   # Aesthetics
