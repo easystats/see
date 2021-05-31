@@ -23,13 +23,18 @@
 #'   geoms_from_list(list(l1 = l1, l2 = l2))
 #'
 #' # Example 2
-#' l1 <- list(geom = "jitter",
+#' l1 <- list(geom = "violin",
+#'            data = iris,
+#'            aes = list(x = "Species", y = "Sepal.Width"))
+#' l2 <- list(geom = "jitter",
 #'            data = iris,
 #'            width = 0.1,
 #'            aes = list(x = "Species", y = "Sepal.Width"))
 #'
 #' ggplot() +
-#'   geom_from_list(l1)
+#'   geom_from_list(l1) +
+#'   geom_from_list(l2)
+#'
 #' @export
 geom_from_list <- function(x, ...) {
 
@@ -39,12 +44,18 @@ geom_from_list <- function(x, ...) {
   # If labs, return immediately
   if(x$geom == "labs") return(do.call(ggplot2::labs, args))
 
+  # Default parameters
+  stat <- "identity"
+  position <- "identity"
+
   # Fix for geom_jitter (because geom cannot be 'jitter')
   if(x$geom == "jitter") {
     x$geom <- "point"
     position <- ggplot2::position_jitter(width = x$width, height = x$height)
-  } else {
-    position <- "identity"
+  }
+  if(x$geom == "violin") {
+    stat <- "ydensity"
+    position <- "dodge"
   }
 
   # Position
@@ -62,7 +73,7 @@ geom_from_list <- function(x, ...) {
   aes_list <- do.call(ggplot2::aes_string, x$aes)
 
   # Create layer
-  ggplot2::layer(stat = "identity",
+  ggplot2::layer(stat = stat,
                  position = position,
                  geom = x$geom,
                  mapping = aes_list,
