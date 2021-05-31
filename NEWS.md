@@ -1,4 +1,4 @@
-# see 0.6.4
+# see 0.6.5
 
 ## General
 
@@ -8,6 +8,8 @@
   in the _bayestestR_ package.
 
 ## New features
+
+* New functions `geom_from_list` and `geoms_from_list` to create geoms from lists.
 
 * Plotting for normality check is now supported for `afex_aov` models.
 
