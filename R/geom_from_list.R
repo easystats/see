@@ -50,6 +50,12 @@
 #' ggplot() +
 #'   geom_from_list(list(geom = "density_2d_polygon", data = iris,
 #'                       aes = list(x = "Sepal.Width", y = "Petal.Length")))
+#'
+#' ggplot() +
+#'   geom_from_list(list(geom = "density_2d_raster", data = iris,
+#'                       aes = list(x = "Sepal.Width", y = "Petal.Length"))) +
+#'   scale_x_continuous(expand = c(0, 0)) +
+#'   scale_y_continuous(expand = c(0, 0))
 #' @export
 geom_from_list <- function(x, ...) {
 
@@ -89,6 +95,10 @@ geom_from_list <- function(x, ...) {
     stat <- ggplot2::StatDensity2d
     x$geom <- "polygon"
     if(!"fill" %in% names(x$aes)) x$aes$fill <- "..level.."
+  } else if(x$geom == "density_2d_raster") {
+    stat <- ggplot2::StatDensity2d
+    x$geom <- "raster"
+    if(!"fill" %in% names(x$aes)) x$aes$fill <- "..density.."
   }
 
   # Position
