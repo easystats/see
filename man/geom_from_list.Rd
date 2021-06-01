@@ -16,7 +16,7 @@ to add geom(s) which type and content is specified as a list.
 \examples{
 library(ggplot2)
 
-# Example 1
+# Example 1 (basic geoms and labels) --------------------------
 l1 <- list(geom = "point",
            data = mtcars,
            aes = list(x = "mpg", y = "wt"))
@@ -30,7 +30,7 @@ ggplot() +
 ggplot() +
   geoms_from_list(list(l1 = l1, l2 = l2))
 
-# Example 2
+# Example 2 (Violin, boxplots, ...) --------------------------
 l1 <- list(geom = "violin",
            data = iris,
            aes = list(x = "Species", y = "Sepal.Width"))
@@ -48,7 +48,7 @@ ggplot() +
   geom_from_list(l2)  +
   geom_from_list(l3)
 
-# Example 3
+# Example 3 (2D density) --------------------------
 ggplot() +
   geom_from_list(list(geom = "density_2d", data = iris,
                       aes = list(x = "Sepal.Width", y = "Petal.Length")))
@@ -58,7 +58,6 @@ ggplot() +
 ggplot() +
   geom_from_list(list(geom = "density_2d_polygon", data = iris,
                       aes = list(x = "Sepal.Width", y = "Petal.Length")))
-
 ggplot() +
   geom_from_list(list(geom = "density_2d_raster", data = iris,
                       aes = list(x = "Sepal.Width", y = "Petal.Length"))) +
