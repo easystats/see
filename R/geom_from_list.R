@@ -40,11 +40,26 @@
 #'   geom_from_list(l2)  +
 #'   geom_from_list(l3)
 #'
+#' # Example 3
+#' ggplot() +
+#'   geom_from_list(list(geom = "density_2d", data = iris,
+#'                       aes = list(x = "Sepal.Width", y = "Petal.Length")))
+#' ggplot() +
+#'   geom_from_list(list(geom = "density_2d_filled", data = iris,
+#'                       aes = list(x = "Sepal.Width", y = "Petal.Length")))
+#' ggplot() +
+#'   geom_from_list(list(geom = "density_2d_polygon", data = iris,
+#'                       aes = list(x = "Sepal.Width", y = "Petal.Length")))
 #' @export
 geom_from_list <- function(x, ...) {
 
-  # Separate additional parameters
+  # Additional parameters ------------------------------------------------------
   args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position")]
+
+  if(x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
+    if(!"contour" %in% names(args)) args$contour <- TRUE
+    if(!"contour_var" %in% names(args)) args$contour_var <- "density"
+  }
 
   # If labs, return immediately
   if(x$geom == "labs") return(do.call(ggplot2::labs, args))
@@ -66,6 +81,14 @@ geom_from_list <- function(x, ...) {
   } else if(x$geom == "boxplot") {
     stat <- "boxplot"
     position <- "dodge2"
+  } else if(x$geom == "density_2d"){
+    stat <- ggplot2::StatDensity2d
+  } else if(x$geom == "density_2d_filled") {
+    stat <- ggplot2::StatDensity2dFilled
+  } else if(x$geom == "density_2d_polygon") {
+    stat <- ggplot2::StatDensity2d
+    x$geom <- "polygon"
+    if(!"fill" %in% names(x$aes)) x$aes$fill <- "..level.."
   }
 
   # Position

@@ -48,4 +48,14 @@ ggplot() +
   geom_from_list(l2)  +
   geom_from_list(l3)
 
+# Example 3
+ggplot() +
+  geom_from_list(list(geom = "density_2d", data = iris,
+                      aes = list(x = "Sepal.Width", y = "Petal.Length")))
+ggplot() +
+  geom_from_list(list(geom = "density_2d_filled", data = iris,
+                      aes = list(x = "Sepal.Width", y = "Petal.Length")))
+ggplot() +
+  geom_from_list(list(geom = "density_2d_polygon", data = iris,
+                      aes = list(x = "Sepal.Width", y = "Petal.Length")))
 }
