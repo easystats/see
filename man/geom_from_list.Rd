@@ -31,11 +31,21 @@ ggplot() +
   geoms_from_list(list(l1 = l1, l2 = l2))
 
 # Example 2
-l1 <- list(geom = "jitter",
+l1 <- list(geom = "violin",
+           data = iris,
+           aes = list(x = "Species", y = "Sepal.Width"))
+l2 <- list(geom = "boxplot",
+           data = iris,
+           aes = list(x = "Species", y = "Sepal.Width"),
+           outlier.shape = NA)
+l3 <- list(geom = "jitter",
            data = iris,
            width = 0.1,
            aes = list(x = "Species", y = "Sepal.Width"))
 
 ggplot() +
-  geom_from_list(l1)
+  geom_from_list(l1) +
+  geom_from_list(l2)  +
+  geom_from_list(l3)
+
 }

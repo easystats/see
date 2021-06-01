@@ -26,14 +26,19 @@
 #' l1 <- list(geom = "violin",
 #'            data = iris,
 #'            aes = list(x = "Species", y = "Sepal.Width"))
-#' l2 <- list(geom = "jitter",
+#' l2 <- list(geom = "boxplot",
+#'            data = iris,
+#'            aes = list(x = "Species", y = "Sepal.Width"),
+#'            outlier.shape = NA)
+#' l3 <- list(geom = "jitter",
 #'            data = iris,
 #'            width = 0.1,
 #'            aes = list(x = "Species", y = "Sepal.Width"))
 #'
 #' ggplot() +
 #'   geom_from_list(l1) +
-#'   geom_from_list(l2)
+#'   geom_from_list(l2)  +
+#'   geom_from_list(l3)
 #'
 #' @export
 geom_from_list <- function(x, ...) {
@@ -53,9 +58,14 @@ geom_from_list <- function(x, ...) {
     x$geom <- "point"
     position <- ggplot2::position_jitter(width = x$width, height = x$height)
   }
+
+  # Default for violin
   if(x$geom == "violin") {
     stat <- "ydensity"
     position <- "dodge"
+  } else if(x$geom == "boxplot") {
+    stat <- "boxplot"
+    position <- "dodge2"
   }
 
   # Position
