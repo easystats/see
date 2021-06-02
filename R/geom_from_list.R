@@ -55,6 +55,14 @@
 #'                       aes = list(x = "Sepal.Width", y = "Petal.Length"))) +
 #'   scale_x_continuous(expand = c(0, 0)) +
 #'   scale_y_continuous(expand = c(0, 0))
+#'
+#' # Example 4 (facet and coord flip) --------------------------
+#'
+#' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
+#'   geom_point() +
+#'   geom_from_list(list(geom = "coord_flip")) +
+#'   geom_from_list(list(geom = "facet_wrap", facets = "~ Species", scales = "free"))
+#'
 #' @export
 geom_from_list <- function(x, ...) {
 
@@ -66,8 +74,11 @@ geom_from_list <- function(x, ...) {
     if(!"contour_var" %in% names(args)) args$contour_var <- "density"
   }
 
-  # If labs, return immediately
+  # If they are not geoms, return immediately
   if(x$geom == "labs") return(do.call(ggplot2::labs, args))
+  if(x$geom == "coord_flip") return(do.call(ggplot2::coord_flip, args))
+  if(x$geom == "facet_wrap") return(do.call(ggplot2::facet_wrap, args))
+  if(x$geom == "facet_grid") return(do.call(ggplot2::facet_grid, args))
 
   # Default parameters
   stat <- "identity"
