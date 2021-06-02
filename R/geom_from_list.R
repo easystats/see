@@ -60,6 +60,7 @@
 #'
 #' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
 #'   geom_point() +
+#'   geom_from_list(list(geom = "hline", yintercept = 2)) +
 #'   geom_from_list(list(geom = "coord_flip")) +
 #'   geom_from_list(list(geom = "facet_wrap", facets = "~ Species", scales = "free"))
 #'
@@ -123,7 +124,12 @@ geom_from_list <- function(x, ...) {
   }
 
   # Aesthetics
-  aes_list <- do.call(ggplot2::aes_string, x$aes)
+  if("aes" %in% names(x)) {
+    aes_list <- do.call(ggplot2::aes_string, x$aes)
+  } else {
+    aes_list <- NULL
+  }
+
 
   # Create layer
   ggplot2::layer(stat = stat,
