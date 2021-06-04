@@ -111,11 +111,11 @@ plot.see_parameters_sem <- function(x,
   }
 
   if (!requireNamespace("ggraph", quietly = TRUE)) {
-    stop("Package 'ggraph' required for this function to work. Please install it by running `install.packages('ggraph')`.")
+    insight::check_if_installed("ggraph")
   }
 
   if (!requireNamespace("tidygraph", quietly = TRUE)) {
-    stop("Package 'tidygraph' required for this function to work. Please install it by running `install.packages('tidygraph')`.")
+    insight::check_if_installed("tidygraph")
   }
 
   p <- ggraph::ggraph(tidygraph::tbl_graph(x$nodes, x$edges), ...) +

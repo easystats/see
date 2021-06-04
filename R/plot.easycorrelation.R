@@ -20,18 +20,19 @@
 #' @importFrom utils sessionInfo
 #' @export
 plot.see_easycorrelation <- function(x, size_point = 22, text_color = "white", node_color = "#647687", ...) {
+  insight::check_if_installed("ggraph")
   if (!requireNamespace("ggraph", quietly = TRUE)) {
-    stop("Package 'ggraph' required for this function to work. Please install it.", call. = FALSE)
   } else {
     si <- utils::sessionInfo()
     other_packages <- names(si$otherPkgs)
     if (!is.null(other_packages) && !("ggraph" %in% other_packages)) {
-      message("Package 'ggraph' needs to be loaded. Please load it by typing 'library(ggraph)' into the console.")
+      insight::check_if_installed("ggraph")
       return(NULL)
     }
   }
+
   if (!requireNamespace("tidygraph", quietly = TRUE)) {
-    stop("Package 'tidygraph' required for this function to work. Please install it.", call. = FALSE)
+    insight::check_if_installed("tidygraph")
   }
 
   data <- tidygraph::as_tbl_graph(x)

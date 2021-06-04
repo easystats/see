@@ -98,9 +98,8 @@ GeomViolinHalf <-
 
 #' @keywords internal
 .grobName <- function(prefix, grob) {
-  if (!requireNamespace("grid", quietly = TRUE)) {
-    stop("Package 'grid' required for this function to work. Please install it.", call. = FALSE)
-  }
+  insight::check_if_installed("grid")
+
   grob$name <- grid::grobName(grob, prefix)
   grob
 }

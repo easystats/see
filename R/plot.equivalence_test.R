@@ -46,8 +46,8 @@ plot.see_equivalence_test <- function(x,
     return(x)
   }
 
-  if (inherits(model, "emmGrid") && !requireNamespace("emmeans", quietly = TRUE)) {
-    stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
+  if (inherits(model, "emmGrid")) {
+    insight::check_if_installed("emmeans")
   }
 
   # if we have intercept-only models, keep at least the intercept

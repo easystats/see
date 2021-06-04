@@ -39,9 +39,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
   }
 
   if (inherits(data, "emmGrid")) {
-    if (!requireNamespace("emmeans", quietly = TRUE)) {
-      stop("Package 'emmeans' required for this function to work. Please install it.", call. = FALSE)
-    }
+    insight::check_if_installed("emmeans")
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)

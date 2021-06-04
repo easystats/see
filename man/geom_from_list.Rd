@@ -17,11 +17,15 @@ to add geom(s) which type and content is specified as a list.
 library(ggplot2)
 
 # Example 1 (basic geoms and labels) --------------------------
-l1 <- list(geom = "point",
-           data = mtcars,
-           aes = list(x = "mpg", y = "wt"))
-l2 <- list(geom = "labs",
-           title = "A Title")
+l1 <- list(
+  geom = "point",
+  data = mtcars,
+  aes = list(x = "mpg", y = "wt")
+)
+l2 <- list(
+  geom = "labs",
+  title = "A Title"
+)
 
 ggplot() +
   geom_from_list(l1) +
@@ -31,36 +35,58 @@ ggplot() +
   geoms_from_list(list(l1 = l1, l2 = l2))
 
 # Example 2 (Violin, boxplots, ...) --------------------------
-l1 <- list(geom = "violin",
-           data = iris,
-           aes = list(x = "Species", y = "Sepal.Width"))
-l2 <- list(geom = "boxplot",
-           data = iris,
-           aes = list(x = "Species", y = "Sepal.Width"),
-           outlier.shape = NA)
-l3 <- list(geom = "jitter",
-           data = iris,
-           width = 0.1,
-           aes = list(x = "Species", y = "Sepal.Width"))
+l1 <- list(
+  geom = "violin",
+  data = iris,
+  aes = list(x = "Species", y = "Sepal.Width")
+)
+l2 <- list(
+  geom = "boxplot",
+  data = iris,
+  aes = list(x = "Species", y = "Sepal.Width"),
+  outlier.shape = NA
+)
+l3 <- list(
+  geom = "jitter",
+  data = iris,
+  width = 0.1,
+  aes = list(x = "Species", y = "Sepal.Width")
+)
 
 ggplot() +
   geom_from_list(l1) +
-  geom_from_list(l2)  +
+  geom_from_list(l2) +
   geom_from_list(l3)
 
 # Example 3 (2D density) --------------------------
 ggplot() +
-  geom_from_list(list(geom = "density_2d", data = iris,
-                      aes = list(x = "Sepal.Width", y = "Petal.Length")))
+  geom_from_list(list(
+    geom = "density_2d", data = iris,
+    aes = list(x = "Sepal.Width", y = "Petal.Length")
+  ))
 ggplot() +
-  geom_from_list(list(geom = "density_2d_filled", data = iris,
-                      aes = list(x = "Sepal.Width", y = "Petal.Length")))
+  geom_from_list(list(
+    geom = "density_2d_filled", data = iris,
+    aes = list(x = "Sepal.Width", y = "Petal.Length")
+  ))
 ggplot() +
-  geom_from_list(list(geom = "density_2d_polygon", data = iris,
-                      aes = list(x = "Sepal.Width", y = "Petal.Length")))
+  geom_from_list(list(
+    geom = "density_2d_polygon", data = iris,
+    aes = list(x = "Sepal.Width", y = "Petal.Length")
+  ))
 ggplot() +
-  geom_from_list(list(geom = "density_2d_raster", data = iris,
-                      aes = list(x = "Sepal.Width", y = "Petal.Length"))) +
+  geom_from_list(list(
+    geom = "density_2d_raster", data = iris,
+    aes = list(x = "Sepal.Width", y = "Petal.Length")
+  )) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
+
+# Example 4 (facet and coord flip) --------------------------
+
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
+  geom_point() +
+  geom_from_list(list(geom = "hline", yintercept = 2)) +
+  geom_from_list(list(geom = "coord_flip")) +
+  geom_from_list(list(geom = "facet_wrap", facets = "~ Species", scales = "free"))
 }
