@@ -179,11 +179,15 @@ to add geom(s) which type and content is specified as a list.</p>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
 <span class='co'># Example 1 (basic geoms and labels) --------------------------</span>
-<span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"point"</span>,
-           data <span class='op'>=</span> <span class='va'>mtcars</span>,
-           aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"mpg"</span>, y <span class='op'>=</span> <span class='st'>"wt"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"labs"</span>,
-           title <span class='op'>=</span> <span class='st'>"A Title"</span><span class='op'>)</span>
+<span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  geom <span class='op'>=</span> <span class='st'>"point"</span>,
+  data <span class='op'>=</span> <span class='va'>mtcars</span>,
+  aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"mpg"</span>, y <span class='op'>=</span> <span class='st'>"wt"</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  geom <span class='op'>=</span> <span class='st'>"labs"</span>,
+  title <span class='op'>=</span> <span class='st'>"A Title"</span>
+<span class='op'>)</span>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='va'>l1</span><span class='op'>)</span> <span class='op'>+</span>
@@ -193,39 +197,61 @@ to add geom(s) which type and content is specified as a list.</p>
   <span class='fu'>geoms_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>l1 <span class='op'>=</span> <span class='va'>l1</span>, l2 <span class='op'>=</span> <span class='va'>l2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='geom_from_list-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Example 2 (Violin, boxplots, ...) --------------------------</span>
-<span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"violin"</span>,
-           data <span class='op'>=</span> <span class='va'>iris</span>,
-           aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Species"</span>, y <span class='op'>=</span> <span class='st'>"Sepal.Width"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"boxplot"</span>,
-           data <span class='op'>=</span> <span class='va'>iris</span>,
-           aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Species"</span>, y <span class='op'>=</span> <span class='st'>"Sepal.Width"</span><span class='op'>)</span>,
-           outlier.shape <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
-<span class='va'>l3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"jitter"</span>,
-           data <span class='op'>=</span> <span class='va'>iris</span>,
-           width <span class='op'>=</span> <span class='fl'>0.1</span>,
-           aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Species"</span>, y <span class='op'>=</span> <span class='st'>"Sepal.Width"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  geom <span class='op'>=</span> <span class='st'>"violin"</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>,
+  aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Species"</span>, y <span class='op'>=</span> <span class='st'>"Sepal.Width"</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  geom <span class='op'>=</span> <span class='st'>"boxplot"</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>,
+  aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Species"</span>, y <span class='op'>=</span> <span class='st'>"Sepal.Width"</span><span class='op'>)</span>,
+  outlier.shape <span class='op'>=</span> <span class='cn'>NA</span>
+<span class='op'>)</span>
+<span class='va'>l3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  geom <span class='op'>=</span> <span class='st'>"jitter"</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>,
+  width <span class='op'>=</span> <span class='fl'>0.1</span>,
+  aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Species"</span>, y <span class='op'>=</span> <span class='st'>"Sepal.Width"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='va'>l1</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='va'>l2</span><span class='op'>)</span>  <span class='op'>+</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='va'>l2</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='va'>l3</span><span class='op'>)</span>
 </div><div class='img'><img src='geom_from_list-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Example 3 (2D density) --------------------------</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"density_2d"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
-                      aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+    geom <span class='op'>=</span> <span class='st'>"density_2d"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
+    aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span>
+  <span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='geom_from_list-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"density_2d_filled"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
-                      aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+    geom <span class='op'>=</span> <span class='st'>"density_2d_filled"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
+    aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span>
+  <span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='geom_from_list-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"density_2d_polygon"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
-                      aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+    geom <span class='op'>=</span> <span class='st'>"density_2d_polygon"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
+    aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span>
+  <span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='geom_from_list-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"density_2d_raster"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
-                      aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+    geom <span class='op'>=</span> <span class='st'>"density_2d_raster"</span>, data <span class='op'>=</span> <span class='va'>iris</span>,
+    aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>, y <span class='op'>=</span> <span class='st'>"Petal.Length"</span><span class='op'>)</span>
+  <span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>expand <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>expand <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='geom_from_list-7.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='geom_from_list-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Example 4 (facet and coord flip) --------------------------</span>
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Sepal.Length</span>, y <span class='op'>=</span> <span class='va'>Petal.Width</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"hline"</span>, yintercept <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"coord_flip"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_from_list</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"facet_wrap"</span>, facets <span class='op'>=</span> <span class='st'>"~ Species"</span>, scales <span class='op'>=</span> <span class='st'>"free"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='geom_from_list-8.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
