@@ -20,9 +20,7 @@
 #' plots(p1, p2, n_columns = 2, tags = c("Fig. 1", "Fig. 2"))
 #' @export
 plots <- function(..., n_rows = NULL, n_columns = NULL, tags = FALSE) {
-  if (!requireNamespace("gridExtra", quietly = TRUE)) {
-    stop("Package 'gridExtra' required for this function to work. Please install it.", call. = FALSE)
-  }
+  insight::check_if_installed("gridExtra")
 
   plot_list <- list(...)
 

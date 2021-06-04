@@ -67,9 +67,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   p <- list(p1, p2, p3)
 
   if (panel) {
-    if (!requireNamespace("gridExtra", quietly = TRUE)) {
-      stop("Package 'gridExtra' required for this function to work. Please install it.", call. = FALSE)
-    }
+    insight::check_if_installed("gridExtra")
+
     gridExtra::grid.arrange(p1, p2, p3, layout_matrix = rbind(c(1, 1), c(2, 3)))
   } else {
     lapply(p, graphics::plot)
@@ -121,9 +120,8 @@ plot.see_check_distribution_numeric <- function(x, size_point = 2, panel = TRUE,
   p <- list(p1, p2, p3)
 
   if (panel) {
-    if (!requireNamespace("gridExtra", quietly = TRUE)) {
-      stop("Package 'gridExtra' required for this function to work. Please install it.", call. = FALSE)
-    }
+    insight::check_if_installed("gridExtra")
+
     gridExtra::grid.arrange(p1, p2, p3, layout_matrix = rbind(c(1, 1), c(2, 3)))
   } else {
     lapply(p, graphics::plot)

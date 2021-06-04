@@ -53,8 +53,10 @@
       geom_text(
         data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
         aes(label = .data$Index, colour = .data$Influential),
-        size = size_text, position = position_nudge(x = diff(range(plot_data$Hat)) / 40,
-                                                    y = diff(range(plot_data$Std_Residuals)) / 20)
+        size = size_text, position = position_nudge(
+          x = diff(range(plot_data$Hat)) / 40,
+          y = diff(range(plot_data$Std_Residuals)) / 20
+        )
       )
     }) +
     labs(
