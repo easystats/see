@@ -57,6 +57,7 @@ reference:
   - geom_poolpoint
   - geom_violindot
   - geom_violinhalf
+  - geom_from_list
 
 - title: "Scales"
   contents:
