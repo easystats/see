@@ -174,7 +174,7 @@ geom_from_list <- function(x, ...) {
   )
 }
 
-
+#' @rdname geom_from_list
 #' @export
 geoms_from_list <- function(x, ...) {
 

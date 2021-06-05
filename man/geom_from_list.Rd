@@ -2,9 +2,12 @@
 % Please edit documentation in R/geom_from_list.R
 \name{geom_from_list}
 \alias{geom_from_list}
+\alias{geoms_from_list}
 \title{Create ggplot2 geom(s) from a list}
 \usage{
 geom_from_list(x, ...)
+
+geoms_from_list(x, ...)
 }
 \arguments{
 \item{x}{A list containing a geom type (e.g., \code{geom = "point"}), a list
