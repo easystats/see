@@ -7,11 +7,17 @@
 geom_from_list(x, ...)
 }
 \arguments{
-\item{x}{A list containing a geom type (e.g., \code{geom = "point"}), a list of aesthetics (as characters; e.g., \code{aes = list(x = "mpg", y = "wt")}), some data (e.g., \code{data = mtcars}) and some other parameters. For \code{geoms_from_list()} ("geoms" with an "s"), the input must be a list of lists, ideally named \code{"l1", "l2", "l3"}, etc.}
+\item{x}{A list containing a geom type (e.g., \code{geom = "point"}), a list
+of aesthetics (as characters; e.g., \code{aes = list(x = "mpg", y =
+"wt")}), some data (e.g., \code{data = mtcars}) and some other parameters.
+For \code{geoms_from_list()} ("geoms" with an "s"), the input must be a
+list of lists, ideally named \code{"l1", "l2", "l3"}, etc.}
+
+\item{...}{Additional arguments passed to \code{ggplot2::layer()}.}
 }
 \description{
-These helper functions are built on top of \code{ggplot2::layer()} and can be used
-to add geom(s) which type and content is specified as a list.
+These helper functions are built on top of \code{ggplot2::layer()} and can be
+used to add geom(s) which type and content is specified as a list.
 }
 \examples{
 library(ggplot2)
