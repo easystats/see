@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="Create ggplot2 geom(s) from a list — geom_from_list" />
-<meta property="og:description" content="These helper functions are built on top of ggplot2::layer() and can be used
-to add geom(s) which type and content is specified as a list." />
+<meta property="og:description" content="These helper functions are built on top of ggplot2::layer() and can be
+used to add geom(s) which type and content is specified as a list." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -159,18 +159,28 @@ to add geom(s) which type and content is specified as a list." />
     </div>
 
     <div class="ref-description">
-    <p>These helper functions are built on top of <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code> and can be used
-to add geom(s) which type and content is specified as a list.</p>
+    <p>These helper functions are built on top of <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code> and can be
+used to add geom(s) which type and content is specified as a list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_from_list</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>geom_from_list</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>geoms_from_list</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A list containing a geom type (e.g., <code>geom = "point"</code>), a list of aesthetics (as characters; e.g., <code>aes = list(x = "mpg", y = "wt")</code>), some data (e.g., <code>data = mtcars</code>) and some other parameters. For <code>geoms_from_list()</code> ("geoms" with an "s"), the input must be a list of lists, ideally named <code>"l1", "l2", "l3"</code>, etc.</p></td>
+      <td><p>A list containing a geom type (e.g., <code>geom = "point"</code>), a list
+of aesthetics (as characters; e.g., <code>aes = list(x = "mpg", y =
+"wt")</code>), some data (e.g., <code>data = mtcars</code>) and some other parameters.
+For <code>geoms_from_list()</code> ("geoms" with an "s"), the input must be a
+list of lists, ideally named <code>"l1", "l2", "l3"</code>, etc.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code>.</p></td>
     </tr>
     </table>
 
