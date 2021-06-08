@@ -37,12 +37,7 @@ affiliations:
   name: University of Chicago, USA
 - index: 6
   name: Nanyang Technological University, Singapore
-date: "2021-05-30"
-bibliography: paper.bib
-output: rticles::joss_article
-csl: apa.csl
-journal: JOSS
-link-citations: yes
+date: "2021-06-08"
 ---
 
 
@@ -77,7 +72,9 @@ The central goal of *easystats* is to make the task of doing statistics in R as 
 
 # Features
 
-Below we present one plotting method for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
+Below we present one or two plotting methods for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
+
+\newpage
 
 ## Visualizing Model Parameters
 
@@ -96,6 +93,8 @@ plot(parameters(model))
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-3-1} 
 
+\newpage
+
 As *see* outputs objects of class `ggplot`, *ggplot2* functions can be added as layers to the plot the same as with all other *ggplot2* visualizations. For example, we might add a title using `labs()` from *ggplot2*.
 
 
@@ -111,6 +110,8 @@ plot(parameters(model)) +
 
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-4-1} 
+
+\newpage
 
 Similarly, for Bayesian regression model objects, which are handled by the *bayestestR* package [@Makowski2019], the *see* package provides special plotting methods relevant for Bayesian models (e.g., Highest Density Interval, or *HDI*). Users can fit the model and pass the model results, extracted via *bayestestR*, to `plot()`.
 
@@ -129,6 +130,8 @@ plot(result)
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-5-1} 
 
+\newpage
+
 ## Visualizing Model Performance and Diagnostic Checks
 
 The *performance* package is primarily concerned with checking regression model assumptions [@Lüdecke2020performance]. The *see* package offers tools to visualize these assumption checks, such as the normality of residuals. Users simply pass the fit model object to the relevant *performance* function (`check_normality()` in the example below). Then, this result can be passed to `plot()` to produce a *ggplot2* visualization of the check on normality of the residuals.
@@ -141,7 +144,6 @@ library(see)
 model <- lm(wt ~ mpg, data = mtcars)
 check <- check_normality(model)
 #> Warning: Non-normality of residuals detected (p = 0.016).
-
 plot(check, type = "qq")
 ```
 
@@ -149,6 +151,8 @@ plot(check, type = "qq")
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-6-1} 
 
 <!-- If we don't want to add a predicted values line plot for modelbased, it would be nice to make the manual ggplot2 example match one of the see plots, so swapping in a check_heteroscedasticity() plot would be good. -->
+
+\newpage
 
 ## Visualizing Effect Sizes
 
@@ -166,6 +170,8 @@ plot(omega_squared(model))
 
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-7-1} 
+
+\newpage
 
 ## Visualizing Marginal Effects
 
@@ -191,39 +197,26 @@ plot(contrasts, means)
 
 <!-- We've been using mtcars the entire paper but now switch to iris? Why not keep using mtcars with one of the factor variables like `cyl` as the groups? -->
 
+\newpage
+
 ## Visualizing Correlation Matrices
 
-The *correlation* package provides a unified syntax and human-readable code to carry out many types of correlation analysis [@Makowski2020]. With *see* Results from the `correlation()` function can be passed to `plot()` to visualize these correlations in a network plot.
+The *correlation* package provides a unified syntax and human-readable code to carry out many types of correlation analysis [@Makowski2020]. A user can run `summary(correlation(data))` to create a construct a correlation matrix for the variables in a dataframe. With *see*, this matrix can be passed to `plot()` to visualize these correlations in a corrgram..
 
 
 ```r
 library(correlation)
 library(see)
 
-results <- correlation(iris)
+results <- summary(correlation(iris))
 
 plot(results)
-#> NULL
 ```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-9-1} 
 
 <!-- What did `type = "percentage"` do there? It didn't seem to have any effect removing it? -->
-
-Results from the `correlation()` function can also be passed first to `summary()` then to `plot()` to render these correlations in a corrgram.
-
-
-```r
-library(correlation)
-library(see)
-
-results <- correlation(iris)
-
-plot(summary(results))
-```
-
-
-\includegraphics[width=1\linewidth]{paper_files/figure-latex/unnamed-chunk-10-1} 
-
-<!-- Given the emphasis we place on 'just pass it to `plot()`, it seems odd to only present a figure that requires passing first to `summary()` then to `plot()`. -->
 
 # Licensing and Availability
 
