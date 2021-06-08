@@ -92,7 +92,7 @@ Suggests:
     tidyr,
     spelling,
     testthat (>= 3.0.0),
-    vdiffr
+    vdiffr (>= 1.0.0)
 Encoding: UTF-8
 Language: en-US
 RoxygenNote: 7.1.1.9001
