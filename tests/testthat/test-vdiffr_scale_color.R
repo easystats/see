@@ -1,4 +1,4 @@
-if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2")) {
+if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2")) {
   test_that("scale_color_ functions work correctly", {
     skip_on_cran()
 

@@ -1,8 +1,7 @@
-if (getRversion() < "4.1" && require("vdiffr") && require("ggplot2") &&
+if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
   require("bayestestR")) {
   test_that("plots are rendered correctly", {
     skip_on_cran()
-    skip_if(getRversion() < "3.6")
 
     # coord_radar() ------------------
 
