@@ -90,6 +90,17 @@ Below we present one or two plotting methods for each *easystats* package, but m
 
 \newpage
 
+## Themes and Palettes
+
+The package includes different **ggplot2** themes that one can set for each plot, or generally as shown below:
+
+```{r}
+ggplot2::theme_set(see::theme_modern())
+```
+
+The package provides also color palettes, such as `scale_color_material` or `scale_color_flat` for material and flat design colors, respectively.
+
+
 ## Visualizing Model Parameters
 
 The *parameters* package converts summaries of regression model objects into dataframes [@Lüdecke2020parameters]. The *see* package can take this transformed object and, for example, create a dot-and-whisker plot for the extracted regression estimates simply by passing the `parameters` class object to `plot()`.
@@ -167,25 +178,31 @@ plot(omega_squared(model))
 
 \newpage
 
-## Visualizing Marginal Effects
+## Visualizing Model Predictions and Marginal Effects
 
-<!-- This section, retitled to "Visualizing Predictions and Marginal Effects", would really benefit from a scatterplot with fitted regression line and predicion interval ribbon in addition to the contrasts plot. -->
-
-The *modelbased* package computes model-based estimates and predictions from fitted models [@Makowski2020modelbased]. *see* provides methods to quickly visualize these model predictions. For example, to visualize group contrasts in a factorial design, users first pass their model object to the *modelbased* functions `estimate_contrasts()` and `estimate_means()`, then pass these *two* results objects to `plot()`. 
+The *modelbased* package computes model-based estimates and predictions from fitted models [@Makowski2020modelbased]. *see* provides methods to quickly visualize these model predictions.
 
 ```{r}
 library(modelbased)
-library(rstanarm)
 library(see)
 
-model <- lm(Sepal.Width ~ Species, data = iris)
-contrasts <- estimate_contrasts(model)
-means <- estimate_means(model)
+data <- mtcars
+data$cyl <- as.factor(data$cyl)
 
-plot(contrasts, means)
+model <- lm(mpg ~ wt * cyl, data = data)
+predicted <- estimate_prediction(model)
+
+plot(predicted)
 ```
 
-<!-- We've been using mtcars the entire paper but now switch to iris? Why not keep using mtcars with one of the factor variables like `cyl` as the groups? -->
+One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
+
+```{r}
+means <- estimate_means(model)
+
+plot(means)
+```
+
 
 \newpage
 
