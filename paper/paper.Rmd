@@ -59,26 +59,32 @@ requireNamespace("qqplotr", quietly = TRUE)
 
 # Summary
 
-*easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language [@base2021]. Most *easystats* packages return comprehensive numeric summaries of model parameters and performance. The *see* package complements these numeric summaries with a host of functions and tools to produce a range of publication-ready visualizations for model parameters, predictions, and performance diagnostics. As a core pillar of *easystats*, the *see* package helps users to use visualization for more informative, communicable and well-rounded scientific reporting.
+*easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language [@base2021]. Most *easystats* packages return comprehensive numeric summaries of model parameters and performance. The *see* package complements these numeric summaries with a host of functions and tools to produce a range of publication-ready visualizations for model parameters, predictions, and performance diagnostics. As a core pillar of *easystats*, the *see* package helps users to utilize visualization for more informative, communicable, and well-rounded scientific reporting.
 
 # Statement of Need
 
-The grammar of graphics [@wilkinson2012grammar], largely due to its implementation in the *ggplot2* package [@Wickham2016], has become the dominant approach to visualization in R. Building a model visualization with **ggplot2** is somewhat disconnected from the model fitting and evaluation process. Generally, this process entails:
+The grammar of graphics [@wilkinson2012grammar], largely due to its implementation in the *ggplot2* package [@Wickham2016], has become the dominant approach to visualization in R. Building a model visualization with *ggplot2* is somewhat disconnected from the model fitting and evaluation process. Generally, this process entails:
 
   1. Fitting a model.
   2. Extracting desired results from the model (e.g., model parameters and intervals, model predictions, diagnostic statistics) and arranging them into a dataframe.
   3. Passing the results dataframe to `ggplot()` and specifying the graphical parameters. For example:
   
-  ```{r, eval=FALSE}
-  library(ggplot2)
-  model <- lm(mpg ~ factor(cyl) * wt, data = mtcars)
-  results <- fortify(model)
-  ggplot(results) +
-    geom_point(aes(x = wt, y = mpg, color = factor(cyl))) +
-    geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
-  ```
+```{r, eval=FALSE}
+library(ggplot2)
 
-A number of packages have been developed to extend *ggplot2* and assist with model visualization.^[For a sampling of these packages, visit <https://exts.ggplot2.tidyverse.org/gallery/>] Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. 
+# step-1
+model <- lm(mpg ~ factor(cyl) * wt, data = mtcars)
+
+# step-2
+results <- fortify(model)
+
+# step-3
+ggplot(results) +
+  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
+```
+
+A number of packages have been developed to extend *ggplot2* and assist with model visualization.^[For a sampling of these packages, visit <https://exts.ggplot2.tidyverse.org/gallery/>] Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. 
 
 The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
 
@@ -98,14 +104,14 @@ The package includes different **ggplot2** themes that one can set for each plot
 ggplot2::theme_set(see::theme_modern())
 ```
 
-The package provides also color palettes, such as `scale_color_material` or `scale_color_flat` for material and flat design colors, respectively.
+The package provides also color palettes, such as `scale_color_material` or `scale_color_flat` for material and flat design colors (<https://www.materialui.co/colors>), respectively.
 
 
 ## Visualizing Model Parameters
 
 The *parameters* package converts summaries of regression model objects into dataframes [@Lüdecke2020parameters]. The *see* package can take this transformed object and, for example, create a dot-and-whisker plot for the extracted regression estimates simply by passing the `parameters` class object to `plot()`.
 
-```{r}
+```{r parameters1}
 library(parameters)
 library(see)
 
@@ -118,7 +124,7 @@ plot(parameters(model))
 
 As *see* outputs objects of class `ggplot`, *ggplot2* functions can be added as layers to the plot the same as with all other *ggplot2* visualizations. For example, we might add a title using `labs()` from *ggplot2*.
 
-```{r}
+```{r parameters2}
 library(parameters)
 library(see)
 
@@ -132,7 +138,7 @@ plot(parameters(model)) +
 
 Similarly, for Bayesian regression model objects, which are handled by the *bayestestR* package [@Makowski2019], the *see* package provides special plotting methods relevant for Bayesian models (e.g., Highest Density Interval, or *HDI*). Users can fit the model and pass the model results, extracted via *bayestestR*, to `plot()`.
 
-```{r}
+```{r bayestestR}
 library(bayestestR)
 library(rstanarm)
 library(see)
@@ -149,7 +155,7 @@ plot(result)
 
 The *performance* package is primarily concerned with checking regression model assumptions [@Lüdecke2020performance]. The *see* package offers tools to visualize these assumption checks, such as the normality of residuals. Users simply pass the fit model object to the relevant *performance* function (`check_normality()` in the example below). Then, this result can be passed to `plot()` to produce a *ggplot2* visualization of the check on normality of the residuals.
 
-```{r}
+```{r performance}
 library(performance)
 library(see)
 
@@ -167,7 +173,7 @@ plot(check, type = "qq")
 
 The *effectsize* package computes a variety of effect size metrics for fitted models to assesses the practical importance of observed effects [@Ben-Shachar2020]. In conjunction with *see*, users are able to visualize the magnitude and uncertainty of effect sizes by passing the model object to the relevant *effectsize* function (`omega_squared()` in the following example), and then to `plot()`.
 
-```{r}
+```{r effectsize}
 library(effectsize)
 library(see)
 
@@ -182,14 +188,11 @@ plot(omega_squared(model))
 
 The *modelbased* package computes model-based estimates and predictions from fitted models [@Makowski2020modelbased]. *see* provides methods to quickly visualize these model predictions.
 
-```{r}
+```{r modelbased1}
 library(modelbased)
 library(see)
 
-data <- mtcars
-data$cyl <- as.factor(data$cyl)
-
-model <- lm(mpg ~ wt * cyl, data = data)
+model <- lm(mpg ~ wt * as.factor(cyl), data = mtcars)
 predicted <- estimate_prediction(model)
 
 plot(predicted)
@@ -197,12 +200,11 @@ plot(predicted)
 
 One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
 
-```{r}
+```{r modelbased2}
 means <- estimate_means(model)
 
 plot(means)
 ```
-
 
 \newpage
 
@@ -210,7 +212,7 @@ plot(means)
 
 The *correlation* package provides a unified syntax and human-readable code to carry out many types of correlation analysis [@Makowski2020]. A user can run `summary(correlation(data))` to create a construct a correlation matrix for the variables in a dataframe. With *see*, this matrix can be passed to `plot()` to visualize these correlations in a corrgram..
 
-```{r, error=FALSE}
+```{r correlation, error=FALSE}
 library(correlation)
 library(see)
 
@@ -218,8 +220,6 @@ results <- summary(correlation(iris))
 
 plot(results)
 ```
-
-<!-- What did `type = "percentage"` do there? It didn't seem to have any effect removing it? -->
 
 # Licensing and Availability
 
