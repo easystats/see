@@ -1,15 +1,5 @@
 ---
-output: 
-  github_document:
-    toc: false
-    fig_width: 11
-    fig_height: 6.6
-tags: [readme]
-vignette: >
-  \usepackage[utf8]{inputenc}
-  %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  chunk_output_type: console
+output: github_document
 ---
 
 
@@ -56,7 +46,6 @@ library("see")
 ## Contributing and Support
 
 In case you want to file an issue or contribute in another way to the package, please follow [this guide](https://github.com/easystats/see/blob/master/.github/CONTRIBUTING.md). For questions about the functionality, you may either contact us via email or also file an issue.
-
 
 # Documentation
 
@@ -213,3 +202,8 @@ Plotting functions for the **correlation** package are demonstrated [in this vig
 ### [effectsize](https://github.com/easystats/effectsize)
 
 Plotting functions for the **effectsize** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/effectsize.html).
+
+# Code of Conduct
+
+Please note that this project is released with a 
+[Contributor Code of Conduct](https://easystats.github.io/see/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.

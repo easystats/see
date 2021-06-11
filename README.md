@@ -223,3 +223,9 @@ vignette](https://easystats.github.io/see/articles/correlation.html).
 Plotting functions for the **effectsize** package are demonstrated [in
 this
 vignette](https://easystats.github.io/see/articles/effectsize.html).
+
+# Code of Conduct
+
+Please note that this project is released with a [Contributor Code of
+Conduct](https://easystats.github.io/see/CODE_OF_CONDUCT.html). By
+participating in this project you agree to abide by its terms.
