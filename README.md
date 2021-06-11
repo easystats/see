@@ -25,6 +25,14 @@ And then load it:
 library("see")
 ```
 
+## Contributing and Support
+
+In case you want to file an issue or contribute in another way to the
+package, please follow [this
+guide](https://github.com/easystats/see/blob/master/.github/CONTRIBUTING.md).
+For questions about the functionality, you may either contact us via
+email or also file an issue.
+
 # Documentation
 
 This package provides visualisation toolbox for R packages in the
