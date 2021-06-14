@@ -46,20 +46,51 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
     group = group,
     stringsAsFactors = FALSE
   )
-  # group-mean-center response
-  dat$y <- dat$y - stats::ave(
-    dat[["y"]],
-    dat[["group"]],
-    FUN = mean, na.rm = TRUE
-  )
 
-  p <- if (length(pred) > 1) {
-    ggplot(data = dat, aes(x = .data$group, y = .data$y, fill = .data$group)) +
+  if (length(pred) > 1) {
+    # group-mean-center response
+    dat$y <- dat$y - stats::ave(
+      dat[["y"]],
+      dat[["group"]],
+      FUN = mean, na.rm = TRUE
+    )
+    p <- ggplot(data = dat, aes(x = .data$group, y = .data$y, fill = .data$group)) +
       geom_violin() +
-      geom_label(aes(label = .data$group), y = 0, fill = "white")
+      if (requireNamespace("ggrepel", quietly = TRUE)) {
+        ggrepel::geom_label_repel(
+          aes(label = .data$group), y = 0, fill = "white",
+          data = data.frame(group = unique(dat$group)),
+          direction = "y",
+          segment.colour = NA
+        )
+      } else {
+        geom_label(
+          aes(label = .data$group), y = 0, fill = "white",
+          data = data.frame(group = unique(dat$group))
+        )
+      }
   } else {
-    ggplot(data = dat, aes(x = .data$x, y = .data$y)) +
-      geom_violin(fill = "#2980b9")
+    # group-mean-center response
+    dat$y <- dat$y - stats::ave(
+      dat[["y"]],
+      dat[["x"]],
+      FUN = mean, na.rm = TRUE
+    )
+    p <- ggplot(data = dat, aes(x = .data$x, y = .data$y, fill = .data$x)) +
+      geom_violin() +
+      if (requireNamespace("ggrepel", quietly = TRUE)) {
+        ggrepel::geom_label_repel(
+          aes(label = .data$x), y = 0, fill = "white",
+          data = data.frame(x = unique(dat$x)),
+          direction = "y",
+          segment.colour = NA
+        )
+      } else {
+        geom_label(
+          aes(label = .data$x), y = 0, fill = "white",
+          data = data.frame(x = unique(dat$x))
+        )
+      }
   }
 
   p +
