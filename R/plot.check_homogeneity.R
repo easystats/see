@@ -30,7 +30,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
 
   if (length(pred) > 1) {
     l <- lapply(dat[, pred], as.character)
-    for (i in pred[1:(length(pred) - 1)]) l[[i]] <- sprintf("%s*", l[[i]])
+    for (i in pred[1:(length(pred) - 1)]) l[[i]] <- sprintf("%s \u00D7 ", l[[i]])
     x <- do.call(c, l)
     group_labels <- do.call(paste0, l)
     group <- rep(group_labels, each = length(pred))
