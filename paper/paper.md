@@ -37,7 +37,7 @@ affiliations:
   name: University of Chicago, USA
 - index: 6
   name: Nanyang Technological University, Singapore
-date: "2021-06-09"
+date: "2021-06-14"
 ---
 
 
@@ -204,8 +204,10 @@ model <- lm(mpg ~ wt * as.factor(cyl), data = mtcars)
 predicted <- estimate_prediction(model)
 
 plot(predicted)
-#> [1] "Plots are coming in the future version."
 ```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/modelbased1-1} 
 
 One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
 
@@ -214,8 +216,10 @@ One can also visualize *marginal means* (i.e., the mean at each factor level ave
 means <- estimate_means(model)
 
 plot(means)
-#> [1] "Plots are coming in the future version."
 ```
+
+
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/modelbased2-1} 
 
 \newpage
 

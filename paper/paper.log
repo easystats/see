@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.6.6)  9 JUN 2021 08:29
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.6.6)  14 JUN 2021 11:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1364,6 +1364,10 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [7]
+File: paper_files/figure-latex/modelbased1-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/modelbased1-1.pdf>
+File: paper_files/figure-latex/modelbased2-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/modelbased2-1.pdf>
 File: C:/Users/inp099/Documents/R/win-library/4.2/rticles/rmarkdown/templates/j
 oss/resources/JOSS-logo.png Graphic file (type bmp)
 <C:/Users/inp099/Documents/R/win-library/4.2/rticles/rmarkdown/templates/joss/r
@@ -1377,6 +1381,19 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [8]
+File: C:/Users/inp099/Documents/R/win-library/4.2/rticles/rmarkdown/templates/j
+oss/resources/JOSS-logo.png Graphic file (type bmp)
+<C:/Users/inp099/Documents/R/win-library/4.2/rticles/rmarkdown/templates/joss/r
+esources/JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[9]
 File: paper_files/figure-latex/correlation-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/correlation-1.pdf>
 File: C:/Users/inp099/Documents/R/win-library/4.2/rticles/rmarkdown/templates/j
@@ -1391,7 +1408,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[9]
+[10]
 File: C:/Users/inp099/Documents/R/win-library/4.2/rticles/rmarkdown/templates/j
 oss/resources/JOSS-logo.png Graphic file (type bmp)
 <C:/Users/inp099/Documents/R/win-library/4.2/rticles/rmarkdown/templates/joss/r
@@ -1404,7 +1421,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[10] (./paper.aux)
+[11] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 28D4055EC344C8D66183BE9362F07BDD;2113.
 Package logreq Info: Writing requests to 'paper.run.xml'.
@@ -1412,12 +1429,12 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 33714 strings out of 478468
- 684280 string characters out of 5857149
- 1467182 words of memory out of 5000000
- 53509 multiletter control sequences out of 15000+600000
+ 33734 strings out of 478468
+ 685180 string characters out of 5857149
+ 1467185 words of memory out of 5000000
+ 53527 multiletter control sequences out of 15000+600000
  410310 words of font info for 76 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  87i,12n,95p,738b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paper.pdf (10 pages).
+Output written on paper.pdf (11 pages).
