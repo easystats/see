@@ -94,8 +94,6 @@ The central goal of *easystats* is to make the task of doing statistics in R as 
 
 Below we present one or two plotting methods for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
 
-\newpage
-
 ## Themes and Palettes
 
 The package includes different **ggplot2** themes that one can set for each plot, or generally as shown below:
@@ -106,6 +104,7 @@ ggplot2::theme_set(see::theme_modern())
 
 The package provides also color palettes, such as `scale_color_material` or `scale_color_flat` for material and flat design colors (<https://www.materialui.co/colors>), respectively.
 
+\newpage
 
 ## Visualizing Model Parameters
 
@@ -197,6 +196,8 @@ predicted <- estimate_prediction(model)
 
 plot(predicted)
 ```
+
+\newpage
 
 One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
 

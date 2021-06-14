@@ -38,6 +38,11 @@ affiliations:
 - index: 6
   name: Nanyang Technological University, Singapore
 date: "2021-06-14"
+bibliography: paper.bib
+output: rticles::joss_article
+csl: apa.csl
+journal: JOSS
+link-citations: yes
 ---
 
 
@@ -80,8 +85,6 @@ The central goal of *easystats* is to make the task of doing statistics in R as 
 
 Below we present one or two plotting methods for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
 
-\newpage
-
 ## Themes and Palettes
 
 The package includes different **ggplot2** themes that one can set for each plot, or generally as shown below:
@@ -93,6 +96,7 @@ ggplot2::theme_set(see::theme_modern())
 
 The package provides also color palettes, such as `scale_color_material` or `scale_color_flat` for material and flat design colors (<https://www.materialui.co/colors>), respectively.
 
+\newpage
 
 ## Visualizing Model Parameters
 
@@ -162,6 +166,7 @@ library(see)
 model <- lm(wt ~ mpg, data = mtcars)
 check <- check_normality(model)
 #> Warning: Non-normality of residuals detected (p = 0.016).
+
 plot(check, type = "qq")
 ```
 
@@ -208,6 +213,8 @@ plot(predicted)
 
 
 \includegraphics[width=1\linewidth]{paper_files/figure-latex/modelbased1-1} 
+
+\newpage
 
 One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
 
