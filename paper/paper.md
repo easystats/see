@@ -38,11 +38,6 @@ affiliations:
 - index: 6
   name: Nanyang Technological University, Singapore
 date: "2021-06-14"
-bibliography: paper.bib
-output: rticles::joss_article
-csl: apa.csl
-journal: JOSS
-link-citations: yes
 ---
 
 
