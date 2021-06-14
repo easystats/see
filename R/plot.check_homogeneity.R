@@ -46,11 +46,17 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
     group = group,
     stringsAsFactors = FALSE
   )
-
+  # group-mean-center response
+  dat$y <- dat$y - stats::ave(
+    dat[["y"]],
+    dat[["group"]],
+    FUN = mean, na.rm = TRUE
+  )
 
   p <- if (length(pred) > 1) {
-    ggplot(data = dat, aes(x = .data$x, y = .data$y, fill = .data$group)) +
-      geom_violin()
+    ggplot(data = dat, aes(x = .data$group, y = .data$y, fill = .data$group)) +
+      geom_violin() +
+      geom_label(aes(label = .data$group), y = 0, fill = "white")
   } else {
     ggplot(data = dat, aes(x = .data$x, y = .data$y)) +
       geom_violin(fill = "#2980b9")
@@ -59,6 +65,17 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   p +
     scale_fill_flat_d() +
     scale_x_discrete(labels = NULL) +
-    theme_modern() +
-    labs(x = NULL, y = insight::find_response(model), fill = NULL, title = method)
+    theme_modern(
+      base_size = 12,
+      plot.title.space = 3,
+      axis.title.space = 5
+    ) +
+    guides(fill = "none") +
+    labs(
+      x = NULL,
+      y = insight::find_response(model),
+      title = method,
+      subtitle = "Groups should be evenly spread"
+    ) +
+    theme(plot.title.position = "plot")
 }
