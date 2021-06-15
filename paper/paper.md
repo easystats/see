@@ -37,6 +37,7 @@ affiliations:
   name: University of Chicago, USA
 - index: 6
   name: Nanyang Technological University, Singapore
+bibliography: paper.bib
 date: "2021-06-14"
 ---
 
