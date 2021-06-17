@@ -12,7 +12,6 @@
 #' result <- check_homogeneity(model)
 #' result
 #' plot(result)
-#' @importFrom insight get_data find_predictors get_response
 #' @importFrom rlang .data
 #' @export
 plot.see_check_homogeneity <- function(x, data = NULL, ...) {
@@ -104,7 +103,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
     guides(fill = "none") +
     labs(
       x = NULL,
-      y = insight::find_response(model),
+      y = paste0(insight::find_response(model), "\n(group mean-centered)"),
       title = method,
       subtitle = "Groups should be evenly spread"
     ) +
