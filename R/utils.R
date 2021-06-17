@@ -42,7 +42,6 @@
 
 
 # safe conversion from factor to numeric
-#' @importFrom stats na.omit
 .factor_to_numeric <- function(x) {
   if (is.numeric(x)) {
     return(x)
@@ -60,7 +59,6 @@
 
 
 
-#' @importFrom stats setNames
 .clean_parameter_names <- function(params, grid = FALSE) {
   params <- unique(params)
   labels <- params
@@ -171,14 +169,12 @@
 
 
 
-#' @importFrom insight format_value
 .percents <- function(x) {
   insight::format_value(x = x, as_percent = TRUE, digits = 0)
 }
 
 
 
-#' @importFrom stats na.omit
 .n_unique <- function(x, na.rm = TRUE) {
   if (isTRUE(na.rm)) x <- stats::na.omit(x)
   length(unique(x))

@@ -15,9 +15,6 @@
 #' result <- check_distribution(m)
 #' result
 #' plot(result)
-#' @importFrom graphics plot
-#' @importFrom insight get_response
-#' @importFrom stats residuals density
 #' @export
 plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   model <- .retrieve_data(x)

@@ -180,7 +180,6 @@ material_palettes <- list(
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_material]{scale_color_material()}}.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @export
 palette_material <- function(palette = "contrast", reverse = FALSE, ...) {
   pal <- material_palettes[[palette]]

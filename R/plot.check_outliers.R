@@ -53,8 +53,6 @@ plot.see_check_outliers <- function(x,
 }
 
 
-#' @importFrom stats reshape
-#' @importFrom effectsize normalize
 #' @export
 data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ...) {
   data <- attributes(x)$data

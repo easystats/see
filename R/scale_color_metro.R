@@ -175,7 +175,6 @@ metro_palettes <- list(
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_metro]{scale_color_metro()}}.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @export
 palette_metro <- function(palette = "complement", reverse = FALSE, ...) {
   pal <- metro_palettes[[palette]]

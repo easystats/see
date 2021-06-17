@@ -20,7 +20,6 @@
 #' result <- model_parameters(m)
 #' result
 #' plot(result)
-#' @importFrom bayestestR reshape_ci
 #' @export
 plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, sort = NULL, n_columns = NULL, type = c("forest", "funnel"), weight_points = TRUE, ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
@@ -317,8 +316,6 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
 
 
 
-#' @importFrom effectsize change_scale
-#' @importFrom stats qnorm
 .funnel_plot <- function(x, size_point = 3, meta_measure = NULL) {
   max_y <- max(pretty(max(x$SE) * 105)) / 100
   measure <- .meta_measure(meta_measure)

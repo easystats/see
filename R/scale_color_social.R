@@ -177,7 +177,6 @@ social_palettes <- list(
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_social]{scale_color_social()}}.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @export
 palette_social <- function(palette = "complement", reverse = FALSE, ...) {
   pal <- social_palettes[[palette]]

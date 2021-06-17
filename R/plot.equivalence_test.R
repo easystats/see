@@ -13,9 +13,6 @@
 #' m <- aov(mpg ~ factor(am) * factor(cyl), data = mtcars)
 #' result <- eta_squared(m)
 #' plot(result)
-#' @importFrom stats setNames
-#' @importFrom insight clean_parameters
-#' @importFrom ggridges geom_density_ridges2
 #' @export
 plot.see_equivalence_test <- function(x,
                                       rope_color = "#0171D3",

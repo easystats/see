@@ -1,5 +1,3 @@
-#' @importFrom parameters simulate_model
-#' @importFrom bayestestR estimate_density
 #' @export
 data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FALSE, ...) {
   if (is.null(data)) {

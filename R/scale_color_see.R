@@ -175,7 +175,6 @@ see_palettes <- list(
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_see]{scale_color_see()}}.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @export
 palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
   pal <- see_palettes[[palette]]

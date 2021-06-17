@@ -182,7 +182,6 @@ flat_palettes <- list(
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_flat]{scale_color_flat()}}.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @export
 palette_flat <- function(palette = "contrast", reverse = FALSE, ...) {
   pal <- flat_palettes[[palette]]

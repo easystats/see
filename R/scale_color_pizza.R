@@ -157,7 +157,6 @@ pizza_palettes <- list(
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_pizza]{scale_color_pizza()}}.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @export
 palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {
   pal <- pizza_palettes[[palette]]

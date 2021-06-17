@@ -1,4 +1,3 @@
-#' @importFrom bayestestR point_estimate
 #' @export
 data_plot.point_estimate <- function(x, data = NULL, ...) {
   if (is.null(data)) {

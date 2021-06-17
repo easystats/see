@@ -17,7 +17,6 @@
 #' result <- correlation(mtcars, partial = TRUE)
 #' plot(result)
 #' }
-#' @importFrom utils sessionInfo
 #' @export
 plot.see_easycorrelation <- function(x, size_point = 22, text_color = "white", node_color = "#647687", ...) {
   insight::check_if_installed("ggraph")

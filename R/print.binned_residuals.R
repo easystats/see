@@ -1,5 +1,4 @@
 #' @importFrom rlang .data
-#' @importFrom graphics plot
 #' @export
 print.see_binned_residuals <- function(x, ...) {
   orig_x <- x

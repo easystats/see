@@ -1,4 +1,3 @@
-#' @importFrom insight clean_parameters
 #' @export
 data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
   if (is.null(data)) {
@@ -161,7 +160,6 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' }
 #' }
 #' @importFrom rlang .data
-#' @importFrom ggridges geom_ridgeline_gradient
 #' @export
 plot.see_p_direction <- function(x,
                                  data = NULL,

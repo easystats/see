@@ -203,7 +203,6 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #'   plot(result)
 #' }
 #' }
-#' @importFrom ggridges geom_ridgeline_gradient
 #' @importFrom rlang .data
 #' @export
 plot.see_hdi <- function(x,

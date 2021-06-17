@@ -1,4 +1,3 @@
-#' @importFrom effectsize change_scale
 #' @export
 data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ...) {
   legend_fill <- attr(x, "coefficient_name")
@@ -79,7 +78,6 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ..
 #' result <- correlation(mtcars[, -c(8:9)])
 #' s <- summary(result)
 #' plot(s)
-#' @importFrom insight format_p
 #' @export
 plot.see_easycormatrix <- function(x, show_values = FALSE, show_p = FALSE, show_legend = TRUE, size_point = 1, size_text = 3.5, digits = 3, type = c("circle", "tile"), ...) {
   if (!"data_plot" %in% class(x)) {

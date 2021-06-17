@@ -1,4 +1,3 @@
-#' @importFrom insight clean_parameters
 #' @export
 data_plot.p_significance <- function(x,
                                      data = NULL,
@@ -170,7 +169,6 @@ data_plot.p_significance <- function(x,
 #' }
 #' }
 #' @importFrom rlang .data
-#' @importFrom ggridges geom_ridgeline_gradient
 #' @export
 plot.see_p_significance <- function(x,
                                     data = NULL,

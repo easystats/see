@@ -1,6 +1,3 @@
-#' @importFrom ggridges geom_ridgeline
-#' @importFrom stats median mad
-#' @importFrom bayestestR simulate_prior estimate_density
 .add_prior_layer_ridgeline <- function(model, parameter = NULL, show_intercept = FALSE, priors_alpha = .5, fill_color = NULL, show_ridge_line = TRUE) {
   dat <- tryCatch(
     {
@@ -89,9 +86,6 @@
 
 
 
-#' @importFrom ggridges geom_ridgeline_gradient
-#' @importFrom stats median mad
-#' @importFrom bayestestR simulate_prior estimate_density
 .add_prior_layer_ribbon <- function(model, parameter = NULL, show_intercept = FALSE, priors_alpha = .5, fill_color = NULL) {
   dat <- tryCatch(
     {

@@ -1,6 +1,3 @@
-#' @importFrom insight format_ci
-#' @importFrom bayestestR estimate_density
-#' @importFrom effectsize change_scale
 #' @export
 data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TRUE, ...) {
   if (is.null(data)) {
@@ -125,7 +122,6 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #'   plot(mp)
 #' }
 #' }
-#' @importFrom ggridges geom_ridgeline
 #' @export
 plot.see_parameters_brms_meta <- function(x,
                                           size_point = 2,

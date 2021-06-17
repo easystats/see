@@ -1,4 +1,3 @@
-#' @importFrom insight clean_parameters
 #' @export
 data_plot.estimate_density <- function(x,
                                        data = NULL,
@@ -98,7 +97,6 @@ data_plot.estimate_density <- function(x,
 #' }
 #' }
 #' @importFrom rlang .data
-#' @importFrom ggridges geom_ridgeline
 #' @export
 plot.see_estimate_density <- function(x,
                                       stack = TRUE,
@@ -236,8 +234,6 @@ data_plot.estimate_density_df <- data_plot.estimate_density
 
 
 #' @importFrom rlang .data
-#' @importFrom ggridges geom_ridgeline
-#' @importFrom stats setNames
 #' @export
 plot.see_estimate_density_df <- function(x,
                                          stack = TRUE,

@@ -154,7 +154,6 @@ bluebrown_palettes <- list(
 #' @details This function is usually not called directly, but from within
 #'   \code{\link[=scale_color_bluebrown]{scale_color_bluebrown()}}.
 #'
-#' @importFrom grDevices colorRampPalette
 #' @export
 palette_bluebrown <- function(palette = "contrast", reverse = FALSE, ...) {
   pal <- bluebrown_palettes[[palette]]

@@ -1,4 +1,3 @@
-#' @importFrom stats reshape
 #' @keywords internal
 .reshape_to_long <- function(x,
                              names_to = "group",

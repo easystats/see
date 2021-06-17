@@ -1,5 +1,4 @@
 #' @importFrom rlang .data
-#' @importFrom graphics plot
 #' @export
 print.see_check_model <- function(x,
                                   style = theme_lucid,

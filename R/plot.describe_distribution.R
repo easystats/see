@@ -108,7 +108,6 @@ plot.see_parameters_distribution <- function(x,
 
 
 
-#' @importFrom stats dnorm
 .plot_see_parameters_distribution <- function(x,
                                               dispersion_alpha,
                                               dispersion_color,
