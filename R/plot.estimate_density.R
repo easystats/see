@@ -207,7 +207,7 @@ plot.see_estimate_density <- function(x,
 
 
   if (length(unique(x$Parameter)) == 1) {
-    p <- p + guides(color = FALSE)
+    p <- p + guides(color = "none")
   }
 
 
@@ -260,7 +260,7 @@ plot.see_estimate_density_df <- function(x,
 
 
   if (length(unique(x$Parameter)) == 1) {
-    p <- p + guides(color = FALSE)
+    p <- p + guides(color = "none")
   }
 
 
