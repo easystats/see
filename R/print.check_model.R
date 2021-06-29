@@ -141,8 +141,8 @@ print.see_check_model <- function(x,
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
-  levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
-  names(colors) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
+  levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (\u2265 10)")
+  names(colors) <- c("low (< 5)", "moderate (< 10)", "high (\u2265 10)")
 
   p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group))
 
@@ -184,9 +184,9 @@ print.see_check_model <- function(x,
     geom_col(width = 0.7) +
     labs(
       title = "Collinearity",
-      subtitle = "Higher bars (>5) indicate potential collinearity issues",
+      subtitle = "Higher bars (> 5) indicate potential collinearity issues",
       x = NULL,
-      y = "Variance Inflation Factor (VIF)",
+      y = "Variance Inflation\nFactor (VIF)",
       fill = NULL
     ) +
     # geom_text(aes(label = round(.data$y, 1)), nudge_y = 1) +
@@ -200,7 +200,8 @@ print.see_check_model <- function(x,
     theme(
       legend.position = "bottom",
       legend.margin = margin(0, 0, 0, 0),
-      legend.box.margin = margin(-5, -5, -5, -5)
+      legend.box.margin = margin(-5, -5, -5, -5),
+      legend.key.size = unit(10, "points")
     )
 
   if ("facet" %in% colnames(x)) {
