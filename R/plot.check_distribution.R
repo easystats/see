@@ -59,7 +59,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     theme_lucid()
 
   p3 <- ggplot(dat2, aes(x = .data$x)) +
-    geom_bar(fill = "#f44336", colour = NA) +
+    geom_histogram(fill = "#f44336", colour = theme_lucid()$panel.background$fill,
+                   binwidth = sqrt(length(vars(.data$x)))) +
     labs(x = NULL, y = NULL, title = "Distribution of Response") +
     theme_lucid()
 
@@ -109,7 +110,8 @@ plot.see_check_distribution_numeric <- function(x, size_point = 2, panel = TRUE,
     theme_lucid()
 
   p3 <- ggplot(dat2, aes(x = .data$x)) +
-    geom_bar(colour = NA) +
+    geom_histogram(colour = theme_lucid()$panel.background$fill,
+                   binwidth = sqrt(length(vars(.data$x)))) +
     labs(x = NULL, y = NULL, title = "Distribution of Vector") +
     theme_lucid()
 
