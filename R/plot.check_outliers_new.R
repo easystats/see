@@ -125,7 +125,7 @@
     p <- p +
       .cook_lines +
       theme_style(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
-      guides(colour = FALSE, text = "none")
+      guides(colour = "none", text = "none")
   }
 
   p
