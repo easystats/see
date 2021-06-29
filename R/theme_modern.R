@@ -7,6 +7,7 @@
 #' @param plot.title.size Title size in pts. Can be "none".
 #' @param plot.title.face Title font face ("plain", "italic", "bold", "bold.italic").
 #' @param plot.title.space Title spacing.
+#' @param plot.title.position Alignment of the plot title/subtitle and caption. The setting for plot.title.position applies to both the title and the subtitle. A value of "panel" (the default) means that titles and/or caption are aligned to the plot panels. A value of "plot" means that titles and/or caption are aligned to the entire plot (minus any space for margins and plot tag).
 #' @param legend.title.size Legend elements text size in pts.
 #' @param legend.text.size Legend elements text size in pts. Can be "none".
 #' @param axis.title.space Axis title spacing.
@@ -31,6 +32,7 @@ theme_modern <-
            plot.title.size = 15,
            plot.title.face = "plain",
            plot.title.space = 20,
+           plot.title.position = "plot",
            legend.position = "right",
            axis.title.space = 20,
            legend.title.size = 13,
@@ -98,6 +100,7 @@ theme_modern <-
     theme_classic(base_size = base_size, base_family = base_family) +
       theme(
         plot.title = plot.title.size,
+        plot.title.position = plot.title.position,
         legend.position = legend.position,
         legend.text = element_text(size = legend.text.size),
         legend.title = legend.title.size,
