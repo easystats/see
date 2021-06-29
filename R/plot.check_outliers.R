@@ -118,7 +118,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
       fill = NULL
     ) +
     scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
-    guides(fill = FALSE, color = FALSE, label = FALSE)
+    guides(fill = "none", color = FALSE, label = FALSE)
 
   if (!is.null(threshold) && !is.na(threshold)) {
     p <- p +

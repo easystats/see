@@ -55,7 +55,7 @@ Depends:
 Imports:
     bayestestR,
     effectsize,
-    ggplot2,
+    ggplot2 (>= 3.3.5),
     ggridges,
     insight,
     parameters (>= 0.13.0),

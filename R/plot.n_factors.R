@@ -107,7 +107,7 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
   } else {
     ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$fill)) +
       geom_bar(stat = "identity", width = size) +
-      guides(fill = FALSE) +
+      guides(fill = "none") +
       scale_y_continuous(labels = .percents) +
       add_plot_attributes(x) +
       scale_x_continuous(breaks = 1:max(x$x)) +
