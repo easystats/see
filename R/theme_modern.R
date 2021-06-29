@@ -31,6 +31,7 @@ theme_modern <-
            plot.title.size = 15,
            plot.title.face = "plain",
            plot.title.space = 20,
+           plot.title.position = "plot",
            legend.position = "right",
            axis.title.space = 20,
            legend.title.size = 13,
@@ -98,6 +99,7 @@ theme_modern <-
     theme_classic(base_size = base_size, base_family = base_family) +
       theme(
         plot.title = plot.title.size,
+        plot.title.position = plot.title.position,
         legend.position = legend.position,
         legend.text = element_text(size = legend.text.size),
         legend.title = legend.title.size,
