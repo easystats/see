@@ -20,12 +20,15 @@ single plots are returned.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{performance::check_distribution()} function.
+The \code{plot()} method for the \code{performance::check_distribution()}
+function.
 }
 \examples{
+\donttest{
 library(performance)
 m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_distribution(m)
 result
 plot(result)
+}
 }

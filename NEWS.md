@@ -2,20 +2,24 @@
 
 ## General
 
+* `check_model()` function now uses *patchwork* instead of *gridExtra* to
+  arrange plots in a grid.
+
 * Reduced/removed some package dependencies.
 
-* Revise `plot()` for `bayestestR::bayesfactor()` to meet forthcoming changes
-  in the _bayestestR_ package.
+* Revise `plot()` for `bayestestR::bayesfactor()` to meet forthcoming changes in
+  the _bayestestR_ package.
 
 ## New features
 
-* New functions `geom_from_list` and `geoms_from_list` to create geoms from lists.
+* New functions `geom_from_list` and `geoms_from_list` to create geoms from
+  lists.
 
 * Plotting for normality check is now supported for `afex_aov` models.
 
 ## Bug fixes
 
-* Fixed issue that argument `show_intercept` is no longer ignored in `plot()` 
+* Fixed issue that argument `show_intercept` is no longer ignored in `plot()`
   for `rope()`.
 
 # see 0.6.3
@@ -28,7 +32,7 @@
 
 ## changes
 
-* Plot for SEM models now has arrows pointing from the latent variables towards 
+* Plot for SEM models now has arrows pointing from the latent variables towards
   the manifest variables.
 
 * The `plot()` method for `check_model()` was revised and should now be more
@@ -43,7 +47,7 @@
   being plotted is VIF. This was unclear when this plot was embedded in a grid
   of plots from `check_model()` containing multiple checks.
 
-* Plotting methods for `performance_roc()` and `performance_accuracy()` show 
+* Plotting methods for `performance_roc()` and `performance_accuracy()` show
   correct labels now.
 
 ## Bug fixes

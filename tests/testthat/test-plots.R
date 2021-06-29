@@ -7,5 +7,5 @@ test_that("`plots()` works", {
   p2 <- ggplot(iris, aes(x = Petal.Length)) +
     geom_density()
 
-  expect_s3_class(plots(p1, p2), "gtable")
+  expect_s3_class(plots(p1, p2), "ggplot")
 })

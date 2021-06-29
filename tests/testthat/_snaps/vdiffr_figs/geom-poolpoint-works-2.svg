@@ -501,6 +501,6 @@
 <text x='657.68' y='255.75' style='font-size: 12.00px; font-family: sans;' textLength='35.37px' lengthAdjust='spacingAndGlyphs'>setosa</text>
 <text x='657.68' y='294.25' style='font-size: 12.00px; font-family: sans;' textLength='51.36px' lengthAdjust='spacingAndGlyphs'>versicolor</text>
 <text x='657.68' y='332.74' style='font-size: 12.00px; font-family: sans;' textLength='44.02px' lengthAdjust='spacingAndGlyphs'>virginica</text>
-<text x='48.66' y='15.80' style='font-size: 15.00px; font-family: sans;' textLength='191.76px' lengthAdjust='spacingAndGlyphs'>`geom_poolpoint()` works - 2</text>
+<text x='5.48' y='15.80' style='font-size: 15.00px; font-family: sans;' textLength='191.76px' lengthAdjust='spacingAndGlyphs'>`geom_poolpoint()` works - 2</text>
 </g>
 </svg>

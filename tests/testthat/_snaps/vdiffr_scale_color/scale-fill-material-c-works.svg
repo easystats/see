@@ -204,6 +204,6 @@
 <line x1='646.24' y1='316.43' x2='649.69' y2='316.43' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <line x1='646.24' y1='292.51' x2='649.69' y2='292.51' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <line x1='646.24' y1='268.59' x2='649.69' y2='268.59' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<text x='58.66' y='15.80' style='font-size: 15.00px; font-family: sans;' textLength='188.41px' lengthAdjust='spacingAndGlyphs'>scale_fill_material_c() works</text>
+<text x='5.48' y='15.80' style='font-size: 15.00px; font-family: sans;' textLength='188.41px' lengthAdjust='spacingAndGlyphs'>scale_fill_material_c() works</text>
 </g>
 </svg>
