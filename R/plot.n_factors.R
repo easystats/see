@@ -100,7 +100,7 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
       geom_segment(aes(y = 0, xend = .data$x, yend = .data$y), size = size) +
       geom_point(size = 2 * size) +
       coord_flip() +
-      guides(colour = FALSE) +
+      guides(colour = "none") +
       scale_y_continuous(labels = .percents) +
       scale_color_manual(values = unname(flat_colors(c("grey", "red")))) +
       add_plot_attributes(x)

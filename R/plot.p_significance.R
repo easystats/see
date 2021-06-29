@@ -225,7 +225,7 @@ plot.see_p_significance <- function(x,
 
   p <- p +
     geom_vline(aes(xintercept = 0), linetype = "dotted") +
-    guides(fill = "none", color = FALSE, group = FALSE)
+    guides(fill = "none", color = "none", group = "none")
 
 
   if (length(unique(x$y)) == 1 && is.numeric(x$y)) {

@@ -187,7 +187,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
       coord_flip() +
       theme_modern(legend.position = "none") +
       scale_color_material() +
-      guides(color = FALSE, size = FALSE, shape = FALSE)
+      guides(color = "none", size = "none", shape = "none")
   } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
     # plot setup for model parameters with multiple CIs
     x <- bayestestR::reshape_ci(x)
