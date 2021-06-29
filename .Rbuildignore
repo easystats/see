@@ -13,6 +13,7 @@
 ^docs/.
 ^pkgdown/.
 ^paper.*$
+^apa.*$
 ^man/figures/.
 ^revdep$
 ^vignettes$

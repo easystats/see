@@ -20,24 +20,45 @@ plots(
 )
 }
 \arguments{
+\item{...}{Multiple \code{ggplot}s or a list containing \code{ggplot} objects}
+
 \item{n_rows}{Number of rows to align plots.}
 
 \item{n_columns}{Number of columns to align plots.}
 
-\item{guides}{A string specifying how guides should be treated in the layout. \code{'collect'} will collect shared guides across plots, removing duplicates. \code{'keep'} will keep guides alongside their plot. \code{'auto'} will inherit from a higher patchwork level (if any). See \code{\link[patchwork:plot_layout]{patchwork::plot_layout()}} for details.}
+\item{guides}{A string specifying how guides should be treated in the
+layout. \code{'collect'} will collect shared guides across plots, removing
+duplicates. \code{'keep'} will keep guides alongside their plot.
+\code{'auto'} will inherit from a higher patchwork level (if any). See
+\code{\link[patchwork:plot_layout]{patchwork::plot_layout()}} for details.}
 
-\item{tags}{Add tags to your subfigures. Can be \code{NULL} to omit (default) or a character vector containing tags for each plot. Automatic tags can also be generated with \code{'1'} for Arabic numerals, \code{'A'} for uppercase Latin letters, \code{'a'} for lowercase Latin letters, \code{'I'} for uppercase Roman numerals, and \code{'i'} for lowercase Roman numerals. For backwards compatibility, can also be \code{FALSE} (equivalent to \code{NULL}), \code{NA} (equivalent to \code{NULL}), or \code{TRUE} (equivalent to \code{'A'}).}
+\item{tags}{Add tags to your subfigures. Can be \code{NULL} to omit (default)
+or a character vector containing tags for each plot. Automatic tags can
+also be generated with \code{'1'} for Arabic numerals, \code{'A'} for
+uppercase Latin letters, \code{'a'} for lowercase Latin letters, \code{'I'}
+for uppercase Roman numerals, and \code{'i'} for lowercase Roman numerals.
+For backwards compatibility, can also be \code{FALSE} (equivalent to
+\code{NULL}), \code{NA} (equivalent to \code{NULL}), or \code{TRUE}
+(equivalent to \code{'A'}).}
 
-\item{tag_prefix, tag_suffix}{Text strings that should appear before or after the tag.}
+\item{tag_prefix, tag_suffix}{Text strings that should appear before or after
+the tag.}
 
-\item{tag_sep}{Text string giving the separator to use between different tag levels.}
+\item{tag_sep}{Text string giving the separator to use between different tag
+levels.}
 
-\item{title, subtitle, caption}{Text strings to use for the various plot annotations to add to the composed patchwork.}
+\item{title, subtitle, caption}{Text strings to use for the various plot
+annotations to add to the composed patchwork.}
 
-\item{theme}{A ggplot theme specification to use for the plot. Only elements related to titles, caption, and tags, as well as plot margin and background, are used.}
+\item{theme}{A ggplot theme specification to use for the plot. Only elements
+related to titles, caption, and tags, as well as plot margin and
+background, are used.}
 }
 \description{
-A wrapper around \emph{patchwork} to plot multiple figures side by side on the same page. See \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emph{patchwork} documentation} for more advanced control of plot layouts.
+A wrapper around \emph{patchwork} to plot multiple figures side by side on
+the same page. See
+\href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the
+\emph{patchwork} documentation} for more advanced control of plot layouts.
 }
 \examples{
 library(ggplot2)
@@ -47,12 +68,12 @@ p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point()
 p2 <- ggplot(mtcars, aes(x = mpg)) +
   geom_density()
-p3 <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+p3 <- ggplot(mtcars, aes(x = factor(cyl))) +
   geom_bar() +
   scale_x_discrete("cyl")
 
 plots(p1, p2)
-plots(p1, p2, n_columns = 2, tags = 'A')
+plots(p1, p2, n_columns = 2, tags = "A")
 plots(
   p1, p2, p3,
   n_columns = 1, tags = c("Fig. 1", "Fig. 2", "Fig. 3"),
