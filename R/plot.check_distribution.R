@@ -23,7 +23,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   dat <- data.frame(
     x = factor(c(x$Distribution, x$Distribution), levels = rev(sort(unique(x$Distribution)))),
     y = c(x$p_Response, x$p_Residuals),
-    group = c(rep("Response", length(x$p_Response)), rep("Residuals", length(x$p_Residuals)))
+    group = factor(c(rep("Response", length(x$p_Response)), rep("Residuals", length(x$p_Residuals))),
+                   levels = c("Response", "Residuals"))
   )
 
   # remove all zero-probabilities
@@ -41,7 +42,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     coord_flip() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Residuals and Response") +
     scale_y_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
-    scale_color_material_d() +
+    scale_color_material_d(reverse = TRUE) +
+    guides(colour = guide_legend(reverse = TRUE)) +
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(stats::residuals(model)))
@@ -57,18 +59,16 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     theme_lucid()
 
   p3 <- ggplot(dat2, aes(x = .data$x)) +
-    geom_bar(fill = "#f44336", colour = NA) +
+    geom_histogram(fill = "#f44336", colour = theme_lucid()$panel.background$fill,
+                   binwidth = sqrt(length(vars(.data$x)))) +
     labs(x = NULL, y = NULL, title = "Distribution of Response") +
     theme_lucid()
 
-  p <- list(p1, p2, p3)
-
   if (panel) {
-    insight::check_if_installed("gridExtra")
-
-    gridExtra::grid.arrange(p1, p2, p3, layout_matrix = rbind(c(1, 1), c(2, 3)))
+    insight::check_if_installed("patchwork")
+    return(p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2))
   } else {
-    lapply(p, graphics::plot)
+    return(list(p1, p2, p3))
   }
 }
 
@@ -110,17 +110,15 @@ plot.see_check_distribution_numeric <- function(x, size_point = 2, panel = TRUE,
     theme_lucid()
 
   p3 <- ggplot(dat2, aes(x = .data$x)) +
-    geom_bar(colour = NA) +
+    geom_histogram(colour = theme_lucid()$panel.background$fill,
+                   binwidth = sqrt(length(vars(.data$x)))) +
     labs(x = NULL, y = NULL, title = "Distribution of Vector") +
     theme_lucid()
 
-  p <- list(p1, p2, p3)
-
   if (panel) {
-    insight::check_if_installed("gridExtra")
-
-    gridExtra::grid.arrange(p1, p2, p3, layout_matrix = rbind(c(1, 1), c(2, 3)))
+    insight::check_if_installed("patchwork")
+    return(p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2))
   } else {
-    lapply(p, graphics::plot)
+    return(list(p1, p2, p3))
   }
 }
