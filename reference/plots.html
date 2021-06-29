@@ -47,7 +47,10 @@
 
 
 <meta property="og:title" content="Multiple plots side by side — plots" />
-<meta property="og:description" content="A wrapper around patchwork to plot multiple figures side by side on the same page. See the patchwork documentation for more advanced control of plot layouts." />
+<meta property="og:description" content="A wrapper around patchwork to plot multiple figures side by side on
+the same page. See
+the
+patchwork documentation for more advanced control of plot layouts." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -158,7 +161,10 @@
     </div>
 
     <div class="ref-description">
-    <p>A wrapper around <em>patchwork</em> to plot multiple figures side by side on the same page. See <a href='https://patchwork.data-imaginist.com/articles/patchwork.html'>the <em>patchwork</em> documentation</a> for more advanced control of plot layouts.</p>
+    <p>A wrapper around <em>patchwork</em> to plot multiple figures side by side on
+the same page. See
+<a href='https://patchwork.data-imaginist.com/articles/patchwork.html'>the
+<em>patchwork</em> documentation</a> for more advanced control of plot layouts.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plots</span><span class='op'>(</span>
@@ -180,6 +186,10 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>...</th>
+      <td><p>Multiple <code>ggplot</code>s or a list containing <code>ggplot</code> objects</p></td>
+    </tr>
+    <tr>
       <th>n_rows</th>
       <td><p>Number of rows to align plots.</p></td>
     </tr>
@@ -189,27 +199,43 @@
     </tr>
     <tr>
       <th>guides</th>
-      <td><p>A string specifying how guides should be treated in the layout. <code>'collect'</code> will collect shared guides across plots, removing duplicates. <code>'keep'</code> will keep guides alongside their plot. <code>'auto'</code> will inherit from a higher patchwork level (if any). See <code><a href='https://patchwork.data-imaginist.com/reference/plot_layout.html'>patchwork::plot_layout()</a></code> for details.</p></td>
+      <td><p>A string specifying how guides should be treated in the
+layout. <code>'collect'</code> will collect shared guides across plots, removing
+duplicates. <code>'keep'</code> will keep guides alongside their plot.
+<code>'auto'</code> will inherit from a higher patchwork level (if any). See
+<code><a href='https://patchwork.data-imaginist.com/reference/plot_layout.html'>patchwork::plot_layout()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>Add tags to your subfigures. Can be <code>NULL</code> to omit (default) or a character vector containing tags for each plot. Automatic tags can also be generated with <code>'1'</code> for Arabic numerals, <code>'A'</code> for uppercase Latin letters, <code>'a'</code> for lowercase Latin letters, <code>'I'</code> for uppercase Roman numerals, and <code>'i'</code> for lowercase Roman numerals. For backwards compatibility, can also be <code>FALSE</code> (equivalent to <code>NULL</code>), <code>NA</code> (equivalent to <code>NULL</code>), or <code>TRUE</code> (equivalent to <code>'A'</code>).</p></td>
+      <td><p>Add tags to your subfigures. Can be <code>NULL</code> to omit (default)
+or a character vector containing tags for each plot. Automatic tags can
+also be generated with <code>'1'</code> for Arabic numerals, <code>'A'</code> for
+uppercase Latin letters, <code>'a'</code> for lowercase Latin letters, <code>'I'</code>
+for uppercase Roman numerals, and <code>'i'</code> for lowercase Roman numerals.
+For backwards compatibility, can also be <code>FALSE</code> (equivalent to
+<code>NULL</code>), <code>NA</code> (equivalent to <code>NULL</code>), or <code>TRUE</code>
+(equivalent to <code>'A'</code>).</p></td>
     </tr>
     <tr>
       <th>tag_prefix, tag_suffix</th>
-      <td><p>Text strings that should appear before or after the tag.</p></td>
+      <td><p>Text strings that should appear before or after
+the tag.</p></td>
     </tr>
     <tr>
       <th>tag_sep</th>
-      <td><p>Text string giving the separator to use between different tag levels.</p></td>
+      <td><p>Text string giving the separator to use between different tag
+levels.</p></td>
     </tr>
     <tr>
       <th>title, subtitle, caption</th>
-      <td><p>Text strings to use for the various plot annotations to add to the composed patchwork.</p></td>
+      <td><p>Text strings to use for the various plot
+annotations to add to the composed patchwork.</p></td>
     </tr>
     <tr>
       <th>theme</th>
-      <td><p>A ggplot theme specification to use for the plot. Only elements related to titles, caption, and tags, as well as plot margin and background, are used.</p></td>
+      <td><p>A ggplot theme specification to use for the plot. Only elements
+related to titles, caption, and tags, as well as plot margin and
+background, are used.</p></td>
     </tr>
     </table>
 
@@ -222,18 +248,18 @@
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_density.html'>geom_density</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>p3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<span class='va'>p3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span><span class='st'>"cyl"</span><span class='op'>)</span>
 
 <span class='fu'>plots</span><span class='op'>(</span><span class='va'>p1</span>, <span class='va'>p2</span><span class='op'>)</span>
-</div><div class='img'><img src='plots-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plots</span><span class='op'>(</span><span class='va'>p1</span>, <span class='va'>p2</span>, n_columns <span class='op'>=</span> <span class='fl'>2</span>, tags <span class='op'>=</span> <span class='st'>'A'</span><span class='op'>)</span>
+</div><div class='img'><img src='plots-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plots</span><span class='op'>(</span><span class='va'>p1</span>, <span class='va'>p2</span>, n_columns <span class='op'>=</span> <span class='fl'>2</span>, tags <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
 </div><div class='img'><img src='plots-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plots</span><span class='op'>(</span>
   <span class='va'>p1</span>, <span class='va'>p2</span>, <span class='va'>p3</span>,
   n_columns <span class='op'>=</span> <span class='fl'>1</span>, tags <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Fig. 1"</span>, <span class='st'>"Fig. 2"</span>, <span class='st'>"Fig. 3"</span><span class='op'>)</span>,
   title <span class='op'>=</span> <span class='st'>"The surprising truth about mtcars"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: stat_count() can only have an x or y aesthetic.</span></div><div class='img'><img src='plots-3.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='plots-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
