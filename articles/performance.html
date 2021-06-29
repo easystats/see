@@ -297,7 +297,6 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="fu"><a href="https://easystats.github.io/performance/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">model</span>, check_range <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
 </div>
 </div>
 <div id="overall-model-check" class="section level1">
@@ -307,14 +306,12 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span>
 <span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-17-1.png" width="100%"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">model</span>, panel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-18-1.png" width="100%"><img src="performance_files/figure-html/unnamed-chunk-18-2.png" width="100%"><img src="performance_files/figure-html/unnamed-chunk-18-3.png" width="100%"><img src="performance_files/figure-html/unnamed-chunk-18-4.png" width="100%"><img src="performance_files/figure-html/unnamed-chunk-18-5.png" width="100%"><img src="performance_files/figure-html/unnamed-chunk-18-6.png" width="100%"></p>
 <p>Note that not all checks supported in <code>performance</code> will be reported in this unified <strong>visual</strong> check. For example, for linear models, one needs to check the assumption that errors are not autocorrelated, but this check will not be shown in the visual check.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://easystats.github.io/performance/reference/check_autocorrelation.html">check_autocorrelation</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.008).</span></code></pre></div>
+<span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.006).</span></code></pre></div>
 </div>
 <div id="compare-model-performances" class="section level1">
 <h1 class="hasAnchor">
