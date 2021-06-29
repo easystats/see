@@ -70,6 +70,6 @@
 <text x='657.68' y='276.97' style='font-size: 12.00px; font-family: sans;' textLength='35.37px' lengthAdjust='spacingAndGlyphs'>setosa</text>
 <text x='657.68' y='294.25' style='font-size: 12.00px; font-family: sans;' textLength='51.36px' lengthAdjust='spacingAndGlyphs'>versicolor</text>
 <text x='657.68' y='311.53' style='font-size: 12.00px; font-family: sans;' textLength='44.02px' lengthAdjust='spacingAndGlyphs'>virginica</text>
-<text x='48.66' y='15.80' style='font-size: 15.00px; font-family: sans;' textLength='160.09px' lengthAdjust='spacingAndGlyphs'>scale_fill_see_d() works</text>
+<text x='5.48' y='15.80' style='font-size: 15.00px; font-family: sans;' textLength='160.09px' lengthAdjust='spacingAndGlyphs'>scale_fill_see_d() works</text>
 </g>
 </svg>

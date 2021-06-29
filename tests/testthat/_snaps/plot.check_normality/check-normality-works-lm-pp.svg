@@ -97,7 +97,7 @@
 <text x='684.51' y='554.11' text-anchor='middle' style='font-size: 10.00px; fill: #7F7F7F; font-family: sans;' textLength='19.46px' lengthAdjust='spacingAndGlyphs'>1.00</text>
 <text x='379.39' y='568.74' text-anchor='middle' style='font-size: 11.00px; fill: #4D4D4D; font-family: sans;' textLength='84.99px' lengthAdjust='spacingAndGlyphs'>Probability Points</text>
 <text transform='translate(12.55,287.70) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; fill: #4D4D4D; font-family: sans;' textLength='118.62px' lengthAdjust='spacingAndGlyphs'>Cummulative Probability</text>
-<text x='43.76' y='25.60' style='font-size: 10.00px; font-family: sans;' textLength='130.64px' lengthAdjust='spacingAndGlyphs'>Dots should fall along the line</text>
-<text x='43.76' y='13.24' style='font-size: 12.00px; font-family: sans;' textLength='170.08px' lengthAdjust='spacingAndGlyphs'>Normality of Residuals (PP plot)</text>
+<text x='4.98' y='25.60' style='font-size: 10.00px; font-family: sans;' textLength='130.64px' lengthAdjust='spacingAndGlyphs'>Dots should fall along the line</text>
+<text x='4.98' y='13.24' style='font-size: 12.00px; font-family: sans;' textLength='170.08px' lengthAdjust='spacingAndGlyphs'>Normality of Residuals (PP plot)</text>
 </g>
 </svg>

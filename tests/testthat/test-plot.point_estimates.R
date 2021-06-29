@@ -7,6 +7,6 @@ test_that("`plot.see_point_estimate()` works", {
     )
     result <- point_estimate(m, centrality = "median")
 
-    expect_s3_class(plot(result), "gtable")
+    expect_s3_class(plot(result), "ggplot")
   }
 })
