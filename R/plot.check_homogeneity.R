@@ -57,14 +57,16 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       geom_violin() +
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_label_repel(
-          aes(label = .data$group), y = 0, fill = "white",
+          aes(label = .data$group),
+          y = 0, fill = "white",
           data = data.frame(group = unique(dat$group)),
           direction = "y",
           segment.colour = NA
         )
       } else {
         geom_label(
-          aes(label = .data$group), y = 0, fill = "white",
+          aes(label = .data$group),
+          y = 0, fill = "white",
           data = data.frame(group = unique(dat$group))
         )
       }
@@ -79,14 +81,16 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       geom_violin() +
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_label_repel(
-          aes(label = .data$x), y = 0, fill = "white",
+          aes(label = .data$x),
+          y = 0, fill = "white",
           data = data.frame(x = unique(dat$x)),
           direction = "y",
           segment.colour = NA
         )
       } else {
         geom_label(
-          aes(label = .data$x), y = 0, fill = "white",
+          aes(label = .data$x),
+          y = 0, fill = "white",
           data = data.frame(x = unique(dat$x))
         )
       }

@@ -43,7 +43,7 @@ plot.see_easycorrelation <- function(x, size_point = 22, text_color = "white", n
       ggraph::geom_node_text(aes(label = .data$name), colour = text_color) +
       ggraph::scale_edge_color_gradient2(low = "#a20025", high = "#008a00", name = "r") +
       ggraph::theme_graph() +
-      guides(edge_width = FALSE) +
+      guides(edge_width = "none") +
       scale_x_continuous(expand = expand_scale(c(.10, .10))) +
       scale_y_continuous(expand = expand_scale(c(.10, .10)))
   )

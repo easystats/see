@@ -113,7 +113,7 @@ plot.see_parameters_pca <- function(x,
       nudge_y = .15
     ) +
     coord_flip() +
-    guides(fill = FALSE, color = FALSE) +
+    guides(fill = "none", color = "none") +
     scale_y_continuous(
       limits = c(0, 1.25),
       breaks = c(0, .25, .5, .75, 1, 1.25),

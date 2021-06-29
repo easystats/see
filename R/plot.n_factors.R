@@ -100,14 +100,14 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
       geom_segment(aes(y = 0, xend = .data$x, yend = .data$y), size = size) +
       geom_point(size = 2 * size) +
       coord_flip() +
-      guides(colour = FALSE) +
+      guides(colour = "none") +
       scale_y_continuous(labels = .percents) +
       scale_color_manual(values = unname(flat_colors(c("grey", "red")))) +
       add_plot_attributes(x)
   } else {
     ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$fill)) +
       geom_bar(stat = "identity", width = size) +
-      guides(fill = FALSE) +
+      guides(fill = "none") +
       scale_y_continuous(labels = .percents) +
       add_plot_attributes(x) +
       scale_x_continuous(breaks = 1:max(x$x)) +
