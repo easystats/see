@@ -2,6 +2,7 @@
 #'
 #' A wrapper around \emph{patchwork} to plot multiple figures side by side on the same page. See \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emph{patchwork} documentation} for more advanced control of plot layouts.
 #'
+#' @param ... Multiple \code{ggplot}s or a list containing \code{ggplot} objects
 #' @param n_rows Number of rows to align plots.
 #' @param n_columns Number of columns to align plots.
 #' @param guides 	A string specifying how guides should be treated in the layout. \code{'collect'} will collect shared guides across plots, removing duplicates. \code{'keep'} will keep guides alongside their plot. \code{'auto'} will inherit from a higher patchwork level (if any). See \code{\link[patchwork:plot_layout]{patchwork::plot_layout()}} for details.
@@ -18,7 +19,7 @@
 #'   geom_point()
 #' p2 <- ggplot(mtcars, aes(x = mpg)) +
 #'   geom_density()
-#' p3 <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+#' p3 <- ggplot(mtcars, aes(x = factor(cyl))) +
 #'   geom_bar() +
 #'   scale_x_discrete("cyl")
 #'
