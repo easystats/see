@@ -4,30 +4,58 @@
 \alias{plots}
 \title{Multiple plots side by side}
 \usage{
-plots(..., n_rows = NULL, n_columns = NULL, tags = FALSE)
+plots(
+  ...,
+  n_rows = NULL,
+  n_columns = NULL,
+  guides = NULL,
+  tags = FALSE,
+  tag_prefix = NULL,
+  tag_suffix = NULL,
+  tag_sep = NULL,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  theme = NULL
+)
 }
 \arguments{
-\item{...}{grobs, gtables, ggplot or trellis objects}
-
 \item{n_rows}{Number of rows to align plots.}
 
 \item{n_columns}{Number of columns to align plots.}
 
-\item{tags}{Add tags to your subfigures. Can be \code{FALSE} (no tags), \code{TRUE} (letter tags) or character vector containing tags labels.}
+\item{guides}{A string specifying how guides should be treated in the layout. \code{'collect'} will collect shared guides across plots, removing duplicates. \code{'keep'} will keep guides alongside their plot. \code{'auto'} will inherit from a higher patchwork level (if any). See \code{\link[patchwork:plot_layout]{patchwork::plot_layout()}} for details.}
+
+\item{tags}{Add tags to your subfigures. Can be \code{NULL} to omit (default) or a character vector containing tags for each plot. Automatic tags can also be generated with \code{'1'} for Arabic numerals, \code{'A'} for uppercase Latin letters, \code{'a'} for lowercase Latin letters, \code{'I'} for uppercase Roman numerals, and \code{'i'} for lowercase Roman numerals. For backwards compatibility, can also be \code{FALSE} (equivalent to \code{NULL}), \code{NA} (equivalent to \code{NULL}), or \code{TRUE} (equivalent to \code{'A'}).}
+
+\item{tag_prefix, tag_suffix}{Text strings that should appear before or after the tag.}
+
+\item{tag_sep}{Text string giving the separator to use between different tag levels.}
+
+\item{title, subtitle, caption}{Text strings to use for the various plot annotations to add to the composed patchwork.}
+
+\item{theme}{A ggplot theme specification to use for the plot. Only elements related to titles, caption, and tags, as well as plot margin and background, are used.}
 }
 \description{
-A wrapper around gridExtra::grid.arrange to plot multiple figures side by side on the same page.
+A wrapper around \emph{patchwork} to plot multiple figures side by side on the same page. See \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emph{patchwork} documentation} for more advanced control of plot layouts.
 }
 \examples{
 library(ggplot2)
 library(see)
 
-p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) +
+p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point()
-p2 <- ggplot(iris, aes(x = Petal.Length)) +
+p2 <- ggplot(mtcars, aes(x = mpg)) +
   geom_density()
+p3 <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_bar() +
+  scale_x_discrete("cyl")
 
 plots(p1, p2)
-plots(p1, p2, n_columns = 2, tags = TRUE)
-plots(p1, p2, n_columns = 2, tags = c("Fig. 1", "Fig. 2"))
+plots(p1, p2, n_columns = 2, tags = 'A')
+plots(
+  p1, p2, p3,
+  n_columns = 1, tags = c("Fig. 1", "Fig. 2", "Fig. 3"),
+  title = "The surprising truth about mtcars"
+)
 }
