@@ -124,7 +124,7 @@ plot.see_check_model <- function(x,
   }
 
   if (panel) {
-    plots(p)
+    plots(p, n_columns = 2)
   } else {
     return(p)
   }
