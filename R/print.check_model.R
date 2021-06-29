@@ -4,5 +4,5 @@ print.see_check_model <- function(x,
                                   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                   ...) {
   plot(x, style = style, colors = colors, ...)
-  invisible(orig_x)
+  invisible(x)
 }
