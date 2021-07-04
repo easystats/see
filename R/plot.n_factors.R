@@ -39,7 +39,7 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
 
   attr(dataplot, "info") <- list(
     "xlab" = paste("Number of", lab),
-    "ylab" = "Agreement between methods",
+    "ylab" = "Consensus between methods",
     "title" = paste("How many", lab, "to retain")
   )
 
@@ -73,7 +73,11 @@ data_plot.n_clusters <- data_plot.n_factors
 #' }
 #' @importFrom rlang .data
 #' @export
-plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), size = 1, ...) {
+plot.see_n_factors <- function(x,
+                               data = NULL,
+                               type = c("bar", "line", "area"),
+                               size = 1,
+                               ...) {
   type <- match.arg(type)
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, type = type)
@@ -90,8 +94,19 @@ plot.see_n_factors <- function(x, data = NULL, type = c("bar", "line", "area"), 
   if (type == "area") {
     ggplot(x, aes(x = .data$x, y = .data$y)) +
       geom_area(fill = flat_colors("grey")) +
-      geom_segment(aes(x = .data$x[which.max(.data$y)], xend = .data$x[which.max(.data$y)], y = 0, yend = max(.data$y)), color = flat_colors("red"), linetype = "dashed") +
-      geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)), color = flat_colors("red")) +
+      geom_segment(
+        aes(
+          x = .data$x[which.max(.data$y)],
+          xend = .data$x[which.max(.data$y)],
+          y = 0,
+          yend = max(.data$y)
+        ),
+        color = flat_colors("red"),
+        linetype = "dashed"
+      ) +
+      geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)),
+        color = flat_colors("red")
+      ) +
       scale_y_continuous(labels = .percents) +
       scale_x_continuous(breaks = 1:max(x$x)) +
       add_plot_attributes(x)
