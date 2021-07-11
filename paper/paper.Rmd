@@ -113,6 +113,7 @@ The *parameters* package converts summaries of regression model objects into dat
 ```{r parameters1}
 library(parameters)
 library(see)
+library(ggplot2)
 
 model <- lm(wt ~ am * cyl, data = mtcars)
 
@@ -129,8 +130,10 @@ library(see)
 
 model <- lm(wt ~ am * cyl, data = mtcars)
 
+# changing title and axis labels using ggplot2 functions
 plot(parameters(model)) +
-  ggplot2::labs(title = "A Dot-and-Whisker Plot")
+  labs(title = "A Dot-and-Whisker Plot") + 
+  scale_x_discrete(labels = c("transmission * cylinders", "cylinders", "transmission"))
 ```
 
 \newpage
