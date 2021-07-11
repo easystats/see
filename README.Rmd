@@ -67,8 +67,8 @@ The *see* package is available on CRAN, while its development version is availab
 
 Type | Source | Command
 ---|---|---
-Release | CRAN | `install.packages("datawizard")`
-Development | GitHub | `remotes::install_github("easystats/datawizard")`
+Release | CRAN | `install.packages("see")`
+Development | GitHub | `remotes::install_github("easystats/see")`
 
 Once you have downloaded the package, you can then load it using:
 

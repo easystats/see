@@ -99,10 +99,10 @@ available on GitHub. In order to download the package from GitHub, you
 will need to have installed the *remotes* package first
 (`install.packages("remotes")`).
 
-| Type        | Source | Command                                           |
-|-------------|--------|---------------------------------------------------|
-| Release     | CRAN   | `install.packages("datawizard")`                  |
-| Development | GitHub | `remotes::install_github("easystats/datawizard")` |
+| Type        | Source | Command                                    |
+|-------------|--------|--------------------------------------------|
+| Release     | CRAN   | `install.packages("see")`                  |
+| Development | GitHub | `remotes::install_github("easystats/see")` |
 
 Once you have downloaded the package, you can then load it using:
 
