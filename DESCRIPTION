@@ -66,6 +66,7 @@ Suggests:
     correlation,
     dplyr,
     emmeans,
+    ggdist,
     ggraph,
     ggrepel,
     glmmTMB,
