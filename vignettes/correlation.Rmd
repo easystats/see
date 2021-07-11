@@ -61,7 +61,7 @@ To change the style of geoms, use the `type`-argument.
 plot(s, type = "tile")
 ```
 
-It is also possible to add correlation coefficients and p-values.
+It is also possible to add correlation coefficients and *p*-values.
 
 ```{r}
 plot(s, show_values = TRUE, show_p = TRUE, show_legend = FALSE)

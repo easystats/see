@@ -76,7 +76,7 @@ Once you have downloaded the package, you can then load it using:
 library("see")
 ```
 
-This package provides visualisation toolbox for R packages in the `easystats` [ecosystem](https://easystats.github.io/easystats/). But note that it will not download any of the *easystats* packages for you. Rather, it will be loaded when a respective plotting method is requested by an *easystats* package.
+This package provides visualisation toolbox for R packages in the *easystats* [ecosystem](https://easystats.github.io/easystats/). But note that it will not download any of the *easystats* packages for you. Rather, it will be loaded when a respective plotting method is requested by an *easystats* package.
 
 # Documentation
 
