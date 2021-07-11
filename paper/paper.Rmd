@@ -132,10 +132,12 @@ model <- lm(wt ~ am * cyl, data = mtcars)
 
 # changing title and axis labels using ggplot2 functions
 plot(parameters(model)) +
-  labs(title = "A Dot-and-Whisker Plot") + 
-  scale_x_discrete(labels = c("transmission * cylinders", 
-                              "cylinders", 
-                              "transmission"))
+  labs(title = "A Dot-and-Whisker Plot") +
+  scale_x_discrete(labels = c(
+    "transmission * cylinders",
+    "cylinders",
+    "transmission"
+  ))
 ```
 
 \newpage

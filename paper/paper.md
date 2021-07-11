@@ -39,10 +39,6 @@ affiliations:
   name: Nanyang Technological University, Singapore
 date: "2021-07-11"
 bibliography: paper.bib
-output: rticles::joss_article
-csl: apa.csl
-journal: JOSS
-link-citations: yes
 ---
 
 
@@ -129,10 +125,12 @@ model <- lm(wt ~ am * cyl, data = mtcars)
 
 # changing title and axis labels using ggplot2 functions
 plot(parameters(model)) +
-  labs(title = "A Dot-and-Whisker Plot") + 
-  scale_x_discrete(labels = c("transmission * cylinders", 
-                              "cylinders", 
-                              "transmission"))
+  labs(title = "A Dot-and-Whisker Plot") +
+  scale_x_discrete(labels = c(
+    "transmission * cylinders",
+    "cylinders",
+    "transmission"
+  ))
 ```
 
 
