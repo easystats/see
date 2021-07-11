@@ -111,6 +111,15 @@ s <- summary(result)
 plot(s, size_point = .8)
 ```
 
+The `corrlation` function also provides a convenient way to change names for selected variables:
+
+```{r, eval=isTRUE(packageVersion("correlation") >= '0.7.0')}
+plot(summary(correlation(
+  data = dplyr::select(mtcars, wt, mpg, drat),
+  rename = c("weight", "miles per gallon", "rear axle ratio")
+)))
+```
+
 # Gaussian Graphical Models (GGMs)
 
 To create a Gaussian Graphical Models plot, the library *ggraph* needs to be
