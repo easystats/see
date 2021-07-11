@@ -25,7 +25,11 @@ library(see)
 data <- iris[1:100, ]
 
 ggplot() +
-  geom_binomdensity(data, x = "Sepal.Length", y = "Species")
+  geom_binomdensity(data,
+                    x = "Sepal.Length",
+                    y = "Species",
+                    fill = "red",
+                    color = NA)
 
 # Different scales
 data[1:70, "Species"] <- "setosa" # Create unbalanced proportions

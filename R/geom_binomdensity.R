@@ -12,7 +12,11 @@
 #' data <- iris[1:100, ]
 #'
 #' ggplot() +
-#'   geom_binomdensity(data, x = "Sepal.Length", y = "Species")
+#'   geom_binomdensity(data,
+#'                     x = "Sepal.Length",
+#'                     y = "Species",
+#'                     fill = "red",
+#'                     color = NA)
 #'
 #' # Different scales
 #' data[1:70, "Species"] <- "setosa" # Create unbalanced proportions
@@ -32,7 +36,7 @@
 geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
   insight::check_if_installed(c("ggplot2", "ggdist"))
 
-  # Sanitize y
+  # Sanitize y (e.g., if levels with no values, etc.)
   if (is.factor(data[[y]]) && length(levels(data[[y]])) > 2) {
     data[[y]] <- droplevels(data[[y]])
   }
@@ -43,15 +47,38 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
     stop("The y-variable should have exactly two levels.")
   }
 
-  # Drop NaNs
-  vars <- c(x, y) # later can eventually add variables specified as color, fill, ...
-  data <- na.omit(data[vars])
+  # Aesthetics
+  vars <- c(x , y)
+  data <- na.omit(data[unique(vars)]) # Drop NaNs
 
   # Other parameters
   data$.side <- ifelse(data[[y]] == y_levels[1], "top", "bottom")
   data$.justification <- ifelse(data[[y]] == y_levels[1], 0, 1)
+  data$.scale <- .geom_binomdensity_scale(data, x, y, scale)
 
-  # Scale
+  # ggdist geom
+  ggdist::geom_dots(
+    ggplot2::aes_string(
+      x = x,
+      y = y,
+      side = ".side",
+      justification = ".justification",
+      scale = ".scale"
+    ),
+    data = data,
+    na.rm = TRUE,
+    ...
+  )
+}
+
+
+
+
+# Utilities ---------------------------------------------------------------
+
+
+
+.geom_binomdensity_scale <- function(data, x, y, scale = "auto") {
   prop <- prop.table(xtabs(paste("~", y), data)) # Get prop table (useful later)
   if (length(scale) == 1 && is.character(scale) && scale %in% c("density", "proportion", "auto")) {
 
@@ -67,30 +94,18 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
       prop <- sqrt(prop) / sum(sqrt(prop))
     }
 
-    data$.scale <- as.vector(prop[as.character(data[[y]])] * 0.9)
+    out <- as.vector(prop[as.character(data[[y]])] * 0.9)
   } else if (length(scale) == 1 && is.character(scale) && scale %in% names(data)) {
-    data$.scale <- data[[scale]]
+    out <- data[[scale]]
   } else if (is.list(scale) && all(names(prop) %in% names(scale))) {
     # replace vals
     for (i in names(prop)) {
       prop[[i]] <- scale[[i]]
     }
-    data$.scale <- as.vector(prop[as.character(data[[y]])] * 0.9)
+    out <- as.vector(prop[as.character(data[[y]])] * 0.9)
   } else {
     stop("Oops, 'scale' argument wrongly specified.")
   }
 
-  # ggdist geom
-  ggdist::geom_dots(
-    ggplot2::aes_string(
-      x = x,
-      y = y,
-      side = ".side",
-      justification = ".justification",
-      scale = ".scale"
-    ),
-    data = data,
-    na.rm = TRUE,
-    ...
-  )
+  out
 }
