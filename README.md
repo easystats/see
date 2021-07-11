@@ -89,33 +89,41 @@ package follows this philosophy by using a single access point—the
 generic `plot()` method—for visualization of all manner of statistical
 results supported by *easystats*.
 
-## Installation
+# Installation
 
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
 ![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
 
-Run the following:
+The *see* package is available on CRAN, while its development version is
+available on GitHub. In order to download the package from GitHub, you
+will need to have installed the *remotes* package first
+(`install.packages("remotes")`).
 
-``` r
-install.packages("devtools")
-devtools::install_github("easystats/see")
-```
+| Type        | Source | Command                                           |
+|-------------|--------|---------------------------------------------------|
+| Release     | CRAN   | `install.packages("datawizard")`                  |
+| Development | GitHub | `remotes::install_github("easystats/datawizard")` |
 
-And then load it:
+Once you have downloaded the package, you can then load it using:
 
 ``` r
 library("see")
 ```
 
+This package provides visualisation toolbox for R packages in the
+`easystats` [ecosystem](https://easystats.github.io/easystats/). But
+note that it will not download any of the *easystats* packages for you.
+Rather, it will be loaded when a respective plotting method is requested
+by an *easystats* package.
+
 # Documentation
 
-This package provides visualisation toolbox for R packages in the
-`easystats` ecosystem and extra `geom`s, themes and color palettes for
-`ggplot2`
+Following resources are a good way to get to know more about the
+functionality offered by this package:
 
 [![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
-[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
 [![Features](https://img.shields.io/badge/features-see-orange.svg?colorB=2196F3)](https://easystats.github.io/see/reference/index.html)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
 
 # Plotting functions for ‘easystats’ packages
 
@@ -248,13 +256,16 @@ vignette](https://easystats.github.io/see/articles/effectsize.html).
 
 The *modelbased* package computes model-based estimates and predictions
 from fitted models (Makowski et al., 2020a). *see* provides methods to
-quickly visualize these model predictions.
+quickly visualize these model predictions. For the following example to
+work, you need to have installed the *emmeans* package first.
 
 ``` r
 library(modelbased)
 library(see)
 
 model <- lm(mpg ~ wt * as.factor(cyl), data = mtcars)
+
+# for this to work, *emmeans* package should be available
 predicted <- estimate_prediction(model)
 
 plot(predicted)
@@ -285,7 +296,7 @@ code to carry out many types of correlation analysis (Makowski et al.,
 2020b). A user can run `summary(correlation(data))` to create a
 construct a correlation matrix for the variables in a dataframe. With
 *see*, this matrix can be passed to `plot()` to visualize these
-correlations in a corrgram..
+correlations in a correlation matrix.
 
 ``` r
 library(correlation)
@@ -314,7 +325,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
   theme_modern()
 ```
 
-![](man/figures/unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
 ### Lucid
 
@@ -327,7 +338,7 @@ p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 p + theme_lucid()
 ```
 
-![](man/figures/unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
 ### Blackboard
 
@@ -335,7 +346,7 @@ p + theme_lucid()
 p + theme_blackboard()
 ```
 
-![](man/figures/unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/unnamed-chunk-6-1.png)<!-- -->
 
 ### Abyss
 
@@ -343,7 +354,7 @@ p + theme_blackboard()
 p + theme_abyss()
 ```
 
-![](man/figures/unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/unnamed-chunk-7-1.png)<!-- -->
 
 # Palettes
 
@@ -378,7 +389,7 @@ The `plots()` function allows us to plot the figures side by side.
 plots(p1, p2, p3, n_columns = 2)
 ```
 
-![](man/figures/unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/unnamed-chunk-9-1.png)<!-- -->
 
 The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
@@ -390,7 +401,7 @@ plots(p1, p2, p3,
 )
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-10-1.png)<!-- -->
 
 # Geoms
 
@@ -411,7 +422,7 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, n_columns = 2)
 ```
 
-![](man/figures/unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/unnamed-chunk-11-1.png)<!-- -->
 
 ## Half-violin Half-dot plot
 
@@ -425,7 +436,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
 ## Radar chart (Spider plot)
 
@@ -433,19 +444,26 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 library(dplyr)
 library(tidyr)
 
+# prepare the data in tidy format
 data <- iris %>%
   group_by(Species) %>%
   summarise_all(mean) %>%
   pivot_longer(-Species)
 
 data %>%
-  ggplot(aes(x = name, y = value, color = Species, group = Species)) +
-  geom_polygon(fill = NA, size = 2, show.legend = FALSE) +
-  coord_radar(start = -pi / 4) +
-  theme_minimal()
+  ggplot(aes(
+    x = name,
+    y = value,
+    color = Species,
+    group = Species,
+    fill = Species
+  )) +
+  geom_polygon(size = 1, alpha = .1) +
+  coord_radar() +
+  theme_radar()
 ```
 
-![](man/figures/unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 # Contributing and Support
 

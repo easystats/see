@@ -38,7 +38,7 @@ plot.see_effectsize_table <- function(x, ...) {
     geom_vline(xintercept = 0) +
     scale_color_manual(
       values = c("FALSE" = "green", "TRUE" = "blue"),
-      guide = FALSE
+      guide = "none"
     ) +
     labs(x = es_lab) +
     theme_modern()
