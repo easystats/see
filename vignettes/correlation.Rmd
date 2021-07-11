@@ -23,7 +23,30 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 }
 ```
 
-## Setup
+# Introduction
+
+`correlation` is an [**easystats**](https://github.com/easystats/easystats) package focused on correlation analysis. It's lightweight, easy to use, and allows for the computation of many different types of correlation, including:
+
+✅ **Pearson's correlation**<br>
+✅ **Spearman's rank correlation**<br>
+✅ **Kendall's rank correlation**<br>
+✅ **Biweight midcorrelation**<br>
+✅ **Distance correlation**<br>
+✅ **Percentage bend correlation**<br>
+✅ **Shepherd's Pi correlation**<br>
+✅ **Blomqvist’s coefficient**<br>
+✅ **Hoeffding’s D**<br>
+✅ **Gamma correlation**<br>
+✅ **Gaussian rank correlation**<br>
+✅ **Point-Biserial and biserial correlation**<br>
+✅ **Winsorized correlation**<br>
+✅ **Polychoric correlation**<br>
+✅ **Tetrachoric correlation**<br>
+✅ **Multilevel correlation**<br>
+
+An overview and description of these correlations types is [**available here**](https://easystats.github.io/correlation/articles/types.html). Moreover, many of these correlation types are available as **partial** or within a **Bayesian** framework.
+
+# Setup
 
 ```{r setup}
 library(correlation)
@@ -32,7 +55,7 @@ data(mtcars)
 data(iris)
 ```
 
-## Correlation Matrix
+# Correlation Matrix
 
 _([related function documentation](https://easystats.github.io/correlation/reference/correlation.html))_
 
@@ -61,7 +84,7 @@ To change the style of geoms, use the `type`-argument.
 plot(s, type = "tile")
 ```
 
-It is also possible to add correlation coefficients and p-values.
+It is also possible to add correlation coefficients and *p*-values.
 
 ```{r}
 plot(s, show_values = TRUE, show_p = TRUE, show_legend = FALSE)
@@ -88,7 +111,16 @@ s <- summary(result)
 plot(s, size_point = .8)
 ```
 
-## Gaussian Graphical Models (GGMs)
+The `corrlation` function also provides a convenient way to change names for selected variables:
+
+```{r, eval=isTRUE(packageVersion("correlation") >= '0.7.0')}
+plot(summary(correlation(
+  data = dplyr::select(mtcars, wt, mpg, drat),
+  rename = c("weight", "miles per gallon", "rear axle ratio")
+)))
+```
+
+# Gaussian Graphical Models (GGMs)
 
 To create a Gaussian Graphical Models plot, the library *ggraph* needs to be
 loaded first.

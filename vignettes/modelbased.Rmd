@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE, echo=FALSE}
+```{r, include=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+
 if (!requireNamespace("rstanarm", quietly = TRUE) ||
   !requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("modelbased", quietly = TRUE)) {
@@ -23,7 +24,13 @@ if (!requireNamespace("rstanarm", quietly = TRUE) ||
 }
 ```
 
-## Setup and Model Fitting
+# Introduction
+
+*modelbased* is a package in *easystats* ecosystem to help with model-based estimations, to easily compute of marginal means, contrast analysis and model predictions.
+
+For more, see: <https://easystats.github.io/modelbased/>
+
+# Setup and Model Fitting
 
 ```{r setup}
 library(modelbased)
@@ -36,7 +43,7 @@ theme_set(theme_modern())
 model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
 ```
 
-## Pairwise Contrasts
+# Pairwise Contrasts
 
 ```{r}
 contrasts <- estimate_contrasts(model)

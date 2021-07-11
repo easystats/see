@@ -1,8 +1,12 @@
 #' Add dot-densities for binary y variables
 #'
 #' @param data A dataframe.
-#' @param x,y Characters corresponding to the x and y axis. Note that \code{y} must be a variable with two unique values.
-#' @param scale Method of scaling the dot-densities. Can be 'auto' (corresponding to the square root of the proportion), 'proportion', 'density' or a custom list with values for each facto level (see examples).
+#' @param x,y Characters corresponding to the x and y axis. Note that \code{y}
+#'   must be a variable with two unique values.
+#' @param scale Method of scaling the dot-densities. Can be 'auto'
+#'   (corresponding to the square root of the proportion), 'proportion',
+#'   'density' or a custom list with values for each factor level (see
+#'   examples).
 #' @param ... Other arguments passed to \code{ggdist::geom_dots}.
 #'
 #' @examples
@@ -13,10 +17,11 @@
 #'
 #' ggplot() +
 #'   geom_binomdensity(data,
-#'                     x = "Sepal.Length",
-#'                     y = "Species",
-#'                     fill = "red",
-#'                     color = NA)
+#'     x = "Sepal.Length",
+#'     y = "Species",
+#'     fill = "red",
+#'     color = NA
+#'   )
 #'
 #' # Different scales
 #' data[1:70, "Species"] <- "setosa" # Create unbalanced proportions
@@ -28,9 +33,10 @@
 #' ggplot() +
 #'   geom_binomdensity(data, x = "Sepal.Length", y = "Species", scale = "proportion")
 #' ggplot() +
-#'   geom_binomdensity(data, x = "Sepal.Length", y = "Species",
-#'                     scale = list("setosa" = 0.4, "versicolor" = 0.6))
-#'
+#'   geom_binomdensity(data,
+#'     x = "Sepal.Length", y = "Species",
+#'     scale = list("setosa" = 0.4, "versicolor" = 0.6)
+#'   )
 #' @importFrom stats density na.omit xtabs
 #' @export
 geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
@@ -48,7 +54,7 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
   }
 
   # Aesthetics
-  vars <- c(x , y)
+  vars <- c(x, y)
   data <- na.omit(data[unique(vars)]) # Drop NaNs
 
   # Other parameters

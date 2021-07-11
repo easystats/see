@@ -162,14 +162,14 @@ plot.see_parameters_sem <- function(x,
     ggraph::geom_node_point(aes(colour = .data$Latent, shape = .data$Latent), size = size_point) +
     ggraph::geom_node_text(aes(label = .data$Name)) +
     ggraph::scale_edge_colour_gradient2(
-      guide = FALSE,
+      guide = "none",
       high = "#4CAF50",
       mid = "#FFF9C4",
       low = "#E91E63"
     ) +
-    scale_alpha(guide = FALSE, range = c(0, 1)) +
+    scale_alpha(guide = "none", range = c(0, 1)) +
     scale_shape_manual(values = c(`FALSE` = 15, `TRUE` = 19)) +
-    ggraph::scale_edge_alpha(guide = FALSE, range = c(0, 1)) +
+    ggraph::scale_edge_alpha(guide = "none", range = c(0, 1)) +
     scale_x_continuous(expand = expansion(c(.10, .10))) +
     scale_y_continuous(expand = expansion(c(.10, .10))) +
     ggraph::theme_graph() +
