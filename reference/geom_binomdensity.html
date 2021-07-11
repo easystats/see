@@ -172,11 +172,15 @@
     </tr>
     <tr>
       <th>x, y</th>
-      <td><p>Characters corresponding to the x and y axis. Note that <code>y</code> must be a variable with two unique values.</p></td>
+      <td><p>Characters corresponding to the x and y axis. Note that <code>y</code>
+must be a variable with two unique values.</p></td>
     </tr>
     <tr>
       <th>scale</th>
-      <td><p>Method of scaling the dot-densities. Can be 'auto' (corresponding to the square root of the proportion), 'proportion', 'density' or a custom list with values for each facto level (see examples).</p></td>
+      <td><p>Method of scaling the dot-densities. Can be 'auto'
+(corresponding to the square root of the proportion), 'proportion',
+'density' or a custom list with values for each factor level (see
+examples).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -193,10 +197,11 @@
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_binomdensity</span><span class='op'>(</span><span class='va'>data</span>,
-                    x <span class='op'>=</span> <span class='st'>"Sepal.Length"</span>,
-                    y <span class='op'>=</span> <span class='st'>"Species"</span>,
-                    fill <span class='op'>=</span> <span class='st'>"red"</span>,
-                    color <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
+    x <span class='op'>=</span> <span class='st'>"Sepal.Length"</span>,
+    y <span class='op'>=</span> <span class='st'>"Species"</span>,
+    fill <span class='op'>=</span> <span class='st'>"red"</span>,
+    color <span class='op'>=</span> <span class='cn'>NA</span>
+  <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: side, justification, scale</span></div><div class='img'><img src='geom_binomdensity-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Different scales</span>
 <span class='va'>data</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>70</span>, <span class='st'>"Species"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"setosa"</span> <span class='co'># Create unbalanced proportions</span>
@@ -208,10 +213,11 @@
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: side, justification, scale</span></div><div class='img'><img src='geom_binomdensity-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_binomdensity</span><span class='op'>(</span><span class='va'>data</span>, x <span class='op'>=</span> <span class='st'>"Sepal.Length"</span>, y <span class='op'>=</span> <span class='st'>"Species"</span>, scale <span class='op'>=</span> <span class='st'>"proportion"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: side, justification, scale</span></div><div class='img'><img src='geom_binomdensity-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_binomdensity</span><span class='op'>(</span><span class='va'>data</span>, x <span class='op'>=</span> <span class='st'>"Sepal.Length"</span>, y <span class='op'>=</span> <span class='st'>"Species"</span>,
-                    scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"setosa"</span> <span class='op'>=</span> <span class='fl'>0.4</span>, <span class='st'>"versicolor"</span> <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: side, justification, scale</span></div><div class='img'><img src='geom_binomdensity-5.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+  <span class='fu'>geom_binomdensity</span><span class='op'>(</span><span class='va'>data</span>,
+    x <span class='op'>=</span> <span class='st'>"Sepal.Length"</span>, y <span class='op'>=</span> <span class='st'>"Species"</span>,
+    scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"setosa"</span> <span class='op'>=</span> <span class='fl'>0.4</span>, <span class='st'>"versicolor"</span> <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span>
+  <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: side, justification, scale</span></div><div class='img'><img src='geom_binomdensity-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

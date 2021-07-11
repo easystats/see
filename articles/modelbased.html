@@ -120,9 +120,15 @@
 
     
     
-<div id="setup-and-model-fitting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#setup-and-model-fitting" class="anchor"></a>Setup and Model Fitting</h2>
+<div id="introduction" class="section level1">
+<h1 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h1>
+<p><em>modelbased</em> is a package in <em>easystats</em> ecosystem to help with model-based estimations, to easily compute of marginal means, contrast analysis and model predictions.</p>
+<p>For more, see: <a href="https://easystats.github.io/modelbased/" class="uri">https://easystats.github.io/modelbased/</a></p>
+</div>
+<div id="setup-and-model-fitting" class="section level1">
+<h1 class="hasAnchor">
+<a href="#setup-and-model-fitting" class="anchor"></a>Setup and Model Fitting</h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/modelbased/">modelbased</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/">rstanarm</a></span><span class="op">)</span>
@@ -133,9 +139,9 @@
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="pairwise-contrasts" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pairwise-contrasts" class="anchor"></a>Pairwise Contrasts</h2>
+<div id="pairwise-contrasts" class="section level1">
+<h1 class="hasAnchor">
+<a href="#pairwise-contrasts" class="anchor"></a>Pairwise Contrasts</h1>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>

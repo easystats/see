@@ -120,13 +120,21 @@
 
     
     
+<div id="introduction" class="section level1">
+<h1 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h1>
+<p>A crucial aspect when building regression models is to evaluate the quality of modelfit. It is important to investigate how well models fit to the data and which fit indices to report. Functions to create diagnostic plots or to compute fit measures do exist, however, mostly spread over different packages. There is no unique and consistent approach to assess the model quality for different kind of models.</p>
+<p>The primary goal of the <em>performance</em> package in <em>easystats</em> ecosystem is to fill this gap and to provide utilities for computing <strong>indices of model quality</strong> and <strong>goodness of fit</strong>. These include measures like r-squared (R2), root mean squared error (RMSE) or intraclass correlation coefficient (ICC) , but also functions to check (mixed) models for overdispersion, zero-inflation, convergence or singularity.</p>
+<p>For more, see: <a href="https://easystats.github.io/performance/" class="uri">https://easystats.github.io/performance/</a></p>
+</div>
+<div id="checking-model-assumptions" class="section level1">
+<h1 class="hasAnchor">
+<a href="#checking-model-assumptions" class="anchor"></a>Checking Model Assumptions</h1>
+<p>Let’s load the needed libraries first:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/performance/">performance</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/">lme4</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span></code></pre></div>
-<div id="checking-model-assumptions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#checking-model-assumptions" class="anchor"></a>Checking Model Assumptions</h1>
 <div id="binned-residuals" class="section level2">
 <h2 class="hasAnchor">
 <a href="#binned-residuals" class="anchor"></a>Binned Residuals</h2>
@@ -329,7 +337,7 @@
 <p>Note that not all checks supported in <code>performance</code> will be reported in this unified <strong>visual</strong> check. For example, for linear models, one needs to check the assumption that errors are not autocorrelated, but this check will not be shown in the visual check.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://easystats.github.io/performance/reference/check_autocorrelation.html">check_autocorrelation</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.010).</span></code></pre></div>
+<span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.002).</span></code></pre></div>
 </div>
 <div id="compare-model-performances" class="section level1">
 <h1 class="hasAnchor">
