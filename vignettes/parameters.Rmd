@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE, echo=FALSE}
+```{r, include=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+
 if (!requireNamespace("parameters", quietly = TRUE) ||
   !requireNamespace("effectsize", quietly = TRUE) ||
   !requireNamespace("insight", quietly = TRUE) ||
@@ -30,6 +31,14 @@ if (!requireNamespace("parameters", quietly = TRUE) ||
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
+
+## Introduction
+
+*parameters*' primary goal is to provide utilities for processing the parameters of various statistical models (see [here](https://easystats.github.io/insight/) for a list of supported models). Beyond computing *p-values*, *CIs*, *Bayesian indices* and other measures for a wide variety of models, this package implements features like *bootstrapping* of parameters and models, *feature reduction* (feature extraction and variable selection), or tools for data reduction like functions to perform cluster, factor or principal component analysis.
+
+Another important goal of the **parameters** package is to facilitate and streamline the process of reporting results of statistical models, which includes the easy and intuitive calculation of standardized estimates or robust standard errors and *p*-values. **parameters** therefor offers a simple and unified syntax to process a large variety of (model) objects from many different packages.
+
+For more, see: <https://easystats.github.io/parameters/>
 
 ## Setup and Model Fitting
 
@@ -311,8 +320,8 @@ plot(result)
 ```
 
 ```{r fig.width = 8}
-plot(result, size_text = 3.8) + 
-  labs(y = NULL) + 
+plot(result, size_text = 3.8) +
+  labs(y = NULL) +
   theme(legend.position = "bottom")
 ```
 

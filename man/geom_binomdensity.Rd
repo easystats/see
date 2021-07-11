@@ -11,7 +11,7 @@ geom_binomdensity(data, x, y, scale = "auto", ...)
 
 \item{x, y}{Characters corresponding to the x and y axis. Note that \code{y} must be a variable with two unique values.}
 
-\item{scale}{Method of scaling the dot-densities. Can be 'auto' (corresponding to the square root of the proportion), 'proportion', 'density' or a custom list with values for each facto level (see examples).}
+\item{scale}{Method of scaling the dot-densities. Can be 'auto' (corresponding to the square root of the proportion), 'proportion', 'density' or a custom list with values for each factor level (see examples).}
 
 \item{...}{Other arguments passed to \code{ggdist::geom_dots}.}
 }

@@ -23,7 +23,30 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 }
 ```
 
-## Setup
+# Introduction
+
+`correlation` is an [**easystats**](https://github.com/easystats/easystats) package focused on correlation analysis. It's lightweight, easy to use, and allows for the computation of many different types of correlation, including:
+
+✅ **Pearson's correlation**<br>
+✅ **Spearman's rank correlation**<br>
+✅ **Kendall's rank correlation**<br>
+✅ **Biweight midcorrelation**<br>
+✅ **Distance correlation**<br>
+✅ **Percentage bend correlation**<br>
+✅ **Shepherd's Pi correlation**<br>
+✅ **Blomqvist’s coefficient**<br>
+✅ **Hoeffding’s D**<br>
+✅ **Gamma correlation**<br>
+✅ **Gaussian rank correlation**<br>
+✅ **Point-Biserial and biserial correlation**<br>
+✅ **Winsorized correlation**<br>
+✅ **Polychoric correlation**<br>
+✅ **Tetrachoric correlation**<br>
+✅ **Multilevel correlation**<br>
+
+An overview and description of these correlations types is [**available here**](https://easystats.github.io/correlation/articles/types.html). Moreover, many of these correlation types are available as **partial** or within a **Bayesian** framework.
+
+# Setup
 
 ```{r setup}
 library(correlation)
@@ -32,7 +55,7 @@ data(mtcars)
 data(iris)
 ```
 
-## Correlation Matrix
+# Correlation Matrix
 
 _([related function documentation](https://easystats.github.io/correlation/reference/correlation.html))_
 
@@ -88,7 +111,7 @@ s <- summary(result)
 plot(s, size_point = .8)
 ```
 
-## Gaussian Graphical Models (GGMs)
+# Gaussian Graphical Models (GGMs)
 
 To create a Gaussian Graphical Models plot, the library *ggraph* needs to be
 loaded first.

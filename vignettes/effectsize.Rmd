@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE, echo=FALSE}
+```{r, include=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("dplyr", quietly = TRUE) ||
   !requireNamespace("effectsize", quietly = TRUE)) {
@@ -23,7 +24,13 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 }
 ```
 
-## Setup
+# Introduction
+
+The *effectsize* package in *easystats* provides utilities to work with indices of effect size and standardized parameters, allowing computation and conversion of indices such as Cohen’s *d*, *r*, odds-ratios, etc.
+
+For more, see: <https://easystats.github.io/effectsize/>
+
+# Setup
 
 ```{r setup}
 library(dplyr)
@@ -33,7 +40,7 @@ data(mtcars)
 data(iris)
 ```
 
-## Effect size tables
+# Effect size tables
 
 _([related function documentation](https://easystats.github.io/effectsize/reference/eta_squared.html))_
 
@@ -47,7 +54,7 @@ t_to_d(t = c(1, -1.3, -3, 2.3), df_error = c(40, 35, 40, 85)) %>%
   plot()
 ```
 
-## Equivalence tests
+# Equivalence tests
 
 _([related function documentation](https://easystats.github.io/effectsize/reference/equivalence_test.effectsize_table.html))_
 
