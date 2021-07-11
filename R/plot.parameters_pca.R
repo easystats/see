@@ -87,8 +87,8 @@ plot.see_parameters_pca <- function(x,
   p <- ggplot(
     as.data.frame(x),
     aes(
-      x = .data$Variable,
-      y = abs(.data$y),
+      y = .data$Variable,
+      x = abs(.data$y),
       fill = .data$y,
       color = .data$y
     )
@@ -100,21 +100,20 @@ plot.see_parameters_pca <- function(x,
       scale_fill_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   } else {
     p <- p +
-      geom_segment(aes(y = 0, xend = .data$Variable, yend = abs(.data$y)), size = size) +
+      geom_segment(aes(x = 0, yend = .data$Variable, xend = abs(.data$y)), size = size) +
       geom_point(size = 2 * size) +
       scale_color_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   }
 
   p <- p +
     geom_text(
-      aes(y = abs(.data$y), label = round(.data$y, 2)),
+      aes(x = abs(.data$y), label = round(.data$y, 2)),
       color = text_color,
       size = size_text,
       nudge_y = .15
     ) +
-    coord_flip() +
     guides(fill = "none", color = "none") +
-    scale_y_continuous(
+    scale_x_continuous(
       limits = c(0, 1.25),
       breaks = c(0, .25, .5, .75, 1, 1.25),
       labels = c("0", "0.25", "0.5", "0.75", "1", "")
