@@ -37,15 +37,19 @@ affiliations:
   name: University of Chicago, USA
 - index: 6
   name: Nanyang Technological University, Singapore
+date: "2021-07-11"
 bibliography: paper.bib
-date: "2021-06-14"
+output: rticles::joss_article
+csl: apa.csl
+journal: JOSS
+link-citations: yes
 ---
 
 
 
 # Summary
 
-*easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language [@base2021]. Most *easystats* packages return comprehensive numeric summaries of model parameters and performance. The *see* package complements these numeric summaries with a host of functions and tools to produce a range of publication-ready visualizations for model parameters, predictions, and performance diagnostics. As a core pillar of *easystats*, the *see* package helps users to utilize visualization for more informative, communicable, and well-rounded scientific reporting.
+The *see* package is embedded in the *easystats* ecosystem, a collection of R packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language [@base2021]. Most *easystats* packages return comprehensive numeric summaries of model parameters and performance. The *see* package complements these numeric summaries with a host of functions and tools to produce a range of publication-ready visualizations for model parameters, predictions, and performance diagnostics. As a core pillar of *easystats*, the *see* package helps users to utilize visualization for more informative, communicable, and well-rounded scientific reporting.
 
 # Statement of Need
 
@@ -71,7 +75,7 @@ ggplot(results) +
   geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
 ```
 
-A number of packages have been developed to extend *ggplot2* and assist with model visualization.^[For a sampling of these packages, visit <https://exts.ggplot2.tidyverse.org/gallery/>] Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. 
+A number of packages have been developed to extend *ggplot2* and assist with model visualization.^[For a sampling of these packages, visit <https://exts.ggplot2.tidyverse.org/gallery/>] Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. The `fortify` function from *ggfortify* package [@Horikoshi2018] *does* offer a unified plotting framework for a wide range of statistical models, although it is not as comprehensive as the *see* package because the *easystats* ecosystem covers a much larger collection of statistical models.
 
 The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
 
@@ -102,6 +106,7 @@ The *parameters* package converts summaries of regression model objects into dat
 ```r
 library(parameters)
 library(see)
+library(ggplot2)
 
 model <- lm(wt ~ am * cyl, data = mtcars)
 
@@ -122,8 +127,12 @@ library(see)
 
 model <- lm(wt ~ am * cyl, data = mtcars)
 
+# changing title and axis labels using ggplot2 functions
 plot(parameters(model)) +
-  ggplot2::labs(title = "A Dot-and-Whisker Plot")
+  labs(title = "A Dot-and-Whisker Plot") + 
+  scale_x_discrete(labels = c("transmission * cylinders", 
+                              "cylinders", 
+                              "transmission"))
 ```
 
 
@@ -228,7 +237,7 @@ plot(means)
 
 ## Visualizing Correlation Matrices
 
-The *correlation* package provides a unified syntax and human-readable code to carry out many types of correlation analysis [@Makowski2020]. A user can run `summary(correlation(data))` to create a construct a correlation matrix for the variables in a dataframe. With *see*, this matrix can be passed to `plot()` to visualize these correlations in a corrgram..
+The *correlation* package provides a unified syntax and human-readable code to carry out many types of correlation analysis [@Makowski2020]. A user can run `summary(correlation(data))` to create a construct a correlation matrix for the variables in a dataframe. With *see*, this matrix can be passed to `plot()` to visualize these correlations in a correlation matrix.
 
 
 ```r
