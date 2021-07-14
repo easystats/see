@@ -37,11 +37,19 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   dataplot$y <- dataplot$n_Methods / sum(dataplot$n_Methods)
   rownames(dataplot) <- NULL
 
-  attr(dataplot, "info") <- list(
-    "xlab" = paste("Number of", lab),
-    "ylab" = "Consensus between methods",
-    "title" = paste("How many", lab, "to retain")
-  )
+  if (type == "line") {
+    attr(dataplot, "info") <- list(
+      "ylab" = paste("Number of", lab),
+      "xlab" = "Consensus between methods",
+      "title" = paste("How many", lab, "to retain")
+    )
+  } else {
+    attr(dataplot, "info") <- list(
+      "xlab" = paste("Number of", lab),
+      "ylab" = "Consensus between methods",
+      "title" = paste("How many", lab, "to retain")
+    )
+  }
 
   class(dataplot) <- unique(c("data_plot", "see_n_factors", class(dataplot)))
   dataplot
