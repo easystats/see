@@ -269,7 +269,7 @@ plot.see_check_model <- function(x,
         detrend = detrend
       )
     )
-    y_lab <- "Sample - Normal Distribution Quantiles"
+    y_lab <- "Sample Quantiles"
   } else {
     message(
       "For confidence bands",

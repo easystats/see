@@ -102,7 +102,7 @@
 <text x='510.58' y='554.11' text-anchor='middle' style='font-size: 10.00px; fill: #7F7F7F; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='648.80' y='554.11' text-anchor='middle' style='font-size: 10.00px; fill: #7F7F7F; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>2</text>
 <text x='374.11' y='568.74' text-anchor='middle' style='font-size: 11.00px; fill: #4D4D4D; font-family: sans;' textLength='190.77px' lengthAdjust='spacingAndGlyphs'>Standard Normal Distribution Quantiles</text>
-<text transform='translate(12.55,287.70) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; fill: #4D4D4D; font-family: sans;' textLength='190.15px' lengthAdjust='spacingAndGlyphs'>Sample - Normal Distribution Quantiles</text>
+<text transform='translate(12.55,287.70) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; fill: #4D4D4D; font-family: sans;' textLength='86.84px' lengthAdjust='spacingAndGlyphs'>Sample Quantiles</text>
 <text x='4.98' y='25.60' style='font-size: 10.00px; font-family: sans;' textLength='130.64px' lengthAdjust='spacingAndGlyphs'>Dots should fall along the line</text>
 <text x='4.98' y='13.24' style='font-size: 12.00px; font-family: sans;' textLength='120.06px' lengthAdjust='spacingAndGlyphs'>Normality of Residuals</text>
 </g>
