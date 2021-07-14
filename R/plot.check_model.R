@@ -229,7 +229,7 @@ plot.see_check_model <- function(x,
     ) +
     labs(
       x = "Residuals",
-      y = NULL,
+      y = "Density",
       title = "Normality of Residuals",
       subtitle = "Distribution should be close to the normal curve"
     ) +
