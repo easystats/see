@@ -41,24 +41,23 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
   p1 <- ggplot(dat, aes(
-    x = .data$x,
-    y = .data$y,
+    y = .data$x,
+    x = .data$y,
     colour = .data$group
   )) +
-    geom_linerange(aes(ymin = 0, ymax = .data$y),
+    geom_linerange(aes(xmin = 0, xmax = .data$y),
       position = position_dodge(.4),
       size = .8
     ) +
     geom_point(size = size_point, position = position_dodge(.4)) +
-    coord_flip() +
     labs(
-      x = NULL,
       y = NULL,
+      x = NULL,
       fill = NULL,
       colour = NULL,
       title = "Predicted Distribution of Residuals and Response"
     ) +
-    scale_y_continuous(
+    scale_x_continuous(
       labels = .percents,
       expand = c(0, 0),
       limits = c(0, max_y)
@@ -119,12 +118,11 @@ plot.see_check_distribution_numeric <- function(x,
   # default legend-position
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
-  p1 <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
-    geom_linerange(aes(ymin = 0, ymax = .data$y), position = position_dodge(.4), size = .8) +
+  p1 <- ggplot(dat, aes(y = .data$x, x = .data$y)) +
+    geom_linerange(aes(xmin = 0, xmax = .data$y), position = position_dodge(.4), size = .8) +
     geom_point(size = size_point, position = position_dodge(.4)) +
-    coord_flip() +
-    labs(x = NULL, y = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
-    scale_y_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
+    labs(y = NULL, x = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
+    scale_x_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(vec))

@@ -181,10 +181,9 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
 
   if (is_meta || is_meta_bma) {
     # plot setup for metafor-objects
-    p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
-      geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = size_point, fatten = x$size_point, shape = x$shape) +
-      coord_flip() +
+    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
+      geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
+      geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point, fatten = x$size_point, shape = x$shape) +
       theme_modern(legend.position = "none") +
       scale_color_material() +
       guides(color = "none", size = "none", shape = "none")
@@ -192,30 +191,28 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
     # plot setup for model parameters with multiple CIs
     x <- bayestestR::reshape_ci(x)
     x$CI <- as.character(x$CI)
-    p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$CI)) +
-      geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
+    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$CI)) +
+      geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
       geom_pointrange(
-        aes(ymin = .data$CI_low, ymax = .data$CI_high),
+        aes(xmin = .data$CI_low, xmax = .data$CI_high),
         size = size_point,
         position = position_dodge(1 / length(unique(x$CI)))
       ) +
-      coord_flip() +
       theme_modern() +
       scale_color_material()
   } else {
     # plot setup for regular model parameters
     x$group <- as.factor(x$Coefficient < y_intercept)
-    p <- ggplot(x, aes(x = .data$Parameter, y = .data$Coefficient, color = .data$group)) +
-      geom_hline(aes(yintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(ymin = .data$CI_low, ymax = .data$CI_high), size = size_point) +
-      coord_flip() +
+    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
+      geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
+      geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point) +
       theme_modern(legend.position = "none") +
       scale_color_material()
   }
 
 
   if (!is.null(pretty_names)) {
-    p <- p + scale_x_discrete(labels = pretty_names)
+    p <- p + scale_y_discrete(labels = pretty_names)
   }
 
   # add coefficients and CIs?
@@ -229,7 +226,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
         mapping = aes(label = .data$Estimate_CI, y = Inf),
         colour = "black", hjust = "inward", size = size_text
       ) +
-      ylim(c(min(new_range), max(new_range)))
+      xlim(c(min(new_range), max(new_range)))
   }
 
   # check for exponentiated estimates. in such cases, we transform the y-axis
@@ -246,7 +243,8 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
       new_range <- pretty(2 * max(x$CI_high))
       x_high <- which.max(max(new_range) < range)
     }
-    p <- p + scale_y_log10(
+    p <- p + scale_x_continuous(
+      trans = "log",
       breaks = range[x_low:x_high],
       limits = c(range[x_low], range[x_high]),
       labels = sprintf("%g", range[x_low:x_high])
@@ -257,7 +255,7 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
 
   if (ordinal_model) {
-    facet_scales <- "free_y"
+    facet_scales <- "free_x"
   } else {
     facet_scales <- "free"
   }
@@ -293,21 +291,21 @@ plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8
   if (isTRUE(is_meta)) {
     measure <- .meta_measure(meta_measure)
     p + labs(
-      x = "",
-      y = measure,
+      y = "",
+      x = measure,
       colour = "CI"
     )
   } else {
     if (isTRUE(axis_title_in_facet)) {
       p + labs(
-        x = "Parameter",
-        y = NULL,
+        y = "Parameter",
+        x = NULL,
         colour = "CI"
       )
     } else {
       p + labs(
-        x = "Parameter",
-        y = ifelse(is.null(coefficient_name), ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), coefficient_name),
+        y = "Parameter",
+        x = ifelse(is.null(coefficient_name), ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), coefficient_name),
         colour = "CI"
       )
     }

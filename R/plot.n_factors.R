@@ -111,12 +111,11 @@ plot.see_n_factors <- function(x,
       scale_x_continuous(breaks = 1:max(x$x)) +
       add_plot_attributes(x)
   } else if (type == "line") {
-    ggplot(x, aes(x = .data$x, y = .data$y, colour = .data$group)) +
-      geom_segment(aes(y = 0, xend = .data$x, yend = .data$y), size = size) +
+    ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
+      geom_segment(aes(x = 0, yend = .data$x, xend = .data$y), size = size) +
       geom_point(size = 2 * size) +
-      coord_flip() +
       guides(colour = "none") +
-      scale_y_continuous(labels = .percents) +
+      scale_x_continuous(labels = .percents) +
       scale_color_manual(values = unname(flat_colors(c("grey", "red")))) +
       add_plot_attributes(x)
   } else {
