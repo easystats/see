@@ -21,7 +21,8 @@
 
 \item{show_values}{Logical, if \code{TRUE}, values are displayed.}
 
-\item{show_p}{Logical, if \code{TRUE}, p-values or significant level is displayed.}
+\item{show_p}{Logical, if \code{TRUE}, p-values or significant level is
+displayed.}
 
 \item{show_legend}{Logical, show or hide legend.}
 

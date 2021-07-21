@@ -38,8 +38,9 @@ panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{normalize_height}{Logical, if \code{TRUE}, height of density-areas is
 "normalized", to avoid overlap. In certain cases when the range of a
-distribution of simulated draws is narrow for some parameters, this may result in
-very flat density-areas. In such cases, set \code{normalize_height = FALSE}.}
+distribution of simulated draws is narrow for some parameters, this may
+result in very flat density-areas. In such cases, set
+\code{normalize_height = FALSE}.}
 
 \item{size_line}{Size of line geoms.}
 
@@ -57,7 +58,8 @@ Default to .95.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{parameters::simulate_parameters()} function.
+The \code{plot()} method for the \code{parameters::simulate_parameters()}
+function.
 }
 \examples{
 library(parameters)

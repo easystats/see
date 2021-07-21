@@ -18,7 +18,8 @@ statistical model or such.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{performance::check_homogeneity()} function.
+The \code{plot()} method for the \code{performance::check_homogeneity()}
+function.
 }
 \examples{
 library(performance)

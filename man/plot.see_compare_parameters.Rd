@@ -27,7 +27,8 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{size_text}{Size of text labels.}
 
-\item{dodge_position}{Numeric, indicates the amount of "dodging" (spacing) between geoms.}
+\item{dodge_position}{Numeric, indicates the amount of "dodging" (spacing)
+between geoms.}
 
 \item{sort}{\describe{
   \item{\emph{Plotting model parameters}}{
@@ -48,7 +49,8 @@ panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{parameters::compare_parameters()} function.
+The \code{plot()} method for the \code{parameters::compare_parameters()}
+function.
 }
 \examples{
 if (require("insight") &&

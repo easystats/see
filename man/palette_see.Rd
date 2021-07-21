@@ -14,7 +14,7 @@ palette_see(palette = "contrast", reverse = FALSE, ...)
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-See design color palette.
+See design color palette
 }
 \details{
 This function is usually not called directly, but from within
