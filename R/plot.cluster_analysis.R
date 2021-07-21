@@ -28,7 +28,8 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
 
 #' Plot method for computing cluster analysis
 #'
-#' The \code{plot()} method for the \code{parameters::cluster_analysis()} function.
+#' The \code{plot()} method for the \code{parameters::cluster_analysis()}
+#' function.
 #'
 #' @param n_columns For models with multiple components (like fixed and random,
 #'   count and zero-inflated), defines the number of columns for the
@@ -44,13 +45,21 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
 #' groups <- cluster_analysis(iris[, 1:4], 3)
 #' plot(groups)
 #' @export
-plot.see_cluster_analysis <- function(x, data = NULL, n_columns = NULL, size_bar = .6, ...) {
+plot.see_cluster_analysis <- function(x,
+                                      data = NULL,
+                                      n_columns = NULL,
+                                      size_bar = .6,
+                                      ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data)
   }
 
   p <- ggplot(x, aes(x = .data$Group, y = .data$Z_Score, fill = .data$Term)) +
-    geom_bar(stat = "identity", position = position_dodge(size_bar + .1), width = size_bar) +
+    geom_bar(
+      stat = "identity",
+      position = position_dodge(size_bar + .1),
+      width = size_bar
+    ) +
     geom_hline(aes(yintercept = 0), linetype = "dotted") +
     add_plot_attributes(x)
 

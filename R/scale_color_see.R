@@ -25,7 +25,11 @@
 #'   theme_modern() +
 #'   scale_color_see_c(palette = "rainbow")
 #' @export
-scale_color_see <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_see <- function(palette = "contrast",
+           discrete = TRUE,
+           reverse = FALSE,
+           ...) {
+
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -42,15 +46,27 @@ scale_color_see <- function(palette = "contrast", discrete = TRUE, reverse = FAL
 
 #' @rdname scale_color_see
 #' @export
-scale_color_see_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_color_see(palette = palette, discrete = discrete, reverse = reverse, ...)
-}
+scale_color_see_d <- function(palette = "contrast",
+           discrete = TRUE,
+           reverse = FALSE,
+           ...) {
+    scale_color_see(palette = palette,
+                    discrete = discrete,
+                    reverse = reverse,
+                    ...)
+  }
 
 #' @rdname scale_color_see
 #' @export
-scale_color_see_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_color_see(palette = palette, discrete = discrete, reverse = reverse, ...)
-}
+scale_color_see_c <- function(palette = "contrast",
+           discrete = FALSE,
+           reverse = FALSE,
+           ...) {
+    scale_color_see(palette = palette,
+                    discrete = discrete,
+                    reverse = reverse,
+                    ...)
+  }
 
 #' @rdname scale_color_see
 #' @export
@@ -74,7 +90,11 @@ scale_colour_see_d <- scale_color_see_d
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_see <- function(palette = "contrast",
+           discrete = TRUE,
+           reverse = FALSE,
+           ...) {
+
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -87,23 +107,31 @@ scale_fill_see <- function(palette = "contrast", discrete = TRUE, reverse = FALS
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_fill_see(palette = palette, discrete = discrete, reverse = reverse, ...)
-}
+scale_fill_see_d <- function(palette = "contrast",
+           discrete = TRUE,
+           reverse = FALSE,
+           ...) {
+    scale_fill_see(palette = palette,
+                   discrete = discrete,
+                   reverse = reverse,
+                   ...)
+  }
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_fill_see(palette = palette, discrete = discrete, reverse = reverse, ...)
-}
-
-
+scale_fill_see_c <- function(palette = "contrast",
+           discrete = FALSE,
+           reverse = FALSE,
+           ...) {
+    scale_fill_see(palette = palette,
+                   discrete = discrete,
+                   reverse = reverse,
+                   ...)
+  }
 
 
 
 # Palette --------------------------------------------------------------------
-
-
 
 
 see_colors_list <- c(
@@ -128,7 +156,8 @@ see_colors_list <- c(
 
 #' Extract See colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the See color palette. Use \code{see_colors()} to see all available color.
+#' Can be used to get the hex code of specific colors from the See color
+#' palette. Use \code{see_colors()} to see all available color.
 #'
 #' @inheritParams flat_colors
 #'
@@ -150,8 +179,6 @@ see_colors <- function(...) {
 }
 
 
-
-
 see_palettes <- list(
   `full` = see_colors(),
   `ice` = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
@@ -162,13 +189,7 @@ see_palettes <- list(
 )
 
 
-
-
-
-
 #' See design color palette
-#'
-#' See design color palette.
 #'
 #' @inheritParams palette_flat
 #'

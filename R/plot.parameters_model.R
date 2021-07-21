@@ -21,7 +21,16 @@
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_model <- function(x, show_intercept = FALSE, size_point = .8, size_text = NULL, sort = NULL, n_columns = NULL, type = c("forest", "funnel"), weight_points = TRUE, ...) {
+plot.see_parameters_model <- function(x,
+           show_intercept = FALSE,
+           size_point = .8,
+           size_text = NULL,
+           sort = NULL,
+           n_columns = NULL,
+           type = c("forest", "funnel"),
+           weight_points = TRUE,
+           ...) {
+
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }

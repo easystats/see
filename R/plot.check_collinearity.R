@@ -15,7 +15,10 @@
 #' plot(result)
 #' @importFrom rlang .data
 #' @export
-plot.see_check_collinearity <- function(x, data = NULL, colors = c("#3aaf85", "#1b6ca8", "#cd201f"), ...) {
+plot.see_check_collinearity <- function(x,
+                                        data = NULL,
+                                        colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+                                        ...) {
   if (is.null(data)) {
     dat <- .compact_list(.retrieve_data(x))
   } else {

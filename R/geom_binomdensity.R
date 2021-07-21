@@ -39,7 +39,11 @@
 #'   )
 #' @importFrom stats density na.omit xtabs
 #' @export
-geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
+geom_binomdensity <- function(data,
+                              x,
+                              y,
+                              scale = "auto",
+                              ...) {
   insight::check_if_installed(c("ggplot2", "ggdist"))
 
   # Sanitize y (e.g., if levels with no values, etc.)
@@ -82,8 +86,6 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
 
 # Utilities ---------------------------------------------------------------
 
-
-
 .geom_binomdensity_scale <- function(data, x, y, scale = "auto") {
   prop <- prop.table(xtabs(paste("~", y), data)) # Get prop table (useful later)
   if (length(scale) == 1 && is.character(scale) && scale %in% c("density", "proportion", "auto")) {
@@ -95,6 +97,7 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
       })
       prop <- prop / sum(prop)
     }
+
     # Square-rooted proportions
     if (scale == "auto") {
       prop <- sqrt(prop) / sum(sqrt(prop))

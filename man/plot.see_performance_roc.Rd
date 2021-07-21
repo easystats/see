@@ -15,22 +15,21 @@
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{performance::performance_roc()} function.
+The \code{plot()} method for the \code{performance::performance_roc()}
+function.
 }
 \examples{
-if (packageVersion("performance") > "0.7.0") {
-  library(performance)
-  data(iris)
-  set.seed(123)
-  iris$y <- rbinom(nrow(iris), size = 1, .3)
+library(performance)
+data(iris)
+set.seed(123)
+iris$y <- rbinom(nrow(iris), size = 1, .3)
 
-  folds <- sample(nrow(iris), size = nrow(iris) / 8, replace = FALSE)
-  test_data <- iris[folds, ]
-  train_data <- iris[-folds, ]
+folds <- sample(nrow(iris), size = nrow(iris) / 8, replace = FALSE)
+test_data <- iris[folds, ]
+train_data <- iris[-folds, ]
 
-  model <- glm(y ~ Sepal.Length + Sepal.Width, data = train_data, family = "binomial")
-  result <- performance_roc(model, new_data = test_data)
-  result
-  plot(result)
-}
+model <- glm(y ~ Sepal.Length + Sepal.Width, data = train_data, family = "binomial")
+result <- performance_roc(model, new_data = test_data)
+result
+plot(result)
 }

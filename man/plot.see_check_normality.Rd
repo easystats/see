@@ -42,7 +42,8 @@ hex-format) for points and line.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{performance::check_normality()} function.
+The \code{plot()} method for the \code{performance::check_normality()}
+function.
 }
 \examples{
 library(performance)

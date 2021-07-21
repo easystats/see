@@ -1,14 +1,19 @@
 #' Better looking points
 #'
-#' Somewhat nicer points (especially in case of transparency) without outline strokes (borders, contours) by default.
+#' Somewhat nicer points (especially in case of transparency) without outline
+#' strokes (borders, contours) by default.
 #'
 #' @param size Size of points.
 #' @param stroke Stroke thickness.
 #' @param shape Shape of points.
-#' @param ... Other arguments to be passed to \code{\link[ggplot2:geom_point]{geom_point}}, \code{\link[ggplot2:geom_jitter]{geom_jitter}}, \code{\link[ggplot2:geom_pointrange]{geom_pointrange}}, or \code{\link[ggplot2:geom_count]{ggplot2::geom_count}}.
+#' @param ... Other arguments to be passed to
+#'   \code{\link[ggplot2:geom_point]{geom_point}},
+#'   \code{\link[ggplot2:geom_jitter]{geom_jitter}},
+#'   \code{\link[ggplot2:geom_pointrange]{geom_pointrange}}, or
+#'   \code{\link[ggplot2:geom_count]{ggplot2::geom_count}}.
 #'
-#' @note The color aesthetics for \code{geom_point_borderless()} is \code{"fill"},
-#' not \code{color}. See 'Examples'.
+#' @note The color aesthetics for \code{geom_point_borderless()} is
+#'   \code{"fill"}, not \code{color}. See 'Examples'.
 #'
 #' @examples
 #' library(ggplot2)
@@ -80,16 +85,17 @@ geom_pointrange_borderless <- function(...) {
 }
 
 
-
-
 .get_theme_bg_color <- function() {
   current_theme <- ggplot2::theme_get()
+
   if (is.null(current_theme$panel.grid.major)) {
     current_theme$panel.grid.major <- current_theme$panel.grid
   }
+
   bg_color <- ifelse(is.null(current_theme$panel.grid.major$colour),
     "white",
     current_theme$panel.grid.major$colour
   )
+
   bg_color
 }
