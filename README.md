@@ -50,17 +50,18 @@ ggplot(results) +
 
 A number of packages have been developed to extend *ggplot2* and assist
 with model visualization (for a sampling of these packages, visit
-<https://exts.ggplot2.tidyverse.org/gallery/>). Some of these packages
-provide functions for additional geoms, annotations, or common
-visualization types without linking them to a specific statistical
-analysis or fundamentally changing the *ggplot2* workflow (e.g.,
-*ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other
-*ggplot2* extensions provide functions to generate publication-ready
-visualizations for specific types of models (e.g., *metaviz*, *tidymv*,
-*sjPlot*, *survminer*). For example, the *ggstatsplot* package (Patil,
-2021) offers visualizations for statistical analysis of one-way
-factorial designs, and the *plotmm* package (Waggoner, 2020) supports
-specific types of mixture model objects.
+[ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of
+these packages provide functions for additional geoms, annotations, or
+common visualization types without linking them to a specific
+statistical analysis or fundamentally changing the *ggplot2* workflow
+(e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.).
+Other *ggplot2* extensions provide functions to generate
+publication-ready visualizations for specific types of models (e.g.,
+*metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the
+*ggstatsplot* package (Patil, 2021) offers visualizations for
+statistical analysis of one-way factorial designs, and the *plotmm*
+package (Waggoner, 2020) supports specific types of mixture model
+objects.
 
 The aim of the *see* package is to produce visualizations for a wide
 variety of models and statistical analyses in a way that is tightly
@@ -129,8 +130,8 @@ functionality offered by this package:
 
 Below we present one or two plotting methods for each *easystats*
 package, but many other methods are available. Interested readers are
-encouraged to explore the range of examples on the package website,
-<https://easystats.github.io/see/>.
+encouraged to explore the range of examples on the package
+[website](https://easystats.github.io/see/articles/).
 
 ## [parameters](https://github.com/easystats/parameters)
 
@@ -180,11 +181,6 @@ provides special plotting methods relevant for Bayesian models (e.g.,
 Highest Density Interval, or *HDI*). Users can fit the model and pass
 the model results, extracted via *bayestestR*, to `plot()`.
 
-<!-- skipping this for now because I am getting  -->
-<!-- *** caught segfault *** -->
-<!-- address 0x113dd4ffc, cause 'memory not mapped' -->
-<!-- on my Mac -->
-
 ``` r
 library(bayestestR)
 library(rstanarm)
@@ -196,6 +192,8 @@ result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
 
 plot(result)
 ```
+
+![](man/figures/bayestestR-1.png)<!-- -->
 
 Plotting functions for the **bayestestR** package are demonstrated [in
 this
