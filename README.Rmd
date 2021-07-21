@@ -52,7 +52,7 @@ ggplot(results) +
   geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
 ```
 
-A number of packages have been developed to extend *ggplot2* and assist with model visualization (for a sampling of these packages, visit <https://exts.ggplot2.tidyverse.org/gallery/>). Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. 
+A number of packages have been developed to extend *ggplot2* and assist with model visualization (for a sampling of these packages, visit [ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. 
 
 The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
 
@@ -88,7 +88,7 @@ Following resources are a good way to get to know more about the functionality o
 
 # Plotting functions for 'easystats' packages
 
-Below we present one or two plotting methods for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package website, <https://easystats.github.io/see/>.
+Below we present one or two plotting methods for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package [website](https://easystats.github.io/see/articles/).
 
 ## [parameters](https://github.com/easystats/parameters)
 
@@ -121,12 +121,7 @@ Plotting functions for the **parameters** package are demonstrated [in this vign
 
 Similarly, for Bayesian regression model objects, which are handled by the *bayestestR* package [@Makowski2019], the *see* package provides special plotting methods relevant for Bayesian models (e.g., Highest Density Interval, or *HDI*). Users can fit the model and pass the model results, extracted via *bayestestR*, to `plot()`.
 
-<!-- skipping this for now because I am getting  -->
-<!-- *** caught segfault *** -->
-<!-- address 0x113dd4ffc, cause 'memory not mapped' -->
-<!-- on my Mac -->
-
-```{r bayestestR, eval=FALSE}
+```{r bayestestR}
 library(bayestestR)
 library(rstanarm)
 library(see)
