@@ -46,6 +46,7 @@ geom_pooljitter <- function(label,
                             jitter = 0.1,
                             ...) {
   jitter <- ggplot2::position_jitter(width = jitter, height = jitter)
+
   list(
     geom_point2(size = size_point, position = jitter, ...),
     geom_point2(color = "white", size = size_background, position = jitter, ...),

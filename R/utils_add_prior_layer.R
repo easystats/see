@@ -1,4 +1,9 @@
-.add_prior_layer_ridgeline <- function(model, parameter = NULL, show_intercept = FALSE, priors_alpha = .5, fill_color = NULL, show_ridge_line = TRUE) {
+.add_prior_layer_ridgeline <- function(model,
+                                       parameter = NULL,
+                                       show_intercept = FALSE,
+                                       priors_alpha = .5,
+                                       fill_color = NULL,
+                                       show_ridge_line = TRUE) {
   dat <- tryCatch(
     {
       priors <- bayestestR::simulate_prior(model)
@@ -86,7 +91,11 @@
 
 
 
-.add_prior_layer_ribbon <- function(model, parameter = NULL, show_intercept = FALSE, priors_alpha = .5, fill_color = NULL) {
+.add_prior_layer_ribbon <- function(model,
+                                    parameter = NULL,
+                                    show_intercept = FALSE,
+                                    priors_alpha = .5,
+                                    fill_color = NULL) {
   dat <- tryCatch(
     {
       priors <- bayestestR::simulate_prior(model)

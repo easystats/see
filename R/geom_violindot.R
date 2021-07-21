@@ -22,7 +22,7 @@
 geom_violindot <- function(mapping = NULL,
                            data = NULL,
                            trim = TRUE,
-                           scale = "area",
+                           scale = c("area", "count", "width"),
                            show.legend = NA,
                            inherit.aes = TRUE,
                            dots_size = 0.7,
@@ -34,6 +34,8 @@ geom_violindot <- function(mapping = NULL,
                            size_dots = dots_size,
                            color_dots = dots_color,
                            fill_dots = dots_fill) {
+  scale <- match.arg(scale)
+
   if (is.null(color_dots) & is.null(fill_dots)) {
     dotplot <- geom_dotplot(
       binaxis = "y",

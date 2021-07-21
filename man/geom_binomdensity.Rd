@@ -4,7 +4,7 @@
 \alias{geom_binomdensity}
 \title{Add dot-densities for binary y variables}
 \usage{
-geom_binomdensity(data, x, y, scale = "auto", ...)
+geom_binomdensity(data, x, y, scale = c("auto", "density", "proportion"), ...)
 }
 \arguments{
 \item{data}{A dataframe.}

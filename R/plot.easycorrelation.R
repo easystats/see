@@ -18,8 +18,13 @@
 #' plot(result)
 #' }
 #' @export
-plot.see_easycorrelation <- function(x, size_point = 22, text_color = "white", node_color = "#647687", ...) {
+plot.see_easycorrelation <- function(x,
+                                     size_point = 22,
+                                     text_color = "white",
+                                     node_color = "#647687",
+                                     ...) {
   insight::check_if_installed("ggraph")
+
   if (!requireNamespace("ggraph", quietly = TRUE)) {
   } else {
     si <- utils::sessionInfo()

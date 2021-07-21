@@ -72,6 +72,7 @@ plot.see_parameters_pca <- function(x,
                                     size = 1,
                                     ...) {
   type <- match.arg(type)
+
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
   }

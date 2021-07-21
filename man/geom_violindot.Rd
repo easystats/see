@@ -8,7 +8,7 @@ geom_violindot(
   mapping = NULL,
   data = NULL,
   trim = TRUE,
-  scale = "area",
+  scale = c("area", "count", "width"),
   show.legend = NA,
   inherit.aes = TRUE,
   dots_size = 0.7,

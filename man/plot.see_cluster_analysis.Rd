@@ -24,7 +24,8 @@ panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{parameters::cluster_analysis()} function.
+The \code{plot()} method for the \code{parameters::cluster_analysis()}
+function.
 }
 \examples{
 library(parameters)

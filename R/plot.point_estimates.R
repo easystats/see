@@ -79,9 +79,9 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' The \code{plot()} method for the \code{bayestestR::point_estimate()}.
 #'
 #' @param show_labels Logical, if \code{TRUE}, the text labels for the point
-#'   estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
-#'   You may set \code{show_labels = FALSE} in case of overlapping labels, and
-#'   add your own legend or footnote to the plot.
+#'   estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are
+#'   shown. You may set \code{show_labels = FALSE} in case of overlapping
+#'   labels, and add your own legend or footnote to the plot.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_check_outliers
@@ -163,7 +163,9 @@ plot.see_point_estimate <- function(x,
     }
 
     p_object <- p_object +
-      geom_ribbon(aes(ymin = 0, ymax = .data$y), fill = "#FFC107", alpha = posterior_alpha)
+      geom_ribbon(aes(ymin = 0, ymax = .data$y),
+                  fill = "#FFC107",
+                  alpha = posterior_alpha)
 
     if (!is.null(mean_x) && !is.null(mean_y)) {
       p_object <- p_object +

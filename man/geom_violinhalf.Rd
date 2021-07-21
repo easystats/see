@@ -10,7 +10,7 @@ geom_violinhalf(
   stat = "ydensity",
   position = "dodge",
   trim = TRUE,
-  scale = "area",
+  scale = c("area", "count", "width"),
   show.legend = NA,
   inherit.aes = TRUE,
   ...

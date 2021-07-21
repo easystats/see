@@ -1,5 +1,8 @@
 #' @export
-data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FALSE, ...) {
+data_plot.parameters_simulate <- function(x,
+                                          data = NULL,
+                                          normalize_height = FALSE,
+                                          ...) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -57,12 +60,14 @@ data_plot.parameters_simulate <- function(x, data = NULL, normalize_height = FAL
 
 #' Plot method for simulated model parameters
 #'
-#' The \code{plot()} method for the \code{parameters::simulate_parameters()} function.
+#' The \code{plot()} method for the \code{parameters::simulate_parameters()}
+#' function.
 #'
 #' @param normalize_height Logical, if \code{TRUE}, height of density-areas is
 #'   "normalized", to avoid overlap. In certain cases when the range of a
-#'   distribution of simulated draws is narrow for some parameters, this may result in
-#'   very flat density-areas. In such cases, set \code{normalize_height = FALSE}.
+#'   distribution of simulated draws is narrow for some parameters, this may
+#'   result in very flat density-areas. In such cases, set
+#'   \code{normalize_height = FALSE}.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_estimate_density
 #' @inheritParams plot.see_bayesfactor_parameters
