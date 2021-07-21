@@ -42,11 +42,9 @@
 geom_binomdensity <- function(data,
                               x,
                               y,
-                              scale = c("auto", "density", "proportion"),
+                              scale = "auto",
                               ...) {
   insight::check_if_installed(c("ggplot2", "ggdist"))
-
-  scale <- match.arg(scale)
 
   # Sanitize y (e.g., if levels with no values, etc.)
   if (is.factor(data[[y]]) && length(levels(data[[y]])) > 2) {
