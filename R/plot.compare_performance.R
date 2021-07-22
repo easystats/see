@@ -44,7 +44,7 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
 # Plot --------------------------------------------------------------------
 #' Plot method for comparing model performances
 #'
-#' The \code{plot()} method for the \code{performance::compare_performance()} function.
+#' The `plot()` method for the `performance::compare_performance()` function.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality

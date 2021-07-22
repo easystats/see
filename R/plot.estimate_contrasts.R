@@ -62,7 +62,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
 #' Plot method for estimating contrasts
 #'
-#' The \code{plot()} method for the \code{modelbased::estimate_contrasts()}
+#' The `plot()` method for the `modelbased::estimate_contrasts()`
 #' function.
 #'
 #' @inheritParams data_plot

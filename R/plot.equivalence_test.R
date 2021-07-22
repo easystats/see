@@ -1,6 +1,6 @@
 #' Plot method for (conditional) equivalence testing
 #'
-#' The \code{plot()} method for the \code{bayestestR::equivalence_test()} function.
+#' The `plot()` method for the `bayestestR::equivalence_test()` function.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters

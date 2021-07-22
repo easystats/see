@@ -22,12 +22,12 @@
 \item{value}{What value to display.}
 
 \item{sort}{\describe{
-  \item{\emph{Plotting model parameters}}{
-  If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
-  }
-  \item{\emph{Plotting Bayes factors}}{
-  Sort pie-slices by posterior probability (descending)?
-  }
+\item{\emph{Plotting model parameters}}{
+If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+}
+\item{\emph{Plotting Bayes factors}}{
+Sort pie-slices by posterior probability (descending)?
+}
 }}
 
 \item{log}{Show log-transformed Bayes factors.}

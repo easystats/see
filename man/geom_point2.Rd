@@ -29,10 +29,10 @@ geom_pointrange_borderless(...)
 }
 \arguments{
 \item{...}{Other arguments to be passed to
-\code{\link[ggplot2:geom_point]{geom_point}},
-\code{\link[ggplot2:geom_jitter]{geom_jitter}},
-\code{\link[ggplot2:geom_pointrange]{geom_pointrange}}, or
-\code{\link[ggplot2:geom_count]{ggplot2::geom_count}}.}
+\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}},
+\code{\link[ggplot2:geom_jitter]{ggplot2::geom_jitter()}},
+\code{\link[ggplot2:geom_linerange]{ggplot2::geom_pointrange()}}, or
+\code{\link[ggplot2:geom_count]{ggplot2::geom_count()}}.}
 
 \item{stroke}{Stroke thickness.}
 
@@ -46,7 +46,7 @@ strokes (borders, contours) by default.
 }
 \note{
 The color aesthetics for \code{geom_point_borderless()} is
-  \code{"fill"}, not \code{color}. See 'Examples'.
+\code{"fill"}, not \code{color}. See 'Examples'.
 }
 \examples{
 library(ggplot2)

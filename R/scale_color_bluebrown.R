@@ -1,8 +1,8 @@
 #' Blue-brown color palette
 #'
-#' A blue-brown color palette. Use \code{scale_color_bluebrown_d()} for
-#' \emph{discrete} categories and \code{scale_color_bluebrown_c()} for
-#' a \emph{continuous} scale.
+#' A blue-brown color palette. Use `scale_color_bluebrown_d()` for
+#' *discrete* categories and `scale_color_bluebrown_c()` for
+#' a *continuous* scale.
 #'
 #' @inheritParams palette_bluebrown
 #' @inheritParams scale_color_flat
@@ -110,7 +110,7 @@ bluebrown_colors_list <- c(
 
 #' Extract blue-brown colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the blue-brown color palette. Use \code{bluebrown_colors()} to see all available color.
+#' Can be used to get the hex code of specific colors from the blue-brown color palette. Use `bluebrown_colors()` to see all available color.
 #'
 #' @inheritParams flat_colors
 #'
@@ -152,7 +152,7 @@ bluebrown_palettes <- list(
 #' @inheritParams palette_flat
 #'
 #' @details This function is usually not called directly, but from within
-#'   \code{\link[=scale_color_bluebrown]{scale_color_bluebrown()}}.
+#'   [`scale_color_bluebrown()`][scale_color_bluebrown].
 #'
 #' @export
 palette_bluebrown <- function(palette = "contrast", reverse = FALSE, ...) {

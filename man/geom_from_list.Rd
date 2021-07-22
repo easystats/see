@@ -11,10 +11,9 @@ geoms_from_list(x, ...)
 }
 \arguments{
 \item{x}{A list containing a geom type (e.g., \code{geom = "point"}), a list
-of aesthetics (as characters; e.g., \code{aes = list(x = "mpg", y =
-"wt")}), some data (e.g., \code{data = mtcars}) and some other parameters.
+of aesthetics (as characters; e.g., \code{aes = list(x = "mpg", y = "wt")}), some data (e.g., \code{data = mtcars}) and some other parameters.
 For \code{geoms_from_list()} ("geoms" with an "s"), the input must be a
-list of lists, ideally named \code{"l1", "l2", "l3"}, etc.}
+list of lists, ideally named \verb{"l1", "l2", "l3"}, etc.}
 
 \item{...}{Additional arguments passed to \code{ggplot2::layer()}.}
 }

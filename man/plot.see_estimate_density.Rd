@@ -35,7 +35,7 @@ count and zero-inflated), defines the number of columns for the
 panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{priors}{Logical, if \code{TRUE}, prior distributions are simulated
-(using \code{\link[bayestestR:simulate_prior]{simulate_prior()}}) and added
+(using \code{\link[bayestestR:simulate_prior]{bayestestR::simulate_prior()}}) and added
 to the plot.}
 
 \item{priors_alpha}{Alpha value of the prior distributions.}

@@ -29,16 +29,16 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 # Plot --------------------------------------------------------------------
 #' Plot method for describing distributions of vectors
 #'
-#' The \code{plot()} method for the \code{parameters::describe_distribution()}
+#' The `plot()` method for the `parameters::describe_distribution()`
 #' function.
 #'
-#' @param dispersion Logical, if \code{TRUE}, will add range of dispersion for
+#' @param dispersion Logical, if `TRUE`, will add range of dispersion for
 #'   each variable to the plot.
 #' @param dispersion_alpha Transparency level of dispersion ribbon.
 #' @param dispersion_color Color of dispersion ribbon.
-#' @param dispersion_style Character, style of dispersion area. \code{"ribbon"}
-#'   for a ribbon, \code{"curve"} for a normal-curve.
-#' @param highlight Vector with names of categories in \code{x} that should be
+#' @param dispersion_style Character, style of dispersion area. `"ribbon"`
+#'   for a ribbon, `"curve"` for a normal-curve.
+#' @param highlight Vector with names of categories in `x` that should be
 #'   highlighted.
 #' @param highlight_color Vector of color values for highlighted categories. The
 #'   remaining (non-highlighted) categories will be filled with a lighter grey.

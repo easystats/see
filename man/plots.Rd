@@ -57,8 +57,7 @@ background, are used.}
 \description{
 A wrapper around \emph{patchwork} to plot multiple figures side by side on
 the same page. See
-\href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the
-\emph{patchwork} documentation} for more advanced control of plot layouts.
+\href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emph{patchwork} documentation} for more advanced control of plot layouts.
 }
 \examples{
 library(ggplot2)

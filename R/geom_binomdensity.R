@@ -1,13 +1,13 @@
 #' Add dot-densities for binary y variables
 #'
 #' @param data A dataframe.
-#' @param x,y Characters corresponding to the x and y axis. Note that \code{y}
+#' @param x,y Characters corresponding to the x and y axis. Note that `y`
 #'   must be a variable with two unique values.
 #' @param scale Method of scaling the dot-densities. Can be 'auto'
 #'   (corresponding to the square root of the proportion), 'proportion',
 #'   'density' or a custom list with values for each factor level (see
 #'   examples).
-#' @param ... Other arguments passed to \code{ggdist::geom_dots}.
+#' @param ... Other arguments passed to `ggdist::geom_dots`.
 #'
 #' @examples
 #' library(ggplot2)

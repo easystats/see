@@ -100,5 +100,5 @@ if (require("ggplot2") && require("dplyr") && require("tidyr")) {
 }
 }
 \seealso{
-\code{\link{coord_radar}}
+\code{\link[=coord_radar]{coord_radar()}}
 }

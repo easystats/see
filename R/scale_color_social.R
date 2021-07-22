@@ -1,8 +1,8 @@
 #' Social color palette
 #'
-#' The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
-#' Use \code{scale_color_social_d} for \emph{discrete} categories and
-#' \code{scale_color_social_c} for a \emph{continuous} scale.
+#' The palette based [Social colors](https://www.materialui.co/socialcolors).
+#' Use `scale_color_social_d` for *discrete* categories and
+#' `scale_color_social_c` for a *continuous* scale.
 #'
 #' @inheritParams palette_social
 #' @inheritParams scale_color_flat
@@ -130,7 +130,7 @@ social_colors_list <- c(
 
 #' Extract Social colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the Social color palette. Use \code{social_colors()} to see all available color.
+#' Can be used to get the hex code of specific colors from the Social color palette. Use `social_colors()` to see all available color.
 #'
 #' @inheritParams flat_colors
 #'
@@ -170,12 +170,12 @@ social_palettes <- list(
 
 #' Social color palette
 #'
-#' The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
+#' The palette based [Social colors](https://www.materialui.co/socialcolors).
 #'
 #' @inheritParams palette_flat
 #'
 #' @details This function is usually not called directly, but from within
-#'   \code{\link[=scale_color_social]{scale_color_social()}}.
+#'   [`scale_color_social()`][scale_color_social].
 #'
 #' @export
 palette_social <- function(palette = "complement", reverse = FALSE, ...) {

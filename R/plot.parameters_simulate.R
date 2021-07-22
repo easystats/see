@@ -60,14 +60,14 @@ data_plot.parameters_simulate <- function(x,
 
 #' Plot method for simulated model parameters
 #'
-#' The \code{plot()} method for the \code{parameters::simulate_parameters()}
+#' The `plot()` method for the `parameters::simulate_parameters()`
 #' function.
 #'
-#' @param normalize_height Logical, if \code{TRUE}, height of density-areas is
+#' @param normalize_height Logical, if `TRUE`, height of density-areas is
 #'   "normalized", to avoid overlap. In certain cases when the range of a
 #'   distribution of simulated draws is narrow for some parameters, this may
 #'   result in very flat density-areas. In such cases, set
-#'   \code{normalize_height = FALSE}.
+#'   `normalize_height = FALSE`.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_estimate_density
 #' @inheritParams plot.see_bayesfactor_parameters

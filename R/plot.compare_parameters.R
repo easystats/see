@@ -1,6 +1,6 @@
 #' Plot method for comparison of model parameters
 #'
-#' The \code{plot()} method for the \code{parameters::compare_parameters()}
+#' The `plot()` method for the `parameters::compare_parameters()`
 #' function.
 #'
 #' @param dodge_position Numeric, indicates the amount of "dodging" (spacing)

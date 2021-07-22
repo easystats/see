@@ -1,9 +1,9 @@
 #' Plot method for classifying the distribution of a model-family
 #'
-#' The \code{plot()} method for the \code{performance::check_distribution()}
+#' The `plot()` method for the `performance::check_distribution()`
 #' function.
 #'
-#' @param panel Logical, if \code{TRUE}, plots are arranged as panels; else,
+#' @param panel Logical, if `TRUE`, plots are arranged as panels; else,
 #'   single plots are returned.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters

@@ -141,7 +141,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
 #' Plot method for probability of direction
 #'
-#' The \code{plot()} method for the \code{bayestestR::p_direction()} function.
+#' The `plot()` method for the `bayestestR::p_direction()` function.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters

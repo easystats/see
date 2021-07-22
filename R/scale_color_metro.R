@@ -1,9 +1,9 @@
 #' Metro color palette
 #'
-#' The palette based on Metro \href{https://www.materialui.co/metrocolors}{Metro
-#' colors}.
-#' Use \code{scale_color_metro_d} for \emph{discrete} categories and
-#' \code{scale_color_metro_c} for a \emph{continuous} scale.
+#' The palette based on Metro [Metro
+#' colors](https://www.materialui.co/metrocolors).
+#' Use `scale_color_metro_d` for *discrete* categories and
+#' `scale_color_metro_c` for a *continuous* scale.
 #'
 #' @inheritParams palette_metro
 #' @inheritParams scale_color_flat
@@ -129,7 +129,7 @@ metro_colors_list <- c(
 
 #' Extract Metro colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the Metro color palette. Use \code{metro_colors()} to see all available color.
+#' Can be used to get the hex code of specific colors from the Metro color palette. Use `metro_colors()` to see all available color.
 #'
 #' @inheritParams flat_colors
 #'
@@ -169,13 +169,13 @@ metro_palettes <- list(
 
 #' Metro color palette
 #'
-#' The palette based on \href{https://www.materialui.co/metrocolors}{Metro
-#' colors}.
+#' The palette based on [Metro
+#' colors](https://www.materialui.co/metrocolors).
 #'
 #' @inheritParams palette_flat
 #'
 #' @details This function is usually not called directly, but from within
-#'   \code{\link[=scale_color_metro]{scale_color_metro()}}.
+#'   [`scale_color_metro()`][scale_color_metro].
 #'
 #' @export
 palette_metro <- function(palette = "complement", reverse = FALSE, ...) {

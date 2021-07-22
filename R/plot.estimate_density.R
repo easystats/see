@@ -67,17 +67,17 @@ data_plot.estimate_density <- function(x,
 
 #' Plot method for density estimation of posterior samples
 #'
-#' The \code{plot()} method for the \code{bayestestR::estimate_density()} function.
+#' The `plot()` method for the `bayestestR::estimate_density()` function.
 #'
-#' @param stack Logical, if \code{TRUE}, densities are plotted as stacked lines.
+#' @param stack Logical, if `TRUE`, densities are plotted as stacked lines.
 #'   Else, densities are plotted for each parameter among each other.
-#' @param priors Logical, if \code{TRUE}, prior distributions are simulated
-#'   (using \code{\link[bayestestR:simulate_prior]{simulate_prior()}}) and added
+#' @param priors Logical, if `TRUE`, prior distributions are simulated
+#'   (using [bayestestR::simulate_prior()]) and added
 #'   to the plot.
 #' @param priors_alpha Alpha value of the prior distributions.
 #' @param posteriors_alpha Alpha value of the posterior distributions.
 #' @param centrality The point-estimate (centrality index) to compute. May be
-#'   \code{"median"}, \code{"mean"} or \code{"MAP"}.
+#'   `"median"`, `"mean"` or `"MAP"`.
 #' @param ci Value of probability of the CI (between 0 and 1) to be estimated.
 #'   Default to .95.
 #' @inheritParams data_plot

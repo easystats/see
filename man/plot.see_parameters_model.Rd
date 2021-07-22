@@ -43,12 +43,12 @@ posterior distributions for other parameters are hardly visible.}
 \item{size_text}{Size of text labels.}
 
 \item{sort}{\describe{
-  \item{\emph{Plotting model parameters}}{
-  If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
-  }
-  \item{\emph{Plotting Bayes factors}}{
-  Sort pie-slices by posterior probability (descending)?
-  }
+\item{\emph{Plotting model parameters}}{
+If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+}
+\item{\emph{Plotting Bayes factors}}{
+Sort pie-slices by posterior probability (descending)?
+}
 }}
 
 \item{n_columns}{For models with multiple components (like fixed and random,

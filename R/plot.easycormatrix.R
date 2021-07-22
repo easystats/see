@@ -59,10 +59,10 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ..
 
 #' Plot method for correlation matrices
 #'
-#' The \code{plot()} method for the \code{correlation::correlation()} function.
+#' The `plot()` method for the `correlation::correlation()` function.
 #'
-#' @param show_values Logical, if \code{TRUE}, values are displayed.
-#' @param show_p Logical, if \code{TRUE}, p-values or significant level is
+#' @param show_values Logical, if `TRUE`, values are displayed.
+#' @param show_p Logical, if `TRUE`, p-values or significant level is
 #'   displayed.
 #' @param show_legend Logical, show or hide legend.
 #' @param digits Number of decimals used for values.

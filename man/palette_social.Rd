@@ -20,5 +20,5 @@ The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
 }
 \details{
 This function is usually not called directly, but from within
-  \code{\link[=scale_color_social]{scale_color_social()}}.
+\code{\link[=scale_color_social]{scale_color_social()}}.
 }

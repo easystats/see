@@ -96,5 +96,6 @@ Suggests:
     vdiffr (>= 1.0.0)
 Encoding: UTF-8
 Language: en-US
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
 Config/testthat/edition: 3

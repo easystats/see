@@ -82,8 +82,7 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based on Metro \href{https://www.materialui.co/metrocolors}{Metro
-colors}.
+The palette based on Metro \href{https://www.materialui.co/metrocolors}{Metro colors}.
 Use \code{scale_color_metro_d} for \emph{discrete} categories and
 \code{scale_color_metro_c} for a \emph{continuous} scale.
 }
