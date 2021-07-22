@@ -67,7 +67,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' The `plot()` method for the `parameters::model_parameters()`
 #' function when used with brms-meta-analysis models.
 #'
-#' @param normalize_height Logical, if `TRUE`, height of mcmc-areas is
+#' @param normalize_height Logical. If `TRUE`, height of mcmc-areas is
 #'   "normalized", to avoid overlap. In certain cases when the range of a
 #'   posterior distribution is narrow for some parameters, this may result in
 #'   very flat mcmc-areas. In such cases, set `normalize_height = FALSE`.

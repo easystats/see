@@ -21,22 +21,24 @@
 
 \item{value}{What value to display.}
 
-\item{sort}{\describe{
-\item{\emph{Plotting model parameters}}{
+\item{sort}{The behavior of this argument depends on the plotting contexts.
+\itemize{
+\item \emph{Plotting model parameters}:
 If \code{NULL}, coefficients are plotted in the order as they appear in the
-summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
-}
-\item{\emph{Plotting Bayes factors}}{
+summary. Setting \code{sort = "ascending"} or \code{sort = "descending"} sorts
+coefficients in ascending or descending order, respectively.
+Setting \code{sort = TRUE} is the same as \code{sort = "ascending"}.
+\item \emph{Plotting Bayes factors}:
 Sort pie-slices by posterior probability (descending)?
-}
 }}
 
-\item{log}{Show log-transformed Bayes factors.}
+\item{log}{Logical that decides whether to display log-transformed Bayes
+factors.}
 
-\item{prior_odds}{optional vector of prior odds for the models. See
+\item{prior_odds}{An optional vector of prior odds for the models. See
 \code{BayesFactor::priorOdds}. As the size of the pizza slices corresponds to
 posterior probability (which is a function of prior probability and the
-BF), custom \code{prior_odds} will change the slices' size.}
+Bayes Factor), custom \code{prior_odds} will change the slices' size.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

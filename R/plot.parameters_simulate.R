@@ -63,7 +63,7 @@ data_plot.parameters_simulate <- function(x,
 #' The `plot()` method for the `parameters::simulate_parameters()`
 #' function.
 #'
-#' @param normalize_height Logical, if `TRUE`, height of density-areas is
+#' @param normalize_height Logical. If `TRUE`, height of density-areas is
 #'   "normalized", to avoid overlap. In certain cases when the range of a
 #'   distribution of simulated draws is narrow for some parameters, this may
 #'   result in very flat density-areas. In such cases, set

@@ -7,7 +7,7 @@
 golden_ratio(x = 1)
 }
 \arguments{
-\item{x}{A number to be multiplied by the golden ratio. The default (x=1)
+\item{x}{A number to be multiplied by the golden ratio. The default (\code{x = 1})
 returns the value of the golden ratio.}
 }
 \description{

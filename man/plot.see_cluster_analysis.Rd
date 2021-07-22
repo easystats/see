@@ -10,7 +10,7 @@
 \item{x}{An object.}
 
 \item{data}{The original data used to create this object. Can be a
-statistical model or such.}
+statistical model.}
 
 \item{n_columns}{For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the

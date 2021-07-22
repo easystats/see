@@ -12,9 +12,9 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size_line}{Size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms.}
 
-\item{line_alpha}{Alpha value of lines indicating \code{yrep}.}
+\item{line_alpha}{Numeric value specifying alpha of lines indicating \code{yrep}.}
 
 \item{size_bar}{Size of bar geoms.}
 

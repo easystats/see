@@ -19,16 +19,16 @@
 \arguments{
 \item{x}{An object.}
 
-\item{show_values}{Logical, if \code{TRUE}, values are displayed.}
+\item{show_values}{Logical. If \code{TRUE}, values are displayed.}
 
-\item{show_p}{Logical, if \code{TRUE}, p-values or significant level is
+\item{show_p}{Logical. If \code{TRUE}, \emph{p}-values or significant level is
 displayed.}
 
-\item{show_legend}{Logical, show or hide legend.}
+\item{show_legend}{Logical, show (\code{TRUE}) or hide (\code{FALSE}) legend.}
 
-\item{size_point}{Size of point-geoms.}
+\item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{size_text}{Size of text labels.}
+\item{size_text}{Numeric value specifying size of text labels.}
 
 \item{digits}{Number of decimals used for values.}
 

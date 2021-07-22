@@ -1,5 +1,9 @@
 #' @export
-data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ...) {
+data_plot.see_easycormatrix <- function(x,
+                                        data = NULL,
+                                        digits = 3,
+                                        size = 1,
+                                        ...) {
   legend_fill <- attr(x, "coefficient_name")
   redundant <- attr(x, "redundant")
 
@@ -61,10 +65,10 @@ data_plot.see_easycormatrix <- function(x, data = NULL, digits = 3, size = 1, ..
 #'
 #' The `plot()` method for the `correlation::correlation()` function.
 #'
-#' @param show_values Logical, if `TRUE`, values are displayed.
-#' @param show_p Logical, if `TRUE`, p-values or significant level is
+#' @param show_values Logical. If `TRUE`, values are displayed.
+#' @param show_p Logical. If `TRUE`, *p*-values or significant level is
 #'   displayed.
-#' @param show_legend Logical, show or hide legend.
+#' @param show_legend Logical, show (`TRUE`) or hide (`FALSE`) legend.
 #' @param digits Number of decimals used for values.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality

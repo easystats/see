@@ -2,10 +2,7 @@
 #'
 #' Add a radar coordinate system useful for radar charts.
 #'
-#' @param theta Can be 'x' or 'y'.
-#' @param start Starting position. Best expressed in terms of `pi` (e.g.,
-#'   `-pi/4`).
-#' @param direction The direction of plotting. Can be 1 or -1.
+#' @inheritParams ggplot2::coord_polar
 #' @param ... Other arguments to be passed to `ggproto`.
 #'
 #' @examples

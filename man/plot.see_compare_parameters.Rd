@@ -19,25 +19,27 @@
 \item{x}{An object.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.}
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.}
 
-\item{size_point}{Size of point-geoms.}
+\item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{size_text}{Size of text labels.}
+\item{size_text}{Numeric value specifying size of text labels.}
 
-\item{dodge_position}{Numeric, indicates the amount of "dodging" (spacing)
-between geoms.}
+\item{dodge_position}{Numeric value specifying the amount of "dodging"
+(spacing) between geoms.}
 
-\item{sort}{\describe{
-\item{\emph{Plotting model parameters}}{
+\item{sort}{The behavior of this argument depends on the plotting contexts.
+\itemize{
+\item \emph{Plotting model parameters}:
 If \code{NULL}, coefficients are plotted in the order as they appear in the
-summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
-}
-\item{\emph{Plotting Bayes factors}}{
+summary. Setting \code{sort = "ascending"} or \code{sort = "descending"} sorts
+coefficients in ascending or descending order, respectively.
+Setting \code{sort = TRUE} is the same as \code{sort = "ascending"}.
+\item \emph{Plotting Bayes factors}:
 Sort pie-slices by posterior probability (descending)?
-}
 }}
 
 \item{n_columns}{For models with multiple components (like fixed and random,

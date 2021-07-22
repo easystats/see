@@ -7,12 +7,12 @@
 coord_radar(theta = "x", start = 0, direction = 1, ...)
 }
 \arguments{
-\item{theta}{Can be 'x' or 'y'.}
+\item{theta}{variable to map angle to (\code{x} or \code{y})}
 
-\item{start}{Starting position. Best expressed in terms of \code{pi} (e.g.,
-\code{-pi/4}).}
+\item{start}{Offset of starting point from 12 o'clock in radians. Offset
+is applied clockwise or anticlockwise depending on value of \code{direction}.}
 
-\item{direction}{The direction of plotting. Can be 1 or -1.}
+\item{direction}{1, clockwise; -1, anticlockwise}
 
 \item{...}{Other arguments to be passed to \code{ggproto}.}
 }

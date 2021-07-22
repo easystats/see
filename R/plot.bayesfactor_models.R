@@ -5,21 +5,20 @@
 #'
 #' @param n_pies Number of pies.
 #' @param value What value to display.
-#' @param sort \describe{
-#'   \item{*Plotting model parameters*}{
+#' @param sort The behavior of this argument depends on the plotting contexts.
+#' - *Plotting model parameters*:
 #'   If `NULL`, coefficients are plotted in the order as they appear in the
-#'   summary. Use `sort = "ascending"` (or `sort = TRUE`)) resp. `sort =
-#'   "descending"` to sort coefficients in ascending or descending order.
-#'   }
-#'   \item{*Plotting Bayes factors*}{
+#'   summary. Setting `sort = "ascending"` or `sort = "descending"` sorts
+#'   coefficients in ascending or descending order, respectively.
+#'   Setting `sort = TRUE` is the same as `sort = "ascending"`.
+#' - *Plotting Bayes factors*:
 #'   Sort pie-slices by posterior probability (descending)?
-#'   }
-#' }
-#' @param log Show log-transformed Bayes factors.
-#' @param prior_odds optional vector of prior odds for the models. See
+#' @param log Logical that decides whether to display log-transformed Bayes
+#'   factors.
+#' @param prior_odds An optional vector of prior odds for the models. See
 #'   `BayesFactor::priorOdds`. As the size of the pizza slices corresponds to
 #'   posterior probability (which is a function of prior probability and the
-#'   BF), custom `prior_odds` will change the slices' size.
+#'   Bayes Factor), custom `prior_odds` will change the slices' size.
 #' @inheritParams data_plot
 #'
 #' @return A ggplot2-object.

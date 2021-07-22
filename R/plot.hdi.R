@@ -184,9 +184,9 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' The `plot()` method for the `bayestestR::hdi()` and related
 #' function.
 #'
-#' @param show_zero Logical, if `TRUE`, will add a vertical (dotted) line
+#' @param show_zero Logical. If `TRUE`, will add a vertical (dotted) line
 #'   at 0.
-#' @param show_title Logical, if `TRUE`, will show the title of the plot.
+#' @param show_title Logical. If `TRUE`, will show the title of the plot.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis

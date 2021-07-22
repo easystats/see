@@ -82,9 +82,14 @@ plots <- function(...,
   pw <- patchwork::wrap_plots(..., nrow = n_rows, ncol = n_columns, guides = guides) +
     patchwork::plot_annotation(
       tag_levels = tags,
-      tag_prefix = tag_prefix, tag_suffix = tag_suffix, tag_sep = tag_sep,
-      title = title, subtitle = subtitle, caption = caption,
+      tag_prefix = tag_prefix,
+      tag_suffix = tag_suffix,
+      tag_sep = tag_sep,
+      title = title,
+      subtitle = subtitle,
+      caption = caption,
       theme = theme
     )
+
   return(pw)
 }

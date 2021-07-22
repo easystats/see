@@ -4,7 +4,7 @@
 #' proportions, for instance for a horizontal figure, if you want its height to
 #' be 8, you can set its width to be `golden_ratio(8)`.
 #'
-#' @param x A number to be multiplied by the golden ratio. The default (x=1)
+#' @param x A number to be multiplied by the golden ratio. The default (`x = 1`)
 #'   returns the value of the golden ratio.
 #'
 #' @examples

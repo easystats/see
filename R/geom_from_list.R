@@ -1,13 +1,16 @@
 #' Create ggplot2 geom(s) from a list
 #'
 #' These helper functions are built on top of `ggplot2::layer()` and can be
-#' used to add geom(s) which type and content is specified as a list.
+#' used to add geom(s), whose type and content are specified as a list.
 #'
-#' @param x A list containing a geom type (e.g., `geom = "point"`), a list
-#'   of aesthetics (as characters; e.g., `aes = list(x = "mpg", y =
-#'   "wt")`), some data (e.g., `data = mtcars`) and some other parameters.
-#'   For `geoms_from_list()` ("geoms" with an "s"), the input must be a
-#'   list of lists, ideally named `"l1", "l2", "l3"`, etc.
+#' @param x A list containing:
+#' - a geom type (e.g. `geom = "point"`),
+#' - a list of aesthetics (e.g. `aes = list(x = "mpg", y = "wt")`),
+#' - some data (e.g. `data = mtcars`),
+#' - and some other parameters.
+#'
+#' For `geoms_from_list()` ("geoms" with an "s"), the input must be a list of
+#' lists, ideally named `"l1", "l2", "l3"`, etc.
 #' @param ... Additional arguments passed to `ggplot2::layer()`.
 #'
 #'

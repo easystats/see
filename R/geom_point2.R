@@ -12,8 +12,8 @@
 #'   [ggplot2::geom_pointrange()], or
 #'   [ggplot2::geom_count()].
 #'
-#' @note The color aesthetics for `geom_point_borderless()` is
-#'   `"fill"`, not `color`. See 'Examples'.
+#' @note The color aesthetics for `geom_point_borderless()` is `"fill"`, not
+#'   `"color"`. See 'Examples'.
 #'
 #' @examples
 #' library(ggplot2)

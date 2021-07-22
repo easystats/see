@@ -16,18 +16,19 @@
 \arguments{
 \item{x}{An object.}
 
-\item{si_color}{Color of SI ribbon.}
+\item{si_color}{Character specifying color of SI ribbon.}
 
-\item{si_alpha}{Transparency level of SI ribbon.}
+\item{si_alpha}{Numeric value specifying Transparency level of SI ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.}
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.}
 
-\item{support_only}{Plot only the support data, or show the "raw" prior and
-posterior distributions? Only applies when plotting
-\code{\link[bayestestR:si]{bayestestR::si()}}.}
+\item{support_only}{Logical. Decides whether to plot only the support data,
+or show the "raw" prior and posterior distributions? Only applies when
+plotting \code{\link[bayestestR:si]{bayestestR::si()}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

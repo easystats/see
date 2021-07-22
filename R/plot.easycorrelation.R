@@ -2,8 +2,8 @@
 #'
 #' The `plot()` method for the `correlation::correlation()` function.
 #'
-#' @param node_color Color of node- or circle-geoms.
-#' @param text_color Color of text labels.
+#' @param node_color Character specifying color of node- or circle-geoms.
+#' @param text_color Character specifying color of text labels.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_bayesfactor_parameters

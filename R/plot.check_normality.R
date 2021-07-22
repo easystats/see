@@ -4,11 +4,12 @@
 #' function.
 #'
 #' @param type Character vector, indicating the type of plot.
-#' @param size_line Size of line geoms.
-#' @param dot_alpha,alpha ALpha level of the confidence bands and point-geoms.
+#' @param size_line Numeric value specifying size of line geoms.
+#' @param dot_alpha,alpha Numeric value specifying alpha level of the
+#'   confidence bands and point-geoms.
 #' @param colors Character vector of length two, indicating the colors (in
 #'   hex-format) for points and line.
-#' @param detrend Should the plot be detrended?
+#' @param detrend Logical that decides if the plot should be detrended.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #'

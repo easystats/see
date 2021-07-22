@@ -10,7 +10,7 @@
 \item{x}{An object.}
 
 \item{data}{The original data used to create this object. Can be a
-statistical model or such.}
+statistical model.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

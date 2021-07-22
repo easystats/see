@@ -69,17 +69,19 @@ data_plot.estimate_density <- function(x,
 #'
 #' The `plot()` method for the `bayestestR::estimate_density()` function.
 #'
-#' @param stack Logical, if `TRUE`, densities are plotted as stacked lines.
+#' @param stack Logical. If `TRUE`, densities are plotted as stacked lines.
 #'   Else, densities are plotted for each parameter among each other.
-#' @param priors Logical, if `TRUE`, prior distributions are simulated
+#' @param priors Logical. If `TRUE`, prior distributions are simulated
 #'   (using [bayestestR::simulate_prior()]) and added
 #'   to the plot.
-#' @param priors_alpha Alpha value of the prior distributions.
-#' @param posteriors_alpha Alpha value of the posterior distributions.
-#' @param centrality The point-estimate (centrality index) to compute. May be
-#'   `"median"`, `"mean"` or `"MAP"`.
-#' @param ci Value of probability of the CI (between 0 and 1) to be estimated.
-#'   Default to .95.
+#' @param priors_alpha Numeric value specifying alpha for the prior
+#'   distributions.
+#' @param posteriors_alpha Numeric value specifying alpha for the posterior
+#'   distributions.
+#' @param centrality Character specifying the point-estimate (centrality index)
+#'   to compute. Can be `"median"`, `"mean"` or `"MAP"`.
+#' @param ci Numeric value of probability of the CI (between 0 and 1) to be
+#'   estimated. Default to `.95`.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis
