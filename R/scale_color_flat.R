@@ -1,6 +1,6 @@
 #' Flat UI color palette
 #'
-#' The palette based on Flat UI (https://www.materialui.co/flatuicolors).
+#' The palette based on \href{https://www.materialui.co/flatuicolors}{Flat UI}.
 #' Use \code{scale_color_flat_d} for \emph{discrete} categories and
 #' \code{scale_color_flat_c} for a \emph{continuous} scale.
 #'
@@ -173,9 +173,11 @@ flat_palettes <- list(
 
 #' Flat UI color palette
 #'
-#' The palette based on Flat UI colors (https://www.materialui.co/flatuicolors).
+#' The palette based on \href{https://www.materialui.co/flatuicolors}{Flat UI}.
 #'
-#' @param palette Character name of palette. Depending on the color scale, can be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"} or \code{"light"} (for dark themes).
+#' @param palette Character name of palette. Depending on the color scale, can
+#'   be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
+#'   \code{"contrast"} or \code{"light"} (for dark themes).
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
 #'

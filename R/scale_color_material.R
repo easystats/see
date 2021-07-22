@@ -1,8 +1,8 @@
 #' Material design color palette
 #'
-#' The palette based on material design colors (https://www.materialui.co/color).
-#' Use \code{scale_color_material_d()} for \emph{discrete} categories and
-#' \code{scale_color_material_c()} for a \emph{continuous} scale.
+#' The palette based on \href{https://www.materialui.co/color}{material design
+#' colors}. Use \code{scale_color_material_d()} for \emph{discrete} categories
+#' and \code{scale_color_material_c()} for a \emph{continuous} scale.
 #'
 #' @inheritParams palette_material
 #' @inheritParams scale_color_flat
@@ -173,7 +173,8 @@ material_palettes <- list(
 
 #' Material design color palette
 #'
-#' The palette based on material design colors (https://www.materialui.co/colors).
+#' The palette based on \href{https://www.materialui.co/color}{material design
+#' colors}.
 #'
 #' @inheritParams palette_flat
 #'

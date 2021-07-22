@@ -16,9 +16,10 @@ statistical model or such.}
 }
 \description{
 \code{data_plot()} attempts to extract and transform an object
-to be further plotted, while \code{plot()} tries to visualize results of
-functions from different packages of the \href{https://github.com/easystats}{easystats-project}.
-See the documentation for your object's class:
+  to be further plotted, while \code{plot()} tries to visualize results of
+  functions from different packages of the
+  \href{https://github.com/easystats}{easystats-project}. See the
+  documentation for your object's class:
 \itemize{
  \item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
  \item{\link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}}
