@@ -185,7 +185,7 @@ plot.see_compare_parameters <- function(x,
 
 #' @export
 data_plot.see_compare_parameters <- function(x, ...) {
-  col_coefficient <- which(grepl("^Coefficient\\.", colnames(x)))
+  col_coefficient <- which(grepl("^(Coefficient|Log-Odds|Log-Mean|Odds Ratio|Risk Ratio|IRR)\\.", colnames(x)))
   col_ci_low <- which(grepl("^CI_low\\.", colnames(x)))
   col_ci_high <- which(grepl("^CI_high\\.", colnames(x)))
   col_p <- which(grepl("^p\\.", colnames(x)))
