@@ -133,6 +133,32 @@ result <- model_parameters(model2)
 plot(result)
 ```
 
+### Changing parameter names in the plot
+
+By default, `model_parameters()` returns a data frame, where the parameter names are found in the column `Parameter`. These names are used by default in the generated plot:
+
+```{r}
+plot(model_parameters(model4))
+``` 
+
+However, there are several ways to change the the names of the parameters. Since `plot()` returns *ggplot* objects, these can be easily modified, e.g. by adding a `scale_y_discrete()` layer.
+
+```{r}
+library(ggplot2)
+plot(model_parameters(model4)) +
+  scale_y_discrete(labels = c("Time", "Age", "Education (mid-level)", 
+                              "Eucation (high-level)"))
+```
+
+Another way would be changing the values of the `Parameter` column before calling `plot()`:
+
+```{r}
+mp <- model_parameters(model4)
+mp$Parameter <- c("(Intercept)", "Time", "Age", "Education (mid-level)", 
+                  "Eucation (high-level)")
+plot(mp)
+```
+
 ## Simulated Model Parameters
 
 `simulate_parameters()` computes simulated draws of parameters and their related
