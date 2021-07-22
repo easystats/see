@@ -1,6 +1,7 @@
 #' Metro color palette
 #'
-#' The palette based on Metro (https://www.materialui.co/metrocolors).
+#' The palette based on Metro \href{https://www.materialui.co/metrocolors}{Metro
+#' colors}.
 #' Use \code{scale_color_metro_d} for \emph{discrete} categories and
 #' \code{scale_color_metro_c} for a \emph{continuous} scale.
 #'
@@ -168,7 +169,8 @@ metro_palettes <- list(
 
 #' Metro color palette
 #'
-#' The palette based on Metro colors (https://www.materialui.co/metrocolors).
+#' The palette based on \href{https://www.materialui.co/metrocolors}{Metro
+#' colors}.
 #'
 #' @inheritParams palette_flat
 #'

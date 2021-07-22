@@ -76,7 +76,9 @@ scale_fill_material_c(
 )
 }
 \arguments{
-\item{palette}{Character name of palette. Depending on the color scale, can be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"} or \code{"light"} (for dark themes).}
+\item{palette}{Character name of palette. Depending on the color scale, can
+be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
+\code{"contrast"} or \code{"light"} (for dark themes).}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
@@ -85,9 +87,9 @@ scale_fill_material_c(
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based on material design colors (https://www.materialui.co/color).
-Use \code{scale_color_material_d()} for \emph{discrete} categories and
-\code{scale_color_material_c()} for a \emph{continuous} scale.
+The palette based on \href{https://www.materialui.co/color}{material design
+colors}. Use \code{scale_color_material_d()} for \emph{discrete} categories
+and \code{scale_color_material_c()} for a \emph{continuous} scale.
 }
 \examples{
 library(ggplot2)
