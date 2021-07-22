@@ -1,6 +1,6 @@
 #' Plot method for check model for (non-)normality of residuals
 #'
-#' The \code{plot()} method for the \code{performance::check_normality()}
+#' The `plot()` method for the `performance::check_normality()`
 #' function.
 #'
 #' @param type Character vector, indicating the type of plot.

@@ -77,7 +77,8 @@ theme_radar_dark(
 \item{tags.face}{Tags font face ("plain", "italic", "bold", "bold.italic").}
 }
 \description{
-\code{theme_radar()} is a light, clear theme for ggplot radar-plots, while \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
+\code{theme_radar()} is a light, clear theme for ggplot radar-plots, while
+\code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
 }
 \examples{
 if (require("ggplot2") && require("dplyr") && require("tidyr")) {
@@ -100,5 +101,5 @@ if (require("ggplot2") && require("dplyr") && require("tidyr")) {
 }
 }
 \seealso{
-\code{\link{coord_radar}}
+\code{\link[=coord_radar]{coord_radar()}}
 }

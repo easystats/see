@@ -64,13 +64,13 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 
 #' Plot method for Model Parameters from Bayesian Meta-Analysis
 #'
-#' The \code{plot()} method for the \code{parameters::model_parameters()}
+#' The `plot()` method for the `parameters::model_parameters()`
 #' function when used with brms-meta-analysis models.
 #'
-#' @param normalize_height Logical, if \code{TRUE}, height of mcmc-areas is
+#' @param normalize_height Logical, if `TRUE`, height of mcmc-areas is
 #'   "normalized", to avoid overlap. In certain cases when the range of a
 #'   posterior distribution is narrow for some parameters, this may result in
-#'   very flat mcmc-areas. In such cases, set \code{normalize_height = FALSE}.
+#'   very flat mcmc-areas. In such cases, set `normalize_height = FALSE`.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_rope
 #' @inheritParams plot.see_check_normality
@@ -82,14 +82,14 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #'
 #' @details
 #' \subsection{Colors of density areas and errorbars}{
-#'   To change the colors of the density areas, use \code{scale_fill_manual()}
-#'   with named color-values, e.g. \code{scale_fill_manual(values = c("Study" =
-#'   "blue", "Overall" = "green"))}.
-#'   To change the color of the error bars, use \code{scale_color_manual(values
-#'   = c("Errorbar" = "red"))}.
+#'   To change the colors of the density areas, use `scale_fill_manual()`
+#'   with named color-values, e.g. `scale_fill_manual(values = c("Study" =
+#'   "blue", "Overall" = "green"))`.
+#'   To change the color of the error bars, use `scale_color_manual(values
+#'   = c("Errorbar" = "red"))`.
 #' }
 #' \subsection{Show or hide estimates and CI}{
-#'   Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual
+#'   Use `size_text = NULL` or `size_text = NA` to hide the textual
 #'   output of estimates and credible intervals.
 #' }
 #'

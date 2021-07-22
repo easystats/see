@@ -1,14 +1,14 @@
 #' Flat UI color palette
 #'
-#' The palette based on \href{https://www.materialui.co/flatuicolors}{Flat UI}.
-#' Use \code{scale_color_flat_d} for \emph{discrete} categories and
-#' \code{scale_color_flat_c} for a \emph{continuous} scale.
+#' The palette based on [Flat UI](https://www.materialui.co/flatuicolors).
+#' Use `scale_color_flat_d` for *discrete* categories and
+#' `scale_color_flat_c` for a *continuous* scale.
 #'
 #' @inheritParams palette_flat
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param ... Additional arguments passed to \code{discrete_scale()} or
-#'  \code{scale_color_gradientn()}, used respectively when discrete is
-#'  \code{TRUE} or \code{FALSE}.
+#' @param ... Additional arguments passed to `discrete_scale()` or
+#'  `scale_color_gradientn()`, used respectively when discrete is
+#'  `TRUE` or `FALSE`.
 #'
 #' @examples
 #' library(ggplot2)
@@ -133,7 +133,8 @@ flat_colors_list <- c(
 
 #' Extract Flat UI colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the Flat UI color palette. Use \code{flat_colors()} to see all available color.
+#' Can be used to get the hex code of specific colors from the Flat UI color
+#' palette. Use `flat_colors()` to see all available color.
 #'
 #' @param ... Character names of colors.
 #'
@@ -173,16 +174,16 @@ flat_palettes <- list(
 
 #' Flat UI color palette
 #'
-#' The palette based on \href{https://www.materialui.co/flatuicolors}{Flat UI}.
+#' The palette based on [Flat UI](https://www.materialui.co/flatuicolors).
 #'
 #' @param palette Character name of palette. Depending on the color scale, can
-#'   be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-#'   \code{"contrast"} or \code{"light"} (for dark themes).
+#'   be `"full"`, `"ice"`, `"rainbow"`, `"complement"`,
+#'   `"contrast"` or `"light"` (for dark themes).
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
+#' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
 #' @details This function is usually not called directly, but from within
-#'   \code{\link[=scale_color_flat]{scale_color_flat()}}.
+#'   [`scale_color_flat()`][scale_color_flat].
 #'
 #' @export
 palette_flat <- function(palette = "contrast", reverse = FALSE, ...) {

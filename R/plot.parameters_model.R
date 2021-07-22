@@ -1,10 +1,12 @@
 #' Plot method for model parameters
 #'
-#' The \code{plot()} method for the \code{parameters::model_parameters()} function.
+#' The `plot()` method for the `parameters::model_parameters()` function.
 #'
-#' @param type Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).
+#' @param type Indicating the type of plot. Only applies for model parameters
+#'   from meta-analysis objects (e.g. \pkg{metafor}).
 #' @param component Indicate which component of the model should be plotted.
-#' @param weight_points Logical, if \code{TRUE}, for meta-analysis objects, point size will be adjusted according to the study-weights.
+#' @param weight_points Logical, if `TRUE`, for meta-analysis objects, point
+#'   size will be adjusted according to the study-weights.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_bayesfactor_models
@@ -22,15 +24,14 @@
 #' plot(result)
 #' @export
 plot.see_parameters_model <- function(x,
-           show_intercept = FALSE,
-           size_point = .8,
-           size_text = NULL,
-           sort = NULL,
-           n_columns = NULL,
-           type = c("forest", "funnel"),
-           weight_points = TRUE,
-           ...) {
-
+                                      show_intercept = FALSE,
+                                      size_point = .8,
+                                      size_text = NULL,
+                                      sort = NULL,
+                                      n_columns = NULL,
+                                      type = c("forest", "funnel"),
+                                      weight_points = TRUE,
+                                      ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }

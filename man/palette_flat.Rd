@@ -20,5 +20,5 @@ The palette based on \href{https://www.materialui.co/flatuicolors}{Flat UI}.
 }
 \details{
 This function is usually not called directly, but from within
-  \code{\link[=scale_color_flat]{scale_color_flat()}}.
+\code{\link[=scale_color_flat]{scale_color_flat()}}.
 }

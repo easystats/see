@@ -67,7 +67,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
 #' Plot method for Region of Practical Equivalence
 #'
-#' The \code{plot()} method for the \code{bayestestR::rope()}.
+#' The `plot()` method for the `bayestestR::rope()`.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters

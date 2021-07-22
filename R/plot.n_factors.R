@@ -64,9 +64,9 @@ data_plot.n_clusters <- data_plot.n_factors
 
 #' Plot method for numbers of clusters to extract or factors to retain
 #'
-#' The \code{plot()} method for the \code{parameters::n_factors()} and \code{parameters::n_clusters()}
+#' The `plot()` method for the `parameters::n_factors()` and `parameters::n_clusters()`
 #'
-#' @param size Depending on \code{type}, size of bars, lines or segments.
+#' @param size Depending on `type`, size of bars, lines or segments.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'

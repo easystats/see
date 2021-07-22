@@ -37,9 +37,9 @@ data_plot.performance_pp_check <- function(x, ...) {
 
 #' Plot method for posterior predictive checks
 #'
-#' The \code{plot()} method for the \code{performance::pp_check()} function.
+#' The `plot()` method for the `performance::pp_check()` function.
 #'
-#' @param line_alpha Alpha value of lines indicating \code{yrep}.
+#' @param line_alpha Alpha value of lines indicating `yrep`.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_distribution

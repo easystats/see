@@ -1,26 +1,26 @@
 #' Multiple plots side by side
 #'
-#' A wrapper around \emph{patchwork} to plot multiple figures side by side on
+#' A wrapper around *patchwork* to plot multiple figures side by side on
 #' the same page. See
-#' \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the
-#' \emph{patchwork} documentation} for more advanced control of plot layouts.
+#' [the
+#' *patchwork* documentation](https://patchwork.data-imaginist.com/articles/patchwork.html) for more advanced control of plot layouts.
 #'
-#' @param ... Multiple \code{ggplot}s or a list containing \code{ggplot} objects
+#' @param ... Multiple `ggplot`s or a list containing `ggplot` objects
 #' @param n_rows Number of rows to align plots.
 #' @param n_columns Number of columns to align plots.
 #' @param guides A string specifying how guides should be treated in the
-#'   layout. \code{'collect'} will collect shared guides across plots, removing
-#'   duplicates. \code{'keep'} will keep guides alongside their plot.
-#'   \code{'auto'} will inherit from a higher patchwork level (if any). See
-#'   \code{\link[patchwork:plot_layout]{patchwork::plot_layout()}} for details.
-#' @param tags Add tags to your subfigures. Can be \code{NULL} to omit (default)
+#'   layout. `'collect'` will collect shared guides across plots, removing
+#'   duplicates. `'keep'` will keep guides alongside their plot.
+#'   `'auto'` will inherit from a higher patchwork level (if any). See
+#'   [patchwork::plot_layout()] for details.
+#' @param tags Add tags to your subfigures. Can be `NULL` to omit (default)
 #'   or a character vector containing tags for each plot. Automatic tags can
-#'   also be generated with \code{'1'} for Arabic numerals, \code{'A'} for
-#'   uppercase Latin letters, \code{'a'} for lowercase Latin letters, \code{'I'}
-#'   for uppercase Roman numerals, and \code{'i'} for lowercase Roman numerals.
-#'   For backwards compatibility, can also be \code{FALSE} (equivalent to
-#'   \code{NULL}), \code{NA} (equivalent to \code{NULL}), or \code{TRUE}
-#'   (equivalent to \code{'A'}).
+#'   also be generated with `'1'` for Arabic numerals, `'A'` for
+#'   uppercase Latin letters, `'a'` for lowercase Latin letters, `'I'`
+#'   for uppercase Roman numerals, and `'i'` for lowercase Roman numerals.
+#'   For backwards compatibility, can also be `FALSE` (equivalent to
+#'   `NULL`), `NA` (equivalent to `NULL`), or `TRUE`
+#'   (equivalent to `'A'`).
 #' @param tag_prefix,tag_suffix Text strings that should appear before or after
 #'   the tag.
 #' @param tag_sep Text string giving the separator to use between different tag

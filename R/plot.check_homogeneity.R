@@ -1,6 +1,6 @@
 #' Plot method for homogeneity of variances checks
 #'
-#' The \code{plot()} method for the \code{performance::check_homogeneity()}
+#' The `plot()` method for the `performance::check_homogeneity()`
 #' function.
 #'
 #' @inheritParams data_plot

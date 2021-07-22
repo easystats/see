@@ -20,5 +20,5 @@ The palette based on blue-brown colors.
 }
 \details{
 This function is usually not called directly, but from within
-  \code{\link[=scale_color_bluebrown]{scale_color_bluebrown()}}.
+\code{\link[=scale_color_bluebrown]{scale_color_bluebrown()}}.
 }

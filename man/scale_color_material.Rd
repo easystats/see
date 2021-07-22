@@ -87,9 +87,9 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based on \href{https://www.materialui.co/color}{material design
-colors}. Use \code{scale_color_material_d()} for \emph{discrete} categories
-and \code{scale_color_material_c()} for a \emph{continuous} scale.
+The palette based on \href{https://www.materialui.co/color}{material design colors}. Use \code{scale_color_material_d()} for
+\emph{discrete} categories and \code{scale_color_material_c()} for a \emph{continuous}
+scale.
 }
 \examples{
 library(ggplot2)

@@ -16,10 +16,9 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based on \href{https://www.materialui.co/color}{material design
-colors}.
+The palette based on \href{https://www.materialui.co/color}{material design colors}.
 }
 \details{
 This function is usually not called directly, but from within
-  \code{\link[=scale_color_material]{scale_color_material()}}.
+\code{\link[=scale_color_material]{scale_color_material()}}.
 }

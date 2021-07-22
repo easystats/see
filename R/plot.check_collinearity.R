@@ -1,6 +1,6 @@
 #' Plot method for multicollinearity checks
 #'
-#' The \code{plot()} method for the \code{performance::check_collinearity()} function.
+#' The `plot()` method for the `performance::check_collinearity()` function.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality

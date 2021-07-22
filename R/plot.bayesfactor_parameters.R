@@ -1,11 +1,11 @@
 #' Plot method for Bayes Factors for a single parameter
 #'
-#' The \code{plot()} method for the \code{bayestestR::bayesfactor_parameters()} function.
+#' The `plot()` method for the `bayestestR::bayesfactor_parameters()` function.
 #'
 #' @param size_point Size of point-geoms.
 #' @param rope_alpha Transparency level of ROPE ribbon.
 #' @param rope_color Color of ROPE ribbon.
-#' @param show_intercept Logical, if \code{TRUE}, the intercept-parameter is included
+#' @param show_intercept Logical, if `TRUE`, the intercept-parameter is included
 #'   in the plot. By default, it is hidden because in many cases the intercept-parameter
 #'   has a posterior distribution on a very different location, so density curves of
 #'   posterior distributions for other parameters are hardly visible.

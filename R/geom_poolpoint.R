@@ -7,7 +7,7 @@
 #' @param size_background Size of the white background circle.
 #' @param size_point Size of the ball.
 #' @param jitter Width and height of position jitter.
-#' @param ... Other arguments to be passed to \code{geom_point}.
+#' @param ... Other arguments to be passed to `geom_point`.
 #'
 #' @examples
 #' library(ggplot2)

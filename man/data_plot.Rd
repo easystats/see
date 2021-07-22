@@ -16,40 +16,40 @@ statistical model or such.}
 }
 \description{
 \code{data_plot()} attempts to extract and transform an object
-  to be further plotted, while \code{plot()} tries to visualize results of
-  functions from different packages of the
-  \href{https://github.com/easystats}{easystats-project}. See the
-  documentation for your object's class:
+to be further plotted, while \code{plot()} tries to visualize results of
+functions from different packages of the
+\href{https://github.com/easystats}{easystats-project}. See the
+documentation for your object's class:
 \itemize{
- \item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
- \item{\link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}}
- \item{\link[=plot.see_equivalence_test]{bayestestR::equivalence_test()}}
- \item{\link[=plot.see_estimate_density]{bayestestR::estimate_density()}}
- \item{\link[=plot.see_hdi]{bayestestR::hdi()}}
- \item{\link[=plot.see_p_direction]{bayestestR::p_direction()}}
- \item{\link[=plot.see_p_significance]{bayestestR::p_significance()}}
- \item{\link[=plot.see_si]{bayestestR::si()}}
- \item{\link[=plot.see_easycormatrix]{correlation::correlation()}}
- \item{\link[=plot.see_easycorrelation]{correlation::correlation()} (Gaussian Graphical Models)}
- \item{\link[=plot.see_effectsize_table]{effectsize::effectsize()}}
- \item{\link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}}
- \item{\link[=plot.see_cluster_analysis]{parameters::cluster_analysis()}}
- \item{\link[=plot.see_compare_parameters]{parameters::compare_parameters()}}
- \item{\link[=plot.see_parameters_distribution]{parameters::describe_distribution()}}
- \item{\link[=plot.see_parameters_model]{parameters::model_parameters()}}
- \item{\link[=plot.see_parameters_pca]{parameters::principal_components()}}
- \item{\link[=plot.see_n_factors]{parameters::n_clusters()}}
- \item{\link[=plot.see_n_factors]{parameters::n_factors()}}
- \item{\link[=plot.see_parameters_simulate]{parameters::simulate_parameters()}}
- \item{\link[=plot.see_check_collinearity]{performance::check_collinearity()}}
- \item{\link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}}
- \item{\link[=plot.see_check_homogeneity]{performance::check_homogeneity()}}
- \item{\link[=plot.see_check_normality]{performance::check_normality()}}
- \item{\link[=plot.see_check_outliers]{performance::check_outliers()}}
- \item{\link[=plot.see_compare_performance]{performance::compare_performance()}}
- \item{\link[=plot.see_performance_roc]{performance::performance_roc()}}
- \item{\link[=plot.see_performance_pp_check]{performance::pp_check()}}
- }
+\item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
+\item{\link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}}
+\item{\link[=plot.see_equivalence_test]{bayestestR::equivalence_test()}}
+\item{\link[=plot.see_estimate_density]{bayestestR::estimate_density()}}
+\item{\link[=plot.see_hdi]{bayestestR::hdi()}}
+\item{\link[=plot.see_p_direction]{bayestestR::p_direction()}}
+\item{\link[=plot.see_p_significance]{bayestestR::p_significance()}}
+\item{\link[=plot.see_si]{bayestestR::si()}}
+\item{\link[=plot.see_easycormatrix]{correlation::correlation()}}
+\item{\link[=plot.see_easycorrelation]{correlation::correlation()} (Gaussian Graphical Models)}
+\item{\link[=plot.see_effectsize_table]{effectsize::effectsize()}}
+\item{\link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}}
+\item{\link[=plot.see_cluster_analysis]{parameters::cluster_analysis()}}
+\item{\link[=plot.see_compare_parameters]{parameters::compare_parameters()}}
+\item{\link[=plot.see_parameters_distribution]{parameters::describe_distribution()}}
+\item{\link[=plot.see_parameters_model]{parameters::model_parameters()}}
+\item{\link[=plot.see_parameters_pca]{parameters::principal_components()}}
+\item{\link[=plot.see_n_factors]{parameters::n_clusters()}}
+\item{\link[=plot.see_n_factors]{parameters::n_factors()}}
+\item{\link[=plot.see_parameters_simulate]{parameters::simulate_parameters()}}
+\item{\link[=plot.see_check_collinearity]{performance::check_collinearity()}}
+\item{\link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}}
+\item{\link[=plot.see_check_homogeneity]{performance::check_homogeneity()}}
+\item{\link[=plot.see_check_normality]{performance::check_normality()}}
+\item{\link[=plot.see_check_outliers]{performance::check_outliers()}}
+\item{\link[=plot.see_compare_performance]{performance::compare_performance()}}
+\item{\link[=plot.see_performance_roc]{performance::performance_roc()}}
+\item{\link[=plot.see_performance_pp_check]{performance::pp_check()}}
+}
 }
 \details{
 \code{data_plot()} is in most situation not needed when the purpose
@@ -61,7 +61,7 @@ the data or model for plotting can't be retrieved via \code{data_plot()}. In
 such cases, \code{plot()} gives an error and asks for providing data or models.
 \cr \cr
 Most \code{plot()}-functions work out-of-the-box, i.e. you don't need to do
-much more than calling \code{plot(<object>)} (see 'Examples'). Some plot-functions
+much more than calling \verb{plot(<object>)} (see 'Examples'). Some plot-functions
 allow to specify arguments to modify the transparency or color of geoms, these
 are shown in the 'Usage' section.
 }

@@ -28,12 +28,12 @@ data_plot.cluster_analysis <- function(x, data = NULL, ...) {
 
 #' Plot method for computing cluster analysis
 #'
-#' The \code{plot()} method for the \code{parameters::cluster_analysis()}
+#' The `plot()` method for the `parameters::cluster_analysis()`
 #' function.
 #'
 #' @param n_columns For models with multiple components (like fixed and random,
 #'   count and zero-inflated), defines the number of columns for the
-#'   panel-layout. If \code{NULL}, a single, integrated plot is shown.
+#'   panel-layout. If `NULL`, a single, integrated plot is shown.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_distribution

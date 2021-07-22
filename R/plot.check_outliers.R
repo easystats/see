@@ -1,10 +1,10 @@
 #' Plot method for checking outliers
 #'
-#' The \code{plot()} method for the \code{performance::check_outliers()}
+#' The `plot()` method for the `performance::check_outliers()`
 #' function.
 #'
 #' @param size_text Size of text labels.
-#' @param rescale_distance Logical, if \code{TRUE}, distance values are rescaled
+#' @param rescale_distance Logical, if `TRUE`, distance values are rescaled
 #'   to a range from 0 to 1. This is mainly due to better catch the differences
 #'   between distance values.
 #' @inheritParams data_plot

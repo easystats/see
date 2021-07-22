@@ -1,7 +1,7 @@
 #' Plot method for (non-)constant error variance checks
 #'
-#' The \code{plot()} method for the
-#' \code{performance::check_heteroscedasticity()} function.
+#' The `plot()` method for the
+#' `performance::check_heteroscedasticity()` function.
 #'
 #' @inheritParams data_plot
 #'

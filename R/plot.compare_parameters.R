@@ -1,6 +1,6 @@
 #' Plot method for comparison of model parameters
 #'
-#' The \code{plot()} method for the \code{parameters::compare_parameters()}
+#' The `plot()` method for the `parameters::compare_parameters()`
 #' function.
 #'
 #' @param dodge_position Numeric, indicates the amount of "dodging" (spacing)
@@ -27,14 +27,13 @@
 #' }
 #' @export
 plot.see_compare_parameters <- function(x,
-           show_intercept = FALSE,
-           size_point = .8,
-           size_text = NULL,
-           dodge_position = .8,
-           sort = NULL,
-           n_columns = NULL,
-           ...) {
-
+                                        show_intercept = FALSE,
+                                        size_point = .8,
+                                        size_text = NULL,
+                                        dodge_position = .8,
+                                        sort = NULL,
+                                        n_columns = NULL,
+                                        ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
   }

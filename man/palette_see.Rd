@@ -20,5 +20,5 @@ See design color palette
 }
 \details{
 This function is usually not called directly, but from within
-  \code{\link[=scale_color_see]{scale_color_see()}}.
+\code{\link[=scale_color_see]{scale_color_see()}}.
 }

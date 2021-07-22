@@ -45,7 +45,7 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 
 #' Plot method for principal component analysis
 #'
-#' The \code{plot()} method for the \code{parameters::principal_components()} function.
+#' The `plot()` method for the `parameters::principal_components()` function.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters

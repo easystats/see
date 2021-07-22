@@ -1,6 +1,6 @@
 #' Plot method for effect size tables
 #'
-#' The \code{plot()} method for the \code{effectsize::effectsize()} function.
+#' The `plot()` method for the `effectsize::effectsize()` function.
 #'
 #' @inheritParams data_plot
 #'
@@ -89,4 +89,3 @@ plot.see_equivalence_test_effectsize <- function(x, ...) {
     ) +
     theme_modern()
 }
-

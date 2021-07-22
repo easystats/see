@@ -3,8 +3,8 @@
 #' Pizza color palette
 #'
 #' The palette based on authentic neapolitan pizzas.
-#' Use \code{scale_color_pizza_d()} for \emph{discrete} categories and
-#' \code{scale_color_pizza_c()} for a \emph{continuous} scale.
+#' Use `scale_color_pizza_d()` for *discrete* categories and
+#' `scale_color_pizza_c()` for a *continuous* scale.
 #'
 #' @inheritParams palette_pizza
 #' @inheritParams scale_color_flat
@@ -152,10 +152,10 @@ pizza_palettes <- list(
 #' @param palette Pizza type. Can be "margherita" (default), "margherita_crust",
 #'  "diavola" or "diavola_crust".
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.
+#' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
 #' @details This function is usually not called directly, but from within
-#'   \code{\link[=scale_color_pizza]{scale_color_pizza()}}.
+#'   [`scale_color_pizza()`][scale_color_pizza].
 #'
 #' @export
 palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {

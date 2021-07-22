@@ -27,7 +27,7 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{support_only}{Plot only the support data, or show the "raw" prior and
 posterior distributions? Only applies when plotting
-\code{\link[bayestestR]{si}}.}
+\code{\link[bayestestR:si]{bayestestR::si()}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

@@ -47,15 +47,13 @@ function when used with brms-meta-analysis models.
 }
 \details{
 \subsection{Colors of density areas and errorbars}{
-  To change the colors of the density areas, use \code{scale_fill_manual()}
-  with named color-values, e.g. \code{scale_fill_manual(values = c("Study" =
-  "blue", "Overall" = "green"))}.
-  To change the color of the error bars, use \code{scale_color_manual(values
-  = c("Errorbar" = "red"))}.
+To change the colors of the density areas, use \code{scale_fill_manual()}
+with named color-values, e.g. \code{scale_fill_manual(values = c("Study" = "blue", "Overall" = "green"))}.
+To change the color of the error bars, use \code{scale_color_manual(values = c("Errorbar" = "red"))}.
 }
 \subsection{Show or hide estimates and CI}{
-  Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual
-  output of estimates and credible intervals.
+Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual
+output of estimates and credible intervals.
 }
 }
 \examples{

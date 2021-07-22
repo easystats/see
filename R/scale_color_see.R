@@ -1,7 +1,7 @@
 #' See color palette
 #'
-#' The See color palette. Use \code{scale_color_see_d()} for \emph{discrete}
-#' categories and \code{scale_color_see_c()} for a \emph{continuous} scale.
+#' The See color palette. Use `scale_color_see_d()` for *discrete*
+#' categories and `scale_color_see_c()` for a *continuous* scale.
 #'
 #' @inheritParams palette_see
 #' @inheritParams scale_color_flat
@@ -26,10 +26,9 @@
 #'   scale_color_see_c(palette = "rainbow")
 #' @export
 scale_color_see <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-
+                            discrete = TRUE,
+                            reverse = FALSE,
+                            ...) {
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -47,26 +46,30 @@ scale_color_see <- function(palette = "contrast",
 #' @rdname scale_color_see
 #' @export
 scale_color_see_d <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-    scale_color_see(palette = palette,
-                    discrete = discrete,
-                    reverse = reverse,
-                    ...)
-  }
+                              discrete = TRUE,
+                              reverse = FALSE,
+                              ...) {
+  scale_color_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 #' @rdname scale_color_see
 #' @export
 scale_color_see_c <- function(palette = "contrast",
-           discrete = FALSE,
-           reverse = FALSE,
-           ...) {
-    scale_color_see(palette = palette,
-                    discrete = discrete,
-                    reverse = reverse,
-                    ...)
-  }
+                              discrete = FALSE,
+                              reverse = FALSE,
+                              ...) {
+  scale_color_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 #' @rdname scale_color_see
 #' @export
@@ -91,10 +94,9 @@ scale_colour_see_d <- scale_color_see_d
 #' @rdname scale_color_see
 #' @export
 scale_fill_see <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-
+                           discrete = TRUE,
+                           reverse = FALSE,
+                           ...) {
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -108,26 +110,30 @@ scale_fill_see <- function(palette = "contrast",
 #' @rdname scale_color_see
 #' @export
 scale_fill_see_d <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-    scale_fill_see(palette = palette,
-                   discrete = discrete,
-                   reverse = reverse,
-                   ...)
-  }
+                             discrete = TRUE,
+                             reverse = FALSE,
+                             ...) {
+  scale_fill_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 #' @rdname scale_color_see
 #' @export
 scale_fill_see_c <- function(palette = "contrast",
-           discrete = FALSE,
-           reverse = FALSE,
-           ...) {
-    scale_fill_see(palette = palette,
-                   discrete = discrete,
-                   reverse = reverse,
-                   ...)
-  }
+                             discrete = FALSE,
+                             reverse = FALSE,
+                             ...) {
+  scale_fill_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 
 
@@ -157,7 +163,7 @@ see_colors_list <- c(
 #' Extract See colors as hex codes
 #'
 #' Can be used to get the hex code of specific colors from the See color
-#' palette. Use \code{see_colors()} to see all available color.
+#' palette. Use `see_colors()` to see all available color.
 #'
 #' @inheritParams flat_colors
 #'
@@ -194,7 +200,7 @@ see_palettes <- list(
 #' @inheritParams palette_flat
 #'
 #' @details This function is usually not called directly, but from within
-#'   \code{\link[=scale_color_see]{scale_color_see()}}.
+#'   [`scale_color_see()`][scale_color_see].
 #'
 #' @export
 palette_see <- function(palette = "contrast", reverse = FALSE, ...) {

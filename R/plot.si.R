@@ -1,12 +1,12 @@
 #' Plot method for support intervals
 #'
-#' The \code{plot()} method for the \code{bayestestR::si()}.
+#' The `plot()` method for the `bayestestR::si()`.
 #'
 #' @param si_alpha Transparency level of SI ribbon.
 #' @param si_color Color of SI ribbon.
 #' @param support_only Plot only the support data, or show the "raw" prior and
 #'   posterior distributions? Only applies when plotting
-#'   \code{\link[bayestestR]{si}}.
+#'   [bayestestR::si()].
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis

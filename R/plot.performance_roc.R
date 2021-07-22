@@ -1,6 +1,6 @@
 #' Plot method for ROC curves
 #'
-#' The \code{plot()} method for the \code{performance::performance_roc()}
+#' The `plot()` method for the `performance::performance_roc()`
 #' function.
 #'
 #' @inheritParams data_plot

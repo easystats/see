@@ -12,7 +12,6 @@
 #'   geom_violinhalf() +
 #'   theme_modern() +
 #'   scale_fill_material_d()
-#'
 #' @import ggplot2
 #' @export
 geom_violinhalf <- function(mapping = NULL,

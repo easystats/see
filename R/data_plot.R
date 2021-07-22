@@ -1,10 +1,10 @@
 #' @title Prepare objects for plotting or plot objects
 #' @name data_plot
 #'
-#' @description \code{data_plot()} attempts to extract and transform an object
-#'   to be further plotted, while \code{plot()} tries to visualize results of
+#' @description `data_plot()` attempts to extract and transform an object
+#'   to be further plotted, while `plot()` tries to visualize results of
 #'   functions from different packages of the
-#'   \href{https://github.com/easystats}{easystats-project}. See the
+#'   [easystats-project](https://github.com/easystats). See the
 #'   documentation for your object's class:
 #' \itemize{
 #'  \item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
@@ -42,20 +42,20 @@
 #'   statistical model or such.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' @details \code{data_plot()} is in most situation not needed when the purpose
-#' is plotting, since most \code{plot()}-functions in \pkg{see} internally call
-#' \code{data_plot()} to prepare the data for plotting.
+#' @details `data_plot()` is in most situation not needed when the purpose
+#' is plotting, since most `plot()`-functions in \pkg{see} internally call
+#' `data_plot()` to prepare the data for plotting.
 #' \cr \cr
-#' Many \code{plot()}-functions have a \code{data}-argument that is needed when
-#' the data or model for plotting can't be retrieved via \code{data_plot()}. In
-#' such cases, \code{plot()} gives an error and asks for providing data or models.
+#' Many `plot()`-functions have a `data`-argument that is needed when
+#' the data or model for plotting can't be retrieved via `data_plot()`. In
+#' such cases, `plot()` gives an error and asks for providing data or models.
 #' \cr \cr
-#' Most \code{plot()}-functions work out-of-the-box, i.e. you don't need to do
-#' much more than calling \code{plot(<object>)} (see 'Examples'). Some plot-functions
+#' Most `plot()`-functions work out-of-the-box, i.e. you don't need to do
+#' much more than calling `plot(<object>)` (see 'Examples'). Some plot-functions
 #' allow to specify arguments to modify the transparency or color of geoms, these
 #' are shown in the 'Usage' section.
 #'
-#' @seealso \href{https://easystats.github.io/see/articles/}{Package-Vignettes}
+#' @seealso [Package-Vignettes](https://easystats.github.io/see/articles/)
 #'
 #' @examples
 #' \dontrun{
@@ -101,7 +101,8 @@ data_plot <- function(x, data = NULL, ...) {
 
 #' Complete figure with its attributes
 #'
-#' The \link{data_plot} function usually stores information (such as title, axes labels etc.) as attributes. This function adds those information to the plot.
+#' The [data_plot] function usually stores information (such as title, axes
+#' labels etc.) as attributes. This function adds those information to the plot.
 #'
 #' @inheritParams data_plot
 #' @examples

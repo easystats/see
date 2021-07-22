@@ -150,7 +150,7 @@ data_plot.p_significance <- function(x,
 
 #' Plot method for practical significance
 #'
-#' The \code{plot()} method for the \code{bayestestR::p_significance()} function.
+#' The `plot()` method for the `bayestestR::p_significance()` function.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters

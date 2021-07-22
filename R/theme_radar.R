@@ -1,10 +1,11 @@
 #' Themes for radar plots
 #'
-#' \code{theme_radar()} is a light, clear theme for ggplot radar-plots, while \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
+#' `theme_radar()` is a light, clear theme for ggplot radar-plots, while
+#' `theme_radar_dark()` is a dark variant of `theme_radar()`.
 #'
 #' @inheritParams theme_modern
 #'
-#' @seealso \code{\link{coord_radar}}
+#' @seealso [coord_radar()]
 #'
 #' @examples
 #' if (require("ggplot2") && require("dplyr") && require("tidyr")) {
