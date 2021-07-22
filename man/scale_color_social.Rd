@@ -76,7 +76,9 @@ scale_fill_social_c(
 )
 }
 \arguments{
-\item{palette}{Character name of palette. Depending on the color scale, can be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"} or \code{"light"} (for dark themes).}
+\item{palette}{Character name of palette. Depending on the color scale, can
+be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
+\code{"contrast"} or \code{"light"} (for dark themes).}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
@@ -85,7 +87,7 @@ scale_fill_social_c(
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based on Social (https://www.materialui.co/socialcolors).
+The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
 Use \code{scale_color_social_d} for \emph{discrete} categories and
 \code{scale_color_social_c} for a \emph{continuous} scale.
 }

@@ -1,6 +1,6 @@
 #' Social color palette
 #'
-#' The palette based on Social (https://www.materialui.co/socialcolors).
+#' The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
 #' Use \code{scale_color_social_d} for \emph{discrete} categories and
 #' \code{scale_color_social_c} for a \emph{continuous} scale.
 #'
@@ -170,7 +170,7 @@ social_palettes <- list(
 
 #' Social color palette
 #'
-#' The palette based on Social colors (https://www.materialui.co/socialcolors).
+#' The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
 #'
 #' @inheritParams palette_flat
 #'

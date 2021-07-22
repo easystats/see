@@ -71,7 +71,9 @@ scale_fill_metro_c(
 )
 }
 \arguments{
-\item{palette}{Character name of palette. Depending on the color scale, can be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"} or \code{"light"} (for dark themes).}
+\item{palette}{Character name of palette. Depending on the color scale, can
+be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
+\code{"contrast"} or \code{"light"} (for dark themes).}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
@@ -80,7 +82,8 @@ scale_fill_metro_c(
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based on Metro (https://www.materialui.co/metrocolors).
+The palette based on Metro \href{https://www.materialui.co/metrocolors}{Metro
+colors}.
 Use \code{scale_color_metro_d} for \emph{discrete} categories and
 \code{scale_color_metro_c} for a \emph{continuous} scale.
 }

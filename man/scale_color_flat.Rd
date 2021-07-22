@@ -46,7 +46,9 @@ scale_fill_flat_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
 scale_fill_flat_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Character name of palette. Depending on the color scale, can be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"} or \code{"light"} (for dark themes).}
+\item{palette}{Character name of palette. Depending on the color scale, can
+be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
+\code{"contrast"} or \code{"light"} (for dark themes).}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
@@ -57,7 +59,7 @@ scale_fill_flat_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
 \code{TRUE} or \code{FALSE}.}
 }
 \description{
-The palette based on Flat UI (https://www.materialui.co/flatuicolors).
+The palette based on \href{https://www.materialui.co/flatuicolors}{Flat UI}.
 Use \code{scale_color_flat_d} for \emph{discrete} categories and
 \code{scale_color_flat_c} for a \emph{continuous} scale.
 }
