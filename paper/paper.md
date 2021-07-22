@@ -37,7 +37,7 @@ affiliations:
   name: University of Chicago, USA
 - index: 6
   name: Nanyang Technological University, Singapore
-date: "2021-07-11"
+date: "2021-07-22"
 bibliography: paper.bib
 ---
 
@@ -71,7 +71,7 @@ ggplot(results) +
   geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
 ```
 
-A number of packages have been developed to extend *ggplot2* and assist with model visualization.^[For a sampling of these packages, visit <https://exts.ggplot2.tidyverse.org/gallery/>] Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. The `fortify` function from *ggfortify* package [@Horikoshi2018] *does* offer a unified plotting framework for a wide range of statistical models, although it is not as comprehensive as the *see* package because the *easystats* ecosystem covers a much larger collection of statistical models.
+A number of packages have been developed to extend *ggplot2* and assist with model visualization.^[For a sampling of these packages, visit <https://exts.ggplot2.tidyverse.org/gallery/>] Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. The `fortify()` function from *ggfortify* package [@Horikoshi2018] *does* offer a unified plotting framework for a wide range of statistical models, although it is not as comprehensive as the *see* package because the *easystats* ecosystem covers a much larger collection of statistical models.
 
 The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
 
@@ -126,7 +126,7 @@ model <- lm(wt ~ am * cyl, data = mtcars)
 # changing title and axis labels using ggplot2 functions
 plot(parameters(model)) +
   labs(title = "A Dot-and-Whisker Plot") +
-  scale_x_discrete(labels = c(
+  scale_y_discrete(labels = c(
     "transmission * cylinders",
     "cylinders",
     "transmission"
@@ -201,7 +201,7 @@ plot(omega_squared(model))
 
 ## Visualizing Model Predictions and Marginal Effects
 
-The *modelbased* package computes model-based estimates and predictions from fitted models [@Makowski2020modelbased]. *see* provides methods to quickly visualize these model predictions.
+The *modelbased* package computes model-based estimates and predictions from fitted models [@Makowski2020modelbased]. *see* provides methods to quickly visualize these model predictions using `estimate_prediction()`. `estimate_means()` computes *marginal means*, i.e. the mean at each factor level averaged over other predictors.
 
 
 ```r
@@ -209,27 +209,13 @@ library(modelbased)
 library(see)
 
 model <- lm(mpg ~ wt * as.factor(cyl), data = mtcars)
-predicted <- estimate_prediction(model)
-
-plot(predicted)
-```
-
-
-\includegraphics[width=1\linewidth]{paper_files/figure-latex/modelbased1-1} 
-
-\newpage
-
-One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
-
-
-```r
 means <- estimate_means(model)
 
 plot(means)
 ```
 
 
-\includegraphics[width=1\linewidth]{paper_files/figure-latex/modelbased2-1} 
+\includegraphics[width=1\linewidth]{paper_files/figure-latex/modelbased1-1} 
 
 \newpage
 
