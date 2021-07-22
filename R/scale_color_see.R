@@ -26,10 +26,9 @@
 #'   scale_color_see_c(palette = "rainbow")
 #' @export
 scale_color_see <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-
+                            discrete = TRUE,
+                            reverse = FALSE,
+                            ...) {
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -47,26 +46,30 @@ scale_color_see <- function(palette = "contrast",
 #' @rdname scale_color_see
 #' @export
 scale_color_see_d <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-    scale_color_see(palette = palette,
-                    discrete = discrete,
-                    reverse = reverse,
-                    ...)
-  }
+                              discrete = TRUE,
+                              reverse = FALSE,
+                              ...) {
+  scale_color_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 #' @rdname scale_color_see
 #' @export
 scale_color_see_c <- function(palette = "contrast",
-           discrete = FALSE,
-           reverse = FALSE,
-           ...) {
-    scale_color_see(palette = palette,
-                    discrete = discrete,
-                    reverse = reverse,
-                    ...)
-  }
+                              discrete = FALSE,
+                              reverse = FALSE,
+                              ...) {
+  scale_color_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 #' @rdname scale_color_see
 #' @export
@@ -91,10 +94,9 @@ scale_colour_see_d <- scale_color_see_d
 #' @rdname scale_color_see
 #' @export
 scale_fill_see <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-
+                           discrete = TRUE,
+                           reverse = FALSE,
+                           ...) {
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -108,26 +110,30 @@ scale_fill_see <- function(palette = "contrast",
 #' @rdname scale_color_see
 #' @export
 scale_fill_see_d <- function(palette = "contrast",
-           discrete = TRUE,
-           reverse = FALSE,
-           ...) {
-    scale_fill_see(palette = palette,
-                   discrete = discrete,
-                   reverse = reverse,
-                   ...)
-  }
+                             discrete = TRUE,
+                             reverse = FALSE,
+                             ...) {
+  scale_fill_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 #' @rdname scale_color_see
 #' @export
 scale_fill_see_c <- function(palette = "contrast",
-           discrete = FALSE,
-           reverse = FALSE,
-           ...) {
-    scale_fill_see(palette = palette,
-                   discrete = discrete,
-                   reverse = reverse,
-                   ...)
-  }
+                             discrete = FALSE,
+                             reverse = FALSE,
+                             ...) {
+  scale_fill_see(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    ...
+  )
+}
 
 
 

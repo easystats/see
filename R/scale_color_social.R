@@ -130,7 +130,8 @@ social_colors_list <- c(
 
 #' Extract Social colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the Social color palette. Use `social_colors()` to see all available color.
+#' Can be used to get the hex code of specific colors from the Social color
+#' palette. Use `social_colors()` to see all available color.
 #'
 #' @inheritParams flat_colors
 #'

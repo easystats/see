@@ -89,4 +89,3 @@ plot.see_equivalence_test_effectsize <- function(x, ...) {
     ) +
     theme_modern()
 }
-

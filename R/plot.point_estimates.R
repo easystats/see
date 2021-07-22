@@ -164,8 +164,9 @@ plot.see_point_estimate <- function(x,
 
     p_object <- p_object +
       geom_ribbon(aes(ymin = 0, ymax = .data$y),
-                  fill = "#FFC107",
-                  alpha = posterior_alpha)
+        fill = "#FFC107",
+        alpha = posterior_alpha
+      )
 
     if (!is.null(mean_x) && !is.null(mean_y)) {
       p_object <- p_object +

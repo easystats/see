@@ -13,7 +13,8 @@ flat_colors(...)
 A character vector with color-codes.
 }
 \description{
-Can be used to get the hex code of specific colors from the Flat UI color palette. Use \code{flat_colors()} to see all available color.
+Can be used to get the hex code of specific colors from the Flat UI color
+palette. Use \code{flat_colors()} to see all available color.
 }
 \examples{
 flat_colors()

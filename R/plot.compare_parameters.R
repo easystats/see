@@ -27,14 +27,13 @@
 #' }
 #' @export
 plot.see_compare_parameters <- function(x,
-           show_intercept = FALSE,
-           size_point = .8,
-           size_text = NULL,
-           dodge_position = .8,
-           sort = NULL,
-           n_columns = NULL,
-           ...) {
-
+                                        show_intercept = FALSE,
+                                        size_point = .8,
+                                        size_text = NULL,
+                                        dodge_position = .8,
+                                        sort = NULL,
+                                        n_columns = NULL,
+                                        ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
   }

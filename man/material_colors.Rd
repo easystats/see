@@ -13,7 +13,8 @@ material_colors(...)
 A character vector with color-codes.
 }
 \description{
-Can be used to get the hex code of specific colors from the material design color palette. Use \code{material_colors()} to see all available color.
+Can be used to get the hex code of specific colors from the material design
+color palette. Use \code{material_colors()} to see all available color.
 }
 \examples{
 material_colors()

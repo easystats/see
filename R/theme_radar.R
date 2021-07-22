@@ -1,6 +1,7 @@
 #' Themes for radar plots
 #'
-#' `theme_radar()` is a light, clear theme for ggplot radar-plots, while `theme_radar_dark()` is a dark variant of `theme_radar()`.
+#' `theme_radar()` is a light, clear theme for ggplot radar-plots, while
+#' `theme_radar_dark()` is a dark variant of `theme_radar()`.
 #'
 #' @inheritParams theme_modern
 #'

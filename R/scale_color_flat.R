@@ -133,7 +133,8 @@ flat_colors_list <- c(
 
 #' Extract Flat UI colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the Flat UI color palette. Use `flat_colors()` to see all available color.
+#' Can be used to get the hex code of specific colors from the Flat UI color
+#' palette. Use `flat_colors()` to see all available color.
 #'
 #' @param ... Character names of colors.
 #'

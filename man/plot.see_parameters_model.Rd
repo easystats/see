@@ -44,7 +44,8 @@ posterior distributions for other parameters are hardly visible.}
 
 \item{sort}{\describe{
 \item{\emph{Plotting model parameters}}{
-If \code{NULL}, coefficients are plotted in the order as they appear in the summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
+If \code{NULL}, coefficients are plotted in the order as they appear in the
+summary. Use \code{sort = "ascending"} (or \code{sort = TRUE})) resp. \code{sort = "descending"} to sort coefficients in ascending or descending order.
 }
 \item{\emph{Plotting Bayes factors}}{
 Sort pie-slices by posterior probability (descending)?
@@ -55,9 +56,11 @@ Sort pie-slices by posterior probability (descending)?
 count and zero-inflated), defines the number of columns for the
 panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
-\item{type}{Indicating the type of plot. Only applies for model parameters from meta-analysis objects (e.g. \pkg{metafor}).}
+\item{type}{Indicating the type of plot. Only applies for model parameters
+from meta-analysis objects (e.g. \pkg{metafor}).}
 
-\item{weight_points}{Logical, if \code{TRUE}, for meta-analysis objects, point size will be adjusted according to the study-weights.}
+\item{weight_points}{Logical, if \code{TRUE}, for meta-analysis objects, point
+size will be adjusted according to the study-weights.}
 
 \item{...}{Arguments passed to or from other methods.}
 
