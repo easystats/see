@@ -3,8 +3,8 @@
 #' The `plot()` method for the `parameters::compare_parameters()`
 #' function.
 #'
-#' @param dodge_position Numeric, indicates the amount of "dodging" (spacing)
-#'   between geoms.
+#' @param dodge_position Numeric value specifying the amount of "dodging"
+#'   (spacing) between geoms.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_bayesfactor_models

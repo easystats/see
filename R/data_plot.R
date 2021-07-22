@@ -1,11 +1,10 @@
 #' @title Prepare objects for plotting or plot objects
 #' @name data_plot
 #'
-#' @description `data_plot()` attempts to extract and transform an object
-#'   to be further plotted, while `plot()` tries to visualize results of
-#'   functions from different packages of the
-#'   [easystats-project](https://github.com/easystats). See the
-#'   documentation for your object's class:
+#' @description `data_plot()` extracts and transforms an object for plotting,
+#'   while `plot()` visualizes results of functions from different packages in
+#'   [easystats-project](https://github.com/easystats). See the documentation
+#'   for your object's class:
 #' \itemize{
 #'  \item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
 #'  \item{\link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}}
@@ -39,7 +38,7 @@
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a
-#'   statistical model or such.
+#'   statistical model.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @details `data_plot()` is in most situation not needed when the purpose
@@ -50,10 +49,10 @@
 #' the data or model for plotting can't be retrieved via `data_plot()`. In
 #' such cases, `plot()` gives an error and asks for providing data or models.
 #' \cr \cr
-#' Most `plot()`-functions work out-of-the-box, i.e. you don't need to do
-#' much more than calling `plot(<object>)` (see 'Examples'). Some plot-functions
-#' allow to specify arguments to modify the transparency or color of geoms, these
-#' are shown in the 'Usage' section.
+#' Most `plot()`-functions work out-of-the-box, i.e. you don't need to do much
+#' more than calling `plot(<object>)` (see 'Examples'). Some plot-functions
+#' allow to specify arguments to modify the transparency or color of geoms,
+#' these are shown in the 'Usage' section.
 #'
 #' @seealso [Package-Vignettes](https://easystats.github.io/see/articles/)
 #'
@@ -101,8 +100,9 @@ data_plot <- function(x, data = NULL, ...) {
 
 #' Complete figure with its attributes
 #'
-#' The [data_plot] function usually stores information (such as title, axes
-#' labels etc.) as attributes. This function adds those information to the plot.
+#' The `data_plot()` function usually stores information (such as title, axes
+#' labels, etc.) as attributes, while `add_plot_attributes()` adds this
+#' information to the plot.
 #'
 #' @inheritParams data_plot
 #' @examples

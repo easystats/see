@@ -2,11 +2,11 @@
 #'
 #' The `plot()` method for the `bayestestR::si()`.
 #'
-#' @param si_alpha Transparency level of SI ribbon.
-#' @param si_color Color of SI ribbon.
-#' @param support_only Plot only the support data, or show the "raw" prior and
-#'   posterior distributions? Only applies when plotting
-#'   [bayestestR::si()].
+#' @param si_alpha Numeric value specifying Transparency level of SI ribbon.
+#' @param si_color Character specifying color of SI ribbon.
+#' @param support_only Logical. Decides whether to plot only the support data,
+#'   or show the "raw" prior and posterior distributions? Only applies when
+#'   plotting [bayestestR::si()].
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_cluster_analysis

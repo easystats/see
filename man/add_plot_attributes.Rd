@@ -10,8 +10,9 @@ add_plot_attributes(x)
 \item{x}{An object.}
 }
 \description{
-The \link{data_plot} function usually stores information (such as title, axes
-labels etc.) as attributes. This function adds those information to the plot.
+The \code{data_plot()} function usually stores information (such as title, axes
+labels, etc.) as attributes, while \code{add_plot_attributes()} adds this
+information to the plot.
 }
 \examples{
 \dontrun{

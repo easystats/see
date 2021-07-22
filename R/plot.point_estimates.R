@@ -78,7 +78,7 @@ data_plot.map_estimate <- data_plot.point_estimate
 #'
 #' The `plot()` method for the `bayestestR::point_estimate()`.
 #'
-#' @param show_labels Logical, if `TRUE`, the text labels for the point
+#' @param show_labels Logical. If `TRUE`, the text labels for the point
 #'   estimates (i.e. *"Mean"*, *"Median"* and/or *"MAP"*) are
 #'   shown. You may set `show_labels = FALSE` in case of overlapping
 #'   labels, and add your own legend or footnote to the plot.

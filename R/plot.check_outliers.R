@@ -3,8 +3,8 @@
 #' The `plot()` method for the `performance::check_outliers()`
 #' function.
 #'
-#' @param size_text Size of text labels.
-#' @param rescale_distance Logical, if `TRUE`, distance values are rescaled
+#' @param size_text Numeric value specifying size of text labels.
+#' @param rescale_distance Logical. If `TRUE`, distance values are rescaled
 #'   to a range from 0 to 1. This is mainly due to better catch the differences
 #'   between distance values.
 #' @inheritParams data_plot

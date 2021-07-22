@@ -66,7 +66,8 @@ data_plot.n_clusters <- data_plot.n_factors
 #'
 #' The `plot()` method for the `parameters::n_factors()` and `parameters::n_clusters()`
 #'
-#' @param size Depending on `type`, size of bars, lines or segments.
+#' @param size Depending on `type`, a numeric value specifying size of bars,
+#'   lines, or segments.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'

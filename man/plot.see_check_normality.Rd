@@ -23,18 +23,19 @@
 \item{type}{Character vector, indicating the type of plot.}
 
 \item{data}{The original data used to create this object. Can be a
-statistical model or such.}
+statistical model.}
 
-\item{size_line}{Size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms.}
 
-\item{size_point}{Size of point-geoms.}
+\item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{dot_alpha, alpha}{ALpha level of the confidence bands and point-geoms.}
+\item{dot_alpha, alpha}{Numeric value specifying alpha level of the
+confidence bands and point-geoms.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
 
-\item{detrend}{Should the plot be detrended?}
+\item{detrend}{Logical that decides if the plot should be detrended.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

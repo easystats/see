@@ -10,7 +10,7 @@
 \item{x}{An object.}
 
 \item{data}{The original data used to create this object. Can be a
-statistical model or such.}
+statistical model.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}

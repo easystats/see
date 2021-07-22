@@ -45,8 +45,8 @@ Somewhat nicer points (especially in case of transparency) without outline
 strokes (borders, contours) by default.
 }
 \note{
-The color aesthetics for \code{geom_point_borderless()} is
-\code{"fill"}, not \code{color}. See 'Examples'.
+The color aesthetics for \code{geom_point_borderless()} is \code{"fill"}, not
+\code{"color"}. See 'Examples'.
 }
 \examples{
 library(ggplot2)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom_binomdensity.R
 \name{geom_binomdensity}
 \alias{geom_binomdensity}
-\title{Add dot-densities for binary y variables}
+\title{Add dot-densities for binary \code{y} variables}
 \usage{
 geom_binomdensity(data, x, y, scale = "auto", ...)
 }
@@ -12,15 +12,15 @@ geom_binomdensity(data, x, y, scale = "auto", ...)
 \item{x, y}{Characters corresponding to the x and y axis. Note that \code{y}
 must be a variable with two unique values.}
 
-\item{scale}{Method of scaling the dot-densities. Can be 'auto'
-(corresponding to the square root of the proportion), 'proportion',
-'density' or a custom list with values for each factor level (see
-examples).}
+\item{scale}{Character specifying method of scaling the dot-densities. Can
+be: \code{'auto'} (corresponding to the square root of the proportion),
+\code{'proportion'}, \code{'density'} or a custom list with values for each factor
+level (see examples).}
 
 \item{...}{Other arguments passed to \code{ggdist::geom_dots}.}
 }
 \description{
-Add dot-densities for binary y variables
+Add dot-densities for binary \code{y} variables
 }
 \examples{
 library(ggplot2)

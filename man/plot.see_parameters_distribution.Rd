@@ -19,23 +19,24 @@
 \arguments{
 \item{x}{An object.}
 
-\item{dispersion}{Logical, if \code{TRUE}, will add range of dispersion for
-each variable to the plot.}
+\item{dispersion}{Logical. If \code{TRUE}, a range of dispersion for
+each variable to the plot will be added.}
 
-\item{dispersion_alpha}{Transparency level of dispersion ribbon.}
+\item{dispersion_alpha}{Numeric value specifying the transparency level of dispersion ribbon.}
 
-\item{dispersion_color}{Color of dispersion ribbon.}
+\item{dispersion_color}{Character specifying the color of dispersion ribbon.}
 
-\item{dispersion_style}{Character, style of dispersion area. \code{"ribbon"}
-for a ribbon, \code{"curve"} for a normal-curve.}
+\item{dispersion_style}{Character describing the style of dispersion area.
+\code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.}
 
 \item{size_bar}{Size of bar geoms.}
 
-\item{highlight}{Vector with names of categories in \code{x} that should be
+\item{highlight}{A vector with names of categories in \code{x} that should be
 highlighted.}
 
-\item{highlight_color}{Vector of color values for highlighted categories. The
-remaining (non-highlighted) categories will be filled with a lighter grey.}
+\item{highlight_color}{A vector of color values for highlighted categories.
+The remaining (non-highlighted) categories will be filled with a lighter
+grey.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

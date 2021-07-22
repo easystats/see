@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size_line}{Size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

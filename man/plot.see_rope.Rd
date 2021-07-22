@@ -18,16 +18,17 @@
 \item{x}{An object.}
 
 \item{data}{The original data used to create this object. Can be a
-statistical model or such.}
+statistical model.}
 
-\item{rope_alpha}{Transparency level of ROPE ribbon.}
+\item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
 
-\item{rope_color}{Color of ROPE ribbon.}
+\item{rope_color}{Character specifying color of ROPE ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.}
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.}
 
 \item{n_columns}{For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the

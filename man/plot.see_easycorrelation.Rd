@@ -9,11 +9,11 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size_point}{Size of point-geoms.}
+\item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{text_color}{Color of text labels.}
+\item{text_color}{Character specifying color of text labels.}
 
-\item{node_color}{Color of node- or circle-geoms.}
+\item{node_color}{Character specifying color of node- or circle-geoms.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

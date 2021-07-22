@@ -18,18 +18,20 @@
 \item{x}{An object.}
 
 \item{data}{The original data used to create this object. Can be a
-statistical model or such.}
+statistical model.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.}
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.}
 
-\item{priors}{Logical, if \code{TRUE}, prior distributions are simulated
+\item{priors}{Logical. If \code{TRUE}, prior distributions are simulated
 (using \code{\link[bayestestR:simulate_prior]{bayestestR::simulate_prior()}}) and added
 to the plot.}
 
-\item{priors_alpha}{Alpha value of the prior distributions.}
+\item{priors_alpha}{Numeric value specifying alpha for the prior
+distributions.}
 
 \item{n_columns}{For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the

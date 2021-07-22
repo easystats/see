@@ -10,11 +10,12 @@
 \item{x}{An object.}
 
 \item{data}{The original data used to create this object. Can be a
-statistical model or such.}
+statistical model.}
 
 \item{type}{Character vector, indicating the type of plot.}
 
-\item{size}{Depending on \code{type}, size of bars, lines or segments.}
+\item{size}{Depending on \code{type}, a numeric value specifying size of bars,
+lines, or segments.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

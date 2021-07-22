@@ -2,13 +2,14 @@
 #'
 #' The `plot()` method for the `bayestestR::bayesfactor_parameters()` function.
 #'
-#' @param size_point Size of point-geoms.
-#' @param rope_alpha Transparency level of ROPE ribbon.
-#' @param rope_color Color of ROPE ribbon.
+#' @param size_point Numeric specifying size of point-geoms.
+#' @param rope_alpha Numeric specifying transparency level of ROPE ribbon.
+#' @param rope_color Character specifying color of ROPE ribbon.
 #' @param show_intercept Logical, if `TRUE`, the intercept-parameter is included
-#'   in the plot. By default, it is hidden because in many cases the intercept-parameter
-#'   has a posterior distribution on a very different location, so density curves of
-#'   posterior distributions for other parameters are hardly visible.
+#'   in the plot. By default, it is hidden because in many cases the
+#'   intercept-parameter has a posterior distribution on a very different
+#'   location, so density curves of posterior distributions for other parameters
+#'   are hardly visible.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_models
 #'
@@ -16,10 +17,17 @@
 #'
 #' @importFrom rlang .data
 #' @export
-plot.see_bayesfactor_parameters <- function(x, size_point = 2, rope_color = "#0171D3", rope_alpha = .2, show_intercept = FALSE, ...) {
+plot.see_bayesfactor_parameters <- function(x,
+           size_point = 2,
+           rope_color = "#0171D3",
+           rope_alpha = .2,
+           show_intercept = FALSE,
+           ...) {
+
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
     x$BF <- exp(x$log_BF)
   }
+
   plot_data <- attr(x, "plot_data")$plot_data
   d_points <- attr(x, "plot_data")$d_points
   hypothesis <- attr(x, "hypothesis")
@@ -80,7 +88,13 @@ plot.see_bayesfactor_parameters <- function(x, size_point = 2, rope_color = "#01
       )
   } else {
     p <- p +
-      geom_point(data = d_points, size = size_point, pch = 21, colour = null_point_outline, stroke = 1)
+      geom_point(
+        data = d_points,
+        size = size_point,
+        pch = 21,
+        colour = null_point_outline,
+        stroke = 1
+      )
   }
 
   p

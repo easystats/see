@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size_point}{Size of point-geoms.}
+\item{size_point}{Numeric specifying size of point-geoms.}
 
 \item{panel}{Logical, if \code{TRUE}, plots are arranged as panels; else,
 single plots are returned.}
