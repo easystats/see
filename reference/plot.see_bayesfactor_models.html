@@ -191,23 +191,27 @@ These plots visualize the <strong>posterior probabilities</strong> of the compar
     </tr>
     <tr>
       <th>sort</th>
-      <td><dl>
-<dt><em>Plotting model parameters</em></dt><dd><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the
-summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></dd>
-<dt><em>Plotting Bayes factors</em></dt><dd><p>Sort pie-slices by posterior probability (descending)?</p></dd>
-
-</dl></td>
+      <td><p>The behavior of this argument depends on the plotting contexts.</p><ul>
+<li><p><em>Plotting model parameters</em>:
+If <code>NULL</code>, coefficients are plotted in the order as they appear in the
+summary. Setting <code>sort = "ascending"</code> or <code>sort = "descending"</code> sorts
+coefficients in ascending or descending order, respectively.
+Setting <code>sort = TRUE</code> is the same as <code>sort = "ascending"</code>.</p></li>
+<li><p><em>Plotting Bayes factors</em>:
+Sort pie-slices by posterior probability (descending)?</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>log</th>
-      <td><p>Show log-transformed Bayes factors.</p></td>
+      <td><p>Logical that decides whether to display log-transformed Bayes
+factors.</p></td>
     </tr>
     <tr>
       <th>prior_odds</th>
-      <td><p>optional vector of prior odds for the models. See
+      <td><p>An optional vector of prior odds for the models. See
 <code>BayesFactor::priorOdds</code>. As the size of the pizza slices corresponds to
 posterior probability (which is a function of prior probability and the
-BF), custom <code>prior_odds</code> will change the slices' size.</p></td>
+Bayes Factor), custom <code>prior_odds</code> will change the slices' size.</p></td>
     </tr>
     <tr>
       <th>...</th>

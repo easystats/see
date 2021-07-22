@@ -185,31 +185,35 @@ function.</p>
     <tr>
       <th>show_intercept</th>
       <td><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.</p></td>
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.</p></td>
     </tr>
     <tr>
       <th>size_point</th>
-      <td><p>Size of point-geoms.</p></td>
+      <td><p>Numeric specifying size of point-geoms.</p></td>
     </tr>
     <tr>
       <th>size_text</th>
-      <td><p>Size of text labels.</p></td>
+      <td><p>Numeric value specifying size of text labels.</p></td>
     </tr>
     <tr>
       <th>dodge_position</th>
-      <td><p>Numeric, indicates the amount of "dodging" (spacing)
-between geoms.</p></td>
+      <td><p>Numeric value specifying the amount of "dodging"
+(spacing) between geoms.</p></td>
     </tr>
     <tr>
       <th>sort</th>
-      <td><dl>
-<dt><em>Plotting model parameters</em></dt><dd><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the
-summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></dd>
-<dt><em>Plotting Bayes factors</em></dt><dd><p>Sort pie-slices by posterior probability (descending)?</p></dd>
-
-</dl></td>
+      <td><p>The behavior of this argument depends on the plotting contexts.</p><ul>
+<li><p><em>Plotting model parameters</em>:
+If <code>NULL</code>, coefficients are plotted in the order as they appear in the
+summary. Setting <code>sort = "ascending"</code> or <code>sort = "descending"</code> sorts
+coefficients in ascending or descending order, respectively.
+Setting <code>sort = TRUE</code> is the same as <code>sort = "ascending"</code>.</p></li>
+<li><p><em>Plotting Bayes factors</em>:
+Sort pie-slices by posterior probability (descending)?</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>n_columns</th>

@@ -185,15 +185,15 @@
     <tr>
       <th>data</th>
       <td><p>The original data used to create this object. Can be a
-statistical model or such.</p></td>
+statistical model.</p></td>
     </tr>
     <tr>
       <th>size_point</th>
-      <td><p>Size of point-geoms.</p></td>
+      <td><p>Numeric specifying size of point-geoms.</p></td>
     </tr>
     <tr>
       <th>size_text</th>
-      <td><p>Size of text labels.</p></td>
+      <td><p>Numeric value specifying size of text labels.</p></td>
     </tr>
     <tr>
       <th>panel</th>
@@ -202,7 +202,7 @@ single plots are returned.</p></td>
     </tr>
     <tr>
       <th>show_labels</th>
-      <td><p>Logical, if <code>TRUE</code>, the text labels for the point
+      <td><p>Logical. If <code>TRUE</code>, the text labels for the point
 estimates (i.e. <em>"Mean"</em>, <em>"Median"</em> and/or <em>"MAP"</em>) are
 shown. You may set <code>show_labels = FALSE</code> in case of overlapping
 labels, and add your own legend or footnote to the plot.</p></td>
@@ -210,19 +210,21 @@ labels, and add your own legend or footnote to the plot.</p></td>
     <tr>
       <th>show_intercept</th>
       <td><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.</p></td>
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.</p></td>
     </tr>
     <tr>
       <th>priors</th>
-      <td><p>Logical, if <code>TRUE</code>, prior distributions are simulated
+      <td><p>Logical. If <code>TRUE</code>, prior distributions are simulated
 (using <code><a href='https://easystats.github.io/bayestestR/reference/simulate_prior.html'>bayestestR::simulate_prior()</a></code>) and added
 to the plot.</p></td>
     </tr>
     <tr>
       <th>priors_alpha</th>
-      <td><p>Alpha value of the prior distributions.</p></td>
+      <td><p>Numeric value specifying alpha for the prior
+distributions.</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -197,26 +197,30 @@
     <tr>
       <th>show_intercept</th>
       <td><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.</p></td>
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.</p></td>
     </tr>
     <tr>
       <th>size_point</th>
-      <td><p>Size of point-geoms.</p></td>
+      <td><p>Numeric specifying size of point-geoms.</p></td>
     </tr>
     <tr>
       <th>size_text</th>
-      <td><p>Size of text labels.</p></td>
+      <td><p>Numeric value specifying size of text labels.</p></td>
     </tr>
     <tr>
       <th>sort</th>
-      <td><dl>
-<dt><em>Plotting model parameters</em></dt><dd><p>If <code>NULL</code>, coefficients are plotted in the order as they appear in the
-summary. Use <code>sort = "ascending"</code> (or <code>sort = TRUE</code>)) resp. <code>sort = "descending"</code> to sort coefficients in ascending or descending order.</p></dd>
-<dt><em>Plotting Bayes factors</em></dt><dd><p>Sort pie-slices by posterior probability (descending)?</p></dd>
-
-</dl></td>
+      <td><p>The behavior of this argument depends on the plotting contexts.</p><ul>
+<li><p><em>Plotting model parameters</em>:
+If <code>NULL</code>, coefficients are plotted in the order as they appear in the
+summary. Setting <code>sort = "ascending"</code> or <code>sort = "descending"</code> sorts
+coefficients in ascending or descending order, respectively.
+Setting <code>sort = TRUE</code> is the same as <code>sort = "ascending"</code>.</p></li>
+<li><p><em>Plotting Bayes factors</em>:
+Sort pie-slices by posterior probability (descending)?</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>n_columns</th>
@@ -226,12 +230,12 @@ panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></td>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>Indicating the type of plot. Only applies for model parameters
-from meta-analysis objects (e.g. <span class="pkg">metafor</span>).</p></td>
+      <td><p>Character indicating the type of plot. Only applies for model
+parameters from meta-analysis objects (e.g. <span class="pkg">metafor</span>).</p></td>
     </tr>
     <tr>
       <th>weight_points</th>
-      <td><p>Logical, if <code>TRUE</code>, for meta-analysis objects, point
+      <td><p>Logical. If <code>TRUE</code>, for meta-analysis objects, point
 size will be adjusted according to the study-weights.</p></td>
     </tr>
     <tr>
@@ -241,11 +245,12 @@ size will be adjusted according to the study-weights.</p></td>
     <tr>
       <th>data</th>
       <td><p>The original data used to create this object. Can be a
-statistical model or such.</p></td>
+statistical model.</p></td>
     </tr>
     <tr>
       <th>component</th>
-      <td><p>Indicate which component of the model should be plotted.</p></td>
+      <td><p>Character indicating which component of the model should be
+plotted.</p></td>
     </tr>
     <tr>
       <th>threshold_coefficient</th>

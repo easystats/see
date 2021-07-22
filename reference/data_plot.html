@@ -47,11 +47,10 @@
 
 
 <meta property="og:title" content="Prepare objects for plotting or plot objects — data_plot" />
-<meta property="og:description" content="data_plot() attempts to extract and transform an object
-to be further plotted, while plot() tries to visualize results of
-functions from different packages of the
-easystats-project. See the
-documentation for your object's class:
+<meta property="og:description" content="data_plot() extracts and transforms an object for plotting,
+while plot() visualizes results of functions from different packages in
+easystats-project. See the documentation
+for your object's class:
 bayestestR::bayesfactor_models()
 bayestestR::bayesfactor_parameters()
 bayestestR::equivalence_test()
@@ -192,11 +191,10 @@ performance::pp_check()
     </div>
 
     <div class="ref-description">
-    <p><code>data_plot()</code> attempts to extract and transform an object
-to be further plotted, while <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> tries to visualize results of
-functions from different packages of the
-<a href='https://github.com/easystats'>easystats-project</a>. See the
-documentation for your object's class:</p><ul>
+    <p><code>data_plot()</code> extracts and transforms an object for plotting,
+while <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> visualizes results of functions from different packages in
+<a href='https://github.com/easystats'>easystats-project</a>. See the documentation
+for your object's class:</p><ul>
 <li><p><a href='plot.see_bayesfactor_models.html'>bayestestR::bayesfactor_models()</a></p></li>
 <li><p><a href='plot.see_bayesfactor_parameters.html'>bayestestR::bayesfactor_parameters()</a></p></li>
 <li><p><a href='plot.see_equivalence_test_effectsize.html'>bayestestR::equivalence_test()</a></p></li>
@@ -241,7 +239,7 @@ documentation for your object's class:</p><ul>
     <tr>
       <th>data</th>
       <td><p>The original data used to create this object. Can be a
-statistical model or such.</p></td>
+statistical model.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -259,10 +257,10 @@ Many <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></co
 the data or model for plotting can't be retrieved via <code>data_plot()</code>. In
 such cases, <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code> gives an error and asks for providing data or models.
 <br /> <br />
-Most <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code>-functions work out-of-the-box, i.e. you don't need to do
-much more than calling <code>plot(&lt;object&gt;)</code> (see 'Examples'). Some plot-functions
-allow to specify arguments to modify the transparency or color of geoms, these
-are shown in the 'Usage' section.</p>
+Most <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code>-functions work out-of-the-box, i.e. you don't need to do much
+more than calling <code>plot(&lt;object&gt;)</code> (see 'Examples'). Some plot-functions
+allow to specify arguments to modify the transparency or color of geoms,
+these are shown in the 'Usage' section.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://easystats.github.io/see/articles/'>Package-Vignettes</a></p></div>

@@ -188,19 +188,20 @@ function.</p>
     <tr>
       <th>data</th>
       <td><p>The original data used to create this object. Can be a
-statistical model or such.</p></td>
+statistical model.</p></td>
     </tr>
     <tr>
       <th>stack</th>
-      <td><p>Logical, if <code>TRUE</code>, densities are plotted as stacked lines.
+      <td><p>Logical. If <code>TRUE</code>, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.</p></td>
     </tr>
     <tr>
       <th>show_intercept</th>
       <td><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
-in the plot. By default, it is hidden because in many cases the intercept-parameter
-has a posterior distribution on a very different location, so density curves of
-posterior distributions for other parameters are hardly visible.</p></td>
+in the plot. By default, it is hidden because in many cases the
+intercept-parameter has a posterior distribution on a very different
+location, so density curves of posterior distributions for other parameters
+are hardly visible.</p></td>
     </tr>
     <tr>
       <th>n_columns</th>
@@ -210,7 +211,7 @@ panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></td>
     </tr>
     <tr>
       <th>normalize_height</th>
-      <td><p>Logical, if <code>TRUE</code>, height of density-areas is
+      <td><p>Logical. If <code>TRUE</code>, height of density-areas is
 "normalized", to avoid overlap. In certain cases when the range of a
 distribution of simulated draws is narrow for some parameters, this may
 result in very flat density-areas. In such cases, set
@@ -218,21 +219,22 @@ result in very flat density-areas. In such cases, set
     </tr>
     <tr>
       <th>size_line</th>
-      <td><p>Size of line geoms.</p></td>
+      <td><p>Numeric value specifying size of line geoms.</p></td>
     </tr>
     <tr>
       <th>posteriors_alpha</th>
-      <td><p>Alpha value of the posterior distributions.</p></td>
+      <td><p>Numeric value specifying alpha for the posterior
+distributions.</p></td>
     </tr>
     <tr>
       <th>centrality</th>
-      <td><p>The point-estimate (centrality index) to compute. May be
-<code>"median"</code>, <code>"mean"</code> or <code>"MAP"</code>.</p></td>
+      <td><p>Character specifying the point-estimate (centrality index)
+to compute. Can be <code>"median"</code>, <code>"mean"</code> or <code>"MAP"</code>.</p></td>
     </tr>
     <tr>
       <th>ci</th>
-      <td><p>Value of probability of the CI (between 0 and 1) to be estimated.
-Default to .95.</p></td>
+      <td><p>Numeric value of probability of the CI (between 0 and 1) to be
+estimated. Default to <code>.95</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
