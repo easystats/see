@@ -95,15 +95,13 @@ results supported by *easystats*.
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
 ![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
 
-The *see* package is available on CRAN, while its development version is
-available on GitHub. In order to download the package from GitHub, you
-will need to have installed the *remotes* package first
-(`install.packages("remotes")`).
+The *see* package is available on CRAN, while its latest development
+version is available on R-universe (from *rOpenSci*).
 
-| Type        | Source | Command                                    |
-|-------------|--------|--------------------------------------------|
-| Release     | CRAN   | `install.packages("see")`                  |
-| Development | GitHub | `remotes::install_github("easystats/see")` |
+| Type        | Source   | Command                                                               |
+|-------------|----------|-----------------------------------------------------------------------|
+| Release     | CRAN     | `install.packages("see")`                                             |
+| Development | rOpenSci | `install.packages("see", repos = "https://easystats.r-universe.dev")` |
 
 Once you have downloaded the package, you can then load it using:
 
