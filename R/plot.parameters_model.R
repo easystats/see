@@ -232,12 +232,12 @@ plot.see_parameters_model <- function(x,
     p <- p + scale_y_discrete(labels = pretty_names)
   }
 
+  # find min/max range based on CI
+  min_ci <- min(x$CI_low, na.rm = TRUE)
+  max_ci <- max(x$CI_high, na.rm = TRUE)
+
   # add coefficients and CIs?
   if (add_values) {
-    # find min/max range based on CI
-    min_ci <- min(x$CI_low, na.rm = TRUE)
-    max_ci <- max(x$CI_high, na.rm = TRUE)
-
     # add some space to the right panel for text
     space_factor <- sqrt(ceiling(diff(c(min_ci, max_ci))) / 5)
     new_range <- pretty(c(min_ci, max_ci + space_factor))
@@ -261,12 +261,12 @@ plot.see_parameters_model <- function(x,
 
   if (exponentiated_coefs) {
     range <- 2^c(-24:16)
-    x_low <- which.min(min(x$CI_low) > range) - 1
-    x_high <- which.max(max(x$CI_high) < range)
+    x_low <- which.min(min_ci > range) - 1
+    x_high <- which.max(max_ci < range)
 
     if (add_values) {
       # add some space to the right panel for text
-      new_range <- pretty(2 * max(x$CI_high))
+      new_range <- pretty(2 * max_ci)
       x_high <- which.max(max(new_range) < range)
     }
 
