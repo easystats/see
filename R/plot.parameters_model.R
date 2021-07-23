@@ -190,7 +190,9 @@ plot.see_parameters_model <- function(x,
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   }
 
+
   if (is_meta || is_meta_bma) {
+
     # plot setup for metafor-objects
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
@@ -198,7 +200,9 @@ plot.see_parameters_model <- function(x,
       theme_modern(legend.position = "none") +
       scale_color_material() +
       guides(color = "none", size = "none", shape = "none")
+
   } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
+
     # plot setup for model parameters with multiple CIs
     x <- bayestestR::reshape_ci(x)
     x$CI <- as.character(x$CI)
@@ -211,7 +215,9 @@ plot.see_parameters_model <- function(x,
       ) +
       theme_modern() +
       scale_color_material()
+
   } else {
+
     # plot setup for regular model parameters
     x$group <- as.factor(x$Coefficient < y_intercept)
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
@@ -228,16 +234,23 @@ plot.see_parameters_model <- function(x,
 
   # add coefficients and CIs?
   if (add_values) {
-    # add some space to the right panel for text
-    space_factor <- sqrt(ceiling(diff(c(min(x$CI_low), max(x$CI_high)))) / 5)
-    new_range <- pretty(c(min(x$CI_low), max(x$CI_high) + space_factor))
+    # find min/max range based on CI
+    min_ci <- min(x$CI_low, na.rm = TRUE)
+    max_ci <- max(x$CI_high, na.rm = TRUE)
 
-    p <- p +
-      geom_text(
-        mapping = aes(label = .data$Estimate_CI, y = Inf),
-        colour = "black", hjust = "inward", size = size_text
-      ) +
-      xlim(c(min(new_range), max(new_range)))
+    # add some space to the right panel for text
+    space_factor <- sqrt(ceiling(diff(c(min_ci, max_ci))) / 5)
+    new_range <- pretty(c(min_ci, max_ci + space_factor))
+
+    # expand scale range and add numbers to the right border
+    if (!any(is.infinite(new_range)) && !any(is.na(new_range))) {
+      p <- p +
+        geom_text(
+          mapping = aes(label = .data$Estimate_CI, x = Inf),
+          colour = "black", hjust = "inward", size = size_text
+        ) +
+        xlim(c(min(new_range), max(new_range)))
+    }
   }
 
   # check for exponentiated estimates. in such cases, we transform the y-axis
@@ -245,15 +258,18 @@ plot.see_parameters_model <- function(x,
   # do this, we create a pretty range of values, and then look for lowest and
   # largest data points that are within this range. Thereby we have the pretty
   # values we can use as breaks and labels for the scale...
+
   if (exponentiated_coefs) {
     range <- 2^c(-24:16)
     x_low <- which.min(min(x$CI_low) > range) - 1
     x_high <- which.max(max(x$CI_high) < range)
+
     if (add_values) {
       # add some space to the right panel for text
       new_range <- pretty(2 * max(x$CI_high))
       x_high <- which.max(max(new_range) < range)
     }
+
     p <- p + scale_x_continuous(
       trans = "log",
       breaks = range[x_low:x_high],
