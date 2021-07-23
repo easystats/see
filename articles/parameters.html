@@ -233,10 +233,12 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">model1</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <p>It is also possible to plot only the count-model component. This is done in <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters()</a></code> via the <code>component</code> argument. In easystats-functions, the count-component has the more generic name <code>"conditional"</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">model1</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, component <span class="op">=</span> <span class="st">"conditional"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 <p>As compared to the classical <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>-output, <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters()</a></code>, and hence the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method, tries to create human readable, prettier parameters names.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">model2</span><span class="op">)</span>
@@ -454,7 +456,8 @@
 <span class="co"># priors &lt;- c(prior(normal(0,1), class = Intercept),</span>
 <span class="co">#             prior(cauchy(0,0.5), class = sd))</span>
 <span class="co">#</span>
-<span class="co"># brm(TE|se(seTE) ~ 1 + (1|Author),</span>
+<span class="co"># model &lt;- </span>
+<span class="co">#    brm(TE|se(seTE) ~ 1 + (1|Author),</span>
 <span class="co">#    data = Meta_Analysis_Data,</span>
 <span class="co">#    prior = priors,</span>
 <span class="co">#    iter = 4000)</span>
