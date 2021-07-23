@@ -204,7 +204,7 @@ plot.see_parameters_model <- function(x,
   } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
 
     # plot setup for model parameters with multiple CIs
-    x <- bayestestR::reshape_ci(x)
+    x <- datawizard::reshape_ci(x)
     x$CI <- as.character(x$CI)
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$CI)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
