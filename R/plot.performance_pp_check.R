@@ -68,7 +68,7 @@ print.see_performance_pp_check <- function(x,
 
   if (isTRUE(check_range)) {
     p2 <- .plot_pp_check_range(orig_x, size_bar)
-    plots(p1, p2)
+    graphics::plot(plots(p1, p2, n_columns = 1))
   } else {
     suppressWarnings(graphics::plot(p1))
   }
