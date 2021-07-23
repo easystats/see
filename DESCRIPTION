@@ -54,6 +54,7 @@ Depends:
     stats
 Imports:
     bayestestR,
+    datawizard,
     effectsize,
     ggplot2 (>= 3.3.5),
     ggridges,
