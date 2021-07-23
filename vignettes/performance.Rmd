@@ -69,7 +69,7 @@ result
 plot(result)
 ```
 
-```{r, eval=FALSE}
+```{r}
 library(glmmTMB)
 data(Salamanders)
 
@@ -96,8 +96,6 @@ plot(result)
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_outliers.html))_
 
-### Bars indicating influential observations
-
 ```{r}
 # select only mpg and disp (continuous)
 mt1 <- mtcars[, c(1, 3, 4)]
@@ -108,13 +106,20 @@ model <- lm(disp ~ mpg + hp, data = mt2)
 result <- check_outliers(model)
 
 result
-plot(result, type = "bars")
 ```
 
-### Dot-plot with contour lines
+There are two visualization options
+
+### dot-plot with contour lines
 
 ```{r}
 plot(result, type = "dots")
+```
+
+### bars indicating influential observations 
+
+```{r}
+plot(result, type = "bars")
 ```
 
 ## Check for Normal Distributed Residuals
