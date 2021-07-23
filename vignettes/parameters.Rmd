@@ -110,7 +110,7 @@ plot(result, size_text = 4)
 
 This also works for exponentiated coefficients.
 
-```{r, eval=FALSE}
+```{r}
 result <- model_parameters(model1, exponentiate = TRUE)
 plot(result, size_text = 4)
 ```
@@ -119,7 +119,7 @@ It is also possible to plot only the count-model component. This is done in
 `model_parameters()` via the `component` argument. In easystats-functions, the
 count-component has the more generic name `"conditional"`.
 
-```{r, eval=FALSE}
+```{r}
 result <- model_parameters(model1, exponentiate = TRUE, component = "conditional")
 plot(result)
 ```
@@ -317,7 +317,8 @@ plot(result)
 # priors <- c(prior(normal(0,1), class = Intercept),
 #             prior(cauchy(0,0.5), class = sd))
 #
-# brm(TE|se(seTE) ~ 1 + (1|Author),
+# model <- 
+#    brm(TE|se(seTE) ~ 1 + (1|Author),
 #    data = Meta_Analysis_Data,
 #    prior = priors,
 #    iter = 4000)
