@@ -1,7 +1,7 @@
 Type: Package
 Package: see
-Title: Visualisation Toolbox for 'easystats' and Extra Geoms,
-    Themes and Color Palettes for 'ggplot2'
+Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and
+    Color Palettes for 'ggplot2'
 Version: 0.6.5
 Authors@R: 
     c(person(given = "Daniel",
@@ -28,7 +28,7 @@ Authors@R:
              family = "Wiernik",
              role = c("aut", "ctb"),
              email = "brenton@wiernik.org",
-             comment = c(ORCID = "0000-0001-9560-6336")),       
+             comment = c(ORCID = "0000-0001-9560-6336")),
       person(given = "Philip",
              family = "Waggoner",
              role = c("aut", "ctb"),
@@ -38,12 +38,22 @@ Authors@R:
              family = "Stevens",
              role = "ctb",
              email = "jeffrey.r.stevens@gmail.com",
-             comment = c(ORCID = "0000-0003-2375-1360")))
+             comment = c(ORCID = "0000-0003-2375-1360")),
+      person(given = "Matthew",
+             family = "Smith",
+             role = "rev",
+             email = "M.Smith3@napier.ac.uk",
+             comment = c(Twitter = "@SmithMatt90")),
+      person(given = "Jakob",
+             family = "Bossek",
+             role = "rev",
+             email = "bossek@wi.uni-muenster.de",
+             comment = c(Twitter = "@BossekJakob")))
 Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
-Description: Provides plotting utilities supporting
-    easystats-packages (<https://github.com/easystats/easystats>) and some
-    extra themes, geoms, and scales for 'ggplot2'. Color scales are based
-    on <https://www.materialui.co/colors>.
+Description: Provides plotting utilities supporting easystats-packages
+    (<https://github.com/easystats/easystats>) and some extra themes,
+    geoms, and scales for 'ggplot2'. Color scales are based on
+    <https://www.materialui.co/colors>.
 License: GPL-3
 URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues
@@ -89,14 +99,14 @@ Suggests:
     randomForest,
     rmarkdown,
     rstanarm,
+    spelling,
     splines,
+    testthat (>= 3.0.0),
     tidygraph,
     tidyr,
-    spelling,
-    testthat (>= 3.0.0),
     vdiffr (>= 1.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
-Config/testthat/edition: 3
