@@ -10,11 +10,12 @@
   x,
   show_intercept = FALSE,
   size_point = 0.8,
-  size_text = NULL,
+  size_text = NA,
   sort = NULL,
   n_columns = NULL,
   type = c("forest", "funnel"),
   weight_points = TRUE,
+  show_labels = FALSE,
   ...
 )
 
@@ -63,6 +64,8 @@ parameters from meta-analysis objects (e.g. \pkg{metafor}).}
 
 \item{weight_points}{Logical. If \code{TRUE}, for meta-analysis objects, point
 size will be adjusted according to the study-weights.}
+
+\item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
 
 \item{...}{Arguments passed to or from other methods.}
 

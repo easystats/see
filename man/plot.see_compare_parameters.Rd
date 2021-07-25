@@ -8,10 +8,11 @@
   x,
   show_intercept = FALSE,
   size_point = 0.8,
-  size_text = NULL,
+  size_text = NA,
   dodge_position = 0.8,
   sort = NULL,
   n_columns = NULL,
+  show_labels = FALSE,
   ...
 )
 }
@@ -45,6 +46,8 @@ Sort pie-slices by posterior probability (descending)?
 \item{n_columns}{For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the
 panel-layout. If \code{NULL}, a single, integrated plot is shown.}
+
+\item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

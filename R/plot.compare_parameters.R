@@ -33,7 +33,7 @@ plot.see_compare_parameters <- function(x,
                                         dodge_position = .8,
                                         sort = NULL,
                                         n_columns = NULL,
-                                        show_labels = FALSE
+                                        show_labels = FALSE,
                                         ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)

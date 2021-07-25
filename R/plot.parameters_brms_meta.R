@@ -131,7 +131,7 @@ plot.see_parameters_brms_meta <- function(x,
                                           rope_alpha = 0.15,
                                           rope_color = "cadetblue",
                                           normalize_height = TRUE,
-                                          show_labels = TRUE
+                                          show_labels = TRUE,
                                           ...) {
 
   # save model for later use
