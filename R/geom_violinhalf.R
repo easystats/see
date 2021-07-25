@@ -48,6 +48,7 @@ geom_violinhalf <- function(mapping = NULL,
 #' @format NULL
 #' @usage NULL
 #' @import ggplot2
+#' @importFrom rlang `%||%`
 #' @keywords internal
 GeomViolinHalf <- ggproto("GeomViolinHalf", Geom,
   setup_data = function(data, params) {
@@ -92,11 +93,6 @@ GeomViolinHalf <- ggproto("GeomViolinHalf", Geom,
   ),
   required_aes = c("x", "y")
 )
-
-
-#' @keywords internal
-"%||%" <- function(a, b) if (!is.null(a)) a else b
-
 
 #' @keywords internal
 .grobName <- function(prefix, grob) {

@@ -98,7 +98,7 @@ plot.see_easycormatrix <- function(x,
   }
 
   # accept deprecated `show_values` argument
-  if (!is.null(list(...)$show_values)) show_labels <- show_values
+  if (!is.null(list(...)$show_values)) show_labels <- list(...)$show_values
 
   type <- match.arg(type)
 
