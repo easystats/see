@@ -65,7 +65,7 @@ data_plot.see_easycormatrix <- function(x,
 #'
 #' The `plot()` method for the `correlation::correlation()` function.
 #'
-#' @param show_values Logical. If `TRUE`, values are displayed.
+#' @param show_labels Logical. If `TRUE`, correlation values are displayed.
 #' @param show_p Logical. If `TRUE`, *p*-values or significant level is
 #'   displayed.
 #' @param show_legend Logical, show (`TRUE`) or hide (`FALSE`) legend.
@@ -85,7 +85,7 @@ data_plot.see_easycormatrix <- function(x,
 #' plot(s)
 #' @export
 plot.see_easycormatrix <- function(x,
-                                   show_values = FALSE,
+                                   show_labels = FALSE,
                                    show_p = FALSE,
                                    show_legend = TRUE,
                                    size_point = 1,
@@ -97,14 +97,21 @@ plot.see_easycormatrix <- function(x,
     x <- data_plot(x, digits = digits, size = size_point)
   }
 
+  # accept deprecated `show_values` argument
+  if (!is.null(list(...)$show_values)) show_labels <- show_values
+
   type <- match.arg(type)
 
   if (show_p) {
     non_empty <- x$labels != ""
-    x$labels[non_empty] <- paste0(
-      x$labels[non_empty],
-      insight::format_p(x$p, stars_only = TRUE)[non_empty]
-    )
+    if (show_labels) {
+      x$labels[non_empty] <- paste0(
+        x$labels[non_empty],
+        insight::format_p(x$p, stars_only = TRUE)[non_empty]
+      )
+    } else {
+      x$labels[non_empty] <- insight::format_p(x$p)[non_empty]
+    }
   }
 
   if (type == "tile") {
@@ -131,7 +138,7 @@ plot.see_easycormatrix <- function(x,
     theme(axis.line = element_blank()) +
     add_plot_attributes(x)
 
-  if (show_values) {
+  if (show_labels || show_p) {
     p <- p + geom_text(aes(label = .data$labels), size = size_text, color = "black")
   }
 
