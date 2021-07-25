@@ -3,17 +3,14 @@
                                     na.rm = TRUE,
                                     ref.color = "darkgray",
                                     ref.linetype = "dashed",
+                                    show_labels = TRUE,
                                     size_line = NULL,
                                     size_text = NULL,
                                     theme_style = theme_lucid,
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
                                     dot_alpha_level = .8) {
-  if (is.null(size_line)) {
-    size_line <- .7
-  }
-  if (is.null(size_text)) {
-    size_text <- 3
-  }
+  size_line <- size_line %||% .7
+  size_text <- size_text %||% 3
 
   plot_data <- x
   cook.levels <- attributes(x)$cook_levels
@@ -43,21 +40,23 @@
       color = colors[1]
     ) +
     scale_colour_manual(values = c("OK" = colors[2], "Influential" = colors[3])) +
-    (if (requireNamespace("ggrepel", quietly = TRUE)) {
-      ggrepel::geom_text_repel(
-        data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
-        aes(label = .data$Index, colour = .data$Influential),
-        size = size_text
-      )
-    } else {
-      geom_text(
-        data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
-        aes(label = .data$Index, colour = .data$Influential),
-        size = size_text, position = position_nudge(
-          x = diff(range(plot_data$Hat)) / 40,
-          y = diff(range(plot_data$Std_Residuals)) / 20
+    (if (isTRUE(show_labels)) {
+      if (requireNamespace("ggrepel", quietly = TRUE)) {
+        ggrepel::geom_text_repel(
+          data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
+          aes(label = .data$Index, colour = .data$Influential),
+          size = size_text
         )
-      )
+      } else {
+        geom_text(
+          data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
+          aes(label = .data$Index, colour = .data$Influential),
+          size = size_text, position = position_nudge(
+            x = diff(range(plot_data$Hat)) / 40,
+            y = diff(range(plot_data$Std_Residuals)) / 20
+          )
+        )
+      }
     }) +
     labs(
       x = expression("Leverage (" * h[ii] * ")"),

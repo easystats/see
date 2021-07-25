@@ -27,11 +27,12 @@
 plot.see_parameters_model <- function(x,
                                       show_intercept = FALSE,
                                       size_point = .8,
-                                      size_text = NULL,
+                                      size_text = NA,
                                       sort = NULL,
                                       n_columns = NULL,
                                       type = c("forest", "funnel"),
                                       weight_points = TRUE,
+                                      show_labels = FALSE,
                                       ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
@@ -48,7 +49,7 @@ plot.see_parameters_model <- function(x,
   zi_coefficient_name <- attributes(x)$zi_coefficient_name
 
   # add coefficients and CIs?
-  add_values <- !is.null(size_text) && !is.na(size_text)
+  add_values <- isTRUE(show_labels)
 
   # ordinal model? needed for free facet scales later...
   ordinal_model <- isTRUE(attributes(x)$ordinal_model)

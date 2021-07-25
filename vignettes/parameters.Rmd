@@ -101,18 +101,18 @@ result <- model_parameters(model1)
 plot(result)
 ```
 
-When `size_text` is given, coefficients and confidence intervals are added to
-the plot.
+When `show_labels` is `TRUE`, coefficients and confidence intervals are added to
+the plot. Adjust the text size with `size_text`.
 
 ```{r}
-plot(result, size_text = 4)
+plot(result, show_labels = TRUE, size_text = 4)
 ```
 
 This also works for exponentiated coefficients.
 
 ```{r}
 result <- model_parameters(model1, exponentiate = TRUE)
-plot(result, size_text = 4)
+plot(result, show_labels = TRUE, size_text = 4)
 ```
 
 It is also possible to plot only the count-model component. This is done in
@@ -268,11 +268,11 @@ result
 plot(result)
 ```
 
-If `size_text` is not `NULL`, estimates and confidence intervals are included in
-the plot.
+If `show_labels` is `TRUE`, estimates and confidence intervals are included in
+the plot. Adjust the text size with `size_text`.
 
 ```{r, warning=FALSE, message=FALSE}
-plot(result, size_text = 4)
+plot(result, show_labels = TRUE, size_text = 4)
 ```
 
 ### Funnel plots

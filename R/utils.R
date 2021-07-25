@@ -185,3 +185,7 @@
 .is_integer <- function(x) {
   is.numeric(x) && all(floor(x) == x, na.rm = T)
 }
+
+`%||%` <- function (x, y) {
+  if (is.null(x)) y else x
+}
