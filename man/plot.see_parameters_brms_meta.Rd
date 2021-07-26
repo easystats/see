@@ -13,6 +13,7 @@
   rope_alpha = 0.15,
   rope_color = "cadetblue",
   normalize_height = TRUE,
+  show_labels = TRUE,
   ...
 )
 }
@@ -37,6 +38,8 @@ distributions.}
 posterior distribution is narrow for some parameters, this may result in
 very flat mcmc-areas. In such cases, set \code{normalize_height = FALSE}.}
 
+\item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
@@ -53,7 +56,7 @@ with named color-values, e.g. \code{scale_fill_manual(values = c("Study" = "blue
 To change the color of the error bars, use \code{scale_color_manual(values = c("Errorbar" = "red"))}.
 }
 \subsection{Show or hide estimates and CI}{
-Use \code{size_text = NULL} or \code{size_text = NA} to hide the textual
+Use \code{show_labels = FALSE} to hide the textual
 output of estimates and credible intervals.
 }
 }

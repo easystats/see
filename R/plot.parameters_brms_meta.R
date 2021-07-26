@@ -89,7 +89,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #'   = c("Errorbar" = "red"))`.
 #' }
 #' \subsection{Show or hide estimates and CI}{
-#'   Use `size_text = NULL` or `size_text = NA` to hide the textual
+#'   Use `show_labels = FALSE` to hide the textual
 #'   output of estimates and credible intervals.
 #' }
 #'
@@ -131,6 +131,7 @@ plot.see_parameters_brms_meta <- function(x,
                                           rope_alpha = 0.15,
                                           rope_color = "cadetblue",
                                           normalize_height = TRUE,
+                                          show_labels = TRUE,
                                           ...) {
 
   # save model for later use
@@ -191,7 +192,15 @@ plot.see_parameters_brms_meta <- function(x,
       shape = 21
     )
 
-  if (!is.null(size_text) && !is.na(size_text)) {
+  p <- p +
+    theme_lucid() +
+    scale_y_discrete() +
+    scale_fill_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
+    scale_colour_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
+    guides(fill = "none", colour = "none") +
+    add_plot_attributes(x)
+
+  if (isTRUE(show_labels)) {
     # add some space to the right panel for text
     space_factor <- sqrt(ceiling(diff(c(min(x$x), max(x$x)))) / 5)
     new_range <- pretty(c(min(x$x), max(x$x) + space_factor))
@@ -203,20 +212,9 @@ plot.see_parameters_brms_meta <- function(x,
         hjust = "inward",
         size = size_text
       ) +
-      xlim(c(min(new_range), max(new_range)))
-  }
-
-  p <- p +
-    theme_lucid() +
-    scale_y_discrete() +
-    scale_fill_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
-    scale_colour_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
-    guides(fill = "none", colour = "none") +
-    add_plot_attributes(x)
-
-  # no panel grids when we have text
-  if (!is.null(size_text) && !is.na(size_text)) {
-    p <- p + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+      xlim(c(min(new_range), max(new_range))) +
+      # no panel grids when we have text
+      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
   }
 
   p

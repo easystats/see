@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{see_easycormatrix}(
   x,
-  show_values = FALSE,
+  show_labels = FALSE,
   show_p = FALSE,
   show_legend = TRUE,
   size_point = 1,
@@ -19,7 +19,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{show_values}{Logical. If \code{TRUE}, values are displayed.}
+\item{show_labels}{Logical. If \code{TRUE}, correlation values are displayed.}
 
 \item{show_p}{Logical. If \code{TRUE}, \emph{p}-values or significant level is
 displayed.}

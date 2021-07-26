@@ -1,4 +1,4 @@
-#' @importFrom rlang .data
+#' @importFrom rlang .data `%||%`
 #' @export
 plot.see_check_model <- function(x,
                                  style = theme_lucid,
@@ -10,6 +10,7 @@ plot.see_check_model <- function(x,
   check <- attr(x, "check")
   size_point <- attr(x, "dot_size")
   size_line <- attr(x, "line_size")
+  show_labels <- attr(x, "show_labels") %||% TRUE
   size_text <- attr(x, "text_size")
   alpha_level <- attr(x, "alpha")
   dot_alpha_level <- attr(x, "dot_alpha")
@@ -75,6 +76,7 @@ plot.see_check_model <- function(x,
   if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
     p$OUTLIERS <- .plot_diag_outliers_new(
       x$INFLUENTIAL,
+      show_labels = show_labels,
       size_text = size_text,
       size_line = size_line,
       theme_style = style,

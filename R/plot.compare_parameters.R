@@ -29,10 +29,11 @@
 plot.see_compare_parameters <- function(x,
                                         show_intercept = FALSE,
                                         size_point = .8,
-                                        size_text = NULL,
+                                        size_text = NA,
                                         dodge_position = .8,
                                         sort = NULL,
                                         n_columns = NULL,
+                                        show_labels = FALSE,
                                         ...) {
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x)
@@ -45,7 +46,7 @@ plot.see_compare_parameters <- function(x,
   y_intercept <- ifelse(exponentiated_coefs, 1, 0)
 
   # add coefficients and CIs?
-  add_values <- !is.null(size_text) && !is.na(size_text)
+  add_values <- isTRUE(show_labels)
 
   # ordinal model? needed for free facet scales later...
   ordinal_model <- isTRUE(attributes(x)$ordinal_model)

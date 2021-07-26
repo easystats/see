@@ -10,6 +10,7 @@
   size_text = 3.5,
   text_color = "black",
   size = 1,
+  show_labels = TRUE,
   ...
 )
 }
@@ -24,6 +25,8 @@
 
 \item{size}{Depending on \code{type}, a numeric value specifying size of bars,
 lines, or segments.}
+
+\item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

@@ -12,6 +12,7 @@
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = TRUE,
   type = c("dots", "bars"),
+  show_labels = TRUE,
   ...
 )
 }
@@ -33,6 +34,8 @@ to a range from 0 to 1. This is mainly due to better catch the differences
 between distance values.}
 
 \item{type}{Character vector, indicating the type of plot.}
+
+\item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
