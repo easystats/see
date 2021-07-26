@@ -225,14 +225,14 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<p>When <code>size_text</code> is given, coefficients and confidence intervals are added to the plot.</p>
+<p>When <code>show_labels</code> is <code>TRUE</code>, coefficients and confidence intervals are added to the plot. Adjust the text size with <code>size_text</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, show_labels <span class="op">=</span> <span class="cn">TRUE</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>This also works for exponentiated coefficients.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">model1</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, show_labels <span class="op">=</span> <span class="cn">TRUE</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <p>It is also possible to plot only the count-model component. This is done in <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters()</a></code> via the <code>component</code> argument. In easystats-functions, the count-component has the more generic name <code>"conditional"</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -377,9 +377,9 @@
 <span class="co">#&gt; Overall   |       -0.18 | 0.44 | [-1.05,  0.68] | -0.42 | 0.676  |</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
-<p>If <code>size_text</code> is not <code>NULL</code>, estimates and confidence intervals are included in the plot.</p>
+<p>If <code>show_labels</code> is <code>TRUE</code>, estimates and confidence intervals are included in the plot. Adjust the text size with <code>size_text</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, show_labels <span class="op">=</span> <span class="cn">TRUE</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
 <div id="funnel-plots" class="section level3">
 <h3 class="hasAnchor">

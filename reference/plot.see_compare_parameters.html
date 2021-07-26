@@ -168,10 +168,11 @@ function.</p>
   <span class='va'>x</span>,
   show_intercept <span class='op'>=</span> <span class='cn'>FALSE</span>,
   size_point <span class='op'>=</span> <span class='fl'>0.8</span>,
-  size_text <span class='op'>=</span> <span class='cn'>NULL</span>,
+  size_text <span class='op'>=</span> <span class='cn'>NA</span>,
   dodge_position <span class='op'>=</span> <span class='fl'>0.8</span>,
   sort <span class='op'>=</span> <span class='cn'>NULL</span>,
   n_columns <span class='op'>=</span> <span class='cn'>NULL</span>,
+  show_labels <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -220,6 +221,10 @@ Sort pie-slices by posterior probability (descending)?</p></li>
       <td><p>For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the
 panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></td>
+    </tr>
+    <tr>
+      <th>show_labels</th>
+      <td><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></td>
     </tr>
     <tr>
       <th>...</th>

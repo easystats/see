@@ -166,11 +166,12 @@
   <span class='va'>x</span>,
   show_intercept <span class='op'>=</span> <span class='cn'>FALSE</span>,
   size_point <span class='op'>=</span> <span class='fl'>0.8</span>,
-  size_text <span class='op'>=</span> <span class='cn'>NULL</span>,
+  size_text <span class='op'>=</span> <span class='cn'>NA</span>,
   sort <span class='op'>=</span> <span class='cn'>NULL</span>,
   n_columns <span class='op'>=</span> <span class='cn'>NULL</span>,
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"forest"</span>, <span class='st'>"funnel"</span><span class='op'>)</span>,
   weight_points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  show_labels <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span>
 
@@ -237,6 +238,10 @@ parameters from meta-analysis objects (e.g. <span class="pkg">metafor</span>).</
       <th>weight_points</th>
       <td><p>Logical. If <code>TRUE</code>, for meta-analysis objects, point
 size will be adjusted according to the study-weights.</p></td>
+    </tr>
+    <tr>
+      <th>show_labels</th>
+      <td><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></td>
     </tr>
     <tr>
       <th>...</th>

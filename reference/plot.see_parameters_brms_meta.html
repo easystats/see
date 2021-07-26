@@ -173,6 +173,7 @@ function when used with brms-meta-analysis models.</p>
   rope_alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
   rope_color <span class='op'>=</span> <span class='st'>"cadetblue"</span>,
   normalize_height <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  show_labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -216,6 +217,10 @@ posterior distribution is narrow for some parameters, this may result in
 very flat mcmc-areas. In such cases, set <code>normalize_height = FALSE</code>.</p></td>
     </tr>
     <tr>
+      <th>show_labels</th>
+      <td><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
@@ -232,7 +237,7 @@ very flat mcmc-areas. In such cases, set <code>normalize_height = FALSE</code>.<
 with named color-values, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual(values = c("Study" = "blue", "Overall" = "green"))</a></code>.
 To change the color of the error bars, use <code><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual(values = c("Errorbar" = "red"))</a></code>.</p>
 <h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Show or hide estimates and CI</h3>
-<p>Use <code>size_text = NULL</code> or <code>size_text = NA</code> to hide the textual
+<p>Use <code>show_labels = FALSE</code> to hide the textual
 output of estimates and credible intervals.</p>
 
 
