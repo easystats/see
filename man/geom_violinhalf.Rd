@@ -10,6 +10,7 @@ geom_violinhalf(
   stat = "ydensity",
   position = "dodge",
   trim = TRUE,
+  flip = FALSE,
   scale = c("area", "count", "width"),
   show.legend = NA,
   inherit.aes = TRUE,
@@ -46,6 +47,12 @@ a call to a position adjustment function.}
 \item{trim}{If \code{TRUE} (default), trim the tails of the violins
 to the range of the data. If \code{FALSE}, don't trim the tails.}
 
+\item{flip}{Should the half-violin plot switch directions? By default, this
+is \code{FALSE} and all half-violin geoms will have the flat-side on facing
+leftward. If \code{flip = TRUE}, then all flat-sides will face rightward.
+Optionally, a numeric vector can be supplied indicating which specific
+geoms should be flipped. See examples for more details.}
+
 \item{scale}{if "area" (default), all violins have the same area (before trimming
 the tails). If "count", areas are scaled proportionally to the number of
 observations. If "width", all violins have the same maximum width.}
@@ -78,10 +85,18 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   theme_modern() +
   scale_fill_material_d()
 
-# To flip the half-violin, use `flip = TRUE`:
+# To flip all half-violin geoms, use `flip = TRUE`:
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violinhalf(flip = TRUE) +
   theme_modern() +
   scale_fill_material_d()
+
+# To flip the half-violin geoms for the first and third groups only
+# by passing a numeric vector
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violinhalf(flip = c(1,3)) +
+  theme_modern() +
+  scale_fill_material_d()
+
 
 }

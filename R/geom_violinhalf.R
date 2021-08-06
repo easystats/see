@@ -4,6 +4,12 @@
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_violin
+#' @param flip Should the half-violin plot switch directions? By default, this
+#'   is `FALSE` and all half-violin geoms will have the flat-side on facing
+#'   leftward. If `flip = TRUE`, then all flat-sides will face rightward.
+#'   Optionally, a numeric vector can be supplied indicating which specific
+#'   geoms should be flipped. See examples for more details.
+#'
 #' @examples
 #' library(ggplot2)
 #' library(see)
@@ -13,11 +19,19 @@
 #'   theme_modern() +
 #'   scale_fill_material_d()
 #'
-#' # To flip the half-violin, use `flip = TRUE`:
+#' # To flip all half-violin geoms, use `flip = TRUE`:
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violinhalf(flip = TRUE) +
 #'   theme_modern() +
 #'   scale_fill_material_d()
+#'
+#' # To flip the half-violin geoms for the first and third groups only
+#' # by passing a numeric vector
+#' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+#'   geom_violinhalf(flip = c(1,3)) +
+#'   theme_modern() +
+#'   scale_fill_material_d()
+#'
 #'
 #' @import ggplot2
 #' @export
@@ -26,6 +40,7 @@ geom_violinhalf <- function(mapping = NULL,
                             stat = "ydensity",
                             position = "dodge",
                             trim = TRUE,
+                            flip = FALSE,
                             scale = c("area", "count", "width"),
                             show.legend = NA,
                             inherit.aes = TRUE,
@@ -43,6 +58,7 @@ geom_violinhalf <- function(mapping = NULL,
     params = list(
       trim = trim,
       scale = scale,
+      flip = flip,
       ...
     )
   )
@@ -71,14 +87,23 @@ GeomViolinHalf <- ggproto("GeomViolinHalf", Geom,
                               .group
                             }))
                           },
-                          draw_group = function(data, panel_scales, coord, flip = FALSE) {
+                          draw_group = function(data, panel_scales, coord, flip) {
                             # Find the points for the line to go all the way around
                             data$xminv <- data$x
-                            if (flip) {
-                              data$xmaxv <- data$x - data$violinwidth * (data$xmax - data$x)
-                            } else {
-                              data$xmaxv <- data$x + data$violinwidth * (data$xmax - data$x)
-                            }
+
+                            if (is.logical(flip)) {
+                              if (flip) {
+                                data$xmaxv <- data$x - data$violinwidth * (data$xmax - data$x)
+                              } else {
+                                data$xmaxv <- data$x + data$violinwidth * (data$xmax - data$x)
+                              }
+                              } else if (is.numeric(flip)) {
+                              if (unique(data$group) %in% flip) {
+                                data$xmaxv <- data$x - data$violinwidth * (data$xmax - data$x)
+                              } else {
+                                data$xmaxv <- data$x + data$violinwidth * (data$xmax - data$x)
+                              }
+                              }
 
                             # Make sure it's sorted properly to draw the outline
                             mindata <- maxdata <- data
