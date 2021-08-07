@@ -167,6 +167,7 @@
   stat <span class='op'>=</span> <span class='st'>"ydensity"</span>,
   position <span class='op'>=</span> <span class='st'>"dodge"</span>,
   trim <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  flip <span class='op'>=</span> <span class='cn'>FALSE</span>,
   scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"area"</span>, <span class='st'>"count"</span>, <span class='st'>"width"</span><span class='op'>)</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -213,6 +214,14 @@ a call to a position adjustment function.</p></td>
 to the range of the data. If <code>FALSE</code>, don't trim the tails.</p></td>
     </tr>
     <tr>
+      <th>flip</th>
+      <td><p>Should the half-violin plot switch directions? By default, this
+is <code>FALSE</code> and all half-violin geoms will have the flat-side on facing
+leftward. If <code>flip = TRUE</code>, then all flat-sides will face rightward.
+Optionally, a numeric vector can be supplied indicating which specific
+geoms should be flipped. See examples for more details.</p></td>
+    </tr>
+    <tr>
       <th>scale</th>
       <td><p>if "area" (default), all violins have the same area (before trimming
 the tails). If "count", areas are scaled proportionally to the number of
@@ -251,7 +260,22 @@ to the paired geom/stat.</p></td>
   <span class='fu'>geom_violinhalf</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='theme_modern.html'>theme_modern</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='scale_color_material.html'>scale_fill_material_d</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='geom_violinhalf-1.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='geom_violinhalf-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># To flip all half-violin geoms, use `flip = TRUE`:</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Species</span>, y <span class='op'>=</span> <span class='va'>Sepal.Length</span>, fill <span class='op'>=</span> <span class='va'>Species</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_violinhalf</span><span class='op'>(</span>flip <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='scale_color_material.html'>scale_fill_material_d</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='geom_violinhalf-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># To flip the half-violin geoms for the first and third groups only</span>
+<span class='co'># by passing a numeric vector</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Species</span>, y <span class='op'>=</span> <span class='va'>Sepal.Length</span>, fill <span class='op'>=</span> <span class='va'>Species</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_violinhalf</span><span class='op'>(</span>flip <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='theme_modern.html'>theme_modern</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='scale_color_material.html'>scale_fill_material_d</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='geom_violinhalf-3.png' alt='' width='700' height='433' /></div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
