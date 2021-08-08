@@ -90,6 +90,17 @@
 #'   geom_from_list(list(geom = "hline", yintercept = 2)) +
 #'   geom_from_list(list(geom = "coord_flip")) +
 #'   geom_from_list(list(geom = "facet_wrap", facets = "~ Species", scales = "free"))
+#'
+#' # Example 5 (theme and scales) --------------------------
+#' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+#'   geom_point() +
+#'   geom_from_list(list(geom = "scale_color_viridis_d", option = "inferno")) +
+#'   geom_from_list(list(geom = "theme", legend.position = "top"))
+#'
+#' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+#'   geom_point() +
+#'   geom_from_list(list(geom = "scale_color_material_d", palette = "rainbow")) +
+#'   geom_from_list(list(geom = "theme_void"))
 #' @export
 geom_from_list <- function(x, ...) {
 
@@ -113,6 +124,12 @@ geom_from_list <- function(x, ...) {
   }
   if (x$geom == "facet_grid") {
     return(do.call(ggplot2::facet_grid, args))
+  }
+  if (startsWith(x$geom, "scale_")) {
+    return(do.call(x$geom, args))
+  }
+  if (startsWith(x$geom, "theme")) {
+    return(do.call(x$geom, args))
   }
 
   # Default parameters
