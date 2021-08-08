@@ -34,7 +34,8 @@ library(ggplot2)
 l1 <- list(
   geom = "point",
   data = mtcars,
-  aes = list(x = "mpg", y = "wt")
+  aes = list(x = "mpg", y = "wt", size = "hp", color = "hp"),
+  show.legend = c("size" = FALSE)
 )
 l2 <- list(
   geom = "labs",

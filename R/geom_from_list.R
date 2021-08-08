@@ -21,7 +21,8 @@
 #' l1 <- list(
 #'   geom = "point",
 #'   data = mtcars,
-#'   aes = list(x = "mpg", y = "wt")
+#'   aes = list(x = "mpg", y = "wt", size = "hp", color = "hp"),
+#'   show.legend = c("size" = FALSE)
 #' )
 #' l2 <- list(
 #'   geom = "labs",
@@ -105,7 +106,7 @@
 geom_from_list <- function(x, ...) {
 
   # Additional parameters ------------------------------------------------------
-  args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position")]
+  args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
 
   if (x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
     if (!"contour" %in% names(args)) args$contour <- TRUE
@@ -129,6 +130,9 @@ geom_from_list <- function(x, ...) {
     return(do.call(x$geom, args))
   }
   if (startsWith(x$geom, "theme")) {
+    return(do.call(x$geom, args))
+  }
+  if (startsWith(x$geom, "see_")) {
     return(do.call(x$geom, args))
   }
 
@@ -181,6 +185,12 @@ geom_from_list <- function(x, ...) {
     aes_list <- NULL
   }
 
+  # Show.legend
+  if("show.legend" %in% names(x)) {
+    show.legend <- x$show.legend
+  } else {
+    show.legend <- NA
+  }
 
   # Create layer
   ggplot2::layer(
@@ -190,6 +200,7 @@ geom_from_list <- function(x, ...) {
     mapping = aes_list,
     data = x$data,
     params = args,
+    show.legend = show.legend,
     ...
   )
 }
