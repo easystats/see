@@ -34,7 +34,8 @@ library(ggplot2)
 l1 <- list(
   geom = "point",
   data = mtcars,
-  aes = list(x = "mpg", y = "wt")
+  aes = list(x = "mpg", y = "wt", size = "hp", color = "hp"),
+  show.legend = c("size" = FALSE)
 )
 l2 <- list(
   geom = "labs",
@@ -103,4 +104,15 @@ ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
   geom_from_list(list(geom = "hline", yintercept = 2)) +
   geom_from_list(list(geom = "coord_flip")) +
   geom_from_list(list(geom = "facet_wrap", facets = "~ Species", scales = "free"))
+
+# Example 5 (theme and scales) --------------------------
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+  geom_point() +
+  geom_from_list(list(geom = "scale_color_viridis_d", option = "inferno")) +
+  geom_from_list(list(geom = "theme", legend.position = "top"))
+
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+  geom_point() +
+  geom_from_list(list(geom = "scale_color_material_d", palette = "rainbow")) +
+  geom_from_list(list(geom = "theme_void"))
 }

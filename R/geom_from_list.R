@@ -21,7 +21,8 @@
 #' l1 <- list(
 #'   geom = "point",
 #'   data = mtcars,
-#'   aes = list(x = "mpg", y = "wt")
+#'   aes = list(x = "mpg", y = "wt", size = "hp", color = "hp"),
+#'   show.legend = c("size" = FALSE)
 #' )
 #' l2 <- list(
 #'   geom = "labs",
@@ -90,11 +91,22 @@
 #'   geom_from_list(list(geom = "hline", yintercept = 2)) +
 #'   geom_from_list(list(geom = "coord_flip")) +
 #'   geom_from_list(list(geom = "facet_wrap", facets = "~ Species", scales = "free"))
+#'
+#' # Example 5 (theme and scales) --------------------------
+#' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+#'   geom_point() +
+#'   geom_from_list(list(geom = "scale_color_viridis_d", option = "inferno")) +
+#'   geom_from_list(list(geom = "theme", legend.position = "top"))
+#'
+#' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+#'   geom_point() +
+#'   geom_from_list(list(geom = "scale_color_material_d", palette = "rainbow")) +
+#'   geom_from_list(list(geom = "theme_void"))
 #' @export
 geom_from_list <- function(x, ...) {
 
   # Additional parameters ------------------------------------------------------
-  args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position")]
+  args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
 
   if (x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
     if (!"contour" %in% names(args)) args$contour <- TRUE
@@ -113,6 +125,15 @@ geom_from_list <- function(x, ...) {
   }
   if (x$geom == "facet_grid") {
     return(do.call(ggplot2::facet_grid, args))
+  }
+  if (startsWith(x$geom, "scale_")) {
+    return(do.call(x$geom, args))
+  }
+  if (startsWith(x$geom, "theme")) {
+    return(do.call(x$geom, args))
+  }
+  if (startsWith(x$geom, "see_")) {
+    return(do.call(x$geom, args))
   }
 
   # Default parameters
@@ -164,6 +185,12 @@ geom_from_list <- function(x, ...) {
     aes_list <- NULL
   }
 
+  # Show.legend
+  if("show.legend" %in% names(x)) {
+    show.legend <- x$show.legend
+  } else {
+    show.legend <- NA
+  }
 
   # Create layer
   ggplot2::layer(
@@ -173,6 +200,7 @@ geom_from_list <- function(x, ...) {
     mapping = aes_list,
     data = x$data,
     params = args,
+    show.legend = show.legend,
     ...
   )
 }
