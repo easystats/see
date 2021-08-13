@@ -32,6 +32,12 @@ if (!requireNamespace("parameters", quietly = TRUE) ||
 }
 ```
 
+This vignette can be referred to by citing the package:
+
+```{r}
+citation("see")
+```
+
 ## Introduction
 
 *parameters*' primary goal is to provide utilities for processing the parameters of various statistical models (see [here](https://easystats.github.io/insight/) for a list of supported models). Beyond computing *p-values*, *CIs*, *Bayesian indices* and other measures for a wide variety of models, this package implements features like *bootstrapping* of parameters and models, *feature reduction* (feature extraction and variable selection), or tools for data reduction like functions to perform cluster, factor or principal component analysis.

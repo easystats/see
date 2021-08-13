@@ -24,6 +24,12 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 }
 ```
 
+This vignette can be referred to by citing the package:
+
+```{r}
+citation("see")
+```
+
 # Introduction
 
 The *effectsize* package in *easystats* provides utilities to work with indices of effect size and standardized parameters, allowing computation and conversion of indices such as Cohen’s *d*, *r*, odds-ratios, etc.

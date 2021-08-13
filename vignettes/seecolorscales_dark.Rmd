@@ -18,6 +18,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+This vignette can be referred to by citing the package:
+
+```{r}
+citation("see")
+```
+
 Before we start, we create some data sets with three, four and five groups; one
 is useful to demonstrate line-geoms, the iris-dataset is used for point-geoms.
 

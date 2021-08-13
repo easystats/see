@@ -24,6 +24,12 @@ if (!requireNamespace("rstanarm", quietly = TRUE) ||
 }
 ```
 
+This vignette can be referred to by citing the package:
+
+```{r}
+citation("see")
+```
+
 # Introduction
 
 *modelbased* is a package in *easystats* ecosystem to help with model-based estimations, to easily compute of marginal means, contrast analysis and model predictions.

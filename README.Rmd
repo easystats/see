@@ -184,7 +184,7 @@ plot(predicted)
 
 One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
 
-```{r modelbased2}
+```{r modelbased2, error=TRUE}
 means <- estimate_means(model)
 
 plot(means)

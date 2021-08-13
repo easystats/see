@@ -23,6 +23,12 @@ if (!requireNamespace("ggplot2", quietly = TRUE) ||
 }
 ```
 
+This vignette can be referred to by citing the package:
+
+```{r}
+citation("see")
+```
+
 # Introduction
 
 `correlation` is an [**easystats**](https://github.com/easystats/easystats) package focused on correlation analysis. It's lightweight, easy to use, and allows for the computation of many different types of correlation, including:
