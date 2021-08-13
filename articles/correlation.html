@@ -120,6 +120,26 @@
 
     
     
+<p>This vignette can be referred to by citing the package:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"see"</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   Lüdecke et al., (2021). see: An R Package for Visualizing Statistical</span>
+<span class="co">#&gt;   Models. Journal of Open Source Software, 6(64), 3393.</span>
+<span class="co">#&gt;   https://doi.org/10.21105/joss.03393</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   @Article{,</span>
+<span class="co">#&gt;     title = {{see}: An {R} Package for Visualizing Statistical Models},</span>
+<span class="co">#&gt;     author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},</span>
+<span class="co">#&gt;     journal = {Journal of Open Source Software},</span>
+<span class="co">#&gt;     year = {2021},</span>
+<span class="co">#&gt;     volume = {6},</span>
+<span class="co">#&gt;     number = {64},</span>
+<span class="co">#&gt;     pages = {3393},</span>
+<span class="co">#&gt;     doi = {10.21105/joss.03393},</span>
+<span class="co">#&gt;   }</span></code></pre></div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
@@ -130,7 +150,7 @@
 <div id="setup" class="section level1">
 <h1 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h1>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/correlation/">correlation</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
@@ -141,7 +161,7 @@
 <a href="#correlation-matrix" class="anchor"></a>Correlation Matrix</h1>
 <p><em>(<a href="https://easystats.github.io/correlation/reference/correlation.html">related function documentation</a>)</em></p>
 <p>The default output for <code><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation()</a></code> is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -170,20 +190,20 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; p-value adjustment method: Holm (1979)</span></code></pre></div>
 <p>The result from <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> can be used to create a plot.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span>, size_point <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<p>To change the style of geoms, use the <code>type</code>-argument.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span>, type <span class="op">=</span> <span class="st">"tile"</span><span class="op">)</span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<p>It is also possible to add correlation coefficients and <em>p</em>-values.</p>
+<p>To change the style of geoms, use the <code>type</code>-argument.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span>, show_values <span class="op">=</span> <span class="cn">TRUE</span>, show_p <span class="op">=</span> <span class="cn">TRUE</span>, show_legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span>, type <span class="op">=</span> <span class="st">"tile"</span><span class="op">)</span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<p>And a “redundant” summary can be plotted as well:</p>
+<p>It is also possible to add correlation coefficients and <em>p</em>-values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span>, show_values <span class="op">=</span> <span class="cn">TRUE</span>, show_p <span class="op">=</span> <span class="cn">TRUE</span>, show_legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p>And a “redundant” summary can be plotted as well:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span>, redundant <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="va">s</span>
@@ -199,9 +219,9 @@
 <span class="co">#&gt; p-value adjustment method: Holm (1979)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></code></pre></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <p>For larger correlation matrices, the <code>size_point</code> argument can be used to adjust size of point geoms.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="va">result</span>
 <span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
@@ -250,9 +270,9 @@
 
 <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span>, size_point <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span></code></pre></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <p>The <code>corrlation</code> function also provides a convenient way to change names for selected variables:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span>
   data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">wt</span>, <span class="va">mpg</span>, <span class="va">drat</span><span class="op">)</span>,
   rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"weight"</span>, <span class="st">"miles per gallon"</span>, <span class="st">"rear axle ratio"</span><span class="op">)</span>
@@ -262,7 +282,7 @@
 <h1 class="hasAnchor">
 <a href="#gaussian-graphical-models-ggms" class="anchor"></a>Gaussian Graphical Models (GGMs)</h1>
 <p>To create a Gaussian Graphical Models plot, the library <em>ggraph</em> needs to be loaded first.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span><span class="va">mtcars</span>, partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
@@ -331,7 +351,7 @@
 <span class="co">#&gt; Observations: 32</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="correlation_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
   </div>
 

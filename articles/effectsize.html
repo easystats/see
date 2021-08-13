@@ -120,6 +120,26 @@
 
     
     
+<p>This vignette can be referred to by citing the package:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"see"</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   Lüdecke et al., (2021). see: An R Package for Visualizing Statistical</span>
+<span class="co">#&gt;   Models. Journal of Open Source Software, 6(64), 3393.</span>
+<span class="co">#&gt;   https://doi.org/10.21105/joss.03393</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   @Article{,</span>
+<span class="co">#&gt;     title = {{see}: An {R} Package for Visualizing Statistical Models},</span>
+<span class="co">#&gt;     author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},</span>
+<span class="co">#&gt;     journal = {Journal of Open Source Software},</span>
+<span class="co">#&gt;     year = {2021},</span>
+<span class="co">#&gt;     volume = {6},</span>
+<span class="co">#&gt;     number = {64},</span>
+<span class="co">#&gt;     pages = {3393},</span>
+<span class="co">#&gt;     doi = {10.21105/joss.03393},</span>
+<span class="co">#&gt;   }</span></code></pre></div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
@@ -129,7 +149,7 @@
 <div id="setup" class="section level1">
 <h1 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h1>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span>
@@ -140,35 +160,35 @@
 <h1 class="hasAnchor">
 <a href="#effect-size-tables" class="anchor"></a>Effect size tables</h1>
 <p><em>(<a href="https://easystats.github.io/effectsize/reference/eta_squared.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">am</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://easystats.github.io/effectsize/reference/eta_squared.html">eta_squared</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="effectsize_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p><img src="effectsize_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 
 <span class="fu"><a href="https://easystats.github.io/effectsize/reference/t_to_r.html">t_to_d</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">2.3</span><span class="op">)</span>, df_error <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">35</span>, <span class="fl">40</span>, <span class="fl">85</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="effectsize_files/figure-html/unnamed-chunk-2-2.png" width="672"></p>
+<p><img src="effectsize_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
 </div>
 <div id="equivalence-tests" class="section level1">
 <h1 class="hasAnchor">
 <a href="#equivalence-tests" class="anchor"></a>Equivalence tests</h1>
 <p><em>(<a href="https://easystats.github.io/effectsize/reference/equivalence_test.effectsize_table.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">am</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://easystats.github.io/effectsize/reference/eta_squared.html">eta_squared</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="effectsize_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p><img src="effectsize_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 
 <span class="fu"><a href="https://easystats.github.io/effectsize/reference/t_to_r.html">t_to_d</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">2.3</span><span class="op">)</span>, df_error <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">35</span>, <span class="fl">40</span>, <span class="fl">85</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="effectsize_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
+<p><img src="effectsize_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 </div>
   </div>
 

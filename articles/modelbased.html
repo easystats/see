@@ -120,6 +120,26 @@
 
     
     
+<p>This vignette can be referred to by citing the package:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"see"</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   Lüdecke et al., (2021). see: An R Package for Visualizing Statistical</span>
+<span class="co">#&gt;   Models. Journal of Open Source Software, 6(64), 3393.</span>
+<span class="co">#&gt;   https://doi.org/10.21105/joss.03393</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   @Article{,</span>
+<span class="co">#&gt;     title = {{see}: An {R} Package for Visualizing Statistical Models},</span>
+<span class="co">#&gt;     author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},</span>
+<span class="co">#&gt;     journal = {Journal of Open Source Software},</span>
+<span class="co">#&gt;     year = {2021},</span>
+<span class="co">#&gt;     volume = {6},</span>
+<span class="co">#&gt;     number = {64},</span>
+<span class="co">#&gt;     pages = {3393},</span>
+<span class="co">#&gt;     doi = {10.21105/joss.03393},</span>
+<span class="co">#&gt;   }</span></code></pre></div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
@@ -129,7 +149,7 @@
 <div id="setup-and-model-fitting" class="section level1">
 <h1 class="hasAnchor">
 <a href="#setup-and-model-fitting" class="anchor"></a>Setup and Model Fitting</h1>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/modelbased/">modelbased</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/">rstanarm</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
@@ -142,12 +162,12 @@
 <div id="pairwise-contrasts" class="section level1">
 <h1 class="hasAnchor">
 <a href="#pairwise-contrasts" class="anchor"></a>Pairwise Contrasts</h1>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">contrasts</span>, <span class="va">means</span><span class="op">)</span></code></pre></div>
-<p><img src="modelbased_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
+<p><img src="modelbased_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 </div>
   </div>
 
