@@ -108,6 +108,8 @@ geom_from_list <- function(x, ...) {
   # Additional parameters ------------------------------------------------------
   args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
 
+  if(is.null(x$geom)) return(NULL)
+
   if (x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
     if (!"contour" %in% names(args)) args$contour <- TRUE
     if (!"contour_var" %in% names(args)) args$contour_var <- "density"
