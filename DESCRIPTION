@@ -80,6 +80,7 @@ Suggests:
     ggdist,
     ggraph,
     ggrepel,
+    ggside,
     glmmTMB,
     grid,
     httr,

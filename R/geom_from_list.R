@@ -102,6 +102,14 @@
 #'   geom_point() +
 #'   geom_from_list(list(geom = "scale_color_material_d", palette = "rainbow")) +
 #'   geom_from_list(list(geom = "theme_void"))
+#'
+#' # Example 5 (Smooths and side densities) --------------------------
+#'
+#' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
+#'   geom_from_list(list(geom = "point")) +
+#'   geom_from_list(list(geom = "smooth", color = "red")) +
+#'   geom_from_list(x=list(geom = "ggside::geom_xsidedensity")) +
+#'   geom_from_list(x=list(geom = "ggside::scale_xsidey_continuous", breaks = NULL))
 #' @export
 geom_from_list <- function(x, ...) {
 
@@ -109,6 +117,10 @@ geom_from_list <- function(x, ...) {
   args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
 
   if(is.null(x$geom)) return(NULL)
+
+  if (inherits(x$geom, "function")) {
+    return(do.call(x$geom, args))
+  }
 
   if (x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
     if (!"contour" %in% names(args)) args$contour <- TRUE
@@ -128,6 +140,12 @@ geom_from_list <- function(x, ...) {
   if (x$geom == "facet_grid") {
     return(do.call(ggplot2::facet_grid, args))
   }
+  if (x$geom == "smooth") {
+    if(!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if(!"method" %in% names(args)) args$method <- "loess"
+    if(!"formula" %in% names(args)) args$formula <- "y ~ x"
+    return(do.call(ggplot2::geom_smooth, args))
+  }
   if (startsWith(x$geom, "scale_")) {
     return(do.call(x$geom, args))
   }
@@ -136,6 +154,10 @@ geom_from_list <- function(x, ...) {
   }
   if (startsWith(x$geom, "see_")) {
     return(do.call(x$geom, args))
+  }
+  if (startsWith(x$geom, "ggside::")) {
+    insight::check_if_installed("ggside")
+    return(do.call(eval(parse(text=x$geom)), args))
   }
 
   # Default parameters
