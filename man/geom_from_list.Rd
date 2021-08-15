@@ -121,6 +121,6 @@ ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
 ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
   geom_from_list(list(geom = "point")) +
   geom_from_list(list(geom = "smooth", color = "red")) +
-  geom_from_list(x=list(geom = "ggside::geom_xsidedensity")) +
-  geom_from_list(x=list(geom = "ggside::scale_xsidey_continuous", breaks = NULL))
+  geom_from_list(list(aes = list(x = "Sepal.Length"), geom = "ggside::geom_xsidedensity")) +
+  geom_from_list(list(geom = "ggside::scale_xsidey_continuous", breaks = NULL))
 }

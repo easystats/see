@@ -108,8 +108,8 @@
 #' ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
 #'   geom_from_list(list(geom = "point")) +
 #'   geom_from_list(list(geom = "smooth", color = "red")) +
-#'   geom_from_list(x=list(geom = "ggside::geom_xsidedensity")) +
-#'   geom_from_list(x=list(geom = "ggside::scale_xsidey_continuous", breaks = NULL))
+#'   geom_from_list(list(aes = list(x = "Sepal.Length"), geom = "ggside::geom_xsidedensity")) +
+#'   geom_from_list(list(geom = "ggside::scale_xsidey_continuous", breaks = NULL))
 #' @export
 geom_from_list <- function(x, ...) {
 
@@ -157,6 +157,7 @@ geom_from_list <- function(x, ...) {
   }
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
+    if(!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
     return(do.call(eval(parse(text=x$geom)), args))
   }
 
