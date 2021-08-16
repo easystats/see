@@ -33,6 +33,9 @@ plot.see_parameters_model <- function(x,
                                       type = c("forest", "funnel"),
                                       weight_points = TRUE,
                                       show_labels = FALSE,
+                                      show_estimate = TRUE,
+                                      show_interval = TRUE,
+                                      show_density = FALSE,
                                       ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
@@ -53,6 +56,11 @@ plot.see_parameters_model <- function(x,
 
   # ordinal model? needed for free facet scales later...
   ordinal_model <- isTRUE(attributes(x)$ordinal_model)
+
+  # bayesian models
+  ### TODO: Add these attributes to parameters
+  is_bayesian <- isTRUE(attributes(x)$bayesian_model)
+  has_iter <- isTRUE(attributes(x)$has_iter)
 
   # brms has some special handling...
   is_brms <- inherits(x, c("parameters_stan", "parameters_brms"))
@@ -113,6 +121,71 @@ plot.see_parameters_model <- function(x,
   if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
     if (length(cp) == length(x$Parameter)) {
       x$Parameter <- cp
+    }
+  }
+
+  if (isTRUE(show_density)) {
+    insight::check_if_installed(c("ggdist"))
+
+    if (isTRUE(attributes(x)$bootstrap) || isTRUE(is_bayesian)) {
+      # MCMC or bootstrapped models
+      if (! isTRUE(has_iter)) {
+        stop(
+          insight::format_message(
+            "Individual iterations are needed to show densities.",
+            "  Re-run `parameters()` with `keep_iterations = TRUE"
+          ),
+          call. = FALSE
+        )
+      }
+      density_layer <- ggdist::stat_slab(
+        aes(fill = after_scale(color)),
+        size = NA, alpha = .25
+      )
+    } else if (isTRUE(exponentiated_coefs)) {
+      # exponentiated coefficients
+      log_x <- x[,c("Coefficient", "SE")]
+      log_x$SE <- log_x$SE / log_x$Coefficient
+      log_x$Coefficient <- log(log_x$Coefficient)
+
+      density_layer <- ggdist::stat_dist_slab(
+        aes(
+          dist = "lnorm",
+          arg1 = .data$Coefficient,
+          arg2 = .data$SE,
+          fill = after_scale(color)
+        ),
+        data = log_x,
+        size = NA, alpha = .25
+      )
+    } else if (
+      mc == "lm" ||
+      attributes(x, "df_method") %in% c("ml1", "betwithin", "satterthwaite", "kenward")
+    ) {
+      # t-distribution confidence densities
+      density_layer <- ggdist::stat_dist_slab(
+        aes(
+          dist = "student_t",
+          arg1 = .data$df_error,
+          arg2 = .data$Coefficient,
+          arg3 = .data$SE,
+          fill = after_scale(color)
+        ),
+        data = log_x,
+        size = NA, alpha = .25
+      )
+    } else {
+      # normal-approximation confidence densities
+      density_layer <- ggdist::stat_dist_slab(
+        aes(
+          dist = "norm",
+          arg1 = .data$Coefficient,
+          arg2 = .data$SE,
+          fill = after_scale(color)
+        ),
+        data = log_x,
+        size = NA, alpha = .25
+      )
     }
   }
 
@@ -197,10 +270,26 @@ plot.see_parameters_model <- function(x,
     # plot setup for metafor-objects
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point, fatten = x$size_point, shape = x$shape) +
       theme_modern(legend.position = "none") +
       scale_color_material() +
       guides(color = "none", size = "none", shape = "none")
+
+    if (show_density) {
+      # p <- p + density_layer
+      message(
+        insight::format_message("Plotting densities not yet supported for meta-analysis models.")
+      )
+    }
+
+    if (show_interval) {
+      p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
+                             width = 0,
+                             size = size_point)
+    }
+
+    if (show_estimate) {
+      p <- p + geom_point(size = x$size_point * size_point, shape = x$shape)
+    }
 
   } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
 
@@ -209,13 +298,28 @@ plot.see_parameters_model <- function(x,
     x$CI <- as.character(x$CI)
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$CI)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(
-        aes(xmin = .data$CI_low, xmax = .data$CI_high),
-        size = size_point,
-        position = position_dodge(1 / length(unique(x$CI)))
-      ) +
       theme_modern() +
       scale_color_material()
+
+    if (show_density) {
+      p <- p + density_layer
+    }
+
+    if (show_interval) {
+      p <- p + geom_errorbar(
+        aes(xmin = .data$CI_low, xmax = .data$CI_high),
+        width = 0,
+        size = size_point,
+        position = position_dodge(1 / length(unique(x$CI)))
+      )
+    }
+
+    if (show_estimate) {
+      p <- p + geom_point(
+        size = 4 * size_point,
+        position = position_dodge(1 / length(unique(x$CI)))
+      )
+    }
 
   } else {
 
@@ -223,9 +327,23 @@ plot.see_parameters_model <- function(x,
     x$group <- as.factor(x$Coefficient < y_intercept)
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point) +
       theme_modern(legend.position = "none") +
       scale_color_material()
+
+    if (show_density) {
+      p <- p + density_layer
+    }
+
+    if (show_interval) {
+      p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
+                             width = 0,
+                             size = size_point)
+    }
+
+    if (show_estimate) {
+      p <- p + geom_point(size = 4 * size_point)
+    }
+
   }
 
 
