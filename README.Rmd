@@ -1,6 +1,6 @@
 ---
 output: github_document
-bibliography: paper.bib
+bibliography: paper/paper.bib
 csl: apa.csl
 ---
 

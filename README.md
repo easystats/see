@@ -1,7 +1,7 @@
 
 # see <img src='man/figures/logo.png' align="right" height="139" />
 
-[![publication](https://img.shields.io/badge/Cite-Unpublished-yellow)](https://github.com/easystats/see/blob/master/inst/CITATION)
+[![DOI](https://doi.org/10.21105/joss.03393/status.svg)](https://doi.org/10.21105/joss.03393)
 [![downloads](http://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/see)](https://cranlogs.r-pkg.org/)
 
