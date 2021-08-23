@@ -1,7 +1,7 @@
 #' Material design color palette
 #'
 #' The palette based on [material design
-#' colors](https://www.materialui.co/color). Use `scale_color_material_d()` for
+#' colors](https://materialui.co/color). Use `scale_color_material_d()` for
 #' *discrete* categories and `scale_color_material_c()` for a *continuous*
 #' scale.
 #'
@@ -176,7 +176,7 @@ material_palettes <- list(
 #' Material design color palette
 #'
 #' The palette based on [material design
-#' colors](https://www.materialui.co/color).
+#' colors](https://materialui.co/color).
 #'
 #' @inheritParams palette_flat
 #'

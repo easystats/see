@@ -53,7 +53,7 @@ Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
 Description: Provides plotting utilities supporting easystats-packages
     (<https://github.com/easystats/easystats>) and some extra themes,
     geoms, and scales for 'ggplot2'. Color scales are based on
-    <https://www.materialui.co/colors>.
+    <https://materialui.co/colors>.
 License: GPL-3
 URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues

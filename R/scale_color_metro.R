@@ -1,7 +1,7 @@
 #' Metro color palette
 #'
 #' The palette based on Metro [Metro
-#' colors](https://www.materialui.co/metrocolors).
+#' colors](https://materialui.co/metrocolors).
 #' Use `scale_color_metro_d` for *discrete* categories and
 #' `scale_color_metro_c` for a *continuous* scale.
 #'
@@ -171,7 +171,7 @@ metro_palettes <- list(
 #' Metro color palette
 #'
 #' The palette based on [Metro
-#' colors](https://www.materialui.co/metrocolors).
+#' colors](https://materialui.co/metrocolors).
 #'
 #' @inheritParams palette_flat
 #'

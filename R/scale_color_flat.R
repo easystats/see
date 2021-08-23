@@ -1,6 +1,6 @@
 #' Flat UI color palette
 #'
-#' The palette based on [Flat UI](https://www.materialui.co/flatuicolors).
+#' The palette based on [Flat UI](https://materialui.co/flatuicolors).
 #' Use `scale_color_flat_d` for *discrete* categories and
 #' `scale_color_flat_c` for a *continuous* scale.
 #'
@@ -174,7 +174,7 @@ flat_palettes <- list(
 
 #' Flat UI color palette
 #'
-#' The palette based on [Flat UI](https://www.materialui.co/flatuicolors).
+#' The palette based on [Flat UI](https://materialui.co/flatuicolors).
 #'
 #' @param palette Character name of palette. Depending on the color scale, can
 #'   be `"full"`, `"ice"`, `"rainbow"`, `"complement"`,

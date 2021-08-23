@@ -16,7 +16,7 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
+The palette based \href{https://materialui.co/socialcolors}{Social colors}.
 }
 \details{
 This function is usually not called directly, but from within

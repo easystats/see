@@ -1,6 +1,6 @@
 #' Social color palette
 #'
-#' The palette based [Social colors](https://www.materialui.co/socialcolors).
+#' The palette based [Social colors](https://materialui.co/socialcolors).
 #' Use `scale_color_social_d` for *discrete* categories and
 #' `scale_color_social_c` for a *continuous* scale.
 #'
@@ -171,7 +171,7 @@ social_palettes <- list(
 
 #' Social color palette
 #'
-#' The palette based [Social colors](https://www.materialui.co/socialcolors).
+#' The palette based [Social colors](https://materialui.co/socialcolors).
 #'
 #' @inheritParams palette_flat
 #'

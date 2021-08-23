@@ -87,7 +87,7 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based \href{https://www.materialui.co/socialcolors}{Social colors}.
+The palette based \href{https://materialui.co/socialcolors}{Social colors}.
 Use \code{scale_color_social_d} for \emph{discrete} categories and
 \code{scale_color_social_c} for a \emph{continuous} scale.
 }

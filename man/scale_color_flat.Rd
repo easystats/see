@@ -59,7 +59,7 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \code{TRUE} or \code{FALSE}.}
 }
 \description{
-The palette based on \href{https://www.materialui.co/flatuicolors}{Flat UI}.
+The palette based on \href{https://materialui.co/flatuicolors}{Flat UI}.
 Use \code{scale_color_flat_d} for \emph{discrete} categories and
 \code{scale_color_flat_c} for a \emph{continuous} scale.
 }
