@@ -72,6 +72,12 @@ plot.see_parameters_model <- function(x,
     colnames(x)[which(colnames(x) == "Std_Coefficient")] <- "Coefficient"
   }
 
+  # check if multiple CIs
+  if (sum(grepl("^CI_low", colnames(x))) > 1) {
+    multiple_ci <- TRUE
+    x <- datawizard::reshape_ci(x)
+  }
+
   # create text string for estimate and CI
   x$Estimate_CI <- sprintf(
     "%.2f %s",
@@ -310,10 +316,11 @@ plot.see_parameters_model <- function(x,
       p <- p + geom_point(size = x$size_point * size_point, shape = x$shape)
     }
 
-  } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
+  } else if (isTRUE(multiple_ci)) {
+
+
 
     # plot setup for model parameters with multiple CIs
-    x <- datawizard::reshape_ci(x)
     x$CI <- as.character(x$CI)
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$CI)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
@@ -321,7 +328,11 @@ plot.see_parameters_model <- function(x,
       scale_color_material()
 
     if (show_density) {
-      p <- p + density_layer
+      # TODO: Handle multiple CIs
+      # p <- p + density_layer
+      message(
+        insight::format_message("Plotting densities not yet supported with multiple CIs.")
+      )
     }
 
     if (show_interval) {
