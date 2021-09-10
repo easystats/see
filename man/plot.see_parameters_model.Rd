@@ -16,6 +16,10 @@
   type = c("forest", "funnel"),
   weight_points = TRUE,
   show_labels = FALSE,
+  show_estimate = TRUE,
+  show_interval = TRUE,
+  show_density = FALSE,
+  log_scale = FALSE,
   ...
 )
 
@@ -66,6 +70,9 @@ parameters from meta-analysis objects (e.g. \pkg{metafor}).}
 size will be adjusted according to the study-weights.}
 
 \item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
+
+\item{log_scale}{Should exponentiated coefficients (e.g., odds-ratios) be
+plotted on a log scale? (default: \code{FALSE})}
 
 \item{...}{Arguments passed to or from other methods.}
 

@@ -45,28 +45,27 @@ plot.see_parameters_model <- function(x,
   }
 
   # retrieve settings ----------------
+  model_attributes <- attributes(x)[! names(attributes(x)) %in% c("names", "row.names", "class")]
 
   # is exp?
-  exponentiated_coefs <- isTRUE(attributes(x)$exponentiate)
+  exponentiated_coefs <- isTRUE(model_attributes$exponentiate)
   y_intercept <- ifelse(exponentiated_coefs, 1, 0)
 
   # label for coefficient scale
-  coefficient_name <- attributes(x)$coefficient_name
-  zi_coefficient_name <- attributes(x)$zi_coefficient_name
+  coefficient_name <- model_attributes$coefficient_name
+  zi_coefficient_name <- model_attributes$zi_coefficient_name
 
   # add coefficients and CIs?
   add_values <- isTRUE(show_labels)
 
   # ordinal model? needed for free facet scales later...
-  ordinal_model <- isTRUE(attributes(x)$ordinal_model)
+  ordinal_model <- isTRUE(model_attributes$ordinal_model)
 
-  # bayesian models
-  ### TODO: Add these attributes to parameters
-  is_bayesian <- isTRUE(attributes(x)$bayesian_model)
-  has_iter <- isTRUE(attributes(x)$has_iter)
+  # bootstrap models handle densities differently
+  is_bootstrap <- isTRUE(model_attributes$bootstrap)
 
-  # brms has some special handling...
-  is_brms <- inherits(x, c("parameters_stan", "parameters_brms"))
+  # bayesian (namely brms) has some special handling...
+  is_bayesian <- inherits(x, c("parameters_stan", "parameters_brms"))
 
   # check column names, differs for standardized models
   if ("Std_Coefficient" %in% colnames(x)) {
@@ -81,10 +80,10 @@ plot.see_parameters_model <- function(x,
   )
 
   # do we have a measure for meta analysis (to label axis)
-  meta_measure <- attributes(x)$measure
+  meta_measure <- model_attributes$measure
 
-  if (is_brms) {
-    cleaned_parameters <- attributes(x)$parameter_info
+  if (is_bayesian) {
+    cleaned_parameters <- model_attributes$parameter_info
     if (!is.null(cleaned_parameters)) {
       x <- merge(x, cleaned_parameters, sort = FALSE)
       x$Parameter <- x$Cleaned_Parameter
@@ -94,6 +93,7 @@ plot.see_parameters_model <- function(x,
         x <- x[!grepl("^SD/Cor", x$Group), , drop = FALSE]
       }
     }
+    attributes(x) <- c(attributes(x), model_attributes)
   }
 
   if ("Subgroup" %in% colnames(x)) {
@@ -101,11 +101,11 @@ plot.see_parameters_model <- function(x,
   }
 
   # do we have prettified names?
-  pretty_names <- attributes(x)$pretty_names
+  pretty_names <- model_attributes$pretty_names
 
   x <- .fix_facet_names(x)
 
-  if (is_brms && "Group" %in% colnames(x)) {
+  if (is_bayesian && "Group" %in% colnames(x)) {
     x$Effects[x$Group != ""] <- paste0(x$Effects[x$Group != ""], " (", x$Group[x$Group != ""], ")")
   }
 
@@ -115,9 +115,9 @@ plot.see_parameters_model <- function(x,
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
   has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
 
-  mc <- attributes(x)$model_class
-  cp <- attributes(x)$cleaned_parameters
-  is_linear <- attributes(x)$linear_model
+  mc <- model_attributes$model_class
+  cp <- model_attributes$cleaned_parameters
+  is_linear <- model_attributes$linear_model
   is_meta <- !is.null(mc) && mc %in% c("rma", "rma.mv", "rma.uni", "metaplus")
   is_meta_bma <- !is.null(mc) && mc %in% c("meta_random", "meta_fixed", "meta_bma")
 
@@ -132,21 +132,37 @@ plot.see_parameters_model <- function(x,
     insight::check_if_installed(c("ggdist"))
 
     # TODO: Handle Effects and Components
+    # TODO: Handle meta-analysis models
 
-    if (isTRUE(attributes(x)$bootstrap) || isTRUE(is_bayesian)) {
+    if (is_bootstrap || isTRUE(is_bayesian)) {
+      if (is_bootstrap) {
+        data <- model_attributes$boot_samples
+      } else {
+        data <- as.data.frame(.retrieve_data(x))
+      }
+
       # MCMC or bootstrapped models
-      if (! isTRUE(has_iter)) {
+      if (is.null(data)) {
         stop(
-          insight::format_message(
-            "Individual iterations are needed to show densities.",
-            "  Re-run `parameters()` with `keep_iterations = TRUE"
-          ),
+          insight::format_message("Could not retrieve parameter simulations."),
           call. = FALSE
         )
       }
+
+      data <- datawizard::reshape_longer(
+        data,
+        colnames_to = "Parameter",
+        rows_to = "Iteration",
+        values_to = "Coefficient"
+      )
+      group <- x[,c("Parameter"), drop = FALSE]
+      group$group <- as.factor(x$Coefficient < y_intercept)
+      data <- merge(data, group, by = "Parameter")
+
       density_layer <- ggdist::stat_slab(
         aes(fill = after_scale(color)),
-        size = NA, alpha = .25
+        size = NA, alpha = .25,
+        data = data
       )
     } else if (isTRUE(exponentiated_coefs)) {
       density_layer <- ggdist::stat_dist_slab(
@@ -160,7 +176,7 @@ plot.see_parameters_model <- function(x,
       )
     } else if (
       is_linear ||
-      attributes(x)$df_method %in% c("ml1", "betwithin", "satterthwaite", "kenward")
+      model_attributes$df_method %in% c("ml1", "betwithin", "satterthwaite", "kenward")
     ) {
       # t-distribution confidence densities
       density_layer <- ggdist::stat_dist_slab(
@@ -251,6 +267,10 @@ plot.see_parameters_model <- function(x,
 
   if (!show_intercept) {
     x <- x[!.in_intercepts(x$Parameter), ]
+    if (show_density && (is_bayesian || is_bootstrap)) {
+      data <- data[!.in_intercepts(data$Parameter), ]
+      density_layer$data <- data
+    }
   }
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
