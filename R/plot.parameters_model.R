@@ -14,6 +14,8 @@
 #' @inheritParams plot.see_cluster_analysis
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_brms_meta
+#' @param log_scale Should exponentiated coefficients (e.g., odds-ratios) be
+#'   plotted on a log scale? (default: `FALSE`)
 #'
 #' @return A ggplot2-object.
 #'
@@ -36,6 +38,7 @@ plot.see_parameters_model <- function(x,
                                       show_estimate = TRUE,
                                       show_interval = TRUE,
                                       show_density = FALSE,
+                                      log_scale = FALSE,
                                       ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
@@ -114,6 +117,7 @@ plot.see_parameters_model <- function(x,
 
   mc <- attributes(x)$model_class
   cp <- attributes(x)$cleaned_parameters
+  is_linear <- attributes(x)$linear_model
   is_meta <- !is.null(mc) && mc %in% c("rma", "rma.mv", "rma.uni", "metaplus")
   is_meta_bma <- !is.null(mc) && mc %in% c("meta_random", "meta_fixed", "meta_bma")
 
@@ -126,6 +130,8 @@ plot.see_parameters_model <- function(x,
 
   if (isTRUE(show_density)) {
     insight::check_if_installed(c("ggdist"))
+
+    # TODO: Handle Effects and Components
 
     if (isTRUE(attributes(x)$bootstrap) || isTRUE(is_bayesian)) {
       # MCMC or bootstrapped models
@@ -143,24 +149,18 @@ plot.see_parameters_model <- function(x,
         size = NA, alpha = .25
       )
     } else if (isTRUE(exponentiated_coefs)) {
-      # exponentiated coefficients
-      log_x <- x[,c("Coefficient", "SE")]
-      log_x$SE <- log_x$SE / log_x$Coefficient
-      log_x$Coefficient <- log(log_x$Coefficient)
-
       density_layer <- ggdist::stat_dist_slab(
         aes(
           dist = "lnorm",
-          arg1 = .data$Coefficient,
-          arg2 = .data$SE,
+          arg1 = log(.data$Coefficient),
+          arg2 = .data$SE / .data$Coefficient,
           fill = after_scale(color)
         ),
-        data = log_x,
         size = NA, alpha = .25
       )
     } else if (
-      mc == "lm" ||
-      attributes(x, "df_method") %in% c("ml1", "betwithin", "satterthwaite", "kenward")
+      is_linear ||
+      attributes(x)$df_method %in% c("ml1", "betwithin", "satterthwaite", "kenward")
     ) {
       # t-distribution confidence densities
       density_layer <- ggdist::stat_dist_slab(
@@ -171,7 +171,6 @@ plot.see_parameters_model <- function(x,
           arg3 = .data$SE,
           fill = after_scale(color)
         ),
-        data = log_x,
         size = NA, alpha = .25
       )
     } else {
@@ -183,7 +182,6 @@ plot.see_parameters_model <- function(x,
           arg2 = .data$SE,
           fill = after_scale(color)
         ),
-        data = log_x,
         size = NA, alpha = .25
       )
     }
@@ -378,7 +376,7 @@ plot.see_parameters_model <- function(x,
   # largest data points that are within this range. Thereby we have the pretty
   # values we can use as breaks and labels for the scale...
 
-  if (exponentiated_coefs) {
+  if (exponentiated_coefs & log_scale) {
     range <- 2^c(-24:16)
     x_low <- which.min(min_ci > range) - 1
     x_high <- which.max(max_ci < range)
