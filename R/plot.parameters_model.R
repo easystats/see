@@ -156,7 +156,7 @@ plot.see_parameters_model <- function(x,
         values_to = "Coefficient"
       )
       group <- x[,c("Parameter"), drop = FALSE]
-      group$group <- as.factor(x$Coefficient < y_intercept)
+      group$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
       data <- merge(data, group, by = "Parameter")
 
       density_layer <- ggdist::stat_slab(
@@ -300,6 +300,7 @@ plot.see_parameters_model <- function(x,
     }
 
     if (show_interval) {
+      # TODO: Handle NA boundaries
       p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
                              width = 0,
                              size = size_point)
@@ -324,6 +325,7 @@ plot.see_parameters_model <- function(x,
     }
 
     if (show_interval) {
+      # TODO: Handle NA boundaries
       p <- p + geom_errorbar(
         aes(xmin = .data$CI_low, xmax = .data$CI_high),
         width = 0,
@@ -342,17 +344,24 @@ plot.see_parameters_model <- function(x,
   } else {
 
     # plot setup for regular model parameters
-    x$group <- as.factor(x$Coefficient < y_intercept)
+    x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
+    if (all(x$group == "TRUE")) {
+      color_scale <- scale_color_material(reverse = TRUE)
+    } else {
+      color_scale <- scale_color_material()
+    }
+
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
       theme_modern(legend.position = "none") +
-      scale_color_material()
+      color_scale
 
     if (show_density) {
       p <- p + density_layer
     }
 
     if (show_interval) {
+      # TODO: Handle NA boundaries
       p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
                              width = 0,
                              size = size_point)
