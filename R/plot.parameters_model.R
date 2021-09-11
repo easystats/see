@@ -76,6 +76,8 @@ plot.see_parameters_model <- function(x,
   if (sum(grepl("^CI_low", colnames(x))) > 1) {
     multiple_ci <- TRUE
     x <- datawizard::reshape_ci(x)
+  } else {
+    multiple_ci <- FALSE
   }
 
   # create text string for estimate and CI
@@ -164,10 +166,13 @@ plot.see_parameters_model <- function(x,
       group <- x[,c("Parameter"), drop = FALSE]
       group$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
       data <- merge(data, group, by = "Parameter")
+      if (isTRUE(exponentiated_coefs)) {
+        data$Coefficient <- exp(data$Coefficient)
+      }
 
       density_layer <- ggdist::stat_slab(
-        aes(fill = after_scale(color)),
-        size = NA, alpha = .25,
+        aes(fill = after_scale(.data$color)),
+        size = NA, alpha = .2,
         data = data
       )
     } else if (isTRUE(exponentiated_coefs)) {
@@ -176,9 +181,10 @@ plot.see_parameters_model <- function(x,
           dist = "lnorm",
           arg1 = log(.data$Coefficient),
           arg2 = .data$SE / .data$Coefficient,
-          fill = after_scale(color)
+          fill = after_scale(.data$color)
         ),
-        size = NA, alpha = .25
+        size = NA, alpha = .2,
+        data = function(x) x[x$CI == x$CI[1],]
       )
     } else if (
       is_linear ||
@@ -191,9 +197,10 @@ plot.see_parameters_model <- function(x,
           arg1 = .data$df_error,
           arg2 = .data$Coefficient,
           arg3 = .data$SE,
-          fill = after_scale(color)
+          fill = after_scale(.data$color)
         ),
-        size = NA, alpha = .25
+        size = NA, alpha = .2,
+        data = function(x) x[x$CI == x$CI[1],]
       )
     } else {
       # normal-approximation confidence densities
@@ -202,9 +209,10 @@ plot.see_parameters_model <- function(x,
           dist = "norm",
           arg1 = .data$Coefficient,
           arg2 = .data$SE,
-          fill = after_scale(color)
+          fill = after_scale(.data$color)
         ),
-        size = NA, alpha = .25
+        size = NA, alpha = .2,
+        data = function(x) x[x$CI == x$CI[1],]
       )
     }
   }
@@ -318,37 +326,42 @@ plot.see_parameters_model <- function(x,
 
   } else if (isTRUE(multiple_ci)) {
 
-
-
     # plot setup for model parameters with multiple CIs
     x$CI <- as.character(x$CI)
-    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$CI)) +
+
+    x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
+    if (all(x$group == "TRUE")) {
+      color_scale <- scale_color_material(reverse = TRUE)
+    } else {
+      color_scale <- scale_color_material()
+    }
+
+    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient,
+                       size = rev(.data$CI), color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-      theme_modern() +
-      scale_color_material()
+      theme_modern(legend.position = "none") +
+      color_scale
 
     if (show_density) {
       # TODO: Handle multiple CIs
-      # p <- p + density_layer
-      message(
-        insight::format_message("Plotting densities not yet supported with multiple CIs.")
-      )
+      p <- p + density_layer
+      # message(
+      #   insight::format_message("Plotting densities not yet supported with multiple CIs.")
+      # )
     }
 
     if (show_interval) {
       # TODO: Handle NA boundaries
       p <- p + geom_errorbar(
         aes(xmin = .data$CI_low, xmax = .data$CI_high),
-        width = 0,
-        size = size_point,
-        position = position_dodge(1 / length(unique(x$CI)))
-      )
+        width = 0
+      ) +
+        scale_size_ordinal(range = c(size_point, 3 * size_point))
     }
 
     if (show_estimate) {
       p <- p + geom_point(
-        size = 4 * size_point,
-        position = position_dodge(1 / length(unique(x$CI)))
+        size = 4 * size_point
       )
     }
 
