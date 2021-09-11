@@ -14,6 +14,13 @@
 #' @inheritParams plot.see_cluster_analysis
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_brms_meta
+#' @param show_estimate Should the point estimate of each parameter be shown?
+#'   (default: `TRUE`)
+#' @param show_interval Should the compatibility interval(s) of each parameter
+#'   be shown? (default: `TRUE`)
+#' @param show_density Should the compatibility density (i.e., posterior,
+#'   bootstrap, or confidence density) of each parameter be shown?
+#'   (default: `FALSE`)
 #' @param log_scale Should exponentiated coefficients (e.g., odds-ratios) be
 #'   plotted on a log scale? (default: `FALSE`)
 #'
@@ -343,11 +350,7 @@ plot.see_parameters_model <- function(x,
       color_scale
 
     if (show_density) {
-      # TODO: Handle multiple CIs
       p <- p + density_layer
-      # message(
-      #   insight::format_message("Plotting densities not yet supported with multiple CIs.")
-      # )
     }
 
     if (show_interval) {
