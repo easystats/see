@@ -14,6 +14,15 @@
 #' @inheritParams plot.see_cluster_analysis
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_brms_meta
+#' @param show_estimate Should the point estimate of each parameter be shown?
+#'   (default: `TRUE`)
+#' @param show_interval Should the compatibility interval(s) of each parameter
+#'   be shown? (default: `TRUE`)
+#' @param show_density Should the compatibility density (i.e., posterior,
+#'   bootstrap, or confidence density) of each parameter be shown?
+#'   (default: `FALSE`)
+#' @param log_scale Should exponentiated coefficients (e.g., odds-ratios) be
+#'   plotted on a log scale? (default: `FALSE`)
 #'
 #' @return A ggplot2-object.
 #'
@@ -33,33 +42,49 @@ plot.see_parameters_model <- function(x,
                                       type = c("forest", "funnel"),
                                       weight_points = TRUE,
                                       show_labels = FALSE,
+                                      show_estimate = TRUE,
+                                      show_interval = TRUE,
+                                      show_density = FALSE,
+                                      log_scale = FALSE,
                                       ...) {
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
     colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
   }
 
   # retrieve settings ----------------
+  model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
   # is exp?
-  exponentiated_coefs <- isTRUE(attributes(x)$exponentiate)
+  exponentiated_coefs <- isTRUE(model_attributes$exponentiate)
   y_intercept <- ifelse(exponentiated_coefs, 1, 0)
 
   # label for coefficient scale
-  coefficient_name <- attributes(x)$coefficient_name
-  zi_coefficient_name <- attributes(x)$zi_coefficient_name
+  coefficient_name <- model_attributes$coefficient_name
+  zi_coefficient_name <- model_attributes$zi_coefficient_name
 
   # add coefficients and CIs?
   add_values <- isTRUE(show_labels)
 
   # ordinal model? needed for free facet scales later...
-  ordinal_model <- isTRUE(attributes(x)$ordinal_model)
+  ordinal_model <- isTRUE(model_attributes$ordinal_model)
 
-  # brms has some special handling...
-  is_brms <- inherits(x, c("parameters_stan", "parameters_brms"))
+  # bootstrap models handle densities differently
+  is_bootstrap <- isTRUE(model_attributes$bootstrap)
+
+  # bayesian (namely brms) has some special handling...
+  is_bayesian <- inherits(x, c("parameters_stan", "parameters_brms"))
 
   # check column names, differs for standardized models
   if ("Std_Coefficient" %in% colnames(x)) {
     colnames(x)[which(colnames(x) == "Std_Coefficient")] <- "Coefficient"
+  }
+
+  # check if multiple CIs
+  if (sum(grepl("^CI_low", colnames(x))) > 1) {
+    multiple_ci <- TRUE
+    x <- datawizard::reshape_ci(x)
+  } else {
+    multiple_ci <- FALSE
   }
 
   # create text string for estimate and CI
@@ -70,10 +95,10 @@ plot.see_parameters_model <- function(x,
   )
 
   # do we have a measure for meta analysis (to label axis)
-  meta_measure <- attributes(x)$measure
+  meta_measure <- model_attributes$measure
 
-  if (is_brms) {
-    cleaned_parameters <- attributes(x)$parameter_info
+  if (is_bayesian) {
+    cleaned_parameters <- model_attributes$parameter_info
     if (!is.null(cleaned_parameters)) {
       x <- merge(x, cleaned_parameters, sort = FALSE)
       x$Parameter <- x$Cleaned_Parameter
@@ -83,6 +108,7 @@ plot.see_parameters_model <- function(x,
         x <- x[!grepl("^SD/Cor", x$Group), , drop = FALSE]
       }
     }
+    attributes(x) <- c(attributes(x), model_attributes)
   }
 
   if ("Subgroup" %in% colnames(x)) {
@@ -90,11 +116,11 @@ plot.see_parameters_model <- function(x,
   }
 
   # do we have prettified names?
-  pretty_names <- attributes(x)$pretty_names
+  pretty_names <- model_attributes$pretty_names
 
   x <- .fix_facet_names(x)
 
-  if (is_brms && "Group" %in% colnames(x)) {
+  if (is_bayesian && "Group" %in% colnames(x)) {
     x$Effects[x$Group != ""] <- paste0(x$Effects[x$Group != ""], " (", x$Group[x$Group != ""], ")")
   }
 
@@ -104,8 +130,9 @@ plot.see_parameters_model <- function(x,
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
   has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
 
-  mc <- attributes(x)$model_class
-  cp <- attributes(x)$cleaned_parameters
+  mc <- model_attributes$model_class
+  cp <- model_attributes$cleaned_parameters
+  is_linear <- model_attributes$linear_model
   is_meta <- !is.null(mc) && mc %in% c("rma", "rma.mv", "rma.uni", "metaplus")
   is_meta_bma <- !is.null(mc) && mc %in% c("meta_random", "meta_fixed", "meta_bma")
 
@@ -113,6 +140,87 @@ plot.see_parameters_model <- function(x,
   if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
     if (length(cp) == length(x$Parameter)) {
       x$Parameter <- cp
+    }
+  }
+
+  if (isTRUE(show_density)) {
+    insight::check_if_installed(c("ggdist"))
+
+    # TODO: Handle Effects and Components
+    # TODO: Handle meta-analysis models
+
+    if (is_bootstrap || isTRUE(is_bayesian)) {
+      if (is_bootstrap) {
+        data <- model_attributes$boot_samples
+      } else {
+        data <- as.data.frame(.retrieve_data(x))
+      }
+
+      # MCMC or bootstrapped models
+      if (is.null(data)) {
+        stop(
+          insight::format_message("Could not retrieve parameter simulations."),
+          call. = FALSE
+        )
+      }
+
+      data <- datawizard::reshape_longer(
+        data,
+        colnames_to = "Parameter",
+        rows_to = "Iteration",
+        values_to = "Coefficient"
+      )
+      group <- x[,c("Parameter"), drop = FALSE]
+      group$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
+      data <- merge(data, group, by = "Parameter")
+      if (isTRUE(exponentiated_coefs)) {
+        data$Coefficient <- exp(data$Coefficient)
+      }
+
+      density_layer <- ggdist::stat_slab(
+        aes(fill = after_scale(.data$color)),
+        size = NA, alpha = .2,
+        data = data
+      )
+    } else if (isTRUE(exponentiated_coefs)) {
+      density_layer <- ggdist::stat_dist_slab(
+        aes(
+          dist = "lnorm",
+          arg1 = log(.data$Coefficient),
+          arg2 = .data$SE / .data$Coefficient,
+          fill = after_scale(.data$color)
+        ),
+        size = NA, alpha = .2,
+        data = function(x) x[x$CI == x$CI[1],]
+      )
+    } else if (
+      is_linear ||
+      model_attributes$df_method %in% c("ml1", "betwithin", "satterthwaite", "kenward")
+    ) {
+      # t-distribution confidence densities
+      density_layer <- ggdist::stat_dist_slab(
+        aes(
+          dist = "student_t",
+          arg1 = .data$df_error,
+          arg2 = .data$Coefficient,
+          arg3 = .data$SE,
+          fill = after_scale(.data$color)
+        ),
+        size = NA, alpha = .2,
+        data = function(x) x[x$CI == x$CI[1],]
+      )
+    } else {
+      # normal-approximation confidence densities
+      density_layer <- ggdist::stat_dist_slab(
+        aes(
+          dist = "norm",
+          arg1 = .data$Coefficient,
+          arg2 = .data$SE,
+          fill = after_scale(.data$color)
+        ),
+        size = NA, alpha = .2,
+        data = function(x) x[x$CI == x$CI[1],]
+      )
     }
   }
 
@@ -180,6 +288,10 @@ plot.see_parameters_model <- function(x,
 
   if (!show_intercept) {
     x <- x[!.in_intercepts(x$Parameter), ]
+    if (show_density && (is_bayesian || is_bootstrap)) {
+      data <- data[!.in_intercepts(data$Parameter), ]
+      density_layer$data <- data
+    }
   }
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
@@ -197,35 +309,101 @@ plot.see_parameters_model <- function(x,
     # plot setup for metafor-objects
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point, fatten = x$size_point, shape = x$shape) +
       theme_modern(legend.position = "none") +
       scale_color_material() +
       guides(color = "none", size = "none", shape = "none")
 
-  } else if (sum(grepl("^CI_low", colnames(x))) > 1) {
+    if (show_density) {
+      # p <- p + density_layer
+      message(
+        insight::format_message("Plotting densities not yet supported for meta-analysis models.")
+      )
+    }
+
+    if (show_interval) {
+      # TODO: Handle NA boundaries
+      p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
+                             width = 0,
+                             size = size_point)
+    }
+
+    if (show_estimate) {
+      p <- p + geom_point(size = x$size_point * size_point, shape = x$shape)
+    }
+
+  } else if (isTRUE(multiple_ci)) {
 
     # plot setup for model parameters with multiple CIs
-    x <- datawizard::reshape_ci(x)
     x$CI <- as.character(x$CI)
-    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$CI)) +
+
+    x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
+    if (all(x$group == "TRUE")) {
+      color_scale <- scale_color_material(reverse = TRUE)
+    } else {
+      color_scale <- scale_color_material()
+    }
+
+    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient,
+                       size = rev(.data$CI), color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(
+      theme_modern(legend.position = "none") +
+      color_scale
+
+    if (show_density) {
+      p <- p + density_layer
+    }
+
+    if (show_interval) {
+      # TODO: Handle NA boundaries
+      p <- p + geom_errorbar(
         aes(xmin = .data$CI_low, xmax = .data$CI_high),
-        size = size_point,
-        position = position_dodge(1 / length(unique(x$CI)))
+        width = 0
       ) +
-      theme_modern() +
-      scale_color_material()
+        scale_size_ordinal(range = c(size_point, 3 * size_point))
+    }
+
+    if (show_estimate) {
+      p <- p + geom_point(
+        size = 4 * size_point
+      )
+    }
 
   } else {
 
     # plot setup for regular model parameters
-    x$group <- as.factor(x$Coefficient < y_intercept)
+    x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
+    if (all(x$group == "TRUE")) {
+      color_scale <- scale_color_material(reverse = TRUE)
+    } else {
+      color_scale <- scale_color_material()
+    }
+
     p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-      geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point) +
       theme_modern(legend.position = "none") +
-      scale_color_material()
+      color_scale
+
+    if (show_density) {
+      p <- p + density_layer
+    }
+
+    if (show_interval) {
+      # TODO: Handle NA boundaries
+      p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
+                             width = 0,
+                             size = size_point)
+    }
+
+    if (show_estimate) {
+      if (show_density) {
+        p <- p + geom_point(size = 4 * size_point,
+                            fill = "white",
+                            shape = 21)
+      } else {
+        p <- p + geom_point(size = 4 * size_point)
+      }
+    }
+
   }
 
 
@@ -260,7 +438,7 @@ plot.see_parameters_model <- function(x,
   # largest data points that are within this range. Thereby we have the pretty
   # values we can use as breaks and labels for the scale...
 
-  if (exponentiated_coefs) {
+  if (exponentiated_coefs & log_scale) {
     range <- 2^c(-24:16)
     x_low <- which.min(min_ci > range) - 1
     x_high <- which.max(max_ci < range)

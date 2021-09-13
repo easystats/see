@@ -16,6 +16,10 @@
   type = c("forest", "funnel"),
   weight_points = TRUE,
   show_labels = FALSE,
+  show_estimate = TRUE,
+  show_interval = TRUE,
+  show_density = FALSE,
+  log_scale = FALSE,
   ...
 )
 
@@ -66,6 +70,19 @@ parameters from meta-analysis objects (e.g. \pkg{metafor}).}
 size will be adjusted according to the study-weights.}
 
 \item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
+
+\item{show_estimate}{Should the point estimate of each parameter be shown?
+(default: \code{TRUE})}
+
+\item{show_interval}{Should the compatibility interval(s) of each parameter
+be shown? (default: \code{TRUE})}
+
+\item{show_density}{Should the compatibility density (i.e., posterior,
+bootstrap, or confidence density) of each parameter be shown?
+(default: \code{FALSE})}
+
+\item{log_scale}{Should exponentiated coefficients (e.g., odds-ratios) be
+plotted on a log scale? (default: \code{FALSE})}
 
 \item{...}{Arguments passed to or from other methods.}
 
