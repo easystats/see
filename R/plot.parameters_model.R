@@ -52,7 +52,7 @@ plot.see_parameters_model <- function(x,
   }
 
   # retrieve settings ----------------
-  model_attributes <- attributes(x)[! names(attributes(x)) %in% c("names", "row.names", "class")]
+  model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
   # is exp?
   exponentiated_coefs <- isTRUE(model_attributes$exponentiate)
@@ -395,7 +395,13 @@ plot.see_parameters_model <- function(x,
     }
 
     if (show_estimate) {
-      p <- p + geom_point(size = 4 * size_point)
+      if (show_density) {
+        p <- p + geom_point(size = 4 * size_point,
+                            fill = "white",
+                            shape = 21)
+      } else {
+        p <- p + geom_point(size = 4 * size_point)
+      }
     }
 
   }
