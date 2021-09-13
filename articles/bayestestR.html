@@ -210,7 +210,6 @@
 <span class="co">#&gt; Speciesvirginica              | 80.47%</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor | 79.20%</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | 62.20%</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-7-1.png" width="100%"></p>
 <p>For more complex models with different components, each component is displayed in a separate facet. Use <code>n_columns</code> to define the layout, i.e. how many columns are used to display the facets.</p>
@@ -263,7 +262,6 @@
 <span class="co">#&gt; Parameter   |   pd</span>
 <span class="co">#&gt; ------------------</span>
 <span class="co">#&gt; (Intercept) | 100%</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -298,7 +296,6 @@
 <span class="co">#&gt; Speciesvirginica              | 0.76</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor | 0.75</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | 0.58</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-10-1.png" width="100%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -350,7 +347,6 @@
 <span class="co">#&gt; Parameter   |   ps</span>
 <span class="co">#&gt; ------------------</span>
 <span class="co">#&gt; (Intercept) | 1.00</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -384,7 +380,6 @@
 <span class="co">#&gt; Speciesvirginica              |   0.46 |  0.46 |  0.53</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor |   0.56 |  0.56 |  0.60</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  |  -0.21 | -0.20 | -0.24</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-13-1.png" width="100%"></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -401,7 +396,6 @@
 <span class="co">#&gt; Speciesvirginica              |  0.46 |  0.53</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor |  0.56 |  0.60</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | -0.20 | -0.24</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, panel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
 <div id="adding-prior-samples-3" class="section level3">
@@ -433,7 +427,6 @@
 <span class="co">#&gt; Speciesvirginica              | [ 0.07,  0.77] | [-0.11,  1.11] | [-0.36, 1.29] | [-0.55, 1.49]</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor | [ 0.02,  0.94] | [-0.19,  1.36] | [-0.60, 1.53] | [-0.67, 1.90]</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | [-0.64,  0.22] | [-0.92,  0.52] | [-1.21, 0.84] | [-1.45, 1.03]</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -463,14 +456,12 @@
 <span class="co">#&gt; Speciesvirginica              | [-0.56, 1.48] |   fixed | conditional</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor | [-0.53, 1.73] |   fixed | conditional</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | [-1.21, 0.77] |   fixed | conditional</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-18-1.png" width="100%"></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, support_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, support_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-18-2.png" width="100%"></p>
@@ -509,7 +500,6 @@
 <span class="co">#&gt; Speciesvirginica              |      9.16 %</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor |      7.84 %</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  |      9.39 %</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, rope_color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Greens"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-19-1.png" width="100%"></p>
@@ -595,7 +585,6 @@
 <span class="co">#&gt; r_persons[3,Intercept] |     12.13 %</span>
 <span class="co">#&gt; r_persons[4,Intercept] |      0.00 %</span>
 <span class="co">#&gt; SD persons (Intercept) |      0.00 %</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, rope_color <span class="op">=</span> <span class="st">"grey70"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_social.html">scale_fill_social</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
@@ -621,7 +610,6 @@
 <span class="co">#&gt; Speciesvirginica              | Undecided |      9.16 % | [-0.55 1.49]</span>
 <span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      7.84 % | [-0.67 1.90]</span>
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |      9.39 % | [-1.45 1.03]</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_blackboard.html">theme_blackboard</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -665,7 +653,6 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  |    0.321</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; * Evidence Against The Null: 0</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -687,7 +674,6 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  |    0.295</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; * Evidence Against The Null: [-0.083, 0.083]</span>
-
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
