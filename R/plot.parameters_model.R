@@ -47,12 +47,32 @@ plot.see_parameters_model <- function(x,
                                       show_density = FALSE,
                                       log_scale = FALSE,
                                       ...) {
-  if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
-    colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map")))] <- "Coefficient"
-  }
 
   # retrieve settings ----------------
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
+
+  # Clean up column names
+  if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
+    colnames(x)[which.min(match(colnames(x), model_attributes$coefficient_name))] <- "Coefficient"
+  }
+
+  if (!any(grepl("Parameter", colnames(x), fixed = TRUE))) {
+    if (length(model_attributes$parameter_names) > 1) {
+      collapsed_params <- apply(
+        do.call(
+          cbind,
+          lapply(
+            model_attributes$parameter_names,
+            function(param) paste(param, "=", x[[param]])
+          )
+        ), 1,
+        paste, collapse = ", "
+      )
+      x$Parameter <- collapsed_params
+    } else {
+      colnames(x)[which.min(match(colnames(x), model_attributes$parameter_names))] <- "Parameter"
+    }
+  }
 
   # is exp?
   exponentiated_coefs <- isTRUE(model_attributes$exponentiate)
@@ -193,10 +213,7 @@ plot.see_parameters_model <- function(x,
         size = NA, alpha = .2,
         data = function(x) x[x$CI == x$CI[1],]
       )
-    } else if (
-      is_linear ||
-      model_attributes$df_method %in% c("ml1", "betwithin", "satterthwaite", "kenward")
-    ) {
+    } else if (model_attributes$test_statistic == "t-statistic") {
       # t-distribution confidence densities
       density_layer <- ggdist::stat_dist_slab(
         aes(
@@ -287,10 +304,12 @@ plot.see_parameters_model <- function(x,
 
 
   if (!show_intercept) {
-    x <- x[!.in_intercepts(x$Parameter), ]
-    if (show_density && (is_bayesian || is_bootstrap)) {
-      data <- data[!.in_intercepts(data$Parameter), ]
-      density_layer$data <- data
+    if (length(.in_intercepts(x$Parameter)) > 0) {
+      x <- x[!.in_intercepts(x$Parameter), ]
+      if (show_density && (is_bayesian || is_bootstrap)) {
+        data <- data[!.in_intercepts(data$Parameter), ]
+        density_layer$data <- data
+      }
     }
   }
 
@@ -432,7 +451,8 @@ plot.see_parameters_model <- function(x,
     }
   }
 
-  # check for exponentiated estimates. in such cases, we transform the y-axis
+  # check for exponentiated estimates. in such cases,
+  # if the user requests a log_scale we transform the y-axis
   # to log-scale, to get proper proportion of exponentiated estimates. to
   # do this, we create a pretty range of values, and then look for lowest and
   # largest data points that are within this range. Thereby we have the pretty
@@ -494,6 +514,12 @@ plot.see_parameters_model <- function(x,
     suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free"))
   }
 
+  if (length(model_attributes$parameter_names) > 1) {
+    parameter_label <- "Parameters"
+  } else {
+    parameter_label <- model_attributes$parameter_names
+  }
+
   if (isTRUE(is_meta)) {
     measure <- .meta_measure(meta_measure)
     p + labs(
@@ -504,13 +530,13 @@ plot.see_parameters_model <- function(x,
   } else {
     if (isTRUE(axis_title_in_facet)) {
       p + labs(
-        y = "Parameter",
+        y = parameter_label,
         x = NULL,
         colour = "CI"
       )
     } else {
       p + labs(
-        y = "Parameter",
+        y = parameter_label,
         x = ifelse(is.null(coefficient_name), ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), coefficient_name),
         colour = "CI"
       )
