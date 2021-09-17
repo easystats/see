@@ -24,11 +24,11 @@
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{performance::pp_check()} function.
+The \code{plot()} method for the \code{performance::check_predictions()} function.
 }
 \examples{
 if (require("performance")) {
   model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-  pp_check(model)
+  check_predictions(model)
 }
 }

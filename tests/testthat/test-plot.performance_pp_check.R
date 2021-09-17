@@ -4,6 +4,6 @@
 #       data = iris
 #     )
 #
-#     expect_s3_class(plot(pp_check(model)), "gg")
+#     expect_s3_class(plot(check_predictions(model)), "gg")
 #   }
 # })

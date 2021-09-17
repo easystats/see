@@ -37,7 +37,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 
 #' Plot method for posterior predictive checks
 #'
-#' The `plot()` method for the `performance::pp_check()` function.
+#' The `plot()` method for the `performance::check_predictions()` function.
 #'
 #' @param line_alpha Numeric value specifying alpha of lines indicating `yrep`.
 #' @inheritParams data_plot
@@ -49,7 +49,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' @examples
 #' if (require("performance")) {
 #'   model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-#'   pp_check(model)
+#'   check_predictions(model)
 #' }
 #' @export
 print.see_performance_pp_check <- function(x,
