@@ -49,7 +49,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' @examples
 #' if (require("performance")) {
 #'   model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-#'   check_predictions(model)
+#'   check_posterior_predictions(model)
 #' }
 #' @export
 print.see_performance_pp_check <- function(x,
