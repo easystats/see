@@ -53,7 +53,7 @@ plot.see_parameters_model <- function(x,
 
   # Clean up column names
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
-    colnames(x)[which.min(match(colnames(x), model_attributes$coefficient_name))] <- "Coefficient"
+    colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map", "MAP", model_attributes$coefficient_name)))] <- "Coefficient"
   }
 
   if (!any(grepl("Parameter", colnames(x), fixed = TRUE))) {
