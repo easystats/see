@@ -29,6 +29,6 @@ The \code{plot()} method for the \code{performance::check_predictions()} functio
 \examples{
 if (require("performance")) {
   model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-  check_predictions(model)
+  check_posterior_predictions(model)
 }
 }
