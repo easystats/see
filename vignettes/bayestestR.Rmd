@@ -93,6 +93,18 @@ prior distribution for the parameters with `priors = TRUE`.
 plot(result, stack = FALSE, priors = TRUE)
 ```
 
+## Density Estimation of Posterior Samples from `describe_posterior()`
+
+_([related function documentation](https://easystats.github.io/bayestestR/reference/describe_posterior.html))_
+
+There is a convenient short cut to plot posterior samples directly from `bayestestR::describe_posterior()`, which internally calls `estimate_density()` and `plot()`:
+
+```{r}
+result <- describe_posterior(model)
+plot(result)
+```
+
+
 ## Probability of Direction (pd)
 
 _([related function documentation](https://easystats.github.io/bayestestR/reference/p_direction.html))_
