@@ -190,13 +190,24 @@
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
 </div>
 </div>
+<div id="density-estimation-of-posterior-samples-from-describe_posterior" class="section level2">
+<h2 class="hasAnchor">
+<a href="#density-estimation-of-posterior-samples-from-describe_posterior" class="anchor"></a>Density Estimation of Posterior Samples from <code>describe_posterior()</code>
+</h2>
+<p><em>(<a href="https://easystats.github.io/bayestestR/reference/describe_posterior.html">related function documentation</a>)</em></p>
+<p>There is a convenient short cut to plot posterior samples directly from <code><a href="https://easystats.github.io/bayestestR/reference/describe_posterior.html">bayestestR::describe_posterior()</a></code>, which internally calls <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html">estimate_density()</a></code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/describe_posterior.html">describe_posterior</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-7-1.png" width="100%"></p>
+</div>
 <div id="probability-of-direction-pd" class="section level2">
 <h2 class="hasAnchor">
 <a href="#probability-of-direction-pd" class="anchor"></a>Probability of Direction (pd)</h2>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/p_direction.html">related function documentation</a>)</em></p>
 <p>The probability of direction (also known as the maximum probability of effect - MPE) varies between 50% and 100% (i.e., 0.5 and 1) and can be interpreted as the probability (expressed in percentage) that a parameter (described by its posterior distribution) is strictly positive or negative (whichever is the most probable).</p>
 <p>It is mathematically defined as the proportion of the posterior distribution that is of the median’s sign. Although differently expressed, this index is fairly similar (i.e., is strongly correlated) to the frequentist p-value</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">p_direction</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -212,9 +223,9 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | 62.20%</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-7-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
 <p>For more complex models with different components, each component is displayed in a separate facet. Use <code>n_columns</code> to define the layout, i.e. how many columns are used to display the facets.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">p_direction</a></span><span class="op">(</span><span class="va">model2</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -265,17 +276,17 @@
 <span class="co">#&gt; (Intercept) | 100%</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-9-1.png" width="100%"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-8-2.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-9-2.png" width="100%"></p>
 <div id="adding-prior-samples-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples-1" class="anchor"></a>Adding Prior Samples</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html">p_direction</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, priors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-9-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-10-1.png" width="100%"></p>
 </div>
 </div>
 <div id="practical-significance" class="section level2">
@@ -284,7 +295,7 @@
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/p_significance.html">related function documentation</a>)</em></p>
 <p>The probability of practical significance is conceptualized as a unidirectional equivalence test. It returns the probability that an effect is above a given threshold corresponding to a negligible effect in the median’s direction.</p>
 <p>Mathematically, it is defined as the proportion of the posterior distribution of the median sign above the threshold.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">p_significance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -300,8 +311,8 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | 0.58</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-10-1.png" width="100%"></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">p_significance</a></span><span class="op">(</span><span class="va">model2</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -352,17 +363,17 @@
 <span class="co">#&gt; (Intercept) | 1.00</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-12-1.png" width="100%"></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-11-2.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-12-2.png" width="100%"></p>
 <div id="adding-prior-samples-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples-2" class="anchor"></a>Adding Prior Samples</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html">p_significance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, priors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-12-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-13-1.png" width="100%"></p>
 </div>
 </div>
 <div id="point-estimates" class="section level2">
@@ -370,7 +381,7 @@
 <a href="#point-estimates" class="anchor"></a>Point Estimates</h2>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">related function documentation</a>)</em></p>
 <p><code><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">point_estimate()</a></code> computes various point-estimates, such as the mean, the median or the MAP, to describe posterior distributions. The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method shows the posterior distribution of related parameters and emphasizes the point estimate within the plot.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -386,8 +397,8 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  |  -0.21 | -0.20 | -0.24</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-13-1.png" width="100%"></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">model</span>, centrality <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"map"</span>, <span class="st">"mean"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -403,14 +414,14 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | -0.20 | -0.24</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, panel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-15-1.png" width="100%"></p>
 <div id="adding-prior-samples-3" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-prior-samples-3" class="anchor"></a>Adding Prior Samples</h3>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, priors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-15-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
 </div>
 </div>
 <div id="highest-density-interval-hdi" class="section level2">
@@ -419,7 +430,7 @@
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/hdi.html">related function documentation</a>)</em></p>
 <p><code><a href="https://easystats.github.io/bayestestR/reference/hdi.html">hdi()</a></code> computes the Highest Density Interval (HDI) of posterior distributions. All points within this interval have a higher probability density than points outside the interval.</p>
 <p>The HDI can be used in the context of uncertainty characterisation of posterior distributions as Credible Interval (CI).</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/hdi.html">hdi</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -435,22 +446,22 @@
 <span class="co">#&gt; Petal.Width:Speciesvirginica  | [-0.64,  0.22] | [-0.92,  0.52] | [-1.21, 0.84] | [-1.45, 1.03]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-1.png" width="100%"></p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/hdi.html">hdi</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-1.png" width="100%"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-1.png" width="100%"></p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-17-2.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-2.png" width="100%"></p>
 </div>
 <div id="support-interval" class="section level2">
 <h2 class="hasAnchor">
 <a href="#support-interval" class="anchor"></a>Support Interval</h2>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/si.html">related function documentation</a>)</em></p>
 <p>Plotting the result of a call to <code><a href="https://easystats.github.io/bayestestR/reference/si.html">si()</a></code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). The support interval will be denoted by a shaded border.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/si.html">si</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="va">result</span>
 <span class="co">#&gt; Support Interval</span>
@@ -467,13 +478,13 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-1.png" width="100%"></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-19-1.png" width="100%"></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, support_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_color_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_metro.html">scale_fill_metro</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"ice"</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-18-2.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-19-2.png" width="100%"></p>
 </div>
 <div id="region-of-practical-equivalence-rope" class="section level2">
 <h2 class="hasAnchor">
@@ -481,7 +492,7 @@
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/rope.html">related function documentation</a>)</em></p>
 <p><code><a href="https://easystats.github.io/bayestestR/reference/rope.html">rope()</a></code> computes the proportion (in percentage) of the HDI of a posterior distribution that lies within a region of practical equivalence (<em>ROPE</em>).</p>
 <p>The related <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>-method plots posterior distributions, coloring different HDI levels, and adds a “rope” region to the plot that indicates which portion of the posterior distributions lies inside (and outside) the ROPE.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html">rope</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -512,8 +523,8 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, rope_color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Greens"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-19-1.png" width="100%"></p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html">rope</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -598,14 +609,14 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, rope_color <span class="op">=</span> <span class="st">"grey70"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_social.html">scale_fill_social</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-21-1.png" width="100%"></p>
 </div>
 <div id="test-for-practical-equivalence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-for-practical-equivalence" class="anchor"></a>Test for Practical Equivalence</h2>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">related function documentation</a>)</em></p>
 <p>The test for practical equivalence is based on the “HDI+ROPE decision rule” to check whether parameter values should be accepted or rejected against an explicitly formulated “null hypothesis” (i.e., a ROPE). In other words, it checks the percentage of the 89% HDI that is the null region (the ROPE). If this percentage is sufficiently low, the null hypothesis is rejected. If this percentage is sufficiently high, the null hypothesis is accepted.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -625,8 +636,8 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_blackboard.html">theme_blackboard</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-21-1.png" width="100%"></p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-22-1.png" width="100%"></p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.89</span>, <span class="fl">.95</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -634,7 +645,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.89</span>, <span class="fl">.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -649,7 +660,7 @@
 <a href="#bayes-factors-for-model-parameters" class="anchor"></a>Bayes Factors for Model Parameters</h3>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">related function documentation</a>)</em></p>
 <p>Plotting the result of a call to <code><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">bayesfactor_parameters()</a></code> results in a plot presenting the prior and posterior distributions for each parameter (note that by default <code>show_intercept = FALSE</code>). When a point null was tested, two dots represent the density of the null at the value - the ratio of their heights is the value of the Savage-Dickey Bayes factor:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">bayesfactor_parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -669,9 +680,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-24-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-25-1.png" width="100%"></p>
 <p>When an interval null was tested, two dashed lines mark the edges of the null interval at the value - the Bayes factor represents the degree by which the distribution mass of the posterior has shifted outside or inside the null interval relative to the prior distribution:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html">bayesfactor_parameters</a></span><span class="op">(</span><span class="va">model</span>, null <span class="op">=</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope_range.html">rope_range</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span>
@@ -691,13 +702,13 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_color_material</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_material.html">scale_fill_material</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-25-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-26-1.png" width="100%"></p>
 </div>
 <div id="bayes-factors-for-model-comparison" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factors-for-model-comparison" class="anchor"></a>Bayes Factors for Model Comparison</h3>
 <p><em>(<a href="https://easystats.github.io/bayestestR/reference/bayesfactor_models.html">related function documentation</a>)</em></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">drat</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="va">lm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -716,15 +727,15 @@
 <span class="co">#&gt; * Against Denominator: [lm0] (Intercept only)</span>
 <span class="co">#&gt; *   Bayes Factor Type: BIC approximation</span></code></pre></div>
 <p><em>Pizza plots</em> are a visual way of representing the posterior probabilities of several models, with ratio of the areas of any two models corresponding to their posterior odds.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> It is possible to plot all compared models on one (pizza) pie:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_pies <span class="op">=</span> <span class="st">"one"</span>, value <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_pizza.html">scale_fill_pizza</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-27-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-28-1.png" width="100%"></p>
 <p>But it is also possible to plot one pizza for each model and the denominator model (and who doesn’t like <strong><em>more</em></strong> pizza?):</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, n_pies <span class="op">=</span> <span class="st">"many"</span>, value <span class="op">=</span> <span class="st">"BF"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"rainbow"</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="bayestestR_files/figure-html/unnamed-chunk-28-1.png" width="100%"></p>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-29-1.png" width="100%"></p>
 </div>
 </div>
 <div class="footnotes">
