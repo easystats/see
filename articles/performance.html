@@ -335,7 +335,7 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">len</span> <span class="op">~</span> <span class="va">supp</span> <span class="op">+</span> <span class="va">dose</span>, data <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_homogeneity.html">check_homogeneity</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; OK: Variances in each of the groups are the same (Bartlett Test, p = 0.226).</span>
+<span class="co">#&gt; OK: There is not clear evidence for different variances across groups (Bartlett Test, p = 0.226).</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
 </div>
@@ -345,12 +345,12 @@
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_predictions.html">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://easystats.github.io/performance/reference/pp_check.html">check_posterior_predictions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://easystats.github.io/performance/reference/check_predictions.html">check_posterior_predictions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-17-1.png" width="100%"></p>
 <p>To check if the model properly captures the variation in the data, use <code>check_range = TRUE</code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://easystats.github.io/performance/reference/pp_check.html">check_posterior_predictions</a></span><span class="op">(</span><span class="va">model</span>, check_range <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://easystats.github.io/performance/reference/check_predictions.html">check_posterior_predictions</a></span><span class="op">(</span><span class="va">model</span>, check_range <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-18-1.png" width="100%"></p>
 </div>
 </div>
@@ -402,12 +402,12 @@
 <span class="va">result</span>
 <span class="co">#&gt; # Comparison of Model Performance Indices</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Name | Model |     AIC |     BIC |    R2 | R2 (adj.) |  RMSE | Sigma</span>
-<span class="co">#&gt; --------------------------------------------------------------------</span>
-<span class="co">#&gt; lm1  |    lm | 231.452 | 243.494 | 0.619 |     0.614 | 0.510 | 0.515</span>
-<span class="co">#&gt; lm2  |    lm | 106.233 | 121.286 | 0.837 |     0.833 | 0.333 | 0.338</span>
-<span class="co">#&gt; lm3  |    lm | 187.092 | 208.167 | 0.727 |     0.718 | 0.431 | 0.440</span>
-<span class="co">#&gt; lm4  |    lm |  78.797 | 105.892 | 0.871 |     0.865 | 0.296 | 0.305</span>
+<span class="co">#&gt; Name | Model |     AIC |  AIC_wt |     BIC |  BIC_wt |    R2 | R2 (adj.) |  RMSE | Sigma</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; lm1  |    lm | 231.452 | &lt; 0.001 | 243.494 | &lt; 0.001 | 0.619 |     0.614 | 0.510 | 0.515</span>
+<span class="co">#&gt; lm2  |    lm | 106.233 | &lt; 0.001 | 121.286 | &lt; 0.001 | 0.837 |     0.833 | 0.333 | 0.338</span>
+<span class="co">#&gt; lm3  |    lm | 187.092 | &lt; 0.001 | 208.167 | &lt; 0.001 | 0.727 |     0.718 | 0.431 | 0.440</span>
+<span class="co">#&gt; lm4  |    lm |  78.797 |   1.000 | 105.892 |   1.000 | 0.871 |     0.865 | 0.296 | 0.305</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-22-1.png" width="100%"></p>
