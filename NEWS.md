@@ -10,6 +10,9 @@
   
 * Improve support for `parameters::model_parameters()` from *emmeans* objects.
 
+* Updated code and examples to work with new API decisions made for the
+  *performance* package.
+
 ## Bug fixes
 
 * Fix density plots for frequentist models.
