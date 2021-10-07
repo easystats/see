@@ -18,13 +18,21 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
   )
   dataplot$Variable <- factor(dataplot$Variable, levels = rev(unique(dataplot$Variable)))
 
+  # Title
+  if(inherits(x, "parameters_efa")) {
+    title <- "Factor Analysis"
+  } else {
+    title <- "Principal Component Analysis"
+  }
+
   rotation_name <- attr(x, "rotation", exact = TRUE)
 
   if (rotation_name == "none") {
-    title <- "Loadings from Principal Component Analysis (no rotation)"
+    title <- paste("Loadings from", title, "(no rotation)")
   } else {
-    title <- sprintf("Rotated loadings from Principal Component Analysis (%s-rotation)", rotation_name)
+    title <- paste0("Rotated loadings from ", title, "(", rotation_name, ")")
   }
+
 
   attr(dataplot, "info") <- list(
     "xlab" = "",
