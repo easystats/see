@@ -94,9 +94,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 # To flip the half-violin geoms for the first and third groups only
 # by passing a numeric vector
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_violinhalf(flip = c(1,3)) +
+  geom_violinhalf(flip = c(1, 3)) +
   theme_modern() +
   scale_fill_material_d()
-
-
 }

@@ -66,7 +66,8 @@ plot.see_parameters_model <- function(x,
             function(param) paste(param, "=", x[[param]])
           )
         ), 1,
-        paste, collapse = ", "
+        paste,
+        collapse = ", "
       )
       x$Parameter <- collapsed_params
     } else {
@@ -190,7 +191,7 @@ plot.see_parameters_model <- function(x,
         rows_to = "Iteration",
         values_to = "Coefficient"
       )
-      group <- x[,c("Parameter"), drop = FALSE]
+      group <- x[, c("Parameter"), drop = FALSE]
       group$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
       data <- merge(data, group, by = "Parameter")
       if (isTRUE(exponentiated_coefs)) {
@@ -211,7 +212,7 @@ plot.see_parameters_model <- function(x,
           fill = after_scale(.data$color)
         ),
         size = NA, alpha = .2,
-        data = function(x) x[x$CI == x$CI[1],]
+        data = function(x) x[x$CI == x$CI[1], ]
       )
     } else if (model_attributes$test_statistic == "t-statistic") {
       # t-distribution confidence densities
@@ -224,7 +225,7 @@ plot.see_parameters_model <- function(x,
           fill = after_scale(.data$color)
         ),
         size = NA, alpha = .2,
-        data = function(x) x[x$CI == x$CI[1],]
+        data = function(x) x[x$CI == x$CI[1], ]
       )
     } else {
       # normal-approximation confidence densities
@@ -236,7 +237,7 @@ plot.see_parameters_model <- function(x,
           fill = after_scale(.data$color)
         ),
         size = NA, alpha = .2,
-        data = function(x) x[x$CI == x$CI[1],]
+        data = function(x) x[x$CI == x$CI[1], ]
       )
     }
   }
@@ -342,14 +343,14 @@ plot.see_parameters_model <- function(x,
     if (show_interval) {
       # TODO: Handle NA boundaries
       p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
-                             width = 0,
-                             size = size_point)
+        width = 0,
+        size = size_point
+      )
     }
 
     if (show_estimate) {
       p <- p + geom_point(size = x$size_point * size_point, shape = x$shape)
     }
-
   } else if (isTRUE(multiple_ci)) {
 
     # plot setup for model parameters with multiple CIs
@@ -362,8 +363,10 @@ plot.see_parameters_model <- function(x,
       color_scale <- scale_color_material()
     }
 
-    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient,
-                       size = rev(.data$CI), color = .data$group)) +
+    p <- ggplot(x, aes(
+      y = .data$Parameter, x = .data$Coefficient,
+      size = rev(.data$CI), color = .data$group
+    )) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
       theme_modern(legend.position = "none") +
       color_scale
@@ -386,7 +389,6 @@ plot.see_parameters_model <- function(x,
         size = 4 * size_point
       )
     }
-
   } else {
 
     # plot setup for regular model parameters
@@ -409,20 +411,22 @@ plot.see_parameters_model <- function(x,
     if (show_interval) {
       # TODO: Handle NA boundaries
       p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
-                             width = 0,
-                             size = size_point)
+        width = 0,
+        size = size_point
+      )
     }
 
     if (show_estimate) {
       if (show_density) {
-        p <- p + geom_point(size = 4 * size_point,
-                            fill = "white",
-                            shape = 21)
+        p <- p + geom_point(
+          size = 4 * size_point,
+          fill = "white",
+          shape = 21
+        )
       } else {
         p <- p + geom_point(size = 4 * size_point)
       }
     }
-
   }
 
 

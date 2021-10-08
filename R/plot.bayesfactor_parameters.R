@@ -18,12 +18,11 @@
 #' @importFrom rlang .data
 #' @export
 plot.see_bayesfactor_parameters <- function(x,
-           size_point = 2,
-           rope_color = "#0171D3",
-           rope_alpha = .2,
-           show_intercept = FALSE,
-           ...) {
-
+                                            size_point = 2,
+                                            rope_color = "#0171D3",
+                                            rope_alpha = .2,
+                                            show_intercept = FALSE,
+                                            ...) {
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
     x$BF <- exp(x$log_BF)
   }

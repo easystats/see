@@ -1,7 +1,6 @@
-if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
-  require("bayestestR")) {
-  test_that("plots are rendered correctly", {
-    skip_on_cran()
+if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2")) {
+  test_that("geom and coord functions work correctly", {
+    # skip_on_cran()
 
     # coord_radar() ------------------
 
@@ -36,7 +35,7 @@ if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
       fig = plots(normal, new, n_columns = 2)
     )
 
-    # `geom_poolpoint()` works ----------------
+    # geom_poolpoint() ----------------
 
     set.seed(123)
     vdiffr::expect_doppelganger(
@@ -75,28 +74,6 @@ if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
         geom_violinhalf() +
         theme_modern() +
         scale_fill_material_d()
-    )
-
-    # plot.see_bayesfactor_models() --------------------
-
-    lm0 <- lm(qsec ~ 1, data = mtcars)
-    lm1 <- lm(qsec ~ drat, data = mtcars)
-    lm2 <- lm(qsec ~ wt, data = mtcars)
-    lm3 <- lm(qsec ~ drat + wt, data = mtcars)
-    result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
-
-    set.seed(123)
-    vdiffr::expect_doppelganger(
-      title = "``plot.see_bayesfactor_models()` works - 1",
-      fig = plot(result, n_pies = "one", value = "probability", sort = TRUE) +
-        scale_fill_pizza(reverse = TRUE)
-    )
-
-    set.seed(123)
-    vdiffr::expect_doppelganger(
-      title = "`plot.see_bayesfactor_models()` works - 2",
-      fig = plot(result, n_pies = "many", value = "BF", log = TRUE) +
-        scale_fill_pizza(reverse = FALSE)
     )
   })
 }

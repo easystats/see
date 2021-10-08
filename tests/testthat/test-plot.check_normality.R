@@ -1,7 +1,7 @@
 if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
   require("performance") && require("lme4") && require("see") && require("qqplotr")) {
   test_that("`plot.see_check_normality()` works", {
-    skip_on_cran()
+    # skip_on_cran()
 
     set.seed(123)
     m_lm <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)

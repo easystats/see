@@ -116,7 +116,9 @@ geom_from_list <- function(x, ...) {
   # Additional parameters ------------------------------------------------------
   args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
 
-  if(is.null(x$geom)) return(NULL)
+  if (is.null(x$geom)) {
+    return(NULL)
+  }
 
   if (inherits(x$geom, "function")) {
     return(do.call(x$geom, args))
@@ -141,9 +143,9 @@ geom_from_list <- function(x, ...) {
     return(do.call(ggplot2::facet_grid, args))
   }
   if (x$geom == "smooth") {
-    if(!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
-    if(!"method" %in% names(args)) args$method <- "loess"
-    if(!"formula" %in% names(args)) args$formula <- "y ~ x"
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if (!"method" %in% names(args)) args$method <- "loess"
+    if (!"formula" %in% names(args)) args$formula <- "y ~ x"
     return(do.call(ggplot2::geom_smooth, args))
   }
   if (startsWith(x$geom, "scale_")) {
@@ -157,8 +159,8 @@ geom_from_list <- function(x, ...) {
   }
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
-    if(!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
-    return(do.call(eval(parse(text=x$geom)), args))
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    return(do.call(eval(parse(text = x$geom)), args))
   }
 
   # Default parameters
@@ -211,7 +213,7 @@ geom_from_list <- function(x, ...) {
   }
 
   # Show.legend
-  if("show.legend" %in% names(x)) {
+  if ("show.legend" %in% names(x)) {
     show.legend <- x$show.legend
   } else {
     show.legend <- NA

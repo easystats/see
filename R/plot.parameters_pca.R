@@ -19,7 +19,7 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
   dataplot$Variable <- factor(dataplot$Variable, levels = rev(unique(dataplot$Variable)))
 
   # Title
-  if(inherits(x, "parameters_efa")) {
+  if (inherits(x, "parameters_efa")) {
     title <- "Factor Analysis"
   } else {
     title <- "Principal Component Analysis"
