@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">see</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
       </span>
     </div>
 
@@ -220,12 +220,12 @@
 <span class="co">#&gt; (Intercept)                                     |        4.79 |  0.17 | [  4.45,  5.13] |  27.66 | &lt; .001</span>
 <span class="co">#&gt; Species [versicolor]                            |       -3.73 |  2.14 | [ -7.96,  0.50] |  -1.74 | 0.083 </span>
 <span class="co">#&gt; Species [virginica]                             |       -2.67 |  2.88 | [ -8.36,  3.03] |  -0.93 | 0.356 </span>
-<span class="co">#&gt; Petal.Width [1st degree]                        |        2.53 |  2.36 | [ -2.13,  7.20] |   1.07 | 0.285 </span>
-<span class="co">#&gt; Petal.Width [2nd degree]                        |      -11.18 | 21.14 | [-52.98, 30.62] |  -0.53 | 0.598 </span>
-<span class="co">#&gt; Species [versicolor] * Petal.Width [1st degree] |        5.48 |  4.84 | [ -4.09, 15.05] |   1.13 | 0.260 </span>
-<span class="co">#&gt; Species [virginica] * Petal.Width [1st degree]  |        2.37 |  4.35 | [ -6.22, 10.96] |   0.54 | 0.587 </span>
-<span class="co">#&gt; Species [versicolor] * Petal.Width [2nd degree] |       14.84 | 21.16 | [-26.99, 56.68] |   0.70 | 0.484 </span>
-<span class="co">#&gt; Species [virginica] * Petal.Width [2nd degree]  |       15.81 | 21.32 | [-26.35, 57.96] |   0.74 | 0.460</span>
+<span class="co">#&gt; Petal Width [1st degree]                        |        2.53 |  2.36 | [ -2.13,  7.20] |   1.07 | 0.285 </span>
+<span class="co">#&gt; Petal Width [2nd degree]                        |      -11.18 | 21.14 | [-52.98, 30.62] |  -0.53 | 0.598 </span>
+<span class="co">#&gt; Species [versicolor] * Petal Width [1st degree] |        5.48 |  4.84 | [ -4.09, 15.05] |   1.13 | 0.260 </span>
+<span class="co">#&gt; Species [virginica] * Petal Width [1st degree]  |        2.37 |  4.35 | [ -6.22, 10.96] |   0.54 | 0.587 </span>
+<span class="co">#&gt; Species [versicolor] * Petal Width [2nd degree] |       14.84 | 21.16 | [-26.99, 56.68] |   0.70 | 0.484 </span>
+<span class="co">#&gt; Species [virginica] * Petal Width [2nd degree]  |       15.81 | 21.32 | [-26.35, 57.96] |   0.74 | 0.460</span>
 
 
 <span class="va">model3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span>
@@ -524,12 +524,13 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   ROPE: [-1.99 1.99]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;         Parameter        H0 inside ROPE        90% CI</span>
-<span class="co">#&gt;       (Intercept)  Rejected      0.00 % [59.33 68.41]</span>
-<span class="co">#&gt;              time Undecided     83.52 % [-0.76  2.53]</span>
-<span class="co">#&gt;               age  Accepted    100.00 % [-0.26  0.32]</span>
-<span class="co">#&gt;   education [mid]  Rejected      0.00 % [ 5.13 12.39]</span>
-<span class="co">#&gt;  education [high]  Rejected      0.00 % [10.14 18.57]</span>
+<span class="co">#&gt; Parameter        |         90% CI | % in ROPE |        H0 |      p</span>
+<span class="co">#&gt; ------------------------------------------------------------------</span>
+<span class="co">#&gt; (Intercept)      | [59.33, 68.41] |        0% |  Rejected | &gt; .999</span>
+<span class="co">#&gt; time             | [-0.76,  2.53] |    83.52% | Undecided | 0.137 </span>
+<span class="co">#&gt; age              | [-0.26,  0.32] |      100% |  Accepted | &lt; .001</span>
+<span class="co">#&gt; education [mid]  | [ 5.13, 12.39] |        0% |  Rejected | 0.999 </span>
+<span class="co">#&gt; education [high] | [10.14, 18.57] |        0% |  Rejected | &gt; .999</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-29-1.png" width="672"></p>
@@ -540,12 +541,13 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   ROPE: [-1.99 1.99]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;         Parameter        H0 inside ROPE        90% CI</span>
-<span class="co">#&gt;       (Intercept)  Rejected      0.00 % [59.33 68.41]</span>
-<span class="co">#&gt;              time Undecided     83.52 % [-0.76  2.53]</span>
-<span class="co">#&gt;               age  Accepted    100.00 % [-0.26  0.32]</span>
-<span class="co">#&gt;   education [mid]  Rejected      0.00 % [ 5.13 12.39]</span>
-<span class="co">#&gt;  education [high]  Rejected      0.00 % [10.14 18.57]</span>
+<span class="co">#&gt; Parameter        |         90% CI | % in ROPE |        H0 |      p</span>
+<span class="co">#&gt; ------------------------------------------------------------------</span>
+<span class="co">#&gt; (Intercept)      | [59.33, 68.41] |        0% |  Rejected | &gt; .999</span>
+<span class="co">#&gt; time             | [-0.76,  2.53] |    83.52% | Undecided | 0.137 </span>
+<span class="co">#&gt; age              | [-0.26,  0.32] |      100% |  Accepted | &lt; .001</span>
+<span class="co">#&gt; education [mid]  | [ 5.13, 12.39] |        0% |  Rejected | 0.999 </span>
+<span class="co">#&gt; education [high] | [10.14, 18.57] |        0% |  Rejected | &gt; .999</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-30-1.png" width="672"></p>
@@ -562,34 +564,35 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Group: grp</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;  Parameter       H0 inside ROPE       90% CI</span>
-<span class="co">#&gt;          1 Accepted    100.00 % [-1.91 4.28]</span>
-<span class="co">#&gt;          2 Accepted    100.00 % [-3.27 2.84]</span>
-<span class="co">#&gt;          3 Accepted    100.00 % [-3.33 2.83]</span>
-<span class="co">#&gt;          4 Accepted    100.00 % [-3.56 2.60]</span>
-<span class="co">#&gt;          5 Accepted    100.00 % [-3.33 2.85]</span>
-<span class="co">#&gt; </span>
+<span class="co">#&gt; Parameter | Estimate | Group |           90% CI | % in ROPE |       H0</span>
+<span class="co">#&gt; ----------------------------------------------------------------------</span>
+<span class="co">#&gt; 1         |     1.18 |   grp | [ -1.91,   4.28] |      100% | Accepted</span>
+<span class="co">#&gt; 2         |    -0.21 |   grp | [ -3.27,   2.84] |      100% | Accepted</span>
+<span class="co">#&gt; 3         |    -0.25 |   grp | [ -3.33,   2.83] |      100% | Accepted</span>
+<span class="co">#&gt; 4         |    -0.48 |   grp | [ -3.56,   2.60] |      100% | Accepted</span>
+<span class="co">#&gt; 5         |    -0.24 |   grp | [ -3.33,   2.85] |      100% | Accepted</span>
 <span class="co">#&gt; Group: Subject</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;  Parameter        H0 inside ROPE          90% CI</span>
-<span class="co">#&gt;        308  Rejected      0.00 % [ 25.22  56.50]</span>
-<span class="co">#&gt;        309  Rejected      0.00 % [-93.51 -62.24]</span>
-<span class="co">#&gt;        310  Rejected      0.00 % [-78.91 -47.65]</span>
-<span class="co">#&gt;        330 Undecided     36.01 % [-11.32  19.96]</span>
-<span class="co">#&gt;        331 Undecided     35.46 % [ -5.45  25.80]</span>
-<span class="co">#&gt;        332 Undecided     36.02 % [ -7.17  24.10]</span>
-<span class="co">#&gt;        333  Rejected     15.44 % [  0.81  32.07]</span>
-<span class="co">#&gt;        334 Undecided     36.00 % [-18.65  12.65]</span>
-<span class="co">#&gt;        335  Rejected      0.00 % [-61.11 -29.85]</span>
-<span class="co">#&gt;        337  Rejected      0.00 % [ 56.54  87.79]</span>
-<span class="co">#&gt;        349  Rejected      1.22 % [-36.57  -5.25]</span>
-<span class="co">#&gt;        350 Undecided     22.52 % [ -1.41  29.88]</span>
-<span class="co">#&gt;        351 Undecided     35.97 % [-23.74   7.59]</span>
-<span class="co">#&gt;        352  Rejected      0.00 % [ 20.76  52.12]</span>
-<span class="co">#&gt;        369 Undecided     36.05 % [ -8.66  22.60]</span>
-<span class="co">#&gt;        370 Undecided     35.99 % [-21.96   9.34]</span>
-<span class="co">#&gt;        371 Undecided     36.05 % [-18.96  12.29]</span>
-<span class="co">#&gt;        372  Rejected      9.80 % [  2.57  33.84]</span>
+<span class="co">#&gt; Parameter | Estimate |   Group |           90% CI | % in ROPE |        H0</span>
+<span class="co">#&gt; -------------------------------------------------------------------------</span>
+<span class="co">#&gt; 308       |    40.86 | Subject | [ 25.22,  56.50] |        0% |  Rejected</span>
+<span class="co">#&gt; 309       |   -77.88 | Subject | [-93.51, -62.24] |        0% |  Rejected</span>
+<span class="co">#&gt; 310       |   -63.28 | Subject | [-78.91, -47.65] |        0% |  Rejected</span>
+<span class="co">#&gt; 330       |     4.32 | Subject | [-11.32,  19.96] |    36.01% | Undecided</span>
+<span class="co">#&gt; 331       |    10.18 | Subject | [ -5.45,  25.80] |    35.46% | Undecided</span>
+<span class="co">#&gt; 332       |     8.47 | Subject | [ -7.17,  24.10] |    36.02% | Undecided</span>
+<span class="co">#&gt; 333       |    16.44 | Subject | [  0.81,  32.07] |    15.44% |  Rejected</span>
+<span class="co">#&gt; 334       |    -3.00 | Subject | [-18.65,  12.65] |    36.00% | Undecided</span>
+<span class="co">#&gt; 335       |   -45.48 | Subject | [-61.11, -29.85] |        0% |  Rejected</span>
+<span class="co">#&gt; 337       |    72.16 | Subject | [ 56.54,  87.79] |        0% |  Rejected</span>
+<span class="co">#&gt; 349       |   -20.91 | Subject | [-36.57,  -5.25] |     1.22% |  Rejected</span>
+<span class="co">#&gt; 350       |    14.23 | Subject | [ -1.41,  29.88] |    22.52% | Undecided</span>
+<span class="co">#&gt; 351       |    -8.07 | Subject | [-23.74,   7.59] |    35.97% | Undecided</span>
+<span class="co">#&gt; 352       |    36.44 | Subject | [ 20.76,  52.12] |        0% |  Rejected</span>
+<span class="co">#&gt; 369       |     6.97 | Subject | [ -8.66,  22.60] |    36.05% | Undecided</span>
+<span class="co">#&gt; 370       |    -6.31 | Subject | [-21.96,   9.34] |    35.99% | Undecided</span>
+<span class="co">#&gt; 371       |    -3.34 | Subject | [-18.96,  12.29] |    36.05% | Undecided</span>
+<span class="co">#&gt; 372       |    18.21 | Subject | [  2.57,  33.84] |     9.80% |  Rejected</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-31-1.png" width="672"></p>
@@ -715,7 +718,7 @@
 <span class="va">result</span>
 <span class="co">#&gt; # Method Agreement Procedure:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, SE Scree, R2, Velicer's MAP).</span>
+<span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, Scree (SE), Scree (R2), Velicer's MAP).</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
@@ -733,7 +736,7 @@
 <span class="va">result</span>
 <span class="co">#&gt; # Method Agreement Procedure:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; The choice of 2 clusters is supported by 12 (42.86%) methods out of 28 (CH, Cindex, DB, Silhouette, Beale, Ratkowsky, PtBiserial, McClain, Dunn, SDindex, Mixture, Tibs2001SEmax).</span>
+<span class="co">#&gt; The choice of 2 clusters is supported by 15 (53.57%) methods out of 28 (Elbow, Silhouette, Gap_Maechler2012, Gap_Dudoit2002, Ch, DB, Duda, Pseudot2, Beale, Ratkowsky, PtBiserial, Mcclain, Dunn, SDindex, Mixture).</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
@@ -750,7 +753,7 @@
 <a href="#histogram-for-numbers-with-fractional-part" class="anchor"></a>Histogram for Numbers with Fractional Part</h3>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">describe_distribution</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span>
+<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/datawizard/reference/describe_distribution.html">describe_distribution</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span>
 <span class="va">result</span>
 <span class="co">#&gt; Mean |   SD |  IQR |        Range | Skewness | Kurtosis |   n | n_Missing</span>
 <span class="co">#&gt; -------------------------------------------------------------------------</span>
@@ -772,7 +775,7 @@
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">333</span><span class="op">)</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">describe_distribution</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/datawizard/reference/describe_distribution.html">describe_distribution</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">result</span>
 <span class="co">#&gt;  Mean |    SD |   IQR |          Range | Skewness | Kurtosis |    n | n_Missing</span>
 <span class="co">#&gt; -------------------------------------------------------------------------------</span>
@@ -793,7 +796,7 @@
 <a href="#highlighting-categories" class="anchor"></a>Highlighting Categories</h3>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/describe_distribution.html">describe_distribution</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="fl">1000</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/datawizard/reference/describe_distribution.html">describe_distribution</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="fl">1000</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># highlight one category</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span></code></pre></div>
