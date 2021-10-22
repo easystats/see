@@ -27,6 +27,7 @@ if (!requireNamespace("parameters", quietly = TRUE) ||
   !requireNamespace("lavaan", quietly = TRUE) ||
   !requireNamespace("metafor", quietly = TRUE) ||
   !requireNamespace("ggplot2", quietly = TRUE) ||
+  !requireNamespace("factoextra", quietly = TRUE) ||
   !requireNamespace("splines", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
