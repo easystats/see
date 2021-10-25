@@ -189,7 +189,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' @param show_title Logical. If `TRUE`, will show the title of the plot.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
-#' @inheritParams plot.see_cluster_analysis
+#' @inheritParams plot.see_parameters_model
 #'
 #' @return A ggplot2-object.
 #'

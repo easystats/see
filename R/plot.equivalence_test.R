@@ -4,7 +4,7 @@
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
-#' @inheritParams plot.see_cluster_analysis
+#' @inheritParams plot.see_parameters_model
 #'
 #' @return A ggplot2-object.
 #'

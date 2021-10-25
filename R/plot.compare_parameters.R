@@ -8,7 +8,7 @@
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_bayesfactor_models
-#' @inheritParams plot.see_cluster_analysis
+#' @inheritParams plot.see_parameters_model
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_brms_meta
 #'

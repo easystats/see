@@ -46,8 +46,6 @@ are hardly visible.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{size_text}{Numeric value specifying size of text labels.}
-
 \item{sort}{The behavior of this argument depends on the plotting contexts.
 \itemize{
 \item \emph{Plotting model parameters}:
@@ -68,8 +66,6 @@ parameters from meta-analysis objects (e.g. \pkg{metafor}).}
 
 \item{weight_points}{Logical. If \code{TRUE}, for meta-analysis objects, point
 size will be adjusted according to the study-weights.}
-
-\item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
 
 \item{show_estimate}{Should the point estimate of each parameter be shown?
 (default: \code{TRUE})}
