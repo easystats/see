@@ -149,6 +149,9 @@ geom_from_list <- function(x, ...) {
   if (x$geom == "labs") {
     return(do.call(ggplot2::labs, args))
   }
+  if (x$geom == "guides") {
+    return(do.call(ggplot2::labs, args))
+  }
   if (x$geom == "coord_flip") {
     return(do.call(ggplot2::coord_flip, args))
   }
