@@ -21,8 +21,6 @@
 
 \item{size_text}{Numeric value specifying size of text labels.}
 
-\item{text_color}{Character specifying color of text labels.}
-
 \item{size}{Depending on \code{type}, a numeric value specifying size of bars,
 lines, or segments.}
 

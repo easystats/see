@@ -150,7 +150,7 @@ geom_from_list <- function(x, ...) {
     return(do.call(ggplot2::labs, args))
   }
   if (x$geom == "guides") {
-    return(do.call(ggplot2::labs, args))
+    return(do.call(ggplot2::guides, args))
   }
   if (x$geom == "coord_flip") {
     return(do.call(ggplot2::coord_flip, args))
