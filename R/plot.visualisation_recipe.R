@@ -3,15 +3,8 @@ plot.see_visualisation_recipe <- function(x, ...) {
   if("ggraph" %in% names(attributes(x))) {
 
     insight::check_if_installed("ggraph")
-    # This below is because ggraph must actually be loaded
-    if (!requireNamespace("ggraph", quietly = TRUE)) {
-    } else {
-      si <- utils::sessionInfo()
-      other_packages <- names(si$otherPkgs)
-      if (!is.null(other_packages) && !("ggraph" %in% other_packages)) {
-        insight::check_if_installed("ggraph")
-        return(NULL)
-      }
+    if(!"ggraph" %in% .packages()){
+      attachNamespace("ggraph") # Needs to be attached
     }
     ggraph::ggraph(attributes(x)$data, layout = attributes(x)$layout) +
       geoms_from_list(x)
@@ -26,11 +19,14 @@ plot.see_visualisation_recipe <- function(x, ...) {
 # Example
 # vr1 <- datawizard::visualisation_recipe(correlation::correlation(iris))
 # vr2 <- datawizard::visualisation_recipe(summary(correlation::correlation(iris)))
+# x <- list(p1 = vr1, p2 = vr2)
+# class(x) <- "see_visualisation_recipes"
+# plot(x)
 #' @export
 plot.see_visualisation_recipes <- function(x, ...) {
   the_plots <- list()
-  for(vr in x) {
-    the_plots[paste0("p", length(the_plots) + 1)] <- plot(vr)
+  for(i in names(x)) {
+    the_plots[[i]] <- plot(x[[i]])
   }
   plots(the_plots, ...)
 }
