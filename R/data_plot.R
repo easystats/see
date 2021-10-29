@@ -18,7 +18,6 @@
 #'  \item{\link[=plot.see_easycorrelation]{correlation::correlation()} (Gaussian Graphical Models)}
 #'  \item{\link[=plot.see_effectsize_table]{effectsize::effectsize()}}
 #'  \item{\link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}}
-#'  \item{\link[=plot.see_cluster_analysis]{parameters::cluster_analysis()}}
 #'  \item{\link[=plot.see_compare_parameters]{parameters::compare_parameters()}}
 #'  \item{\link[=plot.see_parameters_distribution]{parameters::describe_distribution()}}
 #'  \item{\link[=plot.see_parameters_model]{parameters::model_parameters()}}

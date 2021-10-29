@@ -71,7 +71,6 @@ data_plot.parameters_simulate <- function(x,
 #' @inheritParams data_plot
 #' @inheritParams plot.see_estimate_density
 #' @inheritParams plot.see_bayesfactor_parameters
-#' @inheritParams plot.see_cluster_analysis
 #'
 #' @return A ggplot2-object.
 #'

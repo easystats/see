@@ -9,7 +9,6 @@
 #'   plotting [bayestestR::si()].
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
-#' @inheritParams plot.see_cluster_analysis
 #'
 #' @return A ggplot2-object.
 #'
