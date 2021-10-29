@@ -1,6 +1,6 @@
 .runThisTest <- Sys.getenv("RunAllseeTests") == "yes"
 
-if (.runThisTest) {
+if (getRversion() >= "4.1" && .runThisTest && require("vdiffr")) {
   test_that("`plot.see_n_factors()` works", {
     if (require("parameters") && require("nFactors")) {
       data(mtcars)
