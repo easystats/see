@@ -1,4 +1,6 @@
-if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
+.runThisTest <- Sys.getenv("RunAllseeTests") == "yes"
+
+if (.runThisTest && getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
   require("dplyr") && require("tidyr")) {
   test_that("theme functions work", {
     # skip_on_cran()

@@ -1,4 +1,6 @@
-if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2")) {
+.runThisTest <- Sys.getenv("RunAllseeTests") == "yes"
+
+if (.runThisTest && getRversion() >= "4.1" && require("vdiffr") && require("ggplot2")) {
   test_that("scale_color_ functions work correctly", {
     # skip_on_cran()
 
