@@ -15,6 +15,7 @@
 ^paper.*$
 ^apa.*$
 ^man/figures/.
+^tests/testthat/_snaps/.
 ^revdep$
 ^vignettes$
 ^.github$
