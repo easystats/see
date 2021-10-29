@@ -13,6 +13,7 @@
 #' @inheritParams plot.see_bayesfactor_models
 #' @inheritParams plot.see_cluster_analysis
 #' @inheritParams plot.see_check_normality
+#' #' @inheritParams plot.see_check_outliers
 #' @inheritParams plot.see_parameters_brms_meta
 #' @param show_estimate Should the point estimate of each parameter be shown?
 #'   (default: `TRUE`)
@@ -26,6 +27,7 @@
 #'@param n_columns For models with multiple components (like fixed and random,
 #'   count and zero-inflated), defines the number of columns for the
 #'   panel-layout. If `NULL`, a single, integrated plot is shown.
+#' @param text_color Character specifying color of text labels.
 #'
 #' @return A ggplot2-object.
 #'
