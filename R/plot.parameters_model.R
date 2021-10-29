@@ -13,7 +13,7 @@
 #' @inheritParams plot.see_bayesfactor_models
 #' @inheritParams plot.see_cluster_analysis
 #' @inheritParams plot.see_check_normality
-#' #' @inheritParams plot.see_check_outliers
+#' @inheritParams plot.see_check_outliers
 #' @inheritParams plot.see_parameters_brms_meta
 #' @param show_estimate Should the point estimate of each parameter be shown?
 #'   (default: `TRUE`)
