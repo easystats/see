@@ -62,6 +62,32 @@ data(mtcars)
 data(iris)
 ```
 
+
+# Correlation Scatterplot
+
+_([related function documentation](https://easystats.github.io/correlation/reference/cor_test.html))_
+
+It is easy to visualize correlation tests with `correlation` and `see`.
+
+```{r}
+result <- cor_test(iris, "Sepal.Length", "Petal.Width")
+
+plot(result)
+```
+
+We can even customize that to make it more beautiful:
+
+```{r}
+plot(result, 
+     point = list(aes = list(color = "Petal.Width", size = "Sepal.Length"),
+                  alpha = 0.66),
+     smooth = list(color = "black", se = FALSE)) +
+  see::theme_modern() +
+  see::scale_color_material_c(palette = "rainbow", guide = "none") +
+  scale_size_continuous(guide = "none")
+```
+
+
 # Correlation Matrix
 
 _([related function documentation](https://easystats.github.io/correlation/reference/correlation.html))_
@@ -82,20 +108,15 @@ The result from `summary()` can be used to create a plot.
 
 ```{r}
 s <- summary(result)
-plot(s, size_point = 2)
+plot(s)
 ```
 
-To change the style of geoms, use the `type`-argument.
+To change the style of geoms, use the `show_data`-argument.
 
 ```{r}
-plot(s, type = "tile")
+plot(s, show_data = "points")
 ```
 
-It is also possible to add correlation coefficients and *p*-values.
-
-```{r}
-plot(s, show_values = TRUE, show_p = TRUE, show_legend = FALSE)
-```
 
 And a "redundant" summary can be plotted as well:
 
@@ -105,17 +126,6 @@ s <- summary(result, redundant = TRUE)
 s
 
 plot(s)
-```
-
-For larger correlation matrices, the `size_point` argument can be used to adjust
-size of point geoms.
-
-```{r}
-result <- correlation(mtcars[, -c(8:9)])
-result
-
-s <- summary(result)
-plot(s, size_point = .8)
 ```
 
 The `corrlation` function also provides a convenient way to change names for selected variables:
