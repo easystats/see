@@ -1,9 +1,9 @@
-.runThisTest <- Sys.getenv("RunAllseeTests") == "yes"
-
-if (.runThisTest && getRversion() >= "4.1" && require("vdiffr") && require("ggplot2") &&
+if (getRversion() >= "4.1" &&
+  require("vdiffr") &&
+  require("ggplot2") &&
   require("bayestestR")) {
   test_that("bayestestR package plots rendered correctly", {
-    # skip_on_cran()
+    skip_on_cran()
 
     # plot.see_bayesfactor_models() --------------------
 

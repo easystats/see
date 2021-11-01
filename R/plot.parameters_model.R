@@ -23,7 +23,7 @@
 #'   (default: `FALSE`)
 #' @param log_scale Should exponentiated coefficients (e.g., odds-ratios) be
 #'   plotted on a log scale? (default: `FALSE`)
-#'@param n_columns For models with multiple components (like fixed and random,
+#' @param n_columns For models with multiple components (like fixed and random,
 #'   count and zero-inflated), defines the number of columns for the
 #'   panel-layout. If `NULL`, a single, integrated plot is shown.
 #'

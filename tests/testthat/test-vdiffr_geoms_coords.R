@@ -1,6 +1,4 @@
-.runThisTest <- Sys.getenv("RunAllseeTests") == "yes"
-
-if (.runThisTest && getRversion() >= "4.1" && require("vdiffr") && require("ggplot2")) {
+if (getRversion() >= "4.1" && require("vdiffr") && require("ggplot2")) {
   test_that("geom and coord functions work correctly", {
     # skip_on_cran()
 
