@@ -432,13 +432,21 @@ _([related function documentation](https://easystats.github.io/parameters/refere
 
 ```{r}
 data(iris)
-result <- cluster_analysis(iris[, 1:4], n_clusters = 3)
+result <- cluster_analysis(iris[, 1:4], n = 3)
 result
-
 plot(result)
 
-result <- cluster_analysis(iris[, 1:4], n_clusters = 4)
-plot(result, n_columns = 2)
+result <- cluster_analysis(iris[, 1:4], n = 4)
+plot(result)
+```
+
+### Plotting cluster means
+
+```{r}
+s <- summary(result)
+s
+
+plot(s)
 ```
 
 ## Number of Components/Factors to Retain
