@@ -673,6 +673,9 @@
 <h2 class="hasAnchor">
 <a href="#cluster-analysis" class="anchor"></a>Cluster Analysis</h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">related function documentation</a>)</em></p>
+<div id="clustering-solution" class="section level3">
+<h3 class="hasAnchor">
+<a href="#clustering-solution" class="anchor"></a>Clustering solution</h3>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">cluster_analysis</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
@@ -701,9 +704,10 @@
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html">cluster_analysis</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-35-2.png" width="672"></p>
-<div id="plotting-cluster-means" class="section level3">
+</div>
+<div id="cluster-centers" class="section level3">
 <h3 class="hasAnchor">
-<a href="#plotting-cluster-means" class="anchor"></a>Plotting cluster means</h3>
+<a href="#cluster-centers" class="anchor"></a>Cluster centers</h3>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="va">s</span>
