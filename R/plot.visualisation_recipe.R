@@ -1,19 +1,16 @@
 #' @export
 plot.see_visualisation_recipe <- function(x, ...) {
   if ("ggraph" %in% names(attributes(x))) {
-
     insight::check_if_installed("ggraph")
     if (!"ggraph" %in% .packages()) {
       attachNamespace("ggraph") # Needs to be attached
     }
     ggraph::ggraph(attributes(x)$data, layout = attributes(x)$layout) +
       geoms_from_list(x)
-
   } else {
     ggplot2::ggplot(data = attributes(x)$data) +
       geoms_from_list(x, ...)
   }
-
 }
 
 # Example
@@ -30,4 +27,3 @@ plot.see_visualisation_recipes <- function(x, ...) {
   }
   plots(the_plots, ...)
 }
-

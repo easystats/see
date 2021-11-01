@@ -1,8 +1,8 @@
-.runThisTest <- Sys.getenv("RunAllseeTests") == "yes"
-
-if (.runThisTest && getRversion() >= "4.1" && require("vdiffr") && require("ggplot2")) {
+if (getRversion() >= "4.1" && getRversion() < "4.2" &&
+  require("vdiffr") &&
+  require("ggplot2")) {
   test_that("scale_color_ functions work correctly", {
-    # skip_on_cran()
+    skip_on_cran()
 
     vdiffr::expect_doppelganger(
       title = "scale_color_bluebrown_d() works",
