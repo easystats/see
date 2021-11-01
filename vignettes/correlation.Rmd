@@ -58,6 +58,7 @@ An overview and description of these correlations types is [**available here**](
 ```{r setup}
 library(correlation)
 library(see)
+library(ggplot2)
 data(mtcars)
 data(iris)
 ```
