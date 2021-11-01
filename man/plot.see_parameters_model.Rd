@@ -97,8 +97,6 @@ plotted.}
 \item{threshold_p}{Numeric, threshold at which value p-values will be displayed.}
 
 \item{ci}{Logical, whether confidence intervals should be added to the plot.}
-
-\item{text_color}{Character specifying color of text labels.}
 }
 \value{
 A ggplot2-object.

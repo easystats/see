@@ -28,8 +28,6 @@ for your object's class:
 \item{\link[=plot.see_p_direction]{bayestestR::p_direction()}}
 \item{\link[=plot.see_p_significance]{bayestestR::p_significance()}}
 \item{\link[=plot.see_si]{bayestestR::si()}}
-\item{\link[=plot.see_easycormatrix]{correlation::correlation()}}
-\item{\link[=plot.see_easycorrelation]{correlation::correlation()} (Gaussian Graphical Models)}
 \item{\link[=plot.see_effectsize_table]{effectsize::effectsize()}}
 \item{\link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}}
 \item{\link[=plot.see_compare_parameters]{parameters::compare_parameters()}}

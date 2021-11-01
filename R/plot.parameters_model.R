@@ -26,7 +26,6 @@
 #'@param n_columns For models with multiple components (like fixed and random,
 #'   count and zero-inflated), defines the number of columns for the
 #'   panel-layout. If `NULL`, a single, integrated plot is shown.
-#' @param text_color Character specifying color of text labels.
 #'
 #' @return A ggplot2-object.
 #'
