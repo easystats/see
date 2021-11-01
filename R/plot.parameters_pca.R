@@ -55,6 +55,7 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #'
 #' The `plot()` method for the `parameters::principal_components()` function.
 #'
+#' @param text_color Character specifying color of text labels.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_check_outliers
