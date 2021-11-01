@@ -430,6 +430,8 @@ plot(result, type = "line", text_color = "white") +
 
 _([related function documentation](https://easystats.github.io/parameters/reference/cluster_analysis.html))_
 
+### Clustering solution
+
 ```{r}
 data(iris)
 result <- cluster_analysis(iris[, 1:4], n = 3)
@@ -440,7 +442,7 @@ result <- cluster_analysis(iris[, 1:4], n = 4)
 plot(result)
 ```
 
-### Plotting cluster means
+### Cluster centers
 
 ```{r}
 s <- summary(result)
