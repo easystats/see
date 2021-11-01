@@ -125,7 +125,8 @@ ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
   geom_from_list(list(geom = "ggside::scale_xsidey_continuous", breaks = NULL))
 
 # Example 6 (ggraph) --------------------------
-if (require("tidygraph", quietly = TRUE)) {
+if (require("tidygraph", quietly = TRUE) &&
+  require("ggraph", quietly = TRUE)) {
   # Prepare graph
   nodes <- data.frame(name = c("Dom", "Mattan", "Daniel", "Brenton"))
   edges <- data.frame(
@@ -134,7 +135,6 @@ if (require("tidygraph", quietly = TRUE)) {
   )
   data <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
 
-  library(ggraph)
   ggraph(data, layout = "kk") +
     geom_from_list(list(geom = "ggraph::geom_edge_arc")) +
     geom_from_list(list(geom = "ggraph::geom_node_point", size = 10)) +
