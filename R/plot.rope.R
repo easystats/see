@@ -107,6 +107,8 @@ plot.see_rope <- function(x,
   # get labels
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
+  insight::check_if_installed("ggridges")
+
   p <- ggplot(
     as.data.frame(x),
     aes(
