@@ -67,7 +67,6 @@ Imports:
     datawizard (>= 0.2.1),
     effectsize (>= 0.5),
     ggplot2 (>= 3.3.5),
-    ggridges,
     insight (>= 0.14.5),
     parameters (>= 0.15.0)
 Suggests:
@@ -80,6 +79,7 @@ Suggests:
     ggdist,
     ggraph,
     ggrepel,
+    ggridges,
     ggside,
     glmmTMB,
     grid,

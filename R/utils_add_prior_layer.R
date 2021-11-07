@@ -28,6 +28,8 @@
     }
   )
 
+  insight::check_if_installed("ggridges")
+
   if (!is.null(dat)) {
     if (!is.null(fill_color)) {
       if (isTRUE(show_ridge_line)) {

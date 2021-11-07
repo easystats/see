@@ -195,6 +195,8 @@ plot.see_p_significance <- function(x,
   # get labels
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
+  insight::check_if_installed("ggridges")
+
   # base setup
   p <- ggplot(
     as.data.frame(x),

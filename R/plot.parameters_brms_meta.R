@@ -168,6 +168,8 @@ plot.see_parameters_brms_meta <- function(x,
       )
   }
 
+  insight::check_if_installed("ggridges")
+
   p <- p +
     ggridges::geom_ridgeline(
       mapping = aes(fill = .data$Group),

@@ -150,6 +150,8 @@ plot.see_estimate_density <- function(x,
 
     # add prior layer
     if (priors) {
+      insight::check_if_installed("ggridges")
+
       p <- p +
         .add_prior_layer_ridgeline(
           model,
@@ -165,6 +167,8 @@ plot.see_estimate_density <- function(x,
         scale_fill_flat(reverse = TRUE) +
         scale_colour_flat(reverse = TRUE)
     } else {
+      insight::check_if_installed("ggridges")
+
       p <- p +
         ggridges::geom_ridgeline(aes(fill = "Posterior"),
           alpha = posteriors_alpha,
@@ -249,6 +253,8 @@ plot.see_estimate_density_df <- function(x,
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
       geom_line(size = size_line)
   } else {
+    insight::check_if_installed("ggridges")
+
     p <- ggplot(x, aes(x = .data$x, y = .data$Parameter, height = .data$y)) +
       ggridges::geom_ridgeline()
   }

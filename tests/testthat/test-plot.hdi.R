@@ -1,5 +1,5 @@
 test_that("`plot.see_hdi()` works", {
-  if (require("bayestestR") && require("rstanarm")) {
+  if (require("bayestestR") && require("rstanarm") && require("ggridges")) {
     set.seed(123)
     m <<- stan_glm(Sepal.Length ~ Petal.Width * Species,
       data = iris,
