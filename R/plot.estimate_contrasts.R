@@ -78,7 +78,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   plot(contrasts, means)
 #' }
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
   if (!"data_plot" %in% class(x)) {

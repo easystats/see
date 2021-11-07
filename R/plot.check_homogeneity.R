@@ -13,7 +13,7 @@
 #' result <- check_homogeneity(model)
 #' result
 #' plot(result)
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   if (is.null(data)) {

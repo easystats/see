@@ -22,7 +22,7 @@
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_si <- function(x,
                         si_color = "#0171D3",

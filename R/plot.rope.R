@@ -85,7 +85,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_rope <- function(x,
                           data = NULL,
