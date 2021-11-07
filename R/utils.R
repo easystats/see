@@ -185,3 +185,17 @@
 .is_integer <- function(x) {
   is.numeric(x) && all(floor(x) == x, na.rm = T)
 }
+
+
+#' Default value for `NULL`
+#'
+#' @param x,y If `x` is NULL, will return `y`; otherwise returns `x`.
+#' @name op-null-default
+#' @examples
+#' 4 %||% 5
+#' NULL %||% 1
+#' @keywords internal
+#' @noRd
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}

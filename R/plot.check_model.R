@@ -1,4 +1,4 @@
-#' @importFrom rlang .data `%||%`
+#' @importFrom rlang .data
 #' @export
 plot.see_check_model <- function(x,
                                  style = theme_lucid,

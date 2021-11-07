@@ -69,7 +69,6 @@ geom_violinhalf <- function(mapping = NULL,
 #' @format NULL
 #' @usage NULL
 #' @import ggplot2
-#' @importFrom rlang `%||%`
 #' @keywords internal
 GeomViolinHalf <- ggproto("GeomViolinHalf", Geom,
   extra_params = c("na.rm", "flip"),

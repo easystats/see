@@ -1,4 +1,4 @@
-#' @importFrom rlang `%||%`
+
 .plot_diag_outliers_new <- function(x,
                                     na.rm = TRUE,
                                     ref.color = "darkgray",
