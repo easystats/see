@@ -15,7 +15,7 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_bayesfactor_parameters <- function(x,
                                             size_point = 2,

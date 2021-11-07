@@ -80,7 +80,7 @@ data_plot.n_clusters <- data_plot.n_factors
 #'   result
 #'   plot(result, type = "line")
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_n_factors <- function(x,
                                data = NULL,

@@ -98,7 +98,7 @@ data_plot.estimate_density <- function(x,
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_estimate_density <- function(x,
                                       stack = TRUE,
@@ -235,7 +235,7 @@ plot.see_estimate_density <- function(x,
 data_plot.estimate_density_df <- data_plot.estimate_density
 
 
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_estimate_density_df <- function(x,
                                          stack = TRUE,

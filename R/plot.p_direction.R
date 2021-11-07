@@ -159,7 +159,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_p_direction <- function(x,
                                  data = NULL,

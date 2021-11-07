@@ -168,7 +168,7 @@ data_plot.p_significance <- function(x,
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_p_significance <- function(x,
                                     data = NULL,

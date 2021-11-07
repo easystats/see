@@ -100,7 +100,7 @@ data_plot.map_estimate <- data_plot.point_estimate
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#' @importFrom ggplot2 .data
 #' @export
 plot.see_point_estimate <- function(x,
                                     data = NULL,

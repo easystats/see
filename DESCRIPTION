@@ -69,8 +69,7 @@ Imports:
     ggplot2 (>= 3.3.5),
     ggridges,
     insight (>= 0.14.5),
-    parameters (>= 0.15.0),
-    rlang
+    parameters (>= 0.15.0)
 Suggests:
     brms,
     coda,
