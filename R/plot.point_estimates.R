@@ -100,7 +100,7 @@ data_plot.map_estimate <- data_plot.point_estimate
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#'
 #' @export
 plot.see_point_estimate <- function(x,
                                     data = NULL,
@@ -146,7 +146,7 @@ plot.see_point_estimate <- function(x,
     label_map_x <- map_x
     label_map_y <- max_y * 1.05
 
-    p_object <- ggplot(i, aes(x = .data$x, y = .data$y, group = .data$group))
+    p_object <- ggplot(i, aes(x = x, y = y, group = group))
 
     # add prior layer
     if (priors) {
@@ -163,7 +163,7 @@ plot.see_point_estimate <- function(x,
     }
 
     p_object <- p_object +
-      geom_ribbon(aes(ymin = 0, ymax = .data$y),
+      geom_ribbon(aes(ymin = 0, ymax = y),
         fill = "#FFC107",
         alpha = posterior_alpha
       )

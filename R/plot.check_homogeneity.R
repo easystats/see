@@ -13,7 +13,6 @@
 #' result <- check_homogeneity(model)
 #' result
 #' plot(result)
-#' @importFrom rlang .data
 #' @export
 plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   if (is.null(data)) {
@@ -54,11 +53,11 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       dat[["group"]],
       FUN = mean, na.rm = TRUE
     )
-    p <- ggplot(data = dat, aes(x = .data$group, y = .data$y, fill = .data$group)) +
+    p <- ggplot(data = dat, aes(x = group, y = y, fill = group)) +
       geom_violin() +
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_label_repel(
-          aes(label = .data$group),
+          aes(label = group),
           y = 0, fill = "white",
           data = data.frame(group = unique(dat$group)),
           direction = "y",
@@ -66,7 +65,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
         )
       } else {
         geom_label(
-          aes(label = .data$group),
+          aes(label = group),
           y = 0, fill = "white",
           data = data.frame(group = unique(dat$group))
         )
@@ -78,11 +77,11 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       dat[["x"]],
       FUN = mean, na.rm = TRUE
     )
-    p <- ggplot(data = dat, aes(x = .data$x, y = .data$y, fill = .data$x)) +
+    p <- ggplot(data = dat, aes(x = x, y = y, fill = x)) +
       geom_violin() +
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_label_repel(
-          aes(label = .data$x),
+          aes(label = x),
           y = 0, fill = "white",
           data = data.frame(x = unique(dat$x)),
           direction = "y",
@@ -90,7 +89,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
         )
       } else {
         geom_label(
-          aes(label = .data$x),
+          aes(label = x),
           y = 0, fill = "white",
           data = data.frame(x = unique(dat$x))
         )

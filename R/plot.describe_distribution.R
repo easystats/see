@@ -139,9 +139,9 @@ plot.see_parameters_distribution <- function(x,
   }
 
   if (!is.null(x$highlight)) {
-    p <- ggplot(x, aes(x = .data$x, fill = highlight))
+    p <- ggplot(x, aes(x = x, fill = highlight))
   } else {
-    p <- ggplot(x, aes(x = .data$x))
+    p <- ggplot(x, aes(x = x))
   }
 
   if (is.factor(x$x) || is.character(x$x) || .n_unique(x$x) <= 12) {
@@ -185,7 +185,7 @@ plot.see_parameters_distribution <- function(x,
       } else {
         p <- p +
           geom_ribbon(
-            aes(ymin = 0, ymax = .data$curve_y),
+            aes(ymin = 0, ymax = curve_y),
             alpha = dispersion_alpha,
             fill = dispersion_color,
             colour = NA

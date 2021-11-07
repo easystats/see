@@ -85,7 +85,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#'
 #' @export
 plot.see_rope <- function(x,
                           data = NULL,
@@ -110,11 +110,11 @@ plot.see_rope <- function(x,
   p <- ggplot(
     as.data.frame(x),
     aes(
-      x = .data$x,
-      y = .data$y,
-      height = .data$height,
-      group = .data$y,
-      fill = .data$fill
+      x = x,
+      y = y,
+      height = height,
+      group = y,
+      fill = fill
     )
   ) +
     ggridges::geom_ridgeline_gradient() +

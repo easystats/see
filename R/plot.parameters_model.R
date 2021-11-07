@@ -202,7 +202,7 @@ plot.see_parameters_model <- function(x,
       }
 
       density_layer <- ggdist::stat_slab(
-        aes(fill = after_scale(.data$color)),
+        aes(fill = after_scale(color)),
         size = NA, alpha = .2,
         data = data
       )
@@ -210,9 +210,9 @@ plot.see_parameters_model <- function(x,
       density_layer <- ggdist::stat_dist_slab(
         aes(
           dist = "lnorm",
-          arg1 = log(.data$Coefficient),
-          arg2 = .data$SE / .data$Coefficient,
-          fill = after_scale(.data$color)
+          arg1 = log(Coefficient),
+          arg2 = SE / Coefficient,
+          fill = after_scale(color)
         ),
         size = NA, alpha = .2,
         data = function(x) x[x$CI == x$CI[1], ]
@@ -222,10 +222,10 @@ plot.see_parameters_model <- function(x,
       density_layer <- ggdist::stat_dist_slab(
         aes(
           dist = "student_t",
-          arg1 = .data$df_error,
-          arg2 = .data$Coefficient,
-          arg3 = .data$SE,
-          fill = after_scale(.data$color)
+          arg1 = df_error,
+          arg2 = Coefficient,
+          arg3 = SE,
+          fill = after_scale(color)
         ),
         size = NA, alpha = .2,
         data = function(x) x[x$CI == x$CI[1], ]
@@ -235,9 +235,9 @@ plot.see_parameters_model <- function(x,
       density_layer <- ggdist::stat_dist_slab(
         aes(
           dist = "norm",
-          arg1 = .data$Coefficient,
-          arg2 = .data$SE,
-          fill = after_scale(.data$color)
+          arg1 = Coefficient,
+          arg2 = SE,
+          fill = after_scale(color)
         ),
         size = NA, alpha = .2,
         data = function(x) x[x$CI == x$CI[1], ]
@@ -330,7 +330,7 @@ plot.see_parameters_model <- function(x,
   if (is_meta || is_meta_bma) {
 
     # plot setup for metafor-objects
-    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
+    p <- ggplot(x, aes(y = Parameter, x = Coefficient, color = group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
       theme_modern(legend.position = "none") +
       scale_color_material() +
@@ -345,7 +345,7 @@ plot.see_parameters_model <- function(x,
 
     if (show_interval) {
       # TODO: Handle NA boundaries
-      p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
+      p <- p + geom_errorbar(aes(xmin = CI_low, xmax = CI_high),
         width = 0,
         size = size_point
       )
@@ -367,8 +367,8 @@ plot.see_parameters_model <- function(x,
     }
 
     p <- ggplot(x, aes(
-      y = .data$Parameter, x = .data$Coefficient,
-      size = rev(.data$CI), color = .data$group
+      y = Parameter, x = Coefficient,
+      size = rev(CI), color = group
     )) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
       theme_modern(legend.position = "none") +
@@ -381,7 +381,7 @@ plot.see_parameters_model <- function(x,
     if (show_interval) {
       # TODO: Handle NA boundaries
       p <- p + geom_errorbar(
-        aes(xmin = .data$CI_low, xmax = .data$CI_high),
+        aes(xmin = CI_low, xmax = CI_high),
         width = 0
       ) +
         scale_size_ordinal(range = c(size_point, 3 * size_point))
@@ -402,7 +402,7 @@ plot.see_parameters_model <- function(x,
       color_scale <- scale_color_material()
     }
 
-    p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
+    p <- ggplot(x, aes(y = Parameter, x = Coefficient, color = group)) +
       geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
       theme_modern(legend.position = "none") +
       color_scale
@@ -413,7 +413,7 @@ plot.see_parameters_model <- function(x,
 
     if (show_interval) {
       # TODO: Handle NA boundaries
-      p <- p + geom_errorbar(aes(xmin = .data$CI_low, xmax = .data$CI_high),
+      p <- p + geom_errorbar(aes(xmin = CI_low, xmax = CI_high),
         width = 0,
         size = size_point
       )
@@ -451,7 +451,7 @@ plot.see_parameters_model <- function(x,
     if (!any(is.infinite(new_range)) && !any(is.na(new_range))) {
       p <- p +
         geom_text(
-          mapping = aes(label = .data$Estimate_CI, x = Inf),
+          mapping = aes(label = Estimate_CI, x = Inf),
           colour = "black", hjust = "inward", size = size_text
         ) +
         xlim(c(min(new_range), max(new_range)))
@@ -570,11 +570,11 @@ plot.see_parameters_model <- function(x,
     y = c(max(dat_funnel$se_range), 0, max(dat_funnel$se_range))
   )
 
-  ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
+  ggplot(x, aes(x = Coefficient, y = SE)) +
     scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
-    geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = .3) +
-    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_low, y = .data$se_range), linetype = "dashed", color = "grey70") +
-    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_high, y = .data$se_range), linetype = "dashed", color = "grey70") +
+    geom_polygon(data = d_polygon, aes(x, y), fill = "grey80", alpha = .3) +
+    geom_line(data = dat_funnel, mapping = aes(x = ci_low, y = se_range), linetype = "dashed", color = "grey70") +
+    geom_line(data = dat_funnel, mapping = aes(x = ci_high, y = se_range), linetype = "dashed", color = "grey70") +
     theme_modern() +
     geom_vline(xintercept = estimate, colour = "grey70") +
     geom_point(size = size_point, colour = "#34465d") +

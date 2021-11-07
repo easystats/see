@@ -107,7 +107,7 @@ plot.see_performance_pp_check <- function(x,
   ggplot() +
     stat_density(
       data = x[x$key != "y", ],
-      mapping = aes(x = .data$values, group = .data$grp, color = .data$key),
+      mapping = aes(x = values, group = grp, color = key),
       geom = "line",
       position = "identity",
       size = size_line,
@@ -115,7 +115,7 @@ plot.see_performance_pp_check <- function(x,
     ) +
     stat_density(
       data = x[x$key == "y", ],
-      mapping = aes(x = .data$values, group = .data$grp, color = .data$key),
+      mapping = aes(x = values, group = grp, color = key),
       geom = "line",
       position = "identity",
       size = size_line * 1.1
@@ -157,7 +157,7 @@ plot.see_performance_pp_check <- function(x,
   replicated$group <- factor(replicated$group, levels = c("minimum", "maximum"))
   original$group <- factor(original$group, levels = c("minimum", "maximum"))
 
-  p <- ggplot(replicated, aes(x = .data$x, group = .data$group)) +
+  p <- ggplot(replicated, aes(x = x, group = group)) +
     facet_wrap(~group, scales = "free_x")
 
   if (.n_unique(replicated$x) <= 12) {
@@ -173,7 +173,7 @@ plot.see_performance_pp_check <- function(x,
   p +
     geom_vline(
       data = original,
-      mapping = aes(xintercept = .data$x),
+      mapping = aes(xintercept = x),
       color = unname(social_colors("blue")),
       size = 1
     ) +

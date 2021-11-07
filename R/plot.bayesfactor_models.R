@@ -109,15 +109,15 @@ plot.see_bayesfactor_models <- function(x,
 
   ## Plot
   if (n_pies == "one") {
-    p <- ggplot(one_pie_data, aes(x = "", y = .data$PostProb, fill = .data$Model))
+    p <- ggplot(one_pie_data, aes(x = "", y = PostProb, fill = Model))
   } else {
-    p <- ggplot(many_pies_data, aes(x = "", y = .data$bar_pos, fill = .data$Model)) +
-      facet_wrap(~ .data$panel)
+    p <- ggplot(many_pies_data, aes(x = "", y = bar_pos, fill = Model)) +
+      facet_wrap(~panel)
   }
 
   p +
     geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
-    geom_text(aes(label = .data$label), position = position_stack(vjust = 0.5)) +
+    geom_text(aes(label = label), position = position_stack(vjust = 0.5)) +
     coord_polar("y", start = 0) +
     scale_y_continuous(expand = c(0, 0)) +
     labs(x = "", y = "", fill = "Model") +

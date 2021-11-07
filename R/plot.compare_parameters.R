@@ -93,9 +93,9 @@ plot.see_compare_parameters <- function(x,
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   }
 
-  p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
+  p <- ggplot(x, aes(y = Parameter, x = Coefficient, color = group)) +
     geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-    geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point, position = position_dodge(dodge_position)) +
+    geom_pointrange(aes(xmin = CI_low, xmax = CI_high), size = size_point, position = position_dodge(dodge_position)) +
     theme_modern() +
     scale_color_material()
 
@@ -107,7 +107,7 @@ plot.see_compare_parameters <- function(x,
 
     p <- p +
       geom_text(
-        mapping = aes(label = .data$Estimate_CI, y = Inf),
+        mapping = aes(label = Estimate_CI, y = Inf),
         colour = "black", hjust = "inward", size = size_text,
         position = position_dodge2(dodge_position)
       ) +

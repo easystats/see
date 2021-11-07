@@ -22,7 +22,7 @@
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#'
 #' @export
 plot.see_si <- function(x,
                         si_color = "#0171D3",
@@ -45,11 +45,11 @@ plot.see_si <- function(x,
 
   if (length(unique(x$CI)) > 1) {
     p <- ggplot(mapping = aes(
-      x = .data$x,
+      x = x,
     )) +
       # SI
       geom_rect(
-        aes(xmin = .data$CI_low, xmax = .data$CI_high, alpha = .data$CI),
+        aes(xmin = CI_low, xmax = CI_high, alpha = CI),
         ymin = 0, ymax = Inf,
         data = x,
         fill = si_color,
@@ -65,11 +65,11 @@ plot.see_si <- function(x,
   } else {
     # Basic plot
     p <- ggplot(mapping = aes(
-      x = .data$x,
+      x = x,
     )) +
       # SI
       geom_rect(
-        aes(xmin = .data$CI_low, xmax = .data$CI_high),
+        aes(xmin = CI_low, xmax = CI_high),
         ymin = 0, ymax = Inf,
         data = x,
         fill = si_color, alpha = si_alpha,
@@ -118,7 +118,7 @@ plot.see_si <- function(x,
     support_data <- do.call(rbind, support_data)
 
     p <- p +
-      aes(y = .data$updating_factor) +
+      aes(y = updating_factor) +
       # distributions
       geom_line(size = 1, data = support_data) +
       geom_area(alpha = 0.15, data = support_data) +
@@ -127,9 +127,9 @@ plot.see_si <- function(x,
   } else {
     p <- p +
       aes(
-        y = .data$y,
-        color = .data$Distribution,
-        fill = .data$Distribution
+        y = y,
+        color = Distribution,
+        fill = Distribution
       ) +
       # distributions
       geom_line(size = 1, data = plot_data) +

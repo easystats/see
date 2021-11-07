@@ -78,7 +78,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   plot(contrasts, means)
 #' }
 #' }
-#' @importFrom rlang .data
+#'
 #' @export
 plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
   if (!"data_plot" %in% class(x)) {
@@ -88,12 +88,12 @@ plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
   p <- ggplot() +
     geom_polygon(
       data = x$geom_polygon,
-      aes(x = .data$x, y = .data$y, group = .data$group),
+      aes(x = x, y = y, group = group),
       alpha = 0.1
     ) +
     geom_pointrange(
       data = x$geom_pointrange,
-      aes(x = .data$x, y = .data$y, ymax = .data$ymax, ymin = .data$ymin),
+      aes(x = x, y = y, ymax = ymax, ymin = ymin),
       color = "black"
     ) +
     add_plot_attributes(x)

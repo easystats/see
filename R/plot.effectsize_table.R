@@ -26,15 +26,15 @@ plot.see_effectsize_table <- function(x, ...) {
   x$.es <- x[, es_name]
 
   if (all(c("CI_low", "CI_high") %in% colnames(x))) {
-    CIs <- geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0)
+    CIs <- geom_errorbarh(aes(xmin = CI_low, xmax = CI_high), height = 0)
   } else {
     NULL
   }
 
 
-  ggplot(x, aes(y = .data$Parameter, color = .data$.es > 0)) +
+  ggplot(x, aes(y = Parameter, color = .es > 0)) +
     CIs +
-    geom_point(aes(x = .data$.es), size = 2) +
+    geom_point(aes(x = .es), size = 2) +
     geom_vline(xintercept = 0) +
     scale_color_manual(
       values = c("FALSE" = "green", "TRUE" = "blue"),
@@ -72,9 +72,9 @@ plot.see_equivalence_test_effectsize <- function(x, ...) {
 
   x$.es <- x[, es_name]
 
-  ggplot(x, aes(y = .data$Parameter, color = .data$ROPE_Equivalence)) +
-    geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0) +
-    geom_point(aes(x = .data$.es), size = 2) +
+  ggplot(x, aes(y = Parameter, color = ROPE_Equivalence)) +
+    geom_errorbarh(aes(xmin = CI_low, xmax = CI_high), height = 0) +
+    geom_point(aes(x = .es), size = 2) +
     geom_vline(xintercept = 0) +
     geom_vline(xintercept = unique(attr(x, "rope")), linetype = "dashed") +
     scale_color_manual(values = c(

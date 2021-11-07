@@ -1,4 +1,4 @@
-#' @importFrom rlang .data
+
 #' @export
 print.see_binned_residuals <- function(x, ...) {
   orig_x <- x
@@ -26,13 +26,13 @@ print.see_binned_residuals <- function(x, ...) {
   if (is.null(geom_size)) geom_size <- 2
 
 
-  p <- ggplot(data = x, aes(x = .data$xbar)) +
+  p <- ggplot(data = x, aes(x = xbar)) +
     geom_abline(slope = 0, intercept = 0, colour = "grey80")
 
   if (!is.null(term)) {
     p <- p +
       stat_smooth(
-        aes(y = .data$ybar),
+        aes(y = ybar),
         method = "loess",
         se = FALSE,
         formula = y ~ x,
@@ -42,10 +42,10 @@ print.see_binned_residuals <- function(x, ...) {
   }
 
   p <- p +
-    geom_ribbon(aes(ymin = -Inf, ymax = .data$se.lo), alpha = .1, fill = "grey70") +
-    geom_ribbon(aes(ymin = .data$se, ymax = Inf), alpha = .1, fill = "grey70") +
-    geom_line(aes(y = .data$se), colour = "grey70") +
-    geom_line(aes(y = .data$se.lo), colour = "grey70") +
+    geom_ribbon(aes(ymin = -Inf, ymax = se.lo), alpha = .1, fill = "grey70") +
+    geom_ribbon(aes(ymin = se, ymax = Inf), alpha = .1, fill = "grey70") +
+    geom_line(aes(y = se), colour = "grey70") +
+    geom_line(aes(y = se.lo), colour = "grey70") +
     theme_bw() +
     scale_color_manual(values = geom_color) +
     labs(
@@ -59,9 +59,9 @@ print.see_binned_residuals <- function(x, ...) {
   }
 
   if (is.null(ltitle)) {
-    p <- p + geom_point(aes(y = .data$ybar), size = geom_size)
+    p <- p + geom_point(aes(y = ybar), size = geom_size)
   } else {
-    p <- p + geom_point(aes(y = .data$ybar, colour = .data$group), size = geom_size)
+    p <- p + geom_point(aes(y = ybar, colour = group), size = geom_size)
   }
 
   suppressWarnings(graphics::plot(p))

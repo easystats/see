@@ -168,7 +168,7 @@ data_plot.p_significance <- function(x,
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#'
 #' @export
 plot.see_p_significance <- function(x,
                                     data = NULL,
@@ -199,11 +199,11 @@ plot.see_p_significance <- function(x,
   p <- ggplot(
     as.data.frame(x),
     aes(
-      x = .data$x,
-      y = .data$y,
-      height = .data$height,
-      group = .data$y,
-      fill = .data$fill
+      x = x,
+      y = y,
+      height = height,
+      group = y,
+      fill = fill
     )
   ) +
     ggridges::geom_ridgeline_gradient() +

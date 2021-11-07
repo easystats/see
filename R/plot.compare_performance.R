@@ -60,7 +60,6 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
 #' result <- compare_performance(lm1, lm2, lm3)
 #' result
 #' plot(result)
-#' @importFrom rlang .data
 #' @export
 plot.see_compare_performance <- function(x, size_line = 1, ...) {
 
@@ -74,8 +73,8 @@ plot.see_compare_performance <- function(x, size_line = 1, ...) {
   #   if (missing(size)) size <- .7
   #   x$Model <- sprintf("%s (%s)", x$Model, x$Type)
   #   p <- ggplot(x, aes(
-  #     x = .data$Model,
-  #     y = .data$Performance_Score
+  #     x = Model,
+  #     y = Performance_Score
   #   )) +
   #     geom_col(width = size) +
   #     scale_y_continuous(limits = c(0, 1), labels = .percents) +
@@ -87,11 +86,11 @@ plot.see_compare_performance <- function(x, size_line = 1, ...) {
   }
 
   p <- ggplot(x, aes(
-    x = .data$name,
-    y = .data$values,
-    colour = .data$Model,
-    group = .data$Model,
-    fill = .data$Model
+    x = name,
+    y = values,
+    colour = Model,
+    group = Model,
+    fill = Model
   )) +
     geom_polygon(size = size_line, alpha = .05) +
     coord_radar() +

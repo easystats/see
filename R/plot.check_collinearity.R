@@ -13,7 +13,6 @@
 #' result <- check_collinearity(m)
 #' result
 #' plot(result)
-#' @importFrom rlang .data
 #' @export
 plot.see_check_collinearity <- function(x,
                                         data = NULL,

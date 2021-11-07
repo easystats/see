@@ -1,4 +1,4 @@
-#' @importFrom rlang .data
+
 #' @export
 plot.see_check_model <- function(x,
                                  style = theme_lucid,
@@ -144,7 +144,7 @@ plot.see_check_model <- function(x,
   levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
   names(colors) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
 
-  p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$group))
+  p <- ggplot(x, aes(x = x, y = y, fill = group))
 
   if (ylim > 5) {
     p <- p + geom_rect(
@@ -189,7 +189,7 @@ plot.see_check_model <- function(x,
       y = "Variance Inflation Factor (VIF)",
       fill = NULL
     ) +
-    # geom_text(aes(label = round(.data$y, 1)), nudge_y = 1) +
+    # geom_text(aes(label = round(y, 1)), nudge_y = 1) +
     scale_fill_manual(values = colors) +
     theme_style(
       base_size = 10,
@@ -217,15 +217,15 @@ plot.see_check_model <- function(x,
                             alpha_level = .2,
                             theme_style = theme_lucid,
                             colors = unname(social_colors(c("green", "blue", "red")))) {
-  ggplot(x, aes(x = .data$x)) +
+  ggplot(x, aes(x = x)) +
     geom_ribbon(
-      mapping = aes(ymin = 0, ymax = .data$y),
+      mapping = aes(ymin = 0, ymax = y),
       colour = NA,
       fill = colors[2],
       alpha = alpha_level
     ) +
     geom_line(
-      mapping = aes(y = .data$curve),
+      mapping = aes(y = curve),
       colour = colors[1],
       size = size_line
     ) +
@@ -292,7 +292,7 @@ plot.see_check_model <- function(x,
     )
     y_lab <- "Sample Quantiles"
   }
-  ggplot(x, aes(sample = .data$y)) +
+  ggplot(x, aes(sample = y)) +
     qq_stuff +
     labs(
       title = "Normality of Residuals",
@@ -319,7 +319,7 @@ plot.see_check_model <- function(x,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = .8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
-    p_plot <- ggplot(x, aes(sample = .data$res)) +
+    p_plot <- ggplot(x, aes(sample = res)) +
       qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
       qqplotr::stat_pp_line(
         size = size_line,
@@ -345,7 +345,7 @@ plot.see_check_model <- function(x,
     dparms <- MASS::fitdistr(x$res, densfun = "normal")
     x$y <- do.call(stats::pnorm, c(list(q = x$res), dparms$estimate))
 
-    p_plot <- ggplot(x, aes(x = .data$probs, y = .data$y)) +
+    p_plot <- ggplot(x, aes(x = probs, y = y)) +
       geom_abline(
         slope = 1,
         size = size_line,
@@ -384,7 +384,7 @@ plot.see_check_model <- function(x,
                                    theme_style = theme_lucid,
                                    colors = unname(social_colors(c("green", "blue", "red"))),
                                    dot_alpha_level = .8) {
-  ggplot(x, aes(x = .data$x, .data$y)) +
+  ggplot(x, aes(x = x, y)) +
     geom_point2(
       colour = colors[2],
       size = size_point,
@@ -420,7 +420,7 @@ plot.see_check_model <- function(x,
                                  theme_style = theme_lucid,
                                  colors = unname(social_colors(c("green", "blue", "red"))),
                                  dot_alpha_level = .8) {
-  ggplot(x, aes(x = .data$x, y = .data$y)) +
+  ggplot(x, aes(x = x, y = y)) +
     geom_point2(
       colour = colors[2],
       size = size_point,
@@ -460,7 +460,7 @@ plot.see_check_model <- function(x,
                             dot_alpha_level = .8) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
-    p <- ggplot(dat, aes(x = .data$x, y = .data$y)) +
+    p <- ggplot(dat, aes(x = x, y = y)) +
       labs(
         x = "Theoretical Quantiles",
         y = "RE Quantiles",
@@ -475,7 +475,7 @@ plot.see_check_model <- function(x,
         colour = colors[1]
       ) +
       geom_errorbar(
-        aes(ymin = .data$conf.low, ymax = .data$conf.high),
+        aes(ymin = conf.low, ymax = conf.high),
         width = 0,
         colour = colors[2],
         alpha = dot_alpha_level

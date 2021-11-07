@@ -27,17 +27,17 @@ plot.see_performance_roc <- function(x, ...) {
     p <- ggplot(
       x,
       aes(
-        x = .data$Specificity,
-        y = .data$Sensitivity,
-        colour = .data$Model
+        x = Specificity,
+        y = Sensitivity,
+        colour = Model
       )
     )
   } else {
     p <- ggplot(
       x,
       aes(
-        x = .data$Specificity,
-        y = .data$Sensitivity,
+        x = Specificity,
+        y = Sensitivity,
       )
     )
   }

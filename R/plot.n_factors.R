@@ -80,7 +80,6 @@ data_plot.n_clusters <- data_plot.n_factors
 #'   result
 #'   plot(result, type = "line")
 #' }
-#' @importFrom rlang .data
 #' @export
 plot.see_n_factors <- function(x,
                                data = NULL,
@@ -102,34 +101,34 @@ plot.see_n_factors <- function(x,
   }
 
   if (type == "area") {
-    ggplot(x, aes(x = .data$x, y = .data$y)) +
+    ggplot(x, aes(x = x, y = y)) +
       geom_area(fill = flat_colors("grey")) +
       geom_segment(
         aes(
-          x = .data$x[which.max(.data$y)],
-          xend = .data$x[which.max(.data$y)],
+          x = x[which.max(y)],
+          xend = x[which.max(y)],
           y = 0,
-          yend = max(.data$y)
+          yend = max(y)
         ),
         color = flat_colors("red"),
         linetype = "dashed"
       ) +
-      geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)),
+      geom_point(aes(x = x[which.max(y)], y = max(y)),
         color = flat_colors("red")
       ) +
       scale_y_continuous(labels = .percents) +
       scale_x_continuous(breaks = 1:max(x$x)) +
       add_plot_attributes(x)
   } else if (type == "line") {
-    ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
-      geom_segment(aes(x = 0, yend = .data$x, xend = .data$y), size = size) +
+    ggplot(x, aes(y = x, x = y, colour = group)) +
+      geom_segment(aes(x = 0, yend = x, xend = y), size = size) +
       geom_point(size = 2 * size) +
       guides(colour = "none") +
       scale_x_continuous(labels = .percents) +
       scale_color_manual(values = unname(flat_colors(c("grey", "red")))) +
       add_plot_attributes(x)
   } else {
-    ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$fill)) +
+    ggplot(x, aes(x = x, y = y, fill = fill)) +
       geom_bar(stat = "identity", width = size) +
       guides(fill = "none") +
       scale_y_continuous(labels = .percents) +

@@ -15,7 +15,7 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @importFrom rlang .data
+
 #' @export
 plot.see_bayesfactor_parameters <- function(x,
                                             size_point = 2,
@@ -52,10 +52,10 @@ plot.see_bayesfactor_parameters <- function(x,
   p <- ggplot(
     plot_data,
     aes(
-      x = .data$x,
-      y = .data$y,
-      color = .data$Distribution,
-      fill = .data$Distribution
+      x = x,
+      y = y,
+      color = Distribution,
+      fill = Distribution
     )
   ) +
     geom_line(size = 1) +

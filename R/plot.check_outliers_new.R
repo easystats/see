@@ -20,8 +20,8 @@
   n_above <- sum(plot_data$Cooks_Distance >= min_cook_level)
   label.n <- ifelse(n_above < 5, 5, n_above)
 
-  p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals)) +
-    geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = dot_alpha_level) +
+  p <- ggplot(plot_data, aes(x = Hat, Std_Residuals)) +
+    geom_point2(aes(colour = Influential), na.rm = na.rm, alpha = dot_alpha_level) +
     geom_vline(
       xintercept = 0,
       color = ref.color,
@@ -44,13 +44,13 @@
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_text_repel(
           data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
-          aes(label = .data$Index, colour = .data$Influential),
+          aes(label = Index, colour = Influential),
           size = size_text
         )
       } else {
         geom_text(
           data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
-          aes(label = .data$Index, colour = .data$Influential),
+          aes(label = Index, colour = Influential),
           size = size_text, position = position_nudge(
             x = diff(range(plot_data$Hat)) / 40,
             y = diff(range(plot_data$Std_Residuals)) / 20

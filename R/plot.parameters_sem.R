@@ -86,7 +86,7 @@ data_plot.parameters_sem <- function(x,
 #' @param threshold_coefficient Numeric, threshold at which value coefficients will be displayed.
 #' @param threshold_p Numeric, threshold at which value p-values will be displayed.
 #' @param ci Logical, whether confidence intervals should be added to the plot.
-#' @importFrom rlang .data
+
 #' @rdname plot.see_parameters_model
 #' @export
 plot.see_parameters_sem <- function(x,
@@ -122,9 +122,9 @@ plot.see_parameters_sem <- function(x,
 
     # Plot Correlations
     ggraph::geom_edge_arc(aes(
-      alpha = as.numeric(.data$Component == "Correlation"),
-      label = .data$Label_Correlation,
-      color = .data$Coefficient
+      alpha = as.numeric(Component == "Correlation"),
+      label = Label_Correlation,
+      color = Coefficient
     ),
     strength = 0.1,
     label_dodge = unit(2, "mm"),
@@ -135,9 +135,9 @@ plot.see_parameters_sem <- function(x,
     ) +
     # Plot Loadings
     ggraph::geom_edge_link(aes(
-      alpha = as.numeric(.data$Component == "Loading"),
-      label = .data$Label_Loading,
-      color = .data$Coefficient
+      alpha = as.numeric(Component == "Loading"),
+      label = Label_Loading,
+      color = Coefficient
     ),
     label_dodge = unit(2, "mm"),
     angle_calc = "along",
@@ -148,9 +148,9 @@ plot.see_parameters_sem <- function(x,
     ) +
     # Plot regressions
     ggraph::geom_edge_link(aes(
-      alpha = as.numeric(.data$Component == "Regression"),
-      label = .data$Label_Regression,
-      color = .data$Coefficient
+      alpha = as.numeric(Component == "Regression"),
+      label = Label_Regression,
+      color = Coefficient
     ),
     label_dodge = unit(2, "mm"),
     angle_calc = "along",
@@ -159,8 +159,8 @@ plot.see_parameters_sem <- function(x,
     arrow = arrow(type = "closed", length = unit(3, "mm")),
     start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
     ) +
-    ggraph::geom_node_point(aes(colour = .data$Latent, shape = .data$Latent), size = size_point) +
-    ggraph::geom_node_text(aes(label = .data$Name)) +
+    ggraph::geom_node_point(aes(colour = Latent, shape = Latent), size = size_point) +
+    ggraph::geom_node_text(aes(label = Name)) +
     ggraph::scale_edge_colour_gradient2(
       guide = "none",
       high = "#4CAF50",

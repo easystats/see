@@ -52,4 +52,5 @@ if (require("bayestestR") && require("rstanarm")) {
   plot(result)
 }
 }
+
 }

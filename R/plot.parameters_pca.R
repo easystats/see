@@ -69,7 +69,6 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
 #' result
 #' plot(result)
-#' @importFrom rlang .data
 #' @export
 plot.see_parameters_pca <- function(x,
                                     type = c("bar", "line"),
@@ -95,10 +94,10 @@ plot.see_parameters_pca <- function(x,
   p <- ggplot(
     as.data.frame(x),
     aes(
-      y = .data$Variable,
-      x = abs(.data$y),
-      fill = .data$y,
-      color = .data$y
+      y = Variable,
+      x = abs(y),
+      fill = y,
+      color = y
     )
   )
 
@@ -108,7 +107,7 @@ plot.see_parameters_pca <- function(x,
       scale_fill_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   } else {
     p <- p +
-      geom_segment(aes(x = 0, yend = .data$Variable, xend = abs(.data$y)), size = size) +
+      geom_segment(aes(x = 0, yend = Variable, xend = abs(y)), size = size) +
       geom_point(size = 2 * size) +
       scale_color_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   }
@@ -116,7 +115,7 @@ plot.see_parameters_pca <- function(x,
   if (isTRUE(show_labels)) {
     p <- p +
       geom_text(
-        aes(x = abs(.data$y), label = round(.data$y, 2)),
+        aes(x = abs(y), label = round(y, 2)),
         color = text_color,
         size = size_text,
         nudge_y = .15

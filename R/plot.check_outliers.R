@@ -111,7 +111,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
 
   size_text <- size_text %||% 3.5
 
-  p <- ggplot(d, aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)) +
+  p <- ggplot(d, aes(x = Distance, fill = Outliers, label = Id)) +
     geom_histogram() +
     labs(
       title = "Influential Observations",
@@ -159,10 +159,10 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
     ggplot(
       data = d,
       aes(
-        x = .data$Obs,
-        y = .data$Distance,
-        fill = .data$Method,
-        group = .data$Method
+        x = Obs,
+        y = Distance,
+        fill = Method,
+        group = Method
       )
     ) +
       # geom_vline(xintercept = as.character(c(1, 2))) +

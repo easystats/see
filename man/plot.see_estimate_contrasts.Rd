@@ -30,4 +30,5 @@ if (require("modelbased") && require("rstanarm")) {
   plot(contrasts, means)
 }
 }
+
 }

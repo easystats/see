@@ -34,10 +34,10 @@
         ggridges::geom_ridgeline(
           data = dat,
           mapping = aes(
-            x = .data$x,
-            y = as.factor(.data$Parameter),
-            height = .data$y,
-            group = as.factor(.data$Parameter),
+            x = x,
+            y = as.factor(Parameter),
+            height = y,
+            group = as.factor(Parameter),
           ),
           fill = fill_color,
           alpha = priors_alpha
@@ -46,10 +46,10 @@
         ggridges::geom_ridgeline(
           data = dat,
           mapping = aes(
-            x = .data$x,
-            y = as.factor(.data$Parameter),
-            height = .data$y,
-            group = as.factor(.data$Parameter),
+            x = x,
+            y = as.factor(Parameter),
+            height = y,
+            group = as.factor(Parameter),
           ),
           fill = fill_color,
           alpha = priors_alpha,

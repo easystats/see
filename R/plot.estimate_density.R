@@ -98,7 +98,7 @@ data_plot.estimate_density <- function(x,
 #'   plot(result)
 #' }
 #' }
-#' @importFrom rlang .data
+#'
 #' @export
 plot.see_estimate_density <- function(x,
                                       stack = TRUE,
@@ -141,12 +141,12 @@ plot.see_estimate_density <- function(x,
   x <- .remove_intercept(x, show_intercept = show_intercept)
 
   if (stack == TRUE) {
-    p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
+    p <- ggplot(x, aes(x = x, y = y, color = Parameter)) +
       geom_line(size = size_line) +
       add_plot_attributes(x) +
       scale_color_flat(labels = labels)
   } else {
-    p <- ggplot(x, aes(x = .data$x, y = .data$Parameter, height = .data$y))
+    p <- ggplot(x, aes(x = x, y = Parameter, height = y))
 
     # add prior layer
     if (priors) {
@@ -183,15 +183,15 @@ plot.see_estimate_density <- function(x,
       geom_errorbarh(
         data = summary,
         mapping = aes(
-          xmin = .data$CI_low,
-          xmax = .data$CI_high,
+          xmin = CI_low,
+          xmax = CI_high,
           color = "Posterior"
         ),
         size = size_line
       ) +
       geom_point(
         data = summary,
-        mapping = aes(x = .data$x, color = "Posterior"),
+        mapping = aes(x = x, color = "Posterior"),
         size = size_point,
         fill = "white",
         shape = 21
@@ -235,7 +235,7 @@ plot.see_estimate_density <- function(x,
 data_plot.estimate_density_df <- data_plot.estimate_density
 
 
-#' @importFrom rlang .data
+
 #' @export
 plot.see_estimate_density_df <- function(x,
                                          stack = TRUE,
@@ -246,10 +246,10 @@ plot.see_estimate_density_df <- function(x,
   labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
   if (stack == TRUE) {
-    p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
+    p <- ggplot(x, aes(x = x, y = y, color = Parameter)) +
       geom_line(size = size_line)
   } else {
-    p <- ggplot(x, aes(x = .data$x, y = .data$Parameter, height = .data$y)) +
+    p <- ggplot(x, aes(x = x, y = Parameter, height = y)) +
       ggridges::geom_ridgeline()
   }
 

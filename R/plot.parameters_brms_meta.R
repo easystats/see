@@ -153,7 +153,7 @@ plot.see_parameters_brms_meta <- function(x,
   summary <- attributes(x)$summary
   rope <- attributes(summary)$rope
 
-  p <- ggplot(x, mapping = aes(x = .data$x, y = .data$Study, height = .data$y))
+  p <- ggplot(x, mapping = aes(x = x, y = Study, height = y))
 
   if (!is.null(rope)) {
     p <- p +
@@ -170,7 +170,7 @@ plot.see_parameters_brms_meta <- function(x,
 
   p <- p +
     ggridges::geom_ridgeline(
-      mapping = aes(fill = .data$Group),
+      mapping = aes(fill = Group),
       color = NA,
       scale = 1,
       alpha = posteriors_alpha
@@ -178,15 +178,15 @@ plot.see_parameters_brms_meta <- function(x,
     geom_errorbarh(
       data = summary,
       mapping = aes(
-        xmin = .data$CI_low,
-        xmax = .data$CI_high,
-        color = .data$Color
+        xmin = CI_low,
+        xmax = CI_high,
+        color = Color
       ),
       size = size_line
     ) +
     geom_point(
       data = summary,
-      mapping = aes(x = .data$Estimate, color = .data$Color),
+      mapping = aes(x = Estimate, color = Color),
       size = size_point,
       fill = "white",
       shape = 21
@@ -208,7 +208,7 @@ plot.see_parameters_brms_meta <- function(x,
     p <- p +
       geom_text(
         data = summary,
-        mapping = aes(label = .data$Estimate_CI, x = Inf),
+        mapping = aes(label = Estimate_CI, x = Inf),
         hjust = "inward",
         size = size_text
       ) +

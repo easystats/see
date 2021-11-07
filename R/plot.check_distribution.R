@@ -41,11 +41,11 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
   p1 <- ggplot(dat, aes(
-    y = .data$x,
-    x = .data$y,
-    colour = .data$group
+    y = x,
+    x = y,
+    colour = group
   )) +
-    geom_linerange(aes(xmin = 0, xmax = .data$y),
+    geom_linerange(aes(xmin = 0, xmax = y),
       position = position_dodge(.4),
       size = .8
     ) +
@@ -73,15 +73,15 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   # much greater than 1 and with a large range, so we have proper bar plots
   if (diff(range(dat2$x)) > 10) dat2$x <- round(dat2$x)
 
-  p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
+  p2 <- ggplot(dat1, aes(x = x, y = y)) +
     geom_line(colour = "#2196F3") +
     labs(x = NULL, y = NULL, title = "Density of Residuals") +
     theme_lucid()
 
-  p3 <- ggplot(dat2, aes(x = .data$x)) +
+  p3 <- ggplot(dat2, aes(x = x)) +
     geom_histogram(
       fill = "#f44336", colour = theme_lucid()$panel.background$fill,
-      binwidth = sqrt(length(vars(.data$x)))
+      binwidth = sqrt(length(vars(x)))
     ) +
     labs(x = NULL, y = NULL, title = "Distribution of Response") +
     theme_lucid()
@@ -118,8 +118,8 @@ plot.see_check_distribution_numeric <- function(x,
   # default legend-position
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
-  p1 <- ggplot(dat, aes(y = .data$x, x = .data$y)) +
-    geom_linerange(aes(xmin = 0, xmax = .data$y), position = position_dodge(.4), size = .8) +
+  p1 <- ggplot(dat, aes(y = x, x = y)) +
+    geom_linerange(aes(xmin = 0, xmax = y), position = position_dodge(.4), size = .8) +
     geom_point(size = size_point, position = position_dodge(.4)) +
     labs(y = NULL, x = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
     scale_x_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
@@ -128,15 +128,15 @@ plot.see_check_distribution_numeric <- function(x,
   dat1 <- as.data.frame(stats::density(vec))
   dat2 <- data.frame(x = vec)
 
-  p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
+  p2 <- ggplot(dat1, aes(x = x, y = y)) +
     geom_line() +
     labs(x = NULL, y = NULL, title = "Density of Vector") +
     theme_lucid()
 
-  p3 <- ggplot(dat2, aes(x = .data$x)) +
+  p3 <- ggplot(dat2, aes(x = x)) +
     geom_histogram(
       colour = theme_lucid()$panel.background$fill,
-      binwidth = sqrt(length(vars(.data$x)))
+      binwidth = sqrt(length(vars(x)))
     ) +
     labs(x = NULL, y = NULL, title = "Distribution of Vector") +
     theme_lucid()
