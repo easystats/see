@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("ggraph", quietly = TRUE) ||
   !requireNamespace("correlation", quietly = TRUE) &&
+  !requireNamespace("poorman", quietly = TRUE) &&
   !packageVersion("correlation") > "0.7.1") {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -133,7 +134,7 @@ The `corrlation` function also provides a convenient way to change names for sel
 
 ```{r, eval=isTRUE(packageVersion("correlation") >= '0.7.0')}
 plot(summary(correlation(
-  data = dplyr::select(mtcars, wt, mpg, drat),
+  data = select(mtcars, wt, mpg, drat),
   rename = c("weight", "miles per gallon", "rear axle ratio")
 )))
 ```

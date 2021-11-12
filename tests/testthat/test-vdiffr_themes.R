@@ -1,14 +1,14 @@
 if (getRversion() >= "4.1" && getRversion() < "4.2" &&
   require("vdiffr") &&
   require("ggplot2") &&
-  require("dplyr") &&
+  require("poorman") &&
   require("tidyr")) {
   test_that("theme functions work", {
     skip_on_cran()
 
     data <- iris %>%
       group_by(Species) %>%
-      summarise_all(mean) %>%
+     summarise(across(everything(), mean)) %>%
       pivot_longer(-Species)
 
 
