@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
-  !requireNamespace("dplyr", quietly = TRUE) ||
+  !requireNamespace("poorman", quietly = TRUE) ||
   !requireNamespace("effectsize", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -39,7 +39,7 @@ For more, see: <https://easystats.github.io/effectsize/>
 # Setup
 
 ```{r setup}
-library(dplyr)
+library(poorman)
 library(effectsize)
 library(see)
 data(mtcars)

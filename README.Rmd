@@ -8,7 +8,7 @@ csl: apa.csl
 # see <img src='man/figures/logo.png' align="right" height="139" />
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(dplyr)
+library(poorman)
 library(see)
 
 knitr::opts_chunk$set(
@@ -316,13 +316,13 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 ## Radar chart (Spider plot)
 
 ```{r}
-library(dplyr)
+library(poorman)
 library(tidyr)
 
 # prepare the data in tidy format
 data <- iris %>%
   group_by(Species) %>%
-  summarise_all(mean) %>%
+ summarise(across(everything(), mean)) %>%
   pivot_longer(-Species)
 
 data %>%

@@ -1,6 +1,6 @@
 if (getRversion() >= "4.1" &&
   getRversion() < "4.2" &&
-  require("vdiffr") &&
+  require("vdiffr") && require("poorman") && require("tidyr") &&
   require("ggplot2")) {
   test_that("geom and coord functions work correctly", {
     skip_on_cran()
@@ -8,8 +8,8 @@ if (getRversion() >= "4.1" &&
     # coord_radar() ------------------
 
     data <- iris %>%
-      dplyr::group_by(Species) %>%
-      dplyr::summarise_all(mean) %>%
+      group_by(Species) %>%
+     summarise(across(everything(), mean)) %>%
       tidyr::pivot_longer(-Species)
 
     set.seed(123)

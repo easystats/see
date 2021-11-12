@@ -8,10 +8,10 @@
 #' @seealso [coord_radar()]
 #'
 #' @examples
-#' if (require("ggplot2") && require("dplyr") && require("tidyr")) {
+#' if (require("ggplot2") && require("poorman") && require("tidyr")) {
 #'   data <- iris %>%
 #'     group_by(Species) %>%
-#'     summarise_all(mean) %>%
+#'    summarise(across(everything(), mean)) %>%
 #'     pivot_longer(-Species)
 #'
 #'   data %>%
