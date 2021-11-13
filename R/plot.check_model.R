@@ -41,7 +41,7 @@ plot.see_check_model <- function(x,
 
   if (is.null(check)) check <- "all"
 
-  if ("NCV" %in% names(x) && any(c("ncv", "linearity", "all") %in% check)) {
+  if ("NCV" %in% names(x) && !is.null(x$NCV) && any(c("ncv", "linearity", "all") %in% check)) {
     p$NCV <- .plot_diag_linearity(
       x$NCV,
       size_point,
@@ -53,7 +53,7 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("HOMOGENEITY" %in% names(x) && any(c("homogeneity", "all") %in% check)) {
+  if ("HOMOGENEITY" %in% names(x) && !is.null(x$HOMOGENEITY) && any(c("homogeneity", "all") %in% check)) {
     p$HOMOGENEITY <- .plot_diag_homogeneity(
       x$HOMOGENEITY,
       size_point,
@@ -65,7 +65,7 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("VIF" %in% names(x) && any(c("vif", "all") %in% check)) {
+  if ("VIF" %in% names(x) && !is.null(x$VIF) && any(c("vif", "all") %in% check)) {
     p$VIF <- .plot_diag_vif(
       x$VIF,
       theme_style = style,
@@ -73,7 +73,7 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("OUTLIERS" %in% names(x) && any(c("outliers", "all") %in% check)) {
+  if ("INFLUENTIAL" %in% names(x) && !is.null(x$INFLUENTIAL) && any(c("outliers", "influential", "all") %in% check)) {
     p$OUTLIERS <- .plot_diag_outliers_new(
       x$INFLUENTIAL,
       show_labels = show_labels,
@@ -85,7 +85,7 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("QQ" %in% names(x) && any(c("qq", "all") %in% check)) {
+  if ("QQ" %in% names(x) && !is.null(x$QQ) && any(c("qq", "all") %in% check)) {
     p$QQ <- .plot_diag_qq(
       x$QQ,
       size_point,
@@ -98,7 +98,7 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("NORM" %in% names(x) && any(c("normality", "all") %in% check)) {
+  if ("NORM" %in% names(x) && !is.null(x$NORM) && any(c("normality", "all") %in% check)) {
     p$NORM <- .plot_diag_norm(
       x$NORM,
       size_line,
@@ -108,7 +108,7 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("REQQ" %in% names(x) && any(c("reqq", "all") %in% check)) {
+  if ("REQQ" %in% names(x) && !is.null(x$REQQ) && any(c("reqq", "all") %in% check)) {
     ps <- .plot_diag_reqq(
       x$REQQ,
       size_point,
