@@ -11,7 +11,7 @@
 #' if (require("ggplot2") && require("poorman") && require("tidyr")) {
 #'   data <- iris %>%
 #'     group_by(Species) %>%
-#'    summarise(across(everything(), mean)) %>%
+#'     summarise(across(everything(), mean)) %>%
 #'     pivot_longer(-Species)
 #'
 #'   data %>%

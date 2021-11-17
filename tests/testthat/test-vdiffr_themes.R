@@ -8,7 +8,7 @@ if (getRversion() >= "4.1" && getRversion() < "4.2" &&
 
     data <- iris %>%
       group_by(Species) %>%
-     summarise(across(everything(), mean)) %>%
+      summarise(across(everything(), mean)) %>%
       pivot_longer(-Species)
 
 

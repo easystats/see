@@ -9,7 +9,7 @@ if (getRversion() >= "4.1" &&
 
     data <- iris %>%
       group_by(Species) %>%
-     summarise(across(everything(), mean)) %>%
+      summarise(across(everything(), mean)) %>%
       tidyr::pivot_longer(-Species)
 
     set.seed(123)
