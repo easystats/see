@@ -34,82 +34,24 @@ template:
 reference:
 - title: "Plotting Functions"
   contents:
-  - data_plot
-  - plot.see_bayesfactor_models
-  - plot.see_bayesfactor_parameters
-  - plot.see_equivalence_test
-  - plot.see_estimate_density
-  - plot.see_hdi
-  - plot.see_p_direction
-  - plot.see_p_significance
-  - plot.see_si
-  - plot.see_easycormatrix
-  - plot.see_easycorrelation
-  - plot.see_effectsize_table
-  - plot.see_estimate_contrasts
-  - plot.see_cluster_analysis
-  - plot.see_parameters_distribution
-  - plot.see_compare_parameters
-  - plot.see_parameters_model
-  - plot.see_parameters_pca
-  - plot.see_parameters_brms_meta
-  - plot.see_n_factors
-  - plot.see_parameters_simulate
-  - plot.see_check_collinearity
-  - plot.see_check_heteroscedasticity
-  - plot.see_check_homogeneity
-  - plot.see_check_normality
-  - plot.see_check_outliers
-  - plot.see_compare_performance
-  - plot.see_performance_roc
-  - plot.see_performance_pp_check
-  - plot.see_check_distribution
-  - plot.see_point_estimate
-  - plot.see_rope
-  - plots
+  - contains("plot")
 
 - title: "Geoms"
   contents:
-  - geom_point2
-  - geom_poolpoint
-  - geom_violindot
-  - geom_violinhalf
-  - geom_from_list
+  - starts_with("geom_")
 
 - title: "Scales"
   contents:
-  - scale_color_bluebrown
-  - scale_color_flat
-  - scale_color_material
-  - scale_color_metro
-  - scale_color_pizza
-  - scale_color_see
-  - scale_color_social
+  - starts_with("scale_color_")
 
 - title: "Themes"
   contents:
-  - theme_abyss
-  - theme_blackboard
-  - theme_lucid
-  - theme_modern
-  - theme_radar
+  - starts_with("theme_")
 
 - title: "Color Palettes"
   contents:
-  - bluebrown_colors
-  - flat_colors
-  - material_colors
-  - metro_colors
-  - pizza_colors
-  - see_colors
-  - social_colors
-  - palette_bluebrown
-  - palette_flat
-  - palette_material
-  - palette_metro
-  - palette_pizza
-  - palette_see
-  - palette_social
+  - matches("_colors$")
+  - matches("^palette_")
 
 - title: "Miscellaneous"
   contents:
