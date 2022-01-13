@@ -24,7 +24,7 @@ Add a radar coordinate system useful for radar charts.
 if (require("poorman") && require("tidyr") && require("ggplot2")) {
   data <- iris \%>\%
     group_by(Species) \%>\%
-   summarise(across(everything(), mean)) \%>\%
+    summarise(across(everything(), mean)) \%>\%
     pivot_longer(-Species)
 
   data \%>\%
