@@ -39,6 +39,9 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
   dataplot <- dataplot[dataplot$Study != "tau", ]
   summary <- summary[summary$Study != "tau", ]
 
+  dataplot$Study <- droplevels(dataplot$Study)
+  summary$Study <- droplevels(summary$Study)
+
   dataplot$Group <- "Study"
   dataplot$Group[dataplot$Study == "Overall"] <- "Overall"
   dataplot$Color <- "Study"
