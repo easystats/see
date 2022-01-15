@@ -103,7 +103,7 @@ In case of models with multiple components, parameters are separated into facets
 by model component.
 
 ```{r}
-result <- model_parameters(model1)
+result <- model_parameters(model1, effects = "fixed")
 
 plot(result)
 ```
@@ -118,7 +118,7 @@ plot(result, show_labels = TRUE, size_text = 4)
 This also works for exponentiated coefficients.
 
 ```{r}
-result <- model_parameters(model1, exponentiate = TRUE)
+result <- model_parameters(model1, exponentiate = TRUE, effects = "fixed")
 plot(result, show_labels = TRUE, size_text = 4)
 ```
 
