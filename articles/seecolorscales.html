@@ -43,7 +43,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -88,6 +88,9 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="seecolorscales_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Color Scales</h1>
@@ -162,14 +165,14 @@
 <span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="../reference/theme_modern.html">theme_modern</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="section level1">
-<h1 id="the-see-color-scales">The <em>see</em> Color Scales<a class="anchor" aria-label="anchor" href="#the-see-color-scales"></a>
-</h1>
+<div class="section level2">
+<h2 id="the-see-color-scales">The <em>see</em> Color Scales<a class="anchor" aria-label="anchor" href="#the-see-color-scales"></a>
+</h2>
 <p>There are several different <a href="https://easystats.github.io/see/reference/index.html#section-scales" class="external-link">color scales available</a> in the <em>see</em> package, most of them having some pre-defined palettes like <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>, <code>"contrast"</code>, or <code>"light"</code> - exceptions are the <a href="https://easystats.github.io/see/reference/scale_color_pizza.html" class="external-link">pizza color scale</a> and <a href="https://easystats.github.io/see/reference/scale_color_blubrown.html" class="external-link">bluebrown color scale</a>.</p>
 <p>In this vignettes, we show the default palettes for the different color scales to give an impression how these scales work with different type of data.</p>
-<div class="section level2">
-<h2 id="social-colors---three-groups">Social Colors - Three Groups<a class="anchor" aria-label="anchor" href="#social-colors---three-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="social-colors---three-groups">Social Colors - Three Groups<a class="anchor" aria-label="anchor" href="#social-colors---three-groups"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -182,9 +185,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-3-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="social-colors---four-groups">Social Colors - Four Groups<a class="anchor" aria-label="anchor" href="#social-colors---four-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="social-colors---four-groups">Social Colors - Four Groups<a class="anchor" aria-label="anchor" href="#social-colors---four-groups"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -197,9 +200,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="social-colors---five-groups">Social Colors - Five Groups<a class="anchor" aria-label="anchor" href="#social-colors---five-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="social-colors---five-groups">Social Colors - Five Groups<a class="anchor" aria-label="anchor" href="#social-colors---five-groups"></a>
+</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -213,12 +216,12 @@
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="material-colors">Material Colors<a class="anchor" aria-label="anchor" href="#material-colors"></a>
-</h1>
 <div class="section level2">
-<h2 id="material-colors---three-groups">Material Colors - Three Groups<a class="anchor" aria-label="anchor" href="#material-colors---three-groups"></a>
+<h2 id="material-colors">Material Colors<a class="anchor" aria-label="anchor" href="#material-colors"></a>
 </h2>
+<div class="section level3">
+<h3 id="material-colors---three-groups">Material Colors - Three Groups<a class="anchor" aria-label="anchor" href="#material-colors---three-groups"></a>
+</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -231,9 +234,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="material-colors---four-groups">Material Colors - Four Groups<a class="anchor" aria-label="anchor" href="#material-colors---four-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="material-colors---four-groups">Material Colors - Four Groups<a class="anchor" aria-label="anchor" href="#material-colors---four-groups"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -246,9 +249,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="material-colors---five-groups">Material Colors - Five Groups<a class="anchor" aria-label="anchor" href="#material-colors---five-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="material-colors---five-groups">Material Colors - Five Groups<a class="anchor" aria-label="anchor" href="#material-colors---five-groups"></a>
+</h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -262,12 +265,12 @@
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-8-1.png" width="768"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="flat-colors">Flat Colors<a class="anchor" aria-label="anchor" href="#flat-colors"></a>
-</h1>
 <div class="section level2">
-<h2 id="flat-colors---three-groups">Flat Colors - Three Groups<a class="anchor" aria-label="anchor" href="#flat-colors---three-groups"></a>
+<h2 id="flat-colors">Flat Colors<a class="anchor" aria-label="anchor" href="#flat-colors"></a>
 </h2>
+<div class="section level3">
+<h3 id="flat-colors---three-groups">Flat Colors - Three Groups<a class="anchor" aria-label="anchor" href="#flat-colors---three-groups"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -280,9 +283,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="flat-colors---four-groups">Flat Colors - Four Groups<a class="anchor" aria-label="anchor" href="#flat-colors---four-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="flat-colors---four-groups">Flat Colors - Four Groups<a class="anchor" aria-label="anchor" href="#flat-colors---four-groups"></a>
+</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -295,9 +298,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="flat-colors---five-groups">Flat Colors - Five Groups<a class="anchor" aria-label="anchor" href="#flat-colors---five-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="flat-colors---five-groups">Flat Colors - Five Groups<a class="anchor" aria-label="anchor" href="#flat-colors---five-groups"></a>
+</h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -311,12 +314,12 @@
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-11-1.png" width="768"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="metro-colors">Metro Colors<a class="anchor" aria-label="anchor" href="#metro-colors"></a>
-</h1>
 <div class="section level2">
-<h2 id="metro-colors---three-groups">Metro Colors - Three Groups<a class="anchor" aria-label="anchor" href="#metro-colors---three-groups"></a>
+<h2 id="metro-colors">Metro Colors<a class="anchor" aria-label="anchor" href="#metro-colors"></a>
 </h2>
+<div class="section level3">
+<h3 id="metro-colors---three-groups">Metro Colors - Three Groups<a class="anchor" aria-label="anchor" href="#metro-colors---three-groups"></a>
+</h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -329,9 +332,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-12-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="metro-colors---four-groups">Metro Colors - Four Groups<a class="anchor" aria-label="anchor" href="#metro-colors---four-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="metro-colors---four-groups">Metro Colors - Four Groups<a class="anchor" aria-label="anchor" href="#metro-colors---four-groups"></a>
+</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -344,9 +347,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-13-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="metro-colors---five-groups">Metro Colors - Five Groups<a class="anchor" aria-label="anchor" href="#metro-colors---five-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="metro-colors---five-groups">Metro Colors - Five Groups<a class="anchor" aria-label="anchor" href="#metro-colors---five-groups"></a>
+</h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -360,12 +363,12 @@
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-14-1.png" width="768"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="see-colors">See Colors<a class="anchor" aria-label="anchor" href="#see-colors"></a>
-</h1>
 <div class="section level2">
-<h2 id="see-colors---three-groups">See Colors - Three Groups<a class="anchor" aria-label="anchor" href="#see-colors---three-groups"></a>
+<h2 id="see-colors">See Colors<a class="anchor" aria-label="anchor" href="#see-colors"></a>
 </h2>
+<div class="section level3">
+<h3 id="see-colors---three-groups">See Colors - Three Groups<a class="anchor" aria-label="anchor" href="#see-colors---three-groups"></a>
+</h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -378,9 +381,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-15-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="see-colors---four-groups">See Colors - Four Groups<a class="anchor" aria-label="anchor" href="#see-colors---four-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="see-colors---four-groups">See Colors - Four Groups<a class="anchor" aria-label="anchor" href="#see-colors---four-groups"></a>
+</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -393,9 +396,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-16-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="see-colors---five-groups">See Colors - Five Groups<a class="anchor" aria-label="anchor" href="#see-colors---five-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="see-colors---five-groups">See Colors - Five Groups<a class="anchor" aria-label="anchor" href="#see-colors---five-groups"></a>
+</h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -409,12 +412,12 @@
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="pizza-colors">Pizza Colors<a class="anchor" aria-label="anchor" href="#pizza-colors"></a>
-</h1>
 <div class="section level2">
-<h2 id="pizza-colors---three-groups">Pizza Colors - Three Groups<a class="anchor" aria-label="anchor" href="#pizza-colors---three-groups"></a>
+<h2 id="pizza-colors">Pizza Colors<a class="anchor" aria-label="anchor" href="#pizza-colors"></a>
 </h2>
+<div class="section level3">
+<h3 id="pizza-colors---three-groups">Pizza Colors - Three Groups<a class="anchor" aria-label="anchor" href="#pizza-colors---three-groups"></a>
+</h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -427,9 +430,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-18-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="pizza-colors---four-groups">Pizza Colors - Four Groups<a class="anchor" aria-label="anchor" href="#pizza-colors---four-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="pizza-colors---four-groups">Pizza Colors - Four Groups<a class="anchor" aria-label="anchor" href="#pizza-colors---four-groups"></a>
+</h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -442,9 +445,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-19-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="pizza-colors---five-groups">Pizza Colors - Five Groups<a class="anchor" aria-label="anchor" href="#pizza-colors---five-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="pizza-colors---five-groups">Pizza Colors - Five Groups<a class="anchor" aria-label="anchor" href="#pizza-colors---five-groups"></a>
+</h3>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -458,12 +461,12 @@
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-20-1.png" width="768"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="bluebrown-colors">Bluebrown Colors<a class="anchor" aria-label="anchor" href="#bluebrown-colors"></a>
-</h1>
 <div class="section level2">
-<h2 id="bluebrown-colors---three-groups">Bluebrown Colors - Three Groups<a class="anchor" aria-label="anchor" href="#bluebrown-colors---three-groups"></a>
+<h2 id="bluebrown-colors">Bluebrown Colors<a class="anchor" aria-label="anchor" href="#bluebrown-colors"></a>
 </h2>
+<div class="section level3">
+<h3 id="bluebrown-colors---three-groups">Bluebrown Colors - Three Groups<a class="anchor" aria-label="anchor" href="#bluebrown-colors---three-groups"></a>
+</h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -476,9 +479,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-21-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="bluebrown-colors---four-groups">Bluebrown Colors - Four Groups<a class="anchor" aria-label="anchor" href="#bluebrown-colors---four-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="bluebrown-colors---four-groups">Bluebrown Colors - Four Groups<a class="anchor" aria-label="anchor" href="#bluebrown-colors---four-groups"></a>
+</h3>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -491,9 +494,9 @@
 <span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, n_rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-22-1.png" width="768"></p>
 </div>
-<div class="section level2">
-<h2 id="bluebrown-colors---five-groups">Bluebrown Colors - Five Groups<a class="anchor" aria-label="anchor" href="#bluebrown-colors---five-groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="bluebrown-colors---five-groups">Bluebrown Colors - Five Groups<a class="anchor" aria-label="anchor" href="#bluebrown-colors---five-groups"></a>
+</h3>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
@@ -507,9 +510,9 @@
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-23-1.png" width="768"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="overview-of-palette-colors">Overview of Palette Colors<a class="anchor" aria-label="anchor" href="#overview-of-palette-colors"></a>
-</h1>
+<div class="section level2">
+<h2 id="overview-of-palette-colors">Overview of Palette Colors<a class="anchor" aria-label="anchor" href="#overview-of-palette-colors"></a>
+</h2>
 <p><img src="seecolorscales_files/figure-html/unnamed-chunk-24-1.png" width="768"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -525,7 +528,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>

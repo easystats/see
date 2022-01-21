@@ -43,7 +43,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -88,6 +88,9 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="performance_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plotting Functions for the 'performance' Package</h1>
@@ -119,24 +122,24 @@
 <span class="co">#&gt;     pages = {3393},</span>
 <span class="co">#&gt;     doi = {10.21105/joss.03393},</span>
 <span class="co">#&gt;   }</span></code></pre></div>
-<div class="section level1">
-<h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h1>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>A crucial aspect when building regression models is to evaluate the quality of modelfit. It is important to investigate how well models fit to the data and which fit indices to report. Functions to create diagnostic plots or to compute fit measures do exist, however, mostly spread over different packages. There is no unique and consistent approach to assess the model quality for different kind of models.</p>
 <p>The primary goal of the <em>performance</em> package in <em>easystats</em> ecosystem is to fill this gap and to provide utilities for computing <strong>indices of model quality</strong> and <strong>goodness of fit</strong>. These include measures like r-squared (R2), root mean squared error (RMSE) or intraclass correlation coefficient (ICC) , but also functions to check (mixed) models for overdispersion, zero-inflation, convergence or singularity.</p>
 <p>For more, see: <a href="https://easystats.github.io/performance/" class="external-link uri">https://easystats.github.io/performance/</a></p>
 </div>
-<div class="section level1">
-<h1 id="checking-model-assumptions">Checking Model Assumptions<a class="anchor" aria-label="anchor" href="#checking-model-assumptions"></a>
-</h1>
+<div class="section level2">
+<h2 id="checking-model-assumptions">Checking Model Assumptions<a class="anchor" aria-label="anchor" href="#checking-model-assumptions"></a>
+</h2>
 <p>Let’s load the needed libraries first:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/performance/" class="external-link">performance</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/" class="external-link">see</a></span><span class="op">)</span></code></pre></div>
-<div class="section level2">
-<h2 id="binned-residuals">Binned Residuals<a class="anchor" aria-label="anchor" href="#binned-residuals"></a>
-</h2>
+<div class="section level3">
+<h3 id="binned-residuals">Binned Residuals<a class="anchor" aria-label="anchor" href="#binned-residuals"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/binned_residuals.html" class="external-link">related function documentation</a>)</em></p>
 <p>Example where model is <strong>not</strong> a good fit.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -151,9 +154,9 @@
 <span class="co">#&gt; Ok: About 100% of the residuals are inside the error bounds.</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-4-1.png" width="100%"></p>
 </div>
-<div class="section level2">
-<h2 id="check-for-multicollinearity---variance-inflation-factor">Check for Multicollinearity - Variance Inflation Factor<a class="anchor" aria-label="anchor" href="#check-for-multicollinearity---variance-inflation-factor"></a>
-</h2>
+<div class="section level3">
+<h3 id="check-for-multicollinearity---variance-inflation-factor">Check for Multicollinearity - Variance Inflation Factor<a class="anchor" aria-label="anchor" href="#check-for-multicollinearity---variance-inflation-factor"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_collinearity.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -221,9 +224,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
 </div>
-<div class="section level2">
-<h2 id="check-for-outliers">Check for Outliers<a class="anchor" aria-label="anchor" href="#check-for-outliers"></a>
-</h2>
+<div class="section level3">
+<h3 id="check-for-outliers">Check for Outliers<a class="anchor" aria-label="anchor" href="#check-for-outliers"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_outliers.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># select only mpg and disp (continuous)</span>
@@ -237,54 +240,54 @@
 <span class="va">result</span>
 <span class="co">#&gt; Warning: 2 outliers detected (cases 31, 34).</span></code></pre></div>
 <p>There are two visualization options</p>
-<div class="section level3">
-<h3 id="dot-plot-with-contour-lines">dot-plot with contour lines<a class="anchor" aria-label="anchor" href="#dot-plot-with-contour-lines"></a>
-</h3>
+<div class="section level4">
+<h4 id="dot-plot-with-contour-lines">dot-plot with contour lines<a class="anchor" aria-label="anchor" href="#dot-plot-with-contour-lines"></a>
+</h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"dots"</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
 </div>
-<div class="section level3">
-<h3 id="bars-indicating-influential-observations">bars indicating influential observations<a class="anchor" aria-label="anchor" href="#bars-indicating-influential-observations"></a>
-</h3>
+<div class="section level4">
+<h4 id="bars-indicating-influential-observations">bars indicating influential observations<a class="anchor" aria-label="anchor" href="#bars-indicating-influential-observations"></a>
+</h4>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"bars"</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-9-1.png" width="100%"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="check-for-normal-distributed-residuals">Check for Normal Distributed Residuals<a class="anchor" aria-label="anchor" href="#check-for-normal-distributed-residuals"></a>
-</h2>
+<div class="section level3">
+<h3 id="check-for-normal-distributed-residuals">Check for Normal Distributed Residuals<a class="anchor" aria-label="anchor" href="#check-for-normal-distributed-residuals"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="co">#&gt; OK: residuals appear as normally distributed (p = 0.230).</span></code></pre></div>
-<div class="section level3">
-<h3 id="density-plot">Density Plot<a class="anchor" aria-label="anchor" href="#density-plot"></a>
-</h3>
+<div class="section level4">
+<h4 id="density-plot">Density Plot<a class="anchor" aria-label="anchor" href="#density-plot"></a>
+</h4>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
 </div>
-<div class="section level3">
-<h3 id="qq-plot">QQ Plot<a class="anchor" aria-label="anchor" href="#qq-plot"></a>
-</h3>
+<div class="section level4">
+<h4 id="qq-plot">QQ Plot<a class="anchor" aria-label="anchor" href="#qq-plot"></a>
+</h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-12-1.png" width="100%"></p>
 </div>
-<div class="section level3">
-<h3 id="pp-plot">PP Plot<a class="anchor" aria-label="anchor" href="#pp-plot"></a>
-</h3>
+<div class="section level4">
+<h4 id="pp-plot">PP Plot<a class="anchor" aria-label="anchor" href="#pp-plot"></a>
+</h4>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"pp"</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-13-1.png" width="100%"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="check-for-normal-distributed-random-effects">Check for Normal Distributed Random Effects<a class="anchor" aria-label="anchor" href="#check-for-normal-distributed-random-effects"></a>
-</h2>
+<div class="section level3">
+<h3 id="check-for-normal-distributed-random-effects">Check for Normal Distributed Random Effects<a class="anchor" aria-label="anchor" href="#check-for-normal-distributed-random-effects"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span>
@@ -296,9 +299,9 @@
 <span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
 </div>
-<div class="section level2">
-<h2 id="check-for-heteroscedasticity">Check for Heteroscedasticity<a class="anchor" aria-label="anchor" href="#check-for-heteroscedasticity"></a>
-</h2>
+<div class="section level3">
+<h3 id="check-for-heteroscedasticity">Check for Heteroscedasticity<a class="anchor" aria-label="anchor" href="#check-for-heteroscedasticity"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -307,9 +310,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-15-1.png" width="100%"></p>
 </div>
-<div class="section level2">
-<h2 id="check-for-homogeneity">Check for Homogeneity<a class="anchor" aria-label="anchor" href="#check-for-homogeneity"></a>
-</h2>
+<div class="section level3">
+<h3 id="check-for-homogeneity">Check for Homogeneity<a class="anchor" aria-label="anchor" href="#check-for-homogeneity"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_homogeneity.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">len</span> <span class="op">~</span> <span class="va">supp</span> <span class="op">+</span> <span class="va">dose</span>, data <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">)</span>
@@ -318,9 +321,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
 </div>
-<div class="section level2">
-<h2 id="posterior-predictive-checks">Posterior Predictive Checks<a class="anchor" aria-label="anchor" href="#posterior-predictive-checks"></a>
-</h2>
+<div class="section level3">
+<h3 id="posterior-predictive-checks">Posterior Predictive Checks<a class="anchor" aria-label="anchor" href="#posterior-predictive-checks"></a>
+</h3>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -333,9 +336,9 @@
 <p><img src="performance_files/figure-html/unnamed-chunk-18-1.png" width="100%"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="overall-model-check">Overall Model Check<a class="anchor" aria-label="anchor" href="#overall-model-check"></a>
-</h1>
+<div class="section level2">
+<h2 id="overall-model-check">Overall Model Check<a class="anchor" aria-label="anchor" href="#overall-model-check"></a>
+</h2>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span>
@@ -365,9 +368,9 @@
 <code class="sourceCode R"><span class="fu"><a href="https://easystats.github.io/performance/reference/check_autocorrelation.html" class="external-link">check_autocorrelation</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.002).</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="compare-model-performances">Compare Model Performances<a class="anchor" aria-label="anchor" href="#compare-model-performances"></a>
-</h1>
+<div class="section level2">
+<h2 id="compare-model-performances">Compare Model Performances<a class="anchor" aria-label="anchor" href="#compare-model-performances"></a>
+</h2>
 <p><em>(<a href="https://easystats.github.io/performance/reference/model_performance.html" class="external-link">related function documentation</a>)</em></p>
 <p><code><a href="https://easystats.github.io/performance/reference/compare_performance.html" class="external-link">compare_performance()</a></code> computes indices of model performance for different models at once and hence allows comparison of indices across models. The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>-method creates a “spiderweb” plot, where the different indices are normalized and larger values indicate better model performance. Hence, points closer to the center indicate worse fit indices.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
@@ -391,9 +394,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-22-1.png" width="100%"></p>
 </div>
-<div class="section level1">
-<h1 id="model-and-vector-properties">Model and Vector Properties<a class="anchor" aria-label="anchor" href="#model-and-vector-properties"></a>
-</h1>
+<div class="section level2">
+<h2 id="model-and-vector-properties">Model and Vector Properties<a class="anchor" aria-label="anchor" href="#model-and-vector-properties"></a>
+</h2>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_distribution.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span>
@@ -431,9 +434,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-24-1.png" width="100%"></p>
 </div>
-<div class="section level1">
-<h1 id="roc-curves">ROC curves<a class="anchor" aria-label="anchor" href="#roc-curves"></a>
-</h1>
+<div class="section level2">
+<h2 id="roc-curves">ROC curves<a class="anchor" aria-label="anchor" href="#roc-curves"></a>
+</h2>
 <p><em>(<a href="https://easystats.github.io/performance/reference/performance_roc.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"performance"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="st">"0.7.0"</span><span class="op">)</span> <span class="op">{</span>
@@ -480,7 +483,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>
