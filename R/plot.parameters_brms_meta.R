@@ -156,11 +156,11 @@ plot.see_parameters_brms_meta <- function(x,
   summary <- attributes(x)$summary
   rope <- attributes(summary)$rope
 
-  p <- ggplot(x, mapping = aes(x = .data$x, y = .data$Study, height = .data$y))
+  p <- ggplot2::ggplot(x, mapping = ggplot2::aes(x = .data$x, y = .data$Study, height = .data$y))
 
   if (!is.null(rope)) {
     p <- p +
-      annotate(
+      ggplot2::annotate(
         "rect",
         xmin = rope[1],
         xmax = rope[2],
@@ -175,23 +175,23 @@ plot.see_parameters_brms_meta <- function(x,
 
   p <- p +
     ggridges::geom_ridgeline(
-      mapping = aes(fill = .data$Group),
+      mapping = ggplot2::aes(fill = .data$Group),
       color = NA,
       scale = 1,
       alpha = posteriors_alpha
     ) +
-    geom_errorbarh(
+    ggplot2::geom_errorbarh(
       data = summary,
-      mapping = aes(
+      mapping = ggplot2::aes(
         xmin = .data$CI_low,
         xmax = .data$CI_high,
         color = .data$Color
       ),
       size = size_line
     ) +
-    geom_point(
+    ggplot2::geom_point(
       data = summary,
-      mapping = aes(x = .data$Estimate, color = .data$Color),
+      mapping = ggplot2::aes(x = .data$Estimate, color = .data$Color),
       size = size_point,
       fill = "white",
       shape = 21
@@ -199,10 +199,10 @@ plot.see_parameters_brms_meta <- function(x,
 
   p <- p +
     theme_lucid() +
-    scale_y_discrete() +
-    scale_fill_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
-    scale_colour_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
-    guides(fill = "none", colour = "none") +
+    ggplot2::scale_y_discrete() +
+    ggplot2::scale_fill_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
+    ggplot2::scale_colour_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
+    ggplot2::guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
 
   if (isTRUE(show_labels)) {
@@ -211,15 +211,15 @@ plot.see_parameters_brms_meta <- function(x,
     new_range <- pretty(c(min(x$x), max(x$x) + space_factor))
 
     p <- p +
-      geom_text(
+      ggplot2::geom_text(
         data = summary,
-        mapping = aes(label = .data$Estimate_CI, x = Inf),
+        mapping = ggplot2::aes(label = .data$Estimate_CI, x = Inf),
         hjust = "inward",
         size = size_text
       ) +
-      xlim(c(min(new_range), max(new_range))) +
+      ggplot2::xlim(c(min(new_range), max(new_range))) +
       # no panel grids when we have text
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+      ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank())
   }
 
   p
