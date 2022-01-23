@@ -15,7 +15,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 
   # normalize height
   if (isTRUE(normalize_height)) {
-    dataplot$y <- effectsize::change_scale(dataplot$y, to = c(0, .9))
+    dataplot$y <- datawizard::data_rescale(dataplot$y, to = c(0, .9))
   }
 
   # summary
