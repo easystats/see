@@ -64,7 +64,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
   # Extract distances
   d <- data[grepl("Distance_", names(data))]
   if (rescale_distance) {
-    d <- effectsize::normalize(d, verbose = FALSE)
+    d <- datawizard::normalize(d, verbose = FALSE)
   }
 
   d_long <- stats::reshape(
