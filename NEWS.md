@@ -1,5 +1,7 @@
 # see 0.6.9
 
+* Minor changes to catch up with changes from other easystats-packages.
+
 # see 0.6.8
 
 ## New features
