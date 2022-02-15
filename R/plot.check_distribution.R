@@ -12,11 +12,12 @@
 #'
 #' @examples
 #' \donttest{
-#' library(performance)
-#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-#' result <- check_distribution(m)
-#' result
-#' plot(result)
+#' if (require("randomForest") && require("performance")) {
+#'   m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#'   result <- check_distribution(m)
+#'   result
+#'   plot(result)
+#' }
 #' }
 #' @export
 plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {

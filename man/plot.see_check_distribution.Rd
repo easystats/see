@@ -25,10 +25,11 @@ function.
 }
 \examples{
 \donttest{
-library(performance)
-m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-result <- check_distribution(m)
-result
-plot(result)
+if (require("randomForest") && require("performance")) {
+  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+  result <- check_distribution(m)
+  result
+  plot(result)
+}
 }
 }
