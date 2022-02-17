@@ -95,6 +95,11 @@ plot.see_parameters_simulate <- function(x,
   is_mlm <- !is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class
   if (is.null(n_columns) && isTRUE(is_mlm)) n_columns <- 1
 
+  # check for defaults
+  if (missing(centrality) && !is.null(attributes(x)$centrality)) {
+    centrality <- attributes(x)$centrality
+  }
+
   if (!"data_plot" %in% class(x)) {
     x <- data_plot(x, data = data, normalize_height = normalize_height)
   }
