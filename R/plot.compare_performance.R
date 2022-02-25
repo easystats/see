@@ -11,10 +11,21 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   x <- datawizard::data_rescale(x, exclude = "Model", to = c(.1, 1))
 
   # recode some indices, so higher values = better fit
-  for (i in c("AIC", "BIC", "RMSE", "Sigma")) {
+  for (i in c("AIC", "BIC", "AICc", "RMSE", "Sigma")) {
     if (i %in% colnames(x)) {
       x[[i]] <- 1.1 - x[[i]]
     }
+  }
+
+  # show weighted ICs instead of raw...
+  if ("AIC_wt" %in% colnames(x)) {
+    x$AIC <- NULL
+  }
+  if ("AICc_wt" %in% colnames(x)) {
+    x$AICc <- NULL
+  }
+  if ("BIC_wt" %in% colnames(x)) {
+    x$BIC <- NULL
   }
 
   # remove indices with missing value, comparison makes no sense here
