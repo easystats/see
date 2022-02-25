@@ -1,7 +1,11 @@
 # see 0.6.10
 
-* Improved plotting for `performance::check_model()`, using more appropriate 
-  plots for binomial models.
+* Improved plotting for `performance::check_model()`:
+
+  - using more appropriate plots for binomial models
+
+  - the redundant density-plot of normality-checks was replaced by the
+    posterior predictive check plot.
 
 # see 0.6.9
 
