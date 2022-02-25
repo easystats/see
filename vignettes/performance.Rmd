@@ -52,14 +52,20 @@ Example where model is **not** a good fit.
 
 ```{r message=TRUE}
 model <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
-binned_residuals(model)
+result <- binned_residuals(model)
+result
+
+plot(result)
 ```
 
 Example where model **is** a good fit.
 
 ```{r message=TRUE}
 mod <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
-binned_residuals(mod)
+result <- binned_residuals(model)
+result
+
+plot(result)
 ```
 
 ## Check for Multicollinearity - Variance Inflation Factor
@@ -205,6 +211,17 @@ check_posterior_predictions(model, check_range = TRUE)
 # Overall Model Check
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_model.html))_
+
+The composition of plots when checking model assumptions depends on the type of the input model. E.g., for logistic regression models, a [binned residuals plot](https://easystats.github.io/performance/reference/binned_residuals.html) is used, while for linear models a plot of homegeneity of variance is shown instead.
+
+## Checks for generalized linear models
+
+```{r fig.height=12, fig.width=10}
+model <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
+check_model(model)
+```
+
+## Checks for linear (mixed) models
 
 ```{r fig.height=12, fig.width=10}
 model <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
