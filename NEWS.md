@@ -1,3 +1,8 @@
+# see 0.6.10
+
+* Improved plotting for `performance::check_model()`, using more appropriate 
+  plots for binomial models.
+
 # see 0.6.9
 
 * Minor changes to catch up with changes from other easystats-packages.
