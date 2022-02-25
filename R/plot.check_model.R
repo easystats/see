@@ -15,6 +15,7 @@ plot.see_check_model <- function(x,
   alpha_level <- attr(x, "alpha")
   dot_alpha_level <- attr(x, "dot_alpha")
   detrend <- attr(x, "detrend")
+  model_info <- attr(x, "model_info")
 
   if (missing(style) && !is.null(attr(x, "theme"))) {
     theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
@@ -50,6 +51,15 @@ plot.see_check_model <- function(x,
       theme_style = style,
       colors = colors,
       dot_alpha_level = dot_alpha_level
+    )
+  }
+
+  if ("BINNED_RESID" %in% names(x) && !is.null(x$BINNED_RESID) && any(c("binned_residuals", "all") %in% check)) {
+    x$HOMOGENEITY <- NULL
+    p$BINNED_RESID <- plot.see_binned_residuals(
+      x$BINNED_RESID,
+      adjust_legend = TRUE,
+      theme_style = style
     )
   }
 

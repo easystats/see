@@ -1,0 +1,83 @@
+#' @importFrom ggplot2 .data
+#' @export
+plot.see_binned_residuals <- function(x, theme_style = theme_lucid, ...) {
+  x$se.lo <- -x$se
+  if (length(unique(x$group)) > 1) {
+    ltitle <- "Within error bounds"
+  } else {
+    ltitle <- NULL
+  }
+
+  # set defaults
+
+  term <- attr(x, "term", exact = TRUE)
+  geom_color <- attr(x, "geom_color", exact = TRUE)
+  geom_size <- attr(x, "geom_size", exact = TRUE)
+
+
+  if (is.null(term)) {
+    xtitle <- sprintf("Estimated Probability of %s", attr(x, "resp_var", exact = TRUE))
+  } else {
+    xtitle <- term
+  }
+
+  if (is.null(geom_color)) geom_color <- c("#d11141", "#00aedb")
+  if (is.null(geom_size)) geom_size <- 2
+
+
+  p <- ggplot2::ggplot(data = x, aes(x = .data$xbar)) +
+    ggplot2::geom_abline(slope = 0, intercept = 0, colour = "grey80")
+
+  if (!is.null(term)) {
+    p <- p +
+      ggplot2::stat_smooth(
+        ggplot2::aes(y = .data$ybar),
+        method = "loess",
+        se = FALSE,
+        formula = y ~ x,
+        colour = "#00b159",
+        size = .6
+      )
+  }
+
+  p <- p +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = -Inf, ymax = .data$se.lo), alpha = .1, fill = "grey70") +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = .1, fill = "grey70") +
+    ggplot2::geom_line(ggplot2::aes(y = .data$se), colour = "grey70") +
+    ggplot2::geom_line(ggplot2::aes(y = .data$se.lo), colour = "grey70") +
+    ggplot2::scale_color_manual(values = geom_color) +
+    ggplot2::labs(
+      x = xtitle,
+      y = "Average residual",
+      colour = ltitle,
+      title = "Binned Residuals",
+      subtitle = "Points should be within error bounds"
+    )
+
+  if (is.null(term)) {
+    p <- p + ggplot2::scale_x_continuous(labels = .percents)
+  }
+
+  if (is.null(ltitle)) {
+    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = geom_size)
+  } else {
+    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = geom_size)
+  }
+
+  p <- p + theme_style(
+    base_size = 10,
+    plot.title.space = 3,
+    axis.title.space = 5
+  )
+
+  dots <- list(...)
+  if (isTRUE(dots[["adjust_legend"]])) {
+    p <- p + ggplot2::theme(
+      legend.position = "bottom",
+      legend.margin = ggplot2::margin(0, 0, 0, 0),
+      legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
+    )
+  }
+
+  p
+}
