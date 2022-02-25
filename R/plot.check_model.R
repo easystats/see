@@ -59,7 +59,8 @@ plot.see_check_model <- function(x,
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
       adjust_legend = TRUE,
-      theme_style = style
+      style = style,
+      colors = colors[3:2]
     )
   }
 

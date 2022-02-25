@@ -1,6 +1,6 @@
 #' @importFrom ggplot2 .data
 #' @export
-plot.see_binned_residuals <- function(x, theme_style = theme_lucid, ...) {
+plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...) {
   x$se.lo <- -x$se
   if (length(unique(x$group)) > 1) {
     ltitle <- "Within error bounds"
@@ -11,9 +11,23 @@ plot.see_binned_residuals <- function(x, theme_style = theme_lucid, ...) {
   # set defaults
 
   term <- attr(x, "term", exact = TRUE)
-  geom_color <- attr(x, "geom_color", exact = TRUE)
   geom_size <- attr(x, "geom_size", exact = TRUE)
 
+  if (missing(style) && !is.null(attr(x, "theme"))) {
+    theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
+    style <- get(theme_style[2], asNamespace(theme_style[1]))
+  }
+  theme_style <- style
+
+  if (missing(colors)) {
+    colors <- attr(x, "geom_color")
+  }
+
+  if (is.null(colors)) {
+    colors <- c("#cd201f", "#1b6ca8")
+  }
+
+  colors <- unname(colors)
 
   if (is.null(term)) {
     xtitle <- sprintf("Estimated Probability of %s", attr(x, "resp_var", exact = TRUE))
@@ -21,11 +35,10 @@ plot.see_binned_residuals <- function(x, theme_style = theme_lucid, ...) {
     xtitle <- term
   }
 
-  if (is.null(geom_color)) geom_color <- c("#d11141", "#00aedb")
   if (is.null(geom_size)) geom_size <- 2
 
 
-  p <- ggplot2::ggplot(data = x, aes(x = .data$xbar)) +
+  p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
     ggplot2::geom_abline(slope = 0, intercept = 0, colour = "grey80")
 
   if (!is.null(term)) {
@@ -45,7 +58,7 @@ plot.see_binned_residuals <- function(x, theme_style = theme_lucid, ...) {
     ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = .1, fill = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se), colour = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se.lo), colour = "grey70") +
-    ggplot2::scale_color_manual(values = geom_color) +
+    ggplot2::scale_color_manual(values = colors) +
     ggplot2::labs(
       x = xtitle,
       y = "Average residual",
