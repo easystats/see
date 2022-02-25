@@ -77,13 +77,15 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
     p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = geom_size)
   }
 
-  p <- p + theme_style(
-    base_size = 10,
-    plot.title.space = 3,
-    axis.title.space = 5
-  )
-
   dots <- list(...)
+  if (isTRUE(dots[["check_model"]])) {
+    p <- p + theme_style(
+      base_size = 10,
+      plot.title.space = 3,
+      axis.title.space = 5
+    )
+  }
+
   if (isTRUE(dots[["adjust_legend"]])) {
     p <- p + ggplot2::theme(
       legend.position = "bottom",

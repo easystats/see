@@ -58,9 +58,10 @@ plot.see_check_model <- function(x,
     x$HOMOGENEITY <- NULL
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
-      adjust_legend = TRUE,
       style = style,
-      colors = colors[3:2]
+      colors = colors[3:2],
+      adjust_legend = TRUE,
+      check_model = TRUE
     )
   }
 
@@ -106,6 +107,16 @@ plot.see_check_model <- function(x,
       theme_style = style,
       colors = colors,
       dot_alpha_level = dot_alpha_level
+    )
+  }
+
+  if ("PP_CHECK" %in% names(x) && !is.null(x$PP_CHECK) && any(c("pp_check", "all") %in% check)) {
+    x$NORM <- NULL
+    p$PP_CHECK <- plot.see_performance_pp_check(
+      x$PP_CHECK,
+      style = style,
+      check_model = TRUE,
+      adjust_legend = TRUE
     )
   }
 
