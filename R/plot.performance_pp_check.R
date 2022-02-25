@@ -40,6 +40,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' The `plot()` method for the `performance::check_predictions()` function.
 #'
 #' @param line_alpha Numeric value specifying alpha of lines indicating `yrep`.
+#' @param style A ggplot2-theme.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_distribution

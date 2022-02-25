@@ -5,9 +5,23 @@
 \alias{plot.see_performance_pp_check}
 \title{Plot method for posterior predictive checks}
 \usage{
-\method{print}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, size_bar = 0.7, ...)
+\method{print}{see_performance_pp_check}(
+  x,
+  size_line = 0.7,
+  line_alpha = 0.25,
+  size_bar = 0.7,
+  style = theme_lucid,
+  ...
+)
 
-\method{plot}{see_performance_pp_check}(x, size_line = 0.7, line_alpha = 0.25, size_bar = 0.7, ...)
+\method{plot}{see_performance_pp_check}(
+  x,
+  size_line = 0.7,
+  line_alpha = 0.25,
+  size_bar = 0.7,
+  style = theme_lucid,
+  ...
+)
 }
 \arguments{
 \item{x}{An object.}
@@ -17,6 +31,8 @@
 \item{line_alpha}{Numeric value specifying alpha of lines indicating \code{yrep}.}
 
 \item{size_bar}{Size of bar geoms.}
+
+\item{style}{A ggplot2-theme.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
