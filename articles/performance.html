@@ -145,26 +145,12 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
 <span class="fu"><a href="https://easystats.github.io/performance/reference/binned_residuals.html" class="external-link">binned_residuals</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Probably bad model fit. Only about 50% of the residuals are inside the error bounds.</span>
-<span class="co">#&gt;         xbar        ybar n       x.lo       x.hi         se group</span>
-<span class="co">#&gt; 1 0.03786483 -0.03786483 5 0.01744776 0.06917366 0.01937882    no</span>
-<span class="co">#&gt; 2 0.09514191 -0.09514191 5 0.07087498 0.15160143 0.02873921    no</span>
-<span class="co">#&gt; 3 0.25910531  0.07422802 6 0.17159955 0.35374001 0.43367801   yes</span>
-<span class="co">#&gt; 4 0.47954643 -0.07954643 5 0.38363314 0.54063600 0.50744089   yes</span>
-<span class="co">#&gt; 5 0.71108931  0.28891069 5 0.57299903 0.89141359 0.11199575    no</span>
-<span class="co">#&gt; 6 0.97119262 -0.13785929 6 0.91147360 0.99815623 0.30981245   yes</span></code></pre></div>
+<span class="co">#&gt; Warning: Probably bad model fit. Only about 50% of the residuals are inside the error bounds.</span></code></pre></div>
 <p>Example where model <strong>is</strong> a good fit.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="va">vs</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
 <span class="fu"><a href="https://easystats.github.io/performance/reference/binned_residuals.html" class="external-link">binned_residuals</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
-<span class="co">#&gt; Ok: About 100% of the residuals are inside the error bounds.</span>
-<span class="co">#&gt;         xbar        ybar n         x.lo       x.hi         se group</span>
-<span class="co">#&gt; 1 0.01154067 -0.01154067 6 1.607098e-09 0.03462201 0.01459792   yes</span>
-<span class="co">#&gt; 2 0.10225539  0.14774461 4 7.697513e-02 0.12030984 0.48817444   yes</span>
-<span class="co">#&gt; 3 0.15304476  0.01362191 6 1.266065e-01 0.21077937 0.33672115   yes</span>
-<span class="co">#&gt; 4 0.41008466 -0.07675133 6 2.864160e-01 0.51295229 0.39478179   yes</span>
-<span class="co">#&gt; 5 0.80852160 -0.05852160 4 6.265388e-01 0.90579215 0.38220108   yes</span>
-<span class="co">#&gt; 6 0.98481191  0.01518809 6 9.450740e-01 1.00000000 0.01981050   yes</span></code></pre></div>
+<span class="co">#&gt; Ok: About 100% of the residuals are inside the error bounds.</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="check-for-multicollinearity---variance-inflation-factor">Check for Multicollinearity - Variance Inflation Factor<a class="anchor" aria-label="anchor" href="#check-for-multicollinearity---variance-inflation-factor"></a>
