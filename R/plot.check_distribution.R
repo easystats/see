@@ -79,9 +79,20 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     labs(x = NULL, y = NULL, title = "Density of Residuals") +
     theme_lucid()
 
+  # usually, we have an outline for the bars in the same color as the
+  # theme background, however, for very thin bars, this results in "invisible"
+  # bars, because the fill colour is not visible. For larger ranges, use fill
+  # colour as color, too.
+
+  if (abs(diff(range(dat2$x))) > 100) {
+    bar_color <- "#f44336"
+  } else {
+    bar_color <- theme_lucid()$panel.background$fill
+  }
+
   p3 <- ggplot(dat2, aes(x = .data$x)) +
     geom_histogram(
-      fill = "#f44336", colour = theme_lucid()$panel.background$fill,
+      fill = "#f44336", colour = bar_color,
       binwidth = sqrt(length(vars(.data$x)))
     ) +
     labs(x = NULL, y = NULL, title = "Distribution of Response") +
