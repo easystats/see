@@ -22,9 +22,8 @@ data_plot.performance_pp_check <- function(x, ...) {
   attr(dataplot, "info") <- list(
     "xlab" = attr(x, "response_name"),
     "ylab" =  "Density",
-    "legend_fill" = NULL,
-    "legend_color" = NULL,
-    "title" = "Posterior Predictive Check"
+    "title" = "Posterior Predictive Check",
+    "check_range" = attr(x, "check_range")
   )
 
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
@@ -108,6 +107,8 @@ plot.see_performance_pp_check <- function(x,
 
 
 .plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, ...) {
+  info <- attr(x, "info")
+
   out <- ggplot2::ggplot(x) +
     ggplot2::stat_density(
       mapping = ggplot2::aes(
@@ -138,8 +139,8 @@ plot.see_performance_pp_check <- function(x,
       ), guide = "none"
     ) +
     ggplot2::labs(
-      x = attr(x, "response_name"),
-      y = "Density",
+      x = info$xlab,
+      y = info$ylab,
       color = "",
       size = "",
       alpha = "",
@@ -161,7 +162,7 @@ plot.see_performance_pp_check <- function(x,
     )
   }
 
-  if (isTRUE(dots[["adjust_legend"]])) {
+  if (isTRUE(dots[["adjust_legend"]]) || isTRUE(info$check_range)) {
     out <- out + ggplot2::theme(
       legend.position = "bottom",
       legend.margin = ggplot2::margin(0, 0, 0, 0),
@@ -177,38 +178,36 @@ plot.see_performance_pp_check <- function(x,
   original <-
     data.frame(
       x = c(min(x$y), max(x$y)),
-      group = c("minimum", "maximum"),
-      color = "y",
+      group = factor(c("Minimum", "Maximum"), levels = c("Minimum", "Maximum")),
+      color = "Observed data",
       stringsAsFactors = FALSE
     )
 
-  Model-predicted <- rbind(
+  replicated <- rbind(
     data.frame(
       x = sapply(x[which(names(x) != "y")], min),
-      group = "minimum",
-      color = "yrep",
+      group = "Minimum",
+      color = "Model-predicted data",
       stringsAsFactors = FALSE
     ),
     data.frame(
       x = sapply(x[which(names(x) != "y")], max),
-      group = "maximum",
-      color = "yrep",
+      group = "Maximum",
+      color = "Model-predicted data",
       stringsAsFactors = FALSE
     )
   )
+  replicated$group <- factor(replicated$group, levels = c("Minimum", "Maximum"))
 
-  Model-predicted$group <- factor(Model-predicted$group, levels = c("minimum", "maximum"))
-  original$group <- factor(original$group, levels = c("minimum", "maximum"))
+  p <- ggplot2::ggplot(replicated, ggplot2::aes(x = .data$x, group = .data$group)) +
+    ggplot2::facet_wrap(~ group, scales = "free_x")
 
-  p <- ggplot2::ggplot(Model-predicted, ggplot2::aes(x = .data$x, group = .data$group)) +
-    ggplot2::facet_wrap(~group, scales = "free_x")
-
-  if (.n_unique(Model-predicted$x) <= 12) {
+  if (.n_unique(replicated$x) <= 12) {
     p <- p + ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA)
-  } else if (.is_integer(Model-predicted$x)) {
+  } else if (.is_integer(replicated$x)) {
     p <- p +
       ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA) +
-      ggplot2::scale_x_continuous(n.breaks = round(.n_unique(Model-predicted$x) / 4))
+      ggplot2::scale_x_continuous(n.breaks = round(.n_unique(replicated$x) / 4))
   } else {
     p <- p + ggplot2::geom_histogram(binwidth = size_bar, fill = colors[2], color = NA)
   }
@@ -220,5 +219,6 @@ plot.see_performance_pp_check <- function(x,
       color = colors[1],
       size = 1
     ) +
-    ggplot2::labs(x = NULL, y = NULL)
+    ggplot2::labs(x = NULL, y = NULL,
+                  subtitle = "Model-predicted extrema should contain observed data extrema")
 }
