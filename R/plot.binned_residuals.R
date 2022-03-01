@@ -1,6 +1,11 @@
 #' @importFrom ggplot2 .data
 #' @export
-plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...) {
+plot.see_binned_residuals <- function(x,
+                                      size_line = .7,
+                                      size_point = 2.2,
+                                      colors = social_colors(c("blue", "red", "green")),
+                                      style = theme_lucid,
+                                      ...) {
   x$se.lo <- -x$se
   if (length(unique(x$group)) > 1) {
     ltitle <- "Within error bounds"
@@ -9,10 +14,7 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
   }
 
   # set defaults
-
   term <- attr(x, "term", exact = TRUE)
-  geom_size <- attr(x, "geom_size", exact = TRUE)
-  line_size <- attr(x, "line_size", exact = TRUE)
 
   if (missing(style) && !is.null(attr(x, "theme"))) {
     theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
@@ -20,14 +22,9 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
   }
   theme_style <- style
 
-  if (missing(colors)) {
-    colors <- attr(x, "geom_color")
+  if (is.null(colors) || length(colors) != 3) {
+    colors <- social_colors(c("blue", "red", "green"))
   }
-
-  if (is.null(colors)) {
-    colors <- c("#cd201f", "#1b6ca8")
-  }
-
   colors <- unname(colors)
 
   if (is.null(term)) {
@@ -36,21 +33,18 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
     xtitle <- term
   }
 
-  if (is.null(geom_size)) geom_size <- 2.5
-  if (is.null(line_size)) line_size <- .8
-
   p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
     ggplot2::geom_abline(slope = 0, intercept = 0, colour = "grey80")
 
-  if (!is.null(term)) {
+  if (isTRUE(insight::check_if_installed("mgcv", quietly = TRUE))) {
     p <- p +
       ggplot2::stat_smooth(
         ggplot2::aes(y = .data$ybar),
-        method = "loess",
+        method = "gam",
         se = FALSE,
-        formula = y ~ x,
-        colour = "#00b159",
-        size = .6
+        formula = y ~ s(x, bs = "tp"),
+        colour = colors[3],
+        size = size_line
       )
   }
 
@@ -59,7 +53,7 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
     ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = .1, fill = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se), colour = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se.lo), colour = "grey70") +
-    ggplot2::scale_color_manual(values = colors) +
+    ggplot2::scale_color_manual(values = colors[2:1]) +
     ggplot2::labs(
       x = xtitle,
       y = "Average residual",
@@ -73,13 +67,13 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
   }
 
   if (is.null(ltitle)) {
-    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = geom_size)
+    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = size_point)
   } else {
-    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = geom_size)
+    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = size_point)
   }
 
   # add error bars
-  p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = line_size, width = 0)
+  p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = size_line, width = 0)
 
 
   dots <- list(...)
