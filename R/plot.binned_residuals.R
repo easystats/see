@@ -12,7 +12,7 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
 
   term <- attr(x, "term", exact = TRUE)
   geom_size <- attr(x, "geom_size", exact = TRUE)
-  line_size <- attr(x, "geom_size", exact = TRUE)
+  line_size <- attr(x, "line_size", exact = TRUE)
 
   if (missing(style) && !is.null(attr(x, "theme"))) {
     theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
@@ -36,7 +36,7 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
     xtitle <- term
   }
 
-  if (is.null(geom_size)) geom_size <- 2
+  if (is.null(geom_size)) geom_size <- 2.5
   if (is.null(line_size)) line_size <- .8
 
   p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
@@ -79,7 +79,7 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
   }
 
   # add error bars
-  p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), width = 0)
+  p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = line_size, width = 0)
 
 
   dots <- list(...)
