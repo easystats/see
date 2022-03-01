@@ -12,6 +12,7 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
 
   term <- attr(x, "term", exact = TRUE)
   geom_size <- attr(x, "geom_size", exact = TRUE)
+  line_size <- attr(x, "geom_size", exact = TRUE)
 
   if (missing(style) && !is.null(attr(x, "theme"))) {
     theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
@@ -36,7 +37,7 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
   }
 
   if (is.null(geom_size)) geom_size <- 2
-
+  if (is.null(line_size)) line_size <- .8
 
   p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
     ggplot2::geom_abline(slope = 0, intercept = 0, colour = "grey80")
@@ -76,6 +77,10 @@ plot.see_binned_residuals <- function(x, colors = NULL, style = theme_lucid, ...
   } else {
     p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = geom_size)
   }
+
+  # add error bars
+  p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), width = 0)
+
 
   dots <- list(...)
   if (isTRUE(dots[["check_model"]])) {
