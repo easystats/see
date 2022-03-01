@@ -49,7 +49,7 @@ plot.see_check_normality <- function(x,
     )
   } else {
     if (type == "qq") {
-      if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov"))) {
+      if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
       } else {
         res_ <- sort(stats::rstudent(model), na.last = NA)
