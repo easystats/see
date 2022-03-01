@@ -15,14 +15,13 @@ data_plot.performance_pp_check <- function(x, ...) {
   }
 
   dataplot <- dataplot[, 1:(ncol(dataplot) - 1), drop = FALSE]
-  dataplot$key[dataplot$key != "y"] <- "yrep"
+  dataplot$key[dataplot$key != "y"] <- "Model-predicted data"
+  dataplot$key[dataplot$key == "y"] <- "Observed data"
   dataplot$grp <- rep(1:ncol(x), each = nrow(x))
-  dataplot$alpha[dataplot$key != "y"] <- .3
-  dataplot$alpha[dataplot$key == "y"] <- 1
 
   attr(dataplot, "info") <- list(
-    "xlab" = NULL,
-    "ylab" = NULL,
+    "xlab" = attr(x, "response_name"),
+    "ylab" =  "Density",
     "legend_fill" = NULL,
     "legend_color" = NULL,
     "title" = "Posterior Predictive Check"
@@ -54,10 +53,11 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' }
 #' @export
 print.see_performance_pp_check <- function(x,
-                                           size_line = .7,
-                                           line_alpha = .25,
+                                           size_line = .5,
+                                           line_alpha = .15,
                                            size_bar = 0.7,
                                            style = theme_lucid,
+                                           colors = unname(social_colors(c("green", "blue"))),
                                            ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
@@ -66,10 +66,10 @@ print.see_performance_pp_check <- function(x,
     x <- data_plot(x)
   }
 
-  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, ...)
+  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, ...)
 
   if (isTRUE(check_range)) {
-    p2 <- .plot_pp_check_range(orig_x, size_bar)
+    p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
     graphics::plot(plots(p1, p2, n_columns = 1))
   } else {
     suppressWarnings(graphics::plot(p1))
@@ -82,10 +82,11 @@ print.see_performance_pp_check <- function(x,
 #' @rdname print.see_performance_pp_check
 #' @export
 plot.see_performance_pp_check <- function(x,
-                                          size_line = .7,
-                                          line_alpha = .25,
+                                          size_line = .5,
+                                          line_alpha = .15,
                                           size_bar = 0.7,
                                           style = theme_lucid,
+                                          colors = unname(social_colors(c("green", "blue"))),
                                           ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
@@ -94,10 +95,10 @@ plot.see_performance_pp_check <- function(x,
     x <- data_plot(x)
   }
 
-  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, ...)
+  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, ...)
 
   if (isTRUE(check_range)) {
-    p2 <- .plot_pp_check_range(orig_x, size_bar)
+    p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
     plots(p1, p2)
   } else {
     p1
@@ -106,34 +107,48 @@ plot.see_performance_pp_check <- function(x,
 
 
 
-.plot_pp_check <- function(x, size_line, line_alpha, theme_style, ...) {
-  out <- ggplot2::ggplot() +
+.plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, ...) {
+  out <- ggplot2::ggplot(x) +
     ggplot2::stat_density(
-      data = x[x$key != "y", ],
-      mapping = ggplot2::aes(x = .data$values, group = .data$grp, color = .data$key),
+      mapping = ggplot2::aes(
+        x = .data$values,
+        group = .data$grp,
+        color = .data$key,
+        size = .data$key,
+        alpha = .data$key
+      ),
       geom = "line",
       position = "identity",
-      size = size_line,
-      alpha = line_alpha
     ) +
-    ggplot2::stat_density(
-      data = x[x$key == "y", ],
-      mapping = ggplot2::aes(x = .data$values, group = .data$grp, color = .data$key),
-      geom = "line",
-      position = "identity",
-      size = size_line * 1.1
-    ) +
-    ggplot2::scale_y_continuous(labels = NULL) +
+    ggplot2::scale_y_continuous() +
     ggplot2::scale_color_manual(values = c(
-      "y" = unname(social_colors("blue")),
-      "yrep" = unname(flat_colors("grey"))
+      "Observed data" = colors[1],
+      "Model-predicted data" = colors[2]
     )) +
+    ggplot2::scale_size_manual(
+      values = c(
+        "Observed data" = 2.5 * size_line,
+        "Model-predicted data" = size_line
+      ),
+    ) +
+    ggplot2::scale_alpha_manual(
+      values = c(
+        "Observed data" = 1,
+        "Model-predicted data" = line_alpha
+      ), guide = "none"
+    ) +
     ggplot2::labs(
-      x = NULL,
-      y = NULL,
-      colour = NULL,
+      x = attr(x, "response_name"),
+      y = "Density",
+      color = "",
+      size = "",
+      alpha = "",
       title = "Posterior Predictive Check",
-      subtitle = "Grey lines should replicate the blue line"
+      subtitle = "Model-predicted lines should resemble observed data line"
+    ) +
+    ggplot2::guides(
+      color = ggplot2::guide_legend(reverse = TRUE),
+      size = ggplot2::guide_legend(reverse = TRUE)
     )
 
 
@@ -158,7 +173,7 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_pp_check_range <- function(x, size_bar = .7) {
+.plot_pp_check_range <- function(x, size_bar = .7, colors) {
   original <-
     data.frame(
       x = c(min(x$y), max(x$y)),
@@ -167,7 +182,7 @@ plot.see_performance_pp_check <- function(x,
       stringsAsFactors = FALSE
     )
 
-  replicated <- rbind(
+  Model-predicted <- rbind(
     data.frame(
       x = sapply(x[which(names(x) != "y")], min),
       group = "minimum",
@@ -182,27 +197,27 @@ plot.see_performance_pp_check <- function(x,
     )
   )
 
-  replicated$group <- factor(replicated$group, levels = c("minimum", "maximum"))
+  Model-predicted$group <- factor(Model-predicted$group, levels = c("minimum", "maximum"))
   original$group <- factor(original$group, levels = c("minimum", "maximum"))
 
-  p <- ggplot2::ggplot(replicated, ggplot2::aes(x = .data$x, group = .data$group)) +
+  p <- ggplot2::ggplot(Model-predicted, ggplot2::aes(x = .data$x, group = .data$group)) +
     ggplot2::facet_wrap(~group, scales = "free_x")
 
-  if (.n_unique(replicated$x) <= 12) {
-    p <- p + ggplot2::geom_bar(width = size_bar, fill = unname(flat_colors("grey")), color = NA)
-  } else if (.is_integer(replicated$x)) {
+  if (.n_unique(Model-predicted$x) <= 12) {
+    p <- p + ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA)
+  } else if (.is_integer(Model-predicted$x)) {
     p <- p +
-      ggplot2::geom_bar(width = size_bar, fill = unname(flat_colors("grey")), color = NA) +
-      ggplot2::scale_x_continuous(n.breaks = round(.n_unique(replicated$x) / 4))
+      ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA) +
+      ggplot2::scale_x_continuous(n.breaks = round(.n_unique(Model-predicted$x) / 4))
   } else {
-    p <- p + ggplot2::geom_histogram(binwidth = size_bar, fill = unname(flat_colors("grey")), color = NA)
+    p <- p + ggplot2::geom_histogram(binwidth = size_bar, fill = colors[2], color = NA)
   }
 
   p +
     ggplot2::geom_vline(
       data = original,
       mapping = ggplot2::aes(xintercept = .data$x),
-      color = unname(social_colors("blue")),
+      color = colors[1],
       size = 1
     ) +
     ggplot2::labs(x = NULL, y = NULL)
