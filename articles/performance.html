@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.9.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -267,8 +267,7 @@
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">related function documentation</a>)</em></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; OK: residuals appear as normally distributed (p = 0.230).</span></code></pre></div>
+<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <div class="section level4">
 <h4 id="density-plot">Density Plot<a class="anchor" aria-label="anchor" href="#density-plot"></a>
 </h4>
@@ -299,8 +298,7 @@
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span>, effects <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span>
 <span class="co">#&gt; Group: Subject</span>
-<span class="co">#&gt; (Intercept) OK: random effects appear as normally distributed (p = 0.428).</span>
-<span class="co">#&gt;        Days OK: random effects appear as normally distributed (p = 0.898).</span>
+<span class="co">#&gt; (Intercept)        Days</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
@@ -312,7 +310,6 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html" class="external-link">check_heteroscedasticity</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.042).</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-15-1.png" width="100%"></p>
 </div>
@@ -323,7 +320,6 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">len</span> <span class="op">~</span> <span class="va">supp</span> <span class="op">+</span> <span class="va">dose</span>, data <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_homogeneity.html" class="external-link">check_homogeneity</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; OK: There is not clear evidence for different variances across groups (Bartlett Test, p = 0.226).</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-16-1.png" width="100%"></p>
 </div>
@@ -364,19 +360,19 @@
 <p><img src="performance_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span>, panel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; $NCV</span></code></pre></div>
+<span class="co">#&gt; $PP_CHECK</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-21-1.png" width="100%"></p>
 <pre><code><span class="co">#&gt; </span>
-<span class="co">#&gt; $HOMOGENEITY</span></code></pre>
+<span class="co">#&gt; $NCV</span></code></pre>
 <p><img src="performance_files/figure-html/unnamed-chunk-21-2.png" width="100%"></p>
 <pre><code><span class="co">#&gt; </span>
-<span class="co">#&gt; $OUTLIERS</span></code></pre>
+<span class="co">#&gt; $HOMOGENEITY</span></code></pre>
 <p><img src="performance_files/figure-html/unnamed-chunk-21-3.png" width="100%"></p>
 <pre><code><span class="co">#&gt; </span>
-<span class="co">#&gt; $QQ</span></code></pre>
+<span class="co">#&gt; $OUTLIERS</span></code></pre>
 <p><img src="performance_files/figure-html/unnamed-chunk-21-4.png" width="100%"></p>
 <pre><code><span class="co">#&gt; </span>
-<span class="co">#&gt; $PP_CHECK</span></code></pre>
+<span class="co">#&gt; $QQ</span></code></pre>
 <p><img src="performance_files/figure-html/unnamed-chunk-21-5.png" width="100%"></p>
 <pre><code><span class="co">#&gt; </span>
 <span class="co">#&gt; [[6]]</span></code></pre>
