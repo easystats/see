@@ -67,14 +67,14 @@ plot.see_binned_residuals <- function(x,
   }
 
   if (is.null(ltitle)) {
-    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = size_point)
+    p <- p +
+      ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = size_point) +
+      ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = size_line, width = 0)
   } else {
-    p <- p + ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = size_point)
+    p <- p +
+      ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = size_point) +
+      ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high), size = size_line, width = 0)
   }
-
-  # add error bars
-  p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = size_line, width = 0)
-
 
   dots <- list(...)
   if (isTRUE(dots[["check_model"]])) {

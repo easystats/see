@@ -174,11 +174,11 @@ The *modelbased* package computes model-based estimates and predictions from fit
 library(modelbased)
 library(see)
 
-model <- lm(mpg ~ wt * as.factor(cyl), data = mtcars)
+data(mtcars)
+mtcars$gear <- as.factor(mtcars$gear)
+model <- lm(mpg ~ wt * gear, data = mtcars)
 
-# for this to work, *emmeans* package should be available
-predicted <- estimate_prediction(model)
-
+predicted <- estimate_expectation(model, data = "grid")
 plot(predicted)
 ```
 
@@ -202,7 +202,7 @@ library(see)
 
 results <- summary(correlation(iris))
 
-plot(results)
+plot(results, show_data = "points")
 ```
 
 Plotting functions for the **correlation** package are demonstrated [in this vignette](https://easystats.github.io/see/articles/correlation.html).

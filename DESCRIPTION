@@ -2,7 +2,7 @@ Type: Package
 Package: see
 Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and
     Color Palettes for 'ggplot2'
-Version: 0.6.9.3
+Version: 0.6.9.4
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -88,6 +88,7 @@ Suggests:
     logspline,
     MASS,
     mclust,
+    mgcv,
     metafor,
     modelbased,
     NbClust,

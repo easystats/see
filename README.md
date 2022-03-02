@@ -213,7 +213,6 @@ library(see)
 
 model <- lm(wt ~ mpg, data = mtcars)
 check <- check_normality(model)
-## Warning: Non-normality of residuals detected (p = 0.016).
 
 plot(check, type = "qq")
 ```
@@ -259,11 +258,11 @@ work, you need to have installed the *emmeans* package first.
 library(modelbased)
 library(see)
 
-model <- lm(mpg ~ wt * as.factor(cyl), data = mtcars)
+data(mtcars)
+mtcars$gear <- as.factor(mtcars$gear)
+model <- lm(mpg ~ wt * gear, data = mtcars)
 
-# for this to work, *emmeans* package should be available
-predicted <- estimate_prediction(model)
-
+predicted <- estimate_expectation(model, data = "grid")
 plot(predicted)
 ```
 
@@ -300,7 +299,7 @@ library(see)
 
 results <- summary(correlation(iris))
 
-plot(results)
+plot(results, show_data = "points")
 ```
 
 ![](man/figures/correlation-1.png)<!-- -->
@@ -437,13 +436,13 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 ## Radar chart (Spider plot)
 
 ``` r
-library(dplyr)
+library(poorman)
 library(tidyr)
 
 # prepare the data in tidy format
 data <- iris %>%
   group_by(Species) %>%
-  summarise_all(mean) %>%
+ summarise(across(everything(), mean)) %>%
   pivot_longer(-Species)
 
 data %>%
