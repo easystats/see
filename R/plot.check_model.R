@@ -42,6 +42,16 @@ plot.see_check_model <- function(x,
 
   if (is.null(check)) check <- "all"
 
+  if ("PP_CHECK" %in% names(x) && !is.null(x$PP_CHECK) && any(c("pp_check", "all") %in% check)) {
+    x$NORM <- NULL
+    p$PP_CHECK <- plot.see_performance_pp_check(
+      x$PP_CHECK,
+      style = style,
+      check_model = TRUE,
+      adjust_legend = TRUE
+    )
+  }
+
   if ("NCV" %in% names(x) && !is.null(x$NCV) && any(c("ncv", "linearity", "all") %in% check)) {
     p$NCV <- .plot_diag_linearity(
       x$NCV,
@@ -77,14 +87,6 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("VIF" %in% names(x) && !is.null(x$VIF) && any(c("vif", "all") %in% check)) {
-    p$VIF <- .plot_diag_vif(
-      x$VIF,
-      theme_style = style,
-      colors = colors
-    )
-  }
-
   if ("INFLUENTIAL" %in% names(x) && !is.null(x$INFLUENTIAL) && any(c("outliers", "influential", "all") %in% check)) {
     p$OUTLIERS <- .plot_diag_outliers_new(
       x$INFLUENTIAL,
@@ -94,6 +96,14 @@ plot.see_check_model <- function(x,
       theme_style = style,
       colors = colors,
       dot_alpha_level = dot_alpha_level
+    )
+  }
+
+  if ("VIF" %in% names(x) && !is.null(x$VIF) && any(c("vif", "all") %in% check)) {
+    p$VIF <- .plot_diag_vif(
+      x$VIF,
+      theme_style = style,
+      colors = colors
     )
   }
 
@@ -107,16 +117,6 @@ plot.see_check_model <- function(x,
       theme_style = style,
       colors = colors,
       dot_alpha_level = dot_alpha_level
-    )
-  }
-
-  if ("PP_CHECK" %in% names(x) && !is.null(x$PP_CHECK) && any(c("pp_check", "all") %in% check)) {
-    x$NORM <- NULL
-    p$PP_CHECK <- plot.see_performance_pp_check(
-      x$PP_CHECK,
-      style = style,
-      check_model = TRUE,
-      adjust_legend = TRUE
     )
   }
 
