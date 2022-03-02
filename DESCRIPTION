@@ -2,7 +2,7 @@ Type: Package
 Package: see
 Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and
     Color Palettes for 'ggplot2'
-Version: 0.6.9.2
+Version: 0.6.9.3
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -64,11 +64,11 @@ Depends:
     stats
 Imports:
     bayestestR (>= 0.11.5),
-    datawizard (>= 0.2.2.9000),
+    datawizard (>= 0.2.3),
     effectsize (>= 0.5),
     ggplot2 (>= 3.3.5),
-    insight (>= 0.14.5),
-    parameters (>= 0.15.0)
+    insight (>= 0.16.0),
+    parameters (>= 0.16.0)
 Suggests:
     brms,
     coda,
@@ -111,4 +111,4 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Remotes: easystats/performance
+Remotes: easystats/insight, easystats/performance
