@@ -45,6 +45,11 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
   )
 
   if (is.null(r)) {
+    r <- tryCatch(c(scale(stats::residuals(model))),
+                  error = function(e) NULL)
+  }
+
+  if (is.null(r)) {
     warning(sprintf("Homogeneity of variance could not be computed. Cannot extract residual variance from objects of class '%s'.\n", class(model)[1]), call. = FALSE)
     return(NULL)
   }
