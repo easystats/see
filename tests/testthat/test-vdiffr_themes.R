@@ -1,14 +1,18 @@
-if (getRversion() >= "4.1" && getRversion() < "4.2" &&
-  require("vdiffr") &&
-  require("ggplot2") &&
-  require("poorman")) {
+if (getRversion() >= "4.1" && getRversion() < "4.2") {
   test_that("theme functions work", {
     skip_on_cran()
+
+    skip_if_not_installed("vdiffr")
+    skip_if_not_installed("poorman")
+    skip_if_not_installed("ggplot2")
+
+    library(poorman)
+    library(ggplot2)
 
     data <- iris %>%
       group_by(Species) %>%
       summarise(across(everything(), mean)) %>%
-      reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+      datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
     set.seed(123)
     vdiffr::expect_doppelganger(

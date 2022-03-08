@@ -64,8 +64,8 @@ Depends:
     stats
 Imports:
     bayestestR (>= 0.11.5),
-    datawizard (>= 0.2.3),
-    effectsize (>= 0.5),
+    datawizard (>= 0.3.0),
+    effectsize (>= 0.6),
     ggplot2 (>= 3.3.5),
     insight (>= 0.16.0),
     parameters (>= 0.16.0)
