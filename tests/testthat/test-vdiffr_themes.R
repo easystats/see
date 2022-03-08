@@ -18,7 +18,7 @@ if (getRversion() >= "4.1" && getRversion() < "4.2") {
     vdiffr::expect_doppelganger(
       title = "theme_radar works",
       fig = data %>% ggplot(aes(
-        x = ame,
+        x = Name,
         y = Value,
         color = Species,
         group = Species,
