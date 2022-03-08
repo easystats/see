@@ -25,7 +25,7 @@ if (require("poorman") && require("ggplot2")) {
   data <- iris \%>\%
     group_by(Species) \%>\%
     summarise(across(everything(), mean)) \%>\%
-    reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
   data \%>\%
     ggplot(aes(x = Name, y = Value, color = Species, group = Species)) +
