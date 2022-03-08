@@ -10,13 +10,15 @@ if (getRversion() >= "4.1" &&
     data <- iris %>%
       group_by(Species) %>%
       summarise(across(everything(), mean)) %>%
-      tidyr::pivot_longer(-Species)
+      reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
     set.seed(123)
     vdiffr::expect_doppelganger(
       title = "coord_radar() works",
       fig = data %>% ggplot(aes(
-        x = name, y = value, color = Species,
+        x = Name,
+        y = Value,
+        color = Species,
         group = Species
       )) +
         geom_polygon(fill = NA, size = 2) +
