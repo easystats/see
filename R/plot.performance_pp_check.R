@@ -21,7 +21,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 
   attr(dataplot, "info") <- list(
     "xlab" = attr(x, "response_name"),
-    "ylab" =  "Density",
+    "ylab" = "Density",
     "title" = "Posterior Predictive Check",
     "check_range" = attr(x, "check_range")
   )
@@ -200,7 +200,7 @@ plot.see_performance_pp_check <- function(x,
   replicated$group <- factor(replicated$group, levels = c("Minimum", "Maximum"))
 
   p <- ggplot2::ggplot(replicated, ggplot2::aes(x = .data$x, group = .data$group)) +
-    ggplot2::facet_wrap(~ group, scales = "free_x")
+    ggplot2::facet_wrap(~group, scales = "free_x")
 
   if (.n_unique(replicated$x) <= 12) {
     p <- p + ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA)
@@ -219,6 +219,8 @@ plot.see_performance_pp_check <- function(x,
       color = colors[1],
       size = 1
     ) +
-    ggplot2::labs(x = NULL, y = NULL,
-                  subtitle = "Model-predicted extrema should contain observed data extrema")
+    ggplot2::labs(
+      x = NULL, y = NULL,
+      subtitle = "Model-predicted extrema should contain observed data extrema"
+    )
 }

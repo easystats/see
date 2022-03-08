@@ -46,7 +46,8 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
 
   if (is.null(r)) {
     r <- tryCatch(c(scale(stats::residuals(model))),
-                  error = function(e) NULL)
+      error = function(e) NULL
+    )
   }
 
   if (is.null(r)) {

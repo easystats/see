@@ -81,16 +81,16 @@ theme_radar_dark(
 \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
 }
 \examples{
-if (require("ggplot2") && require("poorman") && require("tidyr")) {
+if (require("ggplot2") && require("poorman")) {
   data <- iris \%>\%
     group_by(Species) \%>\%
     summarise(across(everything(), mean)) \%>\%
-    pivot_longer(-Species)
+    datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
   data \%>\%
     ggplot(aes(
-      x = name,
-      y = value,
+      x = Name,
+      y = Value,
       color = Species,
       group = Species,
       fill = Species
