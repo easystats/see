@@ -12,7 +12,7 @@
 #'   data <- iris %>%
 #'     group_by(Species) %>%
 #'     summarise(across(everything(), mean)) %>%
-#'     reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+#'     datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 #'
 #'   data %>%
 #'     ggplot(aes(
