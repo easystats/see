@@ -405,18 +405,18 @@
 </h2>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nathaneastwood.github.io/poorman/" class="external-link">poorman</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/datawizard/" class="external-link">datawizard</a></span><span class="op">)</span>
 
 <span class="co"># prepare the data in tidy format</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://nathaneastwood.github.io/poorman/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://nathaneastwood.github.io/poorman/reference/pipe.html" class="external-link">%&gt;%</a></span>
- <span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/select_helpers.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://nathaneastwood.github.io/poorman/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">-</span><span class="va">Species</span><span class="op">)</span>
+      <span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://nathaneastwood.github.io/poorman/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/select_helpers.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://nathaneastwood.github.io/poorman/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://easystats.github.io/datawizard/reference/data_to_long.html" class="external-link">reshape_longer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>, <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">data</span> <span class="op"><a href="https://nathaneastwood.github.io/poorman/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>
-    x <span class="op">=</span> <span class="va">name</span>,
-    y <span class="op">=</span> <span class="va">value</span>,
+    x <span class="op">=</span> <span class="va">Name</span>,
+    y <span class="op">=</span> <span class="va">Value</span>,
     color <span class="op">=</span> <span class="va">Species</span>,
     group <span class="op">=</span> <span class="va">Species</span>,
     fill <span class="op">=</span> <span class="va">Species</span>
@@ -442,37 +442,37 @@
 </h1>
 <div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
 <div id="ref-Ben-Shachar2020" class="csl-entry">
-<p>Ben-Shachar, M. S., Lüdecke, D., &amp; Makowski, D. (2020). <span class="nocase">e</span>ffectsize: Estimation of effect size indices and standardized parameters. <em>Journal of Open Source Software</em>, <em>5</em>(56), 2815. <a href="https://doi.org/10.21105/joss.02815" class="external-link uri">https://doi.org/10.21105/joss.02815</a></p>
+Ben-Shachar, M. S., Lüdecke, D., &amp; Makowski, D. (2020). <span class="nocase">e</span>ffectsize: Estimation of effect size indices and standardized parameters. <em>Journal of Open Source Software</em>, <em>5</em>(56), 2815. <a href="https://doi.org/10.21105/joss.02815" class="external-link uri">https://doi.org/10.21105/joss.02815</a>
 </div>
 <div id="ref-Lüdecke2020parameters" class="csl-entry">
-<p>Lüdecke, D., Ben-Shachar, M. S., Patil, I., &amp; Makowski, D. (2020). Extracting, computing and exploring the parameters of statistical models using R. <em>Journal of Open Source Software</em>, <em>5</em>(53), 2445. <a href="https://doi.org/10.21105/joss.02445" class="external-link uri">https://doi.org/10.21105/joss.02445</a></p>
+Lüdecke, D., Ben-Shachar, M. S., Patil, I., &amp; Makowski, D. (2020). Extracting, computing and exploring the parameters of statistical models using R. <em>Journal of Open Source Software</em>, <em>5</em>(53), 2445. <a href="https://doi.org/10.21105/joss.02445" class="external-link uri">https://doi.org/10.21105/joss.02445</a>
 </div>
 <div id="ref-Lüdecke2020performance" class="csl-entry">
-<p>Lüdecke, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &amp; Makowski, D. (2021). <span class="nocase">performance</span>: An R package for assessment, comparison and testing of statistical models. <em>Journal of Open Source Software</em>, <em>6</em>(60), 3139. <a href="https://doi.org/10.21105/joss.03139" class="external-link uri">https://doi.org/10.21105/joss.03139</a></p>
+Lüdecke, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &amp; Makowski, D. (2021). <span class="nocase">performance</span>: An R package for assessment, comparison and testing of statistical models. <em>Journal of Open Source Software</em>, <em>6</em>(60), 3139. <a href="https://doi.org/10.21105/joss.03139" class="external-link uri">https://doi.org/10.21105/joss.03139</a>
 </div>
 <div id="ref-Makowski2019" class="csl-entry">
-<p>Makowski, D., Ben-Shachar, M. S., &amp; Lüdecke, D. (2019). <span class="nocase">bayestestR</span>: Describing effects and their uncertainty, existence and significance within the Bayesian framework. <em>Journal of Open Source Software</em>, <em>4</em>(40), 1541. <a href="https://doi.org/10.21105/joss.01541" class="external-link uri">https://doi.org/10.21105/joss.01541</a></p>
+Makowski, D., Ben-Shachar, M. S., &amp; Lüdecke, D. (2019). <span class="nocase">bayestestR</span>: Describing effects and their uncertainty, existence and significance within the Bayesian framework. <em>Journal of Open Source Software</em>, <em>4</em>(40), 1541. <a href="https://doi.org/10.21105/joss.01541" class="external-link uri">https://doi.org/10.21105/joss.01541</a>
 </div>
 <div id="ref-Makowski2020modelbased" class="csl-entry">
-<p>Makowski, D., Ben-Shachar, M. S., Patil, I., &amp; Lüdecke, D. (2020a). Estimation of model-based predictions, contrasts and means. <em>CRAN</em>. <a href="https://github.com/easystats/modelbased" class="external-link uri">https://github.com/easystats/modelbased</a></p>
+Makowski, D., Ben-Shachar, M. S., Patil, I., &amp; Lüdecke, D. (2020a). Estimation of model-based predictions, contrasts and means. <em>CRAN</em>. <a href="https://github.com/easystats/modelbased" class="external-link uri">https://github.com/easystats/modelbased</a>
 </div>
 <div id="ref-Makowski2020" class="csl-entry">
-<p>Makowski, D., Ben-Shachar, M. S., Patil, I., &amp; Lüdecke, D. (2020b). Methods and algorithms for correlation analysis in R. <em>Journal of Open Source Software</em>, <em>5</em>(51), 2306. <a href="https://doi.org/10.21105/joss.02306" class="external-link uri">https://doi.org/10.21105/joss.02306</a></p>
+Makowski, D., Ben-Shachar, M. S., Patil, I., &amp; Lüdecke, D. (2020b). Methods and algorithms for correlation analysis in R. <em>Journal of Open Source Software</em>, <em>5</em>(51), 2306. <a href="https://doi.org/10.21105/joss.02306" class="external-link uri">https://doi.org/10.21105/joss.02306</a>
 </div>
 <div id="ref-Patil2021" class="csl-entry">
-<p>Patil, I. (2021). <span class="nocase">Visualizations with statistical details: The <span class="nocase">’ggstatsplot’</span> approach</span>. <em>Journal of Open Source Software</em>, <em>6</em>(61), 3167. <a href="https://doi.org/10.21105/joss.03167" class="external-link uri">https://doi.org/10.21105/joss.03167</a></p>
+Patil, I. (2021). <span class="nocase">Visualizations with statistical details: The <span class="nocase">’ggstatsplot’</span> approach</span>. <em>Journal of Open Source Software</em>, <em>6</em>(61), 3167. <a href="https://doi.org/10.21105/joss.03167" class="external-link uri">https://doi.org/10.21105/joss.03167</a>
 </div>
 <div id="ref-base2021" class="csl-entry">
-<p>R Core Team. (2021). <em>R: A language and environment for statistical computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="external-link uri">https://www.R-project.org/</a></p>
+R Core Team. (2021). <em>R: A language and environment for statistical computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="external-link uri">https://www.R-project.org/</a>
 </div>
 <div id="ref-Waggoner2020" class="csl-entry">
-<p>Waggoner, P. D. (2020). <em><span class="nocase">plotmm</span>: Tidy tools for visualizing mixture models</em>. <a href="https://CRAN.R-project.org/package=plotmm" class="external-link uri">https://CRAN.R-project.org/package=plotmm</a></p>
+Waggoner, P. D. (2020). <em><span class="nocase">plotmm</span>: Tidy tools for visualizing mixture models</em>. <a href="https://CRAN.R-project.org/package=plotmm" class="external-link uri">https://CRAN.R-project.org/package=plotmm</a>
 </div>
 <div id="ref-Wickham2016" class="csl-entry">
-<p>Wickham, H. (2016). <em><span class="nocase">ggplot2</span>: Elegant graphics for data analysis</em>. Springer-Verlag New York.</p>
+Wickham, H. (2016). <em><span class="nocase">ggplot2</span>: Elegant graphics for data analysis</em>. Springer-Verlag New York.
 </div>
 <div id="ref-wilkinson2012grammar" class="csl-entry">
-<p>Wilkinson, L. (2012). <span class="nocase">The Grammar of Graphics</span>. In <em>Handbook of computational statistics</em> (pp. 375–414). Springer.</p>
+Wilkinson, L. (2012). <span class="nocase">The Grammar of Graphics</span>. In <em>Handbook of computational statistics</em> (pp. 375–414). Springer.
 </div>
 </div>
 </div>
@@ -546,7 +546,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
     </footer>
