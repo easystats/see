@@ -7,6 +7,8 @@
   - the redundant density-plot of normality-checks was replaced by the
     posterior predictive check plot.
 
+* Minor improvements for some plot-methods (colour tweaking, labelling, ...).
+
 # see 0.6.9
 
 * Minor changes to catch up with changes from other easystats-packages.
