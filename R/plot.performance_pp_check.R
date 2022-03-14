@@ -128,7 +128,7 @@ plot.see_performance_pp_check <- function(x,
     )) +
     ggplot2::scale_size_manual(
       values = c(
-        "Observed data" = 2.5 * size_line,
+        "Observed data" = 2 * size_line,
         "Model-predicted data" = size_line
       ),
     ) +
