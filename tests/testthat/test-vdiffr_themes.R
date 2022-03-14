@@ -1,23 +1,28 @@
-if (getRversion() >= "4.1" && getRversion() < "4.2" &&
-  require("vdiffr") &&
-  require("ggplot2") &&
-  require("poorman") &&
-  require("tidyr")) {
+if (getRversion() >= "4.1" && getRversion() < "4.2") {
   test_that("theme functions work", {
-    skip_on_cran()
+    skip_if_not(.Platform$OS.type == "windows")
+
+    skip_if_not_installed("vdiffr")
+    skip_if_not_installed("poorman")
+    skip_if_not_installed("ggplot2")
+
+    library(poorman)
+    library(ggplot2)
 
     data <- iris %>%
       group_by(Species) %>%
       summarise(across(everything(), mean)) %>%
-      pivot_longer(-Species)
-
+      datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
     set.seed(123)
     vdiffr::expect_doppelganger(
       title = "theme_radar works",
       fig = data %>% ggplot(aes(
-        x = name, y = value, color = Species,
-        group = Species, fill = Species
+        x = Name,
+        y = Value,
+        color = Species,
+        group = Species,
+        fill = Species
       )) +
         geom_polygon(
           size = 1,

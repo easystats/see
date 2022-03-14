@@ -6,7 +6,7 @@ if (getRversion() >= "4.1" && getRversion() < "4.2" &&
   require("see") &&
   require("qqplotr")) {
   test_that("`plot.see_check_normality()` works", {
-    skip_on_cran()
+    skip_if_not(.Platform$OS.type == "windows")
 
     set.seed(123)
     m_lm <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)

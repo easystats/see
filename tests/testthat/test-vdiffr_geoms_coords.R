@@ -1,22 +1,28 @@
-if (getRversion() >= "4.1" &&
-  getRversion() < "4.2" &&
-  require("vdiffr") && require("poorman") && require("tidyr") &&
-  require("ggplot2")) {
+if (getRversion() >= "4.1" && getRversion() < "4.2") {
   test_that("geom and coord functions work correctly", {
-    skip_on_cran()
+    skip_if_not(.Platform$OS.type == "windows")
+
+    skip_if_not_installed("vdiffr")
+    skip_if_not_installed("poorman")
+    skip_if_not_installed("ggplot2")
+
+    library(poorman)
+    library(ggplot2)
 
     # coord_radar() ------------------
 
     data <- iris %>%
       group_by(Species) %>%
       summarise(across(everything(), mean)) %>%
-      tidyr::pivot_longer(-Species)
+      datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
     set.seed(123)
     vdiffr::expect_doppelganger(
       title = "coord_radar() works",
       fig = data %>% ggplot(aes(
-        x = name, y = value, color = Species,
+        x = Name,
+        y = Value,
+        color = Species,
         group = Species
       )) +
         geom_polygon(fill = NA, size = 2) +
