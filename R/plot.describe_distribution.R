@@ -144,12 +144,12 @@ plot.see_parameters_distribution <- function(x,
     p <- ggplot(x, aes(x = .data$x))
   }
 
-  if (is.factor(x$x) || is.character(x$x) || .n_unique(x$x) <= 12) {
+  if (is.factor(x$x) || is.character(x$x) || insight::n_unique(x$x) <= 12) {
     p <- p + geom_bar(width = size_bar)
   } else if (.is_integer(x$x)) {
     p <- p +
       geom_bar(width = size_bar) +
-      scale_x_continuous(n.breaks = round(.n_unique(x$x) / 4))
+      scale_x_continuous(n.breaks = round(insight::n_unique(x$x) / 4))
   } else {
     p <- p + geom_histogram()
   }
@@ -196,7 +196,7 @@ plot.see_parameters_distribution <- function(x,
 
   if (!is.null(x$highlight)) {
     if (is.null(highlight_color)) {
-      highlight_color <- palette_material("full")(.n_unique(x$highlight) - 1)
+      highlight_color <- palette_material("full")(insight::n_unique(x$highlight) - 1)
     }
 
     names(highlight_color) <- highlight
