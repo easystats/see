@@ -69,8 +69,6 @@ Imports:
     ggplot2 (>= 3.3.5),
     insight (>= 0.16.0),
     parameters (>= 0.17.0)
-Remotes:
-    easystats/insight
 Suggests:
     brms,
     coda,
