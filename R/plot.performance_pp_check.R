@@ -202,12 +202,12 @@ plot.see_performance_pp_check <- function(x,
   p <- ggplot2::ggplot(replicated, ggplot2::aes(x = .data$x, group = .data$group)) +
     ggplot2::facet_wrap(~group, scales = "free_x")
 
-  if (.n_unique(replicated$x) <= 12) {
+  if (insight::n_unique(replicated$x) <= 12) {
     p <- p + ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA)
   } else if (.is_integer(replicated$x)) {
     p <- p +
       ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA) +
-      ggplot2::scale_x_continuous(n.breaks = round(.n_unique(replicated$x) / 4))
+      ggplot2::scale_x_continuous(n.breaks = round(insight::n_unique(replicated$x) / 4))
   } else {
     p <- p + ggplot2::geom_histogram(binwidth = size_bar, fill = colors[2], color = NA)
   }
