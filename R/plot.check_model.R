@@ -75,6 +75,14 @@ plot.see_check_model <- function(x,
     )
   }
 
+  if ("OVERDISPERSION" %in% names(x) && !is.null(x$OVERDISPERSION) && any(c("overdispersion", "all") %in% check)) {
+    p$OVERDISPERSION <- .plot_diag_overdispersion(
+      x$OVERDISPERSION,
+      style = style,
+      colors = colors[3:2]
+    )
+  }
+
   if ("HOMOGENEITY" %in% names(x) && !is.null(x$HOMOGENEITY) && any(c("homogeneity", "all") %in% check)) {
     p$HOMOGENEITY <- .plot_diag_homogeneity(
       x$HOMOGENEITY,
@@ -520,3 +528,28 @@ plot.see_check_model <- function(x,
     p
   })
 }
+
+
+
+.plot_diag_overdispersion <- function(x,
+                                      theme_style = theme_lucid,
+                                      colors = social_colors(c("blue", "green")),
+                                      ...) {
+  p <- ggplot2::ggplot(x) + ggplot2::aes(x = .data$V) +
+    ggplot2::geom_smooth(ggplot2::aes(y = .data$V), color = colors[1], se = FALSE) +
+    ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), color = colors[2]) +
+    ggplot2::labs(
+      title = "Overdispersion and zero-inflation",
+      subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",
+      x = "Predicted mean",
+      y = "Residual variance"
+    ) +
+    theme_style(
+      base_size = 10,
+      plot.title.space = 3,
+      axis.title.space = 5
+    )
+
+  p
+}
+
