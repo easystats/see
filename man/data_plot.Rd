@@ -40,6 +40,7 @@ for your object's class:
 \item{\link[=plot.see_check_collinearity]{performance::check_collinearity()}}
 \item{\link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}}
 \item{\link[=plot.see_check_homogeneity]{performance::check_homogeneity()}}
+\item{\link[=plot.see_check_overdisp]{performance::check_overdispersion()}}
 \item{\link[=plot.see_check_normality]{performance::check_normality()}}
 \item{\link[=plot.see_check_outliers]{performance::check_outliers()}}
 \item{\link[=plot.see_compare_performance]{performance::compare_performance()}}

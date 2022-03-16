@@ -11,17 +11,7 @@
 
 \item{size_line}{Numeric value specifying size of line geoms.}
 
-\item{colors}{Character vector of length two, indicating the colors (in
-hex-format) for points and line.}
-
 \item{...}{Arguments passed to or from other methods.}
-
-\item{type}{Character vector, indicating the type of plot.}
-
-\item{dot_alpha, alpha}{Numeric value specifying alpha level of the
-confidence bands and point-geoms.}
-
-\item{detrend}{Logical that decides if the plot should be detrended.}
 }
 \value{
 A ggplot2-object.
@@ -32,7 +22,10 @@ function.
 }
 \examples{
 library(performance)
-m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-result <- check_normality(m)
-plot(result)
+if (require("glmmTMB")) {
+  data(Salamanders)
+  m <- glm(count ~ spp + mined, family = poisson, data = Salamanders)
+  result <- check_overdispersion(m)
+  plot(result)
+}
 }
