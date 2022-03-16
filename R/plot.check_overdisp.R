@@ -5,6 +5,7 @@
 #'
 #' @param size_line Numeric value specifying size of line geoms.
 #' @inheritParams data_plot
+#' @inheritParams plot.see_check_normality
 #'
 #' @return A ggplot2-object.
 #'

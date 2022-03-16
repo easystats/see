@@ -11,6 +11,9 @@
 
 \item{size_line}{Numeric value specifying size of line geoms.}
 
+\item{colors}{Character vector of length two, indicating the colors (in
+hex-format) for points and line.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
