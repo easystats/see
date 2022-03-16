@@ -79,7 +79,7 @@ plot.see_check_model <- function(x,
     p$OVERDISPERSION <- .plot_diag_overdispersion(
       x$OVERDISPERSION,
       style = style,
-      colors = colors[3:2]
+      colors = colors[c(1, 3)]
     )
   }
 
