@@ -4,22 +4,22 @@
 \alias{plot.see_check_overdisp}
 \title{Plot method to check model for overdispersion}
 \usage{
-\method{plot}{see_check_overdisp}(x, ...)
+\method{plot}{see_check_overdisp}(x, size_line = 0.8, colors = c("#3aaf85", "#1b6ca8"), ...)
 }
 \arguments{
 \item{x}{An object.}
+
+\item{size_line}{Numeric value specifying size of line geoms.}
+
+\item{colors}{Character vector of length two, indicating the colors (in
+hex-format) for points and line.}
 
 \item{...}{Arguments passed to or from other methods.}
 
 \item{type}{Character vector, indicating the type of plot.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
-
 \item{dot_alpha, alpha}{Numeric value specifying alpha level of the
 confidence bands and point-geoms.}
-
-\item{colors}{Character vector of length two, indicating the colors (in
-hex-format) for points and line.}
 
 \item{detrend}{Logical that decides if the plot should be detrended.}
 }

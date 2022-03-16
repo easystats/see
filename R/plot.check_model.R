@@ -79,7 +79,8 @@ plot.see_check_model <- function(x,
     p$OVERDISPERSION <- .plot_diag_overdispersion(
       x$OVERDISPERSION,
       style = style,
-      colors = colors[c(1, 3)]
+      colors = colors[c(1, 3)],
+      size_line = size_line
     )
   }
 
@@ -534,10 +535,11 @@ plot.see_check_model <- function(x,
 .plot_diag_overdispersion <- function(x,
                                       theme_style = theme_lucid,
                                       colors = social_colors(c("blue", "green")),
+                                      size_line = .8,
                                       ...) {
   p <- ggplot2::ggplot(x) + ggplot2::aes(x = .data$V) +
-    ggplot2::geom_smooth(ggplot2::aes(y = .data$V), color = colors[1], se = FALSE) +
-    ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), color = colors[2]) +
+    ggplot2::geom_smooth(ggplot2::aes(y = .data$V), size = size_line, color = colors[1], se = FALSE) +
+    ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), size = size_line, color = colors[2]) +
     ggplot2::labs(
       title = "Overdispersion and zero-inflation",
       subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",
