@@ -16,6 +16,7 @@ plot.see_check_model <- function(x,
   dot_alpha_level <- attr(x, "dot_alpha")
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
+  overdisp_type <- attr(x, "overdisp_type")
 
   if (missing(style) && !is.null(attr(x, "theme"))) {
     theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
@@ -80,7 +81,8 @@ plot.see_check_model <- function(x,
       x$OVERDISPERSION,
       style = style,
       colors = colors[c(1, 2)],
-      size_line = size_line
+      size_line = size_line,
+      type = overdisp_type
     )
   }
 
@@ -536,21 +538,44 @@ plot.see_check_model <- function(x,
                                       theme_style = theme_lucid,
                                       colors = c("#3aaf85", "#1b6ca8"),
                                       size_line = .8,
+                                      type = 1,
                                       ...) {
-  p <- ggplot2::ggplot(x) + ggplot2::aes(x = .data$V) +
-    ggplot2::geom_smooth(ggplot2::aes(y = .data$V), size = size_line, color = colors[2], se = FALSE) +
-    ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), size = size_line, color = colors[1]) +
-    ggplot2::labs(
-      title = "Overdispersion and zero-inflation",
-      subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",
-      x = "Predicted mean",
-      y = "Residual variance"
-    ) +
-    theme_style(
-      base_size = 10,
-      plot.title.space = 3,
-      axis.title.space = 5
-    )
+
+  if (is.null(type) || type == 1) {
+    p <- ggplot2::ggplot(x) + ggplot2::aes(x = .data$Predicted) +
+      ggplot2::geom_smooth(ggplot2::aes(y = .data$V), size = size_line, color = colors[2], se = FALSE) +
+      ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), size = size_line, color = colors[1]) +
+      ggplot2::labs(
+        title = "Overdispersion and zero-inflation",
+        subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",
+        x = "Predicted mean",
+        y = "Residual variance"
+      ) +
+      theme_style(
+        base_size = 10,
+        plot.title.space = 3,
+        axis.title.space = 5
+      )
+  } else {
+    p <- ggplot2::ggplot(x) + ggplot2::aes(x = .data$Predicted) +
+      ggplot2::geom_point(ggplot2::aes(y = .data$StdRes)) +
+      ggplot2::geom_hline(
+        yintercept = c(-2, 2, -4, 4),
+        linetype = c("solid", "solid", "dashed", "dashed"),
+        color = c(rep(colors[1], 2), rep(colors[2], 2))
+      ) +
+      ggplot2::labs(
+        title = "Overdispersion and zero-inflation",
+        subtitle = "Most points should be within ±2 (green), few points outside ±4 (blue)",
+        x = "Predicted mean",
+        y = "Standardized resiuduals"
+      ) +
+      theme_style(
+        base_size = 10,
+        plot.title.space = 3,
+        axis.title.space = 5
+      )
+  }
 
   p
 }
