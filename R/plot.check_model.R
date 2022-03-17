@@ -566,7 +566,7 @@ plot.see_check_model <- function(x,
       ) +
       ggplot2::labs(
         title = "Overdispersion and zero-inflation",
-        subtitle = "Most points should be within ±2 (green), few points outside ±4 (blue)",
+        subtitle = "Most points should be within solid lines, few points outside dashed lines",
         x = "Predicted mean",
         y = "Standardized resiuduals"
       ) +
