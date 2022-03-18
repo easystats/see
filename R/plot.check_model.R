@@ -540,9 +540,9 @@ plot.see_check_model <- function(x,
                                       size_line = .8,
                                       type = 1,
                                       ...) {
-
   if (is.null(type) || type == 1) {
-    p <- ggplot2::ggplot(x) + ggplot2::aes(x = .data$Predicted) +
+    p <- ggplot2::ggplot(x) +
+      ggplot2::aes(x = .data$Predicted) +
       ggplot2::geom_smooth(ggplot2::aes(y = .data$V), size = size_line, color = colors[2], se = FALSE) +
       ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), size = size_line, color = colors[1]) +
       ggplot2::labs(
@@ -557,7 +557,8 @@ plot.see_check_model <- function(x,
         axis.title.space = 5
       )
   } else {
-    p <- ggplot2::ggplot(x) + ggplot2::aes(x = .data$Predicted) +
+    p <- ggplot2::ggplot(x) +
+      ggplot2::aes(x = .data$Predicted) +
       ggplot2::geom_point(ggplot2::aes(y = .data$StdRes)) +
       ggplot2::geom_hline(
         yintercept = c(-2, 2, -4, 4),
@@ -579,4 +580,3 @@ plot.see_check_model <- function(x,
 
   p
 }
-
