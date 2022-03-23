@@ -200,7 +200,7 @@ data_plot.see_compare_parameters <- function(x, ...) {
 
   rownames(dataplot) <- NULL
 
-  exp_coef <- unique(unlist(datawizard::compact_list(lapply(x, function(i) {
+  exp_coef <- unique(unlist(insight::compact_list(lapply(x, function(i) {
     attributes(i)$exponentiate
   }))))
   attr(dataplot, "exponentiate") <- !is.null(exp_coef) && any(exp_coef != FALSE)

@@ -20,7 +20,7 @@ plot.see_check_collinearity <- function(x,
                                         colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                         ...) {
   if (is.null(data)) {
-    dat <- datawizard::compact_list(.retrieve_data(x))
+    dat <- insight::compact_list(.retrieve_data(x))
   } else {
     dat <- data
   }

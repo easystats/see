@@ -23,7 +23,7 @@ data_plot.estimate_density <- function(x,
   # summary
   split_columns <- intersect(c("Parameter", "Effects", "Component"), colnames(dataplot))
   datasplit <- split(dataplot, dataplot[split_columns])
-  summary <- do.call(rbind, datawizard::compact_list(lapply(datasplit, function(i) {
+  summary <- do.call(rbind, insight::compact_list(lapply(datasplit, function(i) {
     if (length(i$x) > 0) {
       Estimate <- as.numeric(bayestestR::point_estimate(i$x, centrality = centrality))
       CI <- as.numeric(bayestestR::ci(i$x, ci = ci))

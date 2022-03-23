@@ -22,10 +22,9 @@ Add a radar coordinate system useful for radar charts.
 \examples{
 # Create a radar/spider chart with ggplot:
 if (require("poorman") && require("ggplot2")) {
-  data <- iris \%>\%
-    group_by(Species) \%>\%
-    summarise(across(everything(), mean)) \%>\%
-    datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+  data <- iris[-5] \%>\%
+    aggregate(list(Species = iris$Species), mean) \%>\%
+    datawizard::reshape_longer(2:5)
 
   data \%>\%
     ggplot(aes(x = Name, y = Value, color = Species, group = Species)) +

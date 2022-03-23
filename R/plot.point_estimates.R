@@ -266,7 +266,7 @@ plot.see_point_estimate <- function(x,
     p_object
   })
 
-  p <- datawizard::compact_list(p)
+  p <- insight::compact_list(p)
 
   if (length(x) == 1) {
     p[[1]]
