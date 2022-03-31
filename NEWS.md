@@ -1,4 +1,4 @@
-# see 0.6.10
+# see 0.7.0
 
 * Improved plotting for `performance::check_model()`:
 
@@ -6,6 +6,8 @@
 
   - the redundant density-plot of normality-checks was replaced by the
     posterior predictive check plot.
+    
+  - includes a plot to investigate overdispersion for count-models.
 
 * Minor improvements for some plot-methods (colour tweaking, labelling, ...).
 
