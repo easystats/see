@@ -1,7 +1,7 @@
 
 # see <img src='man/figures/logo.png' align="right" height="139" />
 
-[![DOI](https://doi.org/10.21105/joss.03393/status.svg)](https://doi.org/10.21105/joss.03393)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03393/status.svg)](https://doi.org/10.21105/joss.03393)
 [![downloads](http://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/see)](https://cranlogs.r-pkg.org/)
 
@@ -93,7 +93,10 @@ results supported by *easystats*.
 # Installation
 
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
-![R-check](https://github.com/easystats/see/workflows/R-check/badge.svg)
+[![see status
+badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-universe.dev)
+[![R
+check](https://github.com/easystats/see/workflows/R-check/badge.svg?branch=master)](https://github.com/easystats/see/actions)
 
 The *see* package is available on CRAN, while its latest development
 version is available on R-universe (from *rOpenSci*).
