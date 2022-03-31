@@ -1,3 +1,9 @@
+# see 0.7.1
+
+## Bug fixes
+
+* `plot.check_model()` did not apply the `colors` argument to all sub-plots.
+
 # see 0.7.0
 
 * Improved plotting for `performance::check_model()`:

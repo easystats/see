@@ -2,7 +2,7 @@
 #' @export
 plot.see_check_model <- function(x,
                                  style = theme_lucid,
-                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+                                 colors = NULL,
                                  ...) {
   p <- list()
 
@@ -23,7 +23,7 @@ plot.see_check_model <- function(x,
     style <- get(theme_style[2], asNamespace(theme_style[1]))
   }
 
-  if (missing(colors)) {
+  if (is.null(colors)) {
     colors <- attr(x, "colors")
   }
 
@@ -49,7 +49,8 @@ plot.see_check_model <- function(x,
       x$PP_CHECK,
       style = style,
       check_model = TRUE,
-      adjust_legend = TRUE
+      adjust_legend = TRUE,
+      colors = colors[1:2]
     )
   }
 
@@ -70,7 +71,7 @@ plot.see_check_model <- function(x,
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
       style = style,
-      colors = colors[3:2],
+      colors = colors[c(2, 3, 1)],
       adjust_legend = TRUE,
       check_model = TRUE
     )
