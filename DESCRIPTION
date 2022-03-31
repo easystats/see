@@ -2,7 +2,7 @@ Type: Package
 Package: see
 Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and
     Color Palettes for 'ggplot2'
-Version: 0.6.9.7
+Version: 0.7.0
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -111,4 +111,3 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Remotes: easystats/modelbased
