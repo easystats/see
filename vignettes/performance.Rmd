@@ -212,12 +212,25 @@ check_posterior_predictions(model, check_range = TRUE)
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_model.html))_
 
-The composition of plots when checking model assumptions depends on the type of the input model. E.g., for logistic regression models, a [binned residuals plot](https://easystats.github.io/performance/reference/binned_residuals.html) is used, while for linear models a plot of homegeneity of variance is shown instead.
+The composition of plots when checking model assumptions depends on the type of the input model. E.g., for logistic regression models, a [binned residuals plot](https://easystats.github.io/performance/reference/binned_residuals.html) is used, while for linear models a plot of homegeneity of variance is shown instead. Models from count data include plots to inspect overdispersion.
 
 ## Checks for generalized linear models
 
+### Logistic regression model
+
 ```{r fig.height=12, fig.width=10}
 model <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
+check_model(model)
+```
+
+### Modelling count data
+
+```{r fig.height=12, fig.width=10}
+model <- glm(
+  count ~ spp + mined + cover,
+  family = poisson(),
+  data = Salamanders
+)
 check_model(model)
 ```
 
