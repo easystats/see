@@ -33,17 +33,17 @@ plot.see_check_collinearity <- function(x,
   dat$group[dat$VIF >= 5 & dat$VIF < 10] <- "moderate"
   dat$group[dat$VIF >= 10] <- "high"
 
-  if (ncol(dat) == 5) {
-    colnames(dat) <- c("x", "y", "se", "facet", "group")
-    dat[, c("x", "y", "facet", "group")]
-  } else {
-    colnames(dat) <- c("x", "y", "se", "group")
-    dat[, c("x", "y", "group")]
+  dat <- datawizard::data_rename(
+    dat,
+    c("Term", "VIF", "SE_factor", "Component"),
+    c("x", "y", "se", "facet")
+  )
+
+  dat <- datawizard::data_select(dat, c("x", "y", "se", "facet", "group"))
+
+  if (insight::n_unique(dat$facet) <= 1) {
+    dat$facet <- NULL
   }
 
-  if (length(unique(dat$facet)) == 1) {
-    dat <- dat[, -which(colnames(dat) == "facet")]
-  }
-
-  .plot_diag_vif(dat, colors = colors)
+  .plot_diag_vif(dat, colors = colors, ci_data = attributes(x)$CI)
 }

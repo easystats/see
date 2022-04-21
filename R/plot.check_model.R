@@ -169,7 +169,8 @@ plot.see_check_model <- function(x,
 
 .plot_diag_vif <- function(x,
                            theme_style = theme_lucid,
-                           colors = unname(social_colors(c("green", "blue", "red")))) {
+                           colors = unname(social_colors(c("green", "blue", "red"))),
+                           ci_data = NULL) {
   ylim <- max(x$y, na.rm = TRUE)
   if (ylim < 10) ylim <- 10
 
