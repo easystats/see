@@ -115,7 +115,8 @@ plot.see_check_model <- function(x,
     p$VIF <- .plot_diag_vif(
       x$VIF,
       theme_style = style,
-      colors = colors
+      colors = colors,
+      ci_data = attributes(x$VIF)$CI
     )
   }
 
