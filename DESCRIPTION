@@ -67,6 +67,7 @@ Imports:
     datawizard (>= 0.4.0),
     effectsize (>= 0.6),
     ggplot2 (>= 3.3.5),
+    scales (>= 1.1.1),
     insight (>= 0.17.0),
     parameters (>= 0.17.0)
 Suggests:
