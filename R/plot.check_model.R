@@ -247,10 +247,13 @@ plot.see_check_model <- function(x,
       title = "Collinearity",
       subtitle = "Higher points (> 5) indicate potential collinearity issues",
       x = NULL,
-      y = paste("Variance Inflation", "Factor (VIF)", sep = ifelse(is_check_model, "\n", " ")),
-      fill = NULL
+      y = paste("Variance Inflation", "Factor (VIF)", sep = ifelse(is_check_model, "\n", " "))
     ) +
-    ggplot2::scale_color_manual(values = colors) +
+    ggplot2::scale_color_manual(
+      values = colors,
+      aesthetics = c("color", "fill"),
+      guide = ggplot2::guide_legend(title = NULL)
+    ) +
     theme_style(
       base_size = 10,
       plot.title.space = 3,
