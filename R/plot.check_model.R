@@ -242,7 +242,7 @@ plot.see_check_model <- function(x,
       title = "Collinearity",
       subtitle = "High collinearity (VIF) may inflate parameter uncertainty",
       x = NULL,
-      y = paste("Variance Inflation", "Factor (VIF)", sep = ifelse(is_check_model, "\n", " "))
+      y = paste("Variance Inflation", "Factor (VIF, log-scaled)", sep = ifelse(is_check_model, "\n", " "))
     ) +
     ggplot2::scale_color_manual(
       values = colors,
