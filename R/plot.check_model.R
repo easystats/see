@@ -191,8 +191,8 @@ plot.see_check_model <- function(x,
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
-  levels(x$group) <- c("Low (< 5)", "Moderate (< 10)", "High (>= 10)")
-  names(colors) <- c("Low (< 5)", "Moderate (< 10)", "High (>= 10)")
+  levels(x$group) <- c("Low (< 5)", "Moderate (< 10)", "High (\u2265 10)")
+  names(colors) <- c("Low (< 5)", "Moderate (< 10)", "High (\u2265 10)")
 
   p <- ggplot2::ggplot(x) +
     ggplot2::aes(
