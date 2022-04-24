@@ -191,8 +191,8 @@ plot.see_check_model <- function(x,
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
-  levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
-  names(colors) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
+  levels(x$group) <- c("Low (< 5)", "Moderate (< 10)", "High (>= 10)")
+  names(colors) <- c("Low (< 5)", "Moderate (< 10)", "High (>= 10)")
 
   p <- ggplot2::ggplot(x) +
     ggplot2::aes(
@@ -245,7 +245,7 @@ plot.see_check_model <- function(x,
     ) +
     ggplot2::labs(
       title = "Collinearity",
-      subtitle = "Higher points indicate collinearity may inflate parameter uncertainty",
+      subtitle = "High collinearity (VIF) may inflate parameter uncertainty",
       x = NULL,
       y = paste("Variance Inflation", "Factor (VIF)", sep = ifelse(is_check_model, "\n", " "))
     ) +
