@@ -202,39 +202,35 @@ plot.see_check_model <- function(x,
       ymax = .data$VIF_CI_high
     )
 
-  if (ylim > 5) {
-    p <- p + ggplot2::geom_rect(
-      xmin = -Inf,
-      xmax = Inf,
-      ymin = 0,
-      ymax = 5,
-      fill = colors[1],
-      color = NA,
-      alpha = .025
-    )
+  p <- p + ggplot2::geom_rect(
+    xmin = -Inf,
+    xmax = Inf,
+    ymin = (1),
+    ymax = (5),
+    fill = colors[1],
+    color = NA,
+    alpha = .025
+  )
 
-    p <- p + ggplot2::geom_rect(
-      xmin = -Inf,
-      xmax = Inf,
-      ymin = 5,
-      ymax = ifelse(ylim > 10, 10, ylim),
-      fill = colors[2],
-      color = NA,
-      alpha = .025
-    )
-  }
+  p <- p + ggplot2::geom_rect(
+    xmin = -Inf,
+    xmax = Inf,
+    ymin = (5),
+    ymax = (10),
+    fill = colors[2],
+    color = NA,
+    alpha = .025
+  )
 
-  if (ylim > 10) {
-    p <- p + ggplot2::geom_rect(
-      xmin = -Inf,
-      xmax = Inf,
-      ymin = 10,
-      ymax = ylim,
-      fill = colors[3],
-      color = NA,
-      alpha = .025
-    )
-  }
+  p <- p + ggplot2::geom_rect(
+    xmin = -Inf,
+    xmax = Inf,
+    ymin = (10),
+    ymax = Inf,
+    fill = colors[3],
+    color = NA,
+    alpha = .025
+  )
 
   p <- p +
     { if (!is.null(ci_data)) {
