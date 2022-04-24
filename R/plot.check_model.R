@@ -245,7 +245,7 @@ plot.see_check_model <- function(x,
     ) +
     ggplot2::labs(
       title = "Collinearity",
-      subtitle = "Higher points (> 5) indicate potential collinearity issues",
+      subtitle = "Higher points indicate collinearity may inflate parameter uncertainty",
       x = NULL,
       y = paste("Variance Inflation", "Factor (VIF)", sep = ifelse(is_check_model, "\n", " "))
     ) +
