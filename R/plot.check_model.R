@@ -181,7 +181,12 @@ plot.see_check_model <- function(x,
   ylim <- ceiling(max(x$y, na.rm = TRUE))
   if (ylim < 10) ylim <- 10
 
-  x <- cbind(x, ci_data)
+  if (!is.null(ci_data)) {
+    x <- cbind(x, ci_data)
+  } else {
+    x$VIF_CI_low <- NA_real_
+    x$VIF_CI_high <- NA_real_
+  }
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
@@ -232,15 +237,15 @@ plot.see_check_model <- function(x,
   }
 
   p <- p +
-    ggplot2::geom_linerange(
-      size = size_line,
-    ) +
+    { if (!is.null(ci_data)) {
+      ggplot2::geom_linerange(size = size_line)
+    }} +
     geom_point2(
       size = size_point
     ) +
     ggplot2::labs(
       title = "Collinearity",
-      subtitle = "Higher points (>5) indicate potential collinearity issues",
+      subtitle = "Higher points (> 5) indicate potential collinearity issues",
       x = NULL,
       y = paste("Variance Inflation", "Factor (VIF)", sep = ifelse(is_check_model, "\n", " ")),
       fill = NULL
@@ -264,7 +269,7 @@ plot.see_check_model <- function(x,
     )
 
   if ("facet" %in% colnames(x)) {
-    p <- p + ggplot2::facet_wrap(~facet, nrow = 1, scales = "free")
+    p <- p + ggplot2::facet_wrap(~ facet, nrow = 1, scales = "free")
   }
 
   p
