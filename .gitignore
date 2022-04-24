@@ -50,4 +50,3 @@ revdep/library.noindex
 revdep/data.sqlite
 /doc/
 /Meta/
-*.Rproj
