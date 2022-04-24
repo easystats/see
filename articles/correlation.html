@@ -165,7 +165,7 @@
 <h2 id="correlation-matrix">Correlation Matrix<a class="anchor" aria-label="anchor" href="#correlation-matrix"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">related function documentation</a>)</em></p>
-<p>The default output for <code><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation()</a></code> is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>.</p>
+<p>The default output for <code><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation()</a></code> is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using <code><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
 
@@ -184,7 +184,7 @@
 <span class="co">#&gt; p-value adjustment method: Holm (1979)</span>
 <span class="co">#&gt; Observations: 150</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+<span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter    | Petal.Width | Petal.Length | Sepal.Width</span>
@@ -194,9 +194,9 @@
 <span class="co">#&gt; Petal.Length |     0.96*** |              |            </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; p-value adjustment method: Holm (1979)</span></code></pre></div>
-<p>The result from <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> can be used to create a plot.</p>
+<p>The result from <code><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary()</a></code> can be used to create a plot.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 <p>To change the style of geoms, use the <code>show_data</code>-argument.</p>
@@ -205,7 +205,7 @@
 <p><img src="correlation_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <p>And a “redundant” summary can be plotted as well:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span>, redundant <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span>, redundant <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="va">s</span>
 <span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
@@ -223,7 +223,7 @@
 <p><img src="correlation_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <p>The <code>corrlation</code> function also provides a convenient way to change names for selected variables:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span>
   data <span class="op">=</span> <span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">wt</span>, <span class="va">mpg</span>, <span class="va">drat</span><span class="op">)</span>,
   rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weight"</span>, <span class="st">"miles per gallon"</span>, <span class="st">"rear axle ratio"</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -317,7 +317,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
     </footer>
