@@ -179,6 +179,7 @@ plot.see_check_model <- function(x,
                            ci_data = NULL,
                            is_check_model = FALSE) {
   ylim <- ceiling(max(x$y, na.rm = TRUE))
+  xlim <- nrow(x)
   if (ylim < 10) ylim <- 10
 
   if (!is.null(ci_data)) {
@@ -202,34 +203,37 @@ plot.see_check_model <- function(x,
       ymax = .data$VIF_CI_high
     )
 
-  p <- p + ggplot2::geom_rect(
+  p <- p + ggplot2::annotate(
+    geom = "rect",
     xmin = -Inf,
     xmax = Inf,
-    ymin = (1),
-    ymax = (5),
+    ymin = 1,
+    ymax = 5,
     fill = colors[1],
     color = NA,
-    alpha = .025
+    alpha = .15
   )
 
-  p <- p + ggplot2::geom_rect(
+  p <- p + ggplot2::annotate(
+    geom = "rect",
     xmin = -Inf,
     xmax = Inf,
-    ymin = (5),
-    ymax = (10),
+    ymin = 5,
+    ymax = 10,
     fill = colors[2],
     color = NA,
-    alpha = .025
+    alpha = .15
   )
 
-  p <- p + ggplot2::geom_rect(
+  p <- p + ggplot2::annotate(
+    geom = "rect",
     xmin = -Inf,
     xmax = Inf,
-    ymin = (10),
+    ymin = 10,
     ymax = Inf,
     fill = colors[3],
     color = NA,
-    alpha = .025
+    alpha = .15
   )
 
   p <- p +
@@ -258,6 +262,7 @@ plot.see_check_model <- function(x,
       expand = ggplot2::expansion(mult = c(0, .05)),
       breaks = scales::breaks_extended(n = 6)
     ) +
+    ggplot2::scale_x_discrete() +
     ggplot2::theme(
       legend.position = "bottom",
       legend.margin = ggplot2::margin(0, 0, 0, 0),
