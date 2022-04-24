@@ -257,8 +257,9 @@ plot.see_check_model <- function(x,
     ggplot2::scale_y_continuous(
       limits = c(1, ylim),
       oob = scales::oob_keep,
+      trans = "log10",
       expand = ggplot2::expansion(mult = c(0, .05)),
-      breaks = scales::breaks_extended(n = 6)
+      breaks = scales::log_breaks(n = 7, base = 10)
     ) +
     ggplot2::scale_x_discrete() +
     ggplot2::theme(
