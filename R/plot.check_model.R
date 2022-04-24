@@ -178,7 +178,7 @@ plot.see_check_model <- function(x,
                            colors = unname(social_colors(c("green", "blue", "red"))),
                            ci_data = NULL,
                            is_check_model = FALSE) {
-  ylim <- max(x$y, na.rm = TRUE)
+  ylim <- ceiling(max(x$y, na.rm = TRUE))
   if (ylim < 10) ylim <- 10
 
   x <- cbind(x, ci_data)
@@ -251,7 +251,12 @@ plot.see_check_model <- function(x,
       plot.title.space = 3,
       axis.title.space = 5
     ) +
-    ggplot2::scale_y_continuous(limits = c(1, ylim), oob = scales::oob_keep) +
+    ggplot2::scale_y_continuous(
+      limits = c(1, ylim),
+      oob = scales::oob_keep,
+      expand = ggplot2::expansion(mult = c(0, .05)),
+      breaks = scales::breaks_extended(n = 6)
+    ) +
     ggplot2::theme(
       legend.position = "bottom",
       legend.margin = ggplot2::margin(0, 0, 0, 0),
