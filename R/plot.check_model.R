@@ -262,6 +262,7 @@ plot.see_check_model <- function(x,
     ggplot2::scale_y_continuous(
       limits = c(1, ylim),
       oob = scales::oob_keep,
+      trans = "log",
       expand = ggplot2::expansion(mult = c(0, .05)),
       breaks = scales::breaks_extended(n = 6)
     ) +
