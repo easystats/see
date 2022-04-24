@@ -23,8 +23,7 @@
 
 \item{size_line}{Numeric value specifying size of line geoms.}
 
-\item{dot_alpha}{Numeric value specifying alpha level of the
-confidence bands and point-geoms.}
+\item{dot_alpha}{Numeric value specifying alpha level of the point geoms.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}

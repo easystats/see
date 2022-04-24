@@ -29,8 +29,9 @@ statistical model.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{dot_alpha, alpha}{Numeric value specifying alpha level of the
-confidence bands and point-geoms.}
+\item{alpha}{Numeric value specifying alpha level of the confidence bands.}
+
+\item{dot_alpha}{Numeric value specifying alpha level of the point geoms.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}

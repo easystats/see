@@ -18,6 +18,8 @@
 plot.see_check_collinearity <- function(x,
                                         data = NULL,
                                         colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+                                        size_point = 4,
+                                        size_line = .8,
                                         ...) {
   if (is.null(data)) {
     dat <- insight::compact_list(.retrieve_data(x))
@@ -45,5 +47,12 @@ plot.see_check_collinearity <- function(x,
     dat$facet <- NULL
   }
 
-  .plot_diag_vif(dat, colors = colors, ci_data = attributes(x)$CI)
+  .plot_diag_vif(
+    dat,
+    size_point = size_point,
+    size_line = size_line,
+    colors = colors,
+    ci_data = attributes(x)$CI,
+    is_check_model = FALSE
+  )
 }
