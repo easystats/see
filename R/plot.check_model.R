@@ -201,42 +201,37 @@ plot.see_check_model <- function(x,
       color = .data$group,
       ymin = .data$VIF_CI_low,
       ymax = .data$VIF_CI_high
-    )
-
-  p <- p + ggplot2::annotate(
-    geom = "rect",
-    xmin = -Inf,
-    xmax = Inf,
-    ymin = 1,
-    ymax = 5,
-    fill = colors[1],
-    color = NA,
-    alpha = .15
-  )
-
-  p <- p + ggplot2::annotate(
-    geom = "rect",
-    xmin = -Inf,
-    xmax = Inf,
-    ymin = 5,
-    ymax = 10,
-    fill = colors[2],
-    color = NA,
-    alpha = .15
-  )
-
-  p <- p + ggplot2::annotate(
-    geom = "rect",
-    xmin = -Inf,
-    xmax = Inf,
-    ymin = 10,
-    ymax = Inf,
-    fill = colors[3],
-    color = NA,
-    alpha = .15
-  )
-
-  p <- p +
+    ) +
+    ggplot2::annotate(
+      geom = "rect",
+      xmin = -Inf,
+      xmax = Inf,
+      ymin = 1,
+      ymax = 5,
+      fill = colors[1],
+      color = NA,
+      alpha = .15
+    ) +
+    ggplot2::annotate(
+      geom = "rect",
+      xmin = -Inf,
+      xmax = Inf,
+      ymin = 5,
+      ymax = 10,
+      fill = colors[2],
+      color = NA,
+      alpha = .15
+    ) +
+    ggplot2::annotate(
+      geom = "rect",
+      xmin = -Inf,
+      xmax = Inf,
+      ymin = 10,
+      ymax = Inf,
+      fill = colors[3],
+      color = NA,
+      alpha = .15
+    ) +
     { if (!is.null(ci_data)) {
       ggplot2::geom_linerange(size = size_line)
     }} +
@@ -262,7 +257,6 @@ plot.see_check_model <- function(x,
     ggplot2::scale_y_continuous(
       limits = c(1, ylim),
       oob = scales::oob_keep,
-      trans = "log",
       expand = ggplot2::expansion(mult = c(0, .05)),
       breaks = scales::breaks_extended(n = 6)
     ) +
