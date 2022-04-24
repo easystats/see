@@ -4,7 +4,14 @@
 \alias{plot.see_check_collinearity}
 \title{Plot method for multicollinearity checks}
 \usage{
-\method{plot}{see_check_collinearity}(x, data = NULL, colors = c("#3aaf85", "#1b6ca8", "#cd201f"), ...)
+\method{plot}{see_check_collinearity}(
+  x,
+  data = NULL,
+  colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+  size_point = 4,
+  size_line = 0.8,
+  ...
+)
 }
 \arguments{
 \item{x}{An object.}
@@ -14,6 +21,10 @@ statistical model.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
+
+\item{size_point}{Numeric specifying size of point-geoms.}
+
+\item{size_line}{Numeric value specifying size of line geoms.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

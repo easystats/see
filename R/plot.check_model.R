@@ -114,9 +114,12 @@ plot.see_check_model <- function(x,
   if ("VIF" %in% names(x) && !is.null(x$VIF) && any(c("vif", "all") %in% check)) {
     p$VIF <- .plot_diag_vif(
       x$VIF,
+      size_point = 1.5 * size_point,
+      size_line = size_line,
       theme_style = style,
       colors = colors,
-      ci_data = attributes(x$VIF)$CI
+      ci_data = attributes(x$VIF)$CI,
+      is_check_model = TRUE
     )
   }
 
@@ -169,18 +172,30 @@ plot.see_check_model <- function(x,
 
 
 .plot_diag_vif <- function(x,
+                           size_point,
+                           size_line,
                            theme_style = theme_lucid,
                            colors = unname(social_colors(c("green", "blue", "red"))),
-                           ci_data = NULL) {
+                           ci_data = NULL,
+                           is_check_model = FALSE) {
   ylim <- max(x$y, na.rm = TRUE)
   if (ylim < 10) ylim <- 10
+
+  x <- cbind(x, ci_data)
 
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
   levels(x$group) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
   names(colors) <- c("low (< 5)", "moderate (< 10)", "high (>= 10)")
 
-  p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y, fill = .data$group))
+  p <- ggplot2::ggplot(x) +
+    ggplot2::aes(
+      x = .data$x,
+      y = .data$y,
+      color = .data$group,
+      ymin = .data$VIF_CI_low,
+      ymax = .data$VIF_CI_high
+    )
 
   if (ylim > 5) {
     p <- p + ggplot2::geom_rect(
@@ -217,22 +232,26 @@ plot.see_check_model <- function(x,
   }
 
   p <- p +
-    ggplot2::geom_col(width = 0.7) +
+    ggplot2::geom_linerange(
+      size = size_line,
+    ) +
+    geom_point2(
+      size = size_point
+    ) +
     ggplot2::labs(
       title = "Collinearity",
-      subtitle = "Higher bars (>5) indicate potential collinearity issues",
+      subtitle = "Higher points (>5) indicate potential collinearity issues",
       x = NULL,
-      y = "Variance Inflation Factor (VIF)",
+      y = paste("Variance Inflation", "Factor (VIF)", sep = ifelse(is_check_model, "\n", " ")),
       fill = NULL
     ) +
-    # geom_text(aes(label = round(.data$y, 1)), nudge_y = 1) +
-    ggplot2::scale_fill_manual(values = colors) +
+    ggplot2::scale_color_manual(values = colors) +
     theme_style(
       base_size = 10,
       plot.title.space = 3,
       axis.title.space = 5
     ) +
-    ggplot2::ylim(c(0, ylim)) +
+    ggplot2::scale_y_continuous(limits = c(0, ylim), oob = scales::oob_keep) +
     ggplot2::theme(
       legend.position = "bottom",
       legend.margin = ggplot2::margin(0, 0, 0, 0),
