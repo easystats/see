@@ -251,7 +251,7 @@ plot.see_check_model <- function(x,
       plot.title.space = 3,
       axis.title.space = 5
     ) +
-    ggplot2::scale_y_continuous(limits = c(0, ylim), oob = scales::oob_keep) +
+    ggplot2::scale_y_continuous(limits = c(1, ylim), oob = scales::oob_keep) +
     ggplot2::theme(
       legend.position = "bottom",
       legend.margin = ggplot2::margin(0, 0, 0, 0),
