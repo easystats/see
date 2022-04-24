@@ -1,7 +1,6 @@
 Type: Package
 Package: see
-Title: Visualisation Toolbox for 'easystats' and Extra Geoms, Themes and
-    Color Palettes for 'ggplot2'
+Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
 Version: 0.7.0.1
 Authors@R: 
     c(person(given = "Daniel",
