@@ -232,9 +232,23 @@ plot.see_check_model <- function(x,
       color = NA,
       alpha = .15
     ) +
-    { if (!is.null(ci_data)) {
-      ggplot2::geom_linerange(size = size_line)
-    }} +
+    { if (!is.null(ci_data)) {list(
+        ggplot2::geom_linerange(size = size_line),
+        ggplot2::geom_segment(
+          data = x[x$VIF_CI_high > ylim * 1.15, ],
+          mapping = aes(
+            x = .data$x, xend = .data$x,
+            y = .data$y, yend = .data$VIF_CI_high
+          ),
+          lineend = "round",
+          linejoin = "round",
+          arrow = ggplot2::arrow(
+            ends = "last", type = "closed",
+            angle = 20, length = ggplot2::unit(.03, "native")
+          ),
+          show.legend = FALSE
+        )
+    )}} +
     geom_point2(
       size = size_point
     ) +
@@ -255,10 +269,10 @@ plot.see_check_model <- function(x,
       axis.title.space = 5
     ) +
     ggplot2::scale_y_continuous(
-      limits = c(1, ylim),
-      oob = scales::oob_keep,
+      limits = c(1, ylim * 1.15),
+      oob = scales::oob_squish,
       trans = "log10",
-      expand = ggplot2::expansion(mult = c(0, .05)),
+      expand = c(0, 0),
       breaks = scales::log_breaks(n = 7, base = 10)
     ) +
     ggplot2::scale_x_discrete() +
