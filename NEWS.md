@@ -1,5 +1,10 @@
 # see 0.7.1
 
+## Changes
+
+* Changed style for `plot.check_collinearity()`, which is now a dot-plot, 
+  including error bars.
+
 ## Bug fixes
 
 * `plot.check_model()` did not apply the `colors` argument to all sub-plots.
