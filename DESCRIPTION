@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.7.0.1
+Version: 0.7.0.2
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -110,4 +110,6 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2.9000
+RoxygenNote: 7.1.2
+Remotes: easystats/performance
+
