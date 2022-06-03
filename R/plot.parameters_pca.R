@@ -30,7 +30,7 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
   if (rotation_name == "none") {
     title <- paste("Loadings from", title, "(no rotation)")
   } else {
-    title <- paste0("Rotated loadings from ", title, "(", rotation_name, ")")
+    title <- paste0("Rotated loadings from ", title, " (", rotation_name, ")")
   }
 
 
