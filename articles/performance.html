@@ -93,7 +93,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plotting Functions for the 'performance' Package</h1>
             
       
@@ -177,13 +177,13 @@
 <span class="co">#&gt; Low Correlation</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Term  VIF    VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
-<span class="co">#&gt;  gear 1.53 [1.19,  2.51]         1.24      0.65     [0.40, 0.84]</span>
+<span class="co">#&gt;   cyl 5.41 [3.42,  9.04]         2.33      0.18     [0.11, 0.29]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Moderate Correlation</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Term  VIF    VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
+<span class="co">#&gt;  gear 1.53  [1.19, 2.51]         1.24      0.65     [0.40, 0.84]</span>
 <span class="co">#&gt;    wt 5.05 [3.21,  8.41]         2.25      0.20     [0.12, 0.31]</span>
-<span class="co">#&gt;   cyl 5.41 [3.42,  9.04]         2.33      0.18     [0.11, 0.29]</span>
 <span class="co">#&gt;  disp 9.97 [6.08, 16.85]         3.16      0.10     [0.06, 0.16]</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-5-1.png" width="100%"></p>
@@ -213,9 +213,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Low Correlation</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;   Term  VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
-<span class="co">#&gt;    spp 1.07 [ 1.02,  1.24]         1.04      0.93     [0.81, 0.98]</span>
-<span class="co">#&gt;  mined 1.17 [ 1.10,  1.31]         1.08      0.85     [0.76, 0.91]</span>
+<span class="co">#&gt;   Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
+<span class="co">#&gt;    spp 1.07 [1.02, 1.24]         1.04      0.93     [0.81, 0.98]</span>
+<span class="co">#&gt;  mined 1.17 [1.10, 1.31]         1.08      0.85     [0.76, 0.91]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; High Correlation</span>
 <span class="co">#&gt; </span>
@@ -462,8 +462,8 @@
 <span class="co">#&gt; # Predicted Distribution of Vector</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;       Distribution Probability</span>
-<span class="co">#&gt;            poisson         72%</span>
-<span class="co">#&gt;  negative binomial         25%</span>
+<span class="co">#&gt;            poisson         69%</span>
+<span class="co">#&gt;  negative binomial         28%</span>
 <span class="co">#&gt;           binomial          3%</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-26-1.png" width="100%"></p>
@@ -517,7 +517,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer>

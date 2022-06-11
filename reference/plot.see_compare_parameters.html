@@ -91,19 +91,29 @@ function.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>An object.</p></dd>
+
+
 <dt>show_intercept</dt>
 <dd><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the
 intercept-parameter has a posterior distribution on a very different
 location, so density curves of posterior distributions for other parameters
 are hardly visible.</p></dd>
+
+
 <dt>size_point</dt>
 <dd><p>Numeric specifying size of point-geoms.</p></dd>
+
+
 <dt>size_text</dt>
 <dd><p>Numeric value specifying size of text labels.</p></dd>
+
+
 <dt>dodge_position</dt>
 <dd><p>Numeric value specifying the amount of "dodging"
 (spacing) between geoms.</p></dd>
+
+
 <dt>sort</dt>
 <dd><p>The behavior of this argument depends on the plotting contexts.</p><ul><li><p><em>Plotting model parameters</em>:
 If <code>NULL</code>, coefficients are plotted in the order as they appear in the
@@ -113,18 +123,27 @@ Setting <code>sort = TRUE</code> is the same as <code>sort = "ascending"</code>.
 <li><p><em>Plotting Bayes factors</em>:
 Sort pie-slices by posterior probability (descending)?</p></li>
 </ul></dd>
+
+
 <dt>n_columns</dt>
 <dd><p>For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the
 panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></dd>
+
+
 <dt>show_labels</dt>
 <dd><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggplot2-object.</p>
+    
+
+<p>A ggplot2-object.</p>
     </div>
 
     <div class="section level2">
@@ -154,7 +173,7 @@ panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer></div>

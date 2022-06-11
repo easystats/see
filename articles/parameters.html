@@ -93,7 +93,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plotting Functions for the 'parameters' Package</h1>
             
       
@@ -582,14 +582,14 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter   |        H0 | inside ROPE |       95% HDI</span>
 <span class="co">#&gt; -----------------------------------------------------</span>
-<span class="co">#&gt; (Intercept) | Undecided |     12.41 % | [-0.86  0.23]</span>
-<span class="co">#&gt; sppPR       |  Rejected |      0.00 % | [-1.74 -0.84]</span>
-<span class="co">#&gt; sppDM       | Undecided |     10.94 % | [-0.01  0.51]</span>
-<span class="co">#&gt; sppEC-A     |  Rejected |      0.00 % | [-0.96 -0.19]</span>
+<span class="co">#&gt; (Intercept) | Undecided |     12.42 % | [-0.91  0.19]</span>
+<span class="co">#&gt; sppPR       |  Rejected |      0.00 % | [-1.72 -0.81]</span>
+<span class="co">#&gt; sppDM       | Undecided |      9.79 % | [ 0.00  0.54]</span>
+<span class="co">#&gt; sppEC-A     |  Rejected |      0.00 % | [-0.95 -0.17]</span>
 <span class="co">#&gt; sppEC-L     |  Rejected |      0.00 % | [ 0.41  0.91]</span>
 <span class="co">#&gt; sppDES-L    |  Rejected |      0.00 % | [ 0.39  0.86]</span>
-<span class="co">#&gt; sppDF       | Undecided |     38.70 % | [-0.16  0.38]</span>
-<span class="co">#&gt; minedno     |  Rejected |      0.00 % | [ 0.67  1.77]</span>
+<span class="co">#&gt; sppDF       | Undecided |     38.74 % | [-0.15  0.38]</span>
+<span class="co">#&gt; minedno     |  Rejected |      0.00 % | [ 0.70  1.82]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
@@ -668,11 +668,8 @@
 <span class="co">#&gt; 2       |    50 |       47.35 |        -1.01 |        0.85 |        -1.30 |       -1.25</span>
 <span class="co">#&gt; 3       |    53 |       44.09 |        -0.05 |       -0.88 |         0.35 |        0.28</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # Indices of model performance</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Sum_Squares_Total | Sum_Squares_Between | Sum_Squares_Within |    R2</span>
-<span class="co">#&gt; --------------------------------------------------------------------</span>
-<span class="co">#&gt; 596.000           |             457.112 |            138.888 | 0.767</span>
+<span class="co">#&gt;   Sum_Squares_Total Sum_Squares_Between Sum_Squares_Within        R2</span>
+<span class="co">#&gt; 1               596            457.1116           138.8884 0.7669658</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; # You can access the predicted clusters via 'predict()'.</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
@@ -819,7 +816,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer>

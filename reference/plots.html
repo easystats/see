@@ -96,16 +96,24 @@ the same page. See
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>...</dt>
 <dd><p>Multiple <code>ggplot</code>s or a list containing <code>ggplot</code> objects</p></dd>
+
+
 <dt>n_rows</dt>
 <dd><p>Number of rows to align plots.</p></dd>
+
+
 <dt>n_columns</dt>
 <dd><p>Number of columns to align plots.</p></dd>
+
+
 <dt>guides</dt>
 <dd><p>A string specifying how guides should be treated in the
 layout. <code>'collect'</code> will collect shared guides across plots, removing
 duplicates. <code>'keep'</code> will keep guides alongside their plot.
 <code>'auto'</code> will inherit from a higher patchwork level (if any). See
 <code><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">patchwork::plot_layout()</a></code> for details.</p></dd>
+
+
 <dt>tags</dt>
 <dd><p>Add tags to your subfigures. Can be <code>NULL</code> to omit (default)
 or a character vector containing tags for each plot. Automatic tags can
@@ -115,19 +123,28 @@ for uppercase Roman numerals, and <code>'i'</code> for lowercase Roman numerals.
 For backwards compatibility, can also be <code>FALSE</code> (equivalent to
 <code>NULL</code>), <code>NA</code> (equivalent to <code>NULL</code>), or <code>TRUE</code>
 (equivalent to <code>'A'</code>).</p></dd>
+
+
 <dt>tag_prefix, tag_suffix</dt>
 <dd><p>Text strings that should appear before or after
 the tag.</p></dd>
+
+
 <dt>tag_sep</dt>
 <dd><p>Text string giving the separator to use between different tag
 levels.</p></dd>
+
+
 <dt>title, subtitle, caption</dt>
 <dd><p>Text strings to use for the various plot
 annotations to add to the composed patchwork.</p></dd>
+
+
 <dt>theme</dt>
 <dd><p>A ggplot theme specification to use for the plot. Only elements
 related to titles, caption, and tags, as well as plot margin and
 background, are used.</p></dd>
+
 </dl></div>
 
     <div class="section level2">
@@ -164,7 +181,7 @@ background, are used.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer></div>

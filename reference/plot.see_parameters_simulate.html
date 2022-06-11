@@ -93,45 +93,68 @@ function.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>An object.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>The original data used to create this object. Can be a
 statistical model.</p></dd>
+
+
 <dt>stack</dt>
 <dd><p>Logical. If <code>TRUE</code>, densities are plotted as stacked lines.
 Else, densities are plotted for each parameter among each other.</p></dd>
+
+
 <dt>show_intercept</dt>
 <dd><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the
 intercept-parameter has a posterior distribution on a very different
 location, so density curves of posterior distributions for other parameters
 are hardly visible.</p></dd>
+
+
 <dt>n_columns</dt>
 <dd><p>For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the
 panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></dd>
+
+
 <dt>normalize_height</dt>
 <dd><p>Logical. If <code>TRUE</code>, height of density-areas is
 "normalized", to avoid overlap. In certain cases when the range of a
 distribution of simulated draws is narrow for some parameters, this may
 result in very flat density-areas. In such cases, set
 <code>normalize_height = FALSE</code>.</p></dd>
+
+
 <dt>size_line</dt>
 <dd><p>Numeric value specifying size of line geoms.</p></dd>
+
+
 <dt>posteriors_alpha</dt>
 <dd><p>Numeric value specifying alpha for the posterior
 distributions.</p></dd>
+
+
 <dt>centrality</dt>
 <dd><p>Character specifying the point-estimate (centrality index)
 to compute. Can be <code>"median"</code>, <code>"mean"</code> or <code>"MAP"</code>.</p></dd>
+
+
 <dt>ci</dt>
 <dd><p>Numeric value of probability of the CI (between 0 and 1) to be
 estimated. Default to <code>.95</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggplot2-object.</p>
+    
+
+<p>A ggplot2-object.</p>
     </div>
 
     <div class="section level2">
@@ -149,10 +172,10 @@ estimated. Default to <code>.95</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cyl         |       -1.54 | [-2.40, -0.70] | &lt; .001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gear        |       -0.47 | [-2.11,  1.07] | 0.532 </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Uncertainty intervals (equal-tailed) and p values (two-tailed) computed using a</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   MCMC distribution approximation.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Uncertainty intervals (equal-tailed) and p-values (two-tailed) computed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   using a MCMC distribution approximation.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in MASS::mvrnorm(n = iterations, mu = beta, Sigma = varcov):</span> incompatible arguments</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Incompatible arguments to calculate multivariate normal distribution.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -164,7 +187,7 @@ estimated. Default to <code>.95</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer></div>

@@ -106,16 +106,24 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>An object.</p></dd>
+
+
 <dt>show_intercept</dt>
 <dd><p>Logical, if <code>TRUE</code>, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the
 intercept-parameter has a posterior distribution on a very different
 location, so density curves of posterior distributions for other parameters
 are hardly visible.</p></dd>
+
+
 <dt>size_point</dt>
 <dd><p>Numeric specifying size of point-geoms.</p></dd>
+
+
 <dt>size_text</dt>
 <dd><p>Numeric value specifying size of text labels.</p></dd>
+
+
 <dt>sort</dt>
 <dd><p>The behavior of this argument depends on the plotting contexts.</p><ul><li><p><em>Plotting model parameters</em>:
 If <code>NULL</code>, coefficients are plotted in the order as they appear in the
@@ -125,49 +133,80 @@ Setting <code>sort = TRUE</code> is the same as <code>sort = "ascending"</code>.
 <li><p><em>Plotting Bayes factors</em>:
 Sort pie-slices by posterior probability (descending)?</p></li>
 </ul></dd>
+
+
 <dt>n_columns</dt>
 <dd><p>For models with multiple components (like fixed and random,
 count and zero-inflated), defines the number of columns for the
 panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Character indicating the type of plot. Only applies for model
 parameters from meta-analysis objects (e.g. <span class="pkg">metafor</span>).</p></dd>
+
+
 <dt>weight_points</dt>
 <dd><p>Logical. If <code>TRUE</code>, for meta-analysis objects, point
 size will be adjusted according to the study-weights.</p></dd>
+
+
 <dt>show_labels</dt>
 <dd><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></dd>
+
+
 <dt>show_estimate</dt>
 <dd><p>Should the point estimate of each parameter be shown?
 (default: <code>TRUE</code>)</p></dd>
+
+
 <dt>show_interval</dt>
 <dd><p>Should the compatibility interval(s) of each parameter
 be shown? (default: <code>TRUE</code>)</p></dd>
+
+
 <dt>show_density</dt>
 <dd><p>Should the compatibility density (i.e., posterior,
 bootstrap, or confidence density) of each parameter be shown?
 (default: <code>FALSE</code>)</p></dd>
+
+
 <dt>log_scale</dt>
 <dd><p>Should exponentiated coefficients (e.g., odds-ratios) be
 plotted on a log scale? (default: <code>FALSE</code>)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>The original data used to create this object. Can be a
 statistical model.</p></dd>
+
+
 <dt>component</dt>
 <dd><p>Character indicating which component of the model should be
 plotted.</p></dd>
+
+
 <dt>threshold_coefficient</dt>
 <dd><p>Numeric, threshold at which value coefficients will be displayed.</p></dd>
+
+
 <dt>threshold_p</dt>
 <dd><p>Numeric, threshold at which value p-values will be displayed.</p></dd>
+
+
 <dt>ci</dt>
 <dd><p>Logical, whether confidence intervals should be added to the plot.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggplot2-object.</p>
+    
+
+<p>A ggplot2-object.</p>
     </div>
 
     <div class="section level2">
@@ -184,8 +223,8 @@ plotted.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gear        |       -0.49 | 0.79 | [-2.11,  1.13] | -0.62 | 0.540 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> disp        |    6.94e-03 | 0.01 | [-0.02,  0.03] |  0.58 | 0.568 </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Uncertainty intervals (equal-tailed) and p values (two-tailed) computed using a</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   Wald t-distribution approximation.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Uncertainty intervals (equal-tailed) and p-values (two-tailed) computed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   using a Wald t-distribution approximation.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="plot.see_parameters_model-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
@@ -199,7 +238,7 @@ plotted.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer></div>
