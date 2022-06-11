@@ -1,6 +1,6 @@
 if (getRversion() >= "4.1") {
   test_that("geom and coord functions work correctly", {
-    skip_if_not(.Platform$OS.type == "windows")
+    
 
     skip_if_not_installed("vdiffr")
     skip_if_not_installed("poorman")
