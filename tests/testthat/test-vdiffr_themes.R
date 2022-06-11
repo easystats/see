@@ -1,4 +1,4 @@
-if (getRversion() >= "4.1" && getRversion() < "4.2") {
+if (getRversion() >= "4.1") {
   test_that("theme functions work", {
     skip_if_not(.Platform$OS.type == "windows")
 

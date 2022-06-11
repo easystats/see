@@ -1,4 +1,4 @@
-if (getRversion() >= "4.1" && getRversion() < "4.2" &&
+if (getRversion() >= "4.1" &&
   require("vdiffr") &&
   require("ggplot2") &&
   require("performance") &&

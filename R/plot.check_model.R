@@ -232,23 +232,27 @@ plot.see_check_model <- function(x,
       color = NA,
       alpha = .15
     ) +
-    { if (!is.null(ci_data)) {list(
-        ggplot2::geom_linerange(size = size_line),
-        ggplot2::geom_segment(
-          data = x[x$VIF_CI_high > ylim * 1.15, ],
-          mapping = aes(
-            x = .data$x, xend = .data$x,
-            y = .data$y, yend = .data$VIF_CI_high
-          ),
-          lineend = "round",
-          linejoin = "round",
-          arrow = ggplot2::arrow(
-            ends = "last", type = "closed",
-            angle = 20, length = ggplot2::unit(.03, "native")
-          ),
-          show.legend = FALSE
+    {
+      if (!is.null(ci_data)) {
+        list(
+          ggplot2::geom_linerange(size = size_line),
+          ggplot2::geom_segment(
+            data = x[x$VIF_CI_high > ylim * 1.15, ],
+            mapping = aes(
+              x = .data$x, xend = .data$x,
+              y = .data$y, yend = .data$VIF_CI_high
+            ),
+            lineend = "round",
+            linejoin = "round",
+            arrow = ggplot2::arrow(
+              ends = "last", type = "closed",
+              angle = 20, length = ggplot2::unit(.03, "native")
+            ),
+            show.legend = FALSE
+          )
         )
-    )}} +
+      }
+    } +
     geom_point2(
       size = size_point
     ) +
@@ -283,7 +287,7 @@ plot.see_check_model <- function(x,
     )
 
   if ("facet" %in% colnames(x)) {
-    p <- p + ggplot2::facet_wrap(~ facet, nrow = 1, scales = "free")
+    p <- p + ggplot2::facet_wrap(~facet, nrow = 1, scales = "free")
   }
 
   p
