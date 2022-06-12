@@ -59,7 +59,7 @@ BugReports: https://github.com/easystats/see/issues
 Depends:
     graphics,
     grDevices,
-    R (>= 3.4),
+    R (>= 3.5),
     stats
 Imports:
     bayestestR (>= 0.12.1),
