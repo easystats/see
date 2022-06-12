@@ -62,13 +62,13 @@ Depends:
     R (>= 3.4),
     stats
 Imports:
-    bayestestR (>= 0.11.5),
-    datawizard (>= 0.4.0),
-    effectsize (>= 0.6),
-    ggplot2 (>= 3.3.5),
-    scales (>= 1.1.1),
-    insight (>= 0.17.0),
-    parameters (>= 0.17.0)
+    bayestestR (>= 0.12.1),
+    datawizard (>= 0.4.1),
+    effectsize (>= 0.7.0),
+    ggplot2 (>= 3.3.6),
+    scales (>= 1.2.0),
+    insight (>= 0.17.1),
+    parameters (>= 0.18.1)
 Suggests:
     brms,
     coda,
