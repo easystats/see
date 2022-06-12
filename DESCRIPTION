@@ -101,7 +101,6 @@ Suggests:
     randomForest,
     rmarkdown,
     rstanarm,
-    spelling,
     splines,
     testthat (>= 3.1.0),
     tidygraph,
