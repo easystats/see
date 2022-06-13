@@ -84,7 +84,8 @@ plot.see_equivalence_test <- function(x,
     tmp <- as.data.frame(tmp2)
     colnames(tmp) <- cnames
 
-    tmp <- .reshape_to_long(tmp, names_to = "predictor", values_to = "estimate")
+    tmp <- datawizard::reshape_longer(tmp, names_to = "predictor",
+                                      values_to = "estimate")
     # tmp$predictor <- as.factor(tmp$predictor)
 
     tmp$grp <- NA
@@ -239,7 +240,8 @@ plot.see_equivalence_test_df <- function(x,
     tmp <- as.data.frame(tmp2)
     colnames(tmp) <- cnames
 
-    tmp <- .reshape_to_long(tmp, names_to = "predictor", values_to = "estimate")
+    tmp <- datawizard::reshape_longer(tmp, names_to = "predictor",
+                                      values_to = "estimate")
 
     tmp$grp <- NA
     for (j in 1:nrow(i)) {

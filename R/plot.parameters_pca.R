@@ -10,11 +10,11 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
     dataplot$Label <- NULL
   }
 
-  dataplot <- .reshape_to_long(
+  dataplot <- datawizard::reshape_longer(
     dataplot,
     names_to = "Component",
     values_to = "y",
-    columns = 2:ncol(dataplot)
+    select = 2:ncol(dataplot)
   )
   dataplot$Variable <- factor(dataplot$Variable, levels = rev(unique(dataplot$Variable)))
 

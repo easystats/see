@@ -190,10 +190,29 @@ data_plot.see_compare_parameters <- function(x, ...) {
   col_ci_high <- which(grepl("^CI_high\\.", colnames(x)))
   col_p <- which(grepl("^p\\.", colnames(x)))
 
-  out1 <- .reshape_to_long(x, values_to = "Coefficient", columns = colnames(x)[col_coefficient])[c("Parameter", "Component", "group", "Coefficient")]
-  out2 <- .reshape_to_long(x, values_to = "CI_low", columns = colnames(x)[col_ci_low])["CI_low"]
-  out3 <- .reshape_to_long(x, values_to = "CI_high", columns = colnames(x)[col_ci_high])["CI_high"]
-  out4 <- .reshape_to_long(x, values_to = "p", columns = colnames(x)[col_p])["p"]
+  out1 <- datawizard::reshape_longer(
+    x,
+    select = colnames(x)[col_coefficient],
+    values_to = "Coefficient"
+  )[c("Parameter", "Component", "group", "Coefficient")]
+
+  out2 <- datawizard::reshape_longer(
+    x,
+    select = colnames(x)[col_ci_low],
+    values_to = "CI_low"
+  )["CI_low"]
+
+  out3 <- datawizard::reshape_longer(
+    x,
+    select = colnames(x)[col_ci_high],
+    values_to = "CI_high"
+  )["CI_high"]
+
+  out4 <- datawizard::reshape_longer(
+    x,
+    select = colnames(x)[col_p],
+    values_to = "p"
+  )["p"]
 
   dataplot <- cbind(out1, out2, out3, out4)
   dataplot$group <- gsub("(.*)\\.(.*)", "\\2", dataplot$group)

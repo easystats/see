@@ -31,12 +31,14 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   # remove indices with missing value, comparison makes no sense here
   x <- x[sapply(x, function(.x) !anyNA(.x))]
 
-  x <- .reshape_to_long(x, names_to = "name", columns = 2:ncol(x))
+  x <- datawizard::reshape_longer(x, names_to = "name", select = 2:ncol(x))
   x$name <- factor(x$name, levels = unique(x$name))
 
   dataplot <- as.data.frame(x)
   # rounding issues here...
-  dataplot$values[dataplot$values > 1] <- 1
+  if (length(dataplot$values > 1) > 0) {
+    dataplot$values[dataplot$values > 1] <- 1
+  }
 
   attr(dataplot, "info") <- list(
     "xlab" = "",
