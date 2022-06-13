@@ -9,6 +9,9 @@
 
 * `plot.check_model()` did not apply the `colors` argument to all sub-plots.
 
+* `plot()` for `model_parameters()` could fail when model objects' class
+  attribute had more than one element.
+
 # see 0.7.0
 
 * Improved plotting for `performance::check_model()`:
