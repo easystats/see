@@ -157,11 +157,11 @@ plot.see_parameters_model <- function(x,
   mc <- model_attributes$model_class
   cp <- model_attributes$cleaned_parameters
   is_linear <- model_attributes$linear_model
-  is_meta <- !is.null(mc) && mc %in% c("rma", "rma.mv", "rma.uni", "metaplus")
-  is_meta_bma <- !is.null(mc) && mc %in% c("meta_random", "meta_fixed", "meta_bma")
+  is_meta <- !is.null(mc) && any(mc %in% c("rma", "rma.mv", "rma.uni", "metaplus"))
+  is_meta_bma <- !is.null(mc) && any(mc %in% c("meta_random", "meta_fixed", "meta_bma"))
 
   # minor fixes for Bayesian models
-  if (!is.null(mc) && !is.null(cp) && mc %in% c("stanreg", "stanmvreg", "brmsfit")) {
+  if (!is.null(mc) && !is.null(cp) && any(mc %in% c("stanreg", "stanmvreg", "brmsfit"))) {
     if (length(cp) == length(x$Parameter)) {
       x$Parameter <- cp
     }
