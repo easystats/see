@@ -31,7 +31,12 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   # remove indices with missing value, comparison makes no sense here
   x <- x[sapply(x, function(.x) !anyNA(.x))]
 
-  x <- datawizard::reshape_longer(x, names_to = "name", select = 2:ncol(x))
+  x <- datawizard::reshape_longer(
+    x,
+    names_to = "name",
+    select = 2:ncol(x),
+    values_to = "values"
+  )
   x$name <- factor(x$name, levels = unique(x$name))
 
   dataplot <- as.data.frame(x)

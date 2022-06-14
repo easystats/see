@@ -193,7 +193,8 @@ data_plot.see_compare_parameters <- function(x, ...) {
   out1 <- datawizard::reshape_longer(
     x,
     select = colnames(x)[col_coefficient],
-    values_to = "Coefficient"
+    values_to = "Coefficient",
+    names_to = "group"
   )[c("Parameter", "Component", "group", "Coefficient")]
 
   out2 <- datawizard::reshape_longer(
