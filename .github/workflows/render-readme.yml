@@ -31,6 +31,7 @@ jobs:
         with:
           extra-packages: |
             deps::.
+            any::see
 
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'
