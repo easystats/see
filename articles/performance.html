@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -300,8 +300,6 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span>, effects <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span>
-<span class="co">#&gt; Group: Subject</span>
-<span class="co">#&gt; (Intercept)        Days</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
