@@ -176,15 +176,15 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Low Correlation</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;  Term  VIF    VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
-<span class="co">#&gt;   cyl 5.41 [3.42,  9.04]         2.33      0.18     [0.11, 0.29]</span>
+<span class="co">#&gt;  Term  VIF Increased SE Tolerance</span>
+<span class="co">#&gt;  gear 1.53         1.24      0.65</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Moderate Correlation</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;  Term  VIF    VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
-<span class="co">#&gt;  gear 1.53  [1.19, 2.51]         1.24      0.65     [0.40, 0.84]</span>
-<span class="co">#&gt;    wt 5.05 [3.21,  8.41]         2.25      0.20     [0.12, 0.31]</span>
-<span class="co">#&gt;  disp 9.97 [6.08, 16.85]         3.16      0.10     [0.06, 0.16]</span>
+<span class="co">#&gt;  Term  VIF Increased SE Tolerance</span>
+<span class="co">#&gt;    wt 5.05         2.25      0.20</span>
+<span class="co">#&gt;   cyl 5.41         2.33      0.18</span>
+<span class="co">#&gt;  disp 9.97         3.16      0.10</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-5-1.png" width="100%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -213,23 +213,23 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Low Correlation</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;   Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
-<span class="co">#&gt;    spp 1.07 [1.02, 1.24]         1.04      0.93     [0.81, 0.98]</span>
-<span class="co">#&gt;  mined 1.17 [1.10, 1.31]         1.08      0.85     [0.76, 0.91]</span>
+<span class="co">#&gt;   Term  VIF Increased SE Tolerance</span>
+<span class="co">#&gt;    spp 1.07         1.04      0.93</span>
+<span class="co">#&gt;  mined 1.17         1.08      0.85</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; High Correlation</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;    Term   VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
-<span class="co">#&gt;   cover 13.45 [11.66, 15.55]         3.67      0.07     [0.06, 0.09]</span>
-<span class="co">#&gt;  cover2 13.28 [11.51, 15.35]         3.64      0.08     [0.07, 0.09]</span>
+<span class="co">#&gt;    Term   VIF Increased SE Tolerance</span>
+<span class="co">#&gt;   cover 13.45         3.67      0.07</span>
+<span class="co">#&gt;  cover2 13.28         3.64      0.08</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; * zero inflated component:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Low Correlation</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;   Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI</span>
-<span class="co">#&gt;    spp 1.08 [1.03, 1.24]         1.04      0.93     [0.81, 0.97]</span>
-<span class="co">#&gt;  mined 1.08 [1.03, 1.24]         1.04      0.93     [0.81, 0.97]</span>
+<span class="co">#&gt;   Term  VIF Increased SE Tolerance</span>
+<span class="co">#&gt;    spp 1.08         1.04      0.93</span>
+<span class="co">#&gt;  mined 1.08         1.04      0.93</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
 </div>
@@ -300,6 +300,8 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span>
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span>, effects <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span>
+<span class="co">#&gt; Group: Subject</span>
+<span class="co">#&gt; (Intercept)        Days</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
