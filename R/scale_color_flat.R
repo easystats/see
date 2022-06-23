@@ -6,9 +6,8 @@
 #'
 #' @inheritParams palette_flat
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param ... Additional arguments passed to `discrete_scale()` or
-#'  `scale_color_gradientn()`, used respectively when discrete is
-#'  `TRUE` or `FALSE`.
+#' @param ... Additional arguments passed to `discrete_scale()` when `discrete`
+#'   is `TRUE` or to `scale_color_gradientn()` when `discrete` is `FALSE`.
 #'
 #' @examples
 #' library(ggplot2)
@@ -134,7 +133,7 @@ flat_colors_list <- c(
 #' Extract Flat UI colors as hex codes
 #'
 #' Can be used to get the hex code of specific colors from the Flat UI color
-#' palette. Use `flat_colors()` to see all available color.
+#' palette. Use `flat_colors()` to see all available colors.
 #'
 #' @param ... Character names of colors.
 #'
@@ -178,7 +177,7 @@ flat_palettes <- list(
 #'
 #' @param palette Character name of palette. Depending on the color scale, can
 #'   be `"full"`, `"ice"`, `"rainbow"`, `"complement"`,
-#'   `"contrast"` or `"light"` (for dark themes).
+#'   `"contrast"`, `"light"` (for dark themes), or `"black_first"`.
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'

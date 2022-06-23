@@ -130,7 +130,7 @@ metro_colors_list <- c(
 #' Extract Metro colors as hex codes
 #'
 #' Can be used to get the hex code of specific colors from the Metro color
-#' palette. Use `metro_colors()` to see all available color.
+#' palette. Use `metro_colors()` to see all available colors.
 #'
 #' @inheritParams flat_colors
 #'

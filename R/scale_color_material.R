@@ -135,7 +135,7 @@ material_colors_list <- c(
 #' Extract material design colors as hex codes
 #'
 #' Can be used to get the hex code of specific colors from the material design
-#' color palette. Use `material_colors()` to see all available color.
+#' color palette. Use `material_colors()` to see all available colors.
 #'
 #' @inheritParams flat_colors
 #'

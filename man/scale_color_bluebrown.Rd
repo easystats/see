@@ -78,7 +78,7 @@ scale_fill_bluebrown_c(
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
 be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"} or \code{"light"} (for dark themes).}
+\code{"contrast"}, \code{"light"} (for dark themes), or \code{"black_first"}.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 

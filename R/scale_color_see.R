@@ -163,7 +163,7 @@ see_colors_list <- c(
 #' Extract See colors as hex codes
 #'
 #' Can be used to get the hex code of specific colors from the See color
-#' palette. Use `see_colors()` to see all available color.
+#' palette. Use `see_colors()` to see all available colors.
 #'
 #' @inheritParams flat_colors
 #'

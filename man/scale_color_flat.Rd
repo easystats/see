@@ -48,15 +48,14 @@ scale_fill_flat_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
 be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"} or \code{"light"} (for dark themes).}
+\code{"contrast"}, \code{"light"} (for dark themes), or \code{"black_first"}.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{...}{Additional arguments passed to \code{discrete_scale()} or
-\code{scale_color_gradientn()}, used respectively when discrete is
-\code{TRUE} or \code{FALSE}.}
+\item{...}{Additional arguments passed to \code{discrete_scale()} when \code{discrete}
+is \code{TRUE} or to \code{scale_color_gradientn()} when \code{discrete} is \code{FALSE}.}
 }
 \description{
 The palette based on \href{https://materialui.co/flatuicolors}{Flat UI}.
