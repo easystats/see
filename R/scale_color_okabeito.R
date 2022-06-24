@@ -170,7 +170,7 @@ palette_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, ...
   if (!palette %in% names(okabeito_palettes)) {
     msg <- c(paste0(
       "Palette name not available. `palette` must be one of ",
-      datawizard::text_concatenate(paste0("`", names(okabeito_palettes), "`"), last = " or "),
+      datawizard::text_concatenate(names(okabeito_palettes), last = " or ", enclose = "`"),
       "."), "Using default palette now."
     )
     warning(insight::format_message(msg), call. = FALSE)

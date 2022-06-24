@@ -217,7 +217,7 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
   if (!palette %in% names(palette_list)) {
     msg <- c(paste0(
       "Palette name not available. `palette` must be one of ",
-      datawizard::text_concatenate(paste0("`", names(palette_list), "`"), last = " or "),
+      datawizard::text_concatenate(names(palette_list), last = " or ", enclose = "`"),
       "."), "Using default palette now."
     )
     warning(insight::format_message(msg), call. = FALSE)
