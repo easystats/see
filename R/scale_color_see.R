@@ -215,8 +215,13 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
 
 .retrieve_palette <- function(palette, palette_list, reverse = FALSE, ...) {
   if (!palette %in% names(palette_list)) {
-    msg <- paste0("Palette name not available. `palette` must be one of ", paste0("`", names(palette_list), "`", collapse = ", "), ".")
-    stop(insight::format_message(msg), call. = FALSE)
+    msg <- c(paste0(
+      "Palette name not available. `palette` must be one of ",
+      datawizard::text_concatenate(paste0("`", names(palette_list), "`"), last = " or "),
+      "."), "Using default palette now."
+    )
+    warning(insight::format_message(msg), call. = FALSE)
+    palette <- 1
   }
   pal <- palette_list[[palette]]
 

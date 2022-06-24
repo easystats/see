@@ -168,8 +168,13 @@ okabeito_palettes <- list(
 palette_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, ...) {
 
   if (!palette %in% names(okabeito_palettes)) {
-    msg <- paste0("Palette name not available. `palette` must be one of ", paste0("`", names(okabeito_palettes), "`", collapse = ", "), ".")
-    stop(insight::format_message(msg), call. = FALSE)
+    msg <- c(paste0(
+      "Palette name not available. `palette` must be one of ",
+      datawizard::text_concatenate(paste0("`", names(okabeito_palettes), "`"), last = " or "),
+      "."), "Using default palette now."
+    )
+    warning(insight::format_message(msg), call. = FALSE)
+    palette <- "full"
   }
 
   pal <- okabeito_palettes[[palette]]
