@@ -16,13 +16,13 @@
 #'   theme_modern() +
 #'   scale_fill_bluebrown_d()
 #' @export
-scale_color_bluebrown <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_bluebrown <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
   pal <- palette_bluebrown(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("colour", paste0("bluebrown_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("bluebrown_", palette), palette = pal, ...)
   } else {
-    scale_color_gradientn(colours = pal(256), ...)
+    scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
@@ -33,14 +33,14 @@ scale_color_bluebrown <- function(palette = "contrast", discrete = TRUE, reverse
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_color_bluebrown_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_color_bluebrown(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_bluebrown_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_bluebrown(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_color_bluebrown_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_color_bluebrown(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_bluebrown_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_bluebrown(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_bluebrown
@@ -65,27 +65,27 @@ scale_colour_bluebrown_d <- scale_color_bluebrown_d
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_fill_bluebrown <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_bluebrown <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
   pal <- palette_bluebrown(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("fill", paste0("bluebrown_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("bluebrown_", palette), palette = pal, ...)
   } else {
-    scale_fill_gradientn(colours = pal(256), ...)
+    scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_fill_bluebrown_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_fill_bluebrown(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_bluebrown_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_bluebrown(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_fill_bluebrown_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_fill_bluebrown(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_bluebrown_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_bluebrown(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 

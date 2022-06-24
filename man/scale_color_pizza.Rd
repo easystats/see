@@ -16,6 +16,7 @@ scale_color_pizza(
   palette = "margherita",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -23,6 +24,7 @@ scale_color_pizza_d(
   palette = "margherita",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -30,6 +32,7 @@ scale_color_pizza_c(
   palette = "margherita",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -37,6 +40,7 @@ scale_colour_pizza(
   palette = "margherita",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -44,6 +48,7 @@ scale_colour_pizza_c(
   palette = "margherita",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -51,15 +56,23 @@ scale_colour_pizza_d(
   palette = "margherita",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
-scale_fill_pizza(palette = "margherita", discrete = TRUE, reverse = FALSE, ...)
+scale_fill_pizza(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+)
 
 scale_fill_pizza_d(
   palette = "margherita",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 
@@ -67,6 +80,7 @@ scale_fill_pizza_c(
   palette = "margherita",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 }
@@ -77,6 +91,9 @@ scale_fill_pizza_c(
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
+
+\item{aesthetics}{A vector of names of the aesthetics that this scale
+should be applied to (e.g., \code{c('color', 'fill')}).}
 
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }

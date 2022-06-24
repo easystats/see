@@ -12,28 +12,77 @@
 \alias{scale_fill_see_c}
 \title{See color palette}
 \usage{
-scale_color_see(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_color_see(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
-scale_color_see_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_color_see_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
-scale_color_see_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
+scale_color_see_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
-scale_colour_see(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_colour_see(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
 scale_colour_see_c(
   palette = "contrast",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
-scale_colour_see_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_colour_see_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
-scale_fill_see(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_fill_see(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+)
 
-scale_fill_see_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_fill_see_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+)
 
-scale_fill_see_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
+scale_fill_see_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+)
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
@@ -43,6 +92,9 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
+
+\item{aesthetics}{A vector of names of the aesthetics that this scale
+should be applied to (e.g., \code{c('color', 'fill')}).}
 
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }

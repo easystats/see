@@ -16,6 +16,7 @@ scale_color_social(
   palette = "complement",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -23,6 +24,7 @@ scale_color_social_d(
   palette = "complement",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -30,6 +32,7 @@ scale_color_social_c(
   palette = "complement",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -37,6 +40,7 @@ scale_colour_social(
   palette = "complement",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -44,6 +48,7 @@ scale_colour_social_c(
   palette = "complement",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -51,6 +56,7 @@ scale_colour_social_d(
   palette = "complement",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -58,6 +64,7 @@ scale_fill_social(
   palette = "complement",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 
@@ -65,6 +72,7 @@ scale_fill_social_d(
   palette = "complement",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 
@@ -72,6 +80,7 @@ scale_fill_social_c(
   palette = "complement",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 }
@@ -83,6 +92,9 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
+
+\item{aesthetics}{A vector of names of the aesthetics that this scale
+should be applied to (e.g., \code{c('color', 'fill')}).}
 
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }

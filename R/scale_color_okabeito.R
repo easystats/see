@@ -13,7 +13,6 @@
 #' For color-accessible continuous variables, consider
 #' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
 #'
-#' @param aesthetics The names of the aesthetics that this scale works with.
 #' @inheritParams palette_okabeito
 #' @inheritParams scale_color_flat
 #'
