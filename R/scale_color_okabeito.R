@@ -34,7 +34,7 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
 #'   theme_modern() +
-#'   scale_fill_oi(palette = "with_gray")
+#'   scale_fill_oi(palette = "black_first")
 #'
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
@@ -168,7 +168,7 @@ okabeito_palettes <- list(
 palette_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, ...) {
 
   if (!palette %in% names(okabeito_palettes)) {
-    msg <- paste0("Palette name not available. `palette` must be one of ", paste0("`", c("a", "B"), "`", collapse = ", "), ".")
+    msg <- paste0("Palette name not available. `palette` must be one of ", paste0("`", names(okabeito_palettes), "`", collapse = ", "), ".")
     stop(insight::format_message(msg), call. = FALSE)
   }
 

@@ -80,7 +80,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +
   theme_modern() +
-  scale_fill_oi(palette = "with_gray")
+  scale_fill_oi(palette = "black_first")
 
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +
