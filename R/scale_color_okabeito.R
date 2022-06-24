@@ -13,6 +13,7 @@
 #' For color-accessible continuous variables, consider
 #' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
 #'
+#' @param aesthetics The names of the aesthetics that this scale works with.
 #' @inheritParams palette_okabeito
 #' @inheritParams scale_color_flat
 #'
@@ -165,6 +166,12 @@ okabeito_palettes <- list(
 #'
 #' @export
 palette_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, ...) {
+
+  if (!palette %in% names(okabeito_palettes)) {
+    msg <- paste0("Palette name not available. `palette` must be one of ", paste0("`", c("a", "B"), "`", collapse = ", "), ".")
+    stop(insight::format_message(msg), call. = FALSE)
+  }
+
   pal <- okabeito_palettes[[palette]]
 
   stopifnot(

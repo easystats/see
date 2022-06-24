@@ -49,6 +49,8 @@ be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
 \item{order}{A vector of numbers from 1 to 9 indicating the order of colors to use
 (default: \code{1:9})}
 
+\item{aesthetics}{The names of the aesthetics that this scale works with.}
+
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
