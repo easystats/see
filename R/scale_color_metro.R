@@ -180,9 +180,5 @@ metro_palettes <- list(
 #'
 #' @export
 palette_metro <- function(palette = "complement", reverse = FALSE, ...) {
-  pal <- metro_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, metro_palettes, reverse = reverse, ...)
 }

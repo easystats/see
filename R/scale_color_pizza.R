@@ -159,9 +159,5 @@ pizza_palettes <- list(
 #'
 #' @export
 palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {
-  pal <- pizza_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, pizza_palettes, reverse = reverse, ...)
 }

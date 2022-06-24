@@ -180,9 +180,5 @@ social_palettes <- list(
 #'
 #' @export
 palette_social <- function(palette = "complement", reverse = FALSE, ...) {
-  pal <- social_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, social_palettes, reverse = reverse, ...)
 }

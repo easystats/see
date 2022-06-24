@@ -204,7 +204,21 @@ see_palettes <- list(
 #'
 #' @export
 palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
-  pal <- see_palettes[[palette]]
+  .retrieve_palette(palette, see_palettes, reverse = reverse, ...)
+}
+
+
+
+
+
+# helper -----------------------
+
+.retrieve_palette <- function(palette, palette_list, reverse = FALSE, ...) {
+  if (!palette %in% names(palette_list)) {
+    msg <- paste0("Palette name not available. `palette` must be one of ", paste0("`", names(palette_list), "`", collapse = ", "), ".")
+    stop(insight::format_message(msg), call. = FALSE)
+  }
+  pal <- palette_list[[palette]]
 
   if (reverse) pal <- rev(pal)
 

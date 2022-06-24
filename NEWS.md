@@ -1,3 +1,9 @@
+# see 0.7.2
+
+## Changes
+
+* Added Okabe-Ito color palette (`palette_okabeito`, `scale_color_okabeito()`) etc.)
+
 # see 0.7.1
 
 ## Changes

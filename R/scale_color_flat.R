@@ -186,9 +186,5 @@ flat_palettes <- list(
 #'
 #' @export
 palette_flat <- function(palette = "contrast", reverse = FALSE, ...) {
-  pal <- flat_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, flat_palettes, reverse = reverse, ...)
 }

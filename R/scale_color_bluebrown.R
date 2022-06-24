@@ -156,9 +156,5 @@ bluebrown_palettes <- list(
 #'
 #' @export
 palette_bluebrown <- function(palette = "contrast", reverse = FALSE, ...) {
-  pal <- bluebrown_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, bluebrown_palettes, reverse = reverse, ...)
 }
