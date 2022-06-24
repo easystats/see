@@ -169,7 +169,7 @@ palette_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, ...
 
   stopifnot(
     "`order` must be a vector of integers." = is.numeric(order),
-    "All elements of `order` must be greater than 0 and less than 9." = all(order > 0 & order <= 9)
+    "All elements of `order` must be greater than 0 and less than 10." = all(order > 0 & order <= 9)
   )
   pal <- pal[order]
 
