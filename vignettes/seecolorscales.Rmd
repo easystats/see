@@ -388,6 +388,50 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
+# Okabe-Ito Colors
+
+## Okabe-Ito Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_okabeito()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_okabeito()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## Okabe-Ito Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_okabeito()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_okabeito()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## Okabe-Ito Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(size = 1) +
+  scale_color_okabeito()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_okabeito()
+
+plots(p1, p2, n_rows = 1)
+```
+
 # Overview of Palette Colors
 
 ```{r fig.height=12,echo=FALSE}
@@ -513,5 +557,22 @@ p7 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
-plots(p1, p2, p3, p4, p5, p6, p7, n_columns = 1, tags = c("Social", "Flat", "Material", "Metro", "See", "Pizza", "Bluebrown"))
+d <- data.frame(
+  x = names(okabeito_colors())
+)
+
+p8 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = .9) +
+  scale_fill_manual(values = okabeito_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+
+plots(p1, p2, p3, p4, p5, p6, p7, p8, n_columns = 1, tags = c("Social", "Flat", "Material", "Metro", "See", "Pizza", "Bluebrown", "Okabe-Ito"))
 ```
