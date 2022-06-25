@@ -27,13 +27,13 @@
 #'   theme_modern() +
 #'   scale_color_material_c(palette = "rainbow")
 #' @export
-scale_color_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("colour", paste0("material_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("material_", palette), palette = pal, ...)
   } else {
-    scale_color_gradientn(colours = pal(256), ...)
+    scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
@@ -44,14 +44,14 @@ scale_color_material <- function(palette = "contrast", discrete = TRUE, reverse 
 
 #' @rdname scale_color_material
 #' @export
-scale_color_material_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_color_material(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_material_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_material
 #' @export
-scale_color_material_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_color_material(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_material_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_material
@@ -76,27 +76,27 @@ scale_colour_material_d <- scale_color_material_d
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("fill", paste0("material_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("material_", palette), palette = pal, ...)
   } else {
-    scale_fill_gradientn(colours = pal(256), ...)
+    scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_fill_material(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_material_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_fill_material(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_material_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 
@@ -135,7 +135,7 @@ material_colors_list <- c(
 #' Extract material design colors as hex codes
 #'
 #' Can be used to get the hex code of specific colors from the material design
-#' color palette. Use `material_colors()` to see all available color.
+#' color palette. Use `material_colors()` to see all available colors.
 #'
 #' @inheritParams flat_colors
 #'
@@ -185,9 +185,5 @@ material_palettes <- list(
 #'
 #' @export
 palette_material <- function(palette = "contrast", reverse = FALSE, ...) {
-  pal <- material_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, material_palettes, reverse = reverse, ...)
 }

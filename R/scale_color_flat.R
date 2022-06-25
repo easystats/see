@@ -6,9 +6,10 @@
 #'
 #' @inheritParams palette_flat
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param ... Additional arguments passed to `discrete_scale()` or
-#'  `scale_color_gradientn()`, used respectively when discrete is
-#'  `TRUE` or `FALSE`.
+#' @param aesthetics A vector of names of the aesthetics that this scale
+#'   should be applied to (e.g., `c('color', 'fill')`).
+#' @param ... Additional arguments passed to `discrete_scale()` when `discrete`
+#'   is `TRUE` or to `scale_color_gradientn()` when `discrete` is `FALSE`.
 #'
 #' @examples
 #' library(ggplot2)
@@ -29,13 +30,13 @@
 #'   theme_modern() +
 #'   scale_color_flat_c(palette = "rainbow")
 #' @export
-scale_color_flat <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_flat <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
   pal <- palette_flat(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("colour", paste0("flat_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("flat_", palette), palette = pal, ...)
   } else {
-    scale_color_gradientn(colours = pal(256), ...)
+    scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
@@ -46,14 +47,14 @@ scale_color_flat <- function(palette = "contrast", discrete = TRUE, reverse = FA
 
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_color_flat(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_flat_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_color_flat(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_flat_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_flat
@@ -78,27 +79,27 @@ scale_colour_flat_d <- scale_color_flat_d
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_flat <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
   pal <- palette_flat(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("fill", paste0("flat_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("flat_", palette), palette = pal, ...)
   } else {
-    scale_fill_gradientn(colours = pal(256), ...)
+    scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, ...) {
-  scale_fill_flat(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_flat_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, ...) {
-  scale_fill_flat(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_flat_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 
@@ -134,7 +135,7 @@ flat_colors_list <- c(
 #' Extract Flat UI colors as hex codes
 #'
 #' Can be used to get the hex code of specific colors from the Flat UI color
-#' palette. Use `flat_colors()` to see all available color.
+#' palette. Use `flat_colors()` to see all available colors.
 #'
 #' @param ... Character names of colors.
 #'
@@ -178,7 +179,7 @@ flat_palettes <- list(
 #'
 #' @param palette Character name of palette. Depending on the color scale, can
 #'   be `"full"`, `"ice"`, `"rainbow"`, `"complement"`,
-#'   `"contrast"` or `"light"` (for dark themes).
+#'   `"contrast"`, `"light"` (for dark themes), or `"black_first"`.
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
@@ -187,9 +188,5 @@ flat_palettes <- list(
 #'
 #' @export
 palette_flat <- function(palette = "contrast", reverse = FALSE, ...) {
-  pal <- flat_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, flat_palettes, reverse = reverse, ...)
 }

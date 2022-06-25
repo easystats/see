@@ -14,7 +14,7 @@ A character vector with color-codes.
 }
 \description{
 Can be used to get the hex code of specific colors from the Metro color
-palette. Use \code{metro_colors()} to see all available color.
+palette. Use \code{metro_colors()} to see all available colors.
 }
 \examples{
 metro_colors()

@@ -1,4 +1,12 @@
-# see 0.7.1.1
+# see 0.7.2
+
+## Changes
+
+* Added `aesthetics` argument to all `color` and `fill` scale functions so that
+  the same scale can be applied to multiple aesthetics and so that the functions
+  can be used with other aesthetics from other packages (e.g., `edge_color`).
+  
+* Added Okabe-Ito color palette (`palette_okabeito`, `scale_color_okabeito()`) etc.)
 
 # see 0.7.1
 

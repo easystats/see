@@ -23,13 +23,13 @@
 #'   theme_modern() +
 #'   scale_color_pizza_c()
 #' @export
-scale_color_pizza <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_pizza <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("colour", paste0("pizza_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("pizza_", palette), palette = pal, ...)
   } else {
-    scale_color_gradientn(colours = pal(256), ...)
+    scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
@@ -40,14 +40,14 @@ scale_color_pizza <- function(palette = "margherita", discrete = TRUE, reverse =
 
 #' @rdname scale_color_pizza
 #' @export
-scale_color_pizza_d <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, ...) {
-  scale_color_pizza(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_pizza_d <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_pizza
 #' @export
-scale_color_pizza_c <- function(palette = "margherita", discrete = FALSE, reverse = FALSE, ...) {
-  scale_color_pizza(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_color_pizza_c <- function(palette = "margherita", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
+  scale_color_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_pizza
@@ -72,27 +72,27 @@ scale_colour_pizza_d <- scale_color_pizza_d
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_pizza <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("fill", paste0("pizza_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, paste0("pizza_", palette), palette = pal, ...)
   } else {
-    scale_fill_gradientn(colours = pal(256), ...)
+    scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza_d <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, ...) {
-  scale_fill_pizza(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_pizza_d <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza_c <- function(palette = "margherita", discrete = FALSE, reverse = FALSE, ...) {
-  scale_fill_pizza(palette = palette, discrete = discrete, reverse = reverse, ...)
+scale_fill_pizza_c <- function(palette = "margherita", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
+  scale_fill_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 
@@ -159,9 +159,5 @@ pizza_palettes <- list(
 #'
 #' @export
 palette_pizza <- function(palette = "margherita", reverse = FALSE, ...) {
-  pal <- pizza_palettes[[palette]]
-
-  if (reverse) pal <- rev(pal)
-
-  grDevices::colorRampPalette(pal, ...)
+  .retrieve_palette(palette, pizza_palettes, reverse = reverse, ...)
 }

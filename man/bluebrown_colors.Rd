@@ -13,7 +13,7 @@ bluebrown_colors(...)
 A character vector with color-codes.
 }
 \description{
-Can be used to get the hex code of specific colors from the blue-brown color palette. Use \code{bluebrown_colors()} to see all available color.
+Can be used to get the hex code of specific colors from the blue-brown color palette. Use \code{bluebrown_colors()} to see all available colors.
 }
 \examples{
 bluebrown_colors()

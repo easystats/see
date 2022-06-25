@@ -12,23 +12,43 @@
 \alias{scale_fill_flat_c}
 \title{Flat UI color palette}
 \usage{
-scale_color_flat(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_color_flat(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
-scale_color_flat_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_color_flat_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
 scale_color_flat_c(
   palette = "contrast",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
-scale_colour_flat(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_colour_flat(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+)
 
 scale_colour_flat_c(
   palette = "contrast",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -36,27 +56,48 @@ scale_colour_flat_d(
   palette = "contrast",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
-scale_fill_flat(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_fill_flat(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+)
 
-scale_fill_flat_d(palette = "contrast", discrete = TRUE, reverse = FALSE, ...)
+scale_fill_flat_d(
+  palette = "contrast",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+)
 
-scale_fill_flat_c(palette = "contrast", discrete = FALSE, reverse = FALSE, ...)
+scale_fill_flat_c(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+)
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
 be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"} or \code{"light"} (for dark themes).}
+\code{"contrast"}, \code{"light"} (for dark themes), or \code{"black_first"}.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{...}{Additional arguments passed to \code{discrete_scale()} or
-\code{scale_color_gradientn()}, used respectively when discrete is
-\code{TRUE} or \code{FALSE}.}
+\item{aesthetics}{A vector of names of the aesthetics that this scale
+should be applied to (e.g., \code{c('color', 'fill')}).}
+
+\item{...}{Additional arguments passed to \code{discrete_scale()} when \code{discrete}
+is \code{TRUE} or to \code{scale_color_gradientn()} when \code{discrete} is \code{FALSE}.}
 }
 \description{
 The palette based on \href{https://materialui.co/flatuicolors}{Flat UI}.

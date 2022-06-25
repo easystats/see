@@ -16,6 +16,7 @@ scale_color_bluebrown(
   palette = "contrast",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -23,6 +24,7 @@ scale_color_bluebrown_d(
   palette = "contrast",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -30,6 +32,7 @@ scale_color_bluebrown_c(
   palette = "contrast",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -37,6 +40,7 @@ scale_colour_bluebrown(
   palette = "contrast",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -44,6 +48,7 @@ scale_colour_bluebrown_c(
   palette = "contrast",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -51,6 +56,7 @@ scale_colour_bluebrown_d(
   palette = "contrast",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "color",
   ...
 )
 
@@ -58,6 +64,7 @@ scale_fill_bluebrown(
   palette = "contrast",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 
@@ -65,6 +72,7 @@ scale_fill_bluebrown_d(
   palette = "contrast",
   discrete = TRUE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 
@@ -72,17 +80,21 @@ scale_fill_bluebrown_c(
   palette = "contrast",
   discrete = FALSE,
   reverse = FALSE,
+  aesthetics = "fill",
   ...
 )
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
 be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"} or \code{"light"} (for dark themes).}
+\code{"contrast"}, \code{"light"} (for dark themes), or \code{"black_first"}.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
+
+\item{aesthetics}{A vector of names of the aesthetics that this scale
+should be applied to (e.g., \code{c('color', 'fill')}).}
 
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
