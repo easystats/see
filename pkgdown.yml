@@ -1,6 +1,6 @@
 pandoc: 2.14.2
-pkgdown: 2.0.4.9000
-pkgdown_sha: 5203a63f002405e99b8510debe809ff3d9f18b02
+pkgdown: 2.0.5.9000
+pkgdown_sha: b4096aa376773d7dee98a267fd0b5a025975a3dc
 articles:
   bayestestR: bayestestR.html
   correlation: correlation.html
@@ -10,5 +10,5 @@ articles:
   performance: performance.html
   seecolorscales: seecolorscales.html
   seecolorscales_dark: seecolorscales_dark.html
-last_built: 2022-06-20T15:12Z
+last_built: 2022-06-25T07:05Z
 

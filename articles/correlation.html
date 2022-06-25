@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,26 +105,26 @@
     
 <p>This vignette can be referred to by citing the package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"see"</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; To cite package 'see' in publications use:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   Lüdecke et al., (2021). see: An R Package for Visualizing Statistical</span>
-<span class="co">#&gt;   Models. Journal of Open Source Software, 6(64), 3393.</span>
-<span class="co">#&gt;   https://doi.org/10.21105/joss.03393</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   @Article{,</span>
-<span class="co">#&gt;     title = {{see}: An {R} Package for Visualizing Statistical Models},</span>
-<span class="co">#&gt;     author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},</span>
-<span class="co">#&gt;     journal = {Journal of Open Source Software},</span>
-<span class="co">#&gt;     year = {2021},</span>
-<span class="co">#&gt;     volume = {6},</span>
-<span class="co">#&gt;     number = {64},</span>
-<span class="co">#&gt;     pages = {3393},</span>
-<span class="co">#&gt;     doi = {10.21105/joss.03393},</span>
-<span class="co">#&gt;   }</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"see"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; To cite package 'see' in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Lüdecke et al., (2021). see: An R Package for Visualizing Statistical</span></span>
+<span><span class="co">#&gt;   Models. Journal of Open Source Software, 6(64), 3393.</span></span>
+<span><span class="co">#&gt;   https://doi.org/10.21105/joss.03393</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Article{,</span></span>
+<span><span class="co">#&gt;     title = {{see}: An {R} Package for Visualizing Statistical Models},</span></span>
+<span><span class="co">#&gt;     author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},</span></span>
+<span><span class="co">#&gt;     journal = {Journal of Open Source Software},</span></span>
+<span><span class="co">#&gt;     year = {2021},</span></span>
+<span><span class="co">#&gt;     volume = {6},</span></span>
+<span><span class="co">#&gt;     number = {64},</span></span>
+<span><span class="co">#&gt;     pages = {3393},</span></span>
+<span><span class="co">#&gt;     doi = {10.21105/joss.03393},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -136,11 +136,11 @@
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/correlation/" class="external-link">correlation</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/" class="external-link">see</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/correlation/" class="external-link">correlation</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/" class="external-link">see</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="correlation-scatterplot">Correlation Scatterplot<a class="anchor" aria-label="anchor" href="#correlation-scatterplot"></a>
@@ -148,87 +148,87 @@
 <p><em>(<a href="https://easystats.github.io/correlation/reference/cor_test.html" class="external-link">related function documentation</a>)</em></p>
 <p>It is easy to visualize correlation tests with <code>correlation</code> and <code>see</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/cor_test.html" class="external-link">cor_test</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"Sepal.Length"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/cor_test.html" class="external-link">cor_test</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"Sepal.Length"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>We can even customize that to make it more beautiful:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, 
-     point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>aes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Petal.Width"</span>, size <span class="op">=</span> <span class="st">"Sepal.Length"</span><span class="op">)</span>,
-                  alpha <span class="op">=</span> <span class="fl">0.66</span><span class="op">)</span>,
-     smooth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">see</span><span class="fu">::</span><span class="fu"><a href="../reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">see</span><span class="fu">::</span><span class="fu"><a href="../reference/scale_color_material.html">scale_color_material_c</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"rainbow"</span>, guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_continuous</a></span><span class="op">(</span>guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, </span>
+<span>     point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>aes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Petal.Width"</span>, size <span class="op">=</span> <span class="st">"Sepal.Length"</span><span class="op">)</span>,</span>
+<span>                  alpha <span class="op">=</span> <span class="fl">0.66</span><span class="op">)</span>,</span>
+<span>     smooth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">see</span><span class="fu">::</span><span class="fu"><a href="../reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">see</span><span class="fu">::</span><span class="fu"><a href="../reference/scale_color_material.html">scale_color_material_c</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"rainbow"</span>, guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_continuous</a></span><span class="op">(</span>guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="correlation-matrix">Correlation Matrix<a class="anchor" aria-label="anchor" href="#correlation-matrix"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">related function documentation</a>)</em></p>
-<p>The default output for <code><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation()</a></code> is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using <code><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary()</a></code>.</p>
+<p>The default output for <code><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation()</a></code> is a detailed overview including test statistic, p-values and confidence intervals. A shorter summary in matrix-layout can be obtained by using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
-
-<span class="va">result</span>
-<span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter1   |   Parameter2 |     r |         95% CI | t(148) |         p</span>
-<span class="co">#&gt; -------------------------------------------------------------------------</span>
-<span class="co">#&gt; Sepal.Length |  Sepal.Width | -0.12 | [-0.27,  0.04] |  -1.44 | 0.152    </span>
-<span class="co">#&gt; Sepal.Length | Petal.Length |  0.87 | [ 0.83,  0.91] |  21.65 | &lt; .001***</span>
-<span class="co">#&gt; Sepal.Length |  Petal.Width |  0.82 | [ 0.76,  0.86] |  17.30 | &lt; .001***</span>
-<span class="co">#&gt; Sepal.Width  | Petal.Length | -0.43 | [-0.55, -0.29] |  -5.77 | &lt; .001***</span>
-<span class="co">#&gt; Sepal.Width  |  Petal.Width | -0.37 | [-0.50, -0.22] |  -4.79 | &lt; .001***</span>
-<span class="co">#&gt; Petal.Length |  Petal.Width |  0.96 | [ 0.95,  0.97] |  43.39 | &lt; .001***</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; p-value adjustment method: Holm (1979)</span>
-<span class="co">#&gt; Observations: 150</span>
-
-<span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter    | Petal.Width | Petal.Length | Sepal.Width</span>
-<span class="co">#&gt; -------------------------------------------------------</span>
-<span class="co">#&gt; Sepal.Length |     0.82*** |      0.87*** |       -0.12</span>
-<span class="co">#&gt; Sepal.Width  |    -0.37*** |     -0.43*** |            </span>
-<span class="co">#&gt; Petal.Length |     0.96*** |              |            </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; p-value adjustment method: Holm (1979)</span></code></pre></div>
-<p>The result from <code><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary()</a></code> can be used to create a plot.</p>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span></span>
+<span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter1   |   Parameter2 |     r |         95% CI | t(148) |         p</span></span>
+<span><span class="co">#&gt; -------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; Sepal.Length |  Sepal.Width | -0.12 | [-0.27,  0.04] |  -1.44 | 0.152    </span></span>
+<span><span class="co">#&gt; Sepal.Length | Petal.Length |  0.87 | [ 0.83,  0.91] |  21.65 | &lt; .001***</span></span>
+<span><span class="co">#&gt; Sepal.Length |  Petal.Width |  0.82 | [ 0.76,  0.86] |  17.30 | &lt; .001***</span></span>
+<span><span class="co">#&gt; Sepal.Width  | Petal.Length | -0.43 | [-0.55, -0.29] |  -5.77 | &lt; .001***</span></span>
+<span><span class="co">#&gt; Sepal.Width  |  Petal.Width | -0.37 | [-0.50, -0.22] |  -4.79 | &lt; .001***</span></span>
+<span><span class="co">#&gt; Petal.Length |  Petal.Width |  0.96 | [ 0.95,  0.97] |  43.39 | &lt; .001***</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span>
+<span><span class="co">#&gt; Observations: 150</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter    | Petal.Width | Petal.Length | Sepal.Width</span></span>
+<span><span class="co">#&gt; -------------------------------------------------------</span></span>
+<span><span class="co">#&gt; Sepal.Length |     0.82*** |      0.87*** |       -0.12</span></span>
+<span><span class="co">#&gt; Sepal.Width  |    -0.37*** |     -0.43*** |            </span></span>
+<span><span class="co">#&gt; Petal.Length |     0.96*** |              |            </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span></code></pre></div>
+<p>The result from <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> can be used to create a plot.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 <p>To change the style of geoms, use the <code>show_data</code>-argument.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span>, show_data <span class="op">=</span> <span class="st">"points"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span>, show_data <span class="op">=</span> <span class="st">"points"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <p>And a “redundant” summary can be plotted as well:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span>, redundant <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">s</span>
-<span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter    | Sepal.Length | Sepal.Width | Petal.Length | Petal.Width</span>
-<span class="co">#&gt; ----------------------------------------------------------------------</span>
-<span class="co">#&gt; Sepal.Length |      1.00*** |       -0.12 |      0.87*** |     0.82***</span>
-<span class="co">#&gt; Sepal.Width  |        -0.12 |     1.00*** |     -0.43*** |    -0.37***</span>
-<span class="co">#&gt; Petal.Length |      0.87*** |    -0.43*** |      1.00*** |     0.96***</span>
-<span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |     1.00***</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; p-value adjustment method: Holm (1979)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span>, redundant <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">s</span></span>
+<span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter    | Sepal.Length | Sepal.Width | Petal.Length | Petal.Width</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; Sepal.Length |      1.00*** |       -0.12 |      0.87*** |     0.82***</span></span>
+<span><span class="co">#&gt; Sepal.Width  |        -0.12 |     1.00*** |     -0.43*** |    -0.37***</span></span>
+<span><span class="co">#&gt; Petal.Length |      0.87*** |    -0.43*** |      1.00*** |     0.96***</span></span>
+<span><span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |     1.00***</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <p>The <code>corrlation</code> function also provides a convenient way to change names for selected variables:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://wviechtb.github.io/metafor/reference/print.rma.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">wt</span>, <span class="va">mpg</span>, <span class="va">drat</span><span class="op">)</span>,
-  rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weight"</span>, <span class="st">"miles per gallon"</span>, <span class="st">"rear axle ratio"</span><span class="op">)</span>
-<span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://nathaneastwood.github.io/poorman/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">wt</span>, <span class="va">mpg</span>, <span class="va">drat</span><span class="op">)</span>,</span>
+<span>  rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weight"</span>, <span class="st">"miles per gallon"</span>, <span class="st">"rear axle ratio"</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
 <div class="section level2">
@@ -236,74 +236,74 @@
 </h2>
 <p>To create a Gaussian Graphical Models plot, the library <em>ggraph</em> needs to be loaded first.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com" class="external-link">ggraph</a></span><span class="op">)</span>
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span><span class="va">mtcars</span>, partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">result</span>
-<span class="co">#&gt; # Correlation Matrix (pearson-method)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parameter1 | Parameter2 |     r |         95% CI | t(30) |         p</span>
-<span class="co">#&gt; --------------------------------------------------------------------</span>
-<span class="co">#&gt; mpg        |        cyl | -0.02 | [-0.37,  0.33] | -0.13 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |       disp |  0.16 | [-0.20,  0.48] |  0.89 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |         hp | -0.21 | [-0.52,  0.15] | -1.18 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |       drat |  0.10 | [-0.25,  0.44] |  0.58 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |         wt | -0.39 | [-0.65, -0.05] | -2.34 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |       qsec |  0.24 | [-0.12,  0.54] |  1.34 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |         vs |  0.03 | [-0.32,  0.38] |  0.18 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |         am |  0.26 | [-0.10,  0.56] |  1.46 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |       gear |  0.10 | [-0.26,  0.43] |  0.52 | &gt; .999   </span>
-<span class="co">#&gt; mpg        |       carb | -0.05 | [-0.39,  0.30] | -0.29 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |       disp |  0.27 | [-0.09,  0.56] |  1.51 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |         hp |  0.17 | [-0.19,  0.49] |  0.97 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |       drat | -0.27 | [-0.57,  0.09] | -1.55 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |         wt | -0.11 | [-0.44,  0.25] | -0.62 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |       qsec | -0.26 | [-0.56,  0.10] | -1.48 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |         vs | -0.32 | [-0.60,  0.03] | -1.85 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |         am | -0.25 | [-0.55,  0.11] | -1.39 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |       gear | -0.35 | [-0.62,  0.00] | -2.04 | &gt; .999   </span>
-<span class="co">#&gt; cyl        |       carb |  0.23 | [-0.13,  0.53] |  1.27 | &gt; .999   </span>
-<span class="co">#&gt; disp       |         hp |  0.54 | [ 0.24,  0.75] |  3.52 | 0.072    </span>
-<span class="co">#&gt; disp       |       drat |  0.10 | [-0.26,  0.43] |  0.53 | &gt; .999   </span>
-<span class="co">#&gt; disp       |         wt |  0.76 | [ 0.56,  0.88] |  6.43 | &lt; .001***</span>
-<span class="co">#&gt; disp       |       qsec | -0.31 | [-0.60,  0.04] | -1.80 | &gt; .999   </span>
-<span class="co">#&gt; disp       |         vs | -0.10 | [-0.44,  0.25] | -0.57 | &gt; .999   </span>
-<span class="co">#&gt; disp       |         am | -0.07 | [-0.41,  0.29] | -0.37 | &gt; .999   </span>
-<span class="co">#&gt; disp       |       gear |  0.06 | [-0.29,  0.40] |  0.34 | &gt; .999   </span>
-<span class="co">#&gt; disp       |       carb | -0.66 | [-0.82, -0.40] | -4.77 | 0.002**  </span>
-<span class="co">#&gt; hp         |       drat | -0.06 | [-0.40,  0.29] | -0.34 | &gt; .999   </span>
-<span class="co">#&gt; hp         |         wt | -0.30 | [-0.59,  0.06] | -1.72 | &gt; .999   </span>
-<span class="co">#&gt; hp         |       qsec | -0.05 | [-0.39,  0.30] | -0.29 | &gt; .999   </span>
-<span class="co">#&gt; hp         |         vs |  0.27 | [-0.08,  0.57] |  1.55 | &gt; .999   </span>
-<span class="co">#&gt; hp         |         am |  0.10 | [-0.26,  0.43] |  0.55 | &gt; .999   </span>
-<span class="co">#&gt; hp         |       gear |  0.11 | [-0.25,  0.44] |  0.59 | &gt; .999   </span>
-<span class="co">#&gt; hp         |       carb |  0.50 | [ 0.19,  0.72] |  3.19 | 0.167    </span>
-<span class="co">#&gt; drat       |         wt | -0.11 | [-0.44,  0.25] | -0.62 | &gt; .999   </span>
-<span class="co">#&gt; drat       |       qsec | -0.06 | [-0.40,  0.29] | -0.33 | &gt; .999   </span>
-<span class="co">#&gt; drat       |         vs |  0.03 | [-0.33,  0.37] |  0.14 | &gt; .999   </span>
-<span class="co">#&gt; drat       |         am |  0.12 | [-0.24,  0.45] |  0.68 | &gt; .999   </span>
-<span class="co">#&gt; drat       |       gear |  0.06 | [-0.29,  0.40] |  0.35 | &gt; .999   </span>
-<span class="co">#&gt; drat       |       carb |  0.21 | [-0.15,  0.52] |  1.18 | &gt; .999   </span>
-<span class="co">#&gt; wt         |       qsec |  0.55 | [ 0.24,  0.75] |  3.57 | 0.063    </span>
-<span class="co">#&gt; wt         |         vs | -0.06 | [-0.40,  0.29] | -0.36 | &gt; .999   </span>
-<span class="co">#&gt; wt         |         am |  0.02 | [-0.33,  0.36] |  0.10 | &gt; .999   </span>
-<span class="co">#&gt; wt         |       gear | -0.13 | [-0.46,  0.23] | -0.71 | &gt; .999   </span>
-<span class="co">#&gt; wt         |       carb |  0.62 | [ 0.34,  0.80] |  4.30 | 0.009**  </span>
-<span class="co">#&gt; qsec       |         vs |  0.35 | [ 0.00,  0.62] |  2.02 | &gt; .999   </span>
-<span class="co">#&gt; qsec       |         am | -0.32 | [-0.60,  0.03] | -1.84 | &gt; .999   </span>
-<span class="co">#&gt; qsec       |       gear | -0.10 | [-0.43,  0.26] | -0.56 | &gt; .999   </span>
-<span class="co">#&gt; qsec       |       carb | -0.25 | [-0.55,  0.11] | -1.40 | &gt; .999   </span>
-<span class="co">#&gt; vs         |         am | -0.21 | [-0.52,  0.15] | -1.18 | &gt; .999   </span>
-<span class="co">#&gt; vs         |       gear |  0.04 | [-0.31,  0.38] |  0.22 | &gt; .999   </span>
-<span class="co">#&gt; vs         |       carb | -0.09 | [-0.43,  0.27] | -0.50 | &gt; .999   </span>
-<span class="co">#&gt; am         |       gear |  0.28 | [-0.08,  0.57] |  1.58 | &gt; .999   </span>
-<span class="co">#&gt; am         |       carb | -0.05 | [-0.39,  0.31] | -0.25 | &gt; .999   </span>
-<span class="co">#&gt; gear       |       carb |  0.43 | [ 0.09,  0.68] |  2.59 | 0.727    </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; p-value adjustment method: Holm (1979)</span>
-<span class="co">#&gt; Observations: 32</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com" class="external-link">ggraph</a></span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span><span class="va">mtcars</span>, partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span></span>
+<span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter1 | Parameter2 |     r |         95% CI | t(30) |         p</span></span>
+<span><span class="co">#&gt; --------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; mpg        |        cyl | -0.02 | [-0.37,  0.33] | -0.13 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |       disp |  0.16 | [-0.20,  0.48] |  0.89 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |         hp | -0.21 | [-0.52,  0.15] | -1.18 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |       drat |  0.10 | [-0.25,  0.44] |  0.58 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |         wt | -0.39 | [-0.65, -0.05] | -2.34 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |       qsec |  0.24 | [-0.12,  0.54] |  1.34 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |         vs |  0.03 | [-0.32,  0.38] |  0.18 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |         am |  0.26 | [-0.10,  0.56] |  1.46 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |       gear |  0.10 | [-0.26,  0.43] |  0.52 | &gt; .999   </span></span>
+<span><span class="co">#&gt; mpg        |       carb | -0.05 | [-0.39,  0.30] | -0.29 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |       disp |  0.27 | [-0.09,  0.56] |  1.51 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |         hp |  0.17 | [-0.19,  0.49] |  0.97 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |       drat | -0.27 | [-0.57,  0.09] | -1.55 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |         wt | -0.11 | [-0.44,  0.25] | -0.62 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |       qsec | -0.26 | [-0.56,  0.10] | -1.48 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |         vs | -0.32 | [-0.60,  0.03] | -1.85 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |         am | -0.25 | [-0.55,  0.11] | -1.39 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |       gear | -0.35 | [-0.62,  0.00] | -2.04 | &gt; .999   </span></span>
+<span><span class="co">#&gt; cyl        |       carb |  0.23 | [-0.13,  0.53] |  1.27 | &gt; .999   </span></span>
+<span><span class="co">#&gt; disp       |         hp |  0.54 | [ 0.24,  0.75] |  3.52 | 0.072    </span></span>
+<span><span class="co">#&gt; disp       |       drat |  0.10 | [-0.26,  0.43] |  0.53 | &gt; .999   </span></span>
+<span><span class="co">#&gt; disp       |         wt |  0.76 | [ 0.56,  0.88] |  6.43 | &lt; .001***</span></span>
+<span><span class="co">#&gt; disp       |       qsec | -0.31 | [-0.60,  0.04] | -1.80 | &gt; .999   </span></span>
+<span><span class="co">#&gt; disp       |         vs | -0.10 | [-0.44,  0.25] | -0.57 | &gt; .999   </span></span>
+<span><span class="co">#&gt; disp       |         am | -0.07 | [-0.41,  0.29] | -0.37 | &gt; .999   </span></span>
+<span><span class="co">#&gt; disp       |       gear |  0.06 | [-0.29,  0.40] |  0.34 | &gt; .999   </span></span>
+<span><span class="co">#&gt; disp       |       carb | -0.66 | [-0.82, -0.40] | -4.77 | 0.002**  </span></span>
+<span><span class="co">#&gt; hp         |       drat | -0.06 | [-0.40,  0.29] | -0.34 | &gt; .999   </span></span>
+<span><span class="co">#&gt; hp         |         wt | -0.30 | [-0.59,  0.06] | -1.72 | &gt; .999   </span></span>
+<span><span class="co">#&gt; hp         |       qsec | -0.05 | [-0.39,  0.30] | -0.29 | &gt; .999   </span></span>
+<span><span class="co">#&gt; hp         |         vs |  0.27 | [-0.08,  0.57] |  1.55 | &gt; .999   </span></span>
+<span><span class="co">#&gt; hp         |         am |  0.10 | [-0.26,  0.43] |  0.55 | &gt; .999   </span></span>
+<span><span class="co">#&gt; hp         |       gear |  0.11 | [-0.25,  0.44] |  0.59 | &gt; .999   </span></span>
+<span><span class="co">#&gt; hp         |       carb |  0.50 | [ 0.19,  0.72] |  3.19 | 0.167    </span></span>
+<span><span class="co">#&gt; drat       |         wt | -0.11 | [-0.44,  0.25] | -0.62 | &gt; .999   </span></span>
+<span><span class="co">#&gt; drat       |       qsec | -0.06 | [-0.40,  0.29] | -0.33 | &gt; .999   </span></span>
+<span><span class="co">#&gt; drat       |         vs |  0.03 | [-0.33,  0.37] |  0.14 | &gt; .999   </span></span>
+<span><span class="co">#&gt; drat       |         am |  0.12 | [-0.24,  0.45] |  0.68 | &gt; .999   </span></span>
+<span><span class="co">#&gt; drat       |       gear |  0.06 | [-0.29,  0.40] |  0.35 | &gt; .999   </span></span>
+<span><span class="co">#&gt; drat       |       carb |  0.21 | [-0.15,  0.52] |  1.18 | &gt; .999   </span></span>
+<span><span class="co">#&gt; wt         |       qsec |  0.55 | [ 0.24,  0.75] |  3.57 | 0.063    </span></span>
+<span><span class="co">#&gt; wt         |         vs | -0.06 | [-0.40,  0.29] | -0.36 | &gt; .999   </span></span>
+<span><span class="co">#&gt; wt         |         am |  0.02 | [-0.33,  0.36] |  0.10 | &gt; .999   </span></span>
+<span><span class="co">#&gt; wt         |       gear | -0.13 | [-0.46,  0.23] | -0.71 | &gt; .999   </span></span>
+<span><span class="co">#&gt; wt         |       carb |  0.62 | [ 0.34,  0.80] |  4.30 | 0.009**  </span></span>
+<span><span class="co">#&gt; qsec       |         vs |  0.35 | [ 0.00,  0.62] |  2.02 | &gt; .999   </span></span>
+<span><span class="co">#&gt; qsec       |         am | -0.32 | [-0.60,  0.03] | -1.84 | &gt; .999   </span></span>
+<span><span class="co">#&gt; qsec       |       gear | -0.10 | [-0.43,  0.26] | -0.56 | &gt; .999   </span></span>
+<span><span class="co">#&gt; qsec       |       carb | -0.25 | [-0.55,  0.11] | -1.40 | &gt; .999   </span></span>
+<span><span class="co">#&gt; vs         |         am | -0.21 | [-0.52,  0.15] | -1.18 | &gt; .999   </span></span>
+<span><span class="co">#&gt; vs         |       gear |  0.04 | [-0.31,  0.38] |  0.22 | &gt; .999   </span></span>
+<span><span class="co">#&gt; vs         |       carb | -0.09 | [-0.43,  0.27] | -0.50 | &gt; .999   </span></span>
+<span><span class="co">#&gt; am         |       gear |  0.28 | [-0.08,  0.57] |  1.58 | &gt; .999   </span></span>
+<span><span class="co">#&gt; am         |       carb | -0.05 | [-0.39,  0.31] | -0.25 | &gt; .999   </span></span>
+<span><span class="co">#&gt; gear       |       carb |  0.43 | [ 0.09,  0.68] |  2.59 | 0.727    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span>
+<span><span class="co">#&gt; Observations: 32</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -319,7 +319,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
     </footer>
