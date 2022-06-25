@@ -97,6 +97,9 @@
     <loc>/reference/metro_colors.html</loc>
   </url>
   <url>
+    <loc>/reference/okabeito_colors.html</loc>
+  </url>
+  <url>
     <loc>/reference/palette_bluebrown.html</loc>
   </url>
   <url>
@@ -107,6 +110,9 @@
   </url>
   <url>
     <loc>/reference/palette_metro.html</loc>
+  </url>
+  <url>
+    <loc>/reference/palette_okabeito.html</loc>
   </url>
   <url>
     <loc>/reference/palette_pizza.html</loc>
@@ -218,6 +224,9 @@
   </url>
   <url>
     <loc>/reference/scale_color_metro.html</loc>
+  </url>
+  <url>
+    <loc>/reference/scale_color_okabeito.html</loc>
   </url>
   <url>
     <loc>/reference/scale_color_pizza.html</loc>

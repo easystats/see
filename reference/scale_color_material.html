@@ -80,6 +80,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"color"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -87,6 +88,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"color"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -94,6 +96,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"color"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -101,6 +104,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"color"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -108,6 +112,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"color"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -115,6 +120,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"color"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -122,6 +128,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"fill"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -129,6 +136,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"fill"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -136,6 +144,7 @@ scale.</p>
 <span>  palette <span class="op">=</span> <span class="st">"contrast"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="st">"fill"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -145,7 +154,7 @@ scale.</p>
     <dl><dt>palette</dt>
 <dd><p>Character name of palette. Depending on the color scale, can
 be <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>,
-<code>"contrast"</code> or <code>"light"</code> (for dark themes).</p></dd>
+<code>"contrast"</code>, <code>"light"</code> (for dark themes), or <code>"black_first"</code>.</p></dd>
 
 
 <dt>discrete</dt>
@@ -154,6 +163,11 @@ be <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"compl
 
 <dt>reverse</dt>
 <dd><p>Boolean indicating whether the palette should be reversed.</p></dd>
+
+
+<dt>aesthetics</dt>
+<dd><p>A vector of names of the aesthetics that this scale
+should be applied to (e.g., <code>c('color', 'fill')</code>).</p></dd>
 
 
 <dt>...</dt>
