@@ -20,15 +20,10 @@ knitr::opts_chunk$set(
 if (!requireNamespace("rstanarm", quietly = TRUE) ||
   !requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("lme4", quietly = TRUE) ||
+  !requireNamespace("mgcv", quietly = TRUE) ||
   !requireNamespace("modelbased", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
-```
-
-This vignette can be referred to by citing the package:
-
-```{r}
-citation("see")
 ```
 
 # Introduction
@@ -37,22 +32,30 @@ citation("see")
 
 For more, see: <https://easystats.github.io/modelbased/>
 
-# Setup and Model Fitting
+This vignette can be referred to by citing the package:
+
+```{r}
+citation("see")
+```
+
+Let's first load all the needed libraries and set a common ggplot theme for all plots:
 
 ```{r setup}
 library(modelbased)
 library(rstanarm)
 library(ggplot2)
 library(see)
+library(lme4)
+library(mgcv)
 
 theme_set(theme_modern())
-
-model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
 ```
 
 # Pairwise Contrasts
 
-```{r}
+```{r pairwise}
+model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
 
@@ -64,7 +67,6 @@ plot(contrasts, means)
 ## Interactions, with continuous interaction terms
 
 ```{r}
-data(mtcars)
 model <- lm(mpg ~ wt * gear, data = mtcars)
 
 result <- estimate_expectation(model, data = "grid")
@@ -74,7 +76,6 @@ plot(result)
 ## Interactions, with continuous interaction terms
 
 ```{r}
-data(mtcars)
 mtcars$gear <- as.factor(mtcars$gear)
 model <- lm(mpg ~ wt * gear, data = mtcars)
 
@@ -82,17 +83,26 @@ result <- estimate_expectation(model, data = "grid")
 plot(result)
 ```
 
-# Plot group-level scores of mixed models
+## Interactions between two continuous variables
 
-```{r}
-library(lme4)
+```{r np-interval}
+model <- lm(mpg ~ hp * wt, data = mtcars)
+
+slopes <- estimate_slopes(model, trend = "hp", at = "wt")
+
+plot(slopes)
+```
+
+# Group-level scores of mixed models
+
+```{r mixed-intercept}
 model <- lmer(Reaction ~ Days + (1 | Subject), data = sleepstudy)
 
 result <- estimate_grouplevel(model)
 plot(result)
 ```
 
-```{r}
+```{r mixed-slope}
 model <- lmer(Reaction ~ Days + (1 + Days | Subject), data = sleepstudy)
 
 result <- estimate_grouplevel(model)
@@ -101,8 +111,7 @@ plot(result)
 
 # Estimate slopes
 
-```{r}
-data(iris)
+```{r slopes}
 model <- lm(Sepal.Width ~ Species * Petal.Length, data = iris)
 
 result <- estimate_slopes(model, trend = "Petal.Length", at = "Species")
@@ -110,9 +119,41 @@ plot(result)
 ```
 
 
-```{r}
+```{r slopes-poly}
 model <- lm(Petal.Length ~ Species * poly(Sepal.Width, 3), data = iris)
 
 result <- estimate_slopes(model, at = c("Sepal.Width", "Species"))
 plot(result)
 ```
+
+# Estimate derivatives
+
+Linear-model
+
+```{r derivatives-l}
+model_lm <- lm(mpg ~ wt, data = mtcars)
+
+plot(estimate_relation(model_lm))
+```
+
+Non-linear model
+
+```{r derivatives-nl}
+# Fit a non-linear General Additive Model (GAM)
+model <- mgcv::gam(Sepal.Width ~ s(Petal.Length), data = iris)
+
+# 1. Compute derivatives
+deriv <- estimate_slopes(model,
+  trend = "Petal.Length",
+  at = "Petal.Length",
+  length = 100
+)
+
+# 2. Visualize predictions and derivative
+plots(
+  plot(estimate_relation(model)),
+  plot(deriv),
+  n_rows = 2
+)
+```
+
