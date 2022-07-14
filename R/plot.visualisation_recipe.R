@@ -25,5 +25,7 @@ plot.see_visualisation_recipes <- function(x, ...) {
   for (i in names(x)) {
     the_plots[[i]] <- plot(x[[i]])
   }
-  plots(the_plots, ...)
+  pw <- plots(the_plots, ...)
+  .safe_print_plots(pw)
+  invisible(pw)
 }
