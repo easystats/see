@@ -558,7 +558,7 @@ plot.see_parameters_model <- function(x,
   measure <- .meta_measure(meta_measure)
 
   dat_funnel <- data.frame(
-    se_range = datawizard::data_rescale(1:(nrow(x) * 10), to = c(0, max_y))
+    se_range = datawizard::rescale(1:(nrow(x) * 10), to = c(0, max_y))
   )
   estimate <- x$Coefficient[x$Parameter == "Overall"]
 

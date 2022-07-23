@@ -8,7 +8,7 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   if ("BF" %in% colnames(x)) x$BF[is.na(x$BF)] <- 1
 
   # normalize indices, for better comparison
-  x <- datawizard::data_rescale(x, exclude = "Model", to = c(.1, 1))
+  x <- datawizard::rescale(x, exclude = "Model", to = c(.1, 1))
 
   # recode some indices, so higher values = better fit
   for (i in c("AIC", "BIC", "AICc", "RMSE", "Sigma")) {
