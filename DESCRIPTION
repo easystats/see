@@ -109,5 +109,9 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
-Remotes: easystats/datawizard, easystats/parameters, easystats/performance
+RoxygenNote: 7.2.1
+Remotes: 
+    easystats/correlation, 
+    easystats/datawizard, 
+    easystats/parameters, 
+    easystats/performance
