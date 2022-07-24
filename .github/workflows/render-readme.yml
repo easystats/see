@@ -31,6 +31,8 @@ jobs:
         with:
           extra-packages: |
             easystats/datawizard
+            easystats/performance
+            easystats/parameters
             deps::.
             easystats/see
 
