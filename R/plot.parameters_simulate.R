@@ -15,7 +15,7 @@ data_plot.parameters_simulate <- function(x,
 
   # normalize height
   if (isTRUE(normalize_height)) {
-    out$y <- datawizard::data_rescale(out$y, to = c(0, .9))
+    out$y <- datawizard::rescale(out$y, to = c(0, .9))
   }
 
   if (length(unique(params$Effects)) > 1) {
