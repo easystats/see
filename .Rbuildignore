@@ -21,3 +21,5 @@
 ^.github$
 ^WIP$
 ^\.github$
+\.code-workspace$
+\.lintr$
