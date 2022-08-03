@@ -465,7 +465,7 @@ plot.see_parameters_model <- function(x,
   # largest data points that are within this range. Thereby we have the pretty
   # values we can use as breaks and labels for the scale...
 
-  if (exponentiated_coefs & log_scale) {
+  if (exponentiated_coefs && log_scale) {
     range <- 2^c(-24:16)
     x_low <- which.min(min_ci > range) - 1
     x_high <- which.max(max_ci < range)
@@ -544,7 +544,9 @@ plot.see_parameters_model <- function(x,
     } else {
       p + labs(
         y = parameter_label,
-        x = ifelse(is.null(coefficient_name), ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), coefficient_name),
+        x = ifelse(is.null(coefficient_name),
+              ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
+                coefficient_name),
         colour = "CI"
       )
     }
@@ -573,8 +575,18 @@ plot.see_parameters_model <- function(x,
   ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
     scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
     geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = .3) +
-    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_low, y = .data$se_range), linetype = "dashed", color = "grey70") +
-    geom_line(data = dat_funnel, mapping = aes(x = .data$ci_high, y = .data$se_range), linetype = "dashed", color = "grey70") +
+    geom_line(
+      data = dat_funnel,
+      mapping = aes(x = .data$ci_low, y = .data$se_range),
+      linetype = "dashed",
+      color = "grey70"
+    ) +
+    geom_line(
+      data = dat_funnel,
+      mapping = aes(x = .data$ci_high, y = .data$se_range),
+      linetype = "dashed",
+      color = "grey70"
+    ) +
     theme_modern() +
     geom_vline(xintercept = estimate, colour = "grey70") +
     geom_point(size = size_point, colour = "#34465d") +

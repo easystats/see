@@ -110,7 +110,7 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-Remotes: 
+Remotes:
     easystats/correlation, 
     easystats/datawizard, 
     easystats/parameters, 
