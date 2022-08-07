@@ -6,6 +6,8 @@ plot.see_check_model <- function(x,
                                  ...) {
   p <- list()
 
+# read arguments / settings from "check_model()" -----
+
   panel <- attr(x, "panel")
   check <- attr(x, "check")
   size_point <- attr(x, "dot_size")
@@ -18,6 +20,9 @@ plot.see_check_model <- function(x,
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
+
+
+  # set default values for arguments ------
 
   if (missing(style) && !is.null(attr(x, "theme"))) {
     theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
@@ -42,7 +47,12 @@ plot.see_check_model <- function(x,
     dot_alpha_level <- .8
   }
 
-  if (is.null(check)) check <- "all"
+  if (is.null(check)) {
+    check <- "all"
+  }
+
+
+  # build plot panels --------------------
 
   if ("PP_CHECK" %in% names(x) && !is.null(x$PP_CHECK) && any(c("pp_check", "all") %in% check)) {
     x$NORM <- NULL
