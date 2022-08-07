@@ -129,7 +129,6 @@
 #' }
 #' @export
 geom_from_list <- function(x, ...) {
-
   # Additional parameters ------------------------------------------------------
   args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
 
@@ -260,7 +259,6 @@ geom_from_list <- function(x, ...) {
 #' @rdname geom_from_list
 #' @export
 geoms_from_list <- function(x, ...) {
-
   # Get name of layers
   n <- length(x)
   l_names <- paste0("l", 1:n)

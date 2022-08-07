@@ -127,9 +127,9 @@ okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE) {
 
   if (is.null(cols)) {
     if (isTRUE(original_names)) {
-      cols <- c('orange', 'light blue', 'green', 'yellow', 'blue', 'red', 'purple', 'grey', 'black')
+      cols <- c("orange", "light blue", "green", "yellow", "blue", "red", "purple", "grey", "black")
     } else {
-      cols <- c('orange', 'sky blue', 'bluish green', 'yellow', 'blue', 'vermillion', 'reddish purple', 'grey', 'black')
+      cols <- c("orange", "sky blue", "bluish green", "yellow", "blue", "vermillion", "reddish purple", "grey", "black")
     }
     if (isTRUE(black_first)) cols <- union("black", cols)
   }
@@ -165,13 +165,12 @@ okabeito_palettes <- list(
 #'
 #' @export
 palette_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, ...) {
-
   if (!palette %in% names(okabeito_palettes)) {
     msg <- c(paste0(
       "Palette name not available. `palette` must be one of ",
       datawizard::text_concatenate(names(okabeito_palettes), last = " or ", enclose = "`"),
-      "."), "Using default palette now."
-    )
+      "."
+    ), "Using default palette now.")
     warning(insight::format_message(msg), call. = FALSE)
     palette <- "full"
   }

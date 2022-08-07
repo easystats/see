@@ -74,7 +74,6 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_compare_performance <- function(x, size_line = 1, ...) {
-
   # We may think of plotting the "performance scores" as bar plots,
   # however, the "worst" model always has a score of zero, so no bar
   # is shown - this is rather confusing. One option might be to only

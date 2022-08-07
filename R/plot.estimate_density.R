@@ -112,7 +112,6 @@ plot.see_estimate_density <- function(x,
                                       centrality = "median",
                                       ci = 0.95,
                                       ...) {
-
   # save model for later use
   model <- tryCatch(
     {

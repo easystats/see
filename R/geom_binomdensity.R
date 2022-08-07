@@ -89,7 +89,6 @@ geom_binomdensity <- function(data,
 .geom_binomdensity_scale <- function(data, x, y, scale = "auto") {
   prop <- prop.table(xtabs(paste("~", y), data)) # Get prop table (useful later)
   if (length(scale) == 1 && is.character(scale) && scale %in% c("density", "proportion", "auto")) {
-
     # Density instead of proportion
     if (scale == "density") {
       prop <- sapply(split(data, data[[y]]), function(df) {
