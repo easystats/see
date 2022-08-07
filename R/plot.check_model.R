@@ -148,7 +148,7 @@ plot.see_check_model <- function(x,
       theme_style = style,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
-      show_dots = show_dots
+      show_dots = TRUE # qq-plots w/o dots makes no sense
     )
   }
 
@@ -171,7 +171,7 @@ plot.see_check_model <- function(x,
       theme_style = style,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
-      show_dots = show_dots
+      show_dots = TRUE # qq-plots w/o dots makes no sense
     )
 
     for (i in seq_along(ps)) {
