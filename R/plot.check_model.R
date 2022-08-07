@@ -349,10 +349,8 @@ plot.see_check_model <- function(x,
                           show_dots = TRUE) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     qq_stuff <- list(
-      qqplotr::stat_qq_band(alpha = alpha_level, detrend = detrend),
-      qqplotr::stat_qq_line(
-        size = size_line,
-        colour = colors[1],
+      qqplotr::stat_qq_band(
+        alpha = alpha_level, 
         detrend = detrend
       ),
       qqplotr::stat_qq_point(
@@ -361,6 +359,11 @@ plot.see_check_model <- function(x,
         size = size_point,
         colour = colors[2], # "#2c3e50",
         alpha = dot_alpha_level,
+        detrend = detrend
+      ),
+      qqplotr::stat_qq_line(
+        size = size_line,
+        colour = colors[1],
         detrend = detrend
       )
     )
