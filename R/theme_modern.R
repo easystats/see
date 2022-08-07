@@ -43,7 +43,6 @@ theme_modern <-
            axis.text.angle = NULL,
            tags.size = 15,
            tags.face = "bold") {
-
     # Remove legend title if necessary
     if (is.null(plot.title.size)) {
       plot.title.size <-

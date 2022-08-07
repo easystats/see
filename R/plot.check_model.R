@@ -350,7 +350,7 @@ plot.see_check_model <- function(x,
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     qq_stuff <- list(
       qqplotr::stat_qq_band(
-        alpha = alpha_level, 
+        alpha = alpha_level,
         detrend = detrend
       ),
       qqplotr::stat_qq_point(
@@ -489,12 +489,12 @@ plot.see_check_model <- function(x,
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
   if (isTRUE(show_dots)) {
-  p <- p +
-    geom_point2(
-      colour = colors[2],
-      size = size_point,
-      alpha = dot_alpha_level
-    )
+    p <- p +
+      geom_point2(
+        colour = colors[2],
+        size = size_point,
+        alpha = dot_alpha_level
+      )
   }
 
   p +

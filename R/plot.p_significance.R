@@ -177,7 +177,6 @@ plot.see_p_significance <- function(x,
                                     priors_alpha = .4,
                                     n_columns = 1,
                                     ...) {
-
   # save model for later use
   model <- .retrieve_data(x)
 

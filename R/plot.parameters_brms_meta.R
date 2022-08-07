@@ -136,7 +136,6 @@ plot.see_parameters_brms_meta <- function(x,
                                           normalize_height = TRUE,
                                           show_labels = TRUE,
                                           ...) {
-
   # save model for later use
   model <- tryCatch(
     {

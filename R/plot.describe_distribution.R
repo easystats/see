@@ -66,7 +66,6 @@ plot.see_parameters_distribution <- function(x,
                                              highlight = NULL,
                                              highlight_color = NULL,
                                              ...) {
-
   # get data
   data <- .retrieve_data(x)
 

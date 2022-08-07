@@ -50,7 +50,6 @@ plot.see_parameters_model <- function(x,
                                       show_density = FALSE,
                                       log_scale = FALSE,
                                       ...) {
-
   # retrieve settings ----------------
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
@@ -328,7 +327,6 @@ plot.see_parameters_model <- function(x,
 
 
   if (is_meta || is_meta_bma) {
-
     # plot setup for metafor-objects
     p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
@@ -355,7 +353,6 @@ plot.see_parameters_model <- function(x,
       p <- p + ggplot2::geom_point(size = x$size_point * size_point, shape = x$shape)
     }
   } else if (isTRUE(multiple_ci)) {
-
     # plot setup for model parameters with multiple CIs
     x$CI <- as.character(x$CI)
 
@@ -393,7 +390,6 @@ plot.see_parameters_model <- function(x,
       )
     }
   } else {
-
     # plot setup for regular model parameters
     x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
     if (all(x$group == "TRUE")) {
@@ -545,8 +541,9 @@ plot.see_parameters_model <- function(x,
       p + labs(
         y = parameter_label,
         x = ifelse(is.null(coefficient_name),
-              ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
-                coefficient_name),
+          ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
+          coefficient_name
+        ),
         colour = "CI"
       )
     }

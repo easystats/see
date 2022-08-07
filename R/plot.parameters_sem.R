@@ -7,8 +7,6 @@ data_plot.parameters_sem <- function(x,
                                      threshold_p = NULL,
                                      ci = TRUE,
                                      ...) {
-
-
   # Compatibility patch
   if (any(!type %in% component)) component <- type
 
