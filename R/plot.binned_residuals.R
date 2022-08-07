@@ -12,6 +12,7 @@ plot.see_binned_residuals <- function(x,
   } else {
     ltitle <- NULL
   }
+  dots <- list(...)
 
   # set defaults
   term <- attr(x, "term", exact = TRUE)
@@ -31,6 +32,13 @@ plot.see_binned_residuals <- function(x,
     xtitle <- sprintf("Estimated Probability of %s", attr(x, "resp_var", exact = TRUE))
   } else {
     xtitle <- term
+  }
+
+  # show or hide dots - may be useful for large models with many observations
+  if (isTRUE(dots[["show_dots"]])) {
+    x$ybar[x$group == "yes"] <- NA
+    x$CI_low[x$group == "yes"] <- NA
+    x$CI_high[x$group == "yes"] <- NA
   }
 
   p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
@@ -76,7 +84,6 @@ plot.see_binned_residuals <- function(x,
       ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = size_line, width = 0)
   }
 
-  dots <- list(...)
   if (isTRUE(dots[["check_model"]])) {
     p <- p + theme_style(
       base_size = 10,

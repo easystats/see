@@ -8,7 +8,8 @@
                                     size_text = NULL,
                                     theme_style = theme_lucid,
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
-                                    dot_alpha_level = .8) {
+                                    dot_alpha_level = .8,
+                                    show_dots = TRUE) {
   size_line <- size_line %||% .7
   size_text <- size_text %||% 3
 
@@ -20,8 +21,13 @@
   n_above <- sum(plot_data$Cooks_Distance >= min_cook_level)
   label.n <- ifelse(n_above < 5, 5, n_above)
 
-  p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals)) +
-    geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = dot_alpha_level) +
+  p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals))
+
+  if (isTRUE(show_dots)) {
+    p <- p + geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = dot_alpha_level)
+  }
+
+  p <- p +
     geom_vline(
       xintercept = 0,
       color = ref.color,
@@ -75,7 +81,7 @@
     .hat80 <- min(.hat) + diff(range(.hat)) * .8
     .cook_labels <- c("Cook's D = ", rep("", length(cook.levels) - 1))
     .cook_lines <- c(
-      lapply(1:length(cook.levels), function(.level) {
+      lapply(seq_along(cook.levels), function(.level) {
         annotate(
           geom = "line",
           x = .hat,
@@ -85,7 +91,7 @@
           size = size_line
         )
       }),
-      lapply(1:length(cook.levels), function(.level) {
+      lapply(seq_along(cook.levels), function(.level) {
         annotate(
           geom = "line",
           x = .hat,
@@ -95,7 +101,7 @@
           size = size_line
         )
       }),
-      lapply(1:length(cook.levels), function(.level) {
+      lapply(seq_along(cook.levels), function(.level) {
         annotate(
           geom = "text",
           label = insight::format_value(cook.levels[.level], digits = 1),
@@ -107,7 +113,7 @@
           size = size_text
         )
       }),
-      lapply(1:length(cook.levels), function(.level) {
+      lapply(seq_along(cook.levels), function(.level) {
         annotate(
           geom = "text",
           label = insight::format_value(cook.levels[.level], digits = 1),
