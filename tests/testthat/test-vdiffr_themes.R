@@ -1,6 +1,6 @@
 if (getRversion() >= "4.1") {
   test_that("theme functions work", {
-    skip_if_not(.Platform$OS.type == "windows")
+    # skip_if_not(.Platform$OS.type == "windows")
 
     skip_if_not_installed("vdiffr")
     skip_if_not_installed("poorman")
@@ -18,8 +18,8 @@ if (getRversion() >= "4.1") {
     vdiffr::expect_doppelganger(
       title = "theme_radar works",
       fig = data %>% ggplot(aes(
-        x = Name,
-        y = Value,
+        x = name,
+        y = value,
         color = Species,
         group = Species,
         fill = Species
