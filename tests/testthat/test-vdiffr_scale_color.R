@@ -2,7 +2,7 @@ if (getRversion() >= "4.1" &&
   require("vdiffr") &&
   require("ggplot2")) {
   test_that("scale_color_ functions work correctly", {
-    skip_if_not(.Platform$OS.type == "windows")
+    # skip_if_not(.Platform$OS.type == "windows")
 
     vdiffr::expect_doppelganger(
       title = "scale_color_bluebrown_d() works",

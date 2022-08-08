@@ -3,7 +3,7 @@ if (getRversion() >= "4.1" &&
   require("ggplot2") &&
   require("bayestestR")) {
   test_that("bayestestR package plots rendered correctly", {
-    skip_if_not(.Platform$OS.type == "windows")
+    # skip_if_not(.Platform$OS.type == "windows")
 
     # plot.see_bayesfactor_models() --------------------
 

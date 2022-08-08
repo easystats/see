@@ -36,9 +36,9 @@
 </defs>
 <g clip-path='url(#cpNzEuMzN8NTk5LjcxfDIyLjc4fDU1MS4xNw==)'>
 <rect x='71.33' y='22.78' width='528.39' height='528.39' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<polygon points='335.52,445.61 229.48,286.98 335.52,246.45 335.52,286.98 ' style='stroke-width: 4.27; stroke: #F8766D; stroke-linecap: butt; fill: none;' />
-<polygon points='335.52,476.60 251.40,286.98 335.52,153.21 371.51,286.98 ' style='stroke-width: 4.27; stroke: #00BA38; stroke-linecap: butt; fill: none;' />
-<polygon points='335.52,498.33 244.61,286.98 335.52,110.15 394.84,286.98 ' style='stroke-width: 4.27; stroke: #619CFF; stroke-linecap: butt; fill: none;' />
+<polygon points='335.52,445.61 229.48,286.98 335.52,246.45 335.52,286.98 ' style='stroke-width: 4.27; stroke: #F8766D; fill: none;' />
+<polygon points='335.52,476.60 251.40,286.98 335.52,153.21 371.51,286.98 ' style='stroke-width: 4.27; stroke: #00BA38; fill: none;' />
+<polygon points='335.52,498.33 244.61,286.98 335.52,110.15 394.84,286.98 ' style='stroke-width: 4.27; stroke: #619CFF; fill: none;' />
 <text x='335.52' y='52.23' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='49.42px' lengthAdjust='spacingAndGlyphs'>Petal.Length</text>
 <text x='573.29' y='290.00' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='45.00px' lengthAdjust='spacingAndGlyphs'>Petal.Width</text>
 <text x='335.52' y='527.78' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='51.87px' lengthAdjust='spacingAndGlyphs'>Sepal.Length</text>
@@ -52,16 +52,16 @@
 <polyline points='68.59,228.52 71.33,228.52 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='68.59,161.87 71.33,161.87 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='68.59,95.22 71.33,95.22 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<text x='335.52' y='568.24' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='29.35px' lengthAdjust='spacingAndGlyphs'>Name</text>
-<text transform='translate(56.48,286.98) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='28.14px' lengthAdjust='spacingAndGlyphs'>Value</text>
+<text x='335.52' y='568.24' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='27.52px' lengthAdjust='spacingAndGlyphs'>name</text>
+<text transform='translate(56.48,286.98) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='26.30px' lengthAdjust='spacingAndGlyphs'>value</text>
 <rect x='610.67' y='253.39' width='60.42' height='67.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <text x='610.67' y='262.10' style='font-size: 11.00px; font-family: sans;' textLength='39.14px' lengthAdjust='spacingAndGlyphs'>Species</text>
 <rect x='610.67' y='268.72' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='612.83' y='270.88' width='12.96' height='12.96' style='stroke-width: 3.25; stroke: #F8766D; stroke-linecap: butt; stroke-linejoin: miter;' />
+<rect x='612.83' y='270.88' width='12.96' height='12.96' style='stroke-width: 3.25; stroke: #F8766D; stroke-linecap: square; stroke-linejoin: miter;' />
 <rect x='610.67' y='286.00' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='612.83' y='288.16' width='12.96' height='12.96' style='stroke-width: 3.25; stroke: #00BA38; stroke-linecap: butt; stroke-linejoin: miter;' />
+<rect x='612.83' y='288.16' width='12.96' height='12.96' style='stroke-width: 3.25; stroke: #00BA38; stroke-linecap: square; stroke-linejoin: miter;' />
 <rect x='610.67' y='303.28' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='612.83' y='305.44' width='12.96' height='12.96' style='stroke-width: 3.25; stroke: #619CFF; stroke-linecap: butt; stroke-linejoin: miter;' />
+<rect x='612.83' y='305.44' width='12.96' height='12.96' style='stroke-width: 3.25; stroke: #619CFF; stroke-linecap: square; stroke-linejoin: miter;' />
 <text x='633.43' y='280.39' style='font-size: 8.80px; font-family: sans;' textLength='25.94px' lengthAdjust='spacingAndGlyphs'>setosa</text>
 <text x='633.43' y='297.67' style='font-size: 8.80px; font-family: sans;' textLength='37.66px' lengthAdjust='spacingAndGlyphs'>versicolor</text>
 <text x='633.43' y='314.95' style='font-size: 8.80px; font-family: sans;' textLength='32.28px' lengthAdjust='spacingAndGlyphs'>virginica</text>

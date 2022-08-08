@@ -1,5 +1,5 @@
 if (getRversion() >= "4.1" && require("vdiffr")) {
-  skip_if_not(.Platform$OS.type == "windows")
+  # skip_if_not(.Platform$OS.type == "windows")
 
   test_that("`plot.see_n_factors()` works", {
     if (require("parameters") && require("nFactors")) {

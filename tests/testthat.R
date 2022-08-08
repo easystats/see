@@ -1,27 +1,12 @@
-if (require("testthat")) {
-  library(see)
+# This file is part of the standard setup for testthat.
+# It is recommended that you do not modify it.
+#
+# Where should you do additional test configuration?
+# Learn more about the roles of various files in:
+# * https://r-pkgs.org/tests.html
+# * https://testthat.r-lib.org/reference/test_package.html#special-files
 
-  if (length(strsplit(packageDescription("see")$Version, "\\.")[[1]]) > 3) {
-    Sys.setenv("RunAllseeTests" = "yes")
-  } else {
-    Sys.setenv("RunAllseeTests" = "no")
-  }
+library(testthat)
+library(see)
 
-  osx <- tryCatch(
-    {
-      si <- Sys.info()
-      if (!is.null(si["sysname"])) {
-        si["sysname"] == "Darwin" || grepl("^darwin", R.version$os)
-      } else {
-        FALSE
-      }
-    },
-    error = function(e) {
-      FALSE
-    }
-  )
-
-  if (!osx) {
-    test_check("see")
-  }
-}
+test_check("see")
