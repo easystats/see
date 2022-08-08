@@ -15,8 +15,8 @@
 #'
 #'   data %>%
 #'     ggplot(aes(
-#'       x = Name,
-#'       y = Value,
+#'       x = name,
+#'       y = value,
 #'       color = Species,
 #'       group = Species,
 #'       fill = Species
