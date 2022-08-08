@@ -73,7 +73,7 @@ plot.see_equivalence_test <- function(x,
       tmp <- as.data.frame(model, stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
     }
 
-    tmp2 <- lapply(1:nrow(i), function(j) {
+    tmp2 <- lapply(seq_len(nrow(i)), function(j) {
       p <- i$Parameter[j]
       tmp[[p]][tmp[[p]] < i$HDI_low[j]] <- NA
       tmp[[p]][tmp[[p]] > i$HDI_high[j]] <- NA
@@ -88,7 +88,7 @@ plot.see_equivalence_test <- function(x,
     # tmp$predictor <- as.factor(tmp$predictor)
 
     tmp$grp <- NA
-    for (j in 1:nrow(i)) {
+    for (j in seq_len(nrow(i))) {
       tmp$grp[tmp$predictor == i$Parameter[j]] <- i$ROPE_Equivalence[j]
     }
 
@@ -128,7 +128,7 @@ plot.see_equivalence_test <- function(x,
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
-  add.args <- lapply(match.call(expand.dots = F)$`...`, function(x) x)
+  add.args <- lapply(match.call(expand.dots = FALSE)$`...`, function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
@@ -228,7 +228,7 @@ plot.see_equivalence_test_df <- function(x,
   result <- lapply(tests, function(i) {
     tmp <- data[, i$Parameter, drop = FALSE]
 
-    tmp2 <- lapply(1:nrow(i), function(j) {
+    tmp2 <- lapply(seq_len(nrow(i)), function(j) {
       p <- i$Parameter[j]
       tmp[[p]][tmp[[p]] < i$HDI_low[j]] <- NA
       tmp[[p]][tmp[[p]] > i$HDI_high[j]] <- NA
@@ -242,7 +242,7 @@ plot.see_equivalence_test_df <- function(x,
     tmp <- .reshape_to_long(tmp, names_to = "predictor", values_to = "estimate")
 
     tmp$grp <- NA
-    for (j in 1:nrow(i)) {
+    for (j in seq_len(nrow(i))) {
       tmp$grp[tmp$predictor == i$Parameter[j]] <- i$ROPE_Equivalence[j]
     }
 
@@ -272,7 +272,7 @@ plot.see_equivalence_test_df <- function(x,
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
-  add.args <- lapply(match.call(expand.dots = F)$`...`, function(x) x)
+  add.args <- lapply(match.call(expand.dots = FALSE)$`...`, function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
@@ -386,7 +386,7 @@ plot.see_equivalence_test_lm <- function(x,
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
-  add.args <- lapply(match.call(expand.dots = F)$`...`, function(x) x)
+  add.args <- lapply(match.call(expand.dots = FALSE)$`...`, function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
