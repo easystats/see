@@ -67,7 +67,7 @@ Imports:
     effectsize (>= 0.7.0),
     ggplot2 (>= 3.3.6),
     insight (>= 0.18.0),
-    parameters (>= 0.18.1.10)
+    parameters (>= 0.18.1)
 Suggests:
     brms,
     coda,
