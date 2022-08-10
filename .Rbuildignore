@@ -23,3 +23,6 @@
 ^\.github$
 \.code-workspace$
 \.lintr$
+
+^cran-comments\.md$
+^revdep$
