@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("ggraph", quietly = TRUE) ||
   !requireNamespace("poorman", quietly = TRUE) &&
-  !packageVersion("correlation") > "0.7.1") {
+  !packageVersion("correlation") >= "0.8.2") {
   knitr::opts_chunk$set(eval = FALSE)
 } else {
   library(ggplot2)
