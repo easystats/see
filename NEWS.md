@@ -8,6 +8,12 @@
   
 * Added Okabe-Ito color palette (`palette_okabeito`, `scale_color_okabeito()`) etc.)
 
+* Several minor improvements.
+
+## Bug fixes
+
+* Fixed CRAN check issues.
+
 # see 0.7.1
 
 ## Changes

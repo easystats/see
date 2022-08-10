@@ -43,6 +43,7 @@ Temporary Items
 .Ruserdata
 inst/doc
 .httr-oauth
+/revdep/
 revdep/checks
 revdep/library
 revdep/checks.noindex
