@@ -1,3 +1,9 @@
+# see 0.7.2.1
+
+## Changes
+
+* Replaced deprecated arguments in function calls.
+
 # see 0.7.2
 
 ## Changes
