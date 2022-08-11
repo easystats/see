@@ -84,7 +84,7 @@ plot(result)
 We can even customize that to make it more beautiful:
 
 ```{r}
-plot(result, 
+plot(result,
      point = list(aes = list(color = "Petal.Width", size = "Sepal.Length"),
                   alpha = 0.66),
      smooth = list(color = "black", se = FALSE)) +

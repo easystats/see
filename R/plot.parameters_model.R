@@ -189,7 +189,7 @@ plot.see_parameters_model <- function(x,
 
       data <- datawizard::reshape_longer(
         data,
-        colnames_to = "Parameter",
+        names_to = "Parameter",
         rows_to = "Iteration",
         values_to = "Coefficient"
       )

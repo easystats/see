@@ -37,11 +37,11 @@ plot.see_check_collinearity <- function(x,
 
   dat <- datawizard::data_rename(
     dat,
-    c("Term", "VIF", "SE_factor", "Component"),
-    c("x", "y", "se", "facet")
+    pattern = c("Term", "VIF", "SE_factor", "Component"),
+    replacement = c("x", "y", "se", "facet")
   )
 
-  dat <- datawizard::data_select(dat, c("x", "y", "facet", "group"))
+  dat <- datawizard::data_select(dat, select = c("x", "y", "facet", "group"))
 
   if (insight::n_unique(dat$facet) <= 1) {
     dat$facet <- NULL
