@@ -33,6 +33,7 @@ jobs:
             easystats/bayestestR
             easystats/correlation
             easystats/datawizard
+            easystats/modelbased
             easystats/performance
             easystats/parameters
             deps::.
