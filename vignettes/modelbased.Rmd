@@ -138,7 +138,7 @@ plot(estimate_relation(model_lm))
 
 Non-linear model
 
-```{r derivatives-nl}
+```{r derivatives-nl, eval=FALSE}
 # Fit a non-linear General Additive Model (GAM)
 model <- mgcv::gam(Sepal.Width ~ s(Petal.Length), data = iris)
 
