@@ -136,9 +136,9 @@ plot(s)
 
 The `corrlation` function also provides a convenient way to change names for selected variables:
 
-```{r, eval=isTRUE(packageVersion("correlation") >= '0.7.0')}
+```{r}
 plot(summary(correlation(
-  data = select(mtcars, wt, mpg, drat),
+  data = mtcars[c("wt", "mpg", "drat")],
   rename = c("weight", "miles per gallon", "rear axle ratio")
 )))
 ```
