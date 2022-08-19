@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.2.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.0/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
 <link href="../deps/JetBrains_Mono-0.4.2/font.css" rel="stylesheet">
 <link href="../deps/Roboto_Slab-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -153,8 +153,21 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p><em>parameters</em>’ primary goal is to provide utilities for processing the parameters of various statistical models (see <a href="https://easystats.github.io/insight/" class="external-link">here</a> for a list of supported models). Beyond computing <em>p-values</em>, <em>CIs</em>, <em>Bayesian indices</em> and other measures for a wide variety of models, this package implements features like <em>bootstrapping</em> of parameters and models, <em>feature reduction</em> (feature extraction and variable selection), or tools for data reduction like functions to perform cluster, factor or principal component analysis.</p>
-<p>Another important goal of the <strong>parameters</strong> package is to facilitate and streamline the process of reporting results of statistical models, which includes the easy and intuitive calculation of standardized estimates or robust standard errors and <em>p</em>-values. <strong>parameters</strong> therefor offers a simple and unified syntax to process a large variety of (model) objects from many different packages.</p>
+<p><em>parameters</em>’ primary goal is to provide utilities for
+processing the parameters of various statistical models (see <a href="https://easystats.github.io/insight/" class="external-link">here</a> for a list of
+supported models). Beyond computing <em>p-values</em>, <em>CIs</em>,
+<em>Bayesian indices</em> and other measures for a wide variety of
+models, this package implements features like <em>bootstrapping</em> of
+parameters and models, <em>feature reduction</em> (feature extraction
+and variable selection), or tools for data reduction like functions to
+perform cluster, factor or principal component analysis.</p>
+<p>Another important goal of the <strong>parameters</strong> package is
+to facilitate and streamline the process of reporting results of
+statistical models, which includes the easy and intuitive calculation of
+standardized estimates or robust standard errors and <em>p</em>-values.
+<strong>parameters</strong> therefor offers a simple and unified syntax
+to process a large variety of (model) objects from many different
+packages.</p>
 <p>For more, see: <a href="https://easystats.github.io/parameters/" class="external-link uri">https://easystats.github.io/parameters/</a></p>
 </div>
 <div class="section level2">
@@ -235,14 +248,19 @@
 <div class="section level2">
 <h2 id="model-parameters">Model Parameters<a class="anchor" aria-label="anchor" href="#model-parameters"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">related function documentation</a>)</em></p>
-<p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>-method for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> creates a so called “forest plot”. In case of models with multiple components, parameters are separated into facets by model component.</p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">related
+function documentation</a>)</em></p>
+<p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>-method for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code>
+creates a so called “forest plot”. In case of models with multiple
+components, parameters are separated into facets by model component.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model1</span>, effects <span class="op">=</span> <span class="st">"fixed"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<p>When <code>show_labels</code> is <code>TRUE</code>, coefficients and confidence intervals are added to the plot. Adjust the text size with <code>size_text</code>.</p>
+<p>When <code>show_labels</code> is <code>TRUE</code>, coefficients and
+confidence intervals are added to the plot. Adjust the text size with
+<code>size_text</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, show_labels <span class="op">=</span> <span class="cn">TRUE</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
@@ -251,12 +269,18 @@
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model1</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, effects <span class="op">=</span> <span class="st">"fixed"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, show_labels <span class="op">=</span> <span class="cn">TRUE</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
-<p>It is also possible to plot only the count-model component. This is done in <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> via the <code>component</code> argument. In easystats-functions, the count-component has the more generic name <code>"conditional"</code>.</p>
+<p>It is also possible to plot only the count-model component. This is
+done in <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> via the <code>component</code>
+argument. In easystats-functions, the count-component has the more
+generic name <code>"conditional"</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model1</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, component <span class="op">=</span> <span class="st">"conditional"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
-<p>As compared to the classical <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>-output, <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code>, and hence the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>-method, tries to create human readable, prettier parameters names.</p>
+<p>As compared to the classical <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>-output,
+<code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code>, and hence the
+<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>-method, tries to create human readable, prettier
+parameters names.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model2</span><span class="op">)</span></span>
 <span></span>
@@ -265,18 +289,25 @@
 <div class="section level3">
 <h3 id="changing-parameter-names-in-the-plot">Changing parameter names in the plot<a class="anchor" aria-label="anchor" href="#changing-parameter-names-in-the-plot"></a>
 </h3>
-<p>By default, <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> returns a data frame, where the parameter names are found in the column <code>Parameter</code>. These names are used by default in the generated plot:</p>
+<p>By default, <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> returns a data frame,
+where the parameter names are found in the column
+<code>Parameter</code>. These names are used by default in the generated
+plot:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
-<p>However, there are several ways to change the the names of the parameters. Since <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> returns <em>ggplot</em> objects, these can be easily modified, e.g. by adding a <code><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete()</a></code> layer.</p>
+<p>However, there are several ways to change the the names of the
+parameters. Since <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> returns <em>ggplot</em> objects,
+these can be easily modified, e.g. by adding a
+<code><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete()</a></code> layer.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Time"</span>, <span class="st">"Age"</span>, <span class="st">"Education (mid-level)"</span>, </span>
 <span>                              <span class="st">"Eucation (high-level)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
-<p>Another way would be changing the values of the <code>Parameter</code> column before calling <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>:</p>
+<p>Another way would be changing the values of the
+<code>Parameter</code> column before calling <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span></span>
 <span><span class="va">mp</span><span class="op">$</span><span class="va">Parameter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Intercept)"</span>, <span class="st">"Time"</span>, <span class="st">"Age"</span>, <span class="st">"Education (mid-level)"</span>, </span>
@@ -288,8 +319,15 @@
 <div class="section level2">
 <h2 id="simulated-model-parameters">Simulated Model Parameters<a class="anchor" aria-label="anchor" href="#simulated-model-parameters"></a>
 </h2>
-<p><code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">simulate_parameters()</a></code> computes simulated draws of parameters and their related indices such as Confidence Intervals (CI) and p-values. Simulating parameter draws can be seen as a (computationally faster) alternative to bootstrapping.</p>
-<p>As <code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">simulate_parameters()</a></code> is based on <code><a href="https://easystats.github.io/parameters/reference/simulate_model.html" class="external-link">simulate_model()</a></code> and thus simulates many draws for each parameter, <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> will produce similar plots as the density estimation plots <a href="https://easystats.github.io/see/articles/bayestestR.html">from Bayesian models</a>.</p>
+<p><code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">simulate_parameters()</a></code> computes simulated draws of
+parameters and their related indices such as Confidence Intervals (CI)
+and p-values. Simulating parameter draws can be seen as a
+(computationally faster) alternative to bootstrapping.</p>
+<p>As <code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">simulate_parameters()</a></code> is based on
+<code><a href="https://easystats.github.io/parameters/reference/simulate_model.html" class="external-link">simulate_model()</a></code> and thus simulates many draws for each
+parameter, <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> will produce similar plots as the density
+estimation plots <a href="https://easystats.github.io/see/articles/bayestestR.html">from
+Bayesian models</a>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">simulate_parameters</a></span><span class="op">(</span><span class="va">model1</span><span class="op">)</span></span>
 <span></span>
@@ -325,7 +363,9 @@
 <div class="section level2">
 <h2 id="model-parameters-of-bayesian-models">Model Parameters of Bayesian models<a class="anchor" aria-label="anchor" href="#model-parameters-of-bayesian-models"></a>
 </h2>
-<p><code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> for Bayesian models will produce “forest plots” (instead of <a href="https://easystats.github.io/see/articles/bayestestR.html">density estimations</a>).</p>
+<p><code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> for Bayesian models will produce
+“forest plots” (instead of <a href="https://easystats.github.io/see/articles/bayestestR.html">density
+estimations</a>).</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We download the model to save computation time. Here is the code</span></span>
 <span><span class="co"># to refit the exact model used below...</span></span>
@@ -363,7 +403,8 @@
 <p><img src="parameters_files/figure-html/unnamed-chunk-20-1.png" width="576"></p>
 </div>
 <div class="section level3">
-<h3 id="including-intercepts-and-variance-estimates-for-random-intercepts">Including Intercepts and Variance Estimates for Random Intercepts<a class="anchor" aria-label="anchor" href="#including-intercepts-and-variance-estimates-for-random-intercepts"></a>
+<h3 id="including-intercepts-and-variance-estimates-for-random-intercepts">Including Intercepts and Variance Estimates for Random
+Intercepts<a class="anchor" aria-label="anchor" href="#including-intercepts-and-variance-estimates-for-random-intercepts"></a>
 </h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, show_intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -394,7 +435,9 @@
 <span><span class="co">#&gt; Overall   |       -0.18 | 0.44 | [-1.05,  0.68] | -0.42 | 0.676  |</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
-<p>If <code>show_labels</code> is <code>TRUE</code>, estimates and confidence intervals are included in the plot. Adjust the text size with <code>size_text</code>.</p>
+<p>If <code>show_labels</code> is <code>TRUE</code>, estimates and
+confidence intervals are included in the plot. Adjust the text size with
+<code>size_text</code>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, show_labels <span class="op">=</span> <span class="cn">TRUE</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-23-1.png" width="672"></p>
@@ -488,7 +531,8 @@
 <div class="section level2">
 <h2 id="comparison-of-models">Comparison of Models<a class="anchor" aria-label="anchor" href="#comparison-of-models"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/compare_parameters.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/compare_parameters.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="co"># shorter variable name</span></span>
@@ -509,7 +553,8 @@
 <div class="section level2">
 <h2 id="equivalence-testing">Equivalence Testing<a class="anchor" aria-label="anchor" href="#equivalence-testing"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/equivalence_test.lm.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/equivalence_test.lm.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="section level3">
 <h3 id="for-fixed-effects">For fixed effects<a class="anchor" aria-label="anchor" href="#for-fixed-effects"></a>
 </h3>
@@ -623,7 +668,8 @@
 <div class="section level2">
 <h2 id="principal-component-analysis">Principal Component Analysis<a class="anchor" aria-label="anchor" href="#principal-component-analysis"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">principal_components</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, n <span class="op">=</span> <span class="st">"all"</span>, threshold <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
@@ -675,7 +721,8 @@
 <div class="section level2">
 <h2 id="cluster-analysis">Cluster Analysis<a class="anchor" aria-label="anchor" href="#cluster-analysis"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/cluster_analysis.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/cluster_analysis.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="section level3">
 <h3 id="clustering-solution">Clustering solution<a class="anchor" aria-label="anchor" href="#clustering-solution"></a>
 </h3>
@@ -727,7 +774,8 @@
 <div class="section level2">
 <h2 id="number-of-componentsfactors-to-retain">Number of Components/Factors to Retain<a class="anchor" aria-label="anchor" href="#number-of-componentsfactors-to-retain"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/n_factors.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/n_factors.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/n_factors.html" class="external-link">n_factors</a></span><span class="op">(</span><span class="va">mtcars</span>, type <span class="op">=</span> <span class="st">"PCA"</span><span class="op">)</span></span>
@@ -745,7 +793,8 @@
 <div class="section level2">
 <h2 id="number-of-clusters-to-retain">Number of Clusters to Retain<a class="anchor" aria-label="anchor" href="#number-of-clusters-to-retain"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/n_clusters.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/n_clusters.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/n_clusters.html" class="external-link">n_clusters</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/datawizard/reference/standardize.html" class="external-link">standardize</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
@@ -763,7 +812,8 @@
 <div class="section level2">
 <h2 id="description-of-variable-distributions">Description of Variable Distributions<a class="anchor" aria-label="anchor" href="#description-of-variable-distributions"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/parameters/reference/describe_distribution.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/describe_distribution.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="section level3">
 <h3 id="histogram-for-numbers-with-fractional-part">Histogram for Numbers with Fractional Part<a class="anchor" aria-label="anchor" href="#histogram-for-numbers-with-fractional-part"></a>
 </h3>

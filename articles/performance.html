@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.2.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.0/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
 <link href="../deps/JetBrains_Mono-0.4.2/font.css" rel="stylesheet">
 <link href="../deps/Roboto_Slab-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -153,8 +153,19 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>A crucial aspect when building regression models is to evaluate the quality of modelfit. It is important to investigate how well models fit to the data and which fit indices to report. Functions to create diagnostic plots or to compute fit measures do exist, however, mostly spread over different packages. There is no unique and consistent approach to assess the model quality for different kind of models.</p>
-<p>The primary goal of the <em>performance</em> package in <em>easystats</em> ecosystem is to fill this gap and to provide utilities for computing <strong>indices of model quality</strong> and <strong>goodness of fit</strong>. These include measures like r-squared (R2), root mean squared error (RMSE) or intraclass correlation coefficient (ICC) , but also functions to check (mixed) models for overdispersion, zero-inflation, convergence or singularity.</p>
+<p>A crucial aspect when building regression models is to evaluate the
+quality of modelfit. It is important to investigate how well models fit
+to the data and which fit indices to report. Functions to create
+diagnostic plots or to compute fit measures do exist, however, mostly
+spread over different packages. There is no unique and consistent
+approach to assess the model quality for different kind of models.</p>
+<p>The primary goal of the <em>performance</em> package in
+<em>easystats</em> ecosystem is to fill this gap and to provide
+utilities for computing <strong>indices of model quality</strong> and
+<strong>goodness of fit</strong>. These include measures like r-squared
+(R2), root mean squared error (RMSE) or intraclass correlation
+coefficient (ICC) , but also functions to check (mixed) models for
+overdispersion, zero-inflation, convergence or singularity.</p>
 <p>For more, see: <a href="https://easystats.github.io/performance/" class="external-link uri">https://easystats.github.io/performance/</a></p>
 </div>
 <div class="section level2">
@@ -168,7 +179,8 @@
 <div class="section level3">
 <h3 id="binned-residuals">Binned Residuals<a class="anchor" aria-label="anchor" href="#binned-residuals"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/binned_residuals.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/binned_residuals.html" class="external-link">related
+function documentation</a>)</em></p>
 <p>Example where model is <strong>not</strong> a good fit.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span>
@@ -191,7 +203,8 @@
 <div class="section level3">
 <h3 id="check-for-multicollinearity---variance-inflation-factor">Check for Multicollinearity - Variance Inflation Factor<a class="anchor" aria-label="anchor" href="#check-for-multicollinearity---variance-inflation-factor"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_collinearity.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_collinearity.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_collinearity.html" class="external-link">check_collinearity</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
@@ -261,7 +274,8 @@
 <div class="section level3">
 <h3 id="check-for-outliers">Check for Outliers<a class="anchor" aria-label="anchor" href="#check-for-outliers"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_outliers.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_outliers.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select only mpg and disp (continuous)</span></span>
 <span><span class="va">mt1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span></span>
@@ -292,7 +306,8 @@
 <div class="section level3">
 <h3 id="check-for-normal-distributed-residuals">Check for Normal Distributed Residuals<a class="anchor" aria-label="anchor" href="#check-for-normal-distributed-residuals"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
@@ -321,7 +336,8 @@
 <div class="section level3">
 <h3 id="check-for-normal-distributed-random-effects">Check for Normal Distributed Random Effects<a class="anchor" aria-label="anchor" href="#check-for-normal-distributed-random-effects"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span>, effects <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span>
@@ -332,7 +348,8 @@
 <div class="section level3">
 <h3 id="check-for-heteroscedasticity">Check for Heteroscedasticity<a class="anchor" aria-label="anchor" href="#check-for-heteroscedasticity"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html" class="external-link">check_heteroscedasticity</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -342,7 +359,8 @@
 <div class="section level3">
 <h3 id="check-for-homogeneity">Check for Homogeneity<a class="anchor" aria-label="anchor" href="#check-for-homogeneity"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_homogeneity.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_homogeneity.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">len</span> <span class="op">~</span> <span class="va">supp</span> <span class="op">+</span> <span class="va">dose</span>, data <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_homogeneity.html" class="external-link">check_homogeneity</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -352,12 +370,14 @@
 <div class="section level3">
 <h3 id="posterior-predictive-checks">Posterior Predictive Checks<a class="anchor" aria-label="anchor" href="#posterior-predictive-checks"></a>
 </h3>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">check_posterior_predictions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-17-1.png" width="100%"></p>
-<p>To check if the model properly captures the variation in the data, use <code>check_range = TRUE</code>:</p>
+<p>To check if the model properly captures the variation in the data,
+use <code>check_range = TRUE</code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">check_posterior_predictions</a></span><span class="op">(</span><span class="va">model</span>, check_range <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -367,8 +387,13 @@
 <div class="section level2">
 <h2 id="overall-model-check">Overall Model Check<a class="anchor" aria-label="anchor" href="#overall-model-check"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">related function documentation</a>)</em></p>
-<p>The composition of plots when checking model assumptions depends on the type of the input model. E.g., for logistic regression models, a <a href="https://easystats.github.io/performance/reference/binned_residuals.html" class="external-link">binned residuals plot</a> is used, while for linear models a plot of homegeneity of variance is shown instead. Models from count data include plots to inspect overdispersion.</p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">related
+function documentation</a>)</em></p>
+<p>The composition of plots when checking model assumptions depends on
+the type of the input model. E.g., for logistic regression models, a <a href="https://easystats.github.io/performance/reference/binned_residuals.html" class="external-link">binned
+residuals plot</a> is used, while for linear models a plot of
+homegeneity of variance is shown instead. Models from count data include
+plots to inspect overdispersion.</p>
 <div class="section level3">
 <h3 id="checks-for-generalized-linear-models">Checks for generalized linear models<a class="anchor" aria-label="anchor" href="#checks-for-generalized-linear-models"></a>
 </h3>
@@ -402,7 +427,11 @@
 <p><img src="performance_files/figure-html/unnamed-chunk-21-1.png" width="100%"></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span>, panel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>Note that not all checks supported in <code>performance</code> will be reported in this unified <strong>visual</strong> check. For example, for linear models, one needs to check the assumption that errors are not autocorrelated, but this check will not be shown in the visual check.</p>
+<p>Note that not all checks supported in <code>performance</code> will
+be reported in this unified <strong>visual</strong> check. For example,
+for linear models, one needs to check the assumption that errors are not
+autocorrelated, but this check will not be shown in the visual
+check.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_autocorrelation.html" class="external-link">check_autocorrelation</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.004).</span></span></code></pre></div>
@@ -411,8 +440,14 @@
 <div class="section level2">
 <h2 id="compare-model-performances">Compare Model Performances<a class="anchor" aria-label="anchor" href="#compare-model-performances"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/performance/reference/model_performance.html" class="external-link">related function documentation</a>)</em></p>
-<p><code><a href="https://easystats.github.io/performance/reference/compare_performance.html" class="external-link">compare_performance()</a></code> computes indices of model performance for different models at once and hence allows comparison of indices across models. The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>-method creates a “spiderweb” plot, where the different indices are normalized and larger values indicate better model performance. Hence, points closer to the center indicate worse fit indices.</p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/model_performance.html" class="external-link">related
+function documentation</a>)</em></p>
+<p><code><a href="https://easystats.github.io/performance/reference/compare_performance.html" class="external-link">compare_performance()</a></code> computes indices of model
+performance for different models at once and hence allows comparison of
+indices across models. The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>-method creates a
+“spiderweb” plot, where the different indices are normalized and larger
+values indicate better model performance. Hence, points closer to the
+center indicate worse fit indices.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
@@ -437,7 +472,8 @@
 <div class="section level2">
 <h2 id="model-and-vector-properties">Model and Vector Properties<a class="anchor" aria-label="anchor" href="#model-and-vector-properties"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/performance/reference/check_distribution.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_distribution.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_distribution.html" class="external-link">check_distribution</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -477,7 +513,8 @@
 <div class="section level2">
 <h2 id="roc-curves">ROC curves<a class="anchor" aria-label="anchor" href="#roc-curves"></a>
 </h2>
-<p><em>(<a href="https://easystats.github.io/performance/reference/performance_roc.html" class="external-link">related function documentation</a>)</em></p>
+<p><em>(<a href="https://easystats.github.io/performance/reference/performance_roc.html" class="external-link">related
+function documentation</a>)</em></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"performance"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="st">"0.7.0"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
