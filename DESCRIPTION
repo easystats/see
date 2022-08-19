@@ -63,7 +63,7 @@ Depends:
     stats
 Imports:
     bayestestR (>= 0.12.1),
-    datawizard (>= 0.5.0),
+    datawizard (>= 0.5.1),
     effectsize (>= 0.7.0.5),
     ggplot2 (>= 3.3.6),
     insight (>= 0.18.2),
@@ -105,9 +105,13 @@ Suggests:
     testthat (>= 3.1.0),
     tidygraph,
     vdiffr
-Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Remotes: easystats/correlation, easystats/modelbased
+Config/testthat/edition: 3
+Config/Needs/website:
+    rstudio/bslib,
+    r-lib/pkgdown,
+    easystats/easystatstemplate
