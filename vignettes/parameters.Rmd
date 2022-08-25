@@ -153,16 +153,20 @@ However, there are several ways to change the the names of the parameters. Since
 ```{r}
 library(ggplot2)
 plot(model_parameters(model4)) +
-  scale_y_discrete(labels = c("Time", "Age", "Education (mid-level)", 
-                              "Eucation (high-level)"))
+  scale_y_discrete(labels = c(
+    "Time", "Age", "Education (mid-level)",
+    "Eucation (high-level)"
+  ))
 ```
 
 Another way would be changing the values of the `Parameter` column before calling `plot()`:
 
 ```{r}
 mp <- model_parameters(model4)
-mp$Parameter <- c("(Intercept)", "Time", "Age", "Education (mid-level)", 
-                  "Eucation (high-level)")
+mp$Parameter <- c(
+  "(Intercept)", "Time", "Age", "Education (mid-level)",
+  "Eucation (high-level)"
+)
 plot(mp)
 ```
 
@@ -324,7 +328,7 @@ plot(result)
 # priors <- c(prior(normal(0,1), class = Intercept),
 #             prior(cauchy(0,0.5), class = sd))
 #
-# model <- 
+# model <-
 #    brm(TE|se(seTE) ~ 1 + (1|Author),
 #    data = Meta_Analysis_Data,
 #    prior = priors,

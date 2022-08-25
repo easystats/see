@@ -39,7 +39,7 @@ plot.see_equivalence_test <- function(x,
   )
 
   if (is.null(model)) {
-    warning(sprintf("Can't find object '%s'.", model_name))
+    warning(sprintf("Can't find object '%s'.", model_name), call. = FALSE)
     return(x)
   }
 
@@ -355,7 +355,7 @@ plot.see_equivalence_test_lm <- function(x,
   )
 
   if (is.null(model)) {
-    warning(sprintf("Can't find object '%s'.", model_name))
+    warning(sprintf("Can't find object '%s'.", model_name), call. = FALSE)
     return(x)
   }
 

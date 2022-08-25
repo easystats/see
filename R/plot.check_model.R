@@ -6,7 +6,7 @@ plot.see_check_model <- function(x,
                                  ...) {
   p <- list()
 
-# read arguments / settings from "check_model()" -----
+  # read arguments / settings from "check_model()" -----
 
   panel <- attr(x, "panel")
   check <- attr(x, "check")

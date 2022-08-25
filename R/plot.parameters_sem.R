@@ -119,43 +119,46 @@ plot.see_parameters_sem <- function(x,
   p <- ggraph::ggraph(tidygraph::tbl_graph(x$nodes, x$edges), ...) +
 
     # Plot Correlations
-    ggraph::geom_edge_arc(aes(
-      alpha = as.numeric(.data$Component == "Correlation"),
-      label = .data$Label_Correlation,
-      color = .data$Coefficient
-    ),
-    strength = 0.1,
-    label_dodge = unit(2, "mm"),
-    linetype = 2,
-    angle_calc = "along",
-    label_size = 3,
-    start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+    ggraph::geom_edge_arc(
+      aes(
+        alpha = as.numeric(.data$Component == "Correlation"),
+        label = .data$Label_Correlation,
+        color = .data$Coefficient
+      ),
+      strength = 0.1,
+      label_dodge = unit(2, "mm"),
+      linetype = 2,
+      angle_calc = "along",
+      label_size = 3,
+      start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
     ) +
     # Plot Loadings
-    ggraph::geom_edge_link(aes(
-      alpha = as.numeric(.data$Component == "Loading"),
-      label = .data$Label_Loading,
-      color = .data$Coefficient
-    ),
-    label_dodge = unit(2, "mm"),
-    angle_calc = "along",
-    edge_width = 0.8,
-    label_size = 3,
-    arrow = arrow(type = "closed", length = unit(3, "mm")),
-    start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+    ggraph::geom_edge_link(
+      aes(
+        alpha = as.numeric(.data$Component == "Loading"),
+        label = .data$Label_Loading,
+        color = .data$Coefficient
+      ),
+      label_dodge = unit(2, "mm"),
+      angle_calc = "along",
+      edge_width = 0.8,
+      label_size = 3,
+      arrow = arrow(type = "closed", length = unit(3, "mm")),
+      start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
     ) +
     # Plot regressions
-    ggraph::geom_edge_link(aes(
-      alpha = as.numeric(.data$Component == "Regression"),
-      label = .data$Label_Regression,
-      color = .data$Coefficient
-    ),
-    label_dodge = unit(2, "mm"),
-    angle_calc = "along",
-    edge_width = 1.2,
-    label_size = 3,
-    arrow = arrow(type = "closed", length = unit(3, "mm")),
-    start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+    ggraph::geom_edge_link(
+      aes(
+        alpha = as.numeric(.data$Component == "Regression"),
+        label = .data$Label_Regression,
+        color = .data$Coefficient
+      ),
+      label_dodge = unit(2, "mm"),
+      angle_calc = "along",
+      edge_width = 1.2,
+      label_size = 3,
+      arrow = arrow(type = "closed", length = unit(3, "mm")),
+      start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
     ) +
     ggraph::geom_node_point(aes(colour = .data$Latent, shape = .data$Latent), size = size_point) +
     ggraph::geom_node_text(aes(label = .data$Name)) +

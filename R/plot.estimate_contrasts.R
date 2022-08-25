@@ -7,7 +7,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @keywords internal
 .data_plot_estimate_contrasts <- function(x, means = NULL, ...) {
   if (is.null(means)) {
-    stop("Please provide the estimated means data obtained via 'estimate_means()'.")
+    stop("Please provide the estimated means data obtained via 'estimate_means()'.", call. = FALSE)
   } else {
     x_name <- names(means)[1]
   }

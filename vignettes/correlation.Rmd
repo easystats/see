@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 if (!requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("ggraph", quietly = TRUE) ||
   !requireNamespace("poorman", quietly = TRUE) &&
-  !packageVersion("correlation") >= "0.8.2") {
+    !packageVersion("correlation") >= "0.8.2") {
   knitr::opts_chunk$set(eval = FALSE)
 } else {
   library(ggplot2)
@@ -85,9 +85,12 @@ We can even customize that to make it more beautiful:
 
 ```{r}
 plot(result,
-     point = list(aes = list(color = "Petal.Width", size = "Sepal.Length"),
-                  alpha = 0.66),
-     smooth = list(color = "black", se = FALSE)) +
+  point = list(
+    aes = list(color = "Petal.Width", size = "Sepal.Length"),
+    alpha = 0.66
+  ),
+  smooth = list(color = "black", se = FALSE)
+) +
   see::theme_modern() +
   see::scale_color_material_c(palette = "rainbow", guide = "none") +
   scale_size_continuous(guide = "none")
