@@ -95,8 +95,7 @@ results supported by *easystats*.
 [![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
 [![see status
 badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-universe.dev)
-[![R
-check](https://github.com/easystats/see/workflows/R-check/badge.svg?branch=master)](https://github.com/easystats/see/actions)
+[![R-CMD-check](https://github.com/easystats/see/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/see/actions)
 
 The *see* package is available on CRAN, while its latest development
 version is available on R-universe (from *rOpenSci*).
