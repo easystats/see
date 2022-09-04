@@ -71,7 +71,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' @examples
 #' \donttest{
-#' if (require("modelbased") && require("rstanarm")) {
+#' if (require("modelbased") && require("rstanarm") && require("emmeans")) {
 #'   model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
 #'   contrasts <- estimate_contrasts(model)
 #'   means <- estimate_means(model)
