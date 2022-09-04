@@ -5,12 +5,9 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
-  release:
-    types: [published]
-  workflow_dispatch:
 
-name: pkgdown
+name: HTML5 check
 
 jobs:
-  pkgdown:
-    uses: easystats/workflows/.github/workflows/pkgdown.yaml@main
+  HTML5-check:
+    uses: easystats/workflows/.github/workflows/html-5-check.yaml@main
