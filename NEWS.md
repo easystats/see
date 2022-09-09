@@ -4,6 +4,11 @@
 
 * Replaced deprecated arguments in function calls.
 
+## Bug fixes
+
+* Fixed issues in the `plot()` method from `model_parameters()` for
+  intercept-only models.
+
 # see 0.7.2
 
 ## Changes
