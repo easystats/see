@@ -53,8 +53,8 @@ plot.see_parameters_model <- function(x,
   # retrieve settings ----------------
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
-  # show intercept for interceopt only models
-  if (insight::is_nullmodel(x)) {
+  # show intercept for intercept-only models
+  if (insight::is_model(x) && insight::is_nullmodel(x)) {
     show_intercept <- TRUE
   }
 
