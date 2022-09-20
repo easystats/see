@@ -22,6 +22,7 @@ if (!requireNamespace("bayestestR", quietly = TRUE) ||
   !requireNamespace("rstanarm", quietly = TRUE) ||
   !requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("brms", quietly = TRUE) ||
+  !requireNamespace("logspline", quietly = TRUE) ||
   !requireNamespace("insight", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -250,6 +251,8 @@ and posterior distributions for each parameter (note that by default
 border.
 
 ```{r}
+library(logspline) # needed for `si()`
+
 result <- si(model)
 result
 
