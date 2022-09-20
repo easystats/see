@@ -48,7 +48,7 @@ Authors@R:
              role = "rev",
              email = "bossek@wi.uni-muenster.de",
              comment = c(Twitter = "@BossekJakob")))
-Maintainer: Daniel Lüdecke <d.luedecke@uke.de>
+Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
 Description: Provides plotting utilities supporting easystats-packages
     (<https://github.com/easystats/easystats>) and some extra themes,
     geoms, and scales for 'ggplot2'. Color scales are based on
