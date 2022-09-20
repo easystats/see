@@ -82,6 +82,7 @@ Suggests:
     httr,
     lavaan,
     lme4,
+    logspline,
     MASS,
     mgcv,
     metafor,
