@@ -183,7 +183,6 @@ packages.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.metafor-project.org" class="external-link">metafor</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">splines</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Salamanders"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"iris"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"sleepstudy"</span><span class="op">)</span></span>
@@ -223,19 +222,19 @@ packages.</p>
 <span><span class="co">#&gt; mined [no]  |    -1.84 | 0.31 | [-2.46, -1.23] | -5.87 | &lt; .001</span></span>
 <span></span>
 <span></span>
-<span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/splines/bs.html" class="external-link">bs</a></span><span class="op">(</span><span class="va">Petal.Width</span>, degree <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="fu">splines</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/splines/bs.html" class="external-link">bs</a></span><span class="op">(</span><span class="va">Petal.Width</span>, degree <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model2</span>, effects <span class="op">=</span> <span class="st">"fixed"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Parameter                                       | Coefficient |    SE |          95% CI | t(141) |      p</span></span>
-<span><span class="co">#&gt; ---------------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; (Intercept)                                     |        4.79 |  0.17 | [  4.45,  5.13] |  27.66 | &lt; .001</span></span>
-<span><span class="co">#&gt; Species [versicolor]                            |       -3.73 |  2.14 | [ -7.96,  0.50] |  -1.74 | 0.083 </span></span>
-<span><span class="co">#&gt; Species [virginica]                             |       -2.67 |  2.88 | [ -8.36,  3.03] |  -0.93 | 0.356 </span></span>
-<span><span class="co">#&gt; Petal Width [1st degree]                        |        2.53 |  2.36 | [ -2.13,  7.20] |   1.07 | 0.285 </span></span>
-<span><span class="co">#&gt; Petal Width [2nd degree]                        |      -11.18 | 21.14 | [-52.98, 30.62] |  -0.53 | 0.598 </span></span>
-<span><span class="co">#&gt; Species [versicolor] * Petal Width [1st degree] |        5.48 |  4.84 | [ -4.09, 15.05] |   1.13 | 0.260 </span></span>
-<span><span class="co">#&gt; Species [virginica] * Petal Width [1st degree]  |        2.37 |  4.35 | [ -6.22, 10.96] |   0.54 | 0.587 </span></span>
-<span><span class="co">#&gt; Species [versicolor] * Petal Width [2nd degree] |       14.84 | 21.16 | [-26.99, 56.68] |   0.70 | 0.484 </span></span>
-<span><span class="co">#&gt; Species [virginica] * Petal Width [2nd degree]  |       15.81 | 21.32 | [-26.35, 57.96] |   0.74 | 0.460</span></span>
+<span><span class="co">#&gt; Parameter                | Coefficient |    SE |          95% CI | t(141) |      p</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; (Intercept)              |        4.79 |  0.17 | [  4.45,  5.13] |  27.66 | &lt; .001</span></span>
+<span><span class="co">#&gt; Species [versicolor]     |       -3.73 |  2.14 | [ -7.96,  0.50] |  -1.74 | 0.083 </span></span>
+<span><span class="co">#&gt; Species [virginica]      |       -2.67 |  2.88 | [ -8.36,  3.03] |  -0.93 | 0.356 </span></span>
+<span><span class="co">#&gt; Petal Width [1st degree] |        2.53 |  2.36 | [ -2.13,  7.20] |   1.07 | 0.285 </span></span>
+<span><span class="co">#&gt; Petal Width [2nd degree] |      -11.18 | 21.14 | [-52.98, 30.62] |  -0.53 | 0.598 </span></span>
+<span><span class="co">#&gt; Petal Width [1st degree] |        5.48 |  4.84 | [ -4.09, 15.05] |   1.13 | 0.260 </span></span>
+<span><span class="co">#&gt; Petal Width [1st degree] |        2.37 |  4.35 | [ -6.22, 10.96] |   0.54 | 0.587 </span></span>
+<span><span class="co">#&gt; Petal Width [2nd degree] |       14.84 | 21.16 | [-26.99, 56.68] |   0.70 | 0.484 </span></span>
+<span><span class="co">#&gt; Petal Width [2nd degree] |       15.81 | 21.32 | [-26.35, 57.96] |   0.74 | 0.460</span></span>
 <span></span>
 <span></span>
 <span><span class="va">model3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span></span>
