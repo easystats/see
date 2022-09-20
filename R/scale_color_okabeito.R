@@ -6,7 +6,7 @@
 #' includes 9 vivid colors that are readily nameable and include colors that
 #' correspond to major primary and secondary colors (e.g., red, yellow, blue).
 #'
-#' The Okabe-Ito palette is included in the base R [palette.colors()].
+#' The Okabe-Ito palette is included in the base R [grDevices::palette.colors()].
 #' These functions make this palette easier to use with *ggplot2*.
 #'
 #' The Okabe-Ito palette is only available as a discrete palette.
