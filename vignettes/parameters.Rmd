@@ -26,6 +26,7 @@ if (!requireNamespace("parameters", quietly = TRUE) ||
   !requireNamespace("brms", quietly = TRUE) ||
   !requireNamespace("lavaan", quietly = TRUE) ||
   !requireNamespace("metafor", quietly = TRUE) ||
+  !requireNamespace("splines", quietly = TRUE) ||
   !requireNamespace("ggplot2", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -79,7 +80,7 @@ model1 <- glmmTMB(
 model_parameters(model1, effects = "fixed")
 
 
-model2 <- lm(Sepal.Length ~ Species * bs(Petal.Width, degree = 2), data = iris)
+model2 <- lm(Sepal.Length ~ Species * splines::bs(Petal.Width, degree = 2), data = iris)
 model_parameters(model2, effects = "fixed")
 
 

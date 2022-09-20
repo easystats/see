@@ -96,6 +96,7 @@ Suggests:
     rmarkdown,
     rstanarm,
     scales (>= 1.2.0),
+    splines,
     testthat (>= 3.1.0),
     tidygraph,
     vdiffr
