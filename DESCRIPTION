@@ -1,11 +1,11 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.7.2.2
+Version: 0.7.3
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
-             role = c("aut", "cre"),
+             role = c("aut", "ctb"),
              email = "d.luedecke@uke.de",
              comment = c(ORCID = "0000-0002-8895-3206", Twitter = "@strengejacke")),
       person(given = "Dominique",
@@ -15,7 +15,7 @@ Authors@R:
              comment = c(ORCID = "0000-0001-5375-9967", Twitter = "@Dom_Makowski")),
       person(given = "Indrajeet",
              family = "Patil",
-             role = c("aut", "ctb"),
+             role = c("aut", "cre"),
              email = "patilindrajeet.science@gmail.com",
              comment = c(ORCID = "0000-0003-1995-6531", Twitter = "@patilindrajeets")),
       person(given = "Mattan S.",
@@ -59,14 +59,14 @@ BugReports: https://github.com/easystats/see/issues
 Depends:
     graphics,
     grDevices,
-    R (>= 3.5),
+    R (>= 3.6),
     stats
 Imports:
-    bayestestR (>= 0.12.1),
-    datawizard (>= 0.5.1),
+    bayestestR (>= 0.13.0),
+    datawizard (>= 0.6.0),
     effectsize (>= 0.7.0.5),
     ggplot2 (>= 3.3.6),
-    insight (>= 0.18.2),
+    insight (>= 0.18.3),
     parameters (>= 0.18.2)
 Suggests:
     brms,

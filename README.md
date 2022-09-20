@@ -103,7 +103,8 @@ version is available on R-universe (from *rOpenSci*).
 | Type        | Source     | Command                                                               |
 |-------------|------------|-----------------------------------------------------------------------|
 | Release     | CRAN       | `install.packages("see")`                                             |
-| Development | R-universe | `install.packages("see", repos = "https://easystats.r-universe.dev")` |
+| Development | r-universe | `install.packages("see", repos = "https://easystats.r-universe.dev")` |
+| Development | GitHub     | `remotes::install_github("easystats/see")`                            |
 
 Once you have downloaded the package, you can then load it using:
 
@@ -111,20 +112,12 @@ Once you have downloaded the package, you can then load it using:
 library("see")
 ```
 
-This package provides visualisation toolbox for R packages in the
-*easystats* [ecosystem](https://easystats.github.io/easystats/). But
-note that it will not download any of the *easystats* packages for you.
-Rather, it will be loaded when a respective plotting method is requested
-by an *easystats* package.
-
-# Documentation
-
-Following resources are a good way to get to know more about the
-functionality offered by this package:
-
-[![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
-[![Features](https://img.shields.io/badge/features-see-orange.svg?colorB=2196F3)](https://easystats.github.io/see/reference/index.html)
-[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+> **Tip**
+>
+> **Instead of `library(datawizard)`, use `library(easystats)`.** **This
+> will make all features of the easystats-ecosystem available.**
+>
+> **To stay updated, use `easystats::install_latest()`.**
 
 # Plotting functions for ‘easystats’ packages
 
@@ -136,7 +129,7 @@ encouraged to explore the range of examples on the package
 ## [parameters](https://github.com/easystats/parameters)
 
 The *parameters* package converts summaries of regression model objects
-into dataframes (Lüdecke et al., 2020). The *see* package can take this
+into data frames (Lüdecke et al., 2020). The *see* package can take this
 transformed object and, for example, create a dot-and-whisker plot for
 the extracted regression estimates simply by passing the `parameters`
 class object to `plot()`.

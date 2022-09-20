@@ -1,6 +1,8 @@
-# see 0.7.2.1
+# see 0.7.3
 
 ## Changes
+
+* Indrajeet Patil is now the maintainer.
 
 * Replaced deprecated arguments in function calls.
 
