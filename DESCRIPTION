@@ -109,7 +109,7 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-Remotes: easystats/correlation, easystats/modelbased
+Remotes: easystats/performance, easystats/parameters
 Config/testthat/edition: 3
 Config/Needs/website:
     rstudio/bslib,
