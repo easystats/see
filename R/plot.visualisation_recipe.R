@@ -23,7 +23,7 @@ plot.see_visualisation_recipe <- function(x, ...) {
 plot.see_visualisation_recipes <- function(x, ...) {
   the_plots <- list()
   for (i in names(x)) {
-    the_plots[[i]] <- plot(x[[i]])
+    the_plots[[i]] <- graphics::plot(x[[i]])
   }
   pw <- plots(the_plots, ...)
   .safe_print_plots(pw)
