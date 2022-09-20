@@ -26,9 +26,7 @@ if (!requireNamespace("parameters", quietly = TRUE) ||
   !requireNamespace("brms", quietly = TRUE) ||
   !requireNamespace("lavaan", quietly = TRUE) ||
   !requireNamespace("metafor", quietly = TRUE) ||
-  !requireNamespace("ggplot2", quietly = TRUE) ||
-  !requireNamespace("factoextra", quietly = TRUE) ||
-  !requireNamespace("splines", quietly = TRUE)) {
+  !requireNamespace("ggplot2", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
@@ -59,7 +57,6 @@ library(lme4)
 library(lavaan)
 library(metafor)
 library(ggplot2)
-library(splines)
 data("Salamanders")
 data("iris")
 data("sleepstudy")

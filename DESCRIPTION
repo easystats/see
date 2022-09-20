@@ -70,10 +70,8 @@ Imports:
     parameters (>= 0.18.2)
 Suggests:
     brms,
-    coda,
     correlation (>= 0.8.2),
     emmeans,
-    factoextra,
     ggdist,
     ggraph,
     ggrepel,
@@ -84,13 +82,10 @@ Suggests:
     httr,
     lavaan,
     lme4,
-    logspline,
     MASS,
-    mclust,
     mgcv,
     metafor,
     modelbased (>= 0.8.1),
-    NbClust,
     nFactors,
     patchwork,
     performance (>= 0.9.2),
@@ -101,7 +96,6 @@ Suggests:
     rmarkdown,
     rstanarm,
     scales (>= 1.2.0),
-    splines,
     testthat (>= 3.1.0),
     tidygraph,
     vdiffr
