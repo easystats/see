@@ -45,7 +45,7 @@
     
     <a class="navbar-brand me-2" href="index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -179,21 +179,24 @@
 </tr>
 <tr class="even">
 <td>Development</td>
-<td>R-universe</td>
+<td>r-universe</td>
 <td><code>install.packages("see", repos = "https://easystats.r-universe.dev")</code></td>
+</tr>
+<tr class="odd">
+<td>Development</td>
+<td>GitHub</td>
+<td><code>remotes::install_github("easystats/see")</code></td>
 </tr>
 </tbody>
 </table>
 <p>Once you have downloaded the package, you can then load it using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/see/">"see"</a></span><span class="op">)</span></span></code></pre></div>
-<p>This package provides visualisation toolbox for R packages in the <em>easystats</em> <a href="https://easystats.github.io/easystats/" class="external-link">ecosystem</a>. But note that it will not download any of the <em>easystats</em> packages for you. Rather, it will be loaded when a respective plotting method is requested by an <em>easystats</em> package.</p>
-</div>
-<div class="section level1">
-<h1 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
-</h1>
-<p>Following resources are a good way to get to know more about the functionality offered by this package:</p>
-<p><a href="https://easystats.github.io/see/"><img src="https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63" alt="Documentation"></a> <a href="https://easystats.github.io/see/reference/index.html"><img src="https://img.shields.io/badge/features-see-orange.svg?colorB=2196F3" alt="Features"></a> <a href="https://easystats.github.io/blog/posts/" class="external-link"><img src="https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800" alt="Blog"></a></p>
+<blockquote>
+<p><strong>Tip</strong></p>
+<p><strong>Instead of <code><a href="https://easystats.github.io/datawizard/" class="external-link">library(datawizard)</a></code>, use <code><a href="https://easystats.github.io/easystats/" class="external-link">library(easystats)</a></code>.</strong> <strong>This will make all features of the easystats-ecosystem available.</strong></p>
+<p><strong>To stay updated, use <code>easystats::install_latest()</code>.</strong></p>
+</blockquote>
 </div>
 <div class="section level1">
 <h1 id="plotting-functions-for-easystats-packages">Plotting functions for ‘easystats’ packages<a class="anchor" aria-label="anchor" href="#plotting-functions-for-easystats-packages"></a>
@@ -203,7 +206,7 @@
 <h2 id="parameters">
 <a href="https://github.com/easystats/parameters" class="external-link">parameters</a><a class="anchor" aria-label="anchor" href="#parameters"></a>
 </h2>
-<p>The <em>parameters</em> package converts summaries of regression model objects into dataframes (Lüdecke et al., 2020). The <em>see</em> package can take this transformed object and, for example, create a dot-and-whisker plot for the extracted regression estimates simply by passing the <code>parameters</code> class object to <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>.</p>
+<p>The <em>parameters</em> package converts summaries of regression model objects into data frames (Lüdecke et al., 2020). The <em>see</em> package can take this transformed object and, for example, create a dot-and-whisker plot for the extracted regression estimates simply by passing the <code>parameters</code> class object to <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/parameters/" class="external-link">parameters</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span></span>
@@ -536,11 +539,11 @@ Wilkinson, L. (2012). <span class="nocase">The Grammar of Graphics</span>. In <e
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8895-3206" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a> <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-8895-3206" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a> <br><small class="roles"> Author, inventor </small> <a href="https://orcid.org/0000-0001-5375-9967" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
-<a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a> <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0003-1995-6531" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-1995-6531" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a> <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-4287-4801" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>

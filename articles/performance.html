@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -286,7 +286,9 @@ function documentation</a>)</em></p>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_outliers.html" class="external-link">check_outliers</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
-<span><span class="co">#&gt; Warning: 2 outliers detected (cases 31, 34).</span></span></code></pre></div>
+<span><span class="co">#&gt; 2 outliers detected: cases 31, 34.</span></span>
+<span><span class="co">#&gt; - Based on the following method and threshold: cook (0.81).</span></span>
+<span><span class="co">#&gt; - For variable: (Whole model).</span></span></code></pre></div>
 <p>There are two visualization options</p>
 <div class="section level4">
 <h4 id="dot-plot-with-contour-lines">dot-plot with contour lines<a class="anchor" aria-label="anchor" href="#dot-plot-with-contour-lines"></a>
@@ -459,12 +461,12 @@ center indicate worse fit indices.</p>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; # Comparison of Model Performance Indices</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Name | Model |     AIC | AIC weights |     BIC | BIC weights |    R2 | R2 (adj.) |  RMSE | Sigma</span></span>
-<span><span class="co">#&gt; ------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; lm1  |    lm | 231.452 |    7.10e-34 | 243.494 |    1.32e-30 | 0.619 |     0.614 | 0.510 | 0.515</span></span>
-<span><span class="co">#&gt; lm2  |    lm | 106.233 |    1.10e-06 | 121.286 |    4.54e-04 | 0.837 |     0.833 | 0.333 | 0.338</span></span>
-<span><span class="co">#&gt; lm3  |    lm | 187.092 |    3.05e-24 | 208.167 |    6.18e-23 | 0.727 |     0.718 | 0.431 | 0.440</span></span>
-<span><span class="co">#&gt; lm4  |    lm |  78.797 |       1.000 | 105.892 |       1.000 | 0.871 |     0.865 | 0.296 | 0.305</span></span>
+<span><span class="co">#&gt; Name | Model | AIC (weights) | BIC (weights) |    R2 | R2 (adj.) |  RMSE | Sigma</span></span>
+<span><span class="co">#&gt; --------------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; lm1  |    lm | 231.5 (&lt;.001) | 243.5 (&lt;.001) | 0.619 |     0.614 | 0.510 | 0.515</span></span>
+<span><span class="co">#&gt; lm2  |    lm | 106.2 (&lt;.001) | 121.3 (&lt;.001) | 0.837 |     0.833 | 0.333 | 0.338</span></span>
+<span><span class="co">#&gt; lm3  |    lm | 187.1 (&lt;.001) | 208.2 (&lt;.001) | 0.727 |     0.718 | 0.431 | 0.440</span></span>
+<span><span class="co">#&gt; lm4  |    lm |  78.8 (&gt;.999) | 105.9 (&gt;.999) | 0.871 |     0.865 | 0.296 | 0.305</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-24-1.png" width="100%"></p>
