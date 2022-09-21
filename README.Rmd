@@ -76,10 +76,10 @@ library("see")
 
 > **Tip**
 >
-> **Instead of `library(datawizard)`, use `library(easystats)`.**
-> **This will make all features of the  easystats-ecosystem available.**
+> Instead of `library(see)`, use `library(easystats)`.
+> This will make all features of the  easystats-ecosystem available.
 >
-> **To stay updated, use `easystats::install_latest()`.**
+> To stay updated, use `easystats::install_latest()`.
 
 # Plotting functions for 'easystats' packages
 
