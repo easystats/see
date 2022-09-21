@@ -6,6 +6,8 @@
 
 * Indrajeet Patil is now the maintainer.
 
+* The minimum needed R version has been bumped to `3.6`.
+
 * Replaced deprecated arguments in function calls.
 
 ## Bug fixes
