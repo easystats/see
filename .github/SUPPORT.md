@@ -1,6 +1,6 @@
-# Getting help with `{datawizard}`
+# Getting help with `{see}`
 
-Thanks for using `{datawizard}`. Before filing an issue, there are a few places
+Thanks for using `{see}`. Before filing an issue, there are a few places
 to explore and pieces to put together to make the process as smooth as possible.
 
 Start by making a minimal **repr**oducible **ex**ample using the 
@@ -19,7 +19,7 @@ Armed with your reprex, the next step is to figure out where to ask:
     problem _is_ a bug or a feature request, you can easily return here and 
     report it. 
 
-Before opening a new issue, be sure to [search issues and pull requests](https://github.com/easystats/datawizard/issues) to make sure the 
+Before opening a new issue, be sure to [search issues and pull requests](https://github.com/easystats/see/issues) to make sure the 
 bug hasn't been reported and/or already fixed in the development version. By 
 default, the search will be pre-populated with `is:issue is:open`. You can 
 [edit the qualifiers](https://help.github.com/articles/searching-issues-and-pull-requests/) 
