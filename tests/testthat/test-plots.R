@@ -1,6 +1,5 @@
 test_that("`plots()` works", {
-  library(ggplot2)
-  library(see)
+  skip_if_pkg_not_available("ggplot2")
 
   p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) +
     geom_point()

@@ -1,5 +1,5 @@
 test_that("`plot.see_rope()` works", {
-  if (require("bayestestR") && require("rstanarm")) {
+  if (require("rstanarm")) {
     set.seed(123)
     m <- stan_glm(Sepal.Length ~ Petal.Width * Species,
       data = iris,

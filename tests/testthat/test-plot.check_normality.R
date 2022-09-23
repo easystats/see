@@ -1,9 +1,6 @@
 if (getRversion() >= "4.1" &&
   require("vdiffr") &&
-  require("ggplot2") &&
-  require("performance") &&
   require("lme4") &&
-  require("see") &&
   require("qqplotr")) {
   test_that("`plot.see_check_normality()` works", {
     # skip_if_not(.Platform$OS.type == "windows")
