@@ -9,4 +9,12 @@
 library(testthat)
 library(see)
 
+library(ggplot2)
+library(bayestestR)
+library(performance)
+library(parameters)
+library(effectsize)
+library(insight)
+library(datawizard)
+
 test_check("see")
