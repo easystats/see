@@ -49,10 +49,11 @@ Authors@R:
              email = "bossek@wi.uni-muenster.de",
              comment = c(Twitter = "@BossekJakob")))
 Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
-Description: Provides plotting utilities supporting easystats-packages
-    (<https://github.com/easystats/easystats>) and some extra themes,
+Description: Provides plotting utilities supporting packages in the 'easystats'
+    ecosystem (<https://github.com/easystats/easystats>) and some extra themes,
     geoms, and scales for 'ggplot2'. Color scales are based on
-    <https://materialui.co/colors>.
+    <https://materialui.co/colors>. 
+    References: Lüdecke et al. (2021) <doi:10.21105/joss.03393>.
 License: GPL-3
 URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues
@@ -63,14 +64,16 @@ Depends:
     stats
 Imports:
     bayestestR (>= 0.13.0),
-    datawizard (>= 0.6.0),
+    correlation (>= 0.8.2),
+    datawizard (>= 0.6.1),
     effectsize (>= 0.7.0.5),
     ggplot2 (>= 3.3.6),
-    insight (>= 0.18.3),
-    parameters (>= 0.18.2)
+    insight (>= 0.18.4),
+    modelbased (>= 0.8.1),
+    parameters (>= 0.18.2),
+    performance (>= 0.9.2),
 Suggests:
     brms,
-    correlation (>= 0.8.2),
     emmeans,
     ggdist,
     ggraph,
@@ -86,10 +89,8 @@ Suggests:
     MASS,
     mgcv,
     metafor,
-    modelbased (>= 0.8.1),
     nFactors,
     patchwork,
-    performance (>= 0.9.2),
     poorman,
     psych,
     qqplotr,
