@@ -139,22 +139,28 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
   if (!is.numeric(palette) && suppressWarnings(is.na(as.numeric(palette)))) {
     stop("`palette` must be the numeric code for a color palette at <https://color-hex.com>", call. = FALSE)
   }
+
   if (palette == 1014416) {
     pal <- c("#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51")
     pal_name <- "Josiah"
   } else {
-    if (! requireNamespace("curl")) {
-      insight::format_error("Package 'curl' is required to retrieve palettes from <https://color-hex.com>.")
-    }
+    insight::check_if_installed("curl", reason = "to retrieve palettes from <https://color-hex.com>")
+
     curl_url <- paste0("https://www.color-hex.com/color-palette/", palette)
-    curl_res <- tryCatch(suppressWarnings(readLines(curl::curl(url = curl_url))), error = function(e) e)
+    curl_res <- tryCatch(
+      suppressWarnings(readLines(curl::curl(url = curl_url))),
+      error = function(e) e
+    )
+
     if (inherits(curl_res, "error")) {
       insight::format_error("Could not reach <color-hex.com>. Check your internet connection.")
     }
+
     curl_res <- curl_res[grep("description", curl_res)]
-    if (! length(curl_res)) {
+    if (!length(curl_res)) {
       insight::format_error(paste0("Requested palette '", palette, "' not found. Check the palette ID."))
     }
+
     pal <- as.vector(regmatches(curl_res, gregexec("#[a-fA-F0-9]{6}", curl_res))[[1]])
     pal_name <- regmatches(curl_res, gregexec("content=\"(.*) color palette", curl_res))[[1]][2]
   }
