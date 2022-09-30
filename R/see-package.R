@@ -14,6 +14,7 @@
 #' @docType package
 #' @aliases see see-package
 #' @name see-package
+#' @keywords internal
 "_PACKAGE"
 
 # Suppress R CMD check note
