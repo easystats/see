@@ -17,8 +17,9 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-# `{factoextra}` is needed for cluster analysis 
+# `{factoextra}` and `{NbClust}` are needed for cluster analysis
 if (!requireNamespace("factoextra", quietly = TRUE) ||
+  !requireNamespace("NbClust", quietly = TRUE) ||
   !requireNamespace("httr", quietly = TRUE) ||
   !requireNamespace("glmmTMB", quietly = TRUE) ||
   !requireNamespace("lme4", quietly = TRUE) ||

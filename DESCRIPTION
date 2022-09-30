@@ -90,6 +90,7 @@ Suggests:
     MASS,
     mgcv,
     metafor,
+    NbClust,
     nFactors,
     patchwork,
     poorman,
