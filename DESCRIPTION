@@ -75,6 +75,7 @@ Imports:
 Suggests:
     brms,
     emmeans,
+    factoextra,
     ggdist,
     ggraph,
     ggrepel,
