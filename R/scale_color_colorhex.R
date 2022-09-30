@@ -30,12 +30,12 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
 #'   theme_modern() +
-#'   scale_fill_josiah_d(palette = "ice")
+#'   scale_fill_colorhex_d(palette = 1014416)
 #'
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_josiah_c(palette = "rainbow")
+#'   scale_color_colorhex_c(palette = 1014416)
 #' @export
 scale_color_colorhex <- function(palette = 1014416, discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
   pal <- palette_colorhex(palette = palette, reverse = reverse)
