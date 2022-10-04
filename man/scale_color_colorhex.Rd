@@ -116,10 +116,10 @@ an internet connection to download and access.
 library(ggplot2)
 library(see)
 
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+ggplot(iris, aes(x = Species, y = Sepal.Length, color = Species)) +
   geom_boxplot() +
   theme_modern() +
-  scale_color_colorhex_d()
+  scale_color_colorhex_d(palette = 1014416)
 
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +

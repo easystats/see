@@ -22,10 +22,10 @@
 #' library(ggplot2)
 #' library(see)
 #'
-#' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+#' ggplot(iris, aes(x = Species, y = Sepal.Length, color = Species)) +
 #'   geom_boxplot() +
 #'   theme_modern() +
-#'   scale_color_colorhex_d()
+#'   scale_color_colorhex_d(palette = 1014416)
 #'
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
@@ -45,7 +45,7 @@ scale_color_colorhex <- function(palette = 1014416, discrete = TRUE, reverse = F
   if (discrete) {
     discrete_scale(aesthetics = aesthetics, scale_name = paste0("colorhex_", pal_name), palette = pal, ...)
   } else {
-    scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, scale_name = paste0("colorhex_", pal_name), ...)
+    scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
 }
 
@@ -147,10 +147,12 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
     insight::check_if_installed("curl", reason = "to retrieve palettes from <https://color-hex.com>")
 
     curl_url <- paste0("https://www.color-hex.com/color-palette/", palette)
+    con <- curl::curl(url = curl_url)
     curl_res <- tryCatch(
-      suppressWarnings(readLines(curl::curl(url = curl_url))),
+      suppressWarnings(readLines(con)),
       error = function(e) e
     )
+    close(con)
 
     if (inherits(curl_res, "error")) {
       insight::format_error("Could not reach <color-hex.com>. Check your internet connection.")
@@ -169,4 +171,5 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
 
   pal <- grDevices::colorRampPalette(pal, ...)
   attr(pal, "name") <- pal_name
+  return(pal)
 }
