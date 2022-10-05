@@ -96,6 +96,7 @@ results supported by *easystats*.
 [![see status
 badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-universe.dev)
 [![R-CMD-check](https://github.com/easystats/see/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/see/actions)
+[![codecov](https://codecov.io/gh/easystats/see/branch/main/graph/badge.svg)](https://app.codecov.io/gh/easystats/see)
 
 The *see* package is available on CRAN, while its latest development
 version is available on R-universe (from *rOpenSci*).
