@@ -106,6 +106,9 @@
     <loc>https://easystats.github.io/see/reference/palette_bluebrown.html</loc>
   </url>
   <url>
+    <loc>https://easystats.github.io/see/reference/palette_colorhex.html</loc>
+  </url>
+  <url>
     <loc>https://easystats.github.io/see/reference/palette_flat.html</loc>
   </url>
   <url>
@@ -218,6 +221,9 @@
   </url>
   <url>
     <loc>https://easystats.github.io/see/reference/scale_color_bluebrown.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/reference/scale_color_colorhex.html</loc>
   </url>
   <url>
     <loc>https://easystats.github.io/see/reference/scale_color_flat.html</loc>
