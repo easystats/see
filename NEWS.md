@@ -1,5 +1,10 @@
 # see (development version)
 
+## Bug fixes
+
+* Fixed issues with `plot()` for `check_outliers()` for models with convergence
+  issues.
+
 # see 0.7.3
 
 ## Changes

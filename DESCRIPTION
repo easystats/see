@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.7.3.1
+Version: 0.7.3.2
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -115,3 +115,4 @@ Config/Needs/website:
     rstudio/bslib,
     r-lib/pkgdown,
     easystats/easystatstemplate
+Remotes: easystats/performance
