@@ -1,6 +1,6 @@
 if (getRversion() >= "4.1" && require("vdiffr")) {
   test_that("bayestestR package plots rendered correctly", {
-    # skip_if_not(.Platform$OS.type == "windows")
+
 
     # plot.see_bayesfactor_models() --------------------
 
