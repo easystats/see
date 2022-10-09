@@ -1,10 +1,10 @@
 if (getRversion() >= "4.1") {
   test_that("theme functions work", {
-    # skip_if_not(.Platform$OS.type == "windows")
+
 
     skip_if_not_installed("vdiffr")
     skip_if_not_installed("poorman")
-    skip_if_not_installed("ggplot2")
+    
 
     library(poorman)
     library(ggplot2)

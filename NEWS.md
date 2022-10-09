@@ -1,5 +1,10 @@
 # see (development version)
 
+## Changes
+
+* New function `scale_color_colorhex()` provides color scales based on palettes 
+  from <https://color-hex.com> (#245).
+
 ## Bug fixes
 
 * Fixed issues with `plot()` for `check_outliers()` for models with convergence
