@@ -1,7 +1,5 @@
 if (getRversion() >= "4.1" && require("vdiffr")) {
   test_that("bayestestR package plots rendered correctly", {
-
-
     # plot.see_bayesfactor_models() --------------------
 
     lm0 <- lm(qsec ~ 1, data = mtcars)

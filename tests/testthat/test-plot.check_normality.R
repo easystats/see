@@ -3,8 +3,6 @@ if (getRversion() >= "4.1" &&
   require("lme4") &&
   require("qqplotr")) {
   test_that("`plot.see_check_normality()` works", {
-
-
     set.seed(123)
     m_lm <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
     result1 <- check_normality(m_lm)

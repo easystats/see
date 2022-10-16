@@ -9,12 +9,15 @@
 library(testthat)
 library(see)
 
-library(ggplot2)
-library(bayestestR)
-library(performance)
-library(parameters)
-library(effectsize)
-library(insight)
-library(datawizard)
+# suppress printing environment name (noisy)
+invisible({
+  loadNamespace(ggplot2)
+  loadNamespace(bayestestR)
+  loadNamespace(performance)
+  loadNamespace(parameters)
+  loadNamespace(effectsize)
+  loadNamespace(insight)
+  loadNamespace(datawizard)
+})
 
 test_check("see")

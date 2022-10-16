@@ -1,10 +1,8 @@
 if (getRversion() >= "4.1") {
   test_that("theme functions work", {
-
-
     skip_if_not_installed("vdiffr")
     skip_if_not_installed("poorman")
-    
+
 
     library(poorman)
     library(ggplot2)
