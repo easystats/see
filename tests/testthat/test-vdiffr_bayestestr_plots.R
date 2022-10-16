@@ -1,4 +1,4 @@
-if (getRversion() >= "4.1" && require("vdiffr")) {
+if (getRversion() >= "4.1" && requiet("vdiffr")) {
   test_that("bayestestR package plots rendered correctly", {
     # plot.see_bayesfactor_models() --------------------
 

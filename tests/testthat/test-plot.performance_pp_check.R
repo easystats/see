@@ -1,5 +1,5 @@
 # test_that("`print.see_performance_pp_check()` works", {
-#   if (require("performance")) {
+#   if (requiet("performance")) {
 #     model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length,
 #       data = iris
 #     )

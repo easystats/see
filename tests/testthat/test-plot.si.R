@@ -1,5 +1,5 @@
 test_that("`plot.see_si()` works", {
-  if (require("rstanarm") && require("logspline")) {
+  if (requiet("rstanarm") && requiet("logspline")) {
     set.seed(123)
     m <- stan_glm(Sepal.Length ~ Petal.Width * Species,
       data = iris,

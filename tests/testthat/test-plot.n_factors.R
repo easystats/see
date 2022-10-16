@@ -1,8 +1,8 @@
-if (getRversion() >= "4.1" && require("vdiffr")) {
+if (getRversion() >= "4.1" && requiet("vdiffr")) {
   # skip_if_not(.Platform$OS.type == "windows")
 
   test_that("`plot.see_n_factors()` works", {
-    if (require("parameters") && require("nFactors")) {
+    if (requiet("parameters") && requiet("nFactors")) {
       data(mtcars)
       result <- n_factors(mtcars, type = "PCA")
 

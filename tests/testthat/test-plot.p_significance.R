@@ -1,5 +1,5 @@
 test_that("`plot.see_p_significance()` works", {
-  if (require("rstanarm") && require("ggridges")) {
+  if (requiet("rstanarm") && requiet("ggridges")) {
     set.seed(123)
     m <<- stan_glm(Sepal.Length ~ Petal.Width * Species,
       data = iris,

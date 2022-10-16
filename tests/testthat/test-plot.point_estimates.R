@@ -1,5 +1,5 @@
 test_that("`plot.see_point_estimate()` works", {
-  if (require("rstanarm")) {
+  if (requiet("rstanarm")) {
     set.seed(123)
     m <- stan_glm(Sepal.Length ~ Petal.Width * Species,
       data = iris,
