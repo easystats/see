@@ -14,7 +14,7 @@
 #' @param ... Additional arguments passed to `ggplot2::layer()`.
 #'
 #'
-#' @examples
+#' @examplesIf require("ggside") && require("ggplot2")
 #' library(ggplot2)
 #'
 #' # Example 1 (basic geoms and labels) --------------------------

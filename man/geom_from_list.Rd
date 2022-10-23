@@ -28,6 +28,7 @@ These helper functions are built on top of \code{ggplot2::layer()} and can be
 used to add geom(s), whose type and content are specified as a list.
 }
 \examples{
+\dontshow{if (require("ggside") && require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(ggplot2)
 
 # Example 1 (basic geoms and labels) --------------------------
@@ -140,4 +141,5 @@ if (require("tidygraph", quietly = TRUE) &&
     geom_from_list(list(geom = "ggraph::geom_node_point", size = 10)) +
     geom_from_list(list(geom = "ggraph::geom_node_label", aes = list(label = "name")))
 }
+\dontshow{\}) # examplesIf}
 }
