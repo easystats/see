@@ -1,5 +1,5 @@
 skip_on_cran()
-testthat::skip_if_not_installed("performance", minimum_version = "0.10.0.2")
+skip_if_not_installed("performance", minimum_version = "0.10.0.2")
 
 test_that("`check_model()` works if convergence issues", {
   d <- data.frame(

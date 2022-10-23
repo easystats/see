@@ -9,7 +9,7 @@
 #'   level (see examples).
 #' @param ... Other arguments passed to `ggdist::geom_dots`.
 #'
-#' @examples
+#' @examplesIf require("ggdist")
 #' library(ggplot2)
 #' library(see)
 #'
@@ -37,7 +37,6 @@
 #'     x = "Sepal.Length", y = "Species",
 #'     scale = list("setosa" = 0.4, "versicolor" = 0.6)
 #'   )
-#' @importFrom stats density na.omit xtabs
 #' @export
 geom_binomdensity <- function(data,
                               x,
@@ -59,7 +58,7 @@ geom_binomdensity <- function(data,
 
   # Aesthetics
   vars <- c(x, y)
-  data <- na.omit(data[unique(vars)]) # Drop NaNs
+  data <- stats::na.omit(data[unique(vars)]) # Drop NaNs
 
   # Other parameters
   data$.side <- ifelse(data[[y]] == y_levels[1], "top", "bottom")
@@ -87,12 +86,12 @@ geom_binomdensity <- function(data,
 # Utilities ---------------------------------------------------------------
 
 .geom_binomdensity_scale <- function(data, x, y, scale = "auto") {
-  prop <- prop.table(xtabs(paste("~", y), data)) # Get prop table (useful later)
+  prop <- prop.table(stats::xtabs(paste("~", y), data)) # Get prop table (useful later)
   if (length(scale) == 1 && is.character(scale) && scale %in% c("density", "proportion", "auto")) {
     # Density instead of proportion
     if (scale == "density") {
       prop <- sapply(split(data, data[[y]]), function(df) {
-        max(density(df[[x]], na.rm = TRUE)$y) * nrow(df)
+        max(stats::density(df[[x]], na.rm = TRUE)$y) * nrow(df)
       })
       prop <- prop / sum(prop)
     }
