@@ -15,7 +15,7 @@
 #' @note The color aesthetics for `geom_point_borderless()` is `"fill"`, not
 #'   `"color"`. See 'Examples'.
 #'
-#' @examples
+#' @examplesIf requireNamespace("patchwork", quietly = TRUE)
 #' library(ggplot2)
 #' library(see)
 #'

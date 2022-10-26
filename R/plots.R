@@ -30,7 +30,7 @@
 #' @param theme A ggplot theme specification to use for the plot. Only elements
 #'   related to titles, caption, and tags, as well as plot margin and
 #'   background, are used.
-#' @examples
+#' @examplesIf requireNamespace("patchwork", quietly = TRUE)
 #' library(ggplot2)
 #' library(see)
 #'
