@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.0/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
 <link href="../deps/JetBrains_Mono-0.4.2/font.css" rel="stylesheet">
 <link href="../deps/Roboto_Slab-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -486,16 +486,16 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; Predicted Distribution of Residuals</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Distribution Probability</span></span>
-<span><span class="co">#&gt;        normal         91%</span></span>
-<span><span class="co">#&gt;   exponential          6%</span></span>
+<span><span class="co">#&gt;        cauchy         94%</span></span>
 <span><span class="co">#&gt;     lognormal          3%</span></span>
+<span><span class="co">#&gt;       weibull          3%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Predicted Distribution of Response</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Distribution Probability</span></span>
-<span><span class="co">#&gt;     lognormal         81%</span></span>
-<span><span class="co">#&gt;         gamma         12%</span></span>
-<span><span class="co">#&gt;           chi          3%</span></span>
+<span><span class="co">#&gt;   Distribution Probability</span></span>
+<span><span class="co">#&gt;      lognormal         47%</span></span>
+<span><span class="co">#&gt;          gamma         44%</span></span>
+<span><span class="co">#&gt;  beta-binomial          3%</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-25-1.png" width="100%"></p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
@@ -506,9 +506,9 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; # Predicted Distribution of Vector</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Distribution Probability</span></span>
-<span><span class="co">#&gt;            poisson         69%</span></span>
-<span><span class="co">#&gt;  negative binomial         28%</span></span>
-<span><span class="co">#&gt;           binomial          3%</span></span>
+<span><span class="co">#&gt;            poisson         56%</span></span>
+<span><span class="co">#&gt;  negative binomial         38%</span></span>
+<span><span class="co">#&gt;           binomial          6%</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-26-1.png" width="100%"></p>
 </div>
