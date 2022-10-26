@@ -17,7 +17,7 @@ data_plot.performance_pp_check <- function(x, ...) {
   dataplot <- dataplot[, 1:(ncol(dataplot) - 1), drop = FALSE]
   dataplot$key[dataplot$key != "y"] <- "Model-predicted data"
   dataplot$key[dataplot$key == "y"] <- "Observed data"
-  dataplot$grp <- rep(1:ncol(x), each = nrow(x))
+  dataplot$grp <- rep(seq_len(ncol(x)), each = nrow(x))
 
   attr(dataplot, "info") <- list(
     "xlab" = attr(x, "response_name"),
