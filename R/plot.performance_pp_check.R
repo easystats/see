@@ -23,7 +23,8 @@ data_plot.performance_pp_check <- function(x, ...) {
     "xlab" = attr(x, "response_name"),
     "ylab" = "Density",
     "title" = "Posterior Predictive Check",
-    "check_range" = attr(x, "check_range")
+    "check_range" = attr(x, "check_range"),
+    "bandwidth" <- attr(x, "bandwidth")
   )
 
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
@@ -109,6 +110,12 @@ plot.see_performance_pp_check <- function(x,
 .plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, ...) {
   info <- attr(x, "info")
 
+  # default bandwidth, for smooting
+  bandwith <- attr(x, "bandwidth")
+  if (is.null(bandwith)) {
+    bandwith <- "nrd"
+  }
+
   out <- ggplot2::ggplot(x) +
     ggplot2::stat_density(
       mapping = ggplot2::aes(
@@ -120,6 +127,7 @@ plot.see_performance_pp_check <- function(x,
       ),
       geom = "line",
       position = "identity",
+      bw = bandwith
     ) +
     ggplot2::scale_y_continuous() +
     ggplot2::scale_color_manual(values = c(
