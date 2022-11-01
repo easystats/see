@@ -196,7 +196,7 @@ packages.</p>
 <code class="sourceCode R"><span><span class="co"># fit three example model</span></span>
 <span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB</a></span><span class="op">(</span></span>
 <span>  <span class="va">count</span> <span class="op">~</span> <span class="va">spp</span> <span class="op">+</span> <span class="va">mined</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">site</span><span class="op">)</span>,</span>
-<span>  ziformula <span class="op">=</span>  <span class="op">~</span><span class="va">mined</span>,</span>
+<span>  ziformula <span class="op">=</span> <span class="op">~</span><span class="va">mined</span>,</span>
 <span>  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">Salamanders</span></span>
 <span><span class="op">)</span></span>
@@ -873,13 +873,13 @@ function documentation</a>)</em></p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># highlight multiple categories</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"H"</span><span class="op">)</span>, size_bar <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"H"</span><span class="op">)</span>, size_bar <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-43-2.png" width="672"></p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># own color scales - pass a named vector to 'scale_fill_manual()'</span></span>
 <span><span class="co"># the name of the non-highlighted color is "no_highlight".</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"H"</span>, <span class="st">"A"</span><span class="op">)</span>, size_bar <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"H"</span>, <span class="st">"A"</span><span class="op">)</span>, size_bar <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>D <span class="op">=</span> <span class="st">"red"</span>, H <span class="op">=</span> <span class="st">"green"</span>, A <span class="op">=</span> <span class="st">"gold"</span>, no_highlight <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-43-3.png" width="672"></p>
 </div>
