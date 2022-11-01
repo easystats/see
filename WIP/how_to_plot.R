@@ -69,7 +69,7 @@ how_to_plot.see_estimate_density <- how_to_plot.estimate_density
 #' @keywords internal
 .how_to_plode_cleaner <- function(name) {
   sourcecode <- utils::getAnywhere(name)
-  code <- sourcecode$objs[sourcecode$dups == FALSE]
+  code <- sourcecode$objs[!sourcecode$dups]
   code <- as.character(code)
   # Split by line
   code <- strsplit(code, "\n", fixed = TRUE)[[1]]

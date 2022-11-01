@@ -245,7 +245,7 @@ plot.see_hdi <- function(x,
     p <- p + geom_vline(xintercept = 0, linetype = "dotted")
   }
 
-  if (show_title == FALSE) {
+  if (!show_title) {
     p <- p + ggtitle("")
   }
 

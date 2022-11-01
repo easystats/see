@@ -37,8 +37,8 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
   summary$Parameter <- factor(summary$Parameter, levels = rev(unique(summary$Parameter)))
   colnames(summary)[match("Parameter", colnames(summary))] <- "Study"
 
-  summary$x <- as.numeric(NA)
-  summary$y <- as.numeric(NA)
+  summary$x <- NA_real_
+  summary$y <- NA_real_
   summary$Color <- "Study"
   summary$Color[summary$Study == "Overall"] <- "Overall"
 

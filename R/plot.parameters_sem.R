@@ -41,7 +41,7 @@ data_plot.parameters_sem <- function(x,
   rownames(edges) <- NULL
 
   # Labels
-  if (ci == TRUE) {
+  if (ci) {
     edges$Label <- paste0(
       sprintf("%.2f, ", edges$Coefficient),
       attributes(x)$ci * 100,

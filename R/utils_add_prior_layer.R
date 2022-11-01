@@ -39,7 +39,7 @@
             x = .data$x,
             y = as.factor(.data$Parameter),
             height = .data$y,
-            group = as.factor(.data$Parameter),
+            group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
           alpha = priors_alpha
@@ -51,7 +51,7 @@
             x = .data$x,
             y = as.factor(.data$Parameter),
             height = .data$y,
-            group = as.factor(.data$Parameter),
+            group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
           alpha = priors_alpha,
@@ -130,7 +130,7 @@
           x = .data$x,
           ymin = 0,
           ymax = .data$y,
-          group = as.factor(.data$Parameter),
+          group = as.factor(.data$Parameter)
         ),
         fill = fill_color,
         alpha = priors_alpha
