@@ -18,7 +18,8 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-if (!requireNamespace("bayestestR", quietly = TRUE) ||
+if (requireNamespace("bayestestR", quietly = TRUE) ||
+  !requireNamespace("httr", quietly = TRUE) || # needed for `insight::download_model()`
   !requireNamespace("rstanarm", quietly = TRUE) ||
   !requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("brms", quietly = TRUE) ||
