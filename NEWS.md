@@ -5,6 +5,12 @@
 * New function `scale_color_colorhex()` provides color scales based on palettes 
   from <https://color-hex.com> (#245).
 
+* The default for the smoothing bandwidth from `plot.check_predictions()` has
+  changed from `"nrd0"` to `"nrd"`, which seems to produce better fitting plots
+  for non-gaussian models. Furthermore, `performance::check_predictions()`
+  accepts a `bw` argument (smoothing bandwidth), which is passed down to the
+  `plot()` method's density-estimation.
+
 ## Bug fixes
 
 * Fixed issues with `plot()` for `check_outliers()` for models with convergence
