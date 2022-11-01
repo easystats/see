@@ -59,7 +59,7 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
     x = stats::fitted(model),
     y = sqrt(abs(r))
   )
-  .plot_diag_homogeneity(dat, size_point = 2, size_line = .8, ...)
+  .plot_diag_homogeneity(dat, size_point = 2, size_line = 0.8, ...)
 }
 
 

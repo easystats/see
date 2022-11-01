@@ -1,7 +1,7 @@
 .add_prior_layer_ridgeline <- function(model,
                                        parameter = NULL,
                                        show_intercept = FALSE,
-                                       priors_alpha = .5,
+                                       priors_alpha = 0.5,
                                        fill_color = NULL,
                                        show_ridge_line = TRUE) {
   dat <- tryCatch(
@@ -96,7 +96,7 @@
 .add_prior_layer_ribbon <- function(model,
                                     parameter = NULL,
                                     show_intercept = FALSE,
-                                    priors_alpha = .5,
+                                    priors_alpha = 0.5,
                                     fill_color = NULL) {
   dat <- tryCatch(
     {

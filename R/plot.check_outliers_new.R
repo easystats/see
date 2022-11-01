@@ -8,7 +8,7 @@
                                     size_text = NULL,
                                     theme_style = theme_lucid,
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
-                                    dot_alpha_level = .8,
+                                    dot_alpha_level = 0.8,
                                     show_dots = TRUE) {
   size_line <- size_line %||% .7
   size_text <- size_text %||% 3

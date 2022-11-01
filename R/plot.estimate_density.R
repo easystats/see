@@ -81,7 +81,7 @@ data_plot.estimate_density <- function(x,
 #' @param centrality Character specifying the point-estimate (centrality index)
 #'   to compute. Can be `"median"`, `"mean"` or `"MAP"`.
 #' @param ci Numeric value of probability of the CI (between 0 and 1) to be
-#'   estimated. Default to `.95`.
+#'   estimated. Default to `0.95`.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_parameters_model
@@ -105,9 +105,9 @@ plot.see_estimate_density <- function(x,
                                       show_intercept = FALSE,
                                       n_columns = 1,
                                       priors = FALSE,
-                                      priors_alpha = .4,
+                                      priors_alpha = 0.4,
                                       posteriors_alpha = 0.7,
-                                      size_line = .9,
+                                      size_line = 0.9,
                                       size_point = 2,
                                       centrality = "median",
                                       ci = 0.95,
@@ -243,7 +243,7 @@ data_plot.estimate_density_df <- data_plot.estimate_density
 plot.see_estimate_density_df <- function(x,
                                          stack = TRUE,
                                          n_columns = 1,
-                                         size_line = .9,
+                                         size_line = 0.9,
                                          ...) {
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))

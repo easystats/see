@@ -90,7 +90,7 @@ data_plot.p_significance <- function(x,
       }
     )
   )
-  dataplot$fill2 <- with(dataplot, ifelse(prop >= .5, "Most probable", "Less probable"))
+  dataplot$fill2 <- with(dataplot, ifelse(prop >= 0.5, "Most probable", "Less probable"))
   dataplot <- dataplot[, which(!names(dataplot) %in% c("n", "prop"))]
 
   if (!is.null(levels_order)) {
@@ -174,7 +174,7 @@ plot.see_p_significance <- function(x,
                                     data = NULL,
                                     show_intercept = FALSE,
                                     priors = FALSE,
-                                    priors_alpha = .4,
+                                    priors_alpha = 0.4,
                                     n_columns = 1,
                                     ...) {
   # save model for later use

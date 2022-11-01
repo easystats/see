@@ -316,7 +316,7 @@ plot.see_check_model <- function(x,
 
 .plot_diag_norm <- function(x,
                             size_line,
-                            alpha_level = .2,
+                            alpha_level = 0.2,
                             theme_style = theme_lucid,
                             colors = unname(social_colors(c("green", "blue", "red")))) {
   ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
@@ -351,11 +351,11 @@ plot.see_check_model <- function(x,
 .plot_diag_qq <- function(x,
                           size_point,
                           size_line,
-                          alpha_level = .2,
+                          alpha_level = 0.2,
                           detrend = FALSE,
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = .8,
+                          dot_alpha_level = 0.8,
                           show_dots = TRUE) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     qq_stuff <- list(
@@ -424,11 +424,11 @@ plot.see_check_model <- function(x,
 .plot_diag_pp <- function(x,
                           size_point,
                           size_line,
-                          alpha_level = .2,
+                          alpha_level = 0.2,
                           detrend = FALSE,
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = .8) {
+                          dot_alpha_level = 0.8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
       qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
@@ -491,10 +491,10 @@ plot.see_check_model <- function(x,
 .plot_diag_homogeneity <- function(x,
                                    size_point,
                                    size_line,
-                                   alpha_level = .2,
+                                   alpha_level = 0.2,
                                    theme_style = theme_lucid,
                                    colors = unname(social_colors(c("green", "blue", "red"))),
-                                   dot_alpha_level = .8,
+                                   dot_alpha_level = 0.8,
                                    show_dots = TRUE) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
@@ -534,10 +534,10 @@ plot.see_check_model <- function(x,
 .plot_diag_linearity <- function(x,
                                  size_point,
                                  size_line,
-                                 alpha_level = .2,
+                                 alpha_level = 0.2,
                                  theme_style = theme_lucid,
                                  colors = unname(social_colors(c("green", "blue", "red"))),
-                                 dot_alpha_level = .8,
+                                 dot_alpha_level = 0.8,
                                  show_dots = TRUE) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
@@ -579,10 +579,10 @@ plot.see_check_model <- function(x,
                             size_point,
                             size_line,
                             panel = TRUE,
-                            alpha_level = .2,
+                            alpha_level = 0.2,
                             theme_style = theme_lucid,
                             colors = unname(social_colors(c("green", "blue", "red"))),
-                            dot_alpha_level = .8,
+                            dot_alpha_level = 0.8,
                             show_dots = TRUE) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
@@ -635,7 +635,7 @@ plot.see_check_model <- function(x,
 .plot_diag_overdispersion <- function(x,
                                       theme_style = theme_lucid,
                                       colors = c("#3aaf85", "#1b6ca8"),
-                                      size_line = .8,
+                                      size_line = 0.8,
                                       type = 1,
                                       ...) {
   if (is.null(type) || type == 1) {

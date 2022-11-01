@@ -38,7 +38,7 @@
 #' @export
 plot.see_parameters_model <- function(x,
                                       show_intercept = FALSE,
-                                      size_point = .8,
+                                      size_point = 0.8,
                                       size_text = NA,
                                       sort = NULL,
                                       n_columns = NULL,

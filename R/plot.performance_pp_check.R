@@ -52,7 +52,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' }
 #' @export
 print.see_performance_pp_check <- function(x,
-                                           size_line = .5,
+                                           size_line = 0.5,
                                            line_alpha = .15,
                                            size_bar = 0.7,
                                            style = theme_lucid,
@@ -81,7 +81,7 @@ print.see_performance_pp_check <- function(x,
 #' @rdname print.see_performance_pp_check
 #' @export
 plot.see_performance_pp_check <- function(x,
-                                          size_line = .5,
+                                          size_line = 0.5,
                                           line_alpha = .15,
                                           size_bar = 0.7,
                                           style = theme_lucid,

@@ -110,7 +110,7 @@ plot.see_point_estimate <- function(x,
                                     show_labels = TRUE,
                                     show_intercept = FALSE,
                                     priors = FALSE,
-                                    priors_alpha = .4,
+                                    priors_alpha = 0.4,
                                     ...) {
   # save model for later use
   model <- .retrieve_data(x)

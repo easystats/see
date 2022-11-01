@@ -1,6 +1,6 @@
 #' @export
 plot.see_check_overdisp <- function(x,
-                                    size_line = .8,
+                                    size_line = 0.8,
                                     colors = c("#3aaf85", "#1b6ca8"),
                                     type = 1,
                                     ...) {

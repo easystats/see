@@ -26,8 +26,8 @@
 #' @export
 plot.see_check_outliers <- function(x,
                                     size_text = 3.5,
-                                    size_line = .8,
-                                    dot_alpha = .8,
+                                    size_line = 0.8,
+                                    dot_alpha = 0.8,
                                     colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                     rescale_distance = TRUE,
                                     type = c("dots", "bars"),
