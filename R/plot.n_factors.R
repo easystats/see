@@ -95,7 +95,7 @@ plot.see_n_factors <- function(x,
 
   if (missing(size)) {
     size <- switch(type,
-      "bar" = .7,
+      "bar" = 0.7,
       "line" = 1,
       1
     )

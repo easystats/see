@@ -53,7 +53,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' @export
 print.see_performance_pp_check <- function(x,
                                            size_line = 0.5,
-                                           line_alpha = .15,
+                                           line_alpha = 0.15,
                                            size_bar = 0.7,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
@@ -82,7 +82,7 @@ print.see_performance_pp_check <- function(x,
 #' @export
 plot.see_performance_pp_check <- function(x,
                                           size_line = 0.5,
-                                          line_alpha = .15,
+                                          line_alpha = 0.15,
                                           size_bar = 0.7,
                                           style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
@@ -174,7 +174,7 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_pp_check_range <- function(x, size_bar = .7, colors) {
+.plot_pp_check_range <- function(x, size_bar = 0.7, colors) {
   original <-
     data.frame(
       x = c(min(x$y), max(x$y)),

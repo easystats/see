@@ -16,7 +16,7 @@
 #' @export
 plot.see_equivalence_test <- function(x,
                                       rope_color = "#0171D3",
-                                      rope_alpha = .2,
+                                      rope_alpha = 0.2,
                                       show_intercept = FALSE,
                                       n_columns = 1,
                                       ...) {
@@ -209,7 +209,7 @@ plot.see_equivalence_test <- function(x,
 #' @export
 plot.see_equivalence_test_df <- function(x,
                                          rope_color = "#0171D3",
-                                         rope_alpha = .2,
+                                         rope_alpha = 0.2,
                                          data = NULL,
                                          n_columns = 1,
                                          ...) {
@@ -330,9 +330,9 @@ plot.see_equivalence_test_df <- function(x,
 #' @rdname plot.see_equivalence_test
 #' @export
 plot.see_equivalence_test_lm <- function(x,
-                                         size_point = .7,
+                                         size_point = 0.7,
                                          rope_color = "#0171D3",
-                                         rope_alpha = .2,
+                                         rope_alpha = 0.2,
                                          show_intercept = FALSE,
                                          n_columns = 1,
                                          ...) {

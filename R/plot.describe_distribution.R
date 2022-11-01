@@ -59,10 +59,10 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' @export
 plot.see_parameters_distribution <- function(x,
                                              dispersion = FALSE,
-                                             dispersion_alpha = .3,
+                                             dispersion_alpha = 0.3,
                                              dispersion_color = "#3498db",
                                              dispersion_style = c("ribbon", "curve"),
-                                             size_bar = .7,
+                                             size_bar = 0.7,
                                              highlight = NULL,
                                              highlight_color = NULL,
                                              ...) {

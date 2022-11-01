@@ -207,7 +207,7 @@ plot.see_parameters_model <- function(x,
 
       density_layer <- ggdist::stat_slab(
         ggplot2::aes(fill = ggplot2::after_scale(.data$color)),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = data
       )
     } else if (isTRUE(exponentiated_coefs)) {
@@ -218,7 +218,7 @@ plot.see_parameters_model <- function(x,
           arg2 = .data$SE / .data$Coefficient,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     } else if (model_attributes$test_statistic == "t-statistic") {
@@ -231,7 +231,7 @@ plot.see_parameters_model <- function(x,
           arg3 = .data$SE,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     } else {
@@ -243,7 +243,7 @@ plot.see_parameters_model <- function(x,
           arg2 = .data$SE,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     }
@@ -566,8 +566,8 @@ plot.see_parameters_model <- function(x,
   )
   estimate <- x$Coefficient[x$Parameter == "Overall"]
 
-  dat_funnel$ci_low <- estimate - stats::qnorm(.975) * dat_funnel$se_range
-  dat_funnel$ci_high <- estimate + stats::qnorm(.975) * dat_funnel$se_range
+  dat_funnel$ci_low <- estimate - stats::qnorm(0.975) * dat_funnel$se_range
+  dat_funnel$ci_high <- estimate + stats::qnorm(0.975) * dat_funnel$se_range
 
   d_polygon <- data.frame(
     x = c(min(dat_funnel$ci_low), estimate, max(dat_funnel$ci_high)),
@@ -576,7 +576,7 @@ plot.see_parameters_model <- function(x,
 
   ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
     scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
-    geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = .3) +
+    geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = 0.3) +
     geom_line(
       data = dat_funnel,
       mapping = aes(x = .data$ci_low, y = .data$se_range),

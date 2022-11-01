@@ -10,7 +10,7 @@
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
                                     dot_alpha_level = 0.8,
                                     show_dots = TRUE) {
-  size_line <- size_line %||% .7
+  size_line <- size_line %||% 0.7
   size_text <- size_text %||% 3
 
   plot_data <- x
@@ -78,7 +78,7 @@
       sqrt(crit * n_params * (1 - .hat) / .hat)
     })
 
-    .hat80 <- min(.hat) + diff(range(.hat)) * .8
+    .hat80 <- min(.hat) + diff(range(.hat)) * 0.8
     .cook_labels <- c("Cook's D = ", rep("", length(cook.levels) - 1))
     .cook_lines <- c(
       lapply(seq_along(cook.levels), function(.level) {

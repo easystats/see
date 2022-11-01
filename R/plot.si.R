@@ -26,7 +26,7 @@
 #' @export
 plot.see_si <- function(x,
                         si_color = "#0171D3",
-                        si_alpha = .2,
+                        si_alpha = 0.2,
                         show_intercept = FALSE,
                         support_only = FALSE, ...) {
   plot_data <- attr(x, "plot_data")

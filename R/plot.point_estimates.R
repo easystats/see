@@ -156,7 +156,7 @@ plot.see_point_estimate <- function(x,
         priors_alpha = priors_alpha,
         fill_color = "#FF9800"
       )
-      posterior_alpha <- .7
+      posterior_alpha <- 0.7
     } else {
       posterior_alpha <- 1
     }

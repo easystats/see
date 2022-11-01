@@ -40,11 +40,11 @@ plot.see_check_model <- function(x,
   colors <- unname(colors)
 
   if (is.null(alpha_level)) {
-    alpha_level <- .2
+    alpha_level <- 0.2
   }
 
   if (is.null(dot_alpha_level)) {
-    dot_alpha_level <- .8
+    dot_alpha_level <- 0.8
   }
 
   if (is.null(check)) {
@@ -229,7 +229,7 @@ plot.see_check_model <- function(x,
       ymax = 5,
       fill = colors[1],
       color = NA,
-      alpha = .15
+      alpha = 0.15
     ) +
     ggplot2::annotate(
       geom = "rect",
@@ -239,7 +239,7 @@ plot.see_check_model <- function(x,
       ymax = 10,
       fill = colors[2],
       color = NA,
-      alpha = .15
+      alpha = 0.15
     ) +
     ggplot2::annotate(
       geom = "rect",
@@ -249,7 +249,7 @@ plot.see_check_model <- function(x,
       ymax = Inf,
       fill = colors[3],
       color = NA,
-      alpha = .15
+      alpha = 0.15
     ) +
     {
       if (!is.null(ci_data)) {
@@ -265,7 +265,7 @@ plot.see_check_model <- function(x,
             linejoin = "round",
             arrow = ggplot2::arrow(
               ends = "last", type = "closed",
-              angle = 20, length = ggplot2::unit(.03, "native")
+              angle = 20, length = ggplot2::unit(0.03, "native")
             ),
             show.legend = FALSE
           )

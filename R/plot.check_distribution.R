@@ -47,10 +47,10 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     colour = .data$group
   )) +
     geom_linerange(aes(xmin = 0, xmax = .data$y),
-      position = position_dodge(.4),
+      position = position_dodge(0.4),
       size = 0.8
     ) +
-    geom_point(size = size_point, position = position_dodge(.4)) +
+    geom_point(size = size_point, position = position_dodge(0.4)) +
     labs(
       y = NULL,
       x = NULL,
@@ -131,8 +131,8 @@ plot.see_check_distribution_numeric <- function(x,
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
   p1 <- ggplot(dat, aes(y = .data$x, x = .data$y)) +
-    geom_linerange(aes(xmin = 0, xmax = .data$y), position = position_dodge(.4), size = 0.8) +
-    geom_point(size = size_point, position = position_dodge(.4)) +
+    geom_linerange(aes(xmin = 0, xmax = .data$y), position = position_dodge(0.4), size = 0.8) +
+    geom_point(size = size_point, position = position_dodge(0.4)) +
     labs(y = NULL, x = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
     scale_x_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
     theme_lucid(legend.position = lp)

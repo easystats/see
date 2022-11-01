@@ -171,8 +171,8 @@ plot.see_parameters_sem <- function(x,
     scale_alpha(guide = "none", range = c(0, 1)) +
     scale_shape_manual(values = c(`FALSE` = 15, `TRUE` = 19)) +
     ggraph::scale_edge_alpha(guide = "none", range = c(0, 1)) +
-    scale_x_continuous(expand = expansion(c(.10, .10))) +
-    scale_y_continuous(expand = expansion(c(.10, .10))) +
+    scale_x_continuous(expand = expansion(c(0.10, 0.10))) +
+    scale_y_continuous(expand = expansion(c(0.10, 0.10))) +
     ggraph::theme_graph() +
     theme(legend.position = "none")
 

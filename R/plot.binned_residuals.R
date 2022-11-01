@@ -1,7 +1,7 @@
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_binned_residuals <- function(x,
-                                      size_line = .7,
+                                      size_line = 0.7,
                                       size_point = 2.2,
                                       colors = social_colors(c("blue", "red", "green")),
                                       style = theme_lucid,
@@ -57,8 +57,8 @@ plot.see_binned_residuals <- function(x,
   }
 
   p <- p +
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = -Inf, ymax = .data$se.lo), alpha = .1, fill = "grey70") +
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = .1, fill = "grey70") +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = -Inf, ymax = .data$se.lo), alpha = 0.1, fill = "grey70") +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = 0.1, fill = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se), colour = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se.lo), colour = "grey70") +
     ggplot2::scale_color_manual(values = colors[2:1]) +

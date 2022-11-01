@@ -74,7 +74,7 @@ theme_set(theme_modern())
 # fit three example model
 model1 <- glmmTMB(
   count ~ spp + mined + (1 | site),
-  ziformula =  ~mined,
+  ziformula = ~mined,
   family = poisson(),
   data = Salamanders
 )
@@ -527,10 +527,10 @@ result <- describe_distribution(sample(LETTERS[1:10], 1000, TRUE))
 plot(result, highlight = "D")
 
 # highlight multiple categories
-plot(result, highlight = c("D", "H"), size_bar = .4)
+plot(result, highlight = c("D", "H"), size_bar = 0.4)
 
 # own color scales - pass a named vector to 'scale_fill_manual()'
 # the name of the non-highlighted color is "no_highlight".
-plot(result, highlight = c("D", "H", "A"), size_bar = .4) +
+plot(result, highlight = c("D", "H", "A"), size_bar = 0.4) +
   scale_fill_manual(values = c(D = "red", H = "green", A = "gold", no_highlight = "steelblue"))
 ```

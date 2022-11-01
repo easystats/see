@@ -20,7 +20,7 @@
 plot.see_bayesfactor_parameters <- function(x,
                                             size_point = 2,
                                             rope_color = "#0171D3",
-                                            rope_alpha = .2,
+                                            rope_alpha = 0.2,
                                             show_intercept = FALSE,
                                             ...) {
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
