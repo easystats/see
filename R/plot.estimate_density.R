@@ -139,7 +139,7 @@ plot.see_estimate_density <- function(x,
   # remove intercept from output, if requested
   x <- .remove_intercept(x, show_intercept = show_intercept)
 
-  if (stack == TRUE) {
+  if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
       geom_line(size = size_line) +
       add_plot_attributes(x) +
@@ -248,7 +248,7 @@ plot.see_estimate_density_df <- function(x,
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
-  if (stack == TRUE) {
+  if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
       geom_line(size = size_line)
   } else {
