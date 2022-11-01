@@ -85,7 +85,6 @@ Suggests:
     ggside,
     glmmTMB,
     grid,
-    httr,
     lavaan,
     lme4,
     logspline,
