@@ -1,7 +1,9 @@
 #' @export
-plot.see_p_function <- function(x, colors = c("#3aaf85", "#1b6ca8", "#cd201f"), ...) {
+plot.see_p_function <- function(x,
+                                colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+                                ...) {
   # CI level emphasize
-  line_size <- c(0.8, 0.8, 0.8, 0.9)
+  line_size <- .8
 
   # data for ribbons
   data_ribbon_full <- attr(x, "data")
@@ -58,33 +60,63 @@ plot.see_p_function <- function(x, colors = c("#3aaf85", "#1b6ca8", "#cd201f"), 
       #   y = 0.025,
       #   label = sprintf("%.3f", point_estimate)
       # ) +
-      ggplot2::scale_y_continuous(
-        limits = c(0, 1),
-        breaks = seq(0, 1, 0.05),
-        sec.axis = ggplot2::sec_axis(
-          trans = ~ 1 - .,
-          name = "Compatibility Interval",
-          breaks = seq(0, 1, 0.05),
-          labels = sprintf("%g%%", round(100 * seq(0, 1, 0.05)))
-        ),
-        expand = c(0, 0)
-      ) +
       ggplot2::scale_color_manual(
-        values = c(colors[1], colors[3]),
+        # values = c(colors[1], colors[3]),
+        values = c(colors[1], colors[1]),
         guide = "none"
       ) +
       theme_lucid() +
       ggplot2::theme(panel.grid.minor.y = element_blank())
 
-    p <- p + ggplot2::labs(y = "P value", x = "Range of Estimates", colour = NULL)
+    # p <- p + ggplot2::labs(y = "P value", x = paste0("Range of Estimates for ", param), colour = NULL)
+    if (length(unique(x$Parameter)) == 1) {
+      p <- p +
+        ggplot2::labs(y = "P value", x = paste0("Range of Estimates for ", param), colour = NULL) +
+        ggplot2::scale_y_continuous(
+          limits = c(0, 1),
+          breaks = seq(0, 1, 0.05),
+          sec.axis = ggplot2::sec_axis(
+            trans = ~ 1 - .,
+            name = "Compatibility Interval",
+            breaks = seq(0, 1, 0.05),
+            labels = sprintf("%g%%", round(100 * seq(0, 1, 0.05)))
+          ),
+          expand = c(0, 0)
+        )
 
-    # if (i == 1) {
-    #   p <- p + ggplot2::labs(y = "P value", x = NULL, colour = NULL)
-    # } else if (i == n_plots) {
-    #   p <- p + ggplot2::labs(y = NULL, x = NULL, colour = NULL)
-    # } else {
-    #   p <- p + ggplot2::labs(y = NULL, x = "Range of Estimates", colour = NULL)
-    # }
+    } else if (param == unique(x$Parameter)[1]) {
+      p <- p +
+        ggplot2::labs(y = "P value", x = paste0("Range of Estimates for ", param), colour = NULL) +
+        ggplot2::scale_y_continuous(
+          limits = c(0, 1),
+          breaks = seq(0, 1, 0.05),
+          expand = c(0, 0)
+        )
+
+    } else if (param == unique(x$Parameter)[length(unique(x$Parameter))]) {
+      p <- p +
+        ggplot2::labs(y = NULL, x = paste0("Range of Estimates for ", param), colour = NULL) +
+        ggplot2::scale_y_continuous(
+          limits = c(0, 1),
+          breaks = seq(0, 1, 0.05),
+          sec.axis = ggplot2::sec_axis(
+            trans = ~ 1 - .,
+            name = "Compatibility Interval",
+            breaks = seq(0, 1, 0.05),
+            labels = sprintf("%g%%", round(100 * seq(0, 1, 0.05)))
+          ),
+          expand = c(0, 0)
+        )
+
+    } else {
+      p <- p +
+        ggplot2::labs(y = NULL, x = paste0("Range of Estimates for ", param), colour = NULL) +
+        ggplot2::scale_y_continuous(
+          limits = c(0, 1),
+          breaks = seq(0, 1, 0.05),
+          expand = c(0, 0)
+        )
+    }
     p
   })
 
