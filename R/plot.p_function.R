@@ -2,7 +2,7 @@
 plot.see_p_function <- function(x,
                                 ci_emphasize = NULL,
                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-                                size_line = c(0.6, 0.8),
+                                size_line = c(0.7, 0.9),
                                 grid = FALSE,
                                 show_intercept = FALSE,
                                 ...) {
