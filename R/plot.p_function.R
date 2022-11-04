@@ -115,8 +115,6 @@ plot.see_p_function <- function(x,
         ),
         colour = colors[1],
         size = size_text,
-        alpha = 3 * line_alpha,
-        nudge_y = 0.02,
         show.legend = FALSE
       )
   }
