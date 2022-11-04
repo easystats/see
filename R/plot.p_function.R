@@ -3,6 +3,7 @@ plot.see_p_function <- function(x,
                                 ci_emphasize = NULL,
                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                 size_line = c(0.7, 0.9),
+                                line_alpha = 0.2,
                                 grid = FALSE,
                                 show_intercept = FALSE,
                                 ...) {
@@ -24,7 +25,7 @@ plot.see_p_function <- function(x,
 
   # for multiple overlayed plots in different colors, use dark gray CI lines
   if (!grid && insight::n_unique(data_ribbon$Parameter) > 1) {
-    colors[1] <- "#777777"
+    colors[1] <- "black"
   }
 
   # in case user wants to emphasize CIs
@@ -81,6 +82,7 @@ plot.see_p_function <- function(x,
       ),
       colour = colors[1],
       size = 1.5,
+      alpha = line_alpha,
       show.legend = FALSE
     ) +
     # points for vertical CI bars
@@ -93,6 +95,7 @@ plot.see_p_function <- function(x,
       ),
       colour = colors[1],
       size = 1.5,
+      alpha = line_alpha,
       show.legend = FALSE
     ) +
     # lines for vertical CI bars
@@ -107,6 +110,7 @@ plot.see_p_function <- function(x,
         size = .data$group
       ),
       colour = colors[1],
+      alpha = line_alpha,
       show.legend = FALSE
     )
 
@@ -124,6 +128,7 @@ plot.see_p_function <- function(x,
             size = .data$group
           ),
           colour = colors[1],
+          alpha = line_alpha,
           show.legend = FALSE,
           linetype = "dashed"
         ) +
@@ -139,6 +144,7 @@ plot.see_p_function <- function(x,
             size = .data$group
           ),
           colour = colors[1],
+          alpha = line_alpha,
           show.legend = FALSE,
           linetype = "dashed"
         )
