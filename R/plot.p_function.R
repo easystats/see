@@ -1,5 +1,6 @@
 #' @export
 plot.see_p_function <- function(x,
+                                ci_emphasize = NULL,
                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                 size_line = c(0.6, 0.8),
                                 grid = FALSE,
@@ -25,6 +26,12 @@ plot.see_p_function <- function(x,
   # for multiple overlayed plots in different colors, use dark gray CI lines
   if (!grid && insight::n_unique(data_ribbon$Parameter) > 1) {
     colors[1] <- "#777777"
+  }
+
+  # in case user wants to emphasize CIs
+  data_ci_emphasize <- NULL
+  if (!is.null(ci_emphasize) && ci_emphasize %in% data_ci_segments$CI) {
+    data_ci_emphasize <- data_ci_segments[data_ci_segments$CI %in% ci_emphasize, ]
   }
 
   # setup - no color/fill aes for ribbons when we have no facets
@@ -96,7 +103,43 @@ plot.see_p_function <- function(x,
       ),
       colour = colors[1],
       show.legend = FALSE
-    ) +
+    )
+
+    if (!is.null(data_ci_emphasize)) {
+      p <- p +
+        # lines from CI bars to bottom
+        ggplot2::geom_segment(
+          data = data_ci_emphasize,
+          mapping = ggplot2::aes(
+            x = .data$CI_low,
+            y = 0,
+            xend = .data$CI_low,
+            yend = 1 - .data$CI,
+            group = .data$Parameter,
+            size = .data$group
+          ),
+          colour = colors[1],
+          show.legend = FALSE,
+          linetype = "dotted"
+        ) +
+        # lines from CI bars to bottom
+        ggplot2::geom_segment(
+          data = data_ci_emphasize,
+          mapping = ggplot2::aes(
+            x = .data$CI_high,
+            y = 0,
+            xend = .data$CI_high,
+            yend = 1 - .data$CI,
+            group = .data$Parameter,
+            size = .data$group
+          ),
+          colour = colors[1],
+          show.legend = FALSE,
+          linetype = "dotted"
+        )
+    }
+
+  p <-  p +
     # make sure we have two different y axes
     ggplot2::scale_y_continuous(
       limits = c(0, 1),
