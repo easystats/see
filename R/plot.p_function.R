@@ -16,6 +16,12 @@ plot.see_p_function <- function(x,
   data_ribbon <- .remove_intercept(data_ribbon, show_intercept = show_intercept)
   data_ci_segments <- .remove_intercept(data_ci_segments, show_intercept = show_intercept)
 
+  pretty_names <- attributes(x)$pretty_names
+  for (pn in seq_along(pretty_names)) {
+    data_ribbon$Parameter[data_ribbon$Parameter == names(pretty_names[pn])] <- pretty_names[pn]
+    data_ci_segments$Parameter[data_ci_segments$Parameter == names(pretty_names[pn])] <- pretty_names[pn]
+  }
+
   # setup - no color/fill aes for ribbons when we have no facets
   if (isTRUE(grid)) {
     p <- ggplot2::ggplot() +
@@ -29,7 +35,7 @@ plot.see_p_function <- function(x,
         ),
         fill = colors[2],
         colour = colors[2],
-        alpha = 0.1
+        alpha = 0.2
       )
   } else {
     p <- ggplot2::ggplot() +
