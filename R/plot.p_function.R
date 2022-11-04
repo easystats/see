@@ -1,10 +1,10 @@
 #' @export
 plot.see_p_function <- function(x,
-                                ci_emphasize = NULL,
                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                 size_dots = 1.3,
                                 size_line = c(0.7, 0.9),
                                 line_alpha = 0.2,
+                                show_values = TRUE,
                                 grid = FALSE,
                                 show_intercept = FALSE,
                                 ...) {
@@ -28,15 +28,6 @@ plot.see_p_function <- function(x,
   if (!grid && insight::n_unique(data_ribbon$Parameter) > 1) {
     colors[1] <- "black"
   }
-
-  # in case user wants to emphasize CIs
-  data_ci_emphasize <- NULL
-  if (!is.null(ci_emphasize) && ci_emphasize %in% data_ci_segments$CI) {
-    data_ci_segments$group <- 1
-    data_ci_segments$group[data_ci_segments$CI %in% ci_emphasize] <- 2
-    data_ci_emphasize <- data_ci_segments[data_ci_segments$CI %in% ci_emphasize, ]
-    data_ci_emphasize$group <- as.factor(data_ci_emphasize$group)
-}
 
   # make sure group is factor
   data_ci_segments$group <- as.factor(data_ci_segments$group)
@@ -115,72 +106,23 @@ plot.see_p_function <- function(x,
       show.legend = FALSE
     )
 
-    if (!is.null(data_ci_emphasize)) {
-      p <- p +
-        # lines from CI bars to bottom
-        ggplot2::geom_segment(
-          data = data_ci_emphasize,
-          mapping = ggplot2::aes(
-            x = .data$CI_low,
-            y = 0,
-            xend = .data$CI_low,
-            yend = 1 - .data$CI,
-            group = .data$Parameter,
-            size = .data$group
-          ),
-          colour = colors[1],
-          alpha = line_alpha,
-          show.legend = FALSE,
-          linetype = "dashed"
-        ) +
-        # lines from CI bars to bottom
-        ggplot2::geom_segment(
-          data = data_ci_emphasize,
-          mapping = ggplot2::aes(
-            x = .data$CI_high,
-            y = 0,
-            xend = .data$CI_high,
-            yend = 1 - .data$CI,
-            group = .data$Parameter,
-            size = .data$group
-          ),
-          colour = colors[1],
-          alpha = line_alpha,
-          show.legend = FALSE,
-          linetype = "dashed"
-        )
-
-      # add text values
-      if (requireNamespace("ggrepel", quietly = TRUE)) {
-        p <-  p +
-          ggrepel::geom_text_repel(
-            data = data_ci_emphasize,
-            mapping = ggplot2::aes(
-              x = .data$CI_low,
-              y = 1 - .data$CI,
-              group = .data$Parameter,
-              label = sprintf("%.2f", .data$CI_low)
-            ),
-            colour = colors[1],
-            alpha = 3 * line_alpha,
-            nudge_x = -0.05,
-            show.legend = FALSE
-          ) +
-          ggrepel::geom_text_repel(
-            data = data_ci_emphasize,
-            mapping = ggplot2::aes(
-              x = .data$CI_high,
-              y = 1 - .data$CI,
-              group = .data$Parameter,
-              label = sprintf("%.2f", .data$CI_high)
-            ),
-            colour = colors[1],
-            alpha = 3 * line_alpha,
-            nudge_x = 0.05,
-            show.legend = FALSE
-          )
-      }
-    }
+  # emphasize specific CI level
+  if (show_values) {
+    p <- p +
+      ggplot2::geom_label(
+        data = data_ci_segments,
+        mapping = ggplot2::aes(
+          x = (.data$CI_low + .data$CI_high) / 2,
+          y = 1 - .data$CI,
+          group = .data$Parameter,
+          label = sprintf("%.2f, %.2f", .data$CI_low, .data$CI_high)
+        ),
+        colour = colors[1],
+        alpha = 3 * line_alpha,
+        nudge_y = 0.02,
+        show.legend = FALSE
+      )
+  }
 
   p <-  p +
     # make sure we have two different y axes
