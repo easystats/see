@@ -1,17 +1,20 @@
 #' @export
 plot.see_p_function <- function(x,
                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+                                size_line = c(0.8, 1.0),
                                 grid = FALSE,
+                                show_intercept = FALSE,
                                 ...) {
-  # CI level emphasize
-  line_size <- .8
-
   # data for ribbons
   data_ribbon <- attr(x, "data")
 
   # data for vertical CI level lines
   data_ci_segments <- x
   data_ci_segments$group <- as.factor(data_ci_segments$group)
+
+  # remove intercept?
+  data_ribbon <- .remove_intercept(data_ribbon, show_intercept = show_intercept)
+  data_ci_segments <- .remove_intercept(data_ci_segments, show_intercept = show_intercept)
 
   # setup - no color/fill aes for ribbons when we have no facets
   if (isTRUE(grid)) {
@@ -51,9 +54,10 @@ plot.see_p_function <- function(x,
       mapping = ggplot2::aes(
         x = .data$CI_low,
         y = 1 - .data$CI,
-        colour = .data$group,
         group = .data$Parameter
-      )
+      ),
+      colour = colors[1],
+      show.legend = FALSE
     ) +
     # points for vertical CI bars
     ggplot2::geom_point(
@@ -61,9 +65,10 @@ plot.see_p_function <- function(x,
       mapping = ggplot2::aes(
         x = .data$CI_high,
         y = 1 - .data$CI,
-        colour = .data$group,
         group = .data$Parameter
-      )
+      ),
+      colour = colors[1],
+      show.legend = FALSE
     ) +
     # lines for vertical CI bars
     ggplot2::geom_segment(
@@ -73,10 +78,11 @@ plot.see_p_function <- function(x,
         y = 1 - .data$CI,
         xend = .data$CI_high,
         yend = 1 - .data$CI,
-        colour = .data$group,
-        group = .data$Parameter
+        group = .data$Parameter,
+        size = .data$group
       ),
-      size = 0.9
+      colour = colors[1],
+      show.legend = FALSE
     ) +
     # make sure we have two different y axes
     ggplot2::scale_y_continuous(
@@ -91,15 +97,16 @@ plot.see_p_function <- function(x,
       expand = c(0, 0)
     ) +
     # labelling
-    ggplot2::labs(y = "P value", x = "Range of Estimates", colour = NULL, fill = NULL) +
-    theme_lucid()
+    ggplot2::labs(y = "P value", x = "Range of Estimates", colour = NULL) +
+    theme_lucid() +
+    ggplot2::scale_size_manual(values = size_line, guide = "none")
 
   # facets for grids, different color/fill when no grids
   if (isTRUE(grid)) {
     p <- p + ggplot2::facet_grid(~ .data$Parameter, scales = "free_x")
   } else {
     p <- p +
-      scale_color_flat_d() +
+      scale_color_flat_d(guide = "none") +
       scale_fill_flat_d()
   }
 
