@@ -11,7 +11,6 @@ plot.see_p_function <- function(x,
 
   # data for vertical CI level lines
   data_ci_segments <- x
-  data_ci_segments$group <- as.factor(data_ci_segments$group)
 
   # remove intercept?
   data_ribbon <- .remove_intercept(data_ribbon, show_intercept = show_intercept)
@@ -31,8 +30,14 @@ plot.see_p_function <- function(x,
   # in case user wants to emphasize CIs
   data_ci_emphasize <- NULL
   if (!is.null(ci_emphasize) && ci_emphasize %in% data_ci_segments$CI) {
+    data_ci_segments$group <- 1
+    data_ci_segments$group[data_ci_segments$CI %in% ci_emphasize] <- 2
     data_ci_emphasize <- data_ci_segments[data_ci_segments$CI %in% ci_emphasize, ]
-  }
+    data_ci_emphasize$group <- as.factor(data_ci_emphasize$group)
+}
+
+  # make sure group is factor
+  data_ci_segments$group <- as.factor(data_ci_segments$group)
 
   # setup - no color/fill aes for ribbons when we have no facets
   if (isTRUE(grid) || insight::n_unique(data_ribbon$Parameter) == 1) {
