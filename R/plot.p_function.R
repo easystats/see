@@ -164,7 +164,7 @@ plot.see_p_function <- function(x,
       expand = c(0, 0)
     ) +
     # labelling
-    ggplot2::labs(y = "P value", x = "Range of Estimates", colour = NULL) +
+    ggplot2::labs(y = expression(paste(italic("p"), " value")), x = "Range of Estimates", colour = NULL) +
     theme_lucid() +
     ggplot2::scale_size_manual(values = size_line, guide = "none")
 
