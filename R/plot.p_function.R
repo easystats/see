@@ -1,7 +1,7 @@
 #' @export
 plot.see_p_function <- function(x,
                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-                                size_line = c(0.8, 1.0),
+                                size_line = c(0.6, 0.8),
                                 grid = FALSE,
                                 show_intercept = FALSE,
                                 ...) {
@@ -22,8 +22,13 @@ plot.see_p_function <- function(x,
     data_ci_segments$Parameter[data_ci_segments$Parameter == names(pretty_names[pn])] <- pretty_names[pn]
   }
 
+  # for multiple overlayed plots in different colors, use dark gray CI lines
+  if (!grid && insight::n_unique(data_ribbon$Parameter) > 1) {
+    colors[1] <- "#777777"
+  }
+
   # setup - no color/fill aes for ribbons when we have no facets
-  if (isTRUE(grid)) {
+  if (isTRUE(grid) || insight::n_unique(data_ribbon$Parameter) == 1) {
     p <- ggplot2::ggplot() +
       ggplot2::geom_ribbon(
         data = data_ribbon,
@@ -49,7 +54,7 @@ plot.see_p_function <- function(x,
           colour = .data$Parameter,
           group = .data$Parameter
         ),
-        alpha = 0.1
+        alpha = 0.2
       )
   }
 
@@ -63,6 +68,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
+      size = 1.5,
       show.legend = FALSE
     ) +
     # points for vertical CI bars
@@ -74,6 +80,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
+      size = 1.5,
       show.legend = FALSE
     ) +
     # lines for vertical CI bars
@@ -110,7 +117,7 @@ plot.see_p_function <- function(x,
   # facets for grids, different color/fill when no grids
   if (isTRUE(grid)) {
     p <- p + ggplot2::facet_grid(~ .data$Parameter, scales = "free_x")
-  } else {
+  } else if (insight::n_unique(data_ribbon$Parameter) > 1) {
     p <- p +
       scale_color_flat_d(guide = "none") +
       scale_fill_flat_d()
