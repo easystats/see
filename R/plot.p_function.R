@@ -120,7 +120,7 @@ plot.see_p_function <- function(x,
           ),
           colour = colors[1],
           show.legend = FALSE,
-          linetype = "dotted"
+          linetype = "dashed"
         ) +
         # lines from CI bars to bottom
         ggplot2::geom_segment(
@@ -135,7 +135,7 @@ plot.see_p_function <- function(x,
           ),
           colour = colors[1],
           show.legend = FALSE,
-          linetype = "dotted"
+          linetype = "dashed"
         )
     }
 
