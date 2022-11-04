@@ -1,9 +1,9 @@
 #' @export
 plot.see_p_function <- function(x,
-                                colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-                                size_dots = 1.3,
+                                colors = c("black", "#1b6ca8", "#cd201f"),
+                                size_dots = 1.2,
                                 size_line = c(0.7, 0.9),
-                                line_alpha = 0.2,
+                                line_alpha = 0.15,
                                 show_values = TRUE,
                                 grid = FALSE,
                                 show_intercept = FALSE,
@@ -22,11 +22,6 @@ plot.see_p_function <- function(x,
   for (pn in seq_along(pretty_names)) {
     data_ribbon$Parameter[data_ribbon$Parameter == names(pretty_names[pn])] <- pretty_names[pn]
     data_ci_segments$Parameter[data_ci_segments$Parameter == names(pretty_names[pn])] <- pretty_names[pn]
-  }
-
-  # for multiple overlayed plots in different colors, use dark gray CI lines
-  if (!grid && insight::n_unique(data_ribbon$Parameter) > 1) {
-    colors[1] <- "black"
   }
 
   # make sure group is factor
