@@ -2,6 +2,7 @@
 plot.see_p_function <- function(x,
                                 ci_emphasize = NULL,
                                 colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+                                size_dots = 1.3,
                                 size_line = c(0.7, 0.9),
                                 line_alpha = 0.2,
                                 grid = FALSE,
@@ -81,7 +82,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size = 1.5,
+      size =  size_dots,
       alpha = line_alpha,
       show.legend = FALSE
     ) +
@@ -94,7 +95,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size = 1.5,
+      size =  size_dots,
       alpha = line_alpha,
       show.legend = FALSE
     ) +
@@ -148,6 +149,37 @@ plot.see_p_function <- function(x,
           show.legend = FALSE,
           linetype = "dashed"
         )
+
+      # add text values
+      if (requireNamespace("ggrepel", quietly = TRUE)) {
+        p <-  p +
+          ggrepel::geom_text_repel(
+            data = data_ci_emphasize,
+            mapping = ggplot2::aes(
+              x = .data$CI_low,
+              y = 1 - .data$CI,
+              group = .data$Parameter,
+              label = sprintf("%.2f", .data$CI_low)
+            ),
+            colour = colors[1],
+            alpha = 3 * line_alpha,
+            nudge_x = -0.05,
+            show.legend = FALSE
+          ) +
+          ggrepel::geom_text_repel(
+            data = data_ci_emphasize,
+            mapping = ggplot2::aes(
+              x = .data$CI_high,
+              y = 1 - .data$CI,
+              group = .data$Parameter,
+              label = sprintf("%.2f", .data$CI_high)
+            ),
+            colour = colors[1],
+            alpha = 3 * line_alpha,
+            nudge_x = 0.05,
+            show.legend = FALSE
+          )
+      }
     }
 
   p <-  p +
@@ -164,7 +196,7 @@ plot.see_p_function <- function(x,
       expand = c(0, 0)
     ) +
     # labelling
-    ggplot2::labs(y = expression(paste(italic("p"), " value")), x = "Range of Estimates", colour = NULL) +
+    ggplot2::labs(y = expression(paste(italic("p"), "value")), x = "Range of Estimates", colour = NULL) +
     theme_lucid() +
     ggplot2::scale_size_manual(values = size_line, guide = "none")
 
