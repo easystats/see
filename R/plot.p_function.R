@@ -28,7 +28,7 @@
 #' @export
 plot.see_p_function <- function(x,
                                 colors = c("black", "#1b6ca8"),
-                                size_points = 1.2,
+                                size_point = 1.2,
                                 size_line = c(0.7, 0.9),
                                 size_text = 3,
                                 line_alpha = 0.15,
@@ -96,7 +96,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size =  size_points,
+      size =  size_point,
       alpha = line_alpha,
       show.legend = FALSE
     ) +
@@ -109,7 +109,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size =  size_points,
+      size =  size_point,
       alpha = line_alpha,
       show.legend = FALSE
     ) +

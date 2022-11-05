@@ -7,7 +7,7 @@
 \method{plot}{see_p_function}(
   x,
   colors = c("black", "#1b6ca8"),
-  size_points = 1.2,
+  size_point = 1.2,
   size_line = c(0.7, 0.9),
   size_text = 3,
   line_alpha = 0.15,
@@ -23,6 +23,8 @@
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) used when only one parameter is plotted, resp. when panels
 are plotted as facets.}
+
+\item{size_point}{Numeric specifying size of point-geoms.}
 
 \item{size_line}{Numeric value specifying size of line geoms.}
 
