@@ -11,7 +11,7 @@
   size_line = c(0.7, 0.9),
   size_text = 3,
   line_alpha = 0.15,
-  show_values = TRUE,
+  show_labels = TRUE,
   n_columns = NULL,
   show_intercept = FALSE,
   ...
@@ -23,6 +23,19 @@
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) used when only one parameter is plotted, resp. when panels
 are plotted as facets.}
+
+\item{size_line}{Numeric value specifying size of line geoms.}
+
+\item{size_text}{Numeric value specifying size of text labels.}
+
+\item{line_alpha}{Numeric value specifying alpha of lines indicating the
+emphasized compatibility interval levels (see \code{?parameters::p_function}).}
+
+\item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
+
+\item{n_columns}{For models with multiple components (like fixed and random,
+count and zero-inflated), defines the number of columns for the
+panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the

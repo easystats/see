@@ -6,8 +6,14 @@
 #' @param colors Character vector of length two, indicating the colors (in
 #' hex-format) used when only one parameter is plotted, resp. when panels
 #' are plotted as facets.
+#' @param line_alpha Numeric value specifying alpha of lines indicating the
+#' emphasized compatibility interval levels (see `?parameters::p_function`).
+#'
 #' @inheritParams data_plot
+#' @inheritParams plot.see_parameters_model
 #' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams plot.see_check_normality
+#' @inheritParams plot.see_check_outliers
 #'
 #' @return A ggplot2-object.
 #'
@@ -23,7 +29,7 @@ plot.see_p_function <- function(x,
                                 size_line = c(0.7, 0.9),
                                 size_text = 3,
                                 line_alpha = 0.15,
-                                show_values = TRUE,
+                                show_labels = TRUE,
                                 n_columns = NULL,
                                 show_intercept = FALSE,
                                 ...) {
@@ -121,7 +127,7 @@ plot.see_p_function <- function(x,
     )
 
   # emphasize specific CI level
-  if (show_values) {
+  if (show_labels) {
     p <- p +
       ggplot2::geom_label(
         data = data_ci_segments,
