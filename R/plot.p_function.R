@@ -53,7 +53,7 @@ plot.see_p_function <- function(x,
   data_ci_segments$group <- as.factor(data_ci_segments$group)
 
   # setup - no color/fill aes for ribbons when we have no facets
-  if (isTRUE(grid) || insight::n_unique(data_ribbon$Parameter) == 1) {
+  if (!is.null(n_columns) || insight::n_unique(data_ribbon$Parameter) == 1) {
     p <- ggplot2::ggplot() +
       ggplot2::geom_ribbon(
         data = data_ribbon,
