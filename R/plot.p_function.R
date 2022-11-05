@@ -18,9 +18,12 @@
 #' @return A ggplot2-object.
 #'
 #' @examples
-#' library(performance)
-#' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-#' result <- check_normality(m)
+#' library(parameters)
+#' model <- lm(Sepal.Length ~ Species + Sepal.Width + Petal.Length, data = iris)
+#' result <- p_function(model)
+#' plot(result, n_columns = 2, show_labels = FALSE)
+#'
+#' result <- p_function(model, keep = "Sepal.Width")
 #' plot(result)
 #' @export
 plot.see_p_function <- function(x,
