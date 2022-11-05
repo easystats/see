@@ -1,12 +1,30 @@
+#' Plot method for plotting p-functions (aka consonance functions)
+#'
+#' The `plot()` method for the `parameters::p_function ()`.
+#'
+#' @param x An object returned by `parameters::p_function ()`.
+#' @param colors Character vector of length two, indicating the colors (in
+#' hex-format) used when only one parameter is plotted, resp. when panels
+#' are plotted as facets.
+#' @inheritParams data_plot
+#' @inheritParams plot.see_bayesfactor_parameters
+#'
+#' @return A ggplot2-object.
+#'
+#' @examples
+#' library(performance)
+#' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' result <- check_normality(m)
+#' plot(result)
 #' @export
 plot.see_p_function <- function(x,
-                                colors = c("black", "#1b6ca8", "#cd201f"),
-                                size_dots = 1.2,
+                                colors = c("black", "#1b6ca8"),
+                                size_points = 1.2,
                                 size_line = c(0.7, 0.9),
                                 size_text = 3,
                                 line_alpha = 0.15,
                                 show_values = TRUE,
-                                grid = FALSE,
+                                n_columns = NULL,
                                 show_intercept = FALSE,
                                 ...) {
   # data for ribbons
@@ -69,7 +87,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size =  size_dots,
+      size =  size_points,
       alpha = line_alpha,
       show.legend = FALSE
     ) +
@@ -82,7 +100,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size =  size_dots,
+      size =  size_points,
       alpha = line_alpha,
       show.legend = FALSE
     ) +
@@ -138,8 +156,8 @@ plot.see_p_function <- function(x,
     ggplot2::scale_size_manual(values = size_line, guide = "none")
 
   # facets for grids, different color/fill when no grids
-  if (isTRUE(grid)) {
-    p <- p + ggplot2::facet_grid(~ .data$Parameter, scales = "free_x")
+  if (!is.null(n_columns)) {
+    p <- p + ggplot2::facet_wrap(~ .data$Parameter, scales = "free_x", ncol = n_columns)
   } else if (insight::n_unique(data_ribbon$Parameter) > 1) {
     p <- p +
       scale_color_flat_d(guide = "none") +
