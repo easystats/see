@@ -402,6 +402,21 @@ result
 plot(result)
 ```
 
+## p-value function and consonance/compatibility plot
+
+_([related function documentation](https://easystats.github.io/parameters/reference/p_function.html))_
+
+```{r}
+data(iris)
+model <- lm(Sepal.Length ~ Species, data = iris)
+
+result <- p_function(model)
+plot(result)
+
+result <- p_function(model, ci_levels = c(0.5, 0.7, emph = 0.9))
+plot(result, site_line = 0.6, 1.0)
+```
+
 ## Principal Component Analysis
 
 _([related function documentation](https://easystats.github.io/parameters/reference/principal_components.html))_

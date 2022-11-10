@@ -86,7 +86,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
 
 .plot_diag_outliers <- function(x, show_labels = TRUE, size_text = 3.5, rescale_distance = TRUE) {
   d <- data_plot(x, rescale_distance = rescale_distance)
-  d$Id <- 1:nrow(d)
+  d$Id <- seq_len(nrow(d))
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
   d$Id[d$Outliers == "0"] <- NA
 
