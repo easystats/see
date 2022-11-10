@@ -402,7 +402,7 @@ result
 plot(result)
 ```
 
-## p-function and consonance/compatibility plot
+## p-value function and consonance/compatibility plot
 
 _([related function documentation](https://easystats.github.io/parameters/reference/p_function.html))_
 
