@@ -96,7 +96,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size =  size_point,
+      size = size_point,
       alpha = line_alpha,
       show.legend = FALSE
     ) +
@@ -109,7 +109,7 @@ plot.see_p_function <- function(x,
         group = .data$Parameter
       ),
       colour = colors[1],
-      size =  size_point,
+      size = size_point,
       alpha = line_alpha,
       show.legend = FALSE
     ) +
@@ -146,7 +146,7 @@ plot.see_p_function <- function(x,
       )
   }
 
-  p <-  p +
+  p <- p +
     # make sure we have two different y axes
     ggplot2::scale_y_continuous(
       limits = c(0, 1),
