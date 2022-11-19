@@ -16,6 +16,10 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+
+if (requireNamespace("patchwork", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 This vignette can be referred to by citing the package:

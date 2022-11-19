@@ -16,6 +16,10 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+
+if (requireNamespace("patchwork", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 This vignette can be referred to by citing the package:
@@ -453,11 +457,7 @@ p1 <- ggplot(d, aes(x, fill = x)) +
     panel.grid = element_blank()
   )
 
-
-
-d <- data.frame(
-  x = names(flat_colors())
-)
+d <- data.frame(x = names(flat_colors()))
 
 p2 <- ggplot(d, aes(x, fill = x)) +
   geom_bar(width = 0.9) +
