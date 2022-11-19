@@ -18,6 +18,13 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+
+if (requireNamespace("performance", quietly = TRUE) ||
+  !requireNamespace("glmmTMB", quietly = TRUE) || 
+  !requireNamespace("lme4", quietly = TRUE) ||
+  !requireNamespace("bayestestR", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 This vignette can be referred to by citing the package:
@@ -50,7 +57,7 @@ _([related function documentation](https://easystats.github.io/performance/refer
 
 Example where model is **not** a good fit.
 
-```{r message=TRUE}
+```{r}
 model <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
 result <- binned_residuals(model)
 result
@@ -60,7 +67,7 @@ plot(result)
 
 Example where model **is** a good fit.
 
-```{r message=TRUE}
+```{r}
 model <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
 result <- binned_residuals(model)
 result
@@ -250,7 +257,7 @@ unified **visual** check. For example, for linear models, one needs to check the
 assumption that errors are not autocorrelated, but this check will not be shown
 in the visual check.
 
-```{r message=TRUE}
+```{r}
 check_autocorrelation(lm(formula = wt ~ mpg, data = mtcars))
 ```
 
