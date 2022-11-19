@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-if (requireNamespace("patchwork", quietly = TRUE)) {
+if (!requireNamespace("patchwork", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```

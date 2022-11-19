@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-if (requireNamespace("performance", quietly = TRUE) ||
+if (!requireNamespace("performance", quietly = TRUE) ||
   !requireNamespace("glmmTMB", quietly = TRUE) ||
   !requireNamespace("lme4", quietly = TRUE) ||
   !requireNamespace("bayestestR", quietly = TRUE)) {
