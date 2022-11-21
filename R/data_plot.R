@@ -53,40 +53,38 @@
 #'
 #' @seealso [Package-Vignettes](https://easystats.github.io/see/articles/)
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf require("rstanarm") && FALSE
 #' library(bayestestR)
-#' if (require("rstanarm")) {
-#'   model <- stan_glm(
-#'     Sepal.Length ~ Petal.Width * Species,
-#'     data = iris,
-#'     chains = 2, iter = 200, refresh = 0
-#'   )
+#' library(rstanarm)
 #'
-#'   x <- rope(model)
-#'   plot(x)
+#' model <- stan_glm(
+#'   Sepal.Length ~ Petal.Width * Species,
+#'   data = iris,
+#'   chains = 2, iter = 200, refresh = 0
+#' )
 #'
-#'   x <- hdi(model)
-#'   plot(x) + theme_modern()
+#' x <- rope(model)
+#' plot(x)
 #'
-#'   data <- rnorm(1000, 1)
-#'   x <- p_direction(data)
-#'   plot(x)
+#' x <- hdi(model)
+#' plot(x) + theme_modern()
 #'
-#'   x <- p_direction(model)
-#'   plot(x)
+#' data <- rnorm(1000, 1)
+#' x <- p_direction(data)
+#' plot(x)
 #'
-#'   model <- stan_glm(
-#'     mpg ~ wt + gear + cyl + disp,
-#'     chains = 2,
-#'     iter = 200,
-#'     refresh = 0,
-#'     data = mtcars
-#'   )
-#'   x <- equivalence_test(model)
-#'   plot(x)
-#' }
-#' }
+#' x <- p_direction(model)
+#' plot(x)
+#'
+#' model <- stan_glm(
+#'   mpg ~ wt + gear + cyl + disp,
+#'   chains = 2,
+#'   iter = 200,
+#'   refresh = 0,
+#'   data = mtcars
+#' )
+#' x <- equivalence_test(model)
+#' plot(x)
 #'
 #' @export
 data_plot <- function(x, data = NULL, ...) {

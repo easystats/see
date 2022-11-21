@@ -62,40 +62,39 @@ allow to specify arguments to modify the transparency or color of geoms,
 these are shown in the 'Usage' section.
 }
 \examples{
-\dontrun{
+\dontshow{if (require("rstanarm") && FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(bayestestR)
-if (require("rstanarm")) {
-  model <- stan_glm(
-    Sepal.Length ~ Petal.Width * Species,
-    data = iris,
-    chains = 2, iter = 200, refresh = 0
-  )
+library(rstanarm)
 
-  x <- rope(model)
-  plot(x)
+model <- stan_glm(
+  Sepal.Length ~ Petal.Width * Species,
+  data = iris,
+  chains = 2, iter = 200, refresh = 0
+)
 
-  x <- hdi(model)
-  plot(x) + theme_modern()
+x <- rope(model)
+plot(x)
 
-  data <- rnorm(1000, 1)
-  x <- p_direction(data)
-  plot(x)
+x <- hdi(model)
+plot(x) + theme_modern()
 
-  x <- p_direction(model)
-  plot(x)
+data <- rnorm(1000, 1)
+x <- p_direction(data)
+plot(x)
 
-  model <- stan_glm(
-    mpg ~ wt + gear + cyl + disp,
-    chains = 2,
-    iter = 200,
-    refresh = 0,
-    data = mtcars
-  )
-  x <- equivalence_test(model)
-  plot(x)
-}
-}
+x <- p_direction(model)
+plot(x)
 
+model <- stan_glm(
+  mpg ~ wt + gear + cyl + disp,
+  chains = 2,
+  iter = 200,
+  refresh = 0,
+  data = mtcars
+)
+x <- equivalence_test(model)
+plot(x)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \href{https://easystats.github.io/see/articles/}{Package-Vignettes}
