@@ -46,12 +46,13 @@ A ggplot2-object.
 The \code{plot()} method for the \code{bayestestR::p_direction()} function.
 }
 \examples{
+\dontshow{if (require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (require("bayestestR") && require("rstanarm")) {
-  set.seed(123)
-  m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-  result <- p_direction(m)
-  plot(result)
+library(rstanarm)
+set.seed(123)
+m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+result <- p_direction(m)
+plot(result)
 }
-}
+\dontshow{\}) # examplesIf}
 }

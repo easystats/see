@@ -53,11 +53,12 @@
 #'
 #' @seealso [Package-Vignettes](https://easystats.github.io/see/articles/)
 #'
-#' @examplesIf require("rstanarm") && FALSE
+#' @examplesIf require("rstanarm")
+#' \donttest{
 #' library(bayestestR)
 #' library(rstanarm)
 #'
-#' model <- stan_glm(
+#' model <<- stan_glm(
 #'   Sepal.Length ~ Petal.Width * Species,
 #'   data = iris,
 #'   chains = 2, iter = 200, refresh = 0
@@ -76,7 +77,7 @@
 #' x <- p_direction(model)
 #' plot(x)
 #'
-#' model <- stan_glm(
+#' model <<- stan_glm(
 #'   mpg ~ wt + gear + cyl + disp,
 #'   chains = 2,
 #'   iter = 200,
@@ -85,7 +86,7 @@
 #' )
 #' x <- equivalence_test(model)
 #' plot(x)
-#'
+#' }
 #' @export
 data_plot <- function(x, data = NULL, ...) {
   UseMethod("data_plot")

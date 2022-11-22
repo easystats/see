@@ -65,7 +65,7 @@ function.
 }
 \examples{
 library(parameters)
-m <- lm(mpg ~ wt + cyl + gear, data = mtcars)
+m <<- lm(mpg ~ wt + cyl + gear, data = mtcars)
 result <- simulate_parameters(m)
 result
 plot(result)

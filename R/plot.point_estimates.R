@@ -90,15 +90,14 @@ data_plot.map_estimate <- data_plot.point_estimate
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
+#' @examplesIf require("rstanarm")
 #' \donttest{
-#' if (require("bayestestR") && require("rstanarm")) {
-#'   set.seed(123)
-#'   m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-#'   result <- point_estimate(m, centrality = "median")
-#'   result
-#'   plot(result)
-#' }
+#' library(rstanarm)
+#' set.seed(123)
+#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- point_estimate(m, centrality = "median")
+#' result
+#' plot(result)
 #' }
 #' @importFrom ggplot2 .data
 #' @export

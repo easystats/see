@@ -159,14 +159,13 @@ data_plot.p_significance <- function(x,
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
+#' @examplesIf require("rstanarm")
 #' \donttest{
-#' if (require("bayestestR") && require("rstanarm")) {
-#'   set.seed(123)
-#'   m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-#'   result <- p_significance(m)
-#'   plot(result)
-#' }
+#' library(rstanarm)
+#' set.seed(123)
+#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- p_significance(m)
+#' plot(result)
 #' }
 #' @importFrom ggplot2 .data
 #' @export
