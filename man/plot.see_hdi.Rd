@@ -46,6 +46,7 @@ function.
 }
 \examples{
 \dontshow{if (require("rstanarm") && FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+library(rstanarm)
 set.seed(123)
 m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 result <- hdi(m)

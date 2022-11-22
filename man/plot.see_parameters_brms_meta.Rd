@@ -61,32 +61,33 @@ output of estimates and credible intervals.
 }
 }
 \examples{
+\dontshow{if (require("brms") && require("metafor")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
-if (require("bayestestR") && require("brms") && require("metafor")) {
-  +
-    # data
-    data(dat.bcg)
-  dat <- escalc(
-    measure = "RR",
-    ai = tpos,
-    bi = tneg,
-    ci = cpos,
-    di = cneg,
-    data = dat.bcg
-  )
-  dat$author <- make.unique(dat$author)
+library(brms)
+library(metafor)
+data(dat.bcg)
 
-  # model
-  set.seed(123)
-  priors <- c(
-    prior(normal(0, 1), class = Intercept),
-    prior(cauchy(0, 0.5), class = sd)
-  )
-  model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
+dat <- escalc(
+  measure = "RR",
+  ai = tpos,
+  bi = tneg,
+  ci = cpos,
+  di = cneg,
+  data = dat.bcg
+)
+dat$author <- make.unique(dat$author)
 
-  # result
-  mp <- model_parameters(model)
-  plot(mp)
+# model
+set.seed(123)
+priors <- c(
+  prior(normal(0, 1), class = Intercept),
+  prior(cauchy(0, 0.5), class = sd)
+)
+model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
+
+# result
+mp <- model_parameters(model)
+plot(mp)
 }
-}
+\dontshow{\}) # examplesIf}
 }
