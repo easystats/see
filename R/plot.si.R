@@ -15,6 +15,7 @@
 #' @examplesIf require("rstanarm")
 #' \donttest{
 #' library(rstanarm)
+#' library(bayestestR)
 #' set.seed(123)
 #' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 #' result <- si(m)

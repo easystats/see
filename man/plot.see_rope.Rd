@@ -46,6 +46,7 @@ The \code{plot()} method for the \code{bayestestR::rope()}.
 \dontshow{if (require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 library(rstanarm)
+library(bayestestR)
 set.seed(123)
 m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 result <- rope(m)

@@ -153,6 +153,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' @examplesIf require("rstanarm")
 #' \donttest{
 #' library(rstanarm)
+#' library(bayestestR)
 #' set.seed(123)
 #' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 #' result <- p_direction(m)

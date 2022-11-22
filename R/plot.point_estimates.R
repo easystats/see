@@ -93,6 +93,7 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' @examplesIf require("rstanarm")
 #' \donttest{
 #' library(rstanarm)
+#' library(bayestestR)
 #' set.seed(123)
 #' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 #' result <- point_estimate(m, centrality = "median")
