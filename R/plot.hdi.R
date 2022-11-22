@@ -193,16 +193,12 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' \donttest{
-#' if (require("bayestestR") && require("rstanarm")) {
-#'   set.seed(123)
-#'   m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-#'   result <- hdi(m)
-#'   result
-#'   plot(result)
-#' }
-#' }
+#' @examplesIf require("rstanarm") && FALSE
+#' set.seed(123)
+#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- hdi(m)
+#' result
+#' plot(result)
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_hdi <- function(x,
