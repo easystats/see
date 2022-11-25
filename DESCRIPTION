@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.7.3.5
+Version: 0.7.3.6
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -68,10 +68,10 @@ Imports:
     datawizard (>= 0.6.4),
     effectsize (>= 0.8.2),
     ggplot2 (>= 3.4.0),
-    insight (>= 0.18.7),
+    insight (>= 0.18.8),
     modelbased (>= 0.8.5),
     parameters (>= 0.20.0),
-    performance (>= 0.10.0),
+    performance (>= 0.10.1),
 Suggests:
     brms,
     curl,
