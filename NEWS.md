@@ -1,4 +1,4 @@
-# see (development version)
+# see 0.7.4
 
 ## Changes
 
