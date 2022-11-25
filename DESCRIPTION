@@ -103,7 +103,7 @@ Suggests:
     rstanarm,
     scales (>= 1.2.0),
     splines,
-    testthat (>= 3.1.0),
+    testthat (>= 3.1.5),
     tidygraph,
     vdiffr
 Encoding: UTF-8
@@ -115,4 +115,3 @@ Config/Needs/website:
     rstudio/bslib,
     r-lib/pkgdown,
     easystats/easystatstemplate
-Remotes: easystats/parameters, easystats/performance
