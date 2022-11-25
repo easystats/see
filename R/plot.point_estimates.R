@@ -175,7 +175,7 @@ plot.see_point_estimate <- function(x,
           y = 0,
           yend = mean_y,
           color = "#E91E63",
-          size = 1,
+          linewidth = 1,
           alpha = posterior_alpha
         ) +
         geom_point(
@@ -205,7 +205,7 @@ plot.see_point_estimate <- function(x,
           y = 0,
           yend = median_y,
           color = "#2196F3",
-          size = 1,
+          linewidth = 1,
           alpha = posterior_alpha
         ) +
         geom_point(
@@ -235,7 +235,7 @@ plot.see_point_estimate <- function(x,
           y = 0,
           yend = map_y,
           color = "#4CAF50",
-          size = 1,
+          linewidth = 1,
           alpha = posterior_alpha
         ) +
         geom_point(

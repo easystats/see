@@ -58,7 +58,7 @@ plot.see_bayesfactor_parameters <- function(x,
       fill = .data$Distribution
     )
   ) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     geom_area(alpha = 0.15, position = "identity") +
     geom_vline(xintercept = hypothesis, linetype = "dashed", colour = "grey50") +
     labs(

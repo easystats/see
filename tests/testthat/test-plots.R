@@ -1,4 +1,4 @@
-skip_if_not_installed("patchwork")
+requiet("patchwork")
 
 test_that("`plots()` works", {
   p1 <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Width)) +

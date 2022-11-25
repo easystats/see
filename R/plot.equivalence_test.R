@@ -106,8 +106,8 @@ plot.see_equivalence_test <- function(x,
   tmp$predictor <- factor(tmp$predictor, levels = rev(unique(tmp$predictor)))
 
   # check if we have multiple panels
-  if ((!"Effects" %in% names(tmp) || length(unique(tmp$Effects)) <= 1) &&
-    (!"Component" %in% names(tmp) || length(unique(tmp$Component)) <= 1)) {
+  if ((!"Effects" %in% names(tmp) || length(unique(tmp$Effects)) <= 1L) &&
+    (!"Component" %in% names(tmp) || length(unique(tmp$Component)) <= 1L)) {
     n_columns <- NULL
   }
 
@@ -136,7 +136,6 @@ plot.see_equivalence_test <- function(x,
 
   rope.line.alpha <- 1.25 * rope_alpha
   if (rope.line.alpha > 1) rope.line.alpha <- 1
-
 
   insight::check_if_installed("ggridges")
 

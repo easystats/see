@@ -52,7 +52,7 @@ plot.see_binned_residuals <- function(x,
         se = FALSE,
         formula = y ~ s(x, bs = "tp"),
         colour = colors[3],
-        size = size_line
+        linewidth = size_line
       )
   }
 
@@ -77,11 +77,23 @@ plot.see_binned_residuals <- function(x,
   if (is.null(ltitle)) {
     p <- p +
       ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = size_point) +
-      ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high), size = size_line, width = 0)
+      ggplot2::geom_errorbar(
+        ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high),
+        linewidth = size_line,
+        width = 0
+      )
   } else {
     p <- p +
       ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = size_point) +
-      ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = size_line, width = 0)
+      ggplot2::geom_errorbar(
+        ggplot2::aes(
+          ymin = .data$CI_low,
+          ymax = .data$CI_high,
+          colour = .data$group
+        ),
+        linewidth = size_line,
+        width = 0
+      )
   }
 
   if (isTRUE(dots[["check_model"]])) {

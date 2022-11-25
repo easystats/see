@@ -195,7 +195,7 @@ plot.see_parameters_brms_meta <- function(x,
         xmax = .data$CI_high,
         color = .data$Color
       ),
-      size = size_line
+      linewidth = size_line
     ) +
     ggplot2::geom_point(
       data = summary,

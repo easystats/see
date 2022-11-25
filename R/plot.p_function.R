@@ -122,7 +122,7 @@ plot.see_p_function <- function(x,
         xend = .data$CI_high,
         yend = 1 - .data$CI,
         group = .data$Parameter,
-        size = .data$group
+        linewidth = .data$group
       ),
       colour = colors[1],
       alpha = line_alpha,

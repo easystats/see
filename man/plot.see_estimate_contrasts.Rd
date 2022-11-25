@@ -22,12 +22,12 @@ The \code{plot()} method for the \code{modelbased::estimate_contrasts()}
 function.
 }
 \examples{
+\dontshow{if (require("modelbased") && require("rstanarm") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (require("modelbased") && require("rstanarm") && require("emmeans")) {
-  model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
-  contrasts <- estimate_contrasts(model)
-  means <- estimate_means(model)
-  plot(contrasts, means)
+model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+contrasts <- estimate_contrasts(model)
+means <- estimate_means(model)
+plot(contrasts, means)
 }
-}
+\dontshow{\}) # examplesIf}
 }

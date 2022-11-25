@@ -141,7 +141,7 @@ plot.see_estimate_density <- function(x,
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(size = size_line) +
+      geom_line(linewidth = size_line) +
       add_plot_attributes(x) +
       scale_color_flat(labels = labels)
   } else {
@@ -190,7 +190,7 @@ plot.see_estimate_density <- function(x,
           xmax = .data$CI_high,
           color = "Posterior"
         ),
-        size = size_line
+        linewidth = size_line
       ) +
       geom_point(
         data = summary,
@@ -250,7 +250,7 @@ plot.see_estimate_density_df <- function(x,
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(size = size_line)
+      geom_line(linewidth = size_line)
   } else {
     insight::check_if_installed("ggridges")
 
@@ -265,11 +265,9 @@ plot.see_estimate_density_df <- function(x,
     p <- p + scale_y_discrete(labels = labels)
   }
 
-
-  if (length(unique(x$Parameter)) == 1) {
+  if (length(unique(x$Parameter)) == 1L) {
     p <- p + guides(color = "none")
   }
-
 
   if ("Group" %in% names(x)) {
     p <- p + facet_wrap(~Group, scales = "free", ncol = n_columns)

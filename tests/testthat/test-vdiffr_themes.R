@@ -1,5 +1,5 @@
 test_that("theme functions work", {
-  skip_if_not_installed("vdiffr")
+  requiet("vdiffr")
   requiet("poorman")
   skip_if_not(getRversion() >= "4.1")
 
@@ -21,7 +21,7 @@ test_that("theme functions work", {
       fill = Species
     )) +
       geom_polygon(
-        size = 1,
+        linewidth = 1,
         alpha = 0.1
       ) +
       coord_radar() +

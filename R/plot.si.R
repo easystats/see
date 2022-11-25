@@ -120,7 +120,7 @@ plot.see_si <- function(x,
     p <- p +
       aes(y = .data$updating_factor) +
       # distributions
-      geom_line(size = 1, data = support_data) +
+      geom_line(linewidth = 1, data = support_data) +
       geom_area(alpha = 0.15, data = support_data) +
       geom_hline(yintercept = unique(x$CI), colour = "grey30", linetype = "dotted") +
       labs(y = "Updating Factor")
@@ -132,12 +132,12 @@ plot.see_si <- function(x,
         fill = .data$Distribution
       ) +
       # distributions
-      geom_line(size = 1, data = plot_data) +
+      geom_line(linewidth = 1, data = plot_data) +
       geom_area(alpha = 0.15, data = plot_data) +
       labs(y = "Density")
   }
 
-  if (length(unique(plot_data$ind)) > 1) {
+  if (length(unique(plot_data$ind)) > 1L) {
     p <- p + facet_wrap(~ind, scales = "free")
   }
 

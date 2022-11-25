@@ -254,12 +254,14 @@ plot.see_check_model <- function(x,
     {
       if (!is.null(ci_data)) {
         list(
-          ggplot2::geom_linerange(size = size_line),
+          ggplot2::geom_linerange(linewidth = size_line),
           ggplot2::geom_segment(
             data = x[x$VIF_CI_high > ylim * 1.15, ],
             mapping = aes(
-              x = .data$x, xend = .data$x,
-              y = .data$y, yend = .data$VIF_CI_high
+              x = .data$x,
+              xend = .data$x,
+              y = .data$y,
+              yend = .data$VIF_CI_high
             ),
             lineend = "round",
             linejoin = "round",
@@ -513,7 +515,7 @@ plot.see_check_model <- function(x,
       se = TRUE,
       alpha = alpha_level,
       formula = y ~ x,
-      size = size_line,
+      linewidth = size_line,
       colour = colors[1]
     ) +
     ggplot2::labs(
@@ -596,7 +598,7 @@ plot.see_check_model <- function(x,
       ggplot2::stat_smooth(
         method = "lm",
         alpha = alpha_level,
-        size = size_line,
+        linewidth = size_line,
         formula = y ~ x,
         colour = colors[1]
       ) +
@@ -641,8 +643,8 @@ plot.see_check_model <- function(x,
   if (is.null(type) || type == 1) {
     p <- ggplot2::ggplot(x) +
       ggplot2::aes(x = .data$Predicted) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$V), size = size_line, color = colors[2], se = FALSE) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), size = size_line, color = colors[1]) +
+      ggplot2::geom_smooth(ggplot2::aes(y = .data$V), linewidth = size_line, color = colors[2], se = FALSE) +
+      ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), linewidth = size_line, color = colors[1]) +
       ggplot2::labs(
         title = "Overdispersion and zero-inflation",
         subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",

@@ -348,9 +348,10 @@ plot.see_parameters_model <- function(x,
 
     if (show_interval) {
       # TODO: Handle NA boundaries
-      p <- p + ggplot2::geom_errorbar(ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
+      p <- p + ggplot2::geom_errorbar(
+        ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
         width = 0,
-        size = size_point
+        linewidth = size_point
       )
     }
 
@@ -416,7 +417,7 @@ plot.see_parameters_model <- function(x,
       # TODO: Handle NA boundaries
       p <- p + ggplot2::geom_errorbar(ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
         width = 0,
-        size = size_point
+        linewidth = size_point
       )
     }
 

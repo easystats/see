@@ -16,7 +16,7 @@
 #'   )
 #'
 #'   ggplot(data, aes(x = name, y = value, color = Species, group = Species)) +
-#'     geom_polygon(fill = NA, size = 2) +
+#'     geom_polygon(fill = NA, linewidth = 2) +
 #'     coord_radar(start = -pi / 4)
 #' }
 #' @export

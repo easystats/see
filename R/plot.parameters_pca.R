@@ -108,7 +108,7 @@ plot.see_parameters_pca <- function(x,
       scale_fill_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   } else {
     p <- p +
-      geom_segment(aes(x = 0, yend = .data$Variable, xend = abs(.data$y)), size = size) +
+      geom_segment(aes(x = 0, yend = .data$Variable, xend = abs(.data$y)), linewidth = size) +
       geom_point(size = 2 * size) +
       scale_color_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   }
