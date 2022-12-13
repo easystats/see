@@ -1,5 +1,5 @@
 
-# see <img src='man/figures/logo.png' align="right" height="139" />
+# see: Model Visualisation Toolbox for ‘easystats’ and ‘ggplot2’ <img src='man/figures/logo.png' align="right" height="139" />
 
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03393/status.svg)](https://doi.org/10.21105/joss.03393)
 [![downloads](http://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
