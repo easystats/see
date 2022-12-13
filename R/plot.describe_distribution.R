@@ -8,7 +8,7 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
     attr(dataplot, "centrality") <- stats::setNames(x[[1]], colnames(x)[1])
     attr(dataplot, "dispersion") <- stats::setNames(x[[2]], colnames(x)[2])
   } else {
-    dataplot <- lapply(1:nrow(x), function(i) {
+    dataplot <- lapply(seq_len(nrow(x)), function(i) {
       out <- data.frame(
         x = data[[i]],
         stringsAsFactors = FALSE

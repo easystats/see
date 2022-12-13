@@ -29,7 +29,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     y = c(x$p_Response, x$p_Residuals),
     group = factor(c(rep("Response", length(x$p_Response)), rep("Residuals", length(x$p_Residuals))),
       levels = c("Response", "Residuals")
-    )
+    ),
+    stringsAsFactors = FALSE
   )
 
   # remove all zero-probabilities
@@ -118,7 +119,8 @@ plot.see_check_distribution_numeric <- function(x,
 
   dat <- data.frame(
     x = factor(x$Distribution, levels = rev(sort(unique(x$Distribution)))),
-    y = x$p_Vector
+    y = x$p_Vector,
+    stringsAsFactors = FALSE
   )
 
   # remove all zero-probabilities
@@ -138,7 +140,7 @@ plot.see_check_distribution_numeric <- function(x,
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(vec))
-  dat2 <- data.frame(x = vec)
+  dat2 <- data.frame(x = vec, stringsAsFactors = FALSE)
 
   p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
     geom_line() +

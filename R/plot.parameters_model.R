@@ -450,7 +450,7 @@ plot.see_parameters_model <- function(x,
     new_range <- pretty(c(min_ci, max_ci + space_factor))
 
     # expand scale range and add numbers to the right border
-    if (!any(is.infinite(new_range)) && !any(is.na(new_range))) {
+    if (!any(is.infinite(new_range)) && !anyNA(new_range)) {
       p <- p +
         geom_text(
           mapping = aes(label = .data$Estimate_CI, x = Inf),
@@ -468,7 +468,7 @@ plot.see_parameters_model <- function(x,
   # values we can use as breaks and labels for the scale...
 
   if (exponentiated_coefs && log_scale) {
-    range <- 2^c(-24:16)
+    range <- 2^(-24:16)
     x_low <- which.min(min_ci > range) - 1
     x_high <- which.max(max_ci < range)
 

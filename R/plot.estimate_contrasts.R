@@ -31,7 +31,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @keywords internal
 .data_contrasts_and_means <- function(contrasts, means, x_name, y_name) {
   polygons <- contrasts
-  polygons$group <- 1:nrow(polygons)
+  polygons$group <- seq_len(nrow(polygons))
 
   data_means <- means
   data_means$x <- data_means[, x_name]
