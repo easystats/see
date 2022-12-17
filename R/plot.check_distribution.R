@@ -11,7 +11,7 @@
 #' @return A ggplot2-object.
 #'
 #' @examples identical(Sys.getenv("NOT_CRAN"), "true") && require("randomForest")
-#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 #' result <- check_distribution(m)
 #' result
 #' plot(result)
