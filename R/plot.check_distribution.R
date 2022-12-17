@@ -10,7 +10,8 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples identical(Sys.getenv("NOT_CRAN"), "true") && require("randomForest") && FALSE
+#' @examples identical(Sys.getenv("NOT_CRAN"), "true") && require("randomForest")
+#' library(performance)
 #' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 #' result <- check_distribution(m)
 #' result
