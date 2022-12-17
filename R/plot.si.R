@@ -12,8 +12,7 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("rstanarm")
-#' \donttest{
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")
 #' library(rstanarm)
 #' library(bayestestR)
 #' set.seed(123)
@@ -21,14 +20,14 @@
 #' result <- si(m)
 #' result
 #' plot(result)
-#' }
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_si <- function(x,
                         si_color = "#0171D3",
                         si_alpha = 0.2,
                         show_intercept = FALSE,
-                        support_only = FALSE, ...) {
+                        support_only = FALSE,
+                        ...) {
   plot_data <- attr(x, "plot_data")
   x$ind <- x$Parameter
 

@@ -10,15 +10,11 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' \donttest{
-#' if (require("randomForest") && require("performance")) {
-#'   m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-#'   result <- check_distribution(m)
-#'   result
-#'   plot(result)
-#' }
-#' }
+#' @examples identical(Sys.getenv("NOT_CRAN"), "true") && require("randomForest")
+#' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+#' result <- check_distribution(m)
+#' result
+#' plot(result)
 #' @export
 plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   model <- .retrieve_data(x)

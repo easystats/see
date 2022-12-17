@@ -75,8 +75,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("rstanarm")
-#' \donttest{
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")
 #' library(rstanarm)
 #' library(bayestestR)
 #' set.seed(123)
@@ -84,7 +83,6 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' result <- rope(m)
 #' result
 #' plot(result)
-#' }
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_rope <- function(x,

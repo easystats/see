@@ -53,8 +53,7 @@
 #'
 #' @seealso [Package-Vignettes](https://easystats.github.io/see/articles/)
 #'
-#' @examplesIf require("rstanarm")
-#' \donttest{
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")
 #' library(bayestestR)
 #' library(rstanarm)
 #'
@@ -86,7 +85,6 @@
 #' )
 #' x <- equivalence_test(model)
 #' plot(x)
-#' }
 #' @export
 data_plot <- function(x, data = NULL, ...) {
   UseMethod("data_plot")

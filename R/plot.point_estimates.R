@@ -90,8 +90,7 @@ data_plot.map_estimate <- data_plot.point_estimate
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("rstanarm")
-#' \donttest{
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")
 #' library(rstanarm)
 #' library(bayestestR)
 #' set.seed(123)
@@ -99,7 +98,6 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' result <- point_estimate(m, centrality = "median")
 #' result
 #' plot(result)
-#' }
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_point_estimate <- function(x,

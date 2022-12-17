@@ -62,8 +62,7 @@ allow to specify arguments to modify the transparency or color of geoms,
 these are shown in the 'Usage' section.
 }
 \examples{
-\dontshow{if (require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\donttest{
+\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(bayestestR)
 library(rstanarm)
 
@@ -95,7 +94,6 @@ model <<- stan_glm(
 )
 x <- equivalence_test(model)
 plot(x)
-}
 \dontshow{\}) # examplesIf}
 }
 \seealso{
