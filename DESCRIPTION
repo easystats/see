@@ -57,6 +57,7 @@ Description: Provides plotting utilities supporting packages in the 'easystats'
 License: GPL-3
 URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues
+Remotes: easystats/insight@revise_get_data
 Depends:
     graphics,
     grDevices,
