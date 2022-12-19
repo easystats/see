@@ -18,10 +18,10 @@ data_plot.parameters_simulate <- function(x,
     out$y <- datawizard::rescale(out$y, to = c(0, 0.9))
   }
 
-  if (length(unique(params$Effects)) > 1) {
+  if (length(unique(params$Effects)) > 1L) {
     out$Effects <- NA
 
-    if (length(unique(params$Component)) > 1) {
+    if (length(unique(params$Component)) > 1L) {
       zi_comp <- params$Component == "zero_inflated"
       params$Parameter[zi_comp] <- paste0(params$Parameter[zi_comp], "_zi")
       disp_comp <- params$Component == "dispersion"
@@ -34,7 +34,7 @@ data_plot.parameters_simulate <- function(x,
       }
     }
 
-    if (length(unique(params$Component)) > 1) {
+    if (length(unique(params$Component)) > 1L) {
       out$Component <- NA
       for (i in names(dat)) {
         if (i %in% params$Parameter && i %in% out$Parameter) {

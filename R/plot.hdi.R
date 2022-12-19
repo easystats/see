@@ -54,7 +54,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
     data <- as.data.frame(data)
   }
 
-  if (ncol(data) > 1) {
+  if (ncol(data) > 1L) {
     levels_order <- unique(rev(x$Parameter))
     data <- data[levels_order]
     dataplot <- data.frame()

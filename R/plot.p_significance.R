@@ -27,7 +27,7 @@ data_plot.p_significance <- function(x,
     data <- as.data.frame(data)
   }
 
-  if (ncol(data) > 1) {
+  if (ncol(data) > 1L) {
     levels_order <- rev(x$Parameter)
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()

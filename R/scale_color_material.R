@@ -27,7 +27,11 @@
 #'   theme_modern() +
 #'   scale_color_material_c(palette = "rainbow")
 #' @export
-scale_color_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+scale_color_material <- function(palette = "contrast",
+                                 discrete = TRUE,
+                                 reverse = FALSE,
+                                 aesthetics = "color",
+                                 ...) {
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -44,14 +48,34 @@ scale_color_material <- function(palette = "contrast", discrete = TRUE, reverse 
 
 #' @rdname scale_color_material
 #' @export
-scale_color_material_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_material_d <- function(palette = "contrast",
+                                   discrete = TRUE,
+                                   reverse = FALSE,
+                                   aesthetics = "color",
+                                   ...) {
+  scale_color_material(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_material
 #' @export
-scale_color_material_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_material_c <- function(palette = "contrast",
+                                   discrete = FALSE,
+                                   reverse = FALSE,
+                                   aesthetics = "color",
+                                   ...) {
+  scale_color_material(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_material
@@ -76,7 +100,11 @@ scale_colour_material_d <- scale_color_material_d
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+scale_fill_material <- function(palette = "contrast",
+                                discrete = TRUE,
+                                reverse = FALSE,
+                                aesthetics = "fill",
+                                ...) {
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -89,14 +117,34 @@ scale_fill_material <- function(palette = "contrast", discrete = TRUE, reverse =
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_material_d <- function(palette = "contrast",
+                                  discrete = TRUE,
+                                  reverse = FALSE,
+                                  aesthetics = "fill",
+                                  ...) {
+  scale_fill_material(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_material(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_material_c <- function(palette = "contrast",
+                                  discrete = FALSE,
+                                  reverse = FALSE,
+                                  aesthetics = "fill",
+                                  ...) {
+  scale_fill_material(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 

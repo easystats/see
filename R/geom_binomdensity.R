@@ -46,13 +46,13 @@ geom_binomdensity <- function(data,
   insight::check_if_installed(c("ggplot2", "ggdist"))
 
   # Sanitize y (e.g., if levels with no values, etc.)
-  if (is.factor(data[[y]]) && length(levels(data[[y]])) > 2) {
+  if (is.factor(data[[y]]) && length(levels(data[[y]])) > 2L) {
     data[[y]] <- droplevels(data[[y]])
   }
 
   # Find y-axis levels
   y_levels <- levels(as.factor(data[[y]]))
-  if (length(y_levels) != 2) {
+  if (length(y_levels) != 2L) {
     stop("The y-variable should have exactly two levels.", call. = FALSE)
   }
 
@@ -62,7 +62,7 @@ geom_binomdensity <- function(data,
 
   # Other parameters
   data$.side <- ifelse(data[[y]] == y_levels[1], "top", "bottom")
-  data$.justification <- ifelse(data[[y]] == y_levels[1], 0, 1)
+  data$.justification <- as.numeric(!(data[[y]] == y_levels[1]))
   data$.scale <- .geom_binomdensity_scale(data, x, y, scale)
 
   # ggdist geom
