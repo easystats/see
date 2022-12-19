@@ -33,19 +33,15 @@ plot.see_si <- function(x,
 
   # if we have intercept-only models, keep at least the intercept
   intercepts_data <- which(.in_intercepts(plot_data$ind))
-  if (length(intercepts_data) &&
-    nrow(plot_data) > length(intercepts_data) &&
-    !show_intercept) {
+  if (length(intercepts_data) && (nrow(plot_data) > length(intercepts_data)) && !show_intercept) {
     intercepts_si <- which(.in_intercepts(x$ind))
     x <- x[-intercepts_si, ]
     plot_data <- plot_data[-intercepts_data, ]
   }
 
 
-  if (length(unique(x$CI)) > 1) {
-    p <- ggplot(mapping = aes(
-      x = .data$x,
-    )) +
+  if (length(unique(x$CI)) > 1L) {
+    p <- ggplot(mapping = aes(x = .data$x)) +
       # SI
       geom_rect(
         aes(xmin = .data$CI_low, xmax = .data$CI_high, alpha = .data$CI),
@@ -63,9 +59,7 @@ plot.see_si <- function(x,
       theme(legend.position = "bottom")
   } else {
     # Basic plot
-    p <- ggplot(mapping = aes(
-      x = .data$x,
-    )) +
+    p <- ggplot(mapping = aes(x = .data$x)) +
       # SI
       geom_rect(
         aes(xmin = .data$CI_low, xmax = .data$CI_high),

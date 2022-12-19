@@ -167,7 +167,7 @@ plot.see_p_function <- function(x,
   # facets for grids, different color/fill when no grids
   if (!is.null(n_columns)) {
     p <- p + ggplot2::facet_wrap(~ .data$Parameter, scales = "free_x", ncol = n_columns)
-  } else if (insight::n_unique(data_ribbon$Parameter) > 1) {
+  } else if (insight::n_unique(data_ribbon$Parameter) > 1L) {
     p <- p +
       scale_color_flat_d(guide = "none") +
       scale_fill_flat_d()

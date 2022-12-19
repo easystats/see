@@ -208,8 +208,14 @@ plot.see_parameters_brms_meta <- function(x,
   p <- p +
     theme_lucid() +
     ggplot2::scale_y_discrete() +
-    ggplot2::scale_fill_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
-    ggplot2::scale_colour_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
+    ggplot2::scale_fill_manual(values = c(
+      "Study" = unname(metro_colors("light blue")),
+      "Overall" = unname(metro_colors("amber"))
+    )) +
+    ggplot2::scale_colour_manual(values = c(
+      "Study" = unname(metro_colors("light blue")),
+      "Overall" = unname(metro_colors("amber"))
+    )) +
     ggplot2::guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
 
@@ -227,7 +233,10 @@ plot.see_parameters_brms_meta <- function(x,
       ) +
       ggplot2::xlim(c(min(new_range), max(new_range))) +
       # no panel grids when we have text
-      ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank())
+      ggplot2::theme(
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank()
+      )
   }
 
   p

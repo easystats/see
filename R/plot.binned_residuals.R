@@ -7,7 +7,7 @@ plot.see_binned_residuals <- function(x,
                                       style = theme_lucid,
                                       ...) {
   x$se.lo <- -x$se
-  if (length(unique(x$group)) > 1) {
+  if (length(unique(x$group)) > 1L) {
     ltitle <- "Within error bounds"
   } else {
     ltitle <- NULL

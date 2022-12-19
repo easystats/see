@@ -23,7 +23,7 @@
 #' plot(result)
 #' @export
 plot.see_performance_roc <- function(x, ...) {
-  if (length(unique(x$Model)) > 1) {
+  if (length(unique(x$Model)) > 1L) {
     p <- ggplot(
       x,
       aes(

@@ -119,7 +119,7 @@ plot.see_equivalence_test <- function(x,
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-  if (length(unique(tmp$HDI)) > 1) {
+  if (length(unique(tmp$HDI)) > 1L) {
     x.title <- "Highest Density Region of Posterior Samples"
   } else {
     x.title <- sprintf("%g%% Highest Density Region of Posterior Samples", 100 * x$CI[1])
@@ -173,26 +173,26 @@ plot.see_equivalence_test <- function(x,
 
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
-      if (length(unique(tmp$HDI)) > 1) {
+      if (length(unique(tmp$HDI)) > 1L) {
         p <- p + facet_wrap(~ Effects + Component + HDI, scales = "free", ncol = n_columns)
       } else {
         p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
       }
     } else if ("Effects" %in% names(x)) {
-      if (length(unique(tmp$HDI)) > 1) {
+      if (length(unique(tmp$HDI)) > 1L) {
         p <- p + facet_wrap(~ Effects + HDI, scales = "free", ncol = n_columns)
       } else {
         p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
       }
     } else if ("Component" %in% names(x)) {
-      if (length(unique(tmp$HDI)) > 1) {
+      if (length(unique(tmp$HDI)) > 1L) {
         p <- p + facet_wrap(~ Component + HDI, scales = "free", ncol = n_columns)
       } else {
         p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
       }
     }
   } else {
-    if (length(unique(tmp$HDI)) > 1) {
+    if (length(unique(tmp$HDI)) > 1L) {
       p <- p + facet_wrap(~HDI, scales = "free", ncol = n_columns)
     }
   }
@@ -262,7 +262,7 @@ plot.see_equivalence_test_df <- function(x,
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-  if (length(unique(tmp$HDI)) > 1) {
+  if (length(unique(tmp$HDI)) > 1L) {
     x.title <- "Highest Density Region of Posterior Samples"
   } else {
     x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
@@ -315,7 +315,7 @@ plot.see_equivalence_test_df <- function(x,
     scale_y_discrete(labels = labels) +
     theme(legend.position = "bottom")
 
-  if (length(unique(tmp$HDI)) > 1) {
+  if (length(unique(tmp$HDI)) > 1L) {
     p <- p + facet_wrap(~HDI, scales = "free", ncol = n_columns)
   }
 

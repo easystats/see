@@ -64,7 +64,7 @@ plot.see_parameters_model <- function(x,
   }
 
   if (!any(grepl("Parameter", colnames(x), fixed = TRUE))) {
-    if (length(model_attributes$parameter_names) > 1) {
+    if (length(model_attributes$parameter_names) > 1L) {
       collapsed_params <- apply(
         do.call(
           cbind,
@@ -108,7 +108,7 @@ plot.see_parameters_model <- function(x,
   }
 
   # check if multiple CIs
-  if (sum(grepl("^CI_low", colnames(x))) > 1) {
+  if (sum(grepl("^CI_low", colnames(x))) > 1L) {
     multiple_ci <- TRUE
     x <- datawizard::reshape_ci(x)
   } else {
@@ -153,10 +153,10 @@ plot.see_parameters_model <- function(x,
   }
 
   # remember components
-  has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
-  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
-  has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
-  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
+  has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1L
+  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1L
+  has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1L
+  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1L
 
   mc <- model_attributes$model_class
   cp <- model_attributes$cleaned_parameters
@@ -165,10 +165,8 @@ plot.see_parameters_model <- function(x,
   is_meta_bma <- !is.null(mc) && any(mc %in% c("meta_random", "meta_fixed", "meta_bma"))
 
   # minor fixes for Bayesian models
-  if (!is.null(mc) && !is.null(cp) && any(mc %in% c("stanreg", "stanmvreg", "brmsfit"))) {
-    if (length(cp) == length(x$Parameter)) {
-      x$Parameter <- cp
-    }
+  if (!is.null(mc) && !is.null(cp) && any(mc %in% c("stanreg", "stanmvreg", "brmsfit")) && length(cp) == length(x$Parameter)) {
+    x$Parameter <- cp
   }
 
   if (isTRUE(show_density)) {
@@ -523,7 +521,7 @@ plot.see_parameters_model <- function(x,
     suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free"))
   }
 
-  if (length(model_attributes$parameter_names) > 1) {
+  if (length(model_attributes$parameter_names) > 1L) {
     parameter_label <- "Parameters"
   } else {
     parameter_label <- model_attributes$parameter_names

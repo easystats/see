@@ -130,13 +130,13 @@ add_plot_attributes <- function(x) {
   out <- list(ggplot2::ylab(info$ylab), ggplot2::xlab(info$xlab))
 
   if (!is.null(info$legend_fill)) {
-    out[[length(out) + 1]] <- ggplot2::labs(fill = info$legend_fill)
+    out[[length(out) + 1L]] <- ggplot2::labs(fill = info$legend_fill)
   }
   if (!is.null(info$legend_color)) {
-    out[[length(out) + 1]] <- ggplot2::labs(color = info$legend_color)
+    out[[length(out) + 1L]] <- ggplot2::labs(color = info$legend_color)
   }
   if (!is.null(info$title)) {
-    out[[length(out) + 1]] <- ggplot2::labs(title = info$title)
+    out[[length(out) + 1L]] <- ggplot2::labs(title = info$title)
   }
 
   out
@@ -181,7 +181,9 @@ add_plot_attributes <- function(x) {
 
 
   if (is.null(dat)) {
-    stop("Failed at retrieving data :( Please provide original model or data through the `data` argument", call. = FALSE)
+    insight::format_error(
+      "Failed at retrieving data :( Please provide original model or data through the `data` argument"
+    )
   }
 
   dat
