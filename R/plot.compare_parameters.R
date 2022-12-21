@@ -43,7 +43,7 @@ plot.see_compare_parameters <- function(x,
 
   # is exp?
   exponentiated_coefs <- isTRUE(attributes(x)$exponentiate)
-  y_intercept <- ifelse(exponentiated_coefs, 1, 0)
+  y_intercept <- as.numeric(exponentiated_coefs)
 
   # add coefficients and CIs?
   add_values <- isTRUE(show_labels)

@@ -310,7 +310,7 @@ plot.see_parameters_model <- function(x,
 
 
   if (!show_intercept) {
-    if (length(.in_intercepts(x$Parameter)) > 0) {
+    if (length(.in_intercepts(x$Parameter)) > 0L) {
       x <- x[!.in_intercepts(x$Parameter), ]
       if (show_density && (is_bayesian || is_bootstrap)) {
         data <- data[!.in_intercepts(data$Parameter), ]

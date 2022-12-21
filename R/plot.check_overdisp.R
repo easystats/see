@@ -9,6 +9,6 @@ plot.see_check_overdisp <- function(x,
     style = theme_lucid,
     colors = colors,
     size_line = size_line,
-    type = type,
+    type = type
   )
 }

@@ -129,7 +129,7 @@ plot.see_parameters_distribution <- function(x,
 
   if (!is.null(highlight)) {
     highlight <- highlight[highlight %in% x$x]
-    if (length(highlight) > 0) {
+    if (length(highlight) > 0L) {
       x$highlight <- "no_highlight"
       for (i in highlight) {
         x$highlight[x$x == i] <- i
@@ -143,7 +143,7 @@ plot.see_parameters_distribution <- function(x,
     p <- ggplot(x, aes(x = .data$x))
   }
 
-  if (is.factor(x$x) || is.character(x$x) || insight::n_unique(x$x) <= 12) {
+  if (is.factor(x$x) || is.character(x$x) || insight::n_unique(x$x) <= 12L) {
     p <- p + geom_bar(width = size_bar)
   } else if (.is_integer(x$x)) {
     p <- p +

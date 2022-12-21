@@ -102,7 +102,8 @@ scale_fill_pizza_c <- function(palette = "margherita", discrete = FALSE, reverse
 
 
 
-# The palette based on this image: https://www.scattidigusto.it/wp-content/uploads/2018/03/pizza-margherita-originale-Scatti-di-Gusto.jpg
+# The palette based on this image:
+# https://www.scattidigusto.it/wp-content/uploads/2018/03/pizza-margherita-originale-Scatti-di-Gusto.jpg
 pizza_colors_list <- c(
   `tomato` = "#CE3722",
   `mozzarella` = "#EBE8E1",
