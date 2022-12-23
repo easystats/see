@@ -63,6 +63,7 @@ output of estimates and credible intervals.
 \examples{
 \dontshow{if (require("brms") && require("metafor")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
+library(parameters)
 library(brms)
 library(metafor)
 data(dat.bcg)
