@@ -5,33 +5,31 @@
 #'   while `plot()` visualizes results of functions from different packages in
 #'   [easystats-project](https://github.com/easystats). See the documentation
 #'   for your object's class:
-#' \itemize{
-#'  \item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
-#'  \item{\link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}}
-#'  \item{\link[=plot.see_equivalence_test]{bayestestR::equivalence_test()}}
-#'  \item{\link[=plot.see_estimate_density]{bayestestR::estimate_density()}}
-#'  \item{\link[=plot.see_hdi]{bayestestR::hdi()}}
-#'  \item{\link[=plot.see_p_direction]{bayestestR::p_direction()}}
-#'  \item{\link[=plot.see_p_significance]{bayestestR::p_significance()}}
-#'  \item{\link[=plot.see_si]{bayestestR::si()}}
-#'  \item{\link[=plot.see_effectsize_table]{effectsize::effectsize()}}
-#'  \item{\link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}}
-#'  \item{\link[=plot.see_compare_parameters]{parameters::compare_parameters()}}
-#'  \item{\link[=plot.see_parameters_distribution]{parameters::describe_distribution()}}
-#'  \item{\link[=plot.see_parameters_model]{parameters::model_parameters()}}
-#'  \item{\link[=plot.see_parameters_pca]{parameters::principal_components()}}
-#'  \item{\link[=plot.see_n_factors]{parameters::n_clusters()}}
-#'  \item{\link[=plot.see_n_factors]{parameters::n_factors()}}
-#'  \item{\link[=plot.see_parameters_simulate]{parameters::simulate_parameters()}}
-#'  \item{\link[=plot.see_check_collinearity]{performance::check_collinearity()}}
-#'  \item{\link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}}
-#'  \item{\link[=plot.see_check_homogeneity]{performance::check_homogeneity()}}
-#'  \item{\link[=plot.see_check_normality]{performance::check_normality()}}
-#'  \item{\link[=plot.see_check_outliers]{performance::check_outliers()}}
-#'  \item{\link[=plot.see_compare_performance]{performance::compare_performance()}}
-#'  \item{\link[=plot.see_performance_roc]{performance::performance_roc()}}
-#'  \item{\link[=plot.see_performance_pp_check]{performance::check_posterior_predictions()}}
-#'  }
+#'  - \link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}
+#'  - \link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}
+#'  - \link[=plot.see_equivalence_test]{bayestestR::equivalence_test()}
+#'  - \link[=plot.see_estimate_density]{bayestestR::estimate_density()}
+#'  - \link[=plot.see_hdi]{bayestestR::hdi()}
+#'  - \link[=plot.see_p_direction]{bayestestR::p_direction()}
+#'  - \link[=plot.see_p_significance]{bayestestR::p_significance()}
+#'  - \link[=plot.see_si]{bayestestR::si()}
+#'  - \link[=plot.see_effectsize_table]{effectsize::effectsize()}
+#'  - \link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}
+#'  - \link[=plot.see_compare_parameters]{parameters::compare_parameters()}
+#'  - \link[=plot.see_parameters_distribution]{parameters::describe_distribution()}
+#'  - \link[=plot.see_parameters_model]{parameters::model_parameters()}
+#'  - \link[=plot.see_parameters_pca]{parameters::principal_components()}
+#'  - \link[=plot.see_n_factors]{parameters::n_clusters()}
+#'  - \link[=plot.see_n_factors]{parameters::n_factors()}
+#'  - \link[=plot.see_parameters_simulate]{parameters::simulate_parameters()}
+#'  - \link[=plot.see_check_collinearity]{performance::check_collinearity()}
+#'  - \link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}
+#'  - \link[=plot.see_check_homogeneity]{performance::check_homogeneity()}
+#'  - \link[=plot.see_check_normality]{performance::check_normality()}
+#'  - \link[=plot.see_check_outliers]{performance::check_outliers()}
+#'  - \link[=plot.see_compare_performance]{performance::compare_performance()}
+#'  - \link[=plot.see_performance_roc]{performance::performance_roc()}
+#'  - \link[=plot.see_performance_pp_check]{performance::check_posterior_predictions()}
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a
