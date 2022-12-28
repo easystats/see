@@ -4,6 +4,8 @@
 \alias{scale_color_okabeito}
 \alias{scale_fill_okabeito}
 \alias{scale_colour_okabeito}
+\alias{scale_colour_oi}
+\alias{scale_color_oi}
 \alias{scale_fill_oi}
 \title{Okabe-Ito color palette}
 \usage{
@@ -31,6 +33,22 @@ scale_colour_okabeito(
   ...
 )
 
+scale_colour_oi(
+  palette = "full",
+  reverse = FALSE,
+  order = 1:9,
+  aesthetics = "color",
+  ...
+)
+
+scale_color_oi(
+  palette = "full",
+  reverse = FALSE,
+  order = 1:9,
+  aesthetics = "color",
+  ...
+)
+
 scale_fill_oi(
   palette = "full",
   reverse = FALSE,
@@ -42,7 +60,8 @@ scale_fill_oi(
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
 be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), or \code{"black_first"}.}
+\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_amber},
+or \code{black_first_amber}.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
@@ -65,6 +84,14 @@ correspond to major primary and secondary colors (e.g., red, yellow, blue).
 The Okabe-Ito palette is included in the base R \code{\link[grDevices:palette]{grDevices::palette.colors()}}.
 These functions make this palette easier to use with \emph{ggplot2}.
 
+The original Okabe-Ito palette's "yellow" color is \code{"#F0E442"}.
+This color is very bright and often does not show up well on white backgrounds
+(see \href{https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/}{here}) for a discussion of this issue).
+Accordingly, by default, this function uses a darker more "amber" color for "yellow" (\code{"#F5C710"}).
+This color is the "yellow" color used in base R >4.0's \href{https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/}{default color palette}.
+The palettes \code{"full"} and \code{"black_first"} use this darker yellow color.
+For the original yellow color suggested by Okabe and Ito (\code{"#F0E442"}), use palettes \code{"full_original"} or \code{"black_first_original"}.
+
 The Okabe-Ito palette is only available as a discrete palette.
 For color-accessible continuous variables, consider
 \link[ggplot2:scale_viridis]{the viridis palettes}.
@@ -82,6 +109,12 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +
   theme_modern() +
   scale_fill_oi(palette = "black_first")
+
+# for the original brighter yellow color suggested by Okabe and Ito
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violin() +
+  theme_modern() +
+  scale_fill_oi(palette = "full")
 
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +

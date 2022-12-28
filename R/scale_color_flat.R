@@ -179,7 +179,8 @@ flat_palettes <- list(
 #'
 #' @param palette Character name of palette. Depending on the color scale, can
 #'   be `"full"`, `"ice"`, `"rainbow"`, `"complement"`,
-#'   `"contrast"`, `"light"` (for dark themes), or `"black_first"`.
+#'   `"contrast"`, `"light"` (for dark themes), `"black_first"`, `full_original`,
+#'   or `black_first_original`.
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'

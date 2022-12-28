@@ -9,6 +9,14 @@
 #' The Okabe-Ito palette is included in the base R [grDevices::palette.colors()].
 #' These functions make this palette easier to use with *ggplot2*.
 #'
+#' The original Okabe-Ito palette's "yellow" color is `"#F0E442"`.
+#' This color is very bright and often does not show up well on white backgrounds
+#' (see [here](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/)) for a discussion of this issue).
+#' Accordingly, by default, this function uses a darker more "amber" color for "yellow" (`"#F5C710"`).
+#' This color is the "yellow" color used in base R >4.0's [default color palette](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/).
+#' The palettes `"full"` and `"black_first"` use this darker yellow color.
+#' For the original yellow color suggested by Okabe and Ito (`"#F0E442"`), use palettes `"full_original"` or `"black_first_original"`.
+#'
 #' The Okabe-Ito palette is only available as a discrete palette.
 #' For color-accessible continuous variables, consider
 #' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
@@ -34,6 +42,12 @@
 #'   geom_violin() +
 #'   theme_modern() +
 #'   scale_fill_oi(palette = "black_first")
+#'
+#' # for the original brighter yellow color suggested by Okabe and Ito
+#' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+#'   geom_violin() +
+#'   theme_modern() +
+#'   scale_fill_oi(palette = "full")
 #'
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
@@ -66,10 +80,15 @@ scale_fill_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, 
 
 #' @rdname scale_color_okabeito
 #' @export
-scale_colour_okabeito <-
-  scale_colour_oi <-
-  scale_color_oi <-
-  scale_color_okabeito
+scale_colour_okabeito <- scale_color_okabeito
+
+#' @rdname scale_color_okabeito
+#' @export
+scale_colour_oi <- scale_color_okabeito
+
+#' @rdname scale_color_okabeito
+#' @export
+scale_color_oi <- scale_color_okabeito
 
 #' @rdname scale_color_okabeito
 #' @export
@@ -93,7 +112,9 @@ okabeito_colors_list <- c(
   `sky blue` = "#56B4E9",
   `bluish green` = "#009E73",
   `vermillion` = "#D55E00",
-  `reddish purple` = "#CC79A7"
+  `reddish purple` = "#CC79A7",
+  `dark yellow` = "#F5C710",
+  `amber` = "#F5C710"
 )
 
 
@@ -122,14 +143,22 @@ okabeito_colors_list <- c(
 #'
 #' okabeito_colors(black_first = TRUE)
 #' @export
-okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE) {
+okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, amber = TRUE) {
   cols <- c(...)
 
   if (is.null(cols)) {
-    if (isTRUE(original_names)) {
-      cols <- c("orange", "light blue", "green", "yellow", "blue", "red", "purple", "grey", "black")
+    if (isFALSE(original_names)) {
+      if (isTRUE(amber)) {
+        cols <- c("orange", "light blue", "green", "amber", "blue", "red", "purple", "grey", "black")
+      } else {
+        cols <- c("orange", "light blue", "green", "yellow", "blue", "red", "purple", "grey", "black")
+      }
     } else {
-      cols <- c("orange", "sky blue", "bluish green", "yellow", "blue", "vermillion", "reddish purple", "grey", "black")
+      if (isTRUE(amber)) {
+        cols <- c("orange", "sky blue", "bluish green", "amber", "blue", "vermillion", "reddish purple", "grey", "black")
+      } else {
+        cols <- c("orange", "sky blue", "bluish green", "yellow", "blue", "vermillion", "reddish purple", "grey", "black")
+      }
     }
     if (isTRUE(black_first)) cols <- union("black", cols)
   }
@@ -142,8 +171,10 @@ okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE) {
 oi_colors <- okabeito_colors
 
 okabeito_palettes <- list(
-  `full` = okabeito_colors(),
-  `black_first` = okabeito_colors(black_first = TRUE)
+  `full` = okabeito_colors(black_first = FALSE, amber = TRUE),
+  `black_first` = okabeito_colors(black_first = TRUE, amber = TRUE),
+  `full_original` = okabeito_colors(black_first = FALSE, amber = FALSE),
+  `black_original` = okabeito_colors(black_first = TRUE, amber = FALSE)
 )
 
 
@@ -164,7 +195,7 @@ okabeito_palettes <- list(
 #'   [`scale_color_material()`][scale_color_material].
 #'
 #' @export
-palette_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, ...) {
+palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ...) {
   if (!palette %in% names(okabeito_palettes)) {
     msg <- c(paste0(
       "Palette name not available. `palette` must be one of ",

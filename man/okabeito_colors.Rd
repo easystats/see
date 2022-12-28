@@ -5,9 +5,9 @@
 \alias{oi_colors}
 \title{Extract Okabe-Ito colors as hex codes}
 \usage{
-okabeito_colors(..., original_names = FALSE, black_first = FALSE)
+okabeito_colors(..., original_names = FALSE, black_first = FALSE, amber = TRUE)
 
-oi_colors(..., original_names = FALSE, black_first = FALSE)
+oi_colors(..., original_names = FALSE, black_first = FALSE, amber = TRUE)
 }
 \arguments{
 \item{...}{Character names of colors.}
