@@ -2,7 +2,7 @@
 
 ## Changes
 
-* Changed the default "yellow" color in `palette_okabeito()` to `"F5C710"`
+* Changed the default "yellow" color in `palette_okabeito()` to `"#F5C710"`
   instead of `"#F0E442"` to increase visibility against a white background.
   For the original Okabe-Ito palette, set `palette = "full_original"` or 
   `palette = "black_first_original"`.
