@@ -87,7 +87,8 @@ scale_fill_metro_c(
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
 be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), or \code{"black_first"}.}
+\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
+or \code{black_first_original}.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 

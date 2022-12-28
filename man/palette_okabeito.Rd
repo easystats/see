@@ -5,14 +5,15 @@
 \alias{palette_oi}
 \title{Okabe-Ito color palette}
 \usage{
-palette_okabeito(palette = "full", reverse = FALSE, order = 1:9, ...)
+palette_okabeito(palette = "full_amber", reverse = FALSE, order = 1:9, ...)
 
-palette_oi(palette = "full", reverse = FALSE, order = 1:9, ...)
+palette_oi(palette = "full_amber", reverse = FALSE, order = 1:9, ...)
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
 be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), or \code{"black_first"}.}
+\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
+or \code{black_first_original}.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 

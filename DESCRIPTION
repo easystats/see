@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.7.4.1
+Version: 0.7.4.2
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -109,7 +109,7 @@ Suggests:
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.2.3.9000
 Config/testthat/edition: 3
 Config/Needs/website:
     rstudio/bslib,
