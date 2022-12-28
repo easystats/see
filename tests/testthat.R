@@ -9,12 +9,16 @@
 library(testthat)
 library(see)
 
-library(ggplot2)
+# easystats
 library(bayestestR)
-library(performance)
-library(parameters)
 library(effectsize)
 library(insight)
+library(correlation)
 library(datawizard)
+library(performance)
+library(parameters)
+
+# third-party
+library(ggplot2)
 
 test_check("see")

@@ -9,7 +9,7 @@
 #'   level (see examples).
 #' @param ... Other arguments passed to `ggdist::geom_dots`.
 #'
-#' @examples
+#' @examplesIf require("ggdist")
 #' library(ggplot2)
 #' library(see)
 #'
@@ -37,7 +37,6 @@
 #'     x = "Sepal.Length", y = "Species",
 #'     scale = list("setosa" = 0.4, "versicolor" = 0.6)
 #'   )
-#' @importFrom stats density na.omit xtabs
 #' @export
 geom_binomdensity <- function(data,
                               x,
@@ -47,23 +46,23 @@ geom_binomdensity <- function(data,
   insight::check_if_installed(c("ggplot2", "ggdist"))
 
   # Sanitize y (e.g., if levels with no values, etc.)
-  if (is.factor(data[[y]]) && length(levels(data[[y]])) > 2) {
+  if (is.factor(data[[y]]) && length(levels(data[[y]])) > 2L) {
     data[[y]] <- droplevels(data[[y]])
   }
 
   # Find y-axis levels
   y_levels <- levels(as.factor(data[[y]]))
-  if (length(y_levels) != 2) {
+  if (length(y_levels) != 2L) {
     stop("The y-variable should have exactly two levels.", call. = FALSE)
   }
 
   # Aesthetics
   vars <- c(x, y)
-  data <- na.omit(data[unique(vars)]) # Drop NaNs
+  data <- stats::na.omit(data[unique(vars)]) # Drop NaNs
 
   # Other parameters
   data$.side <- ifelse(data[[y]] == y_levels[1], "top", "bottom")
-  data$.justification <- ifelse(data[[y]] == y_levels[1], 0, 1)
+  data$.justification <- as.numeric(!(data[[y]] == y_levels[1]))
   data$.scale <- .geom_binomdensity_scale(data, x, y, scale)
 
   # ggdist geom
@@ -87,12 +86,12 @@ geom_binomdensity <- function(data,
 # Utilities ---------------------------------------------------------------
 
 .geom_binomdensity_scale <- function(data, x, y, scale = "auto") {
-  prop <- prop.table(xtabs(paste("~", y), data)) # Get prop table (useful later)
+  prop <- prop.table(stats::xtabs(paste("~", y), data)) # Get prop table (useful later)
   if (length(scale) == 1 && is.character(scale) && scale %in% c("density", "proportion", "auto")) {
     # Density instead of proportion
     if (scale == "density") {
       prop <- sapply(split(data, data[[y]]), function(df) {
-        max(density(df[[x]], na.rm = TRUE)$y) * nrow(df)
+        max(stats::density(df[[x]], na.rm = TRUE)$y) * nrow(df)
       })
       prop <- prop / sum(prop)
     }

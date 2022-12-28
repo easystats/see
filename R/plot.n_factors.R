@@ -95,7 +95,7 @@ plot.see_n_factors <- function(x,
 
   if (missing(size)) {
     size <- switch(type,
-      "bar" = .7,
+      "bar" = 0.7,
       "line" = 1,
       1
     )
@@ -122,7 +122,7 @@ plot.see_n_factors <- function(x,
       add_plot_attributes(x)
   } else if (type == "line") {
     ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
-      geom_segment(aes(x = 0, yend = .data$x, xend = .data$y), size = size) +
+      geom_segment(aes(x = 0, yend = .data$x, xend = .data$y), linewidth = size) +
       geom_point(size = 2 * size) +
       guides(colour = "none") +
       scale_x_continuous(labels = .percents) +

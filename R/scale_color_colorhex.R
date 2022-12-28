@@ -2,9 +2,9 @@
 #'
 #' @description
 #'
-#' This function creates color scales based on palettes from <https://color-hex.com>.
+#' This function creates color scales based on palettes from <https://www.color-hex.com/>.
 #' This website provides a large number of user-submitted color palettes.
-#' This function downloads a requested color palette from <https://color-hex.com>.
+#' This function downloads a requested color palette from <https://www.color-hex.com/>.
 #' and creates a `{ggplot2}` color scale from the provided hex codes.
 #'
 #' Use `scale_color_colorhex_d` for *discrete* categories and
@@ -116,9 +116,9 @@ scale_fill_colorhex_c <- function(palette = 1014416, discrete = FALSE, reverse =
 
 # Palette --------------------------------------------------------------------
 
-#' Color palettes from <https://color-hex.com>
+#' Color palettes from <https://www.color-hex.com/>
 #'
-#' This function downloads a requested color palette from <https://color-hex.com>.
+#' This function downloads a requested color palette from <https://www.color-hex.com/>.
 #' This website provides a large number of user-submitted color palettes.
 #'
 #' @note
@@ -126,7 +126,7 @@ scale_fill_colorhex_c <- function(palette = 1014416, discrete = FALSE, reverse =
 #' is available without an internet connection. All other color palettes require
 #' an internet connection to download and access.
 #'
-#' @param palette The numeric code for a palette at <https://color-hex.com>.
+#' @param palette The numeric code for a palette at <https://www.color-hex.com/>.
 #'   For example, `1014416` for the
 #'   [Josiah color palette (number 1014416)](https://www.color-hex.com/color-palette/1014416).
 #' @inheritParams palette_flat
@@ -137,16 +137,16 @@ scale_fill_colorhex_c <- function(palette = 1014416, discrete = FALSE, reverse =
 #' @export
 palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
   if (!is.numeric(palette) && suppressWarnings(is.na(as.numeric(palette)))) {
-    stop("`palette` must be the numeric code for a color palette at <https://color-hex.com>", call. = FALSE)
+    stop("`palette` must be the numeric code for a color palette at <https://www.color-hex.com/>", call. = FALSE)
   }
 
   if (palette == 1014416) {
     pal <- c("#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51")
     pal_name <- "Josiah"
   } else {
-    insight::check_if_installed("curl", reason = "to retrieve palettes from <https://color-hex.com>")
+    insight::check_if_installed("curl", reason = "to retrieve palettes from <https://www.color-hex.com/>")
 
-    curl_url <- paste0("https://www.color-hex.com/color-palette/", palette)
+    curl_url <- paste0("https://www.color-hex.com//color-palette/", palette)
     con <- curl::curl(url = curl_url)
     curl_res <- tryCatch(
       suppressWarnings(readLines(con)),
@@ -155,7 +155,7 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
     close(con)
 
     if (inherits(curl_res, "error")) {
-      insight::format_error("Could not reach <color-hex.com>. Check your internet connection.")
+      insight::format_error("Could not reach <color-hex.com/>. Check your internet connection.")
     }
 
     curl_res <- curl_res[grep("description", curl_res)]

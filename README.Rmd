@@ -4,7 +4,7 @@ bibliography: paper/paper.bib
 csl: apa.csl
 ---
 
-# see <img src='man/figures/logo.png' align="right" height="139" />
+# see: Model Visualisation Toolbox for 'easystats' and 'ggplot2' <img src='man/figures/logo.png' align="right" height="139" />
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(poorman)
@@ -328,7 +328,7 @@ data %>%
     group = Species,
     fill = Species
   )) +
-  geom_polygon(size = 1, alpha = .1) +
+  geom_polygon(linewidth = 1, alpha = 0.1) +
   coord_radar() +
   theme_radar()
 ```

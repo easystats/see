@@ -15,13 +15,13 @@ data_plot.parameters_simulate <- function(x,
 
   # normalize height
   if (isTRUE(normalize_height)) {
-    out$y <- datawizard::rescale(out$y, to = c(0, .9))
+    out$y <- datawizard::rescale(out$y, to = c(0, 0.9))
   }
 
-  if (length(unique(params$Effects)) > 1) {
+  if (length(unique(params$Effects)) > 1L) {
     out$Effects <- NA
 
-    if (length(unique(params$Component)) > 1) {
+    if (length(unique(params$Component)) > 1L) {
       zi_comp <- params$Component == "zero_inflated"
       params$Parameter[zi_comp] <- paste0(params$Parameter[zi_comp], "_zi")
       disp_comp <- params$Component == "dispersion"
@@ -34,7 +34,7 @@ data_plot.parameters_simulate <- function(x,
       }
     }
 
-    if (length(unique(params$Component)) > 1) {
+    if (length(unique(params$Component)) > 1L) {
       out$Component <- NA
       for (i in names(dat)) {
         if (i %in% params$Parameter && i %in% out$Parameter) {
@@ -76,7 +76,7 @@ data_plot.parameters_simulate <- function(x,
 #'
 #' @examples
 #' library(parameters)
-#' m <- lm(mpg ~ wt + cyl + gear, data = mtcars)
+#' m <<- lm(mpg ~ wt + cyl + gear, data = mtcars)
 #' result <- simulate_parameters(m)
 #' result
 #' plot(result)
@@ -87,7 +87,7 @@ plot.see_parameters_simulate <- function(x,
                                          show_intercept = FALSE,
                                          n_columns = NULL,
                                          normalize_height = FALSE,
-                                         size_line = .9,
+                                         size_line = 0.9,
                                          posteriors_alpha = 0.7,
                                          centrality = "median",
                                          ci = 0.95,

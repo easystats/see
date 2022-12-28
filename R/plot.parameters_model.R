@@ -38,7 +38,7 @@
 #' @export
 plot.see_parameters_model <- function(x,
                                       show_intercept = FALSE,
-                                      size_point = .8,
+                                      size_point = 0.8,
                                       size_text = NA,
                                       sort = NULL,
                                       n_columns = NULL,
@@ -64,7 +64,7 @@ plot.see_parameters_model <- function(x,
   }
 
   if (!any(grepl("Parameter", colnames(x), fixed = TRUE))) {
-    if (length(model_attributes$parameter_names) > 1) {
+    if (length(model_attributes$parameter_names) > 1L) {
       collapsed_params <- apply(
         do.call(
           cbind,
@@ -108,7 +108,7 @@ plot.see_parameters_model <- function(x,
   }
 
   # check if multiple CIs
-  if (sum(grepl("^CI_low", colnames(x))) > 1) {
+  if (sum(grepl("^CI_low", colnames(x))) > 1L) {
     multiple_ci <- TRUE
     x <- datawizard::reshape_ci(x)
   } else {
@@ -153,10 +153,10 @@ plot.see_parameters_model <- function(x,
   }
 
   # remember components
-  has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
-  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
-  has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
-  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
+  has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1L
+  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1L
+  has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1L
+  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1L
 
   mc <- model_attributes$model_class
   cp <- model_attributes$cleaned_parameters
@@ -165,10 +165,8 @@ plot.see_parameters_model <- function(x,
   is_meta_bma <- !is.null(mc) && any(mc %in% c("meta_random", "meta_fixed", "meta_bma"))
 
   # minor fixes for Bayesian models
-  if (!is.null(mc) && !is.null(cp) && any(mc %in% c("stanreg", "stanmvreg", "brmsfit"))) {
-    if (length(cp) == length(x$Parameter)) {
-      x$Parameter <- cp
-    }
+  if (!is.null(mc) && !is.null(cp) && any(mc %in% c("stanreg", "stanmvreg", "brmsfit")) && length(cp) == length(x$Parameter)) {
+    x$Parameter <- cp
   }
 
   if (isTRUE(show_density)) {
@@ -207,7 +205,7 @@ plot.see_parameters_model <- function(x,
 
       density_layer <- ggdist::stat_slab(
         ggplot2::aes(fill = ggplot2::after_scale(.data$color)),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = data
       )
     } else if (isTRUE(exponentiated_coefs)) {
@@ -218,7 +216,7 @@ plot.see_parameters_model <- function(x,
           arg2 = .data$SE / .data$Coefficient,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     } else if (model_attributes$test_statistic == "t-statistic") {
@@ -231,7 +229,7 @@ plot.see_parameters_model <- function(x,
           arg3 = .data$SE,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     } else {
@@ -243,7 +241,7 @@ plot.see_parameters_model <- function(x,
           arg2 = .data$SE,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = .2,
+        size = NA, alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     }
@@ -312,7 +310,7 @@ plot.see_parameters_model <- function(x,
 
 
   if (!show_intercept) {
-    if (length(.in_intercepts(x$Parameter)) > 0) {
+    if (length(.in_intercepts(x$Parameter)) > 0L) {
       x <- x[!.in_intercepts(x$Parameter), ]
       if (show_density && (is_bayesian || is_bootstrap)) {
         data <- data[!.in_intercepts(data$Parameter), ]
@@ -348,9 +346,10 @@ plot.see_parameters_model <- function(x,
 
     if (show_interval) {
       # TODO: Handle NA boundaries
-      p <- p + ggplot2::geom_errorbar(ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
+      p <- p + ggplot2::geom_errorbar(
+        ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
         width = 0,
-        size = size_point
+        linewidth = size_point
       )
     }
 
@@ -416,7 +415,7 @@ plot.see_parameters_model <- function(x,
       # TODO: Handle NA boundaries
       p <- p + ggplot2::geom_errorbar(ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
         width = 0,
-        size = size_point
+        linewidth = size_point
       )
     }
 
@@ -449,7 +448,7 @@ plot.see_parameters_model <- function(x,
     new_range <- pretty(c(min_ci, max_ci + space_factor))
 
     # expand scale range and add numbers to the right border
-    if (!any(is.infinite(new_range)) && !any(is.na(new_range))) {
+    if (!any(is.infinite(new_range)) && !anyNA(new_range)) {
       p <- p +
         geom_text(
           mapping = aes(label = .data$Estimate_CI, x = Inf),
@@ -467,7 +466,7 @@ plot.see_parameters_model <- function(x,
   # values we can use as breaks and labels for the scale...
 
   if (exponentiated_coefs && log_scale) {
-    range <- 2^c(-24:16)
+    range <- 2^(-24:16)
     x_low <- which.min(min_ci > range) - 1
     x_high <- which.max(max_ci < range)
 
@@ -522,7 +521,7 @@ plot.see_parameters_model <- function(x,
     suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free"))
   }
 
-  if (length(model_attributes$parameter_names) > 1) {
+  if (length(model_attributes$parameter_names) > 1L) {
     parameter_label <- "Parameters"
   } else {
     parameter_label <- model_attributes$parameter_names
@@ -566,8 +565,8 @@ plot.see_parameters_model <- function(x,
   )
   estimate <- x$Coefficient[x$Parameter == "Overall"]
 
-  dat_funnel$ci_low <- estimate - stats::qnorm(.975) * dat_funnel$se_range
-  dat_funnel$ci_high <- estimate + stats::qnorm(.975) * dat_funnel$se_range
+  dat_funnel$ci_low <- estimate - stats::qnorm(0.975) * dat_funnel$se_range
+  dat_funnel$ci_high <- estimate + stats::qnorm(0.975) * dat_funnel$se_range
 
   d_polygon <- data.frame(
     x = c(min(dat_funnel$ci_low), estimate, max(dat_funnel$ci_high)),
@@ -576,7 +575,7 @@ plot.see_parameters_model <- function(x,
 
   ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
     scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
-    geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = .3) +
+    geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = 0.3) +
     geom_line(
       data = dat_funnel,
       mapping = aes(x = .data$ci_low, y = .data$se_range),

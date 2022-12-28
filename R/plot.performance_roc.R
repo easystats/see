@@ -23,7 +23,7 @@
 #' plot(result)
 #' @export
 plot.see_performance_roc <- function(x, ...) {
-  if (length(unique(x$Model)) > 1) {
+  if (length(unique(x$Model)) > 1L) {
     p <- ggplot(
       x,
       aes(
@@ -44,7 +44,7 @@ plot.see_performance_roc <- function(x, ...) {
 
 
   p +
-    geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = .5) +
+    geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.5) +
     geom_line() +
     ylim(c(0, 1)) +
     xlim(c(0, 1)) +

@@ -15,20 +15,30 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 
   # normalize height
   if (isTRUE(normalize_height)) {
-    dataplot$y <- datawizard::rescale(dataplot$y, to = c(0, .9))
+    dataplot$y <- datawizard::rescale(dataplot$y, to = c(0, 0.9))
   }
 
   # summary
   summary <- x[, 1:6]
   summary$Parameter <- attributes(x)$cleaned_parameters
   colnames(summary)[2] <- "Estimate"
-  summary$Estimate_CI <- sprintf("%.2f %s", summary$Estimate, insight::format_ci(summary$CI_low, summary$CI_high, ci = NULL, digits = 2, zap_small = TRUE))
+  summary$Estimate_CI <- sprintf(
+    "%.2f %s",
+    summary$Estimate,
+    insight::format_ci(
+      summary$CI_low,
+      summary$CI_high,
+      ci = NULL,
+      digits = 2,
+      zap_small = TRUE
+    )
+  )
 
   summary$Parameter <- factor(summary$Parameter, levels = rev(unique(summary$Parameter)))
   colnames(summary)[match("Parameter", colnames(summary))] <- "Study"
 
-  summary$x <- as.numeric(NA)
-  summary$y <- as.numeric(NA)
+  summary$x <- NA_real_
+  summary$y <- NA_real_
   summary$Color <- "Study"
   summary$Color[summary$Study == "Overall"] <- "Overall"
 
@@ -96,34 +106,34 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #'   output of estimates and credible intervals.
 #' }
 #'
-#' @examples
+#' @examplesIf require("brms") && require("metafor")
 #' \dontrun{
-#' if (require("bayestestR") && require("brms") && require("metafor")) {
-#'   +
-#'     # data
-#'     data(dat.bcg)
-#'   dat <- escalc(
-#'     measure = "RR",
-#'     ai = tpos,
-#'     bi = tneg,
-#'     ci = cpos,
-#'     di = cneg,
-#'     data = dat.bcg
-#'   )
-#'   dat$author <- make.unique(dat$author)
+#' library(parameters)
+#' library(brms)
+#' library(metafor)
+#' data(dat.bcg)
 #'
-#'   # model
-#'   set.seed(123)
-#'   priors <- c(
-#'     prior(normal(0, 1), class = Intercept),
-#'     prior(cauchy(0, 0.5), class = sd)
-#'   )
-#'   model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
+#' dat <- escalc(
+#'   measure = "RR",
+#'   ai = tpos,
+#'   bi = tneg,
+#'   ci = cpos,
+#'   di = cneg,
+#'   data = dat.bcg
+#' )
+#' dat$author <- make.unique(dat$author)
 #'
-#'   # result
-#'   mp <- model_parameters(model)
-#'   plot(mp)
-#' }
+#' # model
+#' set.seed(123)
+#' priors <- c(
+#'   prior(normal(0, 1), class = Intercept),
+#'   prior(cauchy(0, 0.5), class = sd)
+#' )
+#' model <- brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
+#'
+#' # result
+#' mp <- model_parameters(model)
+#' plot(mp)
 #' }
 #' @export
 plot.see_parameters_brms_meta <- function(x,
@@ -186,7 +196,7 @@ plot.see_parameters_brms_meta <- function(x,
         xmax = .data$CI_high,
         color = .data$Color
       ),
-      size = size_line
+      linewidth = size_line
     ) +
     ggplot2::geom_point(
       data = summary,
@@ -199,8 +209,14 @@ plot.see_parameters_brms_meta <- function(x,
   p <- p +
     theme_lucid() +
     ggplot2::scale_y_discrete() +
-    ggplot2::scale_fill_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
-    ggplot2::scale_colour_manual(values = c("Study" = unname(metro_colors("light blue")), "Overall" = unname(metro_colors("amber")))) +
+    ggplot2::scale_fill_manual(values = c(
+      "Study" = unname(metro_colors("light blue")),
+      "Overall" = unname(metro_colors("amber"))
+    )) +
+    ggplot2::scale_colour_manual(values = c(
+      "Study" = unname(metro_colors("light blue")),
+      "Overall" = unname(metro_colors("amber"))
+    )) +
     ggplot2::guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
 
@@ -218,7 +234,10 @@ plot.see_parameters_brms_meta <- function(x,
       ) +
       ggplot2::xlim(c(min(new_range), max(new_range))) +
       # no panel grids when we have text
-      ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank())
+      ggplot2::theme(
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank()
+      )
   }
 
   p

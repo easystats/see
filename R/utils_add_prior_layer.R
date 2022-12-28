@@ -1,7 +1,7 @@
 .add_prior_layer_ridgeline <- function(model,
                                        parameter = NULL,
                                        show_intercept = FALSE,
-                                       priors_alpha = .5,
+                                       priors_alpha = 0.5,
                                        fill_color = NULL,
                                        show_ridge_line = TRUE) {
   dat <- tryCatch(
@@ -39,7 +39,7 @@
             x = .data$x,
             y = as.factor(.data$Parameter),
             height = .data$y,
-            group = as.factor(.data$Parameter),
+            group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
           alpha = priors_alpha
@@ -51,7 +51,7 @@
             x = .data$x,
             y = as.factor(.data$Parameter),
             height = .data$y,
-            group = as.factor(.data$Parameter),
+            group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
           alpha = priors_alpha,
@@ -96,7 +96,7 @@
 .add_prior_layer_ribbon <- function(model,
                                     parameter = NULL,
                                     show_intercept = FALSE,
-                                    priors_alpha = .5,
+                                    priors_alpha = 0.5,
                                     fill_color = NULL) {
   dat <- tryCatch(
     {
@@ -130,7 +130,7 @@
           x = .data$x,
           ymin = 0,
           ymax = .data$y,
-          group = as.factor(.data$Parameter),
+          group = as.factor(.data$Parameter)
         ),
         fill = fill_color,
         alpha = priors_alpha

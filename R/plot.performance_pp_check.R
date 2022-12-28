@@ -17,13 +17,14 @@ data_plot.performance_pp_check <- function(x, ...) {
   dataplot <- dataplot[, 1:(ncol(dataplot) - 1), drop = FALSE]
   dataplot$key[dataplot$key != "y"] <- "Model-predicted data"
   dataplot$key[dataplot$key == "y"] <- "Observed data"
-  dataplot$grp <- rep(1:ncol(x), each = nrow(x))
+  dataplot$grp <- rep(seq_len(ncol(x)), each = nrow(x))
 
   attr(dataplot, "info") <- list(
     "xlab" = attr(x, "response_name"),
     "ylab" = "Density",
     "title" = "Posterior Predictive Check",
-    "check_range" = attr(x, "check_range")
+    "check_range" = attr(x, "check_range"),
+    "bandwidth" = attr(x, "bandwidth")
   )
 
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
@@ -52,8 +53,8 @@ data_plot.performance_pp_check <- function(x, ...) {
 #' }
 #' @export
 print.see_performance_pp_check <- function(x,
-                                           size_line = .5,
-                                           line_alpha = .15,
+                                           size_line = 0.5,
+                                           line_alpha = 0.15,
                                            size_bar = 0.7,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
@@ -81,8 +82,8 @@ print.see_performance_pp_check <- function(x,
 #' @rdname print.see_performance_pp_check
 #' @export
 plot.see_performance_pp_check <- function(x,
-                                          size_line = .5,
-                                          line_alpha = .15,
+                                          size_line = 0.5,
+                                          line_alpha = 0.15,
                                           size_bar = 0.7,
                                           style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
@@ -109,6 +110,12 @@ plot.see_performance_pp_check <- function(x,
 .plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, ...) {
   info <- attr(x, "info")
 
+  # default bandwidth, for smooting
+  bandwidth <- info$bandwidth
+  if (is.null(bandwidth)) {
+    bandwidth <- "nrd"
+  }
+
   out <- ggplot2::ggplot(x) +
     ggplot2::stat_density(
       mapping = ggplot2::aes(
@@ -120,6 +127,7 @@ plot.see_performance_pp_check <- function(x,
       ),
       geom = "line",
       position = "identity",
+      bw = bandwidth
     ) +
     ggplot2::scale_y_continuous() +
     ggplot2::scale_color_manual(values = c(
@@ -174,7 +182,7 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_pp_check_range <- function(x, size_bar = .7, colors) {
+.plot_pp_check_range <- function(x, size_bar = 0.7, colors) {
   original <-
     data.frame(
       x = c(min(x$y), max(x$y)),

@@ -86,7 +86,7 @@ plot.see_parameters_pca <- function(x,
 
   if (missing(size)) {
     size <- switch(type,
-      "bar" = .6,
+      "bar" = 0.6,
       "line" = 1,
       1
     )
@@ -108,7 +108,7 @@ plot.see_parameters_pca <- function(x,
       scale_fill_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   } else {
     p <- p +
-      geom_segment(aes(x = 0, yend = .data$Variable, xend = abs(.data$y)), size = size) +
+      geom_segment(aes(x = 0, yend = .data$Variable, xend = abs(.data$y)), linewidth = size) +
       geom_point(size = 2 * size) +
       scale_color_gradientn(colours = c("#cd201f", "#ffffff", "#0077B5"), limits = c(-1, 1))
   }
@@ -119,7 +119,7 @@ plot.see_parameters_pca <- function(x,
         aes(x = abs(.data$y), label = round(.data$y, 2)),
         color = text_color,
         size = size_text,
-        nudge_y = .15
+        nudge_y = 0.15
       )
   }
 
@@ -127,7 +127,7 @@ plot.see_parameters_pca <- function(x,
     guides(fill = "none", color = "none") +
     scale_x_continuous(
       limits = c(0, 1.25),
-      breaks = c(0, .25, .5, .75, 1, 1.25),
+      breaks = c(0, 0.25, 0.5, 0.75, 1, 1.25),
       labels = c("0", "0.25", "0.5", "0.75", "1", "")
     ) +
     facet_wrap(~Component) +

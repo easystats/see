@@ -31,7 +31,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @keywords internal
 .data_contrasts_and_means <- function(contrasts, means, x_name, y_name) {
   polygons <- contrasts
-  polygons$group <- 1:nrow(polygons)
+  polygons$group <- seq_len(nrow(polygons))
 
   data_means <- means
   data_means$x <- data_means[, x_name]
@@ -69,15 +69,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' \donttest{
-#' if (require("modelbased") && require("rstanarm") && require("emmeans")) {
-#'   model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
-#'   contrasts <- estimate_contrasts(model)
-#'   means <- estimate_means(model)
-#'   plot(contrasts, means)
-#' }
-#' }
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("modelbased") && require("rstanarm") && require("emmeans")
+#' model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+#' contrasts <- estimate_contrasts(model)
+#' means <- estimate_means(model)
+#' plot(contrasts, means)
+#'
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_estimate_contrasts <- function(x, data = NULL, ...) {

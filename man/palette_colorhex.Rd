@@ -2,12 +2,12 @@
 % Please edit documentation in R/scale_color_colorhex.R
 \name{palette_colorhex}
 \alias{palette_colorhex}
-\title{Color palettes from \url{https://color-hex.com}}
+\title{Color palettes from \url{https://www.color-hex.com/}}
 \usage{
 palette_colorhex(palette = 1014416, reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{The numeric code for a palette at \url{https://color-hex.com}.
+\item{palette}{The numeric code for a palette at \url{https://www.color-hex.com/}.
 For example, \code{1014416} for the
 \href{https://www.color-hex.com/color-palette/1014416}{Josiah color palette (number 1014416)}.}
 
@@ -16,7 +16,7 @@ For example, \code{1014416} for the
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-This function downloads a requested color palette from \url{https://color-hex.com}.
+This function downloads a requested color palette from \url{https://www.color-hex.com/}.
 This website provides a large number of user-submitted color palettes.
 }
 \details{

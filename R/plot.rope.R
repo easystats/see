@@ -75,16 +75,14 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' \donttest{
-#' if (require("bayestestR") && require("rstanarm")) {
-#'   set.seed(123)
-#'   m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-#'   result <- rope(m)
-#'   result
-#'   plot(result)
-#' }
-#' }
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")
+#' library(rstanarm)
+#' library(bayestestR)
+#' set.seed(123)
+#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- rope(m)
+#' result
+#' plot(result)
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_rope <- function(x,

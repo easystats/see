@@ -60,6 +60,7 @@ the same page. See
 \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emph{patchwork} documentation} for more advanced control of plot layouts.
 }
 \examples{
+\dontshow{if (requireNamespace("patchwork", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(ggplot2)
 library(see)
 
@@ -78,4 +79,5 @@ plots(
   n_columns = 1, tags = c("Fig. 1", "Fig. 2", "Fig. 3"),
   title = "The surprising truth about mtcars"
 )
+\dontshow{\}) # examplesIf}
 }

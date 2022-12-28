@@ -20,31 +20,31 @@ while \code{plot()} visualizes results of functions from different packages in
 \href{https://github.com/easystats}{easystats-project}. See the documentation
 for your object's class:
 \itemize{
-\item{\link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}}
-\item{\link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}}
-\item{\link[=plot.see_equivalence_test]{bayestestR::equivalence_test()}}
-\item{\link[=plot.see_estimate_density]{bayestestR::estimate_density()}}
-\item{\link[=plot.see_hdi]{bayestestR::hdi()}}
-\item{\link[=plot.see_p_direction]{bayestestR::p_direction()}}
-\item{\link[=plot.see_p_significance]{bayestestR::p_significance()}}
-\item{\link[=plot.see_si]{bayestestR::si()}}
-\item{\link[=plot.see_effectsize_table]{effectsize::effectsize()}}
-\item{\link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}}
-\item{\link[=plot.see_compare_parameters]{parameters::compare_parameters()}}
-\item{\link[=plot.see_parameters_distribution]{parameters::describe_distribution()}}
-\item{\link[=plot.see_parameters_model]{parameters::model_parameters()}}
-\item{\link[=plot.see_parameters_pca]{parameters::principal_components()}}
-\item{\link[=plot.see_n_factors]{parameters::n_clusters()}}
-\item{\link[=plot.see_n_factors]{parameters::n_factors()}}
-\item{\link[=plot.see_parameters_simulate]{parameters::simulate_parameters()}}
-\item{\link[=plot.see_check_collinearity]{performance::check_collinearity()}}
-\item{\link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}}
-\item{\link[=plot.see_check_homogeneity]{performance::check_homogeneity()}}
-\item{\link[=plot.see_check_normality]{performance::check_normality()}}
-\item{\link[=plot.see_check_outliers]{performance::check_outliers()}}
-\item{\link[=plot.see_compare_performance]{performance::compare_performance()}}
-\item{\link[=plot.see_performance_roc]{performance::performance_roc()}}
-\item{\link[=plot.see_performance_pp_check]{performance::check_posterior_predictions()}}
+\item \link[=plot.see_bayesfactor_models]{bayestestR::bayesfactor_models()}
+\item \link[=plot.see_bayesfactor_parameters]{bayestestR::bayesfactor_parameters()}
+\item \link[=plot.see_equivalence_test]{bayestestR::equivalence_test()}
+\item \link[=plot.see_estimate_density]{bayestestR::estimate_density()}
+\item \link[=plot.see_hdi]{bayestestR::hdi()}
+\item \link[=plot.see_p_direction]{bayestestR::p_direction()}
+\item \link[=plot.see_p_significance]{bayestestR::p_significance()}
+\item \link[=plot.see_si]{bayestestR::si()}
+\item \link[=plot.see_effectsize_table]{effectsize::effectsize()}
+\item \link[=plot.see_estimate_contrasts]{modelbased::estimate_contrasts()}
+\item \link[=plot.see_compare_parameters]{parameters::compare_parameters()}
+\item \link[=plot.see_parameters_distribution]{parameters::describe_distribution()}
+\item \link[=plot.see_parameters_model]{parameters::model_parameters()}
+\item \link[=plot.see_parameters_pca]{parameters::principal_components()}
+\item \link[=plot.see_n_factors]{parameters::n_clusters()}
+\item \link[=plot.see_n_factors]{parameters::n_factors()}
+\item \link[=plot.see_parameters_simulate]{parameters::simulate_parameters()}
+\item \link[=plot.see_check_collinearity]{performance::check_collinearity()}
+\item \link[=plot.see_check_heteroscedasticity]{performance::check_heteroscedasticity()}
+\item \link[=plot.see_check_homogeneity]{performance::check_homogeneity()}
+\item \link[=plot.see_check_normality]{performance::check_normality()}
+\item \link[=plot.see_check_outliers]{performance::check_outliers()}
+\item \link[=plot.see_compare_performance]{performance::compare_performance()}
+\item \link[=plot.see_performance_roc]{performance::performance_roc()}
+\item \link[=plot.see_performance_pp_check]{performance::check_posterior_predictions()}
 }
 }
 \details{
@@ -62,40 +62,39 @@ allow to specify arguments to modify the transparency or color of geoms,
 these are shown in the 'Usage' section.
 }
 \examples{
-\dontrun{
+\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(bayestestR)
-if (require("rstanarm")) {
-  model <- stan_glm(
-    Sepal.Length ~ Petal.Width * Species,
-    data = iris,
-    chains = 2, iter = 200, refresh = 0
-  )
+library(rstanarm)
 
-  x <- rope(model)
-  plot(x)
+model <<- stan_glm(
+  Sepal.Length ~ Petal.Width * Species,
+  data = iris,
+  chains = 2, iter = 200, refresh = 0
+)
 
-  x <- hdi(model)
-  plot(x) + theme_modern()
+x <- rope(model)
+plot(x)
 
-  data <- rnorm(1000, 1)
-  x <- p_direction(data)
-  plot(x)
+x <- hdi(model)
+plot(x) + theme_modern()
 
-  x <- p_direction(model)
-  plot(x)
+data <- rnorm(1000, 1)
+x <- p_direction(data)
+plot(x)
 
-  model <- stan_glm(
-    mpg ~ wt + gear + cyl + disp,
-    chains = 2,
-    iter = 200,
-    refresh = 0,
-    data = mtcars
-  )
-  x <- equivalence_test(model)
-  plot(x)
-}
-}
+x <- p_direction(model)
+plot(x)
 
+model <<- stan_glm(
+  mpg ~ wt + gear + cyl + disp,
+  chains = 2,
+  iter = 200,
+  refresh = 0,
+  data = mtcars
+)
+x <- equivalence_test(model)
+plot(x)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \href{https://easystats.github.io/see/articles/}{Package-Vignettes}

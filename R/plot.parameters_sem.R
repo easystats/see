@@ -8,7 +8,7 @@ data_plot.parameters_sem <- function(x,
                                      ci = TRUE,
                                      ...) {
   # Compatibility patch
-  if (any(!type %in% component)) component <- type
+  if (!all(type %in% component)) component <- type
 
   # Deal with thresholds
   if (is.null(threshold_coefficient)) {
@@ -41,7 +41,7 @@ data_plot.parameters_sem <- function(x,
   rownames(edges) <- NULL
 
   # Labels
-  if (ci == TRUE) {
+  if (ci) {
     edges$Label <- paste0(
       sprintf("%.2f, ", edges$Coefficient),
       attributes(x)$ci * 100,
@@ -171,8 +171,8 @@ plot.see_parameters_sem <- function(x,
     scale_alpha(guide = "none", range = c(0, 1)) +
     scale_shape_manual(values = c(`FALSE` = 15, `TRUE` = 19)) +
     ggraph::scale_edge_alpha(guide = "none", range = c(0, 1)) +
-    scale_x_continuous(expand = expansion(c(.10, .10))) +
-    scale_y_continuous(expand = expansion(c(.10, .10))) +
+    scale_x_continuous(expand = expansion(c(0.10, 0.10))) +
+    scale_y_continuous(expand = expansion(c(0.10, 0.10))) +
     ggraph::theme_graph() +
     theme(legend.position = "none")
 

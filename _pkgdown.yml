@@ -5,29 +5,29 @@ template:
   package: easystatstemplate
 
 reference:
-- title: "Plotting Functions"
-  contents:
-  - contains("plot")
+  - title: "Plotting Functions"
+    contents:
+      - contains("plot")
 
-- title: "Geoms"
-  contents:
-  - starts_with("geom_")
+  - title: "Geoms"
+    contents:
+      - starts_with("geom_")
 
-- title: "Scales"
-  contents:
-  - starts_with("scale_color_")
+  - title: "Scales"
+    contents:
+      - starts_with("scale_color_")
 
-- title: "Themes"
-  contents:
-  - starts_with("theme_")
+  - title: "Themes"
+    contents:
+      - starts_with("theme_")
 
-- title: "Color Palettes"
-  contents:
-  - matches("_colors$")
-  - matches("^palette_")
+  - title: "Color Palettes"
+    contents:
+      - matches("_colors$")
+      - matches("^palette_")
 
-- title: "Miscellaneous"
-  contents:
-  - add_plot_attributes
-  - coord_radar
-  - golden_ratio
+  - title: "Miscellaneous"
+    contents:
+      - add_plot_attributes
+      - coord_radar
+      - golden_ratio

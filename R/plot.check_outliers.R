@@ -26,8 +26,8 @@
 #' @export
 plot.see_check_outliers <- function(x,
                                     size_text = 3.5,
-                                    size_line = .8,
-                                    dot_alpha = .8,
+                                    size_line = 0.8,
+                                    dot_alpha = 0.8,
                                     colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                     rescale_distance = TRUE,
                                     type = c("dots", "bars"),
@@ -86,7 +86,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
 
 .plot_diag_outliers <- function(x, show_labels = TRUE, size_text = 3.5, rescale_distance = TRUE) {
   d <- data_plot(x, rescale_distance = rescale_distance)
-  d$Id <- 1:nrow(d)
+  d$Id <- seq_len(nrow(d))
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
   d$Id[d$Outliers == "0"] <- NA
 

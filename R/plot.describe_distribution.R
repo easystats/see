@@ -8,7 +8,7 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
     attr(dataplot, "centrality") <- stats::setNames(x[[1]], colnames(x)[1])
     attr(dataplot, "dispersion") <- stats::setNames(x[[2]], colnames(x)[2])
   } else {
-    dataplot <- lapply(1:nrow(x), function(i) {
+    dataplot <- lapply(seq_len(nrow(x)), function(i) {
       out <- data.frame(
         x = data[[i]],
         stringsAsFactors = FALSE
@@ -59,10 +59,10 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' @export
 plot.see_parameters_distribution <- function(x,
                                              dispersion = FALSE,
-                                             dispersion_alpha = .3,
+                                             dispersion_alpha = 0.3,
                                              dispersion_color = "#3498db",
                                              dispersion_style = c("ribbon", "curve"),
-                                             size_bar = .7,
+                                             size_bar = 0.7,
                                              highlight = NULL,
                                              highlight_color = NULL,
                                              ...) {
@@ -129,7 +129,7 @@ plot.see_parameters_distribution <- function(x,
 
   if (!is.null(highlight)) {
     highlight <- highlight[highlight %in% x$x]
-    if (length(highlight) > 0) {
+    if (length(highlight) > 0L) {
       x$highlight <- "no_highlight"
       for (i in highlight) {
         x$highlight[x$x == i] <- i
@@ -143,7 +143,7 @@ plot.see_parameters_distribution <- function(x,
     p <- ggplot(x, aes(x = .data$x))
   }
 
-  if (is.factor(x$x) || is.character(x$x) || insight::n_unique(x$x) <= 12) {
+  if (is.factor(x$x) || is.character(x$x) || insight::n_unique(x$x) <= 12L) {
     p <- p + geom_bar(width = size_bar)
   } else if (.is_integer(x$x)) {
     p <- p +

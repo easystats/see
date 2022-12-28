@@ -52,7 +52,7 @@ distributions.}
 to compute. Can be \code{"median"}, \code{"mean"} or \code{"MAP"}.}
 
 \item{ci}{Numeric value of probability of the CI (between 0 and 1) to be
-estimated. Default to \code{.95}.}
+estimated. Default to \code{0.95}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -65,7 +65,7 @@ function.
 }
 \examples{
 library(parameters)
-m <- lm(mpg ~ wt + cyl + gear, data = mtcars)
+m <<- lm(mpg ~ wt + cyl + gear, data = mtcars)
 result <- simulate_parameters(m)
 result
 plot(result)

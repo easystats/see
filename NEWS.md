@@ -7,8 +7,20 @@
   For the original Okabe-Ito palette, set `palette = "full_original"` or 
   `palette = "black_first_original"`.
 
-* New function `scale_color_colorhex()` provides color scales based on palettes 
-  from <https://color-hex.com> (#245).
+# see 0.7.4
+
+## Changes
+
+* Updates docs and tests for `{ggplot2}` release (`3.4.0`).
+
+* New function `scale_color_colorhex()` provides color scales based on palettes
+  from <https://www.color-hex.com> (#245).
+
+* The default for the smoothing bandwidth from `plot.check_predictions()` has
+  changed from `"nrd0"` to `"nrd"`, which seems to produce better fitting plots
+  for non-Gaussian models. Furthermore, `performance::check_predictions()`
+  accepts a `bw` argument (smoothing bandwidth), which is passed down to the
+  `plot()` method's density-estimation.
 
 ## Bug fixes
 
@@ -37,8 +49,9 @@
 * Added `aesthetics` argument to all `color` and `fill` scale functions so that
   the same scale can be applied to multiple aesthetics and so that the functions
   can be used with other aesthetics from other packages (e.g., `edge_color`).
-  
-* Added Okabe-Ito color palette (`palette_okabeito`, `scale_color_okabeito()`) etc.)
+
+* Added Okabe-Ito color palette (`palette_okabeito`, `scale_color_okabeito()`)
+  etc.)
 
 * Several minor improvements.
 
@@ -50,7 +63,7 @@
 
 ## Changes
 
-* Changed style for `plot.check_collinearity()`, which is now a dot-plot, 
+* Changed style for `plot.check_collinearity()`, which is now a dot-plot,
   including error bars.
 
 ## Bug fixes
@@ -66,9 +79,9 @@
 
   - using more appropriate plots for binomial models
 
-  - the redundant density-plot of normality-checks was replaced by the
-    posterior predictive check plot.
-    
+  - the redundant density-plot of normality-checks was replaced by the posterior
+    predictive check plot.
+
   - includes a plot to investigate overdispersion for count-models.
 
 * Minor improvements for some plot-methods (colour tweaking, labelling, ...).
@@ -84,9 +97,9 @@
 * Add option to show density layers for Bayesian and bootstrapped models in
   `plot()` for `parameters::model_parameters()`.
 
-* Negative coefficients in `plot()` for `parameters::model_parameters()` are
-  now always red.
-  
+* Negative coefficients in `plot()` for `parameters::model_parameters()` are now
+  always red.
+
 * Improve support for `parameters::model_parameters()` from *emmeans* objects.
 
 * Updated code and examples to work with new API decisions made for the

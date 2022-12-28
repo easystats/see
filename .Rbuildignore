@@ -3,12 +3,14 @@
 ^\.Rproj\.user$
 ^\.travis.yml
 ^\_pkgdown.yml
+^\_pkgdown.yaml
 
 ^LICENSE
 ^logo.png
 ^README.Rmd
 ^README.md
 
+^Rplots.pdf$
 ^data/.
 ^docs/.
 ^pkgdown/.

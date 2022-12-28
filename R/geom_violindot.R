@@ -36,7 +36,7 @@ geom_violindot <- function(mapping = NULL,
                            fill_dots = dots_fill) {
   scale <- match.arg(scale)
 
-  if (is.null(color_dots) & is.null(fill_dots)) {
+  if (is.null(color_dots) && is.null(fill_dots)) {
     dotplot <- geom_dotplot(
       binaxis = "y",
       mapping = mapping,
@@ -48,7 +48,7 @@ geom_violindot <- function(mapping = NULL,
       show.legend = FALSE,
       ...
     )
-  } else if (!is.null(color_dots) & is.null(fill_dots)) {
+  } else if (!is.null(color_dots) && is.null(fill_dots)) {
     dotplot <- geom_dotplot(
       color = color_dots,
       mapping = mapping,
@@ -61,7 +61,7 @@ geom_violindot <- function(mapping = NULL,
       show.legend = FALSE,
       ...
     )
-  } else if (is.null(color_dots) & !is.null(fill_dots)) {
+  } else if (is.null(color_dots) && !is.null(fill_dots)) {
     dotplot <- geom_dotplot(
       fill = fill_dots,
       mapping = mapping,

@@ -40,11 +40,11 @@ plot.see_check_model <- function(x,
   colors <- unname(colors)
 
   if (is.null(alpha_level)) {
-    alpha_level <- .2
+    alpha_level <- 0.2
   }
 
   if (is.null(dot_alpha_level)) {
-    dot_alpha_level <- .8
+    dot_alpha_level <- 0.8
   }
 
   if (is.null(check)) {
@@ -229,7 +229,7 @@ plot.see_check_model <- function(x,
       ymax = 5,
       fill = colors[1],
       color = NA,
-      alpha = .15
+      alpha = 0.15
     ) +
     ggplot2::annotate(
       geom = "rect",
@@ -239,7 +239,7 @@ plot.see_check_model <- function(x,
       ymax = 10,
       fill = colors[2],
       color = NA,
-      alpha = .15
+      alpha = 0.15
     ) +
     ggplot2::annotate(
       geom = "rect",
@@ -249,23 +249,25 @@ plot.see_check_model <- function(x,
       ymax = Inf,
       fill = colors[3],
       color = NA,
-      alpha = .15
+      alpha = 0.15
     ) +
     {
       if (!is.null(ci_data)) {
         list(
-          ggplot2::geom_linerange(size = size_line),
+          ggplot2::geom_linerange(linewidth = size_line),
           ggplot2::geom_segment(
             data = x[x$VIF_CI_high > ylim * 1.15, ],
             mapping = aes(
-              x = .data$x, xend = .data$x,
-              y = .data$y, yend = .data$VIF_CI_high
+              x = .data$x,
+              xend = .data$x,
+              y = .data$y,
+              yend = .data$VIF_CI_high
             ),
             lineend = "round",
             linejoin = "round",
             arrow = ggplot2::arrow(
               ends = "last", type = "closed",
-              angle = 20, length = ggplot2::unit(.03, "native")
+              angle = 20, length = ggplot2::unit(0.03, "native")
             ),
             show.legend = FALSE
           )
@@ -316,7 +318,7 @@ plot.see_check_model <- function(x,
 
 .plot_diag_norm <- function(x,
                             size_line,
-                            alpha_level = .2,
+                            alpha_level = 0.2,
                             theme_style = theme_lucid,
                             colors = unname(social_colors(c("green", "blue", "red")))) {
   ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
@@ -351,11 +353,11 @@ plot.see_check_model <- function(x,
 .plot_diag_qq <- function(x,
                           size_point,
                           size_line,
-                          alpha_level = .2,
+                          alpha_level = 0.2,
                           detrend = FALSE,
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = .8,
+                          dot_alpha_level = 0.8,
                           show_dots = TRUE) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     qq_stuff <- list(
@@ -424,11 +426,11 @@ plot.see_check_model <- function(x,
 .plot_diag_pp <- function(x,
                           size_point,
                           size_line,
-                          alpha_level = .2,
+                          alpha_level = 0.2,
                           detrend = FALSE,
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = .8) {
+                          dot_alpha_level = 0.8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
       qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
@@ -491,10 +493,10 @@ plot.see_check_model <- function(x,
 .plot_diag_homogeneity <- function(x,
                                    size_point,
                                    size_line,
-                                   alpha_level = .2,
+                                   alpha_level = 0.2,
                                    theme_style = theme_lucid,
                                    colors = unname(social_colors(c("green", "blue", "red"))),
-                                   dot_alpha_level = .8,
+                                   dot_alpha_level = 0.8,
                                    show_dots = TRUE) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
@@ -513,7 +515,7 @@ plot.see_check_model <- function(x,
       se = TRUE,
       alpha = alpha_level,
       formula = y ~ x,
-      size = size_line,
+      linewidth = size_line,
       colour = colors[1]
     ) +
     ggplot2::labs(
@@ -534,10 +536,10 @@ plot.see_check_model <- function(x,
 .plot_diag_linearity <- function(x,
                                  size_point,
                                  size_line,
-                                 alpha_level = .2,
+                                 alpha_level = 0.2,
                                  theme_style = theme_lucid,
                                  colors = unname(social_colors(c("green", "blue", "red"))),
-                                 dot_alpha_level = .8,
+                                 dot_alpha_level = 0.8,
                                  show_dots = TRUE) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
@@ -579,10 +581,10 @@ plot.see_check_model <- function(x,
                             size_point,
                             size_line,
                             panel = TRUE,
-                            alpha_level = .2,
+                            alpha_level = 0.2,
                             theme_style = theme_lucid,
                             colors = unname(social_colors(c("green", "blue", "red"))),
-                            dot_alpha_level = .8,
+                            dot_alpha_level = 0.8,
                             show_dots = TRUE) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
@@ -596,7 +598,7 @@ plot.see_check_model <- function(x,
       ggplot2::stat_smooth(
         method = "lm",
         alpha = alpha_level,
-        size = size_line,
+        linewidth = size_line,
         formula = y ~ x,
         colour = colors[1]
       ) +
@@ -635,14 +637,14 @@ plot.see_check_model <- function(x,
 .plot_diag_overdispersion <- function(x,
                                       theme_style = theme_lucid,
                                       colors = c("#3aaf85", "#1b6ca8"),
-                                      size_line = .8,
+                                      size_line = 0.8,
                                       type = 1,
                                       ...) {
   if (is.null(type) || type == 1) {
     p <- ggplot2::ggplot(x) +
       ggplot2::aes(x = .data$Predicted) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$V), size = size_line, color = colors[2], se = FALSE) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), size = size_line, color = colors[1]) +
+      ggplot2::geom_smooth(ggplot2::aes(y = .data$V), linewidth = size_line, color = colors[2], se = FALSE) +
+      ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), linewidth = size_line, color = colors[1]) +
       ggplot2::labs(
         title = "Overdispersion and zero-inflation",
         subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",

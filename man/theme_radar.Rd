@@ -94,7 +94,7 @@ if (require("ggplot2") && require("poorman")) {
       group = Species,
       fill = Species
     )) +
-    geom_polygon(size = 1, alpha = .1) +
+    geom_polygon(linewidth = 1, alpha = 0.1) +
     coord_radar() +
     theme_radar()
 }

@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 0 note
 
-* Indrajeet Patil is now the maintainer.
+* Updates docs and tests for `{ggplot2}` release (`3.4.0`).
 
 ## revdepcheck results
 

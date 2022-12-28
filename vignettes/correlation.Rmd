@@ -16,16 +16,12 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
-if (!requireNamespace("ggplot2", quietly = TRUE) ||
+
+if (!requireNamespace("correlation", quietly = TRUE) ||
+  !requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("ggraph", quietly = TRUE) ||
-  !requireNamespace("poorman", quietly = TRUE) &&
-    !packageVersion("correlation") >= "0.8.2") {
+  !requireNamespace("poorman", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
-} else {
-  library(ggplot2)
-  library(ggraph)
-  library(poorman)
-  library(correlation)
 }
 ```
 
@@ -64,8 +60,6 @@ An overview and description of these correlations types is [**available here**](
 library(correlation)
 library(see)
 library(ggplot2)
-data(mtcars)
-data(iris)
 ```
 
 

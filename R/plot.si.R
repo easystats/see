@@ -12,41 +12,36 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' \donttest{
-#' if (require("bayestestR") && require("rstanarm")) {
-#'   set.seed(123)
-#'   m <- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-#'   result <- si(m)
-#'   result
-#'   plot(result)
-#' }
-#' }
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")
+#' library(rstanarm)
+#' library(bayestestR)
+#' set.seed(123)
+#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- si(m)
+#' result
+#' plot(result)
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_si <- function(x,
                         si_color = "#0171D3",
-                        si_alpha = .2,
+                        si_alpha = 0.2,
                         show_intercept = FALSE,
-                        support_only = FALSE, ...) {
+                        support_only = FALSE,
+                        ...) {
   plot_data <- attr(x, "plot_data")
   x$ind <- x$Parameter
 
   # if we have intercept-only models, keep at least the intercept
   intercepts_data <- which(.in_intercepts(plot_data$ind))
-  if (length(intercepts_data) &&
-    nrow(plot_data) > length(intercepts_data) &&
-    !show_intercept) {
+  if (length(intercepts_data) && (nrow(plot_data) > length(intercepts_data)) && !show_intercept) {
     intercepts_si <- which(.in_intercepts(x$ind))
     x <- x[-intercepts_si, ]
     plot_data <- plot_data[-intercepts_data, ]
   }
 
 
-  if (length(unique(x$CI)) > 1) {
-    p <- ggplot(mapping = aes(
-      x = .data$x,
-    )) +
+  if (length(unique(x$CI)) > 1L) {
+    p <- ggplot(mapping = aes(x = .data$x)) +
       # SI
       geom_rect(
         aes(xmin = .data$CI_low, xmax = .data$CI_high, alpha = .data$CI),
@@ -64,9 +59,7 @@ plot.see_si <- function(x,
       theme(legend.position = "bottom")
   } else {
     # Basic plot
-    p <- ggplot(mapping = aes(
-      x = .data$x,
-    )) +
+    p <- ggplot(mapping = aes(x = .data$x)) +
       # SI
       geom_rect(
         aes(xmin = .data$CI_low, xmax = .data$CI_high),
@@ -120,7 +113,7 @@ plot.see_si <- function(x,
     p <- p +
       aes(y = .data$updating_factor) +
       # distributions
-      geom_line(size = 1, data = support_data) +
+      geom_line(linewidth = 1, data = support_data) +
       geom_area(alpha = 0.15, data = support_data) +
       geom_hline(yintercept = unique(x$CI), colour = "grey30", linetype = "dotted") +
       labs(y = "Updating Factor")
@@ -132,12 +125,12 @@ plot.see_si <- function(x,
         fill = .data$Distribution
       ) +
       # distributions
-      geom_line(size = 1, data = plot_data) +
+      geom_line(linewidth = 1, data = plot_data) +
       geom_area(alpha = 0.15, data = plot_data) +
       labs(y = "Density")
   }
 
-  if (length(unique(plot_data$ind)) > 1) {
+  if (length(unique(plot_data$ind)) > 1L) {
     p <- p + facet_wrap(~ind, scales = "free")
   }
 

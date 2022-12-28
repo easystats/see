@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 )
 
 if (!requireNamespace("bayestestR", quietly = TRUE) ||
+  !requireNamespace("httr", quietly = TRUE) || # needed for `insight::download_model()`
   !requireNamespace("rstanarm", quietly = TRUE) ||
   !requireNamespace("ggplot2", quietly = TRUE) ||
   !requireNamespace("brms", quietly = TRUE) ||
@@ -316,7 +317,7 @@ plot(result) +
 ```
 
 ```{r fig.width=9, fig.height=6, eval=FALSE}
-result <- equivalence_test(model, ci = c(.89, .95))
+result <- equivalence_test(model, ci = c(0.89, 0.95))
 
 result
 
@@ -326,7 +327,7 @@ plot(result) +
 ```
 
 ```{r fig.width=11, fig.height=9, eval=FALSE}
-result <- equivalence_test(model2, ci = c(.89, .95), effects = "all", component = "all")
+result <- equivalence_test(model2, ci = c(0.89, 0.95), effects = "all", component = "all")
 
 result
 

@@ -16,6 +16,10 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+
+if (!requireNamespace("patchwork", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 This vignette can be referred to by citing the package:
@@ -442,7 +446,7 @@ d <- data.frame(
 )
 
 p1 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = social_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
@@ -453,14 +457,10 @@ p1 <- ggplot(d, aes(x, fill = x)) +
     panel.grid = element_blank()
   )
 
-
-
-d <- data.frame(
-  x = names(flat_colors())
-)
+d <- data.frame(x = names(flat_colors()))
 
 p2 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = flat_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
@@ -476,7 +476,7 @@ d <- data.frame(
 )
 
 p3 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = material_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
@@ -494,7 +494,7 @@ d <- data.frame(
 )
 
 p4 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = metro_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
@@ -511,7 +511,7 @@ d <- data.frame(
 )
 
 p5 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = see_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
@@ -528,7 +528,7 @@ d <- data.frame(
 )
 
 p6 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = pizza_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
@@ -545,7 +545,7 @@ d <- data.frame(
 )
 
 p7 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = bluebrown_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +
@@ -562,7 +562,7 @@ d <- data.frame(
 )
 
 p8 <- ggplot(d, aes(x, fill = x)) +
-  geom_bar(width = .9) +
+  geom_bar(width = 0.9) +
   scale_fill_manual(values = okabeito_colors()) +
   scale_y_continuous(labels = NULL, expand = c(0, 0)) +
   guides(fill = "none") +

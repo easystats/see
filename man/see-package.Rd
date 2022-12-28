@@ -12,7 +12,7 @@ Provides plotting utilities supporting packages in the 'easystats' ecosystem
 scales for 'ggplot2'. Color scales are based on
 \url{https://materialui.co/colors}.
 
-References: Lüdecke et al. (2021) \url{doi:10.21105/joss.03393}.
+References: Lüdecke et al. (2021) \doi{10.21105/joss.03393}.
 }
 \details{
 \code{see}

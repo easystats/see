@@ -1,13 +1,13 @@
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_binned_residuals <- function(x,
-                                      size_line = .7,
+                                      size_line = 0.7,
                                       size_point = 2.2,
                                       colors = social_colors(c("blue", "red", "green")),
                                       style = theme_lucid,
                                       ...) {
   x$se.lo <- -x$se
-  if (length(unique(x$group)) > 1) {
+  if (length(unique(x$group)) > 1L) {
     ltitle <- "Within error bounds"
   } else {
     ltitle <- NULL
@@ -52,13 +52,13 @@ plot.see_binned_residuals <- function(x,
         se = FALSE,
         formula = y ~ s(x, bs = "tp"),
         colour = colors[3],
-        size = size_line
+        linewidth = size_line
       )
   }
 
   p <- p +
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = -Inf, ymax = .data$se.lo), alpha = .1, fill = "grey70") +
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = .1, fill = "grey70") +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = -Inf, ymax = .data$se.lo), alpha = 0.1, fill = "grey70") +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = 0.1, fill = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se), colour = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se.lo), colour = "grey70") +
     ggplot2::scale_color_manual(values = colors[2:1]) +
@@ -77,11 +77,23 @@ plot.see_binned_residuals <- function(x,
   if (is.null(ltitle)) {
     p <- p +
       ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = size_point) +
-      ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high), size = size_line, width = 0)
+      ggplot2::geom_errorbar(
+        ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high),
+        linewidth = size_line,
+        width = 0
+      )
   } else {
     p <- p +
       ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = size_point) +
-      ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high, colour = .data$group), size = size_line, width = 0)
+      ggplot2::geom_errorbar(
+        ggplot2::aes(
+          ymin = .data$CI_low,
+          ymax = .data$CI_high,
+          colour = .data$group
+        ),
+        linewidth = size_line,
+        width = 0
+      )
   }
 
   if (isTRUE(dots[["check_model"]])) {

@@ -116,7 +116,7 @@ plot.see_bayesfactor_models <- function(x,
   }
 
   p +
-    geom_bar(width = 1, stat = "identity", color = "white", size = .5) +
+    geom_bar(width = 1, stat = "identity", color = "white", linewidth = 0.5) +
     geom_text(aes(label = .data$label), position = position_stack(vjust = 0.5)) +
     coord_polar("y", start = 0) +
     scale_y_continuous(expand = c(0, 0)) +

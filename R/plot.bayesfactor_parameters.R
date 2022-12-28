@@ -20,7 +20,7 @@
 plot.see_bayesfactor_parameters <- function(x,
                                             size_point = 2,
                                             rope_color = "#0171D3",
-                                            rope_alpha = .2,
+                                            rope_alpha = 0.2,
                                             show_intercept = FALSE,
                                             ...) {
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
@@ -33,9 +33,7 @@ plot.see_bayesfactor_parameters <- function(x,
 
   # if we have intercept-only models, keep at least the intercept
   intercepts_points <- which(.in_intercepts(d_points$ind))
-  if (length(intercepts_points) &&
-    nrow(d_points) > length(intercepts_points) &&
-    !show_intercept) {
+  if (length(intercepts_points) && (nrow(d_points) > length(intercepts_points)) && !show_intercept) {
     intercepts_data <- which(.in_intercepts(plot_data$ind))
     plot_data <- plot_data[-intercepts_data, ]
     d_points <- d_points[-intercepts_points, ]
@@ -58,7 +56,7 @@ plot.see_bayesfactor_parameters <- function(x,
       fill = .data$Distribution
     )
   ) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     geom_area(alpha = 0.15, position = "identity") +
     geom_vline(xintercept = hypothesis, linetype = "dashed", colour = "grey50") +
     labs(
@@ -69,11 +67,11 @@ plot.see_bayesfactor_parameters <- function(x,
     ) +
     theme(legend.position = "bottom")
 
-  if (length(unique(plot_data$ind)) > 1) {
+  if (length(unique(plot_data$ind)) > 1L) {
     p <- p + facet_wrap(~ind, scales = "free")
   }
 
-  if (length(hypothesis) > 1) {
+  if (length(hypothesis) > 1L) {
     rope <- range(hypothesis)
     p <-
       p + annotate(

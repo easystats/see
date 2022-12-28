@@ -54,7 +54,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
     data <- as.data.frame(data)
   }
 
-  if (ncol(data) > 1) {
+  if (ncol(data) > 1L) {
     levels_order <- unique(rev(x$Parameter))
     data <- data[levels_order]
     dataplot <- data.frame()
@@ -193,16 +193,14 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' \donttest{
-#' if (require("bayestestR") && require("rstanarm")) {
-#'   set.seed(123)
-#'   m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
-#'   result <- hdi(m)
-#'   result
-#'   plot(result)
-#' }
-#' }
+#' @examplesIf require("rstanarm") && FALSE
+#' library(rstanarm)
+#' library(bayestestR)
+#' set.seed(123)
+#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' result <- hdi(m)
+#' result
+#' plot(result)
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_hdi <- function(x,
@@ -245,7 +243,7 @@ plot.see_hdi <- function(x,
     p <- p + geom_vline(xintercept = 0, linetype = "dotted")
   }
 
-  if (show_title == FALSE) {
+  if (!show_title) {
     p <- p + ggtitle("")
   }
 

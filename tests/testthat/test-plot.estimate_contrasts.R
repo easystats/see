@@ -1,7 +1,8 @@
 test_that("`plot.see_estimate_contrasts()` works", {
-  skip_if_not_installed("modelbased")
-  skip_if_not_installed("rstanarm")
-  skip_if_not_installed("emmeans")
+  requiet("modelbased")
+  requiet("rstanarm")
+  requiet("emmeans")
+  skip_if_not(getRversion() >= "4.1")
 
   model <- rstanarm::stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
   contrasts <- modelbased::estimate_contrasts(model)
