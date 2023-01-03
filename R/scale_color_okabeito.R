@@ -131,6 +131,7 @@ okabeito_colors_list <- c(
 #' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`, default)
 #'   in the color palette? Only used if no colors are specified (to see all
 #'   available colors).
+#' @param amber If amber color should replace yellow in the palette.
 #'
 #' @return A character vector with color-codes.
 #'
