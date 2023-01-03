@@ -18,12 +18,14 @@ knitr::opts_chunk$set(
 )
 
 pkgs <- c("ggplot2", "mgcv", "modelbased", "lme4", "rstanarm")
-successfully_loaded <- sapply(pkgs, requireNamespace, quietly = TRUE)
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
 
-if (all(successfully_loaded)) {
-  knitr::opts_chunk$set(eval = FALSE)
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
 } else {
-  sapply(pkgs, require, quietly = TRUE, character.only = TRUE, warn.conflicts = FALSE)
+  knitr::opts_chunk$set(eval = FALSE)
 }
 ```
 
