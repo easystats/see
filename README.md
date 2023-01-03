@@ -29,8 +29,8 @@ evaluation process. Generally, this process entails:
 1.  Fitting a model.
 2.  Extracting desired results from the model (e.g., model parameters
     and intervals, model predictions, diagnostic statistics) and
-    arranging them into a dataframe.
-3.  Passing the results dataframe to `ggplot()` and specifying the
+    arranging them into a data frame.
+3.  Passing the results data frame to `ggplot()` and specifying the
     graphical parameters. For example:
 
 ``` r
@@ -44,9 +44,11 @@ results <- fortify(model)
 
 # step-3
 ggplot(results) +
-  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(aes(x = wt, y = mpg, color = `factor(cyl)`)) +
   geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
 ```
+
+<img src="man/figures/unnamed-chunk-2-1.png" width="100%" />
 
 A number of packages have been developed to extend *ggplot2* and assist
 with model visualization (for a sampling of these packages, visit
@@ -144,7 +146,7 @@ model <- lm(wt ~ am * cyl, data = mtcars)
 plot(parameters(model))
 ```
 
-![](man/figures/parameters1-1.png)<!-- -->
+<img src="man/figures/parameters1-1.png" width="100%" />
 
 As *see* outputs objects of class `ggplot`, *ggplot2* functions can be
 added as layers to the plot the same as with all other *ggplot2*
@@ -161,7 +163,7 @@ plot(parameters(model)) +
   ggplot2::labs(title = "A Dot-and-Whisker Plot")
 ```
 
-![](man/figures/parameters2-1.png)<!-- -->
+<img src="man/figures/parameters2-1.png" width="100%" />
 
 Plotting functions for the **parameters** package are demonstrated [in
 this
@@ -187,7 +189,7 @@ result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
 plot(result)
 ```
 
-![](man/figures/bayestestR-1.png)<!-- -->
+<img src="man/figures/bayestestR-1.png" width="100%" />
 
 Plotting functions for the **bayestestR** package are demonstrated [in
 this
@@ -213,7 +215,7 @@ check <- check_normality(model)
 plot(check, type = "qq")
 ```
 
-![](man/figures/performance-1.png)<!-- -->
+<img src="man/figures/performance-1.png" width="100%" />
 
 Plotting functions for the **performance** package are demonstrated [in
 this
@@ -237,7 +239,7 @@ model <- aov(wt ~ am * cyl, data = mtcars)
 plot(omega_squared(model))
 ```
 
-![](man/figures/effectsize-1.png)<!-- -->
+<img src="man/figures/effectsize-1.png" width="100%" />
 
 Plotting functions for the **effectsize** package are demonstrated [in
 this
@@ -262,7 +264,7 @@ predicted <- estimate_expectation(model, data = "grid")
 plot(predicted)
 ```
 
-![](man/figures/modelbased1-1.png)<!-- -->
+<img src="man/figures/modelbased1-1.png" width="100%" />
 
 One can also visualize *marginal means* (i.e., the mean at each factor
 level averaged over other predictors) using `estimate_means()`, that is
@@ -274,7 +276,7 @@ means <- estimate_means(model)
 plot(means)
 ```
 
-![](man/figures/modelbased2-1.png)<!-- -->
+<img src="man/figures/modelbased2-1.png" width="100%" />
 
 Plotting functions for the **modelbased** package are demonstrated [in
 this
@@ -298,7 +300,7 @@ results <- summary(correlation(iris))
 plot(results, show_data = "points")
 ```
 
-![](man/figures/correlation-1.png)<!-- -->
+<img src="man/figures/correlation-1.png" width="100%" />
 
 Plotting functions for the **correlation** package are demonstrated [in
 this
@@ -316,7 +318,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
   theme_modern()
 ```
 
-![](man/figures/unnamed-chunk-4-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-4-1.png" width="100%" />
 
 ### Lucid
 
@@ -329,7 +331,7 @@ p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 p + theme_lucid()
 ```
 
-![](man/figures/unnamed-chunk-5-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-5-1.png" width="100%" />
 
 ### Blackboard
 
@@ -337,7 +339,7 @@ p + theme_lucid()
 p + theme_blackboard()
 ```
 
-![](man/figures/unnamed-chunk-6-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-6-1.png" width="100%" />
 
 ### Abyss
 
@@ -345,7 +347,7 @@ p + theme_blackboard()
 p + theme_abyss()
 ```
 
-![](man/figures/unnamed-chunk-7-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-7-1.png" width="100%" />
 
 # Palettes
 
@@ -380,7 +382,7 @@ The `plots()` function allows us to plot the figures side by side.
 plots(p1, p2, p3, n_columns = 2)
 ```
 
-![](man/figures/unnamed-chunk-9-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-9-1.png" width="100%" />
 
 The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
@@ -392,7 +394,7 @@ plots(p1, p2, p3,
 )
 ```
 
-![](man/figures/unnamed-chunk-10-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-10-1.png" width="100%" />
 
 # Geoms
 
@@ -413,7 +415,7 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, n_columns = 2)
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-11-1.png" width="100%" />
 
 ## Half-violin Half-dot plot
 
@@ -427,7 +429,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-![](man/figures/unnamed-chunk-12-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-12-1.png" width="100%" />
 
 ## Radar chart (Spider plot)
 
@@ -454,7 +456,7 @@ data %>%
   theme_radar()
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-13-1.png" width="100%" />
 
 # Contributing and Support
 

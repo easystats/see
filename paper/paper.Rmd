@@ -69,7 +69,7 @@ The grammar of graphics [@wilkinson2012grammar], largely due to its implementati
   2. Extracting desired results from the model (e.g., model parameters and intervals, model predictions, diagnostic statistics) and arranging them into a dataframe.
   3. Passing the results dataframe to `ggplot()` and specifying the graphical parameters. For example:
   
-```{r, eval=FALSE}
+```{r}
 library(ggplot2)
 
 # step-1

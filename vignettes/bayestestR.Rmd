@@ -318,7 +318,7 @@ plot(result) +
   scale_fill_material()
 ```
 
-```{r fig.width=9, fig.height=6, eval=FALSE}
+```{r fig.width=9, fig.height=6}
 result <- equivalence_test(model, ci = c(0.89, 0.95))
 
 result
@@ -328,7 +328,7 @@ plot(result) +
   scale_fill_flat()
 ```
 
-```{r fig.width=11, fig.height=9, eval=FALSE}
+```{r fig.width=11, fig.height=9}
 result <- equivalence_test(model2, ci = c(0.89, 0.95), effects = "all", component = "all")
 
 result

@@ -320,7 +320,7 @@ plot(result)
 
 ## Bayesian Meta-Analysis using brms
 
-```{r, eval=FALSE}
+```{r}
 # We download the model to save computation time. Here is the code
 # to refit the exact model used below...
 
