@@ -712,16 +712,116 @@ null hypothesis is accepted.</p>
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.89</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
+<span><span class="co">#&gt; # Test for Practical Equivalence</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   ROPE: [-0.08 0.08]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      89% HDI</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.53 5.05]</span></span>
+<span><span class="co">#&gt; Petal.Width                   | Undecided |      4.35 % | [-0.07 1.85]</span></span>
+<span><span class="co">#&gt; Speciesversicolor             | Undecided |      4.10 % | [-1.49 0.05]</span></span>
+<span><span class="co">#&gt; Speciesvirginica              | Undecided |      8.74 % | [-0.40 1.31]</span></span>
+<span><span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      8.01 % | [-0.55 1.62]</span></span>
+<span><span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     10.79 % | [-1.25 0.81]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter                     |        H0 | inside ROPE |      95% HDI</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; (Intercept)                   |  Rejected |      0.00 % | [ 4.47 5.11]</span></span>
+<span><span class="co">#&gt; Petal.Width                   | Undecided |      4.29 % | [-0.31 2.07]</span></span>
+<span><span class="co">#&gt; Speciesversicolor             | Undecided |      4.50 % | [-1.67 0.22]</span></span>
+<span><span class="co">#&gt; Speciesvirginica              | Undecided |      8.18 % | [-0.56 1.50]</span></span>
+<span><span class="co">#&gt; Petal.Width:Speciesversicolor | Undecided |      7.50 % | [-0.78 1.85]</span></span>
+<span><span class="co">#&gt; Petal.Width:Speciesvirginica  | Undecided |     10.11 % | [-1.47 1.01]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-23-1.png" width="100%"></p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.89</span>, <span class="fl">0.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
+<span><span class="co">#&gt; # Test for Practical Equivalence</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   ROPE: [-0.10 0.10]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
+<span><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span><span class="co">#&gt; Intercept | Undecided |      2.70 % | [-0.32  2.29]</span></span>
+<span><span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.32 -1.00]</span></span>
+<span><span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.56  0.87]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter |        H0 | inside ROPE |       89% HDI</span></span>
+<span><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span><span class="co">#&gt; Intercept | Undecided |     11.26 % | [-1.60  0.48]</span></span>
+<span><span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.37  2.46]</span></span>
+<span><span class="co">#&gt; camper    |  Rejected |      0.00 % | [-1.45 -0.21]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter              |        H0 | inside ROPE |       89% HDI</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; r_persons[1,Intercept] | Undecided |      2.25 % | [-2.26  0.34]</span></span>
+<span><span class="co">#&gt; r_persons[2,Intercept] | Undecided |     14.86 % | [-1.36  1.30]</span></span>
+<span><span class="co">#&gt; r_persons[3,Intercept] | Undecided |      5.41 % | [-0.68  1.99]</span></span>
+<span><span class="co">#&gt; r_persons[4,Intercept] |  Rejected |      0.00 % | [ 0.23  2.89]</span></span>
+<span><span class="co">#&gt; SD/Cor: (Intercept)    |  Rejected |      0.00 % | [ 0.79  2.91]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter              |        H0 | inside ROPE |       89% HDI</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; r_persons[1,Intercept] | Undecided |      1.35 % | [ 0.02  2.15]</span></span>
+<span><span class="co">#&gt; r_persons[2,Intercept] | Undecided |     15.77 % | [-0.79  1.24]</span></span>
+<span><span class="co">#&gt; r_persons[3,Intercept] | Undecided |     13.06 % | [-1.36  0.65]</span></span>
+<span><span class="co">#&gt; r_persons[4,Intercept] |  Rejected |      0.00 % | [-2.64 -0.29]</span></span>
+<span><span class="co">#&gt; SD/Cor: (Intercept)    |  Rejected |      0.00 % | [ 0.70  2.82]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Fixed Effects (Conditional Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
+<span><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span><span class="co">#&gt; Intercept | Undecided |      2.54 % | [-0.81  2.51]</span></span>
+<span><span class="co">#&gt; child     |  Rejected |      0.00 % | [-1.36 -0.94]</span></span>
+<span><span class="co">#&gt; camper    |  Rejected |      0.00 % | [ 0.54  0.91]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Fixed Effects (Zero-Inflated Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter |        H0 | inside ROPE |       95% HDI</span></span>
+<span><span class="co">#&gt; ---------------------------------------------------</span></span>
+<span><span class="co">#&gt; Intercept | Undecided |     10.59 % | [-2.03  0.89]</span></span>
+<span><span class="co">#&gt; child     |  Rejected |      0.00 % | [ 1.19  2.54]</span></span>
+<span><span class="co">#&gt; camper    | Undecided |      0.85 % | [-1.61 -0.07]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Random Effects (Conditional Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter              |        H0 | inside ROPE |       95% HDI</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; r_persons[1,Intercept] | Undecided |      2.12 % | [-2.68  0.80]</span></span>
+<span><span class="co">#&gt; r_persons[2,Intercept] | Undecided |     13.98 % | [-1.63  1.66]</span></span>
+<span><span class="co">#&gt; r_persons[3,Intercept] | Undecided |      5.08 % | [-0.95  2.34]</span></span>
+<span><span class="co">#&gt; r_persons[4,Intercept] | Undecided |      1.27 % | [-0.05  3.29]</span></span>
+<span><span class="co">#&gt; SD persons (Intercept) |  Rejected |      0.00 % | [ 0.71  3.58]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; # Random Effects (Zero-Inflated Model)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parameter              |        H0 | inside ROPE |       95% HDI</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; r_persons[1,Intercept] | Undecided |      3.39 % | [-0.23  2.72]</span></span>
+<span><span class="co">#&gt; r_persons[2,Intercept] | Undecided |     14.83 % | [-0.94  1.58]</span></span>
+<span><span class="co">#&gt; r_persons[3,Intercept] | Undecided |     12.29 % | [-1.79  1.02]</span></span>
+<span><span class="co">#&gt; r_persons[4,Intercept] |  Rejected |      0.00 % | [-2.90 -0.10]</span></span>
+<span><span class="co">#&gt; SD persons (Intercept) |  Rejected |      0.00 % | [ 0.63  3.41]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="bayestestR_files/figure-html/unnamed-chunk-24-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="bayes-factors-bfs">Bayes Factors (BFs)<a class="anchor" aria-label="anchor" href="#bayes-factors-bfs"></a>
