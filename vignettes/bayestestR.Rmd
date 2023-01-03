@@ -18,13 +18,15 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-if (!requireNamespace("bayestestR", quietly = TRUE) ||
-  !requireNamespace("httr", quietly = TRUE) || # needed for `insight::download_model()`
-  !requireNamespace("rstanarm", quietly = TRUE) ||
-  !requireNamespace("ggplot2", quietly = TRUE) ||
-  !requireNamespace("brms", quietly = TRUE) ||
-  !requireNamespace("logspline", quietly = TRUE) ||
-  !requireNamespace("insight", quietly = TRUE)) {
+# `{httr}` is needed for `insight::download_model()`
+pkgs <- c("bayestestR", "brms", "ggplot2", "httr", "insight", "logspline", "rstanarm")
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
+
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
+} else {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```

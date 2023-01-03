@@ -17,9 +17,14 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-if (!requireNamespace("ggplot2", quietly = TRUE) ||
-  !requireNamespace("poorman", quietly = TRUE) ||
-  !requireNamespace("effectsize", quietly = TRUE)) {
+pkgs <- c("effectsize", "ggplot2", "poorman")
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
+
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
+} else {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```

@@ -574,5 +574,9 @@ p8 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
-plots(p1, p2, p3, p4, p5, p6, p7, p8, n_columns = 1, tags = c("Social", "Flat", "Material", "Metro", "See", "Pizza", "Bluebrown", "Okabe-Ito"))
+plots(
+  p1, p2, p3, p4, p5, p6, p7, p8,
+  n_columns = 1L,
+  tags = c("Social", "Flat", "Material", "Metro", "See", "Pizza", "Bluebrown", "Okabe-Ito")
+)
 ```

@@ -20,6 +20,8 @@ Only used if no colors are specified (to see all available colors).}
 \item{black_first}{Logical. Should black be first (\code{TRUE}) or last (\code{FALSE}, default)
 in the color palette? Only used if no colors are specified (to see all
 available colors).}
+
+\item{amber}{If amber color should replace yellow in the palette.}
 }
 \value{
 A character vector with color-codes.
