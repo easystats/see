@@ -19,11 +19,13 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-if (!requireNamespace("performance", quietly = TRUE) ||
-  !requireNamespace("glmmTMB", quietly = TRUE) ||
-  !requireNamespace("lme4", quietly = TRUE) ||
-  !requireNamespace("bayestestR", quietly = TRUE)) {
+pkgs <- c("bayestestR", "ggplot2", "glmmTMB", "performance", "lme4")
+successfully_loaded <- sapply(pkgs, requireNamespace, quietly = TRUE)
+
+if (all(successfully_loaded)) {
   knitr::opts_chunk$set(eval = FALSE)
+} else {
+  sapply(pkgs, require, quietly = TRUE, character.only = TRUE, warn.conflicts = FALSE)
 }
 ```
 

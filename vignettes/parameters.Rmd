@@ -19,17 +19,18 @@ knitr::opts_chunk$set(
 
 # The following are needed by `{parameters}` for cluster analysis:
 # `{factoextra}`, `{mclust}`, and `{NbClust}`
-if (!requireNamespace("factoextra", quietly = TRUE) ||
-  !requireNamespace("NbClust", quietly = TRUE) ||
-  !requireNamespace("mclust", quietly = TRUE) ||
-  !requireNamespace("httr", quietly = TRUE) || # needed for `insight::download_model()`
-  !requireNamespace("glmmTMB", quietly = TRUE) ||
-  !requireNamespace("lme4", quietly = TRUE) ||
-  !requireNamespace("brms", quietly = TRUE) ||
-  !requireNamespace("lavaan", quietly = TRUE) ||
-  !requireNamespace("metafor", quietly = TRUE) ||
-  !requireNamespace("splines", quietly = TRUE)) {
+#
+# `{httr}` is needed for `insight::download_model()`
+pkgs <- c(
+  "brms", "factoextra", "ggplot2", "glmmTMB", "httr",
+  "lavaan", "NbClust", "mclust", "metafor", "lme4", "splines"
+)
+successfully_loaded <- sapply(pkgs, requireNamespace, quietly = TRUE)
+
+if (all(successfully_loaded)) {
   knitr::opts_chunk$set(eval = FALSE)
+} else {
+  sapply(pkgs, require, quietly = TRUE, character.only = TRUE, warn.conflicts = FALSE)
 }
 ```
 
@@ -265,7 +266,7 @@ plot(result, show_intercept = TRUE)
 
 ## Model Parameters of Meta-Analysis models
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
 mydat <- data.frame(
   effectsize = c(-0.393, 0.675, 0.282, -1.398),
   standarderror = c(0.317, 0.317, 0.13, 0.36)
@@ -281,7 +282,7 @@ plot(result)
 If `show_labels` is `TRUE`, estimates and confidence intervals are included in
 the plot. Adjust the text size with `size_text`.
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
 plot(result, show_labels = TRUE, size_text = 4)
 ```
 
@@ -289,13 +290,13 @@ plot(result, show_labels = TRUE, size_text = 4)
 
 If `type = "funnel"`, a funnel plot is created.
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
 plot(result, type = "funnel")
 ```
 
 ### Model Parameters of Meta-Analysis Models with Subgroups
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
 set.seed(123)
 data(dat.bcg)
 dat <- escalc(

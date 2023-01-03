@@ -17,11 +17,13 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-if (!requireNamespace("correlation", quietly = TRUE) ||
-  !requireNamespace("ggplot2", quietly = TRUE) ||
-  !requireNamespace("ggraph", quietly = TRUE) ||
-  !requireNamespace("poorman", quietly = TRUE)) {
+pkgs <- c("correlation", "ggplot2", "ggraph", "poorman")
+successfully_loaded <- sapply(pkgs, requireNamespace, quietly = TRUE)
+
+if (all(successfully_loaded)) {
   knitr::opts_chunk$set(eval = FALSE)
+} else {
+  sapply(pkgs, require, quietly = TRUE, character.only = TRUE, warn.conflicts = FALSE)
 }
 ```
 
