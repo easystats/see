@@ -9,13 +9,16 @@
 #' The Okabe-Ito palette is included in the base R [grDevices::palette.colors()].
 #' These functions make this palette easier to use with *ggplot2*.
 #'
-#' The original Okabe-Ito palette's "yellow" color is `"#F0E442"`.
-#' This color is very bright and often does not show up well on white backgrounds
-#' (see [here](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/)) for a discussion of this issue).
-#' Accordingly, by default, this function uses a darker more "amber" color for "yellow" (`"#F5C710"`).
-#' This color is the "yellow" color used in base R >4.0's [default color palette](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/).
-#' The palettes `"full"` and `"black_first"` use this darker yellow color.
-#' For the original yellow color suggested by Okabe and Ito (`"#F0E442"`), use palettes `"full_original"` or `"black_first_original"`.
+#' The original Okabe-Ito palette's "yellow" color is `"#F0E442"`. This color is
+#' very bright and often does not show up well on white backgrounds (see
+#' [here](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/))
+#' for a discussion of this issue). Accordingly, by default, this function uses
+#' a darker more "amber" color for "yellow" (`"#F5C710"`). This color is the
+#' "yellow" color used in base R >4.0's [default color
+#' palette](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/).
+#' The palettes `"full"` and `"black_first"` use this darker yellow color. For
+#' the original yellow color suggested by Okabe and Ito (`"#F0E442"`), use
+#' palettes `"full_original"` or `"black_first_original"`.
 #'
 #' The Okabe-Ito palette is only available as a discrete palette.
 #' For color-accessible continuous variables, consider
@@ -148,21 +151,18 @@ okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, am
   cols <- c(...)
 
   if (is.null(cols)) {
-    if (isFALSE(original_names)) {
-      if (isTRUE(amber)) {
-        cols <- c("orange", "light blue", "green", "amber", "blue", "red", "purple", "grey", "black")
-      } else {
-        cols <- c("orange", "light blue", "green", "yellow", "blue", "red", "purple", "grey", "black")
-      }
-    } else {
-      if (isTRUE(amber)) {
-        cols <- c("orange", "sky blue", "bluish green", "amber", "blue", "vermillion", "reddish purple", "grey", "black")
-      } else {
-        cols <- c("orange", "sky blue", "bluish green", "yellow", "blue", "vermillion", "reddish purple", "grey", "black")
-      }
-    }
-    if (isTRUE(black_first)) cols <- union("black", cols)
+    return(okabeito_colors_list[cols])
   }
+
+  yellow_col <- if (isTRUE(amber)) "amber" else "yellow"
+
+  if (isTRUE(original_names)) {
+    cols <- c("orange", "sky blue", "bluish green", yellow_col, "blue", "vermillion", "reddish purple", "grey", "black")
+  } else {
+    cols <- c("orange", "light blue", "green", yellow_col, "blue", "red", "purple", "grey", "black")
+  }
+
+  if (isTRUE(black_first)) cols <- union("black", cols)
 
   okabeito_colors_list[cols]
 }
