@@ -13,6 +13,7 @@ library(see)
 knitr::opts_chunk$set(
   dpi = 300,
   collapse = TRUE,
+  out.width = "100%",
   fig.path = "man/figures/",
   warning = FALSE,
   message = FALSE
@@ -32,9 +33,9 @@ knitr::opts_chunk$set(
 The grammar of graphics [@wilkinson2012grammar], largely due to its implementation in the *ggplot2* package [@Wickham2016], has become the dominant approach to visualization in R. Building a model visualization with *ggplot2* is somewhat disconnected from the model fitting and evaluation process. Generally, this process entails:
 
   1. Fitting a model.
-  2. Extracting desired results from the model (e.g., model parameters and intervals, model predictions, diagnostic statistics) and arranging them into a dataframe.
-  3. Passing the results dataframe to `ggplot()` and specifying the graphical parameters. For example:
-  
+  2. Extracting desired results from the model (e.g., model parameters and intervals, model predictions, diagnostic statistics) and arranging them into a data frame.
+  3. Passing the results data frame to `ggplot()` and specifying the graphical parameters. For example:
+
 ```{r}
 library(ggplot2)
 
@@ -46,7 +47,7 @@ results <- fortify(model)
 
 # step-3
 ggplot(results) +
-  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(aes(x = wt, y = mpg, color = `factor(cyl)`)) +
   geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
 ```
 
