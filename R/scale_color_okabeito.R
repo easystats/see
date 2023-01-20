@@ -150,7 +150,7 @@ okabeito_colors_list <- c(
 okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, amber = TRUE) {
   cols <- c(...)
 
-  if (is.null(cols)) {
+  if (!is.null(cols)) {
     return(okabeito_colors_list[cols])
   }
 
