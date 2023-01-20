@@ -227,9 +227,6 @@ these are shown in the 'Usage' section.</p>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">iris</span>,</span></span>
 <span class="r-in"><span>  chains <span class="op">=</span> <span class="fl">2</span>, iter <span class="op">=</span> <span class="fl">200</span>, refresh <span class="op">=</span> <span class="fl">0</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The largest R-hat is 1.07, indicating chains have not mixed.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#r-hat</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#bulk-ess</span>
@@ -238,7 +235,7 @@ these are shown in the 'Usage' section.</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#tail-ess</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html" class="external-link">rope</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.87), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.79), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.89), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.74), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.83). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="data_plot-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -269,9 +266,9 @@ these are shown in the 'Usage' section.</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#tail-ess</span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between disp and cyl (r = 0.71). This might lead to inappropriate results. See 'Details' in '?equivalence_test'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between disp and cyl (r = 0.81). This might lead to inappropriate results. See 'Details' in '?equivalence_test'.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Picking joint bandwidth of 0.156</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Picking joint bandwidth of 0.164</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 40 rows containing non-finite values (`stat_density_ridges()`).</span>
 <span class="r-plt img"><img src="data_plot-5.png" alt="" width="700" height="433"></span>
 </code></pre></div>
