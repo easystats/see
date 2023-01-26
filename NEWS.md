@@ -7,6 +7,8 @@
   For the original Okabe-Ito palette, set `palette = "full_original"` or 
   `palette = "black_first_original"`.
 
+* Deals with deprecated arguments and functions in recent `{ggplot2}` updates.
+
 # see 0.7.4
 
 ## Changes
