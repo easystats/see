@@ -1,4 +1,4 @@
-pandoc: '3.0'
+pandoc: 3.0.1
 pkgdown: 2.0.7.9000
 pkgdown_sha: c354aa7e5ea1f9936692494c28c89e5bdd31fc68
 articles:
@@ -10,7 +10,7 @@ articles:
   performance: performance.html
   seecolorscales: seecolorscales.html
   seecolorscales_dark: seecolorscales_dark.html
-last_built: 2023-01-20T22:20Z
+last_built: 2023-01-26T06:16Z
 urls:
   reference: https://easystats.github.io/see/reference
   article: https://easystats.github.io/see/articles
