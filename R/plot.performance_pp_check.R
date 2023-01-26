@@ -122,7 +122,7 @@ plot.see_performance_pp_check <- function(x,
         x = .data$values,
         group = .data$grp,
         color = .data$key,
-        size = .data$key,
+        linewidth = .data$key,
         alpha = .data$key
       ),
       geom = "line",
