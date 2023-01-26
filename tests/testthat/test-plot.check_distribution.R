@@ -1,5 +1,5 @@
 test_that("`plot.see_check_distribution()` works", {
-  requiet("randomForest")
+  skip_if_not_or_load_if_installed("randomForest")
   library(performance)
   m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
   result <- check_distribution(m)

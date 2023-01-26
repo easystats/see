@@ -1,6 +1,6 @@
 test_that("bayestestR package plots rendered correctly", {
-  requiet("bayestestR")
-  requiet("vdiffr")
+  skip_if_not_or_load_if_installed("bayestestR")
+  skip_if_not_or_load_if_installed("vdiffr")
   skip_if_not(getRversion() >= "4.1")
 
   # plot.see_bayesfactor_models() --------------------

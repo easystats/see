@@ -1,6 +1,6 @@
 test_that("scale_color_ functions work correctly", {
-  requiet("vdiffr")
-  requiet("ggplot2")
+  skip_if_not_or_load_if_installed("vdiffr")
+  skip_if_not_or_load_if_installed("ggplot2")
   skip_if_not(getRversion() >= "4.1")
 
   vdiffr::expect_doppelganger(

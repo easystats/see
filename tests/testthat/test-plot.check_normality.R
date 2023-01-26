@@ -1,8 +1,8 @@
 test_that("`plot.see_check_normality()` works", {
   skip_if_not(getRversion() >= "4.1")
-  requiet("vdiffr")
-  requiet("lme4")
-  requiet("qqplotr")
+  skip_if_not_or_load_if_installed("vdiffr")
+  skip_if_not_or_load_if_installed("lme4")
+  skip_if_not_or_load_if_installed("qqplotr")
 
   set.seed(123)
   m_lm <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)

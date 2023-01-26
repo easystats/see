@@ -1,5 +1,5 @@
 test_that("scale_fill_colorhex works as expected", {
-  requiet("vdiffr")
+  skip_if_not_or_load_if_installed("vdiffr")
   skip_if(getRversion() < "4.1")
 
   set.seed(123)

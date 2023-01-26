@@ -1,8 +1,8 @@
 test_that("`plot.see_n_factors()` works", {
   skip_if_not(getRversion() >= "4.1")
-  requiet("parameters")
-  requiet("nFactors")
-  requiet("vdiffr")
+  skip_if_not_or_load_if_installed("parameters")
+  skip_if_not_or_load_if_installed("nFactors")
+  skip_if_not_or_load_if_installed("vdiffr")
   data(mtcars)
   result <- n_factors(mtcars, type = "PCA")
 
