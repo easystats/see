@@ -67,9 +67,9 @@ geom_binomdensity <- function(data,
 
   # ggdist geom
   ggdist::geom_dots(
-    ggplot2::aes_string(
-      x = x,
-      y = y,
+    ggplot2::aes(
+      x = .data[[x]],
+      y = .data[[y]],
       side = ".side",
       justification = ".justification",
       scale = ".scale"

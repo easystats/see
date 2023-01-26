@@ -142,7 +142,7 @@ plot.see_equivalence_test <- function(x,
 
   insight::check_if_installed("ggridges")
 
-  p <- ggplot(tmp, aes_string(x = "estimate", y = "predictor", fill = "grp")) +
+  p <- ggplot(tmp, aes(x = estimate, y = predictor, fill = grp)) +
     annotate(
       "rect",
       xmin = .rope[1],
@@ -286,7 +286,7 @@ plot.see_equivalence_test_df <- function(x,
 
   insight::check_if_installed("ggridges")
 
-  p <- ggplot(tmp, aes_string(x = "estimate", y = "predictor", fill = "grp")) +
+  p <- ggplot(tmp, aes(x = estimate, y = predictor, fill = grp)) +
     annotate(
       "rect",
       xmin = .rope[1],
@@ -399,12 +399,12 @@ plot.see_equivalence_test_lm <- function(x,
 
   p <- ggplot(
     x,
-    aes_string(
-      y = "Parameter",
-      x = "Estimate",
-      xmin = "CI_low",
-      xmax = "CI_high",
-      colour = "ROPE_Equivalence"
+    aes(
+      y = Parameter,
+      x = Estimate,
+      xmin = CI_low,
+      xmax = CI_high,
+      colour = ROPE_Equivalence
     )
   ) +
     annotate(
