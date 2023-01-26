@@ -101,11 +101,11 @@ Suggests:
     randomForest,
     rmarkdown,
     rstanarm,
-    scales (>= 1.2.0),
+    scales (>= 1.2.1),
     splines,
-    testthat (>= 3.1.5),
+    testthat (>= 3.1.6),
     tidygraph,
-    vdiffr
+    vdiffr (>= 1.0.5)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
