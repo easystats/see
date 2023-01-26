@@ -225,7 +225,7 @@ plot.see_performance_pp_check <- function(x,
       data = original,
       mapping = ggplot2::aes(xintercept = .data$x),
       color = colors[1],
-      size = 1
+      linewidth = 1
     ) +
     ggplot2::labs(
       x = NULL, y = NULL,

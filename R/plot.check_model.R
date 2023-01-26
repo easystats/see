@@ -461,7 +461,7 @@ plot.see_check_model <- function(x,
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(x = .data$probs, y = .data$y)) +
       ggplot2::geom_abline(
         slope = 1,
-        size = size_line,
+        linewidth = size_line,
         colour = colors[1]
       ) +
       geom_point2(

@@ -161,7 +161,7 @@ plot.see_equivalence_test <- function(x,
     geom_vline(
       xintercept = 0,
       colour = rope_color,
-      size = 0.8,
+      linewidth = 0.8,
       alpha = rope.line.alpha
     ) +
     ggridges::geom_density_ridges2(
@@ -305,7 +305,7 @@ plot.see_equivalence_test_df <- function(x,
     geom_vline(
       xintercept = 0,
       colour = rope_color,
-      size = 0.8,
+      linewidth = 0.8,
       alpha = rope.line.alpha
     ) +
     ggridges::geom_density_ridges2(
@@ -420,13 +420,13 @@ plot.see_equivalence_test_lm <- function(x,
       xintercept = .rope,
       linetype = "dashed",
       colour = rope_color,
-      size = 0.8,
+      linewidth = 0.8,
       alpha = rope.line.alpha
     ) +
     geom_vline(
       xintercept = 0,
       colour = rope_color,
-      size = 0.8,
+      linewidth = 0.8,
       alpha = rope.line.alpha
     ) +
     geom_pointrange(size = size_point) +
