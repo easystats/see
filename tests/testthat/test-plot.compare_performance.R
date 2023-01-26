@@ -1,5 +1,4 @@
 test_that("`plot.see_compare_performance()` works", {
-  library(performance)
   lm1 <- lm(Sepal.Length ~ Species, data = iris)
   lm2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
   lm3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)

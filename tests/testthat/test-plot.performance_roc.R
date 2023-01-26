@@ -1,5 +1,4 @@
 test_that("`plot.see_performance_roc()` works", {
-  library(performance)
   set.seed(123)
   iris$y <- rbinom(nrow(iris), size = 1, 0.3)
   folds <- sample(nrow(iris), size = nrow(iris) / 8, replace = FALSE)

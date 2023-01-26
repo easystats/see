@@ -6,12 +6,13 @@ skip_if_not_or_load_if_installed <- function(package) {
 }
 
 # load hard deps to use them without namespacing
-library(bayestestR)
-library(correlation)
+library(insight)
 library(datawizard)
 library(effectsize)
-suppressPackageStartupMessages(library(ggplot2))
-library(insight)
+library(bayestestR)
+library(correlation)
 library(modelbased)
 library(parameters)
 library(performance)
+
+suppressPackageStartupMessages(library(ggplot2))
