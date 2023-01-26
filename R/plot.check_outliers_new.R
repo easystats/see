@@ -87,7 +87,7 @@
           y = .cook_ref[[.level]],
           color = colors[1],
           linetype = ref.linetype,
-          size = size_line
+          linewidth = size_line
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {
@@ -97,7 +97,7 @@
           y = -1 * .cook_ref[[.level]],
           color = colors[1],
           linetype = ref.linetype,
-          size = size_line
+          linewidth = size_line
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {

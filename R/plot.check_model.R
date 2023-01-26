@@ -331,7 +331,7 @@ plot.see_check_model <- function(x,
     ggplot2::geom_line(
       mapping = ggplot2::aes(y = .data$curve),
       colour = colors[1],
-      size = size_line
+      linewidth = size_line
     ) +
     ggplot2::labs(
       x = "Residuals",
@@ -374,7 +374,7 @@ plot.see_check_model <- function(x,
         detrend = detrend
       ),
       qqplotr::stat_qq_line(
-        size = size_line,
+        linewidth = size_line,
         colour = colors[1],
         detrend = detrend
       )
@@ -389,7 +389,7 @@ plot.see_check_model <- function(x,
 
     qq_stuff <- list(
       ggplot2::geom_qq_line(
-        size = size_line,
+        linewidth = size_line,
         colour = colors[1]
       ),
       ggplot2::geom_qq(
@@ -435,7 +435,7 @@ plot.see_check_model <- function(x,
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
       qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
       qqplotr::stat_pp_line(
-        size = size_line,
+        linewidth = size_line,
         colour = colors[1],
         detrend = detrend
       ) +
@@ -558,7 +558,7 @@ plot.see_check_model <- function(x,
       se = TRUE,
       formula = y ~ x,
       alpha = alpha_level,
-      size = size_line,
+      linewidth = size_line,
       colour = colors[1]
     ) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
