@@ -82,7 +82,6 @@ Suggests:
     ggrepel,
     ggridges,
     ggside,
-    glmmTMB,
     grid,
     httr,
     lavaan,

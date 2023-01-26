@@ -37,13 +37,24 @@
 #'   theme_modern() +
 #'   scale_color_colorhex_c(palette = 1014416)
 #' @export
-scale_color_colorhex <- function(palette = 1014416, discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+scale_color_colorhex <- function(palette = 1014416,
+                                 discrete = TRUE,
+                                 reverse = FALSE,
+                                 aesthetics = "color",
+                                 ...) {
   pal <- palette_colorhex(palette = palette, reverse = reverse)
   pal_name <- attr(pal, "name")
-  if (is.null(pal_name)) pal_name <- palette
+  if (is.null(pal_name)) {
+    pal_name <- palette
+  }
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, scale_name = paste0("colorhex_", pal_name), palette = pal, ...)
+    discrete_scale(
+      aesthetics = aesthetics,
+      scale_name = paste0("colorhex_", pal_name),
+      palette = pal,
+      ...
+    )
   } else {
     scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -55,14 +66,34 @@ scale_color_colorhex <- function(palette = 1014416, discrete = TRUE, reverse = F
 
 #' @rdname scale_color_colorhex
 #' @export
-scale_color_colorhex_d <- function(palette = 1014416, discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_colorhex(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_colorhex_d <- function(palette = 1014416,
+                                   discrete = TRUE,
+                                   reverse = FALSE,
+                                   aesthetics = "color",
+                                   ...) {
+  scale_color_colorhex(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_colorhex
 #' @export
-scale_color_colorhex_c <- function(palette = 1014416, discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_colorhex(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_colorhex_c <- function(palette = 1014416,
+                                   discrete = FALSE,
+                                   reverse = FALSE,
+                                   aesthetics = "color",
+                                   ...) {
+  scale_color_colorhex(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_colorhex
@@ -87,11 +118,20 @@ scale_colour_colorhex_d <- scale_color_colorhex_d
 
 #' @rdname scale_color_colorhex
 #' @export
-scale_fill_colorhex <- function(palette = 1014416, discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+scale_fill_colorhex <- function(palette = 1014416,
+                                discrete = TRUE,
+                                reverse = FALSE,
+                                aesthetics = "fill",
+                                ...) {
   pal <- palette_colorhex(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("colorhex_", palette), palette = pal, ...)
+    discrete_scale(
+      aesthetics = aesthetics,
+      paste0("colorhex_", palette),
+      palette = pal,
+      ...
+    )
   } else {
     scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -100,14 +140,34 @@ scale_fill_colorhex <- function(palette = 1014416, discrete = TRUE, reverse = FA
 
 #' @rdname scale_color_colorhex
 #' @export
-scale_fill_colorhex_d <- function(palette = 1014416, discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_colorhex(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_colorhex_d <- function(palette = 1014416,
+                                  discrete = TRUE,
+                                  reverse = FALSE,
+                                  aesthetics = "fill",
+                                  ...) {
+  scale_fill_colorhex(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_colorhex
 #' @export
-scale_fill_colorhex_c <- function(palette = 1014416, discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_colorhex(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_colorhex_c <- function(palette = 1014416,
+                                  discrete = FALSE,
+                                  reverse = FALSE,
+                                  aesthetics = "fill",
+                                  ...) {
+  scale_fill_colorhex(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 
