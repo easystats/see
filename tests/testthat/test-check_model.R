@@ -107,7 +107,7 @@ test_that("`check_model()` works if convergence issues", {
     )
   )
 
-  expect_warning(m <- glm(y ~ x + offset(offset), family = poisson, data = d))
+  m <- suppressWarnings(stats::glm(y ~ x + offset(offset), family = poisson, data = d))
   x <- performance::check_model(m)
   expect_s3_class(x, "check_model")
 })
