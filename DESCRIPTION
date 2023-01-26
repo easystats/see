@@ -72,6 +72,7 @@ Imports:
     modelbased (>= 0.8.5),
     parameters (>= 0.20.0),
     performance (>= 0.10.1),
+    utils
 Suggests:
     brms,
     curl,

@@ -67,13 +67,14 @@ geom_binomdensity <- function(data,
 
   # ggdist geom
   ggdist::geom_dots(
-    ggplot2::aes(
-      x = .data[[x]],
-      y = .data[[y]],
+    # TODO: use tidy evaluation with `ggplot2::aes()` instead
+    suppressWarnings(ggplot2::aes_string(
+      x = x,
+      y = y,
       side = ".side",
       justification = ".justification",
       scale = ".scale"
-    ),
+    )),
     data = data,
     na.rm = TRUE,
     ...
