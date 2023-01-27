@@ -165,7 +165,7 @@ geom_from_list <- function(x, ...) {
     return(do.call(ggplot2::facet_grid, args))
   }
   if (x$geom == "smooth") {
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
     if (!"method" %in% names(args)) args$method <- "loess"
     if (!"formula" %in% names(args)) args$formula <- "y ~ x"
     return(do.call(ggplot2::geom_smooth, args))
@@ -181,12 +181,12 @@ geom_from_list <- function(x, ...) {
   }
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
     return(do.call(eval(parse(text = x$geom)), args))
   }
   if (startsWith(x$geom, "ggraph::")) {
     insight::check_if_installed("ggraph")
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
     return(do.call(eval(parse(text = x$geom)), args))
   }
 
@@ -234,7 +234,7 @@ geom_from_list <- function(x, ...) {
 
   # Aesthetics
   if ("aes" %in% names(x)) {
-    aes_list <- do.call(ggplot2::aes_string, x$aes)
+    aes_list <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
   } else {
     aes_list <- NULL
   }

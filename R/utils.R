@@ -1,3 +1,8 @@
+.str_to_sym <- function(x) {
+  if (!is.null(x)) x <- rlang::sym(x)
+  return(x)
+}
+
 .as.data.frame_density <- function(x, ...) {
   data.frame(x = x$x, y = x$y)
 }
