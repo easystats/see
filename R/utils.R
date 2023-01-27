@@ -52,9 +52,9 @@
   if (any(cor_sd)) {
     params[cor_sd] <- paste("SD/Cor: ", gsub("^(sd_|cor_)(.*?)__(.*)", "\\3", params[cor_sd], perl = TRUE))
     # replace "__" by "~"
-    cor_only <- grepl("^cor_", params[cor_sd])
+    cor_only <- !is.na(params[cor_sd]) & startsWith(params[cor_sd], "cor_")
     if (any(cor_only)) {
-      params[cor_sd][which(cor_sd)[cor_only]] <- sub("__", " ~ ", params[cor_sd][which(cor_sd)[cor_only]])
+      params[cor_sd][which(cor_sd)[cor_only]] <- sub("__", " ~ ", params[cor_sd][which(cor_sd)[cor_only]], fixed = TRUE)
     }
   }
   # correlation and sd: rstanarm
