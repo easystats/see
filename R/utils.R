@@ -7,15 +7,6 @@
   data.frame(x = x$x, y = x$y)
 }
 
-
-
-.normalize <- function(x) {
-  as.vector((x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE), na.rm = TRUE))
-}
-
-
-
-
 # safe conversion from factor to numeric
 .factor_to_numeric <- function(x) {
   if (is.numeric(x)) {
@@ -119,21 +110,28 @@
 
 
 .intercepts <- function() {
-  c("(intercept)_zi", "intercept (zero-inflated)", "intercept", "zi_intercept", "(intercept)", "b_intercept", "b_zi_intercept")
+  c(
+    "(intercept)_zi",
+    "intercept (zero-inflated)",
+    "intercept",
+    "zi_intercept",
+    "(intercept)",
+    "b_intercept",
+    "b_zi_intercept"
+  )
 }
 
 
 .has_intercept <- function(x) {
-  tolower(x) %in% .intercepts() | grepl("^intercept", tolower(x))
+  x <- tolower(x)
+  x %in% .intercepts() | !is.na(x) & startsWith(x, "intercept")
 }
 
 
-.in_intercepts <- function(x) {
-  tolower(x) %in% .intercepts() | grepl("^intercept", tolower(x))
-}
+.in_intercepts <- .has_intercept
 
 
-.remove_intercept <- function(x, column = "Parameter", show_intercept) {
+.remove_intercept <- function(x, column = "Parameter", show_intercept = FALSE) {
   if (!show_intercept) {
     remove <- which(.in_intercepts(x[[column]]))
     if (length(remove)) x <- x[-remove, ]
@@ -142,10 +140,8 @@
 }
 
 
-
-
 .percents <- function(x) {
-  insight::format_value(x = x, as_percent = TRUE, digits = 0)
+  insight::format_value(x = x, as_percent = TRUE, digits = 0L)
 }
 
 
