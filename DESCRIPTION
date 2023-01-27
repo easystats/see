@@ -71,8 +71,7 @@ Imports:
     insight (>= 0.18.8),
     modelbased (>= 0.8.5),
     parameters (>= 0.20.0),
-    performance (>= 0.10.1),
-    utils
+    performance (>= 0.10.1)
 Suggests:
     brms,
     curl,
