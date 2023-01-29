@@ -81,23 +81,23 @@ theme_radar_dark(
 \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
 }
 \examples{
-if (require("ggplot2") && require("poorman")) {
-  data <- iris[-5] \%>\%
-    aggregate(list(Species = iris$Species), mean) \%>\%
-    datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+\dontshow{if (require("ggplot2") && require("poorman")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+data <- iris[-5] \%>\%
+  aggregate(list(Species = iris$Species), mean) \%>\%
+  datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
-  data \%>\%
-    ggplot(aes(
-      x = name,
-      y = value,
-      color = Species,
-      group = Species,
-      fill = Species
-    )) +
-    geom_polygon(linewidth = 1, alpha = 0.1) +
-    coord_radar() +
-    theme_radar()
-}
+data \%>\%
+  ggplot(aes(
+    x = name,
+    y = value,
+    color = Species,
+    group = Species,
+    fill = Species
+  )) +
+  geom_polygon(linewidth = 1, alpha = 0.1) +
+  coord_radar() +
+  theme_radar()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=coord_radar]{coord_radar()}}

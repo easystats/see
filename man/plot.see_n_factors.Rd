@@ -26,10 +26,10 @@ A ggplot2-object.
 The \code{plot()} method for the \code{parameters::n_factors()} and \code{parameters::n_clusters()}
 }
 \examples{
-if (require("parameters") && require("nFactors")) {
-  data(mtcars)
-  result <- n_factors(mtcars, type = "PCA")
-  result
-  plot(result, type = "line")
-}
+\dontshow{if (require("parameters") && require("nFactors")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+data(mtcars)
+result <- n_factors(mtcars, type = "PCA")
+result
+plot(result, type = "line")
+\dontshow{\}) # examplesIf}
 }

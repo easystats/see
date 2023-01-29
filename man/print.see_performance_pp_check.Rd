@@ -48,8 +48,8 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_predictions()} function.
 }
 \examples{
-if (require("performance")) {
-  model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-  check_posterior_predictions(model)
-}
+\dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
+check_posterior_predictions(model)
+\dontshow{\}) # examplesIf}
 }
