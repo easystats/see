@@ -58,16 +58,18 @@ data_plot.parameters_sem <- function(x,
   edges$Label_Regression <- ifelse(edges$Component == "Regression", edges$Label, "")
   edges$Label_Correlation <- ifelse(edges$Component == "Correlation", edges$Label, "")
   edges$Label_Loading <- ifelse(edges$Component == "Loading", edges$Label, "")
-  edges <- edges[colSums(!is.na(edges)) > 0]
+  edges <- edges[colSums(!is.na(edges)) > 0L]
 
   # Identify nodes
   latent_nodes <- data.frame(
     Name = as.character(edges[edges$Component == "Loading", "to"]),
-    Latent = TRUE
+    Latent = TRUE,
+    stringsAsFactors = FALSE
   )
   manifest_nodes <- data.frame(
     Name = unique(c(edges$from, edges$to)),
-    Latent = FALSE
+    Latent = FALSE,
+    stringsAsFactors = FALSE
   )
   manifest_nodes <- manifest_nodes[!manifest_nodes$Name %in% latent_nodes$Name, ]
   nodes <- rbind(manifest_nodes, latent_nodes)

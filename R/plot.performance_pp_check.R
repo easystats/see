@@ -136,13 +136,14 @@ plot.see_performance_pp_check <- function(x,
       values = c(
         "Observed data" = 2 * size_line,
         "Model-predicted data" = size_line
-      ),
+      )
     ) +
     ggplot2::scale_alpha_manual(
       values = c(
         "Observed data" = 1,
         "Model-predicted data" = line_alpha
-      ), guide = "none"
+      ),
+      guide = "none"
     ) +
     ggplot2::labs(
       x = info$xlab,
@@ -180,7 +181,9 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_pp_check_range <- function(x, size_bar = 0.7, colors) {
+.plot_pp_check_range <- function(x,
+                                 size_bar = 0.7,
+                                 colors = unname(social_colors(c("green", "blue")))) {
   original <-
     data.frame(
       x = c(min(x$y), max(x$y)),

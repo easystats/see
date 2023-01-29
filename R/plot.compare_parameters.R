@@ -190,20 +190,37 @@ data_plot.see_compare_parameters <- function(x, ...) {
   col_ci_high <- which(grepl("^CI_high\\.", colnames(x)))
   col_p <- which(grepl("^p\\.", colnames(x)))
 
-  out1 <- .reshape_to_long(x, values_to = "Coefficient", columns = colnames(x)[col_coefficient])[c("Parameter", "Component", "group", "Coefficient")]
-  out2 <- .reshape_to_long(x, values_to = "CI_low", columns = colnames(x)[col_ci_low])["CI_low"]
-  out3 <- .reshape_to_long(x, values_to = "CI_high", columns = colnames(x)[col_ci_high])["CI_high"]
-  out4 <- .reshape_to_long(x, values_to = "p", columns = colnames(x)[col_p])["p"]
+  out1 <- .reshape_to_long(
+    x,
+    values_to = "Coefficient",
+    columns = colnames(x)[col_coefficient]
+  )[c("Parameter", "Component", "group", "Coefficient")]
+
+  out2 <- .reshape_to_long(
+    x,
+    values_to = "CI_low",
+    columns = colnames(x)[col_ci_low]
+  )["CI_low"]
+
+  out3 <- .reshape_to_long(
+    x,
+    values_to = "CI_high",
+    columns = colnames(x)[col_ci_high]
+  )["CI_high"]
+
+  out4 <- .reshape_to_long(
+    x,
+    values_to = "p",
+    columns = colnames(x)[col_p]
+  )["p"]
 
   dataplot <- cbind(out1, out2, out3, out4)
   dataplot$group <- gsub("(.*)\\.(.*)", "\\2", dataplot$group)
 
   rownames(dataplot) <- NULL
 
-  exp_coef <- unique(unlist(insight::compact_list(lapply(x, function(i) {
-    attributes(i)$exponentiate
-  }))))
-  attr(dataplot, "exponentiate") <- !is.null(exp_coef) && any(exp_coef != FALSE)
+  exp_coef <- unique(unlist(insight::compact_list(lapply(x, function(i) attributes(i)$exponentiate))))
+  attr(dataplot, "exponentiate") <- !is.null(exp_coef) && any(exp_coef)
 
   class(dataplot) <- c("data_plot", "see_compare_parameters", class(dataplot))
   dataplot
