@@ -170,20 +170,17 @@ geom_from_list <- function(x, ...) {
     if (!"formula" %in% names(args)) args$formula <- "y ~ x"
     return(do.call(ggplot2::geom_smooth, args))
   }
-  if (startsWith(x$geom, "scale_")) {
+
+  if (startsWith(x$geom, "scale_") || startsWith(x$geom, "theme") || startsWith(x$geom, "see_")) {
     return(do.call(x$geom, args))
   }
-  if (startsWith(x$geom, "theme")) {
-    return(do.call(x$geom, args))
-  }
-  if (startsWith(x$geom, "see_")) {
-    return(do.call(x$geom, args))
-  }
+
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
     if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
     return(do.call(eval(parse(text = x$geom)), args))
   }
+
   if (startsWith(x$geom, "ggraph::")) {
     insight::check_if_installed("ggraph")
     if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
