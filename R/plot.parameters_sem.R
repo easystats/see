@@ -96,7 +96,7 @@ plot.see_parameters_sem <- function(x,
                                     ci = TRUE,
                                     size_point = 22,
                                     ...) {
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(
       x,
       component = component,

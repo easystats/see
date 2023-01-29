@@ -179,7 +179,7 @@ plot.see_p_significance <- function(x,
   model <- .retrieve_data(x)
 
   # retrieve and prepare data for plotting
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 

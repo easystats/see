@@ -210,7 +210,7 @@ plot.see_hdi <- function(x,
                          show_title = TRUE,
                          n_columns = 1,
                          ...) {
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 

@@ -31,7 +31,7 @@ plot.see_compare_parameters <- function(x,
                                         n_columns = NULL,
                                         show_labels = FALSE,
                                         ...) {
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 
@@ -91,7 +91,11 @@ plot.see_compare_parameters <- function(x,
 
   p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
     geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-    geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point, position = position_dodge(dodge_position)) +
+    geom_pointrange(
+      aes(xmin = .data$CI_low, xmax = .data$CI_high),
+      size = size_point,
+      position = position_dodge(dodge_position)
+    ) +
     theme_modern() +
     scale_color_material()
 
@@ -116,8 +120,8 @@ plot.see_compare_parameters <- function(x,
   # largest data points that are within this range. Thereby we have the pretty
   # values we can use as breaks and labels for the scale...
   if (exponentiated_coefs) {
-    range <- 2^c(-24:16)
-    x_low <- which.min(min(x$CI_low) > range) - 1
+    range <- 2^(-24:16)
+    x_low <- which.min(min(x$CI_low) > range) - 1L
     x_high <- which.max(max(x$CI_high) < range)
     if (add_values) {
       # add some space to the right panel for text
@@ -133,7 +137,7 @@ plot.see_compare_parameters <- function(x,
   }
 
   # wrap plot into facets, depending on the components
-  if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
+  if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1L, 2L, 1L)
 
   if (ordinal_model) {
     facet_scales <- "free_x"

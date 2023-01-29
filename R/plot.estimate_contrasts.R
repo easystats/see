@@ -78,7 +78,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data)
   }
 

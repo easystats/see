@@ -74,7 +74,7 @@ plot.see_parameters_distribution <- function(x,
     data <- data[x$Variable]
   }
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, ...)
   }
 

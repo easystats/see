@@ -60,7 +60,7 @@ print.see_performance_pp_check <- function(x,
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 
@@ -89,7 +89,7 @@ plot.see_performance_pp_check <- function(x,
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 

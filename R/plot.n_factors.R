@@ -87,7 +87,7 @@ plot.see_n_factors <- function(x,
                                ...) {
   type <- match.arg(type)
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, type = type)
   }
 

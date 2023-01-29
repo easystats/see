@@ -122,7 +122,7 @@ plot.see_estimate_density <- function(x,
   )
 
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = model, centrality = centrality, ci = ci, ...)
   }
 
