@@ -1,5 +1,8 @@
 .str_to_sym <- function(x) {
-  if (!is.null(x) && !is.numeric(x)) x <- rlang::sym(x)
+  if (!is.null(x) && is.character(x)) {
+    x <- rlang::sym(x)
+  }
+
   return(x)
 }
 
