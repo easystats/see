@@ -167,7 +167,8 @@ plot.see_equivalence_test <- function(x,
     ggridges::geom_density_ridges2(
       rel_min_height = 0.01,
       scale = 2,
-      alpha = 0.5
+      alpha = 0.5,
+      na.rm = TRUE
     ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
@@ -311,7 +312,8 @@ plot.see_equivalence_test_df <- function(x,
     ggridges::geom_density_ridges2(
       rel_min_height = 0.01,
       scale = 2,
-      alpha = 0.5
+      alpha = 0.5,
+      na.rm = TRUE
     ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
