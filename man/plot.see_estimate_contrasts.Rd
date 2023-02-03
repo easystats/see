@@ -24,7 +24,7 @@ function.
 \examples{
 \dontshow{if (require("modelbased") && require("rstanarm") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+model <- suppressWarnings(stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0))
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
 plot(contrasts, means)

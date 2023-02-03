@@ -50,7 +50,7 @@ The \code{plot()} method for the \code{bayestestR::p_significance()} function.
 library(rstanarm)
 library(bayestestR)
 set.seed(123)
-m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+m <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
 result <- p_significance(m)
 plot(result)
 \dontshow{\}) # examplesIf}
