@@ -29,6 +29,8 @@ if (can_evaluate) {
 } else {
   knitr::opts_chunk$set(eval = FALSE)
 }
+
+options(warn = 2L)
 ```
 
 This vignette can be referred to by citing the package:
@@ -171,7 +173,7 @@ plot(result)
 ```
 
 ```{r fig.width=8, fig.height=10}
-result <- p_significance(model2, effects = "all", component = "all")
+result <- p_significance(model2, effects = "all", component = "all", verbose = FALSE)
 
 result
 
