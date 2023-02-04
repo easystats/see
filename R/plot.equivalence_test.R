@@ -150,19 +150,22 @@ plot.see_equivalence_test <- function(x,
       ymin = 0,
       ymax = Inf,
       fill = rope_color,
-      alpha = (rope_alpha / 3)
+      alpha = (rope_alpha / 3),
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
       colour = rope_color,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     ggridges::geom_density_ridges2(
       rel_min_height = 0.01,
@@ -301,13 +304,15 @@ plot.see_equivalence_test_df <- function(x,
       xintercept = .rope,
       linetype = "dashed",
       colour = rope_color,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     ggridges::geom_density_ridges2(
       rel_min_height = 0.01,
@@ -423,15 +428,20 @@ plot.see_equivalence_test_lm <- function(x,
       linetype = "dashed",
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
-    geom_pointrange(size = size_point) +
+    geom_pointrange(
+      size = size_point,
+      na.rm = TRUE
+    ) +
     scale_colour_manual(values = fill.color) +
     labs(y = x.title, x = NULL, colour = legend.title) +
     theme(legend.position = "bottom") +

@@ -193,7 +193,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("rstanarm") && FALSE
+#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")
 #' library(rstanarm)
 #' library(bayestestR)
 #' set.seed(123)

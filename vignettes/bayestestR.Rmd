@@ -29,8 +29,6 @@ if (can_evaluate) {
 } else {
   knitr::opts_chunk$set(eval = FALSE)
 }
-
-options(warn = 2L)
 ```
 
 This vignette can be referred to by citing the package:
@@ -258,7 +256,7 @@ border.
 ```{r}
 library(logspline) # needed for `si()`
 
-result <- si(model)
+result <- si(model, verbose = FALSE)
 result
 
 plot(result) +
@@ -291,7 +289,7 @@ plot(result, rope_color = "red") +
 ```
 
 ```{r fig.width=8, fig.height=10}
-result <- rope(model2, ci = c(0.9, 0.95), effects = "all", component = "all")
+result <- rope(model2, ci = c(0.9, 0.95), effects = "all", component = "all", verbose = FALSE)
 
 result
 
@@ -311,7 +309,7 @@ percentage is sufficiently low, the null hypothesis is rejected. If this
 percentage is sufficiently high, the null hypothesis is accepted.
 
 ```{r}
-result <- equivalence_test(model)
+result <- equivalence_test(model, verbose = FALSE)
 
 result
 
