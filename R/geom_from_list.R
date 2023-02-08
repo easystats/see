@@ -211,11 +211,11 @@ geom_from_list <- function(x, ...) {
   } else if (x$geom == "density_2d_polygon") {
     stat <- ggplot2::StatDensity2d
     x$geom <- "polygon"
-    if (!"fill" %in% names(x$aes)) x$aes$fill <- "..level.."
+    if (!"fill" %in% names(x$aes)) x$aes$fill <- quote(after_stat(level))
   } else if (x$geom == "density_2d_raster") {
     stat <- ggplot2::StatDensity2d
     x$geom <- "raster"
-    if (!"fill" %in% names(x$aes)) x$aes$fill <- "..density.."
+    if (!"fill" %in% names(x$aes)) x$aes$fill <- quote(after_stat(density))
   }
 
   # Position
