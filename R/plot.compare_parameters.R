@@ -94,7 +94,8 @@ plot.see_compare_parameters <- function(x,
     geom_pointrange(
       aes(xmin = .data$CI_low, xmax = .data$CI_high),
       size = size_point,
-      position = position_dodge(dodge_position)
+      position = position_dodge(dodge_position),
+      na.rm = TRUE
     ) +
     theme_modern() +
     scale_color_material()
@@ -108,7 +109,9 @@ plot.see_compare_parameters <- function(x,
     p <- p +
       geom_text(
         mapping = aes(label = .data$Estimate_CI, y = Inf),
-        colour = "black", hjust = "inward", size = size_text,
+        colour = "black",
+        hjust = "inward",
+        size = size_text,
         position = position_dodge2(dodge_position)
       ) +
       xlim(c(min(new_range), max(new_range)))

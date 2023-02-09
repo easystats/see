@@ -56,7 +56,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     ) +
     geom_point(
       size = size_point,
-      position = position_dodge(0.4)
+      position = position_dodge(0.4),
+      na.rm = TRUE
     ) +
     labs(
       y = NULL,
@@ -100,7 +101,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   p3 <- ggplot(dat2, aes(x = .data$x)) +
     geom_histogram(
       fill = "#f44336", colour = bar_color,
-      binwidth = sqrt(length(vars(.data$x)))
+      binwidth = sqrt(length(vars(.data$x))),
+      na.rm = TRUE
     ) +
     labs(x = NULL, y = NULL, title = "Distribution of Response") +
     theme_lucid()
@@ -145,7 +147,11 @@ plot.see_check_distribution_numeric <- function(x,
       linewidth = 0.8,
       na.rm = TRUE
     ) +
-    geom_point(size = size_point, position = position_dodge(0.4)) +
+    geom_point(
+      size = size_point,
+      position = position_dodge(0.4),
+      na.rm = TRUE
+    ) +
     labs(
       y = NULL,
       x = NULL,
@@ -171,7 +177,8 @@ plot.see_check_distribution_numeric <- function(x,
   p3 <- ggplot(dat2, aes(x = .data$x)) +
     geom_histogram(
       colour = theme_lucid()$panel.background$fill,
-      binwidth = sqrt(length(vars(.data$x)))
+      binwidth = sqrt(length(vars(.data$x))),
+      na.rm = TRUE
     ) +
     labs(x = NULL, y = NULL, title = "Distribution of Vector") +
     theme_lucid()

@@ -278,7 +278,8 @@ plot.see_check_model <- function(x,
       }
     } +
     geom_point2(
-      size = size_point
+      size = size_point,
+      na.rm = TRUE
     ) +
     ggplot2::labs(
       title = "Collinearity",
@@ -329,12 +330,14 @@ plot.see_check_model <- function(x,
       mapping = ggplot2::aes(ymin = 0, ymax = .data$y),
       colour = NA,
       fill = colors[2],
-      alpha = alpha_level
+      alpha = alpha_level,
+      na.rm = TRUE
     ) +
     ggplot2::geom_line(
       mapping = ggplot2::aes(y = .data$curve),
       colour = colors[1],
-      linewidth = size_line
+      linewidth = size_line,
+      na.rm = TRUE
     ) +
     ggplot2::labs(
       x = "Residuals",
@@ -393,10 +396,13 @@ plot.see_check_model <- function(x,
     qq_stuff <- list(
       ggplot2::geom_qq_line(
         linewidth = size_line,
-        colour = colors[1]
+        colour = colors[1],
+        na.rm = TRUE
       ),
       ggplot2::geom_qq(
-        shape = 16, stroke = 0,
+        shape = 16,
+        na.rm = TRUE,
+        stroke = 0,
         size = size_point,
         colour = colors[2] # "#2c3e50"
       )
@@ -455,7 +461,6 @@ plot.see_check_model <- function(x,
       if (isTRUE(detrend)) " and detrending",
       ", please install `qqplotr`."
     )
-
 
     x$probs <- stats::ppoints(x$res)
     dparms <- MASS::fitdistr(x$res, densfun = "normal")
