@@ -254,7 +254,10 @@ plot.see_check_model <- function(x,
     {
       if (!is.null(ci_data)) {
         list(
-          ggplot2::geom_linerange(linewidth = size_line),
+          ggplot2::geom_linerange(
+            linewidth = size_line,
+            na.rm = TRUE
+          ),
           ggplot2::geom_segment(
             data = x[x$VIF_CI_high > ylim * 1.15, ],
             mapping = aes(

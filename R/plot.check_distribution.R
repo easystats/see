@@ -24,7 +24,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   dat <- data.frame(
     x = factor(c(x$Distribution, x$Distribution), levels = rev(sort(unique(x$Distribution)))),
     y = c(x$p_Response, x$p_Residuals),
-    group = factor(c(rep("Response", length(x$p_Response)), rep("Residuals", length(x$p_Residuals))),
+    group = factor(
+      c(rep("Response", length(x$p_Response)), rep("Residuals", length(x$p_Residuals))),
       levels = c("Response", "Residuals")
     ),
     stringsAsFactors = FALSE
@@ -39,16 +40,24 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   # default legend-position
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
-  p1 <- ggplot(dat, aes(
-    y = .data$x,
-    x = .data$y,
-    colour = .data$group
-  )) +
-    geom_linerange(aes(xmin = 0, xmax = .data$y),
+  p1 <- ggplot(
+    dat,
+    aes(
+      y = .data$x,
+      x = .data$y,
+      colour = .data$group
+    )
+  ) +
+    geom_linerange(
+      aes(xmin = 0, xmax = .data$y),
       position = position_dodge(0.4),
-      linewidth = 0.8
+      linewidth = 0.8,
+      na.rm = TRUE
     ) +
-    geom_point(size = size_point, position = position_dodge(0.4)) +
+    geom_point(
+      size = size_point,
+      position = position_dodge(0.4)
+    ) +
     labs(
       y = NULL,
       x = NULL,
@@ -130,10 +139,25 @@ plot.see_check_distribution_numeric <- function(x,
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
   p1 <- ggplot(dat, aes(y = .data$x, x = .data$y)) +
-    geom_linerange(aes(xmin = 0, xmax = .data$y), position = position_dodge(0.4), linewidth = 0.8) +
+    geom_linerange(
+      aes(xmin = 0, xmax = .data$y),
+      position = position_dodge(0.4),
+      linewidth = 0.8,
+      na.rm = TRUE
+    ) +
     geom_point(size = size_point, position = position_dodge(0.4)) +
-    labs(y = NULL, x = NULL, fill = NULL, colour = NULL, title = "Predicted Distribution of Vector") +
-    scale_x_continuous(labels = .percents, expand = c(0, 0), limits = c(0, max_y)) +
+    labs(
+      y = NULL,
+      x = NULL,
+      fill = NULL,
+      colour = NULL,
+      title = "Predicted Distribution of Vector"
+    ) +
+    scale_x_continuous(
+      labels = .percents,
+      expand = c(0, 0),
+      limits = c(0, max_y)
+    ) +
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(vec))
@@ -154,7 +178,7 @@ plot.see_check_distribution_numeric <- function(x,
 
   if (panel) {
     insight::check_if_installed("patchwork")
-    return(p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2))
+    return(p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2L))
   } else {
     return(list(p1, p2, p3))
   }
