@@ -84,7 +84,7 @@ plot.see_parameters_model <- function(x,
 
   # is exp?
   exponentiated_coefs <- isTRUE(model_attributes$exponentiate)
-  y_intercept <- ifelse(exponentiated_coefs, 1, 0)
+  y_intercept <- as.numeric(exponentiated_coefs)
 
   # label for coefficient scale
   coefficient_name <- model_attributes$coefficient_name
@@ -108,7 +108,7 @@ plot.see_parameters_model <- function(x,
   }
 
   # check if multiple CIs
-  if (sum(grepl("^CI_low", colnames(x))) > 1L) {
+  if (sum(startsWith(colnames(x), "CI_low")) > 1L) {
     multiple_ci <- TRUE
     x <- datawizard::reshape_ci(x)
   } else {
@@ -133,7 +133,7 @@ plot.see_parameters_model <- function(x,
       if (all(x$Group == "")) {
         x$Group <- NULL
       } else {
-        x <- x[!grepl("^SD/Cor", x$Group), , drop = FALSE]
+        x <- x[!startsWith(x$Group, "SD/Cor"), , drop = FALSE]
       }
     }
     attributes(x) <- c(attributes(x), model_attributes)
@@ -309,13 +309,11 @@ plot.see_parameters_model <- function(x,
   }
 
 
-  if (!show_intercept) {
-    if (length(.in_intercepts(x$Parameter)) > 0L) {
-      x <- x[!.in_intercepts(x$Parameter), ]
-      if (show_density && (is_bayesian || is_bootstrap)) {
-        data <- data[!.in_intercepts(data$Parameter), ]
-        density_layer$data <- data
-      }
+  if (!show_intercept && length(.in_intercepts(x$Parameter)) > 0L) {
+    x <- x[!.in_intercepts(x$Parameter), ]
+    if (show_density && (is_bayesian || is_bootstrap)) {
+      data <- data[!.in_intercepts(data$Parameter), ]
+      density_layer$data <- data
     }
   }
 
@@ -518,7 +516,7 @@ plot.see_parameters_model <- function(x,
   } else if (has_response) {
     p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
   } else if (has_subgroups) {
-    suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free"))
+    suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free")) # nolint
   }
 
   if (length(model_attributes$parameter_names) > 1L) {
@@ -545,7 +543,7 @@ plot.see_parameters_model <- function(x,
       p + labs(
         y = parameter_label,
         x = ifelse(is.null(coefficient_name),
-          ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
+          ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), # nolint
           coefficient_name
         ),
         colour = "CI"
