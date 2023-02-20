@@ -170,7 +170,7 @@ plot.see_parameters_model <- function(x,
   }
 
   if (isTRUE(show_density)) {
-    insight::check_if_installed(c("ggdist"))
+    insight::check_if_installed("ggdist")
 
     # TODO: Handle Effects and Components
     # TODO: Handle meta-analysis models
@@ -184,10 +184,7 @@ plot.see_parameters_model <- function(x,
 
       # MCMC or bootstrapped models
       if (is.null(data)) {
-        stop(
-          insight::format_message("Could not retrieve parameter simulations."),
-          call. = FALSE
-        )
+        insight::format_error("Could not retrieve parameter simulations.")
       }
 
       data <- datawizard::reshape_longer(
@@ -196,7 +193,7 @@ plot.see_parameters_model <- function(x,
         rows_to = "Iteration",
         values_to = "Coefficient"
       )
-      group <- x[, c("Parameter"), drop = FALSE]
+      group <- x[, "Parameter", drop = FALSE]
       group$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
       data <- merge(data, group, by = "Parameter")
       if (isTRUE(exponentiated_coefs)) {

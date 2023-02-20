@@ -165,7 +165,7 @@ plot.see_compare_parameters <- function(x,
   } else if (has_response) {
     p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
   } else if (has_subgroups) {
-    suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free"))
+    p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free")
   }
 
   if (isTRUE(axis_title_in_facet)) {
