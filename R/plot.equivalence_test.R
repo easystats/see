@@ -222,7 +222,7 @@ plot.see_equivalence_test_df <- function(x,
   if (is.null(data)) data <- .retrieve_data(x)
 
   if (is.null(data)) {
-    warning("plot() only works for equivalence_test() when original data frame is available.", call. = FALSE)
+    insight::format_warning("plot() only works for equivalence_test() when original data frame is available.")
     return(x)
   }
 
@@ -348,7 +348,7 @@ plot.see_equivalence_test_lm <- function(x,
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
-    warning("plot() only works for equivalence_test() with model-objects.", call. = FALSE)
+    insight::format_warning("plot() only works for equivalence_test() with model-objects.")
     return(x)
   }
 
@@ -364,7 +364,7 @@ plot.see_equivalence_test_lm <- function(x,
   )
 
   if (is.null(model)) {
-    warning(sprintf("Can't find object '%s'.", model_name), call. = FALSE)
+    insight::format_warning(sprintf("Can't find object '%s'.", model_name))
     return(x)
   }
 
