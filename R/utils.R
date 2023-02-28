@@ -1,4 +1,5 @@
 .str_to_sym <- function(x) {
+  insight::check_if_installed("rlang")
   if (!is.null(x) && is.character(x)) {
     x <- rlang::sym(x)
   }
