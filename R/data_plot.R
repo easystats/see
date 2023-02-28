@@ -55,13 +55,13 @@
 #' library(bayestestR)
 #' library(rstanarm)
 #'
-#' model <<- stan_glm(
+#' model <<- suppressWarnings(stan_glm(
 #'   Sepal.Length ~ Petal.Width * Species,
 #'   data = iris,
 #'   chains = 2, iter = 200, refresh = 0
-#' )
+#' ))
 #'
-#' x <- rope(model)
+#' x <- rope(model, verbose = FALSE)
 #' plot(x)
 #'
 #' x <- hdi(model)
@@ -71,17 +71,17 @@
 #' x <- p_direction(data)
 #' plot(x)
 #'
-#' x <- p_direction(model)
+#' x <- p_direction(model, verbose = FALSE)
 #' plot(x)
 #'
-#' model <<- stan_glm(
+#' model <<- suppressWarnings(stan_glm(
 #'   mpg ~ wt + gear + cyl + disp,
 #'   chains = 2,
 #'   iter = 200,
 #'   refresh = 0,
 #'   data = mtcars
-#' )
-#' x <- equivalence_test(model)
+#' ))
+#' x <- equivalence_test(model, verbose = FALSE)
 #' plot(x)
 #' @export
 data_plot <- function(x, data = NULL, ...) {
@@ -104,11 +104,11 @@ data_plot <- function(x, data = NULL, ...) {
 #' library(see)
 #' library(ggplot2)
 #'
-#' model <- stan_glm(
+#' model <- suppressWarnings(stan_glm(
 #'   Sepal.Length ~ Petal.Width + Species + Sepal.Width,
 #'   data = iris,
 #'   chains = 2, iter = 200
-#' )
+#' ))
 #'
 #' result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 #' data <- data_plot(result, data = model)

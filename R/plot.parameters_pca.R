@@ -80,7 +80,7 @@ plot.see_parameters_pca <- function(x,
                                     ...) {
   type <- match.arg(type)
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 

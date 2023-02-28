@@ -93,7 +93,7 @@ data_plot.estimate_density <- function(x,
 #' library(rstanarm)
 #' library(bayestestR)
 #' set.seed(123)
-#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' m <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
 #' result <- estimate_density(m)
 #' plot(result)
 #' @importFrom ggplot2 .data
@@ -122,7 +122,7 @@ plot.see_estimate_density <- function(x,
   )
 
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = model, centrality = centrality, ci = ci, ...)
   }
 

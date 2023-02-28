@@ -7,24 +7,22 @@
 #'
 #' @seealso [coord_radar()]
 #'
-#' @examples
-#' if (require("ggplot2") && require("poorman")) {
-#'   data <- iris[-5] %>%
-#'     aggregate(list(Species = iris$Species), mean) %>%
-#'     datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+#' @examplesIf require("ggplot2") && require("poorman")
+#' data <- iris[-5] %>%
+#'   aggregate(list(Species = iris$Species), mean) %>%
+#'   datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 #'
-#'   data %>%
-#'     ggplot(aes(
-#'       x = name,
-#'       y = value,
-#'       color = Species,
-#'       group = Species,
-#'       fill = Species
-#'     )) +
-#'     geom_polygon(linewidth = 1, alpha = 0.1) +
-#'     coord_radar() +
-#'     theme_radar()
-#' }
+#' data %>%
+#'   ggplot(aes(
+#'     x = name,
+#'     y = value,
+#'     color = Species,
+#'     group = Species,
+#'     fill = Species
+#'   )) +
+#'   geom_polygon(linewidth = 1, alpha = 0.1) +
+#'   coord_radar() +
+#'   theme_radar()
 #' @export
 theme_radar <- function(base_size = 11,
                         base_family = "",

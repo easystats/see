@@ -69,16 +69,17 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf identical(Sys.getenv("NOT_CRAN"), "true") && require("modelbased") && require("rstanarm") && require("emmeans")
-#' model <- stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0)
+#' @examplesIf require("modelbased") && require("rstanarm") && require("emmeans")
+#' \donttest{
+#' model <- suppressWarnings(stan_glm(Sepal.Width ~ Species, data = iris, refresh = 0))
 #' contrasts <- estimate_contrasts(model)
 #' means <- estimate_means(model)
 #' plot(contrasts, means)
-#'
+#' }
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data)
   }
 

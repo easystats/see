@@ -20,17 +20,17 @@ is applied clockwise or anticlockwise depending on value of \code{direction}.}
 Add a radar coordinate system useful for radar charts.
 }
 \examples{
+\dontshow{if (require("datawizard") && require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create a radar/spider chart with ggplot:
-if (require("datawizard") && require("ggplot2")) {
-  data(iris)
-  data <- aggregate(iris[-5], list(Species = iris$Species), mean)
-  data <- data_to_long(
-    data,
-    c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
-  )
+data(iris)
+data <- aggregate(iris[-5], list(Species = iris$Species), mean)
+data <- data_to_long(
+  data,
+  c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
+)
 
-  ggplot(data, aes(x = name, y = value, color = Species, group = Species)) +
-    geom_polygon(fill = NA, linewidth = 2) +
-    coord_radar(start = -pi / 4)
-}
+ggplot(data, aes(x = name, y = value, color = Species, group = Species)) +
+  geom_polygon(fill = NA, linewidth = 2) +
+  coord_radar(start = -pi / 4)
+\dontshow{\}) # examplesIf}
 }

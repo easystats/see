@@ -100,7 +100,7 @@ plot.see_parameters_simulate <- function(x,
     centrality <- attributes(x)$centrality
   }
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, normalize_height = normalize_height)
   }
 

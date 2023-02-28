@@ -79,7 +79,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' library(rstanarm)
 #' library(bayestestR)
 #' set.seed(123)
-#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' m <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
 #' result <- rope(m)
 #' result
 #' plot(result)
@@ -92,7 +92,7 @@ plot.see_rope <- function(x,
                           show_intercept = FALSE,
                           n_columns = 1,
                           ...) {
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 

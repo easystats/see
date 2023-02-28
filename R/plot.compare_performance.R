@@ -92,7 +92,7 @@ plot.see_compare_performance <- function(x, size_line = 1, ...) {
   #     labs(x = "Model", y = "Performance Score")
   # } else {
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 

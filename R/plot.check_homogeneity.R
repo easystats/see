@@ -60,7 +60,10 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
         ggrepel::geom_label_repel(
           aes(label = .data$group),
           y = 0, fill = "white",
-          data = data.frame(group = unique(dat$group)),
+          data = data.frame(
+            group = unique(dat$group),
+            stringsAsFactors = FALSE
+          ),
           direction = "y",
           segment.colour = NA
         )
@@ -68,7 +71,10 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
         geom_label(
           aes(label = .data$group),
           y = 0, fill = "white",
-          data = data.frame(group = unique(dat$group))
+          data = data.frame(
+            group = unique(dat$group),
+            stringsAsFactors = FALSE
+          )
         )
       }
   } else {
@@ -84,7 +90,10 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
         ggrepel::geom_label_repel(
           aes(label = .data$x),
           y = 0, fill = "white",
-          data = data.frame(x = unique(dat$x)),
+          data = data.frame(
+            x = unique(dat$x),
+            stringsAsFactors = FALSE
+          ),
           direction = "y",
           segment.colour = NA
         )
@@ -92,7 +101,10 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
         geom_label(
           aes(label = .data$x),
           y = 0, fill = "white",
-          data = data.frame(x = unique(dat$x))
+          data = data.frame(
+            x = unique(dat$x),
+            stringsAsFactors = FALSE
+          )
         )
       }
   }

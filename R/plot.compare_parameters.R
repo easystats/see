@@ -14,17 +14,13 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' if (require("insight") &&
-#'   require("parameters") &&
-#'   packageVersion("insight") >= "0.13.0") {
-#'   data(iris)
-#'   lm1 <- lm(Sepal.Length ~ Species, data = iris)
-#'   lm2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
-#'   lm3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
-#'   result <- compare_parameters(lm1, lm2, lm3)
-#'   plot(result)
-#' }
+#' @examplesIf require("insight") && require("parameters")
+#' data(iris)
+#' lm1 <- lm(Sepal.Length ~ Species, data = iris)
+#' lm2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
+#' lm3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
+#' result <- compare_parameters(lm1, lm2, lm3)
+#' plot(result)
 #' @export
 plot.see_compare_parameters <- function(x,
                                         show_intercept = FALSE,
@@ -35,7 +31,7 @@ plot.see_compare_parameters <- function(x,
                                         n_columns = NULL,
                                         show_labels = FALSE,
                                         ...) {
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 
@@ -95,7 +91,12 @@ plot.see_compare_parameters <- function(x,
 
   p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
     geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-    geom_pointrange(aes(xmin = .data$CI_low, xmax = .data$CI_high), size = size_point, position = position_dodge(dodge_position)) +
+    geom_pointrange(
+      aes(xmin = .data$CI_low, xmax = .data$CI_high),
+      size = size_point,
+      position = position_dodge(dodge_position),
+      na.rm = TRUE
+    ) +
     theme_modern() +
     scale_color_material()
 
@@ -108,7 +109,9 @@ plot.see_compare_parameters <- function(x,
     p <- p +
       geom_text(
         mapping = aes(label = .data$Estimate_CI, y = Inf),
-        colour = "black", hjust = "inward", size = size_text,
+        colour = "black",
+        hjust = "inward",
+        size = size_text,
         position = position_dodge2(dodge_position)
       ) +
       xlim(c(min(new_range), max(new_range)))
@@ -120,8 +123,8 @@ plot.see_compare_parameters <- function(x,
   # largest data points that are within this range. Thereby we have the pretty
   # values we can use as breaks and labels for the scale...
   if (exponentiated_coefs) {
-    range <- 2^c(-24:16)
-    x_low <- which.min(min(x$CI_low) > range) - 1
+    range <- 2^(-24:16)
+    x_low <- which.min(min(x$CI_low) > range) - 1L
     x_high <- which.max(max(x$CI_high) < range)
     if (add_values) {
       # add some space to the right panel for text
@@ -137,7 +140,7 @@ plot.see_compare_parameters <- function(x,
   }
 
   # wrap plot into facets, depending on the components
-  if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
+  if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1L, 2L, 1L)
 
   if (ordinal_model) {
     facet_scales <- "free_x"
@@ -162,7 +165,7 @@ plot.see_compare_parameters <- function(x,
   } else if (has_response) {
     p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
   } else if (has_subgroups) {
-    suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free"))
+    p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free")
   }
 
   if (isTRUE(axis_title_in_facet)) {
@@ -190,20 +193,37 @@ data_plot.see_compare_parameters <- function(x, ...) {
   col_ci_high <- which(grepl("^CI_high\\.", colnames(x)))
   col_p <- which(grepl("^p\\.", colnames(x)))
 
-  out1 <- .reshape_to_long(x, values_to = "Coefficient", columns = colnames(x)[col_coefficient])[c("Parameter", "Component", "group", "Coefficient")]
-  out2 <- .reshape_to_long(x, values_to = "CI_low", columns = colnames(x)[col_ci_low])["CI_low"]
-  out3 <- .reshape_to_long(x, values_to = "CI_high", columns = colnames(x)[col_ci_high])["CI_high"]
-  out4 <- .reshape_to_long(x, values_to = "p", columns = colnames(x)[col_p])["p"]
+  out1 <- .reshape_to_long(
+    x,
+    values_to = "Coefficient",
+    columns = colnames(x)[col_coefficient]
+  )[c("Parameter", "Component", "group", "Coefficient")]
+
+  out2 <- .reshape_to_long(
+    x,
+    values_to = "CI_low",
+    columns = colnames(x)[col_ci_low]
+  )["CI_low"]
+
+  out3 <- .reshape_to_long(
+    x,
+    values_to = "CI_high",
+    columns = colnames(x)[col_ci_high]
+  )["CI_high"]
+
+  out4 <- .reshape_to_long(
+    x,
+    values_to = "p",
+    columns = colnames(x)[col_p]
+  )["p"]
 
   dataplot <- cbind(out1, out2, out3, out4)
   dataplot$group <- gsub("(.*)\\.(.*)", "\\2", dataplot$group)
 
   rownames(dataplot) <- NULL
 
-  exp_coef <- unique(unlist(insight::compact_list(lapply(x, function(i) {
-    attributes(i)$exponentiate
-  }))))
-  attr(dataplot, "exponentiate") <- !is.null(exp_coef) && any(exp_coef != FALSE)
+  exp_coef <- unique(unlist(insight::compact_list(lapply(x, function(i) attributes(i)$exponentiate))))
+  attr(dataplot, "exponentiate") <- !is.null(exp_coef) && any(exp_coef)
 
   class(dataplot) <- c("data_plot", "see_compare_parameters", class(dataplot))
   dataplot

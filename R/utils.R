@@ -1,15 +1,15 @@
+.str_to_sym <- function(x) {
+  insight::check_if_installed("rlang")
+  if (!is.null(x) && is.character(x)) {
+    x <- rlang::sym(x)
+  }
+
+  return(x)
+}
+
 .as.data.frame_density <- function(x, ...) {
   data.frame(x = x$x, y = x$y)
 }
-
-
-
-.normalize <- function(x) {
-  as.vector((x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE), na.rm = TRUE))
-}
-
-
-
 
 # safe conversion from factor to numeric
 .factor_to_numeric <- function(x) {
@@ -56,9 +56,9 @@
   if (any(cor_sd)) {
     params[cor_sd] <- paste("SD/Cor: ", gsub("^(sd_|cor_)(.*?)__(.*)", "\\3", params[cor_sd], perl = TRUE))
     # replace "__" by "~"
-    cor_only <- grepl("^cor_", params[cor_sd])
+    cor_only <- !is.na(params[cor_sd]) & startsWith(params[cor_sd], "cor_")
     if (any(cor_only)) {
-      params[cor_sd][which(cor_sd)[cor_only]] <- sub("__", " ~ ", params[cor_sd][which(cor_sd)[cor_only]])
+      params[cor_sd][which(cor_sd)[cor_only]] <- sub("__", " ~ ", params[cor_sd][which(cor_sd)[cor_only]], fixed = TRUE)
     }
   }
   # correlation and sd: rstanarm
@@ -114,21 +114,28 @@
 
 
 .intercepts <- function() {
-  c("(intercept)_zi", "intercept (zero-inflated)", "intercept", "zi_intercept", "(intercept)", "b_intercept", "b_zi_intercept")
+  c(
+    "(intercept)_zi",
+    "intercept (zero-inflated)",
+    "intercept",
+    "zi_intercept",
+    "(intercept)",
+    "b_intercept",
+    "b_zi_intercept"
+  )
 }
 
 
 .has_intercept <- function(x) {
-  tolower(x) %in% .intercepts() | grepl("^intercept", tolower(x))
+  x <- tolower(x)
+  x %in% .intercepts() | !is.na(x) & startsWith(x, "intercept")
 }
 
 
-.in_intercepts <- function(x) {
-  tolower(x) %in% .intercepts() | grepl("^intercept", tolower(x))
-}
+.in_intercepts <- .has_intercept
 
 
-.remove_intercept <- function(x, column = "Parameter", show_intercept) {
+.remove_intercept <- function(x, column = "Parameter", show_intercept = FALSE) {
   if (!show_intercept) {
     remove <- which(.in_intercepts(x[[column]]))
     if (length(remove)) x <- x[-remove, ]
@@ -137,10 +144,8 @@
 }
 
 
-
-
 .percents <- function(x) {
-  insight::format_value(x = x, as_percent = TRUE, digits = 0)
+  insight::format_value(x = x, as_percent = TRUE, digits = 0L)
 }
 
 

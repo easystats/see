@@ -21,11 +21,11 @@ library(bayestestR)
 library(see)
 library(ggplot2)
 
-model <- stan_glm(
+model <- suppressWarnings(stan_glm(
   Sepal.Length ~ Petal.Width + Species + Sepal.Width,
   data = iris,
   chains = 2, iter = 200
-)
+))
 
 result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 data <- data_plot(result, data = model)

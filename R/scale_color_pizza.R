@@ -23,7 +23,11 @@
 #'   theme_modern() +
 #'   scale_color_pizza_c()
 #' @export
-scale_color_pizza <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+scale_color_pizza <- function(palette = "margherita",
+                              discrete = TRUE,
+                              reverse = FALSE,
+                              aesthetics = "color",
+                              ...) {
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -40,14 +44,34 @@ scale_color_pizza <- function(palette = "margherita", discrete = TRUE, reverse =
 
 #' @rdname scale_color_pizza
 #' @export
-scale_color_pizza_d <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_pizza_d <- function(palette = "margherita",
+                                discrete = TRUE,
+                                reverse = FALSE,
+                                aesthetics = "color",
+                                ...) {
+  scale_color_pizza(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_pizza
 #' @export
-scale_color_pizza_c <- function(palette = "margherita", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_pizza_c <- function(palette = "margherita",
+                                discrete = FALSE,
+                                reverse = FALSE,
+                                aesthetics = "color",
+                                ...) {
+  scale_color_pizza(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_pizza
@@ -64,15 +88,15 @@ scale_colour_pizza_d <- scale_color_pizza_d
 
 
 
-
-
 # Fill --------------------------------------------------------------------
-
-
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+scale_fill_pizza <- function(palette = "margherita",
+                             discrete = TRUE,
+                             reverse = FALSE,
+                             aesthetics = "fill",
+                             ...) {
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -85,14 +109,34 @@ scale_fill_pizza <- function(palette = "margherita", discrete = TRUE, reverse = 
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza_d <- function(palette = "margherita", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_pizza_d <- function(palette = "margherita",
+                               discrete = TRUE,
+                               reverse = FALSE,
+                               aesthetics = "fill",
+                               ...) {
+  scale_fill_pizza(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza_c <- function(palette = "margherita", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_pizza(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_pizza_c <- function(palette = "margherita",
+                               discrete = FALSE,
+                               reverse = FALSE,
+                               aesthetics = "fill",
+                               ...) {
+  scale_fill_pizza(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 
@@ -140,9 +184,6 @@ pizza_palettes <- list(
   `diavola` = pizza_colors("tomato", "mozzarella", "basil", "diavola"),
   `diavola_crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "diavola", "coal")
 )
-
-
-
 
 
 

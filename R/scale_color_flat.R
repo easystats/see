@@ -30,7 +30,11 @@
 #'   theme_modern() +
 #'   scale_color_flat_c(palette = "rainbow")
 #' @export
-scale_color_flat <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+scale_color_flat <- function(palette = "contrast",
+                             discrete = TRUE,
+                             reverse = FALSE,
+                             aesthetics = "color",
+                             ...) {
   pal <- palette_flat(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -47,14 +51,34 @@ scale_color_flat <- function(palette = "contrast", discrete = TRUE, reverse = FA
 
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_flat_d <- function(palette = "contrast",
+                               discrete = TRUE,
+                               reverse = FALSE,
+                               aesthetics = "color",
+                               ...) {
+  scale_color_flat(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
-  scale_color_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_color_flat_c <- function(palette = "contrast",
+                               discrete = FALSE,
+                               reverse = FALSE,
+                               aesthetics = "color",
+                               ...) {
+  scale_color_flat(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_flat
@@ -79,7 +103,11 @@ scale_colour_flat_d <- scale_color_flat_d
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+scale_fill_flat <- function(palette = "contrast",
+                            discrete = TRUE,
+                            reverse = FALSE,
+                            aesthetics = "fill",
+                            ...) {
   pal <- palette_flat(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -92,14 +120,34 @@ scale_fill_flat <- function(palette = "contrast", discrete = TRUE, reverse = FAL
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_d <- function(palette = "contrast", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_flat_d <- function(palette = "contrast",
+                              discrete = TRUE,
+                              reverse = FALSE,
+                              aesthetics = "fill",
+                              ...) {
+  scale_fill_flat(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_c <- function(palette = "contrast", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
-  scale_fill_flat(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
+scale_fill_flat_c <- function(palette = "contrast",
+                              discrete = FALSE,
+                              reverse = FALSE,
+                              aesthetics = "fill",
+                              ...) {
+  scale_fill_flat(
+    palette = palette,
+    discrete = discrete,
+    reverse = reverse,
+    aesthetics = aesthetics,
+    ...
+  )
 }
 
 
@@ -162,10 +210,31 @@ flat_colors <- function(...) {
 flat_palettes <- list(
   `full` = flat_colors(),
   `ice` = flat_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = flat_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange", "red"),
+  `rainbow` = flat_colors(
+    "purple",
+    "deep purple",
+    "blue",
+    "light blue",
+    "green",
+    "light green",
+    "amber",
+    "orange",
+    "deep orange",
+    "red"
+  ),
   `contrast` = flat_colors("blue", "green", "amber", "purple", "red"),
   `light` = flat_colors("light blue", "purple", "yellow", "light green", "orange"),
-  `complement` = flat_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
+  `complement` = flat_colors(
+    "blue grey",
+    "blue",
+    "light blue",
+    "teal",
+    "green",
+    "yellow",
+    "amber",
+    "orange",
+    "red"
+  )
 )
 
 

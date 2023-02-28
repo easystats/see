@@ -45,11 +45,11 @@ The \code{plot()} method for the \code{bayestestR::hdi()} and related
 function.
 }
 \examples{
-\dontshow{if (require("rstanarm") && FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(rstanarm)
 library(bayestestR)
 set.seed(123)
-m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+m <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
 result <- hdi(m)
 result
 plot(result)

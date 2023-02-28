@@ -53,7 +53,12 @@ theme_radar_dark(
 
 \item{plot.title.space}{Title spacing.}
 
-\item{plot.title.position}{Alignment of the plot title/subtitle and caption. The setting for plot.title.position applies to both the title and the subtitle. A value of "panel" (the default) means that titles and/or caption are aligned to the plot panels. A value of "plot" means that titles and/or caption are aligned to the entire plot (minus any space for margins and plot tag).}
+\item{plot.title.position}{Alignment of the plot title/subtitle and caption.
+The setting for plot.title.position applies to both the title and the
+subtitle. A value of "panel" (the default) means that titles and/or caption
+are aligned to the plot panels. A value of "plot" means that titles and/or
+caption are aligned to the entire plot (minus any space for margins and
+plot tag).}
 
 \item{legend.position}{the position of legends ("none", "left", "right",
 "bottom", "top", or two-element numeric vector)}
@@ -81,23 +86,23 @@ theme_radar_dark(
 \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
 }
 \examples{
-if (require("ggplot2") && require("poorman")) {
-  data <- iris[-5] \%>\%
-    aggregate(list(Species = iris$Species), mean) \%>\%
-    datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+\dontshow{if (require("ggplot2") && require("poorman")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+data <- iris[-5] \%>\%
+  aggregate(list(Species = iris$Species), mean) \%>\%
+  datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
 
-  data \%>\%
-    ggplot(aes(
-      x = name,
-      y = value,
-      color = Species,
-      group = Species,
-      fill = Species
-    )) +
-    geom_polygon(linewidth = 1, alpha = 0.1) +
-    coord_radar() +
-    theme_radar()
-}
+data \%>\%
+  ggplot(aes(
+    x = name,
+    y = value,
+    color = Species,
+    group = Species,
+    fill = Species
+  )) +
+  geom_polygon(linewidth = 1, alpha = 0.1) +
+  coord_radar() +
+  theme_radar()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=coord_radar]{coord_radar()}}

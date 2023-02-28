@@ -42,7 +42,8 @@
             group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
-          alpha = priors_alpha
+          alpha = priors_alpha,
+          na.rm = TRUE
         )
       } else {
         ggridges::geom_ridgeline(
@@ -55,7 +56,8 @@
           ),
           fill = fill_color,
           alpha = priors_alpha,
-          color = NA
+          color = NA,
+          na.rm = TRUE
         )
       }
     } else {
@@ -69,7 +71,8 @@
             group = as.factor(.data$Parameter),
             fill = "Priors"
           ),
-          alpha = priors_alpha
+          alpha = priors_alpha,
+          na.rm = TRUE
         )
       } else {
         ggridges::geom_ridgeline(
@@ -82,7 +85,8 @@
             fill = "Priors"
           ),
           alpha = priors_alpha,
-          color = NA
+          color = NA,
+          na.rm = TRUE
         )
       }
     }

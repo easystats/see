@@ -111,25 +111,6 @@
 #'   geom_from_list(list(aes = list(x = "Sepal.Length"), geom = "ggside::geom_xsidedensity")) +
 #'   geom_from_list(list(geom = "ggside::scale_xsidey_continuous", breaks = NULL))
 #'
-#' # Example 6 (ggraph) --------------------------
-#'
-#' @examplesIf require("tidygraph") && require("ggraph")
-#' library(tidygraph)
-#' library(ggraph)
-#'
-#' # Prepare graph
-#' nodes <- data.frame(name = c("Death", "Famine", "War", "Conquest"))
-#' edges <- data.frame(
-#'   from = c(1, 1, 1, 2, 3, 3, 4, 4, 4),
-#'   to = c(2, 3, 4, 1, 1, 2, 1, 2, 3)
-#' )
-#' data <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
-#'
-#' ggraph(data, layout = "kk") +
-#'   geom_from_list(list(geom = "ggraph::geom_edge_arc")) +
-#'   geom_from_list(list(geom = "ggraph::geom_node_point", size = 10)) +
-#'   geom_from_list(list(geom = "ggraph::geom_node_label", aes = list(label = "name")))
-#'
 #' @export
 geom_from_list <- function(x, ...) {
   # Additional parameters ------------------------------------------------------
@@ -165,28 +146,25 @@ geom_from_list <- function(x, ...) {
     return(do.call(ggplot2::facet_grid, args))
   }
   if (x$geom == "smooth") {
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
     if (!"method" %in% names(args)) args$method <- "loess"
     if (!"formula" %in% names(args)) args$formula <- "y ~ x"
     return(do.call(ggplot2::geom_smooth, args))
   }
-  if (startsWith(x$geom, "scale_")) {
+
+  if (startsWith(x$geom, "scale_") || startsWith(x$geom, "theme") || startsWith(x$geom, "see_")) {
     return(do.call(x$geom, args))
   }
-  if (startsWith(x$geom, "theme")) {
-    return(do.call(x$geom, args))
-  }
-  if (startsWith(x$geom, "see_")) {
-    return(do.call(x$geom, args))
-  }
+
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
     return(do.call(eval(parse(text = x$geom)), args))
   }
+
   if (startsWith(x$geom, "ggraph::")) {
     insight::check_if_installed("ggraph")
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes_string, x$aes)
+    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
     return(do.call(eval(parse(text = x$geom)), args))
   }
 
@@ -214,11 +192,11 @@ geom_from_list <- function(x, ...) {
   } else if (x$geom == "density_2d_polygon") {
     stat <- ggplot2::StatDensity2d
     x$geom <- "polygon"
-    if (!"fill" %in% names(x$aes)) x$aes$fill <- "..level.."
+    if (!"fill" %in% names(x$aes)) x$aes$fill <- quote(after_stat(level))
   } else if (x$geom == "density_2d_raster") {
     stat <- ggplot2::StatDensity2d
     x$geom <- "raster"
-    if (!"fill" %in% names(x$aes)) x$aes$fill <- "..density.."
+    if (!"fill" %in% names(x$aes)) x$aes$fill <- quote(after_stat(density))
   }
 
   # Position
@@ -234,7 +212,7 @@ geom_from_list <- function(x, ...) {
 
   # Aesthetics
   if ("aes" %in% names(x)) {
-    aes_list <- do.call(ggplot2::aes_string, x$aes)
+    aes_list <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
   } else {
     aes_list <- NULL
   }

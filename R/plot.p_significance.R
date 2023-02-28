@@ -42,7 +42,10 @@ data_plot.p_significance <- function(x,
           )
         )
       } else {
-        dataplot <- rbind(dataplot, .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold")))
+        dataplot <- rbind(
+          dataplot,
+          .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold"))
+        )
       }
     }
 
@@ -163,7 +166,7 @@ data_plot.p_significance <- function(x,
 #' library(rstanarm)
 #' library(bayestestR)
 #' set.seed(123)
-#' m <<- stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+#' m <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
 #' result <- p_significance(m)
 #' plot(result)
 #' @importFrom ggplot2 .data
@@ -179,13 +182,13 @@ plot.see_p_significance <- function(x,
   model <- .retrieve_data(x)
 
   # retrieve and prepare data for plotting
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 
   # check if we have multiple panels
-  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1L) &&
+    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1L)) {
     n_columns <- NULL
   }
 
@@ -227,7 +230,7 @@ plot.see_p_significance <- function(x,
     guides(fill = "none", color = "none", group = "none")
 
 
-  if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
+  if (length(unique(x$y)) == 1L && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
     p <- p + scale_y_discrete(labels = labels)

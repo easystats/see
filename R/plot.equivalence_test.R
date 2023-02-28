@@ -150,24 +150,28 @@ plot.see_equivalence_test <- function(x,
       ymin = 0,
       ymax = Inf,
       fill = rope_color,
-      alpha = (rope_alpha / 3)
+      alpha = (rope_alpha / 3),
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
       colour = rope_color,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     ggridges::geom_density_ridges2(
       rel_min_height = 0.01,
       scale = 2,
-      alpha = 0.5
+      alpha = 0.5,
+      na.rm = TRUE
     ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
@@ -218,7 +222,7 @@ plot.see_equivalence_test_df <- function(x,
   if (is.null(data)) data <- .retrieve_data(x)
 
   if (is.null(data)) {
-    warning("plot() only works for equivalence_test() when original data frame is available.", call. = FALSE)
+    insight::format_warning("plot() only works for equivalence_test() when original data frame is available.")
     return(x)
   }
 
@@ -300,18 +304,21 @@ plot.see_equivalence_test_df <- function(x,
       xintercept = .rope,
       linetype = "dashed",
       colour = rope_color,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     ggridges::geom_density_ridges2(
       rel_min_height = 0.01,
       scale = 2,
-      alpha = 0.5
+      alpha = 0.5,
+      na.rm = TRUE
     ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
@@ -341,7 +348,7 @@ plot.see_equivalence_test_lm <- function(x,
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
-    warning("plot() only works for equivalence_test() with model-objects.", call. = FALSE)
+    insight::format_warning("plot() only works for equivalence_test() with model-objects.")
     return(x)
   }
 
@@ -357,7 +364,7 @@ plot.see_equivalence_test_lm <- function(x,
   )
 
   if (is.null(model)) {
-    warning(sprintf("Can't find object '%s'.", model_name), call. = FALSE)
+    insight::format_warning(sprintf("Can't find object '%s'.", model_name))
     return(x)
   }
 
@@ -421,15 +428,20 @@ plot.see_equivalence_test_lm <- function(x,
       linetype = "dashed",
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
       colour = rope_color,
       linewidth = 0.8,
-      alpha = rope.line.alpha
+      alpha = rope.line.alpha,
+      na.rm = TRUE
     ) +
-    geom_pointrange(size = size_point) +
+    geom_pointrange(
+      size = size_point,
+      na.rm = TRUE
+    ) +
     scale_colour_manual(values = fill.color) +
     labs(y = x.title, x = NULL, colour = legend.title) +
     theme(legend.position = "bottom") +

@@ -66,13 +66,13 @@ these are shown in the 'Usage' section.
 library(bayestestR)
 library(rstanarm)
 
-model <<- stan_glm(
+model <<- suppressWarnings(stan_glm(
   Sepal.Length ~ Petal.Width * Species,
   data = iris,
   chains = 2, iter = 200, refresh = 0
-)
+))
 
-x <- rope(model)
+x <- rope(model, verbose = FALSE)
 plot(x)
 
 x <- hdi(model)
@@ -82,17 +82,17 @@ data <- rnorm(1000, 1)
 x <- p_direction(data)
 plot(x)
 
-x <- p_direction(model)
+x <- p_direction(model, verbose = FALSE)
 plot(x)
 
-model <<- stan_glm(
+model <<- suppressWarnings(stan_glm(
   mpg ~ wt + gear + cyl + disp,
   chains = 2,
   iter = 200,
   refresh = 0,
   data = mtcars
-)
-x <- equivalence_test(model)
+))
+x <- equivalence_test(model, verbose = FALSE)
 plot(x)
 \dontshow{\}) # examplesIf}
 }

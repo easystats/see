@@ -74,7 +74,7 @@ plot.see_parameters_distribution <- function(x,
     data <- data[x$Variable]
   }
 
-  if (!"data_plot" %in% class(x)) {
+  if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, ...)
   }
 
@@ -195,7 +195,7 @@ plot.see_parameters_distribution <- function(x,
 
   if (!is.null(x$highlight)) {
     if (is.null(highlight_color)) {
-      highlight_color <- palette_material("full")(insight::n_unique(x$highlight) - 1)
+      highlight_color <- palette_material("full")(insight::n_unique(x$highlight) - 1L)
     }
 
     names(highlight_color) <- highlight
