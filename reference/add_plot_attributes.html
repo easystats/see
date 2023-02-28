@@ -122,16 +122,16 @@ information to the plot.</p>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">+</span> <span class="va">Species</span> <span class="op">+</span> <span class="va">Sepal.Width</span>,</span></span>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">iris</span>,</span></span>
 <span class="r-in"><span>  chains <span class="op">=</span> <span class="fl">2</span>, iter <span class="op">=</span> <span class="fl">200</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 1.9e-05 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.19 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 2.4e-05 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.24 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
@@ -156,15 +156,15 @@ information to the plot.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 200 / 200 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.010873 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.012024 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.022897 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.007801 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.01018 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.017981 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Gradient evaluation took 1.2e-05 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.12 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Gradient evaluation took 1.3e-05 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.13 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
@@ -189,16 +189,10 @@ information to the plot.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 200 / 200 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 0.009459 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.010392 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.019851 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 0.010631 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.010442 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.021073 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#bulk-ess</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#tail-ess</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/hdi.html" class="external-link">hdi</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="data_plot.html">data_plot</a></span><span class="op">(</span><span class="va">result</span>, data <span class="op">=</span> <span class="va">model</span><span class="op">)</span></span></span>

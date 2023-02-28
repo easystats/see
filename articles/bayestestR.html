@@ -356,7 +356,7 @@ distribution of the median sign above the threshold.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html" class="external-link">p_significance</a></span><span class="op">(</span><span class="va">model2</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html" class="external-link">p_significance</a></span><span class="op">(</span><span class="va">model2</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; Practical Significance (threshold: 0.10)</span></span>
@@ -520,7 +520,7 @@ interval will be denoted by a shaded border.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">logspline</span><span class="op">)</span> <span class="co"># needed for `si()`</span></span>
 <span></span>
-<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/si.html" class="external-link">si</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/si.html" class="external-link">si</a></span><span class="op">(</span><span class="va">model</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; Support Interval</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -589,7 +589,7 @@ outside) the ROPE.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Greens"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html" class="external-link">rope</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html" class="external-link">rope</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; # Proportions of samples inside the ROPE [-0.10, 0.10]:</span></span>
@@ -688,7 +688,7 @@ region (the ROPE). If this percentage is sufficiently low, the null
 hypothesis is rejected. If this percentage is sufficiently high, the
 null hypothesis is accepted.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; # Test for Practical Equivalence</span></span>
