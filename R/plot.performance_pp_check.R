@@ -120,7 +120,7 @@ plot.see_performance_pp_check <- function(x,
         x = .data$values,
         group = .data$grp,
         color = .data$key,
-        size = .data$key,
+        linewidth = .data$key,
         alpha = .data$key
       ),
       geom = "line",
@@ -132,7 +132,7 @@ plot.see_performance_pp_check <- function(x,
       "Observed data" = colors[1],
       "Model-predicted data" = colors[2]
     )) +
-    ggplot2::scale_size_manual(
+    ggplot2::scale_linewidth_manual(
       values = c(
         "Observed data" = 1.7 * size_line,
         "Model-predicted data" = size_line
