@@ -162,7 +162,7 @@ plot.see_p_function <- function(x,
     # labelling
     ggplot2::labs(y = expression(paste(italic("p"), "-value")), x = "Range of Estimates", colour = NULL) +
     theme_lucid() +
-    ggplot2::scale_size_manual(values = size_line, guide = "none")
+    ggplot2::scale_linewidth_manual(values = size_line, guide = "none")
 
   # facets for grids, different color/fill when no grids
   if (!is.null(n_columns)) {
