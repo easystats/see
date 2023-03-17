@@ -7,7 +7,7 @@
 #'
 #' @seealso [coord_radar()]
 #'
-#' @examplesIf require("ggplot2") && require("poorman")
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("poorman", quietly = TRUE)
 #' data <- iris[-5] %>%
 #'   aggregate(list(Species = iris$Species), mean) %>%
 #'   datawizard::reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
