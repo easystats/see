@@ -197,7 +197,9 @@ scale_fill_colorhex_c <- function(palette = 1014416,
 #' @export
 palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
   if (!is.numeric(palette) && suppressWarnings(is.na(as.numeric(palette)))) {
-    stop("`palette` must be the numeric code for a color palette at <https://www.color-hex.com/>", call. = FALSE)
+    insight::format_error(
+      "`palette` must be the numeric code for a color palette at <https://www.color-hex.com/>"
+    )
   }
 
   if (palette == 1014416) {
@@ -218,13 +220,13 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
       insight::format_error("Could not reach <color-hex.com/>. Check your internet connection.")
     }
 
-    curl_res <- curl_res[grep("description", curl_res)]
+    curl_res <- grep("description", curl_res, fixed = TRUE, value = TRUE)
     if (!length(curl_res)) {
       insight::format_error(paste0("Requested palette '", palette, "' not found. Check the palette ID."))
     }
 
-    pal <- as.vector(regmatches(curl_res, gregexec("#[a-fA-F0-9]{6}", curl_res))[[1]])
-    pal_name <- regmatches(curl_res, gregexec("content=\"(.*) color palette", curl_res))[[1]][2]
+    pal <- unlist(regmatches(curl_res, gregexpr("#[a-fA-F0-9]{6}", curl_res))[[1]], use.names = FALSE)
+    pal_name <- gsub("(.*)content=\"(.*) color palette(.*)", "\\2", curl_res)
   }
 
   if (reverse) pal <- rev(pal)
