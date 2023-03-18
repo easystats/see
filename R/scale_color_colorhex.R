@@ -218,7 +218,7 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
       insight::format_error("Could not reach <color-hex.com/>. Check your internet connection.")
     }
 
-    curl_res <- grep("description", curl_res, value = TRUE)
+    curl_res <- grep("description", curl_res, fixed = TRUE, value = TRUE)
     if (!length(curl_res)) {
       insight::format_error(paste0("Requested palette '", palette, "' not found. Check the palette ID."))
     }
