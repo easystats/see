@@ -86,7 +86,7 @@ plot tag).}
 \code{theme_radar_dark()} is a dark variant of \code{theme_radar()}.
 }
 \examples{
-\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 data <- datawizard::reshape_longer(
   aggregate(iris[-5], list(Species = iris$Species), mean),
   c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")

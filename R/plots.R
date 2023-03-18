@@ -1,9 +1,8 @@
 #' Multiple plots side by side
 #'
 #' A wrapper around *patchwork* to plot multiple figures side by side on
-#' the same page. See
-#' [the
-#' *patchwork* documentation](https://patchwork.data-imaginist.com/articles/patchwork.html) for more advanced control of plot layouts.
+#' the same page. See [the *patchwork* documentation](https://patchwork.data-imaginist.com/articles/patchwork.html)
+#' for more advanced control of plot layouts.
 #'
 #' @param ... Multiple `ggplot`s or a list containing `ggplot` objects
 #' @param n_rows Number of rows to align plots.

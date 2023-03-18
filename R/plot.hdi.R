@@ -215,8 +215,8 @@ plot.see_hdi <- function(x,
   }
 
   # check if we have multiple panels
-  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1L) &&
+    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1L)) {
     n_columns <- NULL
   }
 
