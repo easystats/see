@@ -218,13 +218,13 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
       insight::format_error("Could not reach <color-hex.com/>. Check your internet connection.")
     }
 
-    curl_res <- curl_res[grep("description", curl_res)]
+    curl_res <- grep("description", curl_res, value = TRUE)
     if (!length(curl_res)) {
       insight::format_error(paste0("Requested palette '", palette, "' not found. Check the palette ID."))
     }
 
-    pal <- as.vector(regmatches(curl_res, gregexec("#[a-fA-F0-9]{6}", curl_res))[[1]])
-    pal_name <- regmatches(curl_res, gregexec("content=\"(.*) color palette", curl_res))[[1]][2]
+    pal <- unlist(regmatches(curl_res, gregexpr("#[a-fA-F0-9]{6}", curl_res))[[1]], use.names = FALSE)
+    pal_name <- gsub("(.*)content=\"(.*) color palette(.*)", "\\2", curl_res)
   }
 
   if (reverse) pal <- rev(pal)
