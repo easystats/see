@@ -197,7 +197,9 @@ scale_fill_colorhex_c <- function(palette = 1014416,
 #' @export
 palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
   if (!is.numeric(palette) && suppressWarnings(is.na(as.numeric(palette)))) {
-    stop("`palette` must be the numeric code for a color palette at <https://www.color-hex.com/>", call. = FALSE)
+    insight::format_error(
+      "`palette` must be the numeric code for a color palette at <https://www.color-hex.com/>"
+    )
   }
 
   if (palette == 1014416) {
