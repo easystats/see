@@ -203,7 +203,7 @@ palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:
       datawizard::text_concatenate(names(okabeito_palettes), last = " or ", enclose = "`"),
       "."
     ), "Using default palette now.")
-    warning(insight::format_message(msg), call. = FALSE)
+    insight::format_warning(msg)
     palette <- "full"
   }
 
@@ -219,11 +219,11 @@ palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:
 
   function(n) {
     if (n > length(pal)) {
-      warning(insight::format_message(
+      insight::format_warning(
         "The number of colors requested `n` is too large.",
         paste0("The maximum number of colors is ", length(pal), "."),
         paste0("Returning a palette with ", length(pal), " colors.")
-      ))
+      )
       n <- length(pal)
     }
     unname(pal[seq_len(n)])

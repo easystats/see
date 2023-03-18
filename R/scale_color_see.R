@@ -230,7 +230,7 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
       datawizard::text_concatenate(names(palette_list), last = " or ", enclose = "`"),
       "."
     ), "Using default palette now.")
-    warning(insight::format_message(msg), call. = FALSE)
+    insight::format_warning(msg)
     palette <- 1
   }
   pal <- palette_list[[palette]]
