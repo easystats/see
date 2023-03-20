@@ -150,6 +150,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
   # normalize
   out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
+
   out
 }
 

@@ -159,7 +159,8 @@ bluebrown_colors_list <- c(
 
 #' Extract blue-brown colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the blue-brown color palette. Use `bluebrown_colors()` to see all available colors.
+#' Can be used to get the hex code of specific colors from the blue-brown color palette.
+#' Use `bluebrown_colors()` to see all available colors.
 #'
 #' @inheritParams flat_colors
 #'
