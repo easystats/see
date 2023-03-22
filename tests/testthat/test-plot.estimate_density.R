@@ -6,6 +6,6 @@ test_that("`plot.see_estimate_density()` works", {
 
   set.seed(123)
   m_rstan <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
-  result <- bayestestR::estimate_density(m)
+  result <- bayestestR::estimate_density(m_rstan)
   expect_s3_class(plot(result), "gg")
 })

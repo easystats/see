@@ -4,7 +4,7 @@ test_that("`plot.see_p_significance()` works", {
 
   set.seed(123)
   m_rstan <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
-  result <- bayestestR::p_significance(m)
+  result <- bayestestR::p_significance(m_rstan)
 
   expect_s3_class(plot(result), "gg")
 })
