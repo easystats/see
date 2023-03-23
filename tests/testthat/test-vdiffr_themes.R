@@ -1,8 +1,6 @@
 test_that("theme functions work", {
   skip_if_not_or_load_if_installed("vdiffr")
   skip_if_not_or_load_if_installed("poorman")
-  skip_if_not(getRversion() >= "4.1")
-
 
 
   data <- iris %>%

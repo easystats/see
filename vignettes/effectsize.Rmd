@@ -44,7 +44,6 @@ For more, see: <https://easystats.github.io/effectsize/>
 # Setup
 
 ```{r setup}
-library(poorman)
 library(effectsize)
 library(see)
 data(mtcars)

@@ -37,7 +37,7 @@ plot.see_performance_roc <- function(x, ...) {
       x,
       aes(
         x = .data$Specificity,
-        y = .data$Sensitivity,
+        y = .data$Sensitivity
       )
     )
   }

@@ -1,9 +1,8 @@
 #' Multiple plots side by side
 #'
 #' A wrapper around *patchwork* to plot multiple figures side by side on
-#' the same page. See
-#' [the
-#' *patchwork* documentation](https://patchwork.data-imaginist.com/articles/patchwork.html) for more advanced control of plot layouts.
+#' the same page. See [the *patchwork* documentation](https://patchwork.data-imaginist.com/articles/patchwork.html)
+#' for more advanced control of plot layouts.
 #'
 #' @param ... Multiple `ggplot`s or a list containing `ggplot` objects
 #' @param n_rows Number of rows to align plots.
@@ -99,20 +98,14 @@ plots <- function(...,
   pw_drawn <- tryCatch(print(pw), error = function(e) e)
   if (inherits(pw_drawn, "simpleError")) {
     if (Sys.getenv("RSTUDIO") == "1") {
-      stop(
-        insight::format_message(
-          "The RStudio 'Plots' window is too small to show this set of plots.",
-          "Please make the window larger."
-        ),
-        call. = FALSE
+      insight::format_error(
+        "The RStudio 'Plots' window is too small to show this set of plots.",
+        "Please make the window larger."
       )
     } else {
-      stop(
-        insight::format_message(
-          "The viewport is too small to show this set of plots.",
-          "Please make it larger."
-        ),
-        call. = FALSE
+      insight::format_error(
+        "The viewport is too small to show this set of plots.",
+        "Please make it larger."
       )
     }
   }

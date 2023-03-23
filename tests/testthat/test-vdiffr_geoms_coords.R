@@ -1,9 +1,6 @@
 test_that("geom and coord functions work correctly", {
-  skip_if_not(getRversion() >= "4.1")
   skip_if_not_or_load_if_installed("vdiffr")
   skip_if_not_or_load_if_installed("poorman")
-
-
 
   # coord_radar() ------------------
 

@@ -150,6 +150,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
   # normalize
   out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
+
   out
 }
 
@@ -215,8 +216,8 @@ plot.see_hdi <- function(x,
   }
 
   # check if we have multiple panels
-  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1L) &&
+    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1L)) {
     n_columns <- NULL
   }
 

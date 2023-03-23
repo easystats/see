@@ -158,10 +158,31 @@ social_colors <- function(...) {
 social_palettes <- list(
   `full` = social_colors(),
   `ice` = social_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = social_colors("purple", "deep purple", "blue", "light blue", "green", "light green", "amber", "orange", "deep orange", "red"),
+  `rainbow` = social_colors(
+    "purple",
+    "deep purple",
+    "blue",
+    "light blue",
+    "green",
+    "light green",
+    "amber",
+    "orange",
+    "deep orange",
+    "red"
+  ),
   `contrast` = social_colors("blue", "green", "amber", "purple", "red"),
   `light` = material_colors("light blue", "purple", "yellow", "light green", "deep orange"),
-  `complement` = social_colors("blue grey", "blue", "light blue", "teal", "green", "yellow", "amber", "orange", "red")
+  `complement` = social_colors(
+    "blue grey",
+    "blue",
+    "light blue",
+    "teal",
+    "green",
+    "yellow",
+    "amber",
+    "orange",
+    "red"
+  )
 )
 
 
