@@ -1,5 +1,5 @@
 # commonly utilized models
-if (require("rstanarm", quietly = TRUE)) {
+if (  suppressPackageStartupMessages(require("rstanarm", warn.conflicts = FALSE, character.only = TRUE))) {
   m_rstan <<- suppressWarnings(
     rstanarm::stan_glm(
       Sepal.Length ~ Petal.Width * Species,
