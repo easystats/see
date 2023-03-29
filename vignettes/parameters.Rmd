@@ -26,7 +26,7 @@ pkgs <- c(
   "lavaan", "NbClust", "mclust", "metafor", "lme4", "splines"
 )
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
-can_evaluate <- all(successfully_loaded)
+can_evaluate <- all(successfully_loaded) && curl::has_internet()
 
 if (can_evaluate) {
   knitr::opts_chunk$set(eval = TRUE)
@@ -238,7 +238,7 @@ estimations](https://easystats.github.io/see/articles/bayestestR.html)).
 #   data = zinb,
 #   family = zero_inflated_poisson()
 # )
-brms_model <- insight::download_model("brms_zi_2")
+brms_model <- insight::download_model("brms_zi_2") 
 result <- model_parameters(brms_model, effects = "all", component = "all")
 
 plot(result)

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 # `{httr}` is needed for `insight::download_model()`
 pkgs <- c("bayestestR", "brms", "ggplot2", "httr", "insight", "logspline", "rstanarm")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
-can_evaluate <- all(successfully_loaded)
+can_evaluate <- all(successfully_loaded) && curl::has_internet()
 
 if (can_evaluate) {
   knitr::opts_chunk$set(eval = TRUE)
