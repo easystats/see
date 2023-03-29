@@ -27,7 +27,7 @@ pkgs <- c(
   "lavaan", "NbClust", "mclust", "metafor", "lme4", "splines"
 )
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
-all_deps_available <- all(successfully_loaded) 
+all_deps_available <- all(successfully_loaded)
 
 # even if all dependencies are available, evaluate only if internet access is available
 if (all_deps_available) {
@@ -244,7 +244,7 @@ estimations](https://easystats.github.io/see/articles/bayestestR.html)).
 #   data = zinb,
 #   family = zero_inflated_poisson()
 # )
-brms_model <- insight::download_model("brms_zi_2") 
+brms_model <- insight::download_model("brms_zi_2")
 result <- model_parameters(brms_model, effects = "all", component = "all")
 
 plot(result)

@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 can_evaluate <- FALSE
 pkgs <- c("bayestestR", "brms", "curl", "ggplot2", "httr", "insight", "logspline", "rstanarm")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
-all_deps_available <- all(successfully_loaded) 
+all_deps_available <- all(successfully_loaded)
 
 # even if all dependencies are available, evaluate only if internet access is available
 if (all_deps_available) {
