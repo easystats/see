@@ -21,12 +21,18 @@ knitr::opts_chunk$set(
 # `{factoextra}`, `{mclust}`, and `{NbClust}`
 #
 # `{httr}` is needed for `insight::download_model()`
+can_evaluate <- FALSE
 pkgs <- c(
-  "brms", "factoextra", "ggplot2", "glmmTMB", "httr",
+  "brms", "curl", "factoextra", "ggplot2", "glmmTMB", "httr",
   "lavaan", "NbClust", "mclust", "metafor", "lme4", "splines"
 )
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
-can_evaluate <- all(successfully_loaded) && curl::has_internet()
+all_deps_available <- all(successfully_loaded) 
+
+# even if all dependencies are available, evaluate only if internet access is available
+if (all_deps_available) {
+  can_evaluate <- curl::has_internet()
+}
 
 if (can_evaluate) {
   knitr::opts_chunk$set(eval = TRUE)
