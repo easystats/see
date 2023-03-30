@@ -1,6 +1,6 @@
 test_that("geom and coord functions work correctly", {
-  skip_if_not_or_load_if_installed("vdiffr")
-  skip_if_not_or_load_if_installed("poorman")
+  skip_if_not_installed("poorman")
+  suppressPackageStartupMessages(library(poorman))
 
   # coord_radar() ------------------
 
@@ -12,12 +12,15 @@ test_that("geom and coord functions work correctly", {
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "coord_radar() works",
-    fig = data %>% ggplot(aes(
-      x = name,
-      y = value,
-      color = Species,
-      group = Species
-    )) +
+    fig = ggplot(
+      data,
+      aes(
+        x = name,
+        y = value,
+        color = Species,
+        group = Species
+      )
+    ) +
       geom_polygon(fill = NA, linewidth = 2) +
       coord_radar(start = -pi / 4)
   )

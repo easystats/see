@@ -1,6 +1,6 @@
 test_that("`plot.see_p_significance()` works", {
-  skip_if_not_or_load_if_installed("rstanarm")
-  skip_if_not_or_load_if_installed("ggridges")
+  skip_if_not_installed("rstanarm")
+  skip_if_not_installed("ggridges")
 
   set.seed(123)
   result <- bayestestR::p_significance(m_rstan)

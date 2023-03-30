@@ -1,18 +1,18 @@
 test_that("`plot.see_check_normality()` works", {
-  skip_if_not_or_load_if_installed("vdiffr")
-  skip_if_not_or_load_if_installed("lme4")
-  skip_if_not_or_load_if_installed("qqplotr")
+  skip_if_not_installed("lme4")
+  skip_if_not_installed("qqplotr")
 
   set.seed(123)
   m_lm <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-  result1 <- check_normality(m_lm)
-  result2 <- check_normality(m_lm)
-  result3 <- check_normality(m_lm)
+  result1 <- performance::check_normality(m_lm)
+  result2 <- performance::check_normality(m_lm)
+  result3 <- performance::check_normality(m_lm)
 
   set.seed(123)
-  m_lmer <<- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
-  result4 <- check_normality(m_lmer, "random")
-  result5 <- check_normality(m_lmer, "fixed")
+  data(sleepstudy, package = "lme4")
+  m_lmer <<- lme4::lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+  result4 <- performance::check_normality(m_lmer, "random")
+  result5 <- performance::check_normality(m_lmer, "fixed")
 
   set.seed(123)
   vdiffr::expect_doppelganger(

@@ -1,15 +1,11 @@
 test_that("bayestestR package plots rendered correctly", {
-  skip_if_not_or_load_if_installed("bayestestR")
-  skip_if_not_or_load_if_installed("vdiffr")
-
-
   # plot.see_bayesfactor_models() --------------------
 
-  lm0 <- lm(qsec ~ 1, data = mtcars)
-  lm1 <- lm(qsec ~ drat, data = mtcars)
-  lm2 <- lm(qsec ~ wt, data = mtcars)
-  lm3 <- lm(qsec ~ drat + wt, data = mtcars)
-  result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
+  lm0 <- stats::lm(qsec ~ 1, data = mtcars)
+  lm1 <- stats::lm(qsec ~ drat, data = mtcars)
+  lm2 <- stats::lm(qsec ~ wt, data = mtcars)
+  lm3 <- stats::lm(qsec ~ drat + wt, data = mtcars)
+  result <- bayestestR::bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 
   set.seed(123)
   vdiffr::expect_doppelganger(
