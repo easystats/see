@@ -1,9 +1,7 @@
 test_that("`plot.see_n_factors()` works", {
-  skip_if_not_or_load_if_installed("parameters")
-  skip_if_not_or_load_if_installed("nFactors")
-  skip_if_not_or_load_if_installed("vdiffr")
-  data(mtcars)
-  result <- n_factors(mtcars, type = "PCA")
+  skip_if_not_installed("nFactors")
+
+  result <- parameters::n_factors(datasets::mtcars, type = "PCA")
 
   set.seed(123)
   vdiffr::expect_doppelganger(

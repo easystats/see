@@ -1,6 +1,6 @@
 test_that("`check_model()` works if convergence issues", {
   skip_on_cran()
-  skip_if_not_or_load_if_installed("performance")
+  skip_if_not_installed("performance")
 
   d <- data.frame(
     y = c(

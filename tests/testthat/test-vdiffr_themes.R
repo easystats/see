@@ -1,7 +1,6 @@
 test_that("theme functions work", {
-  skip_if_not_or_load_if_installed("vdiffr")
-  skip_if_not_or_load_if_installed("poorman")
-
+  skip_if_not_installed("poorman")
+  suppressPackageStartupMessages(library(poorman))
 
   data <- iris %>%
     group_by(Species) %>%
@@ -11,13 +10,15 @@ test_that("theme functions work", {
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "theme_radar works",
-    fig = data %>% ggplot(aes(
-      x = name,
-      y = value,
-      color = Species,
-      group = Species,
-      fill = Species
-    )) +
+    fig = ggplot(
+      data, aes(
+        x = name,
+        y = value,
+        color = Species,
+        group = Species,
+        fill = Species
+      )
+    ) +
       geom_polygon(
         linewidth = 1,
         alpha = 0.1
