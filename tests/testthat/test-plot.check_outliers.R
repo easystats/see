@@ -9,5 +9,5 @@ test_that("`plot.see_check_outliers()` works", {
     )
   )
   model <<- stats::lm(disp ~ mpg + hp, data = mt2)
-  expect_s3_class(plot(performance::check_outliers(model)), "gg")
+  expect_s3_class(plot(performance::check_outliers(model, verbose = FALSE)), "gg")
 })
