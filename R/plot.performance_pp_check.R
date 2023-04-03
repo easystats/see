@@ -136,7 +136,8 @@ plot.see_performance_pp_check <- function(x,
       values = c(
         "Observed data" = 1.7 * size_line,
         "Model-predicted data" = size_line
-      )
+      ),
+      guide = "none"
     ) +
     ggplot2::scale_alpha_manual(
       values = c(
