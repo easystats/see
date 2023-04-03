@@ -1,5 +1,10 @@
 # see (development version)
 
+## Bug fixes
+
+* Fixed issue with duplicated legend in the `plot()` method for
+  `performance::check_predictions()`.
+
 # see 0.7.5
 
 ## Changes
