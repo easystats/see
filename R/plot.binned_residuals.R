@@ -46,14 +46,14 @@ plot.see_binned_residuals <- function(x,
 
   if (isTRUE(insight::check_if_installed("mgcv", quietly = TRUE))) {
     p <- p +
-      suppressWarnings(ggplot2::stat_smooth(
+      ggplot2::stat_smooth(
         ggplot2::aes(y = .data$ybar),
         method = "gam",
         se = FALSE,
         formula = y ~ s(x, bs = "tp"),
         colour = colors[3],
         linewidth = size_line
-      ))
+      )
   }
 
   p <- p +
