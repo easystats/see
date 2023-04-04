@@ -54,6 +54,7 @@ plot.see_check_normality <- function(x,
     )
   } else {
     if (type == "qq") {
+      model_info <- attributes(x)$model_info
       if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
         dat <- stats::na.omit(data.frame(y = res_))
@@ -72,7 +73,8 @@ plot.see_check_normality <- function(x,
         size_line = size_line,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha
+        dot_alpha_level = dot_alpha,
+        model_info = model_info
       )
     } else if (type == "density") {
       r <- suppressMessages(stats::residuals(model))
