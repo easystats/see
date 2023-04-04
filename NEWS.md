@@ -1,5 +1,9 @@
 # see (development version)
 
+* `plot()` for `performance::check_model()` no longer produces a normal QQ plot
+  for GLMs. Instead, it now shows a half-normal QQ plot of the absolute value
+  of the standardized deviance residuals.
+
 ## Bug fixes
 
 * Fixed issue with duplicated legend in the `plot()` method for

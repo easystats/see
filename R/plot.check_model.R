@@ -148,7 +148,8 @@ plot.see_check_model <- function(x,
       theme_style = style,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
-      show_dots = TRUE # qq-plots w/o dots makes no sense
+      show_dots = TRUE, # qq-plots w/o dots makes no sense
+      model_info = model_info
     )
   }
 
@@ -364,8 +365,30 @@ plot.see_check_model <- function(x,
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8,
-                          show_dots = TRUE) {
-  if (requireNamespace("qqplotr", quietly = TRUE)) {
+                          show_dots = TRUE,
+                          model_info = NULL) {
+  qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
+  # qq-halfnorm for GLM
+  if (isTRUE(model_info$is_binomial)) {
+    gg_init <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
+    qq_stuff <- list(
+      ggplot2::geom_point(
+        shape = 16,
+        stroke = 0,
+        size = size_point,
+        colour = colors[2] # "#2c3e50"
+      ),
+      ggplot2::geom_qq_line(
+        ggplot2::aes(sample = .data$y),
+        linewidth = size_line,
+        colour = colors[1],
+        distribution = qhalfnorm,
+        na.rm = TRUE
+      )
+    )
+    y_lab <- "Absolute Deviance Residuals"
+  } else if (requireNamespace("qqplotr", quietly = TRUE)) {
+    gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
     qq_stuff <- list(
       qqplotr::stat_qq_band(
         alpha = alpha_level,
@@ -387,12 +410,15 @@ plot.see_check_model <- function(x,
     )
     y_lab <- "Sample Quantiles"
   } else {
-    message(
-      "For confidence bands",
-      if (isTRUE(detrend)) " and detrending",
-      ", please install `qqplotr`."
+    insight::format_alert(
+      paste0(
+        "For confidence bands",
+        if (isTRUE(detrend)) " and detrending",
+        ", please install `qqplotr`."
+      )
     )
 
+    gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
     qq_stuff <- list(
       ggplot2::geom_qq_line(
         linewidth = size_line,
@@ -414,7 +440,7 @@ plot.see_check_model <- function(x,
     qq_stuff[2] <- NULL
   }
 
-  ggplot2::ggplot(x, ggplot2::aes(sample = .data$y)) +
+  gg_init +
     qq_stuff +
     ggplot2::labs(
       title = "Normality of Residuals",
