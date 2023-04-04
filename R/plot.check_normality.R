@@ -39,6 +39,11 @@ plot.see_check_normality <- function(x,
     model <- data
   }
 
+  # for GLM, only halfnormal Q-Q plots
+  if (inherits(model, "glm")) {
+    type <- "qq"
+  }
+
   # check type
   if (!is.null(attributes(x)$effects) && attributes(x)$effects == "random") {
     .plot_diag_reqq(
