@@ -51,11 +51,16 @@ plot.see_check_normality <- function(x,
     if (type == "qq") {
       if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+        dat <- stats::na.omit(data.frame(y = res_))
+      } else if (inherits(model, "glm")) {
+        res_ <- abs(stats::rstandard(model, type = "deviance"))
+        fitted_ <- stats::qnorm((stats::ppoints(length(res_)) + 1) / 2)[order(order(res_))]
+        dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
       } else {
         res_ <- sort(stats::rstudent(model), na.last = NA)
+        dat <- stats::na.omit(data.frame(y = res_))
       }
 
-      dat <- stats::na.omit(data.frame(y = res_))
       .plot_diag_qq(
         dat,
         size_point = size_point,
