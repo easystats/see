@@ -386,7 +386,7 @@ plot.see_check_model <- function(x,
         na.rm = TRUE
       )
     )
-    y_lab <- "Absolute Deviance Residuals"
+    y_lab <- "|Std. Deviance Residuals|"
   } else if (requireNamespace("qqplotr", quietly = TRUE)) {
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
     qq_stuff <- list(
