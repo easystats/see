@@ -369,7 +369,7 @@ plot.see_check_model <- function(x,
                           model_info = NULL) {
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
   # qq-halfnorm for GLM
-  if (isTRUE(model_info$is_binomial)) {
+  if (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count)) {
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
     qq_stuff <- list(
       ggplot2::geom_point(

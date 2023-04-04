@@ -230,7 +230,7 @@ The composition of plots when checking model assumptions depends on the type of 
 ### Logistic regression model
 
 ```{r fig.height=12, fig.width=10}
-model <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
+model <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
 check_model(model)
 ```
 
