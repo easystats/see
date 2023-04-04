@@ -39,6 +39,11 @@ plot.see_check_normality <- function(x,
     model <- data
   }
 
+  # for GLM, only halfnormal Q-Q plots
+  if (inherits(model, "glm")) {
+    type <- "qq"
+  }
+
   # check type
   if (!is.null(attributes(x)$effects) && attributes(x)$effects == "random") {
     .plot_diag_reqq(
@@ -49,20 +54,27 @@ plot.see_check_normality <- function(x,
     )
   } else {
     if (type == "qq") {
+      model_info <- attributes(x)$model_info
       if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+        dat <- stats::na.omit(data.frame(y = res_))
+      } else if (inherits(model, "glm")) {
+        res_ <- abs(stats::rstandard(model, type = "deviance"))
+        fitted_ <- stats::qnorm((stats::ppoints(length(res_)) + 1) / 2)[order(order(res_))]
+        dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
       } else {
         res_ <- sort(stats::rstudent(model), na.last = NA)
+        dat <- stats::na.omit(data.frame(y = res_))
       }
 
-      dat <- stats::na.omit(data.frame(y = res_))
       .plot_diag_qq(
         dat,
         size_point = size_point,
         size_line = size_line,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha
+        dot_alpha_level = dot_alpha,
+        model_info = model_info
       )
     } else if (type == "density") {
       r <- suppressMessages(stats::residuals(model))
