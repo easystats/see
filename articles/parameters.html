@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -599,13 +599,13 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   ROPE: [-1.99 1.99]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Parameter        |         90% CI | % in ROPE |        H0 |      p</span></span>
-<span><span class="co">#&gt; ------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; (Intercept)      | [59.33, 68.41] |        0% |  Rejected | &gt; .999</span></span>
-<span><span class="co">#&gt; time             | [-0.76,  2.53] |    83.52% | Undecided | 0.137 </span></span>
-<span><span class="co">#&gt; age              | [-0.26,  0.32] |      100% |  Accepted | &lt; .001</span></span>
-<span><span class="co">#&gt; education [mid]  | [ 5.13, 12.39] |        0% |  Rejected | 0.999 </span></span>
-<span><span class="co">#&gt; education [high] | [10.14, 18.57] |        0% |  Rejected | &gt; .999</span></span>
+<span><span class="co">#&gt; Parameter        |         90% CI |   SGPV | Equivalence |      p</span></span>
+<span><span class="co">#&gt; -----------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; (Intercept)      | [59.33, 68.41] | &lt; .001 |    Rejected | &gt; .999</span></span>
+<span><span class="co">#&gt; time             | [-0.76,  2.53] | 0.835  |   Undecided | 0.137 </span></span>
+<span><span class="co">#&gt; age              | [-0.26,  0.32] | &gt; .999 |    Accepted | &lt; .001</span></span>
+<span><span class="co">#&gt; education [mid]  | [ 5.13, 12.39] | &lt; .001 |    Rejected | 0.999 </span></span>
+<span><span class="co">#&gt; education [high] | [10.14, 18.57] | &lt; .001 |    Rejected | &gt; .999</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-29-1.png" width="672"></p>
@@ -616,13 +616,13 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   ROPE: [-1.99 1.99]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Parameter        |         90% CI | % in ROPE |        H0 |      p</span></span>
-<span><span class="co">#&gt; ------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; (Intercept)      | [59.33, 68.41] |        0% |  Rejected | &gt; .999</span></span>
-<span><span class="co">#&gt; time             | [-0.76,  2.53] |    83.52% | Undecided | 0.137 </span></span>
-<span><span class="co">#&gt; age              | [-0.26,  0.32] |      100% |  Accepted | &lt; .001</span></span>
-<span><span class="co">#&gt; education [mid]  | [ 5.13, 12.39] |        0% |  Rejected | 0.999 </span></span>
-<span><span class="co">#&gt; education [high] | [10.14, 18.57] |        0% |  Rejected | &gt; .999</span></span>
+<span><span class="co">#&gt; Parameter        |         90% CI |   SGPV | Equivalence |      p</span></span>
+<span><span class="co">#&gt; -----------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; (Intercept)      | [59.33, 68.41] | &lt; .001 |    Rejected | &gt; .999</span></span>
+<span><span class="co">#&gt; time             | [-0.76,  2.53] | 0.835  |   Undecided | 0.137 </span></span>
+<span><span class="co">#&gt; age              | [-0.26,  0.32] | &gt; .999 |    Accepted | &lt; .001</span></span>
+<span><span class="co">#&gt; education [mid]  | [ 5.13, 12.39] | &lt; .001 |    Rejected | 0.999 </span></span>
+<span><span class="co">#&gt; education [high] | [10.14, 18.57] | &lt; .001 |    Rejected | &gt; .999</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-30-1.png" width="672"></p>
@@ -639,35 +639,35 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Group: grp</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Parameter | Estimate | Group |           90% CI | % in ROPE |       H0</span></span>
+<span><span class="co">#&gt; Parameter | Estimate | Group |           90% CI |   SGPV | Equivalence</span></span>
 <span><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; 1         |     1.18 |   grp | [ -1.91,   4.28] |      100% | Accepted</span></span>
-<span><span class="co">#&gt; 2         |    -0.21 |   grp | [ -3.27,   2.84] |      100% | Accepted</span></span>
-<span><span class="co">#&gt; 3         |    -0.25 |   grp | [ -3.33,   2.83] |      100% | Accepted</span></span>
-<span><span class="co">#&gt; 4         |    -0.48 |   grp | [ -3.56,   2.60] |      100% | Accepted</span></span>
-<span><span class="co">#&gt; 5         |    -0.24 |   grp | [ -3.33,   2.85] |      100% | Accepted</span></span>
+<span><span class="co">#&gt; 1         |     1.18 |   grp | [ -1.91,   4.28] | &gt; .999 |    Accepted</span></span>
+<span><span class="co">#&gt; 2         |    -0.21 |   grp | [ -3.27,   2.84] | &gt; .999 |    Accepted</span></span>
+<span><span class="co">#&gt; 3         |    -0.25 |   grp | [ -3.33,   2.83] | &gt; .999 |    Accepted</span></span>
+<span><span class="co">#&gt; 4         |    -0.48 |   grp | [ -3.56,   2.60] | &gt; .999 |    Accepted</span></span>
+<span><span class="co">#&gt; 5         |    -0.24 |   grp | [ -3.33,   2.85] | &gt; .999 |    Accepted</span></span>
 <span><span class="co">#&gt; Group: Subject</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Parameter | Estimate |   Group |           90% CI | % in ROPE |        H0</span></span>
-<span><span class="co">#&gt; -------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; 308       |    40.86 | Subject | [ 25.22,  56.50] |        0% |  Rejected</span></span>
-<span><span class="co">#&gt; 309       |   -77.88 | Subject | [-93.51, -62.24] |        0% |  Rejected</span></span>
-<span><span class="co">#&gt; 310       |   -63.28 | Subject | [-78.91, -47.65] |        0% |  Rejected</span></span>
-<span><span class="co">#&gt; 330       |     4.32 | Subject | [-11.32,  19.96] |    36.01% | Undecided</span></span>
-<span><span class="co">#&gt; 331       |    10.18 | Subject | [ -5.45,  25.80] |    35.46% | Undecided</span></span>
-<span><span class="co">#&gt; 332       |     8.47 | Subject | [ -7.17,  24.10] |    36.02% | Undecided</span></span>
-<span><span class="co">#&gt; 333       |    16.44 | Subject | [  0.81,  32.07] |    15.44% |  Rejected</span></span>
-<span><span class="co">#&gt; 334       |    -3.00 | Subject | [-18.65,  12.65] |    36.00% | Undecided</span></span>
-<span><span class="co">#&gt; 335       |   -45.48 | Subject | [-61.11, -29.85] |        0% |  Rejected</span></span>
-<span><span class="co">#&gt; 337       |    72.16 | Subject | [ 56.54,  87.79] |        0% |  Rejected</span></span>
-<span><span class="co">#&gt; 349       |   -20.91 | Subject | [-36.57,  -5.25] |     1.22% |  Rejected</span></span>
-<span><span class="co">#&gt; 350       |    14.23 | Subject | [ -1.41,  29.88] |    22.52% | Undecided</span></span>
-<span><span class="co">#&gt; 351       |    -8.07 | Subject | [-23.74,   7.59] |    35.97% | Undecided</span></span>
-<span><span class="co">#&gt; 352       |    36.44 | Subject | [ 20.76,  52.12] |        0% |  Rejected</span></span>
-<span><span class="co">#&gt; 369       |     6.97 | Subject | [ -8.66,  22.60] |    36.05% | Undecided</span></span>
-<span><span class="co">#&gt; 370       |    -6.31 | Subject | [-21.96,   9.34] |    35.99% | Undecided</span></span>
-<span><span class="co">#&gt; 371       |    -3.34 | Subject | [-18.96,  12.29] |    36.05% | Undecided</span></span>
-<span><span class="co">#&gt; 372       |    18.21 | Subject | [  2.57,  33.84] |     9.80% |  Rejected</span></span>
+<span><span class="co">#&gt; Parameter | Estimate |   Group |           90% CI |   SGPV | Equivalence</span></span>
+<span><span class="co">#&gt; ------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; 308       |    40.86 | Subject | [ 25.22,  56.50] | &lt; .001 |    Rejected</span></span>
+<span><span class="co">#&gt; 309       |   -77.88 | Subject | [-93.51, -62.24] | &lt; .001 |    Rejected</span></span>
+<span><span class="co">#&gt; 310       |   -63.28 | Subject | [-78.91, -47.65] | &lt; .001 |    Rejected</span></span>
+<span><span class="co">#&gt; 330       |     4.32 | Subject | [-11.32,  19.96] | 0.360  |   Undecided</span></span>
+<span><span class="co">#&gt; 331       |    10.18 | Subject | [ -5.45,  25.80] | 0.355  |   Undecided</span></span>
+<span><span class="co">#&gt; 332       |     8.47 | Subject | [ -7.17,  24.10] | 0.360  |   Undecided</span></span>
+<span><span class="co">#&gt; 333       |    16.44 | Subject | [  0.81,  32.07] | 0.154  |    Rejected</span></span>
+<span><span class="co">#&gt; 334       |    -3.00 | Subject | [-18.65,  12.65] | 0.360  |   Undecided</span></span>
+<span><span class="co">#&gt; 335       |   -45.48 | Subject | [-61.11, -29.85] | &lt; .001 |    Rejected</span></span>
+<span><span class="co">#&gt; 337       |    72.16 | Subject | [ 56.54,  87.79] | &lt; .001 |    Rejected</span></span>
+<span><span class="co">#&gt; 349       |   -20.91 | Subject | [-36.57,  -5.25] | 0.012  |    Rejected</span></span>
+<span><span class="co">#&gt; 350       |    14.23 | Subject | [ -1.41,  29.88] | 0.225  |   Undecided</span></span>
+<span><span class="co">#&gt; 351       |    -8.07 | Subject | [-23.74,   7.59] | 0.360  |   Undecided</span></span>
+<span><span class="co">#&gt; 352       |    36.44 | Subject | [ 20.76,  52.12] | &lt; .001 |    Rejected</span></span>
+<span><span class="co">#&gt; 369       |     6.97 | Subject | [ -8.66,  22.60] | 0.360  |   Undecided</span></span>
+<span><span class="co">#&gt; 370       |    -6.31 | Subject | [-21.96,   9.34] | 0.360  |   Undecided</span></span>
+<span><span class="co">#&gt; 371       |    -3.34 | Subject | [-18.96,  12.29] | 0.360  |   Undecided</span></span>
+<span><span class="co">#&gt; 372       |    18.21 | Subject | [  2.57,  33.84] | 0.098  |    Rejected</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-31-1.png" width="672"></p>
