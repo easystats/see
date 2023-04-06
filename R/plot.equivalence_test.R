@@ -23,7 +23,7 @@ plot.see_equivalence_test <- function(x,
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
-    warning("plot() only works for equivalence_test() with model-objects.", call. = FALSE)
+    insight::format_alert("`plot()` only works for `equivalence_test()` with model-objects.")
     return(x)
   }
 
@@ -39,7 +39,7 @@ plot.see_equivalence_test <- function(x,
   )
 
   if (is.null(model)) {
-    warning(sprintf("Can't find object '%s'.", model_name), call. = FALSE)
+    insight::format_alert(sprintf("Can't find object '%s'.", model_name))
     return(x)
   }
 
@@ -348,7 +348,7 @@ plot.see_equivalence_test_lm <- function(x,
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
-    insight::format_warning("plot() only works for equivalence_test() with model-objects.")
+    insight::format_alert("`plot()` only works for `equivalence_test()` with model-objects.")
     return(x)
   }
 
@@ -364,7 +364,7 @@ plot.see_equivalence_test_lm <- function(x,
   )
 
   if (is.null(model)) {
-    insight::format_warning(sprintf("Can't find object '%s'.", model_name))
+    insight::format_alert(sprintf("Can't find object '%s'.", model_name))
     return(x)
   }
 
@@ -390,7 +390,7 @@ plot.see_equivalence_test_lm <- function(x,
   # check for user defined arguments
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
-  legend.title <- "Decision on H0"
+  legend.title <- "Equivalence"
   x.title <- NULL
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
