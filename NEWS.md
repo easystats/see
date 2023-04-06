@@ -15,6 +15,9 @@
 * Fixed issue with duplicated legend in the `plot()` method for
   `performance::check_predictions()`.
 
+* Fixes issue in `plot.binned_residuals()` for models whose residuals were
+  completely inside error bounds.
+
 # see 0.7.5
 
 ## Changes
