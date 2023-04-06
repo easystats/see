@@ -35,7 +35,7 @@ plot.see_binned_residuals <- function(x,
   }
 
   # show or hide dots - may be useful for large models with many observations
-  if (isTRUE(dots[["show_dots"]])) {
+  if (!isTRUE(dots[["show_dots"]]) && insight::n_unique(x$group) > 1) {
     x$ybar[x$group == "yes"] <- NA
     x$CI_low[x$group == "yes"] <- NA
     x$CI_high[x$group == "yes"] <- NA
