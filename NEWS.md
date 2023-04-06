@@ -4,6 +4,12 @@
   for GLMs. Instead, it now shows a half-normal QQ plot of the absolute value
   of the standardized deviance residuals.
 
+* `plot()` for `parameters::equivalence_test()` now aligns the labelling with
+  the `print()` method. Hence, the legend title is no longer labelled
+  `"Decision on H0"`, but rather `"Equivalence"`, to emphasize that we can
+  assume practical equivalence for effects, but that we cannot accept the H0
+  (in a frequentist framework).
+
 ## Bug fixes
 
 * Fixed issue with duplicated legend in the `plot()` method for
