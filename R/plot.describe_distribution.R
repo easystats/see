@@ -1,6 +1,6 @@
 #' @export
 data_plot.parameters_distribution <- function(x, data = NULL, ...) {
-  if (nrow(x) == 1) {
+  if (nrow(x) == 1 && is.null(x$Variable)) {
     dataplot <- data.frame(
       x = data,
       stringsAsFactors = FALSE
@@ -71,7 +71,7 @@ plot.see_parameters_distribution <- function(x,
 
   # only keep variables used in "describe_distribution()"
   if (!is.null(x$Variable)) {
-    data <- data[x$Variable]
+    data <- data[, x$Variable, drop = FALSE]
   }
 
   if (!inherits(x, "data_plot")) {

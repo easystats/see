@@ -17,6 +17,9 @@
 
 * Fixes issue in `plot.binned_residuals()` for models whose residuals were
   completely inside error bounds.
+  
+* `plot()` now works when using it on the output of `describe_distribution()` with
+  a `select` argument of length 1.
 
 # see 0.7.5
 
