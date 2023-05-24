@@ -210,7 +210,9 @@ plot.see_performance_pp_check <- function(x,
   x <- cbind(x[1:2], as.data.frame(x[[3]]))
   x$key[nrow(x)] <- "Observed data"
   x <- datawizard::data_to_long(x, select = -1:-2, names_to = "x", values_to = "count")
-  x$x <- datawizard::to_numeric(x$x)
+  if (insight::n_unique(x$x) > 8) {
+    x$x <- datawizard::to_numeric(x$x)
+  }
 
   ggplot2::ggplot() +
     ggplot2::geom_segment(
