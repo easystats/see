@@ -1,5 +1,5 @@
 #' @export
-data_plot.performance_pp_check <- function(x, ...) {
+data_plot.performance_pp_check <- function(x, type = "line", ...) {
   columns <- colnames(x)
   dataplot <- stats::reshape(
     x,
@@ -21,7 +21,7 @@ data_plot.performance_pp_check <- function(x, ...) {
 
   attr(dataplot, "info") <- list(
     "xlab" = attr(x, "response_name"),
-    "ylab" = "Density",
+    "ylab" = ifelse(identical(type, "line"), "Density", "Counts"),
     "title" = "Posterior Predictive Check",
     "check_range" = attr(x, "check_range"),
     "bandwidth" = attr(x, "bandwidth"),
@@ -66,7 +66,7 @@ print.see_performance_pp_check <- function(x,
   type <- match.arg(type)
 
   if (!inherits(x, "data_plot")) {
-    x <- data_plot(x)
+    x <- data_plot(x, type)
   }
 
   p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, type = type, ...)
@@ -97,7 +97,7 @@ plot.see_performance_pp_check <- function(x,
   type <- match.arg(type)
 
   if (!inherits(x, "data_plot")) {
-    x <- data_plot(x)
+    x <- data_plot(x, type)
   }
 
   p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, type = type, ...)
