@@ -24,7 +24,8 @@ data_plot.performance_pp_check <- function(x, ...) {
     "ylab" = "Density",
     "title" = "Posterior Predictive Check",
     "check_range" = attr(x, "check_range"),
-    "bandwidth" = attr(x, "bandwidth")
+    "bandwidth" = attr(x, "bandwidth"),
+    "model_info" = attr(x, "model_info")
   )
 
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
@@ -40,6 +41,8 @@ data_plot.performance_pp_check <- function(x, ...) {
 #'
 #' @param line_alpha Numeric value specifying alpha of lines indicating `yrep`.
 #' @param style A ggplot2-theme.
+#' @param type Plot type for the posterior predictive checks plot. Can be `"line"`
+#' (default) or `"dots"` (only for models with binary, integer or ordinal outcomes).
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_distribution
@@ -56,15 +59,17 @@ print.see_performance_pp_check <- function(x,
                                            size_bar = 0.7,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
+                                           type = c("line", "dots"),
                                            ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
+  type <- match.arg(type)
 
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 
-  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, ...)
+  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, type = type, ...)
 
   if (isTRUE(check_range)) {
     p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
@@ -85,15 +90,17 @@ plot.see_performance_pp_check <- function(x,
                                           size_bar = 0.7,
                                           style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
+                                          type = c("line", "dots"),
                                           ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
+  type <- match.arg(type)
 
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
 
-  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, ...)
+  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, type = type, ...)
 
   if (isTRUE(check_range)) {
     p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
@@ -105,7 +112,7 @@ plot.see_performance_pp_check <- function(x,
 
 
 
-.plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, ...) {
+.plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, type = "line", ...) {
   info <- attr(x, "info")
 
   # default bandwidth, for smooting
@@ -114,7 +121,39 @@ plot.see_performance_pp_check <- function(x,
     bandwidth <- "nrd"
   }
 
-  out <- ggplot2::ggplot(x) +
+  minfo <- info$model_info
+
+  if (identical(type, "dots") && (minfo$is_bernoulli || minfo$is_count || minfo$is_ordinal || minfo$is_categorical)) {
+    out <- .plot_check_predictions_dots(x, colors, info, size_line, line_alpha, ...)
+  } else {
+    # denity plot - for models that have no binary or count/ordinal outcome
+    out <- .plot_check_predictions_density(x, colors, info, size_line, line_alpha, bandwidth, ...)
+  }
+
+
+  dots <- list(...)
+  if (isTRUE(dots[["check_model"]])) {
+    out <- out + theme_style(
+      base_size = 10,
+      plot.title.space = 3,
+      axis.title.space = 5
+    )
+  }
+
+  if (isTRUE(dots[["adjust_legend"]]) || isTRUE(info$check_range)) {
+    out <- out + ggplot2::theme(
+      legend.position = "bottom",
+      legend.margin = ggplot2::margin(0, 0, 0, 0),
+      legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
+    )
+  }
+
+  out
+}
+
+
+.plot_check_predictions_density <- function(x, colors, info, size_line, line_alpha, bandwidth, ...) {
+  ggplot2::ggplot(x) +
     ggplot2::stat_density(
       mapping = ggplot2::aes(
         x = .data$values,
@@ -159,26 +198,63 @@ plot.see_performance_pp_check <- function(x,
       color = ggplot2::guide_legend(reverse = TRUE),
       size = ggplot2::guide_legend(reverse = TRUE)
     )
+}
 
 
-  dots <- list(...)
-  if (isTRUE(dots[["check_model"]])) {
-    out <- out + theme_style(
-      base_size = 10,
-      plot.title.space = 3,
-      axis.title.space = 5
+.plot_check_predictions_dots <- function(x, colors, info, size_line, line_alpha, ...) {
+  # make sure we have a factor, so "table()" generates frequencies for all levels
+  # for each group - we need tables of same size to bind data frames
+  x$values <- as.factor(x$values)
+  x <- aggregate(x["values"], list(grp = x$grp), table)
+  x <- cbind(data.frame(key = "Model-predicted data", stringsAsFactors = FALSE), x)
+  x <- cbind(x[1:2], as.data.frame(x[[3]]))
+  x$key[nrow(x)] <- "Observed data"
+  x <- datawizard::data_to_long(x, select = -1:-2, names_to = "x", values_to = "count")
+  x$x <- datawizard::to_numeric(x$x)
+
+  ggplot2::ggplot() +
+    ggplot2::geom_segment(
+      data = x[x$key == "Observed data", ],
+      mapping = ggplot2::aes(x = .data$x, y = 0, group = .data$grp, yend = .data$count, xend = .data$x),
+      colour = colors[1],
+      size = 2.5 * size_line
+    ) +
+    ggplot2::geom_point(
+      data = x[x$key == "Observed data", ],
+      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp),
+      colour = colors[1],
+      size = 8 * size_line,
+      stroke = 0,
+      shape = 16
+    ) +
+    ggplot2::geom_point(
+      data = x[x$key == "Model-predicted data", ],
+      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp),
+      color = colors[2],
+      alpha = line_alpha,
+      position = ggplot2::position_jitter(width = 0.1, height = 0.02),
+      size = 5 * size_line,
+      stroke = 0,
+      shape = 16
+    ) +
+    ggplot2::scale_y_continuous() +
+    ggplot2::scale_color_manual(values = c(
+      "Observed data" = colors[1],
+      "Model-predicted data" = colors[2]
+    )) +
+    ggplot2::labs(
+      x = info$xlab,
+      y = info$ylab,
+      color = "",
+      size = "",
+      alpha = "",
+      title = "Posterior Predictive Check",
+      subtitle = "Model-predicted points should be close to observed data points"
+    ) +
+    ggplot2::guides(
+      color = ggplot2::guide_legend(reverse = TRUE),
+      size = ggplot2::guide_legend(reverse = TRUE)
     )
-  }
-
-  if (isTRUE(dots[["adjust_legend"]]) || isTRUE(info$check_range)) {
-    out <- out + ggplot2::theme(
-      legend.position = "bottom",
-      legend.margin = ggplot2::margin(0, 0, 0, 0),
-      legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
-    )
-  }
-
-  out
 }
 
 
