@@ -51,7 +51,7 @@ data_plot.performance_pp_check <- function(x, type = "line", ...) {
 #'
 #' @examplesIf require("performance")
 #' model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-#' check_posterior_predictions(model)
+#' check_predictions(model)
 #'
 #' # dot-plot style for count-models
 #' d <- iris

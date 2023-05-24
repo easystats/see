@@ -55,7 +55,7 @@ The \code{plot()} method for the \code{performance::check_predictions()} functio
 \examples{
 \dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
-check_posterior_predictions(model)
+check_predictions(model)
 
 # dot-plot style for count-models
 d <- iris
