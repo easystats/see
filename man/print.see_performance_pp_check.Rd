@@ -56,5 +56,16 @@ The \code{plot()} method for the \code{performance::check_predictions()} functio
 \dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
 check_posterior_predictions(model)
+
+# dot-plot style for count-models
+d <- iris
+d$poisson_var <- rpois(150, 1)
+model <- glm(
+  poisson_var ~ Species + Petal.Length + Petal.Width,
+  data = d,
+  family = poisson()
+)
+out <- check_predictions(model)
+plot(out, type = "dots")
 \dontshow{\}) # examplesIf}
 }

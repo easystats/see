@@ -52,6 +52,17 @@ data_plot.performance_pp_check <- function(x, type = "line", ...) {
 #' @examplesIf require("performance")
 #' model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
 #' check_posterior_predictions(model)
+#'
+#' # dot-plot style for count-models
+#' d <- iris
+#' d$poisson_var <- rpois(150, 1)
+#' model <- glm(
+#'   poisson_var ~ Species + Petal.Length + Petal.Width,
+#'   data = d,
+#'   family = poisson()
+#' )
+#' out <- check_predictions(model)
+#' plot(out, type = "dots")
 #' @export
 print.see_performance_pp_check <- function(x,
                                            size_line = 0.5,
@@ -122,10 +133,17 @@ plot.see_performance_pp_check <- function(x,
   }
 
   minfo <- info$model_info
+  suggest_dots <- (minfo$is_bernoulli || minfo$is_count || minfo$is_ordinal || minfo$is_categorical)
 
-  if (identical(type, "dots") && (minfo$is_bernoulli || minfo$is_count || minfo$is_ordinal || minfo$is_categorical)) {
+  if (identical(type, "dots") && suggest_dots) {
     out <- .plot_check_predictions_dots(x, colors, info, size_line, line_alpha, ...)
   } else {
+    if (suggest_dots) {
+      insight::format_alert(
+        "The model has an integer or a categorical response variable.",
+        "It is recommended to switch to a dot-plot style, e.g. `plot(check_model(model), type = \"dots\"`."
+      )
+    }
     # denity plot - for models that have no binary or count/ordinal outcome
     out <- .plot_check_predictions_density(x, colors, info, size_line, line_alpha, bandwidth, ...)
   }
