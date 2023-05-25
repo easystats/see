@@ -359,6 +359,8 @@ plot.see_performance_pp_check <- function(x,
       color = ggplot2::guide_legend(reverse = TRUE),
       size = ggplot2::guide_legend(reverse = TRUE)
     )
+
+  return(p)
 }
 
 
