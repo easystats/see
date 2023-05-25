@@ -84,7 +84,7 @@
 #' x <- equivalence_test(model, verbose = FALSE)
 #' plot(x)
 #' @export
-data_plot <- function(x, data = NULL, ...) {
+data_plot <- function(x, ...) {
   UseMethod("data_plot")
 }
 
