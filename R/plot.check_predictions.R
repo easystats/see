@@ -342,6 +342,12 @@ plot.see_performance_pp_check <- function(x,
     p <- p2
   }
 
+  if (type == "discrete_interval") {
+    subtitle <- "Model-predicted intervals should include observed data points"
+  } else {
+    subtitle <- "Model-predicted points should be close to observed data points"
+  }
+
   p <- p +
     ggplot2::scale_y_continuous() +
     ggplot2::scale_color_manual(values = c(
