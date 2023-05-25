@@ -233,27 +233,31 @@ plot.see_performance_pp_check <- function(x,
   }
 
   ggplot2::ggplot() +
-    ggplot2::geom_segment(
-      data = x[x$key == "Observed data", ],
-      mapping = ggplot2::aes(x = .data$x, y = 0, group = .data$grp, yend = .data$count, xend = .data$x),
-      colour = colors[1],
-      size = 2.5 * size_line
-    ) +
     ggplot2::geom_point(
-      data = x[x$key == "Observed data", ],
-      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp),
-      colour = colors[1],
-      size = 8 * size_line,
+      data = x[x$key == "Model-predicted data", ],
+      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp, color = .data$key),
+      alpha = line_alpha,
+      position = ggplot2::position_jitter(width = 0.1, height = 0.02),
+      size = 4 * size_line,
       stroke = 0,
       shape = 16
     ) +
+    ggplot2::geom_segment(
+      data = x[x$key == "Observed data", ],
+      mapping = ggplot2::aes(
+        x = .data$x,
+        y = 0,
+        group = .data$grp,
+        yend = .data$count,
+        xend = .data$x,
+        color = .data$key
+      ),
+      size = 2 * size_line
+    ) +
     ggplot2::geom_point(
-      data = x[x$key == "Model-predicted data", ],
-      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp),
-      color = colors[2],
-      alpha = line_alpha,
-      position = ggplot2::position_jitter(width = 0.1, height = 0.02),
-      size = 5 * size_line,
+      data = x[x$key == "Observed data", ],
+      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp, color = .data$key),
+      size = 6 * size_line,
       stroke = 0,
       shape = 16
     ) +
