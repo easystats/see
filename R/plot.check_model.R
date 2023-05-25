@@ -3,6 +3,7 @@
 plot.see_check_model <- function(x,
                                  style = theme_lucid,
                                  colors = NULL,
+                                 type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
                                  ...) {
   p <- list()
 
@@ -21,6 +22,7 @@ plot.see_check_model <- function(x,
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
 
+  type <- match.arg(type)
 
   # set default values for arguments ------
 
@@ -59,6 +61,7 @@ plot.see_check_model <- function(x,
     p$PP_CHECK <- plot.see_performance_pp_check(
       x$PP_CHECK,
       style = style,
+      type = type,
       check_model = TRUE,
       adjust_legend = TRUE,
       colors = colors[1:2]
