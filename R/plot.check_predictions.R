@@ -224,7 +224,7 @@ plot.see_performance_pp_check <- function(x,
   # make sure we have a factor, so "table()" generates frequencies for all levels
   # for each group - we need tables of same size to bind data frames
   x$values <- as.factor(x$values)
-  x <- aggregate(x["values"], list(grp = x$grp), table)
+  x <- stats::aggregate(x["values"], list(grp = x$grp), table)
   x <- cbind(data.frame(key = "Model-predicted data", stringsAsFactors = FALSE), x)
   x <- cbind(x[1:2], as.data.frame(x[[3]]))
   x$key[nrow(x)] <- "Observed data"
@@ -242,7 +242,7 @@ plot.see_performance_pp_check <- function(x,
         unlist(bayestestR::ci(i)[c("CI_low", "CI_high")])
       )
     }
-    x_errorbars <- aggregate(x["count"], list(x$x), centrality_dispersion)
+    x_errorbars <- stats::aggregate(x["count"], list(x$x), centrality_dispersion)
     x_errorbars <- cbind(x_errorbars[1], as.data.frame(x_errorbars[[2]]))
     colnames(x_errorbars) <- c("x", "count", "CI_low", "CI_high")
     x_errorbars <- cbind(
