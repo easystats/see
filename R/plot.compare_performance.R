@@ -29,7 +29,7 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   }
 
   # remove indices with missing value, comparison makes no sense here
-  x <- x[sapply(x, function(.x) !anyNA(.x))]
+  x <- x[vapply(x, function(.x) !anyNA(.x), logical(1))]
 
   x <- .reshape_to_long(x, names_to = "name", columns = 2:ncol(x))
   x$name <- factor(x$name, levels = unique(x$name))

@@ -62,7 +62,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
   row.names(data) <- data$Obs
 
   # Extract distances
-  d <- data[grepl("Distance_", names(data))]
+  d <- data[grepl("Distance_", names(data), fixed = TRUE)]
   if (rescale_distance) {
     d <- datawizard::normalize(d, verbose = FALSE)
   }
@@ -78,7 +78,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
   )
   d_long$Obs <- as.factor(d_long$id)
   row.names(d_long) <- d_long$id <- NULL
-  d_long$Method <- gsub("Distance_", "", d_long$Method)
+  d_long$Method <- gsub("Distance_", "", d_long$Method, fixed = TRUE)
   attr(d_long, "rescale_distance") <- isTRUE(rescale_distance)
   d_long
 }

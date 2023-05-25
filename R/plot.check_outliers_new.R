@@ -18,7 +18,7 @@
 
   min_cook_level <- min(cook.levels, na.rm = TRUE)
   n_above <- sum(plot_data$Cooks_Distance >= min_cook_level, na.rm = TRUE)
-  label.n <- ifelse(n_above < 5, 5, n_above)
+  label.n <- pmax(n_above, 5)
 
   p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals))
 
