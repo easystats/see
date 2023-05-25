@@ -12,7 +12,7 @@
   size_bar = 0.7,
   style = theme_lucid,
   colors = unname(social_colors(c("green", "blue"))),
-  type = c("line", "dots"),
+  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   ...
 )
 
@@ -23,7 +23,7 @@
   size_bar = 0.7,
   style = theme_lucid,
   colors = unname(social_colors(c("green", "blue"))),
-  type = c("line", "dots"),
+  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   ...
 )
 }
@@ -41,8 +41,9 @@
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
 
-\item{type}{Plot type for the posterior predictive checks plot. Can be \code{"line"}
-(default) or \code{"dots"} (only for models with binary, integer or ordinal outcomes).}
+\item{type}{Plot type for the posterior predictive checks plot. Can be \code{"density"}
+(default), \code{"discrete_dots"}, \code{"discrete_interval"} or \code{"discrete_both"} (the
+\verb{discrete_*} options are only for models with binary, integer or ordinal outcomes).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -66,6 +67,6 @@ model <- glm(
   family = poisson()
 )
 out <- check_predictions(model)
-plot(out, type = "dots")
+plot(out, type = "discrete_dots")
 \dontshow{\}) # examplesIf}
 }

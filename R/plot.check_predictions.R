@@ -1,5 +1,5 @@
 #' @export
-data_plot.performance_pp_check <- function(x, type = "line", ...) {
+data_plot.performance_pp_check <- function(x, type = "density", ...) {
   columns <- colnames(x)
   dataplot <- stats::reshape(
     x,
@@ -21,7 +21,7 @@ data_plot.performance_pp_check <- function(x, type = "line", ...) {
 
   attr(dataplot, "info") <- list(
     "xlab" = attr(x, "response_name"),
-    "ylab" = ifelse(identical(type, "line"), "Density", "Counts"),
+    "ylab" = ifelse(identical(type, "density"), "Density", "Counts"),
     "title" = "Posterior Predictive Check",
     "check_range" = attr(x, "check_range"),
     "bandwidth" = attr(x, "bandwidth"),
@@ -41,8 +41,9 @@ data_plot.performance_pp_check <- function(x, type = "line", ...) {
 #'
 #' @param line_alpha Numeric value specifying alpha of lines indicating `yrep`.
 #' @param style A ggplot2-theme.
-#' @param type Plot type for the posterior predictive checks plot. Can be `"line"`
-#' (default) or `"dots"` (only for models with binary, integer or ordinal outcomes).
+#' @param type Plot type for the posterior predictive checks plot. Can be `"density"`
+#' (default), `"discrete_dots"`, `"discrete_interval"` or `"discrete_both"` (the
+#' `discrete_*` options are only for models with binary, integer or ordinal outcomes).
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_distribution
@@ -62,7 +63,7 @@ data_plot.performance_pp_check <- function(x, type = "line", ...) {
 #'   family = poisson()
 #' )
 #' out <- check_predictions(model)
-#' plot(out, type = "dots")
+#' plot(out, type = "discrete_dots")
 #' @export
 print.see_performance_pp_check <- function(x,
                                            size_line = 0.5,
@@ -70,7 +71,7 @@ print.see_performance_pp_check <- function(x,
                                            size_bar = 0.7,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
-                                           type = c("line", "dots"),
+                                           type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
                                            ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
@@ -101,7 +102,7 @@ plot.see_performance_pp_check <- function(x,
                                           size_bar = 0.7,
                                           style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
-                                          type = c("line", "dots"),
+                                          type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
                                           ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
@@ -123,7 +124,7 @@ plot.see_performance_pp_check <- function(x,
 
 
 
-.plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, type = "line", ...) {
+.plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, type = "density", ...) {
   info <- attr(x, "info")
 
   # default bandwidth, for smooting
@@ -135,13 +136,13 @@ plot.see_performance_pp_check <- function(x,
   minfo <- info$model_info
   suggest_dots <- (minfo$is_bernoulli || minfo$is_count || minfo$is_ordinal || minfo$is_categorical)
 
-  if (identical(type, "dots") && suggest_dots) {
-    out <- .plot_check_predictions_dots(x, colors, info, size_line, line_alpha, ...)
+  if (!is.null(type) && type %in% c("discrete_dots", "discrete_interval", "discrete_both") && suggest_dots) {
+    out <- .plot_check_predictions_dots(x, colors, info, size_line, line_alpha, type, ...)
   } else {
     if (suggest_dots) {
       insight::format_alert(
         "The model has an integer or a categorical response variable.",
-        "It is recommended to switch to a dot-plot style, e.g. `plot(check_model(model), type = \"dots\"`."
+        "It is recommended to switch to a dot-plot style, e.g. `plot(check_model(model), type = \"discrete_dots\"`."
       )
     }
     # denity plot - for models that have no binary or count/ordinal outcome
@@ -219,7 +220,7 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_check_predictions_dots <- function(x, colors, info, size_line, line_alpha, ...) {
+.plot_check_predictions_dots <- function(x, colors, info, size_line, line_alpha, type = "discrete_dots", ...) {
   # make sure we have a factor, so "table()" generates frequencies for all levels
   # for each group - we need tables of same size to bind data frames
   x$values <- as.factor(x$values)
@@ -232,35 +233,116 @@ plot.see_performance_pp_check <- function(x,
     x$x <- datawizard::to_numeric(x$x)
   }
 
-  ggplot2::ggplot() +
-    ggplot2::geom_point(
+  p1 <- p2 <- NULL
+
+  if (!is.null(type) && type %in% c("discrete_interval", "discrete_both")) {
+    centrality_dispersion <- function(i) {
+      c(
+        count = stats::median(i, na.rm = TRUE),
+        unlist(bayestestR::ci(i)[c("CI_low", "CI_high")])
+      )
+    }
+    x_errorbars <- aggregate(x["count"], list(x$x), centrality_dispersion)
+    x_errorbars <- cbind(x_errorbars[1], as.data.frame(x_errorbars[[2]]))
+    colnames(x_errorbars) <- c("x", "count", "CI_low", "CI_high")
+    x_errorbars <- cbind(
+      data.frame(key = "Model-predicted data", stringsAsFactors = FALSE),
+      x_errorbars
+    )
+
+    x_tmp <- x[x$key == "Observed data", ]
+    x_tmp$CI_low <- NA
+    x_tmp$CI_high <- NA
+    x_tmp$grp <- NULL
+
+    x_errorbars <- rbind(x_errorbars, x_tmp)
+    p1 <- ggplot2::ggplot() + ggplot2::geom_pointrange(
+      data = x_errorbars[x_errorbars$key == "Model-predicted data", ],
+      mapping = ggplot2::aes(
+        x = .data$x,
+        y = .data$count,
+        ymin = .data$CI_low,
+        ymax = .data$CI_high,
+        color = .data$key
+      ),
+      position = ggplot2::position_nudge(x = 0.2),
+      size = 1.5 * size_line,
+      linewidth = 1.5 * size_line,
+      stroke = 0,
+      shape = 16
+    ) +
+      ggplot2::geom_segment(
+        data = x_errorbars[x_errorbars$key == "Observed data", ],
+        mapping = ggplot2::aes(
+          x = .data$x,
+          y = 0,
+          yend = .data$count,
+          xend = .data$x,
+          color = .data$key
+        ),
+        size = 2 * size_line
+      ) +
+      ggplot2::geom_point(
+        data = x_errorbars[x_errorbars$key == "Observed data", ],
+        mapping = ggplot2::aes(
+          x = .data$x,
+          y = .data$count,
+          color = .data$key
+        ),
+        size = 6 * size_line,
+        stroke = 0,
+        shape = 16
+      )
+  }
+
+  if (!is.null(type) && type %in% c("discrete_dots", "discrete_both")) {
+    if (is.null(p1)) {
+      p2 <- ggplot2::ggplot()
+    } else {
+      p2 <- p1
+    }
+    p2 <- p2 + ggplot2::geom_point(
       data = x[x$key == "Model-predicted data", ],
-      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp, color = .data$key),
+      mapping = ggplot2::aes(
+        x = .data$x,
+        y = .data$count,
+        group = .data$grp,
+        color = .data$key
+      ),
       alpha = line_alpha,
       position = ggplot2::position_jitter(width = 0.1, height = 0.02),
       size = 4 * size_line,
       stroke = 0,
       shape = 16
     ) +
-    ggplot2::geom_segment(
-      data = x[x$key == "Observed data", ],
-      mapping = ggplot2::aes(
-        x = .data$x,
-        y = 0,
-        group = .data$grp,
-        yend = .data$count,
-        xend = .data$x,
-        color = .data$key
-      ),
-      size = 2 * size_line
-    ) +
-    ggplot2::geom_point(
-      data = x[x$key == "Observed data", ],
-      mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp, color = .data$key),
-      size = 6 * size_line,
-      stroke = 0,
-      shape = 16
-    ) +
+      ggplot2::geom_segment(
+        data = x[x$key == "Observed data", ],
+        mapping = ggplot2::aes(
+          x = .data$x,
+          y = 0,
+          group = .data$grp,
+          yend = .data$count,
+          xend = .data$x,
+          color = .data$key
+        ),
+        size = 2 * size_line
+      ) +
+      ggplot2::geom_point(
+        data = x[x$key == "Observed data", ],
+        mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp, color = .data$key),
+        size = 6 * size_line,
+        stroke = 0,
+        shape = 16
+      )
+  }
+
+  if (is.null(p2)) {
+    p <- p1
+  } else {
+    p <- p2
+  }
+
+  p <- p +
     ggplot2::scale_y_continuous() +
     ggplot2::scale_color_manual(values = c(
       "Observed data" = colors[1],

@@ -3,7 +3,7 @@
 plot.see_check_model <- function(x,
                                  style = theme_lucid,
                                  colors = NULL,
-                                 type = c("line", "dots"),
+                                 type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
                                  ...) {
   p <- list()
 
