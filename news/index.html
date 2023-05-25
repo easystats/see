@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5.6</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,6 +88,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="see-development-version">see (development version)<a class="anchor" aria-label="anchor" href="#see-development-version"></a></h2>
 <ul><li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">performance::check_model()</a></code> no longer produces a normal QQ plot for GLMs. Instead, it now shows a half-normal QQ plot of the absolute value of the standardized deviance residuals.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">performance::check_model()</a></code> and <code><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">performance::check_predictions()</a></code> gains a <code>type</code> argument, to either create density plots, or discrete dots resp. interval plots for posterior predictive checks.</p></li>
 <li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">parameters::equivalence_test()</a></code> now aligns the labelling with the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method. Hence, the legend title is no longer labelled <code>"Decision on H0"</code>, but rather <code>"Equivalence"</code>, to emphasize that we can assume practical equivalence for effects, but that we cannot accept the H0 (in a frequentist framework).</p></li>
 </ul><div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
