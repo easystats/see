@@ -361,7 +361,7 @@ plot.see_performance_pp_check <- function(x,
       size = "",
       alpha = "",
       title = "Posterior Predictive Check",
-      subtitle = "Model-predicted points should be close to observed data points"
+      subtitle = subtitle
     ) +
     ggplot2::guides(
       color = ggplot2::guide_legend(reverse = TRUE),
