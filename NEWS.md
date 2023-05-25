@@ -4,6 +4,10 @@
   for GLMs. Instead, it now shows a half-normal QQ plot of the absolute value
   of the standardized deviance residuals.
 
+* `plot()` for `performance::check_model()` and `performance::check_predictions()`
+  gains a `type` argument, to either create density plots, or discrete dots resp.
+  interval plots for posterior predictive checks.
+
 * `plot()` for `parameters::equivalence_test()` now aligns the labelling with
   the `print()` method. Hence, the legend title is no longer labelled
   `"Decision on H0"`, but rather `"Equivalence"`, to emphasize that we can

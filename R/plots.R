@@ -94,9 +94,13 @@ plots <- function(...,
 }
 
 
-.safe_print_plots <- function(pw) {
+.safe_print_plots <- function(pw, ...) {
   pw_drawn <- tryCatch(print(pw), error = function(e) e)
   if (inherits(pw_drawn, "simpleError")) {
+    dots <- list(...)
+    if (isTRUE(dots[["debug"]])) {
+      insight::format_alert(paste("\nFollowing error was thrown:", pw_drawn$message, "\n"))
+    }
     if (Sys.getenv("RSTUDIO") == "1") {
       insight::format_error(
         "The RStudio 'Plots' window is too small to show this set of plots.",

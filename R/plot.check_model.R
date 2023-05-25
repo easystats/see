@@ -182,7 +182,7 @@ plot.see_check_model <- function(x,
 
   if (panel) {
     pw <- plots(p, n_columns = 2)
-    .safe_print_plots(pw)
+    .safe_print_plots(pw, ...)
     invisible(pw)
   } else {
     return(p)
