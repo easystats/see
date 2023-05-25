@@ -271,17 +271,6 @@ plot.see_performance_pp_check <- function(x,
       stroke = 0,
       shape = 16
     ) +
-      ggplot2::geom_segment(
-        data = x_errorbars[x_errorbars$key == "Observed data", ],
-        mapping = ggplot2::aes(
-          x = .data$x,
-          y = 0,
-          yend = .data$count,
-          xend = .data$x,
-          color = .data$key
-        ),
-        size = 2 * size_line
-      ) +
       ggplot2::geom_point(
         data = x_errorbars[x_errorbars$key == "Observed data", ],
         mapping = ggplot2::aes(
@@ -315,24 +304,27 @@ plot.see_performance_pp_check <- function(x,
       stroke = 0,
       shape = 16
     ) +
-      ggplot2::geom_segment(
+      # for legend
+      ggplot2::geom_point(
         data = x[x$key == "Observed data", ],
         mapping = ggplot2::aes(
           x = .data$x,
-          y = 0,
+          y = .data$count,
           group = .data$grp,
-          yend = .data$count,
-          xend = .data$x,
           color = .data$key
         ),
-        size = 2 * size_line
+        size = 4 * size_line
       ) +
       ggplot2::geom_point(
         data = x[x$key == "Observed data", ],
-        mapping = ggplot2::aes(x = .data$x, y = .data$count, group = .data$grp, color = .data$key),
+        mapping = ggplot2::aes(
+          x = .data$x,
+          y = .data$count
+        ),
         size = 6 * size_line,
-        stroke = 0,
-        shape = 16
+        shape = 21,
+        colour = "white",
+        fill = colors[1]
       )
   }
 
