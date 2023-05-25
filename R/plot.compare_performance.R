@@ -1,3 +1,4 @@
+#' @rdname data_plot
 #' @export
 data_plot.compare_performance <- function(x, data = NULL, ...) {
   x$Model <- sprintf("%s (%s)", x$Name, x$Model)
