@@ -82,7 +82,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plot method for posterior predictive checks</h1>
-      <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/HEAD/R/plot.performance_pp_check.R" class="external-link"><code>R/plot.performance_pp_check.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/HEAD/R/plot.check_predictions.R" class="external-link"><code>R/plot.check_predictions.R</code></a></small>
       <div class="d-none name"><code>print.see_performance_pp_check.Rd</code></div>
     </div>
 
@@ -100,6 +100,7 @@
 <span>  size_bar <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  style <span class="op">=</span> <span class="va">theme_lucid</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="fu"><a href="social_colors.html">social_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"density"</span>, <span class="st">"discrete_dots"</span>, <span class="st">"discrete_interval"</span>, <span class="st">"discrete_both"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -111,6 +112,7 @@
 <span>  size_bar <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  style <span class="op">=</span> <span class="va">theme_lucid</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="fu"><a href="social_colors.html">social_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"density"</span>, <span class="st">"discrete_dots"</span>, <span class="st">"discrete_interval"</span>, <span class="st">"discrete_both"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -142,6 +144,12 @@
 hex-format) for points and line.</p></dd>
 
 
+<dt>type</dt>
+<dd><p>Plot type for the posterior predictive checks plot. Can be <code>"density"</code>
+(default), <code>"discrete_dots"</code>, <code>"discrete_interval"</code> or <code>"discrete_both"</code> (the
+<code>discrete_*</code> options are only for models with binary, integer or ordinal outcomes).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
 
@@ -156,8 +164,20 @@ hex-format) for points and line.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="va">Petal.Width</span> <span class="op">+</span> <span class="va">Petal.Length</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">check_posterior_predictions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">check_predictions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="print.see_performance_pp_check-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># dot-plot style for count-models</span></span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span><span class="va">d</span><span class="op">$</span><span class="va">poisson_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">poisson_var</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">+</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="va">Petal.Width</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">d</span>,</span></span>
+<span class="r-in"><span>  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">check_predictions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out</span>, type <span class="op">=</span> <span class="st">"discrete_dots"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="print.see_performance_pp_check-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

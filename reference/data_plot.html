@@ -142,7 +142,7 @@ performance::check_posterior_predictions()
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Prepare objects for plotting or plot objects</h1>
-      <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/HEAD/R/data_plot.R" class="external-link"><code>R/data_plot.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/HEAD/R/data_plot.R" class="external-link"><code>R/data_plot.R</code></a>, <a href="https://github.com/easystats/see/blob/HEAD/R/plot.compare_performance.R" class="external-link"><code>R/plot.compare_performance.R</code></a></small>
       <div class="d-none name"><code>data_plot.Rd</code></div>
     </div>
 
@@ -179,7 +179,10 @@ for your object's class:</p><ul><li><p><a href="plot.see_bayesfactor_models.html
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">data_plot</span><span class="op">(</span><span class="va">x</span>, data <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">data_plot</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for compare_performance</span></span>
+<span><span class="fu">data_plot</span><span class="op">(</span><span class="va">x</span>, data <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -188,13 +191,13 @@ for your object's class:</p><ul><li><p><a href="plot.see_bayesfactor_models.html
 <dd><p>An object.</p></dd>
 
 
+<dt>...</dt>
+<dd><p>Arguments passed to or from other methods.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>The original data used to create this object. Can be a
 statistical model.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>Arguments passed to or from other methods.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -254,7 +257,7 @@ these are shown in the 'Usage' section.</p>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Picking joint bandwidth of 0.187</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Picking joint bandwidth of 0.174</span>
 <span class="r-plt img"><img src="data_plot-5.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
