@@ -97,19 +97,18 @@ plots <- function(...,
 .safe_print_plots <- function(pw, ...) {
   pw_drawn <- tryCatch(print(pw), error = function(e) e)
   if (inherits(pw_drawn, "simpleError")) {
-    dots <- list(...)
-    if (isTRUE(dots[["debug"]])) {
-      insight::format_alert(paste("\nFollowing error was thrown:", pw_drawn$message, "\n"))
-    }
+    msg_display <- "If this doesn't help, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
     if (Sys.getenv("RSTUDIO") == "1") {
       insight::format_error(
         "The RStudio 'Plots' window is too small to show this set of plots.",
-        "Please make the window larger."
+        "Please make the window larger.",
+        msg_display
       )
     } else {
       insight::format_error(
         "The viewport is too small to show this set of plots.",
-        "Please make it larger."
+        "Please make it larger.",
+        msg_display
       )
     }
   }
