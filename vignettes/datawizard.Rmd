@@ -1,5 +1,5 @@
 ---
-title:"Plotting Functions for the 'datawizard' Package"
+title: "Plotting Functions for the 'datawizard' Package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Plotting Functions for the 'datawizard' Package}
