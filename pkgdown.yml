@@ -4,13 +4,14 @@ pkgdown_sha: 39083f38bbb2de2e1126529392bddf3e6e262ab4
 articles:
   bayestestR: bayestestR.html
   correlation: correlation.html
+  datawizard: datawizard.html
   effectsize: effectsize.html
   modelbased: modelbased.html
   parameters: parameters.html
   performance: performance.html
   seecolorscales_dark: seecolorscales_dark.html
   seecolorscales: seecolorscales.html
-last_built: 2023-06-01T09:00Z
+last_built: 2023-06-01T14:29Z
 urls:
   reference: https://easystats.github.io/see/reference
   article: https://easystats.github.io/see/articles
