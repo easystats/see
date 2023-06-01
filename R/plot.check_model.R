@@ -38,7 +38,7 @@ plot.see_check_model <- function(x,
   overdisp_type <- attr(x, "overdisp_type")
   plot_type <- attr(x, "type")
 
-  if (!is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+  if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
     type <- plot_type
   } else {
     type <- match.arg(type)
