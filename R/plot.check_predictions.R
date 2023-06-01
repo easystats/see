@@ -156,7 +156,7 @@ plot.see_performance_pp_check <- function(x,
   } else {
     if (suggest_dots) {
       insight::format_alert(
-        "The model has an integer or a categorical response variable.",
+        "The model has an integer or a discrete response variable.",
         "It is recommended to switch to a dot-plot style, e.g. `plot(check_model(model), type = \"discrete_dots\"`."
       )
     }
