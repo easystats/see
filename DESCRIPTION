@@ -73,7 +73,7 @@ Imports:
     parameters (>= 0.20.2),
     performance (>= 0.10.1)
 Remotes:
-    easystats/correlation, easystats/performance, easystats/bayestestR
+    easystats/performance, easystats/bayestestR
 Suggests:
     brms,
     curl,
