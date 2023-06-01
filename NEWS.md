@@ -14,7 +14,8 @@
   assume practical equivalence for effects, but that we cannot accept the H0
   (in a frequentist framework).
 
-* Added some examples and cross references between docs.
+* Added some examples and cross references between docs. Furthermore, a vignette
+  about plotting functions for the *datawizard* package was added.
 
 ## Bug fixes
 
