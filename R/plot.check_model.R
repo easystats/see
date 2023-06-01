@@ -1,3 +1,28 @@
+#' Plot method for checking model assumptions
+#'
+#' The `plot()` method for the `performance::check_model()` function.
+#' Diagnostic plots for regression models.
+#'
+#' @inheritParams print.see_performance_pp_check
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
+#'
+#' @examplesIf require("performance")
+#' model <- lm(qsec ~ drat + wt, data = mtcars)
+#' plot(check_model(model))
+#'
+#' set.seed(99)
+#' d <- iris
+#' d$skewed <- rpois(150, 1)
+#' model <- glm(
+#'   skewed ~ Species + Petal.Length + Petal.Width,
+#'   data = d,
+#'   family = poisson()
+#' )
+#' plot(check_model(model), type = "discrete_interval")
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_check_model <- function(x,

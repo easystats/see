@@ -43,12 +43,15 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #' @param style A ggplot2-theme.
 #' @param type Plot type for the posterior predictive checks plot. Can be `"density"`
 #' (default), `"discrete_dots"`, `"discrete_interval"` or `"discrete_both"` (the
-#' `discrete_*` options are only for models with binary, integer or ordinal outcomes).
+#' `discrete_*` options are appropriate for models with discrete - binary, integer
+#' or ordinal etc. - outcomes).
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_distribution
 #'
 #' @return A ggplot2-object.
+#'
+#' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
 #' @examplesIf require("performance")
 #' model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
