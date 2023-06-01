@@ -407,35 +407,43 @@ plots to inspect overdispersion.</p>
 <p><img src="performance_files/figure-html/unnamed-chunk-19-1.png" width="100%"></p>
 </div>
 <div class="section level4">
-<h4 id="modelling-count-data">Modelling count data<a class="anchor" aria-label="anchor" href="#modelling-count-data"></a>
+<h4 id="using-discrete-plot-type-for-posterior-predictive-checks">Using discrete plot type for posterior predictive checks<a class="anchor" aria-label="anchor" href="#using-discrete-plot-type-for-posterior-predictive-checks"></a>
 </h4>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out</span>, type <span class="op">=</span> <span class="st">"discrete_interval"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
+</div>
+<div class="section level4">
+<h4 id="modelling-count-data">Modelling count data<a class="anchor" aria-label="anchor" href="#modelling-count-data"></a>
+</h4>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
 <span>  <span class="va">count</span> <span class="op">~</span> <span class="va">spp</span> <span class="op">+</span> <span class="va">mined</span> <span class="op">+</span> <span class="va">cover</span>,</span>
 <span>  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">Salamanders</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-21-1.png" width="100%"></p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="checks-for-linear-mixed-models">Checks for linear (mixed) models<a class="anchor" aria-label="anchor" href="#checks-for-linear-mixed-models"></a>
 </h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-21-1.png" width="100%"></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<p><img src="performance_files/figure-html/unnamed-chunk-22-1.png" width="100%"></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span>, panel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Note that not all checks supported in <code>performance</code> will
 be reported in this unified <strong>visual</strong> check. For example,
 for linear models, one needs to check the assumption that errors are not
 autocorrelated, but this check will not be shown in the visual
 check.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_autocorrelation.html" class="external-link">check_autocorrelation</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.006).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.008).</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -449,7 +457,7 @@ indices across models. The <code><a href="https://rdrr.io/r/graphics/plot.defaul
 “spiderweb” plot, where the different indices are normalized and larger
 values indicate better model performance. Hence, points closer to the
 center indicate worse fit indices.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">lm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">+</span> <span class="va">Petal.Length</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
@@ -468,14 +476,14 @@ center indicate worse fit indices.</p>
 <span><span class="co">#&gt; lm4  |    lm |  78.8 (&gt;.999) |   80.1 (&gt;.999) | 105.9 (&gt;.999) | 0.871 |     0.865 | 0.296 | 0.305</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-24-1.png" width="100%"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-25-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="model-and-vector-properties">Model and Vector Properties<a class="anchor" aria-label="anchor" href="#model-and-vector-properties"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/performance/reference/check_distribution.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_distribution.html" class="external-link">check_distribution</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
@@ -496,8 +504,8 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt;          gamma         44%</span></span>
 <span><span class="co">#&gt;  beta-binomial          3%</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-25-1.png" width="100%"></p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<p><img src="performance_files/figure-html/unnamed-chunk-26-1.png" width="100%"></p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vec</span> <span class="op">&lt;-</span> <span class="fu">bayestestR</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/bayestestR/reference/distribution.html" class="external-link">distribution_poisson</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">500</span>, lambda <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_distribution.html" class="external-link">check_distribution</a></span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span>
 <span></span>
@@ -509,14 +517,14 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt;  negative binomial         38%</span></span>
 <span><span class="co">#&gt;           binomial          6%</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-26-1.png" width="100%"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-27-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="roc-curves">ROC curves<a class="anchor" aria-label="anchor" href="#roc-curves"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/performance/reference/performance_roc.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">iris</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span>, <span class="fl">0.3</span><span class="op">)</span></span>
@@ -531,9 +539,9 @@ function documentation</a>)</em></p>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; AUC: 37.66%</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-27-1.png" width="100%"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-28-1.png" width="100%"></p>
 <p>You can also compare ROC curves for different models.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/bayestestR/" class="external-link">bayestestR</a></span><span class="op">)</span></span>
 <span></span>
@@ -543,7 +551,7 @@ function documentation</a>)</em></p>
 <span></span>
 <span><span class="co"># comparing their performances using the AUC curve</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/performance/reference/performance_roc.html" class="external-link">performance_roc</a></span><span class="op">(</span><span class="va">m1</span>, <span class="va">m2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-28-1.png" width="100%"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-29-1.png" width="100%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
