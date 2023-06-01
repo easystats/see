@@ -17,10 +17,6 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-# The following are needed by `{parameters}` for cluster analysis:
-# `{factoextra}`, `{mclust}`, and `{NbClust}`
-#
-# `{httr}` is needed for `insight::download_model()`
 can_evaluate <- FALSE
 pkgs <- c("datawizard", "ggplot2")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
