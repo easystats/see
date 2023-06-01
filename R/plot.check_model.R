@@ -10,7 +10,7 @@
 #'
 #' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
-#' @examplesIf require("performance")
+#' @examplesIf require("performance") && require("patchwork")
 #' model <- lm(qsec ~ drat + wt, data = mtcars)
 #' plot(check_model(model))
 #' @importFrom ggplot2 .data
