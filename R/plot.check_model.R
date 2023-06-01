@@ -13,16 +13,6 @@
 #' @examplesIf require("performance")
 #' model <- lm(qsec ~ drat + wt, data = mtcars)
 #' plot(check_model(model))
-#'
-#' set.seed(99)
-#' d <- iris
-#' d$skewed <- rpois(150, 1)
-#' model <- glm(
-#'   skewed ~ Species + Petal.Length + Petal.Width,
-#'   data = d,
-#'   family = poisson()
-#' )
-#' plot(check_model(model), type = "discrete_interval")
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_check_model <- function(x,
@@ -46,8 +36,13 @@ plot.see_check_model <- function(x,
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
+  plot_type <- attr(x, "type")
 
-  type <- match.arg(type)
+  if (!is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+    type <- plot_type
+  } else {
+    type <- match.arg(type)
+  }
 
   # set default values for arguments ------
 

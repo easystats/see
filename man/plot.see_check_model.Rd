@@ -38,16 +38,6 @@ Diagnostic plots for regression models.
 \dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 model <- lm(qsec ~ drat + wt, data = mtcars)
 plot(check_model(model))
-
-set.seed(99)
-d <- iris
-d$skewed <- rpois(150, 1)
-model <- glm(
-  skewed ~ Species + Petal.Length + Petal.Width,
-  data = d,
-  family = poisson()
-)
-plot(check_model(model), type = "discrete_interval")
 \dontshow{\}) # examplesIf}
 }
 \seealso{

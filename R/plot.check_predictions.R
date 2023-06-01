@@ -78,7 +78,13 @@ print.see_performance_pp_check <- function(x,
                                            ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
-  type <- match.arg(type)
+  plot_type <- attributes(x)$type
+
+  if (!is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+    type <- plot_type
+  } else {
+    type <- match.arg(type)
+  }
 
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, type)
@@ -109,7 +115,13 @@ plot.see_performance_pp_check <- function(x,
                                           ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
-  type <- match.arg(type)
+  plot_type <- attributes(x)$type
+
+  if (!is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+    type <- plot_type
+  } else {
+    type <- match.arg(type)
+  }
 
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, type)
