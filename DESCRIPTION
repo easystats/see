@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.7.5.7
+Version: 0.7.5.8
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -73,7 +73,7 @@ Imports:
     parameters (>= 0.20.2),
     performance (>= 0.10.1)
 Remotes:
-    easystats/correlation, easystats/performance
+    easystats/performance, easystats/bayestestR
 Suggests:
     brms,
     curl,

@@ -35,7 +35,7 @@ The \code{plot()} method for the \code{performance::check_model()} function.
 Diagnostic plots for regression models.
 }
 \examples{
-\dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("performance") && require("patchwork")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 model <- lm(qsec ~ drat + wt, data = mtcars)
 plot(check_model(model))
 \dontshow{\}) # examplesIf}

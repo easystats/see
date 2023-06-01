@@ -151,25 +151,16 @@ add_plot_attributes <- function(x) {
 
   if (!is.null(obj_name)) {
     # first try, parent frame
-    dat <- tryCatch(
-      {
-        get(obj_name, envir = parent.frame())
-      },
-      error = function(e) {
-        NULL
-      }
-    )
+    dat <- tryCatch(get(obj_name, envir = parent.frame()), error = function(e) NULL)
 
     if (is.null(dat)) {
       # second try, global env
-      dat <- tryCatch(
-        {
-          get(obj_name, envir = globalenv())
-        },
-        error = function(e) {
-          NULL
-        }
-      )
+      dat <- tryCatch(get(obj_name, envir = globalenv()), error = function(e) NULL)
+    }
+
+    if (is.null(dat)) {
+      # last try
+      model <- .dynGet(obj_name, ifnotfound = NULL)
     }
   }
 
@@ -185,4 +176,23 @@ add_plot_attributes <- function(x) {
   }
 
   dat
+}
+
+#' @keywords internal
+.dynGet <- function(x,
+                    ifnotfound = stop(gettextf("%s not found", sQuote(x)), domain = NA),
+                    minframe = 1L,
+                    inherits = FALSE) {
+  x <- insight::safe_deparse(x)
+  n <- sys.nframe()
+  myObj <- structure(list(.b = as.raw(7)), foo = 47L)
+  while (n > minframe) {
+    n <- n - 1L
+    env <- sys.frame(n)
+    r <- get0(x, envir = env, inherits = inherits, ifnotfound = myObj)
+    if (!identical(r, myObj)) {
+      return(r)
+    }
+  }
+  ifnotfound
 }
