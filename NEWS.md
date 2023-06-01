@@ -14,6 +14,8 @@
   assume practical equivalence for effects, but that we cannot accept the H0
   (in a frequentist framework).
 
+* Added some examples and cross references between docs.
+
 ## Bug fixes
 
 * Fixed issue with duplicated legend in the `plot()` method for

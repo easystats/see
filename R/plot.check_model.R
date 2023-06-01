@@ -1,3 +1,18 @@
+#' Plot method for checking model assumptions
+#'
+#' The `plot()` method for the `performance::check_model()` function.
+#' Diagnostic plots for regression models.
+#'
+#' @inheritParams print.see_performance_pp_check
+#' @inheritParams data_plot
+#'
+#' @return A ggplot2-object.
+#'
+#' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
+#'
+#' @examplesIf require("performance")
+#' model <- lm(qsec ~ drat + wt, data = mtcars)
+#' plot(check_model(model))
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_check_model <- function(x,
@@ -21,8 +36,13 @@ plot.see_check_model <- function(x,
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
+  plot_type <- attr(x, "type")
 
-  type <- match.arg(type)
+  if (!is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+    type <- plot_type
+  } else {
+    type <- match.arg(type)
+  }
 
   # set default values for arguments ------
 

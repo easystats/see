@@ -22,9 +22,10 @@ The \code{plot()} method for the \code{performance::check_homogeneity()}
 function.
 }
 \examples{
-library(performance)
+\dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 model <<- lm(len ~ supp + dose, data = ToothGrowth)
 result <- check_homogeneity(model)
 result
 plot(result)
+\dontshow{\}) # examplesIf}
 }

@@ -48,8 +48,12 @@ The \code{plot()} method for the \code{performance::check_normality()}
 function.
 }
 \examples{
-library(performance)
+\dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_normality(m)
 plot(result)
+\dontshow{\}) # examplesIf}
+}
+\seealso{
+See also the vignette about \href{https://easystats.github.io/performance/articles/check_model.html}{\code{check_model()}}.
 }
