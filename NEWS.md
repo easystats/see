@@ -8,6 +8,11 @@
   gains a `type` argument, to either create density plots, or discrete dots resp.
   interval plots for posterior predictive checks.
 
+* `plot()` for `performance::check_model()` sometimes failed to create the plot
+  under certain conditions, e.g. when the screen or app windows was zoomed-in.
+  If an error occurs, a much more informative error message is shown, providing
+  several possible solutions to resolve this poblem.
+
 * `plot()` for `parameters::equivalence_test()` now aligns the labelling with
   the `print()` method. Hence, the legend title is no longer labelled
   `"Decision on H0"`, but rather `"Equivalence"`, to emphasize that we can

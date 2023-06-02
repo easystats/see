@@ -97,15 +97,17 @@ plots <- function(...,
 .safe_print_plots <- function(pw, ...) {
   pw_drawn <- tryCatch(print(pw), error = function(e) e)
   if (inherits(pw_drawn, "simpleError")) {
-    msg_display1 <- "To fix this issue, please make the window larger."
-    msg_display3 <- "Finally, if this did not resolve your problems, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
+    msg_display1 <- "\n- To fix this issue, please make the window larger."
+    msg_display3 <- "\n- If this still does't resolve your problems, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
+    msg_display4 <- "\n- Finally, you can try to decrease the base font-size of your theme before plotting. Load `library(ggplot2)` and run: `theme_set(theme_classic(base_size = 6))`"
     if (Sys.getenv("RSTUDIO") == "1") {
       msg <- "The RStudio 'Plots' window is too small to show this set of plots."
-      msg_display2 <- "If this doesn't help, try to reset your zoom settings. In RStudio, go to Menu \"View > Actual Size\" and then retry."
+      msg_display2 <- "\n- If this doesn't help, try to reset your zoom settings. In RStudio, go to Menu \"View > Actual Size\" and then retry."
     } else {
       msg <- "The viewport is too small to show this set of plots."
-      msg_display2 <- "If this doesn't help, try to reset the zoom settings of your IDE and then retry."
+      msg_display2 <- "\n- If this doesn't help, try to reset the zoom settings of your IDE and then retry."
     }
-    insight::format_error(msg, msg_display1, msg_display2, msg_display3)
+    msg <- paste(msg, "You may try one of the following steps to resolve this problem.")
+    insight::format_error(msg, msg_display1, msg_display2, msg_display3, msg_display4)
   }
 }
