@@ -98,7 +98,7 @@ plots <- function(...,
   pw_drawn <- tryCatch(print(pw), error = function(e) e)
   if (inherits(pw_drawn, "simpleError")) {
     msg_display1 <- "\n- To fix this issue, please make the window larger."
-    msg_display3 <- "\n- If this still does't resolve your problems, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
+    msg_display3 <- "\n- If this still doesn't resolve your problems, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
     msg_display4 <- "\n- Finally, you can try to decrease the base font-size of your theme before plotting. Load `library(ggplot2)` and run: `theme_set(theme_classic(base_size = 6))`"
     if (Sys.getenv("RSTUDIO") == "1") {
       msg <- "The RStudio 'Plots' window is too small to show this set of plots."
