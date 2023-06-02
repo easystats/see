@@ -97,19 +97,15 @@ plots <- function(...,
 .safe_print_plots <- function(pw, ...) {
   pw_drawn <- tryCatch(print(pw), error = function(e) e)
   if (inherits(pw_drawn, "simpleError")) {
-    msg_display <- "If this doesn't help, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
+    msg_display1 <- "To fix this issue, please make the window larger."
+    msg_display3 <- "Finally, if this did not resolve your problems, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
     if (Sys.getenv("RSTUDIO") == "1") {
-      insight::format_error(
-        "The RStudio 'Plots' window is too small to show this set of plots.",
-        "Please make the window larger.",
-        msg_display
-      )
+      msg <- "The RStudio 'Plots' window is too small to show this set of plots."
+      msg_display2 <- "If this doesn't help, try to reset your zoom settings. In RStudio, go to Menu \"View > Actual Size\" and then retry."
     } else {
-      insight::format_error(
-        "The viewport is too small to show this set of plots.",
-        "Please make it larger.",
-        msg_display
-      )
+      msg <- "The viewport is too small to show this set of plots."
+      msg_display2 <- "If this doesn't help, try to reset the zoom settings of your IDE and then retry."
     }
+    insight::format_error(msg, msg_display1, msg_display2, msg_display3)
   }
 }
