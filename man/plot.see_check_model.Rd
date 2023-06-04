@@ -9,6 +9,7 @@
   style = theme_lucid,
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+  n_columns = 2,
   ...
 )
 }
@@ -24,6 +25,8 @@ hex-format) for points and line.}
 (default), \code{"discrete_dots"}, \code{"discrete_interval"} or \code{"discrete_both"} (the
 \verb{discrete_*} options are appropriate for models with discrete - binary, integer
 or ordinal etc. - outcomes).}
+
+\item{n_columns}{Number of columns to align plots.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

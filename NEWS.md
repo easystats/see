@@ -8,6 +8,9 @@
   gains a `type` argument, to either create density plots, or discrete dots resp.
   interval plots for posterior predictive checks.
 
+* `plot()` for `performance::check_model()` gains an `n_column` argument, to
+  define the number of columns for the diagnostic plots (by default, two columns).
+
 * `plot()` for `performance::check_model()` sometimes failed to create the plot
   under certain conditions, e.g. when the screen or app windows was zoomed-in.
   If an error occurs, a much more informative error message is shown, providing
