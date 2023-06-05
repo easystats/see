@@ -1,4 +1,8 @@
+# see (development version)
+
 # see 0.8.0
+
+## Major Changes
 
 * `plot()` for `performance::check_model()` no longer produces a normal QQ plot
   for GLMs. Instead, it now shows a half-normal QQ plot of the absolute value of
