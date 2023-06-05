@@ -271,21 +271,22 @@ plot.see_performance_pp_check <- function(x,
     x_tmp$grp <- NULL
 
     x_errorbars <- rbind(x_errorbars, x_tmp)
-    p1 <- ggplot2::ggplot() + ggplot2::geom_pointrange(
-      data = x_errorbars[x_errorbars$key == "Model-predicted data", ],
-      mapping = ggplot2::aes(
-        x = .data$x,
-        y = .data$count,
-        ymin = .data$CI_low,
-        ymax = .data$CI_high,
-        color = .data$key
-      ),
-      position = ggplot2::position_nudge(x = 0.2),
-      size = 1.5 * size_line,
-      linewidth = 1.5 * size_line,
-      stroke = 0,
-      shape = 16
-    ) +
+    p1 <- ggplot2::ggplot() +
+      ggplot2::geom_pointrange(
+        data = x_errorbars[x_errorbars$key == "Model-predicted data", ],
+        mapping = ggplot2::aes(
+          x = .data$x,
+          y = .data$count,
+          ymin = .data$CI_low,
+          ymax = .data$CI_high,
+          color = .data$key
+        ),
+        position = ggplot2::position_nudge(x = 0.2),
+        size = 1.5 * size_line,
+        linewidth = 1.5 * size_line,
+        stroke = 0,
+        shape = 16
+      ) +
       ggplot2::geom_point(
         data = x_errorbars[x_errorbars$key == "Observed data", ],
         mapping = ggplot2::aes(
