@@ -479,10 +479,10 @@ line-spacing="2">
 
 <div id="ref-Ben-Shachar2020" class="csl-entry">
 
-Ben-Shachar, M. S., Lüdecke, D., & Makowski, D. (2020). <span
-class="nocase">e</span>ffectsize: Estimation of effect size indices and
-standardized parameters. *Journal of Open Source Software*, *5*(56),
-2815. <https://doi.org/10.21105/joss.02815>
+Ben-Shachar, M. S., Lüdecke, D., & Makowski, D. (2020).
+<span class="nocase">e</span>ffectsize: Estimation of effect size
+indices and standardized parameters. *Journal of Open Source Software*,
+*5*(56), 2815. <https://doi.org/10.21105/joss.02815>
 
 </div>
 
@@ -507,8 +507,8 @@ Open Source Software*, *6*(60), 3139.
 
 <div id="ref-Makowski2019" class="csl-entry">
 
-Makowski, D., Ben-Shachar, M. S., & Lüdecke, D. (2019). <span
-class="nocase">bayestestR</span>: Describing effects and their
+Makowski, D., Ben-Shachar, M. S., & Lüdecke, D. (2019).
+<span class="nocase">bayestestR</span>: Describing effects and their
 uncertainty, existence and significance within the Bayesian framework.
 *Journal of Open Source Software*, *4*(40), 1541.
 <https://doi.org/10.21105/joss.01541>
