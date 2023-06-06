@@ -1,3 +1,14 @@
+#' Plot tabulated data.
+#'
+#' @param x Object created by `datawizard::data_tabulate()`.
+#' @param value_lab Boolean. Should values and percentages be displayed at the
+#'  top of each bar.
+#' @param remove_na Boolean. Should missing values be dropped?
+#' @param na_label The label given to missing values (only when
+#'  `remove_na = FALSE`).
+#' @param error_bar Boolean. Should error bars be displayed?
+#'
+#' @rdname plot.dw_data_tabulate
 #' @export
 
 plot.dw_data_tabulates <- function(x, value_lab = TRUE, remove_na = FALSE,
@@ -8,6 +19,8 @@ plot.dw_data_tabulates <- function(x, value_lab = TRUE, remove_na = FALSE,
   })
 }
 
+#' @rdname plot.dw_data_tabulate
+#'
 #' @export
 
 plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
