@@ -1,9 +1,26 @@
+#' Plot method for checking model assumptions
+#'
+#' The `plot()` method for the `performance::check_model()` function.
+#' Diagnostic plots for regression models.
+#'
+#' @inheritParams print.see_performance_pp_check
+#' @inheritParams data_plot
+#' @inheritParams plots
+#'
+#' @return A ggplot2-object.
+#'
+#' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
+#'
+#' @examplesIf require("performance") && require("patchwork")
+#' model <- lm(qsec ~ drat + wt, data = mtcars)
+#' plot(check_model(model))
 #' @importFrom ggplot2 .data
 #' @export
 plot.see_check_model <- function(x,
                                  style = theme_lucid,
                                  colors = NULL,
                                  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+                                 n_columns = 2,
                                  ...) {
   p <- list()
 
@@ -21,8 +38,13 @@ plot.see_check_model <- function(x,
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
+  plot_type <- attr(x, "type")
 
-  type <- match.arg(type)
+  if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+    type <- plot_type
+  } else {
+    type <- match.arg(type)
+  }
 
   # set default values for arguments ------
 
@@ -184,390 +206,13 @@ plot.see_check_model <- function(x,
   }
 
   if (panel) {
-    pw <- plots(p, n_columns = 2)
+    pw <- plots(p, n_columns = n_columns)
     .safe_print_plots(pw, ...)
     invisible(pw)
   } else {
     return(p)
   }
 }
-
-
-
-.plot_diag_vif <- function(x,
-                           size_point,
-                           size_line,
-                           theme_style = theme_lucid,
-                           colors = unname(social_colors(c("green", "blue", "red"))),
-                           ci_data = NULL,
-                           is_check_model = FALSE) {
-  ylim <- ceiling(max(x$y, na.rm = TRUE))
-  xlim <- nrow(x)
-  if (ylim < 10) ylim <- 10
-
-  if (!is.null(ci_data)) {
-    x <- cbind(x, ci_data)
-  } else {
-    x$VIF_CI_low <- NA_real_
-    x$VIF_CI_high <- NA_real_
-  }
-
-  # make sure legend is properly sorted
-  x$group <- factor(x$group, levels = c("low", "moderate", "high"))
-  levels(x$group) <- c("Low (< 5)", "Moderate (< 10)", "High (\u2265 10)")
-  names(colors) <- c("Low (< 5)", "Moderate (< 10)", "High (\u2265 10)")
-
-  p <- ggplot2::ggplot(x) +
-    ggplot2::aes(
-      x = .data$x,
-      y = .data$y,
-      color = .data$group,
-      ymin = .data$VIF_CI_low,
-      ymax = .data$VIF_CI_high
-    ) +
-    ggplot2::annotate(
-      geom = "rect",
-      xmin = -Inf,
-      xmax = Inf,
-      ymin = 1,
-      ymax = 5,
-      fill = colors[1],
-      color = NA,
-      alpha = 0.15
-    ) +
-    ggplot2::annotate(
-      geom = "rect",
-      xmin = -Inf,
-      xmax = Inf,
-      ymin = 5,
-      ymax = 10,
-      fill = colors[2],
-      color = NA,
-      alpha = 0.15
-    ) +
-    ggplot2::annotate(
-      geom = "rect",
-      xmin = -Inf,
-      xmax = Inf,
-      ymin = 10,
-      ymax = Inf,
-      fill = colors[3],
-      color = NA,
-      alpha = 0.15
-    ) +
-    {
-      if (!is.null(ci_data)) {
-        list(
-          ggplot2::geom_linerange(
-            linewidth = size_line,
-            na.rm = TRUE
-          ),
-          ggplot2::geom_segment(
-            data = x[x$VIF_CI_high > ylim * 1.15, ],
-            mapping = aes(
-              x = .data$x,
-              xend = .data$x,
-              y = .data$y,
-              yend = .data$VIF_CI_high
-            ),
-            lineend = "round",
-            linejoin = "round",
-            arrow = ggplot2::arrow(
-              ends = "last", type = "closed",
-              angle = 20, length = ggplot2::unit(0.03, "native")
-            ),
-            show.legend = FALSE
-          )
-        )
-      }
-    } +
-    geom_point2(
-      size = size_point,
-      na.rm = TRUE
-    ) +
-    ggplot2::labs(
-      title = "Collinearity",
-      subtitle = "High collinearity (VIF) may inflate parameter uncertainty",
-      x = NULL,
-      y = paste("Variance Inflation", "Factor (VIF, log-scaled)", sep = ifelse(is_check_model, "\n", " "))
-    ) +
-    ggplot2::scale_color_manual(
-      values = colors,
-      aesthetics = c("color", "fill"),
-      guide = ggplot2::guide_legend(title = NULL)
-    ) +
-    theme_style(
-      base_size = 10,
-      plot.title.space = 3,
-      axis.title.space = 5
-    ) +
-    ggplot2::scale_y_continuous(
-      limits = c(1, ylim * 1.15),
-      oob = scales::oob_squish,
-      trans = "log10",
-      expand = c(0, 0),
-      breaks = scales::log_breaks(n = 7, base = 10)
-    ) +
-    ggplot2::scale_x_discrete() +
-    ggplot2::theme(
-      legend.position = "bottom",
-      legend.margin = ggplot2::margin(0, 0, 0, 0),
-      legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
-    )
-
-  if ("facet" %in% colnames(x)) {
-    p <- p + ggplot2::facet_wrap(~facet, nrow = 1, scales = "free")
-  }
-
-  p
-}
-
-
-
-.plot_diag_norm <- function(x,
-                            size_line,
-                            alpha_level = 0.2,
-                            theme_style = theme_lucid,
-                            colors = unname(social_colors(c("green", "blue", "red")))) {
-  ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
-    ggplot2::geom_ribbon(
-      mapping = ggplot2::aes(ymin = 0, ymax = .data$y),
-      colour = NA,
-      fill = colors[2],
-      alpha = alpha_level,
-      na.rm = TRUE
-    ) +
-    ggplot2::geom_line(
-      mapping = ggplot2::aes(y = .data$curve),
-      colour = colors[1],
-      linewidth = size_line,
-      na.rm = TRUE
-    ) +
-    ggplot2::labs(
-      x = "Residuals",
-      y = "Density",
-      title = "Normality of Residuals",
-      subtitle = "Distribution should be close to the normal curve"
-    ) +
-    theme_style(
-      base_size = 10,
-      plot.title.space = 3,
-      axis.title.space = 5
-    ) +
-    ggplot2::scale_y_continuous(labels = NULL)
-}
-
-
-
-
-.plot_diag_qq <- function(x,
-                          size_point,
-                          size_line,
-                          alpha_level = 0.2,
-                          detrend = FALSE,
-                          theme_style = theme_lucid,
-                          colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = 0.8,
-                          show_dots = TRUE,
-                          model_info = NULL) {
-  qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
-  # qq-halfnorm for GLM
-  if (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count)) {
-    gg_init <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
-    qq_stuff <- list(
-      ggplot2::geom_point(
-        shape = 16,
-        stroke = 0,
-        size = size_point,
-        colour = colors[2] # "#2c3e50"
-      ),
-      ggplot2::geom_qq_line(
-        ggplot2::aes(sample = .data$y),
-        linewidth = size_line,
-        colour = colors[1],
-        distribution = qhalfnorm,
-        na.rm = TRUE
-      )
-    )
-    y_lab <- "|Std. Deviance Residuals|"
-  } else if (requireNamespace("qqplotr", quietly = TRUE)) {
-    gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
-    qq_stuff <- list(
-      qqplotr::stat_qq_band(
-        alpha = alpha_level,
-        detrend = detrend
-      ),
-      qqplotr::stat_qq_point(
-        shape = 16,
-        stroke = 0,
-        size = size_point,
-        colour = colors[2], # "#2c3e50",
-        alpha = dot_alpha_level,
-        detrend = detrend
-      ),
-      qqplotr::stat_qq_line(
-        linewidth = size_line,
-        colour = colors[1],
-        detrend = detrend
-      )
-    )
-    y_lab <- "Sample Quantiles"
-  } else {
-    insight::format_alert(
-      paste0(
-        "For confidence bands",
-        if (isTRUE(detrend)) " and detrending",
-        ", please install `qqplotr`."
-      )
-    )
-
-    gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
-    qq_stuff <- list(
-      ggplot2::geom_qq_line(
-        linewidth = size_line,
-        colour = colors[1],
-        na.rm = TRUE
-      ),
-      ggplot2::geom_qq(
-        shape = 16,
-        na.rm = TRUE,
-        stroke = 0,
-        size = size_point,
-        colour = colors[2] # "#2c3e50"
-      )
-    )
-    y_lab <- "Sample Quantiles"
-  }
-
-  if (!isTRUE(show_dots)) {
-    qq_stuff[2] <- NULL
-  }
-
-  gg_init +
-    qq_stuff +
-    ggplot2::labs(
-      title = "Normality of Residuals",
-      subtitle = "Dots should fall along the line",
-      y = y_lab,
-      x = "Standard Normal Distribution Quantiles"
-    ) +
-    theme_style(
-      base_size = 10,
-      plot.title.space = 3,
-      axis.title.space = 5
-    )
-}
-
-
-
-
-.plot_diag_pp <- function(x,
-                          size_point,
-                          size_line,
-                          alpha_level = 0.2,
-                          detrend = FALSE,
-                          theme_style = theme_lucid,
-                          colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = 0.8) {
-  if (requireNamespace("qqplotr", quietly = TRUE)) {
-    p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
-      qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
-      qqplotr::stat_pp_line(
-        linewidth = size_line,
-        colour = colors[1],
-        detrend = detrend
-      ) +
-      qqplotr::stat_pp_point(
-        shape = 16, stroke = 0,
-        size = size_point,
-        colour = colors[2], # "#2c3e50",
-        alpha = dot_alpha_level,
-        detrend = detrend
-      )
-  } else if (requireNamespace("MASS", quietly = TRUE)) {
-    message(
-      "For confidence bands",
-      if (isTRUE(detrend)) " and detrending",
-      ", please install `qqplotr`."
-    )
-
-    x$probs <- stats::ppoints(x$res)
-    dparms <- MASS::fitdistr(x$res, densfun = "normal")
-    x$y <- do.call(stats::pnorm, c(list(q = x$res), dparms$estimate))
-
-    p_plot <- ggplot2::ggplot(x, ggplot2::aes(x = .data$probs, y = .data$y)) +
-      ggplot2::geom_abline(
-        slope = 1,
-        linewidth = size_line,
-        colour = colors[1]
-      ) +
-      geom_point2(
-        colour = colors[2],
-        size = size_point,
-        alpha = dot_alpha_level
-      ) # "#2c3e50"
-  } else {
-    stop("Package 'qqplotr' OR 'MASS' required for PP-plots. Please install one of them.", call. = FALSE)
-  }
-
-  p_plot +
-    ggplot2::labs(
-      title = "Normality of Residuals (PP plot)",
-      subtitle = "Dots should fall along the line",
-      y = "Cummulative Probability",
-      x = "Probability Points"
-    ) +
-    theme_style(
-      base_size = 10,
-      plot.title.space = 3,
-      axis.title.space = 5
-    )
-}
-
-
-
-
-.plot_diag_homogeneity <- function(x,
-                                   size_point,
-                                   size_line,
-                                   alpha_level = 0.2,
-                                   theme_style = theme_lucid,
-                                   colors = unname(social_colors(c("green", "blue", "red"))),
-                                   dot_alpha_level = 0.8,
-                                   show_dots = TRUE) {
-  p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
-
-  if (isTRUE(show_dots)) {
-    p <- p +
-      geom_point2(
-        colour = colors[2],
-        size = size_point,
-        alpha = dot_alpha_level
-      )
-  }
-
-  p +
-    ggplot2::stat_smooth(
-      method = "loess",
-      se = TRUE,
-      alpha = alpha_level,
-      formula = y ~ x,
-      linewidth = size_line,
-      colour = colors[1]
-    ) +
-    ggplot2::labs(
-      title = "Homogeneity of Variance",
-      subtitle = "Reference line should be flat and horizontal",
-      y = expression(sqrt("|Std. residuals|")),
-      x = "Fitted values"
-    ) +
-    theme_style(
-      base_size = 10,
-      plot.title.space = 3,
-      axis.title.space = 5
-    )
-}
-
 
 
 .plot_diag_linearity <- function(x,
@@ -610,110 +255,4 @@ plot.see_check_model <- function(x,
       plot.title.space = 3,
       axis.title.space = 5
     )
-}
-
-
-
-.plot_diag_reqq <- function(x,
-                            size_point,
-                            size_line,
-                            panel = TRUE,
-                            alpha_level = 0.2,
-                            theme_style = theme_lucid,
-                            colors = unname(social_colors(c("green", "blue", "red"))),
-                            dot_alpha_level = 0.8,
-                            show_dots = TRUE) {
-  lapply(names(x), function(i) {
-    dat <- x[[i]]
-    p <- ggplot2::ggplot(dat, ggplot2::aes(x = .data$x, y = .data$y)) +
-      ggplot2::labs(
-        x = "Theoretical Quantiles",
-        y = "RE Quantiles",
-        title = sprintf("Normality of Random Effects (%s)", i),
-        subtitle = "Dots should be plotted along the line"
-      ) +
-      ggplot2::stat_smooth(
-        method = "lm",
-        alpha = alpha_level,
-        linewidth = size_line,
-        formula = y ~ x,
-        colour = colors[1]
-      ) +
-      ggplot2::geom_errorbar(
-        ggplot2::aes(ymin = .data$conf.low, ymax = .data$conf.high),
-        width = 0,
-        colour = colors[2],
-        alpha = dot_alpha_level
-      ) +
-      theme_style(
-        base_size = 10,
-        plot.title.space = 3,
-        axis.title.space = 5
-      )
-
-    if (isTRUE(show_dots)) {
-      p <- p +
-        geom_point2(
-          colour = colors[2],
-          size = size_point,
-          alpha = dot_alpha_level
-        )
-    }
-
-
-    if (nlevels(dat$facet) > 1 && isTRUE(panel)) {
-      p <- p + ggplot2::facet_wrap(~facet, scales = "free")
-    }
-
-    p
-  })
-}
-
-
-
-.plot_diag_overdispersion <- function(x,
-                                      theme_style = theme_lucid,
-                                      colors = c("#3aaf85", "#1b6ca8"),
-                                      size_line = 0.8,
-                                      type = 1,
-                                      ...) {
-  if (is.null(type) || type == 1) {
-    p <- ggplot2::ggplot(x) +
-      ggplot2::aes(x = .data$Predicted) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$V), linewidth = size_line, color = colors[2], se = FALSE) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), linewidth = size_line, color = colors[1]) +
-      ggplot2::labs(
-        title = "Overdispersion and zero-inflation",
-        subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",
-        x = "Predicted mean",
-        y = "Residual variance"
-      ) +
-      theme_style(
-        base_size = 10,
-        plot.title.space = 3,
-        axis.title.space = 5
-      )
-  } else {
-    p <- ggplot2::ggplot(x) +
-      ggplot2::aes(x = .data$Predicted) +
-      ggplot2::geom_point(ggplot2::aes(y = .data$StdRes)) +
-      ggplot2::geom_hline(
-        yintercept = c(-2, 2, -4, 4),
-        linetype = c("solid", "solid", "dashed", "dashed"),
-        color = c(rep(colors[1], 2), rep(colors[2], 2))
-      ) +
-      ggplot2::labs(
-        title = "Overdispersion and zero-inflation",
-        subtitle = "Most points should be within solid lines, few points outside dashed lines",
-        x = "Predicted mean",
-        y = "Standardized resiuduals"
-      ) +
-      theme_style(
-        base_size = 10,
-        plot.title.space = 3,
-        axis.title.space = 5
-      )
-  }
-
-  p
 }

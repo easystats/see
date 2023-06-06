@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 0 note
 
-* Updates docs and tests for the latest `{ggplot2}` release.
+* Maintenance release.
 
 ## revdepcheck results
 

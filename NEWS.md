@@ -1,18 +1,40 @@
 # see (development version)
 
-* `plot()` for `performance::check_model()` no longer produces a normal QQ plot
-  for GLMs. Instead, it now shows a half-normal QQ plot of the absolute value
-  of the standardized deviance residuals.
+## Minor Changes
 
-* `plot()` for `performance::check_model()` and `performance::check_predictions()`
-  gains a `type` argument, to either create density plots, or discrete dots resp.
-  interval plots for posterior predictive checks.
+* The `print()` method for `performance::check_model()` now also evaluates the
+  default plot type for posterior predictive checks.
+
+# see 0.8.0
+
+## Major Changes
+
+* `plot()` for `performance::check_model()` no longer produces a normal QQ plot
+  for GLMs. Instead, it now shows a half-normal QQ plot of the absolute value of
+  the standardized deviance residuals.
+
+* `plot()` for `performance::check_model()` and
+  `performance::check_predictions()` gains a `type` argument, to either create
+  density plots, or discrete dots resp. interval plots for posterior predictive
+  checks.
+
+* `plot()` for `performance::check_model()` gains an `n_column` argument, to
+  define the number of columns for the diagnostic plots (by default, two
+  columns).
+
+* `plot()` for `performance::check_model()` sometimes failed to create the plot
+  under certain conditions, e.g. when the screen or app windows was zoomed-in.
+  If an error occurs, a much more informative error message is shown, providing
+  several possible solutions to resolve this problem.
 
 * `plot()` for `parameters::equivalence_test()` now aligns the labelling with
-  the `print()` method. Hence, the legend title is no longer labelled
-  `"Decision on H0"`, but rather `"Equivalence"`, to emphasize that we can
-  assume practical equivalence for effects, but that we cannot accept the H0
-  (in a frequentist framework).
+  the `print()` method. Hence, the legend title is no longer labelled `"Decision
+  on H0"`, but rather `"Equivalence"`, to emphasize that we can assume practical
+  equivalence for effects, but that we cannot accept the H0 (in a frequentist
+  framework).
+
+* Added some examples and cross references between docs. Furthermore, a vignette
+  about plotting functions for the *datawizard* package was added.
 
 ## Bug fixes
 
@@ -21,18 +43,18 @@
 
 * Fixes issue in `plot.binned_residuals()` for models whose residuals were
   completely inside error bounds.
-  
-* `plot()` now works when using it on the output of `describe_distribution()` with
-  a `select` argument of length 1.
+
+* `plot()` now works when using it on the output of `describe_distribution()`
+  with a `select` argument of length 1.
 
 # see 0.7.5
 
 ## Changes
 
 * Changed the default "yellow" color in `palette_okabeito()` to `"#F5C710"`
-  instead of `"#F0E442"` to increase visibility against a white background.
-  For the original Okabe-Ito palette, set `palette = "full_original"` or 
-  `palette = "black_first_original"`.
+  instead of `"#F0E442"` to increase visibility against a white background. For
+  the original Okabe-Ito palette, set `palette = "full_original"` or `palette =
+  "black_first_original"`.
 
 * Deals with deprecated arguments and functions in recent `{ggplot2}` updates.
 

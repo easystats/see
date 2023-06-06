@@ -43,7 +43,8 @@ hex-format) for points and line.}
 
 \item{type}{Plot type for the posterior predictive checks plot. Can be \code{"density"}
 (default), \code{"discrete_dots"}, \code{"discrete_interval"} or \code{"discrete_both"} (the
-\verb{discrete_*} options are only for models with binary, integer or ordinal outcomes).}
+\verb{discrete_*} options are appropriate for models with discrete - binary, integer
+or ordinal etc. - outcomes).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -69,4 +70,7 @@ model <- glm(
 out <- check_predictions(model)
 plot(out, type = "discrete_dots")
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+See also the vignette about \href{https://easystats.github.io/performance/articles/check_model.html}{\code{check_model()}}.
 }

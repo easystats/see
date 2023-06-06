@@ -7,8 +7,7 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @examples
-#' library(performance)
+#' @examplesIf require("performance")
 #' model <<- lm(len ~ supp + dose, data = ToothGrowth)
 #' result <- check_homogeneity(model)
 #' result
@@ -125,4 +124,46 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       subtitle = "Groups should be evenly spread"
     ) +
     theme(plot.title.position = "plot")
+}
+
+
+.plot_diag_homogeneity <- function(x,
+                                   size_point,
+                                   size_line,
+                                   alpha_level = 0.2,
+                                   theme_style = theme_lucid,
+                                   colors = unname(social_colors(c("green", "blue", "red"))),
+                                   dot_alpha_level = 0.8,
+                                   show_dots = TRUE) {
+  p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
+
+  if (isTRUE(show_dots)) {
+    p <- p +
+      geom_point2(
+        colour = colors[2],
+        size = size_point,
+        alpha = dot_alpha_level
+      )
+  }
+
+  p +
+    ggplot2::stat_smooth(
+      method = "loess",
+      se = TRUE,
+      alpha = alpha_level,
+      formula = y ~ x,
+      linewidth = size_line,
+      colour = colors[1]
+    ) +
+    ggplot2::labs(
+      title = "Homogeneity of Variance",
+      subtitle = "Reference line should be flat and horizontal",
+      y = expression(sqrt("|Std. residuals|")),
+      x = "Fitted values"
+    ) +
+    theme_style(
+      base_size = 10,
+      plot.title.space = 3,
+      axis.title.space = 5
+    )
 }
