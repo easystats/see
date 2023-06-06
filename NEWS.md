@@ -1,5 +1,10 @@
 # see (development version)
 
+## Minor Changes
+
+* The `print()` method for `performance::check_model()` now also evaluates the
+  default plot type for posterior predictive checks.
+
 # see 0.8.0
 
 ## Major Changes
