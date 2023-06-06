@@ -234,11 +234,11 @@ model <- glm(vs ~ wt + mpg, data = mtcars, family = "binomial")
 check_model(model)
 ```
 
-### Using discrete plot type for posterior predictive checks
+### Using different discrete plot type for posterior predictive checks
 
 ```{r fig.height=12, fig.width=10}
 out <- check_model(model)
-plot(out, type = "discrete_interval")
+plot(out, type = "discrete_both")
 ```
 
 ### Modelling count data
