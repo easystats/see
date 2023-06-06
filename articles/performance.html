@@ -407,11 +407,12 @@ plots to inspect overdispersion.</p>
 <p><img src="performance_files/figure-html/unnamed-chunk-19-1.png" width="100%"></p>
 </div>
 <div class="section level4">
-<h4 id="using-discrete-plot-type-for-posterior-predictive-checks">Using discrete plot type for posterior predictive checks<a class="anchor" aria-label="anchor" href="#using-discrete-plot-type-for-posterior-predictive-checks"></a>
+<h4 id="using-different-discrete-plot-type-for-posterior-predictive-checks">Using different discrete plot type for posterior predictive
+checks<a class="anchor" aria-label="anchor" href="#using-different-discrete-plot-type-for-posterior-predictive-checks"></a>
 </h4>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out</span>, type <span class="op">=</span> <span class="st">"discrete_interval"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out</span>, type <span class="op">=</span> <span class="st">"discrete_both"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
 </div>
 <div class="section level4">
@@ -443,7 +444,7 @@ autocorrelated, but this check will not be shown in the visual
 check.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_autocorrelation.html" class="external-link">check_autocorrelation</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.008).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Autocorrelated residuals detected (p = 0.010).</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
