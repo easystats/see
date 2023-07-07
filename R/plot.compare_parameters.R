@@ -77,7 +77,7 @@ plot.see_compare_parameters <- function(x,
 
 
   if (!show_intercept) {
-    x <- x[!.in_intercepts(x$Parameter), ]
+    x <- x[!.is_intercept(x$Parameter), ]
   }
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {

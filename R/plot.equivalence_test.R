@@ -48,13 +48,13 @@ plot.see_equivalence_test <- function(x,
   }
 
   # if we have intercept-only models, keep at least the intercept
-  intercepts <- which(.in_intercepts(x$Parameter))
+  intercepts <- which(.is_intercept(x$Parameter))
   if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
     x <- x[-intercepts, ]
   }
 
   cp <- insight::clean_parameters(model)
-  intercepts <- which(.in_intercepts(cp$Parameter))
+  intercepts <- which(.is_intercept(cp$Parameter))
   if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
     cp <- cp[-intercepts, ]
   }
@@ -380,7 +380,7 @@ plot.see_equivalence_test_lm <- function(x,
   }
 
   # if we have intercept-only models, keep at least the intercept
-  intercepts <- which(.in_intercepts(x$Parameter))
+  intercepts <- which(.is_intercept(x$Parameter))
   if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
     x <- x[-intercepts, ]
   }
