@@ -42,7 +42,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
   groups <- unique(dataplot$y)
   if (!show_intercept) {
     dataplot <- .remove_intercept(dataplot, column = "y", show_intercept = show_intercept)
-    groups <- unique(setdiff(groups, .intercepts()))
+    groups <- unique(setdiff(groups, .intercept_names))
   }
 
   if (length(groups) == 1) {

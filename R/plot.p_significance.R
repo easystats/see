@@ -103,7 +103,7 @@ data_plot.p_significance <- function(x,
   groups <- unique(dataplot$y)
   if (!show_intercept) {
     dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
-    groups <- unique(setdiff(groups, .intercepts()))
+    groups <- unique(setdiff(groups, .intercept_names))
   }
 
   if (length(groups) == 1) {

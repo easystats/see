@@ -113,7 +113,7 @@
 
 
 
-.intercepts <- function() {
+.intercept_names <-
   c(
     "(intercept)_zi",
     "intercept (zero-inflated)",
@@ -123,12 +123,11 @@
     "b_intercept",
     "b_zi_intercept"
   )
-}
 
 
 .is_intercept <- function(x) {
   x <- tolower(x)
-  x %in% .intercepts() | grepl("intercept", x)
+  x %in% .intercept_names | grepl("(?i)intercept[^a-zA-Z]", x)
 }
 
 .remove_intercept <- function(x, column = "Parameter", show_intercept = FALSE) {
