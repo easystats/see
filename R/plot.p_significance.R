@@ -103,7 +103,7 @@ data_plot.p_significance <- function(x,
   groups <- unique(dataplot$y)
   if (!show_intercept) {
     dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
-    groups <- unique(setdiff(groups, .intercepts()))
+    groups <- unique(setdiff(groups, .intercept_names))
   }
 
   if (length(groups) == 1) {
@@ -192,6 +192,9 @@ plot.see_p_significance <- function(x,
     n_columns <- NULL
   }
 
+  # get parameter names for filtering
+  params <- unique(x$y)
+
   # get labels
   labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
@@ -216,6 +219,7 @@ plot.see_p_significance <- function(x,
     p <- p +
       .add_prior_layer_ridgeline(
         model,
+        parameter = params,
         show_intercept = show_intercept,
         priors_alpha = priors_alpha
       ) +

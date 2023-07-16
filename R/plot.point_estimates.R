@@ -132,7 +132,7 @@ plot.see_point_estimate <- function(x,
       x_lab <- "Parameter Value"
     }
 
-    if (!show_intercept && .has_intercept(x_lab)) {
+    if (!show_intercept && .is_intercept(x_lab)) {
       return(NULL)
     }
 
