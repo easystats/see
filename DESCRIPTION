@@ -97,7 +97,7 @@ Suggests:
     patchwork,
     poorman,
     psych,
-    qqplotr,
+    qqplotr (>= 0.0.6),
     randomForest,
     rlang,
     rmarkdown,
