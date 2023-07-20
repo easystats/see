@@ -10,6 +10,9 @@
 #' @param colors Character vector of length two, indicating the colors (in
 #'   hex-format) for points and line.
 #' @param detrend Logical that decides if the plot should be detrended.
+#' @param method The method used for estimating the qq/pp bands. Default to
+#'   `"ell"` (equal local levels / simultaneous testing - recommended). See
+#'   `qqplotr::stat_qq_band()` for more options and details.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #'
@@ -31,6 +34,7 @@ plot.see_check_normality <- function(x,
                                      dot_alpha = 0.8,
                                      colors = c("#3aaf85", "#1b6ca8"),
                                      detrend = FALSE,
+                                     method = "ell",
                                      ...) {
   type <- match.arg(type)
 
@@ -75,7 +79,8 @@ plot.see_check_normality <- function(x,
         alpha_level = alpha,
         detrend = detrend,
         dot_alpha_level = dot_alpha,
-        model_info = model_info
+        model_info = model_info,
+        method = method
       )
     } else if (type == "density") {
       r <- suppressMessages(stats::residuals(model))
@@ -95,7 +100,8 @@ plot.see_check_normality <- function(x,
         size_line = size_line,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha
+        dot_alpha_level = dot_alpha,
+        method = method
       )
     }
   }
@@ -145,6 +151,7 @@ plot.see_check_normality <- function(x,
                           size_line,
                           alpha_level = 0.2,
                           detrend = FALSE,
+                          method = "ell",
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8,
@@ -175,7 +182,8 @@ plot.see_check_normality <- function(x,
     qq_stuff <- list(
       qqplotr::stat_qq_band(
         alpha = alpha_level,
-        detrend = detrend
+        detrend = detrend,
+        bandType = method
       ),
       qqplotr::stat_qq_point(
         shape = 16,
@@ -246,12 +254,13 @@ plot.see_check_normality <- function(x,
                           size_line,
                           alpha_level = 0.2,
                           detrend = FALSE,
+                          method = "ell",
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
-      qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
+      qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend, bandType = method) +
       qqplotr::stat_pp_line(
         linewidth = size_line,
         colour = colors[1],

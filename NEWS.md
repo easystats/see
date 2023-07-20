@@ -4,6 +4,9 @@
 
 * The `print()` method for `performance::check_model()` now also evaluates the
   default plot type for posterior predictive checks.
+* QQ/PP-plots now default to drawing simultaneous testing bands (when the
+  `qqplotr` package is available). Previous behavior can be restored by setting
+  `method = "pointwise"`.
 
 # see 0.8.0
 

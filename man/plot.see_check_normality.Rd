@@ -14,6 +14,7 @@
   dot_alpha = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
+  method = "ell",
   ...
 )
 }
@@ -37,6 +38,10 @@ statistical model.}
 hex-format) for points and line.}
 
 \item{detrend}{Logical that decides if the plot should be detrended.}
+
+\item{method}{The method used for estimating the qq/pp bands. Default to
+\code{"ell"} (equal local levels / simultaneous testing - recommended). See
+\code{qqplotr::stat_qq_band()} for more options and details.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
