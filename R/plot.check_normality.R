@@ -26,6 +26,10 @@
 #' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 #' result <- check_normality(m)
 #' plot(result)
+#'
+#' @examplesIf require("performance") && require("qqplotr")
+#' plot(result, type = "qq", detrend = TRUE)
+#'
 #' @export
 plot.see_check_normality <- function(x,
                                      type = c("density", "qq", "pp"),
