@@ -4,12 +4,16 @@
 #' function.
 #'
 #' @param type Character vector, indicating the type of plot.
+#'   Options are `"qq"` (default) for quantile-quantile (Q-Q) plots,
+#'   `"pp"` for probability-probability (P-P) plots, or
+#'   `"density"` for density overlay plots.
 #' @param size_line Numeric value specifying size of line geoms.
 #' @param dot_alpha Numeric value specifying alpha level of the point geoms.
 #' @param alpha Numeric value specifying alpha level of the confidence bands.
 #' @param colors Character vector of length two, indicating the colors (in
 #'   hex-format) for points and line.
-#' @param detrend Logical that decides if the plot should be detrended.
+#' @param detrend Logical that decides if Q-Q and P-P plots should be de-trended.
+#'   Defaults to `TRUE` if the *qqplotr* package is installed and `FALSE` otherwise.
 #' @param method The method used for estimating the qq/pp bands. Default to
 #'   `"ell"` (equal local levels / simultaneous testing - recommended). Can also
 #'   be one of `"pointwise"` or `"boot"` for pointwise confidence bands, or
@@ -32,14 +36,14 @@
 #'
 #' @export
 plot.see_check_normality <- function(x,
-                                     type = c("density", "qq", "pp"),
+                                     type = c("qq", "pp", "density"),
                                      data = NULL,
                                      size_line = 0.8,
                                      size_point = 2,
                                      alpha = 0.2,
                                      dot_alpha = 0.8,
                                      colors = c("#3aaf85", "#1b6ca8"),
-                                     detrend = FALSE,
+                                     detrend = requireNamespace("qqplotr", quietly = TRUE),
                                      method = "ell",
                                      ...) {
   type <- match.arg(type)
@@ -302,15 +306,15 @@ plot.see_check_normality <- function(x,
         alpha = dot_alpha_level
       ) # "#2c3e50"
   } else {
-    stop("Package 'qqplotr' OR 'MASS' required for PP-plots. Please install one of them.", call. = FALSE)
+    stop("Package 'qqplotr' OR 'MASS' required for P-P plots. Please install one of them.", call. = FALSE)
   }
 
   p_plot +
     ggplot2::labs(
-      title = "Normality of Residuals (PP plot)",
+      title = "Normality of Residuals",
       subtitle = "Dots should fall along the line",
-      y = "Cummulative Probability",
-      x = "Probability Points"
+      y = "Sample Cummulative Probability",
+      x = "Standard Normal Cumulative Probability"
     ) +
     theme_style(
       base_size = 10,

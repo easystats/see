@@ -66,6 +66,12 @@ data_plot.n_clusters <- data_plot.n_factors
 #'
 #' The `plot()` method for the `parameters::n_factors()` and `parameters::n_clusters()`
 #'
+#' @param type Character vector, indicating the type of plot.
+#'   Options are three different shapes to illustrate the degree of consensus
+#'   between dimensionality methods for each number of factors;
+#'    `"bar"` (default) for a bar chart,
+#'    `"line"` for a horizontal point and line chart, or
+#'   `"area"` for an area chart (frequency polygon).
 #' @param size Depending on `type`, a numeric value specifying size of bars,
 #'   lines, or segments.
 #' @inheritParams data_plot
