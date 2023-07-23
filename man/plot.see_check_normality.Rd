@@ -13,7 +13,7 @@
   alpha = 0.2,
   dot_alpha = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
-  detrend = requireNamespace("qqplotr", quietly = TRUE),
+  detrend = TRUE,
   method = "ell",
   ...
 )
@@ -40,8 +40,8 @@ statistical model.}
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
 
-\item{detrend}{Logical that decides if Q-Q and P-P plots should be de-trended.
-Defaults to \code{TRUE} if the \emph{qqplotr} package is installed and \code{FALSE} otherwise.}
+\item{detrend}{Logical that decides if Q-Q and P-P plots should be de-trended
+(also known as \emph{worm plots}).}
 
 \item{method}{The method used for estimating the qq/pp bands. Default to
 \code{"ell"} (equal local levels / simultaneous testing - recommended). Can also
