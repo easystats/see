@@ -7,6 +7,8 @@
 * QQ/PP-plots now default to drawing simultaneous testing bands (when the
   `qqplotr` package is available). Previous behavior can be restored by setting
   `method = "pointwise"`.
+* Plot method for `performance::check_normality()` now default to a detrended 
+  QQ-plot. Previous behavior can be restored by setting `type = "density"`.
 
 # see 0.8.0
 
