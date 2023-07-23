@@ -40,8 +40,10 @@ hex-format) for points and line.}
 \item{detrend}{Logical that decides if the plot should be detrended.}
 
 \item{method}{The method used for estimating the qq/pp bands. Default to
-\code{"ell"} (equal local levels / simultaneous testing - recommended). See
-\code{qqplotr::stat_qq_band()} for more options and details.}
+\code{"ell"} (equal local levels / simultaneous testing - recommended). Can also
+be one of \code{"pointwise"} or \code{"boot"} for pointwise confidence bands, or
+\code{"ks"} or \code{"ts"} for simultaneous testing. See \code{qqplotr::stat_qq_band()}
+for details.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

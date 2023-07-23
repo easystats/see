@@ -11,8 +11,10 @@
 #'   hex-format) for points and line.
 #' @param detrend Logical that decides if the plot should be detrended.
 #' @param method The method used for estimating the qq/pp bands. Default to
-#'   `"ell"` (equal local levels / simultaneous testing - recommended). See
-#'   `qqplotr::stat_qq_band()` for more options and details.
+#'   `"ell"` (equal local levels / simultaneous testing - recommended). Can also
+#'   be one of `"pointwise"` or `"boot"` for pointwise confidence bands, or
+#'   `"ks"` or `"ts"` for simultaneous testing. See `qqplotr::stat_qq_band()`
+#'   for details.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #'
