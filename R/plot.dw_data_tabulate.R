@@ -13,10 +13,10 @@
 
 plot.dw_data_tabulates <- function(x, value_lab = TRUE, remove_na = FALSE,
                                    na_label = "(Missing)", error_bar = TRUE) {
-  lapply(x, function(dat) {
-    plot.dw_data_tabulate(dat, value_lab = value_lab, remove_na = remove_na,
-                          na_label = na_label, error_bar = error_bar)
-  })
+  lapply(x, plot.dw_data_tabulate,
+    value_lab = value_lab, remove_na = remove_na,
+    na_label = na_label, error_bar = error_bar
+  )
 }
 
 #' @rdname plot.dw_data_tabulate
@@ -25,7 +25,6 @@ plot.dw_data_tabulates <- function(x, value_lab = TRUE, remove_na = FALSE,
 
 plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
                                   na_label = "(Missing)", error_bar = TRUE) {
-
   dat <- as.data.frame(x)
 
   if (isTRUE(remove_na)) {
@@ -38,13 +37,14 @@ plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
     dat$Value <- as.character(dat$Value)
     dat$Value[is.na(dat$Value)] <- na_label
     dat$Value <- factor(
-      dat$Value, levels = c(setdiff(dat$Value, na_label), na_label)
+      dat$Value,
+      levels = c(setdiff(dat$Value, na_label), na_label)
     )
   }
 
   if (isTRUE(error_bar)) {
     total_n <- sum(dat$N)
-    rel_frq <- dat$output/100
+    rel_frq <- dat$output / 100
     ci <- 1.96 * suppressWarnings(sqrt(rel_frq * (1 - rel_frq) / total_n))
     dat$upper.ci <- total_n * (rel_frq + ci)
     dat$lower.ci <- total_n * (rel_frq - ci)
@@ -81,4 +81,3 @@ plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
 
   out
 }
-
