@@ -108,7 +108,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
   groups <- unique(dataplot$y)
   if (!show_intercept) {
     dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
-    groups <- unique(setdiff(groups, .intercepts()))
+    groups <- unique(setdiff(groups, .intercept_names))
   }
 
   if (length(groups) == 1) {

@@ -32,9 +32,9 @@ plot.see_bayesfactor_parameters <- function(x,
   hypothesis <- attr(x, "hypothesis")
 
   # if we have intercept-only models, keep at least the intercept
-  intercepts_points <- which(.in_intercepts(d_points$ind))
+  intercepts_points <- which(.is_intercept(d_points$ind))
   if (length(intercepts_points) && (nrow(d_points) > length(intercepts_points)) && !show_intercept) {
-    intercepts_data <- which(.in_intercepts(plot_data$ind))
+    intercepts_data <- which(.is_intercept(plot_data$ind))
     plot_data <- plot_data[-intercepts_data, ]
     d_points <- d_points[-intercepts_points, ]
   }

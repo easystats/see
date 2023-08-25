@@ -306,10 +306,10 @@ plot.see_parameters_model <- function(x,
   }
 
 
-  if (!show_intercept && length(.in_intercepts(x$Parameter)) > 0L) {
-    x <- x[!.in_intercepts(x$Parameter), ]
+  if (!show_intercept && length(.is_intercept(x$Parameter)) > 0L) {
+    x <- x[!.is_intercept(x$Parameter), ]
     if (show_density && (is_bayesian || is_bootstrap)) {
-      data <- data[!.in_intercepts(data$Parameter), ]
+      data <- data[!.is_intercept(data$Parameter), ]
       density_layer$data <- data
     }
   }

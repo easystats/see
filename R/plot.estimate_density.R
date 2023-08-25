@@ -131,6 +131,9 @@ plot.see_estimate_density <- function(x,
     n_columns <- NULL
   }
 
+  # get parameter names for filtering
+  params <- unique(x$y)
+
   # get labels
   labels <- .clean_parameter_names(x$Parameter, grid = !is.null(n_columns))
 
@@ -152,6 +155,7 @@ plot.see_estimate_density <- function(x,
       p <- p +
         .add_prior_layer_ridgeline(
           model,
+          parameter = params,
           show_intercept = show_intercept,
           priors_alpha = priors_alpha,
           show_ridge_line = FALSE
