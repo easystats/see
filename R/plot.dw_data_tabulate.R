@@ -7,12 +7,14 @@
 #' @param na_label The label given to missing values (only when
 #'  `remove_na = FALSE`).
 #' @param error_bar Boolean. Should error bars be displayed?
+#' @param ... Unused
 #'
 #' @rdname plot.dw_data_tabulate
 #' @export
 
 plot.dw_data_tabulates <- function(x, value_lab = TRUE, remove_na = FALSE,
-                                   na_label = "(Missing)", error_bar = TRUE) {
+                                   na_label = "(Missing)", error_bar = TRUE,
+                                   ...) {
   lapply(x, plot.dw_data_tabulate,
     value_lab = value_lab, remove_na = remove_na,
     na_label = na_label, error_bar = error_bar
@@ -24,7 +26,8 @@ plot.dw_data_tabulates <- function(x, value_lab = TRUE, remove_na = FALSE,
 #' @export
 
 plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
-                                  na_label = "(Missing)", error_bar = TRUE) {
+                                  na_label = "(Missing)", error_bar = TRUE,
+                                  ...) {
   dat <- as.data.frame(x)
 
   if (isTRUE(remove_na)) {
@@ -56,7 +59,7 @@ plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
     dat$label <- paste0(dat$N, "\n(", round(dat$output, 2), "%)")
   }
 
-  out <- ggplot(dat, aes(x = Value, y = N)) +
+  out <- ggplot(dat, aes(x = .data$Value, y = .data$N)) +
     geom_col() +
     labs(title = unique(dat$Variable)) +
     theme_modern()
@@ -64,11 +67,11 @@ plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
   if (isTRUE(value_lab)) {
     if (isTRUE(error_bar)) {
       out <- out +
-        geom_text(aes(label = label), vjust = -1, hjust = 1.2) +
+        geom_text(aes(label = .data$label), vjust = -1, hjust = 1.2) +
         ylim(c(0, max(dat$N) * 1.5))
     } else {
       out <- out +
-        geom_text(aes(label = label), vjust = -0.5) +
+        geom_text(aes(label = .data$label), vjust = -0.5) +
         ylim(c(0, max(dat$N) * 1.2))
     }
   }
@@ -76,7 +79,10 @@ plot.dw_data_tabulate <- function(x, value_lab = TRUE, remove_na = FALSE,
   # add confidence intervals for frequencies
   if (isTRUE(error_bar)) {
     out <- out +
-      geom_errorbar(aes(ymin = lower.ci, ymax = upper.ci), width = 0.5, color = "darkblue")
+      geom_errorbar(
+        aes(ymin = .data$lower.ci, ymax = .data$upper.ci),
+        width = 0.5, color = "darkblue"
+      )
   }
 
   out

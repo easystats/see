@@ -10,7 +10,8 @@
   value_lab = TRUE,
   remove_na = FALSE,
   na_label = "(Missing)",
-  error_bar = TRUE
+  error_bar = TRUE,
+  ...
 )
 
 \method{plot}{dw_data_tabulate}(
@@ -18,7 +19,8 @@
   value_lab = TRUE,
   remove_na = FALSE,
   na_label = "(Missing)",
-  error_bar = TRUE
+  error_bar = TRUE,
+  ...
 )
 }
 \arguments{
@@ -33,6 +35,8 @@ top of each bar.}
 \code{remove_na = FALSE}).}
 
 \item{error_bar}{Boolean. Should error bars be displayed?}
+
+\item{...}{Unused}
 }
 \description{
 Plot tabulated data.
