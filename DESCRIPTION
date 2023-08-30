@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.0.2
+Version: 0.8.0.3
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -97,7 +97,7 @@ Suggests:
     patchwork,
     poorman,
     psych,
-    qqplotr,
+    qqplotr (>= 0.0.6),
     randomForest,
     rlang,
     rmarkdown,

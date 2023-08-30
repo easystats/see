@@ -3,6 +3,12 @@
 #' The `plot()` method for the `performance::check_outliers()`
 #' function.
 #'
+#' @param type Character vector, indicating the type of plot.
+#'   Options are `"dots"` (default) for a scatterplot of leverage (hat) values
+#'   versus residuals, with Cook's Distance contours for evaluating influential
+#'   points, or `"bars"` for a bar chart of (rescaled) outlier statistic values
+#'   for each data point. Only used for outlier plots of fitted models; for
+#'   outlier plots of raw data values, `type = "bars"` is always used.
 #' @param show_labels Logical. If `TRUE`, text labels are displayed.
 #' @param size_text Numeric value specifying size of text labels.
 #' @param rescale_distance Logical. If `TRUE`, distance values are rescaled
