@@ -32,7 +32,12 @@ hex-format) for points and line.}
 to a range from 0 to 1. This is mainly due to better catch the differences
 between distance values.}
 
-\item{type}{Character vector, indicating the type of plot.}
+\item{type}{Character vector, indicating the type of plot.
+Options are \code{"dots"} (default) for a scatterplot of leverage (hat) values
+versus residuals, with Cook's Distance contours for evaluating influential
+points, or \code{"bars"} for a bar chart of (rescaled) outlier statistic values
+for each data point. Only used for outlier plots of fitted models; for
+outlier plots of raw data values, \code{type = "bars"} is always used.}
 
 \item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
 

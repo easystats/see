@@ -12,7 +12,12 @@
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
 
-\item{type}{Character vector, indicating the type of plot.}
+\item{type}{Character vector, indicating the type of plot.
+Options are three different shapes to illustrate the degree of consensus
+between dimensionality methods for each number of factors;
+\code{"bar"} (default) for a bar chart,
+\code{"line"} for a horizontal point and line chart, or
+\code{"area"} for an area chart (frequency polygon).}
 
 \item{size}{Depending on \code{type}, a numeric value specifying size of bars,
 lines, or segments.}

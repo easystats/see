@@ -4,12 +4,21 @@
 #' function.
 #'
 #' @param type Character vector, indicating the type of plot.
+#'   Options are `"qq"` (default) for quantile-quantile (Q-Q) plots,
+#'   `"pp"` for probability-probability (P-P) plots, or
+#'   `"density"` for density overlay plots.
 #' @param size_line Numeric value specifying size of line geoms.
 #' @param dot_alpha Numeric value specifying alpha level of the point geoms.
 #' @param alpha Numeric value specifying alpha level of the confidence bands.
 #' @param colors Character vector of length two, indicating the colors (in
 #'   hex-format) for points and line.
-#' @param detrend Logical that decides if the plot should be detrended.
+#' @param detrend Logical that decides if Q-Q and P-P plots should be de-trended
+#'   (also known as _worm plots_).
+#' @param method The method used for estimating the qq/pp bands. Default to
+#'   `"ell"` (equal local levels / simultaneous testing - recommended). Can also
+#'   be one of `"pointwise"` or `"boot"` for pointwise confidence bands, or
+#'   `"ks"` or `"ts"` for simultaneous testing. See `qqplotr::stat_qq_band()`
+#'   for details.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #'
@@ -21,16 +30,21 @@
 #' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 #' result <- check_normality(m)
 #' plot(result)
+#'
+#' @examplesIf require("performance") && require("qqplotr")
+#' plot(result, type = "qq", detrend = TRUE)
+#'
 #' @export
 plot.see_check_normality <- function(x,
-                                     type = c("density", "qq", "pp"),
+                                     type = c("qq", "pp", "density"),
                                      data = NULL,
                                      size_line = 0.8,
                                      size_point = 2,
                                      alpha = 0.2,
                                      dot_alpha = 0.8,
                                      colors = c("#3aaf85", "#1b6ca8"),
-                                     detrend = FALSE,
+                                     detrend = TRUE,
+                                     method = "ell",
                                      ...) {
   type <- match.arg(type)
 
@@ -75,7 +89,8 @@ plot.see_check_normality <- function(x,
         alpha_level = alpha,
         detrend = detrend,
         dot_alpha_level = dot_alpha,
-        model_info = model_info
+        model_info = model_info,
+        method = method
       )
     } else if (type == "density") {
       r <- suppressMessages(stats::residuals(model))
@@ -95,7 +110,8 @@ plot.see_check_normality <- function(x,
         size_line = size_line,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha
+        dot_alpha_level = dot_alpha,
+        method = method
       )
     }
   }
@@ -145,6 +161,7 @@ plot.see_check_normality <- function(x,
                           size_line,
                           alpha_level = 0.2,
                           detrend = FALSE,
+                          method = "ell",
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8,
@@ -175,7 +192,8 @@ plot.see_check_normality <- function(x,
     qq_stuff <- list(
       qqplotr::stat_qq_band(
         alpha = alpha_level,
-        detrend = detrend
+        detrend = detrend,
+        bandType = method
       ),
       qqplotr::stat_qq_point(
         shape = 16,
@@ -191,24 +209,34 @@ plot.see_check_normality <- function(x,
         detrend = detrend
       )
     )
-    y_lab <- "Sample Quantiles"
+    if (detrend) {
+      y_lab <- "Sample Quantile Deviations"
+    } else {
+      y_lab <- "Sample Quantiles"
+    }
   } else {
-    insight::format_alert(
-      paste0(
-        "For confidence bands",
-        if (isTRUE(detrend)) " and detrending",
-        ", please install `qqplotr`."
-      )
-    )
+    insight::format_alert("For confidence bands, please install `qqplotr`.")
 
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
+
     qq_stuff <- list(
-      ggplot2::geom_qq_line(
-        linewidth = size_line,
-        colour = colors[1],
-        na.rm = TRUE
-      ),
+      if (detrend) {
+        ggplot2::geom_hline(
+          yintercept = 0,
+          linewidth = size_line,
+          colour = colors[1],
+          na.rm = TRUE
+        )
+      } else {
+        ggplot2::geom_qq_line(
+          linewidth = size_line,
+          colour = colors[1],
+          na.rm = TRUE
+        )
+      }
+      ,
       ggplot2::geom_qq(
+        mapping = if (detrend) ggplot2::aes(y = ggplot2::after_stat("sample") - ggplot2::after_stat("theoretical")),
         shape = 16,
         na.rm = TRUE,
         stroke = 0,
@@ -216,7 +244,12 @@ plot.see_check_normality <- function(x,
         colour = colors[2] # "#2c3e50"
       )
     )
-    y_lab <- "Sample Quantiles"
+
+    if (detrend) {
+      y_lab <- "Sample Quantile Deviations"
+    } else {
+      y_lab <- "Sample Quantiles"
+    }
   }
 
   if (!isTRUE(show_dots)) {
@@ -246,12 +279,13 @@ plot.see_check_normality <- function(x,
                           size_line,
                           alpha_level = 0.2,
                           detrend = FALSE,
+                          method = "ell",
                           theme_style = theme_lucid,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
-      qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend) +
+      qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend, bandType = method) +
       qqplotr::stat_pp_line(
         linewidth = size_line,
         colour = colors[1],
@@ -265,11 +299,7 @@ plot.see_check_normality <- function(x,
         detrend = detrend
       )
   } else if (requireNamespace("MASS", quietly = TRUE)) {
-    message(
-      "For confidence bands",
-      if (isTRUE(detrend)) " and detrending",
-      ", please install `qqplotr`."
-    )
+    insight::format_alert("For confidence bands, please install `qqplotr`.")
 
     x$probs <- stats::ppoints(x$res)
     dparms <- MASS::fitdistr(x$res, densfun = "normal")
@@ -277,25 +307,30 @@ plot.see_check_normality <- function(x,
 
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(x = .data$probs, y = .data$y)) +
       ggplot2::geom_abline(
-        slope = 1,
+        slope = if (detrend) 0 else 1,
         linewidth = size_line,
         colour = colors[1]
       ) +
       geom_point2(
+        mapping = if (detrend) ggplot2::aes(y = .data$y - .data$probs),
         colour = colors[2],
         size = size_point,
         alpha = dot_alpha_level
       ) # "#2c3e50"
   } else {
-    stop("Package 'qqplotr' OR 'MASS' required for PP-plots. Please install one of them.", call. = FALSE)
+    insight::format_error("Package 'qqplotr' OR 'MASS' required for P-P plots. Please install one of them.")
   }
+
+
+  y_lab <- "Sample Cummulative Probability"
+  if (detrend) y_lab <- paste0(y_lab, " Deviations")
 
   p_plot +
     ggplot2::labs(
-      title = "Normality of Residuals (PP plot)",
+      title = "Normality of Residuals",
       subtitle = "Dots should fall along the line",
-      y = "Cummulative Probability",
-      x = "Probability Points"
+      y = y_lab,
+      x = "Standard Normal Cumulative Probability"
     ) +
     theme_style(
       base_size = 10,

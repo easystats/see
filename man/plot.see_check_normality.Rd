@@ -6,21 +6,25 @@
 \usage{
 \method{plot}{see_check_normality}(
   x,
-  type = c("density", "qq", "pp"),
+  type = c("qq", "pp", "density"),
   data = NULL,
   size_line = 0.8,
   size_point = 2,
   alpha = 0.2,
   dot_alpha = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
-  detrend = FALSE,
+  detrend = TRUE,
+  method = "ell",
   ...
 )
 }
 \arguments{
 \item{x}{An object.}
 
-\item{type}{Character vector, indicating the type of plot.}
+\item{type}{Character vector, indicating the type of plot.
+Options are \code{"qq"} (default) for quantile-quantile (Q-Q) plots,
+\code{"pp"} for probability-probability (P-P) plots, or
+\code{"density"} for density overlay plots.}
 
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
@@ -36,7 +40,14 @@ statistical model.}
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
 
-\item{detrend}{Logical that decides if the plot should be detrended.}
+\item{detrend}{Logical that decides if Q-Q and P-P plots should be de-trended
+(also known as \emph{worm plots}).}
+
+\item{method}{The method used for estimating the qq/pp bands. Default to
+\code{"ell"} (equal local levels / simultaneous testing - recommended). Can also
+be one of \code{"pointwise"} or \code{"boot"} for pointwise confidence bands, or
+\code{"ks"} or \code{"ts"} for simultaneous testing. See \code{qqplotr::stat_qq_band()}
+for details.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -52,6 +63,9 @@ function.
 m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_normality(m)
 plot(result)
+\dontshow{\}) # examplesIf}
+\dontshow{if (require("performance") && require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+plot(result, type = "qq", detrend = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
