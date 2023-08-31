@@ -1,5 +1,10 @@
 # see (development version)
 
+## New features
+
+* There is now a `plot()` method for outputs of `datawizard::data_tabulate()` 
+  (#293).
+
 ## Minor Changes
 
 * The `print()` method for `performance::check_model()` now also evaluates the
