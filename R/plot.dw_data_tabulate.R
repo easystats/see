@@ -126,7 +126,7 @@ plot.dw_data_tabulate <- function(x, label_values = TRUE,
 }
 
 .wilson_ci <- function(prop, total_n, ci = .95) {
-  z <- qnorm((1 - ci) / 2, lower.tail = FALSE)
+  z <- stats::qnorm((1 - ci) / 2, lower.tail = FALSE)
   z2 <- z^2
   p1 <- prop + 0.5 * z2 / total_n
   p2 <- z * sqrt((prop * (1 - prop) + 0.25 * z2 / total_n) / total_n)
