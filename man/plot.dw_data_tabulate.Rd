@@ -7,37 +7,58 @@
 \usage{
 \method{plot}{dw_data_tabulates}(
   x,
-  value_lab = TRUE,
-  remove_na = FALSE,
+  label_values = TRUE,
+  show_na = c("if_any", "always", "never"),
   na_label = "(Missing)",
   error_bar = TRUE,
+  ci = 0.95,
+  fill_col = "#87CEFA",
+  color_error_bar = "#607B8B",
   ...
 )
 
 \method{plot}{dw_data_tabulate}(
   x,
-  value_lab = TRUE,
-  remove_na = FALSE,
+  label_values = TRUE,
+  show_na = c("if_any", "always", "never"),
   na_label = "(Missing)",
   error_bar = TRUE,
+  ci = 0.95,
+  fill_col = "#87CEFA",
+  color_error_bar = "#607B8B",
   ...
 )
 }
 \arguments{
 \item{x}{Object created by \code{datawizard::data_tabulate()}.}
 
-\item{value_lab}{Boolean. Should values and percentages be displayed at the
+\item{label_values}{Logical. Should values and percentages be displayed at the
 top of each bar.}
 
-\item{remove_na}{Boolean. Should missing values be dropped?}
+\item{show_na}{Should missing values be dropped? Can be \code{"if_any"} (default) to show
+the missing category only if any missing values are present, \code{"always"} to
+always show the missing category, or \code{"never"} to never show the missing
+category.}
 
-\item{na_label}{The label given to missing values (only when
-\code{remove_na = FALSE}).}
+\item{na_label}{The label given to missing values when they are shown.}
 
-\item{error_bar}{Boolean. Should error bars be displayed?}
+\item{error_bar}{Logical. Should error bars be displayed?
+If \code{TRUE}, confidence intervals computed using the Wilson method are shown.
+See Brown et al. (2001) for details.}
+
+\item{ci}{Confidence Interval (CI) level. Default to \code{0.95} (⁠95\%⁠).}
+
+\item{fill_col}{Color to use for category columns (default: "#87CEFA").}
+
+\item{color_error_bar}{Color to use for error bars (default: "#607B8B").}
 
 \item{...}{Unused}
 }
 \description{
 Plot tabulated data.
+}
+\references{
+Brown, L. D., Cai, T. T., & DasGupta, A. (2001).
+Interval estimation for a binomial proportion.
+\emph{Statistical Science, 16}(2), 101–133. \doi{10.1214/ss/1009213286}
 }
