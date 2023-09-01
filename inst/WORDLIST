@@ -4,8 +4,11 @@ Biserial
 Blomqvist’s
 Bluebrown
 BossekJakob
+CEFA
 CMD
+Cai
 DOI
+DasGupta
 Dom
 GGMs
 GeomViolinHalf
@@ -61,7 +64,6 @@ ggraph
 ggrepel
 ggridges
 ggstatsplot
-github
 grey
 gridExtra
 histodot
@@ -69,13 +71,13 @@ homegeneity
 homoscedasticity
 https
 intraclass
-io
 jfly
 jitter
 joss
 koeln
 labelled
 labelling
+loadings
 margherita
 mattansb
 mcmc
@@ -92,6 +94,7 @@ patilindrajeets
 plotmm
 pre
 pts
+qq
 rOpenSci
 rescaled
 rstanarm
@@ -105,6 +108,5 @@ users’
 vermillion
 viridis
 visualising
-www
 ’
 ’ggstatsplot’

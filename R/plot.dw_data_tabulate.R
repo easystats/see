@@ -34,17 +34,18 @@ plot.dw_data_tabulates <- function(x, label_values = TRUE,
   show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
   if (length(x) == 1) {
     plot.dw_data_tabulate(
-      x[[1]], label_values = label_values,
+      x[[1]],
+      label_values = label_values,
       show_na = show_na, na_label = na_label,
       error_bar = error_bar, ci = ci,
       fill_col = fill_col, color_error_bar = color_error_bar
     )
   } else {
     lapply(x, plot.dw_data_tabulate,
-           label_values = label_values,
-           show_na = show_na, na_label = na_label,
-           error_bar = error_bar, ci = ci,
-           fill_col = fill_col, color_error_bar = color_error_bar
+      label_values = label_values,
+      show_na = show_na, na_label = na_label,
+      error_bar = error_bar, ci = ci,
+      fill_col = fill_col, color_error_bar = color_error_bar
     )
   }
 }
