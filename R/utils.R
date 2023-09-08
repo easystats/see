@@ -27,7 +27,10 @@
   as.numeric(as.character(x))
 }
 
-
+.has_multiple_panels <- function(x) {
+  (!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1L) &&
+    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1L)
+}
 
 .clean_parameter_names <- function(params, grid = FALSE) {
   params <- unique(params)
@@ -91,23 +94,25 @@
 .fix_facet_names <- function(x) {
   if ("Component" %in% names(x)) {
     x$Component <- as.character(x$Component)
-    if (!"Effects" %in% names(x)) {
-      x$Component[x$Component == "conditional"] <- "Conditional"
-      x$Component[x$Component == "zero_inflated"] <- "Zero-Inflated"
-      x$Component[x$Component == "dispersion"] <- "Dispersion"
-      x$Component[x$Component == "simplex"] <- "Monotonic Effects"
-    } else {
+    if ("Effects" %in% names(x)) {
       x$Component[x$Component == "conditional"] <- "(Conditional)"
       x$Component[x$Component == "zero_inflated"] <- "(Zero-Inflated)"
       x$Component[x$Component == "dispersion"] <- "(Dispersion)"
       x$Component[x$Component == "simplex"] <- "(Monotonic Effects)"
+    } else {
+      x$Component[x$Component == "conditional"] <- "Conditional"
+      x$Component[x$Component == "zero_inflated"] <- "Zero-Inflated"
+      x$Component[x$Component == "dispersion"] <- "Dispersion"
+      x$Component[x$Component == "simplex"] <- "Monotonic Effects"
     }
   }
+
   if ("Effects" %in% names(x)) {
     x$Effects <- as.character(x$Effects)
     x$Effects[x$Effects == "fixed"] <- "Fixed Effects"
     x$Effects[x$Effects == "random"] <- "Random Effects"
   }
+
   x
 }
 

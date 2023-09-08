@@ -174,9 +174,7 @@ plot.see_p_direction <- function(x,
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 
-  # check if we have multiple panels
-  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+  if (.has_multiple_panels(x)) {
     n_columns <- NULL
   }
 

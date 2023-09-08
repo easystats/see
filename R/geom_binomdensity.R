@@ -46,7 +46,7 @@ geom_binomdensity <- function(data,
   insight::check_if_installed(c("ggplot2", "ggdist"))
 
   # Sanitize y (e.g., if levels with no values, etc.)
-  if (is.factor(data[[y]]) && length(levels(data[[y]])) > 2L) {
+  if (is.factor(data[[y]]) && nlevels(data[[y]]) > 2L) {
     data[[y]] <- droplevels(data[[y]])
   }
 
