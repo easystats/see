@@ -105,12 +105,7 @@ plot.see_equivalence_test <- function(x,
   tmp <- merge(tmp, cp, by = "predictor")
   tmp$predictor <- factor(tmp$predictor, levels = rev(unique(tmp$predictor)))
 
-  has_multiple_panels <-
-    (!"Effects" %in% names(tmp) || length(unique(tmp$Effects)) <= 1L) &&
-      (!"Component" %in% names(tmp) || length(unique(tmp$Component)) <= 1L)
-
-  # check if we have multiple panels
-  if (has_multiple_panels) {
+  if (.has_multiple_panels(tmp)) {
     n_columns <- NULL
   }
 

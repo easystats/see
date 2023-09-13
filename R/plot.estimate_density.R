@@ -123,11 +123,15 @@ plot.see_estimate_density <- function(x,
 
 
   if (!inherits(x, "data_plot")) {
-    x <- data_plot(x, data = model, centrality = centrality, ci = ci, ...)
+    x <- data_plot(x,
+      data = model,
+      centrality = centrality,
+      ci = ci,
+      ...
+    )
   }
 
-  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1) &&
-    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1)) {
+  if (.has_multiple_panels(x)) {
     n_columns <- NULL
   }
 
