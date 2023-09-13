@@ -28,8 +28,8 @@
 }
 
 .has_multiple_panels <- function(x) {
-  (!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1L) &&
-    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1L)
+  (!"Effects" %in% names(x) || insight::n_unique(x$Effects) <= 1L) &&
+    (!"Component" %in% names(x) || insight::n_unique(x$Component) <= 1L)
 }
 
 .clean_parameter_names <- function(params, grid = FALSE) {
