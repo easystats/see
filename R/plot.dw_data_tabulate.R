@@ -11,15 +11,15 @@
 #' @param error_bar Logical. Should error bars be displayed?
 #'   If `TRUE`, confidence intervals computed using the Wilson method are shown.
 #'   See Brown et al. (2001) for details.
-#' @param ci Confidence Interval (CI) level. Default to `0.95` (⁠95%⁠).
-#' @param fill_col Color to use for category columns (default: "#87CEFA").
-#' @param color_error_bar Color to use for error bars (default: "#607B8B").
+#' @param ci Confidence Interval (CI) level. Defaults to `0.95` (`95%`).
+#' @param fill_col Color to use for category columns (default: `"#87CEFA"`).
+#' @param color_error_bar Color to use for error bars (default: `"#607B8B"`).
 #' @param ... Unused
 #'
 #' @references
-#' Brown, L. D., Cai, T. T., & DasGupta, A. (2001).
+#' Brown, L. D., Cai, T. T., & Dasgupta, A. (2001).
 #' Interval estimation for a binomial proportion.
-#' _Statistical Science, 16_(2), 101–133. \doi{10.1214/ss/1009213286}
+#' _Statistical Science_, _16_(2), 101-133. \doi{10.1214/ss/1009213286}
 #'
 #' @rdname plot.dw_data_tabulate
 #' @export
@@ -27,25 +27,34 @@
 plot.dw_data_tabulates <- function(x, label_values = TRUE,
                                    show_na = c("if_any", "always", "never"),
                                    na_label = "(Missing)",
-                                   error_bar = TRUE, ci = .95,
+                                   error_bar = TRUE,
+                                   ci = .95,
                                    fill_col = "#87CEFA",
                                    color_error_bar = "#607B8B",
                                    ...) {
   show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
-  if (length(x) == 1) {
+  if (length(x) == 1L) {
     plot.dw_data_tabulate(
       x[[1]],
       label_values = label_values,
-      show_na = show_na, na_label = na_label,
-      error_bar = error_bar, ci = ci,
-      fill_col = fill_col, color_error_bar = color_error_bar
+      show_na = show_na,
+      na_label = na_label,
+      error_bar = error_bar,
+      ci = ci,
+      fill_col = fill_col,
+      color_error_bar = color_error_bar
     )
   } else {
-    lapply(x, plot.dw_data_tabulate,
+    lapply(
+      x,
+      plot.dw_data_tabulate,
       label_values = label_values,
-      show_na = show_na, na_label = na_label,
-      error_bar = error_bar, ci = ci,
-      fill_col = fill_col, color_error_bar = color_error_bar
+      show_na = show_na,
+      na_label = na_label,
+      error_bar = error_bar,
+      ci = ci,
+      fill_col = fill_col,
+      color_error_bar = color_error_bar
     )
   }
 }
@@ -57,7 +66,8 @@ plot.dw_data_tabulates <- function(x, label_values = TRUE,
 plot.dw_data_tabulate <- function(x, label_values = TRUE,
                                   show_na = c("if_any", "always", "never"),
                                   na_label = "(Missing)",
-                                  error_bar = TRUE, ci = .95,
+                                  error_bar = TRUE,
+                                  ci = .95,
                                   fill_col = "#87CEFA",
                                   color_error_bar = "#607B8B",
                                   ...) {
