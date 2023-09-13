@@ -106,7 +106,7 @@ Suggests:
     splines,
     testthat (>= 3.1.7),
     tidygraph,
-    vdiffr (>= 1.0.5)
+    vdiffr (>= 1.0.6)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
