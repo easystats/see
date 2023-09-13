@@ -326,21 +326,27 @@ plot(result)
 
 ## Bayesian Meta-Analysis using brms
 
-```{r}
-# We download the model to save computation time. Here is the code
-# to refit the exact model used below...
+We download the model to save computation time, but here is the code to refit the exact model used below:
 
+```{r, eval=FALSE}
 # Data from
 # https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/blob/master/_data/Meta_Analysis_Data.RData
-# set.seed(123)
-# priors <- c(prior(normal(0,1), class = Intercept),
-#             prior(cauchy(0,0.5), class = sd))
-#
-# model <-
-#    brm(TE|se(seTE) ~ 1 + (1|Author),
-#    data = Meta_Analysis_Data,
-#    prior = priors,
-#    iter = 4000)
+set.seed(123)
+priors <- c(
+  prior(normal(0, 1), class = Intercept),
+  prior(cauchy(0, 0.5), class = sd)
+)
+
+model <- brm(
+  TE | se(seTE) ~ 1 + (1 | Author),
+  data = Meta_Analysis_Data,
+  prior = priors,
+  iter = 4000
+)
+```
+
+
+```{r}
 library(brms)
 model <- insight::download_model("brms_meta_1")
 result <- model_parameters(model)
