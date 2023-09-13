@@ -46,11 +46,11 @@ category.}
 If \code{TRUE}, confidence intervals computed using the Wilson method are shown.
 See Brown et al. (2001) for details.}
 
-\item{ci}{Confidence Interval (CI) level. Default to \code{0.95} (⁠95\%⁠).}
+\item{ci}{Confidence Interval (CI) level. Defaults to \code{0.95} (\verb{95\%}).}
 
-\item{fill_col}{Color to use for category columns (default: "#87CEFA").}
+\item{fill_col}{Color to use for category columns (default: \code{"#87CEFA"}).}
 
-\item{color_error_bar}{Color to use for error bars (default: "#607B8B").}
+\item{color_error_bar}{Color to use for error bars (default: \code{"#607B8B"}).}
 
 \item{...}{Unused}
 }
@@ -58,7 +58,7 @@ See Brown et al. (2001) for details.}
 Plot tabulated data.
 }
 \references{
-Brown, L. D., Cai, T. T., & DasGupta, A. (2001).
+Brown, L. D., Cai, T. T., & Dasgupta, A. (2001).
 Interval estimation for a binomial proportion.
-\emph{Statistical Science, 16}(2), 101–133. \doi{10.1214/ss/1009213286}
+\emph{Statistical Science}, \emph{16}(2), 101-133. \doi{10.1214/ss/1009213286}
 }
