@@ -28,7 +28,7 @@ plot.dw_data_tabulates <- function(x, label_values = TRUE,
                                    show_na = c("if_any", "always", "never"),
                                    na_label = "(Missing)",
                                    error_bar = TRUE,
-                                   ci = .95,
+                                   ci = 0.95,
                                    fill_col = "#87CEFA",
                                    color_error_bar = "#607B8B",
                                    ...) {
@@ -67,7 +67,7 @@ plot.dw_data_tabulate <- function(x, label_values = TRUE,
                                   show_na = c("if_any", "always", "never"),
                                   na_label = "(Missing)",
                                   error_bar = TRUE,
-                                  ci = .95,
+                                  ci = 0.95,
                                   fill_col = "#87CEFA",
                                   color_error_bar = "#607B8B",
                                   ...) {
@@ -75,7 +75,7 @@ plot.dw_data_tabulate <- function(x, label_values = TRUE,
   dat <- as.data.frame(x)
 
   if (show_na == "if_any") {
-    if (any(is.na(dat$Value))) {
+    if (anyNA(dat$Value)) {
       show_na <- ifelse(dat[is.na(dat$Value), "N"] > 0, "always", "never")
     } else {
       show_na <- "never"
@@ -136,7 +136,7 @@ plot.dw_data_tabulate <- function(x, label_values = TRUE,
   out
 }
 
-.wilson_ci <- function(prop, total_n, ci = .95) {
+.wilson_ci <- function(prop, total_n, ci = 0.95) {
   z <- stats::qnorm((1 - ci) / 2, lower.tail = FALSE)
   z2 <- z^2
   p1 <- prop + 0.5 * z2 / total_n
@@ -144,5 +144,5 @@ plot.dw_data_tabulate <- function(x, label_values = TRUE,
   p3 <- 1 + z2 / total_n
   CI_low <- (p1 - p2) / p3
   CI_high <- (p1 + p2) / p3
-  return(data.frame(CI_low = CI_low, CI_high = CI_high))
+  data.frame(CI_low = CI_low, CI_high = CI_high)
 }
