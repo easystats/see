@@ -4,6 +4,7 @@ plot.see_binned_residuals <- function(x,
                                       size_line = 0.7,
                                       size_point = 2.2,
                                       colors = social_colors(c("blue", "red", "green")),
+                                      show_smooth = FALSE,
                                       style = theme_lucid,
                                       ...) {
   x$se.lo <- -x$se
@@ -44,7 +45,7 @@ plot.see_binned_residuals <- function(x,
   p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
     ggplot2::geom_abline(slope = 0, intercept = 0, colour = "grey80")
 
-  if (isTRUE(insight::check_if_installed("mgcv", quietly = TRUE))) {
+  if (isTRUE(insight::check_if_installed("mgcv", quietly = TRUE)) && show_smooth) {
     p <- p +
       ggplot2::stat_smooth(
         ggplot2::aes(y = .data$ybar),

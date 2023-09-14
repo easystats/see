@@ -14,6 +14,8 @@
   `method = "pointwise"`.
 * Plot method for `performance::check_normality()` now default to a detrended 
   QQ-plot. Previous behavior can be restored by setting `type = "density"`.
+* Plot method for `binned_residuals()` gains a `show_smooth` argument, to show
+  or hide the smooth line.
 
 # see 0.8.0
 
