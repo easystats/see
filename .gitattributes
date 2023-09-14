@@ -1,0 +1,23 @@
+# Basic .gitattributes for a R repo.
+
+# Source files
+# =============================
+*.Rdata    binary
+*.RData    binary
+*.rda      binary
+*.rdb      binary
+*.rds      binary
+*.Rd       text
+*.Rdx      binary
+*.Rmd	   text
+*.R        text eol=crlf
+*.Rproj    text
+*.[Rr]md   linguist-detectable
+
+# Documentation files
+# =============================
+docs/*    linguist-documentation
+man/*     linguist-documentation
+misc/*    linguist-documentation
+pkgdown/* linguist-documentation
+*.html    linguist-documentation
