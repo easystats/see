@@ -84,7 +84,7 @@ data_plot.n_clusters <- data_plot.n_factors
 #' result <- n_factors(mtcars, type = "PCA")
 #' result
 #' plot(result, type = "line")
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_n_factors <- function(x,
                                data = NULL,

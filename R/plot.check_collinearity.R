@@ -13,7 +13,7 @@
 #' result <- check_collinearity(m)
 #' result
 #' plot(result)
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_check_collinearity <- function(x,
                                         data = NULL,

@@ -14,7 +14,7 @@
 #' @examplesIf require("performance") && require("patchwork")
 #' model <- lm(qsec ~ drat + wt, data = mtcars)
 #' plot(check_model(model))
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_check_model <- function(x,
                                  style = theme_lucid,

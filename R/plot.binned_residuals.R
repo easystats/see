@@ -1,4 +1,4 @@
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_binned_residuals <- function(x,
                                       size_line = 0.7,
