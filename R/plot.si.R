@@ -20,7 +20,7 @@
 #' result <- si(m)
 #' result
 #' plot(result)
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_si <- function(x,
                         si_color = "#0171D3",

@@ -157,7 +157,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' m <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
 #' result <- p_direction(m)
 #' plot(result)
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_p_direction <- function(x,
                                  data = NULL,

@@ -45,4 +45,5 @@ data(mtcars)
 result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
 result
 plot(result)
+
 }

@@ -76,7 +76,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' means <- estimate_means(model)
 #' plot(contrasts, means)
 #' }
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
   if (!inherits(x, "data_plot")) {

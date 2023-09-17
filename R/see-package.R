@@ -17,6 +17,13 @@
 #' @keywords internal
 "_PACKAGE"
 
+## see namespace: start
+##
+#' @import ggplot2
+#'
+## see namespace: end
+NULL
+
 # Suppress R CMD check note
 # Namespace in Imports field not imported from: PKG
 #   All declared Imports should be used.

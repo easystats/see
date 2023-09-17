@@ -73,7 +73,7 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
 #' result
 #' plot(result)
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_parameters_pca <- function(x,
                                     type = c("bar", "line"),

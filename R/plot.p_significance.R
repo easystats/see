@@ -169,7 +169,7 @@ data_plot.p_significance <- function(x,
 #' m <<- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
 #' result <- p_significance(m)
 #' plot(result)
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_p_significance <- function(x,
                                     data = NULL,

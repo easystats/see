@@ -202,7 +202,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' result <- hdi(m)
 #' result
 #' plot(result)
-#' @importFrom ggplot2 .data
+#'
 #' @export
 plot.see_hdi <- function(x,
                          data = NULL,

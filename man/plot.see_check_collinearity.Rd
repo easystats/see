@@ -40,4 +40,5 @@ m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_collinearity(m)
 result
 plot(result)
+
 }

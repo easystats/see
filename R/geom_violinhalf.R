@@ -31,7 +31,7 @@
 #'   geom_violinhalf(flip = c(1, 3)) +
 #'   theme_modern() +
 #'   scale_fill_material_d()
-#' @import ggplot2
+#'
 #' @export
 geom_violinhalf <- function(mapping = NULL,
                             data = NULL,
@@ -68,7 +68,7 @@ geom_violinhalf <- function(mapping = NULL,
 #' @rdname ggplot2-ggproto
 #' @format NULL
 #' @usage NULL
-#' @import ggplot2
+#'
 #' @keywords internal
 GeomViolinHalf <- ggproto("GeomViolinHalf", Geom,
   extra_params = c("na.rm", "flip"),

@@ -28,4 +28,5 @@ lm3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
 result <- compare_performance(lm1, lm2, lm3)
 result
 plot(result)
+
 }

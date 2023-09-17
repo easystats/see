@@ -17,7 +17,7 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violindot() +
 #'   theme_modern()
-#' @import ggplot2
+#'
 #' @export
 geom_violindot <- function(mapping = NULL,
                            data = NULL,
