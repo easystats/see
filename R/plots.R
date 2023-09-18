@@ -1,7 +1,9 @@
 #' Multiple plots side by side
 #'
 #' A wrapper around *patchwork* to plot multiple figures side by side on
-#' the same page. See [the *patchwork* documentation](https://patchwork.data-imaginist.com/articles/patchwork.html)
+#' the same page.
+#'
+#' See [the *patchwork* documentation](https://patchwork.data-imaginist.com/articles/patchwork.html)
 #' for more advanced control of plot layouts.
 #'
 #' @param ... Multiple `ggplot`s or a list containing `ggplot` objects
@@ -29,7 +31,8 @@
 #' @param theme A ggplot theme specification to use for the plot. Only elements
 #'   related to titles, caption, and tags, as well as plot margin and
 #'   background, are used.
-#' @examplesIf requireNamespace("patchwork", quietly = TRUE)
+#'
+#' @examplesIf require("patchwork", quietly = TRUE)
 #' library(ggplot2)
 #' library(see)
 #'

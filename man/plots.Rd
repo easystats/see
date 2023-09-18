@@ -56,11 +56,14 @@ background, are used.}
 }
 \description{
 A wrapper around \emph{patchwork} to plot multiple figures side by side on
-the same page. See \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emph{patchwork} documentation}
+the same page.
+}
+\details{
+See \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emph{patchwork} documentation}
 for more advanced control of plot layouts.
 }
 \examples{
-\dontshow{if (requireNamespace("patchwork", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("patchwork", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(ggplot2)
 library(see)
 
