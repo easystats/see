@@ -1,5 +1,9 @@
 # see (development version)
 
+## Major Changes
+
+* This releaase changes the licensing model of `{see}` to an MIT license.
+
 ## New features
 
 * There is now a `plot()` method for outputs of `datawizard::data_tabulate()` 
