@@ -2,7 +2,7 @@
 
 ## Major Changes
 
-* This releaase changes the licensing model of `{see}` to an MIT license.
+* This release changes the licensing model of `{see}` to an MIT license.
 
 ## New features
 
