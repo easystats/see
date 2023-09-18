@@ -107,7 +107,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' }
 #'
 #' @examplesIf require("brms") && require("metafor")
-#' \dontrun{
+#' \donttest{
 #' library(parameters)
 #' library(brms)
 #' library(metafor)
