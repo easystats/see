@@ -98,7 +98,7 @@ data_plot <- function(x, ...) {
 #'
 #' @inheritParams data_plot
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(rstanarm)
 #' library(bayestestR)
 #' library(see)

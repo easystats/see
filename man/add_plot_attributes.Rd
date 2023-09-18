@@ -15,7 +15,7 @@ labels, etc.) as attributes, while \code{add_plot_attributes()} adds this
 information to the plot.
 }
 \examples{
-\dontrun{
+\donttest{
 library(rstanarm)
 library(bayestestR)
 library(see)
