@@ -54,7 +54,7 @@ Description: Provides plotting utilities supporting packages in the 'easystats'
     geoms, and scales for 'ggplot2'. Color scales are based on
     <https://materialui.co/colors>. 
     References: Lüdecke et al. (2021) <doi:10.21105/joss.03393>.
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://easystats.github.io/see/
 BugReports: https://github.com/easystats/see/issues
 Depends:
