@@ -106,7 +106,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #'   output of estimates and credible intervals.
 #' }
 #'
-#' @examplesIf require("brms") && require("metafor")
+#' @examplesIf require("brms") && require("metafor") && require("RcppEigen")
 #' \donttest{
 #' library(parameters)
 #' library(brms)

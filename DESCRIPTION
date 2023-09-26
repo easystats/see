@@ -99,6 +99,7 @@ Suggests:
     psych,
     qqplotr (>= 0.0.6),
     randomForest,
+    RcppEigen,
     rlang,
     rmarkdown,
     rstanarm,
