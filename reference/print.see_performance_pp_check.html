@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0.4</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,6 +101,7 @@
 <span>  style <span class="op">=</span> <span class="va">theme_lucid</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="fu"><a href="social_colors.html">social_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"density"</span>, <span class="st">"discrete_dots"</span>, <span class="st">"discrete_interval"</span>, <span class="st">"discrete_both"</span><span class="op">)</span>,</span>
+<span>  x_limits <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -113,6 +114,7 @@
 <span>  style <span class="op">=</span> <span class="va">theme_lucid</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="fu"><a href="social_colors.html">social_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"density"</span>, <span class="st">"discrete_dots"</span>, <span class="st">"discrete_interval"</span>, <span class="st">"discrete_both"</span><span class="op">)</span>,</span>
+<span>  x_limits <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -149,6 +151,11 @@ hex-format) for points and line.</p></dd>
 (default), <code>"discrete_dots"</code>, <code>"discrete_interval"</code> or <code>"discrete_both"</code> (the
 <code>discrete_*</code> options are appropriate for models with discrete - binary, integer
 or ordinal etc. - outcomes).</p></dd>
+
+
+<dt>x_limits</dt>
+<dd><p>Numeric vector of length 2 specifying the limits of the x-axis.
+If not <code>NULL</code>, will zoom in the x-axis to the specified limits.</p></dd>
 
 
 <dt>...</dt>
