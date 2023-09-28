@@ -20,12 +20,12 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
   dataplot$grp <- rep(seq_len(ncol(x)), each = nrow(x))
 
   attr(dataplot, "info") <- list(
-    "xlab" = attr(x, "response_name"),
-    "ylab" = ifelse(identical(type, "density"), "Density", "Counts"),
-    "title" = "Posterior Predictive Check",
-    "check_range" = attr(x, "check_range"),
-    "bandwidth" = attr(x, "bandwidth"),
-    "model_info" = attr(x, "model_info")
+    xlab = attr(x, "response_name"),
+    ylab = ifelse(identical(type, "density"), "Density", "Counts"),
+    title = "Posterior Predictive Check",
+    check_range = attr(x, "check_range"),
+    bandwidth = attr(x, "bandwidth"),
+    model_info = attr(x, "model_info")
   )
 
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
@@ -45,6 +45,8 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #' (default), `"discrete_dots"`, `"discrete_interval"` or `"discrete_both"` (the
 #' `discrete_*` options are appropriate for models with discrete - binary, integer
 #' or ordinal etc. - outcomes).
+#' @param x_limits Numeric vector of length 2 specifying the limits of the x-axis.
+#' If not `NULL`, will zoom in the x-axis to the specified limits.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_parameters_distribution
@@ -75,6 +77,7 @@ print.see_performance_pp_check <- function(x,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
                                            type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+                                           x_limits = NULL,
                                            ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
@@ -90,7 +93,16 @@ print.see_performance_pp_check <- function(x,
     x <- data_plot(x, type)
   }
 
-  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, type = type, ...)
+  p1 <- .plot_pp_check(
+    x,
+    size_line,
+    line_alpha,
+    theme_style = style,
+    colors = colors,
+    type = type,
+    x_limits = x_limits,
+    ...
+  )
 
   if (isTRUE(check_range)) {
     p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
@@ -112,6 +124,7 @@ plot.see_performance_pp_check <- function(x,
                                           style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
                                           type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+                                          x_limits = NULL,
                                           ...) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
@@ -127,7 +140,16 @@ plot.see_performance_pp_check <- function(x,
     x <- data_plot(x, type)
   }
 
-  p1 <- .plot_pp_check(x, size_line, line_alpha, theme_style = style, colors = colors, type = type, ...)
+  p1 <- .plot_pp_check(
+    x,
+    size_line,
+    line_alpha,
+    theme_style = style,
+    colors = colors,
+    type = type,
+    x_limits = x_limits,
+    ...
+  )
 
   if (isTRUE(check_range)) {
     p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
@@ -139,7 +161,7 @@ plot.see_performance_pp_check <- function(x,
 
 
 
-.plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, type = "density", ...) {
+.plot_pp_check <- function(x, size_line, line_alpha, theme_style, colors, type = "density", x_limits = NULL, ...) {
   info <- attr(x, "info")
 
   # default bandwidth, for smooting
@@ -180,6 +202,10 @@ plot.see_performance_pp_check <- function(x,
       legend.margin = ggplot2::margin(0, 0, 0, 0),
       legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
     )
+  }
+
+  if (!is.null(x_limits)) {
+    out <- out + ggplot2::coord_cartesian(xlim = x_limits)
   }
 
   out
@@ -393,13 +419,13 @@ plot.see_performance_pp_check <- function(x,
 
   replicated <- rbind(
     data.frame(
-      x = sapply(x[which(names(x) != "y")], min),
+      x = vapply(x[which(names(x) != "y")], min, numeric(1)),
       group = "Minimum",
       color = "Model-predicted data",
       stringsAsFactors = FALSE
     ),
     data.frame(
-      x = sapply(x[which(names(x) != "y")], max),
+      x = vapply(x[which(names(x) != "y")], max, numeric(1)),
       group = "Maximum",
       color = "Model-predicted data",
       stringsAsFactors = FALSE
