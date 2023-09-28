@@ -65,13 +65,13 @@ Depends:
 Imports:
     bayestestR (>= 0.13.1),
     correlation (>= 0.8.4),
-    datawizard (>= 0.7.1),
-    effectsize (>= 0.8.3),
-    ggplot2 (>= 3.4.2),
-    insight (>= 0.19.3.2),
+    datawizard (>= 0.9.0),
+    effectsize (>= 0.8.6),
+    ggplot2 (>= 3.4.3),
+    insight (>= 0.19.5),
     modelbased (>= 0.8.6),
-    parameters (>= 0.21.1),
-    performance (>= 0.10.4)
+    parameters (>= 0.21.2),
+    performance (>= 0.10.5)
 Suggests:
     brms,
     curl,
