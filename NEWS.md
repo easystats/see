@@ -20,6 +20,8 @@
   QQ-plot. Previous behavior can be restored by setting `type = "density"`.
 * Plot method for `binned_residuals()` gains a `show_smooth` argument, to show
   or hide the smooth line.
+* Plot method for `check_predictions()` gains a `x_limits` argument, to limit
+  the x-axis-range. This can be useful to "zoom in" certain parts of the plot.
 
 # see 0.8.0
 
