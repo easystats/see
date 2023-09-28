@@ -20,12 +20,12 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
   dataplot$grp <- rep(seq_len(ncol(x)), each = nrow(x))
 
   attr(dataplot, "info") <- list(
-    "xlab" = attr(x, "response_name"),
-    "ylab" = ifelse(identical(type, "density"), "Density", "Counts"),
-    "title" = "Posterior Predictive Check",
-    "check_range" = attr(x, "check_range"),
-    "bandwidth" = attr(x, "bandwidth"),
-    "model_info" = attr(x, "model_info")
+    xlab = attr(x, "response_name"),
+    ylab = ifelse(identical(type, "density"), "Density", "Counts"),
+    title = "Posterior Predictive Check",
+    check_range = attr(x, "check_range"),
+    bandwidth = attr(x, "bandwidth"),
+    model_info = attr(x, "model_info")
   )
 
   class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
@@ -419,13 +419,13 @@ plot.see_performance_pp_check <- function(x,
 
   replicated <- rbind(
     data.frame(
-      x = sapply(x[which(names(x) != "y")], min),
+      x = vapply(x[which(names(x) != "y")], min, numeric(1)),
       group = "Minimum",
       color = "Model-predicted data",
       stringsAsFactors = FALSE
     ),
     data.frame(
-      x = sapply(x[which(names(x) != "y")], max),
+      x = vapply(x[which(names(x) != "y")], max, numeric(1)),
       group = "Maximum",
       color = "Model-predicted data",
       stringsAsFactors = FALSE
