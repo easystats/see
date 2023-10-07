@@ -66,10 +66,10 @@ theme_set(theme_modern())
 ```{r}
 set.seed(123)
 # model with fixed effects only
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
+model <<- rstanarm::stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0)
 
 # model with fixed and random effects as well as zero-inflation component
-model2 <- insight::download_model("brms_zi_3")
+model2 <<- insight::download_model("brms_zi_3")
 ```
 
 ## Density Estimation
