@@ -16,9 +16,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   dataplot <- .data_contrasts_and_means(x, means, x_name = x_name, y_name = y_name)
 
   attr(dataplot, "info") <- list(
-    "xlab" = x_name,
-    "ylab" = y_name,
-    "title" = paste0("Estimated ", y_name, "s and Contrasts")
+    xlab = x_name,
+    ylab = y_name,
+    title = paste0("Estimated ", y_name, "s and Contrasts")
   )
 
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
@@ -45,9 +45,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   polygons <- merge(polygons, data_means[c("Level2", "Mean2")], by = "Level2")
 
   polygons <- rbind(
-    cbind(polygons, data.frame("x" = polygons$Level1, "y" = polygons$Mean1)),
-    cbind(polygons, data.frame("x" = polygons$Level2, "y" = polygons$Mean1 - polygons$CI_low)),
-    cbind(polygons, data.frame("x" = polygons$Level2, "y" = polygons$Mean1 - polygons$CI_high))
+    cbind(polygons, data.frame(x = polygons$Level1, y = polygons$Mean1)),
+    cbind(polygons, data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_low)),
+    cbind(polygons, data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_high))
   )
 
   list(

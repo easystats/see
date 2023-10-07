@@ -97,13 +97,13 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
   d$Id[d$Outliers == "0"] <- NA
 
   method <- switch(attr(x, "method", exact = TRUE),
-    "cook" = "Cook's Distance",
-    "pareto" = "Pareto",
-    "mahalanobis" = "Mahalanobis Distance",
-    "ics" = "Invariant Coordinate Selection",
-    "mcd" = "Minimum Covariance Determinant",
-    "optics" = "OPTICS",
-    "iforest" = "Isolation Forest",
+    cook = "Cook's Distance",
+    pareto = "Pareto",
+    mahalanobis = "Mahalanobis Distance",
+    ics = "Invariant Coordinate Selection",
+    mcd = "Minimum Covariance Determinant",
+    optics = "OPTICS",
+    iforest = "Isolation Forest",
     "Cook's Distance"
   )
 

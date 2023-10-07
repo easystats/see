@@ -199,7 +199,7 @@ plot.see_parameters_distribution <- function(x,
     }
 
     names(highlight_color) <- highlight
-    highlight_color <- c(highlight_color, "no_highlight" = "grey70")
+    highlight_color <- c(highlight_color, no_highlight = "grey70")
 
     p <- p +
       scale_fill_manual(values = highlight_color) +

@@ -40,10 +40,10 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   dataplot$values[dataplot$values > 1] <- 1
 
   attr(dataplot, "info") <- list(
-    "xlab" = "",
-    "ylab" = "",
-    "title" = "Comparison of Model Indices",
-    "legend_color" = "Models"
+    xlab = "",
+    ylab = "",
+    title = "Comparison of Model Indices",
+    legend_color = "Models"
   )
 
   class(dataplot) <- c("data_plot", "see_compare_performance", "data.frame")
