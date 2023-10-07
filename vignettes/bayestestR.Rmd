@@ -335,7 +335,13 @@ plot(result) +
 ```
 
 ```{r fig.width=11, fig.height=9}
-result <- equivalence_test(model2, ci = c(0.89, 0.95), effects = "all", component = "all")
+result <- equivalence_test(
+  model2,
+  ci = c(0.89, 0.95),
+  effects = "all",
+  component = "all",
+  verbose = FALSE
+)
 
 result
 
