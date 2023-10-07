@@ -67,7 +67,7 @@
 #' x <- hdi(model)
 #' plot(x) + theme_modern()
 #'
-#' data <- rnorm(1000, 1)
+#' data <<- rnorm(1000, 1)
 #' x <- p_direction(data)
 #' plot(x)
 #'
