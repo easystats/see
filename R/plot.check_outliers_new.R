@@ -44,7 +44,7 @@
       se = FALSE,
       color = colors[1]
     ) +
-    scale_colour_manual(values = c("OK" = colors[2], "Influential" = colors[3])) +
+    scale_colour_manual(values = c(OK = colors[2], Influential = colors[3])) +
     (if (isTRUE(show_labels)) {
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_text_repel(

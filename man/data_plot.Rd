@@ -81,10 +81,6 @@ plot(x)
 x <- hdi(model)
 plot(x) + theme_modern()
 
-data <- rnorm(1000, 1)
-x <- p_direction(data)
-plot(x)
-
 x <- p_direction(model, verbose = FALSE)
 plot(x)
 

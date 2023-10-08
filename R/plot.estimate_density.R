@@ -51,11 +51,11 @@ data_plot.estimate_density <- function(x,
 
   attr(dataplot, "summary") <- summary
   attr(dataplot, "info") <- list(
-    "xlab" = "Values",
-    "ylab" = "Density",
-    "legend_fill" = "Parameter",
-    "legend_color" = "Parameter",
-    "title" = "Estimated Density Function"
+    xlab = "Values",
+    ylab = "Density",
+    legend_fill = "Parameter",
+    legend_color = "Parameter",
+    title = "Estimated Density Function"
   )
 
   class(dataplot) <- c("data_plot", "see_estimate_density", class(dataplot))

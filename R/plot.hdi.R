@@ -121,10 +121,10 @@ data_plot.bayestestR_eti <- data_plot.hdi
   dataplot <- .fix_facet_names(dataplot)
 
   attr(dataplot, "info") <- list(
-    "xlab" = "Possible parameter values",
-    "ylab" = ylab,
-    "legend_fill" = legend_title,
-    "title" = plot_title
+    xlab = "Possible parameter values",
+    ylab = ylab,
+    legend_fill = legend_title,
+    title = plot_title
   )
 
   class(dataplot) <- c("data_plot", "see_hdi", class(dataplot))
