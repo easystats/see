@@ -15,7 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.7/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><script src="../deps/bslib-component-js-0.5.1.9000/components.min.js"></script><script src="../deps/bslib-component-js-0.5.1.9000/web-components.min.js" type="module"></script><link href="../deps/bslib-component-css-0.5.1.9000/components.css" rel="stylesheet">
+<link href="../deps/Roboto-0.4.7/font.css" rel="stylesheet">
 <link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
 <link href="../deps/Roboto_Slab-0.4.7/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -178,10 +179,10 @@ variety of models objects, including popular modeling packages such as
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="co"># model with fixed effects only</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">rstanarm</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;&lt;-</span> <span class="fu">rstanarm</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># model with fixed and random effects as well as zero-inflation component</span></span>
-<span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu">insight</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/insight/reference/download_model.html" class="external-link">download_model</a></span><span class="op">(</span><span class="st">"brms_zi_3"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model2</span> <span class="op">&lt;&lt;-</span> <span class="fu">insight</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/insight/reference/download_model.html" class="external-link">download_model</a></span><span class="op">(</span><span class="st">"brms_zi_3"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="density-estimation">Density Estimation<a class="anchor" aria-label="anchor" href="#density-estimation"></a>
@@ -739,7 +740,13 @@ null hypothesis is accepted.</p>
 <span>  <span class="fu"><a href="../reference/scale_color_flat.html">scale_fill_flat</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="bayestestR_files/figure-html/unnamed-chunk-23-1.png" width="100%"></p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model2</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.89</span>, <span class="fl">0.95</span><span class="op">)</span>, effects <span class="op">=</span> <span class="st">"all"</span>, component <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span></span>
+<span>  <span class="va">model2</span>,</span>
+<span>  ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.89</span>, <span class="fl">0.95</span><span class="op">)</span>,</span>
+<span>  effects <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  component <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; # Test for Practical Equivalence</span></span>
