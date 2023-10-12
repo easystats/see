@@ -199,7 +199,7 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' library(bayestestR)
 #' set.seed(123)
 #' m <- suppressWarnings(stan_glm(Sepal.Length ~ Petal.Width * Species, data = iris, refresh = 0))
-#' result <- hdi(m)
+#' result <- bayestestR::hdi(m)
 #' result
 #' plot(result)
 #'
