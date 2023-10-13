@@ -7,7 +7,8 @@ plot.see_visualisation_recipe <- function(x, ...) {
     }
     suppressWarnings(ggraph::ggraph(attributes(x)$data, layout = attributes(x)$layout) + geoms_from_list(x))
   } else {
-    suppressWarnings(ggplot2::ggplot(data = attributes(x)$data) + geoms_from_list(x, ...))
+    suppressWarnings(ggplot2::ggplot(data = attributes(x)$data) +
+      geoms_from_list(x, ...))
   }
 }
 
