@@ -190,7 +190,7 @@ density estimation plots [from Bayesian
 models](https://easystats.github.io/see/articles/bayestestR.html).
 
 ```{r}
-result <- simulate_parameters(model1)
+result <<- simulate_parameters(model1)
 
 plot(result)
 ```
