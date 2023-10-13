@@ -126,7 +126,7 @@ plot(result)
 model <- lm(Petal.Length ~ Species * poly(Sepal.Width, 3), data = iris)
 
 result <- estimate_slopes(model, at = c("Sepal.Width", "Species"))
-plot(result)
+suppressWarnings(plot(result))
 ```
 
 # Estimate derivatives
