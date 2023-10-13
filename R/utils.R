@@ -7,9 +7,11 @@
   return(x)
 }
 
+
 .as.data.frame_density <- function(x, ...) {
   data.frame(x = x$x, y = x$y)
 }
+
 
 # safe conversion from factor to numeric
 .factor_to_numeric <- function(x) {
@@ -27,10 +29,12 @@
   as.numeric(as.character(x))
 }
 
+
 .has_multiple_panels <- function(x) {
   (!"Effects" %in% names(x) || insight::n_unique(x$Effects) <= 1L) &&
     (!"Component" %in% names(x) || insight::n_unique(x$Component) <= 1L)
 }
+
 
 .clean_parameter_names <- function(params, grid = FALSE) {
   params <- unique(params)
@@ -90,7 +94,6 @@
 }
 
 
-
 .fix_facet_names <- function(x) {
   if ("Component" %in% names(x)) {
     x$Component <- as.character(x$Component)
@@ -115,7 +118,6 @@
 
   x
 }
-
 
 
 .intercept_names <-

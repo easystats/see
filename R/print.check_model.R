@@ -9,13 +9,13 @@ print.see_check_model <- function(x,
   # to plot(), "type" is no longer recognized as "missing()"
   plot_type <- attr(x, "type")
 
-  if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+  if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) { # nolint
     type <- plot_type
   } else {
     type <- match.arg(type, choices = c("density", "discrete_dots", "discrete_interval", "discrete_both"))
   }
 
-  suppressWarnings(suppressMessages(plot(
+  suppressWarnings(suppressMessages(graphics::plot(
     x,
     style = style,
     colors = colors,
