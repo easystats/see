@@ -245,7 +245,7 @@ estimations](https://easystats.github.io/see/articles/bayestestR.html)).
 #   family = zero_inflated_poisson()
 # )
 brms_model <- insight::download_model("brms_zi_2")
-result <- model_parameters(brms_model, effects = "all", component = "all")
+result <- model_parameters(brms_model, effects = "all", component = "all", verbose = FALSE)
 
 plot(result)
 ```
