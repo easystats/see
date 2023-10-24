@@ -33,6 +33,8 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
     title <- paste0("Rotated loadings from ", title, " (", rotation_name, ")")
   }
 
+  # remove missing values in y, to avoid warning
+  dataplot <- dataplot[!is.na(dataplot$y), ]
 
   attr(dataplot, "info") <- list(
     "xlab" = "",

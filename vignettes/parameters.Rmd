@@ -190,7 +190,7 @@ density estimation plots [from Bayesian
 models](https://easystats.github.io/see/articles/bayestestR.html).
 
 ```{r}
-result <- simulate_parameters(model1)
+result <<- simulate_parameters(model1)
 
 plot(result)
 ```
@@ -245,7 +245,12 @@ estimations](https://easystats.github.io/see/articles/bayestestR.html)).
 #   family = zero_inflated_poisson()
 # )
 brms_model <- insight::download_model("brms_zi_2")
-result <- model_parameters(brms_model, effects = "all", component = "all")
+result <- model_parameters(
+  brms_model,
+  effects = "all",
+  component = "all",
+  verbose = FALSE
+)
 
 plot(result)
 ```
@@ -255,7 +260,9 @@ plot(result)
 ```{r}
 result <- model_parameters(brms_model,
   effects = "all",
-  component = "all", group_level = TRUE
+  component = "all",
+  group_level = TRUE,
+  verbose = FALSE
 )
 plot(result)
 ```

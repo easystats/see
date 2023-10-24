@@ -513,7 +513,9 @@ plot.see_parameters_model <- function(x,
   } else if (has_response) {
     p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
   } else if (has_subgroups) {
-    suppressWarnings(p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free")) # nolint
+    suppressWarnings({
+      p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free")
+    })
   }
 
   if (length(model_attributes$parameter_names) > 1L) {

@@ -5,11 +5,10 @@ plot.see_visualisation_recipe <- function(x, ...) {
     if (!"ggraph" %in% .packages()) {
       attachNamespace("ggraph") # Needs to be attached
     }
-    ggraph::ggraph(attributes(x)$data, layout = attributes(x)$layout) +
-      geoms_from_list(x)
+    suppressWarnings(ggraph::ggraph(attributes(x)$data, layout = attributes(x)$layout) + geoms_from_list(x))
   } else {
-    ggplot2::ggplot(data = attributes(x)$data) +
-      geoms_from_list(x, ...)
+    suppressWarnings(ggplot2::ggplot(data = attributes(x)$data) +
+      geoms_from_list(x, ...))
   }
 }
 
@@ -23,7 +22,7 @@ plot.see_visualisation_recipe <- function(x, ...) {
 plot.see_visualisation_recipes <- function(x, ...) {
   the_plots <- list()
   for (i in names(x)) {
-    the_plots[[i]] <- graphics::plot(x[[i]])
+    the_plots[[i]] <- suppressWarnings(graphics::plot(x[[i]]))
   }
   pw <- plots(the_plots, ...)
   .safe_print_plots(pw)

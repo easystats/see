@@ -361,7 +361,7 @@ represent the density of the null at the value - the ratio of their heights is
 the value of the Savage-Dickey Bayes factor:
 
 ```{r}
-result <- bayesfactor_parameters(model)
+result <- bayesfactor_parameters(model, verbose = FALSE)
 
 result
 
