@@ -40,6 +40,8 @@ plot.see_binned_residuals <- function(x,
     x$ybar[x$group == "yes"] <- NA
     x$CI_low[x$group == "yes"] <- NA
     x$CI_high[x$group == "yes"] <- NA
+    # remove missing values, to avoid warning
+    x <- x[!is.na(x$ybar), ]
   }
 
   p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
