@@ -157,7 +157,7 @@ result <- check_normality(model)
 ### Density Plot
 
 ```{r}
-plot(result)
+plot(result, type = "density")
 ```
 
 ### QQ Plot
