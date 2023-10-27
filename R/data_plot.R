@@ -140,10 +140,15 @@ add_plot_attributes <- function(x) {
 
 
 #' @keywords internal
-.retrieve_data <- function(x) {
+.retrieve_data <- function(x) {  
   # retrieve model
   obj_name <- attr(x, "object_name", exact = TRUE)
   dat <- NULL
+
+  # for simulated residuals, we save all necessary information in the object
+  if (inherits(x, "performance_simres")) {
+    return(attributes(x)$model)
+  }
 
   if (!is.null(obj_name)) {
     # first try, parent frame
@@ -156,7 +161,7 @@ add_plot_attributes <- function(x) {
 
     if (is.null(dat)) {
       # last try
-      model <- .dynGet(obj_name, ifnotfound = NULL)
+      dat <- .dynGet(obj_name, ifnotfound = NULL)
     }
   }
 

@@ -70,8 +70,9 @@ plot.see_check_normality <- function(x,
   } else {
     if (type == "qq") {
       model_info <- attributes(x)$model_info
-      if (inhertis(x, "performance_simres")) {
-        dat <- stats::na.omit(data.frame(y = model))
+      if (inherits(x, "performance_simres")) {
+        dat <- stats::na.omit(data.frame(y = attributes(x)$data))
+        model_info$is_simulated_residuals <- TRUE
       } else if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
         dat <- stats::na.omit(data.frame(y = res_))
@@ -95,7 +96,11 @@ plot.see_check_normality <- function(x,
         method = method
       )
     } else if (type == "density") {
-      r <- suppressMessages(stats::residuals(model))
+      if (inherits(x, "performance_simres")) {
+        r <- attributes(x)$data
+      } else {
+        r <- suppressMessages(stats::residuals(model))
+      }
       dat <- as.data.frame(bayestestR::estimate_density(r))
       dat$curve <- stats::dnorm(
         seq(min(dat$x), max(dat$x), length.out = nrow(dat)),
@@ -104,7 +109,11 @@ plot.see_check_normality <- function(x,
       )
       .plot_diag_norm(dat, size_line = size_line)
     } else if (type == "pp") {
-      x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+      if (inherits(x, "performance_simres")) {
+        x <- attributes(x)$data
+      } else {
+        x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+      }
       dat <- data.frame(res = x)
       .plot_diag_pp(
         dat,
@@ -171,7 +180,7 @@ plot.see_check_normality <- function(x,
                           model_info = NULL) {
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
   # qq-halfnorm for GLM
-  if (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count)) {
+  if (!isTRUE(model_info$is_simulated_residuals) && (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count))) {
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
     qq_stuff <- list(
       ggplot2::geom_point(
