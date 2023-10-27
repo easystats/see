@@ -70,7 +70,9 @@ plot.see_check_normality <- function(x,
   } else {
     if (type == "qq") {
       model_info <- attributes(x)$model_info
-      if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
+      if (inhertis(x, "performance_simres")) {
+        dat <- stats::na.omit(data.frame(y = model))
+      } else if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
         dat <- stats::na.omit(data.frame(y = res_))
       } else if (inherits(model, "glm")) {
