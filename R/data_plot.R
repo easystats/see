@@ -156,7 +156,7 @@ add_plot_attributes <- function(x) {
 
     if (is.null(dat)) {
       # last try
-      model <- .dynGet(obj_name, ifnotfound = NULL)
+      dat <- .dynGet(obj_name, ifnotfound = NULL)
     }
   }
 
