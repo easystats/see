@@ -147,7 +147,7 @@ add_plot_attributes <- function(x) {
 
   # for simulated residuals, we save all necessary information in the object
   if (inherits(x, "performance_simres")) {
-    return(attributes(x)$model)
+    return(x$fittedModel)
   }
 
   if (!is.null(obj_name)) {

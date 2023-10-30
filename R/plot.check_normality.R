@@ -71,7 +71,7 @@ plot.see_check_normality <- function(x,
     if (type == "qq") {
       model_info <- attributes(x)$model_info
       if (inherits(x, "performance_simres")) {
-        dat <- stats::na.omit(data.frame(y = attributes(x)$scaledResiduals))
+        dat <- stats::na.omit(data.frame(y = x$scaledResiduals))
         model_info$is_simulated_residuals <- TRUE
       } else if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
