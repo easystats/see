@@ -140,7 +140,7 @@ add_plot_attributes <- function(x) {
 
 
 #' @keywords internal
-.retrieve_data <- function(x) {  
+.retrieve_data <- function(x) {
   # retrieve model
   obj_name <- attr(x, "object_name", exact = TRUE)
   dat <- NULL
