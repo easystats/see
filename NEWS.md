@@ -1,4 +1,4 @@
-# see (development version)
+# see 0.8.1
 
 ## Major Changes
 
@@ -6,20 +6,24 @@
 
 ## New features
 
-* There is now a `plot()` method for outputs of `datawizard::data_tabulate()` 
+* There is now a `plot()` method for outputs of `datawizard::data_tabulate()`
   (#293).
 
 ## Minor Changes
 
 * The `print()` method for `performance::check_model()` now also evaluates the
   default plot type for posterior predictive checks.
+
 * QQ/PP-plots now default to drawing simultaneous testing bands (when the
   `qqplotr` package is available). Previous behavior can be restored by setting
   `method = "pointwise"`.
-* Plot method for `performance::check_normality()` now default to a detrended 
+
+* Plot method for `performance::check_normality()` now default to a detrended
   QQ-plot. Previous behavior can be restored by setting `type = "density"`.
+
 * Plot method for `binned_residuals()` gains a `show_smooth` argument, to show
   or hide the smooth line.
+
 * Plot method for `check_predictions()` gains a `x_limits` argument, to limit
   the x-axis-range. This can be useful to "zoom in" certain parts of the plot.
 

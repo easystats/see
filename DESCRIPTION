@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.0.7
+Version: 0.8.1
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -105,7 +105,7 @@ Suggests:
     rstanarm,
     scales (>= 1.2.1),
     splines,
-    testthat (>= 3.1.7),
+    testthat (>= 3.2.0),
     tidygraph,
     vdiffr (>= 1.0.6)
 Encoding: UTF-8
