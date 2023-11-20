@@ -156,15 +156,14 @@ By default, `model_parameters()` returns a data frame, where the parameter names
 plot(model_parameters(model4))
 ``` 
 
-However, there are several ways to change the the names of the parameters. Since `plot()` returns *ggplot* objects, these can be easily modified, e.g. by adding a `scale_y_discrete()` layer.
+However, there are several ways to change the the names of the parameters. Since `plot()` returns *ggplot* objects, these can be easily modified, e.g. by adding a `scale_y_discrete()` layer. *Note the correct order of the labels!*
 
 ```{r}
 library(ggplot2)
 plot(model_parameters(model4)) +
-  scale_y_discrete(labels = c(
-    "Time", "Age", "Education (mid-level)",
-    "Eucation (high-level)"
-  ))
+  scale_y_discrete(
+    labels = c("Eucation (high-level)", "Education (mid-level)", "Age", "Time")
+  )
 ```
 
 Another way would be changing the values of the `Parameter` column before calling `plot()`:
