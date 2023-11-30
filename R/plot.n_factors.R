@@ -19,7 +19,17 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
     s2[[var]] <- 1:max(x[[var]])
   }
 
+  if("Variance_Cumulative" %in% names(s1)){
+    s2$Variance_Cumulative <- NA
+  }
+
   dataplot <- rbind(s1, s2[!s2[[var]] %in% s1[[var]], ])
+
+  # Add Variance explained
+  if("Variance_Explained" %in% names(attributes(x))){
+    dataplot$Variance_Cumulative <- NULL  # Remove column and re add
+    dataplot <- merge(dataplot, attributes(x)$Variance_Explained[, c("n_Factors", "Variance_Cumulative")], by = "n_Factors")
+  }
 
   if (type == "line") {
     dataplot$x <- factor(dataplot[[var]], levels = rev(sort(levels(dataplot[[var]]))))
@@ -37,18 +47,30 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   dataplot$y <- dataplot$n_Methods / sum(dataplot$n_Methods)
   rownames(dataplot) <- NULL
 
+  # Labels and titles -----------------------------------------------------
+  n_max <- sum(dataplot$n_Methods)
+  axis_lab <- paste0("% of methods (out of ", n_max, ")")
+
+  # Inverse xlab and ylab for line plot
   if (type == "line") {
     attr(dataplot, "info") <- list(
       "ylab" = paste("Number of", lab),
-      "xlab" = "Consensus between methods",
-      "title" = paste("How many", lab, "to retain")
+      "xlab" = axis_lab
     )
   } else {
     attr(dataplot, "info") <- list(
       "xlab" = paste("Number of", lab),
-      "ylab" = "Consensus between methods",
-      "title" = paste("How many", lab, "to retain")
+      "ylab" = axis_lab
     )
+  }
+  # Title
+
+  attr(dataplot, "info")$title <-  paste("How many", lab, "to retain")
+  attr(dataplot, "info")$subtitle <- paste0("Number of ", lab, " considered optimal by various algorithm")
+  if("Variance_Cumulative" %in% names(dataplot) && type != "line"){
+    attr(dataplot, "info")$subtitle <- paste0(
+      attr(dataplot, "info")$subtitle,
+      ". The dashed line represent the cumulative percentage of variance explained")
   }
 
   class(dataplot) <- unique(c("data_plot", "see_n_factors", class(dataplot)))
@@ -83,7 +105,10 @@ data_plot.n_clusters <- data_plot.n_factors
 #' data(mtcars)
 #' result <- n_factors(mtcars, type = "PCA")
 #' result
+#'
+#' plot(result)  # type = "bar" by default
 #' plot(result, type = "line")
+#' plot(result, type = "area")
 #'
 #' @export
 plot.see_n_factors <- function(x,
@@ -105,8 +130,9 @@ plot.see_n_factors <- function(x,
     )
   }
 
+  # Base plot
   if (type == "area") {
-    ggplot(x, aes(x = .data$x, y = .data$y)) +
+    p <- ggplot(x, aes(x = .data$x, y = .data$y)) +
       geom_area(fill = flat_colors("grey")) +
       geom_segment(
         aes(
@@ -115,32 +141,42 @@ plot.see_n_factors <- function(x,
           y = 0,
           yend = max(.data$y)
         ),
-        color = flat_colors("red"),
-        linetype = "dashed"
+        color = flat_colors("red")
       ) +
       geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)),
         color = flat_colors("red")
       ) +
-      scale_y_continuous(labels = .percents) +
       scale_x_continuous(breaks = 1:max(x$x)) +
       add_plot_attributes(x)
   } else if (type == "line") {
-    ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
+    p <- ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
       geom_segment(aes(x = 0, yend = .data$x, xend = .data$y), linewidth = size) +
       geom_point(size = 2 * size) +
       guides(colour = "none") +
       scale_x_continuous(labels = .percents) +
       scale_color_manual(values = unname(flat_colors(c("grey", "red")))) +
       add_plot_attributes(x)
+    # If line, return plot as variance explained cannot be added due to the horizontal orientation of the plot
+    return(p)
   } else {
-    ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$fill)) +
+    p <- ggplot(x, aes(x = .data$x, y = .data$y, fill = .data$fill)) +
       geom_bar(stat = "identity", width = size) +
       guides(fill = "none") +
-      scale_y_continuous(labels = .percents) +
       add_plot_attributes(x) +
       scale_x_continuous(breaks = 1:max(x$x)) +
       scale_fill_manual(values = unname(flat_colors(c("grey", "red"))))
   }
+
+  # Add variance explained
+  if("Variance_Cumulative" %in% names(x)) {
+    x$Varex_scaled <- x$Variance_Cumulative * max(x$y)
+    p <- p +
+      geom_line(data=x, aes(x = .data$x, y = .data$Varex_scaled, group=1), linetype="dashed") +
+      scale_y_continuous(labels = .percents, sec.axis = sec_axis(~ . / max(x$y), name = "% of variance explained", labels = .percents))
+  } else {
+    p <- p + scale_y_continuous(labels = .percents)
+  }
+  p
 }
 
 #' @export

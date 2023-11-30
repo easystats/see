@@ -132,6 +132,9 @@ add_plot_attributes <- function(x) {
   if (!is.null(info$title)) {
     out[[length(out) + 1L]] <- ggplot2::labs(title = info$title)
   }
+  if (!is.null(info$subtitle)) {
+    out[[length(out) + 1L]] <- ggplot2::labs(subtitle = info$subtitle)
+  }
 
   out
 }
