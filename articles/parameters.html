@@ -297,14 +297,14 @@ plot:</p>
 <p>However, there are several ways to change the the names of the
 parameters. Since <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> returns <em>ggplot</em> objects,
 these can be easily modified, e.g. by adding a
-<code><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete()</a></code> layer.</p>
+<code><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete()</a></code> layer. <em>Note the correct order of the
+labels!</em></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="st">"Time"</span>, <span class="st">"Age"</span>, <span class="st">"Education (mid-level)"</span>,</span>
-<span>    <span class="st">"Eucation (high-level)"</span></span>
-<span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete</a></span><span class="op">(</span></span>
+<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Eucation (high-level)"</span>, <span class="st">"Education (mid-level)"</span>, <span class="st">"Age"</span>, <span class="st">"Time"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <p>Another way would be changing the values of the
 <code>Parameter</code> column before calling <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>:</p>
