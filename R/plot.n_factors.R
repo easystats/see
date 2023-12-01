@@ -58,12 +58,12 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   # Inverse xlab and ylab for line plot
   if (type == "line") {
     attr(dataplot, "info") <- list(
-      ylab = paste("Number of", lab),
+      ylab = paste("Optimal number of", lab),
       xlab = axis_lab
     )
   } else {
     attr(dataplot, "info") <- list(
-      xlab = paste("Number of", lab),
+      xlab = paste("Optimal number of", lab),
       ylab = axis_lab
     )
   }
