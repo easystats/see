@@ -59,11 +59,11 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 
   attr(dataplot, "summary") <- summary
   attr(dataplot, "info") <- list(
-    "xlab" = "Standardized Mean Difference",
-    "ylab" = NULL,
-    "legend_fill" = NULL,
-    "legend_color" = NULL,
-    "title" = "Bayesian Meta-Analysis"
+    xlab = "Standardized Mean Difference",
+    ylab = NULL,
+    legend_fill = NULL,
+    legend_color = NULL,
+    title = "Bayesian Meta-Analysis"
   )
 
   class(dataplot) <- unique(c("data_plot", "see_parameters_brms_meta", class(dataplot)))
@@ -212,12 +212,12 @@ plot.see_parameters_brms_meta <- function(x,
     theme_lucid() +
     ggplot2::scale_y_discrete() +
     ggplot2::scale_fill_manual(values = c(
-      "Study" = unname(metro_colors("light blue")),
-      "Overall" = unname(metro_colors("amber"))
+      Study = unname(metro_colors("light blue")),
+      Overall = unname(metro_colors("amber"))
     )) +
     ggplot2::scale_colour_manual(values = c(
-      "Study" = unname(metro_colors("light blue")),
-      "Overall" = unname(metro_colors("amber"))
+      Study = unname(metro_colors("light blue")),
+      Overall = unname(metro_colors("amber"))
     )) +
     ggplot2::guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
