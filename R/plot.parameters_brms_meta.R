@@ -150,9 +150,7 @@ plot.see_parameters_brms_meta <- function(x,
                                           ...) {
   # save model for later use
   model <- tryCatch(
-    {
-      .retrieve_data(x)
-    },
+    .retrieve_data(x),
     error = function(e) {
       priors <- FALSE
       NULL
