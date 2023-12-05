@@ -179,7 +179,7 @@ add_plot_attributes <- function(x) {
 
 #' @keywords internal
 .dynGet <- function(x,
-                    ifnotfound = stop(gettextf("%s not found", sQuote(x)), domain = NA),
+                    ifnotfound = stop(gettextf("%s not found", sQuote(x)), domain = NA, .call = FALSE),
                     minframe = 1L,
                     inherits = FALSE) {
   x <- insight::safe_deparse(x)
