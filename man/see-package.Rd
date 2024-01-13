@@ -3,7 +3,6 @@
 \docType{package}
 \name{see-package}
 \alias{see-package}
-\alias{_PACKAGE}
 \alias{see}
 \title{see: Framework for Easy Statistical Modeling, Visualization, and Reporting}
 \description{
