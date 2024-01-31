@@ -68,7 +68,7 @@ plot.see_check_normality <- function(x,
       alpha_level = alpha
     )
   } else {
-    if (type == "qq") {
+    if (type == "qq") { # nolint
       model_info <- attributes(x)$model_info
       if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))

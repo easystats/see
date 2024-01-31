@@ -41,9 +41,9 @@ plot.see_check_outliers <- function(x,
                                     ...) {
   type <- match.arg(type)
   influential_obs <- attributes(x)$influential_obs
-  methods <- attr(x, "methods", exact = TRUE)
+  outlier_methods <- attr(x, "methods", exact = TRUE)
 
-  if (type == "dots" && !is.null(influential_obs) && (is.null(methods) || length(methods) == 1)) {
+  if (type == "dots" && !is.null(influential_obs) && (is.null(outlier_methods) || length(outlier_methods) == 1)) {
     .plot_diag_outliers_new(
       influential_obs,
       show_labels = show_labels,
@@ -52,12 +52,10 @@ plot.see_check_outliers <- function(x,
       dot_alpha_level = dot_alpha,
       colors = colors
     )
+  } else if (length(outlier_methods) == 1) {
+    .plot_diag_outliers(x, show_labels = show_labels, size_text = size_text, rescale_distance = rescale_distance)
   } else {
-    if (length(methods == 1)) {
-      .plot_diag_outliers(x, show_labels = show_labels, size_text = size_text, rescale_distance = rescale_distance)
-    } else {
-      .plot_outliers_multimethod(x, rescale_distance)
-    }
+    .plot_outliers_multimethod(x, rescale_distance)
   }
 }
 

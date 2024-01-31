@@ -209,9 +209,9 @@ plot.see_check_model <- function(x,
     pw <- plots(p, n_columns = n_columns)
     .safe_print_plots(pw, ...)
     invisible(pw)
-  } else {
-    return(p)
   }
+
+  p
 }
 
 

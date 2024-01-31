@@ -189,7 +189,7 @@ geom_from_list <- function(x, ...) {
   }
 
   # Default for violin
-  if (x$geom == "violin") {
+  if (x$geom == "violin") { # nolint
     stat <- "ydensity"
     position <- "dodge"
   } else if (x$geom == "boxplot") {
