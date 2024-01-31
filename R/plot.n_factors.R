@@ -27,7 +27,7 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
 
   # Add Variance explained
   if ("Variance_Explained" %in% names(attributes(x))) {
-    dataplot$Variance_Cumulative <- NULL  # Remove column and re add
+    dataplot$Variance_Cumulative <- NULL # Remove column and re add
     dataplot <- merge(
       dataplot,
       attributes(x)$Variance_Explained[, c("n_Factors", "Variance_Cumulative")],
@@ -69,7 +69,7 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   }
   # Title
 
-  attr(dataplot, "info")$title <-  paste("How many", lab, "to retain")
+  attr(dataplot, "info")$title <- paste("How many", lab, "to retain")
   attr(dataplot, "info")$subtitle <- paste0("Number of ", lab, " considered optimal by various algorithm")
   if ("Variance_Cumulative" %in% names(dataplot) && type != "line") {
     attr(dataplot, "info")$subtitle <- paste0(
@@ -111,7 +111,7 @@ data_plot.n_clusters <- data_plot.n_factors
 #' result <- n_factors(mtcars, type = "PCA")
 #' result
 #'
-#' plot(result)  # type = "bar" by default
+#' plot(result) # type = "bar" by default
 #' plot(result, type = "line")
 #' plot(result, type = "area")
 #'
