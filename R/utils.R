@@ -38,7 +38,7 @@
 
 .clean_parameter_names <- function(params, grid = FALSE) {
   params <- unique(params)
-  labels <- params
+  parameter_labels <- params
 
   # clean parameters names
   params <- gsub("(b_|bs_|bsp_|bcs_)(.*)", "\\2", params, perl = TRUE)
@@ -90,7 +90,7 @@
     params <- gsub("(Zero-Inflated) (Random)", "(Random, Zero-Inflated)", params, fixed = TRUE)
   }
 
-  stats::setNames(params, labels)
+  stats::setNames(params, parameter_labels)
 }
 
 
@@ -139,8 +139,8 @@
 
 .remove_intercept <- function(x, column = "Parameter", show_intercept = FALSE) {
   if (!show_intercept) {
-    remove <- which(.is_intercept(x[[column]]))
-    if (length(remove)) x <- x[-remove, ]
+    to_remove <- which(.is_intercept(x[[column]]))
+    if (length(to_remove)) x <- x[-to_remove, ]
   }
   x
 }
