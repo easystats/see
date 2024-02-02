@@ -417,7 +417,7 @@ plot(result)
 ### From simulated model parameters
 
 ```{r fig.height=8}
-simulated_parameters <- simulate_model(model1, component = "conditional")
+simulated_parameters <<- simulate_model(model1, component = "conditional")
 result <- equivalence_test(simulated_parameters)
 result
 
