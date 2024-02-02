@@ -323,7 +323,8 @@ dat <- escalc(
 )
 dat$author <- make.unique(dat$author)
 dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
-model <- rma(yi, vi, mods = ~disease, data = dat, digits = 3, slab = author)
+mydat <<- dat
+model <- rma(yi, vi, mods = ~disease, data = mydat, digits = 3, slab = author)
 result <- model_parameters(model)
 
 result
