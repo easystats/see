@@ -151,7 +151,7 @@ _([related function documentation](https://easystats.github.io/performance/refer
 
 ```{r}
 model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-result <- check_normality(model)
+result <<- check_normality(model)
 ```
 
 ### Density Plot
