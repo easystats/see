@@ -424,7 +424,7 @@ Intercepts<a class="anchor" aria-label="anchor" href="#including-intercepts-and-
 <h2 id="model-parameters-of-meta-analysis-models">Model Parameters of Meta-Analysis models<a class="anchor" aria-label="anchor" href="#model-parameters-of-meta-analysis-models"></a>
 </h2>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mydat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">mydat</span> <span class="op">&lt;&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  effectsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.393</span>, <span class="fl">0.675</span>, <span class="fl">0.282</span>, <span class="op">-</span><span class="fl">1.398</span><span class="op">)</span>,</span>
 <span>  standarderror <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.317</span>, <span class="fl">0.317</span>, <span class="fl">0.13</span>, <span class="fl">0.36</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -474,7 +474,8 @@ confidence intervals are included in the plot. Adjust the text size with
 <span><span class="op">)</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">author</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/make.unique.html" class="external-link">make.unique</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">author</span><span class="op">)</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">disease</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cancer"</span>, <span class="st">"CVD"</span>, <span class="st">"Depression"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">rma</a></span><span class="op">(</span><span class="va">yi</span>, <span class="va">vi</span>, mods <span class="op">=</span> <span class="op">~</span><span class="va">disease</span>, data <span class="op">=</span> <span class="va">dat</span>, digits <span class="op">=</span> <span class="fl">3</span>, slab <span class="op">=</span> <span class="va">author</span><span class="op">)</span></span>
+<span><span class="va">mydat</span> <span class="op">&lt;&lt;-</span> <span class="va">dat</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html" class="external-link">rma</a></span><span class="op">(</span><span class="va">yi</span>, <span class="va">vi</span>, mods <span class="op">=</span> <span class="op">~</span><span class="va">disease</span>, data <span class="op">=</span> <span class="va">mydat</span>, digits <span class="op">=</span> <span class="fl">3</span>, slab <span class="op">=</span> <span class="va">author</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span></span>
@@ -681,56 +682,31 @@ function documentation</a>)</em></p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
 </div>
-<div class="section level3">
-<h3 id="from-simulated-model-parameters">From simulated model parameters<a class="anchor" aria-label="anchor" href="#from-simulated-model-parameters"></a>
-</h3>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">simulated_parameters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/simulate_model.html" class="external-link">simulate_model</a></span><span class="op">(</span><span class="va">model1</span>, component <span class="op">=</span> <span class="st">"conditional"</span><span class="op">)</span></span>
-<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">simulated_parameters</span><span class="op">)</span></span>
-<span><span class="va">result</span></span>
-<span><span class="co">#&gt; # Test for Practical Equivalence</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   ROPE: [-0.10 0.10]</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Parameter   |        H0 | inside ROPE |       95% HDI</span></span>
-<span><span class="co">#&gt; -----------------------------------------------------</span></span>
-<span><span class="co">#&gt; (Intercept) | Undecided |     12.00 % | [-0.92  0.20]</span></span>
-<span><span class="co">#&gt; sppPR       |  Rejected |      0.00 % | [-1.72 -0.81]</span></span>
-<span><span class="co">#&gt; sppDM       | Undecided |      9.68 % | [ 0.01  0.54]</span></span>
-<span><span class="co">#&gt; sppEC-A     |  Rejected |      0.00 % | [-0.95 -0.17]</span></span>
-<span><span class="co">#&gt; sppEC-L     |  Rejected |      0.00 % | [ 0.42  0.90]</span></span>
-<span><span class="co">#&gt; sppDES-L    |  Rejected |      0.00 % | [ 0.38  0.87]</span></span>
-<span><span class="co">#&gt; sppDF       | Undecided |     38.84 % | [-0.15  0.38]</span></span>
-<span><span class="co">#&gt; minedno     |  Rejected |      0.00 % | [ 0.72  1.81]</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-33-1.png" width="672"></p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="p-value-function-and-consonancecompatibility-plot">p-value function and consonance/compatibility plot<a class="anchor" aria-label="anchor" href="#p-value-function-and-consonancecompatibility-plot"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/p_function.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/p_function.html" class="external-link">p_function</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-34-1.png" width="672"></p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-33-1.png" width="672"></p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/p_function.html" class="external-link">p_function</a></span><span class="op">(</span><span class="va">model</span>, ci_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.7</span>, emph <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, site_line <span class="op">=</span> <span class="fl">0.6</span>, <span class="fl">1.0</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-34-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-33-2.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="principal-component-analysis">Principal Component Analysis<a class="anchor" aria-label="anchor" href="#principal-component-analysis"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">principal_components</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, n <span class="op">=</span> <span class="st">"all"</span>, threshold <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -749,8 +725,8 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-35-1.png" width="672"></p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-34-1.png" width="672"></p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">principal_components</a></span><span class="op">(</span></span>
 <span>  <span class="va">mtcars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -776,7 +752,7 @@ function documentation</a>)</em></p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"line"</span>, text_color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-35-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="cluster-analysis">Cluster Analysis<a class="anchor" aria-label="anchor" href="#cluster-analysis"></a>
@@ -786,7 +762,7 @@ function documentation</a>)</em></p>
 <div class="section level3">
 <h3 id="clustering-solution">Clustering solution<a class="anchor" aria-label="anchor" href="#clustering-solution"></a>
 </h3>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html" class="external-link">cluster_analysis</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -796,9 +772,9 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Cluster | n_Obs | Sum_Squares | Sepal.Length | Sepal.Width | Petal.Length | Petal.Width</span></span>
 <span><span class="co">#&gt; ---------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; 1       |    47 |       47.45 |         1.13 |        0.09 |         0.99 |        1.01</span></span>
+<span><span class="co">#&gt; 1       |    53 |       44.09 |        -0.05 |       -0.88 |         0.35 |        0.28</span></span>
 <span><span class="co">#&gt; 2       |    50 |       47.35 |        -1.01 |        0.85 |        -1.30 |       -1.25</span></span>
-<span><span class="co">#&gt; 3       |    53 |       44.09 |        -0.05 |       -0.88 |         0.35 |        0.28</span></span>
+<span><span class="co">#&gt; 3       |    47 |       47.45 |         1.13 |        0.09 |         0.99 |        1.01</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; # Indices of model performance</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -808,27 +784,27 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; # You can access the predicted clusters via `predict()`.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html" class="external-link">cluster_analysis</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-37-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-36-2.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="cluster-centers">Cluster centers<a class="anchor" aria-label="anchor" href="#cluster-centers"></a>
 </h3>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="va">s</span></span>
 <span><span class="co">#&gt;   Cluster Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
-<span><span class="co">#&gt; 1       1  -0.05005221 -0.88042696    0.3465767   0.2805873</span></span>
-<span><span class="co">#&gt; 2       2   1.13217737  0.08812645    0.9928284   1.0141287</span></span>
-<span><span class="co">#&gt; 3       3  -0.62595645  1.80426129   -1.2826445  -1.2290567</span></span>
-<span><span class="co">#&gt; 4       4  -1.19247841  0.40154427   -1.3090939  -1.2608902</span></span>
+<span><span class="co">#&gt; 1       1    0.3558492  -0.3930869   0.58460377  0.54663615</span></span>
+<span><span class="co">#&gt; 2       2    1.3926646   0.2323817   1.15674505  1.21327591</span></span>
+<span><span class="co">#&gt; 3       3   -0.9987207   0.9032290  -1.29875725 -1.25214931</span></span>
+<span><span class="co">#&gt; 4       4   -0.4201099  -1.4246794   0.03924137 -0.05279511</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-38-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -836,7 +812,7 @@ function documentation</a>)</em></p>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_factors.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/n_factors.html" class="external-link">n_factors</a></span><span class="op">(</span><span class="va">mtcars</span>, type <span class="op">=</span> <span class="st">"PCA"</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -845,17 +821,17 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, Scree (SE), Scree (R2), Velicer's MAP).</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-38-1.png" width="672"></p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-39-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-38-2.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="number-of-clusters-to-retain">Number of Clusters to Retain<a class="anchor" aria-label="anchor" href="#number-of-clusters-to-retain"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_clusters.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/n_clusters.html" class="external-link">n_clusters</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/datawizard/reference/standardize.html" class="external-link">standardize</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -864,10 +840,10 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; The choice of 2 clusters is supported by 15 (51.72%) methods out of 29 (Elbow, Silhouette, Gap_Maechler2012, Gap_Dudoit2002, Ch, DB, Duda, Pseudot2, Beale, Ratkowsky, PtBiserial, Mcclain, Dunn, SDindex, Mixture (VVV)).</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-40-1.png" width="672"></p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-40-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-39-2.png" width="672"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
