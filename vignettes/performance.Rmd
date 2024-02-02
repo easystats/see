@@ -208,7 +208,7 @@ _([related function documentation](https://easystats.github.io/performance/refer
 ```{r}
 model <- lm(len ~ supp + dose, data = ToothGrowth)
 result <- check_homogeneity(model)
-plot(result)
+suppressWarnings(plot(result))
 ```
 
 ## Posterior Predictive Checks
