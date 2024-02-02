@@ -72,7 +72,7 @@ plot(result)
 Example where model **is** a good fit.
 
 ```{r}
-model <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
+model <- suppressWarnings(glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial"))
 result <- binned_residuals(model)
 result
 
