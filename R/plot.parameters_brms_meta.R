@@ -19,51 +19,51 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
   }
 
   # summary
-  summary <- x[, 1:6]
-  summary$Parameter <- attributes(x)$cleaned_parameters
-  colnames(summary)[2] <- "Estimate"
-  summary$Estimate_CI <- sprintf(
+  datasummary <- x[, 1:6]
+  datasummary$Parameter <- attributes(x)$cleaned_parameters
+  colnames(datasummary)[2] <- "Estimate"
+  datasummary$Estimate_CI <- sprintf(
     "%.2f %s",
-    summary$Estimate,
+    datasummary$Estimate,
     insight::format_ci(
-      summary$CI_low,
-      summary$CI_high,
+      datasummary$CI_low,
+      datasummary$CI_high,
       ci = NULL,
       digits = 2,
       zap_small = TRUE
     )
   )
 
-  summary$Parameter <- factor(summary$Parameter, levels = rev(unique(summary$Parameter)))
-  colnames(summary)[match("Parameter", colnames(summary))] <- "Study"
+  datasummary$Parameter <- factor(datasummary$Parameter, levels = rev(unique(datasummary$Parameter)))
+  colnames(datasummary)[match("Parameter", colnames(datasummary))] <- "Study"
 
-  summary$x <- NA_real_
-  summary$y <- NA_real_
-  summary$Color <- "Study"
-  summary$Color[summary$Study == "Overall"] <- "Overall"
+  datasummary$x <- NA_real_
+  datasummary$y <- NA_real_
+  datasummary$Color <- "Study"
+  datasummary$Color[datasummary$Study == "Overall"] <- "Overall"
 
   if ("ROPE_low" %in% names(x) && "ROPE_high" %in% names(x)) {
-    attr(summary, "rope") <- c(x$ROPE_low[1], x$ROPE_high[1])
+    attr(datasummary, "rope") <- c(x$ROPE_low[1], x$ROPE_high[1])
   }
 
   dataplot <- dataplot[dataplot$Study != "tau", ]
-  summary <- summary[summary$Study != "tau", ]
+  datasummary <- datasummary[datasummary$Study != "tau", ]
 
   dataplot$Study <- droplevels(dataplot$Study)
-  summary$Study <- droplevels(summary$Study)
+  datasummary$Study <- droplevels(datasummary$Study)
 
   dataplot$Group <- "Study"
   dataplot$Group[dataplot$Study == "Overall"] <- "Overall"
   dataplot$Color <- "Study"
   dataplot$Color[dataplot$Study == "Overall"] <- "Overall"
 
-  attr(dataplot, "summary") <- summary
+  attr(dataplot, "summary") <- datasummary
   attr(dataplot, "info") <- list(
-    "xlab" = "Standardized Mean Difference",
-    "ylab" = NULL,
-    "legend_fill" = NULL,
-    "legend_color" = NULL,
-    "title" = "Bayesian Meta-Analysis"
+    xlab = "Standardized Mean Difference",
+    ylab = NULL,
+    legend_fill = NULL,
+    legend_color = NULL,
+    title = "Bayesian Meta-Analysis"
   )
 
   class(dataplot) <- unique(c("data_plot", "see_parameters_brms_meta", class(dataplot)))
@@ -150,9 +150,7 @@ plot.see_parameters_brms_meta <- function(x,
                                           ...) {
   # save model for later use
   model <- tryCatch(
-    {
-      .retrieve_data(x)
-    },
+    .retrieve_data(x),
     error = function(e) {
       priors <- FALSE
       NULL
@@ -164,7 +162,7 @@ plot.see_parameters_brms_meta <- function(x,
     x <- data_plot(x, data = model, normalize_height = normalize_height, ...)
   }
 
-  summary <- attributes(x)$summary
+  datasummary <- attributes(x)$summary
   rope <- attributes(summary)$rope
 
   p <- ggplot2::ggplot(x, mapping = ggplot2::aes(x = .data$x, y = .data$Study, height = .data$y))
@@ -192,7 +190,7 @@ plot.see_parameters_brms_meta <- function(x,
       alpha = posteriors_alpha
     ) +
     ggplot2::geom_errorbarh(
-      data = summary,
+      data = datasummary,
       mapping = ggplot2::aes(
         xmin = .data$CI_low,
         xmax = .data$CI_high,
@@ -201,7 +199,7 @@ plot.see_parameters_brms_meta <- function(x,
       linewidth = size_line
     ) +
     ggplot2::geom_point(
-      data = summary,
+      data = datasummary,
       mapping = ggplot2::aes(x = .data$Estimate, color = .data$Color),
       size = size_point,
       fill = "white",
@@ -212,12 +210,12 @@ plot.see_parameters_brms_meta <- function(x,
     theme_lucid() +
     ggplot2::scale_y_discrete() +
     ggplot2::scale_fill_manual(values = c(
-      "Study" = unname(metro_colors("light blue")),
-      "Overall" = unname(metro_colors("amber"))
+      Study = unname(metro_colors("light blue")),
+      Overall = unname(metro_colors("amber"))
     )) +
     ggplot2::scale_colour_manual(values = c(
-      "Study" = unname(metro_colors("light blue")),
-      "Overall" = unname(metro_colors("amber"))
+      Study = unname(metro_colors("light blue")),
+      Overall = unname(metro_colors("amber"))
     )) +
     ggplot2::guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
@@ -229,7 +227,7 @@ plot.see_parameters_brms_meta <- function(x,
 
     p <- p +
       ggplot2::geom_text(
-        data = summary,
+        data = datasummary,
         mapping = ggplot2::aes(label = .data$Estimate_CI, x = Inf),
         hjust = "inward",
         size = size_text

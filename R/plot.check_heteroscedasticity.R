@@ -24,21 +24,19 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
 
   faminfo <- insight::model_info(model)
   r <- tryCatch(
-    {
-      if (inherits(model, "merMod")) {
-        stats::residuals(model, scaled = TRUE)
-      } else if (inherits(model, c("glmmTMB", "MixMod"))) {
-        sigma <- if (faminfo$is_mixed) {
-          sqrt(insight::get_variance_residual(model))
-        } else {
-          .sigma_glmmTMB_nonmixed(model, faminfo)
-        }
-        stats::residuals(model) / sigma
-      } else if (inherits(model, "glm")) {
-        stats::rstandard(model, type = "pearson")
+    if (inherits(model, "merMod")) {
+      stats::residuals(model, scaled = TRUE)
+    } else if (inherits(model, c("glmmTMB", "MixMod"))) {
+      sig <- if (faminfo$is_mixed) {
+        sqrt(insight::get_variance_residual(model))
       } else {
-        stats::rstandard(model)
+        .sigma_glmmTMB_nonmixed(model, faminfo)
       }
+      stats::residuals(model) / sig
+    } else if (inherits(model, "glm")) {
+      stats::rstandard(model, type = "pearson")
+    } else {
+      stats::rstandard(model)
     },
     error = function(e) {
       NULL

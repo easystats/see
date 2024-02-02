@@ -17,8 +17,8 @@
       # limit xrange, to avoid overly wide plots
       x_range <- stats::median(dens$x) + 7 * stats::mad(dens$x) * c(-1, 1)
 
-      remove <- which(dens$x <= x_range[1] | dens$x >= x_range[2])
-      if (length(remove)) dens <- dens[-remove, ]
+      to_remove <- which(dens$x <= x_range[1] | dens$x >= x_range[2])
+      if (length(to_remove)) dens <- dens[-to_remove, ]
 
       # remove intercept from output, if requested
       .remove_intercept(dens, column = "Parameter", show_intercept)
@@ -60,35 +60,33 @@
           na.rm = TRUE
         )
       }
+    } else if (isTRUE(show_ridge_line)) {
+      ggridges::geom_ridgeline(
+        data = dat,
+        mapping = aes(
+          x = .data$x,
+          y = as.factor(.data$Parameter),
+          height = .data$y,
+          group = as.factor(.data$Parameter),
+          fill = "Priors"
+        ),
+        alpha = priors_alpha,
+        na.rm = TRUE
+      )
     } else {
-      if (isTRUE(show_ridge_line)) {
-        ggridges::geom_ridgeline(
-          data = dat,
-          mapping = aes(
-            x = .data$x,
-            y = as.factor(.data$Parameter),
-            height = .data$y,
-            group = as.factor(.data$Parameter),
-            fill = "Priors"
-          ),
-          alpha = priors_alpha,
-          na.rm = TRUE
-        )
-      } else {
-        ggridges::geom_ridgeline(
-          data = dat,
-          mapping = aes(
-            x = .data$x,
-            y = as.factor(.data$Parameter),
-            height = .data$y,
-            group = as.factor(.data$Parameter),
-            fill = "Priors"
-          ),
-          alpha = priors_alpha,
-          color = NA,
-          na.rm = TRUE
-        )
-      }
+      ggridges::geom_ridgeline(
+        data = dat,
+        mapping = aes(
+          x = .data$x,
+          y = as.factor(.data$Parameter),
+          height = .data$y,
+          group = as.factor(.data$Parameter),
+          fill = "Priors"
+        ),
+        alpha = priors_alpha,
+        color = NA,
+        na.rm = TRUE
+      )
     }
   }
 }
@@ -115,8 +113,8 @@
       # limit xrange, to avoid overly wide plots
       x_range <- stats::median(dens$x) + 7 * stats::mad(dens$x) * c(-1, 1)
 
-      remove <- which(dens$x <= x_range[1] | dens$x >= x_range[2])
-      if (length(remove)) dens <- dens[-remove, ]
+      to_remove <- which(dens$x <= x_range[1] | dens$x >= x_range[2])
+      if (length(to_remove)) dens <- dens[-to_remove, ]
 
       # remove intercept from output, if requested
       .remove_intercept(dens, column = "Parameter", show_intercept)
