@@ -150,25 +150,34 @@ plot(result, type = "bars")
 _([related function documentation](https://easystats.github.io/performance/reference/check_normality.html))_
 
 ```{r}
-model2 <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-result2 <<- check_normality(model2)
+model2 <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+result2 <- check_normality(model2)
 ```
 
 ### Density Plot
 
-```{r}
+```{r echo=FALSE}
+plot(result2, type = "density", data = model2)
+```
+```{r eval=FALSE}
 plot(result2, type = "density")
 ```
 
 ### QQ Plot
 
-```{r}
+```{r echo=FALSE}
+plot(result2, type = "qq", data = model2)
+```
+```{r eval=FALSE}
 plot(result2, type = "qq")
 ```
 
 ### PP Plot
 
-```{r}
+```{r echo=FALSE}
+plot(result2, type = "pp", data = model2)
+```
+```{r eval=FALSE}
 plot(result2, type = "pp")
 ```
 
