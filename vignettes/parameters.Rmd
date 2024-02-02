@@ -414,16 +414,6 @@ result
 plot(result)
 ```
 
-### From simulated model parameters
-
-```{r fig.height=8}
-simulated_parameters <<- simulate_model(model1, component = "conditional")
-result <- equivalence_test(simulated_parameters)
-result
-
-plot(result)
-```
-
 ## p-value function and consonance/compatibility plot
 
 _([related function documentation](https://easystats.github.io/parameters/reference/p_function.html))_
