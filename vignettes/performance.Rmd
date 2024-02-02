@@ -150,26 +150,26 @@ plot(result, type = "bars")
 _([related function documentation](https://easystats.github.io/performance/reference/check_normality.html))_
 
 ```{r}
-model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-result <<- check_normality(model)
+model2 <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+result2 <<- check_normality(model2)
 ```
 
 ### Density Plot
 
 ```{r}
-plot(result, type = "density")
+plot(result2, type = "density")
 ```
 
 ### QQ Plot
 
 ```{r}
-plot(result, type = "qq")
+plot(result2, type = "qq")
 ```
 
 ### PP Plot
 
 ```{r}
-plot(result, type = "pp")
+plot(result2, type = "pp")
 ```
 
 ## Check for Normal Distributed Random Effects
