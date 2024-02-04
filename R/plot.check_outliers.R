@@ -145,7 +145,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
     }
   }
 
-  p
+  p + guides(x = guide_axis(n.dodge = 2))
 }
 
 
@@ -182,6 +182,7 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
           linetype = "dashed",
           colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey")
         )
-      )
+      ) +
+      guides(x = guide_axis(n.dodge = 2))
   )
 }
