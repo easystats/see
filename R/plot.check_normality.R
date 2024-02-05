@@ -70,8 +70,11 @@ plot.see_check_normality <- function(x,
   } else {
     if (type == "qq") { # nolint
       model_info <- attributes(x)$model_info
-      if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
+      if (inherits(model, c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+        dat <- stats::na.omit(data.frame(y = res_))
+      } else if (inherits(model, "glmmTMB")) {
+        res_ <- abs(stats::residuals(model, type = "deviance"))
         dat <- stats::na.omit(data.frame(y = res_))
       } else if (inherits(model, "glm")) {
         res_ <- abs(stats::rstandard(model, type = "deviance"))
@@ -90,7 +93,8 @@ plot.see_check_normality <- function(x,
         detrend = detrend,
         dot_alpha_level = dot_alpha,
         model_info = model_info,
-        method = method
+        method = method,
+        model_class = class(model)[1]
       )
     } else if (type == "density") {
       r <- suppressMessages(stats::residuals(model))
@@ -166,10 +170,11 @@ plot.see_check_normality <- function(x,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8,
                           show_dots = TRUE,
-                          model_info = NULL) {
+                          model_info = NULL,
+                          model_class = NULL) {
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
   # qq-halfnorm for GLM
-  if (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count)) {
+  if (!identical(model_class, "glmmTMB") && (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count))) {
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
     qq_stuff <- list(
       ggplot2::geom_point(
