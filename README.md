@@ -475,7 +475,7 @@ participating in this project you agree to abide by its terms.
 # References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
-line-spacing="2">
+entry-spacing="0" line-spacing="2">
 
 <div id="ref-Ben-Shachar2020" class="csl-entry">
 
