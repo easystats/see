@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,7 +155,11 @@ panel-layout. If <code>NULL</code>, a single, integrated plot is shown.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">m</span> <span class="op">&lt;&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/rope.html" class="external-link">rope</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between Petal.Width:Speciesversicolor and Petal.Width (r = 0.86), Petal.Width:Speciesversicolor and Speciesversicolor (r = 0.72), Petal.Width:Speciesvirginica and Petal.Width:Speciesversicolor (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between Petal.Width:Speciesversicolor and</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Petal.Width (r = 0.86), Petal.Width:Speciesversicolor and</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Speciesversicolor (r = 0.72), Petal.Width:Speciesvirginica and</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Petal.Width:Speciesversicolor (r = 0.79). This might lead to</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   inappropriate results. See 'Details' in '?rope'.</span>
 <span class="r-in"><span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Proportion of samples inside the ROPE [-0.08, 0.08]:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
