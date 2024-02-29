@@ -48,11 +48,11 @@
 <polyline points='37.88,365.36 40.62,365.36 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='37.88,208.65 40.62,208.65 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='37.88,51.94 40.62,51.94 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='674.49,522.07 677.23,522.07 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='674.49,406.84 677.23,406.84 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='674.49,291.61 677.23,291.61 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='674.49,176.39 677.23,176.39 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='674.49,61.16 677.23,61.16 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='677.23,522.07 674.49,522.07 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='677.23,406.84 674.49,406.84 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='677.23,291.61 674.49,291.61 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='677.23,176.39 674.49,176.39 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='677.23,61.16 674.49,61.16 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <text x='679.42' y='525.10' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0%</text>
 <text x='679.42' y='409.87' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='17.61px' lengthAdjust='spacingAndGlyphs'>25%</text>
 <text x='679.42' y='294.64' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='17.61px' lengthAdjust='spacingAndGlyphs'>50%</text>
@@ -78,7 +78,7 @@
 <text x='622.49' y='556.10' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>9</text>
 <text x='357.55' y='568.24' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='87.44px' lengthAdjust='spacingAndGlyphs'>Number of factors</text>
 <text transform='translate(13.05,291.61) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='120.46px' lengthAdjust='spacingAndGlyphs'>% of methods (out of 17)</text>
-<text transform='translate(704.67,291.61) rotate(90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='116.81px' lengthAdjust='spacingAndGlyphs'>% of variance explained</text>
+<text transform='translate(706.95,291.61) rotate(90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='116.81px' lengthAdjust='spacingAndGlyphs'>% of variance explained</text>
 <text x='40.62' y='30.35' style='font-size: 11.00px; font-family: sans;' textLength='657.39px' lengthAdjust='spacingAndGlyphs'>Number of factors considered optimal by various algorithm. The dashed line represent the cumulative percentage of variance explained</text>
 <text x='40.62' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='157.02px' lengthAdjust='spacingAndGlyphs'>How many factors to retain</text>
 </g>

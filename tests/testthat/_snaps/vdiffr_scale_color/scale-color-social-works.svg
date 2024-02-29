@@ -192,18 +192,18 @@
 <text x='513.36' y='536.46' text-anchor='middle' style='font-size: 12.00px; fill: #4D4D4D; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>6</text>
 <text x='337.32' y='567.82' text-anchor='middle' style='font-size: 13.00px; font-family: sans;' textLength='73.01px' lengthAdjust='spacingAndGlyphs'>Petal.Length</text>
 <text transform='translate(14.43,281.06) rotate(-90)' text-anchor='middle' style='font-size: 13.00px; font-family: sans;' textLength='66.47px' lengthAdjust='spacingAndGlyphs'>Petal.Width</text>
-<rect x='626.93' y='223.32' width='87.59' height='115.48' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<image width='17.28' height='86.40' x='632.41' y='246.92' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAABJUlEQVQ4jZ2NwXXDMAxDPyEla7T779KBnNpkD7YZSZZ7yIWPAD5Bfr6/QoYjs0CyQAJkRO910hKReXqJQOvt29ACyMxbZLzoW0wgLIf6MQT2b6oJ/GFpv8X7gqvE0hvkHfJpQW4zxGVoUUGvUtBSCnqlfOnWqxNE6LfUtq9Jm5aKFqn3ClqUpbs8t9WEAkMWhghDFjrk4ZGBIfMBPpH24lowXAwtQ4GFLjAIGQUZNbduQEXsUicXA3JbULsfUftvan/MnhsVeQRyd7S5oy2lpzwCv8J3F+6O1jg9f7f4tcWHH5MLPJBtgbQGKmsn9d7W3psGjrSBLLmyp56loLJFi2j1/htnVTYXD1QFehTQU6CHAj3Su8jTe94jKXcv4d6byecMKfAHu74dJK4EK58AAAAASUVORK5CYII='/>
-<text x='651.69' y='320.56' style='font-size: 12.00px; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='651.69' y='296.64' style='font-size: 12.00px; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>6</text>
-<text x='651.69' y='272.72' style='font-size: 12.00px; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>7</text>
-<text x='632.41' y='239.09' style='font-size: 13.00px; font-family: sans;' textLength='76.63px' lengthAdjust='spacingAndGlyphs'>Sepal.Length</text>
-<line x1='632.41' y1='316.43' x2='635.87' y2='316.43' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='632.41' y1='292.51' x2='635.87' y2='292.51' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='632.41' y1='268.59' x2='635.87' y2='268.59' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='646.24' y1='316.43' x2='649.69' y2='316.43' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='646.24' y1='292.51' x2='649.69' y2='292.51' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='646.24' y1='268.59' x2='649.69' y2='268.59' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<rect x='626.93' y='223.81' width='87.59' height='114.48' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='632.41' y='239.59' style='font-size: 13.00px; font-family: sans;' textLength='76.63px' lengthAdjust='spacingAndGlyphs'>Sepal.Length</text>
+<image width='17.28' height='86.40' x='632.41' y='246.42' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAABJUlEQVQ4jZ2NwXXDMAxDPyEla7T779KBnNpkD7YZSZZ7yIWPAD5Bfr6/QoYjs0CyQAJkRO910hKReXqJQOvt29ACyMxbZLzoW0wgLIf6MQT2b6oJ/GFpv8X7gqvE0hvkHfJpQW4zxGVoUUGvUtBSCnqlfOnWqxNE6LfUtq9Jm5aKFqn3ClqUpbs8t9WEAkMWhghDFjrk4ZGBIfMBPpH24lowXAwtQ4GFLjAIGQUZNbduQEXsUicXA3JbULsfUftvan/MnhsVeQRyd7S5oy2lpzwCv8J3F+6O1jg9f7f4tcWHH5MLPJBtgbQGKmsn9d7W3psGjrSBLLmyp56loLJFi2j1/htnVTYXD1QFehTQU6CHAj3Su8jTe94jKXcv4d6byecMKfAHu74dJK4EK58AAAAASUVORK5CYII='/>
+<polyline points='646.24,315.93 649.69,315.93 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='646.24,292.01 649.69,292.01 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='646.24,268.09 649.69,268.09 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='635.87,315.93 632.41,315.93 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='635.87,292.01 632.41,292.01 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='635.87,268.09 632.41,268.09 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<text x='655.17' y='320.06' style='font-size: 12.00px; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='655.17' y='296.14' style='font-size: 12.00px; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text x='655.17' y='272.22' style='font-size: 12.00px; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>7</text>
 <text x='5.48' y='15.80' style='font-size: 15.00px; font-family: sans;' textLength='175.93px' lengthAdjust='spacingAndGlyphs'>scale_color_social() works</text>
 </g>
 </svg>

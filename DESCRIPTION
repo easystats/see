@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.2.1
+Version: 0.8.2.2
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -63,15 +63,15 @@ Depends:
     R (>= 3.6),
     stats
 Imports:
-    bayestestR (>= 0.13.1),
+    bayestestR (>= 0.13.2),
     correlation (>= 0.8.4),
     datawizard (>= 0.9.1),
     effectsize (>= 0.8.6),
-    ggplot2 (>= 3.4.4),
+    ggplot2 (>= 3.5.0),
     insight (>= 0.19.8),
-    modelbased (>= 0.8.6),
+    modelbased (>= 0.8.7),
     parameters (>= 0.21.5),
-    performance (>= 0.10.8)
+    performance (>= 0.10.9)
 Suggests:
     brms,
     curl,
@@ -103,11 +103,11 @@ Suggests:
     rlang,
     rmarkdown,
     rstanarm,
-    scales (>= 1.2.1),
+    scales (>= 1.3.0),
     splines,
-    testthat (>= 3.2.0),
+    testthat (>= 3.2.1),
     tidygraph,
-    vdiffr (>= 1.0.6)
+    vdiffr (>= 1.0.7)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)

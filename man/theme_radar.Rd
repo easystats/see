@@ -60,8 +60,8 @@ are aligned to the plot panels. A value of "plot" means that titles and/or
 caption are aligned to the entire plot (minus any space for margins and
 plot tag).}
 
-\item{legend.position}{the position of legends ("none", "left", "right",
-"bottom", "top", or two-element numeric vector)}
+\item{legend.position}{the default position of legends ("none", "left",
+"right", "bottom", "top", "inside")}
 
 \item{axis.title.space}{Axis title spacing.}
 
