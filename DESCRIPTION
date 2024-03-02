@@ -67,7 +67,7 @@ Imports:
     correlation (>= 0.8.4),
     datawizard (>= 0.9.1),
     effectsize (>= 0.8.6),
-    ggplot2 (>= 3.5.0),
+    ggplot2 (>= 3.4.0),
     insight (>= 0.19.8),
     modelbased (>= 0.8.7),
     parameters (>= 0.21.5),
