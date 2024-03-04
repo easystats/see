@@ -20,12 +20,10 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
   }
 
   data <- tryCatch(
-    {
-      if (!is.null(x$Parameter)) {
-        data[, x$Parameter, drop = FALSE]
-      } else {
-        data
-      }
+    if (!is.null(x$Parameter)) {
+      data[, x$Parameter, drop = FALSE]
+    } else {
+      data
     },
     error = function(e) {
       data
@@ -36,10 +34,10 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
   if (is.null(centrality)) centrality <- "all"
 
   dataplot <- lapply(colnames(data), function(i) {
-    dist <- data[[i]]
+    my_dist <- data[[i]]
 
-    pe <- bayestestR::point_estimate(dist, centrality = "all")
-    dat <- as.data.frame(stats::density(dist, n = 256))
+    pe <- bayestestR::point_estimate(my_dist, centrality = "all")
+    dat <- as.data.frame(stats::density(my_dist, n = 256))
     dat$group <- i
 
     if (any(centrality %in% c("all", "mean"))) {
