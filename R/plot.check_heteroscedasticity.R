@@ -39,6 +39,10 @@ plot.see_check_heteroscedasticity <- function(x, data = NULL, ...) {
       stats::rstandard(model)
     },
     error = function(e) {
+      # debugging
+      if (getOption("easystats_erros", FALSE)) {
+        insight::format_error(e$message)
+      }
       NULL
     }
   )

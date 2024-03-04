@@ -23,7 +23,7 @@ data_plot.estimate_density <- function(x,
   # summary
   split_columns <- intersect(c("Parameter", "Effects", "Component"), colnames(dataplot))
   datasplit <- split(dataplot, dataplot[split_columns])
-  summary <- do.call(rbind, insight::compact_list(lapply(datasplit, function(i) {
+  my_summary <- do.call(rbind, insight::compact_list(lapply(datasplit, function(i) {
     if (length(i$x) > 0L) {
       Estimate <- as.numeric(bayestestR::point_estimate(i$x, centrality = centrality))
       CI <- as.numeric(bayestestR::ci(i$x, ci = ci))
@@ -46,10 +46,10 @@ data_plot.estimate_density <- function(x,
     out
   })))
 
-  summary$Parameter <- factor(summary$Parameter)
-  summary$Parameter <- factor(summary$Parameter, levels = levels(dataplot$Parameter))
+  my_summary$Parameter <- factor(my_summary$Parameter)
+  my_summary$Parameter <- factor(my_summary$Parameter, levels = levels(dataplot$Parameter))
 
-  attr(dataplot, "summary") <- summary
+  attr(dataplot, "summary") <- my_summary
   attr(dataplot, "info") <- list(
     xlab = "Values",
     ylab = "Density",
@@ -112,9 +112,7 @@ plot.see_estimate_density <- function(x,
                                       ...) {
   # save model for later use
   model <- tryCatch(
-    {
-      .retrieve_data(x)
-    },
+    .retrieve_data(x),
     error = function(e) {
       priors <- FALSE
       NULL
@@ -139,7 +137,7 @@ plot.see_estimate_density <- function(x,
   params <- unique(x$y)
 
   # get labels
-  labels <- .clean_parameter_names(x$Parameter, grid = !is.null(n_columns))
+  parameter_labels <- .clean_parameter_names(x$Parameter, grid = !is.null(n_columns))
 
   # remove intercept from output, if requested
   x <- .remove_intercept(x, show_intercept = show_intercept)
@@ -148,7 +146,7 @@ plot.see_estimate_density <- function(x,
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
       geom_line(linewidth = size_line) +
       add_plot_attributes(x) +
-      scale_color_flat(labels = labels)
+      scale_color_flat(labels = parameter_labels)
   } else {
     p <- ggplot(x, aes(x = .data$x, y = .data$Parameter, height = .data$y))
 
@@ -184,13 +182,13 @@ plot.see_estimate_density <- function(x,
         scale_color_manual(values = unname(social_colors("grey")))
     }
 
-    summary <- attributes(x)$summary
-    summary <- .remove_intercept(summary, show_intercept = show_intercept)
-    summary$y <- NA
+    my_summary <- attributes(x)$summary
+    my_summary <- .remove_intercept(my_summary, show_intercept = show_intercept)
+    my_summary$y <- NA
 
     p <- p +
       geom_errorbarh(
-        data = summary,
+        data = my_summary,
         mapping = aes(
           xmin = .data$CI_low,
           xmax = .data$CI_high,
@@ -199,7 +197,7 @@ plot.see_estimate_density <- function(x,
         linewidth = size_line
       ) +
       geom_point(
-        data = summary,
+        data = my_summary,
         mapping = aes(x = .data$x, color = "Posterior"),
         size = size_point,
         fill = "white",
@@ -213,7 +211,7 @@ plot.see_estimate_density <- function(x,
   if (length(unique(x$Parameter)) == 1 || isTRUE(stack)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
-    p <- p + scale_y_discrete(labels = labels)
+    p <- p + scale_y_discrete(labels = parameter_labels)
   }
 
 
@@ -252,7 +250,7 @@ plot.see_estimate_density_df <- function(x,
                                          size_line = 0.9,
                                          ...) {
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
-  labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
+  parameter_labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
@@ -268,7 +266,7 @@ plot.see_estimate_density_df <- function(x,
   if (length(unique(x$Parameter)) == 1 || isTRUE(stack)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
-    p <- p + scale_y_discrete(labels = labels)
+    p <- p + scale_y_discrete(labels = parameter_labels)
   }
 
   if (length(unique(x$Parameter)) == 1L) {
