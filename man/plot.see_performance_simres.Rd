@@ -12,6 +12,7 @@
   dot_alpha = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
+  style = theme_lucid,
   ...
 )
 }
@@ -31,6 +32,8 @@ hex-format) for points and line.}
 
 \item{detrend}{Logical that decides if Q-Q and P-P plots should be de-trended
 (also known as \emph{worm plots}).}
+
+\item{style}{A ggplot2-theme.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

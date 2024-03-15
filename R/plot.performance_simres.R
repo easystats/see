@@ -4,6 +4,7 @@
 #' `performance::simulate_residuals()` function.
 #'
 #' @inheritParams plot.see_check_normality
+#' @inheritParams plot.see_check_model
 #'
 #' @return A ggplot2-object.
 #'
@@ -32,6 +33,7 @@ plot.see_performance_simres <- function(x,
                                         dot_alpha = 0.8,
                                         colors = c("#3aaf85", "#1b6ca8"),
                                         detrend = FALSE,
+                                        style = theme_lucid,
                                         ...) {
   dp <- list(min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
 
@@ -97,7 +99,7 @@ plot.see_performance_simres <- function(x,
       x = "Standard Uniform Distribution Quantiles",
       y = y_lab
     ) +
-    theme_lucid(
+    style(
       base_size = 10,
       plot.title.space = 3,
       axis.title.space = 5
