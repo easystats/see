@@ -11,7 +11,7 @@
   alpha = 0.2,
   dot_alpha = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
-  detrend = TRUE,
+  detrend = FALSE,
   ...
 )
 }
