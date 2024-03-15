@@ -85,7 +85,9 @@ plot.see_performance_simres <- function(x,
       ggplot2::geom_qq_line(
         linewidth = size_line,
         colour = colors[1],
-        na.rm = TRUE
+        na.rm = TRUE,
+        distribution = stats::qunif,
+        dparams = dp
       )
     )
     y_lab <- "Sample Quantiles"
