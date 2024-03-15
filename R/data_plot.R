@@ -148,6 +148,11 @@ add_plot_attributes <- function(x) {
   obj_name <- attr(x, "object_name", exact = TRUE)
   dat <- NULL
 
+  # for simulated residuals, we save all necessary information in the object
+  if (inherits(x, "performance_simres")) {
+    return(x$fittedModel)
+  }
+
   if (!is.null(obj_name)) {
     # first try, parent frame
     dat <- tryCatch(get(obj_name, envir = parent.frame()), error = function(e) NULL)
