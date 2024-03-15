@@ -38,7 +38,7 @@ plot.see_performance_simres <- function(x,
   # base plot information
   gg_init <- ggplot2::ggplot(
     data.frame(scaled_residuals = stats::residuals(x)),
-    ggplot2::aes(sample = scaled_residuals)
+    ggplot2::aes(sample = .data$scaled_residuals)
   )
 
   # when we have package qqplotr, we can add confidence bands
