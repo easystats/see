@@ -69,11 +69,11 @@ plot.see_check_collinearity <- function(x,
   xlim <- nrow(x)
   if (ylim < 10) ylim <- 10
 
-  if (!is.null(ci_data)) {
-    x <- cbind(x, ci_data)
-  } else {
+  if (is.null(ci_data)) {
     x$VIF_CI_low <- NA_real_
     x$VIF_CI_high <- NA_real_
+  } else {
+    x <- cbind(x, ci_data)
   }
 
   # make sure legend is properly sorted
@@ -118,33 +118,33 @@ plot.see_check_collinearity <- function(x,
       fill = colors[3],
       color = NA,
       alpha = 0.15
-    ) +
-    {
-      if (!is.null(ci_data)) {
-        list(
-          ggplot2::geom_linerange(
-            linewidth = size_line,
-            na.rm = TRUE
-          ),
-          ggplot2::geom_segment(
-            data = x[x$VIF_CI_high > ylim * 1.15, ],
-            mapping = aes(
-              x = .data$x,
-              xend = .data$x,
-              y = .data$y,
-              yend = .data$VIF_CI_high
-            ),
-            lineend = "round",
-            linejoin = "round",
-            arrow = ggplot2::arrow(
-              ends = "last", type = "closed",
-              angle = 20, length = ggplot2::unit(0.03, "native")
-            ),
-            show.legend = FALSE
-          )
-        )
-      }
-    } +
+    )
+
+  if (!is.null(ci_data)) {
+    p <- p +
+      ggplot2::geom_linerange(
+        linewidth = size_line,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_segment(
+        data = x[x$VIF_CI_high > ylim * 1.15, ],
+        mapping = aes(
+          x = .data$x,
+          xend = .data$x,
+          y = .data$y,
+          yend = .data$VIF_CI_high
+        ),
+        lineend = "round",
+        linejoin = "round",
+        arrow = ggplot2::arrow(
+          ends = "last", type = "closed",
+          angle = 20, length = ggplot2::unit(0.03, "native")
+        ),
+        show.legend = FALSE
+      )
+  }
+
+  p <- p +
     geom_point2(
       size = size_point,
       na.rm = TRUE

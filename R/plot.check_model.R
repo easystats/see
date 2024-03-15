@@ -39,6 +39,7 @@ plot.see_check_model <- function(x,
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
   plot_type <- attr(x, "type")
+  model_class <- attr(x, "model_class")
 
   if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
     type <- plot_type
@@ -174,7 +175,8 @@ plot.see_check_model <- function(x,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
       show_dots = TRUE, # qq-plots w/o dots makes no sense
-      model_info = model_info
+      model_info = model_info,
+      model_class = model_class
     )
   }
 
@@ -209,9 +211,9 @@ plot.see_check_model <- function(x,
     pw <- plots(p, n_columns = n_columns)
     .safe_print_plots(pw, ...)
     invisible(pw)
-  } else {
-    return(p)
   }
+
+  p
 }
 
 

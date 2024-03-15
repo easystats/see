@@ -72,7 +72,7 @@ plot(result)
 Example where model **is** a good fit.
 
 ```{r}
-model <- glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial")
+model <- suppressWarnings(glm(am ~ mpg + vs + cyl, data = mtcars, family = "binomial"))
 result <- binned_residuals(model)
 result
 
@@ -150,26 +150,35 @@ plot(result, type = "bars")
 _([related function documentation](https://easystats.github.io/performance/reference/check_normality.html))_
 
 ```{r}
-model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-result <- check_normality(model)
+model2 <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+result2 <- check_normality(model2)
 ```
 
 ### Density Plot
 
-```{r}
-plot(result, type = "density")
+```{r echo=FALSE}
+plot(result2, type = "density", data = model2)
+```
+```{r eval=FALSE}
+plot(result2, type = "density")
 ```
 
 ### QQ Plot
 
-```{r}
-plot(result, type = "qq")
+```{r echo=FALSE}
+plot(result2, type = "qq", data = model2)
+```
+```{r eval=FALSE}
+plot(result2, type = "qq")
 ```
 
 ### PP Plot
 
-```{r}
-plot(result, type = "pp")
+```{r echo=FALSE}
+plot(result2, type = "pp", data = model2)
+```
+```{r eval=FALSE}
+plot(result2, type = "pp")
 ```
 
 ## Check for Normal Distributed Random Effects
@@ -199,7 +208,7 @@ _([related function documentation](https://easystats.github.io/performance/refer
 ```{r}
 model <- lm(len ~ supp + dose, data = ToothGrowth)
 result <- check_homogeneity(model)
-plot(result)
+suppressWarnings(plot(result))
 ```
 
 ## Posterior Predictive Checks

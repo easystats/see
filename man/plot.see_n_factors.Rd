@@ -35,6 +35,9 @@ The \code{plot()} method for the \code{parameters::n_factors()} and \code{parame
 data(mtcars)
 result <- n_factors(mtcars, type = "PCA")
 result
+
+plot(result) # type = "bar" by default
 plot(result, type = "line")
+plot(result, type = "area")
 \dontshow{\}) # examplesIf}
 }

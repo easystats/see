@@ -201,17 +201,17 @@
 <text x='336.98' y='568.24' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='61.78px' lengthAdjust='spacingAndGlyphs'>Petal.Length</text>
 <text transform='translate(13.05,283.95) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='56.25px' lengthAdjust='spacingAndGlyphs'>Petal.Width</text>
 <rect x='649.68' y='233.08' width='64.84' height='101.73' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='649.68' y='241.79' style='font-size: 11.00px; font-family: sans;' textLength='64.84px' lengthAdjust='spacingAndGlyphs'>Sepal.Length</text>
 <image width='17.28' height='86.40' x='649.68' y='248.41' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAAA20lEQVQ4jZWRyxHDMAhEH3SYSlJ2qojIwZYECGniiwfEsh/M5/0yBVBkfK5WUHFtf5sQieBEcE/jQEBFpK8l3SRZ6GZJEnMhSaH7POrWi7Mrq5djVPeWIIBaClOwmNso+DJkPZ3l0KuQJQclZBd1Qqr/Vubd3DTnyJXsCELbELQB+rVQfQFtqTI6BPFvdzuqi2USzN3IckmuU+fFiRdOZ1t5dlOGjSpvtJY9x4DRc5238BwlrYFiNj6pNZRmJ0ir1nprJUHcOE+PGlbujg3Y0R+Nt2H8n5M8PpjBD4mACCSA7w0SAAAAAElFTkSuQmCC'/>
+<polyline points='663.51,317.93 666.96,317.93 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='663.51,294.01 666.96,294.01 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='663.51,270.09 666.96,270.09 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='653.14,317.93 649.68,317.93 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='653.14,294.01 649.68,294.01 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='653.14,270.09 649.68,270.09 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <text x='672.44' y='320.95' style='font-size: 8.80px; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>5</text>
 <text x='672.44' y='297.03' style='font-size: 8.80px; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>6</text>
 <text x='672.44' y='273.11' style='font-size: 8.80px; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>7</text>
-<text x='649.68' y='241.79' style='font-size: 11.00px; font-family: sans;' textLength='64.84px' lengthAdjust='spacingAndGlyphs'>Sepal.Length</text>
-<line x1='649.68' y1='317.93' x2='653.14' y2='317.93' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='649.68' y1='294.01' x2='653.14' y2='294.01' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='649.68' y1='270.09' x2='653.14' y2='270.09' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='663.51' y1='317.93' x2='666.96' y2='317.93' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='663.51' y1='294.01' x2='666.96' y2='294.01' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<line x1='663.51' y1='270.09' x2='666.96' y2='270.09' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <text x='35.24' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='159.97px' lengthAdjust='spacingAndGlyphs'>scale_fill_colorhex_c works</text>
 </g>
 </svg>

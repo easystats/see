@@ -43,6 +43,7 @@ brms
 characterisation
 codecov
 colour
+cumulate
 datawizard
 de
 diavola
@@ -55,15 +56,18 @@ emmeans
 errorbars
 et
 ffectsize
+geom's
 geoms
 ggalluvial
 ggdist
 ggplot
+ggproto
 ggpubr
 ggraph
 ggrepel
 ggridges
 ggstatsplot
+glyphs
 grey
 gridExtra
 histodot

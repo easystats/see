@@ -62,7 +62,7 @@ geom_binomdensity <- function(data,
 
   # Other parameters
   data$.side <- ifelse(data[[y]] == y_levels[1], "top", "bottom")
-  data$.justification <- as.numeric(!(data[[y]] == y_levels[1]))
+  data$.justification <- as.numeric(data[[y]] != y_levels[1])
   data$.scale <- .geom_binomdensity_scale(data, x, y, scale)
 
   # ggdist geom

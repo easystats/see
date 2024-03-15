@@ -156,15 +156,14 @@ By default, `model_parameters()` returns a data frame, where the parameter names
 plot(model_parameters(model4))
 ``` 
 
-However, there are several ways to change the the names of the parameters. Since `plot()` returns *ggplot* objects, these can be easily modified, e.g. by adding a `scale_y_discrete()` layer.
+However, there are several ways to change the the names of the parameters. Since `plot()` returns *ggplot* objects, these can be easily modified, e.g. by adding a `scale_y_discrete()` layer. *Note the correct order of the labels!*
 
 ```{r}
 library(ggplot2)
 plot(model_parameters(model4)) +
-  scale_y_discrete(labels = c(
-    "Time", "Age", "Education (mid-level)",
-    "Eucation (high-level)"
-  ))
+  scale_y_discrete(
+    labels = c("Eucation (high-level)", "Education (mid-level)", "Age", "Time")
+  )
 ```
 
 Another way would be changing the values of the `Parameter` column before calling `plot()`:
@@ -282,7 +281,7 @@ plot(result, show_intercept = TRUE)
 ## Model Parameters of Meta-Analysis models
 
 ```{r}
-mydat <- data.frame(
+mydat <<- data.frame(
   effectsize = c(-0.393, 0.675, 0.282, -1.398),
   standarderror = c(0.317, 0.317, 0.13, 0.36)
 )
@@ -324,7 +323,8 @@ dat <- escalc(
 )
 dat$author <- make.unique(dat$author)
 dat$disease <- sample(c("Cancer", "CVD", "Depression"), size = nrow(dat), replace = TRUE)
-model <- rma(yi, vi, mods = ~disease, data = dat, digits = 3, slab = author)
+mydat <<- dat
+model <- rma(yi, vi, mods = ~disease, data = mydat, digits = 3, slab = author)
 result <- model_parameters(model)
 
 result
@@ -409,16 +409,6 @@ plot(result)
 
 ```{r fig.height=8}
 result <- equivalence_test(model3, effects = "random")
-result
-
-plot(result)
-```
-
-### From simulated model parameters
-
-```{r fig.height=8}
-simulated_parameters <- simulate_model(model1, component = "conditional")
-result <- equivalence_test(simulated_parameters)
 result
 
 plot(result)

@@ -68,13 +68,16 @@ plot.see_check_normality <- function(x,
       alpha_level = alpha
     )
   } else {
-    if (type == "qq") {
+    if (type == "qq") { # nolint
       model_info <- attributes(x)$model_info
       if (inherits(x, "performance_simres")) {
         dat <- stats::na.omit(data.frame(y = x$scaledResiduals))
         model_info$is_simulated_residuals <- TRUE
       } else if (inherits(model, c("lme", "lmerMod", "merMod", "glmmTMB", "afex_aov", "BFBayesFactor"))) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+        dat <- stats::na.omit(data.frame(y = res_))
+      } else if (inherits(model, "glmmTMB")) {
+        res_ <- abs(stats::residuals(model, type = "deviance"))
         dat <- stats::na.omit(data.frame(y = res_))
       } else if (inherits(model, "glm")) {
         res_ <- abs(stats::rstandard(model, type = "deviance"))
@@ -93,7 +96,8 @@ plot.see_check_normality <- function(x,
         detrend = detrend,
         dot_alpha_level = dot_alpha,
         model_info = model_info,
-        method = method
+        method = method,
+        model_class = class(model)[1]
       )
     } else if (type == "density") {
       if (inherits(x, "performance_simres")) {
@@ -181,7 +185,8 @@ plot.see_performance_simres <- plot.see_check_normality
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8,
                           show_dots = TRUE,
-                          model_info = NULL) {
+                          model_info = NULL,
+                          model_class = NULL) {
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
   # qq-halfnorm for GLM
   if (!isTRUE(model_info$is_simulated_residuals) && (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count))) {

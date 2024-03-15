@@ -114,58 +114,68 @@
 #' @export
 geom_from_list <- function(x, ...) {
   # Additional parameters ------------------------------------------------------
-  args <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
+  arguments <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
 
   if (is.null(x$geom)) {
     return(NULL)
   }
 
   if (inherits(x$geom, "function")) {
-    return(do.call(x$geom, args))
+    return(do.call(x$geom, args = arguments))
   }
 
   if (x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
-    if (!"contour" %in% names(args)) args$contour <- TRUE
-    if (!"contour_var" %in% names(args)) args$contour_var <- "density"
+    if (!"contour" %in% names(arguments)) arguments$contour <- TRUE
+    if (!"contour_var" %in% names(arguments)) arguments$contour_var <- "density"
   }
 
   # If they are not geoms, return immediately
   if (x$geom == "labs") {
-    return(do.call(ggplot2::labs, args))
+    return(do.call(ggplot2::labs, args = arguments))
   }
   if (x$geom == "guides") {
-    return(do.call(ggplot2::guides, args))
+    return(do.call(ggplot2::guides, args = arguments))
   }
   if (x$geom == "coord_flip") {
-    return(do.call(ggplot2::coord_flip, args))
+    return(do.call(ggplot2::coord_flip, args = arguments))
   }
   if (x$geom == "facet_wrap") {
-    return(do.call(ggplot2::facet_wrap, args))
+    return(do.call(ggplot2::facet_wrap, args = arguments))
   }
   if (x$geom == "facet_grid") {
-    return(do.call(ggplot2::facet_grid, args))
+    return(do.call(ggplot2::facet_grid, args = arguments))
   }
   if (x$geom == "smooth") {
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
-    if (!"method" %in% names(args)) args$method <- "loess"
-    if (!"formula" %in% names(args)) args$formula <- "y ~ x"
-    return(do.call(ggplot2::geom_smooth, args))
+    if (!is.null(x$aes)) {
+      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+    }
+    if (!"method" %in% names(arguments)) {
+      arguments$method <- "loess"
+    }
+    if (!"formula" %in% names(arguments)) {
+      arguments$formula <- "y ~ x"
+    }
+    return(do.call(ggplot2::geom_smooth, args = arguments))
   }
 
   if (startsWith(x$geom, "scale_") || startsWith(x$geom, "theme") || startsWith(x$geom, "see_")) {
-    return(do.call(x$geom, args))
+    return(do.call(x$geom, args = arguments))
   }
 
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
-    return(do.call(eval(parse(text = x$geom)), args))
+    if (!is.null(x$aes)) {
+      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+    }
+    return(do.call(eval(parse(text = x$geom)), args = arguments))
   }
 
   if (startsWith(x$geom, "ggraph::")) {
     insight::check_if_installed("ggraph")
-    if (!is.null(x$aes)) args$mapping <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
-    return(do.call(eval(parse(text = x$geom)), args))
+    if (!is.null(x$aes)) {
+      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+    }
+    return(do.call(eval(parse(text = x$geom)), args = arguments))
   }
 
   # Default parameters
@@ -179,7 +189,7 @@ geom_from_list <- function(x, ...) {
   }
 
   # Default for violin
-  if (x$geom == "violin") {
+  if (x$geom == "violin") { # nolint
     stat <- "ydensity"
     position <- "dodge"
   } else if (x$geom == "boxplot") {
@@ -212,7 +222,7 @@ geom_from_list <- function(x, ...) {
 
   # Aesthetics
   if ("aes" %in% names(x)) {
-    aes_list <- do.call(ggplot2::aes, lapply(x$aes, .str_to_sym))
+    aes_list <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
   } else {
     aes_list <- NULL
   }
@@ -231,7 +241,7 @@ geom_from_list <- function(x, ...) {
     geom = x$geom,
     mapping = aes_list,
     data = x$data,
-    params = args,
+    params = arguments,
     show.legend = show.legend,
     ...
   )
