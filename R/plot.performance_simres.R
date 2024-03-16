@@ -45,6 +45,11 @@ plot.see_performance_simres <- function(x,
   # need DHARMa to be installed
   insight::check_if_installed("DHARMa")
 
+  # extract data, if from check_residuals
+  if (inherits(x, "see_check_residuals")) {
+    x <- attributes(x)$data
+  }
+
   if (is.null(transform)) {
     res <- stats::residuals(x)
   } else {
