@@ -95,9 +95,11 @@ plot.see_performance_simres <- function(x,
   } else {
     insight::format_alert("For confidence bands, please install `qqplotr`.")
     qq_stuff <- list(
-      ggplot2::geom_point(
+      ggplot2::geom_qq(
         shape = 16,
         stroke = 0,
+        distribution = stats::qunif,
+        dparams = dp,
         size = size_point,
         colour = colors[2]
       ),
