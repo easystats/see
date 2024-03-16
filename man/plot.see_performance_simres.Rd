@@ -12,6 +12,7 @@
   dot_alpha = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
+  transform = NULL,
   style = theme_lucid,
   ...
 )
@@ -33,6 +34,10 @@ hex-format) for points and line.}
 \item{detrend}{Logical that decides if Q-Q and P-P plots should be de-trended
 (also known as \emph{worm plots}).}
 
+\item{transform}{Function to transform the residuals. If \code{NULL} (default),
+no transformation is applied and uniformly distributed residuals are expected.
+See argument \code{quantileFuntion} in \code{?DHARMa:::residuals.DHARMa} for more details.}
+
 \item{style}{A ggplot2-theme.}
 
 \item{...}{Arguments passed to or from other methods.}
@@ -45,7 +50,7 @@ The \code{plot()} method for the \code{performance::check_residuals()} resp.
 \code{performance::simulate_residuals()} function.
 }
 \examples{
-\dontshow{if (require("performance") && require("glmmTMB") && require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("performance") && require("glmmTMB") && require("qqplotr") && require("DHARMa")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 data(Salamanders, package = "glmmTMB")
 model <- glmmTMB::glmmTMB(
   count ~ mined + spp + (1 | site),

@@ -3,6 +3,10 @@
 #' The `plot()` method for the `performance::check_residuals()` resp.
 #' `performance::simulate_residuals()` function.
 #'
+#' @param transform Function to transform the residuals. If `NULL` (default),
+#' no transformation is applied and uniformly distributed residuals are expected.
+#' See argument `quantileFuntion` in `?DHARMa:::residuals.DHARMa` for more details.
+#'
 #' @inheritParams plot.see_check_normality
 #' @inheritParams plot.see_check_model
 #'
@@ -10,7 +14,7 @@
 #'
 #' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
-#' @examplesIf require("performance") && require("glmmTMB") && require("qqplotr")
+#' @examplesIf require("performance") && require("glmmTMB") && require("qqplotr") && require("DHARMa")
 #' data(Salamanders, package = "glmmTMB")
 #' model <- glmmTMB::glmmTMB(
 #'   count ~ mined + spp + (1 | site),
@@ -33,13 +37,23 @@ plot.see_performance_simres <- function(x,
                                         dot_alpha = 0.8,
                                         colors = c("#3aaf85", "#1b6ca8"),
                                         detrend = FALSE,
+                                        transform = NULL,
                                         style = theme_lucid,
                                         ...) {
   dp <- list(min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
 
+  # need DHARMa to be installed
+  insight::check_if_installed("DHARMa")
+
+  if (is.null(transform)) {
+    res <- stats::residuals(x)
+  } else {
+    res <- stats::residuals(x, quantileFunction = transform)
+  }
+
   # base plot information
   gg_init <- ggplot2::ggplot(
-    data.frame(scaled_residuals = stats::residuals(x)),
+    data.frame(scaled_residuals = res),
     ggplot2::aes(sample = .data$scaled_residuals)
   )
 
