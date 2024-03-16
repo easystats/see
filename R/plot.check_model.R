@@ -165,19 +165,33 @@ plot.see_check_model <- function(x,
   }
 
   if ("QQ" %in% names(x) && !is.null(x$QQ) && any(c("qq", "all") %in% check)) {
-    p$QQ <- .plot_diag_qq(
-      x$QQ,
-      size_point,
-      size_line,
-      alpha_level = alpha_level,
-      detrend = detrend,
-      theme_style = style,
-      colors = colors,
-      dot_alpha_level = dot_alpha_level,
-      show_dots = TRUE, # qq-plots w/o dots makes no sense
-      model_info = model_info,
-      model_class = model_class
-    )
+    if (inherits(x$QQ, "performance_simres")) {
+      p$QQ <- plot(
+        x$QQ,
+        size_line = size_line,
+        size_point = size_point,
+        alpha = alpha_level,
+        dot_alpha = dot_alpha_level,
+        colors = colors,
+        detrend = detrend,
+        style = style
+
+      )
+    } else {
+      p$QQ <- .plot_diag_qq(
+        x$QQ,
+        size_point,
+        size_line,
+        alpha_level = alpha_level,
+        detrend = detrend,
+        theme_style = style,
+        colors = colors,
+        dot_alpha_level = dot_alpha_level,
+        show_dots = TRUE, # qq-plots w/o dots makes no sense
+        model_info = model_info,
+        model_class = model_class
+      )
+    }
   }
 
   if ("NORM" %in% names(x) && !is.null(x$NORM) && any(c("normality", "all") %in% check)) {

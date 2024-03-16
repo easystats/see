@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.2.4
+Version: 0.8.2.5
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -75,6 +75,7 @@ Imports:
 Suggests:
     brms,
     curl,
+    DHARMa,
     emmeans,
     factoextra,
     ggdist,
@@ -118,3 +119,4 @@ Config/Needs/website:
     r-lib/pkgdown,
     easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
+Remotes: easystats/performance#643
