@@ -84,6 +84,8 @@ plot.see_check_model <- function(x,
     p$PP_CHECK <- plot.see_performance_pp_check(
       x$PP_CHECK,
       style = style,
+      size_line = size_line,
+      size_point = size_point,
       type = type,
       check_model = TRUE,
       adjust_legend = TRUE,

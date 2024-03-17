@@ -8,6 +8,7 @@
 \method{print}{see_performance_pp_check}(
   x,
   size_line = 0.5,
+  size_point = 2,
   line_alpha = 0.15,
   size_bar = 0.7,
   style = theme_lucid,
@@ -20,6 +21,7 @@
 \method{plot}{see_performance_pp_check}(
   x,
   size_line = 0.5,
+  size_point = 2,
   line_alpha = 0.15,
   size_bar = 0.7,
   style = theme_lucid,
@@ -33,6 +35,8 @@
 \item{x}{An object.}
 
 \item{size_line}{Numeric value specifying size of line geoms.}
+
+\item{size_point}{Numeric specifying size of point-geoms.}
 
 \item{line_alpha}{Numeric value specifying alpha of lines indicating \code{yrep}.}
 
