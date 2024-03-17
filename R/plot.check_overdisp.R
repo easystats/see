@@ -26,7 +26,7 @@ plot.see_check_overdisp <- function(x,
       ggplot2::geom_smooth(ggplot2::aes(y = .data$V), linewidth = size_line, color = colors[2], se = FALSE) +
       ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), linewidth = size_line, color = colors[1]) +
       ggplot2::labs(
-        title = "Overdispersion and zero-inflation",
+        title = "Misspecified dispersion and zero-inflation",
         subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",
         x = "Predicted mean",
         y = "Residual variance"
@@ -46,7 +46,7 @@ plot.see_check_overdisp <- function(x,
         color = c(rep(colors[1], 2), rep(colors[2], 2))
       ) +
       ggplot2::labs(
-        title = "Overdispersion and zero-inflation",
+        title = "Misspecified dispersion and zero-inflation",
         subtitle = "Most points should be within solid lines, few points outside dashed lines",
         x = "Predicted mean",
         y = "Standardized resiuduals"
