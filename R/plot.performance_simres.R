@@ -48,22 +48,23 @@ plot.see_performance_simres <- function(x,
     x <- attributes(x)$data
   }
 
-  dp <- list(min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
-  dp_band <- list(min = 0, max = 1)
-  dfun <- "unif"
-
   # prepare arguments, based on transformation
   if (is.null(transform)) {
     res <- stats::residuals(x)
+    dp <- list(min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
+    dp_band <- list(min = 0, max = 1)
+    dfun <- "unif"
+  } else if (identical(transform, stats::qnorm)) {
+    res <- stats::residuals(x, quantileFunction = stats::qnorm)
+    dp <- list(mean = 0, sd = 1)
+    dp_band <- list(mean = 0, sd = 1)
+    dfun <- "norm"
+  } else if (is.character(transform)) {
+    insight::format_error("`transform` must be a function, not a string value.")
   } else {
-    res <- stats::residuals(x, quantileFunction = transform)
-    res <- res[!is.infinite(res)]
-    if (identical(transform, stats::qnorm)) {
-      dp <- list(mean = 0, sd = 1)
-      dp_band <- list(mean = 0, sd = 1)
-      dfun <- "norm"
-    }
+    insight::format_error("The transformation specified in `transform` is currently not supported.") # nolint
   }
+  res <- res[!is.infinite(res) & !is.na(res)]
 
   # base plot information
   gg_init <- ggplot2::ggplot(
