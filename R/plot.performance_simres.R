@@ -123,12 +123,23 @@ plot.see_performance_simres <- function(x,
     y_lab <- "Sample Quantiles"
   }
 
+  if (is.null(transform)) {
+    p_title <- "Uniformity of Residuals"
+    p_x <- "Standard Uniform Distribution Quantiles"
+  } else if (identical(transform, stats::qnorm)) {
+    p_title <- "Normality of Residuals"
+    p_x <- "Standard Normal Distribution Quantiles"
+  } else {
+    p_title <- "Residuals Check"
+    p_x <- "Distribution of Quantiles"
+  }
+
   gg_init +
     qq_stuff +
     ggplot2::labs(
-      title = ifelse(is.null(transform), "Uniformity of Residuals", "Residuals Check"),
+      title = p_title,
       subtitle = "Dots should fall along the line",
-      x = ifelse(is.null(transform), "Standard Uniform Distribution Quantiles", "Distribution of Quantiles"),
+      x = p_x,
       y = y_lab
     ) +
     style(
