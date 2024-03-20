@@ -32,7 +32,7 @@
 #' @export
 plot.see_performance_simres <- function(x,
                                         size_line = 0.8,
-                                        size_point = 1,
+                                        size_point = 1.5,
                                         alpha = 0.2,
                                         dot_alpha = 0.8,
                                         colors = c("#3aaf85", "#1b6ca8"),
@@ -40,8 +40,6 @@ plot.see_performance_simres <- function(x,
                                         transform = NULL,
                                         style = theme_lucid,
                                         ...) {
-  dp <- list(min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
-
   # need DHARMa to be installed
   insight::check_if_installed("DHARMa")
 
@@ -50,10 +48,21 @@ plot.see_performance_simres <- function(x,
     x <- attributes(x)$data
   }
 
+  dp <- list(min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
+  dp_band <- list(min = 0, max = 1)
+  dfun <- "unif"
+
+  # prepare arguments, based on transformation
   if (is.null(transform)) {
     res <- stats::residuals(x)
   } else {
     res <- stats::residuals(x, quantileFunction = transform)
+    res <- res[!is.infinite(res)]
+    if (identical(transform, stats::qnorm)) {
+      dp <- list(mean = 0, sd = 1)
+      dp_band <- list(mean = 0, sd = 1)
+      dfun <- "norm"
+    }
   }
 
   # base plot information
@@ -66,20 +75,20 @@ plot.see_performance_simres <- function(x,
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     qq_stuff <- list(
       qqplotr::stat_qq_band(
-        distribution = "unif",
-        dparams = list(min = 0, max = 1),
+        distribution = dfun,
+        dparams = dp_band,
         alpha = alpha,
         detrend = detrend
       ),
       qqplotr::stat_qq_line(
-        distribution = "unif",
+        distribution = dfun,
         dparams = dp,
         size = size_line,
         colour = colors[1],
         detrend = detrend
       ),
       qqplotr::stat_qq_point(
-        distribution = "unif",
+        distribution = dfun,
         dparams = dp,
         size = size_point,
         alpha = dot_alpha,
@@ -98,7 +107,7 @@ plot.see_performance_simres <- function(x,
       ggplot2::geom_qq(
         shape = 16,
         stroke = 0,
-        distribution = stats::qunif,
+        distribution = dfun,
         dparams = dp,
         size = size_point,
         colour = colors[2]
@@ -107,19 +116,30 @@ plot.see_performance_simres <- function(x,
         linewidth = size_line,
         colour = colors[1],
         na.rm = TRUE,
-        distribution = stats::qunif,
+        distribution = dfun,
         dparams = dp
       )
     )
     y_lab <- "Sample Quantiles"
   }
 
+  if (is.null(transform)) {
+    p_title <- "Uniformity of Residuals"
+    p_x <- "Standard Uniform Distribution Quantiles"
+  } else if (identical(transform, stats::qnorm)) {
+    p_title <- "Normality of Residuals"
+    p_x <- "Standard Normal Distribution Quantiles"
+  } else {
+    p_title <- "Residuals Check"
+    p_x <- "Distribution of Quantiles"
+  }
+
   gg_init +
     qq_stuff +
     ggplot2::labs(
-      title = "Uniformity of Residuals",
+      title = p_title,
       subtitle = "Dots should fall along the line",
-      x = "Standard Uniform Distribution Quantiles",
+      x = p_x,
       y = y_lab
     ) +
     style(
