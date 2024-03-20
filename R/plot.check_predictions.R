@@ -327,7 +327,7 @@ plot.see_performance_pp_check <- function(x,
           color = .data$key
         ),
         position = ggplot2::position_nudge(x = 0.2),
-        size = size_line,
+        size = size_point,
         linewidth = size_line,
         stroke = 0,
         shape = 16

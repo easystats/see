@@ -2,9 +2,11 @@
 
 ## Major changes
 
-- New `plot()` method for simulated residuals (implemented in the _performance_ package).
+- New `plot()` method for simulated residuals (implemented in the _performance_
+  package).
 
-- `plot()` for `check_model()` was revised and now includes more accurate Q-Q plots for non-Gaussian models.
+- `plot()` for `check_model()` was revised and now includes more accurate Q-Q
+  plots for non-Gaussian models.
 
 ## Minor Changes
 

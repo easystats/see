@@ -80,6 +80,21 @@ plot.see_check_normality <- function(x,
         res_ <- abs(stats::rstandard(model, type = "deviance"))
         fitted_ <- stats::qnorm((stats::ppoints(length(res_)) + 1) / 2)[order(order(res_))]
         dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
+      } else if (inherits(model, "performance_simres")) {
+        return(plot.see_performance_simres(
+          model,
+          size_line = size_line,
+          size_point = size_point,
+          alpha = alpha,
+          dot_alpha = dot_alpha,
+          colors = colors,
+          detrend = detrend,
+          transform = stats::qnorm,
+          ...
+        ))
+      } else if (is.numeric(model)) {
+        res_ <- sort(model[!is.infinite(model)])
+        dat <- stats::na.omit(data.frame(y = res_))
       } else {
         res_ <- sort(stats::rstudent(model), na.last = NA)
         dat <- stats::na.omit(data.frame(y = res_))
@@ -97,7 +112,14 @@ plot.see_check_normality <- function(x,
         model_class = class(model)[1]
       )
     } else if (type == "density") {
-      r <- suppressMessages(stats::residuals(model))
+      if (inherits(model, "performance_simres")) {
+        r <- stats::residuals(model, quantile_function = stats::qnorm)
+        r <- r[!is.infinite(r)]
+      } else if (is.numeric(model)) {
+        r <- model[!is.infinite(model) & !is.na(model)]
+      } else {
+        r <- suppressMessages(stats::residuals(model))
+      }
       dat <- as.data.frame(bayestestR::estimate_density(r))
       dat$curve <- stats::dnorm(
         seq(min(dat$x), max(dat$x), length.out = nrow(dat)),
