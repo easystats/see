@@ -177,7 +177,6 @@ plot.see_check_model <- function(x,
         colors = colors,
         detrend = detrend,
         style = style
-
       )
     } else {
       p$QQ <- .plot_diag_qq(
