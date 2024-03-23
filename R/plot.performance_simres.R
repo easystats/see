@@ -32,7 +32,7 @@
 #' @export
 plot.see_performance_simres <- function(x,
                                         size_line = 0.8,
-                                        size_point = 1.5,
+                                        size_point = 2,
                                         alpha = 0.2,
                                         dot_alpha = 0.8,
                                         colors = c("#3aaf85", "#1b6ca8"),
