@@ -8,6 +8,8 @@
 #' @return A ggplot2-object.
 #'
 #' @examples
+#' library(performance)
+#'
 #' model <<- lm(len ~ supp + dose, data = ToothGrowth)
 #' result <- check_homogeneity(model)
 #' result

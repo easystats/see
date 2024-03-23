@@ -22,6 +22,8 @@ The \code{plot()} method for the \code{performance::check_homogeneity()}
 function.
 }
 \examples{
+library(performance)
+
 model <<- lm(len ~ supp + dose, data = ToothGrowth)
 result <- check_homogeneity(model)
 result
