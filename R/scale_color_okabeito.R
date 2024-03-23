@@ -60,7 +60,6 @@
 scale_color_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, aesthetics = "color", ...) {
   discrete_scale(
     aesthetics = aesthetics,
-    paste0("okabeito_", palette),
     palette = palette_okabeito(palette = palette, reverse = reverse, order = order),
     ...
   )
@@ -73,7 +72,6 @@ scale_color_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9,
 scale_fill_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, aesthetics = "fill", ...) {
   discrete_scale(
     aesthetics = aesthetics,
-    paste0("okabeito_", palette),
     palette = palette_okabeito(palette = palette, reverse = reverse, order = order),
     ...
   )

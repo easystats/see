@@ -31,7 +31,7 @@ scale_color_pizza <- function(palette = "margherita",
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("pizza_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -100,7 +100,7 @@ scale_fill_pizza <- function(palette = "margherita",
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("pizza_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }

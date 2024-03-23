@@ -35,7 +35,7 @@ scale_color_material <- function(palette = "contrast",
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("material_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -108,7 +108,7 @@ scale_fill_material <- function(palette = "contrast",
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("material_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }

@@ -20,7 +20,7 @@ scale_color_bluebrown <- function(palette = "contrast", discrete = TRUE, reverse
   pal <- palette_bluebrown(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("bluebrown_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -93,12 +93,7 @@ scale_fill_bluebrown <- function(palette = "contrast",
   pal <- palette_bluebrown(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(
-      aesthetics = aesthetics,
-      paste0("bluebrown_", palette),
-      palette = pal,
-      ...
-    )
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -142,8 +137,6 @@ scale_fill_bluebrown_c <- function(palette = "contrast",
 
 
 # Palette --------------------------------------------------------------------
-
-
 
 
 bluebrown_colors_list <- c(
