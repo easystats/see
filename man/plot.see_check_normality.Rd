@@ -59,12 +59,11 @@ The \code{plot()} method for the \code{performance::check_normality()}
 function.
 }
 \examples{
-\dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_normality(m)
 plot(result)
-\dontshow{\}) # examplesIf}
-\dontshow{if (require("performance") && require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+\dontshow{if (require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 plot(result, type = "qq", detrend = TRUE)
 \dontshow{\}) # examplesIf}
 }

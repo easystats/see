@@ -55,7 +55,7 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #'
 #' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
-#' @examplesIf require("performance")
+#' @examples
 #' model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
 #' check_predictions(model)
 #'

@@ -22,7 +22,7 @@ The \code{plot()} method for the \code{modelbased::estimate_contrasts()}
 function.
 }
 \examples{
-\dontshow{if (require("modelbased") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 model <- lm(Sepal.Width ~ Species, data = iris)
 contrasts <- estimate_contrasts(model)
