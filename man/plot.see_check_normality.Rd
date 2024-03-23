@@ -59,6 +59,8 @@ The \code{plot()} method for the \code{performance::check_normality()}
 function.
 }
 \examples{
+library(performance)
+
 m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_normality(m)
 plot(result)

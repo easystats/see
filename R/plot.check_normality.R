@@ -27,6 +27,8 @@
 #' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
 #' @examples
+#' library(performance)
+#'
 #' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 #' result <- check_normality(m)
 #' plot(result)

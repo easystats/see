@@ -13,6 +13,7 @@
 #'
 #' @examplesIf require("patchwork")
 #' library(performance)
+#'
 #' model <- lm(qsec ~ drat + wt, data = mtcars)
 #' plot(check_model(model))
 #'
