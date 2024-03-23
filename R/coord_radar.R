@@ -6,10 +6,12 @@
 #' @param ... Other arguments to be passed to `ggproto`.
 #'
 #' @examples
+#' library(ggplot2)
+#'
 #' # Create a radar/spider chart with ggplot:
 #' data(iris)
 #' data <- aggregate(iris[-5], list(Species = iris$Species), mean)
-#' data <- data_to_long(
+#' data <- datawizard::data_to_long(
 #'   data,
 #'   c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
 #' )
