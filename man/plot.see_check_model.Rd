@@ -39,6 +39,7 @@ Diagnostic plots for regression models.
 }
 \examples{
 \dontshow{if (require("patchwork")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+library(performance)
 model <- lm(qsec ~ drat + wt, data = mtcars)
 plot(check_model(model))
 \dontshow{\}) # examplesIf}
