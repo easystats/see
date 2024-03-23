@@ -64,6 +64,8 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_predictions()} function.
 }
 \examples{
+library(performance)
+
 model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
 check_predictions(model)
 
