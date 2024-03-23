@@ -33,7 +33,7 @@ The \code{plot()} method for the \code{parameters::n_factors()} and \code{parame
 \examples{
 \dontshow{if (require("nFactors")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 data(mtcars)
-result <- n_factors(mtcars, type = "PCA")
+result <- parameters::n_factors(mtcars, type = "PCA")
 result
 
 plot(result) # type = "bar" by default

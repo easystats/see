@@ -130,7 +130,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #'   prior(cauchy(0, 0.5), class = sd)
 #' )
 #' model <- suppressWarnings(
-#'   brm(yi | se(vi) ~ 1 + (1 | author), data = dat)
+#'   brm(yi | se(vi) ~ 1 + (1 | author), data = dat, refresh = 0, silent = 2)
 #' )
 #'
 #' # result

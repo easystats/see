@@ -28,7 +28,7 @@ model <- suppressWarnings(stan_glm(
   chains = 2, iter = 200, refresh = 0
 ))
 
-result <- hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
+result <- bayestestR::hdi(model, ci = c(0.5, 0.75, 0.9, 0.95))
 data <- data_plot(result, data = model)
 
 p <- ggplot(

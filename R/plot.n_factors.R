@@ -108,7 +108,7 @@ data_plot.n_clusters <- data_plot.n_factors
 #'
 #' @examplesIf require("nFactors")
 #' data(mtcars)
-#' result <- n_factors(mtcars, type = "PCA")
+#' result <- parameters::n_factors(mtcars, type = "PCA")
 #' result
 #'
 #' plot(result) # type = "bar" by default

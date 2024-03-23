@@ -24,6 +24,8 @@ function.
 \examples{
 \dontshow{if (require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
+library(modelbased)
+
 model <- lm(Sepal.Width ~ Species, data = iris)
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)

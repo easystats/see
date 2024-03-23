@@ -63,6 +63,6 @@ data(iris)
 lm1 <- lm(Sepal.Length ~ Species, data = iris)
 lm2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
 lm3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
-result <- compare_parameters(lm1, lm2, lm3)
+result <- parameters::compare_parameters(lm1, lm2, lm3)
 plot(result)
 }

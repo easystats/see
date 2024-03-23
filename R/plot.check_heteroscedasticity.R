@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-#' result <- check_heteroscedasticity(m)
+#' result <- performance::check_heteroscedasticity(m)
 #' result
 #' plot(result, data = m) # data required for pkgdown
 #' @export
