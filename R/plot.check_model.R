@@ -11,7 +11,9 @@
 #'
 #' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
-#' @examplesIf require("performance") && require("patchwork")
+#' @examplesIf require("patchwork")
+#' library(performance)
+#'
 #' model <- lm(qsec ~ drat + wt, data = mtcars)
 #' plot(check_model(model))
 #'
@@ -177,7 +179,6 @@ plot.see_check_model <- function(x,
         colors = colors,
         detrend = detrend,
         style = style
-
       )
     } else {
       p$QQ <- .plot_diag_qq(

@@ -7,7 +7,9 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("performance")
+#' @examples
+#' library(performance)
+#'
 #' model <<- lm(len ~ supp + dose, data = ToothGrowth)
 #' result <- check_homogeneity(model)
 #' result

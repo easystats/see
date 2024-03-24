@@ -33,7 +33,7 @@ scale_color_see <- function(palette = "contrast",
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("see_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -106,7 +106,7 @@ scale_fill_see <- function(palette = "contrast",
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("see_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }

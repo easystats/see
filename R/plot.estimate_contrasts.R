@@ -69,8 +69,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("modelbased") && require("emmeans")
+#' @examplesIf require("emmeans")
 #' \donttest{
+#' library(modelbased)
+#'
 #' model <- lm(Sepal.Width ~ Species, data = iris)
 #' contrasts <- estimate_contrasts(model)
 #' means <- estimate_means(model)

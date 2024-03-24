@@ -30,7 +30,7 @@ scale_color_social <- function(palette = "complement", discrete = TRUE, reverse 
   pal <- palette_social(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("social_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_color_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }
@@ -79,7 +79,7 @@ scale_fill_social <- function(palette = "complement", discrete = TRUE, reverse =
   pal <- palette_social(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(aesthetics = aesthetics, paste0("social_", palette), palette = pal, ...)
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }

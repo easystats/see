@@ -9,7 +9,7 @@
   type = c("qq", "pp", "density"),
   data = NULL,
   size_line = 0.8,
-  size_point = 1.5,
+  size_point = 2,
   alpha = 0.2,
   dot_alpha = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
@@ -59,12 +59,13 @@ The \code{plot()} method for the \code{performance::check_normality()}
 function.
 }
 \examples{
-\dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+library(performance)
+
 m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_normality(m)
 plot(result)
-\dontshow{\}) # examplesIf}
-\dontshow{if (require("performance") && require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+\dontshow{if (require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 plot(result, type = "qq", detrend = TRUE)
 \dontshow{\}) # examplesIf}
 }

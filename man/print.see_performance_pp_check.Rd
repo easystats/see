@@ -64,7 +64,8 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_predictions()} function.
 }
 \examples{
-\dontshow{if (require("performance")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+library(performance)
+
 model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)
 check_predictions(model)
 
@@ -78,7 +79,6 @@ model <- glm(
 )
 out <- check_predictions(model)
 plot(out, type = "discrete_dots")
-\dontshow{\}) # examplesIf}
 }
 \seealso{
 See also the vignette about \href{https://easystats.github.io/performance/articles/check_model.html}{\code{check_model()}}.

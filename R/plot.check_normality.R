@@ -26,12 +26,14 @@
 #'
 #' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
-#' @examplesIf require("performance")
+#' @examples
+#' library(performance)
+#'
 #' m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 #' result <- check_normality(m)
 #' plot(result)
 #'
-#' @examplesIf require("performance") && require("qqplotr")
+#' @examplesIf require("qqplotr")
 #' plot(result, type = "qq", detrend = TRUE)
 #'
 #' @export
@@ -39,7 +41,7 @@ plot.see_check_normality <- function(x,
                                      type = c("qq", "pp", "density"),
                                      data = NULL,
                                      size_line = 0.8,
-                                     size_point = 1.5,
+                                     size_point = 2,
                                      alpha = 0.2,
                                      dot_alpha = 0.8,
                                      colors = c("#3aaf85", "#1b6ca8"),

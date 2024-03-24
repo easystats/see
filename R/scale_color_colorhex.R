@@ -51,7 +51,6 @@ scale_color_colorhex <- function(palette = 1014416,
   if (discrete) {
     discrete_scale(
       aesthetics = aesthetics,
-      scale_name = paste0("colorhex_", pal_name),
       palette = pal,
       ...
     )
@@ -126,12 +125,7 @@ scale_fill_colorhex <- function(palette = 1014416,
   pal <- palette_colorhex(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale(
-      aesthetics = aesthetics,
-      paste0("colorhex_", palette),
-      palette = pal,
-      ...
-    )
+    discrete_scale(aesthetics = aesthetics, palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), aesthetics = aesthetics, ...)
   }

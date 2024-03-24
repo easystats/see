@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.2.7
+Version: 0.8.3
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -67,11 +67,11 @@ Imports:
     correlation (>= 0.8.4),
     datawizard (>= 0.9.1),
     effectsize (>= 0.8.6),
-    ggplot2 (>= 3.4.0),
-    insight (>= 0.19.8),
+    ggplot2 (>= 3.4.4),
+    insight (>= 0.19.10),
     modelbased (>= 0.8.7),
-    parameters (>= 0.21.5),
-    performance (>= 0.10.9)
+    parameters (>= 0.21.6),
+    performance (>= 0.11.0)
 Suggests:
     brms,
     curl,
@@ -119,4 +119,3 @@ Config/Needs/website:
     r-lib/pkgdown,
     easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/performance
