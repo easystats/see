@@ -173,7 +173,7 @@ plot.see_check_model <- function(x,
       p$QQ <- plot(
         x$QQ,
         size_line = size_line,
-        size_point = size_point,
+        size_point = 0.9 * size_point,
         alpha = alpha_level,
         dot_alpha = dot_alpha_level,
         colors = colors,

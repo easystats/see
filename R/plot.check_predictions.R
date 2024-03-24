@@ -329,7 +329,7 @@ plot.see_performance_pp_check <- function(x,
           color = .data$key
         ),
         position = ggplot2::position_nudge(x = 0.2),
-        size = size_point,
+        size = 0.4 * size_point,
         linewidth = size_line,
         stroke = 0,
         shape = 16
@@ -341,7 +341,7 @@ plot.see_performance_pp_check <- function(x,
           y = .data$count,
           color = .data$key
         ),
-        size = size_point,
+        size = 1.5 * size_point,
         stroke = 0,
         shape = 16
       )
@@ -363,7 +363,7 @@ plot.see_performance_pp_check <- function(x,
       ),
       alpha = line_alpha,
       position = ggplot2::position_jitter(width = 0.1, height = 0.02),
-      size = size_point * 0.8,
+      size = 0.8 * size_point,
       stroke = 0,
       shape = 16
     ) +
@@ -376,7 +376,7 @@ plot.see_performance_pp_check <- function(x,
           group = .data$grp,
           color = .data$key
         ),
-        size = size_point * 0.8
+        size = 0.8 * size_point
       ) +
       ggplot2::geom_point(
         data = x[x$key == "Observed data", ],
