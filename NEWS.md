@@ -1,3 +1,9 @@
+# see 0.8.3.1
+
+## Minor Changes
+
+* Small adjustment to size of point geoms for `check_model()` plots.
+
 # see 0.8.3
 
 ## Major changes
