@@ -12,6 +12,12 @@
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
 
+\item{size_point}{Numeric specifying size of point-geoms.}
+
+\item{size_line}{Numeric value specifying size of line geoms.}
+
+\item{base_size}{Base font size for plots.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{

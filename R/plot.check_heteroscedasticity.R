@@ -4,6 +4,7 @@
 #' `performance::check_heteroscedasticity()` function.
 #'
 #' @inheritParams data_plot
+#' @inheritParams plot.see_check_normality
 #'
 #' @return A ggplot2-object.
 #'
