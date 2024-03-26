@@ -16,6 +16,7 @@ plot.see_check_overdisp <- function(x,
 
 .plot_diag_overdispersion <- function(x,
                                       theme_style = theme_lucid,
+                                      base_size = 10,
                                       colors = c("#3aaf85", "#1b6ca8"),
                                       size_line = 0.8,
                                       type = 1,
@@ -32,7 +33,7 @@ plot.see_check_overdisp <- function(x,
         y = "Residual variance"
       ) +
       theme_style(
-        base_size = 10,
+        base_size = base_size,
         plot.title.space = 3,
         axis.title.space = 5
       )
@@ -52,7 +53,7 @@ plot.see_check_overdisp <- function(x,
         y = "Standardized resiuduals"
       ) +
       theme_style(
-        base_size = 10,
+        base_size = base_size,
         plot.title.space = 3,
         axis.title.space = 5
       )

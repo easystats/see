@@ -7,6 +7,7 @@
                                     size_point = 2,
                                     size_text = NULL,
                                     theme_style = theme_lucid,
+                                    base_size = 10,
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
                                     dot_alpha_level = 0.8,
                                     show_dots = TRUE) {
@@ -48,7 +49,8 @@
       method = "loess",
       na.rm = na.rm,
       se = FALSE,
-      color = colors[1]
+      color = colors[1],
+      linewidth = size_line
     ) +
     scale_colour_manual(values = c(OK = colors[2], Influential = colors[3])) +
     (if (isTRUE(show_labels)) {
@@ -134,7 +136,7 @@
 
     p <- p +
       .cook_lines +
-      theme_style(base_size = 10, plot.title.space = 3, axis.title.space = 5) +
+      theme_style(base_size = base_size, plot.title.space = 3, axis.title.space = 5) +
       guides(colour = "none", text = "none")
   }
 

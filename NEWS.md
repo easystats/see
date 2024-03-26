@@ -4,6 +4,10 @@
 
 * Small adjustment to size of point geoms for `check_model()` plots.
 
+* More arguments to change base font sizes and geom sizes are now passed to
+  downstream plot-functions (i.e., `plot()` for `check_model()` passes arguments
+  to change geom sizes to the underlying plot-functions).
+
 # see 0.8.3
 
 ## Major changes

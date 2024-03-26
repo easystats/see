@@ -4,7 +4,7 @@
 \alias{plot.see_check_heteroscedasticity}
 \title{Plot method for (non-)constant error variance checks}
 \usage{
-\method{plot}{see_check_heteroscedasticity}(x, data = NULL, ...)
+\method{plot}{see_check_heteroscedasticity}(x, data = NULL, size_point = 2, size_line = 0.8, base_size = 10, ...)
 }
 \arguments{
 \item{x}{An object.}

@@ -34,6 +34,7 @@ plot.see_check_model <- function(x,
   size_line <- attr(x, "line_size")
   show_labels <- attr(x, "show_labels") %||% TRUE
   size_text <- attr(x, "text_size")
+  base_size <- attr(x, "base_size")
   alpha_level <- attr(x, "alpha")
   dot_alpha_level <- attr(x, "dot_alpha")
   show_dots <- attr(x, "show_dots")
@@ -74,6 +75,10 @@ plot.see_check_model <- function(x,
     dot_alpha_level <- 0.8
   }
 
+  if (is.null(base_size)) {
+    base_size <- 10
+  }
+
   if (is.null(check)) {
     check <- "all"
   }
@@ -88,6 +93,7 @@ plot.see_check_model <- function(x,
       style = style,
       size_line = size_line,
       size_point = size_point,
+      base_size = base_size,
       type = type,
       check_model = TRUE,
       adjust_legend = TRUE,
@@ -102,6 +108,7 @@ plot.see_check_model <- function(x,
       size_line,
       alpha_level,
       theme_style = style,
+      base_size = base_size,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
       show_dots = show_dots
@@ -113,6 +120,7 @@ plot.see_check_model <- function(x,
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
       style = style,
+      base_size = base_size,
       colors = colors[c(2, 3, 1)],
       adjust_legend = TRUE,
       check_model = TRUE,
@@ -124,6 +132,7 @@ plot.see_check_model <- function(x,
     p$OVERDISPERSION <- .plot_diag_overdispersion(
       x$OVERDISPERSION,
       style = style,
+      base_size = base_size,
       colors = colors[c(1, 2)],
       size_line = size_line,
       type = overdisp_type
@@ -137,6 +146,7 @@ plot.see_check_model <- function(x,
       size_line,
       alpha_level,
       theme_style = style,
+      base_size = base_size,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
       show_dots = show_dots
@@ -151,6 +161,7 @@ plot.see_check_model <- function(x,
       size_line = size_line,
       size_point = size_point,
       theme_style = style,
+      base_size = base_size,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
       show_dots = show_dots
@@ -163,6 +174,7 @@ plot.see_check_model <- function(x,
       size_point = 1.5 * size_point,
       size_line = size_line,
       theme_style = style,
+      base_size = base_size,
       colors = colors,
       ci_data = attributes(x$VIF)$CI,
       is_check_model = TRUE
@@ -179,7 +191,8 @@ plot.see_check_model <- function(x,
         dot_alpha = dot_alpha_level,
         colors = colors,
         detrend = detrend,
-        style = style
+        style = style,
+        base_size = base_size
       )
     } else {
       p$QQ <- .plot_diag_qq(
@@ -189,6 +202,7 @@ plot.see_check_model <- function(x,
         alpha_level = alpha_level,
         detrend = detrend,
         theme_style = style,
+        base_size = base_size,
         colors = colors,
         dot_alpha_level = dot_alpha_level,
         show_dots = TRUE, # qq-plots w/o dots makes no sense
@@ -204,6 +218,7 @@ plot.see_check_model <- function(x,
       size_line,
       alpha_level = alpha_level,
       theme_style = style,
+      base_size = base_size,
       colors = colors
     )
   }
@@ -215,6 +230,7 @@ plot.see_check_model <- function(x,
       size_line,
       alpha_level = alpha_level,
       theme_style = style,
+      base_size = base_size,
       colors = colors,
       dot_alpha_level = dot_alpha_level,
       show_dots = TRUE # qq-plots w/o dots makes no sense
@@ -240,6 +256,7 @@ plot.see_check_model <- function(x,
                                  size_line,
                                  alpha_level = 0.2,
                                  theme_style = theme_lucid,
+                                 base_size = 10,
                                  colors = unname(social_colors(c("green", "blue", "red"))),
                                  dot_alpha_level = 0.8,
                                  show_dots = TRUE) {
@@ -271,7 +288,7 @@ plot.see_check_model <- function(x,
       subtitle = "Reference line should be flat and horizontal"
     ) +
     theme_style(
-      base_size = 10,
+      base_size = base_size,
       plot.title.space = 3,
       axis.title.space = 5
     )

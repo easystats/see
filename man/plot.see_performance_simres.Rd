@@ -14,6 +14,7 @@
   detrend = FALSE,
   transform = NULL,
   style = theme_lucid,
+  base_size = 10,
   ...
 )
 }
@@ -39,6 +40,8 @@ no transformation is applied and uniformly distributed residuals are expected.
 See argument \code{quantileFuntion} in \code{?DHARMa:::residuals.DHARMa} for more details.}
 
 \item{style}{A ggplot2-theme.}
+
+\item{base_size}{Base font size for plots.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

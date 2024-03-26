@@ -19,6 +19,7 @@
 #'   be one of `"pointwise"` or `"boot"` for pointwise confidence bands, or
 #'   `"ks"` or `"ts"` for simultaneous testing. See `qqplotr::stat_qq_band()`
 #'   for details.
+#' @param base_size Base font size for plots.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #'
@@ -44,6 +45,7 @@ plot.see_check_normality <- function(x,
                                      size_point = 2,
                                      alpha = 0.2,
                                      dot_alpha = 0.8,
+                                     base_size = 10,
                                      colors = c("#3aaf85", "#1b6ca8"),
                                      detrend = TRUE,
                                      method = "ell",
@@ -91,6 +93,7 @@ plot.see_check_normality <- function(x,
           dot_alpha = dot_alpha,
           colors = colors,
           detrend = detrend,
+          base_size = base_size,
           transform = stats::qnorm,
           ...
         ))
@@ -128,7 +131,7 @@ plot.see_check_normality <- function(x,
         mean(r),
         stats::sd(r)
       )
-      .plot_diag_norm(dat, size_line = size_line)
+      .plot_diag_norm(dat, size_line = size_line, alpha_level = alpha, base_size = base_size)
     } else if (type == "pp") {
       x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
       dat <- data.frame(res = x)
@@ -136,6 +139,7 @@ plot.see_check_normality <- function(x,
         dat,
         size_point = size_point,
         size_line = size_line,
+        base_size = base_size,
         alpha_level = alpha,
         detrend = detrend,
         dot_alpha_level = dot_alpha,
@@ -152,6 +156,7 @@ plot.see_check_normality <- function(x,
                             size_line,
                             alpha_level = 0.2,
                             theme_style = theme_lucid,
+                            base_size = 10,
                             colors = unname(social_colors(c("green", "blue", "red")))) {
   ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
     ggplot2::geom_ribbon(
@@ -174,7 +179,7 @@ plot.see_check_normality <- function(x,
       subtitle = "Distribution should be close to the normal curve"
     ) +
     theme_style(
-      base_size = 10,
+      base_size = base_size,
       plot.title.space = 3,
       axis.title.space = 5
     ) +
@@ -191,6 +196,7 @@ plot.see_check_normality <- function(x,
                           detrend = FALSE,
                           method = "ell",
                           theme_style = theme_lucid,
+                          base_size = 10,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8,
                           show_dots = TRUE,
@@ -293,7 +299,7 @@ plot.see_check_normality <- function(x,
       x = "Standard Normal Distribution Quantiles"
     ) +
     theme_style(
-      base_size = 10,
+      base_size = base_size,
       plot.title.space = 3,
       axis.title.space = 5
     )
@@ -309,6 +315,7 @@ plot.see_check_normality <- function(x,
                           detrend = FALSE,
                           method = "ell",
                           theme_style = theme_lucid,
+                          base_size = 10,
                           colors = unname(social_colors(c("green", "blue", "red"))),
                           dot_alpha_level = 0.8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
@@ -361,7 +368,7 @@ plot.see_check_normality <- function(x,
       x = "Standard Normal Cumulative Probability"
     ) +
     theme_style(
-      base_size = 10,
+      base_size = base_size,
       plot.title.space = 3,
       axis.title.space = 5
     )
@@ -376,6 +383,7 @@ plot.see_check_normality <- function(x,
                             panel = TRUE,
                             alpha_level = 0.2,
                             theme_style = theme_lucid,
+                            base_size = 10,
                             colors = unname(social_colors(c("green", "blue", "red"))),
                             dot_alpha_level = 0.8,
                             show_dots = TRUE) {
@@ -402,7 +410,7 @@ plot.see_check_normality <- function(x,
         alpha = dot_alpha_level
       ) +
       theme_style(
-        base_size = 10,
+        base_size = base_size,
         plot.title.space = 3,
         axis.title.space = 5
       )
