@@ -10,6 +10,7 @@
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   size_point = 3.5,
   size_line = 0.8,
+  base_size = 10,
   ...
 )
 }
@@ -25,6 +26,8 @@ hex-format) for points and line.}
 \item{size_point}{Numeric specifying size of point-geoms.}
 
 \item{size_line}{Numeric value specifying size of line geoms.}
+
+\item{base_size}{Base font size for plots.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

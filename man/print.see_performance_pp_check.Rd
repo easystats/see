@@ -25,6 +25,7 @@
   line_alpha = 0.15,
   size_bar = 0.7,
   style = theme_lucid,
+  base_size = 10,
   colors = unname(social_colors(c("green", "blue"))),
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   x_limits = NULL,
@@ -56,6 +57,8 @@ or ordinal etc. - outcomes).}
 If not \code{NULL}, will zoom in the x-axis to the specified limits.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{base_size}{Base font size for plots.}
 }
 \value{
 A ggplot2-object.

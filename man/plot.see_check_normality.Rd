@@ -12,6 +12,7 @@
   size_point = 2,
   alpha = 0.2,
   dot_alpha = 0.8,
+  base_size = 10,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = TRUE,
   method = "ell",
@@ -36,6 +37,8 @@ statistical model.}
 \item{alpha}{Numeric value specifying alpha level of the confidence bands.}
 
 \item{dot_alpha}{Numeric value specifying alpha level of the point geoms.}
+
+\item{base_size}{Base font size for plots.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
