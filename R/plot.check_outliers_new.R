@@ -4,6 +4,7 @@
                                     ref.linetype = "dashed",
                                     show_labels = TRUE,
                                     size_line = NULL,
+                                    size_point = 2,
                                     size_text = NULL,
                                     theme_style = theme_lucid,
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
@@ -23,7 +24,12 @@
   p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals))
 
   if (isTRUE(show_dots)) {
-    p <- p + geom_point2(aes(colour = .data$Influential), na.rm = na.rm, alpha = dot_alpha_level)
+    p <- p + geom_point2(
+      aes(colour = .data$Influential),
+      na.rm = na.rm,
+      alpha = dot_alpha_level,
+      size = size_point
+    )
   }
 
   p <- p +

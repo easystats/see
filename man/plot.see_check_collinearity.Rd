@@ -8,7 +8,7 @@
   x,
   data = NULL,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-  size_point = 4,
+  size_point = 3.5,
   size_line = 0.8,
   ...
 )
