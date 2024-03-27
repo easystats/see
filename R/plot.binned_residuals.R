@@ -110,7 +110,7 @@ plot.see_binned_residuals <- function(x,
       base_size = base_size,
       plot.title.space = 3,
       axis.title.space = 5,
-      axis.title = ggplot2::element_text(size = size_axis_title)
+      axis.title.size = size_axis_title
     )
   }
 
