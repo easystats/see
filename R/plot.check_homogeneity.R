@@ -134,6 +134,8 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
                                    size_line,
                                    alpha_level = 0.2,
                                    theme_style = theme_lucid,
+                                   size_title = 12,
+                                   size_axis_title = 10,
                                    base_size = 10,
                                    colors = unname(social_colors(c("green", "blue", "red"))),
                                    dot_alpha_level = 0.8,
@@ -167,6 +169,8 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
     theme_style(
       base_size = base_size,
       plot.title.space = 3,
-      axis.title.space = 5
+      axis.title.space = 5,
+      plot.title.size = size_title,
+      axis.title.size = size_axis_title
     )
 }

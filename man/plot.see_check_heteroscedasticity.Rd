@@ -4,7 +4,16 @@
 \alias{plot.see_check_heteroscedasticity}
 \title{Plot method for (non-)constant error variance checks}
 \usage{
-\method{plot}{see_check_heteroscedasticity}(x, data = NULL, size_point = 2, size_line = 0.8, base_size = 10, ...)
+\method{plot}{see_check_heteroscedasticity}(
+  x,
+  data = NULL,
+  size_point = 2,
+  size_line = 0.8,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  ...
+)
 }
 \arguments{
 \item{x}{An object.}
@@ -16,7 +25,8 @@ statistical model.}
 
 \item{size_line}{Numeric value specifying size of line geoms.}
 
-\item{base_size}{Base font size for plots.}
+\item{base_size, size_axis_title, size_title}{Numeric value specifying size of
+axis and plot titles.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

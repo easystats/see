@@ -6,6 +6,8 @@
                                     size_line = NULL,
                                     size_point = 2,
                                     size_text = NULL,
+                                    size_axis_title = base_size,
+                                    size_title = 12,
                                     theme_style = theme_lucid,
                                     base_size = 10,
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
@@ -136,7 +138,13 @@
 
     p <- p +
       .cook_lines +
-      theme_style(base_size = base_size, plot.title.space = 3, axis.title.space = 5) +
+      theme_style(
+        base_size = base_size,
+        plot.title.space = 3,
+        axis.title.space = 5,
+        plot.title.size = size_title,
+        axis.title.size = size_axis_title
+      ) +
       guides(colour = "none", text = "none")
   }
 

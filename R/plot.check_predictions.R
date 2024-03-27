@@ -75,8 +75,11 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 print.see_performance_pp_check <- function(x,
                                            size_line = 0.5,
                                            size_point = 2,
-                                           line_alpha = 0.15,
                                            size_bar = 0.7,
+                                           size_axis_title = base_size,
+                                           size_title = 12,
+                                           base_size = 10,
+                                           line_alpha = 0.15,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
                                            type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
@@ -98,11 +101,14 @@ print.see_performance_pp_check <- function(x,
 
   p1 <- .plot_pp_check(
     x,
-    size_line,
-    size_point,
-    line_alpha,
+    size_line = size_line,
+    size_point = size_point,
+    line_alpha = line_alpha,
     theme_style = style,
     colors = colors,
+    base_size = base_size,
+    size_title = size_title,
+    size_axis_title = size_axis_title,
     type = type,
     x_limits = x_limits,
     ...
@@ -124,10 +130,12 @@ print.see_performance_pp_check <- function(x,
 plot.see_performance_pp_check <- function(x,
                                           size_line = 0.5,
                                           size_point = 2,
-                                          line_alpha = 0.15,
                                           size_bar = 0.7,
-                                          style = theme_lucid,
+                                          size_axis_title = base_size,
+                                          size_title = 12,
                                           base_size = 10,
+                                          line_alpha = 0.15,
+                                          style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
                                           type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
                                           x_limits = NULL,
@@ -148,11 +156,13 @@ plot.see_performance_pp_check <- function(x,
 
   p1 <- .plot_pp_check(
     x,
-    size_line,
-    size_point,
-    line_alpha,
+    size_line = size_line,
+    size_point = size_point,
+    line_alpha = line_alpha,
     theme_style = style,
     base_size = base_size,
+    size_axis_title = size_axis_title,
+    size_title = size_title,
     colors = colors,
     type = type,
     x_limits = x_limits,
@@ -175,6 +185,8 @@ plot.see_performance_pp_check <- function(x,
                            line_alpha,
                            theme_style,
                            base_size = 10,
+                           size_axis_title = 10,
+                           size_title = 12,
                            colors,
                            type = "density",
                            x_limits = NULL,
@@ -209,7 +221,9 @@ plot.see_performance_pp_check <- function(x,
     out <- out + theme_style(
       base_size = base_size,
       plot.title.space = 3,
-      axis.title.space = 5
+      axis.title.space = 5,
+      axis.title.size = size_axis_title,
+      plot.title.size = size_title
     )
   }
 
@@ -229,7 +243,13 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_check_predictions_density <- function(x, colors, info, size_line, line_alpha, bandwidth, ...) {
+.plot_check_predictions_density <- function(x,
+                                            colors,
+                                            info,
+                                            size_line,
+                                            line_alpha,
+                                            bandwidth,
+                                            ...) {
   ggplot2::ggplot(x) +
     ggplot2::stat_density(
       mapping = ggplot2::aes(
