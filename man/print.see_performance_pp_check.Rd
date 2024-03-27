@@ -11,7 +11,9 @@
   size_point = 2,
   line_alpha = 0.15,
   size_bar = 0.7,
+  size_axis_title = base_size * 0.8,
   style = theme_lucid,
+  base_size = 10,
   colors = unname(social_colors(c("green", "blue"))),
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   x_limits = NULL,
@@ -22,8 +24,9 @@
   x,
   size_line = 0.5,
   size_point = 2,
-  line_alpha = 0.15,
   size_bar = 0.7,
+  size_axis_title = base_size * 0.8,
+  line_alpha = 0.15,
   style = theme_lucid,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue"))),
@@ -43,7 +46,11 @@
 
 \item{size_bar}{Size of bar geoms.}
 
+\item{size_axis_title}{Numeric value specifying size of axis titles.}
+
 \item{style}{A ggplot2-theme.}
+
+\item{base_size}{Base font size for plots.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
@@ -57,8 +64,6 @@ or ordinal etc. - outcomes).}
 If not \code{NULL}, will zoom in the x-axis to the specified limits.}
 
 \item{...}{Arguments passed to or from other methods.}
-
-\item{base_size}{Base font size for plots.}
 }
 \value{
 A ggplot2-object.

@@ -20,6 +20,7 @@
 #'   `"ks"` or `"ts"` for simultaneous testing. See `qqplotr::stat_qq_band()`
 #'   for details.
 #' @param base_size Base font size for plots.
+#' @param size_axis_title Numeric value specifying size of axis titles.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #'

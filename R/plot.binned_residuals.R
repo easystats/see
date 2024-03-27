@@ -2,10 +2,11 @@
 plot.see_binned_residuals <- function(x,
                                       size_line = 0.7,
                                       size_point = 2.2,
+                                      size_axis_title = base_size * 0.8,
+                                      base_size = 10,
                                       colors = social_colors(c("blue", "red", "green")),
                                       show_smooth = FALSE,
                                       style = theme_lucid,
-                                      base_size = 10,
                                       ...) {
   x$se.lo <- -x$se
   if (length(unique(x$group)) > 1L) {
@@ -108,7 +109,8 @@ plot.see_binned_residuals <- function(x,
     p <- p + theme_style(
       base_size = base_size,
       plot.title.space = 3,
-      axis.title.space = 5
+      axis.title.space = 5,
+      axis.title = ggplot2::element_text(size = size_axis_title)
     )
   }
 

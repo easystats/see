@@ -53,6 +53,8 @@ be one of \code{"pointwise"} or \code{"boot"} for pointwise confidence bands, or
 for details.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{size_axis_title}{Numeric value specifying size of axis titles.}
 }
 \value{
 A ggplot2-object.
