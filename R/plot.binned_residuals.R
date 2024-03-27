@@ -2,7 +2,8 @@
 plot.see_binned_residuals <- function(x,
                                       size_line = 0.7,
                                       size_point = 2.2,
-                                      size_axis_title = base_size * 0.8,
+                                      size_title = 12,
+                                      size_axis_title = base_size,
                                       base_size = 10,
                                       colors = social_colors(c("blue", "red", "green")),
                                       show_smooth = FALSE,
@@ -110,7 +111,8 @@ plot.see_binned_residuals <- function(x,
       base_size = base_size,
       plot.title.space = 3,
       axis.title.space = 5,
-      axis.title.size = size_axis_title
+      axis.title.size = size_axis_title,
+      plot.title.size = size_title
     )
   }
 

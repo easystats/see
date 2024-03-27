@@ -9,11 +9,12 @@
   x,
   size_line = 0.5,
   size_point = 2,
-  line_alpha = 0.15,
   size_bar = 0.7,
-  size_axis_title = base_size * 0.8,
-  style = theme_lucid,
+  size_axis_title = base_size,
+  size_title = 12,
   base_size = 10,
+  line_alpha = 0.15,
+  style = theme_lucid,
   colors = unname(social_colors(c("green", "blue"))),
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   x_limits = NULL,
@@ -25,10 +26,11 @@
   size_line = 0.5,
   size_point = 2,
   size_bar = 0.7,
-  size_axis_title = base_size * 0.8,
+  size_axis_title = base_size,
+  size_title = 12,
+  base_size = 10,
   line_alpha = 0.15,
   style = theme_lucid,
-  base_size = 10,
   colors = unname(social_colors(c("green", "blue"))),
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   x_limits = NULL,
@@ -42,15 +44,14 @@
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{line_alpha}{Numeric value specifying alpha of lines indicating \code{yrep}.}
-
 \item{size_bar}{Size of bar geoms.}
 
-\item{size_axis_title}{Numeric value specifying size of axis titles.}
+\item{base_size, size_axis_title, size_title}{Numeric value specifying size of
+axis and plot titles.}
+
+\item{line_alpha}{Numeric value specifying alpha of lines indicating \code{yrep}.}
 
 \item{style}{A ggplot2-theme.}
-
-\item{base_size}{Base font size for plots.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}

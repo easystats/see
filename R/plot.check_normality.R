@@ -19,8 +19,8 @@
 #'   be one of `"pointwise"` or `"boot"` for pointwise confidence bands, or
 #'   `"ks"` or `"ts"` for simultaneous testing. See `qqplotr::stat_qq_band()`
 #'   for details.
-#' @param base_size Base font size for plots.
-#' @param size_axis_title Numeric value specifying size of axis titles.
+#' @param base_size,size_axis_title,size_title Numeric value specifying size of
+#' axis and plot titles.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #'
@@ -44,9 +44,11 @@ plot.see_check_normality <- function(x,
                                      data = NULL,
                                      size_line = 0.8,
                                      size_point = 2,
+                                     size_title = 12,
+                                     size_axis_title = base_size,
+                                     base_size = 10,
                                      alpha = 0.2,
                                      dot_alpha = 0.8,
-                                     base_size = 10,
                                      colors = c("#3aaf85", "#1b6ca8"),
                                      detrend = TRUE,
                                      method = "ell",
@@ -70,7 +72,10 @@ plot.see_check_normality <- function(x,
       attributes(x)$re_qq,
       size_point = size_point,
       size_line = size_line,
-      alpha_level = alpha
+      alpha_level = alpha,
+      size_axis_title = size_axis_title,
+      size_title = size_title,
+      base_size = base_size
     )
   } else {
     if (type == "qq") { # nolint
@@ -110,6 +115,9 @@ plot.see_check_normality <- function(x,
         dat,
         size_point = size_point,
         size_line = size_line,
+        size_axis_title = size_axis_title,
+        size_title = size_title,
+        base_size = base_size,
         alpha_level = alpha,
         detrend = detrend,
         dot_alpha_level = dot_alpha,
@@ -132,7 +140,14 @@ plot.see_check_normality <- function(x,
         mean(r),
         stats::sd(r)
       )
-      .plot_diag_norm(dat, size_line = size_line, alpha_level = alpha, base_size = base_size)
+      .plot_diag_norm(
+        dat,
+        size_line = size_line,
+        alpha_level = alpha,
+        base_size = base_size,
+        size_axis_title = size_axis_title,
+        size_title = size_title
+      )
     } else if (type == "pp") {
       x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
       dat <- data.frame(res = x)
@@ -141,6 +156,8 @@ plot.see_check_normality <- function(x,
         size_point = size_point,
         size_line = size_line,
         base_size = base_size,
+        size_axis_title = size_axis_title,
+        size_title = size_title,
         alpha_level = alpha,
         detrend = detrend,
         dot_alpha_level = dot_alpha,
@@ -155,6 +172,8 @@ plot.see_check_normality <- function(x,
 
 .plot_diag_norm <- function(x,
                             size_line,
+                            size_axis_title = 10,
+                            size_title = 12,
                             alpha_level = 0.2,
                             theme_style = theme_lucid,
                             base_size = 10,
@@ -182,7 +201,9 @@ plot.see_check_normality <- function(x,
     theme_style(
       base_size = base_size,
       plot.title.space = 3,
-      axis.title.space = 5
+      axis.title.space = 5,
+      plot.title.size = size_title,
+      axis.title.size = size_axis_title
     ) +
     ggplot2::scale_y_continuous(labels = NULL)
 }
@@ -193,6 +214,8 @@ plot.see_check_normality <- function(x,
 .plot_diag_qq <- function(x,
                           size_point,
                           size_line,
+                          size_axis_title = 10,
+                          size_title = 12,
                           alpha_level = 0.2,
                           detrend = FALSE,
                           method = "ell",
@@ -302,7 +325,9 @@ plot.see_check_normality <- function(x,
     theme_style(
       base_size = base_size,
       plot.title.space = 3,
-      axis.title.space = 5
+      axis.title.space = 5,
+      plot.title.size = size_title,
+      axis.title.size = size_axis_title
     )
 }
 
@@ -312,6 +337,8 @@ plot.see_check_normality <- function(x,
 .plot_diag_pp <- function(x,
                           size_point,
                           size_line,
+                          size_axis_title = base_size,
+                          size_title = 12,
                           alpha_level = 0.2,
                           detrend = FALSE,
                           method = "ell",
@@ -371,7 +398,9 @@ plot.see_check_normality <- function(x,
     theme_style(
       base_size = base_size,
       plot.title.space = 3,
-      axis.title.space = 5
+      axis.title.space = 5,
+      plot.title.size = size_title,
+      axis.title.size = size_axis_title
     )
 }
 
@@ -381,6 +410,8 @@ plot.see_check_normality <- function(x,
 .plot_diag_reqq <- function(x,
                             size_point,
                             size_line,
+                            size_axis_title = base_size,
+                            size_title = 12,
                             panel = TRUE,
                             alpha_level = 0.2,
                             theme_style = theme_lucid,
@@ -413,7 +444,9 @@ plot.see_check_normality <- function(x,
       theme_style(
         base_size = base_size,
         plot.title.space = 3,
-        axis.title.space = 5
+        axis.title.space = 5,
+        plot.title.size = size_title,
+        axis.title.size = size_axis_title
       )
 
     if (isTRUE(show_dots)) {

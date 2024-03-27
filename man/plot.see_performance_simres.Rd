@@ -41,8 +41,6 @@ See argument \code{quantileFuntion} in \code{?DHARMa:::residuals.DHARMa} for mor
 
 \item{style}{A ggplot2-theme.}
 
-\item{base_size}{Base font size for plots.}
-
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
