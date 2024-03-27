@@ -12,7 +12,7 @@ function."><meta property="og:image" content="https://easystats.github.io/see/re
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,9 +102,11 @@ function.</p>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  size_line <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>  size_point <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  size_title <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  size_axis_title <span class="op">=</span> <span class="va">base_size</span>,</span>
+<span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>  dot_alpha <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#3aaf85"</span>, <span class="st">"#1b6ca8"</span><span class="op">)</span>,</span>
 <span>  detrend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"ell"</span>,</span>
@@ -138,16 +140,17 @@ statistical model.</p></dd>
 <dd><p>Numeric specifying size of point-geoms.</p></dd>
 
 
+<dt>base_size, size_axis_title, size_title</dt>
+<dd><p>Numeric value specifying size of
+axis and plot titles.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>Numeric value specifying alpha level of the confidence bands.</p></dd>
 
 
 <dt>dot_alpha</dt>
 <dd><p>Numeric value specifying alpha level of the point geoms.</p></dd>
-
-
-<dt>base_size</dt>
-<dd><p>Base font size for plots.</p></dd>
 
 
 <dt>colors</dt>

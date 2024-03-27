@@ -12,7 +12,7 @@ performance::check_heteroscedasticity() function."><meta property="og:image" con
     
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +96,16 @@ performance::check_heteroscedasticity() function."><meta property="og:image" con
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for see_check_heteroscedasticity</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, data <span class="op">=</span> <span class="cn">NULL</span>, size_point <span class="op">=</span> <span class="fl">2</span>, size_line <span class="op">=</span> <span class="fl">0.8</span>, base_size <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  size_point <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  size_line <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>  size_title <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  size_axis_title <span class="op">=</span> <span class="va">base_size</span>,</span>
+<span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -118,8 +127,9 @@ statistical model.</p></dd>
 <dd><p>Numeric value specifying size of line geoms.</p></dd>
 
 
-<dt>base_size</dt>
-<dd><p>Base font size for plots.</p></dd>
+<dt>base_size, size_axis_title, size_title</dt>
+<dd><p>Numeric value specifying size of
+axis and plot titles.</p></dd>
 
 
 <dt>...</dt>
