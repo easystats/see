@@ -8,6 +8,9 @@
   downstream plot-functions (i.e., `plot()` for `check_model()` passes arguments
   to change geom sizes to the underlying plot-functions).
 
+* `plot()` for `check_predictions()` now supports Bayesian regression models from
+  *brms* and *rstanarm*.
+
 # see 0.8.3
 
 ## Major changes
