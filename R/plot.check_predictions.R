@@ -487,6 +487,9 @@ plot.see_performance_pp_check <- function(x,
   x$Group[x$Group == "y"] <- "Observed data"
   x$Group[x$Group == "Mean"] <- "Model-predicted data"
 
+  # sanity check, remove NA rows
+  x <- x[!is.na(out$Count), ]
+
   p <- ggplot2::ggplot() +
     ggplot2::geom_pointrange(
       data = x[x$Group == "Model-predicted data", ],
