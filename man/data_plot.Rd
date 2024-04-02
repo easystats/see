@@ -47,7 +47,7 @@ for your object's class:
 \item \link[=plot.see_check_outliers]{performance::check_outliers()}
 \item \link[=plot.see_compare_performance]{performance::compare_performance()}
 \item \link[=plot.see_performance_roc]{performance::performance_roc()}
-\item \link[=plot.see_performance_pp_check]{performance::check_posterior_predictions()}
+\item \link[=plot.see_performance_pp_check]{performance::check_predictions()}
 }
 }
 \details{

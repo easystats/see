@@ -29,7 +29,7 @@
 #'  - \link[=plot.see_check_outliers]{performance::check_outliers()}
 #'  - \link[=plot.see_compare_performance]{performance::compare_performance()}
 #'  - \link[=plot.see_performance_roc]{performance::performance_roc()}
-#'  - \link[=plot.see_performance_pp_check]{performance::check_posterior_predictions()}
+#'  - \link[=plot.see_performance_pp_check]{performance::check_predictions()}
 #'
 #' @param x An object.
 #' @param data The original data used to create this object. Can be a

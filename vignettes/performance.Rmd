@@ -217,7 +217,7 @@ _([related function documentation](https://easystats.github.io/performance/refer
 
 ```{r}
 model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-check_posterior_predictions(model)
+check_predictions(model)
 ```
 
 To check if the model properly captures the variation in the data, use
@@ -225,7 +225,7 @@ To check if the model properly captures the variation in the data, use
 
 ```{r}
 model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-check_posterior_predictions(model, check_range = TRUE)
+check_predictions(model, check_range = TRUE)
 ```
 
 # Overall Model Check
