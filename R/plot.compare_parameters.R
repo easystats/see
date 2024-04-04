@@ -210,14 +210,19 @@ data_plot.see_compare_parameters <- function(x, ...) {
     values_to = "CI_high",
     columns = colnames(x)[col_ci_high]
   )["CI_high"]
+  dataplot <- cbind(out1, out2, out3)
 
-  out4 <- .reshape_to_long(
-    x,
-    values_to = "p",
-    columns = colnames(x)[col_p]
-  )["p"]
+  # if we have effects = "random", we probably don't have p-values. so
+  # check if this column exists, and if not, we skip it...
+  if (length(col_p) != 0) {
+    out4 <- .reshape_to_long(
+      x,
+      values_to = "p",
+      columns = colnames(x)[col_p]
+    )["p"]
+    dataplot <- cbind(dataplot, out4)
+  }
 
-  dataplot <- cbind(out1, out2, out3, out4)
   dataplot$group <- gsub("(.*)\\.(.*)", "\\2", dataplot$group)
 
   rownames(dataplot) <- NULL
