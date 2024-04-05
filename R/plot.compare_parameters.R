@@ -75,9 +75,13 @@ plot.see_compare_parameters <- function(x,
     x$Component <- factor(x$Component, levels = unique(x$Component))
   }
 
-
+  # show/hide intercepts
   if (!show_intercept) {
     x <- x[!.is_intercept(x$Parameter), ]
+    # sanity check - any data left?
+    if (nrow(x) == 0) {
+      insight::format_warning("No data left after removing intercepts. Returning empty plot.")
+    }
   }
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
@@ -224,6 +228,8 @@ data_plot.see_compare_parameters <- function(x, ...) {
   }
 
   dataplot$group <- gsub("(.*)\\.(.*)", "\\2", dataplot$group)
+  # make factor, so order in legend is preserved
+  dataplot$group <- factor(dataplot$group, levels = unique(dataplot$group))
 
   rownames(dataplot) <- NULL
 
