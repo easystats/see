@@ -127,19 +127,19 @@ plot.see_compare_parameters <- function(x,
   # largest data points that are within this range. Thereby we have the pretty
   # values we can use as breaks and labels for the scale...
   if (exponentiated_coefs) {
-    range <- 2^(-24:16)
-    x_low <- which.min(min(x$CI_low) > range) - 1L
-    x_high <- which.max(max(x$CI_high) < range)
+    exp_range <- 2^(-24:16)
+    x_low <- which.min(min(x$CI_low) > exp_range) - 1L
+    x_high <- which.max(max(x$CI_high) < exp_range)
     if (add_values) {
       # add some space to the right panel for text
       new_range <- pretty(2 * max(x$CI_high))
-      x_high <- which.max(max(new_range) < range)
+      x_high <- which.max(max(new_range) < exp_range)
     }
     p <- p + scale_x_continuous(
       trans = "log",
-      breaks = range[x_low:x_high],
-      limits = c(range[x_low], range[x_high]),
-      labels = sprintf("%g", range[x_low:x_high])
+      breaks = exp_range[x_low:x_high],
+      limits = c(exp_range[x_low], exp_range[x_high]),
+      labels = sprintf("%g", exp_range[x_low:x_high])
     )
   }
 
@@ -192,7 +192,7 @@ plot.see_compare_parameters <- function(x,
 
 #' @export
 data_plot.see_compare_parameters <- function(x, ...) {
-  col_coefficient <- which(grepl("^(Coefficient|Log-Odds|Log-Mean|Odds Ratio|Risk Ratio|IRR)\\.", colnames(x)))
+  col_coefficient <- grep("^(Coefficient|Log-Odds|Log-Mean|Odds Ratio|Risk Ratio|IRR)\\.", colnames(x))
   col_ci_low <- which(startsWith(colnames(x), "CI_low."))
   col_ci_high <- which(startsWith(colnames(x), "CI_high."))
   col_p <- which(startsWith(colnames(x), "p."))

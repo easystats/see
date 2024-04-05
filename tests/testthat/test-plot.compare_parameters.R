@@ -11,7 +11,7 @@ test_that("`plot()` for compare_parameters", {
     coef = "",
     stringsAsFactors = FALSE
   )
-  gmod_glmmTMB <- glmmTMB(form, family = poisson, priors = gprior, data = gdat)
+  gmod_glmmTMB <- glmmTMB::glmmTMB(form, family = poisson, priors = gprior, data = gdat)
 
   cp <- parameters::compare_parameters(gmod_glmer, gmod_glmmTMB, effects = "random")
   expect_warning(plot(cp), "No data left")
