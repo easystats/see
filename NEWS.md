@@ -11,6 +11,10 @@
 * `plot()` for `check_predictions()` now supports Bayesian regression models from
   *brms* and *rstanarm*.
 
+## Bug fixes
+
+* Corrected order of models for `plot.compare_parameters()`.
+
 # see 0.8.3
 
 ## Major changes
