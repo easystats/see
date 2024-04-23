@@ -9,7 +9,7 @@
 Provides plotting utilities supporting packages in the 'easystats' ecosystem
 (\url{https://github.com/easystats/easystats}) and some extra themes, geoms, and
 scales for 'ggplot2'. Color scales are based on
-\url{https://materialui.co/colors}.
+\url{https://materialui.co/}.
 
 References: Luedecke et al. (2021) \doi{10.21105/joss.03393}.
 }
