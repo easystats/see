@@ -8,9 +8,9 @@
 # This workflow helps find such failing examples that need to be modified.
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
 name: check-all-examples
 

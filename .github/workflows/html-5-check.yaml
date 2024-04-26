@@ -2,9 +2,11 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+    branches: [main]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Trigger once a week at 00:00 on Sunday
+    - cron: "0 0 * * SUN"
 
 name: html-5-check
 
