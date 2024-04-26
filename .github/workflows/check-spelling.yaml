@@ -1,6 +1,4 @@
 on:
-  push:
-    branches: [main]
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Trigger once a week at 00:00 on Sunday
