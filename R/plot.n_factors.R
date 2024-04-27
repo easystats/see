@@ -25,7 +25,6 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
 
   dataplot <- rbind(s1, s2[!s2[[variable]] %in% s1[[variable]], ])
 
-  # Add Variance explained
   if ("Variance_Explained" %in% names(attributes(x))) {
     dataplot$Variance_Cumulative <- NULL # Remove column and re add
     dataplot <- merge(
@@ -52,6 +51,7 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   rownames(dataplot) <- NULL
 
   # Labels and titles -----------------------------------------------------
+
   n_max <- sum(dataplot$n_Methods)
   axis_lab <- paste0("% of methods (out of ", n_max, ")")
 
@@ -67,7 +67,6 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
       ylab = axis_lab
     )
   }
-  # Title
 
   attr(dataplot, "info")$title <- paste("How many", lab, "to retain")
   attr(dataplot, "info")$subtitle <- paste0("Number of ", lab, " considered optimal by various algorithm")
@@ -176,7 +175,6 @@ plot.see_n_factors <- function(x,
       scale_fill_manual(values = unname(flat_colors(c("grey", "red"))))
   }
 
-  # Add variance explained
   if ("Variance_Cumulative" %in% names(x)) {
     x$Varex_scaled <- x$Variance_Cumulative * max(x$y)
     p <- p +
