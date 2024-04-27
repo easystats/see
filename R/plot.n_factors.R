@@ -137,21 +137,25 @@ plot.see_n_factors <- function(x,
 
   # Base plot
   if (type == "area") {
+    segment_data <- data.frame(x_intercept = x$x[which.max(x$y)], y_max = max(x$y, na.rm = TRUE))
     p <- ggplot(x, aes(x = .data$x, y = .data$y)) +
       geom_area(fill = flat_colors("grey")) +
       geom_segment(
+        data = segment_data,
         aes(
-          x = .data$x[which.max(.data$y)],
-          xend = .data$x[which.max(.data$y)],
+          x = x_intercept,
+          xend = x_intercept,
           y = 0,
-          yend = max(.data$y)
+          yend = y_max
         ),
         color = flat_colors("red")
       ) +
-      geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)),
+      geom_point(
+        data = segment_data,
+        aes(x = x_intercept, y = y_max),
         color = flat_colors("red")
       ) +
-      scale_x_continuous(breaks = 1:max(x$x)) +
+      scale_x_continuous(breaks = 1:max(x$x, na.rm = TRUE)) +
       add_plot_attributes(x)
   } else if (type == "line") {
     p <- ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
