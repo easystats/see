@@ -2,6 +2,8 @@
 
 ## Minor Changes
 
+* Fixes warnings generated from the `{ggplot2}` 3.5.0 release.
+
 * Small adjustment to size of point geoms for `check_model()` plots.
 
 * More arguments to change base font sizes and geom sizes are now passed to
