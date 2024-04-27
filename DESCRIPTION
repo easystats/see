@@ -91,6 +91,7 @@ Suggests:
     logspline,
     MASS,
     mclust,
+    merDeriv,
     mgcv,
     metafor,
     NbClust,
@@ -119,4 +120,4 @@ Config/Needs/website:
     r-lib/pkgdown,
     easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/performance
+Remotes: easystats/performance, easystats/modelbased
