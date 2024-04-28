@@ -90,7 +90,7 @@ to give an impression how these scales work with different type of data.
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_social()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -104,7 +104,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_social()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -118,7 +118,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_social()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
@@ -134,7 +134,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_material()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -148,7 +148,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_material()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -162,7 +162,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_material()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
@@ -178,7 +178,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_flat()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -192,7 +192,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_flat()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -206,7 +206,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_flat()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
@@ -222,7 +222,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_metro()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -236,7 +236,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_metro()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -250,7 +250,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_metro()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
@@ -266,7 +266,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_see()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -280,7 +280,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_see()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -294,7 +294,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_see()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
@@ -310,7 +310,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_pizza()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -324,7 +324,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_pizza()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -338,7 +338,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_pizza()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
@@ -354,7 +354,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_bluebrown()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -368,7 +368,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_bluebrown()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -382,7 +382,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_bluebrown()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
@@ -398,7 +398,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d1, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_okabeito()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
@@ -412,7 +412,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d2, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_okabeito()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
@@ -426,7 +426,7 @@ plots(p1, p2, n_rows = 1)
 
 ```{r}
 p1 <- ggplot(d3, aes(x, y, colour = group)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_okabeito()
 
 p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
