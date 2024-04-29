@@ -106,7 +106,8 @@ plots <- function(...,
   if (inherits(pw_drawn, "simpleError")) {
     msg_display1 <- "\n- To fix this issue, please make the window larger."
     msg_display3 <- "\n- If this still doesn't resolve your problems, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again." # nolint
-    msg_display4 <- "\n- Finally, you can try to decrease the base font-size of your theme before plotting. Load `library(ggplot2)` and run: `theme_set(theme_classic(base_size = 6))`" # nolint
+    msg_display4 <- "\n- You can try to decrease the base font-size of your theme before plotting. Load `library(ggplot2)` and run: `theme_set(theme_classic(base_size = 6))`" # nolint
+    msg_display5 <- "\n- Finally, make sure to update your packages (in particular `ggplot2` and `patchwork`) using `update.packages(ask = FALSE)`." # nolint
 
     if (Sys.getenv("RSTUDIO") == "1") {
       msg <- "The RStudio 'Plots' window is too small to show this set of plots."
@@ -117,6 +118,6 @@ plots <- function(...,
     }
 
     msg <- paste(msg, "You may try one of the following steps to resolve this problem.")
-    insight::format_error(msg, msg_display1, msg_display2, msg_display3, msg_display4)
+    insight::format_error(msg, msg_display1, msg_display2, msg_display3, msg_display4, msg_display5)
   }
 }
