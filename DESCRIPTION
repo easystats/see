@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.3.7
+Version: 0.8.4
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -91,6 +91,7 @@ Suggests:
     logspline,
     MASS,
     mclust,
+    merDeriv,
     mgcv,
     metafor,
     NbClust,
@@ -119,4 +120,3 @@ Config/Needs/website:
     r-lib/pkgdown,
     easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/performance

@@ -10,6 +10,8 @@ utils::globalVariables(
     "grp",
     "Parameter",
     "predictor",
-    "ROPE_Equivalence"
+    "ROPE_Equivalence",
+    "x_intercept",
+    "y_max"
   )
 )

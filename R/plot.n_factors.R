@@ -25,7 +25,6 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
 
   dataplot <- rbind(s1, s2[!s2[[variable]] %in% s1[[variable]], ])
 
-  # Add Variance explained
   if ("Variance_Explained" %in% names(attributes(x))) {
     dataplot$Variance_Cumulative <- NULL # Remove column and re add
     dataplot <- merge(
@@ -52,6 +51,7 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   rownames(dataplot) <- NULL
 
   # Labels and titles -----------------------------------------------------
+
   n_max <- sum(dataplot$n_Methods)
   axis_lab <- paste0("% of methods (out of ", n_max, ")")
 
@@ -67,7 +67,6 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
       ylab = axis_lab
     )
   }
-  # Title
 
   attr(dataplot, "info")$title <- paste("How many", lab, "to retain")
   attr(dataplot, "info")$subtitle <- paste0("Number of ", lab, " considered optimal by various algorithm")
@@ -137,21 +136,25 @@ plot.see_n_factors <- function(x,
 
   # Base plot
   if (type == "area") {
+    segment_data <- data.frame(x_intercept = x$x[which.max(x$y)], y_max = max(x$y, na.rm = TRUE))
     p <- ggplot(x, aes(x = .data$x, y = .data$y)) +
       geom_area(fill = flat_colors("grey")) +
       geom_segment(
+        data = segment_data,
         aes(
-          x = .data$x[which.max(.data$y)],
-          xend = .data$x[which.max(.data$y)],
+          x = x_intercept,
+          xend = x_intercept,
           y = 0,
-          yend = max(.data$y)
+          yend = y_max
         ),
         color = flat_colors("red")
       ) +
-      geom_point(aes(x = .data$x[which.max(.data$y)], y = max(.data$y)),
+      geom_point(
+        data = segment_data,
+        aes(x = x_intercept, y = y_max),
         color = flat_colors("red")
       ) +
-      scale_x_continuous(breaks = 1:max(x$x)) +
+      scale_x_continuous(breaks = 1:max(x$x, na.rm = TRUE)) +
       add_plot_attributes(x)
   } else if (type == "line") {
     p <- ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
@@ -172,7 +175,6 @@ plot.see_n_factors <- function(x,
       scale_fill_manual(values = unname(flat_colors(c("grey", "red"))))
   }
 
-  # Add variance explained
   if ("Variance_Cumulative" %in% names(x)) {
     x$Varex_scaled <- x$Variance_Cumulative * max(x$y)
     p <- p +

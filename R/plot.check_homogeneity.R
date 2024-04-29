@@ -66,7 +66,8 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
             stringsAsFactors = FALSE
           ),
           direction = "y",
-          segment.colour = NA
+          segment.colour = NA,
+          max.overlaps = Inf
         )
       } else {
         geom_label(
@@ -96,7 +97,8 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
             stringsAsFactors = FALSE
           ),
           direction = "y",
-          segment.colour = NA
+          segment.colour = NA,
+          max.overlaps = Inf
         )
       } else {
         geom_label(

@@ -1,6 +1,8 @@
-# see 0.8.3.1
+# see 0.8.4
 
 ## Minor Changes
+
+* Fixes warnings generated from the `{ggplot2}` 3.5.0 release.
 
 * Small adjustment to size of point geoms for `check_model()` plots.
 
