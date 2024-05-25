@@ -67,7 +67,6 @@ ggraph
 ggrepel
 ggridges
 ggstatsplot
-glyphs
 grey
 gridExtra
 histodot
@@ -111,7 +110,6 @@ ui
 unmapped
 users’
 vermillion
-viridis
 visualising
 ’
 ’ggstatsplot’
