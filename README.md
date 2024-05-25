@@ -103,11 +103,11 @@ badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-univers
 The *see* package is available on CRAN, while its latest development
 version is available on R-universe (from *rOpenSci*).
 
-| Type        | Source     | Command                                                               |
-|-------------|------------|-----------------------------------------------------------------------|
-| Release     | CRAN       | `install.packages("see")`                                             |
+| Type | Source | Command |
+|----|----|----|
+| Release | CRAN | `install.packages("see")` |
 | Development | r-universe | `install.packages("see", repos = "https://easystats.r-universe.dev")` |
-| Development | GitHub     | `remotes::install_github("easystats/see")`                            |
+| Development | GitHub | `remotes::install_github("easystats/see")` |
 
 Once you have downloaded the package, you can then load it using:
 
