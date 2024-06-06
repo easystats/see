@@ -1,98 +1,288 @@
-<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>https://easystats.github.io/see/dev/CODE_OF_CONDUCT.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/CONTRIBUTING.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/LICENSE-text.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/LICENSE.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/SUPPORT.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/bayestestR.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/correlation.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/datawizard.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/effectsize.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/index.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/modelbased.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/parameters.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/performance.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/seecolorscales.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/articles/seecolorscales_dark.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/authors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/index.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/news/index.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/add_plot_attributes.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/bluebrown_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/coord_radar.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/data_plot.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/flat_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/geom_binomdensity.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/geom_from_list.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/geom_point2.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/geom_poolpoint.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/geom_violindot.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/geom_violinhalf.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/ggplot2-ggproto.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/golden_ratio.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/index.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/material_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/metro_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/okabeito_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_bluebrown.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_colorhex.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_flat.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_material.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_metro.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_okabeito.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_pizza.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_see.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/palette_social.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/pizza_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.dw_data_tabulate.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_bayesfactor_models.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_bayesfactor_parameters.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_check_collinearity.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_check_distribution.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_check_heteroscedasticity.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_check_homogeneity.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_check_model.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_check_normality.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_check_outliers.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_compare_parameters.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_compare_performance.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_effectsize_table.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_equivalence_test.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_estimate_contrasts.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_estimate_density.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_hdi.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_n_factors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_p_direction.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_p_function.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_p_significance.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_brms_meta.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_distribution.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_model.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_pca.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_simulate.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_performance_roc.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_performance_simres.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_point_estimate.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_rope.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plot.see_si.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/plots.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/print.see_performance_pp_check.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_bluebrown.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_colorhex.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_flat.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_material.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_metro.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_okabeito.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_pizza.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_see.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/scale_color_social.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/see-package.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/see_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/social_colors.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/theme_abyss.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/theme_blackboard.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/theme_lucid.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/theme_modern.html</loc></url>
-<url><loc>https://easystats.github.io/see/dev/reference/theme_radar.html</loc></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://easystats.github.io/see/dev/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/SUPPORT.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/bayestestR.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/correlation.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/datawizard.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/effectsize.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/modelbased.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/parameters.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/performance.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/seecolorscales.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/articles/seecolorscales_dark.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/index.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/add_plot_attributes.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/bluebrown_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/coord_radar.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/data_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/flat_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/geom_binomdensity.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/geom_from_list.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/geom_point2.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/geom_poolpoint.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/geom_violindot.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/geom_violinhalf.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/ggplot2-ggproto.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/golden_ratio.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/material_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/metro_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/okabeito_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_bluebrown.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_colorhex.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_flat.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_material.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_metro.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_okabeito.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_pizza.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_see.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/palette_social.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/pizza_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.dw_data_tabulate.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_bayesfactor_models.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_bayesfactor_parameters.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_check_collinearity.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_check_distribution.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_check_heteroscedasticity.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_check_homogeneity.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_check_model.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_check_normality.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_check_outliers.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_compare_parameters.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_compare_performance.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_effectsize_table.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_equivalence_test.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_estimate_contrasts.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_estimate_density.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_hdi.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_n_factors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_p_direction.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_p_function.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_p_significance.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_brms_meta.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_distribution.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_model.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_pca.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_parameters_simulate.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_performance_roc.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_performance_simres.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_point_estimate.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_rope.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plot.see_si.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/plots.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/print.see_performance_pp_check.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_bluebrown.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_colorhex.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_flat.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_material.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_metro.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_okabeito.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_pizza.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_see.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/scale_color_social.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/see-package.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/see_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/social_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/theme_abyss.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/theme_blackboard.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/theme_lucid.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/theme_modern.html</loc>
+  </url>
+  <url>
+    <loc>https://easystats.github.io/see/dev/reference/theme_radar.html</loc>
+  </url>
 </urlset>
-
