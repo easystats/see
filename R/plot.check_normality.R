@@ -235,7 +235,7 @@ plot.see_check_normality <- function(x,
         shape = 16,
         stroke = 0,
         size = size_point,
-        colour = colors[2] # "#2c3e50"
+        colour = colors[2]
       ),
       ggplot2::geom_qq_line(
         ggplot2::aes(sample = .data$y),
@@ -258,7 +258,7 @@ plot.see_check_normality <- function(x,
         shape = 16,
         stroke = 0,
         size = size_point,
-        colour = colors[2], # "#2c3e50",
+        colour = colors[2],
         alpha = dot_alpha_level,
         detrend = detrend
       ),
@@ -299,7 +299,7 @@ plot.see_check_normality <- function(x,
         na.rm = TRUE,
         stroke = 0,
         size = size_point,
-        colour = colors[2] # "#2c3e50"
+        colour = colors[2]
       )
     )
 
@@ -357,7 +357,7 @@ plot.see_check_normality <- function(x,
       qqplotr::stat_pp_point(
         shape = 16, stroke = 0,
         size = size_point,
-        colour = colors[2], # "#2c3e50",
+        colour = colors[2],
         alpha = dot_alpha_level,
         detrend = detrend
       )
@@ -379,7 +379,7 @@ plot.see_check_normality <- function(x,
         colour = colors[2],
         size = size_point,
         alpha = dot_alpha_level
-      ) # "#2c3e50"
+      )
   } else {
     insight::format_error("Package 'qqplotr' OR 'MASS' required for P-P plots. Please install one of them.")
   }
