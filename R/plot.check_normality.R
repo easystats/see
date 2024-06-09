@@ -246,7 +246,7 @@ plot.see_check_normality <- function(x,
       )
     )
     y_lab <- "|Std. Deviance Residuals|"
-  } else if (!requireNamespace("qqplotr", quietly = TRUE)) {
+  } else if (requireNamespace("qqplotr", quietly = TRUE)) {
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
     qq_stuff <- list(
       qqplotr::stat_qq_band(
