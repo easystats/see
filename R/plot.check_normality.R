@@ -246,7 +246,7 @@ plot.see_check_normality <- function(x,
       )
     )
     y_lab <- "|Std. Deviance Residuals|"
-  } else if (requireNamespace("qqplotr", quietly = TRUE)) {
+  } else if (!requireNamespace("qqplotr", quietly = TRUE)) {
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
     qq_stuff <- list(
       qqplotr::stat_qq_band(
@@ -276,6 +276,10 @@ plot.see_check_normality <- function(x,
   } else {
     insight::format_alert("For confidence bands, please install `qqplotr`.")
 
+    # to scale the detrended qq plot
+    N <- length(x$y)
+    SD <- stats::sd(x$y) * sqrt((N - 1) / N)
+
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
 
     qq_stuff <- list(
@@ -294,7 +298,10 @@ plot.see_check_normality <- function(x,
         )
       },
       ggplot2::geom_qq(
-        mapping = if (detrend) ggplot2::aes(y = ggplot2::after_stat(.data$sample) - ggplot2::after_stat(.data$theoretical)),
+        mapping = if (detrend) ggplot2::aes(
+          x = ggplot2::after_stat(.data$theoretical * SD),
+          y = ggplot2::after_stat(.data$sample - .data$theoretical * SD)
+        ),
         shape = 16,
         na.rm = TRUE,
         stroke = 0,
