@@ -279,7 +279,7 @@ plot.see_check_normality <- function(x,
     # to scale the detrended qq plot
     N <- length(x$y)
     SD <- stats::sd(x$y) * sqrt((N - 1) / N)
-    y_range <- c(min(pretty(range(x$y), n = 2)), max(pretty(range(x$y), n = 2)))
+    y_range <- round(range(x$y), 1)
 
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
 
