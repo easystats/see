@@ -276,6 +276,11 @@ plot.see_check_normality <- function(x,
   } else {
     insight::format_alert("For confidence bands, please install `qqplotr`.")
 
+    # to scale the detrended qq plot
+    N <- length(x$y)
+    SD <- stats::sd(x$y) * sqrt((N - 1) / N)
+    y_range <- round(range(x$y), 1)
+
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$y))
 
     qq_stuff <- list(
@@ -294,13 +299,19 @@ plot.see_check_normality <- function(x,
         )
       },
       ggplot2::geom_qq(
-        mapping = if (detrend) ggplot2::aes(y = ggplot2::after_stat(.data$sample) - ggplot2::after_stat(.data$theoretical)),
+        mapping = if (detrend) ggplot2::aes(
+          x = ggplot2::after_stat(.data$theoretical * SD),
+          y = ggplot2::after_stat(.data$sample - .data$theoretical * SD)
+        ),
         shape = 16,
         na.rm = TRUE,
         stroke = 0,
         size = size_point,
         colour = colors[2]
-      )
+      ),
+      if (detrend) {
+        ggplot2::ylim(y_range)
+      }
     )
 
     if (detrend) {

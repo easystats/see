@@ -1,3 +1,10 @@
+# see 0.8.5
+
+## Minor Changes
+
+* Improved scaling for detrended QQ plots when package *qqplotr* is not installed.
+  The normal and the detrended QQ plots are now visually more similar.
+
 # see 0.8.4
 
 ## Minor Changes
