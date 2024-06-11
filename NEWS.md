@@ -1,4 +1,8 @@
-# see 0.8.5
+# see (development version)
+
+## Major Changes
+
+* The minimum needed R version has been bumped to `3.6`.
 
 ## Minor Changes
 

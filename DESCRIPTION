@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.4.4
+Version: 0.8.4.5
 Authors@R: 
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -60,7 +60,7 @@ BugReports: https://github.com/easystats/see/issues
 Depends:
     graphics,
     grDevices,
-    R (>= 3.6),
+    R (>= 4.0),
     stats
 Imports:
     bayestestR (>= 0.13.2),
@@ -71,7 +71,7 @@ Imports:
     insight (>= 0.20.0),
     modelbased (>= 0.8.7),
     parameters (>= 0.21.7),
-    performance (>= 0.11.0)
+    performance (>= 0.12.0)
 Suggests:
     brms,
     curl,
