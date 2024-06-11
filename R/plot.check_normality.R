@@ -299,10 +299,12 @@ plot.see_check_normality <- function(x,
         )
       },
       ggplot2::geom_qq(
-        mapping = if (detrend) ggplot2::aes(
-          x = ggplot2::after_stat(.data$theoretical * SD),
-          y = ggplot2::after_stat(.data$sample - .data$theoretical * SD)
-        ),
+        mapping = if (detrend) {
+          ggplot2::aes(
+            x = ggplot2::after_stat(.data$theoretical * SD),
+            y = ggplot2::after_stat(.data$sample - .data$theoretical * SD)
+          )
+        },
         shape = 16,
         na.rm = TRUE,
         stroke = 0,
