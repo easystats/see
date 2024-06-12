@@ -86,6 +86,7 @@ Suggests:
     glmmTMB,
     grid,
     httr,
+    httr2,
     lavaan,
     lme4,
     logspline,
