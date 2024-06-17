@@ -3,12 +3,19 @@
 function."><meta property="og:description" content="The plot() method for the parameters::describe_distribution()
 function."><meta property="og:image" content="https://easystats.github.io/see/reference/figures/card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@easystats4u"><meta name="twitter:site" content="@easystats4u"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+
+
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">see</a>
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.5</small>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.6</small>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
 <li class="nav-item dropdown">
@@ -49,6 +56,8 @@ function."><meta property="og:image" content="https://easystats.github.io/see/re
     <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
   </ul></li>
       </ul></div>
+
+
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -57,10 +66,12 @@ function."><meta property="og:image" content="https://easystats.github.io/see/re
       <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/main/R/plot.describe_distribution.R" class="external-link"><code>R/plot.describe_distribution.R</code></a></small>
       <div class="d-none name"><code>plot.see_parameters_distribution.Rd</code></div>
     </div>
+
     <div class="ref-description section level2">
     <p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method for the <code><a href="https://easystats.github.io/datawizard/reference/describe_distribution.html" class="external-link">parameters::describe_distribution()</a></code>
 function.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_parameters_distribution'</span></span>
@@ -76,36 +87,57 @@ function.</p>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
+
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+
+
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>An object.</p></dd>
+
+
 <dt id="arg-dispersion">dispersion<a class="anchor" aria-label="anchor" href="#arg-dispersion"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, a range of dispersion for
 each variable to the plot will be added.</p></dd>
+
+
 <dt id="arg-dispersion-alpha">dispersion_alpha<a class="anchor" aria-label="anchor" href="#arg-dispersion-alpha"></a></dt>
 <dd><p>Numeric value specifying the transparency level of dispersion ribbon.</p></dd>
+
+
 <dt id="arg-dispersion-color">dispersion_color<a class="anchor" aria-label="anchor" href="#arg-dispersion-color"></a></dt>
 <dd><p>Character specifying the color of dispersion ribbon.</p></dd>
+
+
 <dt id="arg-dispersion-style">dispersion_style<a class="anchor" aria-label="anchor" href="#arg-dispersion-style"></a></dt>
 <dd><p>Character describing the style of dispersion area.
 <code>"ribbon"</code> for a ribbon, <code>"curve"</code> for a normal-curve.</p></dd>
+
+
 <dt id="arg-size-bar">size_bar<a class="anchor" aria-label="anchor" href="#arg-size-bar"></a></dt>
 <dd><p>Size of bar geoms.</p></dd>
+
+
 <dt id="arg-highlight">highlight<a class="anchor" aria-label="anchor" href="#arg-highlight"></a></dt>
 <dd><p>A vector with names of categories in <code>x</code> that should be
 highlighted.</p></dd>
+
+
 <dt id="arg-highlight-color">highlight_color<a class="anchor" aria-label="anchor" href="#arg-highlight-color"></a></dt>
 <dd><p>A vector of color values for highlighted categories.
 The remaining (non-highlighted) categories will be filled with a lighter
 grey.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A ggplot2-object.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/parameters/" class="external-link">parameters</a></span><span class="op">)</span></span></span>
@@ -122,12 +154,21 @@ grey.</p></dd>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
+
+
     <footer><div class="pkgdown-footer-left">
   <p>Developed by <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>, Philip Waggoner.</p>
 </div>
+
 <div class="pkgdown-footer-right">
   <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
 </div>
+
     </footer></div>
+
+
+
+
+
   </body></html>
 

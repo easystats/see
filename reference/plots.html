@@ -3,12 +3,19 @@
 the same page."><meta property="og:description" content="A wrapper around patchwork to plot multiple figures side by side on
 the same page."><meta property="og:image" content="https://easystats.github.io/see/reference/figures/card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@easystats4u"><meta name="twitter:site" content="@easystats4u"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+
+
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">see</a>
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.5</small>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.6</small>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
 <li class="nav-item dropdown">
@@ -49,6 +56,8 @@ the same page."><meta property="og:image" content="https://easystats.github.io/s
     <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
   </ul></li>
       </ul></div>
+
+
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -57,10 +66,12 @@ the same page."><meta property="og:image" content="https://easystats.github.io/s
       <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/main/R/plots.R" class="external-link"><code>R/plots.R</code></a></small>
       <div class="d-none name"><code>plots.Rd</code></div>
     </div>
+
     <div class="ref-description section level2">
     <p>A wrapper around <em>patchwork</em> to plot multiple figures side by side on
 the same page.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plots</span><span class="op">(</span></span>
@@ -78,20 +89,31 @@ the same page.</p>
 <span>  theme <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
+
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+
+
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Multiple <code>ggplot</code>s or a list containing <code>ggplot</code> objects</p></dd>
+
+
 <dt id="arg-n-rows">n_rows<a class="anchor" aria-label="anchor" href="#arg-n-rows"></a></dt>
 <dd><p>Number of rows to align plots.</p></dd>
+
+
 <dt id="arg-n-columns">n_columns<a class="anchor" aria-label="anchor" href="#arg-n-columns"></a></dt>
 <dd><p>Number of columns to align plots.</p></dd>
+
+
 <dt id="arg-guides">guides<a class="anchor" aria-label="anchor" href="#arg-guides"></a></dt>
 <dd><p>A string specifying how guides should be treated in the
 layout. <code>'collect'</code> will collect shared guides across plots, removing
 duplicates. <code>'keep'</code> will keep guides alongside their plot.
 <code>'auto'</code> will inherit from a higher patchwork level (if any). See
 <code><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">patchwork::plot_layout()</a></code> for details.</p></dd>
+
+
 <dt id="arg-tags">tags<a class="anchor" aria-label="anchor" href="#arg-tags"></a></dt>
 <dd><p>Add tags to your subfigures. Can be <code>NULL</code> to omit (default)
 or a character vector containing tags for each plot. Automatic tags can
@@ -101,25 +123,35 @@ for uppercase Roman numerals, and <code>'i'</code> for lowercase Roman numerals.
 For backwards compatibility, can also be <code>FALSE</code> (equivalent to
 <code>NULL</code>), <code>NA</code> (equivalent to <code>NULL</code>), or <code>TRUE</code>
 (equivalent to <code>'A'</code>).</p></dd>
+
+
 <dt id="arg-tag-prefix-tag-suffix">tag_prefix, tag_suffix<a class="anchor" aria-label="anchor" href="#arg-tag-prefix-tag-suffix"></a></dt>
 <dd><p>Text strings that should appear before or after
 the tag.</p></dd>
+
+
 <dt id="arg-tag-sep">tag_sep<a class="anchor" aria-label="anchor" href="#arg-tag-sep"></a></dt>
 <dd><p>Text string giving the separator to use between different tag
 levels.</p></dd>
+
+
 <dt id="arg-title-subtitle-caption">title, subtitle, caption<a class="anchor" aria-label="anchor" href="#arg-title-subtitle-caption"></a></dt>
 <dd><p>Text strings to use for the various plot
 annotations to add to the composed patchwork.</p></dd>
+
+
 <dt id="arg-theme">theme<a class="anchor" aria-label="anchor" href="#arg-theme"></a></dt>
 <dd><p>A ggplot theme specification to use for the plot. Only elements
 related to titles, caption, and tags, as well as plot margin and
 background, are used.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>See <a href="https://patchwork.data-imaginist.com/articles/patchwork.html" class="external-link">the <em>patchwork</em> documentation</a>
 for more advanced control of plot layouts.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
@@ -147,12 +179,21 @@ for more advanced control of plot layouts.</p>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
+
+
     <footer><div class="pkgdown-footer-left">
   <p>Developed by <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>, Philip Waggoner.</p>
 </div>
+
 <div class="pkgdown-footer-right">
   <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
 </div>
+
     </footer></div>
+
+
+
+
+
   </body></html>
 

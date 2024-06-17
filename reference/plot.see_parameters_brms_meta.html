@@ -3,12 +3,19 @@
 function when used with brms-meta-analysis models."><meta property="og:description" content="The plot() method for the parameters::model_parameters()
 function when used with brms-meta-analysis models."><meta property="og:image" content="https://easystats.github.io/see/reference/figures/card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@easystats4u"><meta name="twitter:site" content="@easystats4u"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+
+
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">see</a>
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.5</small>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.6</small>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
 <li class="nav-item dropdown">
@@ -49,6 +56,8 @@ function when used with brms-meta-analysis models."><meta property="og:image" co
     <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
   </ul></li>
       </ul></div>
+
+
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -57,10 +66,12 @@ function when used with brms-meta-analysis models."><meta property="og:image" co
       <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/main/R/plot.parameters_brms_meta.R" class="external-link"><code>R/plot.parameters_brms_meta.R</code></a></small>
       <div class="d-none name"><code>plot.see_parameters_brms_meta.Rd</code></div>
     </div>
+
     <div class="ref-description section level2">
     <p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method for the <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code>
 function when used with brms-meta-analysis models.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_parameters_brms_meta'</span></span>
@@ -77,32 +88,54 @@ function when used with brms-meta-analysis models.</p>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
+
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+
+
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>An object.</p></dd>
+
+
 <dt id="arg-size-point">size_point<a class="anchor" aria-label="anchor" href="#arg-size-point"></a></dt>
 <dd><p>Numeric specifying size of point-geoms.</p></dd>
+
+
 <dt id="arg-size-line">size_line<a class="anchor" aria-label="anchor" href="#arg-size-line"></a></dt>
 <dd><p>Numeric value specifying size of line geoms.</p></dd>
+
+
 <dt id="arg-size-text">size_text<a class="anchor" aria-label="anchor" href="#arg-size-text"></a></dt>
 <dd><p>Numeric value specifying size of text labels.</p></dd>
+
+
 <dt id="arg-posteriors-alpha">posteriors_alpha<a class="anchor" aria-label="anchor" href="#arg-posteriors-alpha"></a></dt>
 <dd><p>Numeric value specifying alpha for the posterior
 distributions.</p></dd>
+
+
 <dt id="arg-rope-alpha">rope_alpha<a class="anchor" aria-label="anchor" href="#arg-rope-alpha"></a></dt>
 <dd><p>Numeric specifying transparency level of ROPE ribbon.</p></dd>
+
+
 <dt id="arg-rope-color">rope_color<a class="anchor" aria-label="anchor" href="#arg-rope-color"></a></dt>
 <dd><p>Character specifying color of ROPE ribbon.</p></dd>
+
+
 <dt id="arg-normalize-height">normalize_height<a class="anchor" aria-label="anchor" href="#arg-normalize-height"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, height of mcmc-areas is
 "normalized", to avoid overlap. In certain cases when the range of a
 posterior distribution is narrow for some parameters, this may result in
 very flat mcmc-areas. In such cases, set <code>normalize_height = FALSE</code>.</p></dd>
+
+
 <dt id="arg-show-labels">show_labels<a class="anchor" aria-label="anchor" href="#arg-show-labels"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -110,6 +143,7 @@ very flat mcmc-areas. In such cases, set <code>normalize_height = FALSE</code>.<
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+
 <div class="section">
 <h3 id="colors-of-density-areas-and-errorbars">Colors of density areas and errorbars<a class="anchor" aria-label="anchor" href="#colors-of-density-areas-and-errorbars"></a></h3>
 <p>To change the colors of the density areas, use <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual()</a></code>
@@ -121,7 +155,9 @@ To change the color of the error bars, use <code>scale_color_manual(values = c("
 <p>Use <code>show_labels = FALSE</code> to hide the textual
 output of estimates and credible intervals.</p>
 </div>
+
     </div>
+
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
@@ -162,12 +198,21 @@ output of estimates and credible intervals.</p>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
+
+
     <footer><div class="pkgdown-footer-left">
   <p>Developed by <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>, Philip Waggoner.</p>
 </div>
+
 <div class="pkgdown-footer-right">
   <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
 </div>
+
     </footer></div>
+
+
+
+
+
   </body></html>
 

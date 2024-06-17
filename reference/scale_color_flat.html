@@ -5,12 +5,19 @@ scale_color_flat_c for a continuous scale."><meta property="og:description" cont
 Use scale_color_flat_d for discrete categories and
 scale_color_flat_c for a continuous scale."><meta property="og:image" content="https://easystats.github.io/see/reference/figures/card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@easystats4u"><meta name="twitter:site" content="@easystats4u"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+
+
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">see</a>
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.5</small>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4.6</small>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
 <li class="nav-item dropdown">
@@ -51,6 +58,8 @@ scale_color_flat_c for a continuous scale."><meta property="og:image" content="h
     <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
   </ul></li>
       </ul></div>
+
+
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -59,11 +68,13 @@ scale_color_flat_c for a continuous scale."><meta property="og:image" content="h
       <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/main/R/scale_color_flat.R" class="external-link"><code>R/scale_color_flat.R</code></a></small>
       <div class="d-none name"><code>scale_color_flat.Rd</code></div>
     </div>
+
     <div class="ref-description section level2">
     <p>The palette based on <a href="https://materialui.co/flatuicolors" class="external-link">Flat UI</a>.
 Use <code>scale_color_flat_d</code> for <em>discrete</em> categories and
 <code>scale_color_flat_c</code> for a <em>continuous</em> scale.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">scale_color_flat</span><span class="op">(</span></span>
@@ -138,24 +149,37 @@ Use <code>scale_color_flat_d</code> for <em>discrete</em> categories and
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
+
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+
+
 <dl><dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
 <dd><p>Character name of palette. Depending on the color scale, can
 be <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>,
 <code>"contrast"</code>, <code>"light"</code> (for dark themes), <code>"black_first"</code>, <code>full_original</code>,
 or <code>black_first_original</code>.</p></dd>
+
+
 <dt id="arg-discrete">discrete<a class="anchor" aria-label="anchor" href="#arg-discrete"></a></dt>
 <dd><p>Boolean indicating whether color aesthetic is discrete or not.</p></dd>
+
+
 <dt id="arg-reverse">reverse<a class="anchor" aria-label="anchor" href="#arg-reverse"></a></dt>
 <dd><p>Boolean indicating whether the palette should be reversed.</p></dd>
+
+
 <dt id="arg-aesthetics">aesthetics<a class="anchor" aria-label="anchor" href="#arg-aesthetics"></a></dt>
 <dd><p>A vector of names of the aesthetics that this scale
 should be applied to (e.g., <code>c('color', 'fill')</code>).</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html" class="external-link">discrete_scale()</a></code> when <code>discrete</code>
 is <code>TRUE</code> or to <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradientn()</a></code> when <code>discrete</code> is <code>FALSE</code>.</p></dd>
+
 </dl></div>
+
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
@@ -182,12 +206,21 @@ is <code>TRUE</code> or to <code><a href="https://ggplot2.tidyverse.org/referenc
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
+
+
     <footer><div class="pkgdown-footer-left">
   <p>Developed by <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>, Philip Waggoner.</p>
 </div>
+
 <div class="pkgdown-footer-right">
   <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
 </div>
+
     </footer></div>
+
+
+
+
+
   </body></html>
 
