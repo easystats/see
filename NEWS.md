@@ -2,12 +2,14 @@
 
 ## Major Changes
 
-* The minimum needed R version has been bumped to `3.6`.
+* The minimum needed R version has been bumped to `4.0`.
 
 ## Minor Changes
 
-* Improved scaling for detrended QQ plots when package *qqplotr* is not installed.
+* Improved scaling for detrended QQ plots when package `{qqplotr}` is not installed.
   The normal and the detrended QQ plots are now visually more similar.
+
+* Gets rid of warnings due to API changes in the `{datawizard}` package.
 
 # see 0.8.4
 

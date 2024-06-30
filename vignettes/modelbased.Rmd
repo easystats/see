@@ -91,7 +91,7 @@ plot(result)
 ```{r np-interval}
 model <- lm(mpg ~ hp * wt, data = mtcars)
 
-slopes <- estimate_slopes(model, trend = "hp", at = "wt")
+slopes <- estimate_slopes(model, trend = "hp", by = "wt")
 
 plot(slopes)
 ```
@@ -117,7 +117,7 @@ plot(result)
 ```{r slopes}
 model <- lm(Sepal.Width ~ Species * Petal.Length, data = iris)
 
-result <- estimate_slopes(model, trend = "Petal.Length", at = "Species")
+result <- estimate_slopes(model, trend = "Petal.Length", by = "Species")
 plot(result)
 ```
 
@@ -154,7 +154,7 @@ model <- mgcv::gam(Sepal.Width ~ s(Petal.Length), data = iris)
 # 1. Compute derivatives
 deriv <- estimate_slopes(model,
   trend = "Petal.Length",
-  at = "Petal.Length",
+  by = "Petal.Length",
   length = 100
 )
 
