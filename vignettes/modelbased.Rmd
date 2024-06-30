@@ -125,13 +125,13 @@ plot(result)
 ```{r slopes-poly, echo=TRUE, eval=FALSE}
 model <- lm(Petal.Length ~ Species * poly(Sepal.Width, 3), data = iris)
 
-result <- estimate_slopes(model, at = c("Sepal.Width", "Species"))
+result <- estimate_slopes(model, by = c("Sepal.Width", "Species"))
 plot(result)
 ```
 ```{r slopes-poly2, eval=can_evaluate, echo=FALSE}
 model <- lm(Petal.Length ~ Species * poly(Sepal.Width, 3), data = iris)
 
-result <- estimate_slopes(model, at = c("Sepal.Width", "Species"))
+result <- estimate_slopes(model, by = c("Sepal.Width", "Species"))
 suppressWarnings(print(plot(result)))
 ```
 
