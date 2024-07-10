@@ -39,20 +39,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Articles"><span class="fa fa-book-reader"></span> Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/bayestestR.html">Plotting Functions for the 'bayestestR' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/correlation.html">Plotting Functions for the 'correlation' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/datawizard.html">Plotting Functions for the 'datawizard' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/effectsize.html">Plotting Functions for the 'effectsize' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/modelbased.html">Plotting Functions for the 'modelbased' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/parameters.html">Plotting Functions for the 'parameters' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/performance.html">Plotting Functions for the 'performance' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/seecolorscales_dark.html">Color Scales for Dark Themes</a></li>
-    <li><a class="dropdown-item" href="../articles/seecolorscales.html">Color Scales</a></li>
-  </ul>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html" aria-label="Articles"><span class="fa fa-book-reader"></span> Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html" aria-label="News"><span class="fa fa-newspaper"></span> News</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -211,9 +198,8 @@ shorter summary in matrix-layout can be obtained by using
 <span><span class="co">#&gt; Petal.Length |  Petal.Width |  0.96 | [ 0.95,  0.97] |  43.39 | &lt; .001***</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span>
-<span><span class="co">#&gt; Observations: 150</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; Observations: 150</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -226,17 +212,17 @@ shorter summary in matrix-layout can be obtained by using
 <span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span></code></pre></div>
 <p>The result from <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> can be used to create a
 plot.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 <p>To change the style of geoms, use the
 <code>show_data</code>-argument.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span>, show_data <span class="op">=</span> <span class="st">"points"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <p>And a “redundant” summary can be plotted as well:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span>, redundant <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">s</span></span>
@@ -249,14 +235,13 @@ plot.</p>
 <span><span class="co">#&gt; Petal.Length |      0.87*** |    -0.43*** |              |     0.96***</span></span>
 <span><span class="co">#&gt; Petal.Width  |      0.82*** |    -0.37*** |      0.96*** |            </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <p>The <code>corrlation</code> function also provides a convenient way
 to change names for selected variables:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">mtcars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wt"</span>, <span class="st">"mpg"</span>, <span class="st">"drat"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>  rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weight"</span>, <span class="st">"miles per gallon"</span>, <span class="st">"rear axle ratio"</span><span class="op">)</span></span>
@@ -268,7 +253,7 @@ to change names for selected variables:</p>
 </h2>
 <p>To create a Gaussian Graphical Models plot, the library
 <em>ggraph</em> needs to be loaded first.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com" class="external-link">ggraph</a></span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span><span class="va">mtcars</span>, partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -334,9 +319,8 @@ to change names for selected variables:</p>
 <span><span class="co">#&gt; gear       |       carb |  0.43 | [ 0.09,  0.68] |  2.59 | 0.727    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span>
-<span><span class="co">#&gt; Observations: 32</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; Observations: 32</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="correlation_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
@@ -351,7 +335,7 @@ to change names for selected variables:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.9000.</p>
 </div>
 
     </footer>

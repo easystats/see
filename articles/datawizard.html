@@ -39,20 +39,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Articles"><span class="fa fa-book-reader"></span> Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/bayestestR.html">Plotting Functions for the 'bayestestR' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/correlation.html">Plotting Functions for the 'correlation' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/datawizard.html">Plotting Functions for the 'datawizard' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/effectsize.html">Plotting Functions for the 'effectsize' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/modelbased.html">Plotting Functions for the 'modelbased' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/parameters.html">Plotting Functions for the 'parameters' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/performance.html">Plotting Functions for the 'performance' Package</a></li>
-    <li><a class="dropdown-item" href="../articles/seecolorscales_dark.html">Color Scales for Dark Themes</a></li>
-    <li><a class="dropdown-item" href="../articles/seecolorscales.html">Color Scales</a></li>
-  </ul>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html" aria-label="Articles"><span class="fa fa-book-reader"></span> Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html" aria-label="News"><span class="fa fa-newspaper"></span> News</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -163,58 +150,56 @@ function documentation</a>)</em></p>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; Mean |   SD |  IQR |        Range | Skewness | Kurtosis |   n | n_Missing</span></span>
 <span><span class="co">#&gt; -------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; 5.84 | 0.83 | 1.30 | [4.30, 7.90] |     0.31 |    -0.55 | 150 |         0</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; 5.84 | 0.83 | 1.30 | [4.30, 7.90] |     0.31 |    -0.55 | 150 |         0</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="datawizard_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="add-range-of-dispersion-sd-or-mad">Add Range of Dispersion (SD or MAD)<a class="anchor" aria-label="anchor" href="#add-range-of-dispersion-sd-or-mad"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, dispersion <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="datawizard_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="thin-bars-for-integer-values">Thin Bars for Integer Values<a class="anchor" aria-label="anchor" href="#thin-bars-for-integer-values"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">333</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/datawizard/reference/describe_distribution.html" class="external-link">describe_distribution</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt;  Mean |    SD |   IQR |          Range | Skewness | Kurtosis |    n | n_Missing</span></span>
 <span><span class="co">#&gt; -------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; 50.18 | 28.66 | 48.75 | [1.00, 100.00] |     0.02 |    -1.16 | 1000 |         0</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; 50.18 | 28.66 | 48.75 | [1.00, 100.00] |     0.02 |    -1.16 | 1000 |         0</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="datawizard_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="use-a-normal-curve-instead-of-ribbon">Use a Normal Curve instead of Ribbon<a class="anchor" aria-label="anchor" href="#use-a-normal-curve-instead-of-ribbon"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, dispersion <span class="op">=</span> <span class="cn">TRUE</span>, dispersion_style <span class="op">=</span> <span class="st">"curve"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="datawizard_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="highlighting-categories">Highlighting Categories<a class="anchor" aria-label="anchor" href="#highlighting-categories"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/datawizard/reference/describe_distribution.html" class="external-link">describe_distribution</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="fl">1000</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># highlight one category</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="datawizard_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># highlight multiple categories</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"H"</span><span class="op">)</span>, size_bar <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="datawizard_files/figure-html/unnamed-chunk-7-2.png" width="672"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># own color scales - pass a named vector to 'scale_fill_manual()'</span></span>
 <span><span class="co"># the name of the non-highlighted color is "no_highlight".</span></span>
@@ -234,7 +219,7 @@ function documentation</a>)</em></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.9000.</p>
 </div>
 
     </footer>
