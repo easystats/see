@@ -72,8 +72,6 @@ Imports:
     modelbased (>= 0.8.8),
     parameters (>= 0.22.0),
     performance (>= 0.12.0)
-Remotes:
-    easystats/effectsize@CRAN-0.8.9
 Suggests:
     brms,
     curl,
