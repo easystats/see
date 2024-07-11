@@ -48,7 +48,7 @@ plot.see_check_heteroscedasticity <- function(x,
     },
     error = function(e) {
       # debugging
-      if (getOption("easystats_errors", FALSE)) {
+      if (isTRUE(getOption("easystats_errors", FALSE))) {
         insight::format_error(e$message)
       }
       NULL

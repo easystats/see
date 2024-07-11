@@ -100,7 +100,7 @@ plots <- function(...,
 .safe_print_plots <- function(pw, ...) {
   pw_drawn <- tryCatch(print(pw), error = function(e) e)
   # for debugging, return original error
-  if (getOption("easystats_errors", FALSE)) {
+  if (isTRUE(getOption("easystats_errors", FALSE))) {
     insight::format_error(pw_drawn$message)
   }
   if (inherits(pw_drawn, "simpleError")) {
