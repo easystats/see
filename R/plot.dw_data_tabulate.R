@@ -21,10 +21,10 @@
 #' Interval estimation for a binomial proportion.
 #' _Statistical Science_, _16_(2), 101-133. \doi{10.1214/ss/1009213286}
 #'
-#' @rdname plot.dw_data_tabulate
+#' @rdname plot.datawizard_table
 #' @export
 
-plot.dw_data_tabulates <- function(x, label_values = TRUE,
+plot.datawizard_tables <- function(x, label_values = TRUE,
                                    show_na = c("if_any", "always", "never"),
                                    na_label = "(Missing)",
                                    error_bar = TRUE,
@@ -34,7 +34,7 @@ plot.dw_data_tabulates <- function(x, label_values = TRUE,
                                    ...) {
   show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
   if (length(x) == 1L) {
-    plot.dw_data_tabulate(
+    plot.datawizard_table(
       x[[1]],
       label_values = label_values,
       show_na = show_na,
@@ -47,7 +47,7 @@ plot.dw_data_tabulates <- function(x, label_values = TRUE,
   } else {
     lapply(
       x,
-      plot.dw_data_tabulate,
+      plot.datawizard_table,
       label_values = label_values,
       show_na = show_na,
       na_label = na_label,
@@ -59,11 +59,11 @@ plot.dw_data_tabulates <- function(x, label_values = TRUE,
   }
 }
 
-#' @rdname plot.dw_data_tabulate
+#' @rdname plot.datawizard_table
 #'
 #' @export
 
-plot.dw_data_tabulate <- function(x, label_values = TRUE,
+plot.datawizard_table <- function(x, label_values = TRUE,
                                   show_na = c("if_any", "always", "never"),
                                   na_label = "(Missing)",
                                   error_bar = TRUE,

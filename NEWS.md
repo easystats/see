@@ -11,6 +11,10 @@
 
 * Gets rid of warnings due to API changes in the `{datawizard}` package.
 
+## Bug fixes
+
+* Fixed CRAN test failures.
+
 # see 0.8.4
 
 ## Minor Changes
@@ -626,4 +630,3 @@
 ## Bug fixes
 
 * Fixed issues with color codes in the flat-ui palette.
-
