@@ -1,8 +1,8 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.4.7
-Authors@R: 
+Version: 0.8.4.8
+Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
              role = c("aut", "ctb"),
@@ -52,7 +52,7 @@ Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
 Description: Provides plotting utilities supporting packages in the 'easystats'
     ecosystem (<https://github.com/easystats/easystats>) and some extra themes,
     geoms, and scales for 'ggplot2'. Color scales are based on
-    <https://materialui.co/>. 
+    <https://materialui.co/>.
     References: Lüdecke et al. (2021) <doi:10.21105/joss.03393>.
 License: MIT + file LICENSE
 URL: https://easystats.github.io/see/
