@@ -13,7 +13,7 @@
 
 ## Bug fixes
 
-* Fixed CRAN test failures on oldrel-Windows.
+* Fixed CRAN test failures.
 
 # see 0.8.4
 
