@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.4.8
+Version: 0.8.5
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -65,13 +65,13 @@ Depends:
 Imports:
     bayestestR (>= 0.13.2),
     correlation (>= 0.8.5),
-    datawizard (>= 0.11.0),
+    datawizard (>= 0.12.1),
     effectsize (>= 0.8.9),
     ggplot2,
-    insight (>= 0.20.1),
+    insight (>= 0.20.2),
     modelbased (>= 0.8.8),
     parameters (>= 0.22.0),
-    performance (>= 0.12.0)
+    performance (>= 0.12.1)
 Suggests:
     brms,
     curl,

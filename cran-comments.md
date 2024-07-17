@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 0 note
 
-* Fixes breakages caused by changes in the `parameters` package.
+* Fixes test failures on CRAN on Windows old release (R 4.3.3).
 
 ## revdepcheck results
 

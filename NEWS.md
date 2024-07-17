@@ -1,4 +1,4 @@
-# see (development version)
+# see 0.8.5
 
 ## Major Changes
 
