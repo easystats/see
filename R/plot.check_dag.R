@@ -28,6 +28,18 @@
 #'
 #' # plot only model with required adjustments
 #' plot(dag, which = "required")
+#'
+#' # collider-bias?
+#' dag <- check_dag(
+#'   y ~ x + c + d,
+#'   x ~ c + d,
+#'   b ~ x,
+#'   b ~ y,
+#'   outcome = "y",
+#'   exposure = "x",
+#'   adjusted = "c"
+#' )
+#' plot(dag)
 #' @export
 plot.see_check_dag <- function(x,
                                size_point = 15,
