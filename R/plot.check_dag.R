@@ -104,7 +104,7 @@ plot.see_check_dag <- function(x,
     ),
     ggdag::scale_adjusted(),
     ggdag::geom_dag_label(
-      ggplot2::aes(label = .data$name, color = .data$type),
+      ggplot2::aes(label = .data$name),
       size = size_text
     ),
     ggdag::theme_dag(
