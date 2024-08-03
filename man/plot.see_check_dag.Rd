@@ -6,7 +6,8 @@
 \usage{
 \method{plot}{see_check_dag}(
   x,
-  size_point = 15,
+  size_point = 20,
+  size_text = 4.5,
   colors = NULL,
   which = "all",
   check_colliders = TRUE,
@@ -16,7 +17,7 @@
 \arguments{
 \item{x}{A \code{check_dag} object.}
 
-\item{size_point}{Numeric value specifying size of point geoms.}
+\item{size_point}{Numeric value specifying size of text elements.}
 
 \item{colors}{Character vector of length five, indicating the colors (in
 hex-format) for different types of variables.}

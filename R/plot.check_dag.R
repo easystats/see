@@ -4,6 +4,7 @@
 #'
 #' @param x A `check_dag` object.
 #' @param size_point Numeric value specifying size of point geoms.
+#' @param size_point Numeric value specifying size of text elements.
 #' @param colors Character vector of length five, indicating the colors (in
 #' hex-format) for different types of variables.
 #' @param which Character string indicating which plot to show. Can be either
@@ -42,7 +43,8 @@
 #' plot(dag)
 #' @export
 plot.see_check_dag <- function(x,
-                               size_point = 15,
+                               size_point = 20,
+                               size_text = 4.5,
                                colors = NULL,
                                which = "all",
                                check_colliders = TRUE,
@@ -87,45 +89,50 @@ plot.see_check_dag <- function(x,
   }
   names(point_colors) <- c("outcome", "exposure", "adjusted", "unadjusted", "collider")
 
-  plot1 <- ggplot2::ggplot(p1$data, ggplot2::aes(x = .data$x, y = .data$y)) +
-    geom_point_borderless(ggplot2::aes(fill = .data$type), size = size_point) +
+  # these geoms are shared by both plots
+  common_layers <- list(
+    geom_point_borderless(
+      ggplot2::aes(fill = .data$type),
+      size = size_point
+    ),
     ggdag::geom_dag_edges(
       ggplot2::aes(
         xend = .data$xend,
         yend = .data$yend,
         edge_alpha = .data$adjusted
       )
-    ) +
-    ggdag::scale_adjusted() +
-    ggdag::geom_dag_label(ggplot2::aes(label = .data$name)) +
-    ggdag::theme_dag() +
-    ggplot2::scale_fill_manual(values = point_colors) +
-    ggplot2::ggtitle("Current model") +
-    ggplot2::guides(edge_alpha = "none") +
+    ),
+    ggdag::scale_adjusted(),
+    ggdag::geom_dag_label(
+      ggplot2::aes(label = .data$name, color = .data$type),
+      size = size_text
+    ),
+    ggdag::theme_dag(
+      legend.text = ggplot2::element_text(size = 2.75 * size_text),
+      legend.position = "bottom",
+      legend.justification = c(0, 1)
+    ),
+    ggplot2::scale_fill_manual(values = point_colors),
+    ggplot2::guides(
+      edge_alpha = "none",
+      fill = ggplot2::guide_legend(override.aes = list(size = size_point / 4))
+    ),
     ggdag::expand_plot(
-      expand_x = ggplot2::expansion(c(0.05, 0.05)),
-      expand_y = ggplot2::expansion(c(0.05, 0.05))
-    )
+      expand_x = ggplot2::expansion(c(0.2, 0.2)),
+      expand_y = ggplot2::expansion(c(0.2, 0.2))
+    ),
+    ggplot2::labs(fill = NULL)
+  )
 
+  # plot1 - current model
+  plot1 <- ggplot2::ggplot(p1$data, ggplot2::aes(x = .data$x, y = .data$y)) +
+    common_layers +
+    ggplot2::ggtitle("Current model")
+
+  # plot2 - required model
   plot2 <- ggplot2::ggplot(p2$data, ggplot2::aes(x = .data$x, y = .data$y)) +
-    geom_point_borderless(ggplot2::aes(fill = .data$type), size = size_point) +
-    ggdag::geom_dag_edges(
-      ggplot2::aes(
-        xend = .data$xend,
-        yend = .data$yend,
-        edge_alpha = .data$adjusted
-      )
-    ) +
-    ggdag::scale_adjusted() +
-    ggdag::geom_dag_label(ggplot2::aes(label = .data$name)) +
-    ggdag::theme_dag() +
-    ggplot2::scale_fill_manual(values = point_colors) +
-    ggplot2::ggtitle("Required model") +
-    ggplot2::guides(edge_alpha = "none") +
-    ggdag::expand_plot(
-      expand_x = ggplot2::expansion(c(0.05, 0.05)),
-      expand_y = ggplot2::expansion(c(0.05, 0.05))
-    )
+    common_layers +
+    ggplot2::ggtitle("Required model")
 
   if (which == "all") {
     # fix legends
