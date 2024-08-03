@@ -4,7 +4,14 @@
 \alias{plot.see_check_dag}
 \title{Plot method for check DAGs}
 \usage{
-\method{plot}{see_check_dag}(x, size_point = 15, colors = NULL, which = "all", ...)
+\method{plot}{see_check_dag}(
+  x,
+  size_point = 15,
+  colors = NULL,
+  which = "all",
+  check_colliders = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{check_dag} object.}
@@ -16,6 +23,9 @@ hex-format) for different types of variables.}
 
 \item{which}{Character string indicating which plot to show. Can be either
 \code{"all"}, \code{"current"} or \code{"required"}.}
+
+\item{check_colliders}{Logical indicating whether to highlight colliders.
+Set to \code{FALSE} if the algorithm to detect colliders is very slow.}
 
 \item{...}{Not used.}
 }
