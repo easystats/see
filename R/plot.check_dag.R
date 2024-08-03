@@ -102,7 +102,10 @@ plot.see_check_dag <- function(x,
     ggplot2::scale_fill_manual(values = point_colors) +
     ggplot2::ggtitle("Current model") +
     ggplot2::guides(edge_alpha = "none") +
-    ggdag::expand_plot()
+    ggdag::expand_plot(
+      expand_x = ggplot2::expansion(c(0.05, 0.05)),
+      expand_y = ggplot2::expansion(c(0.05, 0.05))
+    )
 
   plot2 <- ggplot2::ggplot(p2$data, ggplot2::aes(x = .data$x, y = .data$y)) +
     geom_point_borderless(ggplot2::aes(fill = .data$type), size = size_point) +
@@ -119,7 +122,10 @@ plot.see_check_dag <- function(x,
     ggplot2::scale_fill_manual(values = point_colors) +
     ggplot2::ggtitle("Required model") +
     ggplot2::guides(edge_alpha = "none") +
-    ggdag::expand_plot()
+    ggdag::expand_plot(
+      expand_x = ggplot2::expansion(c(0.05, 0.05)),
+      expand_y = ggplot2::expansion(c(0.05, 0.05))
+    )
 
   if (which == "all") {
     # fix legends
