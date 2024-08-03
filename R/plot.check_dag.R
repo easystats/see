@@ -41,6 +41,13 @@
 #'   adjusted = "c"
 #' )
 #' plot(dag)
+#'
+#' # longer labels, automatic detection of outcome and exposure
+#' dag <- check_dag(
+#'   QoL ~ age + education + gender,
+#'   age ~ education
+#' )
+#' plot(dag)
 #' @export
 plot.see_check_dag <- function(x,
                                size_point = 20,

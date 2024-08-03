@@ -63,5 +63,12 @@ dag <- check_dag(
   adjusted = "c"
 )
 plot(dag)
+
+# longer labels, automatic detection of outcome and exposure
+dag <- check_dag(
+  QoL ~ age + education + gender,
+  age ~ education
+)
+plot(dag)
 \dontshow{\}) # examplesIf}
 }
