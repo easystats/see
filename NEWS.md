@@ -1,3 +1,9 @@
+# see (development)
+
+## Changes
+
+- New `plot()` method for `performance::check_dag()`.
+
 # see 0.8.5
 
 ## Major Changes
