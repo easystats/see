@@ -1,6 +1,6 @@
-# see (dev)
+# see (development)
 
-## Canges
+## Changes
 
 - New `plot()` method for `performance::check_dag()`.
 
