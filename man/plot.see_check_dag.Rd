@@ -37,5 +37,8 @@ dag <- check_dag(
 )
 dag
 plot(dag)
+
+# plot only model with required adjustments
+plot(dag, which = "required")
 \dontshow{\}) # examplesIf}
 }

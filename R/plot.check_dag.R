@@ -23,6 +23,9 @@
 #' )
 #' dag
 #' plot(dag)
+#'
+#' # plot only model with required adjustments
+#' plot(dag, which = "required")
 #' @export
 plot.see_check_dag <- function(x, size_point = 15, colors = NULL, which = "all", ...) {
   .data <- NULL
