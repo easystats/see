@@ -24,7 +24,7 @@
 #' dag
 #' plot(dag)
 #' @export
-plot.check_dag <- function(x, size_point = 15, colors = NULL, which = "all", ...) {
+plot.see_check_dag <- function(x, size_point = 15, colors = NULL, which = "all", ...) {
   .data <- NULL
   insight::check_if_installed(c("ggdag", "ggplot2"))
   which <- match.arg(which, choices = c("all", "current", "required"))
