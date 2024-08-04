@@ -17,7 +17,9 @@
 \arguments{
 \item{x}{A \code{check_dag} object.}
 
-\item{size_point}{Numeric value specifying size of text elements.}
+\item{size_point}{Numeric value specifying size of point geoms.}
+
+\item{size_text}{Numeric value specifying size of text elements.}
 
 \item{colors}{Character vector of length five, indicating the colors (in
 hex-format) for different types of variables.}

@@ -4,7 +4,7 @@
 #'
 #' @param x A `check_dag` object.
 #' @param size_point Numeric value specifying size of point geoms.
-#' @param size_point Numeric value specifying size of text elements.
+#' @param size_text Numeric value specifying size of text elements.
 #' @param colors Character vector of length five, indicating the colors (in
 #' hex-format) for different types of variables.
 #' @param which Character string indicating which plot to show. Can be either
