@@ -486,11 +486,39 @@ function documentation</a>)</em></p>
 <p><img src="performance_files/figure-html/unnamed-chunk-30-1.png" width="100%"></p>
 </div>
 <div class="section level2">
+<h2 id="directed-acyclic-graphs-dag">Directed Acyclic Graphs (DAG)<a class="anchor" aria-label="anchor" href="#directed-acyclic-graphs-dag"></a>
+</h2>
+<p><em>(<a href="https://easystats.github.io/performance/reference/check_dag.html" class="external-link">related
+function documentation</a>)</em></p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_dag.html" class="external-link">check_dag</a></span><span class="op">(</span></span>
+<span>  <span class="va">y</span> <span class="op">~</span> <span class="va">x</span> <span class="op">+</span> <span class="va">b</span> <span class="op">+</span> <span class="va">c</span>,</span>
+<span>  <span class="va">x</span> <span class="op">~</span> <span class="va">b</span>,</span>
+<span>  outcome <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>  exposure <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>  coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">5</span>, x <span class="op">=</span> <span class="fl">4</span>, b <span class="op">=</span> <span class="fl">3</span>, c <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">2</span>, c <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># plot comparison between current and required model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dag</span><span class="op">)</span></span></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-31-1.png" width="100%"></p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># plot current model specification</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dag</span>, which <span class="op">=</span> <span class="st">"current"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-31-2.png" width="100%"></p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># plot required model specification</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dag</span>, which <span class="op">=</span> <span class="st">"required"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="performance_files/figure-html/unnamed-chunk-31-3.png" width="100%"></p>
+</div>
+<div class="section level2">
 <h2 id="roc-curves">ROC curves<a class="anchor" aria-label="anchor" href="#roc-curves"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/performance/reference/performance_roc.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">iris</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span>, <span class="fl">0.3</span><span class="op">)</span></span>
@@ -505,9 +533,9 @@ function documentation</a>)</em></p>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; AUC: 37.66%</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-31-1.png" width="100%"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-32-1.png" width="100%"></p>
 <p>You can also compare ROC curves for different models.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/bayestestR/" class="external-link">bayestestR</a></span><span class="op">)</span></span>
 <span></span>
@@ -517,7 +545,7 @@ function documentation</a>)</em></p>
 <span></span>
 <span><span class="co"># comparing their performances using the AUC curve</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/performance/reference/performance_roc.html" class="external-link">performance_roc</a></span><span class="op">(</span><span class="va">m1</span>, <span class="va">m2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="performance_files/figure-html/unnamed-chunk-32-1.png" width="100%"></p>
+<p><img src="performance_files/figure-html/unnamed-chunk-33-1.png" width="100%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
