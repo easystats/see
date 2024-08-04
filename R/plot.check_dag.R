@@ -6,7 +6,8 @@
 #' @param size_point Numeric value specifying size of point geoms.
 #' @param size_text Numeric value specifying size of text elements.
 #' @param colors Character vector of length five, indicating the colors (in
-#' hex-format) for different types of variables.
+#' hex-format) for different types of variables, which are assigned in following
+#' order: `outcome`, `exposure`, `adjusted`, `unadjusted`, and `collider`.
 #' @param which Character string indicating which plot to show. Can be either
 #' `"all"`, `"current"` or `"required"`.
 #' @param check_colliders Logical indicating whether to highlight colliders.

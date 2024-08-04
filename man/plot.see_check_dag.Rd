@@ -22,7 +22,8 @@
 \item{size_text}{Numeric value specifying size of text elements.}
 
 \item{colors}{Character vector of length five, indicating the colors (in
-hex-format) for different types of variables.}
+hex-format) for different types of variables, which are assigned in following
+order: \code{outcome}, \code{exposure}, \code{adjusted}, \code{unadjusted}, and \code{collider}.}
 
 \item{which}{Character string indicating which plot to show. Can be either
 \code{"all"}, \code{"current"} or \code{"required"}.}
