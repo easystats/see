@@ -81,6 +81,10 @@
 
 
 <dt id="arg-size-point">size_point<a class="anchor" aria-label="anchor" href="#arg-size-point"></a></dt>
+<dd><p>Numeric value specifying size of point geoms.</p></dd>
+
+
+<dt id="arg-size-text">size_text<a class="anchor" aria-label="anchor" href="#arg-size-text"></a></dt>
 <dd><p>Numeric value specifying size of text elements.</p></dd>
 
 
@@ -119,21 +123,19 @@ Set to <code>FALSE</code> if the algorithm to detect colliders is very slow.</p>
 <span class="r-in"><span>  exposure <span class="op">=</span> <span class="st">"x"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dag</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Correct adjustments for identifying </span><span style="color: #0000BB; font-style: italic;">direct</span><span style="color: #0000BB;"> effects</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">Incorrectly adjusted!</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Check for correct adjustment sets</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Outcome: y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Exposure: x</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Identification of </span><span style="color: #0000BB; font-style: italic;">direct</span><span style="color: #0000BB;"> effects</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">Incorrectly adjusted!</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> To estimate the direct effect, <span style="font-style: italic;">also</span> adjust for <span style="color: #BBBB00;">`b`</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Currently, the model does not adjust for any variables.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Correct adjustments for identifying </span><span style="color: #0000BB; font-style: italic;">total</span><span style="color: #0000BB;"> effects</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Identification of </span><span style="color: #0000BB; font-style: italic;">total</span><span style="color: #0000BB;"> effects</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">Incorrectly adjusted!</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Outcome: y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Exposure: x</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> To estimate the total effect, <span style="font-style: italic;">also</span> adjust for <span style="color: #BBBB00;">`b`</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Currently, the model does not adjust for any variables.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
