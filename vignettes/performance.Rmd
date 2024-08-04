@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-pkgs <- c("bayestestR", "ggplot2", "glmmTMB", "performance", "lme4")
+pkgs <- c("bayestestR", "ggplot2", "glmmTMB", "performance", "lme4", "ggdag", "dagitty")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
 
@@ -139,7 +139,7 @@ There are two visualization options
 plot(result, type = "dots")
 ```
 
-### bars indicating influential observations 
+### bars indicating influential observations
 
 ```{r}
 plot(result, type = "bars")
@@ -324,6 +324,29 @@ result
 plot(result)
 ```
 
+# Directed Acyclic Graphs (DAG)
+
+_([related function documentation](https://easystats.github.io/performance/reference/check_dag.html))_
+
+```{r}
+dag <- check_dag(
+  y ~ x + b + c,
+  x ~ b,
+  outcome = "y",
+  exposure = "x",
+  coords = list(
+    x = c(y = 5, x = 4, b = 3, c = 3),
+    y = c(y = 3, x = 3, b = 2, c = 4)
+  )
+)
+# plot comparison between current and required model
+plot(dag)
+# plot current model specification
+plot(dag, which = "current")
+# plot required model specification
+plot(dag, which = "required")
+```
+
 # ROC curves
 
 _([related function documentation](https://easystats.github.io/performance/reference/performance_roc.html))_
@@ -344,7 +367,7 @@ result
 plot(result)
 ```
 
-You can also compare ROC curves for different models. 
+You can also compare ROC curves for different models.
 
 ```{r}
 set.seed(123)
