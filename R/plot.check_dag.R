@@ -143,8 +143,13 @@ plot.see_check_dag <- function(x,
     ggplot2::ggtitle("Required model")
 
   if (which == "all") {
-    # fix legends
-    plot2 <- plot2 + ggplot2::theme(legend.position = "none")
+    # fix legends - remove the legend that has fewer items, so all items
+    # in the legend are shown for the integrated plot
+    if (insight::n_unique(p1$data$type) > insight::n_unique(p2$data$type)) {
+      plot2 <- plot2 + ggplot2::theme(legend.position = "none")
+    } else {
+      plot1 <- plot1 + ggplot2::theme(legend.position = "none")
+    }
     # plot
     plots(plot1, plot2, n_rows = 1)
   } else if (which == "current") {
