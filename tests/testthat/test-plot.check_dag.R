@@ -51,3 +51,22 @@ test_that("`plot()` for check_dag", {
     fig = plot(dag, which = "required")
   )
 })
+
+
+test_that("`plot()` for check_dag, multiple adjustment sets", {
+  set.seed(1234)
+  dag <- performance::check_dag(
+    podcast ~ mood + humor + skills_course,
+    alertness ~ mood,
+    mood ~ humor,
+    prepared ~ skills_course,
+    exam ~ alertness + prepared,
+    exposure = "podcast",
+    outcome = "exam",
+    coords = ggdag::time_ordered_coords()
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag multiple adjustments",
+    fig = plot(dag)
+  )
+})
