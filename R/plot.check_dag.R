@@ -65,6 +65,14 @@ plot.see_check_dag <- function(x,
   p1 <- p2 <- suppressWarnings(ggdag::dag_adjustment_sets(x))
   adjusted_for <- attributes(x)$adjusted
 
+  # if we have multiple sets, we only need one for the current model
+  if (!is.null(p1$data$set) && insight::n_unique(p1$data$set) > 1) {
+    p1$data <- p1$data[p1$data$set == p1$data$set[1], ]
+    # rename set-variables
+    p2$data$set <- gsub("\\{(.*)\\}", "\\1", p2$data$set)
+    p2$data$set <- paste0("Adjusted for ", p2$data$set)
+  }
+
   # for current plot, we need to update the "adjusted" column
   p1$data$adjusted <- "unadjusted"
   if (!is.null(adjusted_for)) {
@@ -141,6 +149,15 @@ plot.see_check_dag <- function(x,
   plot2 <- ggplot2::ggplot(p2$data, ggplot2::aes(x = .data$x, y = .data$y)) +
     common_layers +
     ggplot2::ggtitle("Required model")
+
+  # if we have multiple sets, we want to facet the second plot by sets
+  if (!is.null(p2$data$set) && insight::n_unique(p2$data$set) > 1) {
+    plot2 <- plot2 + ggplot2::facet_wrap(
+      ~set,
+      scales = "free",
+      ncol = ceiling(sqrt(insight::n_unique(p2$data$set)))
+    )
+  }
 
   if (which == "all") {
     # fix legends - remove the legend that has fewer items, so all items
