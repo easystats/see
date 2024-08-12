@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.5.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.5.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,6 +67,7 @@
 <span>  size_text <span class="op">=</span> <span class="fl">4.5</span>,</span>
 <span>  colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  which <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  effect <span class="op">=</span> <span class="st">"total"</span>,</span>
 <span>  check_colliders <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -99,13 +100,18 @@ order: <code>outcome</code>, <code>exposure</code>, <code>adjusted</code>, <code
 <code>"all"</code>, <code>"current"</code> or <code>"required"</code>.</p></dd>
 
 
+<dt id="arg-effect">effect<a class="anchor" aria-label="anchor" href="#arg-effect"></a></dt>
+<dd><p>Character string indicating which effect for the required model
+is to be estimated. Can be either <code>"total"</code> or <code>"direct"</code>.</p></dd>
+
+
 <dt id="arg-check-colliders">check_colliders<a class="anchor" aria-label="anchor" href="#arg-check-colliders"></a></dt>
 <dd><p>Logical indicating whether to highlight colliders.
 Set to <code>FALSE</code> if the algorithm to detect colliders is very slow.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Not used.</p></dd>
+<dd><p>Currently not used.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -128,16 +134,10 @@ Set to <code>FALSE</code> if the algorithm to detect colliders is very slow.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Outcome: y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Exposure: x</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Identification of </span><span style="color: #0000BB; font-style: italic;">direct</span><span style="color: #0000BB;"> effects</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Identification of direct and total effects</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">Incorrectly adjusted!</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> To estimate the direct effect, <span style="font-style: italic;">also</span> adjust for <span style="color: #BBBB00;">`b`</span>.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Currently, the model does not adjust for any variables.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Identification of </span><span style="color: #0000BB; font-style: italic;">total</span><span style="color: #0000BB;"> effects</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">Incorrectly adjusted!</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> To estimate the total effect, <span style="font-style: italic;">also</span> adjust for <span style="color: #BBBB00;">`b`</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> To estimate the direct and total effect, <span style="font-style: italic;">at least</span> adjust for <span style="color: #BBBB00;">`b`</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Currently, the model does not adjust for any variables.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dag</span><span class="op">)</span></span></span>
