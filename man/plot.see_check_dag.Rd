@@ -10,6 +10,7 @@
   size_text = 4.5,
   colors = NULL,
   which = "all",
+  effect = "total",
   check_colliders = TRUE,
   ...
 )
@@ -28,10 +29,13 @@ order: \code{outcome}, \code{exposure}, \code{adjusted}, \code{unadjusted}, and 
 \item{which}{Character string indicating which plot to show. Can be either
 \code{"all"}, \code{"current"} or \code{"required"}.}
 
+\item{effect}{Character string indicating which effect for the required model
+is to be estimated. Can be either \code{"total"} or \code{"direct"}.}
+
 \item{check_colliders}{Logical indicating whether to highlight colliders.
 Set to \code{FALSE} if the algorithm to detect colliders is very slow.}
 
-\item{...}{Not used.}
+\item{...}{Currently not used.}
 }
 \value{
 A ggplot2-object.
