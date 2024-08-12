@@ -12,7 +12,9 @@
 #' `"all"`, `"current"` or `"required"`.
 #' @param check_colliders Logical indicating whether to highlight colliders.
 #' Set to `FALSE` if the algorithm to detect colliders is very slow.
-#' @param ... Not used.
+#' @param effect Character string indicating which effect for the required model
+#' is to be estimated. Can be either `"total"` or `"direct"`.
+#' @param ... Currently not used.
 #'
 #' @return A ggplot2-object.
 #'
@@ -55,14 +57,16 @@ plot.see_check_dag <- function(x,
                                size_text = 4.5,
                                colors = NULL,
                                which = "all",
+                               effect = "total",
                                check_colliders = TRUE,
                                ...) {
   .data <- NULL
   insight::check_if_installed(c("ggdag", "ggplot2"))
   which <- match.arg(which, choices = c("all", "current", "required"))
+  effect <- match.arg(effect, choices = c("total", "direct"))
 
   # get plot data
-  p1 <- p2 <- suppressWarnings(ggdag::dag_adjustment_sets(x))
+  p1 <- p2 <- suppressWarnings(ggdag::dag_adjustment_sets(x, effect = effect))
   adjusted_for <- attributes(x)$adjusted
 
   # if we have multiple sets, we only need one for the current model
@@ -148,7 +152,7 @@ plot.see_check_dag <- function(x,
   # plot2 - required model
   plot2 <- ggplot2::ggplot(p2$data, ggplot2::aes(x = .data$x, y = .data$y)) +
     common_layers +
-    ggplot2::ggtitle("Required model")
+    ggplot2::ggtitle(sprintf("Required model (%s effect)", effect))
 
   # if we have multiple sets, we want to facet the second plot by sets
   if (!is.null(p2$data$set) && insight::n_unique(p2$data$set) > 1) {

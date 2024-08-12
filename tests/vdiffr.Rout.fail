@@ -1,0 +1,99 @@
+Environment:
+- vdiffr-svg-engine: 2.0
+- vdiffr: 1.0.7
+
+
+Failed doppelganger: plot-check-dag-all (C:\Users\DL\Documents\GitHub\easystats\see\tests\testthat\_snaps/plot.check_dag/plot-check-dag-all.svg)
+
+< before                                                                        
+> after                                                                         
+@@ 116,5 / 116,5 @@                                                             
+  <text x='555.07' y='554.18' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='46.79px' lengthAdjust='spacingAndGlyphs'>adjusted</text>             
+  <text x='631.10' y='554.18' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='60.56px' lengthAdjust='spacingAndGlyphs'>unadjusted</text>           
+< <text x='368.97' y='38.67' style='font-size: 14.40px; font-family: sans;' text
+: Length='101.67px' lengthAdjust='spacingAndGlyphs'>Required model</text>       
+> <text x='368.97' y='38.67' style='font-size: 14.40px; font-family: sans;' text
+: Length='181.70px' lengthAdjust='spacingAndGlyphs'>Required model (total effect
+: )</text>                                                                      
+  <text x='11.46' y='14.56' style='font-size: 13.20px; font-family: sans;' textL
+  ength='105.68px' lengthAdjust='spacingAndGlyphs'>plot.check_dag all</text>    
+  </g>                                                                          
+
+
+Failed doppelganger: plot-check-dag-required (C:\Users\DL\Documents\GitHub\easystats\see\tests\testthat\_snaps/plot.check_dag/plot-check-dag-required.svg)
+
+< before                                                                        
+> after                                                                         
+@@ 57,5 / 57,5 @@                                                               
+  <text x='195.07' y='559.66' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='46.79px' lengthAdjust='spacingAndGlyphs'>adjusted</text>             
+  <text x='271.10' y='559.66' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='60.56px' lengthAdjust='spacingAndGlyphs'>unadjusted</text>           
+< <text x='8.97' y='15.89' style='font-size: 14.40px; font-family: sans;' textLe
+: ngth='101.67px' lengthAdjust='spacingAndGlyphs'>Required model</text>         
+> <text x='8.97' y='15.89' style='font-size: 14.40px; font-family: sans;' textLe
+: ngth='181.70px' lengthAdjust='spacingAndGlyphs'>Required model (total effect)<
+: /text>                                                                        
+  </g>                                                                          
+  </svg>                                                                        
+
+
+Failed doppelganger: plot-check-dag-all-adjusted (C:\Users\DL\Documents\GitHub\easystats\see\tests\testthat\_snaps/plot.check_dag/plot-check-dag-all-adjusted.svg)
+
+< before                                                                        
+> after                                                                         
+@@ 116,5 / 116,5 @@                                                             
+  <text x='555.07' y='554.18' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='46.79px' lengthAdjust='spacingAndGlyphs'>adjusted</text>             
+  <text x='631.10' y='554.18' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='60.56px' lengthAdjust='spacingAndGlyphs'>unadjusted</text>           
+< <text x='368.97' y='38.67' style='font-size: 14.40px; font-family: sans;' text
+: Length='101.67px' lengthAdjust='spacingAndGlyphs'>Required model</text>       
+> <text x='368.97' y='38.67' style='font-size: 14.40px; font-family: sans;' text
+: Length='181.70px' lengthAdjust='spacingAndGlyphs'>Required model (total effect
+: )</text>                                                                      
+  <text x='11.46' y='14.56' style='font-size: 13.20px; font-family: sans;' textL
+  ength='159.99px' lengthAdjust='spacingAndGlyphs'>plot.check_dag all-adjusted</
+  text>                                                                         
+  </g>                                                                          
+
+
+Failed doppelganger: plot-check-dag-required-adjusted (C:\Users\DL\Documents\GitHub\easystats\see\tests\testthat\_snaps/plot.check_dag/plot-check-dag-required-adjusted.svg)
+
+< before                                                                        
+> after                                                                         
+@@ 57,5 / 57,5 @@                                                               
+  <text x='195.07' y='559.66' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='46.79px' lengthAdjust='spacingAndGlyphs'>adjusted</text>             
+  <text x='271.10' y='559.66' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='60.56px' lengthAdjust='spacingAndGlyphs'>unadjusted</text>           
+< <text x='8.97' y='15.89' style='font-size: 14.40px; font-family: sans;' textLe
+: ngth='101.67px' lengthAdjust='spacingAndGlyphs'>Required model</text>         
+> <text x='8.97' y='15.89' style='font-size: 14.40px; font-family: sans;' textLe
+: ngth='181.70px' lengthAdjust='spacingAndGlyphs'>Required model (total effect)<
+: /text>                                                                        
+  </g>                                                                          
+  </svg>                                                                        
+
+
+Failed doppelganger: plot-check-dag-multiple-adjustments (C:\Users\DL\Documents\GitHub\easystats\see\tests\testthat\_snaps/plot.check_dag/plot-check-dag-multiple-adjustments.svg)
+
+< before                                                                        
+> after                                                                         
+@@ 333,5 / 333,5 @@                                                             
+  <text x='555.07' y='554.18' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='46.79px' lengthAdjust='spacingAndGlyphs'>adjusted</text>             
+  <text x='631.10' y='554.18' style='font-size: 12.38px; font-family: sans;' tex
+  tLength='60.56px' lengthAdjust='spacingAndGlyphs'>unadjusted</text>           
+< <text x='368.97' y='38.67' style='font-size: 14.40px; font-family: sans;' text
+: Length='101.67px' lengthAdjust='spacingAndGlyphs'>Required model</text>       
+> <text x='368.97' y='38.67' style='font-size: 14.40px; font-family: sans;' text
+: Length='181.70px' lengthAdjust='spacingAndGlyphs'>Required model (total effect
+: )</text>                                                                      
+  <text x='11.46' y='14.56' style='font-size: 13.20px; font-family: sans;' textL
+  ength='212.82px' lengthAdjust='spacingAndGlyphs'>plot.check_dag multiple adjus
+  tments</text>                                                                 
+  </g>                                                                          
+

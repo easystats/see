@@ -70,3 +70,98 @@ test_that("`plot()` for check_dag, multiple adjustment sets", {
     fig = plot(dag)
   )
 })
+
+
+test_that("`plot()` for check_dag, different total and direct adjustments", {
+  set.seed(1234)
+  dag <- performance::check_dag(
+    outcome ~ exposure + x1 + x2,
+    x2 ~ exposure,
+    exposure ~ x1,
+    outcome = "outcome",
+    exposure = "exposure",
+    coords = data.frame(
+      name = c("outcome", "exposure", "x1", "x2"),
+      x = c(0, 1, 0, 0.5),
+      y = c(0, 0.5, 1, 1),
+      stringsAsFactors = FALSE
+    )
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag total1",
+    fig = plot(dag)
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag direct1",
+    fig = plot(plot(dag, effect = "direct"))
+  )
+
+  dag <- performance::check_dag(
+    outcome ~ exposure + x1 + x2,
+    x2 ~ exposure,
+    exposure ~ x1,
+    adjusted = "x1",
+    outcome = "outcome",
+    exposure = "exposure",
+    coords = data.frame(
+      name = c("outcome", "exposure", "x1", "x2"),
+      x = c(0, 1, 0, 0.5),
+      y = c(0, 0.5, 1, 1),
+      stringsAsFactors = FALSE
+    )
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag total2",
+    fig = plot(dag)
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag direct2",
+    fig = plot(plot(dag, effect = "direct"))
+  )
+
+  dag <- performance::check_dag(
+    outcome ~ exposure + x1 + x2,
+    x2 ~ exposure,
+    exposure ~ x1,
+    adjusted = "x2",
+    outcome = "outcome",
+    exposure = "exposure",
+    coords = data.frame(
+      name = c("outcome", "exposure", "x1", "x2"),
+      x = c(0, 1, 0, 0.5),
+      y = c(0, 0.5, 1, 1),
+      stringsAsFactors = FALSE
+    )
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag total3",
+    fig = plot(dag)
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag direct3",
+    fig = plot(plot(dag, effect = "direct"))
+  )
+
+  dag <- performance::check_dag(
+    outcome ~ exposure + x1 + x2,
+    x2 ~ exposure,
+    exposure ~ x1,
+    adjusted = c("x1", "x2"),
+    outcome = "outcome",
+    exposure = "exposure",
+    coords = data.frame(
+      name = c("outcome", "exposure", "x1", "x2"),
+      x = c(0, 1, 0, 0.5),
+      y = c(0, 0.5, 1, 1),
+      stringsAsFactors = FALSE
+    )
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag total4",
+    fig = plot(dag)
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag direct4",
+    fig = plot(plot(dag, effect = "direct"))
+  )
+})
