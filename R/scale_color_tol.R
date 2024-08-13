@@ -1,37 +1,41 @@
-#' Okabe-Ito color palette
+#' Paul Tol color palettes
 #'
-#' The Okabe-Ito color palette was proposed by Okabe and Ito (2008) as a
-#' qualitative color palette that is accessible to people with a variety of
-#' forms of color vision deficiency. In addition to being accessible, it
-#' includes 9 vivid colors that are readily nameable and include colors that
-#' correspond to major primary and secondary colors (e.g., red, yellow, blue).
+#' Tol (2021) presents a series of palettes built with mathematical principles that
+#' are appropriate for diverse types of data. The colors in these schemes are:
+#' - Visually distinct for all people, including viewers with color vision deficiencies
+#' - Distinct from black and white
+#' - Distinct on screen and paper,
+#' - Cohesive; that is, they match well together
 #'
-#' The Okabe-Ito palette is included in the base R [grDevices::palette.colors()].
-#' These functions make this palette easier to use with *ggplot2*.
+#' Tol provides palettes appropriate to the 3 main types of data:
+#' 1. Qualitative data – nominal or categorical data, where magnitude differences are not relevant.
+#' 2. Diverging data – data ordered between two extremes where the midpoint is important.
+#' 3. Sequential data – data ordered from low to high.
 #'
-#' The original Okabe-Ito palette's "yellow" color is `"#F0E442"`. This color is
-#' very bright and often does not show up well on white backgrounds (see
-#' [here](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/))
-#' for a discussion of this issue). Accordingly, by default, this function uses
-#' a darker more "amber" color for "yellow" (`"#F5C710"`). This color is the
-#' "yellow" color used in base R >4.0's [default color
-#' palette](https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/).
-#' The palettes `"full"` and `"black_first"` use this darker yellow color. For
-#' the original yellow color suggested by Okabe and Ito (`"#F0E442"`), use
-#' palettes `"full_original"` or `"black_first_original"`.
+#' Available palettes for each type of data are:
+#' - Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale, dark, light, ground_cover
+#' - Diverging: sunset, BuRd, PRGn
+#' - Sequential: YlOrBr, iridescent, rainbow_discrete, rainbow_smooth
 #'
-#' The Okabe-Ito palette is only available as a discrete palette.
-#' For color-accessible continuous variables, consider
-#' [Paul Tol's palettes][scale_color_tol()] or
-#' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
+#' <!-- For rainbow_discrete, pick the optimal set based on the number of colors,
+#'      For rainbow_smooth, include a range argument with examples to start/end at off-white vs. purple, red vs brown
+#'      -->
 #'
-#' @inheritParams palette_okabeito
+#' <!-- put a table with recommended uses here -->
+#'
+#' ## Colors for missing or invalid data
+#'
+#' A useful feature of Tol's diverging and sequential palettes is that he
+#' provides a recommended color to use for data that fall outside the data
+#' range represented by the color scale (e.g., for invalid or missing data).
+#' These colors are chosen to be highly distinct from the main color palette.
+#'
+#' @inheritParams palette_tol
 #' @inheritParams scale_color_flat
 #'
 #' @references
-#' Okabe, M., & Ito, K. (2008). Color universal design (CUD):
-#' How to make figures and presentations that are friendly to colorblind people.
-#' https://jfly.uni-koeln.de/color/#pallet (Original work published 2002)
+#' Tol, P. (2021). Colour schemes (SRON/EPS Technical Note No. 09-002; Version 3.2).
+#' SRON. https://personal.sron.nl/~pault/data/colourschemes.pdf (Original work published 2009)
 #'
 #' @examples
 #' library(ggplot2)
@@ -178,25 +182,24 @@ okabeito_palettes <- list(
 )
 
 
-#' Okabe-Ito color palette
+#' Paul Tol's color palettes
 #'
-#' The palette based on Okabe and Ito (2008).
+#' The palettes based proposed by Okabe and Ito (2008).
 #'
 #' @inheritParams palette_flat
 #' @param order A vector of numbers from 1 to 9 indicating the order of colors to use
 #'   (default: `1:9`)
 #'
 #' @references
-#' Okabe, M., & Ito, K. (2008). Color universal design (CUD):
-#' How to make figures and presentations that are friendly to colorblind people.
-#' https://jfly.uni-koeln.de/color/#pallet (Original work published 2002)
+#' Tol, P. (2021). Colour schemes (SRON/EPS Technical Note No. 09-002; Version 3.2).
+#' SRON. https://personal.sron.nl/~pault/data/colourschemes.pdf (Original work published 2009)
 #'
 #' @details This function is usually not called directly, but from within
-#'   [`scale_color_okabeito()`][scale_color_okabeito].
+#'   [`scale_color_tol()`][scale_color_tol].
 #'
 #' @export
-palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ...) {
-  if (!palette %in% names(okabeito_palettes)) {
+palette_tol <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ...) {
+  if (!palette %in% names(tol_palettes)) {
     msg <- c(paste0(
       "Palette name not available. `palette` must be one of ",
       datawizard::text_concatenate(names(okabeito_palettes), last = " or ", enclose = "`"),
