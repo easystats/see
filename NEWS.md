@@ -4,6 +4,9 @@
 
 - New `plot()` method for `performance::check_dag()`.
 
+- New color palette `tate`, inspired by the colors of the Tate Modern museum in
+  London. See `?scale_color_tate`.
+
 # see 0.8.5
 
 ## Major Changes
