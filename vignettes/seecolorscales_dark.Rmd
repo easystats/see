@@ -349,6 +349,50 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
+# Tate Colors
+
+## Tate Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_tate(palette = "light")
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_tate(palette = "light")
+
+plots(p1, p2, n_rows = 1)
+```
+
+## Tate Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_tate(palette = "light")
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_tate(palette = "light")
+
+plots(p1, p2, n_rows = 1)
+```
+
+## Tate Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_tate(palette = "light")
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_tate(palette = "light")
+
+plots(p1, p2, n_rows = 1)
+```
+
 # Overview of Palette Colors
 
 ```{r fig.height=12,echo=FALSE}
@@ -474,6 +518,23 @@ p7 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
+d <- data.frame(
+  x = names(tate_colors())
+)
+
+p8 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = 0.9) +
+  scale_fill_manual(values = tate_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+
 plots(
   p1,
   p2,
@@ -482,6 +543,7 @@ plots(
   p5,
   p6,
   p7,
+  p8,
   n_columns = 1,
   tags = c(
     "Social",
@@ -490,7 +552,8 @@ plots(
     "Metro",
     "See",
     "Pizza",
-    "Bluebrown"
+    "Bluebrown",
+    "Tate"
   )
 )
 ```
