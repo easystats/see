@@ -19,9 +19,9 @@
 #' ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 #'   geom_point() +
 #'   theme_abyss() +
-#'   scale_colour_tate(palette = "fontana")
+#'   scale_colour_tate(palette = "light")
 #' @export
-scale_color_tate <- function(palette = "history",
+scale_color_tate <- function(palette = "modern",
                              discrete = TRUE,
                              reverse = FALSE,
                              aesthetics = "color",
@@ -42,7 +42,7 @@ scale_color_tate <- function(palette = "history",
 
 #' @rdname scale_color_tate
 #' @export
-scale_color_tate_d <- function(palette = "history",
+scale_color_tate_d <- function(palette = "modern",
                                discrete = TRUE,
                                reverse = FALSE,
                                aesthetics = "color",
@@ -58,7 +58,7 @@ scale_color_tate_d <- function(palette = "history",
 
 #' @rdname scale_color_tate
 #' @export
-scale_color_tate_c <- function(palette = "history",
+scale_color_tate_c <- function(palette = "modern",
                                discrete = FALSE,
                                reverse = FALSE,
                                aesthetics = "color",
@@ -94,7 +94,7 @@ scale_colour_tate_d <- scale_color_tate_d
 
 #' @rdname scale_color_tate
 #' @export
-scale_fill_tate <- function(palette = "history",
+scale_fill_tate <- function(palette = "modern",
                             discrete = TRUE,
                             reverse = FALSE,
                             aesthetics = "fill",
@@ -111,7 +111,7 @@ scale_fill_tate <- function(palette = "history",
 
 #' @rdname scale_color_tate
 #' @export
-scale_fill_tate_d <- function(palette = "history",
+scale_fill_tate_d <- function(palette = "modern",
                               discrete = TRUE,
                               reverse = FALSE,
                               aesthetics = "fill",
@@ -127,7 +127,7 @@ scale_fill_tate_d <- function(palette = "history",
 
 #' @rdname scale_color_tate
 #' @export
-scale_fill_tate_c <- function(palette = "history",
+scale_fill_tate_c <- function(palette = "modern",
                               discrete = FALSE,
                               reverse = FALSE,
                               aesthetics = "fill",
@@ -157,7 +157,23 @@ tate_colors_list <- c(
   scarlett = "#7D2D36",
   red = "#A5102E",
   rose = "#C97B6F",
-  yellow = "#C78F52"
+  yellow = "#C78F52",
+  # light palettes
+  `light green` = "#92901F",
+  `light brown` = "#844C22",
+  `light amber` = "#D49C02",
+  `light grey`= "#898765",
+  `light beige` = "#C4A362",
+  `light scarlett` = "#A73C46",
+  `light red` = "#C51A38",
+  `light rose` = "#E49B90",
+  `light yellow` = "#E7A963",
+  # other
+  mint = "#96FFFA",
+  teal = "#008080",
+  orange = "#FF7F00",
+  blue = "#6495ED",
+  lavender = "#DDA0DD"
 )
 
 
@@ -188,8 +204,17 @@ tate_colors <- function(...) {
 
 tate_palettes <- list(
   full = tate_colors(),
-  history = tate_colors("dark green", "brown", "amber", "grey", "beige"),
-  fontana = tate_colors("scarlett", "red", "rose", "yellow")
+  modern = tate_colors("yellow", "rose", "red", "brown", "grey", "dark green"),
+  mix = tate_colors (
+    "light rose", "light scarlett", "leight beige", "light grey",
+    "blue", "orange", "teal", "mint"
+  ),
+  history = tate_colors("dark green", "grey", "brown", "beige", "amber"),
+  fontana = tate_colors("scarlett", "red", "rose", "yellow"),
+  light = tate_colors(
+    "light yellow", "light rose", "light red", "light brown",
+    "light grey", "light green"
+  )
 )
 
 
@@ -201,7 +226,7 @@ tate_palettes <- list(
 #'   [`scale_color_tate()`][scale_color_tate].
 #'
 #' @export
-palette_tate <- function(palette = "history", reverse = FALSE, ...) {
+palette_tate <- function(palette = "modern", reverse = FALSE, ...) {
   .retrieve_palette(palette, tate_palettes, reverse = reverse, ...)
 }
 

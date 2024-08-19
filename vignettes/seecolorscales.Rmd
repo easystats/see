@@ -436,6 +436,50 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
+# Tate Colors
+
+## Tate Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_tate()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_tate()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## Tate Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_tate()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_tate()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## Tate Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_tate()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_tate()
+
+plots(p1, p2, n_rows = 1)
+```
+
 # Overview of Palette Colors
 
 ```{r fig.height=12,echo=FALSE}
