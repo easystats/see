@@ -25,3 +25,27 @@ test_that("`plot.see_p_significance works for two thresholds", {
     fig = plot(out)
   )
 })
+
+test_that("`plot.see_p_significance works {parmaters}}", {
+  skip_if_not_installed("vdiffr")
+  data(qol_cancer, package = "parameters")
+  model <- lm(QoL ~ time + age + education, data = qol_cancer)
+  set.seed(123)
+  out <- parameters::p_significance(model)
+  vdiffr::expect_doppelganger(
+    title = "plot.p_sig_frequ1",
+    fig = plot(out)
+  )
+  set.seed(123)
+  out <- parameters::p_significance(model, threshold = c(-0.5, 3.3))
+  vdiffr::expect_doppelganger(
+    title = "plot.p_sig_frequ2",
+    fig = plot(out)
+  )
+  set.seed(123)
+  out <- parameters::p_significance(model, threshold = c(-0.5, 5))
+  vdiffr::expect_doppelganger(
+    title = "plot.p_sig_frequ3",
+    fig = plot(out)
+  )
+})
