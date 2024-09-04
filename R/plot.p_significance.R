@@ -68,7 +68,7 @@ data_plot.p_significance <- function(x,
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
+    dataplot <- .compute_densities_ps(data[, 1], name = "Posterior", threshold = attr(x, "threshold"))
   }
 
   dataplot <- do.call(
@@ -132,12 +132,28 @@ data_plot.p_significance <- function(x,
 .compute_densities_ps <- function(x, name = "Y", threshold = 0) {
   out <- .as.data.frame_density(stats::density(x))
 
-  fifty_cents <- sum(out$y[out$x > threshold]) > (sum(out$y) / 2)
+  # sanity check
+  if (is.null(threshold)) {
+    threshold <- 0
+  }
+
+  # make sure we have a vector of length 2
+  if (length(threshold) == 1) {
+    threshold <- c(-1 * threshold, threshold)
+  }
+
+  # find out the probability mass larger or lower than the ROPE (outside)
+  p_mass_ht_rope <- sum(out$y[out$x > threshold[2]]) > (sum(out$y) / 2)
+  p_mass_lt_rope <- sum(out$y[out$x < threshold[1]]) > (sum(out$y) / 2)
+
+  # find out whether probability mass "above" ROPE is larger than the probability
+  # mass that is on the left (negative) side of the ROPE
+  fifty_cents <- p_mass_ht_rope > p_mass_lt_rope
 
   out$fill <- "Less Probable"
-  out$fill[abs(out$x) < threshold] <- "ROPE"
-  out$fill[(out$x > threshold)] <- ifelse(fifty_cents, "Significant", "Less Probable")
-  out$fill[out$x < (-1 * threshold)] <- ifelse(fifty_cents, "Less Probable", "Significant")
+  out$fill[out$x > threshold[1] & out$x < threshold[2]] <- "ROPE"
+  out$fill[out$x > threshold[2]] <- ifelse(fifty_cents, "Significant", "Less Probable")
+  out$fill[out$x < threshold[1]] <- ifelse(fifty_cents, "Less Probable", "Significant")
 
   out$height <- out$y
   out$y <- name
