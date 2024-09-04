@@ -32,19 +32,19 @@ data_plot.p_significance <- function(x,
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
     for (i in names(data)) {
-      if (!is.null(params)) {
+      if (is.null(params)) {
         dataplot <- rbind(
           dataplot,
-          cbind(
-            .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold")),
-            "Effects" = params$Effects[params$Parameter == i],
-            "Component" = params$Component[params$Parameter == i]
-          )
+          .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold"))
         )
       } else {
         dataplot <- rbind(
           dataplot,
-          .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold"))
+          cbind(
+            .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold")),
+            Effects = params$Effects[params$Parameter == i],
+            Component = params$Component[params$Parameter == i]
+          )
         )
       }
     }
@@ -78,7 +78,7 @@ data_plot.p_significance <- function(x,
       list(dataplot$y, dataplot$fill),
       function(df) {
         df$n <- nrow(df)
-        return(df)
+        df
       }
     )
   )
@@ -89,7 +89,7 @@ data_plot.p_significance <- function(x,
       dataplot$y,
       function(df) {
         df$prop <- df$n / nrow(df)
-        return(df)
+        df
       }
     )
   )
@@ -116,10 +116,10 @@ data_plot.p_significance <- function(x,
   dataplot <- .fix_facet_names(dataplot)
 
   attr(dataplot, "info") <- list(
-    "xlab" = "Possible parameter values",
-    "ylab" = ylab,
-    "legend_fill" = "Probability",
-    "title" = "Practical Significance"
+    xlab = "Possible parameter values",
+    ylab = ylab,
+    legend_fill = "Probability",
+    title = "Practical Significance"
   )
 
   class(dataplot) <- c("data_plot", "see_p_significance", class(dataplot))
@@ -159,7 +159,8 @@ data_plot.p_significance <- function(x,
   out$y <- name
 
   # normalize
-  out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
+  range_diff <- diff(range(out$height, na.rm = TRUE), na.rm = TRUE)
+  out$height <- as.vector(out$height - min(out$height, na.rm = TRUE) / range_diff)
   out
 }
 
@@ -210,7 +211,7 @@ plot.see_p_significance <- function(x,
   params <- unique(x$y)
 
   # get labels
-  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
+  axis_labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   insight::check_if_installed("ggridges")
 
@@ -251,7 +252,7 @@ plot.see_p_significance <- function(x,
   if (length(unique(x$y)) == 1L && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
-    p <- p + scale_y_discrete(labels = labels)
+    p <- p + scale_y_discrete(labels = axis_labels)
   }
 
 
