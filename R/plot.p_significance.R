@@ -143,8 +143,8 @@ data_plot.p_significance <- function(x,
   }
 
   # find out the probability mass larger or lower than the ROPE (outside)
-  p_mass_ht_rope <- sum(out$y[out$x > threshold[2]]) > (sum(out$y) / 2)
-  p_mass_lt_rope <- sum(out$y[out$x < threshold[1]]) > (sum(out$y) / 2)
+  p_mass_ht_rope <- sum(out$y[out$x > threshold[2]])
+  p_mass_lt_rope <- sum(out$y[out$x < threshold[1]])
 
   # find out whether probability mass "above" ROPE is larger than the probability
   # mass that is on the left (negative) side of the ROPE
