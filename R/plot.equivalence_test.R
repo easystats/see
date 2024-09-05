@@ -110,7 +110,7 @@ plot.see_equivalence_test <- function(x,
   }
 
   # get labels
-  labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
+  axis_labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
 
   tmp <- .fix_facet_names(tmp)
 
@@ -126,11 +126,11 @@ plot.see_equivalence_test <- function(x,
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
-  add.args <- lapply(match.call(expand.dots = FALSE)$`...`, function(x) x)
+  add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
-  if ("labels" %in% names(add.args)) labels <- eval(add.args[["labels"]])
+  if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
 
   rope.line.alpha <- 1.25 * rope_alpha
   if (rope.line.alpha > 1) rope.line.alpha <- 1
@@ -170,7 +170,7 @@ plot.see_equivalence_test <- function(x,
     ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
-    scale_y_discrete(labels = labels) +
+    scale_y_discrete(labels = axis_labels) +
     theme(legend.position = "bottom")
 
   if (!is.null(n_columns)) {
@@ -193,10 +193,8 @@ plot.see_equivalence_test <- function(x,
         p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
       }
     }
-  } else {
-    if (length(unique(tmp$HDI)) > 1L) {
-      p <- p + facet_wrap(~HDI, scales = "free", ncol = n_columns)
-    }
+  } else if (length(unique(tmp$HDI)) > 1L) {
+    p <- p + facet_wrap(~HDI, scales = "free", ncol = n_columns)
   }
 
   p
@@ -259,7 +257,7 @@ plot.see_equivalence_test_df <- function(x,
   tmp$predictor <- factor(tmp$predictor, levels = rev(unique(tmp$predictor)))
 
   # get labels
-  labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
+  axis_labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
 
   # check for user defined arguments
 
@@ -273,11 +271,11 @@ plot.see_equivalence_test_df <- function(x,
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
-  add.args <- lapply(match.call(expand.dots = FALSE)$`...`, function(x) x)
+  add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
-  if ("labels" %in% names(add.args)) labels <- eval(add.args[["labels"]])
+  if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
 
   rope.line.alpha <- 1.25 * rope_alpha
 
@@ -317,7 +315,7 @@ plot.see_equivalence_test_df <- function(x,
     ) +
     scale_fill_manual(values = fill.color) +
     labs(x = x.title, y = NULL, fill = legend.title) +
-    scale_y_discrete(labels = labels) +
+    scale_y_discrete(labels = axis_labels) +
     theme(legend.position = "bottom")
 
   if (length(unique(tmp$HDI)) > 1L) {
@@ -390,11 +388,10 @@ plot.see_equivalence_test_lm <- function(x,
 
   fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
 
-  add.args <- lapply(match.call(expand.dots = FALSE)$`...`, function(x) x)
+  add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
   if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
-  if ("labels" %in% names(add.args)) labels <- eval(add.args[["labels"]])
 
   rope.line.alpha <- 1.25 * rope_alpha
   if (rope.line.alpha > 1) rope.line.alpha <- 1
