@@ -536,7 +536,7 @@ plot.see_performance_pp_check <- function(x,
       size = ggplot2::guide_legend(reverse = TRUE)
     )
 
-  return(p)
+  p
 }
 
 
