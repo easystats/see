@@ -73,6 +73,7 @@ Imports:
     parameters (>= 0.22.1),
     performance (>= 0.12.3)
 Suggests:
+    BH,
     brms,
     curl,
     DHARMa,
