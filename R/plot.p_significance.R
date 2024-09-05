@@ -12,7 +12,6 @@ data_plot.p_significance <- function(x,
 
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
-
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)

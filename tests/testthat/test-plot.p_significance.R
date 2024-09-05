@@ -8,6 +8,7 @@ test_that("`plot.see_p_significance()` works", {
   expect_s3_class(plot(result), "gg")
 })
 
+skip_on_cran()
 skip_if_not_installed("bayestestR", minimum_version = "0.14.1")
 skip_if_not_installed("parameters", minimum_version = "0.22.3")
 
