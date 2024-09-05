@@ -8,8 +8,8 @@ test_that("`plot.see_p_significance()` works", {
   expect_s3_class(plot(result), "gg")
 })
 
-skip_if_not_installed("bayestestR", minimum_version = "0.14.1")
-skip_if_not_installed("parameters", minimum_version = "0.22.3")
+# skip_if_not_installed("bayestestR", minimum_version = "0.14.1")
+# skip_if_not_installed("parameters", minimum_version = "0.22.3")
 
 test_that("`plot.see_p_significance works for two thresholds", {
   skip_if_not_installed("vdiffr")
@@ -27,7 +27,7 @@ test_that("`plot.see_p_significance works for two thresholds", {
   )
 })
 
-test_that("`plot.see_p_significance works {parmaters}}", {
+test_that("`plot.see_p_significance works {parameters}}", {
   skip_if_not_installed("vdiffr")
   data(qol_cancer, package = "parameters")
   model <- lm(QoL ~ time + age + education, data = qol_cancer)
@@ -47,6 +47,22 @@ test_that("`plot.see_p_significance works {parmaters}}", {
   out <- parameters::p_significance(model, threshold = c(-0.5, 5))
   vdiffr::expect_doppelganger(
     title = "plot.p_sig_frequ3",
+    fig = plot(out)
+  )
+})
+
+test_that("plot p_significance, glmmTMB", {
+  skip_if_not_installed("glmmTMB")
+  data(Salamanders, package = "glmmTMB")
+  m1 <- glmmTMB::glmmTMB(count ~ mined + cover + (1 | site),
+    zi = ~mined,
+    family = poisson,
+    data = Salamanders
+  )
+  set.seed(123)
+  out <- parameters::p_significance(m1)
+  vdiffr::expect_doppelganger(
+    title = "plot.p_sig_glmmTMB",
     fig = plot(out)
   )
 })

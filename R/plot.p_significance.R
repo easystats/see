@@ -32,7 +32,7 @@ data_plot.p_significance <- function(x,
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
     for (i in names(data)) {
-      if (is.null(params)) {
+      if (is.null(params) || !all(c("Effects", "Component") %in% colnames(params))) {
         dataplot <- rbind(
           dataplot,
           .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold"))
@@ -160,7 +160,7 @@ data_plot.p_significance <- function(x,
 
   # normalize
   range_diff <- diff(range(out$height, na.rm = TRUE), na.rm = TRUE)
-  out$height <- as.vector(out$height - min(out$height, na.rm = TRUE) / range_diff)
+  out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / range_diff)
   out
 }
 
