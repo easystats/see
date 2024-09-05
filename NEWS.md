@@ -4,6 +4,11 @@
 
 - New `plot()` method for `performance::check_dag()`.
 
+## Bug fixes
+
+- Fixed issue in `plot()` for `performance::check_model()` when package *qqplotr*
+  is not installed.
+
 # see 0.8.5
 
 ## Major Changes
