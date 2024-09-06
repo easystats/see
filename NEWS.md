@@ -1,3 +1,10 @@
+# see (development)
+
+## Changes
+
+- `plot()` for `p_function()` now checks the values of the `size_length`
+  argument, to give an informative error message when the input is not valid.
+
 # see 0.9.0
 
 ## Changes

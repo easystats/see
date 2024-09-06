@@ -426,7 +426,7 @@ result <- p_function(model)
 plot(result)
 
 result <- p_function(model, ci_levels = c(0.5, 0.7, emph = 0.9))
-plot(result, size_line = 0.6, 1.0)
+plot(result, size_line = c(0.6, 1.2))
 ```
 
 ## Principal Component Analysis
