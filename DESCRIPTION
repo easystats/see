@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.9.0.1
+Version: 0.9.0.2
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -70,7 +70,7 @@ Imports:
     ggplot2,
     insight (>= 0.20.4),
     modelbased (>= 0.8.8),
-    parameters (>= 0.22.1),
+    parameters (>= 0.22.2),
     performance (>= 0.12.3)
 Suggests:
     BH,
