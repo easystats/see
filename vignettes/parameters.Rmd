@@ -154,7 +154,7 @@ By default, `model_parameters()` returns a data frame, where the parameter names
 
 ```{r}
 plot(model_parameters(model4))
-``` 
+```
 
 However, there are several ways to change the the names of the parameters. Since `plot()` returns *ggplot* objects, these can be easily modified, e.g. by adding a `scale_y_discrete()` layer. *Note the correct order of the labels!*
 
@@ -426,7 +426,7 @@ result <- p_function(model)
 plot(result)
 
 result <- p_function(model, ci_levels = c(0.5, 0.7, emph = 0.9))
-plot(result, site_line = 0.6, 1.0)
+plot(result, size_line = 0.6, 1.0)
 ```
 
 ## Principal Component Analysis
