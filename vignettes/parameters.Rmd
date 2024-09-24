@@ -429,6 +429,30 @@ result <- p_function(model, ci_levels = c(0.5, 0.7, emph = 0.9))
 plot(result, size_line = c(0.6, 1.2))
 ```
 
+## Probability of Direction
+
+_([related function documentation](https://easystats.github.io/parameters/reference/p_direction.lm.html))_
+
+```{r}
+data(qol_cancer)
+model <- lm(QoL ~ time + age + education, data = qol_cancer)
+result <- p_direction(model)
+
+plot(result)
+```
+
+## Practical Significance
+
+_([related function documentation](https://easystats.github.io/parameters/reference/p_significance.lm.html))_
+
+```{r}
+data(qol_cancer)
+model <- lm(QoL ~ time + age + education, data = qol_cancer)
+result <- p_significance(model)
+
+plot(result)
+```
+
 ## Principal Component Analysis
 
 _([related function documentation](https://easystats.github.io/parameters/reference/principal_components.html))_
