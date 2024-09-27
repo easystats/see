@@ -70,7 +70,7 @@ test_that("`plot.see_parameters_model()` random parameters works", {
 
   set.seed(12345)
   sleepstudy$grp <- sample(1:5, size = 180, replace = TRUE)
-  model <- lmer(
+  model <- lme4::lmer(
     Reaction ~ Days + (1 | grp) + (1 | Subject),
     data = sleepstudy
   )
