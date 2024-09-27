@@ -6,7 +6,7 @@ test_that("`plot.see_parameters_model()` works", {
   skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_1",
-    fig = plot(out)
+    fig = plot(result)
   )
 })
 
