@@ -53,6 +53,14 @@ plot.see_parameters_model <- function(x,
   # retrieve settings ----------------
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
+  # user wants to plot random effects (group levels)?
+  if (isFALSE(model_attributes$ignore_group) && isTRUE(model_attributes$mixed_model)) {
+    if (missing(show_intercept)) {
+      show_intercept <- TRUE
+    }
+    return(.group_level_plot(x, size_point, size_text, sort, n_columns, show_intercept, show_labels, ...))
+  }
+
   # show intercept for intercept-only models
   if (insight::is_model(x) && insight::is_nullmodel(x)) {
     show_intercept <- TRUE
@@ -461,21 +469,21 @@ plot.see_parameters_model <- function(x,
   # values we can use as breaks and labels for the scale...
 
   if (exponentiated_coefs && log_scale) {
-    range <- 2^(-24:16)
-    x_low <- which.min(min_ci > range) - 1
-    x_high <- which.max(max_ci < range)
+    axis_range <- 2^(-24:16)
+    x_low <- which.min(min_ci > axis_range) - 1
+    x_high <- which.max(max_ci < axis_range)
 
     if (add_values) {
       # add some space to the right panel for text
       new_range <- pretty(2 * max_ci)
-      x_high <- which.max(max(new_range) < range)
+      x_high <- which.max(max(new_range) < axis_range)
     }
 
     p <- p + scale_x_continuous(
       trans = "log",
-      breaks = range[x_low:x_high],
-      limits = c(range[x_low], range[x_high]),
-      labels = sprintf("%g", range[x_low:x_high])
+      breaks = axis_range[x_low:x_high],
+      limits = c(axis_range[x_low], axis_range[x_high]),
+      labels = sprintf("%g", axis_range[x_low:x_high])
     )
   }
 
@@ -526,31 +534,134 @@ plot.see_parameters_model <- function(x,
 
   if (isTRUE(is_meta)) {
     measure <- .meta_measure(meta_measure)
-    p + labs(
+    p + ggplot2::labs(
       y = "",
       x = measure,
       colour = "CI"
     )
+  } else if (isTRUE(axis_title_in_facet)) {
+    p + ggplot2::labs(
+      y = parameter_label,
+      x = NULL,
+      colour = "CI"
+    )
   } else {
-    if (isTRUE(axis_title_in_facet)) {
-      p + labs(
-        y = parameter_label,
-        x = NULL,
-        colour = "CI"
-      )
-    } else {
-      p + labs(
-        y = parameter_label,
-        x = ifelse(is.null(coefficient_name),
-          ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), # nolint
-          coefficient_name
-        ),
-        colour = "CI"
-      )
-    }
+    p + ggplot2::labs(
+      y = parameter_label,
+      x = ifelse(is.null(coefficient_name),
+        ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), # nolint
+        coefficient_name
+      ),
+      colour = "CI"
+    )
   }
 }
 
+
+.group_level_plot <- function(x, size_point, size_text, sort, n_columns, show_intercept, show_labels, ...) {
+  # filter random effects
+  x <- x[x$Effects == "random", ]
+  # remove intercept?
+  if (isFALSE(show_intercept) && length(.is_intercept(x$Parameter)) > 0L) {
+    x <- x[!.is_intercept(x$Parameter), ]
+  }
+  # prepare group variable
+  x$Group <- paste(x$Group, x$Parameter, sep = ": ")
+
+  # define columns
+  if (is.null(n_columns)) {
+    n_columns <- 1
+  }
+
+  # define text size
+  if (is.null(size_text) || is.na(size_text)) {
+    size_text <- 4
+  }
+
+  # for now, we fix the NULL to 0. Maybe we could exp() random parameters
+  # for logistic regression and similar models, but currently only link-scale
+  y_intercept <- 0
+
+  # plot setup for regular model parameters
+  x$colored <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
+  if (all(x$colored == "TRUE")) {
+    color_scale <- scale_color_material(reverse = TRUE)
+    fill_scale <- scale_fill_material(reverse = TRUE)
+  } else {
+    color_scale <- scale_color_material()
+    fill_scale <- scale_fill_material()
+  }
+
+  # create text string for estimate and CI
+  x$Estimate_CI <- sprintf(
+    "%.2f %s",
+    x$Coefficient,
+    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2, zap_small = TRUE)
+  )
+
+  # handle sorting
+  if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
+    x$Level <- factor(x$Level, levels = rev(unique(x$Level)[order(x$Coefficient)]))
+  } else if (!is.null(sort) && sort == "descending") {
+    x$Level <- factor(x$Level, levels = unique(x$Level)[order(x$Coefficient)])
+  } else {
+    # sort coefficients as they appear in the classical summary output by default
+    x$Level <- factor(x$Level, levels = rev(unique(x$Level)))
+  }
+
+  # find min/max range based on CI
+  min_ci <- min(x$CI_low, na.rm = TRUE)
+  max_ci <- max(x$CI_high, na.rm = TRUE)
+
+  p <- ggplot2::ggplot(
+    x,
+    ggplot2::aes(
+      x = .data$Coefficient,
+      y = .data$Level,
+      xmin = .data$CI_low,
+      xmax = .data$CI_high,
+      colour = .data$colored,
+      fill = .data$colored
+    )
+  ) +
+    ggplot2::geom_vline(
+      ggplot2::aes(xintercept = y_intercept),
+      linetype = "dotted",
+      colour = "black"
+    ) +
+    theme_modern(legend.position = "none") +
+    color_scale +
+    fill_scale +
+    ggplot2::geom_errorbarh(
+      height = 0,
+      linewidth = size_point
+    ) +
+    ggplot2::geom_point(
+      size = 4 * size_point,
+      colour = "white",
+      shape = 21
+    ) +
+    ggplot2::facet_wrap(~Group, ncol = n_columns)
+
+  # add coefficients and CIs?
+  if (isTRUE(show_labels)) {
+    # add some space to the right panel for text
+    space_factor <- (n_columns^(size_text / 1.2)) * sqrt(ceiling(diff(c(min_ci, max_ci))) / 5)
+    new_range <- pretty(c(min_ci, max_ci + space_factor))
+
+    # expand scale range and add numbers to the right border
+    if (!any(is.infinite(new_range)) && !anyNA(new_range)) {
+      p <- p +
+        ggplot2::geom_text(
+          mapping = ggplot2::aes(label = .data$Estimate_CI, x = Inf),
+          colour = "black", hjust = "inward", size = size_text
+        ) +
+        ggplot2::xlim(c(min(new_range), max(new_range)))
+    }
+  }
+
+  p
+}
 
 
 .funnel_plot <- function(x, size_point = 3, meta_measure = NULL) {
