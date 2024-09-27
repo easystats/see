@@ -54,7 +54,9 @@ plot.see_parameters_model <- function(x,
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
   # user wants to plot random effects (group levels)?
-  if (isFALSE(model_attributes$ignore_group) && isTRUE(model_attributes$mixed_model)) {
+  if (isFALSE(model_attributes$ignore_group) &&
+      isTRUE(model_attributes$mixed_model) &&
+      !"describe_posterior" %in% model_attributes$class) {
     if (missing(show_intercept)) {
       show_intercept <- TRUE
     }
