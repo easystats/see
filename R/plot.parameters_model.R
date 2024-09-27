@@ -613,6 +613,16 @@ plot.see_parameters_model <- function(x,
   min_ci <- min(x$CI_low, na.rm = TRUE)
   max_ci <- max(x$CI_high, na.rm = TRUE)
 
+  # here we check if all facets have the same scale. If so, we set the scales
+  # to fixed, otherwise we set them to free_y (in facet_wrap). This removes
+  # a redundant scale for plots with identical scales.
+  check_scales <- split(x$Level, x$Group)
+  if (isTRUE(identical(unname(check_scales[-length(check_scales)]), unname(check_scales[-1])))) {
+    facet_scales <- "fixed"
+  } else {
+    facet_scales <- "free_y"
+  }
+
   p <- ggplot2::ggplot(
     x,
     ggplot2::aes(
@@ -641,7 +651,7 @@ plot.see_parameters_model <- function(x,
       colour = "white",
       shape = 21
     ) +
-    ggplot2::facet_wrap(~Group, ncol = n_columns)
+    ggplot2::facet_wrap(~Group, ncol = n_columns, scales = facet_scales)
 
   # add coefficients and CIs?
   if (isTRUE(show_labels)) {
