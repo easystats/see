@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,6 +74,7 @@
 <span>  show_estimate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_interval <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_density <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show_direction <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  log_scale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
@@ -163,6 +164,12 @@ bootstrap, or confidence density) of each parameter be shown?
 (default: <code>FALSE</code>)</p></dd>
 
 
+<dt id="arg-show-direction">show_direction<a class="anchor" aria-label="anchor" href="#arg-show-direction"></a></dt>
+<dd><p>Should the "direction" of coefficients (e.g., positive
+or negative coefficients) be highlighted using different colors?
+(default: <code>TRUE</code>)</p></dd>
+
+
 <dt id="arg-log-scale">log_scale<a class="anchor" aria-label="anchor" href="#arg-log-scale"></a></dt>
 <dd><p>Should exponentiated coefficients (e.g., odds-ratios) be
 plotted on a log scale? (default: <code>FALSE</code>)</p></dd>
@@ -197,6 +204,16 @@ plotted.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A ggplot2-object.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>By default, coefficients and their confidence intervals are colored
+depending on whether they show a "positive" or "negative" association with
+the outcome. E.g., in case of linear models, colors simply distinguish positive
+or negative coefficients. For logistic regression models that are shown on the
+odds ratio scale, colors distinguish odds ratios above or below 1. Use
+<code>show_direction = FALSE</code> to disable this feature and only show a one-colored
+forest plot.</p>
     </div>
 
     <div class="section level2">
