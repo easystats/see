@@ -5,6 +5,9 @@
 - `plot()` for `p_function()` now checks the values of the `size_length`
   argument, to give an informative error message when the input is not valid.
 
+- `plot()` for `model_parameters()` now also plots group-levels of random effects
+  (i.e. for mixed models, when `model_parameters(x, ..., group_level = TRUE)`).
+
 # see 0.9.0
 
 ## Changes

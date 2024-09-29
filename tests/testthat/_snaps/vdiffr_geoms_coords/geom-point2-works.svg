@@ -40,6 +40,16 @@
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
+  <clipPath id='cpMzYwLjAwfDcxNC41MnwyMi43OHw1NzAuNTI='>
+    <rect x='360.00' y='22.78' width='354.52' height='547.74' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzYwLjAwfDcxNC41MnwyMi43OHw1NzAuNTI=)'>
+<rect x='360.00' y='22.78' width='354.52' height='547.74' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
   <clipPath id='cpNTQuMTR8MzU0LjUyfDI4LjI2fDUxNy43OQ=='>
     <rect x='54.14' y='28.26' width='300.39' height='489.53' />
   </clipPath>
@@ -212,16 +222,6 @@
 <text x='340.87' y='530.98' text-anchor='middle' style='font-size: 12.00px; fill: #4D4D4D; font-family: sans;' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>2.5</text>
 <text x='204.33' y='562.34' text-anchor='middle' style='font-size: 13.00px; font-family: sans;' textLength='66.47px' lengthAdjust='spacingAndGlyphs'>Petal.Width</text>
 <text transform='translate(19.91,273.03) rotate(-90)' text-anchor='middle' style='font-size: 13.00px; font-family: sans;' textLength='76.63px' lengthAdjust='spacingAndGlyphs'>Sepal.Length</text>
-</g>
-<defs>
-  <clipPath id='cpMzYwLjAwfDcxNC41MnwyMi43OHw1NzAuNTI='>
-    <rect x='360.00' y='22.78' width='354.52' height='547.74' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMzYwLjAwfDcxNC41MnwyMi43OHw1NzAuNTI=)'>
-<rect x='360.00' y='22.78' width='354.52' height='547.74' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
   <clipPath id='cpNDA4LjY2fDcwOS4wNHwyOC4yNnw1MTcuNzk='>

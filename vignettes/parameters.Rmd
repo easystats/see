@@ -148,6 +148,13 @@ result <- model_parameters(model2)
 plot(result)
 ```
 
+### Including group levels of random effects
+
+```{r}
+result <- model_parameters(model3, group_level = TRUE)
+plot(result)
+```
+
 ### Changing parameter names in the plot
 
 By default, `model_parameters()` returns a data frame, where the parameter names are found in the column `Parameter`. These names are used by default in the generated plot:
