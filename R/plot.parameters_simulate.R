@@ -50,6 +50,9 @@ data_plot.parameters_simulate <- function(x,
       out$Component[grepl(paste0(i, "$"), out$Parameter)] <- i
       out$Parameter <- gsub(paste0(i, "$"), "", out$Parameter)
     }
+  } else if ("Response" %in% colnames(x)) {
+    out$Component <- rep(x$Response, each = nrow(out) / nrow(x))
+    out$Parameter <- rep(x$Parameter, each = nrow(out) / nrow(x))
   }
 
   out
@@ -93,7 +96,9 @@ plot.see_parameters_simulate <- function(x,
                                          ci = 0.95,
                                          ...) {
   is_mlm <- !is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class
-  if (is.null(n_columns) && isTRUE(is_mlm)) n_columns <- 1
+  if (is.null(n_columns) && (isTRUE(is_mlm) || "Response" %in% colnames(x))) {
+    n_columns <- 1
+  }
 
   # check for defaults
   if (missing(centrality) && !is.null(attributes(x)$centrality)) {

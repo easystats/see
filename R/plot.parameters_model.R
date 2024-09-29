@@ -21,6 +21,9 @@
 #' @param show_density Should the compatibility density (i.e., posterior,
 #'   bootstrap, or confidence density) of each parameter be shown?
 #'   (default: `FALSE`)
+#' @param show_direction Should the "direction" of coefficients (e.g., positive
+#' or negative coefficients) be highlighted using different colors?
+#' (default: `TRUE`)
 #' @param log_scale Should exponentiated coefficients (e.g., odds-ratios) be
 #'   plotted on a log scale? (default: `FALSE`)
 #' @param n_columns For models with multiple components (like fixed and random,
@@ -28,6 +31,14 @@
 #'   panel-layout. If `NULL`, a single, integrated plot is shown.
 #'
 #' @return A ggplot2-object.
+#'
+#' @note By default, coefficients and their confidence intervals are colored
+#' depending on whether they show a "positive" or "negative" association with
+#' the outcome. E.g., in case of linear models, colors simply distinguish positive
+#' or negative coefficients. For logistic regression models that are shown on the
+#' odds ratio scale, colors distinguish odds ratios above or below 1. Use
+#' `show_direction = FALSE` to disable this feature and only show a one-colored
+#' forest plot.
 #'
 #' @examples
 #' library(parameters)
@@ -48,10 +59,20 @@ plot.see_parameters_model <- function(x,
                                       show_estimate = TRUE,
                                       show_interval = TRUE,
                                       show_density = FALSE,
+                                      show_direction = TRUE,
                                       log_scale = FALSE,
                                       ...) {
   # retrieve settings ----------------
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
+
+  # for GAMs, remove smooth terms
+  if (!is.null(x$Component) && any(x$Component == "smooth_terms")) {
+    x <- x[x$Component != "smooth_terms", ]
+    # if we only have one component left, remove Component column
+    if (insight::n_unique(x$Component) == 1) {
+      x$Component <- NULL
+    }
+  }
 
   # user wants to plot random effects (group levels)?
   if (isFALSE(model_attributes$ignore_group) &&
@@ -366,16 +387,26 @@ plot.see_parameters_model <- function(x,
     x$CI <- as.character(x$CI)
 
     x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
-    if (all(x$group == "TRUE")) {
+    if (all(x$group == "TRUE", na.rm = TRUE)) {
       color_scale <- scale_color_material(reverse = TRUE)
     } else {
       color_scale <- scale_color_material()
     }
 
-    p <- ggplot2::ggplot(x, ggplot2::aes(
-      y = .data$Parameter, x = .data$Coefficient,
-      size = rev(.data$CI), color = .data$group
-    )) +
+    # should positive/negative coefficients be highlighted?
+    if (show_direction) {
+      p <- ggplot2::ggplot(x, ggplot2::aes(
+        y = .data$Parameter, x = .data$Coefficient,
+        size = rev(.data$CI), color = .data$group
+      ))
+    } else {
+      p <- ggplot2::ggplot(x, ggplot2::aes(
+        y = .data$Parameter, x = .data$Coefficient,
+        size = rev(.data$CI)
+      ))
+    }
+
+    p <- p +
       ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
       theme_modern(legend.position = "none") +
       color_scale
@@ -401,16 +432,23 @@ plot.see_parameters_model <- function(x,
   } else {
     # plot setup for regular model parameters
     x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
-    if (all(x$group == "TRUE")) {
+    if (all(x$group == "TRUE", na.rm = TRUE)) {
       color_scale <- scale_color_material(reverse = TRUE)
     } else {
       color_scale <- scale_color_material()
     }
 
+    if (show_direction) {
     p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
       ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
       theme_modern(legend.position = "none") +
       color_scale
+    } else {
+    p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient)) +
+      ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
+      theme_modern(legend.position = "none") +
+      color_scale
+    }
 
     if (show_density) {
       p <- p + density_layer

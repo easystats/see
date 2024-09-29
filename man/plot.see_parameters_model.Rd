@@ -19,6 +19,7 @@
   show_estimate = TRUE,
   show_interval = TRUE,
   show_density = FALSE,
+  show_direction = TRUE,
   log_scale = FALSE,
   ...
 )
@@ -81,6 +82,10 @@ be shown? (default: \code{TRUE})}
 bootstrap, or confidence density) of each parameter be shown?
 (default: \code{FALSE})}
 
+\item{show_direction}{Should the "direction" of coefficients (e.g., positive
+or negative coefficients) be highlighted using different colors?
+(default: \code{TRUE})}
+
 \item{log_scale}{Should exponentiated coefficients (e.g., odds-ratios) be
 plotted on a log scale? (default: \code{FALSE})}
 
@@ -103,6 +108,15 @@ A ggplot2-object.
 }
 \description{
 The \code{plot()} method for the \code{parameters::model_parameters()} function.
+}
+\note{
+By default, coefficients and their confidence intervals are colored
+depending on whether they show a "positive" or "negative" association with
+the outcome. E.g., in case of linear models, colors simply distinguish positive
+or negative coefficients. For logistic regression models that are shown on the
+odds ratio scale, colors distinguish odds ratios above or below 1. Use
+\code{show_direction = FALSE} to disable this feature and only show a one-colored
+forest plot.
 }
 \examples{
 library(parameters)
