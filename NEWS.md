@@ -8,6 +8,9 @@
 - `plot()` for `model_parameters()` now also plots group-levels of random effects
   (i.e. for mixed models, when `model_parameters(x, ..., group_level = TRUE)`).
 
+- `plot()` for `simulate_parameters()` now better copes with models that have
+  multiple response levels (e.g. multinomial models).
+
 # see 0.9.0
 
 ## Changes
