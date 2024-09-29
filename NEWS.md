@@ -11,6 +11,10 @@
 - `plot()` for `simulate_parameters()` now better copes with models that have
   multiple response levels (e.g. multinomial models).
 
+## Bug fixes
+
+- Fixed issue in `plot()` for `parameters::model_parameters()` for GAM models.
+
 # see 0.9.0
 
 ## Changes

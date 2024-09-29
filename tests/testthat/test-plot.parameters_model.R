@@ -69,7 +69,7 @@ test_that("`plot.see_parameters_model()` random parameters works", {
   data(sleepstudy, package = "lme4")
 
   set.seed(12345)
-  sleepstudy$grp <- sample(1:5, size = 180, replace = TRUE)
+  sleepstudy$grp <- sample.int(5, size = 180, replace = TRUE)
   model <- lme4::lmer(
     Reaction ~ Days + (1 | grp) + (1 | Subject),
     data = sleepstudy
@@ -78,5 +78,20 @@ test_that("`plot.see_parameters_model()` random parameters works", {
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_doublerandom",
     fig = plot(out)
+  )
+})
+
+
+test_that("`plot.see_parameters_model()` random parameters works", {
+  skip_if_not_installed("vdiffr")
+  skip_if_not_installed("mgcv")
+  skip_if_not_installed("parameters")
+
+  data(mtcars)
+  m <- mgcv::gam(mpg ~ s(wt) + cyl + gear + disp, data = mtcars)
+  result <- parameters::model_parameters(m)
+  vdiffr::expect_doppelganger(
+    title = "plot.model_parameters_gam",
+    fig = plot(result)
   )
 })

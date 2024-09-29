@@ -53,6 +53,15 @@ plot.see_parameters_model <- function(x,
   # retrieve settings ----------------
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
+  # for GAMs, remove smooth terms
+  if (!is.null(x$Component) && any(x$Component == "smooth_terms")) {
+    x <- x[x$Component != "smooth_terms", ]
+    # if we only have one component left, remove Component column
+    if (insight::n_unique(x$Component) == 1) {
+      x$Component <- NULL
+    }
+  }
+
   # user wants to plot random effects (group levels)?
   if (isFALSE(model_attributes$ignore_group) &&
       isTRUE(model_attributes$mixed_model) &&
@@ -366,7 +375,7 @@ plot.see_parameters_model <- function(x,
     x$CI <- as.character(x$CI)
 
     x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
-    if (all(x$group == "TRUE")) {
+    if (all(x$group == "TRUE", na.rm = TRUE)) {
       color_scale <- scale_color_material(reverse = TRUE)
     } else {
       color_scale <- scale_color_material()
@@ -401,7 +410,7 @@ plot.see_parameters_model <- function(x,
   } else {
     # plot setup for regular model parameters
     x$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
-    if (all(x$group == "TRUE")) {
+    if (all(x$group == "TRUE", na.rm = TRUE)) {
       color_scale <- scale_color_material(reverse = TRUE)
     } else {
       color_scale <- scale_color_material()
