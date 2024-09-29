@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -251,37 +251,45 @@ parameters names.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <div class="section level3">
+<h3 id="including-group-levels-of-random-effects">Including group levels of random effects<a class="anchor" aria-label="anchor" href="#including-group-levels-of-random-effects"></a>
+</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model3</span>, group_level <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+</div>
+<div class="section level3">
 <h3 id="changing-parameter-names-in-the-plot">Changing parameter names in the plot<a class="anchor" aria-label="anchor" href="#changing-parameter-names-in-the-plot"></a>
 </h3>
 <p>By default, <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> returns a data frame,
 where the parameter names are found in the column
 <code>Parameter</code>. These names are used by default in the generated
 plot:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <p>However, there are several ways to change the the names of the
 parameters. Since <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> returns <em>ggplot</em> objects,
 these can be easily modified, e.g. by adding a
 <code><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete()</a></code> layer. <em>Note the correct order of the
 labels!</em></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Eucation (high-level)"</span>, <span class="st">"Education (mid-level)"</span>, <span class="st">"Age"</span>, <span class="st">"Time"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 <p>Another way would be changing the values of the
 <code>Parameter</code> column before calling <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span></span>
 <span><span class="va">mp</span><span class="op">$</span><span class="va">Parameter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"(Intercept)"</span>, <span class="st">"Time"</span>, <span class="st">"Age"</span>, <span class="st">"Education (mid-level)"</span>,</span>
 <span>  <span class="st">"Eucation (high-level)"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mp</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -296,29 +304,29 @@ and p-values. Simulating parameter draws can be seen as a
 parameter, <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> will produce similar plots as the density
 estimation plots <a href="https://easystats.github.io/see/articles/bayestestR.html">from
 Bayesian models</a>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">simulate_parameters</a></span><span class="op">(</span><span class="va">model1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, stack <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
-<p>To avoid vertical overlapping, use <code>normalize_height</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, stack <span class="op">=</span> <span class="cn">FALSE</span>, normalize_height <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, stack <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+<p>To avoid vertical overlapping, use <code>normalize_height</code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="768"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, stack <span class="op">=</span> <span class="cn">FALSE</span>, normalize_height <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="768"></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, n_columns <span class="op">=</span> <span class="fl">2</span>, stack <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="model-parameters-of-sem-models">Model Parameters of SEM models<a class="anchor" aria-label="anchor" href="#model-parameters-of-sem-models"></a>
 </h2>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="st">" visual  =~ x1 + x2 + x3</span></span>
 <span><span class="st">               textual =~ x4 + x5 + x6</span></span>
 <span><span class="st">               speed   =~ x7 + x8 + x9 "</span></span>
@@ -326,7 +334,7 @@ Bayesian models</a>.</p>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">cfa</a></span><span class="op">(</span><span class="va">structure</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-17-1.png" width="864"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-18-1.png" width="864"></p>
 </div>
 <div class="section level2">
 <h2 id="model-parameters-of-bayesian-models">Model Parameters of Bayesian models<a class="anchor" aria-label="anchor" href="#model-parameters-of-bayesian-models"></a>
@@ -334,7 +342,7 @@ Bayesian models</a>.</p>
 <p><code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> for Bayesian models will produce
 “forest plots” (instead of <a href="https://easystats.github.io/see/articles/bayestestR.html">density
 estimations</a>).</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We download the model to save computation time. Here is the code</span></span>
 <span><span class="co"># to refit the exact model used below...</span></span>
 <span></span>
@@ -356,11 +364,11 @@ estimations</a>).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 <div class="section level3">
-<h3 id="including-group-levels-of-random-effects">Including group levels of random effects<a class="anchor" aria-label="anchor" href="#including-group-levels-of-random-effects"></a>
+<h3 id="including-group-levels-of-random-effects-1">Including group levels of random effects<a class="anchor" aria-label="anchor" href="#including-group-levels-of-random-effects-1"></a>
 </h3>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">brms_model</span>,</span>
 <span>  effects <span class="op">=</span> <span class="st">"all"</span>,</span>
 <span>  component <span class="op">=</span> <span class="st">"all"</span>,</span>
@@ -368,28 +376,28 @@ estimations</a>).</p>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="one-column-layout">One-column Layout<a class="anchor" aria-label="anchor" href="#one-column-layout"></a>
 </h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, n_column <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-20-1.png" width="576"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-21-1.png" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="including-intercepts-and-variance-estimates-for-random-intercepts">Including Intercepts and Variance Estimates for Random
 Intercepts<a class="anchor" aria-label="anchor" href="#including-intercepts-and-variance-estimates-for-random-intercepts"></a>
 </h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, show_intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-21-1.png" width="576"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-22-1.png" width="576"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="model-parameters-of-meta-analysis-models">Model Parameters of Meta-Analysis models<a class="anchor" aria-label="anchor" href="#model-parameters-of-meta-analysis-models"></a>
 </h2>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydat</span> <span class="op">&lt;&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  effectsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.393</span>, <span class="fl">0.675</span>, <span class="fl">0.282</span>, <span class="op">-</span><span class="fl">1.398</span><span class="op">)</span>,</span>
 <span>  standarderror <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.317</span>, <span class="fl">0.317</span>, <span class="fl">0.13</span>, <span class="fl">0.36</span><span class="op">)</span></span>
@@ -409,25 +417,25 @@ Intercepts<a class="anchor" aria-label="anchor" href="#including-intercepts-and-
 <span><span class="co">#&gt; Study 4   |       -1.40 | 0.36 | [-2.10, -0.69] | -3.88 | &lt; .001 |   7.72</span></span>
 <span><span class="co">#&gt; Overall   |       -0.18 | 0.44 | [-1.05,  0.68] | -0.42 | 0.676  |</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-23-1.png" width="672"></p>
 <p>If <code>show_labels</code> is <code>TRUE</code>, estimates and
 confidence intervals are included in the plot. Adjust the text size with
 <code>size_text</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, show_labels <span class="op">=</span> <span class="cn">TRUE</span>, size_text <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-23-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
 <div class="section level3">
 <h3 id="funnel-plots">Funnel plots<a class="anchor" aria-label="anchor" href="#funnel-plots"></a>
 </h3>
 <p>If <code>type = "funnel"</code>, a funnel plot is created.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"funnel"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="model-parameters-of-meta-analysis-models-with-subgroups">Model Parameters of Meta-Analysis Models with Subgroups<a class="anchor" aria-label="anchor" href="#model-parameters-of-meta-analysis-models-with-subgroups"></a>
 </h3>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">dat.bcg</span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/escalc.html" class="external-link">escalc</a></span><span class="op">(</span></span>
@@ -476,7 +484,7 @@ confidence intervals are included in the plot. Adjust the text size with
 <span><span class="co">#&gt; Comstock et al.1  |       -0.02 | 0.27 | [-0.54,  0.51] | -0.06 | 0.948  |  14.00</span></span>
 <span><span class="co">#&gt; Overall           |       -0.69 | 0.49 | [-1.65,  0.26] | -1.42 | 0.155  |</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-26-1.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -484,22 +492,22 @@ confidence intervals are included in the plot. Adjust the text size with
 </h2>
 <p>We download the model to save computation time, but here is the code
 to refit the exact model used below:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Data from</span></span>
 <span><span class="co"># https://github.com/MathiasHarrer/Doing-Meta-Analysis-in-R/blob/master/_data/Meta_Analysis_Data.RData</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/set_prior.html" class="external-link">prior</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html" class="external-link">normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">Intercept</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/set_prior.html" class="external-link">prior</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html" class="external-link">cauchy</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://paulbuerkner.com/brms/reference/set_prior.html" class="external-link">prior</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html" class="external-link">normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">Intercept</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://paulbuerkner.com/brms/reference/set_prior.html" class="external-link">prior</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html" class="external-link">cauchy</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html" class="external-link">brm</a></span><span class="op">(</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html" class="external-link">brm</a></span><span class="op">(</span></span>
 <span>  <span class="va">TE</span> <span class="op">|</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/se.html" class="external-link">se</a></span><span class="op">(</span><span class="va">seTE</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Author</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">Meta_Analysis_Data</span>,</span>
 <span>  prior <span class="op">=</span> <span class="va">priors</span>,</span>
 <span>  iter <span class="op">=</span> <span class="fl">4000</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paul-buerkner/brms" class="external-link">brms</a></span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">insight</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/insight/reference/download_model.html" class="external-link">download_model</a></span><span class="op">(</span><span class="st">"brms_meta_1"</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -535,14 +543,14 @@ to refit the exact model used below:</p>
 <span><span class="co">#&gt; ---------------------------------------------------</span></span>
 <span><span class="co">#&gt; sd_Author__Intercept |   0.29 | [0.12, 0.51] | 100%</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="comparison-of-models">Comparison of Models<a class="anchor" aria-label="anchor" href="#comparison-of-models"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/compare_parameters.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="co"># shorter variable name</span></span>
 <span><span class="va">iris</span><span class="op">$</span><span class="va">Length</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span></span>
@@ -552,12 +560,12 @@ function documentation</a>)</em></p>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/compare_parameters.html" class="external-link">compare_parameters</a></span><span class="op">(</span><span class="va">lm1</span>, <span class="va">lm2</span>, <span class="va">lm3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-29-1.png" width="672"></p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, size_text <span class="op">=</span> <span class="fl">3.8</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-29-1.png" width="768"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-30-1.png" width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="equivalence-testing">Equivalence Testing<a class="anchor" aria-label="anchor" href="#equivalence-testing"></a>
@@ -567,7 +575,7 @@ function documentation</a>)</em></p>
 <div class="section level3">
 <h3 id="for-fixed-effects">For fixed effects<a class="anchor" aria-label="anchor" href="#for-fixed-effects"></a>
 </h3>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># default rules, like in bayestestR::equivalence_test()</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model4</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -578,14 +586,14 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; Parameter        |         90% CI |   SGPV | Equivalence |      p</span></span>
 <span><span class="co">#&gt; -----------------------------------------------------------------</span></span>
 <span><span class="co">#&gt; (Intercept)      | [59.33, 68.41] | &lt; .001 |    Rejected | &gt; .999</span></span>
-<span><span class="co">#&gt; time             | [-0.76,  2.53] | 0.908  |   Undecided | 0.137 </span></span>
+<span><span class="co">#&gt; time             | [-0.76,  2.53] | 0.905  |   Undecided | 0.137 </span></span>
 <span><span class="co">#&gt; age              | [-0.26,  0.32] | &gt; .999 |    Accepted | &lt; .001</span></span>
 <span><span class="co">#&gt; education [mid]  | [ 5.13, 12.39] | &lt; .001 |    Rejected | 0.999 </span></span>
 <span><span class="co">#&gt; education [high] | [10.14, 18.57] | &lt; .001 |    Rejected | &gt; .999</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-30-1.png" width="672"></p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-31-1.png" width="672"></p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model4</span>, rule <span class="op">=</span> <span class="st">"cet"</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; # Conditional Equivalence Testing</span></span>
@@ -595,18 +603,18 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; Parameter        |         90% CI |   SGPV | Equivalence |      p</span></span>
 <span><span class="co">#&gt; -----------------------------------------------------------------</span></span>
 <span><span class="co">#&gt; (Intercept)      | [59.33, 68.41] | &lt; .001 |    Rejected | &gt; .999</span></span>
-<span><span class="co">#&gt; time             | [-0.76,  2.53] | 0.908  |   Undecided | 0.137 </span></span>
+<span><span class="co">#&gt; time             | [-0.76,  2.53] | 0.905  |   Undecided | 0.137 </span></span>
 <span><span class="co">#&gt; age              | [-0.26,  0.32] | &gt; .999 |    Accepted | &lt; .001</span></span>
 <span><span class="co">#&gt; education [mid]  | [ 5.13, 12.39] | &lt; .001 |    Rejected | 0.999 </span></span>
 <span><span class="co">#&gt; education [high] | [10.14, 18.57] | &lt; .001 |    Rejected | &gt; .999</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-31-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="for-random-effects">For random effects<a class="anchor" aria-label="anchor" href="#for-random-effects"></a>
 </h3>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">equivalence_test</a></span><span class="op">(</span><span class="va">model3</span>, effects <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; # TOST-test for Practical Equivalence</span></span>
@@ -629,24 +637,24 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; 308       |    40.86 | Subject | [ 25.22,  56.50] | &lt; .001 |    Rejected</span></span>
 <span><span class="co">#&gt; 309       |   -77.88 | Subject | [-93.51, -62.24] | &lt; .001 |    Rejected</span></span>
 <span><span class="co">#&gt; 310       |   -63.28 | Subject | [-78.91, -47.65] | &lt; .001 |    Rejected</span></span>
-<span><span class="co">#&gt; 330       |     4.32 | Subject | [-11.32,  19.96] | 0.463  |   Undecided</span></span>
-<span><span class="co">#&gt; 331       |    10.18 | Subject | [ -5.45,  25.80] | 0.260  |   Undecided</span></span>
+<span><span class="co">#&gt; 330       |     4.32 | Subject | [-11.32,  19.96] | 0.459  |   Undecided</span></span>
+<span><span class="co">#&gt; 331       |    10.18 | Subject | [ -5.45,  25.80] | 0.261  |   Undecided</span></span>
 <span><span class="co">#&gt; 332       |     8.47 | Subject | [ -7.17,  24.10] | 0.323  |   Undecided</span></span>
-<span><span class="co">#&gt; 333       |    16.44 | Subject | [  0.81,  32.07] | 0.082  |    Rejected</span></span>
-<span><span class="co">#&gt; 334       |    -3.00 | Subject | [-18.65,  12.65] | 0.494  |   Undecided</span></span>
+<span><span class="co">#&gt; 333       |    16.44 | Subject | [  0.81,  32.07] | 0.085  |    Rejected</span></span>
+<span><span class="co">#&gt; 334       |    -3.00 | Subject | [-18.65,  12.65] | 0.489  |   Undecided</span></span>
 <span><span class="co">#&gt; 335       |   -45.48 | Subject | [-61.11, -29.85] | &lt; .001 |    Rejected</span></span>
 <span><span class="co">#&gt; 337       |    72.16 | Subject | [ 56.54,  87.79] | &lt; .001 |    Rejected</span></span>
-<span><span class="co">#&gt; 349       |   -20.91 | Subject | [-36.57,  -5.25] | 0.026  |    Rejected</span></span>
-<span><span class="co">#&gt; 350       |    14.23 | Subject | [ -1.41,  29.88] | 0.132  |   Undecided</span></span>
+<span><span class="co">#&gt; 349       |   -20.91 | Subject | [-36.57,  -5.25] | 0.028  |    Rejected</span></span>
+<span><span class="co">#&gt; 350       |    14.23 | Subject | [ -1.41,  29.88] | 0.134  |   Undecided</span></span>
 <span><span class="co">#&gt; 351       |    -8.07 | Subject | [-23.74,   7.59] | 0.337  |   Undecided</span></span>
 <span><span class="co">#&gt; 352       |    36.44 | Subject | [ 20.76,  52.12] | &lt; .001 |    Rejected</span></span>
-<span><span class="co">#&gt; 369       |     6.97 | Subject | [ -8.66,  22.60] | 0.378  |   Undecided</span></span>
-<span><span class="co">#&gt; 370       |    -6.31 | Subject | [-21.96,   9.34] | 0.401  |   Undecided</span></span>
-<span><span class="co">#&gt; 371       |    -3.34 | Subject | [-18.96,  12.29] | 0.488  |   Undecided</span></span>
-<span><span class="co">#&gt; 372       |    18.21 | Subject | [  2.57,  33.84] | 0.054  |    Rejected</span></span>
+<span><span class="co">#&gt; 369       |     6.97 | Subject | [ -8.66,  22.60] | 0.376  |   Undecided</span></span>
+<span><span class="co">#&gt; 370       |    -6.31 | Subject | [-21.96,   9.34] | 0.399  |   Undecided</span></span>
+<span><span class="co">#&gt; 371       |    -3.34 | Subject | [-18.96,  12.29] | 0.483  |   Undecided</span></span>
+<span><span class="co">#&gt; 372       |    18.21 | Subject | [  2.57,  33.84] | 0.056  |    Rejected</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-33-1.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -654,25 +662,51 @@ function documentation</a>)</em></p>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/p_function.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/p_function.html" class="external-link">p_function</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-33-1.png" width="672"></p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-34-1.png" width="672"></p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/p_function.html" class="external-link">p_function</a></span><span class="op">(</span><span class="va">model</span>, ci_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.7</span>, emph <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, size_line <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.6</span>, <span class="fl">1.2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-33-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-34-2.png" width="672"></p>
+</div>
+<div class="section level2">
+<h2 id="probability-of-direction">Probability of Direction<a class="anchor" aria-label="anchor" href="#probability-of-direction"></a>
+</h2>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/p_direction.lm.html" class="external-link">related
+function documentation</a>)</em></p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qol_cancer</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">QoL</span> <span class="op">~</span> <span class="va">time</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">education</span>, data <span class="op">=</span> <span class="va">qol_cancer</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_direction.html" class="external-link">p_direction</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-35-1.png" width="672"></p>
+</div>
+<div class="section level2">
+<h2 id="practical-significance">Practical Significance<a class="anchor" aria-label="anchor" href="#practical-significance"></a>
+</h2>
+<p><em>(<a href="https://easystats.github.io/parameters/reference/p_significance.lm.html" class="external-link">related
+function documentation</a>)</em></p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qol_cancer</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">QoL</span> <span class="op">~</span> <span class="va">time</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">education</span>, data <span class="op">=</span> <span class="va">qol_cancer</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/p_significance.html" class="external-link">p_significance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<p><img src="parameters_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="principal-component-analysis">Principal Component Analysis<a class="anchor" aria-label="anchor" href="#principal-component-analysis"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">principal_components</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, n <span class="op">=</span> <span class="st">"all"</span>, threshold <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -691,8 +725,8 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; The 6 principal components accounted for 99.30% of the total variance of the original data (PC1 = 72.66%, PC2 = 16.52%, PC3 = 4.93%, PC4 = 2.26%, PC5 = 1.85%, PC6 = 1.08%).</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-34-1.png" width="672"></p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">principal_components</a></span><span class="op">(</span></span>
 <span>  <span class="va">mtcars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -718,7 +752,7 @@ function documentation</a>)</em></p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"line"</span>, text_color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_abyss.html">theme_abyss</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-35-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-38-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="cluster-analysis">Cluster Analysis<a class="anchor" aria-label="anchor" href="#cluster-analysis"></a>
@@ -728,7 +762,7 @@ function documentation</a>)</em></p>
 <div class="section level3">
 <h3 id="clustering-solution">Clustering solution<a class="anchor" aria-label="anchor" href="#clustering-solution"></a>
 </h3>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html" class="external-link">cluster_analysis</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -750,27 +784,27 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; # You can access the predicted clusters via `predict()`.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/cluster_analysis.html" class="external-link">cluster_analysis</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-36-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-39-2.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="cluster-centers">Cluster centers<a class="anchor" aria-label="anchor" href="#cluster-centers"></a>
 </h3>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="va">s</span></span>
 <span><span class="co">#&gt;   Cluster Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
-<span><span class="co">#&gt; 1       1    0.3558492  -0.3930869   0.58460377  0.54663615</span></span>
-<span><span class="co">#&gt; 2       2    1.3926646   0.2323817   1.15674505  1.21327591</span></span>
-<span><span class="co">#&gt; 3       3   -0.9987207   0.9032290  -1.29875725 -1.25214931</span></span>
-<span><span class="co">#&gt; 4       4   -0.4201099  -1.4246794   0.03924137 -0.05279511</span></span>
+<span><span class="co">#&gt; 1       1    1.3926646   0.2323817   1.15674505  1.21327591</span></span>
+<span><span class="co">#&gt; 2       2   -0.9987207   0.9032290  -1.29875725 -1.25214931</span></span>
+<span><span class="co">#&gt; 3       3   -0.4201099  -1.4246794   0.03924137 -0.05279511</span></span>
+<span><span class="co">#&gt; 4       4    0.3558492  -0.3930869   0.58460377  0.54663615</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-40-1.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -778,7 +812,7 @@ function documentation</a>)</em></p>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_factors.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/n_factors.html" class="external-link">n_factors</a></span><span class="op">(</span><span class="va">mtcars</span>, type <span class="op">=</span> <span class="st">"PCA"</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -787,17 +821,17 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; The choice of 3 dimensions is supported by 5 (29.41%) methods out of 17 (Bartlett, CNG, Scree (SE), Scree (R2), Velicer's MAP).</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-38-1.png" width="672"></p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-41-1.png" width="672"></p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-38-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-41-2.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="number-of-clusters-to-retain">Number of Clusters to Retain<a class="anchor" aria-label="anchor" href="#number-of-clusters-to-retain"></a>
 </h2>
 <p><em>(<a href="https://easystats.github.io/parameters/reference/n_clusters.html" class="external-link">related
 function documentation</a>)</em></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/n_clusters.html" class="external-link">n_clusters</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/datawizard/reference/standardize.html" class="external-link">standardize</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -806,10 +840,10 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; The choice of 2 clusters is supported by 15 (51.72%) methods out of 29 (Elbow, Silhouette, Gap_Maechler2012, Gap_Dudoit2002, Ch, DB, Duda, Pseudot2, Beale, Ratkowsky, PtBiserial, Mcclain, Dunn, SDindex, Mixture (VVV)).</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<p><img src="parameters_files/figure-html/unnamed-chunk-42-1.png" width="672"></p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="parameters_files/figure-html/unnamed-chunk-39-2.png" width="672"></p>
+<p><img src="parameters_files/figure-html/unnamed-chunk-42-2.png" width="672"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -822,7 +856,7 @@ function documentation</a>)</em></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
 </div>
 
     </footer>
