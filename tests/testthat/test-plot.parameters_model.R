@@ -8,6 +8,10 @@ test_that("`plot.see_parameters_model()` works", {
     title = "plot.model_parameters_1",
     fig = plot(result)
   )
+  vdiffr::expect_doppelganger(
+    title = "plot.model_parameters_no_dir",
+    fig = plot(result, show_direction = FALSE)
+  )
 })
 
 test_that("`plot.see_parameters_model()` random parameters works", {

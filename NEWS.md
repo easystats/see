@@ -8,6 +8,9 @@
 - `plot()` for `model_parameters()` now also plots group-levels of random effects
   (i.e. for mixed models, when `model_parameters(x, ..., group_level = TRUE)`).
 
+- `plot()` for `model_parameters()` gets a `show_direction` argument, to turn
+  off the direction of the effect in the plot.
+
 - `plot()` for `simulate_parameters()` now better copes with models that have
   multiple response levels (e.g. multinomial models).
 
