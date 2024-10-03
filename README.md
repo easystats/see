@@ -2,7 +2,7 @@
 # see: Model Visualisation Toolbox for ‘easystats’ and ‘ggplot2’ <img src='man/figures/logo.png' align="right" height="139" />
 
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03393/status.svg)](https://doi.org/10.21105/joss.03393)
-[![downloads](http://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
+[![downloads](https://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/see)](https://cranlogs.r-pkg.org/)
 
 ***“Damned are those who believe without seeing”***
@@ -94,7 +94,7 @@ results supported by *easystats*.
 
 # Installation
 
-[![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
+[![CRAN](https://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
 [![see status
 badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-universe.dev)
 [![R-CMD-check](https://github.com/easystats/see/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/see/actions)

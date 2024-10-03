@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
 ```
 
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03393/status.svg)](https://doi.org/10.21105/joss.03393)
-[![downloads](http://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
-[![total](https://cranlogs.r-pkg.org/badges/grand-total/see)](https://cranlogs.r-pkg.org/) 
+[![downloads](https://cranlogs.r-pkg.org/badges/see)](https://cran.r-project.org/package=see)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/see)](https://cranlogs.r-pkg.org/)
 
 ***"Damned are those who believe without seeing"***
 
@@ -51,7 +51,7 @@ ggplot(results) +
   geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
 ```
 
-A number of packages have been developed to extend *ggplot2* and assist with model visualization (for a sampling of these packages, visit [ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects. 
+A number of packages have been developed to extend *ggplot2* and assist with model visualization (for a sampling of these packages, visit [ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects.
 
 The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
 
@@ -59,7 +59,7 @@ The central goal of *easystats* is to make the task of doing statistics in R as 
 
 # Installation
 
-[![CRAN](http://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see) [![see status badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-universe.dev) [![R-CMD-check](https://github.com/easystats/see/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/see/actions) [![codecov](https://codecov.io/gh/easystats/see/branch/main/graph/badge.svg)](https://app.codecov.io/gh/easystats/see)
+[![CRAN](https://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see) [![see status badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-universe.dev) [![R-CMD-check](https://github.com/easystats/see/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/see/actions) [![codecov](https://codecov.io/gh/easystats/see/branch/main/graph/badge.svg)](https://app.codecov.io/gh/easystats/see)
 
 The *see* package is available on CRAN, while its latest development version is available on R-universe (from _rOpenSci_).
 
@@ -178,7 +178,7 @@ predicted <- estimate_expectation(model, data = "grid")
 plot(predicted)
 ```
 
-One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`. 
+One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`.
 
 ```{r modelbased2, error=TRUE}
 means <- estimate_means(model)
@@ -340,7 +340,7 @@ In case you want to file an issue or contribute in another way to the package, p
 
 # Code of Conduct
 
-Please note that this project is released with a 
+Please note that this project is released with a
 [Contributor Code of Conduct](https://easystats.github.io/see/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.
 
 # References
