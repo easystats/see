@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.9.0.5
+Version: 0.9.0.6
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -64,10 +64,10 @@ Depends:
 Imports:
     bayestestR (>= 0.14.0),
     correlation (>= 0.8.5),
-    datawizard (>= 0.12.3),
+    datawizard (>= 0.13.0),
     effectsize (>= 0.8.9),
     ggplot2,
-    insight (>= 0.20.4),
+    insight (>= 0.20.5),
     modelbased (>= 0.8.8),
     parameters (>= 0.22.2),
     performance (>= 0.12.3)
@@ -121,4 +121,4 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/Needs/website: easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/performance, easystats/parameters, easystats/datawizard
+Remotes: easystats/performance, easystats/parameters
