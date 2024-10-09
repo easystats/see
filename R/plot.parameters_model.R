@@ -76,8 +76,8 @@ plot.see_parameters_model <- function(x,
 
   # user wants to plot random effects (group levels)?
   if (isFALSE(model_attributes$ignore_group) &&
-      isTRUE(model_attributes$mixed_model) &&
-      !"brmsfit" %in% model_attributes$model_class) {
+    isTRUE(model_attributes$mixed_model) &&
+    !"brmsfit" %in% model_attributes$model_class) {
     if (missing(show_intercept)) {
       show_intercept <- TRUE
     }
@@ -439,15 +439,15 @@ plot.see_parameters_model <- function(x,
     }
 
     if (show_direction) {
-    p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
-      ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
-      theme_modern(legend.position = "none") +
-      color_scale
+      p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
+        ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
+        theme_modern(legend.position = "none") +
+        color_scale
     } else {
-    p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient)) +
-      ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
-      theme_modern(legend.position = "none") +
-      color_scale
+      p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient)) +
+        ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
+        theme_modern(legend.position = "none") +
+        color_scale
     }
 
     if (show_density) {
