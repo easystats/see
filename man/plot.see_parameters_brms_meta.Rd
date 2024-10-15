@@ -61,7 +61,7 @@ output of estimates and credible intervals.
 }
 }
 \examples{
-\dontshow{if (require("brms") && require("metafor") && require("RcppEigen")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("brms") && require("metafor") && require("RcppEigen") && require("BH")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 library(parameters)
 library(brms)

@@ -55,6 +55,12 @@ plot.see_p_function <- function(x,
   # make sure group is factor
   data_ci_segments$group <- as.factor(data_ci_segments$group)
 
+  # sanity check - size_line must be of length two, when we have more than
+  # one group (i.e. when we emphasize CI lines)
+  if (length(size_line) != 2 && insight::n_unique(data_ci_segments$group) == 2) {
+    insight::format_error("Length of `size_line` must of length 2, to match regular and emphasized interval lines.") # nolint
+  }
+
   # setup - no color/fill aes for ribbons when we have no facets
   if (!is.null(n_columns) || insight::n_unique(data_ribbon$Parameter) == 1) {
     p <- ggplot2::ggplot() +

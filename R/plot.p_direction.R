@@ -27,17 +27,17 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
     for (i in names(data)) {
-      if (!is.null(params)) {
+      if (!is.null(params) && all(c("Effects", "Component") %in% colnames(params))) {
         dataplot <- rbind(
           dataplot,
           cbind(
-            .compute_densities_pd(data[[i]], name = i),
-            "Effects" = params$Effects[params$Parameter == i],
-            "Component" = params$Component[params$Parameter == i]
+            .compute_densities_pd(data[[i]], name = i, null = attr(x, "null")),
+            Effects = params$Effects[params$Parameter == i],
+            Component = params$Component[params$Parameter == i]
           )
         )
       } else {
-        dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i))
+        dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i, null = attr(x, "null")))
       }
     }
 
@@ -60,7 +60,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
+    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior", null = attr(x, "null"))
   }
 
   dataplot <- do.call(
@@ -70,7 +70,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
       list(dataplot$y, dataplot$fill),
       function(df) {
         df$n <- nrow(df)
-        return(df)
+        df
       }
     )
   )
@@ -81,7 +81,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
       dataplot$y,
       function(df) {
         df$prop <- df$n / nrow(df)
-        return(df)
+        df
       }
     )
   )
@@ -108,10 +108,10 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
   dataplot <- .fix_facet_names(dataplot)
 
   attr(dataplot, "info") <- list(
-    "xlab" = "Possible parameter values",
-    "ylab" = ylab,
-    "legend_fill" = "Effect direction",
-    "title" = "Probability of Direction"
+    xlab = "Possible parameter values",
+    ylab = ylab,
+    legend_fill = "Effect direction",
+    title = "Probability of Direction"
   )
 
   class(dataplot) <- c("data_plot", "see_p_direction", class(dataplot))
@@ -121,11 +121,14 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
 
 #' @keywords internal
-.compute_densities_pd <- function(x, name = "Y") {
+.compute_densities_pd <- function(x, name = "Y", null = 0) {
   out <- .as.data.frame_density(
     stats::density(x)
   )
-  out$fill <- ifelse(out$x < 0, "Negative", "Positive")
+  if (is.null(null)) {
+    null <- 0
+  }
+  out$fill <- ifelse(out$x < null, "Negative", "Positive")
   out$height <- as.vector(
     (out$y - min(out$y, na.rm = TRUE)) /
       diff(range(out$y, na.rm = TRUE), na.rm = TRUE)
@@ -182,7 +185,7 @@ plot.see_p_direction <- function(x,
   params <- unique(x$y)
 
   # get labels
-  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
+  axis_labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   insight::check_if_installed("ggridges")
 
@@ -216,7 +219,7 @@ plot.see_p_direction <- function(x,
   if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
-    p <- p + scale_y_discrete(labels = labels)
+    p <- p + scale_y_discrete(labels = axis_labels)
   }
 
 

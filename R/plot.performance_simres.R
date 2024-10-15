@@ -45,6 +45,7 @@ plot.see_performance_simres <- function(x,
                                         ...) {
   # need DHARMa to be installed
   insight::check_if_installed("DHARMa")
+  qqplotr_installed <- insight::check_if_installed("qqplotr", quietly = TRUE)
 
   # extract data, if from check_residuals
   if (inherits(x, "see_check_residuals")) {
@@ -56,12 +57,21 @@ plot.see_performance_simres <- function(x,
     res <- stats::residuals(x)
     dp <- list(min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
     dp_band <- list(min = 0, max = 1)
-    dfun <- "unif"
+    # "distribution" argument has different handling in qqplotr
+    if (qqplotr_installed) {
+      dfun <- "unif"
+    } else {
+      dfun <- stats::qunif
+    }
   } else if (identical(transform, stats::qnorm)) {
     res <- stats::residuals(x, quantileFunction = stats::qnorm)
     dp <- list(mean = 0, sd = 1)
     dp_band <- list(mean = 0, sd = 1)
-    dfun <- "norm"
+    if (qqplotr_installed) {
+      dfun <- "norm"
+    } else {
+      dfun <- stats::qnorm
+    }
   } else if (is.character(transform)) {
     insight::format_error("`transform` must be a function, not a string value.")
   } else {
@@ -76,7 +86,7 @@ plot.see_performance_simres <- function(x,
   )
 
   # when we have package qqplotr, we can add confidence bands
-  if (requireNamespace("qqplotr", quietly = TRUE)) {
+  if (qqplotr_installed) {
     qq_stuff <- list(
       qqplotr::stat_qq_band(
         distribution = dfun,

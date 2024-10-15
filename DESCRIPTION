@@ -1,28 +1,28 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.8.5.6
+Version: 0.9.0.6
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
              role = c("aut", "ctb"),
              email = "d.luedecke@uke.de",
-             comment = c(ORCID = "0000-0002-8895-3206", Twitter = "@strengejacke")),
+             comment = c(ORCID = "0000-0002-8895-3206")),
       person(given = "Dominique",
              family = "Makowski",
              role = c("aut", "inv"),
              email = "dom.makowski@gmail.com",
-             comment = c(ORCID = "0000-0001-5375-9967", Twitter = "@Dom_Makowski")),
+             comment = c(ORCID = "0000-0001-5375-9967")),
       person(given = "Indrajeet",
              family = "Patil",
              role = c("aut", "cre"),
              email = "patilindrajeet.science@gmail.com",
-             comment = c(ORCID = "0000-0003-1995-6531", Twitter = "@patilindrajeets")),
+             comment = c(ORCID = "0000-0003-1995-6531")),
       person(given = "Mattan S.",
              family = "Ben-Shachar",
              role = c("aut", "ctb"),
              email = "matanshm@post.bgu.ac.il",
-             comment = c(ORCID = "0000-0002-4287-4801", Twitter = "@mattansb")),
+             comment = c(ORCID = "0000-0002-4287-4801")),
       person(given = "Brenton M.",
              family = "Wiernik",
              role = c("aut", "ctb"),
@@ -46,8 +46,7 @@ Authors@R:
       person(given = "Jakob",
              family = "Bossek",
              role = "rev",
-             email = "bossek@wi.uni-muenster.de",
-             comment = c(Twitter = "@BossekJakob")))
+             email = "bossek@wi.uni-muenster.de"))
 Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
 Description: Provides plotting utilities supporting packages in the 'easystats'
     ecosystem (<https://github.com/easystats/easystats>) and some extra themes,
@@ -65,14 +64,15 @@ Depends:
 Imports:
     bayestestR (>= 0.14.0),
     correlation (>= 0.8.5),
-    datawizard (>= 0.12.2),
+    datawizard (>= 0.13.0),
     effectsize (>= 0.8.9),
-    ggplot2 (>= 3.5.1),
-    insight (>= 0.20.2),
+    ggplot2,
+    insight (>= 0.20.5),
     modelbased (>= 0.8.8),
-    parameters (>= 0.22.1),
-    performance (>= 0.12.2)
+    parameters (>= 0.22.2),
+    performance (>= 0.12.3)
 Suggests:
+    BH,
     brms,
     curl,
     DHARMa,
@@ -92,6 +92,7 @@ Suggests:
     lme4,
     logspline,
     MASS,
+    mclogit,
     mclust,
     merDeriv,
     mgcv,
@@ -120,4 +121,4 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/Needs/website: easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/performance
+Remotes: easystats/performance, easystats/parameters

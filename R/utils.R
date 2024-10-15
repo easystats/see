@@ -42,6 +42,8 @@
 
   # clean parameters names
   params <- gsub("(b_|bs_|bsp_|bcs_)(.*)", "\\2", params, perl = TRUE)
+  params <- gsub("^cond_(.*)", "\\1 (Conditional)", params, perl = TRUE)
+  params <- gsub("(.*)_cond$", "\\1 (Conditional)", params, perl = TRUE)
   params <- gsub("^zi_(.*)", "\\1 (Zero-Inflated)", params, perl = TRUE)
   params <- gsub("(.*)_zi$", "\\1 (Zero-Inflated)", params, perl = TRUE)
   params <- gsub("(.*)_disp$", "\\1 (Dispersion)", params, perl = TRUE)

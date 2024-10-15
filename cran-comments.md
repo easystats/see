@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 0 note
 
-* Fixes test failures on CRAN on Windows old release (R 4.3.3).
+* Maintenance release.
 
 ## revdepcheck results
 

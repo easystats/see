@@ -340,7 +340,7 @@ plot.see_performance_pp_check <- function(x,
   x$key[nrow(x)] <- "Observed data"
   x <- datawizard::data_to_long(x, select = -1:-2, names_to = "x", values_to = "count")
   if (insight::n_unique(x$x) > 8) {
-    x$x <- datawizard::to_numeric(x$x)
+    x$x <- datawizard::to_numeric(x$x, dummy_factors = TRUE)
   }
 
   p1 <- p2 <- NULL
@@ -536,7 +536,7 @@ plot.see_performance_pp_check <- function(x,
       size = ggplot2::guide_legend(reverse = TRUE)
     )
 
-  return(p)
+  p
 }
 
 

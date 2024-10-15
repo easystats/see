@@ -12,7 +12,6 @@ data_plot.p_significance <- function(x,
 
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
-
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
@@ -32,19 +31,19 @@ data_plot.p_significance <- function(x,
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
     for (i in names(data)) {
-      if (!is.null(params)) {
+      if (is.null(params) || !all(c("Effects", "Component") %in% colnames(params))) {
         dataplot <- rbind(
           dataplot,
-          cbind(
-            .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold")),
-            "Effects" = params$Effects[params$Parameter == i],
-            "Component" = params$Component[params$Parameter == i]
-          )
+          .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold"))
         )
       } else {
         dataplot <- rbind(
           dataplot,
-          .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold"))
+          cbind(
+            .compute_densities_ps(data[[i]], name = i, threshold = attr(x, "threshold")),
+            Effects = params$Effects[params$Parameter == i],
+            Component = params$Component[params$Parameter == i]
+          )
         )
       }
     }
@@ -68,7 +67,7 @@ data_plot.p_significance <- function(x,
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior")
+    dataplot <- .compute_densities_ps(data[, 1], name = "Posterior", threshold = attr(x, "threshold"))
   }
 
   dataplot <- do.call(
@@ -78,7 +77,7 @@ data_plot.p_significance <- function(x,
       list(dataplot$y, dataplot$fill),
       function(df) {
         df$n <- nrow(df)
-        return(df)
+        df
       }
     )
   )
@@ -89,7 +88,7 @@ data_plot.p_significance <- function(x,
       dataplot$y,
       function(df) {
         df$prop <- df$n / nrow(df)
-        return(df)
+        df
       }
     )
   )
@@ -116,10 +115,10 @@ data_plot.p_significance <- function(x,
   dataplot <- .fix_facet_names(dataplot)
 
   attr(dataplot, "info") <- list(
-    "xlab" = "Possible parameter values",
-    "ylab" = ylab,
-    "legend_fill" = "Probability",
-    "title" = "Practical Significance"
+    xlab = "Possible parameter values",
+    ylab = ylab,
+    legend_fill = "Probability",
+    title = "Practical Significance"
   )
 
   class(dataplot) <- c("data_plot", "see_p_significance", class(dataplot))
@@ -132,18 +131,35 @@ data_plot.p_significance <- function(x,
 .compute_densities_ps <- function(x, name = "Y", threshold = 0) {
   out <- .as.data.frame_density(stats::density(x))
 
-  fifty_cents <- sum(out$y[out$x > threshold]) > (sum(out$y) / 2)
+  # sanity check
+  if (is.null(threshold)) {
+    threshold <- 0
+  }
+
+  # make sure we have a vector of length 2
+  if (length(threshold) == 1) {
+    threshold <- c(-1 * threshold, threshold)
+  }
+
+  # find out the probability mass larger or lower than the ROPE (outside)
+  p_mass_ht_rope <- sum(out$y[out$x > threshold[2]])
+  p_mass_lt_rope <- sum(out$y[out$x < threshold[1]])
+
+  # find out whether probability mass "above" ROPE is larger than the probability
+  # mass that is on the left (negative) side of the ROPE
+  fifty_cents <- p_mass_ht_rope > p_mass_lt_rope
 
   out$fill <- "Less Probable"
-  out$fill[abs(out$x) < threshold] <- "ROPE"
-  out$fill[(out$x > threshold)] <- ifelse(fifty_cents, "Significant", "Less Probable")
-  out$fill[out$x < (-1 * threshold)] <- ifelse(fifty_cents, "Less Probable", "Significant")
+  out$fill[out$x > threshold[1] & out$x < threshold[2]] <- "ROPE"
+  out$fill[out$x > threshold[2]] <- ifelse(fifty_cents, "Significant", "Less Probable")
+  out$fill[out$x < threshold[1]] <- ifelse(fifty_cents, "Less Probable", "Significant")
 
   out$height <- out$y
   out$y <- name
 
   # normalize
-  out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
+  range_diff <- diff(range(out$height, na.rm = TRUE), na.rm = TRUE)
+  out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / range_diff)
   out
 }
 
@@ -194,7 +210,7 @@ plot.see_p_significance <- function(x,
   params <- unique(x$y)
 
   # get labels
-  labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
+  axis_labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   insight::check_if_installed("ggridges")
 
@@ -235,7 +251,7 @@ plot.see_p_significance <- function(x,
   if (length(unique(x$y)) == 1L && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
-    p <- p + scale_y_discrete(labels = labels)
+    p <- p + scale_y_discrete(labels = axis_labels)
   }
 
 
