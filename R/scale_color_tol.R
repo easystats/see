@@ -62,95 +62,91 @@
 #'   theme_modern() +
 #'   scale_fill_oi(order = c(1, 5, 6, 2, 4, 3, 7))
 #' @export
-scale_color_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, aesthetics = "color", ...) {
+scale_color_tol_discrete <- function(palette = "bright", reverse = FALSE, order = NULL, aesthetics = "color", ...) {
   discrete_scale(
     aesthetics = aesthetics,
-    palette = palette_okabeito(palette = palette, reverse = reverse, order = order),
+    palette = palette_tol_discrete(palette = palette, reverse = reverse, order = order),
     ...
   )
 }
 
 # Fill --------------------------------------------------------------------
 
-#' @rdname scale_color_okabeito
+#' @rdname scale_color_tol
 #' @export
-scale_fill_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, aesthetics = "fill", ...) {
+scale_fill_tol_discrete <- function(palette = "bright", reverse = FALSE, order = NULL, aesthetics = "fill", ...) {
   discrete_scale(
     aesthetics = aesthetics,
-    palette = palette_okabeito(palette = palette, reverse = reverse, order = order),
+    palette = palette_tol_discrete(palette = palette, reverse = reverse, order = order),
     ...
   )
 }
 
 # Aliases -----------------------------------------------------------------
 
-#' @rdname scale_color_okabeito
+#' @rdname scale_color_tol
 #' @export
-scale_colour_okabeito <- scale_color_okabeito
-
-#' @rdname scale_color_okabeito
-#' @export
-scale_colour_oi <- scale_color_okabeito
-
-#' @rdname scale_color_okabeito
-#' @export
-scale_color_oi <- scale_color_okabeito
-
-#' @rdname scale_color_okabeito
-#' @export
-scale_fill_oi <- scale_fill_okabeito
-
+scale_colour_tol_discrete <- scale_color_tol_discrete
 
 
 # Palette --------------------------------------------------------------------
 
-# The palette from: https://jfly.uni-koeln.de/color/#pallet
-okabeito_colors_list <- c(
-  `orange` = "#E69F00",
-  `light blue` = "#56B4E9",
-  `green` = "#009E73",
-  `yellow` = "#F0E442",
-  `blue` = "#0072B2",
-  `red` = "#D55E00",
-  `purple` = "#CC79A7",
-  `grey` = "#999999",
-  `black` = "#000000",
-  `sky blue` = "#56B4E9",
-  `bluish green` = "#009E73",
-  `vermillion` = "#D55E00",
-  `reddish purple` = "#CC79A7",
-  `dark yellow` = "#F5C710",
-  `amber` = "#F5C710"
+tol_colors_discrete_list <- list(
+  bright = c(blue = "#4477AA", red = "#EE6677", green = "#228833", yellow = "#CCBB44", cyan = "#66CCEE", purple = "#AA3377", grey = "#BBBBBB"),
+  `high-contrast` = c(blue = "#004488", yellow = "#DDAA33", red = "#BB5566", black = "#000000", white = "#FFFFFF"),
+  vibrant = c(orange = "#EE7733", blue = "#0077BB", cyan = "#33BBEE", magenta = "#EE3377", red = "#CC3311", teal = "#009988", grey = "#BBBBBB"),
+  muted = c(rose = "#CC6677", indigo = "#332288", sand = "#DDCC77", green = "#117733", cyan = "#88CCEE", wine = "#882255", teal = "#44AA99", olive = "#999933", purple = "#AA4499", grey = "#DDDDDD"),
+  `medium-contrast` = c("light blue" = "#6699CC", "dark blue" = "#004488", "light yellow" = "#EECC66", "dark red" = "#994455", "dark yellow" = "#997700", "light red" = "#EE99AA", black = "#000000", white = "#FFFFFF"),
+  pale = c(blue = "#BBCCEE", cyan = "#CCEEFF", green = "#CCDDAA", yellow = "#EEEEBB", red = "#FFCCCC", grey = "#DDDDDD"),
+  dark = c(blue = "#222255", cyan = "#225555", green = "#225522", yellow = "#666633", red = "#663333", grey = "#555555"),
+  light = c(blue = "#77AADD", orange = "#EE8866", yellow = "#EEDD88", pink = "#FFAABB", cyan = "#99DDFF", mint = "#44BB99", pear = "#BBCC33", olive = "#AAAA00", grey = "#DDDDDD"),
+  # TODO: Finish rainbow color schemes
+  rainbow14 = c('3', '6', '9', '10', '12', '14', '15', '16', '17', '18', '20', '22', '24', '26' = "#DC050C", 'grey'),
+  rainbow23 = c('1', '2', '4', '5', '7', '8', '9', '10', '11', '13', '14', '15', '16', '17', '18', '19', '21', '23', '25', '26' = "#DC050C", '27' = "#A5170E", '28' = "#72190E", '29' = "#42150A", 'grey' = '#777777'),
+  ground_cover = c(
+    water = "#5566AA", "evergreen needleleaf forest" = "#117733", "deciduous needleleaf forest" = "#44AA66",
+    "mixed forest" = "#55AA22", "evergreen broadleaf forest" = "#668822", "deciduous broadleaf forest" = "#88BB55",
+    "woodland" = "#558877", "wooded grassland" = "#88BBAA", "grassland" = "#AADDCC", "cropland" = "#44AA88",
+    "closed shrubland" = "#DDCC66", "open shrubland" = "#FFDD44", "bare ground" = "#FFEE88", "urband and built up" = "#BB0011"
+  )
+)
+
+tol_colors_smooth_list <- list(
+  # Diverging
+  sunset = c("#"),
+  BuRd = c(),
+  PRGn = c(),
+  # Sequential
+  YlOrBr = c(),
+  iridescent = c(),
+  rainbow = c()
 )
 
 
-#' Extract Okabe-Ito colors as hex codes
+#' Extract Paul Tol colors as hex codes
 #'
-#' Can be used to get the hex code of specific colors from the Okabe-Ito palette.
-#' Use `okabeito_colors()` to see all available colors.
+#' Can be used to get the hex code of specific colors from the Paul Tol palettes.
+#' Use `tol_colors()` and specify `palette` to see all available colors.
+#' Note that for sequential palettes, only original (non-interpolated) colors are shown.
 #'
-#' @inheritParams flat_colors
-#' @param original_names Logical. Should the colors be named using the original
-#'   names used by Okabe and Ito (2008), such as "vermillion" (`TRUE`), or
-#'   simplified names, such as "red" (`FALSE`, default)?
-#'   Only used if no colors are specified (to see all available colors).
-#' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`, default)
-#'   in the color palette? Only used if no colors are specified (to see all
-#'   available colors).
-#' @param amber If amber color should replace yellow in the palette.
+#' @param ... Character names of colors.
+#' @param palette Character name of palette. Can be:
+#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,` "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
+#' - Diverging: `"sunset"`, `"BuRd"`, `"PRGn"`
+#' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`, `"rainbow_smooth"`
 #'
 #' @return A character vector with color-codes.
 #'
 #' @examples
-#' okabeito_colors()
+#' tol_colors()
 #'
-#' okabeito_colors(c("red", "light blue", "orange"))
+#' tol_colors(c("red", "light blue", "yellow"))
 #'
-#' okabeito_colors(original_names = TRUE)
+#' tol_colors(palette = "muted")
 #'
-#' okabeito_colors(black_first = TRUE)
+#' tol_colors(c("red", "light blue", "yellow"), palette = "muted")
 #' @export
-okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, amber = TRUE) {
+tol_colors <- function(..., palette = "bright") {
   cols <- c(...)
 
   if (!is.null(cols)) {
@@ -184,11 +180,15 @@ okabeito_palettes <- list(
 
 #' Paul Tol's color palettes
 #'
-#' The palettes based proposed by Okabe and Ito (2008).
+#' The palettes proposed by Tol (2021).
 #'
-#' @inheritParams palette_flat
-#' @param order A vector of numbers from 1 to 9 indicating the order of colors to use
-#'   (default: `1:9`)
+#' @param palette Character name of palette. Can be:
+#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,` "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
+#' - Diverging: `"sunset"`, `"BuRd"`, `"PRGn"`
+#' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`, `"rainbow_smooth"`
+#' @param reverse Boolean indicating whether the palette should be reversed.
+#' @param order A vector of numbers indicating the order of colors to use (default: `NULL` indicating to use all available colors in order).
+#' @parem ... For sequential palettes other than `rainbow_discrete`, additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
 #' @references
 #' Tol, P. (2021). Colour schemes (SRON/EPS Technical Note No. 09-002; Version 3.2).
@@ -198,7 +198,7 @@ okabeito_palettes <- list(
 #'   [`scale_color_tol()`][scale_color_tol].
 #'
 #' @export
-palette_tol <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ...) {
+palette_tol_discrete <- function(palette = "bright", reverse = FALSE, order = NULL, ...) {
   if (!palette %in% names(tol_palettes)) {
     msg <- c(paste0(
       "Palette name not available. `palette` must be one of ",
@@ -231,7 +231,3 @@ palette_tol <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ..
     unname(pal[seq_len(n)])
   }
 }
-
-#' @rdname palette_okabeito
-#' @export
-palette_oi <- palette_okabeito
