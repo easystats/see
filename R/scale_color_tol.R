@@ -1,4 +1,4 @@
-#' Paul Tol color palettes
+#' Paul Tol discrete/qualitative color palettes
 #'
 #' Tol (2021) presents a series of palettes built with mathematical principles that
 #' are appropriate for diverse types of data. The colors in these schemes are:
@@ -12,6 +12,7 @@
 #' 2. Diverging data – data ordered between two extremes where the midpoint is important.
 #' 3. Sequential data – data ordered from low to high.
 #'
+#' This function provides the qualitative palettes, as well as discrete rainbow sequential palettes.
 #' Available palettes for each type of data are:
 #' - Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale, dark, light, ground_cover
 #' - Diverging: sunset, BuRd, PRGn
