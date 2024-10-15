@@ -22,6 +22,7 @@
 #'
 #' The Okabe-Ito palette is only available as a discrete palette.
 #' For color-accessible continuous variables, consider
+#' [Paul Tol's palettes][scale_color_tol()] or
 #' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
 #'
 #' @inheritParams palette_okabeito
@@ -179,7 +180,7 @@ okabeito_palettes <- list(
 
 #' Okabe-Ito color palette
 #'
-#' The palette based proposed by Okabe and Ito (2008).
+#' The palette based on Okabe and Ito (2008).
 #'
 #' @inheritParams palette_flat
 #' @param order A vector of numbers from 1 to 9 indicating the order of colors to use
@@ -191,7 +192,7 @@ okabeito_palettes <- list(
 #' https://jfly.uni-koeln.de/color/#pallet (Original work published 2002)
 #'
 #' @details This function is usually not called directly, but from within
-#'   [`scale_color_material()`][scale_color_material].
+#'   [`scale_color_okabeito()`][scale_color_okabeito].
 #'
 #' @export
 palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ...) {
