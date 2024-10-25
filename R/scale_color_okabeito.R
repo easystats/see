@@ -129,11 +129,11 @@ okabeito_colors_list <- c(
 #' @inheritParams flat_colors
 #' @param original_names Logical. Should the colors be named using the original
 #'   names used by Okabe and Ito (2008), such as "vermillion" (`TRUE`), or
-#'   simplified names, such as "red" (`FALSE`, default)?
-#'   Only used if no colors are specified (to see all available colors).
-#' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`, default)
-#'   in the color palette? Only used if no colors are specified (to see all
-#'   available colors).
+#'   simplified names, such as "red" (`FALSE`, default)? Only used if no colors
+#'   are specified (to see all available colors).
+#' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`,
+#'   default) in the color palette? Only used if no colors are specified (to see
+#'   all available colors).
 #' @param amber If amber color should replace yellow in the palette.
 #'
 #' @return A character vector with color-codes.
