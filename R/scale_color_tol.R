@@ -102,25 +102,25 @@ tol_colors_discrete_list <- list(
   dark = c(blue = "#222255", cyan = "#225555", green = "#225522", yellow = "#666633", red = "#663333", grey = "#555555"),
   light = c(blue = "#77AADD", orange = "#EE8866", yellow = "#EEDD88", pink = "#FFAABB", cyan = "#99DDFF", mint = "#44BB99", pear = "#BBCC33", olive = "#AAAA00", grey = "#DDDDDD"),
   # TODO: Finish rainbow color schemes
-  rainbow14 = c('3', '6', '9', '10', '12', '14', '15', '16', '17', '18', '20', '22', '24', '26' = "#DC050C", 'grey'),
-  rainbow23 = c('1', '2', '4', '5', '7', '8', '9', '10', '11', '13', '14', '15', '16', '17', '18', '19', '21', '23', '25', '26' = "#DC050C", '27' = "#A5170E", '28' = "#72190E", '29' = "#42150A", 'grey' = '#777777'),
+  rainbow14 = c("3", "6", "9", "10", "12", "14", "15", "16", "17", "18", "20", "22", "24", "26" = "#DC050C", "grey"),
+  rainbow23 = c("1", "2", "4", "5", "7", "8", "9", "10", "11", "13", "14", "15", "16", "17", "18", "19", "21", "23", "25", "26" = "#DC050C", "27" = "#A5170E", "28" = "#72190E", "29" = "#42150A", grey = "#777777"),
   ground_cover = c(
     water = "#5566AA", "evergreen needleleaf forest" = "#117733", "deciduous needleleaf forest" = "#44AA66",
     "mixed forest" = "#55AA22", "evergreen broadleaf forest" = "#668822", "deciduous broadleaf forest" = "#88BB55",
-    "woodland" = "#558877", "wooded grassland" = "#88BBAA", "grassland" = "#AADDCC", "cropland" = "#44AA88",
+    woodland = "#558877", "wooded grassland" = "#88BBAA", grassland = "#AADDCC", cropland = "#44AA88",
     "closed shrubland" = "#DDCC66", "open shrubland" = "#FFDD44", "bare ground" = "#FFEE88", "urband and built up" = "#BB0011"
   )
 )
 
 tol_colors_smooth_list <- list(
   # Diverging
-  sunset = c("#"),
-  BuRd = c(),
-  PRGn = c(),
+  sunset = "#",
+  BuRd = NULL,
+  PRGn = NULL,
   # Sequential
-  YlOrBr = c(),
-  iridescent = c(),
-  rainbow = c()
+  YlOrBr = NULL,
+  iridescent = NULL,
+  rainbow = NULL
 )
 
 
@@ -132,9 +132,11 @@ tol_colors_smooth_list <- list(
 #'
 #' @param ... Character names of colors.
 #' @param palette Character name of palette. Can be:
-#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,` "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
+#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,`
+#'   "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
 #' - Diverging: `"sunset"`, `"BuRd"`, `"PRGn"`
-#' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`, `"rainbow_smooth"`
+#' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`,
+#'   `"rainbow_smooth"`
 #'
 #' @return A character vector with color-codes.
 #'
@@ -167,17 +169,6 @@ tol_colors <- function(..., palette = "bright") {
   okabeito_colors_list[cols]
 }
 
-#' @rdname okabeito_colors
-#' @export
-oi_colors <- okabeito_colors
-
-okabeito_palettes <- list(
-  `full` = okabeito_colors(black_first = FALSE, amber = TRUE),
-  `black_first` = okabeito_colors(black_first = TRUE, amber = TRUE),
-  `full_original` = okabeito_colors(black_first = FALSE, amber = FALSE),
-  `black_original` = okabeito_colors(black_first = TRUE, amber = FALSE)
-)
-
 
 #' Paul Tol's color palettes
 #'
@@ -189,7 +180,7 @@ okabeito_palettes <- list(
 #' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`, `"rainbow_smooth"`
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param order A vector of numbers indicating the order of colors to use (default: `NULL` indicating to use all available colors in order).
-#' @parem ... For sequential palettes other than `rainbow_discrete`, additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
+#' @param ... For sequential palettes other than `rainbow_discrete`, additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
 #' @references
 #' Tol, P. (2021). Colour schemes (SRON/EPS Technical Note No. 09-002; Version 3.2).
@@ -214,7 +205,7 @@ palette_tol_discrete <- function(palette = "bright", reverse = FALSE, order = NU
 
   stopifnot(
     "`order` must be a vector of integers." = is.numeric(order),
-    "All elements of `order` must be greater than 0 and less than 10." = all(order > 0 & order <= 9)
+    "All elements of `order` must be greater than 0 and less than 10." = order > 0 & order <= 9
   )
   pal <- pal[order]
 

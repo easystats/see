@@ -96,6 +96,7 @@ palettes \code{"full_original"} or \code{"black_first_original"}.
 
 The Okabe-Ito palette is only available as a discrete palette.
 For color-accessible continuous variables, consider
+\link[=scale_color_tol]{Paul Tol's palettes} or
 \link[ggplot2:scale_viridis]{the viridis palettes}.
 }
 \examples{
