@@ -2,6 +2,8 @@
 % Please edit documentation in R/scale_color_tol.R
 \name{scale_color_tol_discrete}
 \alias{scale_color_tol_discrete}
+\alias{scale_fill_tol_discrete}
+\alias{scale_colour_tol_discrete}
 \title{Paul Tol discrete/qualitative color palettes}
 \usage{
 scale_color_tol_discrete(
@@ -11,26 +13,50 @@ scale_color_tol_discrete(
   aesthetics = "color",
   ...
 )
+
+scale_fill_tol_discrete(
+  palette = "bright",
+  reverse = FALSE,
+  order = NULL,
+  aesthetics = "fill",
+  ...
+)
+
+scale_colour_tol_discrete(
+  palette = "bright",
+  reverse = FALSE,
+  order = NULL,
+  aesthetics = "color",
+  ...
+)
 }
 \arguments{
-\item{palette}{Character name of palette. Depending on the color scale, can
-be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
-or \code{black_first_original}.}
+\item{palette}{Character name of palette. Can be:
+\itemize{
+\item Qualitative: \code{"bright"}, \code{"high-contrast"}, \code{"vibrant"}, \code{"muted"},\code{ "medium-contrast"}, \code{"pale"}, \code{"dark"}, \code{"light"}, \code{"ground_cover"}
+\item Diverging: \code{"sunset"}, \code{"BuRd"}, \code{"PRGn"}
+\item Sequential: \code{"YlOrBr"}, \code{"iridescent"}, \code{"rainbow_discrete"},
+\item \code{"rainbow_smooth"}
+}}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
+
+\item{order}{A vector of numbers indicating the order of colors to use
+(default: \code{NULL} indicating to use all available colors in order).}
 
 \item{aesthetics}{A vector of names of the aesthetics that this scale
 should be applied to (e.g., \code{c('color', 'fill')}).}
 
-\item{...}{Additional arguments passed to \code{discrete_scale()} when \code{discrete}
-is \code{TRUE} or to \code{scale_color_gradientn()} when \code{discrete} is \code{FALSE}.}
+\item{...}{For sequential palettes other than \code{rainbow_discrete}, additional
+arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-Tol (2021) presents a series of palettes built with mathematical principles that
-are appropriate for diverse types of data. The colors in these schemes are:
+Tol (2021) presents a series of palettes built with mathematical principles
+that are appropriate for diverse types of data. The colors in these schemes
+are:
 \itemize{
-\item Visually distinct for all people, including viewers with color vision deficiencies
+\item Visually distinct for all people, including viewers with color vision
+deficiencies
 \item Distinct from black and white
 \item Distinct on screen and paper,
 \item Cohesive; that is, they match well together
@@ -39,15 +65,18 @@ are appropriate for diverse types of data. The colors in these schemes are:
 \details{
 Tol provides palettes appropriate to the 3 main types of data:
 \enumerate{
-\item Qualitative data – nominal or categorical data, where magnitude differences are not relevant.
-\item Diverging data – data ordered between two extremes where the midpoint is important.
+\item Qualitative data – nominal or categorical data, where magnitude
+differences are not relevant.
+\item Diverging data – data ordered between two extremes where the midpoint is
+important.
 \item Sequential data – data ordered from low to high.
 }
 
-This function provides the qualitative palettes, as well as discrete rainbow sequential palettes.
-Available palettes for each type of data are:
+This function provides the qualitative palettes, as well as discrete rainbow
+sequential palettes. Available palettes for each type of data are:
 \itemize{
-\item Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale, dark, light, ground_cover
+\item Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale,
+dark, light, ground_cover
 \item Diverging: sunset, BuRd, PRGn
 \item Sequential: YlOrBr, iridescent, rainbow_discrete, rainbow_smooth
 }\if{html}{\out{
@@ -62,9 +91,9 @@ Available palettes for each type of data are:
 \subsection{Colors for missing or invalid data}{
 
 A useful feature of Tol's diverging and sequential palettes is that he
-provides a recommended color to use for data that fall outside the data
-range represented by the color scale (e.g., for invalid or missing data).
-These colors are chosen to be highly distinct from the main color palette.
+provides a recommended color to use for data that fall outside the data range
+represented by the color scale (e.g., for invalid or missing data). These
+colors are chosen to be highly distinct from the main color palette.
 }
 }
 \examples{

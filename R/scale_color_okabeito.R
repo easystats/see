@@ -22,7 +22,7 @@
 #'
 #' The Okabe-Ito palette is only available as a discrete palette.
 #' For color-accessible continuous variables, consider
-#' [Paul Tol's palettes][scale_color_tol()] or
+#' [Paul Tol's palettes][scale_color_tol_discrete()] or
 #' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
 #'
 #' @inheritParams palette_okabeito

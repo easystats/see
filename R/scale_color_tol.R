@@ -1,20 +1,25 @@
 #' Paul Tol discrete/qualitative color palettes
 #'
-#' Tol (2021) presents a series of palettes built with mathematical principles that
-#' are appropriate for diverse types of data. The colors in these schemes are:
-#' - Visually distinct for all people, including viewers with color vision deficiencies
+#' Tol (2021) presents a series of palettes built with mathematical principles
+#' that are appropriate for diverse types of data. The colors in these schemes
+#' are:
+#' - Visually distinct for all people, including viewers with color vision
+#'   deficiencies
 #' - Distinct from black and white
 #' - Distinct on screen and paper,
 #' - Cohesive; that is, they match well together
 #'
 #' Tol provides palettes appropriate to the 3 main types of data:
-#' 1. Qualitative data – nominal or categorical data, where magnitude differences are not relevant.
-#' 2. Diverging data – data ordered between two extremes where the midpoint is important.
+#' 1. Qualitative data – nominal or categorical data, where magnitude
+#'    differences are not relevant.
+#' 2. Diverging data – data ordered between two extremes where the midpoint is
+#'    important.
 #' 3. Sequential data – data ordered from low to high.
 #'
-#' This function provides the qualitative palettes, as well as discrete rainbow sequential palettes.
-#' Available palettes for each type of data are:
-#' - Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale, dark, light, ground_cover
+#' This function provides the qualitative palettes, as well as discrete rainbow
+#' sequential palettes. Available palettes for each type of data are:
+#' - Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale,
+#'   dark, light, ground_cover
 #' - Diverging: sunset, BuRd, PRGn
 #' - Sequential: YlOrBr, iridescent, rainbow_discrete, rainbow_smooth
 #'
@@ -27,11 +32,11 @@
 #' ## Colors for missing or invalid data
 #'
 #' A useful feature of Tol's diverging and sequential palettes is that he
-#' provides a recommended color to use for data that fall outside the data
-#' range represented by the color scale (e.g., for invalid or missing data).
-#' These colors are chosen to be highly distinct from the main color palette.
+#' provides a recommended color to use for data that fall outside the data range
+#' represented by the color scale (e.g., for invalid or missing data). These
+#' colors are chosen to be highly distinct from the main color palette.
 #'
-#' @inheritParams palette_tol
+#' @inheritParams palette_tol_discrete
 #' @inheritParams scale_color_flat
 #'
 #' @references
@@ -73,7 +78,7 @@ scale_color_tol_discrete <- function(palette = "bright", reverse = FALSE, order 
 
 # Fill --------------------------------------------------------------------
 
-#' @rdname scale_color_tol
+#' @rdname scale_color_tol_discrete
 #' @export
 scale_fill_tol_discrete <- function(palette = "bright", reverse = FALSE, order = NULL, aesthetics = "fill", ...) {
   discrete_scale(
@@ -85,7 +90,7 @@ scale_fill_tol_discrete <- function(palette = "bright", reverse = FALSE, order =
 
 # Aliases -----------------------------------------------------------------
 
-#' @rdname scale_color_tol
+#' @rdname scale_color_tol_discrete
 #' @export
 scale_colour_tol_discrete <- scale_color_tol_discrete
 
@@ -175,19 +180,23 @@ tol_colors <- function(..., palette = "bright") {
 #' The palettes proposed by Tol (2021).
 #'
 #' @param palette Character name of palette. Can be:
-#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,` "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
+#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,`
+#'   "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
 #' - Diverging: `"sunset"`, `"BuRd"`, `"PRGn"`
-#' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`, `"rainbow_smooth"`
+#' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`,
+#' - `"rainbow_smooth"`
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param order A vector of numbers indicating the order of colors to use (default: `NULL` indicating to use all available colors in order).
-#' @param ... For sequential palettes other than `rainbow_discrete`, additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
+#' @param order A vector of numbers indicating the order of colors to use
+#' (default: `NULL` indicating to use all available colors in order).
+#' @param ... For sequential palettes other than `rainbow_discrete`, additional
+#' arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
 #' @references
 #' Tol, P. (2021). Colour schemes (SRON/EPS Technical Note No. 09-002; Version 3.2).
 #' SRON. https://personal.sron.nl/~pault/data/colourschemes.pdf (Original work published 2009)
 #'
 #' @details This function is usually not called directly, but from within
-#'   [`scale_color_tol()`][scale_color_tol].
+#' [`scale_color_tol()`].
 #'
 #' @export
 palette_tol_discrete <- function(palette = "bright", reverse = FALSE, order = NULL, ...) {

@@ -11,14 +11,17 @@ palette_tol_discrete(palette = "bright", reverse = FALSE, order = NULL, ...)
 \itemize{
 \item Qualitative: \code{"bright"}, \code{"high-contrast"}, \code{"vibrant"}, \code{"muted"},\code{ "medium-contrast"}, \code{"pale"}, \code{"dark"}, \code{"light"}, \code{"ground_cover"}
 \item Diverging: \code{"sunset"}, \code{"BuRd"}, \code{"PRGn"}
-\item Sequential: \code{"YlOrBr"}, \code{"iridescent"}, \code{"rainbow_discrete"}, \code{"rainbow_smooth"}
+\item Sequential: \code{"YlOrBr"}, \code{"iridescent"}, \code{"rainbow_discrete"},
+\item \code{"rainbow_smooth"}
 }}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{order}{A vector of numbers indicating the order of colors to use (default: \code{NULL} indicating to use all available colors in order).}
+\item{order}{A vector of numbers indicating the order of colors to use
+(default: \code{NULL} indicating to use all available colors in order).}
 
-\item{...}{For sequential palettes other than \code{rainbow_discrete}, additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{For sequential palettes other than \code{rainbow_discrete}, additional
+arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
 The palettes proposed by Tol (2021).

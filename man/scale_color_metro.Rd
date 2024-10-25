@@ -101,8 +101,8 @@ should be applied to (e.g., \code{c('color', 'fill')}).}
 }
 \description{
 The palette based on Metro \href{https://materialui.co/metrocolors}{Metro colors}.
-Use \code{scale_color_metro_d} for \emph{discrete} categories and
-\code{scale_color_metro_c} for a \emph{continuous} scale.
+Use \code{scale_color_metro_d} for \emph{discrete} categories and \code{scale_color_metro_c}
+for a \emph{continuous} scale.
 }
 \examples{
 library(ggplot2)

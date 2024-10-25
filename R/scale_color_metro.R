@@ -1,9 +1,8 @@
 #' Metro color palette
 #'
-#' The palette based on Metro [Metro
-#' colors](https://materialui.co/metrocolors).
-#' Use `scale_color_metro_d` for *discrete* categories and
-#' `scale_color_metro_c` for a *continuous* scale.
+#' The palette based on Metro [Metro colors](https://materialui.co/metrocolors).
+#' Use `scale_color_metro_d` for *discrete* categories and `scale_color_metro_c`
+#' for a *continuous* scale.
 #'
 #' @inheritParams palette_metro
 #' @inheritParams scale_color_flat
