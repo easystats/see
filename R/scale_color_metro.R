@@ -1,9 +1,8 @@
 #' Metro color palette
 #'
-#' The palette based on Metro [Metro
-#' colors](https://materialui.co/metrocolors).
-#' Use `scale_color_metro_d` for *discrete* categories and
-#' `scale_color_metro_c` for a *continuous* scale.
+#' The palette based on Metro [Metro colors](https://materialui.co/metrocolors).
+#' Use `scale_color_metro_d` for *discrete* categories and `scale_color_metro_c`
+#' for a *continuous* scale.
 #'
 #' @inheritParams palette_metro
 #' @inheritParams scale_color_flat
@@ -158,18 +157,18 @@ scale_fill_metro_c <- function(palette = "complement",
 
 # The palette based on metro design colors: https://www.materialui.co/metrocolors
 metro_colors_list <- c(
-  `red` = "#e51400",
+  red = "#e51400",
   `dark red` = "#a20025",
-  `purple` = "#aa00ff",
+  purple = "#aa00ff",
   `deep purple` = "#76608a",
-  `blue` = "#0050ef",
+  blue = "#0050ef",
   `light blue` = "#1ba1e2",
-  `teal` = "#00aba9",
-  `green` = "#008a00",
+  teal = "#00aba9",
+  green = "#008a00",
   `light green` = "#60a917",
-  `yellow` = "#e3c800",
-  `amber` = "#f0a30a",
-  `orange` = "#fa6800",
+  yellow = "#e3c800",
+  amber = "#f0a30a",
+  orange = "#fa6800",
   `deep orange` = "#a0522d",
   `blue grey` = "#647687"
 )
@@ -203,9 +202,9 @@ metro_colors <- function(...) {
 
 
 metro_palettes <- list(
-  `full` = metro_colors(),
-  `ice` = metro_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = metro_colors(
+  full = metro_colors(),
+  ice = metro_colors("purple", "deep purple", "blue", "light blue"),
+  rainbow = metro_colors(
     "purple",
     "deep purple",
     "blue",
@@ -217,9 +216,9 @@ metro_palettes <- list(
     "deep orange",
     "red"
   ),
-  `contrast` = metro_colors("blue", "green", "amber", "purple", "red"),
-  `light` = material_colors("light blue", "red", "yellow", "light green", "orange"),
-  `complement` = metro_colors(
+  contrast = metro_colors("blue", "green", "amber", "purple", "red"),
+  light = material_colors("light blue", "red", "yellow", "light green", "orange"),
+  complement = metro_colors(
     "blue grey",
     "blue",
     "light blue",

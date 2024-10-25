@@ -22,6 +22,7 @@
 #'
 #' The Okabe-Ito palette is only available as a discrete palette.
 #' For color-accessible continuous variables, consider
+#' [Paul Tol's palettes][scale_color_tol_discrete()] or
 #' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
 #'
 #' @inheritParams palette_okabeito
@@ -100,22 +101,23 @@ scale_fill_oi <- scale_fill_okabeito
 # Palette --------------------------------------------------------------------
 
 # The palette from: https://jfly.uni-koeln.de/color/#pallet
+# or grDevices::palette.colors()
 okabeito_colors_list <- c(
-  `orange` = "#E69F00",
+  orange = "#E69F00",
   `light blue` = "#56B4E9",
-  `green` = "#009E73",
-  `yellow` = "#F0E442",
-  `blue` = "#0072B2",
-  `red` = "#D55E00",
-  `purple` = "#CC79A7",
-  `grey` = "#999999",
-  `black` = "#000000",
+  green = "#009E73",
+  yellow = "#F0E442",
+  blue = "#0072B2",
+  red = "#D55E00",
+  purple = "#CC79A7",
+  grey = "#999999",
+  black = "#000000",
   `sky blue` = "#56B4E9",
   `bluish green` = "#009E73",
-  `vermillion` = "#D55E00",
+  vermillion = "#D55E00",
   `reddish purple` = "#CC79A7",
   `dark yellow` = "#F5C710",
-  `amber` = "#F5C710"
+  amber = "#F5C710"
 )
 
 
@@ -127,11 +129,11 @@ okabeito_colors_list <- c(
 #' @inheritParams flat_colors
 #' @param original_names Logical. Should the colors be named using the original
 #'   names used by Okabe and Ito (2008), such as "vermillion" (`TRUE`), or
-#'   simplified names, such as "red" (`FALSE`, default)?
-#'   Only used if no colors are specified (to see all available colors).
-#' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`, default)
-#'   in the color palette? Only used if no colors are specified (to see all
-#'   available colors).
+#'   simplified names, such as "red" (`FALSE`, default)? Only used if no colors
+#'   are specified (to see all available colors).
+#' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`,
+#'   default) in the color palette? Only used if no colors are specified (to see
+#'   all available colors).
 #' @param amber If amber color should replace yellow in the palette.
 #'
 #' @return A character vector with color-codes.
@@ -170,16 +172,16 @@ okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, am
 oi_colors <- okabeito_colors
 
 okabeito_palettes <- list(
-  `full` = okabeito_colors(black_first = FALSE, amber = TRUE),
-  `black_first` = okabeito_colors(black_first = TRUE, amber = TRUE),
-  `full_original` = okabeito_colors(black_first = FALSE, amber = FALSE),
-  `black_original` = okabeito_colors(black_first = TRUE, amber = FALSE)
+  full = okabeito_colors(black_first = FALSE, amber = TRUE),
+  black_first = okabeito_colors(black_first = TRUE, amber = TRUE),
+  full_original = okabeito_colors(black_first = FALSE, amber = FALSE),
+  black_original = okabeito_colors(black_first = TRUE, amber = FALSE)
 )
 
 
 #' Okabe-Ito color palette
 #'
-#' The palette based proposed by Okabe and Ito (2008).
+#' The palette based on Okabe and Ito (2008).
 #'
 #' @inheritParams palette_flat
 #' @param order A vector of numbers from 1 to 9 indicating the order of colors to use
@@ -191,7 +193,7 @@ okabeito_palettes <- list(
 #' https://jfly.uni-koeln.de/color/#pallet (Original work published 2002)
 #'
 #' @details This function is usually not called directly, but from within
-#'   [`scale_color_material()`][scale_color_material].
+#'   [`scale_color_okabeito()`][scale_color_okabeito].
 #'
 #' @export
 palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ...) {
@@ -209,7 +211,7 @@ palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:
 
   stopifnot(
     "`order` must be a vector of integers." = is.numeric(order),
-    "All elements of `order` must be greater than 0 and less than 10." = all(order > 0 & order <= 9)
+    "All elements of `order` must be greater than 0 and less than 10." = order > 0 & order <= 9
   )
   pal <- pal[order]
 

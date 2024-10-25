@@ -41,8 +41,7 @@ Authors@R:
       person(given = "Matthew",
              family = "Smith",
              role = "rev",
-             email = "M.Smith3@napier.ac.uk",
-             comment = c(Twitter = "@SmithMatt90")),
+             email = "M.Smith3@napier.ac.uk"),
       person(given = "Jakob",
              family = "Bossek",
              role = "rev",
@@ -121,4 +120,3 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/Needs/website: easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/performance, easystats/parameters

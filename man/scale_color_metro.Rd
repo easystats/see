@@ -97,12 +97,12 @@ or \code{black_first_original}.}
 \item{aesthetics}{A vector of names of the aesthetics that this scale
 should be applied to (e.g., \code{c('color', 'fill')}).}
 
-\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{Additional arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 The palette based on Metro \href{https://materialui.co/metrocolors}{Metro colors}.
-Use \code{scale_color_metro_d} for \emph{discrete} categories and
-\code{scale_color_metro_c} for a \emph{continuous} scale.
+Use \code{scale_color_metro_d} for \emph{discrete} categories and \code{scale_color_metro_c}
+for a \emph{continuous} scale.
 }
 \examples{
 library(ggplot2)

@@ -14,7 +14,7 @@ or \code{black_first_original}.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{Additional arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 The palette based on \href{https://materialui.co/metrocolors}{Metro colors}.

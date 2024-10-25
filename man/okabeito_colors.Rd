@@ -14,12 +14,12 @@ oi_colors(..., original_names = FALSE, black_first = FALSE, amber = TRUE)
 
 \item{original_names}{Logical. Should the colors be named using the original
 names used by Okabe and Ito (2008), such as "vermillion" (\code{TRUE}), or
-simplified names, such as "red" (\code{FALSE}, default)?
-Only used if no colors are specified (to see all available colors).}
+simplified names, such as "red" (\code{FALSE}, default)? Only used if no colors
+are specified (to see all available colors).}
 
-\item{black_first}{Logical. Should black be first (\code{TRUE}) or last (\code{FALSE}, default)
-in the color palette? Only used if no colors are specified (to see all
-available colors).}
+\item{black_first}{Logical. Should black be first (\code{TRUE}) or last (\code{FALSE},
+default) in the color palette? Only used if no colors are specified (to see
+all available colors).}
 
 \item{amber}{If amber color should replace yellow in the palette.}
 }
