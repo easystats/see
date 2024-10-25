@@ -9,7 +9,8 @@ palette_tol_discrete(palette = "bright", reverse = FALSE, order = NULL, ...)
 \arguments{
 \item{palette}{Character name of palette. Can be:
 \itemize{
-\item Qualitative: \code{"bright"}, \code{"high-contrast"}, \code{"vibrant"}, \code{"muted"},\code{ "medium-contrast"}, \code{"pale"}, \code{"dark"}, \code{"light"}, \code{"ground_cover"}
+\item Qualitative: \code{"bright"}, \code{"high-contrast"}, \code{"vibrant"}, \code{"muted"},
+\code{"medium-contrast"}, \code{"pale"}, \code{"dark"}, \code{"light"}, \code{"ground_cover"}
 \item Diverging: \code{"sunset"}, \code{"BuRd"}, \code{"PRGn"}
 \item Sequential: \code{"YlOrBr"}, \code{"iridescent"}, \code{"rainbow_discrete"},
 \item \code{"rainbow_smooth"}

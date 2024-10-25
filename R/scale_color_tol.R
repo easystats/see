@@ -180,8 +180,8 @@ tol_colors <- function(..., palette = "bright") {
 #' The palettes proposed by Tol (2021).
 #'
 #' @param palette Character name of palette. Can be:
-#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,`
-#'   "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
+#' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,
+#'   `"medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
 #' - Diverging: `"sunset"`, `"BuRd"`, `"PRGn"`
 #' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`,
 #' - `"rainbow_smooth"`
