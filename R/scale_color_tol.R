@@ -18,10 +18,10 @@
 #'
 #' This function provides the qualitative palettes, as well as discrete rainbow
 #' sequential palettes. Available palettes for each type of data are:
-#' - Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale,
-#'   dark, light, ground_cover
-#' - Diverging: sunset, BuRd, PRGn
-#' - Sequential: YlOrBr, iridescent, rainbow_discrete, rainbow_smooth
+#' - Qualitative: `bright`, `high-contrast`, `vibrant`, `muted`,
+#'   `medium-contrast`, `pale`, `dark`, `light`, `ground_cover`
+#' - Diverging: `sunset`, `BuRd`, `PRGn`
+#' - Sequential: `YlOrBr`, `iridescent`, `rainbow_discrete`, `rainbow_smooth`
 #'
 #' <!-- For rainbow_discrete, pick the optimal set based on the number of colors,
 #'      For rainbow_smooth, include a range argument with examples to start/end at off-white vs. purple, red vs brown

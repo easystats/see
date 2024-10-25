@@ -75,10 +75,10 @@ important.
 This function provides the qualitative palettes, as well as discrete rainbow
 sequential palettes. Available palettes for each type of data are:
 \itemize{
-\item Qualitative: bright, high-contrast, vibrant, muted, medium-contrast, pale,
-dark, light, ground_cover
-\item Diverging: sunset, BuRd, PRGn
-\item Sequential: YlOrBr, iridescent, rainbow_discrete, rainbow_smooth
+\item Qualitative: \code{bright}, \code{high-contrast}, \code{vibrant}, \code{muted},
+\code{medium-contrast}, \code{pale}, \code{dark}, \code{light}, \code{ground_cover}
+\item Diverging: \code{sunset}, \code{BuRd}, \code{PRGn}
+\item Sequential: \code{YlOrBr}, \code{iridescent}, \code{rainbow_discrete}, \code{rainbow_smooth}
 }\if{html}{\out{
 <!-- For rainbow_discrete, pick the optimal set based on the number of colors,
      For rainbow_smooth, include a range argument with examples to start/end at off-white vs. purple, red vs brown
