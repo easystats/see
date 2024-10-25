@@ -20,7 +20,7 @@ or \code{black_first_original}.}
 \item{order}{A vector of numbers from 1 to 9 indicating the order of colors to use
 (default: \code{1:9})}
 
-\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{Additional arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 The palette based on Okabe and Ito (2008).

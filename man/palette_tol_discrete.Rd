@@ -22,7 +22,7 @@ palette_tol_discrete(palette = "bright", reverse = FALSE, order = NULL, ...)
 (default: \code{NULL} indicating to use all available colors in order).}
 
 \item{...}{For sequential palettes other than \code{rainbow_discrete}, additional
-arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 The palettes proposed by Tol (2021).

@@ -189,7 +189,7 @@ tol_colors <- function(..., palette = "bright") {
 #' @param order A vector of numbers indicating the order of colors to use
 #' (default: `NULL` indicating to use all available colors in order).
 #' @param ... For sequential palettes other than `rainbow_discrete`, additional
-#' arguments to pass to [`colorRampPalette()`][colorRampPalette].
+#' arguments to pass to [`grDevices::colorRampPalette()`].
 #'
 #' @references
 #' Tol, P. (2021). Colour schemes (SRON/EPS Technical Note No. 09-002; Version 3.2).

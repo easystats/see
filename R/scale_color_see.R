@@ -240,8 +240,6 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
 
 
 
-
-
 # helper -----------------------
 
 .retrieve_palette <- function(palette, palette_list, reverse = FALSE, ...) {

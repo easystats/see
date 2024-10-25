@@ -49,7 +49,7 @@ scale_colour_tol_discrete(
 should be applied to (e.g., \code{c('color', 'fill')}).}
 
 \item{...}{For sequential palettes other than \code{rainbow_discrete}, additional
-arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 Tol (2021) presents a series of palettes built with mathematical principles
