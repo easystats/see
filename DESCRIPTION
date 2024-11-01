@@ -62,15 +62,15 @@ Depends:
     R (>= 4.0),
     stats
 Imports:
-    bayestestR (>= 0.14.0),
-    correlation (>= 0.8.5),
+    bayestestR (>= 0.15.0),
+    correlation (>= 0.8.6),
     datawizard (>= 0.13.0),
     effectsize (>= 0.8.9),
-    ggplot2,
+    ggplot2 (>= 3.5.1),
     insight (>= 0.20.5),
-    modelbased (>= 0.8.8),
-    parameters (>= 0.22.2),
-    performance (>= 0.12.3)
+    modelbased (>= 0.8.9),
+    parameters (>= 0.23.0),
+    performance (>= 0.12.4)
 Suggests:
     BH,
     brms,
