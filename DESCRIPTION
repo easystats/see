@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.9.0.6
+Version: 0.9.0.7
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -112,7 +112,7 @@ Suggests:
     splines,
     testthat (>= 3.2.1),
     tidygraph,
-    vdiffr (>= 1.0.7)
+    vdiffr (>= 1.0.8)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
