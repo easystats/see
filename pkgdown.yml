@@ -1,6 +1,6 @@
 pandoc: '3.5'
 pkgdown: 2.1.1.9000
-pkgdown_sha: 71fd32ce95f17b379e57e7e33f2294bc034727fd
+pkgdown_sha: ffe60d5f60934e95285d416dae12c05e24ed1dac
 articles:
   bayestestR: bayestestR.html
   correlation: correlation.html
@@ -11,7 +11,7 @@ articles:
   performance: performance.html
   seecolorscales_dark: seecolorscales_dark.html
   seecolorscales: seecolorscales.html
-last_built: 2024-10-09T21:52Z
+last_built: 2024-11-01T06:49Z
 urls:
   reference: https://easystats.github.io/see/reference
   article: https://easystats.github.io/see/articles
