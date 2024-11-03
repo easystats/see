@@ -435,12 +435,19 @@ center indicate worse fit indices.</p>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; # Comparison of Model Performance Indices</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Name | Model | AIC (weights) | AICc (weights) | BIC (weights) |    R2 | R2 (adj.) |  RMSE | Sigma</span></span>
-<span><span class="co">#&gt; -------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; lm1  |    lm | 231.5 (&lt;.001) |  231.7 (&lt;.001) | 243.5 (&lt;.001) | 0.619 |     0.614 | 0.510 | 0.515</span></span>
-<span><span class="co">#&gt; lm2  |    lm | 106.2 (&lt;.001) |  106.6 (&lt;.001) | 121.3 (&lt;.001) | 0.837 |     0.833 | 0.333 | 0.338</span></span>
-<span><span class="co">#&gt; lm3  |    lm | 187.1 (&lt;.001) |  187.9 (&lt;.001) | 208.2 (&lt;.001) | 0.727 |     0.718 | 0.431 | 0.440</span></span>
-<span><span class="co">#&gt; lm4  |    lm |  78.8 (&gt;.999) |   80.1 (&gt;.999) | 105.9 (&gt;.999) | 0.871 |     0.865 | 0.296 | 0.305</span></span>
+<span><span class="co">#&gt; Name | Model | AIC (weights) | AICc (weights) | BIC (weights) |    R2</span></span>
+<span><span class="co">#&gt; ---------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; lm1  |    lm | 231.5 (&lt;.001) |  231.7 (&lt;.001) | 243.5 (&lt;.001) | 0.619</span></span>
+<span><span class="co">#&gt; lm2  |    lm | 106.2 (&lt;.001) |  106.6 (&lt;.001) | 121.3 (&lt;.001) | 0.837</span></span>
+<span><span class="co">#&gt; lm3  |    lm | 187.1 (&lt;.001) |  187.9 (&lt;.001) | 208.2 (&lt;.001) | 0.727</span></span>
+<span><span class="co">#&gt; lm4  |    lm |  78.8 (&gt;.999) |   80.1 (&gt;.999) | 105.9 (&gt;.999) | 0.871</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Name | R2 (adj.) |  RMSE | Sigma</span></span>
+<span><span class="co">#&gt; --------------------------------</span></span>
+<span><span class="co">#&gt; lm1  |     0.614 | 0.510 | 0.515</span></span>
+<span><span class="co">#&gt; lm2  |     0.833 | 0.333 | 0.338</span></span>
+<span><span class="co">#&gt; lm3  |     0.718 | 0.431 | 0.440</span></span>
+<span><span class="co">#&gt; lm4  |     0.865 | 0.296 | 0.305</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="performance_files/figure-html/unnamed-chunk-28-1.png" width="100%"></p>
