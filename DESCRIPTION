@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.9.0.8
+Version: 0.9.0.9
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -69,6 +69,7 @@ Imports:
     ggplot2 (>= 3.5.1),
     insight (>= 0.20.5),
     modelbased (>= 0.8.9),
+    patchwork (>= 1.2.0),
     parameters (>= 0.23.0),
     performance (>= 0.12.4)
 Suggests:
@@ -99,7 +100,6 @@ Suggests:
     metafor,
     NbClust,
     nFactors,
-    patchwork (>= 1.2.0),
     poorman,
     psych,
     qqplotr (>= 0.0.6),

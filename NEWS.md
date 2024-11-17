@@ -13,6 +13,8 @@
 
 - `plot()` for `simulate_parameters()` now better copes with models that have
   multiple response levels (e.g. multinomial models).
+  
+- Gains `{patchwork}` as a hard dependency given its importance for the package.
 
 ## Bug fixes
 
