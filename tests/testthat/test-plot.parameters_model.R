@@ -3,7 +3,7 @@ test_that("`plot.see_parameters_model()` works", {
   result <- parameters::model_parameters(m)
   expect_s3_class(plot(result), "gg")
 
-  skip_if_not_installed("vdiffr")
+
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_1",
     fig = plot(result)
@@ -15,7 +15,6 @@ test_that("`plot.see_parameters_model()` works", {
 })
 
 test_that("`plot.see_parameters_model()` random parameters works", {
-  skip_if_not_installed("vdiffr")
   skip_if_not_installed("lme4")
   skip_if_not_installed("parameters")
 
@@ -67,7 +66,6 @@ test_that("`plot.see_parameters_model()` random parameters works", {
 
 
 test_that("`plot.see_parameters_model()` random parameters works", {
-  skip_if_not_installed("vdiffr")
   skip_if_not_installed("lme4")
   skip_if_not_installed("parameters")
   data(sleepstudy, package = "lme4")
@@ -87,7 +85,6 @@ test_that("`plot.see_parameters_model()` random parameters works", {
 
 
 test_that("`plot.see_parameters_model()` random parameters works", {
-  skip_if_not_installed("vdiffr")
   skip_if_not_installed("mgcv")
   skip_if_not_installed("parameters")
 

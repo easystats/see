@@ -16,7 +16,7 @@ test_that("`plot()` for compare_parameters", {
   cp <- parameters::compare_parameters(gmod_glmer, gmod_glmmTMB, effects = "random")
   expect_warning(plot(cp), "No data left")
 
-  skip_if_not_installed("vdiffr")
+
   vdiffr::expect_doppelganger(
     title = "plot.compare_parameters works",
     fig = plot(cp, show_intercept = TRUE)
