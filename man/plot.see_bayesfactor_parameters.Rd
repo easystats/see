@@ -7,7 +7,7 @@
 \method{plot}{see_bayesfactor_parameters}(
   x,
   size_point = 2,
-  rope_color = "#0171D3",
+  color_rope = "#0171D3",
   rope_alpha = 0.2,
   show_intercept = FALSE,
   ...
@@ -18,7 +18,7 @@
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{rope_color}{Character specifying color of ROPE ribbon.}
+\item{color_rope}{Character specifying color of ROPE ribbon.}
 
 \item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
 

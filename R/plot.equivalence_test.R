@@ -15,7 +15,7 @@
 #' plot(result)
 #' @export
 plot.see_equivalence_test <- function(x,
-                                      rope_color = "#0171D3",
+                                      color_rope = "#0171D3",
                                       rope_alpha = 0.2,
                                       show_intercept = FALSE,
                                       n_columns = 1,
@@ -144,20 +144,20 @@ plot.see_equivalence_test <- function(x,
       xmax = .rope[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
+      fill = color_rope,
       alpha = (rope_alpha / 3),
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
-      colour = rope_color,
+      colour = color_rope,
       alpha = rope.line.alpha,
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE
@@ -207,7 +207,7 @@ plot.see_equivalence_test <- function(x,
 
 #' @export
 plot.see_equivalence_test_df <- function(x,
-                                         rope_color = "#0171D3",
+                                         color_rope = "#0171D3",
                                          rope_alpha = 0.2,
                                          data = NULL,
                                          n_columns = 1,
@@ -290,19 +290,19 @@ plot.see_equivalence_test_df <- function(x,
       xmax = .rope[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
+      fill = color_rope,
       alpha = (rope_alpha / 3)
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
-      colour = rope_color,
+      colour = color_rope,
       alpha = rope.line.alpha,
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE
@@ -333,7 +333,7 @@ plot.see_equivalence_test_df <- function(x,
 #' @export
 plot.see_equivalence_test_lm <- function(x,
                                          size_point = 0.7,
-                                         rope_color = "#0171D3",
+                                         color_rope = "#0171D3",
                                          rope_alpha = 0.2,
                                          show_intercept = FALSE,
                                          n_columns = 1,
@@ -412,20 +412,20 @@ plot.see_equivalence_test_lm <- function(x,
       xmax = .rope[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
+      fill = color_rope,
       alpha = (rope_alpha / 3)
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE

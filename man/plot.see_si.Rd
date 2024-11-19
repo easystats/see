@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{see_si}(
   x,
-  si_color = "#0171D3",
+  color_si = "#0171D3",
   si_alpha = 0.2,
   show_intercept = FALSE,
   support_only = FALSE,
@@ -16,7 +16,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{si_color}{Character specifying color of SI ribbon.}
+\item{color_si}{Character specifying color of SI ribbon.}
 
 \item{si_alpha}{Numeric value specifying Transparency level of SI ribbon.}
 

@@ -3,7 +3,7 @@
 #' The `plot()` method for the `bayestestR::si()`.
 #'
 #' @param si_alpha Numeric value specifying Transparency level of SI ribbon.
-#' @param si_color Character specifying color of SI ribbon.
+#' @param color_si Character specifying color of SI ribbon.
 #' @param support_only Logical. Decides whether to plot only the support data,
 #'   or show the "raw" prior and posterior distributions? Only applies when
 #'   plotting [bayestestR::si()].
@@ -23,7 +23,7 @@
 #'
 #' @export
 plot.see_si <- function(x,
-                        si_color = "#0171D3",
+                        color_si = "#0171D3",
                         si_alpha = 0.2,
                         show_intercept = FALSE,
                         support_only = FALSE,
@@ -47,7 +47,7 @@ plot.see_si <- function(x,
         aes(xmin = .data$CI_low, xmax = .data$CI_high, alpha = .data$CI),
         ymin = 0, ymax = Inf,
         data = x,
-        fill = si_color,
+        fill = color_si,
         inherit.aes = FALSE
       ) +
       scale_alpha_continuous(breaks = unique(x$CI)) +
@@ -65,7 +65,7 @@ plot.see_si <- function(x,
         aes(xmin = .data$CI_low, xmax = .data$CI_high),
         ymin = 0, ymax = Inf,
         data = x,
-        fill = si_color, alpha = si_alpha,
+        fill = color_si, alpha = si_alpha,
         linetype = "dashed", colour = "grey50",
         inherit.aes = FALSE
       ) +

@@ -88,7 +88,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 plot.see_rope <- function(x,
                           data = NULL,
                           rope_alpha = 0.5,
-                          rope_color = "cadetblue",
+                          color_rope = "cadetblue",
                           show_intercept = FALSE,
                           n_columns = 1,
                           ...) {
@@ -122,7 +122,7 @@ plot.see_rope <- function(x,
       xmax = attributes(x)$info$rope_range[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
+      fill = color_rope,
       alpha = rope_alpha
     ) +
     add_plot_attributes(x)

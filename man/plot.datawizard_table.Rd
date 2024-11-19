@@ -12,7 +12,7 @@
   na_label = "(Missing)",
   error_bar = TRUE,
   ci = 0.95,
-  fill_col = "#87CEFA",
+  color_fill = "#87CEFA",
   color_error_bar = "#607B8B",
   ...
 )
@@ -24,7 +24,7 @@
   na_label = "(Missing)",
   error_bar = TRUE,
   ci = 0.95,
-  fill_col = "#87CEFA",
+  color_fill = "#87CEFA",
   color_error_bar = "#607B8B",
   ...
 )
@@ -48,7 +48,7 @@ See Brown et al. (2001) for details.}
 
 \item{ci}{Confidence Interval (CI) level. Defaults to \code{0.95} (\verb{95\%}).}
 
-\item{fill_col}{Color to use for category columns (default: \code{"#87CEFA"}).}
+\item{color_fill}{Color to use for category columns (default: \code{"#87CEFA"}).}
 
 \item{color_error_bar}{Color to use for error bars (default: \code{"#607B8B"}).}
 

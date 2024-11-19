@@ -8,7 +8,7 @@
   x,
   data = NULL,
   rope_alpha = 0.5,
-  rope_color = "cadetblue",
+  color_rope = "cadetblue",
   show_intercept = FALSE,
   n_columns = 1,
   ...
@@ -22,7 +22,7 @@ statistical model.}
 
 \item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
 
-\item{rope_color}{Character specifying color of ROPE ribbon.}
+\item{color_rope}{Character specifying color of ROPE ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the

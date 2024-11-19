@@ -144,7 +144,7 @@ plot.see_parameters_brms_meta <- function(x,
                                           size_text = 3.5,
                                           posteriors_alpha = 0.7,
                                           rope_alpha = 0.15,
-                                          rope_color = "cadetblue",
+                                          color_rope = "cadetblue",
                                           normalize_height = TRUE,
                                           show_labels = TRUE,
                                           ...) {
@@ -175,7 +175,7 @@ plot.see_parameters_brms_meta <- function(x,
         xmax = rope[2],
         ymin = 0,
         ymax = Inf,
-        fill = rope_color,
+        fill = color_rope,
         alpha = rope_alpha
       )
   }

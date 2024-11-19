@@ -11,7 +11,7 @@
 
 \method{plot}{see_equivalence_test}(
   x,
-  rope_color = "#0171D3",
+  color_rope = "#0171D3",
   rope_alpha = 0.2,
   show_intercept = FALSE,
   n_columns = 1,
@@ -21,7 +21,7 @@
 \method{plot}{see_equivalence_test_lm}(
   x,
   size_point = 0.7,
-  rope_color = "#0171D3",
+  color_rope = "#0171D3",
   rope_alpha = 0.2,
   show_intercept = FALSE,
   n_columns = 1,
@@ -33,7 +33,7 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{rope_color}{Character specifying color of ROPE ribbon.}
+\item{color_rope}{Character specifying color of ROPE ribbon.}
 
 \item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
 
