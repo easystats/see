@@ -16,7 +16,7 @@
   line_alpha = 0.15,
   style = theme_lucid,
   colors = unname(social_colors(c("green", "blue"))),
-  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+  type = "density",
   x_limits = NULL,
   ...
 )
@@ -32,7 +32,7 @@
   line_alpha = 0.15,
   style = theme_lucid,
   colors = unname(social_colors(c("green", "blue"))),
-  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+  type = "density",
   x_limits = NULL,
   ...
 )

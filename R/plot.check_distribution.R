@@ -108,10 +108,9 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     theme_lucid()
 
   if (panel) {
-    insight::check_if_installed("patchwork")
-    return(p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2))
+    p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2)
   } else {
-    return(list(p1, p2, p3))
+    list(p1, p2, p3)
   }
 }
 
@@ -184,9 +183,8 @@ plot.see_check_distribution_numeric <- function(x,
     theme_lucid()
 
   if (panel) {
-    insight::check_if_installed("patchwork")
-    return(p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2L))
+    p1 / (p2 | p3) + patchwork::plot_layout(nrow = 2L)
   } else {
-    return(list(p1, p2, p3))
+    list(p1, p2, p3)
   }
 }

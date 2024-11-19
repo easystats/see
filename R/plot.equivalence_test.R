@@ -399,11 +399,11 @@ plot.see_equivalence_test_lm <- function(x,
   p <- ggplot(
     x,
     aes(
-      y = Parameter,
-      x = Estimate,
-      xmin = CI_low,
-      xmax = CI_high,
-      colour = ROPE_Equivalence
+      y = .data$Parameter,
+      x = .data$Estimate,
+      xmin = .data$CI_low,
+      xmax = .data$CI_high,
+      colour = .data$ROPE_Equivalence
     )
   ) +
     annotate(

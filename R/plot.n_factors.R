@@ -139,19 +139,19 @@ plot.see_n_factors <- function(x,
     segment_data <- data.frame(x_intercept = x$x[which.max(x$y)], y_max = max(x$y, na.rm = TRUE))
     p <- ggplot(x, aes(x = .data$x, y = .data$y)) +
       geom_area(fill = flat_colors("grey")) +
-      geom_segment(
+        geom_segment(
         data = segment_data,
         aes(
-          x = x_intercept,
-          xend = x_intercept,
+          x = .data$x_intercept,
+          xend = .data$x_intercept,
           y = 0,
-          yend = y_max
+          yend = .data$y_max
         ),
         color = flat_colors("red")
       ) +
       geom_point(
         data = segment_data,
-        aes(x = x_intercept, y = y_max),
+        aes(x = .data$x_intercept, y = .data$y_max),
         color = flat_colors("red")
       ) +
       scale_x_continuous(breaks = 1:max(x$x, na.rm = TRUE)) +

@@ -14,7 +14,7 @@
 #'
 #' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
-#' @examplesIf insight::check_if_installed("performance", "0.10.9.7") && require("glmmTMB") && require("qqplotr") && require("DHARMa")
+#' @examplesIf require("glmmTMB") && require("qqplotr") && require("DHARMa")
 #' data(Salamanders, package = "glmmTMB")
 #' model <- glmmTMB::glmmTMB(
 #'   count ~ mined + spp + (1 | site),
