@@ -7,7 +7,7 @@
 \method{plot}{see_si}(
   x,
   color_si = "#0171D3",
-  si_alpha = 0.2,
+  alpha_si = 0.2,
   show_intercept = FALSE,
   support_only = FALSE,
   ...
@@ -18,7 +18,7 @@
 
 \item{color_si}{Character specifying color of SI ribbon.}
 
-\item{si_alpha}{Numeric value specifying Transparency level of SI ribbon.}
+\item{alpha_si}{Numeric value specifying Transparency level of SI ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the

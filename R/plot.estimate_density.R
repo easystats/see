@@ -74,9 +74,9 @@ data_plot.estimate_density <- function(x,
 #' @param priors Logical. If `TRUE`, prior distributions are simulated
 #'   (using [bayestestR::simulate_prior()]) and added
 #'   to the plot.
-#' @param priors_alpha Numeric value specifying alpha for the prior
+#' @param alpha_priors Numeric value specifying alpha for the prior
 #'   distributions.
-#' @param posteriors_alpha Numeric value specifying alpha for the posterior
+#' @param alpha_posteriors Numeric value specifying alpha for the posterior
 #'   distributions.
 #' @param centrality Character specifying the point-estimate (centrality index)
 #'   to compute. Can be `"median"`, `"mean"` or `"MAP"`.
@@ -103,8 +103,8 @@ plot.see_estimate_density <- function(x,
                                       show_intercept = FALSE,
                                       n_columns = 1,
                                       priors = FALSE,
-                                      priors_alpha = 0.4,
-                                      posteriors_alpha = 0.7,
+                                      alpha_priors = 0.4,
+                                      alpha_posteriors = 0.7,
                                       linewidth = 0.9,
                                       size_point = 2,
                                       centrality = "median",
@@ -159,11 +159,11 @@ plot.see_estimate_density <- function(x,
           model,
           parameter = params,
           show_intercept = show_intercept,
-          priors_alpha = priors_alpha,
+          alpha_priors = alpha_priors,
           show_ridge_line = FALSE
         ) +
         ggridges::geom_ridgeline(aes(fill = "Posterior"),
-          alpha = posteriors_alpha,
+          alpha = alpha_posteriors,
           color = NA
         ) +
         guides(color = "none") +
@@ -174,7 +174,7 @@ plot.see_estimate_density <- function(x,
 
       p <- p +
         ggridges::geom_ridgeline(aes(fill = "Posterior"),
-          alpha = posteriors_alpha,
+          alpha = alpha_posteriors,
           color = NA
         ) +
         guides(fill = "none", color = "none") +

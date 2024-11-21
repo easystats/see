@@ -87,7 +87,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' @export
 plot.see_rope <- function(x,
                           data = NULL,
-                          rope_alpha = 0.5,
+                          alpha_rope = 0.5,
                           color_rope = "cadetblue",
                           show_intercept = FALSE,
                           n_columns = 1,
@@ -123,7 +123,7 @@ plot.see_rope <- function(x,
       ymin = 0,
       ymax = Inf,
       fill = color_rope,
-      alpha = rope_alpha
+      alpha = alpha_rope
     ) +
     add_plot_attributes(x)
 

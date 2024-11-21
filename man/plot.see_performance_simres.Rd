@@ -12,7 +12,7 @@
   size_axis_title = base_size,
   base_size = 10,
   alpha = 0.2,
-  dot_alpha = 0.8,
+  alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   transform = NULL,
@@ -32,7 +32,7 @@ axis and plot titles.}
 
 \item{alpha}{Numeric value specifying alpha level of the confidence bands.}
 
-\item{dot_alpha}{Numeric value specifying alpha level of the point geoms.}
+\item{alpha_dot}{Numeric value specifying alpha level of the point geoms.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}

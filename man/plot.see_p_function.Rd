@@ -10,7 +10,7 @@
   size_point = 1.2,
   linewidth = c(0.7, 0.9),
   size_text = 3,
-  line_alpha = 0.15,
+  alpha_line = 0.15,
   show_labels = TRUE,
   n_columns = NULL,
   show_intercept = FALSE,
@@ -30,7 +30,7 @@ are plotted as facets.}
 
 \item{size_text}{Numeric value specifying size of text labels.}
 
-\item{line_alpha}{Numeric value specifying alpha of lines indicating the
+\item{alpha_line}{Numeric value specifying alpha of lines indicating the
 emphasized compatibility interval levels (see \code{?parameters::p_function}).}
 
 \item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}

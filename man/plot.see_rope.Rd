@@ -7,7 +7,7 @@
 \method{plot}{see_rope}(
   x,
   data = NULL,
-  rope_alpha = 0.5,
+  alpha_rope = 0.5,
   color_rope = "cadetblue",
   show_intercept = FALSE,
   n_columns = 1,
@@ -20,7 +20,7 @@
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
 
-\item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
+\item{alpha_rope}{Numeric specifying transparency level of ROPE ribbon.}
 
 \item{color_rope}{Character specifying color of ROPE ribbon.}
 

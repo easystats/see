@@ -34,7 +34,7 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #'
 #' @param dispersion Logical. If `TRUE`, a range of dispersion for
 #'   each variable to the plot will be added.
-#' @param dispersion_alpha Numeric value specifying the transparency level of dispersion ribbon.
+#' @param alpha_dispersion Numeric value specifying the transparency level of dispersion ribbon.
 #' @param color_dispersion Character specifying the color of dispersion ribbon.
 #' @param dispersion_style Character describing the style of dispersion area.
 #'   `"ribbon"` for a ribbon, `"curve"` for a normal-curve.
@@ -59,7 +59,7 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' @export
 plot.see_parameters_distribution <- function(x,
                                              dispersion = FALSE,
-                                             dispersion_alpha = 0.3,
+                                             alpha_dispersion = 0.3,
                                              color_dispersion = "#3498db",
                                              dispersion_style = c("ribbon", "curve"),
                                              size_bar = 0.7,
@@ -84,7 +84,7 @@ plot.see_parameters_distribution <- function(x,
     lapply(
       x,
       .plot_see_parameters_distribution,
-      dispersion_alpha,
+      alpha_dispersion,
       color_dispersion,
       dispersion_style,
       show_dispersion = dispersion,
@@ -95,7 +95,7 @@ plot.see_parameters_distribution <- function(x,
   } else {
     .plot_see_parameters_distribution(
       x,
-      dispersion_alpha,
+      alpha_dispersion,
       color_dispersion,
       dispersion_style,
       show_dispersion = dispersion,
@@ -109,7 +109,7 @@ plot.see_parameters_distribution <- function(x,
 
 
 .plot_see_parameters_distribution <- function(x,
-                                              dispersion_alpha,
+                                              alpha_dispersion,
                                               color_dispersion,
                                               dispersion_style,
                                               show_dispersion,
@@ -159,7 +159,7 @@ plot.see_parameters_distribution <- function(x,
       p <- p + geom_vline(
         xintercept = centrality,
         colour = color_dispersion,
-        alpha = dispersion_alpha
+        alpha = alpha_dispersion
       )
     }
     if (!is.null(dispersion)) {
@@ -170,7 +170,7 @@ plot.see_parameters_distribution <- function(x,
             xintercept = .range,
             linetype = "dashed",
             colour = color_dispersion,
-            alpha = dispersion_alpha
+            alpha = alpha_dispersion
           ) +
           annotate(
             "rect",
@@ -179,13 +179,13 @@ plot.see_parameters_distribution <- function(x,
             ymin = 0,
             ymax = Inf,
             fill = color_dispersion,
-            alpha = (dispersion_alpha / 3)
+            alpha = (alpha_dispersion / 3)
           )
       } else {
         p <- p +
           geom_ribbon(
             aes(ymin = 0, ymax = .data$curve_y),
-            alpha = dispersion_alpha,
+            alpha = alpha_dispersion,
             fill = color_dispersion,
             colour = NA
           )

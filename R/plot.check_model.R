@@ -38,7 +38,7 @@ plot.see_check_model <- function(x,
   size_axis_title <- attr(x, "axis_title_size")
   size_title <- attr(x, "title_size")
   alpha_level <- attr(x, "alpha")
-  dot_alpha_level <- attr(x, "dot_alpha")
+  alpha_dot <- attr(x, "alpha_dot")
   show_dots <- attr(x, "show_dots")
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
@@ -73,8 +73,8 @@ plot.see_check_model <- function(x,
     alpha_level <- 0.2
   }
 
-  if (is.null(dot_alpha_level)) {
-    dot_alpha_level <- 0.8
+  if (is.null(alpha_dot)) {
+    alpha_dot <- 0.8
   }
 
   if (is.null(base_size)) {
@@ -124,7 +124,7 @@ plot.see_check_model <- function(x,
       size_axis_title = size_axis_title,
       size_title = size_title,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = show_dots
     )
   }
@@ -168,7 +168,7 @@ plot.see_check_model <- function(x,
       size_axis_title = size_axis_title,
       size_title = size_title,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = show_dots
     )
   }
@@ -185,7 +185,7 @@ plot.see_check_model <- function(x,
       size_title = size_title,
       base_size = base_size,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = show_dots
     )
   }
@@ -212,7 +212,7 @@ plot.see_check_model <- function(x,
         linewidth = linewidth,
         size_point = 0.9 * size_point,
         alpha = alpha_level,
-        dot_alpha = dot_alpha_level,
+        alpha_dot = alpha_dot,
         colors = colors,
         detrend = detrend,
         style = style,
@@ -232,7 +232,7 @@ plot.see_check_model <- function(x,
         theme_style = style,
         base_size = base_size,
         colors = colors,
-        dot_alpha_level = dot_alpha_level,
+        alpha_dot = alpha_dot,
         show_dots = TRUE, # qq-plots w/o dots makes no sense
         model_info = model_info,
         model_class = model_class
@@ -264,7 +264,7 @@ plot.see_check_model <- function(x,
       theme_style = style,
       base_size = base_size,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = TRUE # qq-plots w/o dots makes no sense
     )
 
@@ -292,7 +292,7 @@ plot.see_check_model <- function(x,
                                  theme_style = theme_lucid,
                                  base_size = 10,
                                  colors = unname(social_colors(c("green", "blue", "red"))),
-                                 dot_alpha_level = 0.8,
+                                 alpha_dot = 0.8,
                                  show_dots = TRUE) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
@@ -301,7 +301,7 @@ plot.see_check_model <- function(x,
       geom_point2(
         colour = colors[2],
         size = size_point,
-        alpha = dot_alpha_level
+        alpha = alpha_dot
       )
   }
 

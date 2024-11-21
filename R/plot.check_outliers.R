@@ -36,7 +36,7 @@ plot.see_check_outliers <- function(x,
                                     size_title = 12,
                                     size_axis_title = base_size,
                                     base_size = 10,
-                                    dot_alpha = 0.8,
+                                    alpha_dot = 0.8,
                                     colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                     rescale_distance = TRUE,
                                     type = c("dots", "bars"),
@@ -55,7 +55,7 @@ plot.see_check_outliers <- function(x,
       size_axis_title = size_axis_title,
       size_title = size_title,
       base_size = base_size,
-      dot_alpha_level = dot_alpha,
+      alpha_dot = alpha_dot,
       colors = colors
     )
   } else if (length(outlier_methods) == 1) {

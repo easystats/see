@@ -142,8 +142,8 @@ plot.see_parameters_brms_meta <- function(x,
                                           size_point = 2,
                                           linewidth = 0.8,
                                           size_text = 3.5,
-                                          posteriors_alpha = 0.7,
-                                          rope_alpha = 0.15,
+                                          alpha_posteriors = 0.7,
+                                          alpha_rope = 0.15,
                                           color_rope = "cadetblue",
                                           normalize_height = TRUE,
                                           show_labels = TRUE,
@@ -176,7 +176,7 @@ plot.see_parameters_brms_meta <- function(x,
         ymin = 0,
         ymax = Inf,
         fill = color_rope,
-        alpha = rope_alpha
+        alpha = alpha_rope
       )
   }
 
@@ -187,7 +187,7 @@ plot.see_parameters_brms_meta <- function(x,
       mapping = ggplot2::aes(fill = .data$Group),
       color = NA,
       scale = 1,
-      alpha = posteriors_alpha
+      alpha = alpha_posteriors
     ) +
     ggplot2::geom_errorbarh(
       data = datasummary,

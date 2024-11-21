@@ -16,7 +16,7 @@
 #' @export
 plot.see_equivalence_test <- function(x,
                                       color_rope = "#0171D3",
-                                      rope_alpha = 0.2,
+                                      alpha_rope = 0.2,
                                       show_intercept = FALSE,
                                       n_columns = 1,
                                       ...) {
@@ -132,7 +132,7 @@ plot.see_equivalence_test <- function(x,
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
   if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
 
-  rope.line.alpha <- 1.25 * rope_alpha
+  rope.line.alpha <- 1.25 * alpha_rope
   if (rope.line.alpha > 1) rope.line.alpha <- 1
 
   insight::check_if_installed("ggridges")
@@ -145,7 +145,7 @@ plot.see_equivalence_test <- function(x,
       ymin = 0,
       ymax = Inf,
       fill = color_rope,
-      alpha = (rope_alpha / 3),
+      alpha = (alpha_rope / 3),
       na.rm = TRUE
     ) +
     geom_vline(
@@ -208,7 +208,7 @@ plot.see_equivalence_test <- function(x,
 #' @export
 plot.see_equivalence_test_df <- function(x,
                                          color_rope = "#0171D3",
-                                         rope_alpha = 0.2,
+                                         alpha_rope = 0.2,
                                          data = NULL,
                                          n_columns = 1,
                                          ...) {
@@ -277,7 +277,7 @@ plot.see_equivalence_test_df <- function(x,
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
   if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
 
-  rope.line.alpha <- 1.25 * rope_alpha
+  rope.line.alpha <- 1.25 * alpha_rope
 
   if (rope.line.alpha > 1) rope.line.alpha <- 1
 
@@ -291,7 +291,7 @@ plot.see_equivalence_test_df <- function(x,
       ymin = 0,
       ymax = Inf,
       fill = color_rope,
-      alpha = (rope_alpha / 3)
+      alpha = (alpha_rope / 3)
     ) +
     geom_vline(
       xintercept = .rope,
@@ -334,7 +334,7 @@ plot.see_equivalence_test_df <- function(x,
 plot.see_equivalence_test_lm <- function(x,
                                          size_point = 0.7,
                                          color_rope = "#0171D3",
-                                         rope_alpha = 0.2,
+                                         alpha_rope = 0.2,
                                          show_intercept = FALSE,
                                          n_columns = 1,
                                          ...) {
@@ -393,7 +393,7 @@ plot.see_equivalence_test_lm <- function(x,
   if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
   if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
 
-  rope.line.alpha <- 1.25 * rope_alpha
+  rope.line.alpha <- 1.25 * alpha_rope
   if (rope.line.alpha > 1) rope.line.alpha <- 1
 
   p <- ggplot(
@@ -413,7 +413,7 @@ plot.see_equivalence_test_lm <- function(x,
       ymin = 0,
       ymax = Inf,
       fill = color_rope,
-      alpha = (rope_alpha / 3)
+      alpha = (alpha_rope / 3)
     ) +
     geom_vline(
       xintercept = .rope,

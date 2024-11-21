@@ -8,7 +8,7 @@
 #'   `"pp"` for probability-probability (P-P) plots, or
 #'   `"density"` for density overlay plots.
 #' @param linewidth Numeric value specifying size of line geoms.
-#' @param dot_alpha Numeric value specifying alpha level of the point geoms.
+#' @param alpha_dot Numeric value specifying alpha level of the point geoms.
 #' @param alpha Numeric value specifying alpha level of the confidence bands.
 #' @param colors Character vector of length two, indicating the colors (in
 #'   hex-format) for points and line.
@@ -48,7 +48,7 @@ plot.see_check_normality <- function(x,
                                      size_axis_title = base_size,
                                      base_size = 10,
                                      alpha = 0.2,
-                                     dot_alpha = 0.8,
+                                     alpha_dot = 0.8,
                                      colors = c("#3aaf85", "#1b6ca8"),
                                      detrend = TRUE,
                                      method = "ell",
@@ -96,7 +96,7 @@ plot.see_check_normality <- function(x,
           linewidth = linewidth,
           size_point = size_point,
           alpha = alpha,
-          dot_alpha = dot_alpha,
+          alpha_dot = alpha_dot,
           colors = colors,
           detrend = detrend,
           base_size = base_size,
@@ -120,7 +120,7 @@ plot.see_check_normality <- function(x,
         base_size = base_size,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha,
+        alpha_dot = alpha_dot,
         model_info = model_info,
         method = method,
         model_class = class(model)[1]
@@ -160,7 +160,7 @@ plot.see_check_normality <- function(x,
         size_title = size_title,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha,
+        alpha_dot = alpha_dot,
         method = method
       )
     }
@@ -222,7 +222,7 @@ plot.see_check_normality <- function(x,
                           theme_style = theme_lucid,
                           base_size = 10,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = 0.8,
+                          alpha_dot = 0.8,
                           show_dots = TRUE,
                           model_info = NULL,
                           model_class = NULL) {
@@ -259,7 +259,7 @@ plot.see_check_normality <- function(x,
         stroke = 0,
         size = size_point,
         colour = colors[2],
-        alpha = dot_alpha_level,
+        alpha = alpha_dot,
         detrend = detrend
       ),
       qqplotr::stat_qq_line(
@@ -358,7 +358,7 @@ plot.see_check_normality <- function(x,
                           theme_style = theme_lucid,
                           base_size = 10,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = 0.8) {
+                          alpha_dot = 0.8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
       qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend, bandType = method) +
@@ -371,7 +371,7 @@ plot.see_check_normality <- function(x,
         shape = 16, stroke = 0,
         size = size_point,
         colour = colors[2],
-        alpha = dot_alpha_level,
+        alpha = alpha_dot,
         detrend = detrend
       )
   } else if (requireNamespace("MASS", quietly = TRUE)) {
@@ -391,7 +391,7 @@ plot.see_check_normality <- function(x,
         mapping = if (detrend) ggplot2::aes(y = .data$y - .data$probs),
         colour = colors[2],
         size = size_point,
-        alpha = dot_alpha_level
+        alpha = alpha_dot
       )
   } else {
     insight::format_error("Package 'qqplotr' OR 'MASS' required for P-P plots. Please install one of them.")
@@ -430,7 +430,7 @@ plot.see_check_normality <- function(x,
                             theme_style = theme_lucid,
                             base_size = 10,
                             colors = unname(social_colors(c("green", "blue", "red"))),
-                            dot_alpha_level = 0.8,
+                            alpha_dot = 0.8,
                             show_dots = TRUE) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
@@ -452,7 +452,7 @@ plot.see_check_normality <- function(x,
         ggplot2::aes(ymin = .data$conf.low, ymax = .data$conf.high),
         width = 0,
         colour = colors[2],
-        alpha = dot_alpha_level
+        alpha = alpha_dot
       ) +
       theme_style(
         base_size = base_size,
@@ -467,7 +467,7 @@ plot.see_check_normality <- function(x,
         geom_point2(
           colour = colors[2],
           size = size_point,
-          alpha = dot_alpha_level
+          alpha = alpha_dot
         )
     }
 

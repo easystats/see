@@ -9,8 +9,8 @@
   size_point = 2,
   linewidth = 0.8,
   size_text = 3.5,
-  posteriors_alpha = 0.7,
-  rope_alpha = 0.15,
+  alpha_posteriors = 0.7,
+  alpha_rope = 0.15,
   color_rope = "cadetblue",
   normalize_height = TRUE,
   show_labels = TRUE,
@@ -26,10 +26,10 @@
 
 \item{size_text}{Numeric value specifying size of text labels.}
 
-\item{posteriors_alpha}{Numeric value specifying alpha for the posterior
+\item{alpha_posteriors}{Numeric value specifying alpha for the posterior
 distributions.}
 
-\item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
+\item{alpha_rope}{Numeric specifying transparency level of ROPE ribbon.}
 
 \item{color_rope}{Character specifying color of ROPE ribbon.}
 

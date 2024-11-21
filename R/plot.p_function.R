@@ -6,7 +6,7 @@
 #' @param colors Character vector of length two, indicating the colors (in
 #' hex-format) used when only one parameter is plotted, resp. when panels
 #' are plotted as facets.
-#' @param line_alpha Numeric value specifying alpha of lines indicating the
+#' @param alpha_line Numeric value specifying alpha of lines indicating the
 #' emphasized compatibility interval levels (see `?parameters::p_function`).
 #'
 #' @inheritParams data_plot
@@ -31,7 +31,7 @@ plot.see_p_function <- function(x,
                                 size_point = 1.2,
                                 linewidth = c(0.7, 0.9),
                                 size_text = 3,
-                                line_alpha = 0.15,
+                                alpha_line = 0.15,
                                 show_labels = TRUE,
                                 n_columns = NULL,
                                 show_intercept = FALSE,
@@ -103,7 +103,7 @@ plot.see_p_function <- function(x,
       ),
       colour = colors[1],
       size = size_point,
-      alpha = line_alpha,
+      alpha = alpha_line,
       show.legend = FALSE
     ) +
     # points for vertical CI bars
@@ -116,7 +116,7 @@ plot.see_p_function <- function(x,
       ),
       colour = colors[1],
       size = size_point,
-      alpha = line_alpha,
+      alpha = alpha_line,
       show.legend = FALSE
     ) +
     # lines for vertical CI bars
@@ -131,7 +131,7 @@ plot.see_p_function <- function(x,
         linewidth = .data$group
       ),
       colour = colors[1],
-      alpha = line_alpha,
+      alpha = alpha_line,
       show.legend = FALSE
     )
 

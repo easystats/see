@@ -11,7 +11,7 @@
                                     theme_style = theme_lucid,
                                     base_size = 10,
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
-                                    dot_alpha_level = 0.8,
+                                    alpha_dot = 0.8,
                                     show_dots = TRUE) {
   linewidth <- linewidth %||% 0.7
   size_text <- size_text %||% 3
@@ -30,7 +30,7 @@
     p <- p + geom_point2(
       aes(colour = .data$Influential),
       na.rm = na.rm,
-      alpha = dot_alpha_level,
+      alpha = alpha_dot,
       size = size_point
     )
   }

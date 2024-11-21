@@ -8,7 +8,7 @@
   x,
   size_point = 2,
   color_rope = "#0171D3",
-  rope_alpha = 0.2,
+  alpha_rope = 0.2,
   show_intercept = FALSE,
   ...
 )
@@ -20,7 +20,7 @@
 
 \item{color_rope}{Character specifying color of ROPE ribbon.}
 
-\item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
+\item{alpha_rope}{Numeric specifying transparency level of ROPE ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the
