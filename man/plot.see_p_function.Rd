@@ -8,7 +8,7 @@
   x,
   colors = c("black", "#1b6ca8"),
   size_point = 1.2,
-  size_line = c(0.7, 0.9),
+  linewidth = c(0.7, 0.9),
   size_text = 3,
   line_alpha = 0.15,
   show_labels = TRUE,
@@ -26,7 +26,7 @@ are plotted as facets.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_text}{Numeric value specifying size of text labels.}
 

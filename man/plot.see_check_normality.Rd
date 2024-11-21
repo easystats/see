@@ -8,7 +8,7 @@
   x,
   type = c("qq", "pp", "density"),
   data = NULL,
-  size_line = 0.8,
+  linewidth = 0.8,
   size_point = 2,
   size_title = 12,
   size_axis_title = base_size,
@@ -32,7 +32,7 @@ Options are \code{"qq"} (default) for quantile-quantile (Q-Q) plots,
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 

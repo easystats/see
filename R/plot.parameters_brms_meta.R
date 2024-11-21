@@ -140,7 +140,7 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' @export
 plot.see_parameters_brms_meta <- function(x,
                                           size_point = 2,
-                                          size_line = 0.8,
+                                          linewidth = 0.8,
                                           size_text = 3.5,
                                           posteriors_alpha = 0.7,
                                           rope_alpha = 0.15,
@@ -196,7 +196,7 @@ plot.see_parameters_brms_meta <- function(x,
         xmax = .data$CI_high,
         color = .data$Color
       ),
-      linewidth = size_line
+      linewidth = linewidth
     ) +
     ggplot2::geom_point(
       data = datasummary,

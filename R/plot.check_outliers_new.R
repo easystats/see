@@ -3,7 +3,7 @@
                                     ref.color = "darkgray",
                                     ref.linetype = "dashed",
                                     show_labels = TRUE,
-                                    size_line = NULL,
+                                    linewidth = NULL,
                                     size_point = 2,
                                     size_text = NULL,
                                     size_axis_title = base_size,
@@ -13,7 +13,7 @@
                                     colors = unname(social_colors(c("green", "blue grey", "red"))),
                                     dot_alpha_level = 0.8,
                                     show_dots = TRUE) {
-  size_line <- size_line %||% 0.7
+  linewidth <- linewidth %||% 0.7
   size_text <- size_text %||% 3
 
   plot_data <- x
@@ -52,7 +52,7 @@
       na.rm = na.rm,
       se = FALSE,
       color = colors[1],
-      linewidth = size_line
+      linewidth = linewidth
     ) +
     scale_colour_manual(values = c(OK = colors[2], Influential = colors[3])) +
     (if (isTRUE(show_labels)) {
@@ -97,7 +97,7 @@
           y = .cook_ref[[.level]],
           color = colors[1],
           linetype = ref.linetype,
-          linewidth = size_line
+          linewidth = linewidth
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {
@@ -107,7 +107,7 @@
           y = -1 * .cook_ref[[.level]],
           color = colors[1],
           linetype = ref.linetype,
-          linewidth = size_line
+          linewidth = linewidth
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {

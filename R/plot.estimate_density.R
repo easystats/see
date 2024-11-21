@@ -105,7 +105,7 @@ plot.see_estimate_density <- function(x,
                                       priors = FALSE,
                                       priors_alpha = 0.4,
                                       posteriors_alpha = 0.7,
-                                      size_line = 0.9,
+                                      linewidth = 0.9,
                                       size_point = 2,
                                       centrality = "median",
                                       ci = 0.95,
@@ -144,7 +144,7 @@ plot.see_estimate_density <- function(x,
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(linewidth = size_line) +
+      geom_line(linewidth = linewidth) +
       add_plot_attributes(x) +
       scale_color_flat(labels = parameter_labels)
   } else {
@@ -194,7 +194,7 @@ plot.see_estimate_density <- function(x,
           xmax = .data$CI_high,
           color = "Posterior"
         ),
-        linewidth = size_line
+        linewidth = linewidth
       ) +
       geom_point(
         data = my_summary,
@@ -247,14 +247,14 @@ data_plot.estimate_density_df <- data_plot.estimate_density
 plot.see_estimate_density_df <- function(x,
                                          stack = TRUE,
                                          n_columns = 1,
-                                         size_line = 0.9,
+                                         linewidth = 0.9,
                                          ...) {
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   parameter_labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(linewidth = size_line)
+      geom_line(linewidth = linewidth)
   } else {
     insight::check_if_installed("ggridges")
 

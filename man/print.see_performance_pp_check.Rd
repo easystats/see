@@ -7,7 +7,7 @@
 \usage{
 \method{print}{see_performance_pp_check}(
   x,
-  size_line = 0.5,
+  linewidth = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
@@ -23,7 +23,7 @@
 
 \method{plot}{see_performance_pp_check}(
   x,
-  size_line = 0.5,
+  linewidth = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
@@ -40,7 +40,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 

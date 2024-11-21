@@ -19,7 +19,7 @@ plot.see_check_collinearity <- function(x,
                                         data = NULL,
                                         colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
                                         size_point = 3.5,
-                                        size_line = 0.8,
+                                        linewidth = 0.8,
                                         size_title = 12,
                                         size_axis_title = base_size,
                                         base_size = 10,
@@ -53,7 +53,7 @@ plot.see_check_collinearity <- function(x,
   .plot_diag_vif(
     dat,
     size_point = size_point,
-    size_line = size_line,
+    linewidth = linewidth,
     size_title = size_title,
     size_axis_title = size_axis_title,
     base_size = base_size,
@@ -66,7 +66,7 @@ plot.see_check_collinearity <- function(x,
 
 .plot_diag_vif <- function(x,
                            size_point,
-                           size_line,
+                           linewidth,
                            theme_style = theme_lucid,
                            size_title = 12,
                            size_axis_title = 10,
@@ -132,7 +132,7 @@ plot.see_check_collinearity <- function(x,
   if (!is.null(ci_data)) {
     p <- p +
       ggplot2::geom_linerange(
-        linewidth = size_line,
+        linewidth = linewidth,
         na.rm = TRUE
       ) +
       ggplot2::geom_segment(
