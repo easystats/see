@@ -66,13 +66,13 @@ performance::simulate_residuals() function."><meta property="og:image" content="
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_performance_simres'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  size_line <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>  linewidth <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>  size_point <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  size_title <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  size_axis_title <span class="op">=</span> <span class="va">base_size</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.2</span>,</span>
-<span>  dot_alpha <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>  alpha_dot <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#3aaf85"</span>, <span class="st">"#1b6ca8"</span><span class="op">)</span>,</span>
 <span>  detrend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  transform <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -89,7 +89,7 @@ performance::simulate_residuals() function."><meta property="og:image" content="
 <dd><p>An object.</p></dd>
 
 
-<dt id="arg-size-line">size_line<a class="anchor" aria-label="anchor" href="#arg-size-line"></a></dt>
+<dt id="arg-linewidth">linewidth<a class="anchor" aria-label="anchor" href="#arg-linewidth"></a></dt>
 <dd><p>Numeric value specifying size of line geoms.</p></dd>
 
 
@@ -106,7 +106,7 @@ axis and plot titles.</p></dd>
 <dd><p>Numeric value specifying alpha level of the confidence bands.</p></dd>
 
 
-<dt id="arg-dot-alpha">dot_alpha<a class="anchor" aria-label="anchor" href="#arg-dot-alpha"></a></dt>
+<dt id="arg-alpha-dot">alpha_dot<a class="anchor" aria-label="anchor" href="#arg-alpha-dot"></a></dt>
 <dd><p>Numeric value specifying alpha level of the point geoms.</p></dd>
 
 

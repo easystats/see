@@ -63,13 +63,13 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_performance_pp_check'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  size_line <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  linewidth <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  size_point <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  size_bar <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  size_axis_title <span class="op">=</span> <span class="va">base_size</span>,</span>
 <span>  size_title <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  line_alpha <span class="op">=</span> <span class="fl">0.15</span>,</span>
+<span>  alpha_line <span class="op">=</span> <span class="fl">0.15</span>,</span>
 <span>  style <span class="op">=</span> <span class="va">theme_lucid</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="fu"><a href="social_colors.html">social_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"density"</span>, <span class="st">"discrete_dots"</span>, <span class="st">"discrete_interval"</span>, <span class="st">"discrete_both"</span><span class="op">)</span>,</span>
@@ -80,13 +80,13 @@
 <span><span class="co"># S3 method for class 'see_performance_pp_check'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  size_line <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  linewidth <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  size_point <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  size_bar <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  size_axis_title <span class="op">=</span> <span class="va">base_size</span>,</span>
 <span>  size_title <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  line_alpha <span class="op">=</span> <span class="fl">0.15</span>,</span>
+<span>  alpha_line <span class="op">=</span> <span class="fl">0.15</span>,</span>
 <span>  style <span class="op">=</span> <span class="va">theme_lucid</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="fu"><a href="social_colors.html">social_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"density"</span>, <span class="st">"discrete_dots"</span>, <span class="st">"discrete_interval"</span>, <span class="st">"discrete_both"</span><span class="op">)</span>,</span>
@@ -103,7 +103,7 @@
 <dd><p>An object.</p></dd>
 
 
-<dt id="arg-size-line">size_line<a class="anchor" aria-label="anchor" href="#arg-size-line"></a></dt>
+<dt id="arg-linewidth">linewidth<a class="anchor" aria-label="anchor" href="#arg-linewidth"></a></dt>
 <dd><p>Numeric value specifying size of line geoms.</p></dd>
 
 
@@ -120,7 +120,7 @@
 axis and plot titles.</p></dd>
 
 
-<dt id="arg-line-alpha">line_alpha<a class="anchor" aria-label="anchor" href="#arg-line-alpha"></a></dt>
+<dt id="arg-alpha-line">alpha_line<a class="anchor" aria-label="anchor" href="#arg-alpha-line"></a></dt>
 <dd><p>Numeric value specifying alpha of lines indicating <code>yrep</code>.</p></dd>
 
 
