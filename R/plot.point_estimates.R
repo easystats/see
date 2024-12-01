@@ -69,7 +69,6 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
 data_plot.map_estimate <- data_plot.point_estimate
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for point estimates of posterior samples

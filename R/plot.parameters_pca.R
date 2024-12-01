@@ -50,7 +50,6 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
 data_plot.parameters_efa <- data_plot.parameters_pca
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for principal component analysis

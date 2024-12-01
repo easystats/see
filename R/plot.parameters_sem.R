@@ -53,7 +53,6 @@ data_plot.parameters_sem <- function(x,
   }
 
 
-
   # Separate labels
   edges$Label_Regression <- ifelse(edges$Component == "Regression", edges$Label, "")
   edges$Label_Correlation <- ifelse(edges$Component == "Correlation", edges$Label, "")
@@ -78,8 +77,6 @@ data_plot.parameters_sem <- function(x,
   class(dataplot) <- c("data_plot", "see_parameters_sem", class(dataplot))
   dataplot
 }
-
-
 
 
 # Plot --------------------------------------------------------------------

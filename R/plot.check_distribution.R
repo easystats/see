@@ -116,7 +116,6 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
 }
 
 
-
 #' @export
 plot.see_check_distribution_numeric <- function(x,
                                                 size_point = 2,

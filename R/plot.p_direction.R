@@ -119,7 +119,6 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 }
 
 
-
 #' @keywords internal
 .compute_densities_pd <- function(x, name = "Y", null = 0) {
   out <- .as.data.frame_density(
@@ -137,7 +136,6 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
   out
 }
-
 
 
 # Plot --------------------------------------------------------------------

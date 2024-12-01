@@ -96,7 +96,6 @@ scale_color_oi <- scale_color_okabeito
 scale_fill_oi <- scale_fill_okabeito
 
 
-
 # Palette --------------------------------------------------------------------
 
 # The palette from: https://jfly.uni-koeln.de/color/#pallet

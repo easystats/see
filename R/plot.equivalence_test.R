@@ -201,8 +201,6 @@ plot.see_equivalence_test <- function(x,
 }
 
 
-
-
 # data frame method --------------------------------
 
 #' @export
@@ -324,7 +322,6 @@ plot.see_equivalence_test_df <- function(x,
 
   p
 }
-
 
 
 # freq models method --------------------------------

@@ -108,11 +108,7 @@ scale_colour_colorhex_c <- scale_color_colorhex_c
 scale_colour_colorhex_d <- scale_color_colorhex_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
 
 
 #' @rdname scale_color_colorhex
@@ -163,9 +159,6 @@ scale_fill_colorhex_c <- function(palette = 1014416,
     ...
   )
 }
-
-
-
 
 
 # Palette --------------------------------------------------------------------

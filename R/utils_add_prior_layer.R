@@ -92,9 +92,6 @@
 }
 
 
-
-
-
 .add_prior_layer_ribbon <- function(model,
                                     parameter = NULL,
                                     show_intercept = FALSE,

@@ -234,8 +234,6 @@ plot.see_estimate_density <- function(x,
 }
 
 
-
-
 # Density df --------------------------------------------------------------------
 
 #' @export

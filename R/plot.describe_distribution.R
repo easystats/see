@@ -24,8 +24,6 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 }
 
 
-
-
 # Plot --------------------------------------------------------------------
 #' Plot method for describing distributions of vectors
 #'
@@ -105,7 +103,6 @@ plot.see_parameters_distribution <- function(x,
     )
   }
 }
-
 
 
 .plot_see_parameters_distribution <- function(x,

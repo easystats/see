@@ -62,7 +62,6 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 }
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for Region of Practical Equivalence

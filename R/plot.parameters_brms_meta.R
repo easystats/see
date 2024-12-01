@@ -71,8 +71,6 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 }
 
 
-
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for Model Parameters from Bayesian Meta-Analysis

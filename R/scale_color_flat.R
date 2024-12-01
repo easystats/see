@@ -45,7 +45,6 @@ scale_color_flat <- function(palette = "contrast",
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -94,11 +93,7 @@ scale_colour_flat_c <- scale_color_flat_c
 scale_colour_flat_d <- scale_color_flat_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
 
 
 #' @rdname scale_color_flat
@@ -151,12 +146,7 @@ scale_fill_flat_c <- function(palette = "contrast",
 }
 
 
-
-
-
 # Palette --------------------------------------------------------------------
-
-
 
 
 # The palette based on flat design colors: https://www.materialui.co/flatuicolors
@@ -205,8 +195,6 @@ flat_colors <- function(...) {
 }
 
 
-
-
 flat_palettes <- list(
   `full` = flat_colors(),
   `ice` = flat_colors("purple", "deep purple", "blue", "light blue"),
@@ -236,10 +224,6 @@ flat_palettes <- list(
     "red"
   )
 )
-
-
-
-
 
 
 #' Flat UI color palette

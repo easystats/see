@@ -85,7 +85,6 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
 data_plot.n_clusters <- data_plot.n_factors
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for numbers of clusters to extract or factors to retain

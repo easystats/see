@@ -753,7 +753,6 @@ plot.see_parameters_model <- function(x,
 }
 
 
-
 .meta_measure <- function(meta_measure) {
   switch(meta_measure,
     MD = "Raw Mean Difference",

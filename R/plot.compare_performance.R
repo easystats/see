@@ -51,8 +51,6 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
 }
 
 
-
-
 # Plot --------------------------------------------------------------------
 #' Plot method for comparing model performances
 #'

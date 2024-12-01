@@ -196,7 +196,6 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-
 .plot_pp_check <- function(x,
                            linewidth,
                            size_point,

@@ -40,7 +40,6 @@ scale_color_see <- function(palette = "contrast",
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -89,11 +88,7 @@ scale_colour_see_c <- scale_color_see_c
 scale_colour_see_d <- scale_color_see_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
 
 
 #' @rdname scale_color_see
@@ -144,7 +139,6 @@ scale_fill_see_c <- function(palette = "contrast",
     ...
   )
 }
-
 
 
 # Palette --------------------------------------------------------------------
@@ -237,9 +231,6 @@ see_palettes <- list(
 palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
   .retrieve_palette(palette, see_palettes, reverse = reverse, ...)
 }
-
-
-
 
 
 # helper -----------------------

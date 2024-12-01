@@ -126,7 +126,6 @@ data_plot.p_significance <- function(x,
 }
 
 
-
 #' @keywords internal
 .compute_densities_ps <- function(x, name = "Y", threshold = 0) {
   out <- .as.data.frame_density(stats::density(x))
@@ -162,7 +161,6 @@ data_plot.p_significance <- function(x,
   out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / range_diff)
   out
 }
-
 
 
 # Plot --------------------------------------------------------------------
