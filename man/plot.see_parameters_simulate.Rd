@@ -11,8 +11,8 @@
   show_intercept = FALSE,
   n_columns = NULL,
   normalize_height = FALSE,
-  size_line = 0.9,
-  posteriors_alpha = 0.7,
+  linewidth = 0.9,
+  alpha_posteriors = 0.7,
   centrality = "median",
   ci = 0.95,
   ...
@@ -43,9 +43,9 @@ distribution of simulated draws is narrow for some parameters, this may
 result in very flat density-areas. In such cases, set
 \code{normalize_height = FALSE}.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
-\item{posteriors_alpha}{Numeric value specifying alpha for the posterior
+\item{alpha_posteriors}{Numeric value specifying alpha for the posterior
 distributions.}
 
 \item{centrality}{Character specifying the point-estimate (centrality index)

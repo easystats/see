@@ -106,7 +106,7 @@ plot.see_point_estimate <- function(x,
                                     show_labels = TRUE,
                                     show_intercept = FALSE,
                                     priors = FALSE,
-                                    priors_alpha = 0.4,
+                                    alpha_priors = 0.4,
                                     ...) {
   # save model for later use
   model <- .retrieve_data(x)
@@ -149,18 +149,18 @@ plot.see_point_estimate <- function(x,
         model,
         parameter = x_lab,
         show_intercept = show_intercept,
-        priors_alpha = priors_alpha,
+        alpha_priors = alpha_priors,
         fill_color = "#FF9800"
       )
-      posterior_alpha <- 0.7
+      alpha_posteriors <- 0.7
     } else {
-      posterior_alpha <- 1
+      alpha_posteriors <- 1
     }
 
     p_object <- p_object +
       geom_ribbon(aes(ymin = 0, ymax = .data$y),
         fill = "#FFC107",
-        alpha = posterior_alpha
+        alpha = alpha_posteriors
       )
 
     if (!is.null(mean_x) && !is.null(mean_y)) {
@@ -172,14 +172,14 @@ plot.see_point_estimate <- function(x,
           yend = mean_y,
           color = "#E91E63",
           linewidth = 1,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         ) +
         geom_point(
           x = mean_x,
           y = mean_y,
           color = "#E91E63",
           size = size_point,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         )
       if (show_labels) {
         p_object <- p_object +
@@ -202,14 +202,14 @@ plot.see_point_estimate <- function(x,
           yend = median_y,
           color = "#2196F3",
           linewidth = 1,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         ) +
         geom_point(
           x = median_x,
           y = median_y,
           color = "#2196F3",
           size = size_point,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         )
       if (show_labels) {
         p_object <- p_object +
@@ -232,14 +232,14 @@ plot.see_point_estimate <- function(x,
           yend = map_y,
           color = "#4CAF50",
           linewidth = 1,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         ) +
         geom_point(
           x = map_x,
           y = map_y,
           color = "#4CAF50",
           size = size_point,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         )
       if (show_labels) {
         p_object <- p_object +

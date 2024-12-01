@@ -7,8 +7,8 @@
 \method{plot}{see_rope}(
   x,
   data = NULL,
-  rope_alpha = 0.5,
-  rope_color = "cadetblue",
+  alpha_rope = 0.5,
+  color_rope = "cadetblue",
   show_intercept = FALSE,
   n_columns = 1,
   ...
@@ -20,9 +20,9 @@
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
 
-\item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
+\item{alpha_rope}{Numeric specifying transparency level of ROPE ribbon.}
 
-\item{rope_color}{Character specifying color of ROPE ribbon.}
+\item{color_rope}{Character specifying color of ROPE ribbon.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the

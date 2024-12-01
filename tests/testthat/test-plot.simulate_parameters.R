@@ -6,7 +6,7 @@ skip_on_cran()
 skip_if_offline()
 skip_if_not_installed("mclogit")
 skip_if_not_installed("parameters")
-skip_if_not_installed("vdiffr")
+
 
 test_that("`plot()` for simulate_parameters", {
   pict <- base::readRDS(url("https://slcladal.github.io/data/pict.rda", "rb"))

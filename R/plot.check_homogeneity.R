@@ -133,14 +133,14 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
 
 .plot_diag_homogeneity <- function(x,
                                    size_point,
-                                   size_line,
+                                   linewidth,
                                    alpha_level = 0.2,
                                    theme_style = theme_lucid,
                                    size_title = 12,
                                    size_axis_title = 10,
                                    base_size = 10,
                                    colors = unname(social_colors(c("green", "blue", "red"))),
-                                   dot_alpha_level = 0.8,
+                                   alpha_dot = 0.8,
                                    show_dots = TRUE) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
@@ -149,7 +149,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       geom_point2(
         colour = colors[2],
         size = size_point,
-        alpha = dot_alpha_level
+        alpha = alpha_dot
       )
   }
 
@@ -159,7 +159,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       se = TRUE,
       alpha = alpha_level,
       formula = y ~ x,
-      linewidth = size_line,
+      linewidth = linewidth,
       colour = colors[1]
     ) +
     ggplot2::labs(

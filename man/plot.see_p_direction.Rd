@@ -9,7 +9,7 @@
   data = NULL,
   show_intercept = FALSE,
   priors = FALSE,
-  priors_alpha = 0.4,
+  alpha_priors = 0.4,
   n_columns = 1,
   ...
 )
@@ -30,7 +30,7 @@ are hardly visible.}
 (using \code{\link[bayestestR:simulate_prior]{bayestestR::simulate_prior()}}) and added
 to the plot.}
 
-\item{priors_alpha}{Numeric value specifying alpha for the prior
+\item{alpha_priors}{Numeric value specifying alpha for the prior
 distributions.}
 
 \item{n_columns}{For models with multiple components (like fixed and random,

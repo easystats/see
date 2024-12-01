@@ -166,7 +166,7 @@ plot.see_p_direction <- function(x,
                                  data = NULL,
                                  show_intercept = FALSE,
                                  priors = FALSE,
-                                 priors_alpha = 0.4,
+                                 alpha_priors = 0.4,
                                  n_columns = 1,
                                  ...) {
   # save model for later use
@@ -209,7 +209,7 @@ plot.see_p_direction <- function(x,
       model,
       parameter = params,
       show_intercept = show_intercept,
-      priors_alpha = priors_alpha
+      alpha_priors = alpha_priors
     )
   }
 

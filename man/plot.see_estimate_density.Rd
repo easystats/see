@@ -10,9 +10,9 @@
   show_intercept = FALSE,
   n_columns = 1,
   priors = FALSE,
-  priors_alpha = 0.4,
-  posteriors_alpha = 0.7,
-  size_line = 0.9,
+  alpha_priors = 0.4,
+  alpha_posteriors = 0.7,
+  linewidth = 0.9,
   size_point = 2,
   centrality = "median",
   ci = 0.95,
@@ -39,13 +39,13 @@ panel-layout. If \code{NULL}, a single, integrated plot is shown.}
 (using \code{\link[bayestestR:simulate_prior]{bayestestR::simulate_prior()}}) and added
 to the plot.}
 
-\item{priors_alpha}{Numeric value specifying alpha for the prior
+\item{alpha_priors}{Numeric value specifying alpha for the prior
 distributions.}
 
-\item{posteriors_alpha}{Numeric value specifying alpha for the posterior
+\item{alpha_posteriors}{Numeric value specifying alpha for the posterior
 distributions.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 

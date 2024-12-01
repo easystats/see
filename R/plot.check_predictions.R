@@ -53,7 +53,7 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #'
 #' The `plot()` method for the `performance::check_predictions()` function.
 #'
-#' @param line_alpha Numeric value specifying alpha of lines indicating `yrep`.
+#' @param alpha_line Numeric value specifying alpha of lines indicating `yrep`.
 #' @param style A ggplot2-theme.
 #' @param type Plot type for the posterior predictive checks plot. Can be `"density"`
 #' (default), `"discrete_dots"`, `"discrete_interval"` or `"discrete_both"` (the
@@ -87,13 +87,13 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #' plot(out, type = "discrete_dots")
 #' @export
 print.see_performance_pp_check <- function(x,
-                                           size_line = 0.5,
+                                           linewidth = 0.5,
                                            size_point = 2,
                                            size_bar = 0.7,
                                            size_axis_title = base_size,
                                            size_title = 12,
                                            base_size = 10,
-                                           line_alpha = 0.15,
+                                           alpha_line = 0.15,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
                                            type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
@@ -116,9 +116,9 @@ print.see_performance_pp_check <- function(x,
 
   p1 <- .plot_pp_check(
     x,
-    size_line = size_line,
+    linewidth = linewidth,
     size_point = size_point,
-    line_alpha = line_alpha,
+    alpha_line = alpha_line,
     theme_style = style,
     colors = colors,
     base_size = base_size,
@@ -144,13 +144,13 @@ print.see_performance_pp_check <- function(x,
 #' @rdname print.see_performance_pp_check
 #' @export
 plot.see_performance_pp_check <- function(x,
-                                          size_line = 0.5,
+                                          linewidth = 0.5,
                                           size_point = 2,
                                           size_bar = 0.7,
                                           size_axis_title = base_size,
                                           size_title = 12,
                                           base_size = 10,
-                                          line_alpha = 0.15,
+                                          alpha_line = 0.15,
                                           style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
                                           type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
@@ -173,9 +173,9 @@ plot.see_performance_pp_check <- function(x,
 
   p1 <- .plot_pp_check(
     x,
-    size_line = size_line,
+    linewidth = linewidth,
     size_point = size_point,
-    line_alpha = line_alpha,
+    alpha_line = alpha_line,
     theme_style = style,
     base_size = base_size,
     size_axis_title = size_axis_title,
@@ -198,9 +198,9 @@ plot.see_performance_pp_check <- function(x,
 
 
 .plot_pp_check <- function(x,
-                           size_line,
+                           linewidth,
                            size_point,
-                           line_alpha,
+                           alpha_line,
                            theme_style,
                            base_size = 10,
                            size_axis_title = 10,
@@ -215,7 +215,7 @@ plot.see_performance_pp_check <- function(x,
   # discrete plot type from "bayesplot::pp_check()" returns a different data
   # structure, so we need to handle it differently
   if (isTRUE(is_stan) && type != "density") {
-    return(.plot_check_predictions_stan_dots(x, colors, info, size_line, size_point, line_alpha, ...))
+    return(.plot_check_predictions_stan_dots(x, colors, info, linewidth, size_point, alpha_line, ...))
   }
 
   # default bandwidth, for smooting
@@ -228,7 +228,7 @@ plot.see_performance_pp_check <- function(x,
   suggest_dots <- (minfo$is_bernoulli || minfo$is_count || minfo$is_ordinal || minfo$is_categorical)
 
   if (!is.null(type) && type %in% c("discrete_dots", "discrete_interval", "discrete_both") && suggest_dots) {
-    out <- .plot_check_predictions_dots(x, colors, info, size_line, size_point, line_alpha, type, ...)
+    out <- .plot_check_predictions_dots(x, colors, info, linewidth, size_point, alpha_line, type, ...)
   } else {
     if (suggest_dots) {
       insight::format_alert(
@@ -237,7 +237,7 @@ plot.see_performance_pp_check <- function(x,
       )
     }
     # denity plot - for models that have no binary or count/ordinal outcome
-    out <- .plot_check_predictions_density(x, colors, info, size_line, line_alpha, bandwidth, ...)
+    out <- .plot_check_predictions_density(x, colors, info, linewidth, alpha_line, bandwidth, ...)
   }
 
 
@@ -271,8 +271,8 @@ plot.see_performance_pp_check <- function(x,
 .plot_check_predictions_density <- function(x,
                                             colors,
                                             info,
-                                            size_line,
-                                            line_alpha,
+                                            linewidth,
+                                            alpha_line,
                                             bandwidth,
                                             ...) {
   ggplot2::ggplot(x) +
@@ -295,15 +295,15 @@ plot.see_performance_pp_check <- function(x,
     )) +
     ggplot2::scale_linewidth_manual(
       values = c(
-        "Observed data" = 1.7 * size_line,
-        "Model-predicted data" = size_line
+        "Observed data" = 1.7 * linewidth,
+        "Model-predicted data" = linewidth
       ),
       guide = "none"
     ) +
     ggplot2::scale_alpha_manual(
       values = c(
         "Observed data" = 1,
-        "Model-predicted data" = line_alpha
+        "Model-predicted data" = alpha_line
       ),
       guide = "none"
     ) +
@@ -326,9 +326,9 @@ plot.see_performance_pp_check <- function(x,
 .plot_check_predictions_dots <- function(x,
                                          colors,
                                          info,
-                                         size_line,
+                                         linewidth,
                                          size_point,
-                                         line_alpha,
+                                         alpha_line,
                                          type = "discrete_dots",
                                          ...) {
   # make sure we have a factor, so "table()" generates frequencies for all levels
@@ -378,7 +378,7 @@ plot.see_performance_pp_check <- function(x,
         ),
         position = ggplot2::position_nudge(x = 0.2),
         size = 0.4 * size_point,
-        linewidth = size_line,
+        linewidth = linewidth,
         stroke = 0,
         shape = 16
       ) +
@@ -409,7 +409,7 @@ plot.see_performance_pp_check <- function(x,
         group = .data$grp,
         color = .data$key
       ),
-      alpha = line_alpha,
+      alpha = alpha_line,
       position = ggplot2::position_jitter(width = 0.1, height = 0.02),
       size = 0.8 * size_point,
       stroke = 0,
@@ -478,9 +478,9 @@ plot.see_performance_pp_check <- function(x,
 .plot_check_predictions_stan_dots <- function(x,
                                               colors,
                                               info,
-                                              size_line,
+                                              linewidth,
                                               size_point,
-                                              line_alpha,
+                                              alpha_line,
                                               ...) {
   # make sure we have a factor, so "table()" generates frequencies for all levels
   # for each group - we need tables of same size to bind data frames
@@ -502,7 +502,7 @@ plot.see_performance_pp_check <- function(x,
       ),
       position = ggplot2::position_nudge(x = 0.2),
       size = 0.4 * size_point,
-      linewidth = size_line,
+      linewidth = linewidth,
       stroke = 0,
       shape = 16
     ) +

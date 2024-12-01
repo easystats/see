@@ -6,13 +6,13 @@
 \usage{
 \method{plot}{see_performance_simres}(
   x,
-  size_line = 0.8,
+  linewidth = 0.8,
   size_point = 2,
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
   alpha = 0.2,
-  dot_alpha = 0.8,
+  alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   transform = NULL,
@@ -23,7 +23,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
@@ -32,7 +32,7 @@ axis and plot titles.}
 
 \item{alpha}{Numeric value specifying alpha level of the confidence bands.}
 
-\item{dot_alpha}{Numeric value specifying alpha level of the point geoms.}
+\item{alpha_dot}{Numeric value specifying alpha level of the point geoms.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
