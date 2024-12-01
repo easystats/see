@@ -82,8 +82,6 @@ geom_binomdensity <- function(data,
 }
 
 
-
-
 # Utilities ---------------------------------------------------------------
 
 .geom_binomdensity_scale <- function(data, x, y, scale = "auto") {

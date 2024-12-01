@@ -74,9 +74,9 @@ data_plot.estimate_density <- function(x,
 #' @param priors Logical. If `TRUE`, prior distributions are simulated
 #'   (using [bayestestR::simulate_prior()]) and added
 #'   to the plot.
-#' @param priors_alpha Numeric value specifying alpha for the prior
+#' @param alpha_priors Numeric value specifying alpha for the prior
 #'   distributions.
-#' @param posteriors_alpha Numeric value specifying alpha for the posterior
+#' @param alpha_posteriors Numeric value specifying alpha for the posterior
 #'   distributions.
 #' @param centrality Character specifying the point-estimate (centrality index)
 #'   to compute. Can be `"median"`, `"mean"` or `"MAP"`.
@@ -103,9 +103,9 @@ plot.see_estimate_density <- function(x,
                                       show_intercept = FALSE,
                                       n_columns = 1,
                                       priors = FALSE,
-                                      priors_alpha = 0.4,
-                                      posteriors_alpha = 0.7,
-                                      size_line = 0.9,
+                                      alpha_priors = 0.4,
+                                      alpha_posteriors = 0.7,
+                                      linewidth = 0.9,
                                       size_point = 2,
                                       centrality = "median",
                                       ci = 0.95,
@@ -144,7 +144,7 @@ plot.see_estimate_density <- function(x,
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(linewidth = size_line) +
+      geom_line(linewidth = linewidth) +
       add_plot_attributes(x) +
       scale_color_flat(labels = parameter_labels)
   } else {
@@ -159,11 +159,11 @@ plot.see_estimate_density <- function(x,
           model,
           parameter = params,
           show_intercept = show_intercept,
-          priors_alpha = priors_alpha,
+          alpha_priors = alpha_priors,
           show_ridge_line = FALSE
         ) +
         ggridges::geom_ridgeline(aes(fill = "Posterior"),
-          alpha = posteriors_alpha,
+          alpha = alpha_posteriors,
           color = NA
         ) +
         guides(color = "none") +
@@ -174,7 +174,7 @@ plot.see_estimate_density <- function(x,
 
       p <- p +
         ggridges::geom_ridgeline(aes(fill = "Posterior"),
-          alpha = posteriors_alpha,
+          alpha = alpha_posteriors,
           color = NA
         ) +
         guides(fill = "none", color = "none") +
@@ -194,7 +194,7 @@ plot.see_estimate_density <- function(x,
           xmax = .data$CI_high,
           color = "Posterior"
         ),
-        linewidth = size_line
+        linewidth = linewidth
       ) +
       geom_point(
         data = my_summary,
@@ -234,8 +234,6 @@ plot.see_estimate_density <- function(x,
 }
 
 
-
-
 # Density df --------------------------------------------------------------------
 
 #' @export
@@ -247,14 +245,14 @@ data_plot.estimate_density_df <- data_plot.estimate_density
 plot.see_estimate_density_df <- function(x,
                                          stack = TRUE,
                                          n_columns = 1,
-                                         size_line = 0.9,
+                                         linewidth = 0.9,
                                          ...) {
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   parameter_labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(linewidth = size_line)
+      geom_line(linewidth = linewidth)
   } else {
     insight::check_if_installed("ggridges")
 

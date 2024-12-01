@@ -7,8 +7,8 @@
 #'   Options are `"qq"` (default) for quantile-quantile (Q-Q) plots,
 #'   `"pp"` for probability-probability (P-P) plots, or
 #'   `"density"` for density overlay plots.
-#' @param size_line Numeric value specifying size of line geoms.
-#' @param dot_alpha Numeric value specifying alpha level of the point geoms.
+#' @param linewidth Numeric value specifying size of line geoms.
+#' @param alpha_dot Numeric value specifying alpha level of the point geoms.
 #' @param alpha Numeric value specifying alpha level of the confidence bands.
 #' @param colors Character vector of length two, indicating the colors (in
 #'   hex-format) for points and line.
@@ -42,13 +42,13 @@
 plot.see_check_normality <- function(x,
                                      type = c("qq", "pp", "density"),
                                      data = NULL,
-                                     size_line = 0.8,
+                                     linewidth = 0.8,
                                      size_point = 2,
                                      size_title = 12,
                                      size_axis_title = base_size,
                                      base_size = 10,
                                      alpha = 0.2,
-                                     dot_alpha = 0.8,
+                                     alpha_dot = 0.8,
                                      colors = c("#3aaf85", "#1b6ca8"),
                                      detrend = TRUE,
                                      method = "ell",
@@ -71,7 +71,7 @@ plot.see_check_normality <- function(x,
     .plot_diag_reqq(
       attributes(x)$re_qq,
       size_point = size_point,
-      size_line = size_line,
+      linewidth = linewidth,
       alpha_level = alpha,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -93,10 +93,10 @@ plot.see_check_normality <- function(x,
       } else if (inherits(model, "performance_simres")) {
         return(plot.see_performance_simres(
           model,
-          size_line = size_line,
+          linewidth = linewidth,
           size_point = size_point,
           alpha = alpha,
-          dot_alpha = dot_alpha,
+          alpha_dot = alpha_dot,
           colors = colors,
           detrend = detrend,
           base_size = base_size,
@@ -114,13 +114,13 @@ plot.see_check_normality <- function(x,
       .plot_diag_qq(
         dat,
         size_point = size_point,
-        size_line = size_line,
+        linewidth = linewidth,
         size_axis_title = size_axis_title,
         size_title = size_title,
         base_size = base_size,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha,
+        alpha_dot = alpha_dot,
         model_info = model_info,
         method = method,
         model_class = class(model)[1]
@@ -142,7 +142,7 @@ plot.see_check_normality <- function(x,
       )
       .plot_diag_norm(
         dat,
-        size_line = size_line,
+        linewidth = linewidth,
         alpha_level = alpha,
         base_size = base_size,
         size_axis_title = size_axis_title,
@@ -154,13 +154,13 @@ plot.see_check_normality <- function(x,
       .plot_diag_pp(
         dat,
         size_point = size_point,
-        size_line = size_line,
+        linewidth = linewidth,
         base_size = base_size,
         size_axis_title = size_axis_title,
         size_title = size_title,
         alpha_level = alpha,
         detrend = detrend,
-        dot_alpha_level = dot_alpha,
+        alpha_dot = alpha_dot,
         method = method
       )
     }
@@ -171,7 +171,7 @@ plot.see_check_normality <- function(x,
 # normality plot: density -------------------------
 
 .plot_diag_norm <- function(x,
-                            size_line,
+                            linewidth,
                             size_axis_title = 10,
                             size_title = 12,
                             alpha_level = 0.2,
@@ -189,7 +189,7 @@ plot.see_check_normality <- function(x,
     ggplot2::geom_line(
       mapping = ggplot2::aes(y = .data$curve),
       colour = colors[1],
-      linewidth = size_line,
+      linewidth = linewidth,
       na.rm = TRUE
     ) +
     ggplot2::labs(
@@ -213,7 +213,7 @@ plot.see_check_normality <- function(x,
 
 .plot_diag_qq <- function(x,
                           size_point,
-                          size_line,
+                          linewidth,
                           size_axis_title = 10,
                           size_title = 12,
                           alpha_level = 0.2,
@@ -222,7 +222,7 @@ plot.see_check_normality <- function(x,
                           theme_style = theme_lucid,
                           base_size = 10,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = 0.8,
+                          alpha_dot = 0.8,
                           show_dots = TRUE,
                           model_info = NULL,
                           model_class = NULL) {
@@ -239,7 +239,7 @@ plot.see_check_normality <- function(x,
       ),
       ggplot2::geom_qq_line(
         ggplot2::aes(sample = .data$y),
-        linewidth = size_line,
+        linewidth = linewidth,
         colour = colors[1],
         distribution = qhalfnorm,
         na.rm = TRUE
@@ -259,11 +259,11 @@ plot.see_check_normality <- function(x,
         stroke = 0,
         size = size_point,
         colour = colors[2],
-        alpha = dot_alpha_level,
+        alpha = alpha_dot,
         detrend = detrend
       ),
       qqplotr::stat_qq_line(
-        linewidth = size_line,
+        linewidth = linewidth,
         colour = colors[1],
         detrend = detrend
       )
@@ -287,13 +287,13 @@ plot.see_check_normality <- function(x,
       if (detrend) {
         ggplot2::geom_hline(
           yintercept = 0,
-          linewidth = size_line,
+          linewidth = linewidth,
           colour = colors[1],
           na.rm = TRUE
         )
       } else {
         ggplot2::geom_qq_line(
-          linewidth = size_line,
+          linewidth = linewidth,
           colour = colors[1],
           na.rm = TRUE
         )
@@ -349,7 +349,7 @@ plot.see_check_normality <- function(x,
 
 .plot_diag_pp <- function(x,
                           size_point,
-                          size_line,
+                          linewidth,
                           size_axis_title = base_size,
                           size_title = 12,
                           alpha_level = 0.2,
@@ -358,12 +358,12 @@ plot.see_check_normality <- function(x,
                           theme_style = theme_lucid,
                           base_size = 10,
                           colors = unname(social_colors(c("green", "blue", "red"))),
-                          dot_alpha_level = 0.8) {
+                          alpha_dot = 0.8) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
       qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend, bandType = method) +
       qqplotr::stat_pp_line(
-        linewidth = size_line,
+        linewidth = linewidth,
         colour = colors[1],
         detrend = detrend
       ) +
@@ -371,7 +371,7 @@ plot.see_check_normality <- function(x,
         shape = 16, stroke = 0,
         size = size_point,
         colour = colors[2],
-        alpha = dot_alpha_level,
+        alpha = alpha_dot,
         detrend = detrend
       )
   } else if (requireNamespace("MASS", quietly = TRUE)) {
@@ -384,14 +384,14 @@ plot.see_check_normality <- function(x,
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(x = .data$probs, y = .data$y)) +
       ggplot2::geom_abline(
         slope = if (detrend) 0 else 1,
-        linewidth = size_line,
+        linewidth = linewidth,
         colour = colors[1]
       ) +
       geom_point2(
         mapping = if (detrend) ggplot2::aes(y = .data$y - .data$probs),
         colour = colors[2],
         size = size_point,
-        alpha = dot_alpha_level
+        alpha = alpha_dot
       )
   } else {
     insight::format_error("Package 'qqplotr' OR 'MASS' required for P-P plots. Please install one of them.")
@@ -422,7 +422,7 @@ plot.see_check_normality <- function(x,
 
 .plot_diag_reqq <- function(x,
                             size_point,
-                            size_line,
+                            linewidth,
                             size_axis_title = base_size,
                             size_title = 12,
                             panel = TRUE,
@@ -430,7 +430,7 @@ plot.see_check_normality <- function(x,
                             theme_style = theme_lucid,
                             base_size = 10,
                             colors = unname(social_colors(c("green", "blue", "red"))),
-                            dot_alpha_level = 0.8,
+                            alpha_dot = 0.8,
                             show_dots = TRUE) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
@@ -444,7 +444,7 @@ plot.see_check_normality <- function(x,
       ggplot2::stat_smooth(
         method = "lm",
         alpha = alpha_level,
-        linewidth = size_line,
+        linewidth = linewidth,
         formula = y ~ x,
         colour = colors[1]
       ) +
@@ -452,7 +452,7 @@ plot.see_check_normality <- function(x,
         ggplot2::aes(ymin = .data$conf.low, ymax = .data$conf.high),
         width = 0,
         colour = colors[2],
-        alpha = dot_alpha_level
+        alpha = alpha_dot
       ) +
       theme_style(
         base_size = base_size,
@@ -467,7 +467,7 @@ plot.see_check_normality <- function(x,
         geom_point2(
           colour = colors[2],
           size = size_point,
-          alpha = dot_alpha_level
+          alpha = alpha_dot
         )
     }
 

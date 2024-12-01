@@ -26,8 +26,6 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 }
 
 
-
-
 #' @keywords internal
 .data_contrasts_and_means <- function(contrasts, means, x_name, y_name) {
   polygons <- contrasts
@@ -55,7 +53,6 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     geom_pointrange = data_means
   )
 }
-
 
 
 # Plot --------------------------------------------------------------------

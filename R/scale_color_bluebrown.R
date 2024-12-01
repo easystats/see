@@ -27,7 +27,6 @@ scale_color_bluebrown <- function(palette = "contrast", discrete = TRUE, reverse
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -76,11 +75,7 @@ scale_colour_bluebrown_c <- scale_color_bluebrown_c
 scale_colour_bluebrown_d <- scale_color_bluebrown_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
 
 
 #' @rdname scale_color_bluebrown
@@ -133,9 +128,6 @@ scale_fill_bluebrown_c <- function(palette = "contrast",
 }
 
 
-
-
-
 # Palette --------------------------------------------------------------------
 
 
@@ -175,17 +167,11 @@ bluebrown_colors <- function(...) {
 }
 
 
-
-
 bluebrown_palettes <- list(
   `full` = bluebrown_colors(),
   `contrast` = bluebrown_colors("lightblue", "blue", "darkblue", "grey", "darkbrown", "brown", "lightbrown"),
   `rainbow` = bluebrown_colors("darkblue", "blue", "lightblue", "grey", "lightbrown", "brown", "darkbrown")
 )
-
-
-
-
 
 
 #' Blue-brown design color palette

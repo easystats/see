@@ -12,7 +12,7 @@
 #'   If `TRUE`, confidence intervals computed using the Wilson method are shown.
 #'   See Brown et al. (2001) for details.
 #' @param ci Confidence Interval (CI) level. Defaults to `0.95` (`95%`).
-#' @param fill_col Color to use for category columns (default: `"#87CEFA"`).
+#' @param color_fill Color to use for category columns (default: `"#87CEFA"`).
 #' @param color_error_bar Color to use for error bars (default: `"#607B8B"`).
 #' @param ... Unused
 #'
@@ -29,7 +29,7 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
                                    na_label = "(Missing)",
                                    error_bar = TRUE,
                                    ci = 0.95,
-                                   fill_col = "#87CEFA",
+                                   color_fill = "#87CEFA",
                                    color_error_bar = "#607B8B",
                                    ...) {
   show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
@@ -41,7 +41,7 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
       na_label = na_label,
       error_bar = error_bar,
       ci = ci,
-      fill_col = fill_col,
+      color_fill = color_fill,
       color_error_bar = color_error_bar
     )
   } else {
@@ -53,7 +53,7 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
       na_label = na_label,
       error_bar = error_bar,
       ci = ci,
-      fill_col = fill_col,
+      color_fill = color_fill,
       color_error_bar = color_error_bar
     )
   }
@@ -68,7 +68,7 @@ plot.datawizard_table <- function(x, label_values = TRUE,
                                   na_label = "(Missing)",
                                   error_bar = TRUE,
                                   ci = 0.95,
-                                  fill_col = "#87CEFA",
+                                  color_fill = "#87CEFA",
                                   color_error_bar = "#607B8B",
                                   ...) {
   show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
@@ -108,7 +108,7 @@ plot.datawizard_table <- function(x, label_values = TRUE,
 
   out <- ggplot2::ggplot(dat) +
     ggplot2::aes(x = .data$Value, y = .data$N) +
-    ggplot2::geom_col(fill = fill_col) +
+    ggplot2::geom_col(fill = color_fill) +
     ggplot2::labs(title = unique(dat$Variable)) +
     theme_modern()
 

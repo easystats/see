@@ -62,7 +62,6 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 }
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for Region of Practical Equivalence
@@ -87,8 +86,8 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' @export
 plot.see_rope <- function(x,
                           data = NULL,
-                          rope_alpha = 0.5,
-                          rope_color = "cadetblue",
+                          alpha_rope = 0.5,
+                          color_rope = "cadetblue",
                           show_intercept = FALSE,
                           n_columns = 1,
                           ...) {
@@ -122,8 +121,8 @@ plot.see_rope <- function(x,
       xmax = attributes(x)$info$rope_range[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
-      alpha = rope_alpha
+      fill = color_rope,
+      alpha = alpha_rope
     ) +
     add_plot_attributes(x)
 

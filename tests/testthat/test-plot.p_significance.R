@@ -13,7 +13,8 @@ skip_if_not_installed("bayestestR", minimum_version = "0.14.1")
 skip_if_not_installed("parameters", minimum_version = "0.22.3")
 
 test_that("`plot.see_p_significance works for two thresholds", {
-  skip_if_not_installed("vdiffr")
+  skip_if_not_installed("ggridges")
+
   set.seed(123)
   x <- rnorm(1000, 1, 1.2)
   out <- bayestestR::p_significance(x)
@@ -29,7 +30,8 @@ test_that("`plot.see_p_significance works for two thresholds", {
 })
 
 test_that("`plot.see_p_significance works {parameters}}", {
-  skip_if_not_installed("vdiffr")
+  skip_if_not_installed("ggridges")
+
   data(qol_cancer, package = "parameters")
   model <- lm(QoL ~ time + age + education, data = qol_cancer)
   set.seed(123)
@@ -54,6 +56,8 @@ test_that("`plot.see_p_significance works {parameters}}", {
 
 test_that("plot p_significance, glmmTMB", {
   skip_if_not_installed("glmmTMB")
+  skip_if_not_installed("ggridges")
+
   data(Salamanders, package = "glmmTMB")
   m1 <- glmmTMB::glmmTMB(count ~ mined + cover + (1 | site),
     zi = ~mined,

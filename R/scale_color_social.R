@@ -37,7 +37,6 @@ scale_color_social <- function(palette = "complement", discrete = TRUE, reverse 
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -66,11 +65,7 @@ scale_colour_social_c <- scale_color_social_c
 scale_colour_social_d <- scale_color_social_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
 
 
 #' @rdname scale_color_social
@@ -99,12 +94,7 @@ scale_fill_social_c <- function(palette = "complement", discrete = FALSE, revers
 }
 
 
-
-
-
 # Palette --------------------------------------------------------------------
-
-
 
 
 # The palette based on flat design colors: https://www.materialui.co/socialcolors
@@ -153,8 +143,6 @@ social_colors <- function(...) {
 }
 
 
-
-
 social_palettes <- list(
   `full` = social_colors(),
   `ice` = social_colors("purple", "deep purple", "blue", "light blue"),
@@ -184,10 +172,6 @@ social_palettes <- list(
     "red"
   )
 )
-
-
-
-
 
 
 #' Social color palette

@@ -42,7 +42,6 @@ scale_color_metro <- function(palette = "complement",
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -91,11 +90,7 @@ scale_colour_metro_c <- scale_color_metro_c
 scale_colour_metro_d <- scale_color_metro_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
 
 
 #' @rdname scale_color_metro
@@ -148,12 +143,7 @@ scale_fill_metro_c <- function(palette = "complement",
 }
 
 
-
-
-
 # Palette --------------------------------------------------------------------
-
-
 
 
 # The palette based on metro design colors: https://www.materialui.co/metrocolors
@@ -200,8 +190,6 @@ metro_colors <- function(...) {
 }
 
 
-
-
 metro_palettes <- list(
   `full` = metro_colors(),
   `ice` = metro_colors("purple", "deep purple", "blue", "light blue"),
@@ -231,10 +219,6 @@ metro_palettes <- list(
     "red"
   )
 )
-
-
-
-
 
 
 #' Metro color palette

@@ -7,11 +7,11 @@
 \method{plot}{see_parameters_brms_meta}(
   x,
   size_point = 2,
-  size_line = 0.8,
+  linewidth = 0.8,
   size_text = 3.5,
-  posteriors_alpha = 0.7,
-  rope_alpha = 0.15,
-  rope_color = "cadetblue",
+  alpha_posteriors = 0.7,
+  alpha_rope = 0.15,
+  color_rope = "cadetblue",
   normalize_height = TRUE,
   show_labels = TRUE,
   ...
@@ -22,16 +22,16 @@
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_text}{Numeric value specifying size of text labels.}
 
-\item{posteriors_alpha}{Numeric value specifying alpha for the posterior
+\item{alpha_posteriors}{Numeric value specifying alpha for the posterior
 distributions.}
 
-\item{rope_alpha}{Numeric specifying transparency level of ROPE ribbon.}
+\item{alpha_rope}{Numeric specifying transparency level of ROPE ribbon.}
 
-\item{rope_color}{Character specifying color of ROPE ribbon.}
+\item{color_rope}{Character specifying color of ROPE ribbon.}
 
 \item{normalize_height}{Logical. If \code{TRUE}, height of mcmc-areas is
 "normalized", to avoid overlap. In certain cases when the range of a

@@ -42,7 +42,6 @@ scale_color_material <- function(palette = "contrast",
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -91,11 +90,7 @@ scale_colour_material_c <- scale_color_material_c
 scale_colour_material_d <- scale_color_material_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
 
 
 #' @rdname scale_color_material
@@ -148,12 +143,7 @@ scale_fill_material_c <- function(palette = "contrast",
 }
 
 
-
-
-
 # Palette --------------------------------------------------------------------
-
-
 
 
 # The palette based on material design colors: https://www.materialui.co/colors
@@ -205,8 +195,6 @@ material_colors <- function(...) {
 }
 
 
-
-
 material_palettes <- list(
   `full` = material_colors(),
   `ice` = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
@@ -238,10 +226,6 @@ material_palettes <- list(
     "red"
   )
 )
-
-
-
-
 
 
 #' Material design color palette

@@ -38,7 +38,6 @@ scale_color_pizza <- function(palette = "margherita",
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -85,7 +84,6 @@ scale_colour_pizza_c <- scale_color_pizza_c
 #' @rdname scale_color_pizza
 #' @export
 scale_colour_pizza_d <- scale_color_pizza_d
-
 
 
 # Fill --------------------------------------------------------------------
@@ -140,10 +138,7 @@ scale_fill_pizza_c <- function(palette = "margherita",
 }
 
 
-
-
 # Palette --------------------------------------------------------------------
-
 
 
 # The palette based on this image:
@@ -176,15 +171,12 @@ pizza_colors <- function(...) {
 }
 
 
-
-
 pizza_palettes <- list(
   `margherita` = pizza_colors("tomato", "mozzarella", "basil"),
   `margherita_crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "coal"),
   `diavola` = pizza_colors("tomato", "mozzarella", "basil", "diavola"),
   `diavola_crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "diavola", "coal")
 )
-
 
 
 #' Pizza color palette

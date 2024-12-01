@@ -13,7 +13,6 @@ data_plot.bayestestR_hdi <- data_plot.hdi
 data_plot.bayestestR_eti <- data_plot.hdi
 
 
-
 #' @keywords internal
 .data_plot_hdi <- function(x,
                            data = NULL,
@@ -132,8 +131,6 @@ data_plot.bayestestR_eti <- data_plot.hdi
 }
 
 
-
-
 #' @keywords internal
 .compute_densities_hdi <- function(x, hdi, name = "Y") {
   hdi <- hdi[order(hdi$CI, decreasing = TRUE), ]
@@ -155,8 +152,6 @@ data_plot.bayestestR_eti <- data_plot.hdi
 }
 
 
-
-
 #' @keywords internal
 .classify_hdi <- function(x, breakpoints, labels, if_lower = TRUE) {
   limits <- list(
@@ -173,9 +168,6 @@ data_plot.bayestestR_eti <- data_plot.hdi
   out <- limits$labels[index]
   out
 }
-
-
-
 
 
 # Plot --------------------------------------------------------------------

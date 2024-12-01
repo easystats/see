@@ -50,7 +50,6 @@ data_plot.parameters_pca <- function(x, data = NULL, ...) {
 data_plot.parameters_efa <- data_plot.parameters_pca
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for principal component analysis
@@ -61,7 +60,7 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #'   Options are three different shapes to represent component loadings;
 #'    `"bar"` (default) for a horizontal bar chart, or
 #'    `"line"` for a horizontal point and line chart.
-#' @param text_color Character specifying color of text labels.
+#' @param color_text Character specifying color of text labels.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_check_outliers
@@ -80,7 +79,7 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 plot.see_parameters_pca <- function(x,
                                     type = c("bar", "line"),
                                     size_text = 3.5,
-                                    text_color = "black",
+                                    color_text = "black",
                                     size = 1,
                                     show_labels = TRUE,
                                     ...) {
@@ -123,7 +122,7 @@ plot.see_parameters_pca <- function(x,
     p <- p +
       geom_text(
         aes(x = abs(.data$y), label = round(.data$y, 2)),
-        color = text_color,
+        color = color_text,
         size = size_text,
         nudge_y = 0.15
       )

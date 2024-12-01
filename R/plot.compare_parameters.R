@@ -188,8 +188,6 @@ plot.see_compare_parameters <- function(x,
 }
 
 
-
-
 #' @export
 data_plot.see_compare_parameters <- function(x, ...) {
   col_coefficient <- grep("^(Coefficient|Log-Odds|Log-Mean|Odds Ratio|Risk Ratio|IRR)\\.", colnames(x))

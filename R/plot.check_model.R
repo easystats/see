@@ -31,14 +31,14 @@ plot.see_check_model <- function(x,
   panel <- attr(x, "panel")
   check <- attr(x, "check")
   size_point <- attr(x, "dot_size")
-  size_line <- attr(x, "line_size")
+  linewidth <- attr(x, "line_size")
   show_labels <- attr(x, "show_labels") %||% TRUE
   size_text <- attr(x, "text_size")
   base_size <- attr(x, "base_size")
   size_axis_title <- attr(x, "axis_title_size")
   size_title <- attr(x, "title_size")
   alpha_level <- attr(x, "alpha")
-  dot_alpha_level <- attr(x, "dot_alpha")
+  alpha_dot <- attr(x, "alpha_dot")
   show_dots <- attr(x, "show_dots")
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
@@ -73,8 +73,8 @@ plot.see_check_model <- function(x,
     alpha_level <- 0.2
   }
 
-  if (is.null(dot_alpha_level)) {
-    dot_alpha_level <- 0.8
+  if (is.null(alpha_dot)) {
+    alpha_dot <- 0.8
   }
 
   if (is.null(base_size)) {
@@ -101,7 +101,7 @@ plot.see_check_model <- function(x,
     p$PP_CHECK <- plot.see_performance_pp_check(
       x$PP_CHECK,
       style = style,
-      size_line = size_line,
+      linewidth = linewidth,
       size_point = size_point,
       base_size = base_size,
       size_axis_title = size_axis_title,
@@ -117,14 +117,14 @@ plot.see_check_model <- function(x,
     p$NCV <- .plot_diag_linearity(
       x$NCV,
       size_point = size_point,
-      size_line = size_line,
+      linewidth = linewidth,
       alpha_level = alpha_level,
       theme_style = style,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = show_dots
     )
   }
@@ -152,7 +152,7 @@ plot.see_check_model <- function(x,
       size_axis_title = size_axis_title,
       size_title = size_title,
       colors = colors[c(1, 2)],
-      size_line = size_line,
+      linewidth = linewidth,
       type = overdisp_type
     )
   }
@@ -161,14 +161,14 @@ plot.see_check_model <- function(x,
     p$HOMOGENEITY <- .plot_diag_homogeneity(
       x$HOMOGENEITY,
       size_point = size_point,
-      size_line = size_line,
+      linewidth = linewidth,
       alpha_level = alpha_level,
       theme_style = style,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = show_dots
     )
   }
@@ -178,14 +178,14 @@ plot.see_check_model <- function(x,
       x$INFLUENTIAL,
       show_labels = show_labels,
       size_text = size_text,
-      size_line = size_line,
+      linewidth = linewidth,
       size_point = size_point,
       theme_style = style,
       size_axis_title = size_axis_title,
       size_title = size_title,
       base_size = base_size,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = show_dots
     )
   }
@@ -194,7 +194,7 @@ plot.see_check_model <- function(x,
     p$VIF <- .plot_diag_vif(
       x$VIF,
       size_point = 1.5 * size_point,
-      size_line = size_line,
+      linewidth = linewidth,
       theme_style = style,
       base_size = base_size,
       size_axis_title = size_axis_title,
@@ -209,10 +209,10 @@ plot.see_check_model <- function(x,
     if (inherits(x$QQ, "performance_simres")) {
       p$QQ <- plot(
         x$QQ,
-        size_line = size_line,
+        linewidth = linewidth,
         size_point = 0.9 * size_point,
         alpha = alpha_level,
-        dot_alpha = dot_alpha_level,
+        alpha_dot = alpha_dot,
         colors = colors,
         detrend = detrend,
         style = style,
@@ -224,7 +224,7 @@ plot.see_check_model <- function(x,
       p$QQ <- .plot_diag_qq(
         x$QQ,
         size_point = size_point,
-        size_line = size_line,
+        linewidth = linewidth,
         size_axis_title = size_axis_title,
         size_title = size_title,
         alpha_level = alpha_level,
@@ -232,7 +232,7 @@ plot.see_check_model <- function(x,
         theme_style = style,
         base_size = base_size,
         colors = colors,
-        dot_alpha_level = dot_alpha_level,
+        alpha_dot = alpha_dot,
         show_dots = TRUE, # qq-plots w/o dots makes no sense
         model_info = model_info,
         model_class = model_class
@@ -243,7 +243,7 @@ plot.see_check_model <- function(x,
   if ("NORM" %in% names(x) && !is.null(x$NORM) && any(c("normality", "all") %in% check)) {
     p$NORM <- .plot_diag_norm(
       x$NORM,
-      size_line = size_line,
+      linewidth = linewidth,
       alpha_level = alpha_level,
       theme_style = style,
       base_size = base_size,
@@ -257,14 +257,14 @@ plot.see_check_model <- function(x,
     ps <- .plot_diag_reqq(
       x$REQQ,
       size_point,
-      size_line,
+      linewidth,
       size_axis_title = size_axis_title,
       size_title = size_title,
       alpha_level = alpha_level,
       theme_style = style,
       base_size = base_size,
       colors = colors,
-      dot_alpha_level = dot_alpha_level,
+      alpha_dot = alpha_dot,
       show_dots = TRUE # qq-plots w/o dots makes no sense
     )
 
@@ -285,14 +285,14 @@ plot.see_check_model <- function(x,
 
 .plot_diag_linearity <- function(x,
                                  size_point,
-                                 size_line,
+                                 linewidth,
                                  size_axis_title = 10,
                                  size_title = 12,
                                  alpha_level = 0.2,
                                  theme_style = theme_lucid,
                                  base_size = 10,
                                  colors = unname(social_colors(c("green", "blue", "red"))),
-                                 dot_alpha_level = 0.8,
+                                 alpha_dot = 0.8,
                                  show_dots = TRUE) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
@@ -301,7 +301,7 @@ plot.see_check_model <- function(x,
       geom_point2(
         colour = colors[2],
         size = size_point,
-        alpha = dot_alpha_level
+        alpha = alpha_dot
       )
   }
 
@@ -311,7 +311,7 @@ plot.see_check_model <- function(x,
       se = TRUE,
       formula = y ~ x,
       alpha = alpha_level,
-      linewidth = size_line,
+      linewidth = linewidth,
       colour = colors[1]
     ) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +

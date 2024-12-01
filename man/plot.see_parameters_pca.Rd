@@ -8,7 +8,7 @@
   x,
   type = c("bar", "line"),
   size_text = 3.5,
-  text_color = "black",
+  color_text = "black",
   size = 1,
   show_labels = TRUE,
   ...
@@ -24,7 +24,7 @@ Options are three different shapes to represent component loadings;
 
 \item{size_text}{Numeric value specifying size of text labels.}
 
-\item{text_color}{Character specifying color of text labels.}
+\item{color_text}{Character specifying color of text labels.}
 
 \item{size}{Depending on \code{type}, a numeric value specifying size of bars,
 lines, or segments.}

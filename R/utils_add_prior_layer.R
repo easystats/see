@@ -1,7 +1,7 @@
 .add_prior_layer_ridgeline <- function(model,
                                        parameter = NULL,
                                        show_intercept = FALSE,
-                                       priors_alpha = 0.5,
+                                       alpha_priors = 0.5,
                                        fill_color = NULL,
                                        show_ridge_line = TRUE) {
   dat <- tryCatch(
@@ -42,7 +42,7 @@
             group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
-          alpha = priors_alpha,
+          alpha = alpha_priors,
           na.rm = TRUE
         )
       } else {
@@ -55,7 +55,7 @@
             group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
-          alpha = priors_alpha,
+          alpha = alpha_priors,
           color = NA,
           na.rm = TRUE
         )
@@ -70,7 +70,7 @@
           group = as.factor(.data$Parameter),
           fill = "Priors"
         ),
-        alpha = priors_alpha,
+        alpha = alpha_priors,
         na.rm = TRUE
       )
     } else {
@@ -83,7 +83,7 @@
           group = as.factor(.data$Parameter),
           fill = "Priors"
         ),
-        alpha = priors_alpha,
+        alpha = alpha_priors,
         color = NA,
         na.rm = TRUE
       )
@@ -92,13 +92,10 @@
 }
 
 
-
-
-
 .add_prior_layer_ribbon <- function(model,
                                     parameter = NULL,
                                     show_intercept = FALSE,
-                                    priors_alpha = 0.5,
+                                    alpha_priors = 0.5,
                                     fill_color = NULL) {
   dat <- tryCatch(
     {
@@ -135,7 +132,7 @@
           group = as.factor(.data$Parameter)
         ),
         fill = fill_color,
-        alpha = priors_alpha
+        alpha = alpha_priors
       )
     } else {
       geom_ribbon(
@@ -147,7 +144,7 @@
           group = as.factor(.data$Parameter),
           fill = "Prior"
         ),
-        alpha = priors_alpha
+        alpha = alpha_priors
       )
     }
   }

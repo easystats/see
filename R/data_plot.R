@@ -85,7 +85,6 @@ data_plot <- function(x, ...) {
 }
 
 
-
 #' Complete figure with its attributes
 #'
 #' The `data_plot()` function usually stores information (such as title, axes
@@ -138,8 +137,6 @@ add_plot_attributes <- function(x) {
 
   out
 }
-
-
 
 
 #' @keywords internal

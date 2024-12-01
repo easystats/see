@@ -3,8 +3,8 @@
 #' The `plot()` method for the `bayestestR::bayesfactor_parameters()` function.
 #'
 #' @param size_point Numeric specifying size of point-geoms.
-#' @param rope_alpha Numeric specifying transparency level of ROPE ribbon.
-#' @param rope_color Character specifying color of ROPE ribbon.
+#' @param alpha_rope Numeric specifying transparency level of ROPE ribbon.
+#' @param color_rope Character specifying color of ROPE ribbon.
 #' @param show_intercept Logical, if `TRUE`, the intercept-parameter is included
 #'   in the plot. By default, it is hidden because in many cases the
 #'   intercept-parameter has a posterior distribution on a very different
@@ -19,8 +19,8 @@
 #' @export
 plot.see_bayesfactor_parameters <- function(x,
                                             size_point = 2,
-                                            rope_color = "#0171D3",
-                                            rope_alpha = 0.2,
+                                            color_rope = "#0171D3",
+                                            alpha_rope = 0.2,
                                             show_intercept = FALSE,
                                             ...) {
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
@@ -80,8 +80,8 @@ plot.see_bayesfactor_parameters <- function(x,
         xmax = rope[2],
         ymin = 0,
         ymax = Inf,
-        fill = rope_color,
-        alpha = rope_alpha
+        fill = color_rope,
+        alpha = alpha_rope
       )
   } else {
     p <- p +

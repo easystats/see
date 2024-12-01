@@ -1,4 +1,3 @@
-skip_if_not_installed("vdiffr")
 skip_if_not_installed("ggdag")
 skip_if_not_installed("dagitty")
 

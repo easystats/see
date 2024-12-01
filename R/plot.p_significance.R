@@ -126,7 +126,6 @@ data_plot.p_significance <- function(x,
 }
 
 
-
 #' @keywords internal
 .compute_densities_ps <- function(x, name = "Y", threshold = 0) {
   out <- .as.data.frame_density(stats::density(x))
@@ -164,7 +163,6 @@ data_plot.p_significance <- function(x,
 }
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for practical significance
@@ -191,7 +189,7 @@ plot.see_p_significance <- function(x,
                                     data = NULL,
                                     show_intercept = FALSE,
                                     priors = FALSE,
-                                    priors_alpha = 0.4,
+                                    alpha_priors = 0.4,
                                     n_columns = 1,
                                     ...) {
   # save model for later use
@@ -235,7 +233,7 @@ plot.see_p_significance <- function(x,
         model,
         parameter = params,
         show_intercept = show_intercept,
-        priors_alpha = priors_alpha
+        alpha_priors = alpha_priors
       ) +
       scale_fill_manual(values = c("white", "#FFFC00", "#cd201f", "#0077B5"))
   } else {

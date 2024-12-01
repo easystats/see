@@ -4,12 +4,12 @@
 \alias{plot.see_compare_performance}
 \title{Plot method for comparing model performances}
 \usage{
-\method{plot}{see_compare_performance}(x, size_line = 1, ...)
+\method{plot}{see_compare_performance}(x, linewidth = 1, ...)
 }
 \arguments{
 \item{x}{An object.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

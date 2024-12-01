@@ -71,8 +71,6 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 }
 
 
-
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for Model Parameters from Bayesian Meta-Analysis
@@ -140,11 +138,11 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' @export
 plot.see_parameters_brms_meta <- function(x,
                                           size_point = 2,
-                                          size_line = 0.8,
+                                          linewidth = 0.8,
                                           size_text = 3.5,
-                                          posteriors_alpha = 0.7,
-                                          rope_alpha = 0.15,
-                                          rope_color = "cadetblue",
+                                          alpha_posteriors = 0.7,
+                                          alpha_rope = 0.15,
+                                          color_rope = "cadetblue",
                                           normalize_height = TRUE,
                                           show_labels = TRUE,
                                           ...) {
@@ -175,8 +173,8 @@ plot.see_parameters_brms_meta <- function(x,
         xmax = rope[2],
         ymin = 0,
         ymax = Inf,
-        fill = rope_color,
-        alpha = rope_alpha
+        fill = color_rope,
+        alpha = alpha_rope
       )
   }
 
@@ -187,7 +185,7 @@ plot.see_parameters_brms_meta <- function(x,
       mapping = ggplot2::aes(fill = .data$Group),
       color = NA,
       scale = 1,
-      alpha = posteriors_alpha
+      alpha = alpha_posteriors
     ) +
     ggplot2::geom_errorbarh(
       data = datasummary,
@@ -196,7 +194,7 @@ plot.see_parameters_brms_meta <- function(x,
         xmax = .data$CI_high,
         color = .data$Color
       ),
-      linewidth = size_line
+      linewidth = linewidth
     ) +
     ggplot2::geom_point(
       data = datasummary,
