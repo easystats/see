@@ -40,7 +40,7 @@ plot.see_check_collinearity <- function(x,
 
   dat <- datawizard::data_rename(
     dat,
-    pattern = c("Term", "VIF", "SE_factor", "Component"),
+    select = c("Term", "VIF", "SE_factor", "Component"),
     replacement = c("x", "y", "se", "facet")
   )
 
