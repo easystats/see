@@ -138,7 +138,7 @@ plot.see_n_factors <- function(x,
     segment_data <- data.frame(x_intercept = x$x[which.max(x$y)], y_max = max(x$y, na.rm = TRUE))
     p <- ggplot(x, aes(x = .data$x, y = .data$y)) +
       geom_area(fill = flat_colors("grey")) +
-        geom_segment(
+      geom_segment(
         data = segment_data,
         aes(
           x = .data$x_intercept,
