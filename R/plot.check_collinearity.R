@@ -38,13 +38,10 @@ plot.see_check_collinearity <- function(x,
   dat$group[dat$VIF >= 5 & dat$VIF < 10] <- "moderate"
   dat$group[dat$VIF >= 10] <- "high"
 
-  dat <- datawizard::data_rename(
+  dat <- datawizard::data_select(
     dat,
-    pattern = c("Term", "VIF", "SE_factor", "Component"),
-    replacement = c("x", "y", "se", "facet")
+    select = c(x = "Term", y = "VIF", facet = "Component", group = "group")
   )
-
-  dat <- datawizard::data_select(dat, select = c("x", "y", "facet", "group"))
 
   if (insight::n_unique(dat$facet) <= 1) {
     dat$facet <- NULL
