@@ -14,6 +14,16 @@ test_that("`plot.see_parameters_model()` works", {
   )
 })
 
+
+test_that("`plot.see_parameters_model()` errors for anova tables", {
+  skip_if_not_installed("parameters")
+  data(iris)
+  m <- aov(Sepal.Length ~ Species, data = iris)
+  mp <- parameters::model_parameters(m)
+  expect_error(plot(mp), regex = "Plots cannot be created")
+})
+
+
 test_that("`plot.see_parameters_model()` random parameters works", {
   skip_if_not_installed("lme4")
   skip_if_not_installed("parameters")

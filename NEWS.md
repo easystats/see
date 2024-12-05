@@ -11,9 +11,12 @@
 - `plot()` for `model_parameters()` gets a `show_direction` argument, to turn
   off the direction of the effect in the plot.
 
+- `plot()` for `model_parameters()` now gives an informative error message when
+  trying to plot Anova tables (which does not work).
+
 - `plot()` for `simulate_parameters()` now better copes with models that have
   multiple response levels (e.g. multinomial models).
-  
+
 - Gains `{patchwork}` as a hard dependency given its importance for the package.
 
 ## Bug fixes
