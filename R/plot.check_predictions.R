@@ -96,7 +96,7 @@ print.see_performance_pp_check <- function(x,
                                            alpha_line = 0.15,
                                            style = theme_lucid,
                                            colors = unname(social_colors(c("green", "blue"))),
-                                           type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+                                           type = "density",
                                            x_limits = NULL,
                                            ...) {
   orig_x <- x
@@ -107,7 +107,10 @@ print.see_performance_pp_check <- function(x,
   if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
     type <- plot_type
   } else {
-    type <- match.arg(type)
+    type <- insight::validate_argument(
+      type,
+      c("density", "discrete_dots", "discrete_interval", "discrete_both")
+    )
   }
 
   if (!inherits(x, "data_plot")) {
@@ -153,7 +156,7 @@ plot.see_performance_pp_check <- function(x,
                                           alpha_line = 0.15,
                                           style = theme_lucid,
                                           colors = unname(social_colors(c("green", "blue"))),
-                                          type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+                                          type = "density",
                                           x_limits = NULL,
                                           ...) {
   orig_x <- x
@@ -164,7 +167,10 @@ plot.see_performance_pp_check <- function(x,
   if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) { # nolint
     type <- plot_type
   } else {
-    type <- match.arg(type)
+    type <- insight::validate_argument(
+      type,
+      c("density", "discrete_dots", "discrete_interval", "discrete_both")
+    )
   }
 
   if (!inherits(x, "data_plot")) {
@@ -450,7 +456,7 @@ plot.see_performance_pp_check <- function(x,
     subtitle <- "Model-predicted points should be close to observed data points"
   }
 
-  p <- p +
+  p +
     ggplot2::scale_y_continuous() +
     ggplot2::scale_color_manual(values = c(
       "Observed data" = colors[1],
@@ -469,8 +475,6 @@ plot.see_performance_pp_check <- function(x,
       color = ggplot2::guide_legend(reverse = TRUE),
       size = ggplot2::guide_legend(reverse = TRUE)
     )
-
-  return(p)
 }
 
 
@@ -542,13 +546,12 @@ plot.see_performance_pp_check <- function(x,
 .plot_pp_check_range <- function(x,
                                  size_bar = 0.7,
                                  colors = unname(social_colors(c("green", "blue")))) {
-  original <-
-    data.frame(
-      x = c(min(x$y), max(x$y)),
-      group = factor(c("Minimum", "Maximum"), levels = c("Minimum", "Maximum")),
-      color = "Observed data",
-      stringsAsFactors = FALSE
-    )
+  original <- data.frame(
+    x = c(min(x$y), max(x$y)),
+    group = factor(c("Minimum", "Maximum"), levels = c("Minimum", "Maximum")),
+    color = "Observed data",
+    stringsAsFactors = FALSE
+  )
 
   replicated <- rbind(
     data.frame(

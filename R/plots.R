@@ -64,8 +64,6 @@ plots <- function(...,
                   subtitle = NULL,
                   caption = NULL,
                   theme = NULL) {
-  insight::check_if_installed("patchwork")
-
   # Add tags
   if (!is.null(tags)) {
     if (length(tags) == 1L) {
@@ -81,7 +79,7 @@ plots <- function(...,
     }
   }
 
-  pw <- patchwork::wrap_plots(..., nrow = n_rows, ncol = n_columns, guides = guides) +
+  patchwork::wrap_plots(..., nrow = n_rows, ncol = n_columns, guides = guides) +
     patchwork::plot_annotation(
       tag_levels = tags,
       tag_prefix = tag_prefix,
@@ -92,8 +90,6 @@ plots <- function(...,
       caption = caption,
       theme = theme
     )
-
-  return(pw)
 }
 
 
