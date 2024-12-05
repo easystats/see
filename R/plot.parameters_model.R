@@ -65,6 +65,12 @@ plot.see_parameters_model <- function(x,
   # retrieve settings ----------------
   model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
 
+  # no plot for anova
+  model_class <- attributes(x)$model_class
+  if (!is.null(model_class) && any(model_class %in% c("aov", "anova"))) {
+    insight::format_error("Plots cannot be created for Anova tables. Please fit a (linear) regression model and try again.") # nolint
+  }
+
   # for GAMs, remove smooth terms
   if (!is.null(x$Component) && any(x$Component == "smooth_terms")) {
     x <- x[x$Component != "smooth_terms", ]
