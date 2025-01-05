@@ -21,6 +21,8 @@
 
 ## Bug fixes
 
+- Fixed issue in `plot()` for `bayestestR::si()`.
+
 - Fixed issue in `plot()` for `parameters::model_parameters()` for GAM models.
 
 # see 0.9.0

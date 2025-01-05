@@ -126,7 +126,7 @@ plot.see_si <- function(x,
       ) +
       # distributions
       geom_line(linewidth = 1, data = plot_data) +
-      geom_area(alpha = 0.15, data = plot_data) +
+      geom_area(alpha = 0.15, data = plot_data, position = "identity") +
       labs(y = "Density")
   }
 
