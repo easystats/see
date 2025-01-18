@@ -39,7 +39,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Jeffrey R. Stevens \email{jeffrey.r.stevens@gmail.com} (\href{https://orcid.org/0000-0003-2375-1360}{ORCID}) [contributor]
-  \item Matthew Smith \email{M.Smith3@napier.ac.uk} (@SmithMatt90) [reviewer]
+  \item Matthew Smith \email{M.Smith3@napier.ac.uk} [reviewer]
   \item Jakob Bossek \email{bossek@wi.uni-muenster.de} [reviewer]
 }
 
