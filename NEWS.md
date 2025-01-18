@@ -1,4 +1,4 @@
-# see (development)
+# see 0.10.0
 
 ## Changes
 
