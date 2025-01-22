@@ -74,6 +74,7 @@ Imports:
 Suggests:
     BH,
     brms,
+    collapse,
     curl,
     DHARMa,
     emmeans,
