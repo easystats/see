@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.15</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,23 @@
       <small>Source: <a href="https://github.com/easystats/see/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.10.0" id="see-0100">see 0.10.0<a class="anchor" aria-label="anchor" href="#see-0100"></a></h2><p class="text-muted">CRAN release: 2025-01-22</p>
+<div class="section level3">
+<h3 id="changes-0-10-0">Changes<a class="anchor" aria-label="anchor" href="#changes-0-10-0"></a></h3>
+<ul><li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/p_function.html" class="external-link">p_function()</a></code> now checks the values of the <code>size_length</code> argument, to give an informative error message when the input is not valid.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> now also plots group-levels of random effects (i.e. for mixed models, when <code>model_parameters(x, ..., group_level = TRUE)</code>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> gets a <code>show_direction</code> argument, to turn off the direction of the effect in the plot.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> now gives an informative error message when trying to plot Anova tables (which does not work).</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">simulate_parameters()</a></code> now better copes with models that have multiple response levels (e.g. multinomial models).</p></li>
+<li><p>Gains <a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a> as a hard dependency given its importance for the package.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-10-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-0"></a></h3>
+<ul><li><p>Fixed issue in <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/si.html" class="external-link">bayestestR::si()</a></code>.</p></li>
+<li><p>Fixed issue in <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code> for GAM models.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.0" id="see-090">see 0.9.0<a class="anchor" aria-label="anchor" href="#see-090"></a></h2><p class="text-muted">CRAN release: 2024-09-06</p>
 <div class="section level3">
