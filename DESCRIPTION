@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.9.0.15
+Version: 0.10.0
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -41,8 +41,7 @@ Authors@R:
       person(given = "Matthew",
              family = "Smith",
              role = "rev",
-             email = "M.Smith3@napier.ac.uk",
-             comment = c(Twitter = "@SmithMatt90")),
+             email = "M.Smith3@napier.ac.uk"),
       person(given = "Jakob",
              family = "Bossek",
              role = "rev",
@@ -62,7 +61,7 @@ Depends:
     R (>= 4.0),
     stats
 Imports:
-    bayestestR (>= 0.15.0),
+    bayestestR (>= 0.15.1),
     correlation (>= 0.8.6),
     datawizard (>= 1.0.0),
     effectsize (>= 1.0.0),
@@ -75,6 +74,7 @@ Imports:
 Suggests:
     BH,
     brms,
+    collapse,
     curl,
     DHARMa,
     emmeans,
@@ -92,6 +92,7 @@ Suggests:
     lavaan,
     lme4,
     logspline,
+    marginaleffects,
     MASS,
     mclogit,
     mclust,
