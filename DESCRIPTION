@@ -91,6 +91,7 @@ Suggests:
     lavaan,
     lme4,
     logspline,
+    marginaleffects,
     MASS,
     mclogit,
     mclust,
