@@ -52,12 +52,11 @@ theme_blackboard <- function(base_size = 11,
         plot.background = element_rect(fill = "#0d0d0d"),
         panel.background = element_rect(fill = "#0d0d0d"),
         legend.background = element_rect(fill = "#0d0d0d"),
-        axis.line = element_line(color = "#E0E0E0"),
+        axis.line = element_line(color = "#E0E0E0", linewidth = base_size / 22),
+        rect = element_rect(colour = "#E0E0E0", linewidth = base_size / 22),
         text = element_text(color = "#E0E0E0"),
         axis.text = element_text(color = "#E0E0E0"),
         strip.text = element_text(color = "#E0E0E0"),
-        base_line_size = base_size / 22, # ggplot2 defaults
-        base_rect_size = base_size / 22,
         ...
       )
   }

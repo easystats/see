@@ -52,13 +52,12 @@ theme_abyss <- function(base_size = 11,
         plot.background = element_rect(fill = "#001429"),
         panel.background = element_rect(fill = "#001429"),
         legend.background = element_rect(fill = "#001429"),
-        axis.line = element_line(color = "#f2f2f2"),
+        axis.line = element_line(color = "#f2f2f2", linewidth = base_size / 22),
+        rect = element_rect(colour = "#f2f2f2", linewidth = base_size / 22),
         text = element_text(color = "#f2f2f2"),
         axis.text = element_text(color = "#f2f2f2"),
         panel.grid.major = element_line(color = "#465463"),
         strip.text = element_text(color = "#f2f2f2"),
-        base_line_size = base_size / 22, # ggplot2 defaults
-        base_rect_size = base_size / 22,
         ...
       )
   }

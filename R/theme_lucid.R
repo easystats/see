@@ -49,8 +49,9 @@ theme_lucid <- function(base_size = 11,
     tags.face = tags.face
   ) +
     theme(
-      axis.line.x = element_line(colour = "grey80"),
-      axis.line.y = element_line(colour = "grey80"),
+      axis.line.x = element_line(colour = "grey80", linewidth = base_size / 22),
+      axis.line.y = element_line(colour = "grey80", linewidth = base_size / 22),
+      rect = element_rect(colour = "#grey80", linewidth = base_size / 22),
       axis.text = element_text(colour = "grey50"),
       axis.title = element_text(colour = "grey30"),
       strip.background = element_rect(colour = "grey70", fill = "grey90"),
@@ -59,8 +60,6 @@ theme_lucid <- function(base_size = 11,
       legend.text = element_text(colour = "grey30"),
       panel.grid.major = element_line(colour = "grey90"),
       panel.grid.minor = element_line(colour = "grey92"),
-      base_line_size = base_size / 22, # ggplot2 defaults
-      base_rect_size = base_size / 22,
       ...
     )
 }

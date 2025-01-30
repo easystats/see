@@ -57,21 +57,19 @@ theme_modern <- function(base_size = 11,
                          ...) {
   # Remove legend title if necessary
   if (is.null(plot.title.size)) {
-    plot.title.size <-
-      element_text(
-        size = plot.title.size,
-        face = plot.title.face,
-        margin = margin(0, 0, plot.title.space, 0)
-      )
+    plot.title.size <-element_text(
+      size = plot.title.size,
+      face = plot.title.face,
+      margin = margin(0, 0, plot.title.space, 0)
+    )
   } else if (plot.title.size == "none") {
     plot.title.size <- element_blank()
   } else {
-    plot.title.size <-
-      element_text(
-        size = plot.title.size,
-        face = plot.title.face,
-        margin = margin(0, 0, plot.title.space, 0)
-      )
+    plot.title.size <- element_text(
+      size = plot.title.size,
+      face = plot.title.face,
+      margin = margin(0, 0, plot.title.space, 0)
+    )
   }
 
   # Remove legend title if necessary
@@ -126,8 +124,6 @@ theme_modern <- function(base_size = 11,
       plot.tag = element_text(size = tags.size, face = tags.face),
       strip.background = element_blank(),
       strip.text = element_text(face = "bold"),
-      base_line_size = base_size / 22, # ggplot2 defaults
-      base_rect_size = base_size / 22,
       ...
     )
 }
