@@ -7,20 +7,21 @@
 theme_abyss(
   base_size = 11,
   base_family = "",
-  plot.title.size = 15,
+  plot.title.size = 1.35 * base_size,
   plot.title.face = "plain",
-  plot.title.space = 20,
+  plot.title.space = 1.8 * base_size,
   plot.title.position = "plot",
   legend.position = "right",
-  axis.title.space = 20,
-  legend.title.size = 13,
-  legend.text.size = 12,
-  axis.title.size = 13,
+  axis.title.space = 1.8 * base_size,
+  legend.title.size = 1.2 * base_size,
+  legend.text.size = 1.1 * base_size,
+  axis.title.size = 1.2 * base_size,
   axis.title.face = "plain",
-  axis.text.size = 12,
+  axis.text.size = 1.1 * base_size,
   axis.text.angle = NULL,
-  tags.size = 15,
-  tags.face = "bold"
+  tags.size = 1.35 * base_size,
+  tags.face = "bold",
+  ...
 )
 }
 \arguments{
@@ -61,9 +62,18 @@ plot tag).}
 \item{tags.size}{Tags text size in pts.}
 
 \item{tags.face}{Tags font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{...}{Further arguments passed to \code{ggplot2::theme()}.}
 }
 \description{
 A deep dark blue theme for ggplot.
+}
+\note{
+Base elements like plot borders, titles etc. are scaling with
+\code{base_size}, i.e. when \code{base_size} is increased, all other relevant elements
+are increased in proportion to the base size, to ensure proper scaling of
+the plot. Set arguments for the related elements explicitly to define custom
+sizes.
 }
 \examples{
 library(ggplot2)

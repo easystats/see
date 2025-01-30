@@ -3,6 +3,7 @@
 #' A light, clear theme for ggplot.
 #'
 #' @inheritParams theme_modern
+#' @inherit theme_modern note
 #'
 #' @examples
 #' library(ggplot2)
@@ -14,20 +15,21 @@
 #' @export
 theme_lucid <- function(base_size = 11,
                         base_family = "",
-                        plot.title.size = 12,
+                        plot.title.size = 1.1 * base_size,
                         plot.title.face = "plain",
-                        plot.title.space = 15,
+                        plot.title.space = 1.35 * base_size,
                         plot.title.position = "plot",
                         legend.position = "right",
-                        axis.title.space = 10,
-                        legend.title.size = 11,
-                        legend.text.size = 10,
-                        axis.title.size = 11,
+                        axis.title.space = 0.9 * base_size,
+                        legend.title.size = base_size,
+                        legend.text.size = 0.9 * base_size,
+                        axis.title.size = base_size,
                         axis.title.face = "plain",
-                        axis.text.size = 10,
+                        axis.text.size = 0.9 * base_size,
                         axis.text.angle = NULL,
-                        tags.size = 11,
-                        tags.face = "plain") {
+                        tags.size = base_size,
+                        tags.face = "plain",
+                        ...) {
   theme_modern(
     base_size = base_size,
     base_family = base_family,
@@ -56,6 +58,9 @@ theme_lucid <- function(base_size = 11,
       legend.title = element_text(colour = "grey30"),
       legend.text = element_text(colour = "grey30"),
       panel.grid.major = element_line(colour = "grey90"),
-      panel.grid.minor = element_line(colour = "grey92")
+      panel.grid.minor = element_line(colour = "grey92"),
+      base_line_size = base_size / 22, # ggplot2 defaults
+      base_rect_size = base_size / 22,
+      ...
     )
 }

@@ -22,6 +22,13 @@
 #' @param axis.text.angle Rotate  the x axis labels.
 #' @param tags.size Tags text size in pts.
 #' @param tags.face Tags font face ("plain", "italic", "bold", "bold.italic").
+#' @param ... Further arguments passed to `ggplot2::theme()`.
+#'
+#' @note Base elements like plot borders, titles etc. are scaling with
+#' `base_size`, i.e. when `base_size` is increased, all other relevant elements
+#' are increased in proportion to the base size, to ensure proper scaling of
+#' the plot. Set arguments for the related elements explicitly to define custom
+#' sizes.
 #'
 #' @examples
 #' library(ggplot2)
@@ -33,20 +40,21 @@
 #' @export
 theme_modern <- function(base_size = 11,
                          base_family = "",
-                         plot.title.size = 15,
+                         plot.title.size = 1.35 * base_size,
                          plot.title.face = "plain",
-                         plot.title.space = 20,
+                         plot.title.space = 1.8 * base_size,
                          plot.title.position = "plot",
                          legend.position = "right",
-                         axis.title.space = 20,
-                         legend.title.size = 13,
-                         legend.text.size = 12,
-                         axis.title.size = 13,
+                         axis.title.space = 1.8 * base_size,
+                         legend.title.size = 1.2 * base_size,
+                         legend.text.size = 1.1 * base_size,
+                         axis.title.size = 1.2 * base_size,
                          axis.title.face = "plain",
-                         axis.text.size = 12,
+                         axis.text.size = 1.1 * base_size,
                          axis.text.angle = NULL,
-                         tags.size = 15,
-                         tags.face = "bold") {
+                         tags.size = 1.35 * base_size,
+                         tags.face = "bold",
+                         ...) {
   # Remove legend title if necessary
   if (is.null(plot.title.size)) {
     plot.title.size <-
@@ -117,6 +125,9 @@ theme_modern <- function(base_size = 11,
       axis.ticks = element_blank(),
       plot.tag = element_text(size = tags.size, face = tags.face),
       strip.background = element_blank(),
-      strip.text = element_text(face = "bold")
+      strip.text = element_text(face = "bold"),
+      base_line_size = base_size / 22, # ggplot2 defaults
+      base_rect_size = base_size / 22,
+      ...
     )
 }
