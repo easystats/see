@@ -57,7 +57,7 @@ theme_modern <- function(base_size = 11,
                          ...) {
   # Remove legend title if necessary
   if (is.null(plot.title.size)) {
-    plot.title.size <-element_text(
+    plot.title.size <- element_text(
       size = plot.title.size,
       face = plot.title.face,
       margin = margin(0, 0, plot.title.space, 0)
@@ -100,10 +100,10 @@ theme_modern <- function(base_size = 11,
   }
 
   # Rotate
-  if (!is.null(axis.text.angle)) {
-    hjust <- 1
-  } else {
+  if (is.null(axis.text.angle)) {
     hjust <- NULL
+  } else {
+    hjust <- 1
   }
 
   theme_classic(base_size = base_size, base_family = base_family) +
