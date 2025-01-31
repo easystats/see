@@ -37,10 +37,26 @@ test_that("theme functions work", {
 
   set.seed(123)
   vdiffr::expect_doppelganger(
+    title = "theme_modern works with base_size",
+    fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+      geom_point() +
+      theme_modern(base_size = 20)
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
     title = "theme_lucid works",
     fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
       geom_point(color = "white") +
       theme_lucid()
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "theme_lucid works with base_size",
+    fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
+      geom_point(color = "white") +
+      theme_lucid(base_size = 20)
   )
 
   set.seed(123)
@@ -57,5 +73,13 @@ test_that("theme functions work", {
     fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
       geom_point(color = "white") +
       theme_blackboard()
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "theme_blackboard works with base_size",
+    fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
+      geom_point(color = "white") +
+      theme_blackboard(base_size = 18)
   )
 })

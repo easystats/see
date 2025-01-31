@@ -7,20 +7,21 @@
 theme_lucid(
   base_size = 11,
   base_family = "",
-  plot.title.size = 12,
+  plot.title.size = 1.1 * base_size,
   plot.title.face = "plain",
-  plot.title.space = 15,
+  plot.title.space = 1.35 * base_size,
   plot.title.position = "plot",
   legend.position = "right",
-  axis.title.space = 10,
-  legend.title.size = 11,
-  legend.text.size = 10,
-  axis.title.size = 11,
+  axis.title.space = 0.9 * base_size,
+  legend.title.size = base_size,
+  legend.text.size = 0.9 * base_size,
+  axis.title.size = base_size,
   axis.title.face = "plain",
-  axis.text.size = 10,
+  axis.text.size = 0.9 * base_size,
   axis.text.angle = NULL,
-  tags.size = 11,
-  tags.face = "plain"
+  tags.size = base_size,
+  tags.face = "plain",
+  ...
 )
 }
 \arguments{
@@ -61,9 +62,18 @@ plot tag).}
 \item{tags.size}{Tags text size in pts.}
 
 \item{tags.face}{Tags font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{...}{Further arguments passed to \code{ggplot2::theme()}.}
 }
 \description{
 A light, clear theme for ggplot.
+}
+\note{
+Base elements like plot borders, titles etc. are scaling with
+\code{base_size}, i.e. when \code{base_size} is increased, all other relevant elements
+are increased in proportion to the base size, to ensure proper scaling of
+the plot. Set arguments for the related elements explicitly to define custom
+sizes.
 }
 \examples{
 library(ggplot2)

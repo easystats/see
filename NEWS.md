@@ -1,3 +1,14 @@
+# see (devel)
+
+## Changes
+
+* All `theme_*()` function get a `...` argument that is passed to
+  `ggplot2::theme()`.
+
+* Arguments that change the size of elements in `theme_*()` functions (like
+  `plot.title.size` or `axis.text.size` now scale with the `base_size` argument,
+  to ensure proper scaling of plots when the base-size is changed.
+
 # see 0.10.0
 
 ## Changes
