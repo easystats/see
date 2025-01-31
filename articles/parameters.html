@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +87,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Plotting Functions for the 'parameters' Package</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/v0.10.0/vignettes/parameters.Rmd" class="external-link"><code>vignettes/parameters.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/see/blob/main/vignettes/parameters.Rmd" class="external-link"><code>vignettes/parameters.Rmd</code></a></small>
       <div class="d-none name"><code>parameters.Rmd</code></div>
     </div>
 
@@ -501,7 +501,7 @@ to refit the exact model used below:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html" class="external-link">brm</a></span><span class="op">(</span></span>
-<span>  <span class="va">TE</span> <span class="op">|</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/se.html" class="external-link">se</a></span><span class="op">(</span><span class="va">seTE</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Author</span><span class="op">)</span>,</span>
+<span>  <span class="va">TE</span> <span class="op">|</span> <span class="fu"><a href="https://wviechtb.github.io/metafor/reference/se.html" class="external-link">se</a></span><span class="op">(</span><span class="va">seTE</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Author</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">Meta_Analysis_Data</span>,</span>
 <span>  prior <span class="op">=</span> <span class="va">priors</span>,</span>
 <span>  iter <span class="op">=</span> <span class="fl">4000</span></span>
