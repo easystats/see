@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,20 +63,21 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">theme_lucid</span><span class="op">(</span></span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  base_family <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  plot.title.size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  plot.title.size <span class="op">=</span> <span class="fl">1.1</span> <span class="op">*</span> <span class="va">base_size</span>,</span>
 <span>  plot.title.face <span class="op">=</span> <span class="st">"plain"</span>,</span>
-<span>  plot.title.space <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  plot.title.space <span class="op">=</span> <span class="fl">1.35</span> <span class="op">*</span> <span class="va">base_size</span>,</span>
 <span>  plot.title.position <span class="op">=</span> <span class="st">"plot"</span>,</span>
 <span>  legend.position <span class="op">=</span> <span class="st">"right"</span>,</span>
-<span>  axis.title.space <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  legend.title.size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  legend.text.size <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  axis.title.size <span class="op">=</span> <span class="fl">11</span>,</span>
+<span>  axis.title.space <span class="op">=</span> <span class="fl">0.9</span> <span class="op">*</span> <span class="va">base_size</span>,</span>
+<span>  legend.title.size <span class="op">=</span> <span class="va">base_size</span>,</span>
+<span>  legend.text.size <span class="op">=</span> <span class="fl">0.9</span> <span class="op">*</span> <span class="va">base_size</span>,</span>
+<span>  axis.title.size <span class="op">=</span> <span class="va">base_size</span>,</span>
 <span>  axis.title.face <span class="op">=</span> <span class="st">"plain"</span>,</span>
-<span>  axis.text.size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  axis.text.size <span class="op">=</span> <span class="fl">0.9</span> <span class="op">*</span> <span class="va">base_size</span>,</span>
 <span>  axis.text.angle <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tags.size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  tags.face <span class="op">=</span> <span class="st">"plain"</span></span>
+<span>  tags.size <span class="op">=</span> <span class="va">base_size</span>,</span>
+<span>  tags.face <span class="op">=</span> <span class="st">"plain"</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -153,7 +154,19 @@ plot tag).</p></dd>
 <dt id="arg-tags-face">tags.face<a class="anchor" aria-label="anchor" href="#arg-tags-face"></a></dt>
 <dd><p>Tags font face ("plain", "italic", "bold", "bold.italic").</p></dd>
 
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Further arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">ggplot2::theme()</a></code>.</p></dd>
+
 </dl></div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>Base elements like plot borders, titles etc. are scaling with
+<code>base_size</code>, i.e. when <code>base_size</code> is increased, all other relevant elements
+are increased in proportion to the base size, to ensure proper scaling of
+the plot. Set arguments for the related elements explicitly to define custom
+sizes.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
