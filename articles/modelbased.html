@@ -168,11 +168,16 @@ theme for all plots:</p>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_expectation</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="st">"grid"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="modelbased_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># full range</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_relation</a></span><span class="op">(</span><span class="va">model</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wt"</span>, <span class="st">"gear"</span><span class="op">)</span>, preserve_range <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<p><img src="modelbased_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="interactions-between-two-continuous-variables">Interactions between two continuous variables<a class="anchor" aria-label="anchor" href="#interactions-between-two-continuous-variables"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">*</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html" class="external-link">estimate_slopes</a></span><span class="op">(</span><span class="va">model</span>, trend <span class="op">=</span> <span class="st">"hp"</span>, by <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
@@ -184,13 +189,13 @@ theme for all plots:</p>
 <div class="section level2">
 <h2 id="group-level-scores-of-mixed-models">Group-level scores of mixed models<a class="anchor" aria-label="anchor" href="#group-level-scores-of-mixed-models"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_grouplevel.html" class="external-link">estimate_grouplevel</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="modelbased_files/figure-html/mixed-intercept-1.png" width="672"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_grouplevel.html" class="external-link">estimate_grouplevel</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -200,13 +205,13 @@ theme for all plots:</p>
 <div class="section level2">
 <h2 id="estimate-slopes">Estimate slopes<a class="anchor" aria-label="anchor" href="#estimate-slopes"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="va">Petal.Length</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html" class="external-link">estimate_slopes</a></span><span class="op">(</span><span class="va">model</span>, trend <span class="op">=</span> <span class="st">"Petal.Length"</span>, by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <p><img src="modelbased_files/figure-html/slopes-1.png" width="672"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">Sepal.Width</span>, <span class="fl">3</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html" class="external-link">estimate_slopes</a></span><span class="op">(</span><span class="va">model</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Width"</span>, <span class="st">"Species"</span><span class="op">)</span><span class="op">)</span></span>
@@ -217,13 +222,13 @@ theme for all plots:</p>
 <h2 id="estimate-derivatives">Estimate derivatives<a class="anchor" aria-label="anchor" href="#estimate-derivatives"></a>
 </h2>
 <p>Linear-model</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_relation</a></span><span class="op">(</span><span class="va">model_lm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="modelbased_files/figure-html/derivatives-l-1.png" width="672"></p>
 <p>Non-linear model</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit a non-linear General Additive Model (GAM)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">mgcv</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
