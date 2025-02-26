@@ -86,6 +86,12 @@ result <- estimate_expectation(model, data = "grid")
 plot(result)
 ```
 
+```{r}
+# full range
+result <- estimate_relation(model, by = c("wt", "gear"), preserve_range = FALSE)
+plot(result)
+```
+
 ## Interactions between two continuous variables
 
 ```{r np-interval}
@@ -165,4 +171,3 @@ plots(
   n_rows = 2
 )
 ```
-

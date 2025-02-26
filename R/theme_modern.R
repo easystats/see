@@ -35,7 +35,7 @@
 #' library(see)
 #'
 #' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-#'   geom_point() +
+#'   geom_point(color = pizza_colors("tomato")) +
 #'   theme_modern()
 #' @export
 theme_modern <- function(base_size = 11,

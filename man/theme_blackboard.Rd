@@ -80,6 +80,6 @@ library(ggplot2)
 library(see)
 
 ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
-  geom_point(color = "white") +
+  geom_point(color = see_colors("lime")) +
   theme_blackboard()
 }

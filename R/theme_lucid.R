@@ -10,7 +10,7 @@
 #' library(see)
 #'
 #' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
-#'   geom_point(color = "white") +
+#'   geom_point(color = pizza_colors("tomato")) +
 #'   theme_lucid()
 #' @export
 theme_lucid <- function(base_size = 11,
