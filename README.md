@@ -18,79 +18,29 @@ performance diagnostics. As a core pillar of *easystats*, the *see*
 package helps users to utilize visualization for more informative,
 communicable, and well-rounded scientific reporting.
 
-# Statement of Need
-
-The grammar of graphics (Wilkinson, 2012), largely due to its
-implementation in the *ggplot2* package (Wickham, 2016), has become the
-dominant approach to visualization in R. Building a model visualization
-with *ggplot2* is somewhat disconnected from the model fitting and
-evaluation process. Generally, this process entails:
-
-1.  Fitting a model.
-2.  Extracting desired results from the model (e.g., model parameters
-    and intervals, model predictions, diagnostic statistics) and
-    arranging them into a data frame.
-3.  Passing the results data frame to `ggplot()` and specifying the
-    graphical parameters. For example:
-
+<!--
+&#10;# Statement of Need
+&#10;The grammar of graphics [@wilkinson2012grammar], largely due to its implementation in the *ggplot2* package [@Wickham2016], has become the dominant approach to visualization in R. Building a model visualization with *ggplot2* is somewhat disconnected from the model fitting and evaluation process. Generally, this process entails:
+&#10;  1. Fitting a model.
+  2. Extracting desired results from the model (e.g., model parameters and intervals, model predictions, diagnostic statistics) and arranging them into a data frame.
+  3. Passing the results data frame to `ggplot()` and specifying the graphical parameters. For example:
+&#10;
 ``` r
 library(ggplot2)
-
-# step-1
+&#10;# step-1
 model <- lm(mpg ~ factor(cyl) * wt, data = mtcars)
-
-# step-2
+&#10;# step-2
 results <- fortify(model)
-
-# step-3
+&#10;# step-3
 ggplot(results) +
   geom_point(aes(x = wt, y = mpg, color = `factor(cyl)`)) +
   geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
 ```
-
-<img src="man/figures/unnamed-chunk-2-1.png" width="100%" />
-
-A number of packages have been developed to extend *ggplot2* and assist
-with model visualization (for a sampling of these packages, visit
-[ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of
-these packages provide functions for additional geoms, annotations, or
-common visualization types without linking them to a specific
-statistical analysis or fundamentally changing the *ggplot2* workflow
-(e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.).
-Other *ggplot2* extensions provide functions to generate
-publication-ready visualizations for specific types of models (e.g.,
-*metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the
-*ggstatsplot* package (Patil, 2021) offers visualizations for
-statistical analysis of one-way factorial designs, and the *plotmm*
-package (Waggoner, 2020) supports specific types of mixture model
-objects.
-
-The aim of the *see* package is to produce visualizations for a wide
-variety of models and statistical analyses in a way that is tightly
-linked with the model fitting process and requires minimal interruption
-of users’ workflow. *see* accomplishes this aim by providing a single
-`plot()` method for objects created by the other *easystats* packages,
-such as *parameters* tables, *modelbased* predictions, *performance*
-diagnostic tests, *correlation* matrices, and so on. The *easystats*
-packages compute numeric results for a wide range of statistical models,
-and the *see* package acts as a visual support to the entire *easystats*
-ecosystem. As such, visualizations corresponding to all stages of
-statistical analysis, from model fitting to diagnostics to reporting,
-can be easily created using *see*. *see* plots are compatible with other
-*ggplot2* functions for further customization (e.g., `labs()` for a plot
-title). In addition, *see* provides several aesthetic utilities to
-embellish both *easystats* plots and other *ggplot2* plots. The result
-is a package that minimizes the barrier to producing high-quality
-statistical visualizations in R.
-
-The central goal of *easystats* is to make the task of doing statistics
-in R as easy as possible. This goal is realized through intuitive and
-consistent syntax, consistent and transparent argument names,
-comprehensive documentation, informative warnings and error messages,
-and smart functions with sensible default parameter values. The *see*
-package follows this philosophy by using a single access point—the
-generic `plot()` method—for visualization of all manner of statistical
-results supported by *easystats*.
+&#10;<img src="man/figures/unnamed-chunk-2-1.png" width="100%" />
+&#10;A number of packages have been developed to extend *ggplot2* and assist with model visualization (for a sampling of these packages, visit [ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects.
+&#10;The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
+&#10;The central goal of *easystats* is to make the task of doing statistics in R as easy as possible. This goal is realized through intuitive and consistent syntax, consistent and transparent argument names, comprehensive documentation, informative warnings and error messages, and smart functions with sensible default parameter values. The *see* package follows this philosophy by using a single access point---the generic `plot()` method---for visualization of all manner of statistical results supported by *easystats*.
+&#10;//-->
 
 # Installation
 
@@ -123,6 +73,10 @@ library("see")
 > To stay updated, use `easystats::install_latest()`.
 
 # Plotting functions for ‘easystats’ packages
+
+[![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+[![Features](https://img.shields.io/badge/features-see-orange.svg?colorB=2196F3)](https://easystats.github.io/see/reference/index.html)
 
 Below we present one or two plotting methods for each *easystats*
 package, but many other methods are available. Interested readers are
@@ -261,7 +215,7 @@ mtcars$gear <- as.factor(mtcars$gear)
 model <- lm(mpg ~ wt * gear, data = mtcars)
 
 predicted <- estimate_expectation(model, data = "grid")
-plot(predicted)
+plot(predicted, show_data = TRUE)
 ```
 
 <img src="man/figures/modelbased1-1.png" width="100%" />
@@ -531,43 +485,11 @@ Source Software*, *5*(51), 2306. <https://doi.org/10.21105/joss.02306>
 
 </div>
 
-<div id="ref-Patil2021" class="csl-entry">
-
-Patil, I. (2021). <span class="nocase">Visualizations with statistical
-details: The <span class="nocase">’ggstatsplot’</span> approach</span>.
-*Journal of Open Source Software*, *6*(61), 3167.
-<https://doi.org/10.21105/joss.03167>
-
-</div>
-
 <div id="ref-base2021" class="csl-entry">
 
 R Core Team. (2021). *R: A language and environment for statistical
 computing*. R Foundation for Statistical Computing.
 <https://www.R-project.org/>
-
-</div>
-
-<div id="ref-Waggoner2020" class="csl-entry">
-
-Waggoner, P. D. (2020). *<span class="nocase">plotmm</span>: Tidy tools
-for visualizing mixture models*.
-<https://CRAN.R-project.org/package=plotmm>
-
-</div>
-
-<div id="ref-Wickham2016" class="csl-entry">
-
-Wickham, H. (2016). *<span class="nocase">ggplot2</span>: Elegant
-graphics for data analysis*. Springer-Verlag New York.
-
-</div>
-
-<div id="ref-wilkinson2012grammar" class="csl-entry">
-
-Wilkinson, L. (2012). <span class="nocase">The Grammar of
-Graphics</span>. In *Handbook of computational statistics* (pp.
-375–414). Springer.
 
 </div>
 

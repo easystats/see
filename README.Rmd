@@ -28,6 +28,8 @@ knitr::opts_chunk$set(
 
 *easystats* is a collection of packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language [@base2021]. Most *easystats* packages return comprehensive numeric summaries of model parameters and performance. The *see* package complements these numeric summaries with a host of functions and tools to produce a range of publication-ready visualizations for model parameters, predictions, and performance diagnostics. As a core pillar of *easystats*, the *see* package helps users to utilize visualization for more informative, communicable, and well-rounded scientific reporting.
 
+<!--
+
 # Statement of Need
 
 The grammar of graphics [@wilkinson2012grammar], largely due to its implementation in the *ggplot2* package [@Wickham2016], has become the dominant approach to visualization in R. Building a model visualization with *ggplot2* is somewhat disconnected from the model fitting and evaluation process. Generally, this process entails:
@@ -57,6 +59,8 @@ The aim of the *see* package is to produce visualizations for a wide variety of 
 
 The central goal of *easystats* is to make the task of doing statistics in R as easy as possible. This goal is realized through intuitive and consistent syntax, consistent and transparent argument names, comprehensive documentation, informative warnings and error messages, and smart functions with sensible default parameter values. The *see* package follows this philosophy by using a single access point---the generic `plot()` method---for visualization of all manner of statistical results supported by *easystats*.
 
+//-->
+
 # Installation
 
 [![CRAN](https://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see) [![see status badge](https://easystats.r-universe.dev/badges/see)](https://easystats.r-universe.dev) [![R-CMD-check](https://github.com/easystats/see/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/see/actions) [![codecov](https://codecov.io/gh/easystats/see/branch/main/graph/badge.svg)](https://app.codecov.io/gh/easystats/see)
@@ -83,6 +87,11 @@ library("see")
 > To stay updated, use `easystats::install_latest()`.
 
 # Plotting functions for 'easystats' packages
+
+[![Documentation](https://img.shields.io/badge/documentation-see-orange.svg?colorB=E91E63)](https://easystats.github.io/see/)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+[![Features](https://img.shields.io/badge/features-see-orange.svg?colorB=2196F3)](https://easystats.github.io/see/reference/index.html)
+
 
 Below we present one or two plotting methods for each *easystats* package, but many other methods are available. Interested readers are encouraged to explore the range of examples on the package [website](https://easystats.github.io/see/articles/).
 
@@ -175,7 +184,7 @@ mtcars$gear <- as.factor(mtcars$gear)
 model <- lm(mpg ~ wt * gear, data = mtcars)
 
 predicted <- estimate_expectation(model, data = "grid")
-plot(predicted)
+plot(predicted, show_data = TRUE)
 ```
 
 One can also visualize *marginal means* (i.e., the mean at each factor level averaged over other predictors) using `estimate_means()`, that is then passed to `plot()`.
