@@ -9,6 +9,9 @@
   `plot.title.size` or `axis.text.size` now scale with the `base_size` argument,
   to ensure proper scaling of plots when the base-size is changed.
 
+* Added a new theme, `theme_azurelight()`, with a light-blue character, and
+  reduced use of grid lines.
+
 # see 0.10.0
 
 ## Changes
