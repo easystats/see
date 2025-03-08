@@ -7,8 +7,8 @@
 palette_pizza(palette = "margherita", reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{Pizza type. Can be \code{"margherita"} (default), \code{"margherita_crust"},
-\code{"diavola"} or \code{"diavola_crust"}.}
+\item{palette}{Pizza type. Can be \code{"margherita"} (default), \code{"margherita crust"},
+\code{"diavola"} or \code{"diavola crust"}.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 

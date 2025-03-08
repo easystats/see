@@ -15,9 +15,9 @@ be one of \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \c
 \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original}, or
 \code{black_first_original}. The latter three options are especially for the
 Okabe-Ito color palette. The default is \code{NULL} and either \code{"contrast"} or
-\code{"complement"} is used (depending on whether \code{discrete} is \code{TRUE} or
-\code{FALSE}), which are the two scale useful for discrete or gradient color
-scales, respectively.}
+\code{"gradient"} is used (depending on whether \code{discrete} is \code{TRUE} or \code{FALSE}),
+which are the two scale useful for discrete or gradient color scales,
+respectively.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 

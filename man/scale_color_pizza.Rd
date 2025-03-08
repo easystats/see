@@ -85,8 +85,8 @@ scale_fill_pizza_c(
 )
 }
 \arguments{
-\item{palette}{Pizza type. Can be \code{"margherita"} (default), \code{"margherita_crust"},
-\code{"diavola"} or \code{"diavola_crust"}.}
+\item{palette}{Pizza type. Can be \code{"margherita"} (default), \code{"margherita crust"},
+\code{"diavola"} or \code{"diavola crust"}.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
