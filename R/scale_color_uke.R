@@ -188,7 +188,8 @@ uke_colors <- function(...) {
 
 
 uke_palettes <- list(
-  `uke` = uke_colors("blue", "cyan", "orange", "livid", "red"),
+  `uke` = uke_colors("blue", "brown", "grey"),
+  `inside` = uke_colors("orange", "red", "purple", "livid", "mint"),
   `full` = uke_colors(),
   `ice` = uke_colors("cyan", "livid", "mint", "blue", "grey"),
   `contrast` = uke_colors("blue", "green", "yellow", "red", "purple"),
