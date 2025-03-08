@@ -144,5 +144,5 @@ theme_modern <- function(base_size = 11,
   }
 
   theme_classic(base_size = base_size, base_family = base_family) +
-    theme(theme_args, ...)
+    do.call(theme, c(theme_args, ...))
 }
