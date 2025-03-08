@@ -110,15 +110,10 @@ library(see)
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_boxplot() +
   theme_modern() +
-  scale_fill_uke_d()
-
-ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
-  geom_point() +
-  theme_abyss() +
-  scale_colour_see(palette = "light")
+  scale_fill_uke()
 
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
   geom_point() +
   theme_modern() +
-  scale_color_uke_c(palette = "rainbow")
+  scale_color_uke(palette = "gradient")
 }

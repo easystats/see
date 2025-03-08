@@ -4,7 +4,7 @@
 \alias{palette_uke}
 \title{UKE design color palette}
 \usage{
-palette_uke(palette = "contrast", reverse = FALSE, ...)
+palette_uke(palette = "uke", reverse = FALSE, ...)
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
