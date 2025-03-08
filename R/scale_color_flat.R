@@ -167,21 +167,21 @@ scale_fill_flat_c <- function(palette = NULL,
 
 # The palette based on flat design colors: https://www.materialui.co/flatuicolors
 flat_colors_list <- c(
-  `red` = "#e74c3c",
+  red = "#e74c3c",
   `dark red` = "#c0392b",
-  `purple` = "#9b59b6",
+  purple = "#9b59b6",
   `deep purple` = "#8e44ad",
-  `blue` = "#2980b9",
+  blue = "#2980b9",
   `light blue` = "#3498db",
-  `cyan` = "#1abc9c",
-  `teal` = "#16a085",
-  `green` = "#27ae60",
+  cyan = "#1abc9c",
+  teal = "#16a085",
+  green = "#27ae60",
   `light green` = "#2ecc71",
-  `yellow` = "#f1c40f",
-  `amber` = "#f39c12",
-  `orange` = "#e67e22",
+  yellow = "#f1c40f",
+  amber = "#f39c12",
+  orange = "#e67e22",
   `deep orange` = "#d35400",
-  `grey` = "#95a5a6",
+  grey = "#95a5a6",
   `blue grey` = "#7f8c8d"
 )
 
@@ -212,9 +212,9 @@ flat_colors <- function(...) {
 
 
 flat_palettes <- list(
-  `full` = flat_colors(),
-  `ice` = flat_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = flat_colors(
+  full = flat_colors(),
+  ice = flat_colors("purple", "deep purple", "blue", "light blue"),
+  rainbow = flat_colors(
     "purple",
     "deep purple",
     "blue",
@@ -226,9 +226,9 @@ flat_palettes <- list(
     "deep orange",
     "red"
   ),
-  `contrast` = flat_colors("blue", "green", "amber", "purple", "red"),
-  `light` = flat_colors("light blue", "purple", "yellow", "light green", "orange"),
-  `complement` = flat_colors(
+  contrast = flat_colors("blue", "green", "amber", "purple", "red"),
+  light = flat_colors("light blue", "purple", "yellow", "light green", "orange"),
+  complement = flat_colors(
     "blue grey",
     "blue",
     "light blue",

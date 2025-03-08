@@ -164,24 +164,24 @@ scale_fill_material_c <- function(palette = NULL,
 
 # The palette based on material design colors: https://www.materialui.co/colors
 material_colors_list <- c(
-  `red` = "#f44336",
-  `pink` = "#E91E63",
-  `purple` = "#9C27B0",
+  red = "#f44336",
+  pink = "#E91E63",
+  purple = "#9C27B0",
   `deep purple` = "#673AB7",
-  `indigo` = "#3F51B5",
-  `blue` = "#2196F3",
+  indigo = "#3F51B5",
+  blue = "#2196F3",
   `light blue` = "#03A9F4",
-  `cyan` = "#00BCD4",
-  `teal` = "#009688",
-  `green` = "#4CAF50",
+  cyan = "#00BCD4",
+  teal = "#009688",
+  green = "#4CAF50",
   `light green` = "#8BC34A",
-  `lime` = "#CDDC39",
-  `yellow` = "#FFEB3B",
-  `amber` = "#FFC107",
-  `orange` = "#FF9800",
+  lime = "#CDDC39",
+  yellow = "#FFEB3B",
+  amber = "#FFC107",
+  orange = "#FF9800",
   `deep orange` = "#FF5722",
-  `brown` = "#795548",
-  `grey` = "#9E9E9E",
+  brown = "#795548",
+  grey = "#9E9E9E",
   `blue grey` = "#607D8B"
 )
 
@@ -212,9 +212,9 @@ material_colors <- function(...) {
 
 
 material_palettes <- list(
-  `full` = material_colors(),
-  `ice` = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
-  `rainbow` = material_colors(
+  full = material_colors(),
+  ice = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
+  rainbow = material_colors(
     "purple",
     "deep purple",
     "indigo",
@@ -229,9 +229,9 @@ material_palettes <- list(
     "red",
     "pink"
   ),
-  `contrast` = material_colors("blue", "green", "amber", "purple", "red"),
-  `light` = material_colors("light blue", "pink", "yellow", "light green", "orange"),
-  `complement` = material_colors(
+  contrast = material_colors("blue", "green", "amber", "purple", "red"),
+  light = material_colors("light blue", "pink", "yellow", "light green", "orange"),
+  complement = material_colors(
     "blue",
     "blue grey",
     "teal",
