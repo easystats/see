@@ -101,21 +101,21 @@ scale_fill_oi <- scale_fill_okabeito
 
 # The palette from: https://jfly.uni-koeln.de/color/#pallet
 okabeito_colors_list <- c(
-  `orange` = "#E69F00",
+  orange = "#E69F00",
   `light blue` = "#56B4E9",
-  `green` = "#009E73",
-  `yellow` = "#F0E442",
-  `blue` = "#0072B2",
-  `red` = "#D55E00",
-  `purple` = "#CC79A7",
-  `grey` = "#999999",
-  `black` = "#000000",
+  green = "#009E73",
+  yellow = "#F0E442",
+  blue = "#0072B2",
+  red = "#D55E00",
+  purple = "#CC79A7",
+  grey = "#999999",
+  black = "#000000",
   `sky blue` = "#56B4E9",
   `bluish green` = "#009E73",
-  `vermillion` = "#D55E00",
+  vermillion = "#D55E00",
   `reddish purple` = "#CC79A7",
   `dark yellow` = "#F5C710",
-  `amber` = "#F5C710"
+  amber = "#F5C710"
 )
 
 
@@ -170,10 +170,10 @@ okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, am
 oi_colors <- okabeito_colors
 
 okabeito_palettes <- list(
-  `full` = okabeito_colors(black_first = FALSE, amber = TRUE),
-  `black_first` = okabeito_colors(black_first = TRUE, amber = TRUE),
-  `full_original` = okabeito_colors(black_first = FALSE, amber = FALSE),
-  `black_original` = okabeito_colors(black_first = TRUE, amber = FALSE)
+  full = okabeito_colors(black_first = FALSE, amber = TRUE),
+  black_first = okabeito_colors(black_first = TRUE, amber = TRUE),
+  full_original = okabeito_colors(black_first = FALSE, amber = FALSE),
+  black_original = okabeito_colors(black_first = TRUE, amber = FALSE)
 )
 
 
