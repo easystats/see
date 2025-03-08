@@ -26,7 +26,7 @@ scale_color_uke <- function(palette = NULL,
                             aesthetics = "color",
                             ...) {
   if (is.null(palette)) {
-    palette <- ifelse(discrete, "uke", "gradient")
+    palette <- ifelse(discrete, "full", "gradient")
   }
 
   pal <- palette_uke(palette = palette, reverse = reverse)
@@ -149,16 +149,16 @@ scale_fill_uke_c <- function(palette = NULL,
 uke_colors_list <- c(
   blue = "#004992",
   brown = "#AA9C8F",
-  grey = "#575756",
-  red = "#B22229",
-  mint = "#74C095",
+  cyan = "#68C3CD",
+  green = "#8ABD24",
+  purple = "#BA9BC5",
   yellow = "#FFDF00",
   orange = "#FCBE0E",
   amber = "#EF7B05",
   livid = "#7296AF",
-  purple = "#BA9BC5",
-  cyan = "#68C3CD",
-  green = "#8ABD24"
+  mint = "#74C095",
+  grey = "#575756",
+  red = "#B22229"
 )
 
 
