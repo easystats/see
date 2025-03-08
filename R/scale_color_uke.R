@@ -98,7 +98,7 @@ scale_fill_uke <- function(palette = NULL,
                            aesthetics = "fill",
                            ...) {
   if (is.null(palette)) {
-    palette <- ifelse(discrete, "uke", "gradient")
+    palette <- ifelse(discrete, "full", "gradient")
   }
   pal <- palette_uke(palette = palette, reverse = reverse)
 
@@ -189,9 +189,9 @@ uke_colors <- function(...) {
 
 uke_palettes <- list(
   `uke` = uke_colors("blue", "brown", "grey"),
-  `inside` = uke_colors("orange", "red", "purple", "livid", "mint"),
+  `inside` = uke_colors("orange", "mint", "livid", "purple", "red"),
   `full` = uke_colors(),
-  `ice` = uke_colors("cyan", "livid", "mint", "blue", "grey"),
+  `ice` = uke_colors("cyan", "mint", "blue", "grey", "livid"),
   `contrast` = uke_colors("blue", "green", "yellow", "red", "purple"),
   `gradient` = uke_colors("yellow", "orange", "amber", "purple", "cyan", "livid", "blue")
 )
