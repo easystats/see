@@ -6,8 +6,9 @@
 #' includes 9 vivid colors that are readily nameable and include colors that
 #' correspond to major primary and secondary colors (e.g., red, yellow, blue).
 #'
-#' The Okabe-Ito palette is included in the base R [grDevices::palette.colors()].
-#' These functions make this palette easier to use with *ggplot2*.
+#' The Okabe-Ito palette is included in the base R
+#' [grDevices::palette.colors()]. These functions make this palette easier to
+#' use with *ggplot2*.
 #'
 #' The original Okabe-Ito palette's "yellow" color is `"#F0E442"`. This color is
 #' very bright and often does not show up well on white backgrounds (see
@@ -20,9 +21,9 @@
 #' the original yellow color suggested by Okabe and Ito (`"#F0E442"`), use
 #' palettes `"full_original"` or `"black_first_original"`.
 #'
-#' The Okabe-Ito palette is only available as a discrete palette.
-#' For color-accessible continuous variables, consider
-#' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
+#' The Okabe-Ito palette is only available as a discrete palette. For
+#' color-accessible continuous variables, consider [the viridis
+#' palettes][ggplot2::scale_colour_viridis_d()].
 #'
 #' @inheritParams palette_okabeito
 #' @inheritParams scale_color_flat
@@ -100,21 +101,21 @@ scale_fill_oi <- scale_fill_okabeito
 
 # The palette from: https://jfly.uni-koeln.de/color/#pallet
 okabeito_colors_list <- c(
-  `orange` = "#E69F00",
+  orange = "#E69F00",
   `light blue` = "#56B4E9",
-  `green` = "#009E73",
-  `yellow` = "#F0E442",
-  `blue` = "#0072B2",
-  `red` = "#D55E00",
-  `purple` = "#CC79A7",
-  `grey` = "#999999",
-  `black` = "#000000",
+  green = "#009E73",
+  yellow = "#F0E442",
+  blue = "#0072B2",
+  red = "#D55E00",
+  purple = "#CC79A7",
+  grey = "#999999",
+  black = "#000000",
   `sky blue` = "#56B4E9",
   `bluish green` = "#009E73",
-  `vermillion` = "#D55E00",
+  vermillion = "#D55E00",
   `reddish purple` = "#CC79A7",
   `dark yellow` = "#F5C710",
-  `amber` = "#F5C710"
+  amber = "#F5C710"
 )
 
 
@@ -169,10 +170,10 @@ okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, am
 oi_colors <- okabeito_colors
 
 okabeito_palettes <- list(
-  `full` = okabeito_colors(black_first = FALSE, amber = TRUE),
-  `black_first` = okabeito_colors(black_first = TRUE, amber = TRUE),
-  `full_original` = okabeito_colors(black_first = FALSE, amber = FALSE),
-  `black_original` = okabeito_colors(black_first = TRUE, amber = FALSE)
+  full = okabeito_colors(black_first = FALSE, amber = TRUE),
+  black_first = okabeito_colors(black_first = TRUE, amber = TRUE),
+  full_original = okabeito_colors(black_first = FALSE, amber = FALSE),
+  black_original = okabeito_colors(black_first = TRUE, amber = FALSE)
 )
 
 

@@ -13,7 +13,7 @@
 \title{Social color palette}
 \usage{
 scale_color_social(
-  palette = "complement",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -21,7 +21,7 @@ scale_color_social(
 )
 
 scale_color_social_d(
-  palette = "complement",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -29,7 +29,7 @@ scale_color_social_d(
 )
 
 scale_color_social_c(
-  palette = "complement",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "color",
@@ -37,7 +37,7 @@ scale_color_social_c(
 )
 
 scale_colour_social(
-  palette = "complement",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -45,7 +45,7 @@ scale_colour_social(
 )
 
 scale_colour_social_c(
-  palette = "complement",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "color",
@@ -53,7 +53,7 @@ scale_colour_social_c(
 )
 
 scale_colour_social_d(
-  palette = "complement",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -61,7 +61,7 @@ scale_colour_social_d(
 )
 
 scale_fill_social(
-  palette = "complement",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -69,7 +69,7 @@ scale_fill_social(
 )
 
 scale_fill_social_d(
-  palette = "complement",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -77,7 +77,7 @@ scale_fill_social_d(
 )
 
 scale_fill_social_c(
-  palette = "complement",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -86,9 +86,13 @@ scale_fill_social_c(
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
-be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
-or \code{black_first_original}.}
+be one of \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"},
+\code{"light"} (for dark themes), \code{"black_first"}, \code{full_original}, or
+\code{black_first_original}. The latter three options are especially for the
+Okabe-Ito color palette. The default is \code{NULL} and either \code{"contrast"} or
+\code{"gradient"} is used (depending on whether \code{discrete} is \code{TRUE} or \code{FALSE}),
+which are the two scale useful for discrete or gradient color scales,
+respectively.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
@@ -100,9 +104,10 @@ should be applied to (e.g., \code{c('color', 'fill')}).}
 \item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
 }
 \description{
-The palette based \href{https://materialui.co/socialcolors}{Social colors}.
-Use \code{scale_color_social_d} for \emph{discrete} categories and
-\code{scale_color_social_c} for a \emph{continuous} scale.
+The palette based \href{https://materialui.co/socialcolors}{Social colors}. Use
+\code{scale_color_social_d} for \emph{discrete} categories and \code{scale_color_social_c}
+for a \emph{continuous} scale, or use the \code{discrete} argument in
+\code{scale_color_social()}.
 }
 \examples{
 library(ggplot2)
@@ -111,15 +116,15 @@ library(see)
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_boxplot() +
   theme_modern() +
-  scale_fill_social_d()
+  scale_fill_social()
 
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +
   theme_modern() +
-  scale_fill_social_d(palette = "ice")
+  scale_fill_social(palette = "ice")
 
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
   geom_point() +
   theme_modern() +
-  scale_color_social_c(palette = "rainbow")
+  scale_color_social(discrete = FALSE)
 }

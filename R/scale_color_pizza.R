@@ -144,12 +144,12 @@ scale_fill_pizza_c <- function(palette = "margherita",
 # The palette based on this image:
 # https://www.scattidigusto.it/wp-content/uploads/2018/03/pizza-margherita-originale-Scatti-di-Gusto.jpg
 pizza_colors_list <- c(
-  `tomato` = "#CE3722",
-  `mozzarella` = "#EBE8E1",
-  `basil` = "#768947",
-  `crust` = "#E7CBA3",
-  `coal` = "#302124",
-  `diavola` = "#642118"
+  tomato = "#CE3722",
+  mozzarella = "#EBE8E1",
+  basil = "#768947",
+  crust = "#E7CBA3",
+  coal = "#302124",
+  diavola = "#642118"
 )
 
 
@@ -172,10 +172,11 @@ pizza_colors <- function(...) {
 
 
 pizza_palettes <- list(
-  `margherita` = pizza_colors("tomato", "mozzarella", "basil"),
-  `margherita_crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "coal"),
-  `diavola` = pizza_colors("tomato", "mozzarella", "basil", "diavola"),
-  `diavola_crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "diavola", "coal")
+  margherita = pizza_colors("tomato", "mozzarella", "basil"),
+  `margherita crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "coal"),
+  diavola = pizza_colors("tomato", "mozzarella", "basil", "diavola"),
+  `diavola crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "diavola", "coal"),
+  gradient = c("basil", "tomato")
 )
 
 
@@ -183,8 +184,8 @@ pizza_palettes <- list(
 #'
 #' The palette based on authentic neapolitan pizzas.
 #'
-#' @param palette Pizza type. Can be "margherita" (default), "margherita_crust",
-#'  "diavola" or "diavola_crust".
+#' @param palette Pizza type. Can be `"margherita"` (default), `"margherita crust"`,
+#' `"diavola"` or `"diavola crust"`.
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'

@@ -13,7 +13,7 @@
 \title{Blue-brown color palette}
 \usage{
 scale_color_bluebrown(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -21,7 +21,7 @@ scale_color_bluebrown(
 )
 
 scale_color_bluebrown_d(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -29,7 +29,7 @@ scale_color_bluebrown_d(
 )
 
 scale_color_bluebrown_c(
-  palette = "contrast",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "color",
@@ -37,7 +37,7 @@ scale_color_bluebrown_c(
 )
 
 scale_colour_bluebrown(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -45,7 +45,7 @@ scale_colour_bluebrown(
 )
 
 scale_colour_bluebrown_c(
-  palette = "contrast",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "color",
@@ -53,7 +53,7 @@ scale_colour_bluebrown_c(
 )
 
 scale_colour_bluebrown_d(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -61,7 +61,7 @@ scale_colour_bluebrown_d(
 )
 
 scale_fill_bluebrown(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -69,7 +69,7 @@ scale_fill_bluebrown(
 )
 
 scale_fill_bluebrown_d(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -77,7 +77,7 @@ scale_fill_bluebrown_d(
 )
 
 scale_fill_bluebrown_c(
-  palette = "contrast",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -86,9 +86,13 @@ scale_fill_bluebrown_c(
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
-be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
-or \code{black_first_original}.}
+be one of \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"},
+\code{"light"} (for dark themes), \code{"black_first"}, \code{full_original}, or
+\code{black_first_original}. The latter three options are especially for the
+Okabe-Ito color palette. The default is \code{NULL} and either \code{"contrast"} or
+\code{"gradient"} is used (depending on whether \code{discrete} is \code{TRUE} or \code{FALSE}),
+which are the two scale useful for discrete or gradient color scales,
+respectively.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 

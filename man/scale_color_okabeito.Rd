@@ -59,9 +59,13 @@ scale_fill_oi(
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
-be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
-or \code{black_first_original}.}
+be one of \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"},
+\code{"light"} (for dark themes), \code{"black_first"}, \code{full_original}, or
+\code{black_first_original}. The latter three options are especially for the
+Okabe-Ito color palette. The default is \code{NULL} and either \code{"contrast"} or
+\code{"gradient"} is used (depending on whether \code{discrete} is \code{TRUE} or \code{FALSE}),
+which are the two scale useful for discrete or gradient color scales,
+respectively.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
@@ -81,8 +85,9 @@ includes 9 vivid colors that are readily nameable and include colors that
 correspond to major primary and secondary colors (e.g., red, yellow, blue).
 }
 \details{
-The Okabe-Ito palette is included in the base R \code{\link[grDevices:palette]{grDevices::palette.colors()}}.
-These functions make this palette easier to use with \emph{ggplot2}.
+The Okabe-Ito palette is included in the base R
+\code{\link[grDevices:palette]{grDevices::palette.colors()}}. These functions make this palette easier to
+use with \emph{ggplot2}.
 
 The original Okabe-Ito palette's "yellow" color is \code{"#F0E442"}. This color is
 very bright and often does not show up well on white backgrounds (see
@@ -94,9 +99,8 @@ The palettes \code{"full"} and \code{"black_first"} use this darker yellow color
 the original yellow color suggested by Okabe and Ito (\code{"#F0E442"}), use
 palettes \code{"full_original"} or \code{"black_first_original"}.
 
-The Okabe-Ito palette is only available as a discrete palette.
-For color-accessible continuous variables, consider
-\link[ggplot2:scale_viridis]{the viridis palettes}.
+The Okabe-Ito palette is only available as a discrete palette. For
+color-accessible continuous variables, consider \link[ggplot2:scale_viridis]{the viridis palettes}.
 }
 \examples{
 library(ggplot2)

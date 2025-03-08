@@ -16,6 +16,12 @@
   to the plot and slightly increase the distance between axis labels and the
   related axis.
 
+* Color scale functions (those starting with `scale_*()`) get a new `"gradient"`
+  palette, which are simply the color values for blue and orange colors from that
+  palette. Furthermore, color scale functions now automatically select an
+  appropriate palette (usually, `"contrast"` or `"gradient"`) depending on
+  whether discrete or continuous color scales are requested.
+
 # see 0.10.0
 
 ## Changes
