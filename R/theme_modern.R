@@ -22,6 +22,8 @@
 #' @param axis.text.angle Rotate  the x axis labels.
 #' @param tags.size Tags text size in pts.
 #' @param tags.face Tags font face ("plain", "italic", "bold", "bold.italic").
+#' @param show.ticks Logical, if `TRUE`, adds inner tick marks to the plot and
+#'   slightly increases the padding between axis and the related labels.
 #' @param ... Further arguments passed to `ggplot2::theme()`.
 #'
 #' @note Base elements like plot borders, titles etc. are scaling with
@@ -37,6 +39,11 @@
 #' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 #'   geom_point(color = pizza_colors("tomato")) +
 #'   theme_modern()
+#'
+#' # for a slightly better orientation, tick marks can be added
+#' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+#'   geom_point(color = pizza_colors("tomato")) +
+#'   theme_modern(show.ticks = TRUE)
 #' @export
 theme_modern <- function(base_size = 11,
                          base_family = "",
@@ -54,6 +61,7 @@ theme_modern <- function(base_size = 11,
                          axis.text.angle = NULL,
                          tags.size = 1.35 * base_size,
                          tags.face = "bold",
+                         show.ticks = FALSE,
                          ...) {
   # Remove legend title if necessary
   if (is.null(plot.title.size)) {
@@ -127,10 +135,7 @@ theme_modern <- function(base_size = 11,
   )
 
   # show ticks?
-  dot_args <- list(...)
-
-  if (isTRUE(dot_args$show.ticks)) {
-    dot_args$show.ticks <- NULL
+  if (show.ticks) {
     theme_args$axis.ticks.length <- unit(-0.25, "cm")
     theme_args$axis.text.x.bottom <- element_text(margin = margin(t = base_size * 1.3, r = 0, b = 0, l = 0))
     theme_args$axis.text.y.left <- element_text(margin = margin(t = 0, r = base_size * 1.3, b = 0, l = 0))
@@ -140,4 +145,4 @@ theme_modern <- function(base_size = 11,
 
   theme_classic(base_size = base_size, base_family = base_family) +
     do.call(theme, c(theme_args, dot_args))
-  }
+}
