@@ -13,6 +13,8 @@
   to the plot and slightly increase the distance between axis labels and the
   related axis.
 
+* Added new color palette, `uke_colors()`.
+
 # see 0.10.0
 
 ## Changes

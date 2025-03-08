@@ -436,9 +436,53 @@ p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
 plots(p1, p2, n_rows = 1)
 ```
 
+# UKE Colors
+
+## UKE Colors - Three Groups
+
+```{r}
+p1 <- ggplot(d1, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_uke()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+  geom_point2(size = 2.5) +
+  scale_color_uke()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## UKE Colors - Four Groups
+
+```{r}
+p1 <- ggplot(d2, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_uke()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group4)) +
+  geom_point2(size = 2.5) +
+  scale_color_uke()
+
+plots(p1, p2, n_rows = 1)
+```
+
+## UKE Colors - Five Groups
+
+```{r}
+p1 <- ggplot(d3, aes(x, y, colour = group)) +
+  geom_line(linewidth = 1) +
+  scale_color_uke()
+
+p2 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = group5)) +
+  geom_point2(size = 2.5) +
+  scale_color_uke()
+
+plots(p1, p2, n_rows = 1)
+```
+
 # Overview of Palette Colors
 
-```{r fig.height=12,echo=FALSE}
+```{r fig.height=13,echo=FALSE}
 theme_set(theme_minimal())
 
 d <- data.frame(
@@ -574,9 +618,26 @@ p8 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
+d <- data.frame(
+  x = names(uke_colors())
+)
+
+p9 <- ggplot(d, aes(x, fill = x)) +
+  geom_bar(width = 0.9) +
+  scale_fill_manual(values = uke_colors()) +
+  scale_y_continuous(labels = NULL, expand = c(0, 0)) +
+  guides(fill = "none") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank()
+  )
+
+
 plots(
-  p1, p2, p3, p4, p5, p6, p7, p8,
+  p1, p2, p3, p4, p5, p6, p7, p8, p9,
   n_columns = 1L,
-  tags = c("Social", "Flat", "Material", "Metro", "See", "Pizza", "Bluebrown", "Okabe-Ito")
+  tags = c("Social", "Flat", "Material", "Metro", "See", "Pizza", "Bluebrown", "Okabe-Ito", "UKE")
 )
 ```
