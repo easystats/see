@@ -25,7 +25,7 @@ scale_color_bluebrown <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -101,7 +101,7 @@ scale_fill_bluebrown <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -191,7 +191,8 @@ bluebrown_palettes <- list(
   full = bluebrown_colors(),
   contrast = bluebrown_colors("lightblue", "blue", "darkblue", "grey", "darkbrown", "brown", "lightbrown"),
   rainbow = bluebrown_colors("darkblue", "blue", "lightblue", "grey", "lightbrown", "brown", "darkbrown"),
-  complement = bluebrown_colors("darkblue", "blue", "lightblue", "grey", "lightbrown", "brown", "darkbrown")
+  complement = bluebrown_colors("darkblue", "blue", "lightblue", "grey", "lightbrown", "brown", "darkbrown"),
+  gradient = bluebrown_colors("blue", "brown")
 )
 
 

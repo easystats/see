@@ -36,7 +36,7 @@ scale_color_social <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -88,7 +88,7 @@ scale_fill_social <- function(palette = NULL, discrete = TRUE, reverse = FALSE, 
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -165,9 +165,10 @@ social_colors <- function(...) {
 
 
 social_palettes <- list(
-  `full` = social_colors(),
-  `ice` = social_colors("purple", "deep purple", "blue", "light blue"),
-  `rainbow` = social_colors(
+  full = social_colors(),
+  ice = social_colors("purple", "deep purple", "blue", "light blue"),
+  gradient = social_colors("blue", "orange"),
+  rainbow = social_colors(
     "purple",
     "deep purple",
     "blue",
@@ -179,9 +180,9 @@ social_palettes <- list(
     "deep orange",
     "red"
   ),
-  `contrast` = social_colors("blue", "green", "amber", "purple", "red"),
-  `light` = material_colors("light blue", "purple", "yellow", "light green", "deep orange"),
-  `complement` = social_colors(
+  contrast = social_colors("blue", "green", "amber", "purple", "red"),
+  light = material_colors("light blue", "purple", "yellow", "light green", "deep orange"),
+  complement = social_colors(
     "blue grey",
     "blue",
     "light blue",

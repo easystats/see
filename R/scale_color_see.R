@@ -35,7 +35,7 @@ scale_color_see <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
   pal <- palette_see(palette = palette, reverse = reverse)
@@ -110,7 +110,7 @@ scale_fill_see <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -206,9 +206,10 @@ see_colors <- function(...) {
 
 
 see_palettes <- list(
-  `full` = see_colors(),
-  `ice` = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
-  `rainbow` = see_colors(
+  full = see_colors(),
+  ice = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
+  gradient = see_colors("blue", "orange"),
+  rainbow = see_colors(
     "purple",
     "deep purple",
     "indigo",
@@ -222,8 +223,8 @@ see_palettes <- list(
     "red",
     "pink"
   ),
-  `contrast` = see_colors("blue", "orange", "yellow", "green", "red"),
-  `complement` = see_colors(
+  contrast = see_colors("blue", "orange", "yellow", "green", "red"),
+  complement = see_colors(
     "blue",
     "blue grey",
     "green",
@@ -232,7 +233,7 @@ see_palettes <- list(
     "amber",
     "red"
   ),
-  `light` = see_colors("light blue", "pink", "lime", "light green", "orange")
+  light = see_colors("light blue", "pink", "lime", "light green", "orange")
 )
 
 

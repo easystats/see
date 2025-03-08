@@ -36,7 +36,7 @@ scale_color_material <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -112,7 +112,7 @@ scale_fill_material <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -214,6 +214,7 @@ material_colors <- function(...) {
 material_palettes <- list(
   full = material_colors(),
   ice = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
+  gradient = material_colors("blue", "orange"),
   rainbow = material_colors(
     "purple",
     "deep purple",

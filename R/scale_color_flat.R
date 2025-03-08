@@ -39,7 +39,7 @@ scale_color_flat <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -115,7 +115,7 @@ scale_fill_flat <- function(palette = NULL,
     if (discrete) {
       palette <- "contrast"
     } else {
-      palette <- "complement"
+      palette <- "gradient"
     }
   }
 
@@ -214,6 +214,7 @@ flat_colors <- function(...) {
 flat_palettes <- list(
   full = flat_colors(),
   ice = flat_colors("purple", "deep purple", "blue", "light blue"),
+  gradient = flat_colors("blue", "orange"),
   rainbow = flat_colors(
     "purple",
     "deep purple",
@@ -251,9 +252,9 @@ flat_palettes <- list(
 #' `"light"` (for dark themes), `"black_first"`, `full_original`, or
 #' `black_first_original`. The latter three options are especially for the
 #' Okabe-Ito color palette. The default is `NULL` and either `"contrast"` or
-#' `"complement"` is used (depending on whether `discrete` is `TRUE` or
-#' `FALSE`), which are the two scale useful for discrete or gradient color
-#' scales, respectively.
+#' `"gradient"` is used (depending on whether `discrete` is `TRUE` or `FALSE`),
+#' which are the two scale useful for discrete or gradient color scales,
+#' respectively.
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
