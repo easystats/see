@@ -16,6 +16,10 @@
   to the plot and slightly increase the distance between axis labels and the
   related axis.
 
+* Color scale functions (those starting with `scale_*()`) now automatically
+  select an appropriate palette (usually, `"contrast"` or `"complement"`)
+  depending on whether discrete or continuous color scales are requested.
+
 # see 0.10.0
 
 ## Changes
