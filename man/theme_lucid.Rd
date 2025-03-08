@@ -80,6 +80,7 @@ library(ggplot2)
 library(see)
 
 ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
-  geom_point(color = pizza_colors("tomato")) +
+  geom_point() +
+  scale_color_metro() +
   theme_lucid()
 }

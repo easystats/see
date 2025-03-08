@@ -7,7 +7,9 @@
 #'
 #' @seealso [coord_radar()]
 #'
-#' @examplesIf require("ggplot2", quietly = TRUE)
+#' @examples
+#' library(ggplot2)
+#'
 #' data <- datawizard::reshape_longer(
 #'   aggregate(iris[-5], list(Species = iris$Species), mean),
 #'   c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
