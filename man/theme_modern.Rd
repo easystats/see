@@ -21,6 +21,7 @@ theme_modern(
   axis.text.angle = NULL,
   tags.size = 1.35 * base_size,
   tags.face = "bold",
+  show.ticks = FALSE,
   ...
 )
 }
@@ -63,6 +64,9 @@ plot tag).}
 
 \item{tags.face}{Tags font face ("plain", "italic", "bold", "bold.italic").}
 
+\item{show.ticks}{Logical, if \code{TRUE}, adds inner tick marks to the plot and
+slightly increases the padding between axis and the related labels.}
+
 \item{...}{Further arguments passed to \code{ggplot2::theme()}.}
 }
 \description{
@@ -82,4 +86,9 @@ library(see)
 ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
   geom_point(color = pizza_colors("tomato")) +
   theme_modern()
+
+# for a slightly better orientation, tick marks can be added
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point(color = pizza_colors("tomato")) +
+  theme_modern(show.ticks = TRUE)
 }
