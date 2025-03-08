@@ -19,5 +19,5 @@ palette. Use \code{uke_colors()} to see all available colors.
 \examples{
 uke_colors()
 
-uke_colors("blue", "cyan")
+uke_colors("blue", "mint")
 }

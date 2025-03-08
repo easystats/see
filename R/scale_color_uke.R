@@ -147,26 +147,18 @@ scale_fill_uke_c <- function(palette = NULL,
 
 
 uke_colors_list <- c(
-  `blue` = "#00529A",
-  `brown` = "#9E9084",
-  `dark grey` = "#58595B",
-  `red` = "#B12833",
-  `green` = "#6BC399",
-  `yellow` = "#FFDF00",
-  `orange` = "#F58021",
-  `blue grey` = "#6C90A7",
-  `purple` = "#B093BF",
-  `cyan` = "#5BC6CC",
-  `light blue` = "#E3E5F2",
-  `light brown` = "#E9E4E1",
-  `light grey` = "#E6E7E8",
-  `light red` = "#F4E6E1",
-  `light green` = "#DFF0E6",
-  `light yellow` = "#FFF3BE",
-  `light orange` = "#FEE8D4",
-  `light blue grey` = "#E7EAEE",
-  `light purple` = "#EFEAF3",
-  `light cyan` = "#DEF1F1"
+  blue = "#004992",
+  brown = "#AA9C8F",
+  grey = "#575756",
+  red = "#B22229",
+  mint = "#74C095",
+  yellow = "#FFDF00",
+  orange = "#FCBE0E",
+  amber = "#EF7B05",
+  livid = "#7296AF",
+  purple = "#BA9BC5",
+  cyan = "#68C3CD",
+  green = "#8ABD24"
 )
 
 
@@ -182,7 +174,7 @@ uke_colors_list <- c(
 #' @examples
 #' uke_colors()
 #'
-#' uke_colors("blue", "cyan")
+#' uke_colors("blue", "mint")
 #' @export
 uke_colors <- function(...) {
   cols <- c(...)
@@ -196,15 +188,11 @@ uke_colors <- function(...) {
 
 
 uke_palettes <- list(
-  `uke` = uke_colors("blue", "cyan", "orange", "blue grey", "red"),
+  `uke` = uke_colors("blue", "cyan", "orange", "livid", "red"),
   `full` = uke_colors(),
-  `ice` = uke_colors("cyan", "blue grey", "light green", "light blue"),
-  `contrast` = uke_colors("blue", "orange", "yellow", "green", "red"),
-  `complement` = uke_colors("blue", "light blue", "green", "light green", "yellow", "light yellow", "red", "light red"),
-  `light` = uke_colors("light blue", "light cyan", "light orange", "light blue grey", "light red"),
-  `dark` = uke_colors("blue", "brown", "dark grey", "red", "green", "yellow", "orange", "blue grey", "purple", "cyan"),
-  `gradient` = uke_colors("blue", "blue grey", "purple", "red", "orange", "yellow"),
-  `light gradient` = uke_colors("light blue", "light blue grey", "light purple", "light red", "light orange", "light yellow")
+  `ice` = uke_colors("cyan", "livid", "mint", "blue", "grey"),
+  `contrast` = uke_colors("blue", "green", "yellow", "red", "purple"),
+  `gradient` = uke_colors("yellow", "orange", "amber", "red", "purple", "cyan", "livid", "mint", "green")
 )
 
 
