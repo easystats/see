@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,9 +69,13 @@
 
 <dl><dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
 <dd><p>Character name of palette. Depending on the color scale, can
-be <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>,
-<code>"contrast"</code>, <code>"light"</code> (for dark themes), <code>"black_first"</code>, <code>full_original</code>,
-or <code>black_first_original</code>.</p></dd>
+be one of <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>, <code>"contrast"</code>,
+<code>"light"</code> (for dark themes), <code>"black_first"</code>, <code>full_original</code>, or
+<code>black_first_original</code>. The latter three options are especially for the
+Okabe-Ito color palette. The default is <code>NULL</code> and either <code>"contrast"</code> or
+<code>"gradient"</code> is used (depending on whether <code>discrete</code> is <code>TRUE</code> or <code>FALSE</code>),
+which are the two scale useful for discrete or gradient color scales,
+respectively.</p></dd>
 
 
 <dt id="arg-reverse">reverse<a class="anchor" aria-label="anchor" href="#arg-reverse"></a></dt>

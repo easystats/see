@@ -15,7 +15,7 @@ correspond to major primary and secondary colors (e.g., red, yellow, blue)."><me
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,9 +127,13 @@ correspond to major primary and secondary colors (e.g., red, yellow, blue).</p>
 
 <dl><dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
 <dd><p>Character name of palette. Depending on the color scale, can
-be <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>,
-<code>"contrast"</code>, <code>"light"</code> (for dark themes), <code>"black_first"</code>, <code>full_original</code>,
-or <code>black_first_original</code>.</p></dd>
+be one of <code>"full"</code>, <code>"ice"</code>, <code>"rainbow"</code>, <code>"complement"</code>, <code>"contrast"</code>,
+<code>"light"</code> (for dark themes), <code>"black_first"</code>, <code>full_original</code>, or
+<code>black_first_original</code>. The latter three options are especially for the
+Okabe-Ito color palette. The default is <code>NULL</code> and either <code>"contrast"</code> or
+<code>"gradient"</code> is used (depending on whether <code>discrete</code> is <code>TRUE</code> or <code>FALSE</code>),
+which are the two scale useful for discrete or gradient color scales,
+respectively.</p></dd>
 
 
 <dt id="arg-reverse">reverse<a class="anchor" aria-label="anchor" href="#arg-reverse"></a></dt>
@@ -152,8 +156,9 @@ should be applied to (e.g., <code>c('color', 'fill')</code>).</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The Okabe-Ito palette is included in the base R <code><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">grDevices::palette.colors()</a></code>.
-These functions make this palette easier to use with <em>ggplot2</em>.</p>
+    <p>The Okabe-Ito palette is included in the base R
+<code><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">grDevices::palette.colors()</a></code>. These functions make this palette easier to
+use with <em>ggplot2</em>.</p>
 <p>The original Okabe-Ito palette's "yellow" color is <code>"#F0E442"</code>. This color is
 very bright and often does not show up well on white backgrounds (see
 <a href="https://developer.r-project.org/Blog/public/2019/11/21/a-new-palette-for-r/" class="external-link">here</a>)
@@ -163,9 +168,8 @@ a darker more "amber" color for "yellow" (<code>"#F5C710"</code>). This color is
 The palettes <code>"full"</code> and <code>"black_first"</code> use this darker yellow color. For
 the original yellow color suggested by Okabe and Ito (<code>"#F0E442"</code>), use
 palettes <code>"full_original"</code> or <code>"black_first_original"</code>.</p>
-<p>The Okabe-Ito palette is only available as a discrete palette.
-For color-accessible continuous variables, consider
-the viridis palettes.</p>
+<p>The Okabe-Ito palette is only available as a discrete palette. For
+color-accessible continuous variables, consider the viridis palettes.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
