@@ -12,6 +12,10 @@
 * Added a new theme, `theme_azurelight()`, with a light-blue character, and
   reduced use of grid lines.
 
+* `theme_modern()` now recognizes a `show.ticks` argument, to add tick marks
+  to the plot and slightly increase the distance between axis labels and the
+  related axis.
+
 # see 0.10.0
 
 ## Changes

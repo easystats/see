@@ -106,24 +106,38 @@ theme_modern <- function(base_size = 11,
     hjust <- 1
   }
 
+  # set up further arguments
+
+  theme_args <- list(
+    plot.title = plot.title.size,
+    plot.title.position = plot.title.position,
+    legend.position = legend.position,
+    legend.text = element_text(size = legend.text.size),
+    legend.title = legend.title.size,
+    legend.key = element_blank(),
+    legend.spacing.x = unit(2, "pt"),
+    axis.title.y = element_text(margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)),
+    axis.title.x = element_text(margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)),
+    axis.title = axis.title.size,
+    axis.text.x = element_text(angle = axis.text.angle, hjust = hjust),
+    axis.text = axis.text.size,
+    plot.tag = element_text(size = tags.size, face = tags.face),
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold")
+  )
+
+  # show ticks?
+  dot_args <- list(...)
+
+  if (isTRUE(dot_args$show.ticks)) {
+    dot_args$show.ticks <- NULL
+    theme_args$axis.ticks.length <- unit(-0.25, "cm")
+    theme_args$axis.text.x.bottom <- element_text(margin = margin(t = base_size * 1.3, r = 0, b = 0, l = 0))
+    theme_args$axis.text.y.left <- element_text(margin = margin(t = 0, r = base_size * 1.3, b = 0, l = 0))
+  } else {
+    theme_args$axis.ticks <- element_blank()
+  }
+
   theme_classic(base_size = base_size, base_family = base_family) +
-    theme(
-      plot.title = plot.title.size,
-      plot.title.position = plot.title.position,
-      legend.position = legend.position,
-      legend.text = element_text(size = legend.text.size),
-      legend.title = legend.title.size,
-      legend.key = element_blank(),
-      legend.spacing.x = unit(2, "pt"),
-      axis.title.y = element_text(margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)),
-      axis.title.x = element_text(margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)),
-      axis.title = axis.title.size,
-      axis.text.x = element_text(angle = axis.text.angle, hjust = hjust),
-      axis.text = axis.text.size,
-      axis.ticks = element_blank(),
-      plot.tag = element_text(size = tags.size, face = tags.face),
-      strip.background = element_blank(),
-      strip.text = element_text(face = "bold"),
-      ...
-    )
-}
+    do.call(theme, c(theme_args, dot_args))
+  }
