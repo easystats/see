@@ -115,5 +115,5 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
   geom_point() +
   theme_modern() +
-  scale_color_uke(palette = "gradient")
+  scale_color_uke(discrete = FALSE)
 }

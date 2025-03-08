@@ -18,7 +18,7 @@
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_uke(palette = "gradient")
+#'   scale_color_uke(discrete = FALSE)
 #' @export
 scale_color_uke <- function(palette = NULL,
                             discrete = TRUE,
