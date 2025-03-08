@@ -192,7 +192,7 @@ uke_palettes <- list(
   `full` = uke_colors(),
   `ice` = uke_colors("cyan", "livid", "mint", "blue", "grey"),
   `contrast` = uke_colors("blue", "green", "yellow", "red", "purple"),
-  `gradient` = uke_colors("yellow", "orange", "amber", "red", "purple", "cyan", "livid", "mint", "green")
+  `gradient` = uke_colors("yellow", "orange", "amber", "purple", "cyan", "livid", "blue")
 )
 
 
