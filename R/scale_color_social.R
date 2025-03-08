@@ -120,21 +120,21 @@ scale_fill_social_c <- function(palette = NULL, discrete = FALSE, reverse = FALS
 
 # The palette based on flat design colors: https://www.materialui.co/socialcolors
 social_colors_list <- c(
-  `red` = "#cd201f",
+  red = "#cd201f",
   `dark red` = "#b92b27",
-  `purple` = "#ea4c89",
+  purple = "#ea4c89",
   `deep purple` = "#410093",
-  `blue` = "#0077B5",
+  blue = "#0077B5",
   `light blue` = "#55acee",
-  `cyan` = "#1ab7ea",
-  `teal` = "#00b489",
-  `green` = "#3aaf85",
+  cyan = "#1ab7ea",
+  teal = "#00b489",
+  green = "#3aaf85",
   `light green` = "#25D366",
-  `yellow` = "#FFFC00",
-  `amber` = "#f57d00",
-  `orange` = "#ff6600",
+  yellow = "#FFFC00",
+  amber = "#f57d00",
+  orange = "#ff6600",
   `deep orange` = "#ff3300",
-  `grey` = "#34465d",
+  grey = "#34465d",
   `blue grey` = "#21759b"
 )
 

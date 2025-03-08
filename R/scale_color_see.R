@@ -161,21 +161,21 @@ scale_fill_see_c <- function(palette = NULL,
 
 
 see_colors_list <- c(
-  `red` = "#d32626",
-  `pink` = "#b5076b",
-  `purple` = "#5c2a9d",
+  red = "#d32626",
+  pink = "#b5076b",
+  purple = "#5c2a9d",
   `deep purple` = "#45046a",
-  `indigo` = "#303960",
-  `blue` = "#1b6ca8",
+  indigo = "#303960",
+  blue = "#1b6ca8",
   `light blue` = "#03A9F4",
-  `cyan` = "#0a97b0",
-  `green` = "#438a5e",
+  cyan = "#0a97b0",
+  green = "#438a5e",
   `light green` = "#bac964",
-  `lime` = "#f7fbe1",
-  `yellow` = "#fbd46d",
-  `amber` = "#ff9c71",
-  `orange` = "#fb7813",
-  `grey` = "#e7dfd5",
+  lime = "#f7fbe1",
+  yellow = "#fbd46d",
+  amber = "#ff9c71",
+  orange = "#fb7813",
+  grey = "#e7dfd5",
   `blue grey` = "#3b6978"
 )
 
