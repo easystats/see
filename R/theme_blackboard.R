@@ -29,34 +29,34 @@ theme_blackboard <- function(base_size = 11,
                              axis.text.angle = NULL,
                              tags.size = 1.35 * base_size,
                              tags.face = "bold",
-                            ...) {
-    theme_modern(
-      base_size = base_size,
-      base_family = base_family,
-      plot.title.size = plot.title.size,
-      plot.title.face = plot.title.face,
-      plot.title.space = plot.title.space,
-      plot.title.position = plot.title.position,
-      legend.position = legend.position,
-      axis.title.space = axis.title.space,
-      legend.title.size = legend.title.size,
-      legend.text.size = legend.text.size,
-      axis.title.size = axis.title.size,
-      axis.title.face = axis.title.face,
-      axis.text.size = axis.text.size,
-      axis.text.angle = axis.text.angle,
-      tags.size = tags.size,
-      tags.face = tags.face
-    ) +
-      theme(
-        plot.background = element_rect(fill = "#0d0d0d"),
-        panel.background = element_rect(fill = "#0d0d0d"),
-        legend.background = element_rect(fill = "#0d0d0d"),
-        axis.line = element_line(color = "#E0E0E0", linewidth = base_size / 22),
-        rect = element_rect(colour = "#E0E0E0", linewidth = base_size / 22),
-        text = element_text(color = "#E0E0E0"),
-        axis.text = element_text(color = "#E0E0E0"),
-        strip.text = element_text(color = "#E0E0E0"),
-        ...
-      )
-  }
+                             ...) {
+  theme_modern(
+    base_size = base_size,
+    base_family = base_family,
+    plot.title.size = plot.title.size,
+    plot.title.face = plot.title.face,
+    plot.title.space = plot.title.space,
+    plot.title.position = plot.title.position,
+    legend.position = legend.position,
+    axis.title.space = axis.title.space,
+    legend.title.size = legend.title.size,
+    legend.text.size = legend.text.size,
+    axis.title.size = axis.title.size,
+    axis.title.face = axis.title.face,
+    axis.text.size = axis.text.size,
+    axis.text.angle = axis.text.angle,
+    tags.size = tags.size,
+    tags.face = tags.face
+  ) +
+    theme(
+      plot.background = element_rect(fill = "#0d0d0d"),
+      panel.background = element_rect(fill = "#0d0d0d"),
+      legend.background = element_rect(fill = "#0d0d0d"),
+      axis.line = element_line(color = "#E0E0E0", linewidth = base_size / 22),
+      rect = element_rect(colour = "#E0E0E0", linewidth = base_size / 22),
+      text = element_text(color = "#E0E0E0"),
+      axis.text = element_text(color = "#E0E0E0"),
+      strip.text = element_text(color = "#E0E0E0"),
+      ...
+    )
+}
