@@ -1,8 +1,9 @@
 #' Social color palette
 #'
-#' The palette based [Social colors](https://materialui.co/socialcolors).
-#' Use `scale_color_social_d` for *discrete* categories and
-#' `scale_color_social_c` for a *continuous* scale.
+#' The palette based [Social colors](https://materialui.co/socialcolors). Use
+#' `scale_color_social_d` for *discrete* categories and `scale_color_social_c`
+#' for a *continuous* scale, or use the `discrete` argument in
+#' `scale_color_social()`.
 #'
 #' @inheritParams palette_social
 #' @inheritParams scale_color_flat
@@ -14,19 +15,31 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_boxplot() +
 #'   theme_modern() +
-#'   scale_fill_social_d()
+#'   scale_fill_social()
 #'
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
 #'   theme_modern() +
-#'   scale_fill_social_d(palette = "ice")
+#'   scale_fill_social(palette = "ice")
 #'
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_social_c(palette = "rainbow")
+#'   scale_color_social(discrete = FALSE)
 #' @export
-scale_color_social <- function(palette = "complement", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+scale_color_social <- function(palette = NULL,
+                               discrete = TRUE,
+                               reverse = FALSE,
+                               aesthetics = "color",
+                               ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
+
   pal <- palette_social(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -42,13 +55,13 @@ scale_color_social <- function(palette = "complement", discrete = TRUE, reverse 
 
 #' @rdname scale_color_social
 #' @export
-scale_color_social_d <- function(palette = "complement", discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
+scale_color_social_d <- function(palette = NULL, discrete = TRUE, reverse = FALSE, aesthetics = "color", ...) {
   scale_color_social(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_social
 #' @export
-scale_color_social_c <- function(palette = "complement", discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
+scale_color_social_c <- function(palette = NULL, discrete = FALSE, reverse = FALSE, aesthetics = "color", ...) {
   scale_color_social(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
@@ -70,7 +83,15 @@ scale_colour_social_d <- scale_color_social_d
 
 #' @rdname scale_color_social
 #' @export
-scale_fill_social <- function(palette = "complement", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+scale_fill_social <- function(palette = NULL, discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
+
   pal <- palette_social(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -83,13 +104,13 @@ scale_fill_social <- function(palette = "complement", discrete = TRUE, reverse =
 
 #' @rdname scale_color_social
 #' @export
-scale_fill_social_d <- function(palette = "complement", discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
+scale_fill_social_d <- function(palette = NULL, discrete = TRUE, reverse = FALSE, aesthetics = "fill", ...) {
   scale_fill_social(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 
 #' @rdname scale_color_social
 #' @export
-scale_fill_social_c <- function(palette = "complement", discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
+scale_fill_social_c <- function(palette = NULL, discrete = FALSE, reverse = FALSE, aesthetics = "fill", ...) {
   scale_fill_social(palette = palette, discrete = discrete, reverse = reverse, aesthetics = aesthetics, ...)
 }
 

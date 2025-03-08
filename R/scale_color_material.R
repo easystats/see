@@ -1,9 +1,9 @@
 #' Material design color palette
 #'
-#' The palette based on [material design
-#' colors](https://materialui.co/). Use `scale_color_material_d()` for
-#' *discrete* categories and `scale_color_material_c()` for a *continuous*
-#' scale.
+#' The palette based on [material design colors](https://materialui.co/). Use
+#' `scale_color_material_d()` for *discrete* categories and
+#' `scale_color_material_c()` for a *continuous* scale, or use the `discrete`
+#' argument in `scale_color_material()`.
 #'
 #' @inheritParams palette_material
 #' @inheritParams scale_color_flat
@@ -15,23 +15,31 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_boxplot() +
 #'   theme_modern() +
-#'   scale_fill_material_d()
+#'   scale_fill_material()
 #'
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
 #'   theme_modern() +
-#'   scale_fill_material_d(palette = "ice")
+#'   scale_fill_material(palette = "ice")
 #'
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_material_c(palette = "rainbow")
+#'   scale_color_material(discrete = FALSE)
 #' @export
-scale_color_material <- function(palette = "contrast",
+scale_color_material <- function(palette = NULL,
                                  discrete = TRUE,
                                  reverse = FALSE,
                                  aesthetics = "color",
                                  ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
+
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -47,7 +55,7 @@ scale_color_material <- function(palette = "contrast",
 
 #' @rdname scale_color_material
 #' @export
-scale_color_material_d <- function(palette = "contrast",
+scale_color_material_d <- function(palette = NULL,
                                    discrete = TRUE,
                                    reverse = FALSE,
                                    aesthetics = "color",
@@ -95,11 +103,19 @@ scale_colour_material_d <- scale_color_material_d
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material <- function(palette = "contrast",
+scale_fill_material <- function(palette = NULL,
                                 discrete = TRUE,
                                 reverse = FALSE,
                                 aesthetics = "fill",
                                 ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
+
   pal <- palette_material(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -112,7 +128,7 @@ scale_fill_material <- function(palette = "contrast",
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_d <- function(palette = "contrast",
+scale_fill_material_d <- function(palette = NULL,
                                   discrete = TRUE,
                                   reverse = FALSE,
                                   aesthetics = "fill",
@@ -128,7 +144,7 @@ scale_fill_material_d <- function(palette = "contrast",
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_c <- function(palette = "contrast",
+scale_fill_material_c <- function(palette = NULL,
                                   discrete = FALSE,
                                   reverse = FALSE,
                                   aesthetics = "fill",

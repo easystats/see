@@ -183,8 +183,8 @@ pizza_palettes <- list(
 #'
 #' The palette based on authentic neapolitan pizzas.
 #'
-#' @param palette Pizza type. Can be "margherita" (default), "margherita_crust",
-#'  "diavola" or "diavola_crust".
+#' @param palette Pizza type. Can be `"margherita"` (default), `"margherita_crust"`,
+#' `"diavola"` or `"diavola_crust"`.
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'

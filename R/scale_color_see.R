@@ -1,7 +1,8 @@
 #' See color palette
 #'
-#' The See color palette. Use `scale_color_see_d()` for *discrete*
-#' categories and `scale_color_see_c()` for a *continuous* scale.
+#' The See color palette. Use `scale_color_see_d()` for *discrete* categories
+#' and `scale_color_see_c()` for a *continuous* scale, or use the `discrete`
+#' argument in `scale_color_see()`.
 #'
 #' @inheritParams palette_see
 #' @inheritParams scale_color_flat
@@ -13,7 +14,7 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_boxplot() +
 #'   theme_modern() +
-#'   scale_fill_see_d()
+#'   scale_fill_see()
 #'
 #' ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 #'   geom_point() +
@@ -23,13 +24,20 @@
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_see_c(palette = "rainbow")
+#'   scale_color_see(discrete = FALSE)
 #' @export
-scale_color_see <- function(palette = "contrast",
+scale_color_see <- function(palette = NULL,
                             discrete = TRUE,
                             reverse = FALSE,
                             aesthetics = "color",
                             ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -45,7 +53,7 @@ scale_color_see <- function(palette = "contrast",
 
 #' @rdname scale_color_see
 #' @export
-scale_color_see_d <- function(palette = "contrast",
+scale_color_see_d <- function(palette = NULL,
                               discrete = TRUE,
                               reverse = FALSE,
                               aesthetics = "color",
@@ -61,7 +69,7 @@ scale_color_see_d <- function(palette = "contrast",
 
 #' @rdname scale_color_see
 #' @export
-scale_color_see_c <- function(palette = "contrast",
+scale_color_see_c <- function(palette = NULL,
                               discrete = FALSE,
                               reverse = FALSE,
                               aesthetics = "color",
@@ -93,11 +101,19 @@ scale_colour_see_d <- scale_color_see_d
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see <- function(palette = "contrast",
+scale_fill_see <- function(palette = NULL,
                            discrete = TRUE,
                            reverse = FALSE,
                            aesthetics = "fill",
                            ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
+
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -110,7 +126,7 @@ scale_fill_see <- function(palette = "contrast",
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_d <- function(palette = "contrast",
+scale_fill_see_d <- function(palette = NULL,
                              discrete = TRUE,
                              reverse = FALSE,
                              aesthetics = "fill",
@@ -126,7 +142,7 @@ scale_fill_see_d <- function(palette = "contrast",
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_c <- function(palette = "contrast",
+scale_fill_see_c <- function(palette = NULL,
                              discrete = FALSE,
                              reverse = FALSE,
                              aesthetics = "fill",

@@ -1,8 +1,8 @@
 #' Flat UI color palette
 #'
-#' The palette based on [Flat UI](https://materialui.co/flatuicolors).
-#' Use `scale_color_flat_d` for *discrete* categories and
-#' `scale_color_flat_c` for a *continuous* scale.
+#' The palette based on [Flat UI](https://materialui.co/flatuicolors). Use
+#' `scale_color_flat_d` for *discrete* categories and `scale_color_flat_c` for a
+#' *continuous* scale, or use the `discrete` argument in `scale_color_flat()`.
 #'
 #' @inheritParams palette_flat
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not.
@@ -18,23 +18,31 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_boxplot() +
 #'   theme_modern() +
-#'   scale_fill_flat_d()
+#'   scale_fill_flat()
 #'
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
 #'   theme_modern() +
-#'   scale_fill_flat_d(palette = "ice")
+#'   scale_fill_flat(palette = "ice")
 #'
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_flat_c(palette = "rainbow")
+#'   scale_color_flat(discrete = FALSE)
 #' @export
-scale_color_flat <- function(palette = "contrast",
+scale_color_flat <- function(palette = NULL,
                              discrete = TRUE,
                              reverse = FALSE,
                              aesthetics = "color",
                              ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
+
   pal <- palette_flat(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -50,7 +58,7 @@ scale_color_flat <- function(palette = "contrast",
 
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_d <- function(palette = "contrast",
+scale_color_flat_d <- function(palette = NULL,
                                discrete = TRUE,
                                reverse = FALSE,
                                aesthetics = "color",
@@ -66,7 +74,7 @@ scale_color_flat_d <- function(palette = "contrast",
 
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_c <- function(palette = "contrast",
+scale_color_flat_c <- function(palette = NULL,
                                discrete = FALSE,
                                reverse = FALSE,
                                aesthetics = "color",
@@ -98,11 +106,19 @@ scale_colour_flat_d <- scale_color_flat_d
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat <- function(palette = "contrast",
+scale_fill_flat <- function(palette = NULL,
                             discrete = TRUE,
                             reverse = FALSE,
                             aesthetics = "fill",
                             ...) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "complement"
+    }
+  }
+
   pal <- palette_flat(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -115,7 +131,7 @@ scale_fill_flat <- function(palette = "contrast",
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_d <- function(palette = "contrast",
+scale_fill_flat_d <- function(palette = NULL,
                               discrete = TRUE,
                               reverse = FALSE,
                               aesthetics = "fill",
@@ -131,7 +147,7 @@ scale_fill_flat_d <- function(palette = "contrast",
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_c <- function(palette = "contrast",
+scale_fill_flat_c <- function(palette = NULL,
                               discrete = FALSE,
                               reverse = FALSE,
                               aesthetics = "fill",
@@ -231,9 +247,13 @@ flat_palettes <- list(
 #' The palette based on [Flat UI](https://materialui.co/flatuicolors).
 #'
 #' @param palette Character name of palette. Depending on the color scale, can
-#'   be `"full"`, `"ice"`, `"rainbow"`, `"complement"`,
-#'   `"contrast"`, `"light"` (for dark themes), `"black_first"`, `full_original`,
-#'   or `black_first_original`.
+#' be one of `"full"`, `"ice"`, `"rainbow"`, `"complement"`, `"contrast"`,
+#' `"light"` (for dark themes), `"black_first"`, `full_original`, or
+#' `black_first_original`. The latter three options are especially for the
+#' Okabe-Ito color palette. The default is `NULL` and either `"contrast"` or
+#' `"complement"` is used (depending on whether `discrete` is `TRUE` or
+#' `FALSE`), which are the two scale useful for discrete or gradient color
+#' scales, respectively.
 #' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
 #'
