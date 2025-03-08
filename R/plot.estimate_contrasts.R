@@ -66,7 +66,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("emmeans")
+#' @examplesIf all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))
 #' \donttest{
 #' library(modelbased)
 #'
