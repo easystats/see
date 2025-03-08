@@ -1,6 +1,6 @@
-#' Blackboard dark theme
+#' Azurelight theme
 #'
-#' A modern, sleek and dark theme for ggplot.
+#' A light-blue, clear theme for ggplot with reduced usage of panel grids.
 #'
 #' @inheritParams theme_modern
 #' @inherit theme_modern note
@@ -9,11 +9,14 @@
 #' library(ggplot2)
 #' library(see)
 #'
-#' ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
-#'   geom_point(color = see_colors("lime")) +
-#'   theme_blackboard()
+#' data(iris)
+#'
+#' ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) +
+#'   geom_point2(size = 2.5) +
+#'   scale_color_social() +
+#'   theme_azurelight()
 #' @export
-theme_blackboard <- function(base_size = 11,
+theme_azurelight <- function(base_size = 11,
                              base_family = "",
                              plot.title.size = 1.35 * base_size,
                              plot.title.face = "plain",
@@ -49,14 +52,21 @@ theme_blackboard <- function(base_size = 11,
     tags.face = tags.face
   ) +
     theme(
-      plot.background = element_rect(fill = "#0d0d0d"),
-      panel.background = element_rect(fill = "#0d0d0d"),
-      legend.background = element_rect(fill = "#0d0d0d"),
-      axis.line = element_line(color = "#E0E0E0", linewidth = base_size / 22),
-      rect = element_rect(colour = "#E0E0E0", linewidth = base_size / 22),
-      text = element_text(color = "#E0E0E0"),
-      axis.text = element_text(color = "#E0E0E0"),
-      strip.text = element_text(color = "#E0E0E0"),
+      plot.background = element_rect(fill = "#EEF7FF"),
+      panel.background = element_rect(fill = "#EEF7FF"),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_line(colour = "#E3EBF2"),
+      panel.grid.major.y = element_line(colour = "#D7DFE5"),
+      strip.background = element_rect(colour = "#EEF7FF", fill = "#A5BFCC", linewidth = 0),
+      strip.text = element_text(colour = "#354649", face = "bold"),
+      axis.line.y = element_blank(),
+      axis.line.x.bottom = element_line(color = "#A5BFCC", linewidth = 0.75),
+      axis.ticks.x.bottom = element_line(linewidth = 0.75, colour = "#A5BFCC"),
+      axis.ticks.length.x.bottom = unit(-0.25, "cm"),
+      axis.text.x.bottom = element_text(margin = margin(t = base_size * 1.3, r = 0, b = 0, l = 0)),
+      axis.text.y.left = element_text(margin = margin(t = 0, r = base_size * 1.3, b = 0, l = 0)),
+      legend.background = element_rect(fill = "#EEF7FF"),
       ...
     )
 }
