@@ -532,7 +532,6 @@ p3 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
-
 d <- data.frame(
   x = names(metro_colors())
 )
