@@ -44,7 +44,6 @@ geom_binomdensity <- function(data,
                               scale = "auto",
                               ...) {
   insight::check_if_installed(c("ggplot2", "ggdist"))
-  .data <- NULL
 
   # Sanitize y (e.g., if levels with no values, etc.)
   if (is.factor(data[[y]]) && nlevels(data[[y]]) > 2L) {
@@ -54,7 +53,7 @@ geom_binomdensity <- function(data,
   # Find y-axis levels
   y_levels <- levels(as.factor(data[[y]]))
   if (length(y_levels) != 2L) {
-    stop("The y-variable should have exactly two levels.", call. = FALSE)
+    insight::format_error("The y-variable should have exactly two levels.")
   }
 
   # Aesthetics
@@ -68,13 +67,14 @@ geom_binomdensity <- function(data,
 
   # ggdist geom
   ggdist::geom_dots(
-    ggplot2::aes(
-      x = .data$x,
-      y = .data$y,
-      side = .data$.side,
-      justification = .data$.justification,
-      scale = .data$.scale
-    ),
+    # TODO: use tidy evaluation with `ggplot2::aes()` instead
+    suppressWarnings(ggplot2::aes_string(
+      x = x,
+      y = y,
+      side = ".side",
+      justification = ".justification",
+      scale = ".scale"
+    )),
     data = data,
     na.rm = TRUE,
     ...
