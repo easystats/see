@@ -325,7 +325,7 @@ p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
   geom_point2() +
   theme_modern() +
-  scale_color_material_c(palette = "rainbow")
+  scale_color_material(discrete = FALSE)
 ```
 
 ## Multiple plots
@@ -388,16 +388,25 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 ## Radar chart (Spider plot)
 
 ``` r
-library(poorman)
 library(datawizard)
 
 # prepare the data in tidy format
-data <- iris %>%
-  group_by(Species) %>%
-  summarise(across(everything(), mean)) %>%
-  reshape_longer(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+  data <- iris |>
+    datawizard::data_group("Species") |>
+    datawizard::data_summary(
+      Sepal.Length = mean(Sepal.Length),
+      Sepal.Width = mean(Sepal.Width),
+      Petal.Length = mean(Petal.Length),
+      Petal.Width = mean(Petal.Width)
+    ) |>
+    datawizard::reshape_longer(c(
+      "Sepal.Length",
+      "Sepal.Width",
+      "Petal.Length",
+      "Petal.Width"
+    ))
 
-data %>%
+data |>
   ggplot(aes(
     x = name,
     y = value,
