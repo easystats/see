@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-pkgs <- c("correlation", "ggplot2", "ggraph", "poorman")
+pkgs <- c("correlation", "ggplot2", "ggraph")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
 
