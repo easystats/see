@@ -44,6 +44,7 @@ geom_binomdensity <- function(data,
                               scale = "auto",
                               ...) {
   insight::check_if_installed(c("ggplot2", "ggdist"))
+  .data <- NULL
 
   # Sanitize y (e.g., if levels with no values, etc.)
   if (is.factor(data[[y]]) && nlevels(data[[y]]) > 2L) {
@@ -67,14 +68,13 @@ geom_binomdensity <- function(data,
 
   # ggdist geom
   ggdist::geom_dots(
-    # TODO: use tidy evaluation with `ggplot2::aes()` instead
-    suppressWarnings(ggplot2::aes_string(
-      x = x,
-      y = y,
-      side = ".side",
-      justification = ".justification",
-      scale = ".scale"
-    )),
+    ggplot2::aes(
+      x = .data$x,
+      y = .data$y,
+      side = .data$.side,
+      justification = .data$.justification,
+      scale = .data$.scale
+    ),
     data = data,
     na.rm = TRUE,
     ...
@@ -110,7 +110,7 @@ geom_binomdensity <- function(data,
     }
     out <- as.vector(prop[as.character(data[[y]])] * 0.9)
   } else {
-    stop("Oops, 'scale' argument wrongly specified.", call. = FALSE)
+    insight::format_error("Oops, 'scale' argument wrongly specified.")
   }
 
   out
