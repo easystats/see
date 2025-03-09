@@ -88,7 +88,6 @@ Suggests:
     ggside,
     glmmTMB,
     grid,
-    httr,
     httr2,
     lavaan,
     lme4,

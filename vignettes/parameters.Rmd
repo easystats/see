@@ -20,10 +20,10 @@ knitr::opts_chunk$set(
 # The following are needed by `{parameters}` for cluster analysis:
 # `{factoextra}`, `{mclust}`, and `{NbClust}`
 #
-# `{httr}` is needed for `insight::download_model()`
+# `{httr2}` is needed for `insight::download_model()`
 can_evaluate <- FALSE
 pkgs <- c(
-  "brms", "curl", "factoextra", "ggplot2", "glmmTMB", "httr",
+  "brms", "curl", "factoextra", "ggplot2", "glmmTMB", "httr2",
   "lavaan", "NbClust", "mclust", "metafor", "lme4", "splines"
 )
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)

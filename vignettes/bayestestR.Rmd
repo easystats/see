@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 
-# `{httr}` is needed for `insight::download_model()`
+# `{httr2}` is needed for `insight::download_model()`
 can_evaluate <- FALSE
-pkgs <- c("bayestestR", "brms", "curl", "ggplot2", "httr", "insight", "logspline", "rstanarm")
+pkgs <- c("bayestestR", "brms", "curl", "ggplot2", "httr2", "insight", "logspline", "rstanarm")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 all_deps_available <- all(successfully_loaded)
 
