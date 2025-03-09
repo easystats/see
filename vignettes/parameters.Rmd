@@ -74,7 +74,7 @@ data("sleepstudy")
 data("qol_cancer")
 
 set.seed(12345)
-sleepstudy$grp <-  sample.int(5, size = 180, replace = TRUE)
+sleepstudy$grp <- sample.int(5, size = 180, replace = TRUE)
 
 theme_set(theme_modern())
 ```
