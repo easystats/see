@@ -37,6 +37,14 @@ test_that("theme functions work", {
 
   set.seed(123)
   vdiffr::expect_doppelganger(
+    title = "theme_modern with ticks works",
+    fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+      geom_point() +
+      theme_modern(show.ticks = TRUE)
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
     title = "theme_modern works with base_size",
     fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
       geom_point() +
@@ -81,5 +89,13 @@ test_that("theme functions work", {
     fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
       geom_point(color = "white") +
       theme_blackboard(base_size = 18)
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "theme_azurelight works",
+    fig = ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
+      geom_point() +
+      theme_azurelight()
   )
 })
