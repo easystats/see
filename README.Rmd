@@ -323,20 +323,20 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 library(datawizard)
 
 # prepare the data in tidy format
-  data <- iris |>
-    datawizard::data_group("Species") |>
-    datawizard::data_summary(
-      Sepal.Length = mean(Sepal.Length),
-      Sepal.Width = mean(Sepal.Width),
-      Petal.Length = mean(Petal.Length),
-      Petal.Width = mean(Petal.Width)
-    ) |>
-    datawizard::reshape_longer(c(
-      "Sepal.Length",
-      "Sepal.Width",
-      "Petal.Length",
-      "Petal.Width"
-    ))
+data <- iris |>
+  datawizard::data_group("Species") |>
+  datawizard::data_summary(
+    Sepal.Length = mean(Sepal.Length),
+    Sepal.Width = mean(Sepal.Width),
+    Petal.Length = mean(Petal.Length),
+    Petal.Width = mean(Petal.Width)
+  ) |>
+  datawizard::reshape_longer(c(
+    "Sepal.Length",
+    "Sepal.Width",
+    "Petal.Length",
+    "Petal.Width"
+  ))
 
 data |>
   ggplot(aes(
