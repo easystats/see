@@ -8,7 +8,7 @@
 \method{plot}{datawizard_tables}(
   x,
   label_values = TRUE,
-  show_na = c("if_any", "always", "never"),
+  show_na = "if_any",
   na_label = "(Missing)",
   error_bar = TRUE,
   ci = 0.95,
@@ -20,7 +20,7 @@
 \method{plot}{datawizard_table}(
   x,
   label_values = TRUE,
-  show_na = c("if_any", "always", "never"),
+  show_na = "if_any",
   na_label = "(Missing)",
   error_bar = TRUE,
   ci = 0.95,
@@ -35,16 +35,16 @@
 \item{label_values}{Logical. Should values and percentages be displayed at the
 top of each bar.}
 
-\item{show_na}{Should missing values be dropped? Can be \code{"if_any"} (default) to show
-the missing category only if any missing values are present, \code{"always"} to
-always show the missing category, or \code{"never"} to never show the missing
-category.}
+\item{show_na}{Should missing values be dropped? Can be \code{"if_any"} (default)
+to show the missing category only if any missing values are present,
+\code{"always"} to always show the missing category, or \code{"never"} to never show
+the missing category.}
 
 \item{na_label}{The label given to missing values when they are shown.}
 
-\item{error_bar}{Logical. Should error bars be displayed?
-If \code{TRUE}, confidence intervals computed using the Wilson method are shown.
-See Brown et al. (2001) for details.}
+\item{error_bar}{Logical. Should error bars be displayed? If \code{TRUE},
+confidence intervals computed using the Wilson method are shown. See Brown
+et al. (2001) for details.}
 
 \item{ci}{Confidence Interval (CI) level. Defaults to \code{0.95} (\verb{95\%}).}
 

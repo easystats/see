@@ -3,14 +3,14 @@
 #' @param x Object created by `datawizard::data_tabulate()`.
 #' @param label_values Logical. Should values and percentages be displayed at the
 #'   top of each bar.
-#' @param show_na Should missing values be dropped? Can be `"if_any"` (default) to show
-#'   the missing category only if any missing values are present, `"always"` to
-#'   always show the missing category, or `"never"` to never show the missing
-#'   category.
+#' @param show_na Should missing values be dropped? Can be `"if_any"` (default)
+#'   to show the missing category only if any missing values are present,
+#'   `"always"` to always show the missing category, or `"never"` to never show
+#'   the missing category.
 #' @param na_label The label given to missing values when they are shown.
-#' @param error_bar Logical. Should error bars be displayed?
-#'   If `TRUE`, confidence intervals computed using the Wilson method are shown.
-#'   See Brown et al. (2001) for details.
+#' @param error_bar Logical. Should error bars be displayed? If `TRUE`,
+#'   confidence intervals computed using the Wilson method are shown. See Brown
+#'   et al. (2001) for details.
 #' @param ci Confidence Interval (CI) level. Defaults to `0.95` (`95%`).
 #' @param color_fill Color to use for category columns (default: `"#87CEFA"`).
 #' @param color_error_bar Color to use for error bars (default: `"#607B8B"`).
@@ -25,14 +25,14 @@
 #' @export
 
 plot.datawizard_tables <- function(x, label_values = TRUE,
-                                   show_na = c("if_any", "always", "never"),
+                                   show_na = "if_any",
                                    na_label = "(Missing)",
                                    error_bar = TRUE,
                                    ci = 0.95,
                                    color_fill = "#87CEFA",
                                    color_error_bar = "#607B8B",
                                    ...) {
-  show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
+  show_na <- insight::validate_argument(show_na, c("if_any", "always", "never"))
   if (length(x) == 1L) {
     plot.datawizard_table(
       x[[1]],
@@ -64,14 +64,14 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
 #' @export
 
 plot.datawizard_table <- function(x, label_values = TRUE,
-                                  show_na = c("if_any", "always", "never"),
+                                  show_na = "if_any",
                                   na_label = "(Missing)",
                                   error_bar = TRUE,
                                   ci = 0.95,
                                   color_fill = "#87CEFA",
                                   color_error_bar = "#607B8B",
                                   ...) {
-  show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
+  show_na <- insight::validate_argument(show_na, c("if_any", "always", "never"))
   dat <- as.data.frame(x)
 
   if (show_na == "if_any") {
