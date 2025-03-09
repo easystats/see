@@ -18,7 +18,7 @@ test_that("`plot.see_estimate_density()`, adding prior layers works", {
   skip_if_not_installed("vdiffr")
 
   set.seed(123)
-  m <- insight::download_model("stanreg_glm_2")
+  m <<- insight::download_model("stanreg_glm_2")
   skip_if(is.null(m))
   result <- bayestestR::estimate_density(m)
   set.seed(123)
