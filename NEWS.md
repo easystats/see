@@ -22,6 +22,10 @@
   appropriate palette (usually, `"contrast"` or `"gradient"`) depending on
   whether discrete or continuous color scales are requested.
 
+## Bug fixes
+
+* Fixed issue with adding prior layers to plots from `estimate_density()`.
+
 # see 0.10.0
 
 ## Changes
