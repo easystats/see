@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.10.0.9
+Version: 0.10.0.10
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -88,7 +88,6 @@ Suggests:
     ggside,
     glmmTMB,
     grid,
-    httr,
     httr2,
     lavaan,
     lme4,

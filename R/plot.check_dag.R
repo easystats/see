@@ -62,8 +62,8 @@ plot.see_check_dag <- function(x,
                                ...) {
   .data <- NULL
   insight::check_if_installed(c("ggdag", "ggplot2"))
-  which <- match.arg(which, choices = c("all", "current", "required"))
-  effect <- match.arg(effect, choices = c("total", "direct"))
+  which <- insight::validate_argument(which, c("all", "current", "required"))
+  effect <- insight::validate_argument(effect, c("total", "direct"))
 
   # get plot data
   p1 <- p2 <- suppressWarnings(ggdag::dag_adjustment_sets(x, effect = effect))

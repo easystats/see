@@ -134,7 +134,7 @@ plot.see_estimate_density <- function(x,
   }
 
   # get parameter names for filtering
-  params <- unique(x$y)
+  params <- unique(x$Parameter)
 
   # get labels
   parameter_labels <- .clean_parameter_names(x$Parameter, grid = !is.null(n_columns))

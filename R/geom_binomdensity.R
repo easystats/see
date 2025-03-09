@@ -53,7 +53,7 @@ geom_binomdensity <- function(data,
   # Find y-axis levels
   y_levels <- levels(as.factor(data[[y]]))
   if (length(y_levels) != 2L) {
-    stop("The y-variable should have exactly two levels.", call. = FALSE)
+    insight::format_error("The y-variable should have exactly two levels.")
   }
 
   # Aesthetics
@@ -110,7 +110,7 @@ geom_binomdensity <- function(data,
     }
     out <- as.vector(prop[as.character(data[[y]])] * 0.9)
   } else {
-    stop("Oops, 'scale' argument wrongly specified.", call. = FALSE)
+    insight::format_error("Oops, 'scale' argument wrongly specified.")
   }
 
   out

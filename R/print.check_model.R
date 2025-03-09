@@ -12,7 +12,10 @@ print.see_check_model <- function(x,
   if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) { # nolint
     type <- plot_type
   } else {
-    type <- match.arg(type, choices = c("density", "discrete_dots", "discrete_interval", "discrete_both"))
+    type <- insight::validate_argument(
+      type,
+      c("density", "discrete_dots", "discrete_interval", "discrete_both")
+    )
   }
 
   suppressWarnings(suppressMessages(graphics::plot(
