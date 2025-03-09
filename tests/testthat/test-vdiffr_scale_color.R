@@ -16,6 +16,14 @@ test_that("scale_color_ functions work correctly", {
   )
 
   vdiffr::expect_doppelganger(
+    title = "scale_color_social() default gradient works",
+    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+      geom_point() +
+      theme_modern() +
+      scale_color_social(discrete = FALSE)
+  )
+
+  vdiffr::expect_doppelganger(
     title = "scale_color_pizza_c() works",
     fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
       geom_point() +
