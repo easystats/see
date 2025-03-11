@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 0 note
 
-* Fixes failing tests due to updates to easystats packages.
+* Maintenance update.
 
 ## revdepcheck results
 
