@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,21 @@
       <small>Source: <a href="https://github.com/easystats/see/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.11.0" id="see-0110">see 0.11.0<a class="anchor" aria-label="anchor" href="#see-0110"></a></h2>
+<div class="section level3">
+<h3 id="changes-0-11-0">Changes<a class="anchor" aria-label="anchor" href="#changes-0-11-0"></a></h3>
+<ul><li><p>All <code>theme_*()</code> function get a <code>...</code> argument that is passed to <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">ggplot2::theme()</a></code>.</p></li>
+<li><p>Arguments that change the size of elements in <code>theme_*()</code> functions (like <code>plot.title.size</code> or <code>axis.text.size</code> now scale with the <code>base_size</code> argument, to ensure proper scaling of plots when the base-size is changed.</p></li>
+<li><p>Added a new theme, <code><a href="../reference/theme_azurelight.html">theme_azurelight()</a></code>, with a light-blue character, and reduced use of grid lines.</p></li>
+<li><p><code><a href="../reference/theme_modern.html">theme_modern()</a></code> now recognizes a <code>show.ticks</code> argument, to add tick marks to the plot and slightly increase the distance between axis labels and the related axis.</p></li>
+<li><p>Color scale functions (those starting with <code>scale_*()</code>) get a new <code>"gradient"</code> palette, which are simply the color values for blue and orange colors from that palette. Furthermore, color scale functions now automatically select an appropriate palette (usually, <code>"contrast"</code> or <code>"gradient"</code>) depending on whether discrete or continuous color scales are requested.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-11-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-11-0"></a></h3>
+<ul><li>Fixed issue with adding prior layers to plots from <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html" class="external-link">estimate_density()</a></code>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.10.0" id="see-0100">see 0.10.0<a class="anchor" aria-label="anchor" href="#see-0100"></a></h2><p class="text-muted">CRAN release: 2025-01-22</p>
 <div class="section level3">
