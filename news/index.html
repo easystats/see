@@ -50,7 +50,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/easystats/see/blob/0.11.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/easystats/see/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
@@ -175,7 +175,7 @@
 <li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">performance::check_model()</a></code> and <code><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">performance::check_predictions()</a></code> gains a <code>type</code> argument, to either create density plots, or discrete dots resp. interval plots for posterior predictive checks.</p></li>
 <li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">performance::check_model()</a></code> gains an <code>n_column</code> argument, to define the number of columns for the diagnostic plots (by default, two columns).</p></li>
 <li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">performance::check_model()</a></code> sometimes failed to create the plot under certain conditions, e.g. when the screen or app windows was zoomed-in. If an error occurs, a much more informative error message is shown, providing several possible solutions to resolve this problem.</p></li>
-<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">parameters::equivalence_test()</a></code> now aligns the labelling with the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method. Hence, the legend title is no longer labelled <code>"Decision   on H0"</code>, but rather <code>"Equivalence"</code>, to emphasize that we can assume practical equivalence for effects, but that we cannot accept the H0 (in a frequentist framework).</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html" class="external-link">parameters::equivalence_test()</a></code> now aligns the labelling with the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method. Hence, the legend title is no longer labelled <code>"Decision on H0"</code>, but rather <code>"Equivalence"</code>, to emphasize that we can assume practical equivalence for effects, but that we cannot accept the H0 (in a frequentist framework).</p></li>
 <li><p>Added some examples and cross references between docs. Furthermore, a vignette about plotting functions for the <em>datawizard</em> package was added.</p></li>
 </ul></div>
 <div class="section level3">
@@ -189,7 +189,7 @@
 <h2 class="pkg-version" data-toc-text="0.7.5" id="see-075">see 0.7.5<a class="anchor" aria-label="anchor" href="#see-075"></a></h2><p class="text-muted">CRAN release: 2023-03-23</p>
 <div class="section level3">
 <h3 id="changes-0-7-5">Changes<a class="anchor" aria-label="anchor" href="#changes-0-7-5"></a></h3>
-<ul><li><p>Changed the default “yellow” color in <code><a href="../reference/palette_okabeito.html">palette_okabeito()</a></code> to <code>"#F5C710"</code> instead of <code>"#F0E442"</code> to increase visibility against a white background. For the original Okabe-Ito palette, set <code>palette = "full_original"</code> or <code>palette =   "black_first_original"</code>.</p></li>
+<ul><li><p>Changed the default “yellow” color in <code><a href="../reference/palette_okabeito.html">palette_okabeito()</a></code> to <code>"#F5C710"</code> instead of <code>"#F0E442"</code> to increase visibility against a white background. For the original Okabe-Ito palette, set <code>palette = "full_original"</code> or <code>palette = "black_first_original"</code>.</p></li>
 <li><p>Deals with deprecated arguments and functions in recent <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> updates.</p></li>
 </ul></div>
 </div>
@@ -352,7 +352,7 @@
 <div class="section level3">
 <h3 id="changes-to-functions-0-6-0">Changes to functions<a class="anchor" aria-label="anchor" href="#changes-to-functions-0-6-0"></a></h3>
 <ul><li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code> gains a <code>size_text</code>-argument, to add text values for estimates and confidence intervals to the plot (see also vignette).</p></li>
-<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code> from meta-analysis models (e.g. from <em>metafor</em>) gains a <code>type</code> argument, to create funnel plots with <code>type =   "funnel"</code>.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code> from meta-analysis models (e.g. from <em>metafor</em>) gains a <code>type</code> argument, to create funnel plots with <code>type = "funnel"</code>.</p></li>
 <li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html" class="external-link">bayestestR::estimate_density()</a></code> and <code><a href="https://easystats.github.io/parameters/reference/simulate_parameters.html" class="external-link">parameters::simulate_parameters()</a></code> were revised, and now also include the point-estimate and error bar. Therefore, arguments <code>centrality</code> and <code>ci</code> were added.</p></li>
 </ul></div>
 <div class="section level3">
