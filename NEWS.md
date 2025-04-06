@@ -1,3 +1,10 @@
+# see (development version)
+
+## Major Changes
+
+* The minimum needed R version has been bumped to `4.1`, since `{correlation}`,
+  a runtime dependency, requires it.
+
 # see 0.11.0
 
 ## Changes
@@ -12,13 +19,13 @@
 * Added a new theme, `theme_azurelight()`, with a light-blue character, and
   reduced use of grid lines.
 
-* `theme_modern()` now recognizes a `show.ticks` argument, to add tick marks
-  to the plot and slightly increase the distance between axis labels and the
+* `theme_modern()` now recognizes a `show.ticks` argument, to add tick marks to
+  the plot and slightly increase the distance between axis labels and the
   related axis.
 
 * Color scale functions (those starting with `scale_*()`) get a new `"gradient"`
-  palette, which are simply the color values for blue and orange colors from that
-  palette. Furthermore, color scale functions now automatically select an
+  palette, which are simply the color values for blue and orange colors from
+  that palette. Furthermore, color scale functions now automatically select an
   appropriate palette (usually, `"contrast"` or `"gradient"`) depending on
   whether discrete or continuous color scales are requested.
 
@@ -33,8 +40,9 @@
 - `plot()` for `p_function()` now checks the values of the `size_length`
   argument, to give an informative error message when the input is not valid.
 
-- `plot()` for `model_parameters()` now also plots group-levels of random effects
-  (i.e. for mixed models, when `model_parameters(x, ..., group_level = TRUE)`).
+- `plot()` for `model_parameters()` now also plots group-levels of random
+  effects (i.e. for mixed models, when `model_parameters(x, ..., group_level =
+  TRUE)`).
 
 - `plot()` for `model_parameters()` gets a `show_direction` argument, to turn
   off the direction of the effect in the plot.
@@ -45,7 +53,8 @@
 - `plot()` for `simulate_parameters()` now better copes with models that have
   multiple response levels (e.g. multinomial models).
 
-- Gains `{patchwork}` as a hard dependency given its importance for the package.
+- Gains `{patchwork}` as a hard dependency given its importance for the
+  package.
 
 ## Bug fixes
 
@@ -59,13 +68,14 @@
 
 - New `plot()` method for `performance::check_dag()`.
 
-- Minor improvements to `plot()` for methods `p_direction()` and `p_significance()`,
-  which also support forthcoming changes in the *parameters* package.
+- Minor improvements to `plot()` for methods `p_direction()` and
+  `p_significance()`, which also support forthcoming changes in the *parameters*
+  package.
 
 ## Bug fixes
 
-- Fixed issue in `plot()` for `performance::check_model()` when package *qqplotr*
-  is not installed.
+- Fixed issue in `plot()` for `performance::check_model()` when package
+  *qqplotr* is not installed.
 
 # see 0.8.5
 
@@ -75,8 +85,9 @@
 
 ## Minor Changes
 
-* Improved scaling for detrended QQ plots when package `{qqplotr}` is not installed.
-  The normal and the detrended QQ plots are now visually more similar.
+* Improved scaling for detrended QQ plots when package `{qqplotr}` is not
+  installed. The normal and the detrended QQ plots are now visually more
+  similar.
 
 * Gets rid of warnings due to API changes in the `{datawizard}` package.
 
@@ -96,8 +107,8 @@
   downstream plot-functions (i.e., `plot()` for `check_model()` passes arguments
   to change geom sizes to the underlying plot-functions).
 
-* `plot()` for `check_predictions()` now supports Bayesian regression models from
-  *brms* and *rstanarm*.
+* `plot()` for `check_predictions()` now supports Bayesian regression models
+  from *brms* and *rstanarm*.
 
 ## Bug fixes
 
@@ -699,3 +710,4 @@
 ## Bug fixes
 
 * Fixed issues with color codes in the flat-ui palette.
+
