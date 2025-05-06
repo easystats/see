@@ -9,7 +9,10 @@ test_that("scale_color_ functions work correctly", {
 
   vdiffr::expect_doppelganger(
     title = "scale_color_social() works",
-    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+    fig = ggplot(
+      iris,
+      aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)
+    ) +
       geom_point() +
       theme_modern() +
       scale_color_social_c(palette = "rainbow")
@@ -17,7 +20,10 @@ test_that("scale_color_ functions work correctly", {
 
   vdiffr::expect_doppelganger(
     title = "scale_color_social() default gradient works",
-    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+    fig = ggplot(
+      iris,
+      aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)
+    ) +
       geom_point() +
       theme_modern() +
       scale_color_social(discrete = FALSE)
@@ -25,7 +31,10 @@ test_that("scale_color_ functions work correctly", {
 
   vdiffr::expect_doppelganger(
     title = "scale_color_pizza_c() works",
-    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+    fig = ggplot(
+      iris,
+      aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)
+    ) +
       geom_point() +
       theme_modern() +
       scale_color_pizza_c()
@@ -41,7 +50,10 @@ test_that("scale_color_ functions work correctly", {
 
   vdiffr::expect_doppelganger(
     title = "scale_fill_metro_c() works",
-    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+    fig = ggplot(
+      iris,
+      aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)
+    ) +
       geom_point() +
       theme_modern() +
       scale_color_metro_c(palette = "rainbow")
@@ -57,7 +69,10 @@ test_that("scale_color_ functions work correctly", {
 
   vdiffr::expect_doppelganger(
     title = "scale_fill_material_c() works",
-    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+    fig = ggplot(
+      iris,
+      aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)
+    ) +
       geom_point() +
       theme_modern() +
       scale_color_metro_c(palette = "rainbow")
@@ -73,7 +88,10 @@ test_that("scale_color_ functions work correctly", {
 
   vdiffr::expect_doppelganger(
     title = "scale_fill_see_c() works",
-    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+    fig = ggplot(
+      iris,
+      aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)
+    ) +
       geom_point() +
       theme_modern() +
       scale_color_see_c(palette = "rainbow")
@@ -97,7 +115,10 @@ test_that("scale_color_ functions work correctly", {
 
   vdiffr::expect_doppelganger(
     title = "scale_color_flat_c() works",
-    fig = ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
+    fig = ggplot(
+      iris,
+      aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)
+    ) +
       geom_point() +
       theme_modern() +
       scale_color_flat_c(palette = "rainbow")

@@ -1,5 +1,10 @@
 #' @export
-data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TRUE, ...) {
+data_plot.parameters_brms_meta <- function(
+  x,
+  data = NULL,
+  normalize_height = TRUE,
+  ...
+) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -34,7 +39,10 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
     )
   )
 
-  datasummary$Parameter <- factor(datasummary$Parameter, levels = rev(unique(datasummary$Parameter)))
+  datasummary$Parameter <- factor(
+    datasummary$Parameter,
+    levels = rev(unique(datasummary$Parameter))
+  )
   colnames(datasummary)[match("Parameter", colnames(datasummary))] <- "Study"
 
   datasummary$x <- NA_real_
@@ -66,7 +74,11 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
     title = "Bayesian Meta-Analysis"
   )
 
-  class(dataplot) <- unique(c("data_plot", "see_parameters_brms_meta", class(dataplot)))
+  class(dataplot) <- unique(c(
+    "data_plot",
+    "see_parameters_brms_meta",
+    class(dataplot)
+  ))
   dataplot
 }
 
@@ -136,16 +148,18 @@ data_plot.parameters_brms_meta <- function(x, data = NULL, normalize_height = TR
 #' plot(mp)
 #' }
 #' @export
-plot.see_parameters_brms_meta <- function(x,
-                                          size_point = 2,
-                                          linewidth = 0.8,
-                                          size_text = 3.5,
-                                          alpha_posteriors = 0.7,
-                                          alpha_rope = 0.15,
-                                          color_rope = "cadetblue",
-                                          normalize_height = TRUE,
-                                          show_labels = TRUE,
-                                          ...) {
+plot.see_parameters_brms_meta <- function(
+  x,
+  size_point = 2,
+  linewidth = 0.8,
+  size_text = 3.5,
+  alpha_posteriors = 0.7,
+  alpha_rope = 0.15,
+  color_rope = "cadetblue",
+  normalize_height = TRUE,
+  show_labels = TRUE,
+  ...
+) {
   # save model for later use
   model <- tryCatch(
     .retrieve_data(x),
@@ -155,7 +169,6 @@ plot.see_parameters_brms_meta <- function(x,
     }
   )
 
-
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = model, normalize_height = normalize_height, ...)
   }
@@ -163,7 +176,10 @@ plot.see_parameters_brms_meta <- function(x,
   datasummary <- attributes(x)$summary
   rope <- attributes(summary)$rope
 
-  p <- ggplot2::ggplot(x, mapping = ggplot2::aes(x = .data$x, y = .data$Study, height = .data$y))
+  p <- ggplot2::ggplot(
+    x,
+    mapping = ggplot2::aes(x = .data$x, y = .data$Study, height = .data$y)
+  )
 
   if (!is.null(rope)) {
     p <- p +
@@ -207,14 +223,18 @@ plot.see_parameters_brms_meta <- function(x,
   p <- p +
     theme_lucid() +
     ggplot2::scale_y_discrete() +
-    ggplot2::scale_fill_manual(values = c(
-      Study = unname(metro_colors("light blue")),
-      Overall = unname(metro_colors("amber"))
-    )) +
-    ggplot2::scale_colour_manual(values = c(
-      Study = unname(metro_colors("light blue")),
-      Overall = unname(metro_colors("amber"))
-    )) +
+    ggplot2::scale_fill_manual(
+      values = c(
+        Study = unname(metro_colors("light blue")),
+        Overall = unname(metro_colors("amber"))
+      )
+    ) +
+    ggplot2::scale_colour_manual(
+      values = c(
+        Study = unname(metro_colors("light blue")),
+        Overall = unname(metro_colors("amber"))
+      )
+    ) +
     ggplot2::guides(fill = "none", colour = "none") +
     add_plot_attributes(x)
 

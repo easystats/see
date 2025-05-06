@@ -55,15 +55,17 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_distribution <- function(x,
-                                             dispersion = FALSE,
-                                             alpha_dispersion = 0.3,
-                                             color_dispersion = "#3498db",
-                                             dispersion_style = c("ribbon", "curve"),
-                                             size_bar = 0.7,
-                                             highlight = NULL,
-                                             color_highlight = NULL,
-                                             ...) {
+plot.see_parameters_distribution <- function(
+  x,
+  dispersion = FALSE,
+  alpha_dispersion = 0.3,
+  color_dispersion = "#3498db",
+  dispersion_style = c("ribbon", "curve"),
+  size_bar = 0.7,
+  highlight = NULL,
+  color_highlight = NULL,
+  ...
+) {
   # get data
   data <- .retrieve_data(x)
 
@@ -105,19 +107,22 @@ plot.see_parameters_distribution <- function(x,
 }
 
 
-.plot_see_parameters_distribution <- function(x,
-                                              alpha_dispersion,
-                                              color_dispersion,
-                                              dispersion_style,
-                                              show_dispersion,
-                                              size_bar,
-                                              highlight,
-                                              color_highlight) {
+.plot_see_parameters_distribution <- function(
+  x,
+  alpha_dispersion,
+  color_dispersion,
+  dispersion_style,
+  show_dispersion,
+  size_bar,
+  highlight,
+  color_highlight
+) {
   centrality <- attributes(x)$centrality
   dispersion <- attributes(x)$dispersion
 
   if (!is.null(centrality) && !is.null(dispersion) && is.numeric(x$x)) {
-    x$curve_y <- nrow(x) * stats::dnorm(x = x$x, mean = centrality, sd = dispersion)
+    x$curve_y <- nrow(x) *
+      stats::dnorm(x = x$x, mean = centrality, sd = dispersion)
   } else if (!is.null(centrality) && is.null(dispersion)) {
     dispersion_style <- "ribbon"
   } else if (is.null(centrality)) {
@@ -150,14 +155,14 @@ plot.see_parameters_distribution <- function(x,
     p <- p + geom_histogram()
   }
 
-
   if (isTRUE(show_dispersion)) {
     if (dispersion_style == "ribbon") {
-      p <- p + geom_vline(
-        xintercept = centrality,
-        colour = color_dispersion,
-        alpha = alpha_dispersion
-      )
+      p <- p +
+        geom_vline(
+          xintercept = centrality,
+          colour = color_dispersion,
+          alpha = alpha_dispersion
+        )
     }
     if (!is.null(dispersion)) {
       if (dispersion_style == "ribbon") {
@@ -192,7 +197,9 @@ plot.see_parameters_distribution <- function(x,
 
   if (!is.null(x$highlight)) {
     if (is.null(color_highlight)) {
-      color_highlight <- palette_material("full")(insight::n_unique(x$highlight) - 1L)
+      color_highlight <- palette_material("full")(
+        insight::n_unique(x$highlight) - 1L
+      )
     }
 
     names(color_highlight) <- highlight

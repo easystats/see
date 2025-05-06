@@ -50,17 +50,23 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
 
   if (length(pred) > 1L) {
     # group-mean-center response
-    dat$y <- dat$y - stats::ave(
-      dat[["y"]],
-      dat[["group"]],
-      FUN = mean, na.rm = TRUE
-    )
-    p <- ggplot(data = dat, aes(x = .data$group, y = .data$y, fill = .data$group)) +
+    dat$y <- dat$y -
+      stats::ave(
+        dat[["y"]],
+        dat[["group"]],
+        FUN = mean,
+        na.rm = TRUE
+      )
+    p <- ggplot(
+      data = dat,
+      aes(x = .data$group, y = .data$y, fill = .data$group)
+    ) +
       geom_violin() +
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_label_repel(
           aes(label = .data$group),
-          y = 0, fill = "white",
+          y = 0,
+          fill = "white",
           data = data.frame(
             group = unique(dat$group),
             stringsAsFactors = FALSE
@@ -72,7 +78,8 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       } else {
         geom_label(
           aes(label = .data$group),
-          y = 0, fill = "white",
+          y = 0,
+          fill = "white",
           data = data.frame(
             group = unique(dat$group),
             stringsAsFactors = FALSE
@@ -81,17 +88,20 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       }
   } else {
     # group-mean-center response
-    dat$y <- dat$y - stats::ave(
-      dat[["y"]],
-      dat[["x"]],
-      FUN = mean, na.rm = TRUE
-    )
+    dat$y <- dat$y -
+      stats::ave(
+        dat[["y"]],
+        dat[["x"]],
+        FUN = mean,
+        na.rm = TRUE
+      )
     p <- ggplot(data = dat, aes(x = .data$x, y = .data$y, fill = .data$x)) +
       geom_violin() +
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_label_repel(
           aes(label = .data$x),
-          y = 0, fill = "white",
+          y = 0,
+          fill = "white",
           data = data.frame(
             x = unique(dat$x),
             stringsAsFactors = FALSE
@@ -103,7 +113,8 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       } else {
         geom_label(
           aes(label = .data$x),
-          y = 0, fill = "white",
+          y = 0,
+          fill = "white",
           data = data.frame(
             x = unique(dat$x),
             stringsAsFactors = FALSE
@@ -131,17 +142,19 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
 }
 
 
-.plot_diag_homogeneity <- function(x,
-                                   size_point,
-                                   linewidth,
-                                   alpha_level = 0.2,
-                                   theme_style = theme_lucid,
-                                   size_title = 12,
-                                   size_axis_title = 10,
-                                   base_size = 10,
-                                   colors = unname(social_colors(c("green", "blue", "red"))),
-                                   alpha_dot = 0.8,
-                                   show_dots = TRUE) {
+.plot_diag_homogeneity <- function(
+  x,
+  size_point,
+  linewidth,
+  alpha_level = 0.2,
+  theme_style = theme_lucid,
+  size_title = 12,
+  size_axis_title = 10,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue", "red"))),
+  alpha_dot = 0.8,
+  show_dots = TRUE
+) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
   if (isTRUE(show_dots)) {

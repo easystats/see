@@ -1,8 +1,5 @@
 #' @export
-data_plot.hdi <- function(x,
-                          data = NULL,
-                          show_intercept = FALSE,
-                          ...) {
+data_plot.hdi <- function(x, data = NULL, show_intercept = FALSE, ...) {
   .data_plot_hdi(x = x, data = data, show_intercept = show_intercept)
 }
 
@@ -14,11 +11,13 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
 
 #' @keywords internal
-.data_plot_hdi <- function(x,
-                           data = NULL,
-                           parms = NULL,
-                           show_intercept = FALSE,
-                           ...) {
+.data_plot_hdi <- function(
+  x,
+  data = NULL,
+  parms = NULL,
+  show_intercept = FALSE,
+  ...
+) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -39,7 +38,10 @@ data_plot.bayestestR_eti <- data_plot.hdi
 
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
-    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(
+      data,
+      names = FALSE
+    )))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
     data <- as.data.frame(data, optional = FALSE)
@@ -62,7 +64,11 @@ data_plot.bayestestR_eti <- data_plot.hdi
         dataplot <- rbind(
           dataplot,
           cbind(
-            .compute_densities_hdi(data[[i]], hdi = as.data.frame(x[x$Parameter == i, ]), name = i),
+            .compute_densities_hdi(
+              data[[i]],
+              hdi = as.data.frame(x[x$Parameter == i, ]),
+              name = i
+            ),
             "Effects" = params$Effects[params$Parameter == i],
             "Component" = params$Component[params$Parameter == i]
           )
@@ -70,34 +76,60 @@ data_plot.bayestestR_eti <- data_plot.hdi
       } else {
         dataplot <- rbind(
           dataplot,
-          .compute_densities_hdi(data[[i]], hdi = as.data.frame(x[x$Parameter == i, ]), name = i)
+          .compute_densities_hdi(
+            data[[i]],
+            hdi = as.data.frame(x[x$Parameter == i, ]),
+            name = i
+          )
         )
       }
     }
 
     if ("Effects" %in% names(dataplot) && "Component" %in% names(dataplot)) {
-      if (length(unique(dataplot$Effects)) == 1 && length(unique(dataplot$Component)) == 1) {
+      if (
+        length(unique(dataplot$Effects)) == 1 &&
+          length(unique(dataplot$Component)) == 1
+      ) {
         dataplot$Effects <- NULL
         dataplot$Component <- NULL
       } else {
         if (is.factor(dataplot$Effects)) {
-          dataplot$Effects <- factor(dataplot$Effects, levels = sort(levels(dataplot$Effects)))
+          dataplot$Effects <- factor(
+            dataplot$Effects,
+            levels = sort(levels(dataplot$Effects))
+          )
         } else {
-          dataplot$Effects <- factor(dataplot$Effects, levels = unique(dataplot$Effects))
+          dataplot$Effects <- factor(
+            dataplot$Effects,
+            levels = unique(dataplot$Effects)
+          )
         }
         if (is.factor(dataplot$Component)) {
-          dataplot$Component <- factor(dataplot$Component, levels = sort(levels(dataplot$Component)))
+          dataplot$Component <- factor(
+            dataplot$Component,
+            levels = sort(levels(dataplot$Component))
+          )
         } else {
-          dataplot$Component <- factor(dataplot$Component, levels = unique(dataplot$Component))
+          dataplot$Component <- factor(
+            dataplot$Component,
+            levels = unique(dataplot$Component)
+          )
         }
       }
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_hdi(x = data[, 1], hdi = x, name = "Posterior")
+    dataplot <- .compute_densities_hdi(
+      x = data[, 1],
+      hdi = x,
+      name = "Posterior"
+    )
   }
 
-  cn <- intersect(c("x", "y", "height", "fill", "Effects", "Component"), colnames(dataplot))
+  cn <- intersect(
+    c("x", "y", "height", "fill", "Effects", "Component"),
+    colnames(dataplot)
+  )
   dataplot <- dataplot[, cn, drop = FALSE]
 
   if (!is.null(levels_order)) {
@@ -138,7 +170,12 @@ data_plot.bayestestR_eti <- data_plot.hdi
   out <- .as.data.frame_density(stats::density(x))
 
   out$HDI_low <- sapply(out$x, .classify_hdi, hdi$CI_low, c(100, 100 * hdi$CI))
-  out$HDI_high <- sapply(out$x, .classify_hdi, rev(hdi$CI_high), c(rev(100 * hdi$CI), 100))
+  out$HDI_high <- sapply(
+    out$x,
+    .classify_hdi,
+    rev(hdi$CI_high),
+    c(rev(100 * hdi$CI), 100)
+  )
   out$fill <- as.factor(pmax(out$HDI_low, out$HDI_high))
   out$height <- out$y
   out$y <- name
@@ -146,7 +183,10 @@ data_plot.bayestestR_eti <- data_plot.hdi
   levels(out$fill) <- sprintf("%s%%", levels(out$fill))
 
   # normalize
-  out$height <- as.vector((out$height - min(out$height, na.rm = TRUE)) / diff(range(out$height, na.rm = TRUE), na.rm = TRUE))
+  out$height <- as.vector(
+    (out$height - min(out$height, na.rm = TRUE)) /
+      diff(range(out$height, na.rm = TRUE), na.rm = TRUE)
+  )
 
   out
 }
@@ -196,20 +236,24 @@ data_plot.bayestestR_eti <- data_plot.hdi
 #' plot(result)
 #'
 #' @export
-plot.see_hdi <- function(x,
-                         data = NULL,
-                         show_intercept = FALSE,
-                         show_zero = TRUE,
-                         show_title = TRUE,
-                         n_columns = 1,
-                         ...) {
+plot.see_hdi <- function(
+  x,
+  data = NULL,
+  show_intercept = FALSE,
+  show_zero = TRUE,
+  show_title = TRUE,
+  n_columns = 1,
+  ...
+) {
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
 
   # check if we have multiple panels
-  if ((!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1L) &&
-    (!"Component" %in% names(x) || length(unique(x$Component)) <= 1L)) {
+  if (
+    (!"Effects" %in% names(x) || length(unique(x$Effects)) <= 1L) &&
+      (!"Component" %in% names(x) || length(unique(x$Component)) <= 1L)
+  ) {
     n_columns <- NULL
   }
 
@@ -246,10 +290,10 @@ plot.see_hdi <- function(x,
     p <- p + scale_y_discrete(labels = labels)
   }
 
-
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
-      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+      p <- p +
+        facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
     } else if ("Effects" %in% names(x)) {
       p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
     } else if ("Component" %in% names(x)) {

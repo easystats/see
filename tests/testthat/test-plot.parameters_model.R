@@ -3,7 +3,6 @@ test_that("`plot.see_parameters_model()` works", {
   result <- parameters::model_parameters(m)
   expect_s3_class(plot(result), "gg")
 
-
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_1",
     fig = plot(result)
@@ -70,7 +69,12 @@ test_that("`plot.see_parameters_model()` random parameters works", {
   out <- parameters::model_parameters(s_mod, group_level = TRUE)
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_random_6",
-    fig = plot(out, sort = "ascending", show_labels = TRUE, show_intercept = FALSE)
+    fig = plot(
+      out,
+      sort = "ascending",
+      show_labels = TRUE,
+      show_intercept = FALSE
+    )
   )
 })
 

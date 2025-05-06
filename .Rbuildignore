@@ -29,3 +29,4 @@
 ^revdep$
 ^CRAN-SUBMISSION$
 ^LICENSE\.md$
+^air.toml

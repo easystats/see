@@ -29,22 +29,24 @@
 #'   coord_radar() +
 #'   theme_radar()
 #' @export
-theme_radar <- function(base_size = 11,
-                        base_family = "",
-                        plot.title.size = 12,
-                        plot.title.face = "plain",
-                        plot.title.space = 15,
-                        plot.title.position = "plot",
-                        legend.position = "right",
-                        axis.title.space = 15,
-                        legend.title.size = 11,
-                        legend.text.size = 10,
-                        axis.title.size = 11,
-                        axis.title.face = "plain",
-                        axis.text.size = 10,
-                        axis.text.angle = NULL,
-                        tags.size = 11,
-                        tags.face = "plain") {
+theme_radar <- function(
+  base_size = 11,
+  base_family = "",
+  plot.title.size = 12,
+  plot.title.face = "plain",
+  plot.title.space = 15,
+  plot.title.position = "plot",
+  legend.position = "right",
+  axis.title.space = 15,
+  legend.title.size = 11,
+  legend.text.size = 10,
+  axis.title.size = 11,
+  axis.title.face = "plain",
+  axis.text.size = 10,
+  axis.text.angle = NULL,
+  tags.size = 11,
+  tags.face = "plain"
+) {
   theme_modern(
     base_size = base_size,
     base_family = base_family,
@@ -80,21 +82,23 @@ theme_radar <- function(base_size = 11,
 
 #' @rdname theme_radar
 #' @export
-theme_radar_dark <- function(base_size = 11,
-                             base_family = "",
-                             plot.title.size = 12,
-                             plot.title.face = "plain",
-                             plot.title.space = 15,
-                             legend.position = "right",
-                             axis.title.space = 15,
-                             legend.title.size = 11,
-                             legend.text.size = 10,
-                             axis.title.size = 11,
-                             axis.title.face = "plain",
-                             axis.text.size = 10,
-                             axis.text.angle = NULL,
-                             tags.size = 11,
-                             tags.face = "plain") {
+theme_radar_dark <- function(
+  base_size = 11,
+  base_family = "",
+  plot.title.size = 12,
+  plot.title.face = "plain",
+  plot.title.space = 15,
+  legend.position = "right",
+  axis.title.space = 15,
+  legend.title.size = 11,
+  legend.text.size = 10,
+  axis.title.size = 11,
+  axis.title.face = "plain",
+  axis.text.size = 10,
+  axis.text.angle = NULL,
+  tags.size = 11,
+  tags.face = "plain"
+) {
   theme_modern(
     base_size = base_size,
     base_family = base_family,

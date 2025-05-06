@@ -8,7 +8,10 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
-    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(
+      data,
+      names = FALSE
+    )))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
     data <- as.data.frame(data, optional = FALSE)
@@ -33,7 +36,12 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
   }
 
   # Extract data HDI
-  dataplot <- .data_plot_hdi(hdi, data, parms = params, show_intercept = show_intercept)
+  dataplot <- .data_plot_hdi(
+    hdi,
+    data,
+    parms = params,
+    show_intercept = show_intercept
+  )
   rope_range <- unique(c(x$ROPE_low, x$ROPE_high))
   if (length(rope_range) != 2) {
     stop("Only one ROPE range accepted.", call. = FALSE)
@@ -41,7 +49,11 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
   groups <- unique(dataplot$y)
   if (!show_intercept) {
-    dataplot <- .remove_intercept(dataplot, column = "y", show_intercept = show_intercept)
+    dataplot <- .remove_intercept(
+      dataplot,
+      column = "y",
+      show_intercept = show_intercept
+    )
     groups <- unique(setdiff(groups, .intercept_names))
   }
 
@@ -53,7 +65,11 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
   dataplot$xmin <- rope_range[1]
   dataplot$xmax <- rope_range[2]
-  dataplot$color <- ifelse(dataplot$x >= dataplot$xmin & dataplot$x <= dataplot$xmax, "Negligible", "Significant")
+  dataplot$color <- ifelse(
+    dataplot$x >= dataplot$xmin & dataplot$x <= dataplot$xmax,
+    "Negligible",
+    "Significant"
+  )
   attributes(dataplot)$info$rope_range <- rope_range
   attributes(dataplot)$info$title <- "Region of Practical Equivalence (ROPE)"
 
@@ -84,13 +100,15 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' plot(result)
 #'
 #' @export
-plot.see_rope <- function(x,
-                          data = NULL,
-                          alpha_rope = 0.5,
-                          color_rope = "cadetblue",
-                          show_intercept = FALSE,
-                          n_columns = 1,
-                          ...) {
+plot.see_rope <- function(
+  x,
+  data = NULL,
+  alpha_rope = 0.5,
+  color_rope = "cadetblue",
+  show_intercept = FALSE,
+  n_columns = 1,
+  ...
+) {
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
@@ -134,7 +152,8 @@ plot.see_rope <- function(x,
 
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
-      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+      p <- p +
+        facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
     } else if ("Effects" %in% names(x)) {
       p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
     } else if ("Component" %in% names(x)) {

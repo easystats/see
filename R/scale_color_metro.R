@@ -27,11 +27,13 @@
 #'   theme_modern() +
 #'   scale_color_metro(discrete = FALSE)
 #' @export
-scale_color_metro <- function(palette = NULL,
-                              discrete = TRUE,
-                              reverse = FALSE,
-                              aesthetics = "color",
-                              ...) {
+scale_color_metro <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -52,14 +54,15 @@ scale_color_metro <- function(palette = NULL,
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname scale_color_metro
 #' @export
-scale_color_metro_d <- function(palette = NULL,
-                                discrete = TRUE,
-                                reverse = FALSE,
-                                aesthetics = "color",
-                                ...) {
+scale_color_metro_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_metro(
     palette = palette,
     discrete = discrete,
@@ -71,11 +74,13 @@ scale_color_metro_d <- function(palette = NULL,
 
 #' @rdname scale_color_metro
 #' @export
-scale_color_metro_c <- function(palette = NULL,
-                                discrete = FALSE,
-                                reverse = FALSE,
-                                aesthetics = "color",
-                                ...) {
+scale_color_metro_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_metro(
     palette = palette,
     discrete = discrete,
@@ -100,14 +105,15 @@ scale_colour_metro_d <- scale_color_metro_d
 
 # Fill --------------------------------------------------------------------
 
-
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro <- function(palette = NULL,
-                             discrete = TRUE,
-                             reverse = FALSE,
-                             aesthetics = "fill",
-                             ...) {
+scale_fill_metro <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -128,11 +134,13 @@ scale_fill_metro <- function(palette = NULL,
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro_d <- function(palette = NULL,
-                               discrete = TRUE,
-                               reverse = FALSE,
-                               aesthetics = "fill",
-                               ...) {
+scale_fill_metro_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_metro(
     palette = palette,
     discrete = discrete,
@@ -144,11 +152,13 @@ scale_fill_metro_d <- function(palette = NULL,
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro_c <- function(palette = NULL,
-                               discrete = FALSE,
-                               reverse = FALSE,
-                               aesthetics = "fill",
-                               ...) {
+scale_fill_metro_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_metro(
     palette = palette,
     discrete = discrete,
@@ -160,7 +170,6 @@ scale_fill_metro_c <- function(palette = NULL,
 
 
 # Palette --------------------------------------------------------------------
-
 
 # The palette based on metro design colors: https://www.materialui.co/metrocolors
 metro_colors_list <- c(
@@ -223,7 +232,13 @@ metro_palettes <- list(
     "red"
   ),
   contrast = metro_colors("blue", "green", "amber", "purple", "red"),
-  light = material_colors("light blue", "red", "yellow", "light green", "orange"),
+  light = material_colors(
+    "light blue",
+    "red",
+    "yellow",
+    "light green",
+    "orange"
+  ),
   complement = metro_colors(
     "blue grey",
     "blue",

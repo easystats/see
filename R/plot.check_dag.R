@@ -52,14 +52,16 @@
 #' )
 #' plot(dag)
 #' @export
-plot.see_check_dag <- function(x,
-                               size_point = 20,
-                               size_text = 4.5,
-                               colors = NULL,
-                               which = "all",
-                               effect = "total",
-                               check_colliders = TRUE,
-                               ...) {
+plot.see_check_dag <- function(
+  x,
+  size_point = 20,
+  size_text = 4.5,
+  colors = NULL,
+  which = "all",
+  effect = "total",
+  check_colliders = TRUE,
+  ...
+) {
   .data <- NULL
   insight::check_if_installed(c("ggdag", "ggplot2"))
   which <- insight::validate_argument(which, c("all", "current", "required"))
@@ -86,28 +88,58 @@ plot.see_check_dag <- function(x,
   # tweak data
   p1$data$type <- as.character(p1$data$adjusted)
   if (check_colliders) {
-    p1$data$type[vapply(p1$data$name, ggdag::is_collider, logical(1), .dag = x)] <- "collider"
+    p1$data$type[vapply(
+      p1$data$name,
+      ggdag::is_collider,
+      logical(1),
+      .dag = x
+    )] <- "collider"
   }
   p1$data$type[p1$data$name == attributes(x)$outcome] <- "outcome"
   p1$data$type[p1$data$name %in% attributes(x)$exposure] <- "exposure"
-  p1$data$type <- factor(p1$data$type, levels = c("outcome", "exposure", "adjusted", "unadjusted", "collider"))
+  p1$data$type <- factor(
+    p1$data$type,
+    levels = c("outcome", "exposure", "adjusted", "unadjusted", "collider")
+  )
 
   p2$data$type <- as.character(p2$data$adjusted)
   if (check_colliders) {
-    p2$data$type[vapply(p2$data$name, ggdag::is_collider, logical(1), .dag = x)] <- "collider"
+    p2$data$type[vapply(
+      p2$data$name,
+      ggdag::is_collider,
+      logical(1),
+      .dag = x
+    )] <- "collider"
   }
   p2$data$type[p2$data$name == attributes(x)$outcome] <- "outcome"
   p2$data$type[p2$data$name %in% attributes(x)$exposure] <- "exposure"
-  p2$data$type <- factor(p2$data$type, levels = c("outcome", "exposure", "adjusted", "unadjusted", "collider"))
+  p2$data$type <- factor(
+    p2$data$type,
+    levels = c("outcome", "exposure", "adjusted", "unadjusted", "collider")
+  )
 
   if (is.null(colors)) {
-    point_colors <- see_colors(c("yellow", "cyan", "blue grey", "red", "orange"))
+    point_colors <- see_colors(c(
+      "yellow",
+      "cyan",
+      "blue grey",
+      "red",
+      "orange"
+    ))
   } else if (length(colors) != 5) {
-    insight::format_error("`colors` must be a character vector with five color-values.")
+    insight::format_error(
+      "`colors` must be a character vector with five color-values."
+    )
   } else {
     point_colors <- colors
   }
-  names(point_colors) <- c("outcome", "exposure", "adjusted", "unadjusted", "collider")
+  names(point_colors) <- c(
+    "outcome",
+    "exposure",
+    "adjusted",
+    "unadjusted",
+    "collider"
+  )
 
   # these geoms are shared by both plots
   common_layers <- list(
@@ -156,11 +188,12 @@ plot.see_check_dag <- function(x,
 
   # if we have multiple sets, we want to facet the second plot by sets
   if (!is.null(p2$data$set) && insight::n_unique(p2$data$set) > 1) {
-    plot2 <- plot2 + ggplot2::facet_wrap(
-      ~set,
-      scales = "free",
-      ncol = ceiling(sqrt(insight::n_unique(p2$data$set)))
-    )
+    plot2 <- plot2 +
+      ggplot2::facet_wrap(
+        ~set,
+        scales = "free",
+        ncol = ceiling(sqrt(insight::n_unique(p2$data$set)))
+      )
   }
 
   if (which == "all") {

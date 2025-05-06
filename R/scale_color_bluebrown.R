@@ -16,11 +16,13 @@
 #'   theme_modern() +
 #'   scale_fill_bluebrown_d()
 #' @export
-scale_color_bluebrown <- function(palette = NULL,
-                                  discrete = TRUE,
-                                  reverse = FALSE,
-                                  aesthetics = "color",
-                                  ...) {
+scale_color_bluebrown <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -41,14 +43,15 @@ scale_color_bluebrown <- function(palette = NULL,
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname scale_color_bluebrown
 #' @export
-scale_color_bluebrown_d <- function(palette = NULL,
-                                    discrete = TRUE,
-                                    reverse = FALSE,
-                                    aesthetics = "color",
-                                    ...) {
+scale_color_bluebrown_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_bluebrown(
     palette = palette,
     discrete = discrete,
@@ -60,11 +63,13 @@ scale_color_bluebrown_d <- function(palette = NULL,
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_color_bluebrown_c <- function(palette = NULL,
-                                    discrete = FALSE,
-                                    reverse = FALSE,
-                                    aesthetics = "color",
-                                    ...) {
+scale_color_bluebrown_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_bluebrown(
     palette = palette,
     discrete = discrete,
@@ -89,14 +94,15 @@ scale_colour_bluebrown_d <- scale_color_bluebrown_d
 
 # Fill --------------------------------------------------------------------
 
-
 #' @rdname scale_color_bluebrown
 #' @export
-scale_fill_bluebrown <- function(palette = NULL,
-                                 discrete = TRUE,
-                                 reverse = FALSE,
-                                 aesthetics = "fill",
-                                 ...) {
+scale_fill_bluebrown <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -117,11 +123,13 @@ scale_fill_bluebrown <- function(palette = NULL,
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_fill_bluebrown_d <- function(palette = NULL,
-                                   discrete = TRUE,
-                                   reverse = FALSE,
-                                   aesthetics = "fill",
-                                   ...) {
+scale_fill_bluebrown_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_bluebrown(
     palette = palette,
     discrete = discrete,
@@ -133,11 +141,13 @@ scale_fill_bluebrown_d <- function(palette = NULL,
 
 #' @rdname scale_color_bluebrown
 #' @export
-scale_fill_bluebrown_c <- function(palette = NULL,
-                                   discrete = FALSE,
-                                   reverse = FALSE,
-                                   aesthetics = "fill",
-                                   ...) {
+scale_fill_bluebrown_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_bluebrown(
     palette = palette,
     discrete = discrete,
@@ -149,7 +159,6 @@ scale_fill_bluebrown_c <- function(palette = NULL,
 
 
 # Palette --------------------------------------------------------------------
-
 
 bluebrown_colors_list <- c(
   lightblue = "#6DC0E0",
@@ -189,9 +198,33 @@ bluebrown_colors <- function(...) {
 
 bluebrown_palettes <- list(
   full = bluebrown_colors(),
-  contrast = bluebrown_colors("lightblue", "blue", "darkblue", "grey", "darkbrown", "brown", "lightbrown"),
-  rainbow = bluebrown_colors("darkblue", "blue", "lightblue", "grey", "lightbrown", "brown", "darkbrown"),
-  complement = bluebrown_colors("darkblue", "blue", "lightblue", "grey", "lightbrown", "brown", "darkbrown"),
+  contrast = bluebrown_colors(
+    "lightblue",
+    "blue",
+    "darkblue",
+    "grey",
+    "darkbrown",
+    "brown",
+    "lightbrown"
+  ),
+  rainbow = bluebrown_colors(
+    "darkblue",
+    "blue",
+    "lightblue",
+    "grey",
+    "lightbrown",
+    "brown",
+    "darkbrown"
+  ),
+  complement = bluebrown_colors(
+    "darkblue",
+    "blue",
+    "lightblue",
+    "grey",
+    "lightbrown",
+    "brown",
+    "darkbrown"
+  ),
   gradient = bluebrown_colors("blue", "brown")
 )
 

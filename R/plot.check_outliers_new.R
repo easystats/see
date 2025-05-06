@@ -1,18 +1,20 @@
-.plot_diag_outliers_new <- function(x,
-                                    na.rm = TRUE,
-                                    ref.color = "darkgray",
-                                    ref.linetype = "dashed",
-                                    show_labels = TRUE,
-                                    linewidth = NULL,
-                                    size_point = 2,
-                                    size_text = NULL,
-                                    size_axis_title = base_size,
-                                    size_title = 12,
-                                    theme_style = theme_lucid,
-                                    base_size = 10,
-                                    colors = unname(social_colors(c("green", "blue grey", "red"))),
-                                    alpha_dot = 0.8,
-                                    show_dots = TRUE) {
+.plot_diag_outliers_new <- function(
+  x,
+  na.rm = TRUE,
+  ref.color = "darkgray",
+  ref.linetype = "dashed",
+  show_labels = TRUE,
+  linewidth = NULL,
+  size_point = 2,
+  size_text = NULL,
+  size_axis_title = base_size,
+  size_title = 12,
+  theme_style = theme_lucid,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue grey", "red"))),
+  alpha_dot = 0.8,
+  show_dots = TRUE
+) {
   linewidth <- linewidth %||% 0.7
   size_text <- size_text %||% 3
 
@@ -27,12 +29,13 @@
   p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals))
 
   if (isTRUE(show_dots)) {
-    p <- p + geom_point2(
-      aes(colour = .data$Influential),
-      na.rm = na.rm,
-      alpha = alpha_dot,
-      size = size_point
-    )
+    p <- p +
+      geom_point2(
+        aes(colour = .data$Influential),
+        na.rm = na.rm,
+        alpha = alpha_dot,
+        size = size_point
+      )
   }
 
   p <- p +
@@ -58,15 +61,20 @@
     (if (isTRUE(show_labels)) {
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_text_repel(
-          data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
+          data = plot_data[
+            order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n],
+          ],
           aes(label = .data$Index, colour = .data$Influential),
           size = size_text
         )
       } else {
         geom_text(
-          data = plot_data[order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n], ],
+          data = plot_data[
+            order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n],
+          ],
           aes(label = .data$Index, colour = .data$Influential),
-          size = size_text, position = position_nudge(
+          size = size_text,
+          position = position_nudge(
             x = diff(range(plot_data$Hat)) / 40,
             y = diff(range(plot_data$Std_Residuals)) / 20
           )

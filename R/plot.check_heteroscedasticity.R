@@ -16,14 +16,16 @@
 #' result
 #' plot(result, data = m) # data required for pkgdown
 #' @export
-plot.see_check_heteroscedasticity <- function(x,
-                                              data = NULL,
-                                              size_point = 2,
-                                              linewidth = 0.8,
-                                              size_title = 12,
-                                              size_axis_title = base_size,
-                                              base_size = 10,
-                                              ...) {
+plot.see_check_heteroscedasticity <- function(
+  x,
+  data = NULL,
+  size_point = 2,
+  linewidth = 0.8,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  ...
+) {
   if (is.null(data)) {
     model <- .retrieve_data(x)
   } else {
@@ -94,7 +96,8 @@ plot.see_check_heteroscedasticity <- function(x,
   }
   betad <- model$fit$par["betad"]
 
-  switch(faminfo$family,
+  switch(
+    faminfo$family,
     gaussian = exp(0.5 * betad),
     Gamma = exp(-0.5 * betad),
     exp(betad)

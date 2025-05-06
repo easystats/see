@@ -52,18 +52,20 @@
 #'   title = "The surprising truth about mtcars"
 #' )
 #' @export
-plots <- function(...,
-                  n_rows = NULL,
-                  n_columns = NULL,
-                  guides = NULL,
-                  tags = FALSE,
-                  tag_prefix = NULL,
-                  tag_suffix = NULL,
-                  tag_sep = NULL,
-                  title = NULL,
-                  subtitle = NULL,
-                  caption = NULL,
-                  theme = NULL) {
+plots <- function(
+  ...,
+  n_rows = NULL,
+  n_columns = NULL,
+  guides = NULL,
+  tags = FALSE,
+  tag_prefix = NULL,
+  tag_suffix = NULL,
+  tag_sep = NULL,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  theme = NULL
+) {
   # Add tags
   if (!is.null(tags)) {
     if (length(tags) == 1L) {
@@ -113,7 +115,17 @@ plots <- function(...,
       msg_display2 <- "\n- If this doesn't help, try to reset the zoom settings of your IDE and then retry."
     }
 
-    msg <- paste(msg, "You may try one of the following steps to resolve this problem.")
-    insight::format_error(msg, msg_display1, msg_display2, msg_display3, msg_display4, msg_display5)
+    msg <- paste(
+      msg,
+      "You may try one of the following steps to resolve this problem."
+    )
+    insight::format_error(
+      msg,
+      msg_display1,
+      msg_display2,
+      msg_display3,
+      msg_display4,
+      msg_display5
+    )
   }
 }

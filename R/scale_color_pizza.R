@@ -23,11 +23,13 @@
 #'   theme_modern() +
 #'   scale_color_pizza_c()
 #' @export
-scale_color_pizza <- function(palette = "margherita",
-                              discrete = TRUE,
-                              reverse = FALSE,
-                              aesthetics = "color",
-                              ...) {
+scale_color_pizza <- function(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -40,14 +42,15 @@ scale_color_pizza <- function(palette = "margherita",
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname scale_color_pizza
 #' @export
-scale_color_pizza_d <- function(palette = "margherita",
-                                discrete = TRUE,
-                                reverse = FALSE,
-                                aesthetics = "color",
-                                ...) {
+scale_color_pizza_d <- function(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_pizza(
     palette = palette,
     discrete = discrete,
@@ -59,11 +62,13 @@ scale_color_pizza_d <- function(palette = "margherita",
 
 #' @rdname scale_color_pizza
 #' @export
-scale_color_pizza_c <- function(palette = "margherita",
-                                discrete = FALSE,
-                                reverse = FALSE,
-                                aesthetics = "color",
-                                ...) {
+scale_color_pizza_c <- function(
+  palette = "margherita",
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_pizza(
     palette = palette,
     discrete = discrete,
@@ -90,11 +95,13 @@ scale_colour_pizza_d <- scale_color_pizza_d
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza <- function(palette = "margherita",
-                             discrete = TRUE,
-                             reverse = FALSE,
-                             aesthetics = "fill",
-                             ...) {
+scale_fill_pizza <- function(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   pal <- palette_pizza(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -107,11 +114,13 @@ scale_fill_pizza <- function(palette = "margherita",
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza_d <- function(palette = "margherita",
-                               discrete = TRUE,
-                               reverse = FALSE,
-                               aesthetics = "fill",
-                               ...) {
+scale_fill_pizza_d <- function(
+  palette = "margherita",
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_pizza(
     palette = palette,
     discrete = discrete,
@@ -123,11 +132,13 @@ scale_fill_pizza_d <- function(palette = "margherita",
 
 #' @rdname scale_color_pizza
 #' @export
-scale_fill_pizza_c <- function(palette = "margherita",
-                               discrete = FALSE,
-                               reverse = FALSE,
-                               aesthetics = "fill",
-                               ...) {
+scale_fill_pizza_c <- function(
+  palette = "margherita",
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_pizza(
     palette = palette,
     discrete = discrete,
@@ -139,7 +150,6 @@ scale_fill_pizza_c <- function(palette = "margherita",
 
 
 # Palette --------------------------------------------------------------------
-
 
 # The palette based on this image:
 # https://www.scattidigusto.it/wp-content/uploads/2018/03/pizza-margherita-originale-Scatti-di-Gusto.jpg
@@ -173,9 +183,22 @@ pizza_colors <- function(...) {
 
 pizza_palettes <- list(
   margherita = pizza_colors("tomato", "mozzarella", "basil"),
-  `margherita crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "coal"),
+  `margherita crust` = pizza_colors(
+    "crust",
+    "tomato",
+    "mozzarella",
+    "basil",
+    "coal"
+  ),
   diavola = pizza_colors("tomato", "mozzarella", "basil", "diavola"),
-  `diavola crust` = pizza_colors("crust", "tomato", "mozzarella", "basil", "diavola", "coal"),
+  `diavola crust` = pizza_colors(
+    "crust",
+    "tomato",
+    "mozzarella",
+    "basil",
+    "diavola",
+    "coal"
+  ),
   gradient = c("basil", "tomato")
 )
 

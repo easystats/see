@@ -57,39 +57,70 @@
   # remove ".1" etc. suffix
   params <- gsub("(.*)(\\.)(\\d)$", "\\1 \\3", params)
   # fix zero-inflation part in random effects
-  params <- gsub("(.*)__zi\\s(.*)", "\\1 \\2 (Zero-Inflated)", params, perl = TRUE)
+  params <- gsub(
+    "(.*)__zi\\s(.*)",
+    "\\1 \\2 (Zero-Inflated)",
+    params,
+    perl = TRUE
+  )
   # fix temporary random effects token
   params <- gsub("\\(re\\)\\s(.*)", "\\1 (Random)", params, perl = TRUE)
   # correlation and sd: brms
   cor_sd <- grepl("(sd_|cor_)(.*)", params)
   if (any(cor_sd)) {
-    params[cor_sd] <- paste("SD/Cor: ", gsub("^(sd_|cor_)(.*?)__(.*)", "\\3", params[cor_sd], perl = TRUE))
+    params[cor_sd] <- paste(
+      "SD/Cor: ",
+      gsub("^(sd_|cor_)(.*?)__(.*)", "\\3", params[cor_sd], perl = TRUE)
+    )
     # replace "__" by "~"
     cor_only <- !is.na(params[cor_sd]) & startsWith(params[cor_sd], "cor_")
     if (any(cor_only)) {
-      params[cor_sd][which(cor_sd)[cor_only]] <- sub("__", " ~ ", params[cor_sd][which(cor_sd)[cor_only]], fixed = TRUE)
+      params[cor_sd][which(cor_sd)[cor_only]] <- sub(
+        "__",
+        " ~ ",
+        params[cor_sd][which(cor_sd)[cor_only]],
+        fixed = TRUE
+      )
     }
   }
   # correlation and sd: rstanarm
   cor_sd <- grepl("^Sigma\\[(.*)", params)
   if (any(cor_sd)) {
-    parm1 <- gsub("^Sigma\\[(.*):(.*),(.*)\\]", "\\2", params[cor_sd], perl = TRUE)
-    parm2 <- gsub("^Sigma\\[(.*):(.*),(.*)\\]", "\\3", params[cor_sd], perl = TRUE)
+    parm1 <- gsub(
+      "^Sigma\\[(.*):(.*),(.*)\\]",
+      "\\2",
+      params[cor_sd],
+      perl = TRUE
+    )
+    parm2 <- gsub(
+      "^Sigma\\[(.*):(.*),(.*)\\]",
+      "\\3",
+      params[cor_sd],
+      perl = TRUE
+    )
     params[which(cor_sd)] <- parm1
     rand_cor <- parm1 != parm2
     if (any(rand_cor)) {
-      params[which(cor_sd)[rand_cor]] <- paste0(parm1[rand_cor], " ~ ", parm2[rand_cor])
+      params[which(cor_sd)[rand_cor]] <- paste0(
+        parm1[rand_cor],
+        " ~ ",
+        parm2[rand_cor]
+      )
     }
     params[cor_sd] <- paste("SD: ", params[cor_sd])
   }
-
 
   if (grid) {
     params <- trimws(gsub("(Zero-Inflated)", "", params, fixed = TRUE))
     params <- trimws(gsub("(Random)", "", params, fixed = TRUE))
     params <- trimws(gsub("(Dispersion)", "", params, fixed = TRUE))
   } else {
-    params <- gsub("(Zero-Inflated) (Random)", "(Random, Zero-Inflated)", params, fixed = TRUE)
+    params <- gsub(
+      "(Zero-Inflated) (Random)",
+      "(Random, Zero-Inflated)",
+      params,
+      fixed = TRUE
+    )
   }
 
   stats::setNames(params, parameter_labels)

@@ -26,16 +26,18 @@
 #' result <- p_function(model, keep = "Sepal.Width")
 #' plot(result)
 #' @export
-plot.see_p_function <- function(x,
-                                colors = c("black", "#1b6ca8"),
-                                size_point = 1.2,
-                                linewidth = c(0.7, 0.9),
-                                size_text = 3,
-                                alpha_line = 0.15,
-                                show_labels = TRUE,
-                                n_columns = NULL,
-                                show_intercept = FALSE,
-                                ...) {
+plot.see_p_function <- function(
+  x,
+  colors = c("black", "#1b6ca8"),
+  size_point = 1.2,
+  linewidth = c(0.7, 0.9),
+  size_text = 3,
+  alpha_line = 0.15,
+  show_labels = TRUE,
+  n_columns = NULL,
+  show_intercept = FALSE,
+  ...
+) {
   # data for ribbons
   data_ribbon <- attr(x, "data")
 
@@ -44,12 +46,19 @@ plot.see_p_function <- function(x,
 
   # remove intercept?
   data_ribbon <- .remove_intercept(data_ribbon, show_intercept = show_intercept)
-  data_ci_segments <- .remove_intercept(data_ci_segments, show_intercept = show_intercept)
+  data_ci_segments <- .remove_intercept(
+    data_ci_segments,
+    show_intercept = show_intercept
+  )
 
   pretty_names <- attributes(x)$pretty_names
   for (pn in seq_along(pretty_names)) {
-    data_ribbon$Parameter[data_ribbon$Parameter == names(pretty_names[pn])] <- pretty_names[pn]
-    data_ci_segments$Parameter[data_ci_segments$Parameter == names(pretty_names[pn])] <- pretty_names[pn]
+    data_ribbon$Parameter[
+      data_ribbon$Parameter == names(pretty_names[pn])
+    ] <- pretty_names[pn]
+    data_ci_segments$Parameter[
+      data_ci_segments$Parameter == names(pretty_names[pn])
+    ] <- pretty_names[pn]
   }
 
   # make sure group is factor
@@ -58,7 +67,9 @@ plot.see_p_function <- function(x,
   # sanity check - linewidth must be of length two, when we have more than
   # one group (i.e. when we emphasize CI lines)
   if (length(linewidth) != 2 && insight::n_unique(data_ci_segments$group) == 2) {
-    insight::format_error("Length of `linewidth` must of length 2, to match regular and emphasized interval lines.") # nolint
+    insight::format_error(
+      "Length of `linewidth` must of length 2, to match regular and emphasized interval lines."
+    ) # nolint
   }
 
   # setup - no color/fill aes for ribbons when we have no facets
@@ -166,13 +177,22 @@ plot.see_p_function <- function(x,
       expand = c(0, 0)
     ) +
     # labelling
-    ggplot2::labs(y = expression(paste(italic("p"), "-value")), x = "Range of Estimates", colour = NULL) +
+    ggplot2::labs(
+      y = expression(paste(italic("p"), "-value")),
+      x = "Range of Estimates",
+      colour = NULL
+    ) +
     theme_lucid() +
     ggplot2::scale_linewidth_manual(values = linewidth, guide = "none")
 
   # facets for grids, different color/fill when no grids
   if (!is.null(n_columns)) {
-    p <- p + ggplot2::facet_wrap(~ .data$Parameter, scales = "free_x", ncol = n_columns)
+    p <- p +
+      ggplot2::facet_wrap(
+        ~ .data$Parameter,
+        scales = "free_x",
+        ncol = n_columns
+      )
   } else if (insight::n_unique(data_ribbon$Parameter) > 1L) {
     p <- p +
       scale_color_flat_d(guide = "none") +

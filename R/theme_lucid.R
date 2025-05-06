@@ -14,23 +14,25 @@
 #'   scale_color_metro() +
 #'   theme_lucid()
 #' @export
-theme_lucid <- function(base_size = 11,
-                        base_family = "",
-                        plot.title.size = 1.1 * base_size,
-                        plot.title.face = "plain",
-                        plot.title.space = 1.35 * base_size,
-                        plot.title.position = "plot",
-                        legend.position = "right",
-                        axis.title.space = 0.9 * base_size,
-                        legend.title.size = base_size,
-                        legend.text.size = 0.9 * base_size,
-                        axis.title.size = base_size,
-                        axis.title.face = "plain",
-                        axis.text.size = 0.9 * base_size,
-                        axis.text.angle = NULL,
-                        tags.size = base_size,
-                        tags.face = "plain",
-                        ...) {
+theme_lucid <- function(
+  base_size = 11,
+  base_family = "",
+  plot.title.size = 1.1 * base_size,
+  plot.title.face = "plain",
+  plot.title.space = 1.35 * base_size,
+  plot.title.position = "plot",
+  legend.position = "right",
+  axis.title.space = 0.9 * base_size,
+  legend.title.size = base_size,
+  legend.text.size = 0.9 * base_size,
+  axis.title.size = base_size,
+  axis.title.face = "plain",
+  axis.text.size = 0.9 * base_size,
+  axis.text.angle = NULL,
+  tags.size = base_size,
+  tags.face = "plain",
+  ...
+) {
   theme_modern(
     base_size = base_size,
     base_family = base_family,

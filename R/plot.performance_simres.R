@@ -30,19 +30,21 @@
 #' plot(result)
 #'
 #' @export
-plot.see_performance_simres <- function(x,
-                                        linewidth = 0.8,
-                                        size_point = 2,
-                                        size_title = 12,
-                                        size_axis_title = base_size,
-                                        base_size = 10,
-                                        alpha = 0.2,
-                                        alpha_dot = 0.8,
-                                        colors = c("#3aaf85", "#1b6ca8"),
-                                        detrend = FALSE,
-                                        transform = NULL,
-                                        style = theme_lucid,
-                                        ...) {
+plot.see_performance_simres <- function(
+  x,
+  linewidth = 0.8,
+  size_point = 2,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  alpha = 0.2,
+  alpha_dot = 0.8,
+  colors = c("#3aaf85", "#1b6ca8"),
+  detrend = FALSE,
+  transform = NULL,
+  style = theme_lucid,
+  ...
+) {
   # need DHARMa to be installed
   insight::check_if_installed("DHARMa")
   qqplotr_installed <- insight::check_if_installed("qqplotr", quietly = TRUE)
@@ -75,7 +77,9 @@ plot.see_performance_simres <- function(x,
   } else if (is.character(transform)) {
     insight::format_error("`transform` must be a function, not a string value.")
   } else {
-    insight::format_error("The transformation specified in `transform` is currently not supported.") # nolint
+    insight::format_error(
+      "The transformation specified in `transform` is currently not supported."
+    ) # nolint
   }
   res <- res[!is.infinite(res) & !is.na(res)]
 

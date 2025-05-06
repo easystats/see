@@ -59,7 +59,8 @@ test_that("plot p_significance, glmmTMB", {
   skip_if_not_installed("ggridges")
 
   data(Salamanders, package = "glmmTMB")
-  m1 <- glmmTMB::glmmTMB(count ~ mined + cover + (1 | site),
+  m1 <- glmmTMB::glmmTMB(
+    count ~ mined + cover + (1 | site),
     zi = ~mined,
     family = poisson,
     data = Salamanders

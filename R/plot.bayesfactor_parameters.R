@@ -17,12 +17,14 @@
 #'
 #'
 #' @export
-plot.see_bayesfactor_parameters <- function(x,
-                                            size_point = 2,
-                                            color_rope = "#0171D3",
-                                            alpha_rope = 0.2,
-                                            show_intercept = FALSE,
-                                            ...) {
+plot.see_bayesfactor_parameters <- function(
+  x,
+  size_point = 2,
+  color_rope = "#0171D3",
+  alpha_rope = 0.2,
+  show_intercept = FALSE,
+  ...
+) {
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
     x$BF <- exp(x$log_BF)
   }
@@ -33,7 +35,11 @@ plot.see_bayesfactor_parameters <- function(x,
 
   # if we have intercept-only models, keep at least the intercept
   intercepts_points <- which(.is_intercept(d_points$ind))
-  if (length(intercepts_points) && (nrow(d_points) > length(intercepts_points)) && !show_intercept) {
+  if (
+    length(intercepts_points) &&
+      (nrow(d_points) > length(intercepts_points)) &&
+      !show_intercept
+  ) {
     intercepts_data <- which(.is_intercept(plot_data$ind))
     plot_data <- plot_data[-intercepts_data, ]
     d_points <- d_points[-intercepts_points, ]
@@ -58,7 +64,11 @@ plot.see_bayesfactor_parameters <- function(x,
   ) +
     geom_line(linewidth = 1) +
     geom_area(alpha = 0.15, position = "identity") +
-    geom_vline(xintercept = hypothesis, linetype = "dashed", colour = "grey50") +
+    geom_vline(
+      xintercept = hypothesis,
+      linetype = "dashed",
+      colour = "grey50"
+    ) +
     labs(
       y = "Density",
       color = "Distribution",
@@ -74,7 +84,8 @@ plot.see_bayesfactor_parameters <- function(x,
   if (length(hypothesis) > 1L) {
     rope <- range(hypothesis)
     p <-
-      p + annotate(
+      p +
+      annotate(
         "rect",
         xmin = rope[1],
         xmax = rope[2],

@@ -24,14 +24,17 @@
 #' @rdname plot.datawizard_table
 #' @export
 
-plot.datawizard_tables <- function(x, label_values = TRUE,
-                                   show_na = "if_any",
-                                   na_label = "(Missing)",
-                                   error_bar = TRUE,
-                                   ci = 0.95,
-                                   color_fill = "#87CEFA",
-                                   color_error_bar = "#607B8B",
-                                   ...) {
+plot.datawizard_tables <- function(
+  x,
+  label_values = TRUE,
+  show_na = "if_any",
+  na_label = "(Missing)",
+  error_bar = TRUE,
+  ci = 0.95,
+  color_fill = "#87CEFA",
+  color_error_bar = "#607B8B",
+  ...
+) {
   show_na <- insight::validate_argument(show_na, c("if_any", "always", "never"))
   if (length(x) == 1L) {
     plot.datawizard_table(
@@ -63,14 +66,17 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
 #'
 #' @export
 
-plot.datawizard_table <- function(x, label_values = TRUE,
-                                  show_na = "if_any",
-                                  na_label = "(Missing)",
-                                  error_bar = TRUE,
-                                  ci = 0.95,
-                                  color_fill = "#87CEFA",
-                                  color_error_bar = "#607B8B",
-                                  ...) {
+plot.datawizard_table <- function(
+  x,
+  label_values = TRUE,
+  show_na = "if_any",
+  na_label = "(Missing)",
+  error_bar = TRUE,
+  ci = 0.95,
+  color_fill = "#87CEFA",
+  color_error_bar = "#607B8B",
+  ...
+) {
   show_na <- insight::validate_argument(show_na, c("if_any", "always", "never"))
   dat <- as.data.frame(x)
 
@@ -100,7 +106,11 @@ plot.datawizard_table <- function(x, label_values = TRUE,
   if (isTRUE(error_bar)) {
     total_n <- sum(dat$N)
     props <- dat$output / 100
-    dat <- cbind(dat, CI = ci, .wilson_ci(prop = props, total_n = total_n, ci = ci) * total_n)
+    dat <- cbind(
+      dat,
+      CI = ci,
+      .wilson_ci(prop = props, total_n = total_n, ci = ci) * total_n
+    )
     dat$label <- paste0(dat$N, " (", round(dat$output, 2), "%)")
   } else {
     dat$label <- paste0(dat$N, "\n(", round(dat$output, 2), "%)")
@@ -115,7 +125,11 @@ plot.datawizard_table <- function(x, label_values = TRUE,
   if (isTRUE(label_values)) {
     if (isTRUE(error_bar)) {
       out <- out +
-        ggplot2::geom_text(ggplot2::aes(label = .data$label), vjust = -1, hjust = 1.2) +
+        ggplot2::geom_text(
+          ggplot2::aes(label = .data$label),
+          vjust = -1,
+          hjust = 1.2
+        ) +
         ggplot2::coord_cartesian(ylim = c(0, max(dat$CI_high)))
     } else {
       out <- out +

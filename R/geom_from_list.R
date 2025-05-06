@@ -114,7 +114,10 @@
 #' @export
 geom_from_list <- function(x, ...) {
   # Additional parameters ------------------------------------------------------
-  arguments <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
+  arguments <- x[
+    !names(x) %in%
+      c("geom", "aes", "data", "width", "height", "position", "show.legend")
+  ]
 
   if (is.null(x$geom)) {
     return(NULL)
@@ -147,7 +150,10 @@ geom_from_list <- function(x, ...) {
   }
   if (x$geom == "smooth") {
     if (!is.null(x$aes)) {
-      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+      arguments$mapping <- do.call(
+        ggplot2::aes,
+        args = lapply(x$aes, .str_to_sym)
+      )
     }
     if (!"method" %in% names(arguments)) {
       arguments$method <- "loess"
@@ -158,14 +164,21 @@ geom_from_list <- function(x, ...) {
     return(do.call(ggplot2::geom_smooth, args = arguments))
   }
 
-  if (startsWith(x$geom, "scale_") || startsWith(x$geom, "theme") || startsWith(x$geom, "see_")) {
+  if (
+    startsWith(x$geom, "scale_") ||
+      startsWith(x$geom, "theme") ||
+      startsWith(x$geom, "see_")
+  ) {
     return(do.call(x$geom, args = arguments))
   }
 
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
     if (!is.null(x$aes)) {
-      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+      arguments$mapping <- do.call(
+        ggplot2::aes,
+        args = lapply(x$aes, .str_to_sym)
+      )
     }
     return(do.call(eval(parse(text = x$geom)), args = arguments))
   }
@@ -173,7 +186,10 @@ geom_from_list <- function(x, ...) {
   if (startsWith(x$geom, "ggraph::")) {
     insight::check_if_installed("ggraph")
     if (!is.null(x$aes)) {
-      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+      arguments$mapping <- do.call(
+        ggplot2::aes,
+        args = lapply(x$aes, .str_to_sym)
+      )
     }
     return(do.call(eval(parse(text = x$geom)), args = arguments))
   }
@@ -189,7 +205,8 @@ geom_from_list <- function(x, ...) {
   }
 
   # Default for violin
-  if (x$geom == "violin") { # nolint
+  if (x$geom == "violin") {
+    # nolint
     stat <- "ydensity"
     position <- "dodge"
   } else if (x$geom == "boxplot") {

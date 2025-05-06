@@ -19,21 +19,23 @@
 #'   theme_modern()
 #'
 #' @export
-geom_violindot <- function(mapping = NULL,
-                           data = NULL,
-                           trim = TRUE,
-                           scale = c("area", "count", "width"),
-                           show.legend = NA,
-                           inherit.aes = TRUE,
-                           dots_size = 0.7,
-                           dots_color = NULL,
-                           dots_fill = NULL,
-                           binwidth = 0.05,
-                           position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
-                           ...,
-                           size_dots = dots_size,
-                           color_dots = dots_color,
-                           fill_dots = dots_fill) {
+geom_violindot <- function(
+  mapping = NULL,
+  data = NULL,
+  trim = TRUE,
+  scale = c("area", "count", "width"),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  dots_size = 0.7,
+  dots_color = NULL,
+  dots_fill = NULL,
+  binwidth = 0.05,
+  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
+  ...,
+  size_dots = dots_size,
+  color_dots = dots_color,
+  fill_dots = dots_fill
+) {
   scale <- match.arg(scale)
 
   if (is.null(color_dots) && is.null(fill_dots)) {
@@ -89,7 +91,6 @@ geom_violindot <- function(mapping = NULL,
       ...
     )
   }
-
 
   list(
     geom_violinhalf(

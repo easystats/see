@@ -18,12 +18,14 @@
 #' plot(check_model(model))
 #'
 #' @export
-plot.see_check_model <- function(x,
-                                 style = theme_lucid,
-                                 colors = NULL,
-                                 type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
-                                 n_columns = 2,
-                                 ...) {
+plot.see_check_model <- function(
+  x,
+  style = theme_lucid,
+  colors = NULL,
+  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+  n_columns = 2,
+  ...
+) {
   p <- list()
 
   # read arguments / settings from "check_model()" -----
@@ -46,7 +48,12 @@ plot.see_check_model <- function(x,
   plot_type <- attr(x, "type")
   model_class <- attr(x, "model_class")
 
-  if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+  if (
+    missing(type) &&
+      !is.null(plot_type) &&
+      plot_type %in%
+        c("density", "discrete_dots", "discrete_interval", "discrete_both")
+  ) {
     type <- plot_type
   } else {
     type <- match.arg(type)
@@ -93,10 +100,14 @@ plot.see_check_model <- function(x,
     check <- "all"
   }
 
-
   # build plot panels --------------------
 
-  if ("PP_CHECK" %in% names(x) && !is.null(x$PP_CHECK) && any(c("pp_check", "all") %in% check)) {
+  if (
+    "PP_CHECK" %in%
+      names(x) &&
+      !is.null(x$PP_CHECK) &&
+      any(c("pp_check", "all") %in% check)
+  ) {
     x$NORM <- NULL
     p$PP_CHECK <- plot.see_performance_pp_check(
       x$PP_CHECK,
@@ -113,7 +124,12 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("NCV" %in% names(x) && !is.null(x$NCV) && any(c("ncv", "linearity", "all") %in% check)) {
+  if (
+    "NCV" %in%
+      names(x) &&
+      !is.null(x$NCV) &&
+      any(c("ncv", "linearity", "all") %in% check)
+  ) {
     p$NCV <- .plot_diag_linearity(
       x$NCV,
       size_point = size_point,
@@ -129,7 +145,12 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("BINNED_RESID" %in% names(x) && !is.null(x$BINNED_RESID) && any(c("binned_residuals", "all") %in% check)) {
+  if (
+    "BINNED_RESID" %in%
+      names(x) &&
+      !is.null(x$BINNED_RESID) &&
+      any(c("binned_residuals", "all") %in% check)
+  ) {
     x$HOMOGENEITY <- NULL
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
@@ -144,7 +165,12 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("OVERDISPERSION" %in% names(x) && !is.null(x$OVERDISPERSION) && any(c("overdispersion", "all") %in% check)) {
+  if (
+    "OVERDISPERSION" %in%
+      names(x) &&
+      !is.null(x$OVERDISPERSION) &&
+      any(c("overdispersion", "all") %in% check)
+  ) {
     p$OVERDISPERSION <- .plot_diag_overdispersion(
       x$OVERDISPERSION,
       style = style,
@@ -157,7 +183,12 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("HOMOGENEITY" %in% names(x) && !is.null(x$HOMOGENEITY) && any(c("homogeneity", "all") %in% check)) {
+  if (
+    "HOMOGENEITY" %in%
+      names(x) &&
+      !is.null(x$HOMOGENEITY) &&
+      any(c("homogeneity", "all") %in% check)
+  ) {
     p$HOMOGENEITY <- .plot_diag_homogeneity(
       x$HOMOGENEITY,
       size_point = size_point,
@@ -173,7 +204,12 @@ plot.see_check_model <- function(x,
     )
   }
 
-  if ("INFLUENTIAL" %in% names(x) && !is.null(x$INFLUENTIAL) && any(c("outliers", "influential", "all") %in% check)) {
+  if (
+    "INFLUENTIAL" %in%
+      names(x) &&
+      !is.null(x$INFLUENTIAL) &&
+      any(c("outliers", "influential", "all") %in% check)
+  ) {
     p$OUTLIERS <- .plot_diag_outliers_new(
       x$INFLUENTIAL,
       show_labels = show_labels,
@@ -240,7 +276,12 @@ plot.see_check_model <- function(x,
     }
   }
 
-  if ("NORM" %in% names(x) && !is.null(x$NORM) && any(c("normality", "all") %in% check)) {
+  if (
+    "NORM" %in%
+      names(x) &&
+      !is.null(x$NORM) &&
+      any(c("normality", "all") %in% check)
+  ) {
     p$NORM <- .plot_diag_norm(
       x$NORM,
       linewidth = linewidth,
@@ -283,17 +324,19 @@ plot.see_check_model <- function(x,
 }
 
 
-.plot_diag_linearity <- function(x,
-                                 size_point,
-                                 linewidth,
-                                 size_axis_title = 10,
-                                 size_title = 12,
-                                 alpha_level = 0.2,
-                                 theme_style = theme_lucid,
-                                 base_size = 10,
-                                 colors = unname(social_colors(c("green", "blue", "red"))),
-                                 alpha_dot = 0.8,
-                                 show_dots = TRUE) {
+.plot_diag_linearity <- function(
+  x,
+  size_point,
+  linewidth,
+  size_axis_title = 10,
+  size_title = 12,
+  alpha_level = 0.2,
+  theme_style = theme_lucid,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue", "red"))),
+  alpha_dot = 0.8,
+  show_dots = TRUE
+) {
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
   if (isTRUE(show_dots)) {

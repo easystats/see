@@ -35,7 +35,10 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   }
 
   if (type == "line") {
-    dataplot$x <- factor(dataplot[[variable]], levels = rev(sort(levels(dataplot[[variable]]))))
+    dataplot$x <- factor(
+      dataplot[[variable]],
+      levels = rev(sort(levels(dataplot[[variable]])))
+    )
     dataplot$group <- "0"
     dataplot$group[which.max(dataplot$n_Methods)] <- "1"
   } else if (type == "area") {
@@ -69,7 +72,11 @@ data_plot.n_factors <- function(x, data = NULL, type = "bar", ...) {
   }
 
   attr(dataplot, "info")$title <- paste("How many", lab, "to retain")
-  attr(dataplot, "info")$subtitle <- paste0("Number of ", lab, " considered optimal by various algorithm")
+  attr(dataplot, "info")$subtitle <- paste0(
+    "Number of ",
+    lab,
+    " considered optimal by various algorithm"
+  )
   if ("Variance_Cumulative" %in% names(dataplot) && type != "line") {
     attr(dataplot, "info")$subtitle <- paste0(
       attr(dataplot, "info")$subtitle,
@@ -114,11 +121,13 @@ data_plot.n_clusters <- data_plot.n_factors
 #' plot(result, type = "area")
 #'
 #' @export
-plot.see_n_factors <- function(x,
-                               data = NULL,
-                               type = c("bar", "line", "area"),
-                               size = 1,
-                               ...) {
+plot.see_n_factors <- function(
+  x,
+  data = NULL,
+  type = c("bar", "line", "area"),
+  size = 1,
+  ...
+) {
   type <- match.arg(type)
 
   if (!inherits(x, "data_plot")) {
@@ -126,16 +135,15 @@ plot.see_n_factors <- function(x,
   }
 
   if (missing(size)) {
-    size <- switch(type,
-      bar = 0.7,
-      line = 1,
-      1
-    )
+    size <- switch(type, bar = 0.7, line = 1, 1)
   }
 
   # Base plot
   if (type == "area") {
-    segment_data <- data.frame(x_intercept = x$x[which.max(x$y)], y_max = max(x$y, na.rm = TRUE))
+    segment_data <- data.frame(
+      x_intercept = x$x[which.max(x$y)],
+      y_max = max(x$y, na.rm = TRUE)
+    )
     p <- ggplot(x, aes(x = .data$x, y = .data$y)) +
       geom_area(fill = flat_colors("grey")) +
       geom_segment(
@@ -157,7 +165,10 @@ plot.see_n_factors <- function(x,
       add_plot_attributes(x)
   } else if (type == "line") {
     p <- ggplot(x, aes(y = .data$x, x = .data$y, colour = .data$group)) +
-      geom_segment(aes(x = 0, yend = .data$x, xend = .data$y), linewidth = size) +
+      geom_segment(
+        aes(x = 0, yend = .data$x, xend = .data$y),
+        linewidth = size
+      ) +
       geom_point(size = 2 * size) +
       guides(colour = "none") +
       scale_x_continuous(labels = .percents) +
@@ -184,7 +195,11 @@ plot.see_n_factors <- function(x,
       ) +
       scale_y_continuous(
         labels = .percents,
-        sec.axis = sec_axis(~ . / max(x$y), name = "% of variance explained", labels = .percents)
+        sec.axis = sec_axis(
+          ~ . / max(x$y),
+          name = "% of variance explained",
+          labels = .percents
+        )
       )
   } else {
     p <- p + scale_y_continuous(labels = .percents)

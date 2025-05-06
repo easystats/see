@@ -32,7 +32,12 @@ test_that("`plot()` for simulate_parameters", {
   set.seed(1234)
   vdiffr::expect_doppelganger(
     title = "plot.simulate_parameters works-3",
-    fig = plot(ms, stack = FALSE, show_intercept = TRUE, normalize_height = TRUE)
+    fig = plot(
+      ms,
+      stack = FALSE,
+      show_intercept = TRUE,
+      normalize_height = TRUE
+    )
   )
   set.seed(1234)
   vdiffr::expect_doppelganger(

@@ -8,7 +8,10 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
-    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(
+      data,
+      names = FALSE
+    )))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     params <- insight::clean_parameters(data)
     data <- as.data.frame(data, optional = FALSE)
@@ -37,30 +40,52 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
           )
         )
       } else {
-        dataplot <- rbind(dataplot, .compute_densities_pd(data[[i]], name = i, null = attr(x, "null")))
+        dataplot <- rbind(
+          dataplot,
+          .compute_densities_pd(data[[i]], name = i, null = attr(x, "null"))
+        )
       }
     }
 
     if ("Effects" %in% names(dataplot) && "Component" %in% names(dataplot)) {
-      if (length(unique(dataplot$Effects)) == 1 && length(unique(dataplot$Component)) == 1) {
+      if (
+        length(unique(dataplot$Effects)) == 1 &&
+          length(unique(dataplot$Component)) == 1
+      ) {
         dataplot$Effects <- NULL
         dataplot$Component <- NULL
       } else {
         if (is.factor(dataplot$Effects)) {
-          dataplot$Effects <- factor(dataplot$Effects, levels = sort(levels(dataplot$Effects)))
+          dataplot$Effects <- factor(
+            dataplot$Effects,
+            levels = sort(levels(dataplot$Effects))
+          )
         } else {
-          dataplot$Effects <- factor(dataplot$Effects, levels = unique(dataplot$Effects))
+          dataplot$Effects <- factor(
+            dataplot$Effects,
+            levels = unique(dataplot$Effects)
+          )
         }
         if (is.factor(dataplot$Component)) {
-          dataplot$Component <- factor(dataplot$Component, levels = sort(levels(dataplot$Component)))
+          dataplot$Component <- factor(
+            dataplot$Component,
+            levels = sort(levels(dataplot$Component))
+          )
         } else {
-          dataplot$Component <- factor(dataplot$Component, levels = unique(dataplot$Component))
+          dataplot$Component <- factor(
+            dataplot$Component,
+            levels = unique(dataplot$Component)
+          )
         }
       }
     }
   } else {
     levels_order <- NULL
-    dataplot <- .compute_densities_pd(data[, 1], name = "Posterior", null = attr(x, "null"))
+    dataplot <- .compute_densities_pd(
+      data[, 1],
+      name = "Posterior",
+      null = attr(x, "null")
+    )
   }
 
   dataplot <- do.call(
@@ -85,7 +110,10 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
       }
     )
   )
-  dataplot$fill2 <- with(dataplot, ifelse(prop >= 0.5, "Most probable", "Less probable"))
+  dataplot$fill2 <- with(
+    dataplot,
+    ifelse(prop >= 0.5, "Most probable", "Less probable")
+  )
   dataplot <- dataplot[, which(!names(dataplot) %in% c("n", "prop"))]
 
   if (!is.null(levels_order)) {
@@ -160,13 +188,15 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 #' plot(result)
 #'
 #' @export
-plot.see_p_direction <- function(x,
-                                 data = NULL,
-                                 show_intercept = FALSE,
-                                 priors = FALSE,
-                                 alpha_priors = 0.4,
-                                 n_columns = 1,
-                                 ...) {
+plot.see_p_direction <- function(
+  x,
+  data = NULL,
+  show_intercept = FALSE,
+  priors = FALSE,
+  alpha_priors = 0.4,
+  n_columns = 1,
+  ...
+) {
   # save model for later use
   model <- .retrieve_data(x)
 
@@ -203,16 +233,16 @@ plot.see_p_direction <- function(x,
 
   # add prior layer
   if (priors) {
-    p <- p + .add_prior_layer_ridgeline(
-      model,
-      parameter = params,
-      show_intercept = show_intercept,
-      alpha_priors = alpha_priors
-    )
+    p <- p +
+      .add_prior_layer_ridgeline(
+        model,
+        parameter = params,
+        show_intercept = show_intercept,
+        alpha_priors = alpha_priors
+      )
   }
 
   p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
-
 
   if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
@@ -220,10 +250,10 @@ plot.see_p_direction <- function(x,
     p <- p + scale_y_discrete(labels = axis_labels)
   }
 
-
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
-      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+      p <- p +
+        facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
     } else if ("Effects" %in% names(x)) {
       p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
     } else if ("Component" %in% names(x)) {

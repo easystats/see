@@ -47,24 +47,26 @@
 #'   scale_color_see() +
 #'   theme_modern(show.ticks = TRUE)
 #' @export
-theme_modern <- function(base_size = 11,
-                         base_family = "",
-                         plot.title.size = 1.35 * base_size,
-                         plot.title.face = "plain",
-                         plot.title.space = 1.8 * base_size,
-                         plot.title.position = "plot",
-                         legend.position = "right",
-                         axis.title.space = 1.8 * base_size,
-                         legend.title.size = 1.2 * base_size,
-                         legend.text.size = 1.1 * base_size,
-                         axis.title.size = 1.2 * base_size,
-                         axis.title.face = "plain",
-                         axis.text.size = 1.1 * base_size,
-                         axis.text.angle = NULL,
-                         tags.size = 1.35 * base_size,
-                         tags.face = "bold",
-                         show.ticks = FALSE,
-                         ...) {
+theme_modern <- function(
+  base_size = 11,
+  base_family = "",
+  plot.title.size = 1.35 * base_size,
+  plot.title.face = "plain",
+  plot.title.space = 1.8 * base_size,
+  plot.title.position = "plot",
+  legend.position = "right",
+  axis.title.space = 1.8 * base_size,
+  legend.title.size = 1.2 * base_size,
+  legend.text.size = 1.1 * base_size,
+  axis.title.size = 1.2 * base_size,
+  axis.title.face = "plain",
+  axis.text.size = 1.1 * base_size,
+  axis.text.angle = NULL,
+  tags.size = 1.35 * base_size,
+  tags.face = "bold",
+  show.ticks = FALSE,
+  ...
+) {
   # Remove legend title if necessary
   if (is.null(plot.title.size)) {
     plot.title.size <- element_text(
@@ -93,11 +95,17 @@ theme_modern <- function(base_size = 11,
 
   # Remove axis title if necessary
   if (is.null(axis.title.size)) {
-    axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
+    axis.title.size <- element_text(
+      size = axis.title.size,
+      face = axis.title.face
+    )
   } else if (axis.title.size == "none") {
     axis.title.size <- element_blank()
   } else {
-    axis.title.size <- element_text(size = axis.title.size, face = axis.title.face)
+    axis.title.size <- element_text(
+      size = axis.title.size,
+      face = axis.title.face
+    )
   }
 
   # Remove axis text if necessary
@@ -126,8 +134,12 @@ theme_modern <- function(base_size = 11,
     legend.title = legend.title.size,
     legend.key = element_blank(),
     legend.spacing.x = unit(2, "pt"),
-    axis.title.y = element_text(margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)),
-    axis.title.x = element_text(margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)),
+    axis.title.y = element_text(
+      margin = margin(t = 0, r = axis.title.space, b = 0, l = 0)
+    ),
+    axis.title.x = element_text(
+      margin = margin(t = axis.title.space, r = 0, b = 0, l = 0)
+    ),
     axis.title = axis.title.size,
     axis.text.x = element_text(angle = axis.text.angle, hjust = hjust),
     axis.text = axis.text.size,
@@ -139,8 +151,12 @@ theme_modern <- function(base_size = 11,
   # show ticks?
   if (show.ticks) {
     theme_args$axis.ticks.length <- unit(-0.25, "cm")
-    theme_args$axis.text.x.bottom <- element_text(margin = margin(t = base_size * 1.3, r = 0, b = 0, l = 0))
-    theme_args$axis.text.y.left <- element_text(margin = margin(t = 0, r = base_size * 1.3, b = 0, l = 0))
+    theme_args$axis.text.x.bottom <- element_text(
+      margin = margin(t = base_size * 1.3, r = 0, b = 0, l = 0)
+    )
+    theme_args$axis.text.y.left <- element_text(
+      margin = margin(t = 0, r = base_size * 1.3, b = 0, l = 0)
+    )
   } else {
     theme_args$axis.ticks <- element_blank()
   }

@@ -15,15 +15,17 @@
 #' plot(result)
 #'
 #' @export
-plot.see_check_collinearity <- function(x,
-                                        data = NULL,
-                                        colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-                                        size_point = 3.5,
-                                        linewidth = 0.8,
-                                        size_title = 12,
-                                        size_axis_title = base_size,
-                                        base_size = 10,
-                                        ...) {
+plot.see_check_collinearity <- function(
+  x,
+  data = NULL,
+  colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+  size_point = 3.5,
+  linewidth = 0.8,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  ...
+) {
   if (is.null(data)) {
     dat <- insight::compact_list(.retrieve_data(x))
   } else {
@@ -61,16 +63,18 @@ plot.see_check_collinearity <- function(x,
 }
 
 
-.plot_diag_vif <- function(x,
-                           size_point,
-                           linewidth,
-                           theme_style = theme_lucid,
-                           size_title = 12,
-                           size_axis_title = 10,
-                           base_size = 10,
-                           colors = unname(social_colors(c("green", "blue", "red"))),
-                           ci_data = NULL,
-                           is_check_model = FALSE) {
+.plot_diag_vif <- function(
+  x,
+  size_point,
+  linewidth,
+  theme_style = theme_lucid,
+  size_title = 12,
+  size_axis_title = 10,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue", "red"))),
+  ci_data = NULL,
+  is_check_model = FALSE
+) {
   ylim <- ceiling(max(x$y, na.rm = TRUE))
   xlim <- nrow(x)
   if (ylim < 10) ylim <- 10
@@ -143,8 +147,10 @@ plot.see_check_collinearity <- function(x,
         lineend = "round",
         linejoin = "round",
         arrow = ggplot2::arrow(
-          ends = "last", type = "closed",
-          angle = 20, length = ggplot2::unit(0.03, "native")
+          ends = "last",
+          type = "closed",
+          angle = 20,
+          length = ggplot2::unit(0.03, "native")
         ),
         show.legend = FALSE
       )
@@ -159,7 +165,11 @@ plot.see_check_collinearity <- function(x,
       title = "Collinearity",
       subtitle = "High collinearity (VIF) may inflate parameter uncertainty",
       x = NULL,
-      y = paste("Variance Inflation", "Factor (VIF, log-scaled)", sep = ifelse(is_check_model, "\n", " "))
+      y = paste(
+        "Variance Inflation",
+        "Factor (VIF, log-scaled)",
+        sep = ifelse(is_check_model, "\n", " ")
+      )
     ) +
     ggplot2::scale_color_manual(
       values = colors,

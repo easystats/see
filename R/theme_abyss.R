@@ -13,23 +13,25 @@
 #'   geom_point(color = "white") +
 #'   theme_abyss()
 #' @export
-theme_abyss <- function(base_size = 11,
-                        base_family = "",
-                        plot.title.size = 1.35 * base_size,
-                        plot.title.face = "plain",
-                        plot.title.space = 1.8 * base_size,
-                        plot.title.position = "plot",
-                        legend.position = "right",
-                        axis.title.space = 1.8 * base_size,
-                        legend.title.size = 1.2 * base_size,
-                        legend.text.size = 1.1 * base_size,
-                        axis.title.size = 1.2 * base_size,
-                        axis.title.face = "plain",
-                        axis.text.size = 1.1 * base_size,
-                        axis.text.angle = NULL,
-                        tags.size = 1.35 * base_size,
-                        tags.face = "bold",
-                        ...) {
+theme_abyss <- function(
+  base_size = 11,
+  base_family = "",
+  plot.title.size = 1.35 * base_size,
+  plot.title.face = "plain",
+  plot.title.space = 1.8 * base_size,
+  plot.title.position = "plot",
+  legend.position = "right",
+  axis.title.space = 1.8 * base_size,
+  legend.title.size = 1.2 * base_size,
+  legend.text.size = 1.1 * base_size,
+  axis.title.size = 1.2 * base_size,
+  axis.title.face = "plain",
+  axis.text.size = 1.1 * base_size,
+  axis.text.angle = NULL,
+  tags.size = 1.35 * base_size,
+  tags.face = "bold",
+  ...
+) {
   theme_modern(
     base_size = base_size,
     base_family = base_family,

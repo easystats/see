@@ -26,11 +26,13 @@
 #'   theme_modern() +
 #'   scale_color_see(discrete = FALSE)
 #' @export
-scale_color_see <- function(palette = NULL,
-                            discrete = TRUE,
-                            reverse = FALSE,
-                            aesthetics = "color",
-                            ...) {
+scale_color_see <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -50,14 +52,15 @@ scale_color_see <- function(palette = NULL,
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname scale_color_see
 #' @export
-scale_color_see_d <- function(palette = NULL,
-                              discrete = TRUE,
-                              reverse = FALSE,
-                              aesthetics = "color",
-                              ...) {
+scale_color_see_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_see(
     palette = palette,
     discrete = discrete,
@@ -69,11 +72,13 @@ scale_color_see_d <- function(palette = NULL,
 
 #' @rdname scale_color_see
 #' @export
-scale_color_see_c <- function(palette = NULL,
-                              discrete = FALSE,
-                              reverse = FALSE,
-                              aesthetics = "color",
-                              ...) {
+scale_color_see_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_see(
     palette = palette,
     discrete = discrete,
@@ -98,14 +103,15 @@ scale_colour_see_d <- scale_color_see_d
 
 # Fill --------------------------------------------------------------------
 
-
 #' @rdname scale_color_see
 #' @export
-scale_fill_see <- function(palette = NULL,
-                           discrete = TRUE,
-                           reverse = FALSE,
-                           aesthetics = "fill",
-                           ...) {
+scale_fill_see <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -126,11 +132,13 @@ scale_fill_see <- function(palette = NULL,
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_d <- function(palette = NULL,
-                             discrete = TRUE,
-                             reverse = FALSE,
-                             aesthetics = "fill",
-                             ...) {
+scale_fill_see_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_see(
     palette = palette,
     discrete = discrete,
@@ -142,11 +150,13 @@ scale_fill_see_d <- function(palette = NULL,
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_c <- function(palette = NULL,
-                             discrete = FALSE,
-                             reverse = FALSE,
-                             aesthetics = "fill",
-                             ...) {
+scale_fill_see_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_see(
     palette = palette,
     discrete = discrete,
@@ -158,7 +168,6 @@ scale_fill_see_c <- function(palette = NULL,
 
 
 # Palette --------------------------------------------------------------------
-
 
 see_colors_list <- c(
   red = "#d32626",
@@ -254,11 +263,18 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
 
 .retrieve_palette <- function(palette, palette_list, reverse = FALSE, ...) {
   if (!palette %in% names(palette_list)) {
-    msg <- c(paste0(
-      "Palette name not available. `palette` must be one of ",
-      datawizard::text_concatenate(names(palette_list), last = " or ", enclose = "`"),
-      "."
-    ), "Using default palette now.")
+    msg <- c(
+      paste0(
+        "Palette name not available. `palette` must be one of ",
+        datawizard::text_concatenate(
+          names(palette_list),
+          last = " or ",
+          enclose = "`"
+        ),
+        "."
+      ),
+      "Using default palette now."
+    )
     insight::format_warning(msg)
     palette <- 1
   }

@@ -30,11 +30,13 @@
 #'   theme_modern() +
 #'   scale_color_flat(discrete = FALSE)
 #' @export
-scale_color_flat <- function(palette = NULL,
-                             discrete = TRUE,
-                             reverse = FALSE,
-                             aesthetics = "color",
-                             ...) {
+scale_color_flat <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -55,14 +57,15 @@ scale_color_flat <- function(palette = NULL,
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_d <- function(palette = NULL,
-                               discrete = TRUE,
-                               reverse = FALSE,
-                               aesthetics = "color",
-                               ...) {
+scale_color_flat_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_flat(
     palette = palette,
     discrete = discrete,
@@ -74,11 +77,13 @@ scale_color_flat_d <- function(palette = NULL,
 
 #' @rdname scale_color_flat
 #' @export
-scale_color_flat_c <- function(palette = NULL,
-                               discrete = FALSE,
-                               reverse = FALSE,
-                               aesthetics = "color",
-                               ...) {
+scale_color_flat_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_flat(
     palette = palette,
     discrete = discrete,
@@ -103,14 +108,15 @@ scale_colour_flat_d <- scale_color_flat_d
 
 # Fill --------------------------------------------------------------------
 
-
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat <- function(palette = NULL,
-                            discrete = TRUE,
-                            reverse = FALSE,
-                            aesthetics = "fill",
-                            ...) {
+scale_fill_flat <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -131,11 +137,13 @@ scale_fill_flat <- function(palette = NULL,
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_d <- function(palette = NULL,
-                              discrete = TRUE,
-                              reverse = FALSE,
-                              aesthetics = "fill",
-                              ...) {
+scale_fill_flat_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_flat(
     palette = palette,
     discrete = discrete,
@@ -147,11 +155,13 @@ scale_fill_flat_d <- function(palette = NULL,
 
 #' @rdname scale_color_flat
 #' @export
-scale_fill_flat_c <- function(palette = NULL,
-                              discrete = FALSE,
-                              reverse = FALSE,
-                              aesthetics = "fill",
-                              ...) {
+scale_fill_flat_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_flat(
     palette = palette,
     discrete = discrete,
@@ -163,7 +173,6 @@ scale_fill_flat_c <- function(palette = NULL,
 
 
 # Palette --------------------------------------------------------------------
-
 
 # The palette based on flat design colors: https://www.materialui.co/flatuicolors
 flat_colors_list <- c(
@@ -228,7 +237,13 @@ flat_palettes <- list(
     "red"
   ),
   contrast = flat_colors("blue", "green", "amber", "purple", "red"),
-  light = flat_colors("light blue", "purple", "yellow", "light green", "orange"),
+  light = flat_colors(
+    "light blue",
+    "purple",
+    "yellow",
+    "light green",
+    "orange"
+  ),
   complement = flat_colors(
     "blue grey",
     "blue",

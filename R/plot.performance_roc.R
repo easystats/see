@@ -42,7 +42,6 @@ plot.see_performance_roc <- function(x, ...) {
     )
   }
 
-
   p +
     geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.5) +
     geom_line() +

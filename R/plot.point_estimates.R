@@ -7,7 +7,10 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
 
-    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(
+      data,
+      names = FALSE
+    )))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     data <- insight::get_parameters(data, effects = "all", component = "all")
   } else if (inherits(data, "BFBayesFactor")) {
@@ -97,16 +100,18 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' plot(result)
 #'
 #' @export
-plot.see_point_estimate <- function(x,
-                                    data = NULL,
-                                    size_point = 2,
-                                    size_text = 3.5,
-                                    panel = TRUE,
-                                    show_labels = TRUE,
-                                    show_intercept = FALSE,
-                                    priors = FALSE,
-                                    alpha_priors = 0.4,
-                                    ...) {
+plot.see_point_estimate <- function(
+  x,
+  data = NULL,
+  size_point = 2,
+  size_text = 3.5,
+  panel = TRUE,
+  show_labels = TRUE,
+  show_intercept = FALSE,
+  priors = FALSE,
+  alpha_priors = 0.4,
+  ...
+) {
   # save model for later use
   model <- .retrieve_data(x)
 
@@ -144,20 +149,22 @@ plot.see_point_estimate <- function(x,
 
     # add prior layer
     if (priors) {
-      p_object <- p_object + .add_prior_layer_ribbon(
-        model,
-        parameter = x_lab,
-        show_intercept = show_intercept,
-        alpha_priors = alpha_priors,
-        fill_color = "#FF9800"
-      )
+      p_object <- p_object +
+        .add_prior_layer_ribbon(
+          model,
+          parameter = x_lab,
+          show_intercept = show_intercept,
+          alpha_priors = alpha_priors,
+          fill_color = "#FF9800"
+        )
       alpha_posteriors <- 0.7
     } else {
       alpha_posteriors <- 1
     }
 
     p_object <- p_object +
-      geom_ribbon(aes(ymin = 0, ymax = .data$y),
+      geom_ribbon(
+        aes(ymin = 0, ymax = .data$y),
         fill = "#FFC107",
         alpha = alpha_posteriors
       )
@@ -255,7 +262,11 @@ plot.see_point_estimate <- function(x,
     p_object <- p_object +
       geom_vline(xintercept = 0, linetype = "dotted") +
       scale_y_continuous(expand = c(0, 0), limits = c(0, max_y * 1.15)) +
-      labs(title = "Bayesian Point Estimates", x = x_lab, y = "Probability Density")
+      labs(
+        title = "Bayesian Point Estimates",
+        x = x_lab,
+        y = "Probability Density"
+      )
 
     p_object
   })

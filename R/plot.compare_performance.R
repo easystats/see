@@ -95,13 +95,16 @@ plot.see_compare_performance <- function(x, linewidth = 1, ...) {
     x <- data_plot(x)
   }
 
-  p <- ggplot(x, aes(
-    x = .data$name,
-    y = .data$values,
-    colour = .data$Model,
-    group = .data$Model,
-    fill = .data$Model
-  )) +
+  p <- ggplot(
+    x,
+    aes(
+      x = .data$name,
+      y = .data$values,
+      colour = .data$Model,
+      group = .data$Model,
+      fill = .data$Model
+    )
+  ) +
     geom_polygon(linewidth = linewidth, alpha = 0.05) +
     coord_radar() +
     scale_y_continuous(limits = c(0, 1), labels = NULL) +

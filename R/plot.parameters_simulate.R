@@ -1,8 +1,10 @@
 #' @export
-data_plot.parameters_simulate <- function(x,
-                                          data = NULL,
-                                          normalize_height = FALSE,
-                                          ...) {
+data_plot.parameters_simulate <- function(
+  x,
+  data = NULL,
+  normalize_height = FALSE,
+  ...
+) {
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
@@ -25,7 +27,10 @@ data_plot.parameters_simulate <- function(x,
       zi_comp <- params$Component == "zero_inflated"
       params$Parameter[zi_comp] <- paste0(params$Parameter[zi_comp], "_zi")
       disp_comp <- params$Component == "dispersion"
-      params$Parameter[disp_comp] <- paste0(params$Parameter[disp_comp], "_disp")
+      params$Parameter[disp_comp] <- paste0(
+        params$Parameter[disp_comp],
+        "_disp"
+      )
     }
 
     for (i in names(dat)) {
@@ -38,13 +43,18 @@ data_plot.parameters_simulate <- function(x,
       out$Component <- NA
       for (i in names(dat)) {
         if (i %in% params$Parameter && i %in% out$Parameter) {
-          out$Component[out$Parameter == i] <- params$Component[params$Parameter == i]
+          out$Component[out$Parameter == i] <- params$Component[
+            params$Parameter == i
+          ]
         }
       }
     }
   }
 
-  if (!is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class) {
+  if (
+    !is.null(attributes(x)$object_class) &&
+      "mlm" %in% attributes(x)$object_class
+  ) {
     out$Component <- NA
     for (i in unique(params$Response)) {
       out$Component[grepl(paste0(i, "$"), out$Parameter)] <- i
@@ -84,18 +94,21 @@ data_plot.parameters_simulate <- function(x,
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_simulate <- function(x,
-                                         data = NULL,
-                                         stack = TRUE,
-                                         show_intercept = FALSE,
-                                         n_columns = NULL,
-                                         normalize_height = FALSE,
-                                         linewidth = 0.9,
-                                         alpha_posteriors = 0.7,
-                                         centrality = "median",
-                                         ci = 0.95,
-                                         ...) {
-  is_mlm <- !is.null(attributes(x)$object_class) && "mlm" %in% attributes(x)$object_class
+plot.see_parameters_simulate <- function(
+  x,
+  data = NULL,
+  stack = TRUE,
+  show_intercept = FALSE,
+  n_columns = NULL,
+  normalize_height = FALSE,
+  linewidth = 0.9,
+  alpha_posteriors = 0.7,
+  centrality = "median",
+  ci = 0.95,
+  ...
+) {
+  is_mlm <- !is.null(attributes(x)$object_class) &&
+    "mlm" %in% attributes(x)$object_class
   if (is.null(n_columns) && (isTRUE(is_mlm) || "Response" %in% colnames(x))) {
     n_columns <- 1
   }

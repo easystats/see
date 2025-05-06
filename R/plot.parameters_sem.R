@@ -1,12 +1,14 @@
 #' @export
-data_plot.parameters_sem <- function(x,
-                                     data = NULL,
-                                     component = c("regression", "correlation", "loading"),
-                                     type = component,
-                                     threshold_coefficient = NULL,
-                                     threshold_p = NULL,
-                                     ci = TRUE,
-                                     ...) {
+data_plot.parameters_sem <- function(
+  x,
+  data = NULL,
+  component = c("regression", "correlation", "loading"),
+  type = component,
+  threshold_coefficient = NULL,
+  threshold_p = NULL,
+  ci = TRUE,
+  ...
+) {
   # Compatibility patch
   if (!all(type %in% component)) component <- type
 
@@ -26,13 +28,22 @@ data_plot.parameters_sem <- function(x,
 
   # Revert order of arrows for loadings
   # It is the latent factor that manifests itself in the indicators (#95)
-  edges[edges$Component == "Loading", "from"] <- as.character(edges[edges$Component == "Loading", "To"])
-  edges[edges$Component == "Loading", "to"] <- as.character(edges[edges$Component == "Loading", "From"])
+  edges[edges$Component == "Loading", "from"] <- as.character(edges[
+    edges$Component == "Loading",
+    "To"
+  ])
+  edges[edges$Component == "Loading", "to"] <- as.character(edges[
+    edges$Component == "Loading",
+    "From"
+  ])
 
-  edges <- edges[tolower(edges$Component) %in% component &
-    edges$from != edges$to &
-    edges$Coefficient_abs >= threshold_coefficient &
-    edges$p < threshold_p, ]
+  edges <- edges[
+    tolower(edges$Component) %in%
+      component &
+      edges$from != edges$to &
+      edges$Coefficient_abs >= threshold_coefficient &
+      edges$p < threshold_p,
+  ]
 
   edges$Coefficient_abs <- NULL
   edges$From <- NULL
@@ -52,10 +63,17 @@ data_plot.parameters_sem <- function(x,
     edges$Label <- sprintf("%.2f", edges$Coefficient)
   }
 
-
   # Separate labels
-  edges$Label_Regression <- ifelse(edges$Component == "Regression", edges$Label, "")
-  edges$Label_Correlation <- ifelse(edges$Component == "Correlation", edges$Label, "")
+  edges$Label_Regression <- ifelse(
+    edges$Component == "Regression",
+    edges$Label,
+    ""
+  )
+  edges$Label_Correlation <- ifelse(
+    edges$Component == "Correlation",
+    edges$Label,
+    ""
+  )
   edges$Label_Loading <- ifelse(edges$Component == "Loading", edges$Label, "")
   edges <- edges[colSums(!is.na(edges)) > 0L]
 
@@ -70,7 +88,9 @@ data_plot.parameters_sem <- function(x,
     Latent = FALSE,
     stringsAsFactors = FALSE
   )
-  manifest_nodes <- manifest_nodes[!manifest_nodes$Name %in% latent_nodes$Name, ]
+  manifest_nodes <- manifest_nodes[
+    !manifest_nodes$Name %in% latent_nodes$Name,
+  ]
   nodes <- rbind(manifest_nodes, latent_nodes)
 
   dataplot <- list(edges = edges, nodes = nodes)
@@ -86,15 +106,17 @@ data_plot.parameters_sem <- function(x,
 #'
 #' @rdname plot.see_parameters_model
 #' @export
-plot.see_parameters_sem <- function(x,
-                                    data = NULL,
-                                    component = c("regression", "correlation", "loading"),
-                                    type = component,
-                                    threshold_coefficient = NULL,
-                                    threshold_p = NULL,
-                                    ci = TRUE,
-                                    size_point = 22,
-                                    ...) {
+plot.see_parameters_sem <- function(
+  x,
+  data = NULL,
+  component = c("regression", "correlation", "loading"),
+  type = component,
+  threshold_coefficient = NULL,
+  threshold_p = NULL,
+  ci = TRUE,
+  size_point = 22,
+  ...
+) {
   if (!inherits(x, "data_plot")) {
     x <- data_plot(
       x,
@@ -129,7 +151,8 @@ plot.see_parameters_sem <- function(x,
       linetype = 2,
       angle_calc = "along",
       label_size = 3,
-      start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+      start_cap = ggraph::circle(12, "mm"),
+      end_cap = ggraph::circle(12, "mm")
     ) +
     # Plot Loadings
     ggraph::geom_edge_link(
@@ -143,7 +166,8 @@ plot.see_parameters_sem <- function(x,
       edge_width = 0.8,
       label_size = 3,
       arrow = arrow(type = "closed", length = unit(3, "mm")),
-      start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+      start_cap = ggraph::circle(12, "mm"),
+      end_cap = ggraph::circle(12, "mm")
     ) +
     # Plot regressions
     ggraph::geom_edge_link(
@@ -157,9 +181,13 @@ plot.see_parameters_sem <- function(x,
       edge_width = 1.2,
       label_size = 3,
       arrow = arrow(type = "closed", length = unit(3, "mm")),
-      start_cap = ggraph::circle(12, "mm"), end_cap = ggraph::circle(12, "mm")
+      start_cap = ggraph::circle(12, "mm"),
+      end_cap = ggraph::circle(12, "mm")
     ) +
-    ggraph::geom_node_point(aes(colour = .data$Latent, shape = .data$Latent), size = size_point) +
+    ggraph::geom_node_point(
+      aes(colour = .data$Latent, shape = .data$Latent),
+      size = size_point
+    ) +
     ggraph::geom_node_text(aes(label = .data$Name)) +
     ggraph::scale_edge_colour_gradient2(
       guide = "none",

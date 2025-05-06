@@ -5,8 +5,18 @@ test_that("`plot.see_parameters_distribution()` works", {
   expect_s3_class(plot(result), "gg")
 
   result <- datawizard::describe_distribution(iris)
-  expect_true(all(vapply(plot(result), inherits, "gg", FUN.VALUE = logical(1L))))
+  expect_true(all(vapply(
+    plot(result),
+    inherits,
+    "gg",
+    FUN.VALUE = logical(1L)
+  )))
 
   result <- datawizard::describe_distribution(iris, select = "Sepal.Length")
-  expect_true(all(vapply(plot(result), inherits, "gg", FUN.VALUE = logical(1L))))
+  expect_true(all(vapply(
+    plot(result),
+    inherits,
+    "gg",
+    FUN.VALUE = logical(1L)
+  )))
 })

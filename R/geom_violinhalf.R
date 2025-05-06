@@ -33,16 +33,18 @@
 #'   scale_fill_material_d()
 #'
 #' @export
-geom_violinhalf <- function(mapping = NULL,
-                            data = NULL,
-                            stat = "ydensity",
-                            position = "dodge",
-                            trim = TRUE,
-                            flip = FALSE,
-                            scale = c("area", "count", "width"),
-                            show.legend = NA,
-                            inherit.aes = TRUE,
-                            ...) {
+geom_violinhalf <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "ydensity",
+  position = "dodge",
+  trim = TRUE,
+  flip = FALSE,
+  scale = c("area", "count", "width"),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
   scale <- match.arg(scale)
 
   layer(
@@ -70,19 +72,26 @@ geom_violinhalf <- function(mapping = NULL,
 #' @usage NULL
 #'
 #' @keywords internal
-GeomViolinHalf <- ggproto("GeomViolinHalf", Geom,
+GeomViolinHalf <- ggproto(
+  "GeomViolinHalf",
+  Geom,
   extra_params = c("na.rm", "flip"),
   setup_data = function(data, params) {
-    data$width <- data$width %||% params$width %||% (resolution(data$x, FALSE) * 0.9)
+    data$width <- data$width %||%
+      params$width %||%
+      (resolution(data$x, FALSE) * 0.9)
 
     # ymin, ymax, xmin, and xmax define the bounding rectangle for each group
-    data <- do.call(rbind, lapply(split(data, data$group), function(.group) {
-      .group$ymin <- min(.group$y)
-      .group$ymax <- max(.group$y)
-      .group$xmin <- .group$x
-      .group$xmax <- .group$x + .group$width / 2
-      .group
-    }))
+    data <- do.call(
+      rbind,
+      lapply(split(data, data$group), function(.group) {
+        .group$ymin <- min(.group$y)
+        .group$ymax <- max(.group$y)
+        .group$xmin <- .group$x
+        .group$xmax <- .group$x + .group$width / 2
+        .group
+      })
+    )
   },
   draw_group = function(data, panel_scales, coord, flip) {
     # Find the points for the line to go all the way around
@@ -114,7 +123,10 @@ GeomViolinHalf <- ggproto("GeomViolinHalf", Geom,
     # Needed for coord_polar and such
     newdata <- rbind(newdata, newdata[1, ])
 
-    .grobName("geom_violinhalf", GeomPolygon$draw_panel(newdata, panel_scales, coord))
+    .grobName(
+      "geom_violinhalf",
+      GeomPolygon$draw_panel(newdata, panel_scales, coord)
+    )
   },
   draw_key = draw_key_polygon,
   default_aes = aes(

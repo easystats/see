@@ -30,23 +30,29 @@
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
 #' @export
-plot.see_check_outliers <- function(x,
-                                    size_text = 3.5,
-                                    linewidth = 0.8,
-                                    size_title = 12,
-                                    size_axis_title = base_size,
-                                    base_size = 10,
-                                    alpha_dot = 0.8,
-                                    colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-                                    rescale_distance = TRUE,
-                                    type = c("dots", "bars"),
-                                    show_labels = TRUE,
-                                    ...) {
+plot.see_check_outliers <- function(
+  x,
+  size_text = 3.5,
+  linewidth = 0.8,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  alpha_dot = 0.8,
+  colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
+  rescale_distance = TRUE,
+  type = c("dots", "bars"),
+  show_labels = TRUE,
+  ...
+) {
   type <- match.arg(type)
   influential_obs <- attributes(x)$influential_obs
   outlier_methods <- attr(x, "methods", exact = TRUE)
 
-  if (type == "dots" && !is.null(influential_obs) && (is.null(outlier_methods) || length(outlier_methods) == 1)) {
+  if (
+    type == "dots" &&
+      !is.null(influential_obs) &&
+      (is.null(outlier_methods) || length(outlier_methods) == 1)
+  ) {
     .plot_diag_outliers_new(
       influential_obs,
       show_labels = show_labels,
@@ -59,7 +65,12 @@ plot.see_check_outliers <- function(x,
       colors = colors
     )
   } else if (length(outlier_methods) == 1) {
-    .plot_diag_outliers(x, show_labels = show_labels, size_text = size_text, rescale_distance = rescale_distance)
+    .plot_diag_outliers(
+      x,
+      show_labels = show_labels,
+      size_text = size_text,
+      rescale_distance = rescale_distance
+    )
   } else {
     .plot_outliers_multimethod(x, rescale_distance)
   }
@@ -67,7 +78,12 @@ plot.see_check_outliers <- function(x,
 
 
 #' @export
-data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ...) {
+data_plot.check_outliers <- function(
+  x,
+  data = NULL,
+  rescale_distance = TRUE,
+  ...
+) {
   data <- attributes(x)$data
   row.names(data) <- data$Obs
 
@@ -94,13 +110,19 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
 }
 
 
-.plot_diag_outliers <- function(x, show_labels = TRUE, size_text = 3.5, rescale_distance = TRUE) {
+.plot_diag_outliers <- function(
+  x,
+  show_labels = TRUE,
+  size_text = 3.5,
+  rescale_distance = TRUE
+) {
   d <- data_plot(x, rescale_distance = rescale_distance)
   d$Id <- seq_len(nrow(d))
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
   d$Id[d$Outliers == "0"] <- NA
 
-  method <- switch(attr(x, "method", exact = TRUE),
+  method <- switch(
+    attr(x, "method", exact = TRUE),
     cook = "Cook's Distance",
     pareto = "Pareto",
     mahalanobis = "Mahalanobis Distance",
@@ -121,7 +143,10 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
 
   size_text <- size_text %||% 3.5
 
-  p <- ggplot(d, aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)) +
+  p <- ggplot(
+    d,
+    aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)
+  ) +
     geom_histogram() +
     labs(
       title = "Influential Observations",
@@ -141,7 +166,6 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
         color = "#c0392b"
       )
   }
-
 
   if (isTRUE(show_labels)) {
     if (requireNamespace("ggrepel", quietly = TRUE)) {
@@ -183,7 +207,9 @@ data_plot.check_outliers <- function(x, data = NULL, rescale_distance = TRUE, ..
       # Warning: Vectorized input to `element_text()` is not officially supported.
       # Results may be unexpected or may change in future versions of ggplot2.
       theme(
-        axis.text.x = element_text(colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")),
+        axis.text.x = element_text(
+          colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")
+        ),
         panel.grid.major.x = element_line(
           linetype = "dashed",
           colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey")

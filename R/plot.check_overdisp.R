@@ -1,12 +1,14 @@
 #' @export
-plot.see_check_overdisp <- function(x,
-                                    linewidth = 0.8,
-                                    size_title = 12,
-                                    size_axis_title = base_size,
-                                    base_size = 10,
-                                    colors = c("#3aaf85", "#1b6ca8"),
-                                    type = 1,
-                                    ...) {
+plot.see_check_overdisp <- function(
+  x,
+  linewidth = 0.8,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  colors = c("#3aaf85", "#1b6ca8"),
+  type = 1,
+  ...
+) {
   .plot_diag_overdispersion(
     x,
     style = theme_lucid,
@@ -20,20 +22,31 @@ plot.see_check_overdisp <- function(x,
 }
 
 
-.plot_diag_overdispersion <- function(x,
-                                      theme_style = theme_lucid,
-                                      size_axis_title = base_size,
-                                      size_title = 12,
-                                      base_size = 10,
-                                      colors = c("#3aaf85", "#1b6ca8"),
-                                      linewidth = 0.8,
-                                      type = 1,
-                                      ...) {
+.plot_diag_overdispersion <- function(
+  x,
+  theme_style = theme_lucid,
+  size_axis_title = base_size,
+  size_title = 12,
+  base_size = 10,
+  colors = c("#3aaf85", "#1b6ca8"),
+  linewidth = 0.8,
+  type = 1,
+  ...
+) {
   if (is.null(type) || type == 1) {
     p <- ggplot2::ggplot(x) +
       ggplot2::aes(x = .data$Predicted) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$V), linewidth = linewidth, color = colors[2], se = FALSE) +
-      ggplot2::geom_smooth(ggplot2::aes(y = .data$Res2), linewidth = linewidth, color = colors[1]) +
+      ggplot2::geom_smooth(
+        ggplot2::aes(y = .data$V),
+        linewidth = linewidth,
+        color = colors[2],
+        se = FALSE
+      ) +
+      ggplot2::geom_smooth(
+        ggplot2::aes(y = .data$Res2),
+        linewidth = linewidth,
+        color = colors[1]
+      ) +
       ggplot2::labs(
         title = "Misspecified dispersion and zero-inflation",
         subtitle = "Observed residual variance (green) should follow predicted residual variance (blue)",

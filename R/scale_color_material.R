@@ -27,11 +27,13 @@
 #'   theme_modern() +
 #'   scale_color_material(discrete = FALSE)
 #' @export
-scale_color_material <- function(palette = NULL,
-                                 discrete = TRUE,
-                                 reverse = FALSE,
-                                 aesthetics = "color",
-                                 ...) {
+scale_color_material <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -52,14 +54,15 @@ scale_color_material <- function(palette = NULL,
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname scale_color_material
 #' @export
-scale_color_material_d <- function(palette = NULL,
-                                   discrete = TRUE,
-                                   reverse = FALSE,
-                                   aesthetics = "color",
-                                   ...) {
+scale_color_material_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_material(
     palette = palette,
     discrete = discrete,
@@ -71,11 +74,13 @@ scale_color_material_d <- function(palette = NULL,
 
 #' @rdname scale_color_material
 #' @export
-scale_color_material_c <- function(palette = "contrast",
-                                   discrete = FALSE,
-                                   reverse = FALSE,
-                                   aesthetics = "color",
-                                   ...) {
+scale_color_material_c <- function(
+  palette = "contrast",
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_material(
     palette = palette,
     discrete = discrete,
@@ -100,14 +105,15 @@ scale_colour_material_d <- scale_color_material_d
 
 # Fill --------------------------------------------------------------------
 
-
 #' @rdname scale_color_material
 #' @export
-scale_fill_material <- function(palette = NULL,
-                                discrete = TRUE,
-                                reverse = FALSE,
-                                aesthetics = "fill",
-                                ...) {
+scale_fill_material <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   if (is.null(palette)) {
     if (discrete) {
       palette <- "contrast"
@@ -128,11 +134,13 @@ scale_fill_material <- function(palette = NULL,
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_d <- function(palette = NULL,
-                                  discrete = TRUE,
-                                  reverse = FALSE,
-                                  aesthetics = "fill",
-                                  ...) {
+scale_fill_material_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_material(
     palette = palette,
     discrete = discrete,
@@ -144,11 +152,13 @@ scale_fill_material_d <- function(palette = NULL,
 
 #' @rdname scale_color_material
 #' @export
-scale_fill_material_c <- function(palette = NULL,
-                                  discrete = FALSE,
-                                  reverse = FALSE,
-                                  aesthetics = "fill",
-                                  ...) {
+scale_fill_material_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_material(
     palette = palette,
     discrete = discrete,
@@ -160,7 +170,6 @@ scale_fill_material_c <- function(palette = NULL,
 
 
 # Palette --------------------------------------------------------------------
-
 
 # The palette based on material design colors: https://www.materialui.co/colors
 material_colors_list <- c(
@@ -213,7 +222,13 @@ material_colors <- function(...) {
 
 material_palettes <- list(
   full = material_colors(),
-  ice = material_colors("purple", "deep purple", "indigo", "blue", "light blue"),
+  ice = material_colors(
+    "purple",
+    "deep purple",
+    "indigo",
+    "blue",
+    "light blue"
+  ),
   gradient = material_colors("blue", "orange"),
   rainbow = material_colors(
     "purple",
@@ -231,7 +246,13 @@ material_palettes <- list(
     "pink"
   ),
   contrast = material_colors("blue", "green", "amber", "purple", "red"),
-  light = material_colors("light blue", "pink", "yellow", "light green", "orange"),
+  light = material_colors(
+    "light blue",
+    "pink",
+    "yellow",
+    "light green",
+    "orange"
+  ),
   complement = material_colors(
     "blue",
     "blue grey",

@@ -39,20 +39,22 @@
 #' plot(result, type = "qq", detrend = TRUE)
 #'
 #' @export
-plot.see_check_normality <- function(x,
-                                     type = c("qq", "pp", "density"),
-                                     data = NULL,
-                                     linewidth = 0.8,
-                                     size_point = 2,
-                                     size_title = 12,
-                                     size_axis_title = base_size,
-                                     base_size = 10,
-                                     alpha = 0.2,
-                                     alpha_dot = 0.8,
-                                     colors = c("#3aaf85", "#1b6ca8"),
-                                     detrend = TRUE,
-                                     method = "ell",
-                                     ...) {
+plot.see_check_normality <- function(
+  x,
+  type = c("qq", "pp", "density"),
+  data = NULL,
+  linewidth = 0.8,
+  size_point = 2,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  alpha = 0.2,
+  alpha_dot = 0.8,
+  colors = c("#3aaf85", "#1b6ca8"),
+  detrend = TRUE,
+  method = "ell",
+  ...
+) {
   type <- match.arg(type)
 
   if (is.null(data)) {
@@ -78,9 +80,15 @@ plot.see_check_normality <- function(x,
       base_size = base_size
     )
   } else {
-    if (type == "qq") { # nolint
+    if (type == "qq") {
+      # nolint
       model_info <- attributes(x)$model_info
-      if (inherits(model, c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor"))) {
+      if (
+        inherits(
+          model,
+          c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor")
+        )
+      ) {
         res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
         dat <- stats::na.omit(data.frame(y = res_))
       } else if (inherits(model, "glmmTMB")) {
@@ -88,7 +96,9 @@ plot.see_check_normality <- function(x,
         dat <- stats::na.omit(data.frame(y = res_))
       } else if (inherits(model, "glm")) {
         res_ <- abs(stats::rstandard(model, type = "deviance"))
-        fitted_ <- stats::qnorm((stats::ppoints(length(res_)) + 1) / 2)[order(order(res_))]
+        fitted_ <- stats::qnorm(
+          (stats::ppoints(length(res_)) + 1) / 2
+        )[order(order(res_))]
         dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
       } else if (inherits(model, "performance_simres")) {
         return(plot.see_performance_simres(
@@ -170,14 +180,16 @@ plot.see_check_normality <- function(x,
 
 # normality plot: density -------------------------
 
-.plot_diag_norm <- function(x,
-                            linewidth,
-                            size_axis_title = 10,
-                            size_title = 12,
-                            alpha_level = 0.2,
-                            theme_style = theme_lucid,
-                            base_size = 10,
-                            colors = unname(social_colors(c("green", "blue", "red")))) {
+.plot_diag_norm <- function(
+  x,
+  linewidth,
+  size_axis_title = 10,
+  size_title = 12,
+  alpha_level = 0.2,
+  theme_style = theme_lucid,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue", "red")))
+) {
   ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
     ggplot2::geom_ribbon(
       mapping = ggplot2::aes(ymin = 0, ymax = .data$y),
@@ -211,21 +223,23 @@ plot.see_check_normality <- function(x,
 
 # normality plot: QQ -------------------------
 
-.plot_diag_qq <- function(x,
-                          size_point,
-                          linewidth,
-                          size_axis_title = 10,
-                          size_title = 12,
-                          alpha_level = 0.2,
-                          detrend = FALSE,
-                          method = "ell",
-                          theme_style = theme_lucid,
-                          base_size = 10,
-                          colors = unname(social_colors(c("green", "blue", "red"))),
-                          alpha_dot = 0.8,
-                          show_dots = TRUE,
-                          model_info = NULL,
-                          model_class = NULL) {
+.plot_diag_qq <- function(
+  x,
+  size_point,
+  linewidth,
+  size_axis_title = 10,
+  size_title = 12,
+  alpha_level = 0.2,
+  detrend = FALSE,
+  method = "ell",
+  theme_style = theme_lucid,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue", "red"))),
+  alpha_dot = 0.8,
+  show_dots = TRUE,
+  model_info = NULL,
+  model_class = NULL
+) {
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
   # qq-halfnorm for GLM
   if (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count)) {
@@ -347,28 +361,35 @@ plot.see_check_normality <- function(x,
 
 # normality plot: PP -------------------------
 
-.plot_diag_pp <- function(x,
-                          size_point,
-                          linewidth,
-                          size_axis_title = base_size,
-                          size_title = 12,
-                          alpha_level = 0.2,
-                          detrend = FALSE,
-                          method = "ell",
-                          theme_style = theme_lucid,
-                          base_size = 10,
-                          colors = unname(social_colors(c("green", "blue", "red"))),
-                          alpha_dot = 0.8) {
+.plot_diag_pp <- function(
+  x,
+  size_point,
+  linewidth,
+  size_axis_title = base_size,
+  size_title = 12,
+  alpha_level = 0.2,
+  detrend = FALSE,
+  method = "ell",
+  theme_style = theme_lucid,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue", "red"))),
+  alpha_dot = 0.8
+) {
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
-      qqplotr::stat_pp_band(alpha = alpha_level, detrend = detrend, bandType = method) +
+      qqplotr::stat_pp_band(
+        alpha = alpha_level,
+        detrend = detrend,
+        bandType = method
+      ) +
       qqplotr::stat_pp_line(
         linewidth = linewidth,
         colour = colors[1],
         detrend = detrend
       ) +
       qqplotr::stat_pp_point(
-        shape = 16, stroke = 0,
+        shape = 16,
+        stroke = 0,
         size = size_point,
         colour = colors[2],
         alpha = alpha_dot,
@@ -394,9 +415,10 @@ plot.see_check_normality <- function(x,
         alpha = alpha_dot
       )
   } else {
-    insight::format_error("Package 'qqplotr' OR 'MASS' required for P-P plots. Please install one of them.")
+    insight::format_error(
+      "Package 'qqplotr' OR 'MASS' required for P-P plots. Please install one of them."
+    )
   }
-
 
   y_lab <- "Sample Cummulative Probability"
   if (detrend) y_lab <- paste0(y_lab, " Deviations")
@@ -420,18 +442,20 @@ plot.see_check_normality <- function(x,
 
 # normality plot: Random Effects QQ -------------------------
 
-.plot_diag_reqq <- function(x,
-                            size_point,
-                            linewidth,
-                            size_axis_title = base_size,
-                            size_title = 12,
-                            panel = TRUE,
-                            alpha_level = 0.2,
-                            theme_style = theme_lucid,
-                            base_size = 10,
-                            colors = unname(social_colors(c("green", "blue", "red"))),
-                            alpha_dot = 0.8,
-                            show_dots = TRUE) {
+.plot_diag_reqq <- function(
+  x,
+  size_point,
+  linewidth,
+  size_axis_title = base_size,
+  size_title = 12,
+  panel = TRUE,
+  alpha_level = 0.2,
+  theme_style = theme_lucid,
+  base_size = 10,
+  colors = unname(social_colors(c("green", "blue", "red"))),
+  alpha_dot = 0.8,
+  show_dots = TRUE
+) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
     p <- ggplot2::ggplot(dat, ggplot2::aes(x = .data$x, y = .data$y)) +
@@ -470,7 +494,6 @@ plot.see_check_normality <- function(x,
           alpha = alpha_dot
         )
     }
-
 
     if (nlevels(dat$facet) > 1 && isTRUE(panel)) {
       p <- p + ggplot2::facet_wrap(~facet, scales = "free")
