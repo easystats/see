@@ -142,7 +142,7 @@ plot.see_performance_simres <- function(
   }
 
   if (is.null(transform)) {
-    p_title <- "Uniformity of Residuals"
+    p_title <- "Distribution of Residuals"
     p_x <- "Standard Uniform Distribution Quantiles"
   } else if (identical(transform, stats::qnorm)) {
     p_title <- "Normality of Residuals"
