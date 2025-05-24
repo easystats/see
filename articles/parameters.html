@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -516,6 +516,7 @@ to refit the exact model used below:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Parameter                                  | Median |        95% CI | Weight</span></span>
 <span><span class="co">#&gt; ----------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; b_Intercept                                |   0.57 | [ 0.40, 0.76] |       </span></span>
 <span><span class="co">#&gt; r_Author[Call.et.al.,Intercept]            |   0.63 | [ 0.28, 1.03] |   3.83</span></span>
 <span><span class="co">#&gt; r_Author[Cavanagh.et.al.,Intercept]        |   0.43 | [ 0.10, 0.75] |   5.09</span></span>
 <span><span class="co">#&gt; r_Author[DanitzOrsillo,Intercept]          |   1.05 | [ 0.54, 1.67] |   2.89</span></span>
@@ -534,29 +535,28 @@ to refit the exact model used below:</p>
 <span><span class="co">#&gt; r_Author[Shapiro.et.al.,Intercept]         |   0.96 | [ 0.50, 1.53] |   3.17</span></span>
 <span><span class="co">#&gt; r_Author[SongLindquist,Intercept]          |   0.59 | [ 0.25, 0.95] |   4.41</span></span>
 <span><span class="co">#&gt; r_Author[Warnecke.et.al.,Intercept]        |   0.58 | [ 0.21, 0.96] |   4.02</span></span>
-<span><span class="co">#&gt; b_Intercept                                |   0.57 | [ 0.40, 0.76] |       </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Parameter                                  |     pd |  Rhat |      ESS</span></span>
-<span><span class="co">#&gt; ----------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; r_Author[Call.et.al.,Intercept]            | 99.95% | 1.000 | 10283.00</span></span>
-<span><span class="co">#&gt; r_Author[Cavanagh.et.al.,Intercept]        | 99.45% | 1.000 |  7644.00</span></span>
-<span><span class="co">#&gt; r_Author[DanitzOrsillo,Intercept]          |   100% | 1.000 |  4733.00</span></span>
-<span><span class="co">#&gt; r_Author[de.Vibe.et.al.,Intercept]         | 98.39% | 1.000 |  4947.00</span></span>
-<span><span class="co">#&gt; r_Author[Frazier.et.al.,Intercept]         | 99.91% | 1.000 |  7127.00</span></span>
-<span><span class="co">#&gt; r_Author[Frogeli.et.al.,Intercept]         | 99.99% | 1.000 |  9028.00</span></span>
-<span><span class="co">#&gt; r_Author[Gallego.et.al.,Intercept]         |   100% | 1.000 |  9883.00</span></span>
-<span><span class="co">#&gt; r_Author[Hazlett-Stevens.&amp;.Oren,Intercept] | 99.85% | 1.000 |  9039.00</span></span>
-<span><span class="co">#&gt; r_Author[Hintz.et.al.,Intercept]           | 99.36% | 1.000 |  7263.00</span></span>
-<span><span class="co">#&gt; r_Author[Kang.et.al.,Intercept]            |   100% | 1.000 |  7505.00</span></span>
-<span><span class="co">#&gt; r_Author[Kuhlmann.et.al.,Intercept]        | 93.21% | 1.000 |  6314.00</span></span>
-<span><span class="co">#&gt; r_Author[Lever.Taylor.et.al.,Intercept]    | 99.34% | 1.000 |  9747.00</span></span>
-<span><span class="co">#&gt; r_Author[Phang.et.al.,Intercept]           | 99.83% | 1.000 | 10419.00</span></span>
-<span><span class="co">#&gt; r_Author[Rasanen.et.al.,Intercept]         | 99.26% | 1.000 | 10918.00</span></span>
-<span><span class="co">#&gt; r_Author[Ratanasiripong,Intercept]         | 99.01% | 1.000 | 11984.00</span></span>
-<span><span class="co">#&gt; r_Author[Shapiro.et.al.,Intercept]         |   100% | 1.000 |  6546.00</span></span>
-<span><span class="co">#&gt; r_Author[SongLindquist,Intercept]          | 99.95% | 1.000 |  9709.00</span></span>
-<span><span class="co">#&gt; r_Author[Warnecke.et.al.,Intercept]        | 99.81% | 1.000 |  9922.00</span></span>
-<span><span class="co">#&gt; b_Intercept                                |   100% | 1.000 |  3921.00</span></span>
+<span><span class="co">#&gt; Parameter                                  |     pd |  Rhat |     ESS</span></span>
+<span><span class="co">#&gt; ---------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; b_Intercept                                |   100% | 1.000 | 3921.00</span></span>
+<span><span class="co">#&gt; r_Author[Call.et.al.,Intercept]            | 99.95% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Cavanagh.et.al.,Intercept]        | 99.45% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[DanitzOrsillo,Intercept]          |   100% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[de.Vibe.et.al.,Intercept]         | 98.39% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Frazier.et.al.,Intercept]         | 99.91% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Frogeli.et.al.,Intercept]         | 99.99% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Gallego.et.al.,Intercept]         |   100% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Hazlett-Stevens.&amp;.Oren,Intercept] | 99.85% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Hintz.et.al.,Intercept]           | 99.36% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Kang.et.al.,Intercept]            |   100% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Kuhlmann.et.al.,Intercept]        | 93.21% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Lever.Taylor.et.al.,Intercept]    | 99.34% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Phang.et.al.,Intercept]           | 99.83% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Rasanen.et.al.,Intercept]         | 99.26% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Ratanasiripong,Intercept]         | 99.01% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Shapiro.et.al.,Intercept]         |   100% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[SongLindquist,Intercept]          | 99.95% |       |        </span></span>
+<span><span class="co">#&gt; r_Author[Warnecke.et.al.,Intercept]        | 99.81% |       |        </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; # Tau</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -877,7 +877,7 @@ function documentation</a>)</em></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.9000.</p>
 </div>
 
     </footer>
