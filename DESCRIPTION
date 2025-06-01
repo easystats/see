@@ -64,10 +64,10 @@ Imports:
     bayestestR (>= 0.16.0),
     correlation (>= 0.8.7),
     datawizard (>= 1.1.0),
-    effectsize (>= 1.0.0),
+    effectsize (>= 1.0.1),
     ggplot2 (>= 3.5.2),
     insight (>= 1.3.0),
-    modelbased (>= 0.11.0),
+    modelbased (>= 0.11.2),
     patchwork (>= 1.3.0),
     parameters (>= 0.26.0),
     performance (>= 0.14.0)
