@@ -238,7 +238,9 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
     pal_name <- gsub("(.*)content=\"(.*) color palette(.*)", "\\2", curl_res)
   }
 
-  if (reverse) pal <- rev(pal)
+  if (reverse) {
+    pal <- rev(pal)
+  }
 
   pal <- grDevices::colorRampPalette(pal, ...)
   attr(pal, "name") <- pal_name

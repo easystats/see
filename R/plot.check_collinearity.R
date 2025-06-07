@@ -77,7 +77,9 @@ plot.see_check_collinearity <- function(
 ) {
   ylim <- ceiling(max(x$y, na.rm = TRUE))
   xlim <- nrow(x)
-  if (ylim < 10) ylim <- 10
+  if (ylim < 10) {
+    ylim <- 10
+  }
 
   if (is.null(ci_data)) {
     x$VIF_CI_low <- NA_real_

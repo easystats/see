@@ -10,7 +10,9 @@ data_plot.parameters_sem <- function(
   ...
 ) {
   # Compatibility patch
-  if (!all(type %in% component)) component <- type
+  if (!all(type %in% component)) {
+    component <- type
+  }
 
   # Deal with thresholds
   if (is.null(threshold_coefficient)) {

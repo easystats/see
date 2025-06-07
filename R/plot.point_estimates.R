@@ -34,7 +34,9 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
   )
 
   centrality <- tolower(attr(x, "centrality", exact = TRUE))
-  if (is.null(centrality)) centrality <- "all"
+  if (is.null(centrality)) {
+    centrality <- "all"
+  }
 
   dataplot <- lapply(colnames(data), function(i) {
     my_dist <- data[[i]]

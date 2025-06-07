@@ -421,7 +421,9 @@ plot.see_check_normality <- function(
   }
 
   y_lab <- "Sample Cummulative Probability"
-  if (detrend) y_lab <- paste0(y_lab, " Deviations")
+  if (detrend) {
+    y_lab <- paste0(y_lab, " Deviations")
+  }
 
   p_plot +
     ggplot2::labs(

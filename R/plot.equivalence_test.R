@@ -149,14 +149,23 @@ plot.see_equivalence_test <- function(
   )))]
 
   add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
-  if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
-  if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
-  if ("legend.title" %in% names(add.args))
+  if ("colors" %in% names(add.args)) {
+    fill.color <- eval(add.args[["colors"]])
+  }
+  if ("x.title" %in% names(add.args)) {
+    x.title <- eval(add.args[["x.title"]])
+  }
+  if ("legend.title" %in% names(add.args)) {
     legend.title <- eval(add.args[["legend.title"]])
-  if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
+  }
+  if ("labels" %in% names(add.args)) {
+    axis_labels <- eval(add.args[["labels"]])
+  }
 
   rope.line.alpha <- 1.25 * alpha_rope
-  if (rope.line.alpha > 1) rope.line.alpha <- 1
+  if (rope.line.alpha > 1) {
+    rope.line.alpha <- 1
+  }
 
   insight::check_if_installed("ggridges")
 
@@ -245,7 +254,9 @@ plot.see_equivalence_test_df <- function(
   n_columns = 1,
   ...
 ) {
-  if (is.null(data)) data <- .retrieve_data(x)
+  if (is.null(data)) {
+    data <- .retrieve_data(x)
+  }
 
   if (is.null(data)) {
     insight::format_warning(
@@ -316,15 +327,24 @@ plot.see_equivalence_test_df <- function(
   )))]
 
   add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
-  if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
-  if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
-  if ("legend.title" %in% names(add.args))
+  if ("colors" %in% names(add.args)) {
+    fill.color <- eval(add.args[["colors"]])
+  }
+  if ("x.title" %in% names(add.args)) {
+    x.title <- eval(add.args[["x.title"]])
+  }
+  if ("legend.title" %in% names(add.args)) {
     legend.title <- eval(add.args[["legend.title"]])
-  if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
+  }
+  if ("labels" %in% names(add.args)) {
+    axis_labels <- eval(add.args[["labels"]])
+  }
 
   rope.line.alpha <- 1.25 * alpha_rope
 
-  if (rope.line.alpha > 1) rope.line.alpha <- 1
+  if (rope.line.alpha > 1) {
+    rope.line.alpha <- 1
+  }
 
   insight::check_if_installed("ggridges")
 
@@ -446,13 +466,20 @@ plot.see_equivalence_test_lm <- function(
   )))]
 
   add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
-  if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
-  if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
-  if ("legend.title" %in% names(add.args))
+  if ("colors" %in% names(add.args)) {
+    fill.color <- eval(add.args[["colors"]])
+  }
+  if ("x.title" %in% names(add.args)) {
+    x.title <- eval(add.args[["x.title"]])
+  }
+  if ("legend.title" %in% names(add.args)) {
     legend.title <- eval(add.args[["legend.title"]])
+  }
 
   rope.line.alpha <- 1.25 * alpha_rope
-  if (rope.line.alpha > 1) rope.line.alpha <- 1
+  if (rope.line.alpha > 1) {
+    rope.line.alpha <- 1
+  }
 
   p <- ggplot(
     x,

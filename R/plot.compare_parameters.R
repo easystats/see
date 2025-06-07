@@ -175,12 +175,13 @@ plot.see_compare_parameters <- function(
   }
 
   # wrap plot into facets, depending on the components
-  if (is.null(n_columns))
+  if (is.null(n_columns)) {
     n_columns <- ifelse(
       sum(has_component, has_response, has_effects) > 1L,
       2L,
       1L
     )
+  }
 
   if (ordinal_model) {
     facet_scales <- "free_x"

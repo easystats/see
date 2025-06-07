@@ -71,10 +71,11 @@ plot.see_bayesfactor_models <- function(
   one_pie_data <- as.data.frame(x)
   one_pie_data$postOdds <- priorOdds * one_pie_data$BF
   one_pie_data$PostProb <- (one_pie_data$postOdds / sum(one_pie_data$postOdds))
-  if (isTRUE(sort))
+  if (isTRUE(sort)) {
     one_pie_data <- one_pie_data[
       order(one_pie_data$PostProb, decreasing = TRUE),
     ]
+  }
   one_pie_data$Model <- factor(one_pie_data$Model, levels = one_pie_data$Model)
 
   # Two pie data

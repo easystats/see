@@ -8,7 +8,9 @@
   columns = colnames(x),
   id = "id"
 ) {
-  if (is.numeric(columns)) columns <- colnames(x)[columns]
+  if (is.numeric(columns)) {
+    columns <- colnames(x)[columns]
+  }
   dat <- stats::reshape(
     as.data.frame(x),
     idvar = id,

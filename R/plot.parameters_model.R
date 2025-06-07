@@ -337,7 +337,9 @@ plot.see_parameters_model <- function(
   # data preparation for metafor-objects
   if (is_meta) {
     overall <- which(x$Parameter == "(Intercept)")
-    if (length(overall) == 0) overall <- which(x$Parameter == "Overall")
+    if (length(overall) == 0) {
+      overall <- which(x$Parameter == "Overall")
+    }
     x$Parameter[overall] <- "Overall"
     x$group <- "study"
     x$group[overall] <- "Overall"
@@ -353,7 +355,9 @@ plot.see_parameters_model <- function(
     type <- match.arg(type)
 
     if (type == "funnel") {
-      if (missing(size_point)) size_point <- 2.5
+      if (missing(size_point)) {
+        size_point <- 2.5
+      }
       return(.funnel_plot(x, size_point, meta_measure))
     }
   }
@@ -640,8 +644,9 @@ plot.see_parameters_model <- function(
   }
 
   # wrap plot into facets, depending on the components
-  if (is.null(n_columns))
+  if (is.null(n_columns)) {
     n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
+  }
 
   if (ordinal_model) {
     facet_scales <- "free_x"

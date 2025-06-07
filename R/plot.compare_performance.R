@@ -6,7 +6,9 @@ data_plot.compare_performance <- function(x, data = NULL, ...) {
   x$Performance_Score <- NULL
 
   # set reference for Bayes factors to 1
-  if ("BF" %in% colnames(x)) x$BF[is.na(x$BF)] <- 1
+  if ("BF" %in% colnames(x)) {
+    x$BF[is.na(x$BF)] <- 1
+  }
 
   # normalize indices, for better comparison
   x <- datawizard::rescale(x, exclude = "Model", to = c(0.1, 1))

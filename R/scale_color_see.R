@@ -280,7 +280,9 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
   }
   pal <- palette_list[[palette]]
 
-  if (reverse) pal <- rev(pal)
+  if (reverse) {
+    pal <- rev(pal)
+  }
 
   grDevices::colorRampPalette(pal, ...)
 }

@@ -128,7 +128,9 @@ geom_from_list <- function(x, ...) {
   }
 
   if (x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
-    if (!"contour" %in% names(arguments)) arguments$contour <- TRUE
+    if (!"contour" %in% names(arguments)) {
+      arguments$contour <- TRUE
+    }
     if (!"contour_var" %in% names(arguments)) arguments$contour_var <- "density"
   }
 
@@ -270,7 +272,9 @@ geoms_from_list <- function(x, ...) {
   # Get name of layers
   n <- length(x)
   l_names <- paste0("l", 1:n)
-  if (!all(l_names %in% names(x))) l_names <- names(x)
+  if (!all(l_names %in% names(x))) {
+    l_names <- names(x)
+  }
 
   layers <- list()
   for (i in l_names) {

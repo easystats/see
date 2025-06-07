@@ -205,7 +205,9 @@ okabeito_colors <- function(
     )
   }
 
-  if (isTRUE(black_first)) cols <- union("black", cols)
+  if (isTRUE(black_first)) {
+    cols <- union("black", cols)
+  }
 
   okabeito_colors_list[cols]
 }
@@ -272,7 +274,9 @@ palette_okabeito <- function(
   )
   pal <- pal[order]
 
-  if (reverse) pal <- rev(pal)
+  if (reverse) {
+    pal <- rev(pal)
+  }
 
   function(n) {
     if (n > length(pal)) {
