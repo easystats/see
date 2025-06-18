@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{see_check_normality}(
   x,
-  type = c("qq", "pp", "density"),
+  type = "qq",
   data = NULL,
   linewidth = 0.8,
   size_point = 2,

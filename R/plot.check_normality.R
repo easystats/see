@@ -41,7 +41,7 @@
 #' @export
 plot.see_check_normality <- function(
   x,
-  type = c("qq", "pp", "density"),
+  type = "qq",
   data = NULL,
   linewidth = 0.8,
   size_point = 2,
@@ -55,7 +55,7 @@ plot.see_check_normality <- function(
   method = "ell",
   ...
 ) {
-  type <- match.arg(type)
+  type <- insight::validate_argument(type, c("qq", "pp", "density"))
 
   if (is.null(data)) {
     model <- .retrieve_data(x)
@@ -79,111 +79,124 @@ plot.see_check_normality <- function(
       size_title = size_title,
       base_size = base_size
     )
-  } else {
-    if (type == "qq") {
-      # nolint
-      model_info <- attributes(x)$model_info
-      if (
-        inherits(
-          model,
-          c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor")
-        )
-      ) {
-        res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
-        dat <- stats::na.omit(data.frame(y = res_))
-      } else if (inherits(model, "glmmTMB")) {
-        res_ <- abs(stats::residuals(model, type = "deviance"))
-        dat <- stats::na.omit(data.frame(y = res_))
-      } else if (inherits(model, "glm")) {
-        res_ <- abs(stats::rstandard(model, type = "deviance"))
-        fitted_ <- stats::qnorm(
-          (stats::ppoints(length(res_)) + 1) / 2
-        )[order(order(res_))]
-        dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
-      } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
-        res_ <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
-        dat <- stats::na.omit(data.frame(y = res_))
-      } else if (inherits(model, "performance_simres")) {
-        return(plot.see_performance_simres(
-          model,
-          linewidth = linewidth,
-          size_point = size_point,
-          alpha = alpha,
-          alpha_dot = alpha_dot,
-          colors = colors,
-          detrend = detrend,
-          base_size = base_size,
-          transform = stats::qnorm,
-          ...
-        ))
-      } else if (is.numeric(model)) {
-        res_ <- sort(model[!is.infinite(model)])
-        dat <- stats::na.omit(data.frame(y = res_))
-      } else {
-        res_ <- sort(stats::rstudent(model), na.last = NA)
-        dat <- stats::na.omit(data.frame(y = res_))
-      }
-
-      .plot_diag_qq(
-        dat,
+  } else if (type == "qq") {
+    # return early for simres
+    if (inherits(model, "performance_simres")) {
+      return(plot.see_performance_simres(
+        model,
+        linewidth = linewidth,
         size_point = size_point,
-        linewidth = linewidth,
-        size_axis_title = size_axis_title,
-        size_title = size_title,
-        base_size = base_size,
-        alpha_level = alpha,
-        detrend = detrend,
+        alpha = alpha,
         alpha_dot = alpha_dot,
-        model_info = model_info,
-        method = method,
-        model_class = class(model)[1]
-      )
-    } else if (type == "density") {
-      if (inherits(model, "performance_simres")) {
-        r <- stats::residuals(model, quantile_function = stats::qnorm)
-        r <- r[!is.infinite(r)]
-      } else if (is.numeric(model)) {
-        r <- model[!is.infinite(model) & !is.na(model)]
-      } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
-        r <- insight::get_residuals(model)
-      } else {
-        r <- suppressMessages(stats::residuals(model))
-      }
-      dat <- as.data.frame(bayestestR::estimate_density(r))
-      dat$curve <- stats::dnorm(
-        seq(min(dat$x), max(dat$x), length.out = nrow(dat)),
-        mean(r),
-        stats::sd(r)
-      )
-      .plot_diag_norm(
-        dat,
-        linewidth = linewidth,
-        alpha_level = alpha,
-        base_size = base_size,
-        size_axis_title = size_axis_title,
-        size_title = size_title
-      )
-    } else if (type == "pp") {
-      if (inherits(model, c("fa", "principle", "parameters_efa"))) {
-        x <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
-      } else {
-        x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
-      }
-      dat <- data.frame(res = x)
-      .plot_diag_pp(
-        dat,
-        size_point = size_point,
-        linewidth = linewidth,
-        base_size = base_size,
-        size_axis_title = size_axis_title,
-        size_title = size_title,
-        alpha_level = alpha,
+        colors = colors,
         detrend = detrend,
-        alpha_dot = alpha_dot,
-        method = method
-      )
+        base_size = base_size,
+        transform = stats::qnorm,
+        ...
+      ))
     }
+
+    model_info <- attributes(x)$model_info
+    dat <- .residuals_qq(model)
+    .plot_diag_qq(
+      dat,
+      size_point = size_point,
+      linewidth = linewidth,
+      size_axis_title = size_axis_title,
+      size_title = size_title,
+      base_size = base_size,
+      alpha_level = alpha,
+      detrend = detrend,
+      alpha_dot = alpha_dot,
+      model_info = model_info,
+      method = method,
+      model_class = class(model)[1]
+    )
+  } else if (type == "density") {
+    dat <- .residuals_density(model)
+    .plot_diag_norm(
+      dat,
+      linewidth = linewidth,
+      alpha_level = alpha,
+      base_size = base_size,
+      size_axis_title = size_axis_title,
+      size_title = size_title
+    )
+  } else if (type == "pp") {
+    dat <- .residuals_pp(model)
+    .plot_diag_pp(
+      dat,
+      size_point = size_point,
+      linewidth = linewidth,
+      base_size = base_size,
+      size_axis_title = size_axis_title,
+      size_title = size_title,
+      alpha_level = alpha,
+      detrend = detrend,
+      alpha_dot = alpha_dot,
+      method = method
+    )
   }
+}
+
+
+# extract residuals
+
+.residuals_qq <- function(model) {
+  if (inherits(model, c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor"))) {
+    res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+    dat <- stats::na.omit(data.frame(y = res_))
+  } else if (inherits(model, "glmmTMB")) {
+    res_ <- abs(stats::residuals(model, type = "deviance"))
+    dat <- stats::na.omit(data.frame(y = res_))
+  } else if (inherits(model, "glm")) {
+    res_ <- abs(stats::rstandard(model, type = "deviance"))
+    fitted_ <- stats::qnorm(
+      (stats::ppoints(length(res_)) + 1) / 2
+    )[order(order(res_))]
+    dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
+  } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+    res_ <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
+    dat <- stats::na.omit(data.frame(y = res_))
+  } else if (is.numeric(model)) {
+    res_ <- sort(model[!is.infinite(model)])
+    dat <- stats::na.omit(data.frame(y = res_))
+  } else {
+    res_ <- sort(stats::rstudent(model), na.last = NA)
+    dat <- stats::na.omit(data.frame(y = res_))
+  }
+  dat
+}
+
+
+.residuals_density <- function(model) {
+  if (inherits(model, "performance_simres")) {
+    r <- stats::residuals(model, quantile_function = stats::qnorm)
+    r <- r[!is.infinite(r)]
+  } else if (is.numeric(model)) {
+    r <- model[!is.infinite(model) & !is.na(model)]
+  } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+    r <- insight::get_residuals(model)
+  } else {
+    r <- suppressMessages(stats::residuals(model))
+  }
+  dat <- as.data.frame(bayestestR::estimate_density(r))
+  dat$curve <- stats::dnorm(
+    seq(min(dat$x), max(dat$x), length.out = nrow(dat)),
+    mean(r),
+    stats::sd(r)
+  )
+  dat
+}
+
+
+.residuals_pp <- function(model) {
+  if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+    x <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
+  } else {
+    x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+  }
+  data.frame(res = x)
 }
 
 
@@ -250,6 +263,18 @@ plot.see_check_normality <- function(
   model_class = NULL
 ) {
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
+
+  # set default y-range for FA / PCA
+  if (!is.null(model_class) && model_class %in% c("psych", "fa", "principle", "parameters_efa")) {
+    if (any(abs(x$y) > 0.075)) {
+      y_range <- c(-max(abs(x$y)), max(abs(x$y)))
+    } else {
+      y_range <- c(-0.075, 0.075)
+    }
+  } else {
+    y_range <- NULL
+  }
+
   # qq-halfnorm for GLM
   if (isTRUE(model_info$is_binomial) || isTRUE(model_info$is_count)) {
     gg_init <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
@@ -333,16 +358,14 @@ plot.see_check_normality <- function(
         stroke = 0,
         size = size_point,
         colour = colors[2]
-      ),
-      if (detrend) {
-        ggplot2::ylim(y_range)
-      }
+      )
     )
 
     if (detrend) {
       y_lab <- "Sample Quantile Deviations"
     } else {
       y_lab <- "Sample Quantiles"
+      y_range <- NULL
     }
   }
 
@@ -350,7 +373,7 @@ plot.see_check_normality <- function(
     qq_stuff[2] <- NULL
   }
 
-  gg_init +
+  p <- gg_init +
     qq_stuff +
     ggplot2::labs(
       title = "Normality of Residuals",
@@ -365,6 +388,12 @@ plot.see_check_normality <- function(
       plot.title.size = size_title,
       axis.title.size = size_axis_title
     )
+
+  if (!is.null(y_range)) {
+    p <- p + ggplot2::ylim(y_range)
+  }
+
+  p
 }
 
 
