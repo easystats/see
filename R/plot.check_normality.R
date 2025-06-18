@@ -101,7 +101,7 @@ plot.see_check_normality <- function(
         )[order(order(res_))]
         dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
       } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
-        res_ <- abs(insight::get_residuals(model))
+        res_ <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
         dat <- stats::na.omit(data.frame(y = res_))
       } else if (inherits(model, "performance_simres")) {
         return(plot.see_performance_simres(
@@ -165,7 +165,7 @@ plot.see_check_normality <- function(
       )
     } else if (type == "pp") {
       if (inherits(model, c("fa", "principle", "parameters_efa"))) {
-        x <- sort(insight::get_residuals(model))
+        x <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
       } else {
         x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
       }
