@@ -5,6 +5,11 @@
 * The minimum needed R version has been bumped to `4.1`, since `{correlation}`,
   a runtime dependency, requires it.
 
+## Changes
+
+* `plot()` for `performance::check_normality()` now also supports objects from
+  `psych::fa()`, `psych::principal()` and `parameters::factor_analysis()`.
+
 # see 0.11.0
 
 ## Changes
@@ -710,4 +715,3 @@
 ## Bug fixes
 
 * Fixed issues with color codes in the flat-ui palette.
-
