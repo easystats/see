@@ -100,6 +100,9 @@ plot.see_check_normality <- function(
           (stats::ppoints(length(res_)) + 1) / 2
         )[order(order(res_))]
         dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
+      } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+        res_ <- abs(insight::get_residuals(model))
+        dat <- stats::na.omit(data.frame(y = res_))
       } else if (inherits(model, "performance_simres")) {
         return(plot.see_performance_simres(
           model,
@@ -141,6 +144,8 @@ plot.see_check_normality <- function(
         r <- r[!is.infinite(r)]
       } else if (is.numeric(model)) {
         r <- model[!is.infinite(model) & !is.na(model)]
+      } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+        r <- insight::get_residuals(model)
       } else {
         r <- suppressMessages(stats::residuals(model))
       }
@@ -159,7 +164,11 @@ plot.see_check_normality <- function(
         size_title = size_title
       )
     } else if (type == "pp") {
-      x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+      if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+        x <- sort(insight::get_residuals(model))
+      } else {
+        x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
+      }
       dat <- data.frame(res = x)
       .plot_diag_pp(
         dat,
