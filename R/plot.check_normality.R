@@ -155,7 +155,7 @@ plot.see_check_normality <- function(
       (stats::ppoints(length(res_)) + 1) / 2
     )[order(order(res_))]
     dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
-  } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+  } else if (.is_pca_fa(model)) {
     res_ <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
     dat <- stats::na.omit(data.frame(y = res_))
   } else if (is.numeric(model)) {
@@ -175,7 +175,7 @@ plot.see_check_normality <- function(
     r <- r[!is.infinite(r)]
   } else if (is.numeric(model)) {
     r <- model[!is.infinite(model) & !is.na(model)]
-  } else if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+  } else if (.is_pca_omega(model)) {
     r <- insight::get_residuals(model)
   } else {
     r <- suppressMessages(stats::residuals(model))
@@ -191,12 +191,22 @@ plot.see_check_normality <- function(
 
 
 .residuals_pp <- function(model) {
-  if (inherits(model, c("fa", "principle", "parameters_efa"))) {
+  if (.is_pca_omega(model)) {
     x <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
   } else {
     x <- suppressMessages(sort(stats::residuals(model), na.last = NA))
   }
   data.frame(res = x)
+}
+
+
+.is_pca_omega <- function(model = NULL, mclass = NULL) {
+  efa_classes <- c("fa", "principle", "omega", "parameters_efa", "parameters_omega")
+  if (is.null(mclass)) {
+    inherits(model, efa_classes)
+  } else {
+    tolower(mclass) %in% efa_classes
+  }
 }
 
 
@@ -265,7 +275,7 @@ plot.see_check_normality <- function(
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
 
   # set default y-range for FA / PCA
-  if (!is.null(model_class) && model_class %in% c("psych", "fa", "principle", "parameters_efa")) {
+  if (!is.null(model_class) && .is_pca_omega(model = NULL, mclass = model_class)) {
     if (any(abs(x$y) > 0.075)) {
       y_range <- c(-max(abs(x$y)), max(abs(x$y)))
     } else {
