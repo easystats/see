@@ -205,7 +205,7 @@ plot.see_check_normality <- function(
   if (is.null(mclass)) {
     inherits(model, efa_classes)
   } else {
-    tolower(mclass) %in% efa_classes
+    any(tolower(mclass) %in% efa_classes)
   }
 }
 
