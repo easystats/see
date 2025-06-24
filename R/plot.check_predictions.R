@@ -107,43 +107,22 @@ print.see_performance_pp_check <- function(
 ) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
-  plot_type <- attributes(x)$type
-  is_stan <- attributes(x)$is_stan
 
-  if (
-    missing(type) &&
-      !is.null(plot_type) &&
-      plot_type %in%
-        c("density", "discrete_dots", "discrete_interval", "discrete_both")
-  ) {
-    type <- plot_type
-  } else {
-    type <- insight::validate_argument(
-      type,
-      c("density", "discrete_dots", "discrete_interval", "discrete_both")
-    )
-  }
-
-  if (!inherits(x, "data_plot")) {
-    x <- data_plot(x, type)
-  }
-
-  p1 <- .plot_pp_check(
+  p1 <- .plot_prepare_pp_check(
     x,
+    base_size = base_size,
     linewidth = linewidth,
     size_point = size_point,
-    alpha_line = alpha_line,
-    theme_style = style,
-    colors = colors,
-    base_size = base_size,
-    size_title = size_title,
+    size_bar = size_bar,
     size_axis_title = size_axis_title,
+    size_title = size_title,
+    alpha_line = alpha_line,
+    style = style,
+    colors = colors,
     type = type,
     x_limits = x_limits,
-    is_stan = is_stan,
     ...
   )
-
   if (isTRUE(check_range)) {
     p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
     graphics::plot(plots(p1, p2, n_columns = 1))
@@ -174,6 +153,46 @@ plot.see_performance_pp_check <- function(
 ) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
+
+  p1 <- .plot_prepare_pp_check(
+    x,
+    base_size = base_size,
+    linewidth = linewidth,
+    size_point = size_point,
+    size_bar = size_bar,
+    size_axis_title = size_axis_title,
+    size_title = size_title,
+    alpha_line = alpha_line,
+    style = style,
+    colors = colors,
+    type = type,
+    x_limits = x_limits,
+    ...
+  )
+
+  if (isTRUE(check_range)) {
+    p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
+    plots(p1, p2)
+  } else {
+    p1
+  }
+}
+
+
+.plot_prepare_pp_check <- function(
+  x,
+  base_size = 10,
+  linewidth = 0.5,
+  size_point = 2,
+  size_title = 12,
+  size_axis_title = base_size,
+  alpha_line = 0.15,
+  style = theme_lucid,
+  colors = unname(social_colors(c("green", "blue"))),
+  type = "density",
+  x_limits = NULL,
+  ...
+) {
   plot_type <- attributes(x)$type
   is_stan <- attributes(x)$is_stan
 
@@ -183,7 +202,6 @@ plot.see_performance_pp_check <- function(
       plot_type %in%
         c("density", "discrete_dots", "discrete_interval", "discrete_both")
   ) {
-    # nolint
     type <- plot_type
   } else {
     type <- insight::validate_argument(
@@ -196,28 +214,21 @@ plot.see_performance_pp_check <- function(
     x <- data_plot(x, type)
   }
 
-  p1 <- .plot_pp_check(
+  .plot_pp_check(
     x,
     linewidth = linewidth,
     size_point = size_point,
     alpha_line = alpha_line,
     theme_style = style,
-    base_size = base_size,
-    size_axis_title = size_axis_title,
-    size_title = size_title,
     colors = colors,
+    base_size = base_size,
+    size_title = size_title,
+    size_axis_title = size_axis_title,
     type = type,
     x_limits = x_limits,
     is_stan = is_stan,
     ...
   )
-
-  if (isTRUE(check_range)) {
-    p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
-    plots(p1, p2)
-  } else {
-    p1
-  }
 }
 
 
