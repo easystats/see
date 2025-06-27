@@ -54,11 +54,11 @@ test_that("`plot.see_check_normality()` works with FA", {
   raq_items$id <- NULL
 
   raq_fa <- parameters::factor_analysis(
-      raq_items,
-      n = 4,
-      scores = "tenBerge",
-      cor = "poly",
-      standardize = FALSE
+    raq_items,
+    n = 4,
+    scores = "tenBerge",
+    cor = "poly",
+    standardize = FALSE
   )
 
   out <- performance::check_normality(raq_fa)
