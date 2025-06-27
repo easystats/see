@@ -1,5 +1,5 @@
 test_that("geom_binomdensity() works correctly", {
-  skip_if_not_installed(c("ggplot2", "ggdist"))
+  skip_if_not_installed("ggdist")
   skip_if_not_installed("vdiffr")
 
   # Basic binary data
@@ -84,7 +84,7 @@ test_that("geom_binomdensity() works correctly", {
         data_unbalanced,
         x = "x",
         y = "y",
-        scale = list("Few" = 0.6, "Many" = 0.4),
+        scale = list(Few = 0.6, Many = 0.4),
         fill = "orange",
         alpha = 0.7
       ) +
