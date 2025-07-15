@@ -10,6 +10,9 @@
 * `plot()` for `performance::check_normality()` now also supports objects from
   `psych::fa()`, `psych::principal()` and `parameters::factor_analysis()`.
 
+* Minor re-labelling of axis titles and subtitles in `plot()` for
+  `performance::check_residuals()`.
+
 # see 0.11.0
 
 ## Changes
