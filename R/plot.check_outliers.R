@@ -44,6 +44,12 @@ plot.see_check_outliers <- function(
   show_labels = TRUE,
   ...
 ) {
+
+  if (attributes(x)$method == "mahalanobis") {
+    insight::check_if_installed(c("ggplot2", "see", "ggrepel"))
+    return(plot_mahalanobis(x, ...))
+  }
+
   type <- match.arg(type)
   influential_obs <- attributes(x)$influential_obs
   outlier_methods <- attr(x, "methods", exact = TRUE)

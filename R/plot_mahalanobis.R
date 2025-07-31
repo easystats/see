@@ -1,0 +1,154 @@
+#' Mahalanobis outlier detection plot
+#'
+#' Produces a scree-style Mahalanobis distance plot that highlights two types of
+#' multivariate outliers. Observations exceeding the chi-squared cutoff are shown
+#' in warm colors, while observations following large jumps ("elbows") in the sorted
+#' Mahalanobis distances are shown in cool colors. Elbow outliers are defined based
+#' on sudden increases in distance, analogous to inflection points in scree plots.
+#'
+#' This plot method is automatically called when plotting the result of
+#' [performance::check_outliers()] with `method = "mahalanobis"`.
+#'
+#' @param x A `check_outliers` object created with `method = "mahalanobis"`.
+#' @param idvar Optional character string giving the name of a variable in the original
+#'   data to use as point labels (e.g., participant ID). If `NULL`, row names are used.
+#' @param elbow_threshold Optional scalar setting the minimum jump in Mahalanobis
+#'   distance (between adjacent sorted observations) to be considered an elbow. By
+#'   default, the 95th percentile of all such jumps is used. Higher values yield more
+#'   conservative outlier detection.
+#' @param verbose Logical. If `TRUE` (default), prints a summary list of outlier IDs.
+#' @param ... Additional arguments passed to plotting layers.
+#'
+#' @return A `ggplot2` object displaying the Mahalanobis outlier plot.
+#'   When `verbose = TRUE`, also prints a list with the IDs of `chi_outliers` and `elbow_outliers`.
+#'
+#' @references
+#' This implementation was inspired by a visualization approach developed by
+#' Prof. Marina Doucerain (Université du Québec à Montréal).
+#'
+#' @examples
+#' ## Simulate a small dataset and illustrate the use of the function
+#' set.seed(123)
+#' x <- matrix(rnorm(200 * 5), ncol = 5)
+#' colnames(x) <- paste0("Var", seq_len(ncol(x)))
+#' df <- as.data.frame(x)
+#' df$ID <- paste0("Obs", seq_len(nrow(df)))
+#' x <- performance::check_outliers(df, threshold = 15)
+#' plot(x, idvar = "ID", elbow_threshold = 3)
+
+plot_mahalanobis <- function(x,
+                             idvar = NULL,
+                             elbow_threshold = NULL,
+                             verbose = TRUE, ...) {
+  insight::check_if_installed("ggrepel")
+
+  # Extract Mahalanobis distances
+  att <- attributes(x)
+  out_data <- att$data
+  md <- out_data$Distance_Mahalanobis
+  n_vars <- ncol(out_data)
+  crit <- att$threshold$mahalanobis
+
+  data <- att$raw_data
+  ordered_idx <- order(md)
+  df_plot <- data.frame(
+    obs  = seq_along(md),
+    mdist = sort(md),
+    id   = if (!is.null(idvar) && idvar %in% names(data)) {
+      data[[idvar]][ordered_idx]
+    } else {
+      rownames(data)[ordered_idx]
+    },
+    stringsAsFactors = FALSE
+  )
+
+  # Chi-squared outliers
+  df_plot$chi_outlier <- df_plot$mdist > crit
+
+  # Elbow-based outliers
+  diffs <- diff(df_plot$mdist)
+  if (is.null(elbow_threshold)) {
+    elbow_threshold <- stats::quantile(diffs, 0.95, na.rm = TRUE)
+  }
+  elbow_idx <- which(diffs > elbow_threshold)
+  df_plot$elbow_outlier <- df_plot$obs %in% (elbow_idx + 1)
+
+  df_plot$outlier_type <- ifelse(df_plot$elbow_outlier, "elbow",
+                                 ifelse(df_plot$chi_outlier, "chi", "none"))
+
+  # Build base plot
+  p <- ggplot2::ggplot(df_plot, ggplot2::aes(x = .data$obs, y = .data$mdist)) +
+    ggplot2::geom_point(
+      ggplot2::aes(fill = .data$outlier_type),
+      shape = 21, size = 2, stroke = 0.4, colour = "black"
+    ) +
+    ggplot2::geom_hline(yintercept = crit, colour = "#d33f49", linetype = "dashed", linewidth = 0.8) +
+    ggplot2::scale_fill_manual(
+      values = c("none" = "gray85", "chi" = "#fcbba1", "elbow" = "#5b9bd5"),
+      guide = "none"
+    ) +
+    ggplot2::labs(
+      title = "Mahalanobis Outlier Detection",
+      x = "Observations (sorted)", y = "Mahalanobis Distance"
+    ) +
+    see::theme_modern()
+
+  # Add elbow guideline segments (scree-style) — solid, with gap
+  if (length(elbow_idx) > 0) {
+    gaps <- (df_plot$mdist[elbow_idx + 1] - df_plot$mdist[elbow_idx]) * 0.15
+    elbow_lines <- data.frame(
+      x = df_plot$obs[elbow_idx],
+      xend = df_plot$obs[elbow_idx + 1],
+      y = df_plot$mdist[elbow_idx] + gaps,
+      yend = df_plot$mdist[elbow_idx + 1] - gaps
+    )
+    p <- p + ggplot2::geom_segment(
+      data = elbow_lines,
+      ggplot2::aes(x = .data$x, xend = .data$xend, y = .data$y, yend = .data$yend),
+      inherit.aes = FALSE,
+      colour = "#5b9bd5",
+      linetype = "solid",
+      linewidth = 0.6
+    )
+  }
+
+  # Label chi-outliers
+  p <- p + ggrepel::geom_text_repel(
+    data = subset(df_plot, df_plot$outlier_type == "chi"),
+    ggplot2::aes(label = .data$id),
+    size = 2.8,
+    colour = "#d33f49",
+    min.segment.length = 0,
+    direction = "x",
+    hjust = 1,
+    nudge_x = -5,
+    max.overlaps = 10,
+    box.padding = 0.3,
+    segment.color = "gray60"
+  )
+
+  # Label elbow-outliers
+  p <- p + ggrepel::geom_text_repel(
+    data = subset(df_plot, df_plot$outlier_type == "elbow"),
+    ggplot2::aes(label = .data$id),
+    size = 2.8,
+    colour = "#5b9bd5",
+    min.segment.length = 0,
+    direction = "x",
+    hjust = 1,
+    nudge_x = -5,
+    max.overlaps = 10,
+    box.padding = 0.3,
+    segment.color = "gray60"
+  )
+
+  # Return the outlier data for user reference
+  if (verbose) {
+    print(list(
+      chi_outliers  = df_plot$id[df_plot$chi_outlier],
+      elbow_outliers = df_plot$id[df_plot$elbow_outlier]
+    ))
+  }
+
+  p
+}
