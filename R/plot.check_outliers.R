@@ -45,8 +45,7 @@ plot.see_check_outliers <- function(
   ...
 ) {
 
-  if (attributes(x)$method == "mahalanobis") {
-    insight::check_if_installed(c("ggplot2", "see", "ggrepel"))
+  if (identical(attr(x, "method"), "mahalanobis")) {
     return(plot_mahalanobis(x, ...))
   }
 

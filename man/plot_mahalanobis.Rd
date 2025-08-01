@@ -37,7 +37,7 @@ This plot method is automatically called when plotting the result of
 \code{\link[performance:check_outliers]{performance::check_outliers()}} with \code{method = "mahalanobis"}.
 }
 \examples{
-## Simulate a small dataset and illustrate the use of the function
+\dontshow{if (insight::check_if_installed("ggrepel")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set.seed(123)
 x <- matrix(rnorm(200 * 5), ncol = 5)
 colnames(x) <- paste0("Var", seq_len(ncol(x)))
@@ -45,6 +45,7 @@ df <- as.data.frame(x)
 df$ID <- paste0("Obs", seq_len(nrow(df)))
 x <- performance::check_outliers(df, threshold = 15)
 plot(x, idvar = "ID", elbow_threshold = 3)
+\dontshow{\}) # examplesIf}
 }
 \references{
 This implementation was inspired by a visualization approach developed by

@@ -26,8 +26,7 @@
 #' This implementation was inspired by a visualization approach developed by
 #' Prof. Marina Doucerain (Université du Québec à Montréal).
 #'
-#' @examples
-#' ## Simulate a small dataset and illustrate the use of the function
+#' @examplesIf insight::check_if_installed("ggrepel")
 #' set.seed(123)
 #' x <- matrix(rnorm(200 * 5), ncol = 5)
 #' colnames(x) <- paste0("Var", seq_len(ncol(x)))
@@ -46,18 +45,17 @@ plot_mahalanobis <- function(x,
   att <- attributes(x)
   out_data <- att$data
   md <- out_data$Distance_Mahalanobis
-  n_vars <- ncol(out_data)
   crit <- att$threshold$mahalanobis
 
-  data <- att$raw_data
+  dat <- att$raw_data
   ordered_idx <- order(md)
   df_plot <- data.frame(
     obs  = seq_along(md),
     mdist = sort(md),
-    id   = if (!is.null(idvar) && idvar %in% names(data)) {
-      data[[idvar]][ordered_idx]
+    id   = if (!is.null(idvar) && idvar %in% names(dat)) {
+      dat[[idvar]][ordered_idx]
     } else {
-      rownames(data)[ordered_idx]
+      rownames(dat)[ordered_idx]
     },
     stringsAsFactors = FALSE
   )
@@ -68,13 +66,15 @@ plot_mahalanobis <- function(x,
   # Elbow-based outliers
   diffs <- diff(df_plot$mdist)
   if (is.null(elbow_threshold)) {
-    elbow_threshold <- stats::quantile(diffs, 0.95, na.rm = TRUE)
+    default_eblow_quantile <- 0.95
+    elbow_threshold <- stats::quantile(diffs, default_eblow_quantile, na.rm = TRUE)
   }
   elbow_idx <- which(diffs > elbow_threshold)
   df_plot$elbow_outlier <- df_plot$obs %in% (elbow_idx + 1)
 
-  df_plot$outlier_type <- ifelse(df_plot$elbow_outlier, "elbow",
-                                 ifelse(df_plot$chi_outlier, "chi", "none"))
+  df_plot$outlier_type <- "none"
+  df_plot$outlier_type[df_plot$chi_outlier] <- "chi"
+  df_plot$outlier_type[df_plot$elbow_outlier] <- "elbow"
 
   # Build base plot
   p <- ggplot2::ggplot(df_plot, ggplot2::aes(x = .data$obs, y = .data$mdist)) +
@@ -84,7 +84,7 @@ plot_mahalanobis <- function(x,
     ) +
     ggplot2::geom_hline(yintercept = crit, colour = "#d33f49", linetype = "dashed", linewidth = 0.8) +
     ggplot2::scale_fill_manual(
-      values = c("none" = "gray85", "chi" = "#fcbba1", "elbow" = "#5b9bd5"),
+      values = c(none = "gray85", chi = "#fcbba1", elbow = "#5b9bd5"),
       guide = "none"
     ) +
     ggplot2::labs(
@@ -95,7 +95,8 @@ plot_mahalanobis <- function(x,
 
   # Add elbow guideline segments (scree-style) — solid, with gap
   if (length(elbow_idx) > 0) {
-    gaps <- (df_plot$mdist[elbow_idx + 1] - df_plot$mdist[elbow_idx]) * 0.15
+    gap_proportion <- 0.15
+    gaps <- (df_plot$mdist[elbow_idx + 1] - df_plot$mdist[elbow_idx]) * gap_proportion
     elbow_lines <- data.frame(
       x = df_plot$obs[elbow_idx],
       xend = df_plot$obs[elbow_idx + 1],
@@ -112,35 +113,27 @@ plot_mahalanobis <- function(x,
     )
   }
 
-  # Label chi-outliers
-  p <- p + ggrepel::geom_text_repel(
-    data = subset(df_plot, df_plot$outlier_type == "chi"),
-    ggplot2::aes(label = .data$id),
-    size = 2.8,
-    colour = "#d33f49",
-    min.segment.length = 0,
-    direction = "x",
-    hjust = 1,
-    nudge_x = -5,
-    max.overlaps = 10,
-    box.padding = 0.3,
-    segment.color = "gray60"
-  )
+  # Create a data frame with all points to be labeled
+  label_data <- df_plot[df_plot$outlier_type %in% c("chi", "elbow"), ]
 
-  # Label elbow-outliers
+  # Add labels to plot
   p <- p + ggrepel::geom_text_repel(
-    data = subset(df_plot, df_plot$outlier_type == "elbow"),
-    ggplot2::aes(label = .data$id),
+    data = label_data,
+    ggplot2::aes(label = .data$id, colour = .data$outlier_type),
     size = 2.8,
-    colour = "#5b9bd5",
     min.segment.length = 0,
     direction = "x",
     hjust = 1,
     nudge_x = -5,
     max.overlaps = 10,
     box.padding = 0.3,
-    segment.color = "gray60"
-  )
+    segment.color = "gray60",
+    show.legend = FALSE
+  ) +
+    ggplot2::scale_colour_manual(
+      values = c(chi = "#d33f49", elbow = "#5b9bd5"),
+      guide = "none"
+    )
 
   # Return the outlier data for user reference
   if (verbose) {
