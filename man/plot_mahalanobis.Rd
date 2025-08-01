@@ -37,7 +37,7 @@ This plot method is automatically called when plotting the result of
 \code{\link[performance:check_outliers]{performance::check_outliers()}} with \code{method = "mahalanobis"}.
 }
 \examples{
-\dontshow{if (insight::check_if_installed("ggrepel")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggrepel")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set.seed(123)
 x <- matrix(rnorm(200 * 5), ncol = 5)
 colnames(x) <- paste0("Var", seq_len(ncol(x)))

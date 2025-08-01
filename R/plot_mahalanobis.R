@@ -26,7 +26,7 @@
 #' This implementation was inspired by a visualization approach developed by
 #' Prof. Marina Doucerain (Université du Québec à Montréal).
 #'
-#' @examplesIf insight::check_if_installed("ggrepel")
+#' @examplesIf require("ggrepel")
 #' set.seed(123)
 #' x <- matrix(rnorm(200 * 5), ncol = 5)
 #' colnames(x) <- paste0("Var", seq_len(ncol(x)))
