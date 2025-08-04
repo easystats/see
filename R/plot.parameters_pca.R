@@ -95,7 +95,11 @@ plot.see_parameters_pca <- function(
   }
 
   if (missing(size)) {
-    size <- switch(type, "bar" = 0.6, "line" = 1, 1)
+    size <- switch(type,
+      "bar" = 0.6,
+      "line" = 1,
+      1
+    )
   }
 
   p <- ggplot(

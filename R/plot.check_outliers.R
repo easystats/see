@@ -44,7 +44,6 @@ plot.see_check_outliers <- function(
   show_labels = TRUE,
   ...
 ) {
-
   if (identical(attr(x, "method"), "mahalanobis")) {
     return(plot_mahalanobis(x, ...))
   }
@@ -126,8 +125,7 @@ data_plot.check_outliers <- function(
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
   d$Id[d$Outliers == "0"] <- NA
 
-  method <- switch(
-    attr(x, "method", exact = TRUE),
+  method <- switch(attr(x, "method", exact = TRUE),
     cook = "Cook's Distance",
     pareto = "Pareto",
     mahalanobis = "Mahalanobis Distance",

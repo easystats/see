@@ -35,7 +35,6 @@
 #' df$ID <- paste0("Obs", seq_len(nrow(df)))
 #' x <- performance::check_outliers(df, threshold = 12)
 #' plot(x, idvar = "ID")
-
 plot_mahalanobis <- function(x,
                              idvar = NULL,
                              elbow_threshold = NULL,
@@ -51,12 +50,12 @@ plot_mahalanobis <- function(x,
   dat <- att$raw_data
   ordered_idx <- order(md)
   df_plot <- data.frame(
-    obs  = seq_along(md),
+    obs = seq_along(md),
     mdist = sort(md),
-    id   = if (!is.null(idvar) && idvar %in% names(dat)) {
-      dat[[idvar]][ordered_idx]
-    } else {
+    id = if (is.null(idvar) && idvar %in% names(dat)) {
       rownames(dat)[ordered_idx]
+    } else {
+      dat[[idvar]][ordered_idx]
     },
     stringsAsFactors = FALSE
   )
@@ -73,10 +72,10 @@ plot_mahalanobis <- function(x,
     elbow_idx <- which(diffs > elbow_threshold)[1]
   }
 
-  if (!is.na(elbow_idx)) {
-    df_plot$elbow_outlier <- df_plot$obs > elbow_idx
-  } else {
+  if (is.na(elbow_idx)) {
     df_plot$elbow_outlier <- FALSE
+  } else {
+    df_plot$elbow_outlier <- df_plot$obs > elbow_idx
   }
 
   df_plot$outlier_type <- "none"
@@ -145,7 +144,7 @@ plot_mahalanobis <- function(x,
   # Return the outlier data for user reference
   if (verbose) {
     print(list(
-      chi_outliers  = df_plot$id[df_plot$chi_outlier],
+      chi_outliers = df_plot$id[df_plot$chi_outlier],
       elbow_outliers = df_plot$id[df_plot$elbow_outlier],
       elbow_threshold = elbow_threshold
     ))
