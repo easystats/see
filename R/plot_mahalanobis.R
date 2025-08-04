@@ -12,10 +12,11 @@
 #' @param x A `check_outliers` object created with `method = "mahalanobis"`.
 #' @param idvar Optional character string giving the name of a variable in the original
 #'   data to use as point labels (e.g., participant ID). If `NULL`, row names are used.
-#' @param elbow_threshold Optional scalar setting the minimum jump in Mahalanobis
-#'   distance (between adjacent sorted observations) to be considered an elbow. By
-#'   default, the 95th percentile of all such jumps is used. Higher values yield more
-#'   conservative outlier detection.
+#' @param elbow_threshold Optional scalar specifying the minimum jump in Mahalanobis
+#'   distance (between adjacent sorted observations) used to detect the elbow point.
+#'   If supplied, all observations following the first jump greater than this value
+#'   are flagged as outliers. If `NULL` (default), the largest jump is used
+#'   automatically. Higher values yield more conservative outlier detection.
 #' @param verbose Logical. If `TRUE` (default), prints a summary list of outlier IDs.
 #' @param ... Additional arguments passed to plotting layers.
 #'
@@ -32,8 +33,8 @@
 #' colnames(x) <- paste0("Var", seq_len(ncol(x)))
 #' df <- as.data.frame(x)
 #' df$ID <- paste0("Obs", seq_len(nrow(df)))
-#' x <- performance::check_outliers(df, threshold = 15)
-#' plot(x, idvar = "ID", elbow_threshold = 3)
+#' x <- performance::check_outliers(df, threshold = 12)
+#' plot(x, idvar = "ID")
 
 plot_mahalanobis <- function(x,
                              idvar = NULL,
@@ -66,11 +67,17 @@ plot_mahalanobis <- function(x,
   # Elbow-based outliers
   diffs <- diff(df_plot$mdist)
   if (is.null(elbow_threshold)) {
-    default_eblow_quantile <- 0.95
-    elbow_threshold <- stats::quantile(diffs, default_eblow_quantile, na.rm = TRUE)
+    elbow_idx <- which.max(diffs)
+    elbow_threshold <- diffs[elbow_idx]
+  } else {
+    elbow_idx <- which(diffs > elbow_threshold)[1]
   }
-  elbow_idx <- which(diffs > elbow_threshold)
-  df_plot$elbow_outlier <- df_plot$obs %in% (elbow_idx + 1)
+
+  if (!is.na(elbow_idx)) {
+    df_plot$elbow_outlier <- df_plot$obs > elbow_idx
+  } else {
+    df_plot$elbow_outlier <- FALSE
+  }
 
   df_plot$outlier_type <- "none"
   df_plot$outlier_type[df_plot$chi_outlier] <- "chi"
@@ -139,7 +146,8 @@ plot_mahalanobis <- function(x,
   if (verbose) {
     print(list(
       chi_outliers  = df_plot$id[df_plot$chi_outlier],
-      elbow_outliers = df_plot$id[df_plot$elbow_outlier]
+      elbow_outliers = df_plot$id[df_plot$elbow_outlier],
+      elbow_threshold = elbow_threshold
     ))
   }
 

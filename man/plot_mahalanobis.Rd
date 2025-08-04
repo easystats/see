@@ -12,10 +12,11 @@ plot_mahalanobis(x, idvar = NULL, elbow_threshold = NULL, verbose = TRUE, ...)
 \item{idvar}{Optional character string giving the name of a variable in the original
 data to use as point labels (e.g., participant ID). If \code{NULL}, row names are used.}
 
-\item{elbow_threshold}{Optional scalar setting the minimum jump in Mahalanobis
-distance (between adjacent sorted observations) to be considered an elbow. By
-default, the 95th percentile of all such jumps is used. Higher values yield more
-conservative outlier detection.}
+\item{elbow_threshold}{Optional scalar specifying the minimum jump in Mahalanobis
+distance (between adjacent sorted observations) used to detect the elbow point.
+If supplied, all observations following the first jump greater than this value
+are flagged as outliers. If \code{NULL} (default), the largest jump is used
+automatically. Higher values yield more conservative outlier detection.}
 
 \item{verbose}{Logical. If \code{TRUE} (default), prints a summary list of outlier IDs.}
 
@@ -43,8 +44,8 @@ x <- matrix(rnorm(200 * 5), ncol = 5)
 colnames(x) <- paste0("Var", seq_len(ncol(x)))
 df <- as.data.frame(x)
 df$ID <- paste0("Obs", seq_len(nrow(df)))
-x <- performance::check_outliers(df, threshold = 15)
-plot(x, idvar = "ID", elbow_threshold = 3)
+x <- performance::check_outliers(df, threshold = 12)
+plot(x, idvar = "ID")
 \dontshow{\}) # examplesIf}
 }
 \references{
