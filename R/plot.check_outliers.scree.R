@@ -1,62 +1,38 @@
-#' Mahalanobis outlier detection plot
-#'
-#' Produces a scree-style Mahalanobis distance plot that highlights two types of
-#' multivariate outliers. Observations exceeding the chi-squared cutoff are shown
-#' in warm colors, while observations following large jumps ("elbows") in the sorted
-#' Mahalanobis distances are shown in cool colors. Elbow outliers are defined based
-#' on sudden increases in distance, analogous to inflection points in scree plots.
-#'
-#' This plot method is automatically called when plotting the result of
-#' [performance::check_outliers()] with `method = "mahalanobis"`.
-#'
-#' @param x A `check_outliers` object created with `method = "mahalanobis"`.
-#' @param idvar Optional character string giving the name of a variable in the original
-#'   data to use as point labels (e.g., participant ID). If `NULL`, row names are used.
-#' @param elbow_threshold Optional scalar specifying the minimum jump in Mahalanobis
-#'   distance (between adjacent sorted observations) used to detect the elbow point.
-#'   If supplied, all observations following the first jump greater than this value
-#'   are flagged as outliers. If `NULL` (default), the largest jump is used
-#'   automatically. Higher values yield more conservative outlier detection.
-#' @param verbose Logical. If `TRUE` (default), prints a summary list of outlier IDs.
-#' @param ... Additional arguments passed to plotting layers.
-#'
-#' @return A `ggplot2` object displaying the Mahalanobis outlier plot.
-#'   When `verbose = TRUE`, also prints a list with the IDs of `chi_outliers` and `elbow_outliers`.
-#'
-#' @references
-#' This implementation was inspired by a visualization approach developed by
-#' Prof. Marina Doucerain (Université du Québec à Montréal).
-#'
-#' @examplesIf require("ggrepel")
-#' set.seed(123)
-#' x <- matrix(rnorm(200 * 5), ncol = 5)
-#' colnames(x) <- paste0("Var", seq_len(ncol(x)))
-#' df <- as.data.frame(x)
-#' df$ID <- paste0("Obs", seq_len(nrow(df)))
-#' x <- performance::check_outliers(df, threshold = 12)
-#' plot(x, idvar = "ID")
-plot_mahalanobis <- function(x,
-                             idvar = NULL,
-                             elbow_threshold = NULL,
-                             verbose = TRUE, ...) {
+.plot_scree <- function(x,
+                        elbow_threshold = NULL,
+                        rescale_distance = FALSE,
+                        verbose = TRUE,
+                        ...) {
   insight::check_if_installed("ggrepel")
 
-  # Extract Mahalanobis distances
   att <- attributes(x)
-  out_data <- att$data
-  md <- out_data$Distance_Mahalanobis
-  crit <- att$threshold$mahalanobis
+  method <- tools::toTitleCase(att$method)
 
-  dat <- att$raw_data
+  d <- data_plot(x, rescale_distance = rescale_distance)
+
+  md <- d$Distance
+  crit <- att$threshold[[1]]
   ordered_idx <- order(md)
-  df_plot <- data.frame(
-    obs = seq_along(md),
-    mdist = sort(md),
-    id = if (is.null(idvar) && idvar %in% names(dat)) {
-      rownames(dat)[ordered_idx]
+  obs <- seq_along(md)
+
+  rescaled <- attr(d, "rescale_distance")
+  if (isTRUE(rescaled)) {
+    y_lab <- paste(method, "Distance (rescaled range 0-1)")
+    crit <- attr(d, "rescale_threshold")
+  } else {
+    y_lab <- paste(method, "Distance")
+  }
+
+  if (is.null(d$ID)) {
+    ID <- obs[ordered_idx]
     } else {
-      dat[[idvar]][ordered_idx]
-    },
+      ID <- d$ID[ordered_idx]
+      }
+
+  df_plot <- data.frame(
+    obs = obs,
+    mdist = sort(md),
+    id = ID,
     stringsAsFactors = FALSE
   )
 
@@ -65,9 +41,13 @@ plot_mahalanobis <- function(x,
 
   # Elbow-based outliers
   diffs <- diff(df_plot$mdist)
+
   if (is.null(elbow_threshold)) {
     elbow_idx <- which.max(diffs)
     elbow_threshold <- diffs[elbow_idx]
+    if (length(elbow_threshold) == 0) {
+      insight::format_error("Outlier distance Data invalid. Please check. 2")
+    }
   } else {
     elbow_idx <- which(diffs > elbow_threshold)[1]
   }
@@ -94,8 +74,8 @@ plot_mahalanobis <- function(x,
       guide = "none"
     ) +
     ggplot2::labs(
-      title = "Mahalanobis Outlier Detection",
-      x = "Observations (sorted)", y = "Mahalanobis Distance"
+      title = "Scree Outlier Detection",
+      x = "Observations (sorted)", y = y_lab
     ) +
     see::theme_modern()
 
@@ -144,7 +124,8 @@ plot_mahalanobis <- function(x,
   # Return the outlier data for user reference
   if (verbose) {
     print(list(
-      chi_outliers = df_plot$id[df_plot$chi_outlier],
+      threshold_outliers = df_plot$id[df_plot$chi_outlier],
+      threshold = crit,
       elbow_outliers = df_plot$id[df_plot$elbow_outlier],
       elbow_threshold = elbow_threshold
     ))

@@ -1,4 +1,4 @@
-.plot_diag_outliers_new <- function(
+.plot_diag_outliers_dots <- function(
   x,
   na.rm = TRUE,
   ref.color = "darkgray",
@@ -158,3 +158,71 @@
 
   p
 }
+
+.plot_diag_outliers_dots_old <- function(
+    x,
+    show_labels = TRUE,
+    size_text = 3.5,
+    rescale_distance = TRUE
+) {
+  d <- data_plot(x, rescale_distance = rescale_distance)
+  d$Id <- seq_len(nrow(d))
+  d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
+  d$Id[d$Outliers == "0"] <- NA
+
+  method <- switch(attr(x, "method", exact = TRUE),
+                   cook = "Cook's Distance",
+                   pareto = "Pareto",
+                   mahalanobis = "Mahalanobis Distance",
+                   ics = "Invariant Coordinate Selection",
+                   mcd = "Minimum Covariance Determinant",
+                   optics = "OPTICS",
+                   iforest = "Isolation Forest",
+                   "Cook's Distance"
+  )
+
+  threshold <- attr(x, "threshold", exact = TRUE)[[method]]
+  rescaled <- attr(d, "rescale_distance")
+  if (isTRUE(rescaled)) {
+    x_lab <- paste0(method, " (rescaled range 0-1)")
+  } else {
+    x_lab <- method
+  }
+
+  size_text <- size_text %||% 3.5
+
+  p <- ggplot(
+    d,
+    aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)
+  ) +
+    geom_histogram() +
+    labs(
+      title = "Influential Observations",
+      subtitle = "High Cook's distance might reflect potential outliers",
+      x = x_lab,
+      y = "Count",
+      fill = NULL
+    ) +
+    scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
+    guides(fill = "none", color = "none", label = "none")
+
+  if (!is.null(threshold) && !is.na(threshold)) {
+    p <- p +
+      geom_vline(
+        xintercept = threshold,
+        linetype = "dashed",
+        color = "#c0392b"
+      )
+  }
+
+  if (isTRUE(show_labels)) {
+    if (requireNamespace("ggrepel", quietly = TRUE)) {
+      p <- p + ggrepel::geom_text_repel(y = 2.5, size = size_text, na.rm = TRUE)
+    } else {
+      p <- p + geom_text(y = 2.5, size = size_text, na.rm = TRUE)
+    }
+  }
+
+  p + guides(x = guide_axis(n.dodge = 2))
+}
+

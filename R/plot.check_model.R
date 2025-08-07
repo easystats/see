@@ -210,7 +210,7 @@ plot.see_check_model <- function(
       !is.null(x$INFLUENTIAL) &&
       any(c("outliers", "influential", "all") %in% check)
   ) {
-    p$OUTLIERS <- .plot_diag_outliers_new(
+    p$OUTLIERS <- .plot_diag_outliers_dots(
       x$INFLUENTIAL,
       show_labels = show_labels,
       size_text = size_text,

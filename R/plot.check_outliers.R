@@ -6,29 +6,51 @@
 #' @param type Character vector, indicating the type of plot.
 #'   Options are `"dots"` (default) for a scatterplot of leverage (hat) values
 #'   versus residuals, with Cook's Distance contours for evaluating influential
-#'   points, or `"bars"` for a bar chart of (rescaled) outlier statistic values
-#'   for each data point. Only used for outlier plots of fitted models; for
-#'   outlier plots of raw data values, `type = "bars"` is always used.
+#'   points, `"scree"` for a scree-style plot highlighting "elbow outliers"
+#'   (based on sudden increases in distance; see details), or `"bars"` for a
+#'   bar chart of (rescaled) outlier statistic values for each data point.
+#'   `type = "dots"` is only used for outlier plots of fitted models; for
+#'   outlier plots of raw data values, `type` must be either `"scree"` or `"bars"`.
 #' @param show_labels Logical. If `TRUE`, text labels are displayed.
 #' @param size_text Numeric value specifying size of text labels.
 #' @param rescale_distance Logical. If `TRUE`, distance values are rescaled
 #'   to a range from 0 to 1. This is mainly due to better catch the differences
 #'   between distance values.
+#' @param elbow_threshold Optional scalar specifying the minimum jump in
+#'   distance (between adjacent sorted observations) used to detect the elbow point.
+#'   If supplied, all observations following the first jump greater than this value
+#'   are flagged as outliers. If `NULL` (default), the largest jump is used
+#'   automatically. Higher values yield more conservative outlier detection.
+#' @param verbose Logical. If `TRUE` (default), prints a summary list of outliers.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'
-#' @return A ggplot2-object.
+#' @details When using `type = "scree"`, the function will provide a
+#' scree-style distance plot that highlights two types of outliers.
+#' Observations exceeding the specified threshold are shown in warm colors,
+#' while observations following the largest jump ("elbow", or the specified
+#' cut-off value) in the sorted distances are shown in cool colors. Elbow
+#' outliers are defined based on sudden increases in distance, analogous to
+#' inflection points in scree plots.
 #'
+#' @return A ggplot2-object.
+#' @references
+#' The scree plot implementation was inspired by a visualization approach
+#' developed by Prof. Marina Doucerain (Université du Québec à Montréal).
 #' @examples
 #' library(performance)
 #' data(mtcars)
 #' mt1 <- mtcars[, c(1, 3, 4)]
+#' mt1$ID <- row.names(mt1)
 #' mt2 <- rbind(
 #'   mt1,
-#'   data.frame(mpg = c(37, 40), disp = c(300, 400), hp = c(110, 120))
+#'   data.frame(mpg = c(37, 48), disp = c(300, 400), hp = c(110, 120),
+#'   ID = c("JZ", "GP"))
 #' )
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
+#' plot(check_outliers(mt2$mpg, method = "zscore"), type = "bar")
+#' plot(check_outliers(mt2[-3], method = "mahalanobis", ID = "ID"))
 #' @export
 plot.see_check_outliers <- function(
   x,
@@ -39,25 +61,28 @@ plot.see_check_outliers <- function(
   base_size = 10,
   alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-  rescale_distance = TRUE,
-  type = c("dots", "bars"),
+  rescale_distance = FALSE,
+  type = c("dots", "scree", "count", "bars"),
+  elbow_threshold = NULL,
   show_labels = TRUE,
+  verbose = TRUE,
   ...
 ) {
-  if (identical(attr(x, "method"), "mahalanobis")) {
-    return(plot_mahalanobis(x, ...))
+
+  influential_obs <- attributes(x)$influential_obs
+  outlier_methods <- attr(x, "method", exact = TRUE)
+  if (length(outlier_methods) == 0) {
+    insight::format_error("Outlier distance Data invalid. Please check.")
+  } else if (all(outlier_methods == c("optics", "optics_xi"))) {
+    outlier_methods <- outlier_methods[[1]]
   }
 
-  type <- match.arg(type)
-  influential_obs <- attributes(x)$influential_obs
-  outlier_methods <- attr(x, "methods", exact = TRUE)
-
   if (
-    type == "dots" &&
+    "dots" %in% type &&
       !is.null(influential_obs) &&
       (is.null(outlier_methods) || length(outlier_methods) == 1)
   ) {
-    .plot_diag_outliers_new(
+    .plot_diag_outliers_dots(
       influential_obs,
       show_labels = show_labels,
       size_text = size_text,
@@ -68,17 +93,26 @@ plot.see_check_outliers <- function(
       alpha_dot = alpha_dot,
       colors = colors
     )
-  } else if (length(outlier_methods) == 1) {
-    .plot_diag_outliers(
+  } else if ("scree" %in% type && length(outlier_methods) == 1) {
+    .plot_scree(
+      x,
+      rescale_distance = rescale_distance,
+      elbow_threshold = elbow_threshold,
+      verbose = verbose,
+      ...)
+  } else if ("count" %in% type && length(outlier_methods) == 1) {
+    # this method isn't documented?? It's the old method.
+    # Either we document it or remove it completely?
+    .plot_diag_outliers_dots_old(
       x,
       show_labels = show_labels,
       size_text = size_text,
       rescale_distance = rescale_distance
     )
   } else {
-    .plot_outliers_multimethod(x, rescale_distance)
+      .plot_outliers_multimethod(x, rescale_distance = TRUE)
+      }
   }
-}
 
 
 #' @export
@@ -88,13 +122,22 @@ data_plot.check_outliers <- function(
   rescale_distance = TRUE,
   ...
 ) {
-  data <- attributes(x)$data
+  att <- attributes(x)
+  data <- att$data
   row.names(data) <- data$Obs
 
   # Extract distances
   d <- data[grepl("Distance_", names(data), fixed = TRUE)]
   if (rescale_distance) {
+    # Also normalize the threshold using the original values
+    threshold <- att$threshold[[1]]
+    mdist <- d[1]
+    rescale_threshold <- (threshold - min(mdist, na.rm = TRUE)) /
+      (max(mdist, na.rm = TRUE) - min(mdist, na.rm = TRUE))
+    attr(d, "rescale_threshold") <- rescale_threshold
     d <- datawizard::normalize(d, verbose = FALSE)
+  } else {
+    rescale_threshold <- NULL
   }
 
   d_long <- stats::reshape(
@@ -110,80 +153,13 @@ data_plot.check_outliers <- function(
   row.names(d_long) <- d_long$id <- NULL
   d_long$Method <- gsub("Distance_", "", d_long$Method, fixed = TRUE)
   attr(d_long, "rescale_distance") <- isTRUE(rescale_distance)
+  attr(d_long, "rescale_threshold") <- rescale_threshold
+  d_long$ID <- data$ID
   d_long
 }
 
-
-.plot_diag_outliers <- function(
-  x,
-  show_labels = TRUE,
-  size_text = 3.5,
-  rescale_distance = TRUE
-) {
-  d <- data_plot(x, rescale_distance = rescale_distance)
-  d$Id <- seq_len(nrow(d))
-  d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
-  d$Id[d$Outliers == "0"] <- NA
-
-  method <- switch(attr(x, "method", exact = TRUE),
-    cook = "Cook's Distance",
-    pareto = "Pareto",
-    mahalanobis = "Mahalanobis Distance",
-    ics = "Invariant Coordinate Selection",
-    mcd = "Minimum Covariance Determinant",
-    optics = "OPTICS",
-    iforest = "Isolation Forest",
-    "Cook's Distance"
-  )
-
-  threshold <- attr(x, "threshold", exact = TRUE)[[method]]
-  rescaled <- attr(d, "rescale_distance")
-  if (isTRUE(rescaled)) {
-    x_lab <- paste0(method, " (rescaled range 0-1)")
-  } else {
-    x_lab <- method
-  }
-
-  size_text <- size_text %||% 3.5
-
-  p <- ggplot(
-    d,
-    aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)
-  ) +
-    geom_histogram() +
-    labs(
-      title = "Influential Observations",
-      subtitle = "High Cook's distance might reflect potential outliers",
-      x = x_lab,
-      y = "Count",
-      fill = NULL
-    ) +
-    scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
-    guides(fill = "none", color = "none", label = "none")
-
-  if (!is.null(threshold) && !is.na(threshold)) {
-    p <- p +
-      geom_vline(
-        xintercept = threshold,
-        linetype = "dashed",
-        color = "#c0392b"
-      )
-  }
-
-  if (isTRUE(show_labels)) {
-    if (requireNamespace("ggrepel", quietly = TRUE)) {
-      p <- p + ggrepel::geom_text_repel(y = 2.5, size = size_text, na.rm = TRUE)
-    } else {
-      p <- p + geom_text(y = 2.5, size = size_text, na.rm = TRUE)
-    }
-  }
-
-  p + guides(x = guide_axis(n.dodge = 2))
-}
-
-
 .plot_outliers_multimethod <- function(x, rescale_distance = TRUE) {
-  d <- data_plot(x, rescale_distance = rescale_distance)
+  d <- data_plot(x, rescale_distance = TRUE)
 
   rescaled <- attr(d, "rescale_distance")
   if (isTRUE(rescaled)) {
@@ -192,7 +168,7 @@ data_plot.check_outliers <- function(
     y_lab <- "Distance"
   }
 
-  suppressWarnings(
+  suppressWarnings( # suppressWarnings? Hum
     ggplot(
       data = d,
       aes(
