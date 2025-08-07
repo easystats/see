@@ -25,9 +25,9 @@
 
   if (is.null(d$ID)) {
     ID <- obs[ordered_idx]
-    } else {
-      ID <- d$ID[ordered_idx]
-      }
+  } else {
+    ID <- d$ID[ordered_idx]
+  }
 
   df_plot <- data.frame(
     obs = obs,

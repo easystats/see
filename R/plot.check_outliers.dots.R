@@ -160,10 +160,10 @@
 }
 
 .plot_diag_outliers_dots_old <- function(
-    x,
-    show_labels = TRUE,
-    size_text = 3.5,
-    rescale_distance = TRUE
+  x,
+  show_labels = TRUE,
+  size_text = 3.5,
+  rescale_distance = TRUE
 ) {
   d <- data_plot(x, rescale_distance = rescale_distance)
   d$Id <- seq_len(nrow(d))
@@ -171,14 +171,14 @@
   d$Id[d$Outliers == "0"] <- NA
 
   method <- switch(attr(x, "method", exact = TRUE),
-                   cook = "Cook's Distance",
-                   pareto = "Pareto",
-                   mahalanobis = "Mahalanobis Distance",
-                   ics = "Invariant Coordinate Selection",
-                   mcd = "Minimum Covariance Determinant",
-                   optics = "OPTICS",
-                   iforest = "Isolation Forest",
-                   "Cook's Distance"
+    cook = "Cook's Distance",
+    pareto = "Pareto",
+    mahalanobis = "Mahalanobis Distance",
+    ics = "Invariant Coordinate Selection",
+    mcd = "Minimum Covariance Determinant",
+    optics = "OPTICS",
+    iforest = "Isolation Forest",
+    "Cook's Distance"
   )
 
   threshold <- attr(x, "threshold", exact = TRUE)[[method]]
@@ -225,4 +225,3 @@
 
   p + guides(x = guide_axis(n.dodge = 2))
 }
-

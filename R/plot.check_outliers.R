@@ -44,12 +44,15 @@
 #' mt1$ID <- row.names(mt1)
 #' mt2 <- rbind(
 #'   mt1,
-#'   data.frame(mpg = c(37, 48), disp = c(300, 400), hp = c(110, 120),
-#'   ID = c("JZ", "GP"))
+#'   data.frame(
+#'     mpg = c(37, 48), disp = c(300, 400), hp = c(110, 120),
+#'     ID = c("JZ", "GP")
+#'   )
 #' )
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
 #' plot(check_outliers(mt2$mpg, method = "zscore"), type = "bar")
+#' @examplesIf require("ggrepel")
 #' plot(check_outliers(mt2[-3], method = "mahalanobis", ID = "ID"))
 #' @export
 plot.see_check_outliers <- function(
@@ -68,7 +71,6 @@ plot.see_check_outliers <- function(
   verbose = TRUE,
   ...
 ) {
-
   influential_obs <- attributes(x)$influential_obs
   outlier_methods <- attr(x, "method", exact = TRUE)
   if (length(outlier_methods) == 0) {
@@ -99,7 +101,8 @@ plot.see_check_outliers <- function(
       rescale_distance = rescale_distance,
       elbow_threshold = elbow_threshold,
       verbose = verbose,
-      ...)
+      ...
+    )
   } else if ("count" %in% type && length(outlier_methods) == 1) {
     # this method isn't documented?? It's the old method.
     # Either we document it or remove it completely?
@@ -110,9 +113,9 @@ plot.see_check_outliers <- function(
       rescale_distance = rescale_distance
     )
   } else {
-      .plot_outliers_multimethod(x, rescale_distance = TRUE)
-      }
+    .plot_outliers_multimethod(x, rescale_distance = TRUE)
   }
+}
 
 
 #' @export
