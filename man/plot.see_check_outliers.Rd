@@ -84,13 +84,17 @@ mt1 <- mtcars[, c(1, 3, 4)]
 mt1$ID <- row.names(mt1)
 mt2 <- rbind(
   mt1,
-  data.frame(mpg = c(37, 48), disp = c(300, 400), hp = c(110, 120),
-  ID = c("JZ", "GP"))
+  data.frame(
+    mpg = c(37, 48), disp = c(300, 400), hp = c(110, 120),
+    ID = c("JZ", "GP")
+  )
 )
 model <- lm(disp ~ mpg + hp, data = mt2)
 plot(check_outliers(model))
 plot(check_outliers(mt2$mpg, method = "zscore"), type = "bar")
+\dontshow{if (require("ggrepel")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 plot(check_outliers(mt2[-3], method = "mahalanobis", ID = "ID"))
+\dontshow{\}) # examplesIf}
 }
 \references{
 The scree plot implementation was inspired by a visualization approach
