@@ -31,4 +31,10 @@ test_that("`plot.see_check_outliers()` works", {
     title = "plot.see_check_outliers works scree method",
     fig = plot(performance::check_outliers(model, type = "scree", verbose = FALSE))
   )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "plot.see_check_outliers works scree method, z-score",
+    fig = plot(performance::check_outliers(mt2$mpg, method = "zscore"), type = "scree")
+  )
 })
