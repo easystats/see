@@ -1,8 +1,10 @@
-.plot_scree <- function(x,
-                        elbow_threshold = NULL,
-                        rescale_distance = FALSE,
-                        verbose = TRUE,
-                        ...) {
+.plot_scree <- function(
+  x,
+  elbow_threshold = NULL,
+  rescale_distance = FALSE,
+  verbose = TRUE,
+  ...
+) {
   insight::check_if_installed("ggrepel")
 
   att <- attributes(x)
@@ -66,16 +68,25 @@
   p <- ggplot2::ggplot(df_plot, ggplot2::aes(x = .data$obs, y = .data$mdist)) +
     ggplot2::geom_point(
       ggplot2::aes(fill = .data$outlier_type),
-      shape = 21, size = 2, stroke = 0.4, colour = "black"
+      shape = 21,
+      size = 2,
+      stroke = 0.4,
+      colour = "black"
     ) +
-    ggplot2::geom_hline(yintercept = crit, colour = "#d33f49", linetype = "dashed", linewidth = 0.8) +
+    ggplot2::geom_hline(
+      yintercept = crit,
+      colour = "#d33f49",
+      linetype = "dashed",
+      linewidth = 0.8
+    ) +
     ggplot2::scale_fill_manual(
       values = c(none = "gray85", chi = "#fcbba1", elbow = "#5b9bd5"),
       guide = "none"
     ) +
     ggplot2::labs(
       title = "Scree Outlier Detection",
-      x = "Observations (sorted)", y = y_lab
+      x = "Observations (sorted)",
+      y = y_lab
     ) +
     see::theme_modern()
 
@@ -89,33 +100,35 @@
       y = df_plot$mdist[elbow_idx] + gaps,
       yend = df_plot$mdist[elbow_idx + 1] - gaps
     )
-    p <- p + ggplot2::geom_segment(
-      data = elbow_lines,
-      ggplot2::aes(x = .data$x, xend = .data$xend, y = .data$y, yend = .data$yend),
-      inherit.aes = FALSE,
-      colour = "#5b9bd5",
-      linetype = "solid",
-      linewidth = 0.6
-    )
+    p <- p +
+      ggplot2::geom_segment(
+        data = elbow_lines,
+        ggplot2::aes(x = .data$x, xend = .data$xend, y = .data$y, yend = .data$yend),
+        inherit.aes = FALSE,
+        colour = "#5b9bd5",
+        linetype = "solid",
+        linewidth = 0.6
+      )
   }
 
   # Create a data frame with all points to be labeled
   label_data <- df_plot[df_plot$outlier_type %in% c("chi", "elbow"), ]
 
   # Add labels to plot
-  p <- p + ggrepel::geom_text_repel(
-    data = label_data,
-    ggplot2::aes(label = .data$id, colour = .data$outlier_type),
-    size = 2.8,
-    min.segment.length = 0,
-    direction = "x",
-    hjust = 1,
-    nudge_x = -5,
-    max.overlaps = 10,
-    box.padding = 0.3,
-    segment.color = "gray60",
-    show.legend = FALSE
-  ) +
+  p <- p +
+    ggrepel::geom_text_repel(
+      data = label_data,
+      ggplot2::aes(label = .data$id, colour = .data$outlier_type),
+      size = 2.8,
+      min.segment.length = 0,
+      direction = "x",
+      hjust = 1,
+      nudge_x = -5,
+      max.overlaps = 10,
+      box.padding = 0.3,
+      segment.color = "gray60",
+      show.legend = FALSE
+    ) +
     ggplot2::scale_colour_manual(
       values = c(chi = "#d33f49", elbow = "#5b9bd5"),
       guide = "none"
