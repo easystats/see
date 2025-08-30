@@ -1,7 +1,3 @@
-skip_if(TRUE)
-
-## FIXME: currently does not retrieve the data
-
 skip_on_cran()
 skip_if_offline()
 skip_if_not_installed("mclogit")

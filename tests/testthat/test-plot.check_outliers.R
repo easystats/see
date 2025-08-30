@@ -14,6 +14,8 @@ test_that("`plot.see_check_outliers()` works", {
     "gg"
   )
 
+  skip_if_not_installed("ggrepel")
+
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works default method",
