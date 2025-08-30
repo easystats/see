@@ -1,3 +1,5 @@
+skip("Fails at retrieving data")
+
 skip_on_cran()
 skip_if_offline()
 skip_if_not_installed("mclogit")
