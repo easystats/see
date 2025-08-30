@@ -23,13 +23,19 @@ test_that("`plot.see_check_outliers()` works", {
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works bars method",
-    fig = plot(performance::check_outliers(model, type = "bars", verbose = FALSE))
+    fig = plot(performance::check_outliers(model, verbose = FALSE), type = "bars")
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "plot.see_check_outliers works count method",
+    fig = plot(performance::check_outliers(model, verbose = FALSE), type = "count")
   )
 
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works scree method",
-    fig = plot(performance::check_outliers(model, type = "scree", verbose = FALSE))
+    fig = plot(performance::check_outliers(model, verbose = FALSE), type = "scree")
   )
 
   set.seed(123)
