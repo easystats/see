@@ -1,7 +1,5 @@
 # Workflow derived from https://posit-dev.github.io/air/integration-github-actions.html
 on:
-  push:
-    branches: [main, master]
   pull_request:
     branches: [main, master]
 
