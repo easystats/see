@@ -59,10 +59,9 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #'
 #' The `plot()` method for the `parameters::principal_components()` function.
 #'
-#' @param type Character vector, indicating the type of plot.
-#'   Options are three different shapes to represent component loadings;
-#'    `"bar"` (default) for a horizontal bar chart, or
-#'    `"line"` for a horizontal point and line chart.
+#' @param type Character vector, indicating the type of plot. Options are three
+#'   different shapes to represent component loadings; `"bar"` (default) for a
+#'   horizontal bar chart, or `"line"` for a horizontal point and line chart.
 #' @param color_text Character specifying color of text labels.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
@@ -95,11 +94,7 @@ plot.see_parameters_pca <- function(
   }
 
   if (missing(size)) {
-    size <- switch(type,
-      "bar" = 0.6,
-      "line" = 1,
-      1
-    )
+    size <- switch(type, "bar" = 0.6, "line" = 1, 1)
   }
 
   p <- ggplot(
