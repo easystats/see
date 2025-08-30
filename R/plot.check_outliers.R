@@ -4,13 +4,18 @@
 #' function.
 #'
 #' @param type Character vector, indicating the type of plot.
-#'   Options are `"dots"` (default) for a scatterplot of leverage (hat) values
-#'   versus residuals, with Cook's Distance contours for evaluating influential
-#'   points, `"scree"` for a scree-style plot highlighting "elbow outliers"
-#'   (based on sudden increases in distance; see details), or `"bars"` for a
-#'   bar chart of (rescaled) outlier statistic values for each data point.
-#'   `type = "dots"` is only used for outlier plots of fitted models; for
-#'   outlier plots of raw data values, `type` must be either `"scree"` or `"bars"`.
+#' Options are:
+#' - `"dots"` (default) for a scatterplot of leverage (hat) values versus
+#'   residuals, with Cook's Distance contours for evaluating influential points.
+#' - `"scree"` for a scree-style plot highlighting "elbow outliers" (based on
+#'   sudden increases in distance; see details).
+#' - `"bars"` for a bar chart of (rescaled) outlier statistic values for each
+#'   data point.
+#' - `"count"` for a "histogram"-style plot of outlier, where bins represent
+#'   the outliers' distance values.
+#'
+#' `type = "dots"` is only used for outlier plots of fitted models; for
+#' outlier plots of raw data values, `type` must be either `"scree"` or `"bars"`.
 #' @param show_labels Logical. If `TRUE`, text labels are displayed.
 #' @param size_text Numeric value specifying size of text labels.
 #' @param rescale_distance Logical. If `TRUE`, distance values are rescaled
@@ -65,14 +70,16 @@ plot.see_check_outliers <- function(
   alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = FALSE,
-  type = c("dots", "scree", "count", "bars"),
+  type = "dots",
   elbow_threshold = NULL,
   show_labels = TRUE,
   verbose = TRUE,
   ...
 ) {
+  type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
   influential_obs <- attributes(x)$influential_obs
   outlier_methods <- attr(x, "method", exact = TRUE)
+
   if (length(outlier_methods) == 0) {
     insight::format_error("Outlier distance Data invalid. Please check.")
   } else if (all(outlier_methods == c("optics", "optics_xi"))) {
@@ -80,7 +87,7 @@ plot.see_check_outliers <- function(
   }
 
   if (
-    "dots" %in% type &&
+    type == "dots" &&
       !is.null(influential_obs) &&
       (is.null(outlier_methods) || length(outlier_methods) == 1)
   ) {
@@ -95,7 +102,7 @@ plot.see_check_outliers <- function(
       alpha_dot = alpha_dot,
       colors = colors
     )
-  } else if ("scree" %in% type && length(outlier_methods) == 1) {
+  } else if (type == "scree" && length(outlier_methods) == 1) {
     .plot_scree(
       x,
       rescale_distance = rescale_distance,
@@ -103,10 +110,10 @@ plot.see_check_outliers <- function(
       verbose = verbose,
       ...
     )
-  } else if ("count" %in% type && length(outlier_methods) == 1) {
+  } else if (type == "count" && length(outlier_methods) == 1) {
     # this method isn't documented?? It's the old method.
     # Either we document it or remove it completely?
-    .plot_diag_outliers_dots_old(
+    .plot_diag_outliers_dots_count(
       x,
       show_labels = show_labels,
       size_text = size_text,
@@ -171,7 +178,8 @@ data_plot.check_outliers <- function(
     y_lab <- "Distance"
   }
 
-  suppressWarnings( # suppressWarnings? Hum
+  suppressWarnings(
+    # suppressWarnings? Hum
     ggplot(
       data = d,
       aes(

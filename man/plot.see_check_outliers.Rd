@@ -14,7 +14,7 @@
   alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = FALSE,
-  type = c("dots", "scree", "count", "bars"),
+  type = "dots",
   elbow_threshold = NULL,
   show_labels = TRUE,
   verbose = TRUE,
@@ -41,11 +41,18 @@ to a range from 0 to 1. This is mainly due to better catch the differences
 between distance values.}
 
 \item{type}{Character vector, indicating the type of plot.
-Options are \code{"dots"} (default) for a scatterplot of leverage (hat) values
-versus residuals, with Cook's Distance contours for evaluating influential
-points, \code{"scree"} for a scree-style plot highlighting "elbow outliers"
-(based on sudden increases in distance; see details), or \code{"bars"} for a
-bar chart of (rescaled) outlier statistic values for each data point.
+Options are:
+\itemize{
+\item \code{"dots"} (default) for a scatterplot of leverage (hat) values versus
+residuals, with Cook's Distance contours for evaluating influential points.
+\item \code{"scree"} for a scree-style plot highlighting "elbow outliers" (based on
+sudden increases in distance; see details).
+\item \code{"bars"} for a bar chart of (rescaled) outlier statistic values for each
+data point.
+\item \code{"count"} for a "histogram"-style plot of outlier, where bins represent
+the outliers' distance values.
+}
+
 \code{type = "dots"} is only used for outlier plots of fitted models; for
 outlier plots of raw data values, \code{type} must be either \code{"scree"} or \code{"bars"}.}
 

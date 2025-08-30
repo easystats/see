@@ -159,7 +159,7 @@
   p
 }
 
-.plot_diag_outliers_dots_old <- function(
+.plot_diag_outliers_dots_count <- function(
   x,
   show_labels = TRUE,
   size_text = 3.5,
