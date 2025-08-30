@@ -13,4 +13,22 @@ test_that("`plot.see_check_outliers()` works", {
     plot(performance::check_outliers(model, verbose = FALSE)),
     "gg"
   )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "plot.see_check_outliers works default method",
+    fig = plot(performance::check_outliers(model, verbose = FALSE))
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "plot.see_check_outliers works bars method",
+    fig = plot(performance::check_outliers(model, type = "bars", verbose = FALSE))
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "plot.see_check_outliers works scree method",
+    fig = plot(performance::check_outliers(model, type = "scree", verbose = FALSE))
+  )
 })
