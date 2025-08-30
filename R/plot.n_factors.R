@@ -135,11 +135,7 @@ plot.see_n_factors <- function(
   }
 
   if (missing(size)) {
-    size <- switch(type,
-      bar = 0.7,
-      line = 1,
-      1
-    )
+    size <- switch(type, bar = 0.7, line = 1, 1)
   }
 
   # Base plot
