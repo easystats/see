@@ -48,7 +48,7 @@
     elbow_idx <- which.max(diffs)
     elbow_threshold <- diffs[elbow_idx]
     if (length(elbow_threshold) == 0) {
-      insight::format_error("Outlier distance Data invalid. Please check. 2")
+      insight::format_error("Could not automatically determine an elbow point from the outlier distances.")
     }
   } else {
     elbow_idx <- which(diffs > elbow_threshold)[1]

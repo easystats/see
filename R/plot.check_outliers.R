@@ -81,7 +81,9 @@ plot.see_check_outliers <- function(
   outlier_methods <- attr(x, "method", exact = TRUE)
 
   if (length(outlier_methods) == 0) {
-    insight::format_error("Outlier distance Data invalid. Please check.")
+    insight::format_error(
+      "Invalid outlier method detected. Please ensure `check_outliers()` was called with valid parameters."
+    )
   } else if (all(outlier_methods == c("optics", "optics_xi"))) {
     outlier_methods <- outlier_methods[[1]]
   }
@@ -111,8 +113,6 @@ plot.see_check_outliers <- function(
       ...
     )
   } else if (type == "count" && length(outlier_methods) == 1) {
-    # this method isn't documented?? It's the old method.
-    # Either we document it or remove it completely?
     .plot_diag_outliers_dots_count(
       x,
       show_labels = show_labels,
@@ -120,7 +120,7 @@ plot.see_check_outliers <- function(
       rescale_distance = rescale_distance
     )
   } else {
-    .plot_outliers_multimethod(x, rescale_distance = TRUE)
+    .plot_outliers_multimethod(x, rescale_distance = rescale_distance)
   }
 }
 
@@ -168,8 +168,9 @@ data_plot.check_outliers <- function(
   d_long
 }
 
+
 .plot_outliers_multimethod <- function(x, rescale_distance = TRUE) {
-  d <- data_plot(x, rescale_distance = TRUE)
+  d <- data_plot(x, rescale_distance = rescale_distance)
 
   rescaled <- attr(d, "rescale_distance")
   if (isTRUE(rescaled)) {
@@ -179,10 +180,9 @@ data_plot.check_outliers <- function(
   }
 
   suppressWarnings(
-    # suppressWarnings? Hum
-    ggplot(
+    ggplot2::ggplot(
       data = d,
-      aes(
+      ggplot2::aes(
         x = .data$Obs,
         y = .data$Distance,
         fill = .data$Method,
@@ -190,21 +190,22 @@ data_plot.check_outliers <- function(
       )
     ) +
       # geom_vline(xintercept = as.character(c(1, 2))) +
-      geom_bar(position = "dodge", stat = "identity") +
-      scale_fill_viridis_d() +
+      ggplot2::geom_bar(position = "dodge", stat = "identity") +
+      ggplot2::scale_fill_viridis_d() +
       theme_modern() +
-      labs(x = "Observation", y = y_lab, fill = "Method") +
-      # Warning: Vectorized input to `element_text()` is not officially supported.
-      # Results may be unexpected or may change in future versions of ggplot2.
-      theme(
-        axis.text.x = element_text(
+      ggplot2::labs(x = "Observation", y = y_lab, fill = "Method") +
+      ## FIXME: Warning: Vectorized input to `element_text()` is not officially
+      ## supported. Results may be unexpected or may change in future versions
+      ## of ggplot2.
+      ggplot2::theme(
+        axis.text.x = ggplot2::element_text(
           colour = ifelse(as.numeric(x) >= 0.5, "red", "darkgrey")
         ),
-        panel.grid.major.x = element_line(
+        panel.grid.major.x = ggplot2::element_line(
           linetype = "dashed",
           colour = ifelse(as.numeric(x) >= 0.5, "red", "lightgrey")
         )
       ) +
-      guides(x = guide_axis(n.dodge = 2))
+      ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 2))
   )
 }
