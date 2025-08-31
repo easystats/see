@@ -84,7 +84,9 @@ plot.see_check_outliers <- function(
     insight::format_error(
       "Invalid outlier method detected. Please ensure `check_outliers()` was called with valid parameters."
     )
-  } else if (all(outlier_methods == c("optics", "optics_xi"))) {
+  } else if (
+    length(outlier_methods) == 2 && all(outlier_methods == c("optics", "optics_xi"))
+  ) {
     outlier_methods <- outlier_methods[[1]]
   }
 
