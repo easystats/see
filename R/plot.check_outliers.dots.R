@@ -26,12 +26,12 @@
   n_above <- sum(plot_data$Cooks_Distance >= min_cook_level, na.rm = TRUE)
   label.n <- pmax(n_above, 5)
 
-  p <- ggplot(plot_data, aes(x = .data$Hat, .data$Std_Residuals))
+  p <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$Hat, .data$Std_Residuals))
 
   if (isTRUE(show_dots)) {
     p <- p +
       geom_point2(
-        aes(colour = .data$Influential),
+        ggplot2::aes(colour = .data$Influential),
         na.rm = na.rm,
         alpha = alpha_dot,
         size = size_point
@@ -39,17 +39,17 @@
   }
 
   p <- p +
-    geom_vline(
+    ggplot2::geom_vline(
       xintercept = 0,
       color = ref.color,
       linetype = ref.linetype
     ) +
-    geom_hline(
+    ggplot2::geom_hline(
       yintercept = 0,
       color = ref.color,
       linetype = ref.linetype
     ) +
-    stat_smooth(
+    ggplot2::stat_smooth(
       formula = y ~ x,
       method = "loess",
       na.rm = na.rm,
@@ -57,31 +57,31 @@
       color = colors[1],
       linewidth = linewidth
     ) +
-    scale_colour_manual(values = c(OK = colors[2], Influential = colors[3])) +
+    ggplot2::scale_colour_manual(values = c(OK = colors[2], Influential = colors[3])) +
     (if (isTRUE(show_labels)) {
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_text_repel(
           data = plot_data[
             order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n],
           ],
-          aes(label = .data$Index, colour = .data$Influential),
+          ggplot2::aes(label = .data$Index, colour = .data$Influential),
           size = size_text
         )
       } else {
-        geom_text(
+        ggplot2::geom_text(
           data = plot_data[
             order(plot_data$Cooks_Distance, decreasing = TRUE)[1:label.n],
           ],
-          aes(label = .data$Index, colour = .data$Influential),
+          ggplot2::aes(label = .data$Index, colour = .data$Influential),
           size = size_text,
-          position = position_nudge(
+          position = ggplot2::position_nudge(
             x = diff(range(plot_data$Hat)) / 40,
             y = diff(range(plot_data$Std_Residuals)) / 20
           )
         )
       }
     }) +
-    labs(
+    ggplot2::labs(
       x = expression("Leverage (" * h[ii] * ")"),
       y = "Std. Residuals",
       title = "Influential Observations",
@@ -99,7 +99,7 @@
     .cook_labels <- c("Cook's D = ", rep("", length(cook.levels) - 1))
     .cook_lines <- c(
       lapply(seq_along(cook.levels), function(.level) {
-        annotate(
+        ggplot2::annotate(
           geom = "line",
           x = .hat,
           y = .cook_ref[[.level]],
@@ -109,7 +109,7 @@
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {
-        annotate(
+        ggplot2::annotate(
           geom = "line",
           x = .hat,
           y = -1 * .cook_ref[[.level]],
@@ -119,7 +119,7 @@
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {
-        annotate(
+        ggplot2::annotate(
           geom = "text",
           label = insight::format_value(cook.levels[.level], digits = 1),
           x = .hat80,
@@ -131,7 +131,7 @@
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {
-        annotate(
+        ggplot2::annotate(
           geom = "text",
           label = insight::format_value(cook.levels[.level], digits = 1),
           x = .hat80,
@@ -153,7 +153,7 @@
         plot.title.size = size_title,
         axis.title.size = size_axis_title
       ) +
-      guides(colour = "none", text = "none")
+      ggplot2::guides(colour = "none", text = "none")
   }
 
   p
@@ -192,24 +192,29 @@
 
   size_text <- size_text %||% 3.5
 
-  p <- ggplot(
+  p <- ggplot2::ggplot(
     d,
-    aes(x = .data$Distance, fill = .data$Outliers, group = .data$Id, label = .data$Id)
+    ggplot2::aes(
+      x = .data$Distance,
+      fill = .data$Outliers,
+      group = .data$Id,
+      label = .data$Id
+    )
   ) +
-    geom_histogram() +
-    labs(
+    ggplot2::geom_histogram() +
+    ggplot2::labs(
       title = "Influential Observations",
       subtitle = "High Cook's distance might reflect potential outliers",
       x = x_lab,
       y = "Count",
       fill = NULL
     ) +
-    scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
-    guides(fill = "none", color = "none", label = "none")
+    ggplot2::scale_fill_manual(values = c("#2c3e50", "#c0392b")) +
+    ggplot2::guides(fill = "none", color = "none", label = "none")
 
   if (!is.null(threshold) && !is.na(threshold)) {
     p <- p +
-      geom_vline(
+      ggplot2::geom_vline(
         xintercept = threshold,
         linetype = "dashed",
         color = "#c0392b"
@@ -220,9 +225,9 @@
     if (requireNamespace("ggrepel", quietly = TRUE)) {
       p <- p + ggrepel::geom_text_repel(y = 2.5, size = size_text, na.rm = TRUE)
     } else {
-      p <- p + geom_text(y = 2.5, size = size_text, na.rm = TRUE)
+      p <- p + ggplot2::geom_text(y = 2.5, size = size_text, na.rm = TRUE)
     }
   }
 
-  p + guides(x = guide_axis(n.dodge = 2))
+  p + ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 2))
 }
