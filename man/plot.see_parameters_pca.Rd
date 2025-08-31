@@ -17,10 +17,9 @@
 \arguments{
 \item{x}{An object.}
 
-\item{type}{Character vector, indicating the type of plot.
-Options are three different shapes to represent component loadings;
-\code{"bar"} (default) for a horizontal bar chart, or
-\code{"line"} for a horizontal point and line chart.}
+\item{type}{Character vector, indicating the type of plot. Options are three
+different shapes to represent component loadings; \code{"bar"} (default) for a
+horizontal bar chart, or \code{"line"} for a horizontal point and line chart.}
 
 \item{size_text}{Numeric value specifying size of text labels.}
 

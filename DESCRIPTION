@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.11.0.7
+Version: 0.11.0.8
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -122,4 +122,3 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/Needs/website: easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/insight, easystats/parameters, easystats/performance

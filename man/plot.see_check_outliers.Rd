@@ -13,9 +13,11 @@
   base_size = 10,
   alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
-  rescale_distance = TRUE,
-  type = c("dots", "bars"),
+  rescale_distance = FALSE,
+  type = "dots",
+  elbow_threshold = NULL,
   show_labels = TRUE,
+  verbose = TRUE,
   ...
 )
 }
@@ -39,13 +41,30 @@ to a range from 0 to 1. This is mainly due to better catch the differences
 between distance values.}
 
 \item{type}{Character vector, indicating the type of plot.
-Options are \code{"dots"} (default) for a scatterplot of leverage (hat) values
-versus residuals, with Cook's Distance contours for evaluating influential
-points, or \code{"bars"} for a bar chart of (rescaled) outlier statistic values
-for each data point. Only used for outlier plots of fitted models; for
-outlier plots of raw data values, \code{type = "bars"} is always used.}
+Options are:
+\itemize{
+\item \code{"dots"} (default) for a scatterplot of leverage (hat) values versus
+residuals, with Cook's Distance contours for evaluating influential points.
+\item \code{"scree"} for a scree-style plot highlighting "elbow outliers" (based on
+sudden increases in distance; see details).
+\item \code{"bars"} for a bar chart of (rescaled) outlier statistic values for each
+data point.
+\item \code{"count"} for a "histogram"-style plot of outlier, where bins represent
+the outliers' distance values.
+}
+
+\code{type = "dots"} is only used for outlier plots of fitted models; for
+outlier plots of raw data values, \code{type} must be either \code{"scree"} or \code{"bars"}.}
+
+\item{elbow_threshold}{Optional scalar specifying the minimum jump in
+distance (between adjacent sorted observations) used to detect the elbow point.
+If supplied, all observations following the first jump greater than this value
+are flagged as outliers. If \code{NULL} (default), the largest jump is used
+automatically. Higher values yield more conservative outlier detection.}
 
 \item{show_labels}{Logical. If \code{TRUE}, text labels are displayed.}
+
+\item{verbose}{Logical. If \code{TRUE} (default), prints a summary list of outliers.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -56,14 +75,35 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_outliers()}
 function.
 }
+\details{
+When using \code{type = "scree"}, the function will provide a
+scree-style distance plot that highlights two types of outliers.
+Observations exceeding the specified threshold are shown in warm colors,
+while observations following the largest jump ("elbow", or the specified
+cut-off value) in the sorted distances are shown in cool colors. Elbow
+outliers are defined based on sudden increases in distance, analogous to
+inflection points in scree plots.
+}
 \examples{
 library(performance)
 data(mtcars)
 mt1 <- mtcars[, c(1, 3, 4)]
+mt1$ID <- row.names(mt1)
 mt2 <- rbind(
   mt1,
-  data.frame(mpg = c(37, 40), disp = c(300, 400), hp = c(110, 120))
+  data.frame(
+    mpg = c(37, 48), disp = c(300, 400), hp = c(110, 120),
+    ID = c("JZ", "GP")
+  )
 )
 model <- lm(disp ~ mpg + hp, data = mt2)
 plot(check_outliers(model))
+plot(check_outliers(mt2$mpg, method = "zscore"), type = "bar")
+\dontshow{if (require("ggrepel")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+plot(check_outliers(mt2[-3], method = "mahalanobis", ID = "ID"))
+\dontshow{\}) # examplesIf}
+}
+\references{
+The scree plot implementation was inspired by a visualization approach
+developed by Prof. Marina Doucerain (Université du Québec à Montréal).
 }

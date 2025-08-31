@@ -10,6 +10,9 @@
 * `plot()` for `performance::check_normality()` now also supports objects from
   `psych::fa()`, `psych::principal()` and `parameters::factor_analysis()`.
 
+* `plot()` for `performance::check_outliers()` gets a new `"scree"` type option,
+  to create a scree plot of outlier statistics.
+
 * Minor re-labelling of axis titles and subtitles in `plot()` for
   `performance::check_residuals()`.
 

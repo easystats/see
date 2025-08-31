@@ -1,4 +1,3 @@
-Acyclic
 Anova
 Azurelight
 BFs
@@ -9,8 +8,8 @@ Bluebrown
 CMD
 Cai
 DAGs
-DOI
 Dasgupta
+Doucerain
 GGMs
 GeomViolinHalf
 Geoms
@@ -20,14 +19,16 @@ Luedecke
 MPE
 Mattan
 Modelling
+Montréal
 Multicollinearity
 ORCID
 Okabe
 Polychoric
-SEM
+Québec
 Shachar
 Tetrachoric
 UI
+Université
 VIF
 Visualisation
 Winsorized
@@ -46,6 +47,7 @@ datawizard
 de
 doi
 dotdensity
+du
 easystats
 easystats’
 effectsize
@@ -66,12 +68,10 @@ homoscedasticity
 https
 intraclass
 jfly
-jitter
 joss
 koeln
 labelled
 labelling
-loadings
 mcmc
 metaBMA
 metafor
@@ -86,11 +86,11 @@ pts
 qq
 qqplotr
 rOpenSci
-rescaled
 rstanarm
 subfigures
 ui
 unmapped
 vermillion
 visualising
+à
 ’
