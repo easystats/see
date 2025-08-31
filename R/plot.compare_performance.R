@@ -97,9 +97,9 @@ plot.see_compare_performance <- function(x, linewidth = 1, ...) {
     x <- data_plot(x)
   }
 
-  p <- ggplot(
+  p <- ggplot2::ggplot(
     x,
-    aes(
+    ggplot2::aes(
       x = .data$name,
       y = .data$values,
       colour = .data$Model,
@@ -107,11 +107,11 @@ plot.see_compare_performance <- function(x, linewidth = 1, ...) {
       fill = .data$Model
     )
   ) +
-    geom_polygon(linewidth = linewidth, alpha = 0.05) +
+    ggplot2::geom_polygon(linewidth = linewidth, alpha = 0.05) +
     coord_radar() +
-    scale_y_continuous(limits = c(0, 1), labels = NULL) +
+    ggplot2::scale_y_continuous(limits = c(0, 1), labels = NULL) +
     add_plot_attributes(x) +
-    guides(fill = "none") +
+    ggplot2::guides(fill = "none") +
     theme_radar() +
     scale_color_see()
 
