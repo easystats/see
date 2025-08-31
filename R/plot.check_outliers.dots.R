@@ -194,7 +194,7 @@
 
   p <- ggplot(
     d,
-    aes(x = .data$Distance, fill = .data$Outliers, label = .data$Id)
+    aes(x = .data$Distance, fill = .data$Outliers, group = .data$Id, label = .data$Id)
   ) +
     geom_histogram() +
     labs(
