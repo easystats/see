@@ -9,7 +9,7 @@ function."><meta property="og:image" content="https://easystats.github.io/see/re
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,9 +73,11 @@ function.</p>
 <span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  alpha_dot <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#3aaf85"</span>, <span class="st">"#1b6ca8"</span>, <span class="st">"#cd201f"</span><span class="op">)</span>,</span>
-<span>  rescale_distance <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dots"</span>, <span class="st">"bars"</span><span class="op">)</span>,</span>
+<span>  rescale_distance <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"dots"</span>,</span>
+<span>  elbow_threshold <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  show_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -118,15 +120,32 @@ between distance values.</p></dd>
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
 <dd><p>Character vector, indicating the type of plot.
-Options are <code>"dots"</code> (default) for a scatterplot of leverage (hat) values
-versus residuals, with Cook's Distance contours for evaluating influential
-points, or <code>"bars"</code> for a bar chart of (rescaled) outlier statistic values
-for each data point. Only used for outlier plots of fitted models; for
-outlier plots of raw data values, <code>type = "bars"</code> is always used.</p></dd>
+Options are:</p><ul><li><p><code>"dots"</code> (default) for a scatterplot of leverage (hat) values versus
+residuals, with Cook's Distance contours for evaluating influential points.</p></li>
+<li><p><code>"scree"</code> for a scree-style plot highlighting "elbow outliers" (based on
+sudden increases in distance; see details).</p></li>
+<li><p><code>"bars"</code> for a bar chart of (rescaled) outlier statistic values for each
+data point.</p></li>
+<li><p><code>"count"</code> for a "histogram"-style plot of outlier, where bins represent
+the outliers' distance values.</p></li>
+</ul><p><code>type = "dots"</code> is only used for outlier plots of fitted models; for
+outlier plots of raw data values, <code>type</code> must be either <code>"scree"</code> or <code>"bars"</code>.</p></dd>
+
+
+<dt id="arg-elbow-threshold">elbow_threshold<a class="anchor" aria-label="anchor" href="#arg-elbow-threshold"></a></dt>
+<dd><p>Optional scalar specifying the minimum jump in
+distance (between adjacent sorted observations) used to detect the elbow point.
+If supplied, all observations following the first jump greater than this value
+are flagged as outliers. If <code>NULL</code> (default), the largest jump is used
+automatically. Higher values yield more conservative outlier detection.</p></dd>
 
 
 <dt id="arg-show-labels">show_labels<a class="anchor" aria-label="anchor" href="#arg-show-labels"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>Logical. If <code>TRUE</code> (default), prints a summary list of outliers.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -137,19 +156,42 @@ outlier plots of raw data values, <code>type = "bars"</code> is always used.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A ggplot2-object.</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When using <code>type = "scree"</code>, the function will provide a
+scree-style distance plot that highlights two types of outliers.
+Observations exceeding the specified threshold are shown in warm colors,
+while observations following the largest jump ("elbow", or the specified
+cut-off value) in the sorted distances are shown in cool colors. Elbow
+outliers are defined based on sudden increases in distance, analogous to
+inflection points in scree plots.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>The scree plot implementation was inspired by a visualization approach
+developed by Prof. Marina Doucerain (Université du Québec à Montréal).</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/performance/" class="external-link">performance</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mt1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">mt1</span><span class="op">$</span><span class="va">ID</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">mt1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mt1</span>,</span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">37</span>, <span class="fl">40</span><span class="op">)</span>, disp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">400</span><span class="op">)</span>, hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">110</span>, <span class="fl">120</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">37</span>, <span class="fl">48</span><span class="op">)</span>, disp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">400</span><span class="op">)</span>, hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">110</span>, <span class="fl">120</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"JZ"</span>, <span class="st">"GP"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">disp</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mt2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_outliers.html" class="external-link">check_outliers</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.see_check_outliers-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_outliers.html" class="external-link">check_outliers</a></span><span class="op">(</span><span class="va">mt2</span><span class="op">$</span><span class="va">mpg</span>, method <span class="op">=</span> <span class="st">"zscore"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot.see_check_outliers-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_outliers.html" class="external-link">check_outliers</a></span><span class="op">(</span><span class="va">mt2</span><span class="op">[</span><span class="op">-</span><span class="fl">3</span><span class="op">]</span>, method <span class="op">=</span> <span class="st">"mahalanobis"</span>, ID <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot.see_check_outliers-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
