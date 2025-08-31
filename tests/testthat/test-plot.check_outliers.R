@@ -66,7 +66,7 @@ test_that("`plot.see_check_outliers()` works", {
 
 test_that("`plot.see_check_outliers()` multimethods", {
   data(mtcars)
-  outliers_list <- performance::check_outliers(data, method = c(
+  outliers_list <- performance::check_outliers(mtcars, method = c(
     "mahalanobis",
     "iqr",
     "zscore"
