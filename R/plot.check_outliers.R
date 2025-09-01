@@ -92,9 +92,7 @@ plot.see_check_outliers <- function(
   }
 
   # set default plot type depending on the method
-  if ((missing(type) || is.null(type))) {
-    type <- "scree"
-  }
+  if (!isTRUE(type == "dots")) type <- "scree"
 
   # validate arguments
   type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
