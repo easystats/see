@@ -92,7 +92,7 @@ plot.see_check_outliers <- function(
   }
 
   # set default plot type depending on the method
-  if ((missing(type) || is.null(type)) && identical(outlier_methods, "mahalanobis")) {
+  if ((missing(type) || is.null(type))) {
     type <- "scree"
   }
 

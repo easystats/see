@@ -25,29 +25,29 @@ test_that("`plot.see_check_outliers()` works", {
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works bars method",
-    fig = suppressWarnings(plot(
+    fig = plot(
       performance::check_outliers(model, verbose = FALSE),
       type = "bars"
-    ))
+    )
   )
 
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works bars, rescaled",
-    fig = suppressWarnings(plot(
+    fig = plot(
       performance::check_outliers(model, verbose = FALSE),
       type = "bars",
       rescale_distance = TRUE
-    ))
+    )
   )
 
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works count method",
-    fig = suppressWarnings(plot(
+    fig = suppressMessages(print(plot(
       performance::check_outliers(model, verbose = FALSE),
       type = "count"
-    ))
+    )))
   )
 
   set.seed(123)
