@@ -66,11 +66,14 @@ test_that("`plot.see_check_outliers()` works", {
 
 test_that("`plot.see_check_outliers()` multimethods", {
   data(mtcars)
-  outliers_list <- performance::check_outliers(mtcars, method = c(
-    "mahalanobis",
-    "iqr",
-    "zscore"
-  ))
+  outliers_list <- performance::check_outliers(
+    mtcars,
+    method = c(
+      "mahalanobis",
+      "iqr",
+      "zscore"
+    )
+  )
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers multimethods",

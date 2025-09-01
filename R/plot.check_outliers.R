@@ -86,13 +86,16 @@ plot.see_check_outliers <- function(
       "Invalid outlier method detected. Please ensure `check_outliers()` was called with valid parameters."
     )
   } else if (
-    length(outlier_methods) == 2 && all(outlier_methods == c("optics", "optics_xi"))
+    length(outlier_methods) == 2 &&
+      all(outlier_methods == c("optics", "optics_xi"))
   ) {
     outlier_methods <- outlier_methods[[1]]
   }
 
   # set default plot type depending on the method
-  if (!isTRUE(type == "dots")) type <- "scree"
+  if (!isTRUE(type == "dots")) {
+    type <- "scree"
+  }
 
   # validate arguments
   type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
