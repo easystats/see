@@ -92,8 +92,7 @@ plot.see_check_outliers <- function(
 
   if (length(outlier_methods) > 1 || type == "bars") {
     .plot_outliers_multimethod(x, rescale_distance = rescale_distance)
-  } else if (
-    type == "dots" && !is.null(influential_obs)) {
+  } else if (type == "dots" && !is.null(influential_obs)) {
     .plot_diag_outliers_dots(
       influential_obs,
       show_labels = show_labels,
