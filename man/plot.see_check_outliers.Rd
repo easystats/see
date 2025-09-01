@@ -54,7 +54,7 @@ the outliers' distance values.
 }
 
 \code{type = "dots"} is only used for outlier plots of fitted models; for
-outlier plots of raw data values, \code{type} must be either \code{"scree"} or \code{"bars"}.}
+outlier plots of raw data values, \code{type} should be one of the other options.}
 
 \item{elbow_threshold}{Optional scalar specifying the minimum jump in
 distance (between adjacent sorted observations) used to detect the elbow point.

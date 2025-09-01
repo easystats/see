@@ -15,7 +15,7 @@
 #'   the outliers' distance values.
 #'
 #' `type = "dots"` is only used for outlier plots of fitted models; for
-#' outlier plots of raw data values, `type` must be either `"scree"` or `"bars"`.
+#' outlier plots of raw data values, `type` should be one of the other options.
 #' @param show_labels Logical. If `TRUE`, text labels are displayed.
 #' @param size_text Numeric value specifying size of text labels.
 #' @param rescale_distance Logical. If `TRUE`, distance values are rescaled
