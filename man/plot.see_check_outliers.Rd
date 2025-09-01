@@ -98,7 +98,7 @@ mt2 <- rbind(
 )
 model <- lm(disp ~ mpg + hp, data = mt2)
 plot(check_outliers(model))
-plot(check_outliers(mt2$mpg, method = "zscore"), type = "bar")
+plot(check_outliers(mt2$mpg, method = "zscore"), type = "bars")
 \dontshow{if (require("ggrepel")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 plot(check_outliers(mt2[-3], method = "mahalanobis", ID = "ID"))
 \dontshow{\}) # examplesIf}

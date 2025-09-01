@@ -56,7 +56,7 @@
 #' )
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
-#' plot(check_outliers(mt2$mpg, method = "zscore"), type = "bar")
+#' plot(check_outliers(mt2$mpg, method = "zscore"), type = "bars")
 #' @examplesIf require("ggrepel")
 #' plot(check_outliers(mt2[-3], method = "mahalanobis", ID = "ID"))
 #' @export
@@ -93,9 +93,13 @@ plot.see_check_outliers <- function(
   }
 
   # set default plot type depending on the method
-  if (!isTRUE(type == "dots")) {
+  if (missing(type) && !isTRUE(type == "dots")) {
     type <- "scree"
   }
+
+  # if ((missing(type) || is.null(type))) {
+  #   type <- "scree"
+  # }
 
   # validate arguments
   type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
@@ -120,7 +124,8 @@ plot.see_check_outliers <- function(
       x,
       show_labels = show_labels,
       size_text = size_text,
-      rescale_distance = rescale_distance
+      rescale_distance = rescale_distance,
+      ... # to change bins because of warning
     )
   } else {
     .plot_scree(
