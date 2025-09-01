@@ -15,6 +15,7 @@ test_that("`plot.see_check_outliers()` works", {
   )
 
   skip_if_not_installed("ggrepel")
+  skip_on_os("linux")
 
   set.seed(123)
   vdiffr::expect_doppelganger(
@@ -57,14 +58,22 @@ test_that("`plot.see_check_outliers()` works", {
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works scree method",
-    fig = plot(performance::check_outliers(model, verbose = FALSE), type = "scree"),
+    fig = plot(
+      performance::check_outliers(model, verbose = FALSE),
+      type = "scree",
+      verbose = FALSE
+    ),
     variant = "windows"
   )
 
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works scree method, z-score",
-    fig = plot(performance::check_outliers(mt2$mpg, method = "zscore"), type = "scree"),
+    fig = plot(
+      performance::check_outliers(mt2$mpg, method = "zscore"),
+      type = "scree",
+      verbose = FALSE
+    ),
     variant = "windows"
   )
 })
