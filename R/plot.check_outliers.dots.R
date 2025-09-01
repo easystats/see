@@ -170,8 +170,7 @@
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
   d$Id[d$Outliers == "0"] <- NA
 
-  method <- switch(
-    attr(x, "method", exact = TRUE),
+  method <- switch(attr(x, "method", exact = TRUE),
     cook = "Cook's Distance",
     pareto = "Pareto",
     mahalanobis = "Mahalanobis Distance",

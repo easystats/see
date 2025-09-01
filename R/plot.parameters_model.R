@@ -934,8 +934,7 @@ plot.see_parameters_model <- function(
 
 
 .meta_measure <- function(meta_measure) {
-  switch(
-    meta_measure,
+  switch(meta_measure,
     MD = "Raw Mean Difference",
     SMDH = ,
     SMD = "Standardized Mean Difference",

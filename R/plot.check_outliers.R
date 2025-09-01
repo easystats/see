@@ -70,7 +70,7 @@ plot.see_check_outliers <- function(
   alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = FALSE,
-  type = "dots",
+  type = NULL,
   elbow_threshold = NULL,
   show_labels = TRUE,
   verbose = TRUE,
@@ -90,11 +90,10 @@ plot.see_check_outliers <- function(
     outlier_methods <- outlier_methods[[1]]
   }
 
-  if (
-    type == "dots" &&
-      !is.null(influential_obs) &&
-      (is.null(outlier_methods) || length(outlier_methods) == 1)
-  ) {
+  if (length(outlier_methods) > 1 || type == "bars") {
+    .plot_outliers_multimethod(x, rescale_distance = rescale_distance)
+  } else if (
+    type == "dots" && !is.null(influential_obs)) {
     .plot_diag_outliers_dots(
       influential_obs,
       show_labels = show_labels,
@@ -106,15 +105,7 @@ plot.see_check_outliers <- function(
       alpha_dot = alpha_dot,
       colors = colors
     )
-  } else if (type == "scree" && length(outlier_methods) == 1) {
-    .plot_scree(
-      x,
-      rescale_distance = rescale_distance,
-      elbow_threshold = elbow_threshold,
-      verbose = verbose,
-      ...
-    )
-  } else if (type == "count" && length(outlier_methods) == 1) {
+  } else if (type == "count") {
     .plot_diag_outliers_dots_count(
       x,
       show_labels = show_labels,
@@ -122,7 +113,13 @@ plot.see_check_outliers <- function(
       rescale_distance = rescale_distance
     )
   } else {
-    .plot_outliers_multimethod(x, rescale_distance = rescale_distance)
+    .plot_scree(
+      x,
+      rescale_distance = rescale_distance,
+      elbow_threshold = elbow_threshold,
+      verbose = verbose,
+      ...
+    )
   }
 }
 
