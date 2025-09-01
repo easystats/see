@@ -19,7 +19,8 @@ test_that("`plot.see_check_outliers()` works", {
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works default method",
-    fig = plot(performance::check_outliers(model, verbose = FALSE))
+    fig = plot(performance::check_outliers(model, verbose = FALSE)),
+    variant = "windows"
   )
 
   set.seed(123)
@@ -28,7 +29,8 @@ test_that("`plot.see_check_outliers()` works", {
     fig = plot(
       performance::check_outliers(model, verbose = FALSE),
       type = "bars"
-    )
+    ),
+    variant = "windows"
   )
 
   set.seed(123)
@@ -38,7 +40,8 @@ test_that("`plot.see_check_outliers()` works", {
       performance::check_outliers(model, verbose = FALSE),
       type = "bars",
       rescale_distance = TRUE
-    )
+    ),
+    variant = "windows"
   )
 
   set.seed(123)
@@ -47,19 +50,22 @@ test_that("`plot.see_check_outliers()` works", {
     fig = suppressMessages(print(plot(
       performance::check_outliers(model, verbose = FALSE),
       type = "count"
-    )))
+    ))),
+    variant = "windows"
   )
 
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works scree method",
-    fig = plot(performance::check_outliers(model, verbose = FALSE), type = "scree")
+    fig = plot(performance::check_outliers(model, verbose = FALSE), type = "scree"),
+    variant = "windows"
   )
 
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works scree method, z-score",
-    fig = plot(performance::check_outliers(mt2$mpg, method = "zscore"), type = "scree")
+    fig = plot(performance::check_outliers(mt2$mpg, method = "zscore"), type = "scree"),
+    variant = "windows"
   )
 })
 
@@ -77,6 +83,7 @@ test_that("`plot.see_check_outliers()` multimethods", {
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers multimethods",
-    fig = plot(outliers_list)
+    fig = plot(outliers_list),
+    variant = "windows"
   )
 })
