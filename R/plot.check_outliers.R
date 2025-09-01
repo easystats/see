@@ -70,16 +70,17 @@ plot.see_check_outliers <- function(
   alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = FALSE,
-  type = NULL,
+  type = "dots",
   elbow_threshold = NULL,
   show_labels = TRUE,
   verbose = TRUE,
   ...
 ) {
-  type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
-  influential_obs <- attributes(x)$influential_obs
+  # need to know the method first, because we change the default plot type
+  # depending on the method
   outlier_methods <- attr(x, "method", exact = TRUE)
 
+  # validate that the method is correct
   if (length(outlier_methods) == 0) {
     insight::format_error(
       "Invalid outlier method detected. Please ensure `check_outliers()` was called with valid parameters."
@@ -89,6 +90,15 @@ plot.see_check_outliers <- function(
   ) {
     outlier_methods <- outlier_methods[[1]]
   }
+
+  # set default plot type depending on the method
+  if ((missing(type) || is.null(type)) && identical(outlier_methods, "mahalanobis")) {
+    type <- "scree"
+  }
+
+  # validate arguments
+  type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
+  influential_obs <- attributes(x)$influential_obs
 
   if (length(outlier_methods) > 1 || type == "bars") {
     .plot_outliers_multimethod(x, rescale_distance = rescale_distance)

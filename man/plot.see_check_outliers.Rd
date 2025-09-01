@@ -14,7 +14,7 @@
   alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = FALSE,
-  type = NULL,
+  type = "dots",
   elbow_threshold = NULL,
   show_labels = TRUE,
   verbose = TRUE,
