@@ -15,7 +15,7 @@
 #'   the outliers' distance values.
 #'
 #' `type = "dots"` is only used for outlier plots of fitted models; for
-#' outlier plots of raw data values, `type` must be either `"scree"` or `"bars"`.
+#' outlier plots of raw data values, `type` should be one of the other options.
 #' @param show_labels Logical. If `TRUE`, text labels are displayed.
 #' @param size_text Numeric value specifying size of text labels.
 #' @param rescale_distance Logical. If `TRUE`, distance values are rescaled
@@ -56,7 +56,7 @@
 #' )
 #' model <- lm(disp ~ mpg + hp, data = mt2)
 #' plot(check_outliers(model))
-#' plot(check_outliers(mt2$mpg, method = "zscore"), type = "bar")
+#' plot(check_outliers(mt2$mpg, method = "zscore"), type = "bars")
 #' @examplesIf require("ggrepel")
 #' plot(check_outliers(mt2[-3], method = "mahalanobis", ID = "ID"))
 #' @export
@@ -76,25 +76,38 @@ plot.see_check_outliers <- function(
   verbose = TRUE,
   ...
 ) {
-  type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
-  influential_obs <- attributes(x)$influential_obs
+  # need to know the method first, because we change the default plot type
+  # depending on the method
   outlier_methods <- attr(x, "method", exact = TRUE)
 
+  # validate that the method is correct
   if (length(outlier_methods) == 0) {
     insight::format_error(
       "Invalid outlier method detected. Please ensure `check_outliers()` was called with valid parameters."
     )
   } else if (
-    length(outlier_methods) == 2 && all(outlier_methods == c("optics", "optics_xi"))
+    length(outlier_methods) == 2 &&
+      all(outlier_methods == c("optics", "optics_xi"))
   ) {
     outlier_methods <- outlier_methods[[1]]
   }
 
-  if (
-    type == "dots" &&
-      !is.null(influential_obs) &&
-      (is.null(outlier_methods) || length(outlier_methods) == 1)
-  ) {
+  # set default plot type depending on the method
+  if (missing(type) && !isTRUE(type == "dots")) {
+    type <- "scree"
+  }
+
+  # if ((missing(type) || is.null(type))) {
+  #   type <- "scree"
+  # }
+
+  # validate arguments
+  type <- insight::validate_argument(type, c("dots", "scree", "count", "bars"))
+  influential_obs <- attributes(x)$influential_obs
+
+  if (length(outlier_methods) > 1 || type == "bars") {
+    .plot_outliers_multimethod(x, rescale_distance = rescale_distance)
+  } else if (type == "dots" && !is.null(influential_obs)) {
     .plot_diag_outliers_dots(
       influential_obs,
       show_labels = show_labels,
@@ -106,7 +119,15 @@ plot.see_check_outliers <- function(
       alpha_dot = alpha_dot,
       colors = colors
     )
-  } else if (type == "scree" && length(outlier_methods) == 1) {
+  } else if (type == "count") {
+    .plot_diag_outliers_dots_count(
+      x,
+      show_labels = show_labels,
+      size_text = size_text,
+      rescale_distance = rescale_distance,
+      ... # to change bins because of warning
+    )
+  } else {
     .plot_scree(
       x,
       rescale_distance = rescale_distance,
@@ -114,15 +135,6 @@ plot.see_check_outliers <- function(
       verbose = verbose,
       ...
     )
-  } else if (type == "count" && length(outlier_methods) == 1) {
-    .plot_diag_outliers_dots_count(
-      x,
-      show_labels = show_labels,
-      size_text = size_text,
-      rescale_distance = rescale_distance
-    )
-  } else {
-    .plot_outliers_multimethod(x, rescale_distance = rescale_distance)
   }
 }
 
