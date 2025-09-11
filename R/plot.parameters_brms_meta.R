@@ -203,13 +203,14 @@ plot.see_parameters_brms_meta <- function(
       scale = 1,
       alpha = alpha_posteriors
     ) +
-    ggplot2::geom_errorbarh(
+    ggplot2::geom_errorbar(
       data = datasummary,
       mapping = ggplot2::aes(
         xmin = .data$CI_low,
         xmax = .data$CI_high,
         color = .data$Color
       ),
+      orientation = "y",
       linewidth = linewidth
     ) +
     ggplot2::geom_point(

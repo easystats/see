@@ -1,4 +1,4 @@
-# see (development version)
+# see 0.12.0
 
 ## Major Changes
 
@@ -15,6 +15,9 @@
 
 * Minor re-labelling of axis titles and subtitles in `plot()` for
   `performance::check_residuals()`.
+
+* Updates the package to adapt to the changes in the latest `{ggplot2}`
+  release.
 
 # see 0.11.0
 
@@ -721,3 +724,4 @@
 ## Bug fixes
 
 * Fixed issues with color codes in the flat-ui palette.
+

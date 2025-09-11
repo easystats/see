@@ -28,7 +28,7 @@ These helper functions are built on top of \code{ggplot2::layer()} and can be
 used to add geom(s), whose type and content are specified as a list.
 }
 \examples{
-\dontshow{if (require("ggside") && require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggside") && require("ggplot2")) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 
 # Example 1 (basic geoms and labels) --------------------------

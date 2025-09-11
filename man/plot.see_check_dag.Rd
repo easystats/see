@@ -44,7 +44,7 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_dag()} function.
 }
 \examples{
-\dontshow{if (require("ggdag", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggdag", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(performance)
 # incorrect adjustment
 dag <- check_dag(

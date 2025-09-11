@@ -63,7 +63,7 @@ See \href{https://patchwork.data-imaginist.com/articles/patchwork.html}{the \emp
 for more advanced control of plot layouts.
 }
 \examples{
-\dontshow{if (require("patchwork", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("patchwork", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 

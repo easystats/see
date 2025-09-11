@@ -854,8 +854,9 @@ plot.see_parameters_model <- function(
     theme_modern(legend.position = "none") +
     color_scale +
     fill_scale +
-    ggplot2::geom_errorbarh(
-      height = 0,
+    ggplot2::geom_errorbar(
+      orientation = "y",
+      width = 0,
       linewidth = size_point
     ) +
     ggplot2::geom_point(
