@@ -45,8 +45,7 @@
 #' l2 <- list(
 #'   geom = "boxplot",
 #'   data = iris,
-#'   aes = list(x = "Species", y = "Sepal.Width"),
-#'   outlier.shape = NA
+#'   aes = list(x = "Species", y = "Sepal.Width")
 #' )
 #' l3 <- list(
 #'   geom = "jitter",
