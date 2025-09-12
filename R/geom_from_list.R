@@ -244,7 +244,7 @@ geom_from_list <- function(x, ...) {
   } else {
     show.legend <- NA
   }
-browser()
+
   # Create layer
   ggplot2::layer(
     stat = stat,
