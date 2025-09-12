@@ -151,15 +151,18 @@ theme_modern <- function(
   # show ticks?
   if (show.ticks) {
     theme_args$axis.ticks.length <- unit(-0.25, "cm")
-    theme_args$axis.text.x.bottom <- element_text(
-      margin = margin(t = base_size * 1.3, r = 0, b = 0, l = 0)
-    )
-    theme_args$axis.text.y.left <- element_text(
-      margin = margin(t = 0, r = base_size * 1.3, b = 0, l = 0)
-    )
+    axis_space <- base_size * 1.3
   } else {
     theme_args$axis.ticks <- element_blank()
+    axis_space <- base_size * 1.2
   }
+
+  theme_args$axis.text.x.bottom <- element_text(
+    margin = margin(t = axis_space, r = 0, b = 0, l = 0)
+  )
+  theme_args$axis.text.y.left <- element_text(
+    margin = margin(t = 0, r = axis_space, b = 0, l = 0)
+  )
 
   theme_classic(base_size = base_size, base_family = base_family) +
     do.call(theme, c(theme_args, ...))
