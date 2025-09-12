@@ -89,13 +89,6 @@ ggplot() +
     geom = "density_2d_polygon", data = iris,
     aes = list(x = "Sepal.Width", y = "Petal.Length")
   ))
-ggplot() +
-  geom_from_list(list(
-    geom = "density_2d_raster", data = iris,
-    aes = list(x = "Sepal.Width", y = "Petal.Length")
-  )) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))
 
 # Example 4 (facet and coord flip) --------------------------
 
