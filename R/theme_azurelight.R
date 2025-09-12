@@ -25,7 +25,7 @@ theme_azurelight <- function(
   plot.title.position = "plot",
   legend.position = "right",
   axis.title.space = 1.8 * base_size,
-  axis.text.space = 1.1 * base_size,
+  axis.text.space = base_size,
   legend.title.size = 1.2 * base_size,
   legend.text.size = 1.1 * base_size,
   axis.title.size = 1.2 * base_size,

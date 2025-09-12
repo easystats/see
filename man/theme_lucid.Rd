@@ -13,7 +13,7 @@ theme_lucid(
   plot.title.position = "plot",
   legend.position = "right",
   axis.title.space = 0.9 * base_size,
-  axis.text.space = 1.1 * base_size,
+  axis.text.space = base_size,
   legend.title.size = base_size,
   legend.text.size = 0.9 * base_size,
   axis.title.size = base_size,
