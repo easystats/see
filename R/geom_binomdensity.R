@@ -33,7 +33,8 @@
 #' ggplot() +
 #'   geom_binomdensity(data, x = "Sepal.Length", y = "Species", scale = "proportion")
 #' ggplot() +
-#'   geom_binomdensity(data,
+#'   geom_binomdensity(
+#'     data,
 #'     x = "Sepal.Length", y = "Species",
 #'     scale = list("setosa" = 0.4, "versicolor" = 0.6)
 #'   )
@@ -63,14 +64,13 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
 
   # ggdist geom
   ggdist::geom_dots(
-    # TODO: use tidy evaluation with `ggplot2::aes()` instead
-    suppressWarnings(ggplot2::aes_string(
-      x = x,
-      y = y,
-      side = ".side",
-      justification = ".justification",
-      scale = ".scale"
-    )),
+    ggplot2::aes(
+      x = .data[[x]],
+      y = .data[[y]],
+      side = .data$.side,
+      justification = .data$.justification,
+      scale = .data$.scale
+    ),
     data = data,
     na.rm = TRUE,
     ...
