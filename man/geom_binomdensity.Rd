@@ -47,7 +47,8 @@ ggplot() +
 ggplot() +
   geom_binomdensity(data, x = "Sepal.Length", y = "Species", scale = "proportion")
 ggplot() +
-  geom_binomdensity(data,
+  geom_binomdensity(
+    data,
     x = "Sepal.Length", y = "Species",
     scale = list("setosa" = 0.4, "versicolor" = 0.6)
   )
