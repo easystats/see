@@ -76,11 +76,11 @@
 #'     aes = list(x = "Sepal.Width", y = "Petal.Length")
 #'   ))
 #' ggplot() +
-#'  geom_from_list(list(
-#'    geom = "density_2d_raster", data = iris,
-#'    aes = list(x = "Sepal.Width", y = "Petal.Length"),
-#'    contour = FALSE
-#'  ))
+#'   geom_from_list(list(
+#'     geom = "density_2d_raster", data = iris,
+#'     aes = list(x = "Sepal.Width", y = "Petal.Length"),
+#'     contour = FALSE
+#'   ))
 #'
 #' # Example 4 (facet and coord flip) --------------------------
 #'
