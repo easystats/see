@@ -56,7 +56,7 @@ The \code{plot()} method for the \code{performance::check_residuals()} resp.
 \code{performance::simulate_residuals()} function.
 }
 \examples{
-\dontshow{if (require("glmmTMB") && require("qqplotr") && require("DHARMa")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("glmmTMB") && require("qqplotr") && require("DHARMa")) withAutoprint(\{ # examplesIf}
 data(Salamanders, package = "glmmTMB")
 model <- glmmTMB::glmmTMB(
   count ~ mined + spp + (1 | site),

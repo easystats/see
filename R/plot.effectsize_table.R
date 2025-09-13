@@ -26,9 +26,10 @@ plot.see_effectsize_table <- function(x, ...) {
   x$.es <- x[, es_name]
 
   if (all(c("CI_low", "CI_high") %in% colnames(x))) {
-    CIs <- geom_errorbarh(
+    CIs <- geom_errorbar(
       aes(xmin = .data$CI_low, xmax = .data$CI_high),
-      height = 0
+      orientation = "y",
+      width = 0
     )
   } else {
     NULL
@@ -75,7 +76,11 @@ plot.see_equivalence_test_effectsize <- function(x, ...) {
   x$.es <- x[, es_name]
 
   ggplot(x, aes(y = .data$Parameter, color = .data$ROPE_Equivalence)) +
-    geom_errorbarh(aes(xmin = .data$CI_low, xmax = .data$CI_high), height = 0) +
+    geom_errorbar(
+      aes(xmin = .data$CI_low, xmax = .data$CI_high),
+      orientation = "y",
+      width = 0
+    ) +
     geom_point(aes(x = .data$.es), size = 2) +
     geom_vline(xintercept = 0) +
     geom_vline(xintercept = unique(attr(x, "rope")), linetype = "dashed") +

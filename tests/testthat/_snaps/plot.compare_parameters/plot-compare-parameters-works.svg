@@ -18,39 +18,39 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='0.000000000000064' y='0.00' width='720.00' height='576.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
 </g>
 <defs>
-  <clipPath id='cpMTE3LjI4fDU3Ny43MXwzOC41MXw1MjMuMjA='>
-    <rect x='117.28' y='38.51' width='460.42' height='484.69' />
+  <clipPath id='cpMTIzLjMxfDU3Ny43MXwzOC41MXw1MTcuMTc='>
+    <rect x='123.31' y='38.51' width='454.40' height='478.66' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMTE3LjI4fDU3Ny43MXwzOC41MXw1MjMuMjA=)'>
-<rect x='117.28' y='38.51' width='460.42' height='484.69' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='138.21' y1='523.20' x2='138.21' y2='38.51' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
-<line x1='171.97' y1='200.07' x2='556.78' y2='200.07' style='stroke-width: 1.07; stroke: #F44336; stroke-linecap: butt;' />
-<circle cx='138.21' cy='361.64' r='4.12' style='stroke-width: 1.42; stroke: #2196F3; fill: #2196F3;' />
-<circle cx='257.08' cy='200.07' r='4.12' style='stroke-width: 1.42; stroke: #F44336; fill: #F44336;' />
+<g clip-path='url(#cpMTIzLjMxfDU3Ny43MXwzOC41MXw1MTcuMTc=)'>
+<rect x='123.31' y='38.51' width='454.40' height='478.66' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='143.97' y1='517.17' x2='143.97' y2='38.51' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
+<line x1='177.28' y1='198.06' x2='557.05' y2='198.06' style='stroke-width: 1.07; stroke: #F44336; stroke-linecap: butt;' />
+<circle cx='143.97' cy='357.62' r='4.12' style='stroke-width: 1.42; stroke: #2196F3; fill: #2196F3;' />
+<circle cx='261.27' cy='198.06' r='4.12' style='stroke-width: 1.42; stroke: #F44336; fill: #F44336;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<polyline points='117.28,523.20 117.28,38.51 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<text x='112.35' y='285.02' text-anchor='end' style='font-size: 12.10px; fill: #4D4D4D; font-family: sans;' textLength='75.32px' lengthAdjust='spacingAndGlyphs'>SD (Intercept)</text>
-<polyline points='117.28,523.20 577.71,523.20 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<text x='138.21' y='536.46' text-anchor='middle' style='font-size: 12.10px; fill: #4D4D4D; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='236.99' y='536.46' text-anchor='middle' style='font-size: 12.10px; fill: #4D4D4D; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='335.77' y='536.46' text-anchor='middle' style='font-size: 12.10px; fill: #4D4D4D; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='434.56' y='536.46' text-anchor='middle' style='font-size: 12.10px; fill: #4D4D4D; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='533.34' y='536.46' text-anchor='middle' style='font-size: 12.10px; fill: #4D4D4D; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='347.50' y='567.78' text-anchor='middle' style='font-size: 13.20px; font-family: sans;' textLength='51.36px' lengthAdjust='spacingAndGlyphs'>Estimate</text>
-<text transform='translate(14.56,280.85) rotate(-90)' text-anchor='middle' style='font-size: 13.20px; font-family: sans;' textLength='61.63px' lengthAdjust='spacingAndGlyphs'>Parameter</text>
-<rect x='588.67' y='249.44' width='125.86' height='62.82' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='594.14' y='265.38' style='font-size: 13.20px; font-family: sans;' textLength='35.96px' lengthAdjust='spacingAndGlyphs'>Model</text>
-<line x1='595.87' y1='280.87' x2='609.70' y2='280.87' style='stroke-width: 1.07; stroke: #2196F3; stroke-linecap: butt;' />
-<circle cx='602.78' cy='280.87' r='4.12' style='stroke-width: 1.42; stroke: #2196F3; fill: #2196F3;' />
-<line x1='595.87' y1='298.15' x2='609.70' y2='298.15' style='stroke-width: 1.07; stroke: #F44336; stroke-linecap: butt;' />
-<circle cx='602.78' cy='298.15' r='4.12' style='stroke-width: 1.42; stroke: #F44336; fill: #F44336;' />
-<text x='616.90' y='285.03' style='font-size: 12.10px; font-family: sans;' textLength='67.26px' lengthAdjust='spacingAndGlyphs'>gmod_glmer</text>
-<text x='616.90' y='302.31' style='font-size: 12.10px; font-family: sans;' textLength='92.14px' lengthAdjust='spacingAndGlyphs'>gmod_glmmTMB</text>
+<polyline points='123.31,517.17 123.31,38.51 ' style='stroke-width: 1.07; stroke-linecap: square;' />
+<text x='112.35' y='282.00' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='75.32px' lengthAdjust='spacingAndGlyphs'>SD (Intercept)</text>
+<polyline points='123.31,517.17 577.71,517.17 ' style='stroke-width: 1.07; stroke-linecap: square;' />
+<text x='143.97' y='536.46' text-anchor='middle' style='font-size: 12.10px; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='241.45' y='536.46' text-anchor='middle' style='font-size: 12.10px; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='338.94' y='536.46' text-anchor='middle' style='font-size: 12.10px; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='436.43' y='536.46' text-anchor='middle' style='font-size: 12.10px; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='533.92' y='536.46' text-anchor='middle' style='font-size: 12.10px; font-family: sans;' textLength='23.55px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='350.51' y='567.78' text-anchor='middle' style='font-size: 13.20px; font-family: sans;' textLength='51.36px' lengthAdjust='spacingAndGlyphs'>Estimate</text>
+<text transform='translate(14.56,277.84) rotate(-90)' text-anchor='middle' style='font-size: 13.20px; font-family: sans;' textLength='61.63px' lengthAdjust='spacingAndGlyphs'>Parameter</text>
+<rect x='588.67' y='246.43' width='125.86' height='62.82' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='594.14' y='262.36' style='font-size: 13.20px; font-family: sans;' textLength='35.96px' lengthAdjust='spacingAndGlyphs'>Model</text>
+<line x1='595.87' y1='277.85' x2='609.70' y2='277.85' style='stroke-width: 1.07; stroke: #2196F3; stroke-linecap: butt;' />
+<circle cx='602.78' cy='277.85' r='4.12' style='stroke-width: 1.42; stroke: #2196F3; fill: #2196F3;' />
+<line x1='595.87' y1='295.13' x2='609.70' y2='295.13' style='stroke-width: 1.07; stroke: #F44336; stroke-linecap: butt;' />
+<circle cx='602.78' cy='295.13' r='4.12' style='stroke-width: 1.42; stroke: #F44336; fill: #F44336;' />
+<text x='616.90' y='282.02' style='font-size: 12.10px; font-family: sans;' textLength='67.26px' lengthAdjust='spacingAndGlyphs'>gmod_glmer</text>
+<text x='616.90' y='299.30' style='font-size: 12.10px; font-family: sans;' textLength='92.14px' lengthAdjust='spacingAndGlyphs'>gmod_glmmTMB</text>
 <text x='5.48' y='15.70' style='font-size: 14.85px; font-family: sans;' textLength='212.16px' lengthAdjust='spacingAndGlyphs'>plot.compare_parameters works</text>
 </g>
 </svg>

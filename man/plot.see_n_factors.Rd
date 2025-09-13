@@ -31,7 +31,7 @@ A ggplot2-object.
 The \code{plot()} method for the \code{parameters::n_factors()} and \code{parameters::n_clusters()}
 }
 \examples{
-\dontshow{if (require("nFactors")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("nFactors")) withAutoprint(\{ # examplesIf}
 data(mtcars)
 result <- parameters::n_factors(mtcars, type = "PCA")
 result

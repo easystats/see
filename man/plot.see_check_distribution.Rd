@@ -24,7 +24,7 @@ The \code{plot()} method for the \code{performance::check_distribution()}
 function.
 }
 \examples{
-\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("randomForest")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("randomForest")) withAutoprint(\{ # examplesIf}
 library(performance)
 m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_distribution(m)

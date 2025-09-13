@@ -28,7 +28,7 @@ These helper functions are built on top of \code{ggplot2::layer()} and can be
 used to add geom(s), whose type and content are specified as a list.
 }
 \examples{
-\dontshow{if (require("ggside") && require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggside") && require("ggplot2")) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 
 # Example 1 (basic geoms and labels) --------------------------
@@ -59,8 +59,7 @@ l1 <- list(
 l2 <- list(
   geom = "boxplot",
   data = iris,
-  aes = list(x = "Species", y = "Sepal.Width"),
-  outlier.shape = NA
+  aes = list(x = "Species", y = "Sepal.Width")
 )
 l3 <- list(
   geom = "jitter",
@@ -93,10 +92,9 @@ ggplot() +
 ggplot() +
   geom_from_list(list(
     geom = "density_2d_raster", data = iris,
-    aes = list(x = "Sepal.Width", y = "Petal.Length")
-  )) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))
+    aes = list(x = "Sepal.Width", y = "Petal.Length"),
+    contour = FALSE
+  ))
 
 # Example 4 (facet and coord flip) --------------------------
 

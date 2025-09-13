@@ -13,6 +13,7 @@ theme_lucid(
   plot.title.position = "plot",
   legend.position = "right",
   axis.title.space = 0.9 * base_size,
+  axis.text.space = base_size,
   legend.title.size = base_size,
   legend.text.size = 0.9 * base_size,
   axis.title.size = base_size,
@@ -46,6 +47,9 @@ plot tag).}
 "right", "bottom", "top", "inside")}
 
 \item{axis.title.space}{Axis title spacing.}
+
+\item{axis.text.space}{Axis text spacing, i.e. spacing between axis and the
+related labels.}
 
 \item{legend.title.size}{Legend elements text size in pts.}
 

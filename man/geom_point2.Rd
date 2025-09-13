@@ -49,7 +49,7 @@ The color aesthetics for \code{geom_point_borderless()} is \code{"fill"}, not
 \code{"color"}. See 'Examples'.
 }
 \examples{
-\dontshow{if (requireNamespace("patchwork", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("patchwork", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 

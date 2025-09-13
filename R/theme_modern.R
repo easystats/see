@@ -16,6 +16,8 @@
 #' @param legend.title.size Legend elements text size in pts.
 #' @param legend.text.size Legend elements text size in pts. Can be "none".
 #' @param axis.title.space Axis title spacing.
+#' @param axis.text.space Axis text spacing, i.e. spacing between axis and the
+#'   related labels.
 #' @param axis.title.size Axis title text size in pts.
 #' @param axis.title.face Axis font face ("plain", "italic", "bold", "bold.italic").
 #' @param axis.text.size Axis text size in pts.
@@ -56,6 +58,7 @@ theme_modern <- function(
   plot.title.position = "plot",
   legend.position = "right",
   axis.title.space = 1.8 * base_size,
+  axis.text.space = base_size,
   legend.title.size = 1.2 * base_size,
   legend.text.size = 1.1 * base_size,
   axis.title.size = 1.2 * base_size,
@@ -151,15 +154,17 @@ theme_modern <- function(
   # show ticks?
   if (show.ticks) {
     theme_args$axis.ticks.length <- unit(-0.25, "cm")
-    theme_args$axis.text.x.bottom <- element_text(
-      margin = margin(t = base_size * 1.3, r = 0, b = 0, l = 0)
-    )
-    theme_args$axis.text.y.left <- element_text(
-      margin = margin(t = 0, r = base_size * 1.3, b = 0, l = 0)
-    )
+    axis.text.space <- axis.text.space * 1.1
   } else {
     theme_args$axis.ticks <- element_blank()
   }
+
+  theme_args$axis.text.x.bottom <- element_text(
+    margin = margin(t = axis.text.space, r = 0, b = 0, l = 0)
+  )
+  theme_args$axis.text.y.left <- element_text(
+    margin = margin(t = 0, r = axis.text.space, b = 0, l = 0)
+  )
 
   theme_classic(base_size = base_size, base_family = base_family) +
     do.call(theme, c(theme_args, ...))

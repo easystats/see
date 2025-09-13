@@ -209,13 +209,14 @@ plot.see_estimate_density <- function(
     my_summary$y <- NA
 
     p <- p +
-      geom_errorbarh(
+      geom_errorbar(
         data = my_summary,
         mapping = aes(
           xmin = .data$CI_low,
           xmax = .data$CI_high,
           color = "Posterior"
         ),
+        orientation = "y",
         linewidth = linewidth
       ) +
       geom_point(

@@ -23,7 +23,7 @@ level (see examples).}
 Add dot-densities for binary \code{y} variables
 }
 \examples{
-\dontshow{if (require("ggdist")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggdist")) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 
