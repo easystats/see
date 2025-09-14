@@ -101,7 +101,7 @@ plot.see_performance_simres <- function(
       qqplotr::stat_qq_line(
         distribution = dfun,
         dparams = dp,
-        size = linewidth,
+        linewidth = linewidth,
         colour = colors[1],
         detrend = detrend
       ),

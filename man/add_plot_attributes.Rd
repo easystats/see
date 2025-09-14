@@ -15,7 +15,7 @@ labels, etc.) as attributes, while \code{add_plot_attributes()} adds this
 information to the plot.
 }
 \examples{
-\dontshow{if (require("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("rstanarm", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 library(rstanarm)
 library(bayestestR)

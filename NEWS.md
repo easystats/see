@@ -1,4 +1,4 @@
-# see (development version)
+# see 0.12.0
 
 ## Major Changes
 
@@ -15,6 +15,13 @@
 
 * Minor re-labelling of axis titles and subtitles in `plot()` for
   `performance::check_residuals()`.
+
+* Updates the package to adapt to the changes in the latest `{ggplot2}`
+  release.
+
+* Themes get an `axis.text.space` argument, to define the spacing between axis
+  lines and axis labels. Due to changes in `{ggplot2}`, the default spacing was
+  slightly changed, now it can be set to the desired value using this argument.
 
 # see 0.11.0
 
