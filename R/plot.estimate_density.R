@@ -48,10 +48,12 @@ data_plot.estimate_density <- function(
   has_parameter_data <- length(dataplot$Parameter) > 0
   has_parameter_length_match <- length(dataplot$Parameter) == nrow(dataplot)
   has_parameter_not_all_na <- !all(is.na(dataplot$Parameter))
-  
-  is_parameter_valid_for_factor <- has_parameter_column && has_parameter_data && 
-                                   has_parameter_length_match && has_parameter_not_all_na
-  
+
+  is_parameter_valid_for_factor <- has_parameter_column &&
+    has_parameter_data &&
+    has_parameter_length_match &&
+    has_parameter_not_all_na
+
   if (is_parameter_valid_for_factor) {
     dataplot$Parameter <- factor(dataplot$Parameter)
     dataplot$Parameter <- factor(
