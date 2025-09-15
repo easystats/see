@@ -2,10 +2,18 @@
 # Run this in an R environment with proper dependencies installed
 
 # Install required packages if not already installed
-if (!requireNamespace("testthat", quietly = TRUE)) install.packages("testthat")
-if (!requireNamespace("vdiffr", quietly = TRUE)) install.packages("vdiffr")  
-if (!requireNamespace("parameters", quietly = TRUE)) install.packages("parameters")
-if (!requireNamespace("see", quietly = TRUE)) install.packages("see")
+if (!requireNamespace("testthat", quietly = TRUE)) {
+  install.packages("testthat")
+}
+if (!requireNamespace("vdiffr", quietly = TRUE)) {
+  install.packages("vdiffr")
+}
+if (!requireNamespace("parameters", quietly = TRUE)) {
+  install.packages("parameters")
+}
+if (!requireNamespace("see", quietly = TRUE)) {
+  install.packages("see")
+}
 
 # Load libraries
 library(testthat)
