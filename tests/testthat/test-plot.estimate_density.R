@@ -21,7 +21,6 @@ test_that("`plot.see_estimate_density()` works with group_by and vector input", 
   # This should not error
   expect_no_error(p <- plot(df))
   expect_s3_class(p, "gg")
-  
   # Visual snapshot test
   vdiffr::expect_doppelganger(
     title = "plot.estimate_density with group_by and vector input",
