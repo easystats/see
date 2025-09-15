@@ -286,7 +286,6 @@ plot.see_estimate_density <- function(
       p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
     }
   }
-  
   # Handle Group column for grouped data (e.g., from group_by in estimate_density)
   # Only add facets if not already faceting by other variables and if we have groups
   if ("Group" %in% names(x) && is.null(n_columns)) {
