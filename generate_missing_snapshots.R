@@ -44,8 +44,8 @@ testthat::test_that("Generate missing sort parameter snapshots", {
     title = "plot.model_parameters_sort_ascending",
     fig = plot(result, sort = "ascending", show_labels = TRUE)
   )
-  
-  # Generate descending sort snapshot  
+
+  # Generate descending sort snapshot
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_sort_descending",
     fig = plot(result, sort = "descending", show_labels = TRUE)
