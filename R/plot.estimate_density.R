@@ -14,11 +14,12 @@ data_plot.estimate_density <- function(
   
   # Handle case where Parameter column exists but is empty or malformed
   if ("Parameter" %in% names(dataplot)) {
+    # Check for various problematic conditions
     if (length(dataplot$Parameter) == 0 || 
         all(is.na(dataplot$Parameter)) || 
         all(dataplot$Parameter == "") ||
         length(unique(dataplot$Parameter[!is.na(dataplot$Parameter)])) == 0) {
-      dataplot$Parameter <- "Distribution"
+      dataplot$Parameter <- rep("Distribution", nrow(dataplot))
     }
   }
 
@@ -36,6 +37,7 @@ data_plot.estimate_density <- function(
   # Safely convert Parameter to factor, ensuring it has valid data
   if ("Parameter" %in% names(dataplot) && 
       length(dataplot$Parameter) > 0 &&
+      length(dataplot$Parameter) == nrow(dataplot) &&
       !all(is.na(dataplot$Parameter))) {
     dataplot$Parameter <- factor(dataplot$Parameter)
     dataplot$Parameter <- factor(
@@ -43,8 +45,8 @@ data_plot.estimate_density <- function(
       levels = rev(levels(dataplot$Parameter))
     )
   } else {
-    # If Parameter column is still problematic, set a default
-    dataplot$Parameter <- factor("Distribution")
+    # If Parameter column is still problematic, set a default with correct length
+    dataplot$Parameter <- factor(rep("Distribution", nrow(dataplot)))
   }
 
   # summary
@@ -270,8 +272,9 @@ plot.see_estimate_density <- function(
   }
   
   # Handle Group column for grouped data (e.g., from group_by in estimate_density)
-  if ("Group" %in% names(x)) {
-    p <- p + facet_wrap(~Group, scales = "free", ncol = n_columns)
+  # Only add facets if not already faceting by other variables and if we have groups
+  if ("Group" %in% names(x) && is.null(n_columns)) {
+    p <- p + facet_wrap(~Group, scales = "free")
   }
 
   p
