@@ -14,11 +14,16 @@ data_plot.estimate_density <- function(
   
   # Handle case where Parameter column exists but is empty or malformed
   if ("Parameter" %in% names(dataplot)) {
-    # Check for various problematic conditions
-    if (length(dataplot$Parameter) == 0 || 
-        all(is.na(dataplot$Parameter)) || 
-        all(dataplot$Parameter == "") ||
-        length(unique(dataplot$Parameter[!is.na(dataplot$Parameter)])) == 0) {
+    # Check for various problematic conditions with descriptive variables
+    parameter_is_empty <- length(dataplot$Parameter) == 0
+    parameter_all_na <- all(is.na(dataplot$Parameter))
+    parameter_all_empty_strings <- all(dataplot$Parameter == "")
+    parameter_no_unique_values <- length(unique(dataplot$Parameter[!is.na(dataplot$Parameter)])) == 0
+    
+    parameter_is_problematic <- parameter_is_empty || parameter_all_na || 
+                               parameter_all_empty_strings || parameter_no_unique_values
+    
+    if (parameter_is_problematic) {
       dataplot$Parameter <- rep("Distribution", nrow(dataplot))
     }
   }
@@ -35,10 +40,15 @@ data_plot.estimate_density <- function(
   dataplot <- .fix_facet_names(dataplot)
 
   # Safely convert Parameter to factor, ensuring it has valid data
-  if ("Parameter" %in% names(dataplot) && 
-      length(dataplot$Parameter) > 0 &&
-      length(dataplot$Parameter) == nrow(dataplot) &&
-      !all(is.na(dataplot$Parameter))) {
+  parameter_column_exists <- "Parameter" %in% names(dataplot)
+  parameter_has_data <- length(dataplot$Parameter) > 0
+  parameter_length_matches <- length(dataplot$Parameter) == nrow(dataplot)
+  parameter_not_all_na <- !all(is.na(dataplot$Parameter))
+  
+  parameter_is_valid_for_factor <- parameter_column_exists && parameter_has_data && 
+                                   parameter_length_matches && parameter_not_all_na
+  
+  if (parameter_is_valid_for_factor) {
     dataplot$Parameter <- factor(dataplot$Parameter)
     dataplot$Parameter <- factor(
       dataplot$Parameter,

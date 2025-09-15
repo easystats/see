@@ -11,6 +11,7 @@ test_that("`plot.see_estimate_density()` works", {
 
 test_that("`plot.see_estimate_density()` works with group_by and vector input", {
   skip_if_not_installed("bayestestR")
+  skip_if_not_installed("vdiffr")
   
   # Test case that was failing: vector input with group_by
   df <- bayestestR::estimate_density(iris[c("Species", "Petal.Width")], group_by = "Species")
@@ -18,6 +19,12 @@ test_that("`plot.see_estimate_density()` works with group_by and vector input", 
   # This should not error
   expect_no_error(p <- plot(df))
   expect_s3_class(p, "gg")
+  
+  # Visual snapshot test
+  vdiffr::expect_doppelganger(
+    title = "plot.estimate_density with group_by and vector input",
+    fig = plot(df)
+  )
 })
 
 
