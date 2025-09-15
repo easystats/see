@@ -41,7 +41,6 @@ message("Generating vdiffr snapshots for sort parameter tests...")
 
 # Test context setup
 testthat::test_that("Generate missing sort parameter snapshots", {
-  
   # Generate ascending sort snapshot
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_sort_ascending",
