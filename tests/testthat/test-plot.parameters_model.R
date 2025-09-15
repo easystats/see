@@ -32,7 +32,6 @@ test_that("`plot.see_parameters_model()` sort parameter works for fixed effects"
   # Test with labels
   p4 <- plot(result, sort = "ascending", show_labels = TRUE)
   expect_s3_class(p4, "gg")
-  
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_sort_ascending",
     fig = plot(result, sort = "ascending", show_labels = TRUE)
