@@ -17,7 +17,6 @@ test_that("`plot.see_parameters_model()` works", {
 test_that("`plot.see_parameters_model()` sort parameter works for fixed effects", {
   m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
   result <- parameters::model_parameters(m)
-  
   # Test sort = TRUE (should be same as ascending)
   p1 <- plot(result, sort = TRUE)
   expect_s3_class(p1, "gg")
