@@ -22,7 +22,10 @@ library(parameters)
 library(see)
 
 # Ensure we're in the correct directory (package root)
-if (!file.exists("DESCRIPTION") || !file.exists("tests/testthat/test-plot.parameters_model.R")) {
+if (
+  !file.exists("DESCRIPTION") ||
+    !file.exists("tests/testthat/test-plot.parameters_model.R")
+) {
   stop("Please run this script from the package root directory")
 }
 
