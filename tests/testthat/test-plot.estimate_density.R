@@ -12,7 +12,6 @@ test_that("`plot.see_estimate_density()` works", {
 test_that("`plot.see_estimate_density()` works with group_by and vector input", {
   skip_if_not_installed("bayestestR")
   skip_if_not_installed("vdiffr")
-  
   # Test case that was failing: vector input with group_by
   df <- bayestestR::estimate_density(iris[c("Species", "Petal.Width")], group_by = "Species")
   
