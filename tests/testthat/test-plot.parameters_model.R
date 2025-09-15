@@ -37,7 +37,7 @@ test_that("`plot.see_parameters_model()` sort parameter works for fixed effects"
     fig = plot(result, sort = "ascending", show_labels = TRUE)
   )
   vdiffr::expect_doppelganger(
-    title = "plot.model_parameters_sort_descending", 
+    title = "plot.model_parameters_sort_descending",
     fig = plot(result, sort = "descending", show_labels = TRUE)
   )
 })
