@@ -17,11 +17,16 @@ data_plot.estimate_density <- function(
     is_parameter_empty <- length(dataplot$Parameter) == 0
     is_parameter_all_na <- all(is.na(dataplot$Parameter))
     has_parameter_all_empty_strings <- all(dataplot$Parameter == "")
-    has_parameter_no_unique_values <- length(unique(dataplot$Parameter[!is.na(dataplot$Parameter)])) == 0
-    
-    is_parameter_problematic <- is_parameter_empty || is_parameter_all_na || 
-                               has_parameter_all_empty_strings || has_parameter_no_unique_values
-    
+    has_parameter_no_unique_values <- length(unique(dataplot$Parameter[
+      !is.na(dataplot$Parameter)
+    ])) ==
+      0
+
+    is_parameter_problematic <- is_parameter_empty ||
+      is_parameter_all_na ||
+      has_parameter_all_empty_strings ||
+      has_parameter_no_unique_values
+
     if (is_parameter_problematic) {
       dataplot$Parameter <- rep("Distribution", nrow(dataplot))
     }
