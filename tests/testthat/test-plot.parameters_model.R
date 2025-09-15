@@ -29,7 +29,6 @@ test_that("`plot.see_parameters_model()` sort parameter works for fixed effects"
   # Test sort = "descending"
   p3 <- plot(result, sort = "descending")
   expect_s3_class(p3, "gg")
-  
   # Test with labels
   p4 <- plot(result, sort = "ascending", show_labels = TRUE)
   expect_s3_class(p4, "gg")
