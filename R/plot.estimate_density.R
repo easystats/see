@@ -11,7 +11,6 @@ data_plot.estimate_density <- function(
   if (!"Parameter" %in% names(dataplot)) {
     dataplot$Parameter <- "Distribution"
   }
-  
   # Handle case where Parameter column exists but is empty or malformed
   if ("Parameter" %in% names(dataplot)) {
     # Check for various problematic conditions with descriptive variables
