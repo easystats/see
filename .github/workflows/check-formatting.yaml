@@ -25,5 +25,4 @@ jobs:
         run: air format .
 
       - name: Commit styling changes
-        if: github.event_name == 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v6
