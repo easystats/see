@@ -1,5 +1,9 @@
 # see (development version)
 
+## Major Changes
+
+* Daniel Lüdecke is now the main maintainer of the package.
+
 # see 0.12.0
 
 ## Major Changes
