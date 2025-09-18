@@ -201,7 +201,14 @@ plot.see_check_normality <- function(
 
 
 .is_efa <- function(model = NULL, mclass = NULL) {
-  efa_classes <- c("psych", "fa", "principal", "omega", "parameters_efa", "parameters_omega")
+  efa_classes <- c(
+    "psych",
+    "fa",
+    "principal",
+    "omega",
+    "parameters_efa",
+    "parameters_omega"
+  )
   if (is.null(mclass)) {
     inherits(model, efa_classes)
   } else {
