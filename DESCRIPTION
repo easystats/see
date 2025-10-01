@@ -71,10 +71,10 @@ Imports:
     datawizard (>= 1.2.0),
     effectsize (>= 1.0.1),
     ggplot2 (>= 4.0.0),
-    insight (>= 1.4.1),
+    insight (>= 1.4.2),
     modelbased (>= 0.13.0),
     patchwork (>= 1.3.2),
-    parameters (>= 0.28.1),
+    parameters (>= 0.28.2),
     performance (>= 0.15.1)
 Suggests:
     BH,
