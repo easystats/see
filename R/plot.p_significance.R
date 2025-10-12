@@ -36,7 +36,9 @@ data_plot.p_significance <- function(
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
     for (i in names(data)) {
-      if (is.null(params) || !all(c("Effects", "Component") %in% colnames(params))) {
+      if (
+        is.null(params) || !all(c("Effects", "Component") %in% colnames(params))
+      ) {
         dataplot <- rbind(
           dataplot,
           .compute_densities_ps(

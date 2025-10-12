@@ -91,7 +91,9 @@ plot.see_check_heteroscedasticity <- function(
 
 
 .sigma_glmmTMB_nonmixed <- function(model, faminfo) {
-  if (!is.na(match(faminfo$family, c("binomial", "poisson", "truncated_poisson")))) {
+  if (
+    !is.na(match(faminfo$family, c("binomial", "poisson", "truncated_poisson")))
+  ) {
     return(1)
   }
   betad <- model$fit$par["betad"]

@@ -95,7 +95,8 @@
   # Add elbow guideline segments (scree-style) — solid, with gap
   if (length(elbow_idx) > 0) {
     gap_proportion <- 0.15
-    gaps <- (df_plot$mdist[elbow_idx + 1] - df_plot$mdist[elbow_idx]) * gap_proportion
+    gaps <- (df_plot$mdist[elbow_idx + 1] - df_plot$mdist[elbow_idx]) *
+      gap_proportion
     elbow_lines <- data.frame(
       x = df_plot$obs[elbow_idx],
       xend = df_plot$obs[elbow_idx + 1],
@@ -105,7 +106,12 @@
     p <- p +
       ggplot2::geom_segment(
         data = elbow_lines,
-        ggplot2::aes(x = .data$x, xend = .data$xend, y = .data$y, yend = .data$yend),
+        ggplot2::aes(
+          x = .data$x,
+          xend = .data$xend,
+          y = .data$y,
+          yend = .data$yend
+        ),
         inherit.aes = FALSE,
         colour = "#5b9bd5",
         linetype = "solid",

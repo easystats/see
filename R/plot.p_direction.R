@@ -30,7 +30,9 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
     for (i in names(data)) {
-      if (!is.null(params) && all(c("Effects", "Component") %in% colnames(params))) {
+      if (
+        !is.null(params) && all(c("Effects", "Component") %in% colnames(params))
+      ) {
         dataplot <- rbind(
           dataplot,
           cbind(
