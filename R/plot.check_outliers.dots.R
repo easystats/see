@@ -19,6 +19,25 @@
   size_text <- size_text %||% 3
 
   plot_data <- x
+  
+  # Sample data if too large for performance (issue #420)
+  # But preserve influential points for labeling
+  if (nrow(plot_data) > 3000) {
+    # Keep all influential points
+    influential_points <- plot_data[plot_data$Influential == "Influential", , drop = FALSE]
+    non_influential_points <- plot_data[plot_data$Influential != "Influential", , drop = FALSE]
+    
+    # Sample from non-influential points
+    if (nrow(non_influential_points) > 2500) {
+      set.seed(123)
+      sample_indices <- sample(seq_len(nrow(non_influential_points)), 2500, replace = FALSE)
+      non_influential_points <- non_influential_points[sample_indices, , drop = FALSE]
+    }
+    
+    # Combine back
+    plot_data <- rbind(influential_points, non_influential_points)
+  }
+  
   cook.levels <- attributes(x)$cook_levels
   n_params <- attributes(x)$n_params
 

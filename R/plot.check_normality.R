@@ -281,6 +281,9 @@ plot.see_check_normality <- function(
   model_info = NULL,
   model_class = NULL
 ) {
+  # Sample data if too large for performance (issue #420)
+  x <- .sample_for_plot(x, max_points = 3000)
+  
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
 
   # set default y-range for FA / PCA
@@ -517,6 +520,10 @@ plot.see_check_normality <- function(
 ) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
+    
+    # Sample data if too large for performance (issue #420)
+    dat <- .sample_for_plot(dat, max_points = 3000)
+    
     p <- ggplot2::ggplot(dat, ggplot2::aes(x = .data$x, y = .data$y)) +
       ggplot2::labs(
         x = "Theoretical Quantiles",
