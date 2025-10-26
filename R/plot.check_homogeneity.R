@@ -159,7 +159,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
 ) {
   # Sample data if too large for performance (issue #420)
   x <- .sample_for_plot(x, max_points = 3000)
-  
+
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
   if (isTRUE(show_dots)) {

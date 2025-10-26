@@ -9,7 +9,8 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
+#' @seealso See also the vignette about
+#'   [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
 #' @examplesIf require("patchwork")
 #' library(performance)
@@ -321,9 +322,9 @@ plot.see_check_model <- function(
   if (panel) {
     pw <- plots(p, n_columns = n_columns)
     .safe_print_plots(pw, ...)
-    return(invisible(pw))
+    invisible(pw)
   } else {
-    return(p)
+    p
   }
 }
 
@@ -334,24 +335,24 @@ plot.see_check_model <- function(
   if (is.null(data) || !is.data.frame(data)) {
     return(data)
   }
-  
+
   n_obs <- nrow(data)
-  
+
   # Only sample if dataset exceeds threshold
   if (n_obs > max_points) {
     # Use stratified sampling if there are grouping variables
     # Otherwise use simple random sampling
-    set.seed(123)  # For reproducibility in plots
-    sample_indices <- sample(seq_len(n_obs), max_points, replace = FALSE)
+    set.seed(123) # For reproducibility in plots
+    sample_indices <- sample.int(n_obs, max_points, replace = FALSE)
     data <- data[sample_indices, , drop = FALSE]
-    
+
     # Add attribute to track sampling
     attr(data, "was_sampled") <- TRUE
     attr(data, "original_n") <- n_obs
     attr(data, "sampled_n") <- max_points
   }
-  
-  return(data)
+
+  data
 }
 
 
@@ -370,7 +371,7 @@ plot.see_check_model <- function(
 ) {
   # Sample data if too large for performance (issue #420)
   x <- .sample_for_plot(x, max_points = 3000)
-  
+
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
   if (isTRUE(show_dots)) {
