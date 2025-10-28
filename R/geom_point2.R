@@ -92,7 +92,8 @@ geom_pointrange_borderless <- function(...) {
     current_theme$panel.grid.major <- current_theme$panel.grid
   }
 
-  bg_color <- ifelse(is.null(current_theme$panel.grid.major$colour),
+  bg_color <- ifelse(
+    is.null(current_theme$panel.grid.major$colour),
     "white",
     current_theme$panel.grid.major$colour
   )

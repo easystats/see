@@ -1,12 +1,12 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.9.0.6
+Version: 0.12.0.1
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
-             role = c("aut", "ctb"),
-             email = "d.luedecke@uke.de",
+             role = c("aut", "cre"),
+             email = "officialeasystats@gmail.com",
              comment = c(ORCID = "0000-0002-8895-3206")),
       person(given = "Dominique",
              family = "Makowski",
@@ -15,7 +15,7 @@ Authors@R:
              comment = c(ORCID = "0000-0001-5375-9967")),
       person(given = "Indrajeet",
              family = "Patil",
-             role = c("aut", "cre"),
+             role = c("aut"),
              email = "patilindrajeet.science@gmail.com",
              comment = c(ORCID = "0000-0003-1995-6531")),
       person(given = "Mattan S.",
@@ -28,6 +28,11 @@ Authors@R:
              role = c("aut", "ctb"),
              email = "brenton@wiernik.org",
              comment = c(ORCID = "0000-0001-9560-6336")),
+      person(given = "Rémi",
+             family = "Thériault",
+             role = c("aut", "ctb"),
+             email = "remi.theriault@mail.mcgill.ca",
+             comment = c(ORCID = "0000-0003-4315-6788")),
       person(given = "Philip",
              family = "Waggoner",
              role = c("aut", "ctb"),
@@ -58,25 +63,29 @@ BugReports: https://github.com/easystats/see/issues
 Depends:
     graphics,
     grDevices,
-    R (>= 4.0),
+    R (>= 4.1),
     stats
 Imports:
-    bayestestR (>= 0.14.0),
-    correlation (>= 0.8.5),
-    datawizard (>= 0.13.0),
-    effectsize (>= 0.8.9),
-    ggplot2,
-    insight (>= 0.20.5),
-    modelbased (>= 0.8.8),
-    parameters (>= 0.22.2),
-    performance (>= 0.12.3)
+    bayestestR (>= 0.17.0),
+    correlation (>= 0.8.8),
+    datawizard (>= 1.2.0),
+    effectsize (>= 1.0.1),
+    ggplot2 (>= 4.0.0),
+    insight (>= 1.4.2),
+    modelbased (>= 0.13.0),
+    patchwork (>= 1.3.2),
+    parameters (>= 0.28.2),
+    performance (>= 0.15.1)
 Suggests:
     BH,
     brms,
+    collapse,
     curl,
     DHARMa,
+    discovr,
     emmeans,
     factoextra,
+    Formula,
     ggdag,
     ggdist,
     ggraph,
@@ -85,11 +94,11 @@ Suggests:
     ggside,
     glmmTMB,
     grid,
-    httr,
     httr2,
     lavaan,
     lme4,
     logspline,
+    marginaleffects,
     MASS,
     mclogit,
     mclust,
@@ -98,8 +107,6 @@ Suggests:
     metafor,
     NbClust,
     nFactors,
-    patchwork (>= 1.2.0),
-    poorman,
     psych,
     qqplotr (>= 0.0.6),
     randomForest,
@@ -107,15 +114,15 @@ Suggests:
     rlang,
     rmarkdown,
     rstanarm,
-    scales (>= 1.3.0),
+    scales (>= 1.4.0),
     splines,
     testthat (>= 3.2.1),
     tidygraph,
-    vdiffr (>= 1.0.7)
+    vdiffr (>= 1.0.8)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/Needs/website: easystats/easystatstemplate

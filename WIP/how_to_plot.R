@@ -88,7 +88,12 @@ how_to_plot.see_estimate_density <- how_to_plot.estimate_density
   code <- gsub("%>%", "%>%\n ", code, fixed = TRUE)
 
   # Remove other non necessary sentences:
-  code <- gsub('.remove_intercept(x, column = "y", show_intercept) ', "", code, fixed = TRUE)
+  code <- gsub(
+    '.remove_intercept(x, column = "y", show_intercept) ',
+    "",
+    code,
+    fixed = TRUE
+  )
 
   insight::print_color("# Assuming that the input object is `x`:\n\n", "cyan")
   cat(trimws(code))

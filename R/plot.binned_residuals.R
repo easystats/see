@@ -1,14 +1,16 @@
 #' @export
-plot.see_binned_residuals <- function(x,
-                                      size_line = 0.7,
-                                      size_point = 2.2,
-                                      size_title = 12,
-                                      size_axis_title = base_size,
-                                      base_size = 10,
-                                      colors = social_colors(c("blue", "red", "green")),
-                                      show_smooth = FALSE,
-                                      style = theme_lucid,
-                                      ...) {
+plot.see_binned_residuals <- function(
+  x,
+  linewidth = 0.7,
+  size_point = 2.2,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  colors = social_colors(c("blue", "red", "green")),
+  show_smooth = FALSE,
+  style = theme_lucid,
+  ...
+) {
   x$se.lo <- -x$se
   if (length(unique(x$group)) > 1L) {
     ltitle <- "Within error bounds"
@@ -37,7 +39,10 @@ plot.see_binned_residuals <- function(x,
   colors <- unname(colors)
 
   if (is.null(term)) {
-    xtitle <- sprintf("Estimated Probability of %s", attr(x, "resp_var", exact = TRUE))
+    xtitle <- sprintf(
+      "Estimated Probability of %s",
+      attr(x, "resp_var", exact = TRUE)
+    )
   } else {
     xtitle <- term
   }
@@ -54,7 +59,9 @@ plot.see_binned_residuals <- function(x,
   p <- ggplot2::ggplot(data = x, ggplot2::aes(x = .data$xbar)) +
     ggplot2::geom_abline(slope = 0, intercept = 0, colour = "grey80")
 
-  if (isTRUE(insight::check_if_installed("mgcv", quietly = TRUE)) && show_smooth) {
+  if (
+    isTRUE(insight::check_if_installed("mgcv", quietly = TRUE)) && show_smooth
+  ) {
     p <- p +
       ggplot2::stat_smooth(
         ggplot2::aes(y = .data$ybar),
@@ -62,13 +69,21 @@ plot.see_binned_residuals <- function(x,
         se = FALSE,
         formula = y ~ s(x, bs = "tp"),
         colour = colors[3],
-        linewidth = size_line
+        linewidth = linewidth
       )
   }
 
   p <- p +
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = -Inf, ymax = .data$se.lo), alpha = 0.1, fill = "grey70") +
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$se, ymax = Inf), alpha = 0.1, fill = "grey70") +
+    ggplot2::geom_ribbon(
+      ggplot2::aes(ymin = -Inf, ymax = .data$se.lo),
+      alpha = 0.1,
+      fill = "grey70"
+    ) +
+    ggplot2::geom_ribbon(
+      ggplot2::aes(ymin = .data$se, ymax = Inf),
+      alpha = 0.1,
+      fill = "grey70"
+    ) +
     ggplot2::geom_line(ggplot2::aes(y = .data$se), colour = "grey70") +
     ggplot2::geom_line(ggplot2::aes(y = .data$se.lo), colour = "grey70") +
     ggplot2::scale_color_manual(values = colors[2:1]) +
@@ -89,39 +104,44 @@ plot.see_binned_residuals <- function(x,
       ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = size_point) +
       ggplot2::geom_errorbar(
         ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high),
-        linewidth = size_line,
+        linewidth = linewidth,
         width = 0
       )
   } else {
     p <- p +
-      ggplot2::geom_point(ggplot2::aes(y = .data$ybar, colour = .data$group), size = size_point) +
+      ggplot2::geom_point(
+        ggplot2::aes(y = .data$ybar, colour = .data$group),
+        size = size_point
+      ) +
       ggplot2::geom_errorbar(
         ggplot2::aes(
           ymin = .data$CI_low,
           ymax = .data$CI_high,
           colour = .data$group
         ),
-        linewidth = size_line,
+        linewidth = linewidth,
         width = 0
       )
   }
 
   if (isTRUE(dots[["check_model"]])) {
-    p <- p + theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      axis.title.size = size_axis_title,
-      plot.title.size = size_title
-    )
+    p <- p +
+      theme_style(
+        base_size = base_size,
+        plot.title.space = 3,
+        axis.title.space = 5,
+        axis.title.size = size_axis_title,
+        plot.title.size = size_title
+      )
   }
 
   if (isTRUE(dots[["adjust_legend"]])) {
-    p <- p + ggplot2::theme(
-      legend.position = "bottom",
-      legend.margin = ggplot2::margin(0, 0, 0, 0),
-      legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
-    )
+    p <- p +
+      ggplot2::theme(
+        legend.position = "bottom",
+        legend.margin = ggplot2::margin(0, 0, 0, 0),
+        legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
+      )
   }
 
   p

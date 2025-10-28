@@ -2,8 +2,8 @@
 #'
 #' The `plot()` method for the `bayestestR::si()`.
 #'
-#' @param si_alpha Numeric value specifying Transparency level of SI ribbon.
-#' @param si_color Character specifying color of SI ribbon.
+#' @param alpha_si Numeric value specifying Transparency level of SI ribbon.
+#' @param color_si Character specifying color of SI ribbon.
 #' @param support_only Logical. Decides whether to plot only the support data,
 #'   or show the "raw" prior and posterior distributions? Only applies when
 #'   plotting [bayestestR::si()].
@@ -22,32 +22,38 @@
 #' plot(result)
 #'
 #' @export
-plot.see_si <- function(x,
-                        si_color = "#0171D3",
-                        si_alpha = 0.2,
-                        show_intercept = FALSE,
-                        support_only = FALSE,
-                        ...) {
+plot.see_si <- function(
+  x,
+  color_si = "#0171D3",
+  alpha_si = 0.2,
+  show_intercept = FALSE,
+  support_only = FALSE,
+  ...
+) {
   plot_data <- attr(x, "plot_data")
   x$ind <- x$Parameter
 
   # if we have intercept-only models, keep at least the intercept
   intercepts_data <- which(.is_intercept(plot_data$ind))
-  if (length(intercepts_data) && (nrow(plot_data) > length(intercepts_data)) && !show_intercept) {
+  if (
+    length(intercepts_data) &&
+      (nrow(plot_data) > length(intercepts_data)) &&
+      !show_intercept
+  ) {
     intercepts_si <- which(.is_intercept(x$ind))
     x <- x[-intercepts_si, ]
     plot_data <- plot_data[-intercepts_data, ]
   }
-
 
   if (length(unique(x$CI)) > 1L) {
     p <- ggplot(mapping = aes(x = .data$x)) +
       # SI
       geom_rect(
         aes(xmin = .data$CI_low, xmax = .data$CI_high, alpha = .data$CI),
-        ymin = 0, ymax = Inf,
+        ymin = 0,
+        ymax = Inf,
         data = x,
-        fill = si_color,
+        fill = color_si,
         inherit.aes = FALSE
       ) +
       scale_alpha_continuous(breaks = unique(x$CI)) +
@@ -63,10 +69,13 @@ plot.see_si <- function(x,
       # SI
       geom_rect(
         aes(xmin = .data$CI_low, xmax = .data$CI_high),
-        ymin = 0, ymax = Inf,
+        ymin = 0,
+        ymax = Inf,
         data = x,
-        fill = si_color, alpha = si_alpha,
-        linetype = "dashed", colour = "grey50",
+        fill = color_si,
+        alpha = alpha_si,
+        linetype = "dashed",
+        colour = "grey50",
         inherit.aes = FALSE
       ) +
       labs(
@@ -75,7 +84,6 @@ plot.see_si <- function(x,
       ) +
       theme(legend.position = "bottom")
   }
-
 
   if (isTRUE(support_only)) {
     support_data <- split(plot_data, as.character(plot_data$ind))
@@ -115,7 +123,11 @@ plot.see_si <- function(x,
       # distributions
       geom_line(linewidth = 1, data = support_data) +
       geom_area(alpha = 0.15, data = support_data) +
-      geom_hline(yintercept = unique(x$CI), colour = "grey30", linetype = "dotted") +
+      geom_hline(
+        yintercept = unique(x$CI),
+        colour = "grey30",
+        linetype = "dotted"
+      ) +
       labs(y = "Updating Factor")
   } else {
     p <- p +
@@ -126,7 +138,7 @@ plot.see_si <- function(x,
       ) +
       # distributions
       geom_line(linewidth = 1, data = plot_data) +
-      geom_area(alpha = 0.15, data = plot_data) +
+      geom_area(alpha = 0.15, data = plot_data, position = "identity") +
       labs(y = "Density")
   }
 

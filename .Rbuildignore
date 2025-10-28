@@ -29,3 +29,7 @@
 ^revdep$
 ^CRAN-SUBMISSION$
 ^LICENSE\.md$
+^air.toml
+^[.]?air[.]toml$
+^\.vscode$
+^.claude

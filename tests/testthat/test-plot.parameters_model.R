@@ -3,7 +3,6 @@ test_that("`plot.see_parameters_model()` works", {
   result <- parameters::model_parameters(m)
   expect_s3_class(plot(result), "gg")
 
-  skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_1",
     fig = plot(result)
@@ -14,8 +13,17 @@ test_that("`plot.see_parameters_model()` works", {
   )
 })
 
+
+test_that("`plot.see_parameters_model()` errors for anova tables", {
+  skip_if_not_installed("parameters")
+  data(iris)
+  m <- aov(Sepal.Length ~ Species, data = iris)
+  mp <- parameters::model_parameters(m)
+  expect_error(plot(mp), regex = "Plots cannot be created")
+})
+
+
 test_that("`plot.see_parameters_model()` random parameters works", {
-  skip_if_not_installed("vdiffr")
   skip_if_not_installed("lme4")
   skip_if_not_installed("parameters")
 
@@ -61,13 +69,17 @@ test_that("`plot.see_parameters_model()` random parameters works", {
   out <- parameters::model_parameters(s_mod, group_level = TRUE)
   vdiffr::expect_doppelganger(
     title = "plot.model_parameters_random_6",
-    fig = plot(out, sort = "ascending", show_labels = TRUE, show_intercept = FALSE)
+    fig = plot(
+      out,
+      sort = "ascending",
+      show_labels = TRUE,
+      show_intercept = FALSE
+    )
   )
 })
 
 
 test_that("`plot.see_parameters_model()` random parameters works", {
-  skip_if_not_installed("vdiffr")
   skip_if_not_installed("lme4")
   skip_if_not_installed("parameters")
   data(sleepstudy, package = "lme4")
@@ -87,7 +99,6 @@ test_that("`plot.see_parameters_model()` random parameters works", {
 
 
 test_that("`plot.see_parameters_model()` random parameters works", {
-  skip_if_not_installed("vdiffr")
   skip_if_not_installed("mgcv")
   skip_if_not_installed("parameters")
 

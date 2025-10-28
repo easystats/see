@@ -3,16 +3,16 @@
 #' @param x Object created by `datawizard::data_tabulate()`.
 #' @param label_values Logical. Should values and percentages be displayed at the
 #'   top of each bar.
-#' @param show_na Should missing values be dropped? Can be `"if_any"` (default) to show
-#'   the missing category only if any missing values are present, `"always"` to
-#'   always show the missing category, or `"never"` to never show the missing
-#'   category.
+#' @param show_na Should missing values be dropped? Can be `"if_any"` (default)
+#'   to show the missing category only if any missing values are present,
+#'   `"always"` to always show the missing category, or `"never"` to never show
+#'   the missing category.
 #' @param na_label The label given to missing values when they are shown.
-#' @param error_bar Logical. Should error bars be displayed?
-#'   If `TRUE`, confidence intervals computed using the Wilson method are shown.
-#'   See Brown et al. (2001) for details.
+#' @param error_bar Logical. Should error bars be displayed? If `TRUE`,
+#'   confidence intervals computed using the Wilson method are shown. See Brown
+#'   et al. (2001) for details.
 #' @param ci Confidence Interval (CI) level. Defaults to `0.95` (`95%`).
-#' @param fill_col Color to use for category columns (default: `"#87CEFA"`).
+#' @param color_fill Color to use for category columns (default: `"#87CEFA"`).
 #' @param color_error_bar Color to use for error bars (default: `"#607B8B"`).
 #' @param ... Unused
 #'
@@ -24,15 +24,18 @@
 #' @rdname plot.datawizard_table
 #' @export
 
-plot.datawizard_tables <- function(x, label_values = TRUE,
-                                   show_na = c("if_any", "always", "never"),
-                                   na_label = "(Missing)",
-                                   error_bar = TRUE,
-                                   ci = 0.95,
-                                   fill_col = "#87CEFA",
-                                   color_error_bar = "#607B8B",
-                                   ...) {
-  show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
+plot.datawizard_tables <- function(
+  x,
+  label_values = TRUE,
+  show_na = "if_any",
+  na_label = "(Missing)",
+  error_bar = TRUE,
+  ci = 0.95,
+  color_fill = "#87CEFA",
+  color_error_bar = "#607B8B",
+  ...
+) {
+  show_na <- insight::validate_argument(show_na, c("if_any", "always", "never"))
   if (length(x) == 1L) {
     plot.datawizard_table(
       x[[1]],
@@ -41,7 +44,7 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
       na_label = na_label,
       error_bar = error_bar,
       ci = ci,
-      fill_col = fill_col,
+      color_fill = color_fill,
       color_error_bar = color_error_bar
     )
   } else {
@@ -53,7 +56,7 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
       na_label = na_label,
       error_bar = error_bar,
       ci = ci,
-      fill_col = fill_col,
+      color_fill = color_fill,
       color_error_bar = color_error_bar
     )
   }
@@ -63,15 +66,18 @@ plot.datawizard_tables <- function(x, label_values = TRUE,
 #'
 #' @export
 
-plot.datawizard_table <- function(x, label_values = TRUE,
-                                  show_na = c("if_any", "always", "never"),
-                                  na_label = "(Missing)",
-                                  error_bar = TRUE,
-                                  ci = 0.95,
-                                  fill_col = "#87CEFA",
-                                  color_error_bar = "#607B8B",
-                                  ...) {
-  show_na <- match.arg(show_na, choices = c("if_any", "always", "never"))
+plot.datawizard_table <- function(
+  x,
+  label_values = TRUE,
+  show_na = "if_any",
+  na_label = "(Missing)",
+  error_bar = TRUE,
+  ci = 0.95,
+  color_fill = "#87CEFA",
+  color_error_bar = "#607B8B",
+  ...
+) {
+  show_na <- insight::validate_argument(show_na, c("if_any", "always", "never"))
   dat <- as.data.frame(x)
 
   if (show_na == "if_any") {
@@ -100,7 +106,11 @@ plot.datawizard_table <- function(x, label_values = TRUE,
   if (isTRUE(error_bar)) {
     total_n <- sum(dat$N)
     props <- dat$output / 100
-    dat <- cbind(dat, CI = ci, .wilson_ci(prop = props, total_n = total_n, ci = ci) * total_n)
+    dat <- cbind(
+      dat,
+      CI = ci,
+      .wilson_ci(prop = props, total_n = total_n, ci = ci) * total_n
+    )
     dat$label <- paste0(dat$N, " (", round(dat$output, 2), "%)")
   } else {
     dat$label <- paste0(dat$N, "\n(", round(dat$output, 2), "%)")
@@ -108,14 +118,18 @@ plot.datawizard_table <- function(x, label_values = TRUE,
 
   out <- ggplot2::ggplot(dat) +
     ggplot2::aes(x = .data$Value, y = .data$N) +
-    ggplot2::geom_col(fill = fill_col) +
+    ggplot2::geom_col(fill = color_fill) +
     ggplot2::labs(title = unique(dat$Variable)) +
     theme_modern()
 
   if (isTRUE(label_values)) {
     if (isTRUE(error_bar)) {
       out <- out +
-        ggplot2::geom_text(ggplot2::aes(label = .data$label), vjust = -1, hjust = 1.2) +
+        ggplot2::geom_text(
+          ggplot2::aes(label = .data$label),
+          vjust = -1,
+          hjust = 1.2
+        ) +
         ggplot2::coord_cartesian(ylim = c(0, max(dat$CI_high)))
     } else {
       out <- out +

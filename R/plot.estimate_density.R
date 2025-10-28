@@ -1,9 +1,11 @@
 #' @export
-data_plot.estimate_density <- function(x,
-                                       data = NULL,
-                                       centrality = "median",
-                                       ci = 0.95,
-                                       ...) {
+data_plot.estimate_density <- function(
+  x,
+  data = NULL,
+  centrality = "median",
+  ci = 0.95,
+  ...
+) {
   dataplot <- x
 
   if (!"Parameter" %in% names(dataplot)) {
@@ -12,42 +14,61 @@ data_plot.estimate_density <- function(x,
 
   # add component and effects columns
   if (!is.null(data)) {
-    dataplot <- merge(dataplot, insight::clean_parameters(data), by = "Parameter")
+    dataplot <- merge(
+      dataplot,
+      insight::clean_parameters(data),
+      by = "Parameter"
+    )
   }
 
   dataplot <- .fix_facet_names(dataplot)
 
   dataplot$Parameter <- factor(dataplot$Parameter)
-  dataplot$Parameter <- factor(dataplot$Parameter, levels = rev(levels(dataplot$Parameter)))
+  dataplot$Parameter <- factor(
+    dataplot$Parameter,
+    levels = rev(levels(dataplot$Parameter))
+  )
 
   # summary
-  split_columns <- intersect(c("Parameter", "Effects", "Component"), colnames(dataplot))
+  split_columns <- intersect(
+    c("Parameter", "Effects", "Component"),
+    colnames(dataplot)
+  )
   datasplit <- split(dataplot, dataplot[split_columns])
-  my_summary <- do.call(rbind, insight::compact_list(lapply(datasplit, function(i) {
-    if (length(i$x) > 0L) {
-      Estimate <- as.numeric(bayestestR::point_estimate(i$x, centrality = centrality))
-      CI <- as.numeric(bayestestR::ci(i$x, ci = ci))
-      out <- data.frame(
-        Parameter = unique(i$Parameter),
-        x = Estimate,
-        CI_low = CI[2],
-        CI_high = CI[3],
-        stringsAsFactors = FALSE
-      )
-      if ("Effects" %in% colnames(i)) {
-        out$Effects <- unique(i$Effects)
+  my_summary <- do.call(
+    rbind,
+    insight::compact_list(lapply(datasplit, function(i) {
+      if (length(i$x) > 0L) {
+        Estimate <- as.numeric(bayestestR::point_estimate(
+          i$x,
+          centrality = centrality
+        ))
+        CI <- as.numeric(bayestestR::ci(i$x, ci = ci))
+        out <- data.frame(
+          Parameter = unique(i$Parameter),
+          x = Estimate,
+          CI_low = CI[2],
+          CI_high = CI[3],
+          stringsAsFactors = FALSE
+        )
+        if ("Effects" %in% colnames(i)) {
+          out$Effects <- unique(i$Effects)
+        }
+        if ("Component" %in% colnames(i)) {
+          out$Component <- unique(i$Component)
+        }
+      } else {
+        out <- NULL
       }
-      if ("Component" %in% colnames(i)) {
-        out$Component <- unique(i$Component)
-      }
-    } else {
-      out <- NULL
-    }
-    out
-  })))
+      out
+    }))
+  )
 
   my_summary$Parameter <- factor(my_summary$Parameter)
-  my_summary$Parameter <- factor(my_summary$Parameter, levels = levels(dataplot$Parameter))
+  my_summary$Parameter <- factor(
+    my_summary$Parameter,
+    levels = levels(dataplot$Parameter)
+  )
 
   attr(dataplot, "summary") <- my_summary
   attr(dataplot, "info") <- list(
@@ -74,9 +95,9 @@ data_plot.estimate_density <- function(x,
 #' @param priors Logical. If `TRUE`, prior distributions are simulated
 #'   (using [bayestestR::simulate_prior()]) and added
 #'   to the plot.
-#' @param priors_alpha Numeric value specifying alpha for the prior
+#' @param alpha_priors Numeric value specifying alpha for the prior
 #'   distributions.
-#' @param posteriors_alpha Numeric value specifying alpha for the posterior
+#' @param alpha_posteriors Numeric value specifying alpha for the posterior
 #'   distributions.
 #' @param centrality Character specifying the point-estimate (centrality index)
 #'   to compute. Can be `"median"`, `"mean"` or `"MAP"`.
@@ -98,18 +119,20 @@ data_plot.estimate_density <- function(x,
 #' plot(result)
 #'
 #' @export
-plot.see_estimate_density <- function(x,
-                                      stack = TRUE,
-                                      show_intercept = FALSE,
-                                      n_columns = 1,
-                                      priors = FALSE,
-                                      priors_alpha = 0.4,
-                                      posteriors_alpha = 0.7,
-                                      size_line = 0.9,
-                                      size_point = 2,
-                                      centrality = "median",
-                                      ci = 0.95,
-                                      ...) {
+plot.see_estimate_density <- function(
+  x,
+  stack = TRUE,
+  show_intercept = FALSE,
+  n_columns = 1,
+  priors = FALSE,
+  alpha_priors = 0.4,
+  alpha_posteriors = 0.7,
+  linewidth = 0.9,
+  size_point = 2,
+  centrality = "median",
+  ci = 0.95,
+  ...
+) {
   # save model for later use
   model <- tryCatch(
     .retrieve_data(x),
@@ -119,14 +142,8 @@ plot.see_estimate_density <- function(x,
     }
   )
 
-
   if (!inherits(x, "data_plot")) {
-    x <- data_plot(x,
-      data = model,
-      centrality = centrality,
-      ci = ci,
-      ...
-    )
+    x <- data_plot(x, data = model, centrality = centrality, ci = ci, ...)
   }
 
   if (.has_multiple_panels(x)) {
@@ -134,17 +151,20 @@ plot.see_estimate_density <- function(x,
   }
 
   # get parameter names for filtering
-  params <- unique(x$y)
+  params <- unique(x$Parameter)
 
   # get labels
-  parameter_labels <- .clean_parameter_names(x$Parameter, grid = !is.null(n_columns))
+  parameter_labels <- .clean_parameter_names(
+    x$Parameter,
+    grid = !is.null(n_columns)
+  )
 
   # remove intercept from output, if requested
   x <- .remove_intercept(x, show_intercept = show_intercept)
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(linewidth = size_line) +
+      geom_line(linewidth = linewidth) +
       add_plot_attributes(x) +
       scale_color_flat(labels = parameter_labels)
   } else {
@@ -159,11 +179,12 @@ plot.see_estimate_density <- function(x,
           model,
           parameter = params,
           show_intercept = show_intercept,
-          priors_alpha = priors_alpha,
+          alpha_priors = alpha_priors,
           show_ridge_line = FALSE
         ) +
-        ggridges::geom_ridgeline(aes(fill = "Posterior"),
-          alpha = posteriors_alpha,
+        ggridges::geom_ridgeline(
+          aes(fill = "Posterior"),
+          alpha = alpha_posteriors,
           color = NA
         ) +
         guides(color = "none") +
@@ -173,8 +194,9 @@ plot.see_estimate_density <- function(x,
       insight::check_if_installed("ggridges")
 
       p <- p +
-        ggridges::geom_ridgeline(aes(fill = "Posterior"),
-          alpha = posteriors_alpha,
+        ggridges::geom_ridgeline(
+          aes(fill = "Posterior"),
+          alpha = alpha_posteriors,
           color = NA
         ) +
         guides(fill = "none", color = "none") +
@@ -187,14 +209,15 @@ plot.see_estimate_density <- function(x,
     my_summary$y <- NA
 
     p <- p +
-      geom_errorbarh(
+      geom_errorbar(
         data = my_summary,
         mapping = aes(
           xmin = .data$CI_low,
           xmax = .data$CI_high,
           color = "Posterior"
         ),
-        linewidth = size_line
+        orientation = "y",
+        linewidth = linewidth
       ) +
       geom_point(
         data = my_summary,
@@ -207,22 +230,20 @@ plot.see_estimate_density <- function(x,
     p <- p + add_plot_attributes(x)
   }
 
-
   if (length(unique(x$Parameter)) == 1 || isTRUE(stack)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
     p <- p + scale_y_discrete(labels = parameter_labels)
   }
 
-
   if (length(unique(x$Parameter)) == 1) {
     p <- p + guides(color = "none")
   }
 
-
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
-      p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+      p <- p +
+        facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
     } else if ("Effects" %in% names(x)) {
       p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
     } else if ("Component" %in% names(x)) {
@@ -234,8 +255,6 @@ plot.see_estimate_density <- function(x,
 }
 
 
-
-
 # Density df --------------------------------------------------------------------
 
 #' @export
@@ -244,24 +263,25 @@ data_plot.estimate_density_df <- data_plot.estimate_density
 
 #'
 #' @export
-plot.see_estimate_density_df <- function(x,
-                                         stack = TRUE,
-                                         n_columns = 1,
-                                         size_line = 0.9,
-                                         ...) {
+plot.see_estimate_density_df <- function(
+  x,
+  stack = TRUE,
+  n_columns = 1,
+  linewidth = 0.9,
+  ...
+) {
   x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   parameter_labels <- stats::setNames(levels(x$Parameter), levels(x$Parameter))
 
   if (stack) {
     p <- ggplot(x, aes(x = .data$x, y = .data$y, color = .data$Parameter)) +
-      geom_line(linewidth = size_line)
+      geom_line(linewidth = linewidth)
   } else {
     insight::check_if_installed("ggridges")
 
     p <- ggplot(x, aes(x = .data$x, y = .data$Parameter, height = .data$y)) +
       ggridges::geom_ridgeline()
   }
-
 
   if (length(unique(x$Parameter)) == 1 || isTRUE(stack)) {
     p <- p + scale_y_continuous(breaks = NULL, labels = NULL)

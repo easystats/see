@@ -24,8 +24,6 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 }
 
 
-
-
 # Plot --------------------------------------------------------------------
 #' Plot method for describing distributions of vectors
 #'
@@ -34,13 +32,13 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #'
 #' @param dispersion Logical. If `TRUE`, a range of dispersion for
 #'   each variable to the plot will be added.
-#' @param dispersion_alpha Numeric value specifying the transparency level of dispersion ribbon.
-#' @param dispersion_color Character specifying the color of dispersion ribbon.
+#' @param alpha_dispersion Numeric value specifying the transparency level of dispersion ribbon.
+#' @param color_dispersion Character specifying the color of dispersion ribbon.
 #' @param dispersion_style Character describing the style of dispersion area.
 #'   `"ribbon"` for a ribbon, `"curve"` for a normal-curve.
 #' @param highlight A vector with names of categories in `x` that should be
 #'   highlighted.
-#' @param highlight_color A vector of color values for highlighted categories.
+#' @param color_highlight A vector of color values for highlighted categories.
 #'   The remaining (non-highlighted) categories will be filled with a lighter
 #'   grey.
 #' @param size_bar Size of bar geoms.
@@ -57,15 +55,17 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_distribution <- function(x,
-                                             dispersion = FALSE,
-                                             dispersion_alpha = 0.3,
-                                             dispersion_color = "#3498db",
-                                             dispersion_style = c("ribbon", "curve"),
-                                             size_bar = 0.7,
-                                             highlight = NULL,
-                                             highlight_color = NULL,
-                                             ...) {
+plot.see_parameters_distribution <- function(
+  x,
+  dispersion = FALSE,
+  alpha_dispersion = 0.3,
+  color_dispersion = "#3498db",
+  dispersion_style = c("ribbon", "curve"),
+  size_bar = 0.7,
+  highlight = NULL,
+  color_highlight = NULL,
+  ...
+) {
   # get data
   data <- .retrieve_data(x)
 
@@ -84,43 +84,45 @@ plot.see_parameters_distribution <- function(x,
     lapply(
       x,
       .plot_see_parameters_distribution,
-      dispersion_alpha,
-      dispersion_color,
+      alpha_dispersion,
+      color_dispersion,
       dispersion_style,
       show_dispersion = dispersion,
       size_bar = size_bar,
       highlight = highlight,
-      highlight_color = highlight_color
+      color_highlight = color_highlight
     )
   } else {
     .plot_see_parameters_distribution(
       x,
-      dispersion_alpha,
-      dispersion_color,
+      alpha_dispersion,
+      color_dispersion,
       dispersion_style,
       show_dispersion = dispersion,
       size_bar = size_bar,
       highlight = highlight,
-      highlight_color = highlight_color
+      color_highlight = color_highlight
     )
   }
 }
 
 
-
-.plot_see_parameters_distribution <- function(x,
-                                              dispersion_alpha,
-                                              dispersion_color,
-                                              dispersion_style,
-                                              show_dispersion,
-                                              size_bar,
-                                              highlight,
-                                              highlight_color) {
+.plot_see_parameters_distribution <- function(
+  x,
+  alpha_dispersion,
+  color_dispersion,
+  dispersion_style,
+  show_dispersion,
+  size_bar,
+  highlight,
+  color_highlight
+) {
   centrality <- attributes(x)$centrality
   dispersion <- attributes(x)$dispersion
 
   if (!is.null(centrality) && !is.null(dispersion) && is.numeric(x$x)) {
-    x$curve_y <- nrow(x) * stats::dnorm(x = x$x, mean = centrality, sd = dispersion)
+    x$curve_y <- nrow(x) *
+      stats::dnorm(x = x$x, mean = centrality, sd = dispersion)
   } else if (!is.null(centrality) && is.null(dispersion)) {
     dispersion_style <- "ribbon"
   } else if (is.null(centrality)) {
@@ -153,14 +155,14 @@ plot.see_parameters_distribution <- function(x,
     p <- p + geom_histogram()
   }
 
-
   if (isTRUE(show_dispersion)) {
     if (dispersion_style == "ribbon") {
-      p <- p + geom_vline(
-        xintercept = centrality,
-        colour = dispersion_color,
-        alpha = dispersion_alpha
-      )
+      p <- p +
+        geom_vline(
+          xintercept = centrality,
+          colour = color_dispersion,
+          alpha = alpha_dispersion
+        )
     }
     if (!is.null(dispersion)) {
       if (dispersion_style == "ribbon") {
@@ -169,8 +171,8 @@ plot.see_parameters_distribution <- function(x,
           geom_vline(
             xintercept = .range,
             linetype = "dashed",
-            colour = dispersion_color,
-            alpha = dispersion_alpha
+            colour = color_dispersion,
+            alpha = alpha_dispersion
           ) +
           annotate(
             "rect",
@@ -178,15 +180,15 @@ plot.see_parameters_distribution <- function(x,
             xmax = .range[2],
             ymin = 0,
             ymax = Inf,
-            fill = dispersion_color,
-            alpha = (dispersion_alpha / 3)
+            fill = color_dispersion,
+            alpha = (alpha_dispersion / 3)
           )
       } else {
         p <- p +
           geom_ribbon(
             aes(ymin = 0, ymax = .data$curve_y),
-            alpha = dispersion_alpha,
-            fill = dispersion_color,
+            alpha = alpha_dispersion,
+            fill = color_dispersion,
             colour = NA
           )
       }
@@ -194,15 +196,17 @@ plot.see_parameters_distribution <- function(x,
   }
 
   if (!is.null(x$highlight)) {
-    if (is.null(highlight_color)) {
-      highlight_color <- palette_material("full")(insight::n_unique(x$highlight) - 1L)
+    if (is.null(color_highlight)) {
+      color_highlight <- palette_material("full")(
+        insight::n_unique(x$highlight) - 1L
+      )
     }
 
-    names(highlight_color) <- highlight
-    highlight_color <- c(highlight_color, no_highlight = "grey70")
+    names(color_highlight) <- highlight
+    color_highlight <- c(color_highlight, no_highlight = "grey70")
 
     p <- p +
-      scale_fill_manual(values = highlight_color) +
+      scale_fill_manual(values = color_highlight) +
       guides(fill = "none")
   }
 

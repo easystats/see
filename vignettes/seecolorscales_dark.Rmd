@@ -371,7 +371,6 @@ p1 <- ggplot(d, aes(x, fill = x)) +
   )
 
 
-
 d <- data.frame(
   x = names(flat_colors())
 )
@@ -403,7 +402,6 @@ p3 <- ggplot(d, aes(x, fill = x)) +
     axis.text.x = element_text(angle = 90),
     panel.grid = element_blank()
   )
-
 
 
 d <- data.frame(

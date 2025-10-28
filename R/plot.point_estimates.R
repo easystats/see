@@ -7,7 +7,10 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
 
-    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(data, names = FALSE)))
+    data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(
+      data,
+      names = FALSE
+    )))
   } else if (inherits(data, c("stanreg", "brmsfit"))) {
     data <- insight::get_parameters(data, effects = "all", component = "all")
   } else if (inherits(data, "BFBayesFactor")) {
@@ -31,7 +34,9 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
   )
 
   centrality <- tolower(attr(x, "centrality", exact = TRUE))
-  if (is.null(centrality)) centrality <- "all"
+  if (is.null(centrality)) {
+    centrality <- "all"
+  }
 
   dataplot <- lapply(colnames(data), function(i) {
     my_dist <- data[[i]]
@@ -69,7 +74,6 @@ data_plot.point_estimate <- function(x, data = NULL, ...) {
 data_plot.map_estimate <- data_plot.point_estimate
 
 
-
 # Plot --------------------------------------------------------------------
 
 #' Plot method for point estimates of posterior samples
@@ -98,16 +102,18 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' plot(result)
 #'
 #' @export
-plot.see_point_estimate <- function(x,
-                                    data = NULL,
-                                    size_point = 2,
-                                    size_text = 3.5,
-                                    panel = TRUE,
-                                    show_labels = TRUE,
-                                    show_intercept = FALSE,
-                                    priors = FALSE,
-                                    priors_alpha = 0.4,
-                                    ...) {
+plot.see_point_estimate <- function(
+  x,
+  data = NULL,
+  size_point = 2,
+  size_text = 3.5,
+  panel = TRUE,
+  show_labels = TRUE,
+  show_intercept = FALSE,
+  priors = FALSE,
+  alpha_priors = 0.4,
+  ...
+) {
   # save model for later use
   model <- .retrieve_data(x)
 
@@ -145,22 +151,24 @@ plot.see_point_estimate <- function(x,
 
     # add prior layer
     if (priors) {
-      p_object <- p_object + .add_prior_layer_ribbon(
-        model,
-        parameter = x_lab,
-        show_intercept = show_intercept,
-        priors_alpha = priors_alpha,
-        fill_color = "#FF9800"
-      )
-      posterior_alpha <- 0.7
+      p_object <- p_object +
+        .add_prior_layer_ribbon(
+          model,
+          parameter = x_lab,
+          show_intercept = show_intercept,
+          alpha_priors = alpha_priors,
+          fill_color = "#FF9800"
+        )
+      alpha_posteriors <- 0.7
     } else {
-      posterior_alpha <- 1
+      alpha_posteriors <- 1
     }
 
     p_object <- p_object +
-      geom_ribbon(aes(ymin = 0, ymax = .data$y),
+      geom_ribbon(
+        aes(ymin = 0, ymax = .data$y),
         fill = "#FFC107",
-        alpha = posterior_alpha
+        alpha = alpha_posteriors
       )
 
     if (!is.null(mean_x) && !is.null(mean_y)) {
@@ -172,14 +180,14 @@ plot.see_point_estimate <- function(x,
           yend = mean_y,
           color = "#E91E63",
           linewidth = 1,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         ) +
         geom_point(
           x = mean_x,
           y = mean_y,
           color = "#E91E63",
           size = size_point,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         )
       if (show_labels) {
         p_object <- p_object +
@@ -202,14 +210,14 @@ plot.see_point_estimate <- function(x,
           yend = median_y,
           color = "#2196F3",
           linewidth = 1,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         ) +
         geom_point(
           x = median_x,
           y = median_y,
           color = "#2196F3",
           size = size_point,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         )
       if (show_labels) {
         p_object <- p_object +
@@ -232,14 +240,14 @@ plot.see_point_estimate <- function(x,
           yend = map_y,
           color = "#4CAF50",
           linewidth = 1,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         ) +
         geom_point(
           x = map_x,
           y = map_y,
           color = "#4CAF50",
           size = size_point,
-          alpha = posterior_alpha
+          alpha = alpha_posteriors
         )
       if (show_labels) {
         p_object <- p_object +
@@ -256,7 +264,11 @@ plot.see_point_estimate <- function(x,
     p_object <- p_object +
       geom_vline(xintercept = 0, linetype = "dotted") +
       scale_y_continuous(expand = c(0, 0), limits = c(0, max_y * 1.15)) +
-      labs(title = "Bayesian Point Estimates", x = x_lab, y = "Probability Density")
+      labs(
+        title = "Bayesian Point Estimates",
+        x = x_lab,
+        y = "Probability Density"
+      )
 
     p_object
   })

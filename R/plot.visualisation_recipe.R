@@ -5,10 +5,28 @@ plot.see_visualisation_recipe <- function(x, ...) {
     if (!"ggraph" %in% .packages()) {
       attachNamespace("ggraph") # Needs to be attached
     }
-    suppressWarnings(ggraph::ggraph(attributes(x)$data, layout = attributes(x)$layout) + geoms_from_list(x))
+    suppressWarnings(
+      ggraph::ggraph(attributes(x)$data, layout = attributes(x)$layout) +
+        geoms_from_list(x)
+    )
   } else {
-    suppressWarnings(ggplot2::ggplot(data = attributes(x)$data) +
-      geoms_from_list(x, ...))
+    global_aes <- attributes(x)$global_aes
+    if (!is.null(global_aes) && length(global_aes)) {
+      global_aes <- do.call(
+        ggplot2::aes,
+        args = lapply(global_aes, .str_to_sym)
+      )
+    }
+    suppressWarnings(
+      do.call(
+        ggplot2::ggplot,
+        insight::compact_list(list(
+          data = attributes(x)$data,
+          mapping = global_aes
+        ))
+      ) +
+        geoms_from_list(x, ...)
+    )
   }
 }
 

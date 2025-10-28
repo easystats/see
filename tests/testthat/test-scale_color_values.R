@@ -22,9 +22,15 @@ test_that("`social_colors()` works", {
 })
 
 test_that("`see_colors()` works", {
-  expect_identical(as.vector(see_colors("indigo", "lime")), c("#303960", "#f7fbe1"))
+  expect_identical(
+    as.vector(see_colors("indigo", "lime")),
+    c("#303960", "#f7fbe1")
+  )
 })
 
 test_that("`flat_colors()` works", {
-  expect_identical(as.vector(flat_colors("dark red", "teal")), c("#c0392b", "#16a085"))
+  expect_identical(
+    as.vector(flat_colors("dark red", "teal")),
+    c("#c0392b", "#16a085")
+  )
 })

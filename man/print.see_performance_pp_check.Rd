@@ -7,32 +7,32 @@
 \usage{
 \method{print}{see_performance_pp_check}(
   x,
-  size_line = 0.5,
+  linewidth = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
   size_title = 12,
   base_size = 10,
-  line_alpha = 0.15,
+  alpha_line = 0.15,
   style = theme_lucid,
   colors = unname(social_colors(c("green", "blue"))),
-  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+  type = "density",
   x_limits = NULL,
   ...
 )
 
 \method{plot}{see_performance_pp_check}(
   x,
-  size_line = 0.5,
+  linewidth = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
   size_title = 12,
   base_size = 10,
-  line_alpha = 0.15,
+  alpha_line = 0.15,
   style = theme_lucid,
   colors = unname(social_colors(c("green", "blue"))),
-  type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
+  type = "density",
   x_limits = NULL,
   ...
 )
@@ -40,7 +40,7 @@
 \arguments{
 \item{x}{An object.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
@@ -49,7 +49,7 @@
 \item{base_size, size_axis_title, size_title}{Numeric value specifying size of
 axis and plot titles.}
 
-\item{line_alpha}{Numeric value specifying alpha of lines indicating \code{yrep}.}
+\item{alpha_line}{Numeric value specifying alpha of lines indicating \code{yrep}.}
 
 \item{style}{A ggplot2-theme.}
 

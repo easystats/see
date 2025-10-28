@@ -45,7 +45,7 @@ The \code{plot()} method for the \code{bayestestR::hdi()} and related
 function.
 }
 \examples{
-\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")) withAutoprint(\{ # examplesIf}
 library(rstanarm)
 library(bayestestR)
 set.seed(123)

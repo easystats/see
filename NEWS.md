@@ -1,20 +1,88 @@
-# see (development)
+# see (development version)
+
+## Major Changes
+
+* Daniel Lüdecke is now the main maintainer of the package.
+
+# see 0.12.0
+
+## Major Changes
+
+* The minimum needed R version has been bumped to `4.1`, since `{correlation}`,
+  a runtime dependency, requires it.
+
+## Changes
+
+* `plot()` for `performance::check_normality()` now also supports objects from
+  `psych::fa()`, `psych::principal()` and `parameters::factor_analysis()`.
+
+* `plot()` for `performance::check_outliers()` gets a new `"scree"` type option,
+  to create a scree plot of outlier statistics.
+
+* Minor re-labelling of axis titles and subtitles in `plot()` for
+  `performance::check_residuals()`.
+
+* Updates the package to adapt to the changes in the latest `{ggplot2}`
+  release.
+
+* Themes get an `axis.text.space` argument, to define the spacing between axis
+  lines and axis labels. Due to changes in `{ggplot2}`, the default spacing was
+  slightly changed, now it can be set to the desired value using this argument.
+
+# see 0.11.0
+
+## Changes
+
+* All `theme_*()` function get a `...` argument that is passed to
+  `ggplot2::theme()`.
+
+* Arguments that change the size of elements in `theme_*()` functions (like
+  `plot.title.size` or `axis.text.size` now scale with the `base_size` argument,
+  to ensure proper scaling of plots when the base-size is changed.
+
+* Added a new theme, `theme_azurelight()`, with a light-blue character, and
+  reduced use of grid lines.
+
+* `theme_modern()` now recognizes a `show.ticks` argument, to add tick marks to
+  the plot and slightly increase the distance between axis labels and the
+  related axis.
+
+* Color scale functions (those starting with `scale_*()`) get a new `"gradient"`
+  palette, which are simply the color values for blue and orange colors from
+  that palette. Furthermore, color scale functions now automatically select an
+  appropriate palette (usually, `"contrast"` or `"gradient"`) depending on
+  whether discrete or continuous color scales are requested.
+
+## Bug fixes
+
+* Fixed issue with adding prior layers to plots from `estimate_density()`.
+
+# see 0.10.0
 
 ## Changes
 
 - `plot()` for `p_function()` now checks the values of the `size_length`
   argument, to give an informative error message when the input is not valid.
 
-- `plot()` for `model_parameters()` now also plots group-levels of random effects
-  (i.e. for mixed models, when `model_parameters(x, ..., group_level = TRUE)`).
+- `plot()` for `model_parameters()` now also plots group-levels of random
+  effects (i.e. for mixed models, when `model_parameters(x, ..., group_level =
+  TRUE)`).
 
 - `plot()` for `model_parameters()` gets a `show_direction` argument, to turn
   off the direction of the effect in the plot.
 
+- `plot()` for `model_parameters()` now gives an informative error message when
+  trying to plot Anova tables (which does not work).
+
 - `plot()` for `simulate_parameters()` now better copes with models that have
   multiple response levels (e.g. multinomial models).
 
+- Gains `{patchwork}` as a hard dependency given its importance for the
+  package.
+
 ## Bug fixes
+
+- Fixed issue in `plot()` for `bayestestR::si()`.
 
 - Fixed issue in `plot()` for `parameters::model_parameters()` for GAM models.
 
@@ -24,13 +92,14 @@
 
 - New `plot()` method for `performance::check_dag()`.
 
-- Minor improvements to `plot()` for methods `p_direction()` and `p_significance()`,
-  which also support forthcoming changes in the *parameters* package.
+- Minor improvements to `plot()` for methods `p_direction()` and
+  `p_significance()`, which also support forthcoming changes in the *parameters*
+  package.
 
 ## Bug fixes
 
-- Fixed issue in `plot()` for `performance::check_model()` when package *qqplotr*
-  is not installed.
+- Fixed issue in `plot()` for `performance::check_model()` when package
+  *qqplotr* is not installed.
 
 # see 0.8.5
 
@@ -40,8 +109,9 @@
 
 ## Minor Changes
 
-* Improved scaling for detrended QQ plots when package `{qqplotr}` is not installed.
-  The normal and the detrended QQ plots are now visually more similar.
+* Improved scaling for detrended QQ plots when package `{qqplotr}` is not
+  installed. The normal and the detrended QQ plots are now visually more
+  similar.
 
 * Gets rid of warnings due to API changes in the `{datawizard}` package.
 
@@ -61,8 +131,8 @@
   downstream plot-functions (i.e., `plot()` for `check_model()` passes arguments
   to change geom sizes to the underlying plot-functions).
 
-* `plot()` for `check_predictions()` now supports Bayesian regression models from
-  *brms* and *rstanarm*.
+* `plot()` for `check_predictions()` now supports Bayesian regression models
+  from *brms* and *rstanarm*.
 
 ## Bug fixes
 

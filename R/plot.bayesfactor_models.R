@@ -40,13 +40,15 @@
 #' plot(result, n_pies = "many", value = "BF", log = TRUE) +
 #'   scale_fill_pizza(reverse = FALSE)
 #' @export
-plot.see_bayesfactor_models <- function(x,
-                                        n_pies = c("one", "many"),
-                                        value = c("none", "BF", "probability"),
-                                        sort = FALSE,
-                                        log = FALSE,
-                                        prior_odds = NULL,
-                                        ...) {
+plot.see_bayesfactor_models <- function(
+  x,
+  n_pies = c("one", "many"),
+  value = c("none", "BF", "probability"),
+  sort = FALSE,
+  log = FALSE,
+  prior_odds = NULL,
+  ...
+) {
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
     x$BF <- exp(x$log_BF)
   }
@@ -69,7 +71,11 @@ plot.see_bayesfactor_models <- function(x,
   one_pie_data <- as.data.frame(x)
   one_pie_data$postOdds <- priorOdds * one_pie_data$BF
   one_pie_data$PostProb <- (one_pie_data$postOdds / sum(one_pie_data$postOdds))
-  if (isTRUE(sort)) one_pie_data <- one_pie_data[order(one_pie_data$PostProb, decreasing = TRUE), ]
+  if (isTRUE(sort)) {
+    one_pie_data <- one_pie_data[
+      order(one_pie_data$PostProb, decreasing = TRUE),
+    ]
+  }
   one_pie_data$Model <- factor(one_pie_data$Model, levels = one_pie_data$Model)
 
   # Two pie data
@@ -83,10 +89,15 @@ plot.see_bayesfactor_models <- function(x,
   })
   many_pies_data <- many_pies_data[names(many_pies_data) != denominator_name]
   many_pies_data <- do.call(rbind, many_pies_data)
-  many_pies_data$Model <- factor(many_pies_data$Model, levels = levels(one_pie_data$Model))
-  many_pies_data$panel <- factor(many_pies_data$panel, levels = levels(one_pie_data$Model))
+  many_pies_data$Model <- factor(
+    many_pies_data$Model,
+    levels = levels(one_pie_data$Model)
+  )
+  many_pies_data$panel <- factor(
+    many_pies_data$panel,
+    levels = levels(one_pie_data$Model)
+  )
   many_pies_data$panel <- droplevels(many_pies_data$panel)
-
 
   ## Labels
   if (value == "BF") {
@@ -99,25 +110,41 @@ plot.see_bayesfactor_models <- function(x,
       many_pies_data$label <- insight::format_value(many_pies_data$BF, 2)
     }
   } else if (value == "probability") {
-    one_pie_data$label <- insight::format_value(one_pie_data$PostProb, 1, as_percent = TRUE)
-    many_pies_data$label <- insight::format_value(many_pies_data$PostProb, 1, as_percent = TRUE)
+    one_pie_data$label <- insight::format_value(
+      one_pie_data$PostProb,
+      1,
+      as_percent = TRUE
+    )
+    many_pies_data$label <- insight::format_value(
+      many_pies_data$PostProb,
+      1,
+      as_percent = TRUE
+    )
   } else {
     one_pie_data$label <- ""
     many_pies_data$label <- ""
   }
 
-
   ## Plot
   if (n_pies == "one") {
-    p <- ggplot(one_pie_data, aes(x = "", y = .data$PostProb, fill = .data$Model))
+    p <- ggplot(
+      one_pie_data,
+      aes(x = "", y = .data$PostProb, fill = .data$Model)
+    )
   } else {
-    p <- ggplot(many_pies_data, aes(x = "", y = .data$bar_pos, fill = .data$Model)) +
+    p <- ggplot(
+      many_pies_data,
+      aes(x = "", y = .data$bar_pos, fill = .data$Model)
+    ) +
       facet_wrap(~ .data$panel)
   }
 
   p +
     geom_bar(width = 1, stat = "identity", color = "white", linewidth = 0.5) +
-    geom_text(aes(label = .data$label), position = position_stack(vjust = 0.5)) +
+    geom_text(
+      aes(label = .data$label),
+      position = position_stack(vjust = 0.5)
+    ) +
     coord_polar("y", start = 0) +
     scale_y_continuous(expand = c(0, 0)) +
     labs(x = "", y = "", fill = "Model") +

@@ -42,7 +42,11 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
     model_info = attr(x, "model_info")
   )
 
-  class(dataplot) <- unique(c("data_plot", "see_performance_pp_check", class(dataplot)))
+  class(dataplot) <- unique(c(
+    "data_plot",
+    "see_performance_pp_check",
+    class(dataplot)
+  ))
   dataplot
 }
 
@@ -53,7 +57,7 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #'
 #' The `plot()` method for the `performance::check_predictions()` function.
 #'
-#' @param line_alpha Numeric value specifying alpha of lines indicating `yrep`.
+#' @param alpha_line Numeric value specifying alpha of lines indicating `yrep`.
 #' @param style A ggplot2-theme.
 #' @param type Plot type for the posterior predictive checks plot. Can be `"density"`
 #' (default), `"discrete_dots"`, `"discrete_interval"` or `"discrete_both"` (the
@@ -86,28 +90,38 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #' out <- check_predictions(model)
 #' plot(out, type = "discrete_dots")
 #' @export
-print.see_performance_pp_check <- function(x,
-                                           size_line = 0.5,
-                                           size_point = 2,
-                                           size_bar = 0.7,
-                                           size_axis_title = base_size,
-                                           size_title = 12,
-                                           base_size = 10,
-                                           line_alpha = 0.15,
-                                           style = theme_lucid,
-                                           colors = unname(social_colors(c("green", "blue"))),
-                                           type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
-                                           x_limits = NULL,
-                                           ...) {
+print.see_performance_pp_check <- function(
+  x,
+  linewidth = 0.5,
+  size_point = 2,
+  size_bar = 0.7,
+  size_axis_title = base_size,
+  size_title = 12,
+  base_size = 10,
+  alpha_line = 0.15,
+  style = theme_lucid,
+  colors = unname(social_colors(c("green", "blue"))),
+  type = "density",
+  x_limits = NULL,
+  ...
+) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
   plot_type <- attributes(x)$type
   is_stan <- attributes(x)$is_stan
 
-  if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) {
+  if (
+    missing(type) &&
+      !is.null(plot_type) &&
+      plot_type %in%
+        c("density", "discrete_dots", "discrete_interval", "discrete_both")
+  ) {
     type <- plot_type
   } else {
-    type <- match.arg(type)
+    type <- insight::validate_argument(
+      type,
+      c("density", "discrete_dots", "discrete_interval", "discrete_both")
+    )
   }
 
   if (!inherits(x, "data_plot")) {
@@ -116,9 +130,9 @@ print.see_performance_pp_check <- function(x,
 
   p1 <- .plot_pp_check(
     x,
-    size_line = size_line,
+    linewidth = linewidth,
     size_point = size_point,
-    line_alpha = line_alpha,
+    alpha_line = alpha_line,
     theme_style = style,
     colors = colors,
     base_size = base_size,
@@ -143,28 +157,39 @@ print.see_performance_pp_check <- function(x,
 
 #' @rdname print.see_performance_pp_check
 #' @export
-plot.see_performance_pp_check <- function(x,
-                                          size_line = 0.5,
-                                          size_point = 2,
-                                          size_bar = 0.7,
-                                          size_axis_title = base_size,
-                                          size_title = 12,
-                                          base_size = 10,
-                                          line_alpha = 0.15,
-                                          style = theme_lucid,
-                                          colors = unname(social_colors(c("green", "blue"))),
-                                          type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
-                                          x_limits = NULL,
-                                          ...) {
+plot.see_performance_pp_check <- function(
+  x,
+  linewidth = 0.5,
+  size_point = 2,
+  size_bar = 0.7,
+  size_axis_title = base_size,
+  size_title = 12,
+  base_size = 10,
+  alpha_line = 0.15,
+  style = theme_lucid,
+  colors = unname(social_colors(c("green", "blue"))),
+  type = "density",
+  x_limits = NULL,
+  ...
+) {
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
   plot_type <- attributes(x)$type
   is_stan <- attributes(x)$is_stan
 
-  if (missing(type) && !is.null(plot_type) && plot_type %in% c("density", "discrete_dots", "discrete_interval", "discrete_both")) { # nolint
+  if (
+    missing(type) &&
+      !is.null(plot_type) &&
+      plot_type %in%
+        c("density", "discrete_dots", "discrete_interval", "discrete_both")
+  ) {
+    # nolint
     type <- plot_type
   } else {
-    type <- match.arg(type)
+    type <- insight::validate_argument(
+      type,
+      c("density", "discrete_dots", "discrete_interval", "discrete_both")
+    )
   }
 
   if (!inherits(x, "data_plot")) {
@@ -173,9 +198,9 @@ plot.see_performance_pp_check <- function(x,
 
   p1 <- .plot_pp_check(
     x,
-    size_line = size_line,
+    linewidth = linewidth,
     size_point = size_point,
-    line_alpha = line_alpha,
+    alpha_line = alpha_line,
     theme_style = style,
     base_size = base_size,
     size_axis_title = size_axis_title,
@@ -196,26 +221,35 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-
-.plot_pp_check <- function(x,
-                           size_line,
-                           size_point,
-                           line_alpha,
-                           theme_style,
-                           base_size = 10,
-                           size_axis_title = 10,
-                           size_title = 12,
-                           colors,
-                           type = "density",
-                           x_limits = NULL,
-                           is_stan = NULL,
-                           ...) {
+.plot_pp_check <- function(
+  x,
+  linewidth,
+  size_point,
+  alpha_line,
+  theme_style,
+  base_size = 10,
+  size_axis_title = 10,
+  size_title = 12,
+  colors,
+  type = "density",
+  x_limits = NULL,
+  is_stan = NULL,
+  ...
+) {
   info <- attr(x, "info")
 
   # discrete plot type from "bayesplot::pp_check()" returns a different data
   # structure, so we need to handle it differently
   if (isTRUE(is_stan) && type != "density") {
-    return(.plot_check_predictions_stan_dots(x, colors, info, size_line, size_point, line_alpha, ...))
+    return(.plot_check_predictions_stan_dots(
+      x,
+      colors,
+      info,
+      linewidth,
+      size_point,
+      alpha_line,
+      ...
+    ))
   }
 
   # default bandwidth, for smooting
@@ -225,10 +259,26 @@ plot.see_performance_pp_check <- function(x,
   }
 
   minfo <- info$model_info
-  suggest_dots <- (minfo$is_bernoulli || minfo$is_count || minfo$is_ordinal || minfo$is_categorical)
+  suggest_dots <- (minfo$is_bernoulli ||
+    minfo$is_count ||
+    minfo$is_ordinal ||
+    minfo$is_categorical)
 
-  if (!is.null(type) && type %in% c("discrete_dots", "discrete_interval", "discrete_both") && suggest_dots) {
-    out <- .plot_check_predictions_dots(x, colors, info, size_line, size_point, line_alpha, type, ...)
+  if (
+    !is.null(type) &&
+      type %in% c("discrete_dots", "discrete_interval", "discrete_both") &&
+      suggest_dots
+  ) {
+    out <- .plot_check_predictions_dots(
+      x,
+      colors,
+      info,
+      linewidth,
+      size_point,
+      alpha_line,
+      type,
+      ...
+    )
   } else {
     if (suggest_dots) {
       insight::format_alert(
@@ -237,27 +287,36 @@ plot.see_performance_pp_check <- function(x,
       )
     }
     # denity plot - for models that have no binary or count/ordinal outcome
-    out <- .plot_check_predictions_density(x, colors, info, size_line, line_alpha, bandwidth, ...)
+    out <- .plot_check_predictions_density(
+      x,
+      colors,
+      info,
+      linewidth,
+      alpha_line,
+      bandwidth,
+      ...
+    )
   }
-
 
   dots <- list(...)
   if (isTRUE(dots[["check_model"]])) {
-    out <- out + theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      axis.title.size = size_axis_title,
-      plot.title.size = size_title
-    )
+    out <- out +
+      theme_style(
+        base_size = base_size,
+        plot.title.space = 3,
+        axis.title.space = 5,
+        axis.title.size = size_axis_title,
+        plot.title.size = size_title
+      )
   }
 
   if (isTRUE(dots[["adjust_legend"]]) || isTRUE(info$check_range)) {
-    out <- out + ggplot2::theme(
-      legend.position = "bottom",
-      legend.margin = ggplot2::margin(0, 0, 0, 0),
-      legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
-    )
+    out <- out +
+      ggplot2::theme(
+        legend.position = "bottom",
+        legend.margin = ggplot2::margin(0, 0, 0, 0),
+        legend.box.margin = ggplot2::margin(-5, -5, -5, -5)
+      )
   }
 
   if (!is.null(x_limits)) {
@@ -268,13 +327,15 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_check_predictions_density <- function(x,
-                                            colors,
-                                            info,
-                                            size_line,
-                                            line_alpha,
-                                            bandwidth,
-                                            ...) {
+.plot_check_predictions_density <- function(
+  x,
+  colors,
+  info,
+  linewidth,
+  alpha_line,
+  bandwidth,
+  ...
+) {
   ggplot2::ggplot(x) +
     ggplot2::stat_density(
       mapping = ggplot2::aes(
@@ -289,21 +350,23 @@ plot.see_performance_pp_check <- function(x,
       bw = bandwidth
     ) +
     ggplot2::scale_y_continuous() +
-    ggplot2::scale_color_manual(values = c(
-      "Observed data" = colors[1],
-      "Model-predicted data" = colors[2]
-    )) +
+    ggplot2::scale_color_manual(
+      values = c(
+        "Observed data" = colors[1],
+        "Model-predicted data" = colors[2]
+      )
+    ) +
     ggplot2::scale_linewidth_manual(
       values = c(
-        "Observed data" = 1.7 * size_line,
-        "Model-predicted data" = size_line
+        "Observed data" = 1.7 * linewidth,
+        "Model-predicted data" = linewidth
       ),
       guide = "none"
     ) +
     ggplot2::scale_alpha_manual(
       values = c(
         "Observed data" = 1,
-        "Model-predicted data" = line_alpha
+        "Model-predicted data" = alpha_line
       ),
       guide = "none"
     ) +
@@ -323,22 +386,32 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_check_predictions_dots <- function(x,
-                                         colors,
-                                         info,
-                                         size_line,
-                                         size_point,
-                                         line_alpha,
-                                         type = "discrete_dots",
-                                         ...) {
+.plot_check_predictions_dots <- function(
+  x,
+  colors,
+  info,
+  linewidth,
+  size_point,
+  alpha_line,
+  type = "discrete_dots",
+  ...
+) {
   # make sure we have a factor, so "table()" generates frequencies for all levels
   # for each group - we need tables of same size to bind data frames
   x$values <- as.factor(x$values)
   x <- stats::aggregate(x["values"], list(grp = x$grp), table)
-  x <- cbind(data.frame(key = "Model-predicted data", stringsAsFactors = FALSE), x)
+  x <- cbind(
+    data.frame(key = "Model-predicted data", stringsAsFactors = FALSE),
+    x
+  )
   x <- cbind(x[1:2], as.data.frame(x[[3]]))
   x$key[nrow(x)] <- "Observed data"
-  x <- datawizard::data_to_long(x, select = -1:-2, names_to = "x", values_to = "count")
+  x <- datawizard::data_to_long(
+    x,
+    select = -1:-2,
+    names_to = "x",
+    values_to = "count"
+  )
   if (insight::n_unique(x$x) > 8) {
     x$x <- datawizard::to_numeric(x$x, dummy_factors = TRUE)
   }
@@ -352,7 +425,11 @@ plot.see_performance_pp_check <- function(x,
         unlist(bayestestR::ci(i)[c("CI_low", "CI_high")])
       )
     }
-    x_errorbars <- stats::aggregate(x["count"], list(x$x), centrality_dispersion)
+    x_errorbars <- stats::aggregate(
+      x["count"],
+      list(x$x),
+      centrality_dispersion
+    )
     x_errorbars <- cbind(x_errorbars[1], as.data.frame(x_errorbars[[2]]))
     colnames(x_errorbars) <- c("x", "count", "CI_low", "CI_high")
     x_errorbars <- cbind(
@@ -378,7 +455,7 @@ plot.see_performance_pp_check <- function(x,
         ),
         position = ggplot2::position_nudge(x = 0.2),
         size = 0.4 * size_point,
-        linewidth = size_line,
+        linewidth = linewidth,
         stroke = 0,
         shape = 16
       ) +
@@ -401,20 +478,21 @@ plot.see_performance_pp_check <- function(x,
     } else {
       p2 <- p1
     }
-    p2 <- p2 + ggplot2::geom_point(
-      data = x[x$key == "Model-predicted data", ],
-      mapping = ggplot2::aes(
-        x = .data$x,
-        y = .data$count,
-        group = .data$grp,
-        color = .data$key
-      ),
-      alpha = line_alpha,
-      position = ggplot2::position_jitter(width = 0.1, height = 0.02),
-      size = 0.8 * size_point,
-      stroke = 0,
-      shape = 16
-    ) +
+    p2 <- p2 +
+      ggplot2::geom_point(
+        data = x[x$key == "Model-predicted data", ],
+        mapping = ggplot2::aes(
+          x = .data$x,
+          y = .data$count,
+          group = .data$grp,
+          color = .data$key
+        ),
+        alpha = alpha_line,
+        position = ggplot2::position_jitter(width = 0.1, height = 0.02),
+        size = 0.8 * size_point,
+        stroke = 0,
+        shape = 16
+      ) +
       # for legend
       ggplot2::geom_point(
         data = x[x$key == "Observed data", ],
@@ -451,12 +529,14 @@ plot.see_performance_pp_check <- function(x,
     subtitle <- "Model-predicted points should be close to observed data points"
   }
 
-  p <- p +
+  p +
     ggplot2::scale_y_continuous() +
-    ggplot2::scale_color_manual(values = c(
-      "Observed data" = colors[1],
-      "Model-predicted data" = colors[2]
-    )) +
+    ggplot2::scale_color_manual(
+      values = c(
+        "Observed data" = colors[1],
+        "Model-predicted data" = colors[2]
+      )
+    ) +
     ggplot2::labs(
       x = info$xlab,
       y = info$ylab,
@@ -470,18 +550,18 @@ plot.see_performance_pp_check <- function(x,
       color = ggplot2::guide_legend(reverse = TRUE),
       size = ggplot2::guide_legend(reverse = TRUE)
     )
-
-  return(p)
 }
 
 
-.plot_check_predictions_stan_dots <- function(x,
-                                              colors,
-                                              info,
-                                              size_line,
-                                              size_point,
-                                              line_alpha,
-                                              ...) {
+.plot_check_predictions_stan_dots <- function(
+  x,
+  colors,
+  info,
+  linewidth,
+  size_point,
+  alpha_line,
+  ...
+) {
   # make sure we have a factor, so "table()" generates frequencies for all levels
   # for each group - we need tables of same size to bind data frames
   x$Group[x$Group == "y"] <- "Observed data"
@@ -502,7 +582,7 @@ plot.see_performance_pp_check <- function(x,
       ),
       position = ggplot2::position_nudge(x = 0.2),
       size = 0.4 * size_point,
-      linewidth = size_line,
+      linewidth = linewidth,
       stroke = 0,
       shape = 16
     ) +
@@ -518,10 +598,12 @@ plot.see_performance_pp_check <- function(x,
       shape = 16
     ) +
     ggplot2::scale_y_continuous() +
-    ggplot2::scale_color_manual(values = c(
-      "Observed data" = colors[1],
-      "Model-predicted data" = colors[2]
-    )) +
+    ggplot2::scale_color_manual(
+      values = c(
+        "Observed data" = colors[1],
+        "Model-predicted data" = colors[2]
+      )
+    ) +
     ggplot2::labs(
       x = info$xlab,
       y = info$ylab,
@@ -540,16 +622,17 @@ plot.see_performance_pp_check <- function(x,
 }
 
 
-.plot_pp_check_range <- function(x,
-                                 size_bar = 0.7,
-                                 colors = unname(social_colors(c("green", "blue")))) {
-  original <-
-    data.frame(
-      x = c(min(x$y), max(x$y)),
-      group = factor(c("Minimum", "Maximum"), levels = c("Minimum", "Maximum")),
-      color = "Observed data",
-      stringsAsFactors = FALSE
-    )
+.plot_pp_check_range <- function(
+  x,
+  size_bar = 0.7,
+  colors = unname(social_colors(c("green", "blue")))
+) {
+  original <- data.frame(
+    x = c(min(x$y), max(x$y)),
+    group = factor(c("Minimum", "Maximum"), levels = c("Minimum", "Maximum")),
+    color = "Observed data",
+    stringsAsFactors = FALSE
+  )
 
   replicated <- rbind(
     data.frame(
@@ -567,7 +650,10 @@ plot.see_performance_pp_check <- function(x,
   )
   replicated$group <- factor(replicated$group, levels = c("Minimum", "Maximum"))
 
-  p <- ggplot2::ggplot(replicated, ggplot2::aes(x = .data$x, group = .data$group)) +
+  p <- ggplot2::ggplot(
+    replicated,
+    ggplot2::aes(x = .data$x, group = .data$group)
+  ) +
     ggplot2::facet_wrap(~group, scales = "free_x")
 
   if (insight::n_unique(replicated$x) <= 12) {
@@ -575,9 +661,12 @@ plot.see_performance_pp_check <- function(x,
   } else if (.is_integer(replicated$x)) {
     p <- p +
       ggplot2::geom_bar(width = size_bar, fill = colors[2], color = NA) +
-      ggplot2::scale_x_continuous(n.breaks = round(insight::n_unique(replicated$x) / 4))
+      ggplot2::scale_x_continuous(
+        n.breaks = round(insight::n_unique(replicated$x) / 4)
+      )
   } else {
-    p <- p + ggplot2::geom_histogram(binwidth = size_bar, fill = colors[2], color = NA)
+    p <- p +
+      ggplot2::geom_histogram(binwidth = size_bar, fill = colors[2], color = NA)
   }
 
   p +
@@ -588,7 +677,8 @@ plot.see_performance_pp_check <- function(x,
       linewidth = 1
     ) +
     ggplot2::labs(
-      x = NULL, y = NULL,
+      x = NULL,
+      y = NULL,
       subtitle = "Model-predicted extrema should contain observed data extrema"
     )
 }

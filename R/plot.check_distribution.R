@@ -22,10 +22,16 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   x <- x[-which(x$p_Residuals == 0 & x$p_Response == 0), ]
 
   dat <- data.frame(
-    x = factor(c(x$Distribution, x$Distribution), levels = rev(sort(unique(x$Distribution)))),
+    x = factor(
+      c(x$Distribution, x$Distribution),
+      levels = rev(sort(unique(x$Distribution)))
+    ),
     y = c(x$p_Response, x$p_Residuals),
     group = factor(
-      c(rep("Response", length(x$p_Response)), rep("Residuals", length(x$p_Residuals))),
+      c(
+        rep("Response", length(x$p_Response)),
+        rep("Residuals", length(x$p_Residuals))
+      ),
       levels = c("Response", "Residuals")
     ),
     stringsAsFactors = FALSE
@@ -80,7 +86,9 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
 
   # this ensures that we have integers for response variables with values
   # much greater than 1 and with a large range, so we have proper bar plots
-  if (diff(range(dat2$x)) > 10) dat2$x <- round(dat2$x)
+  if (diff(range(dat2$x)) > 10) {
+    dat2$x <- round(dat2$x)
+  }
 
   p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
     geom_line(colour = "#2196F3") +
@@ -100,7 +108,8 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
 
   p3 <- ggplot(dat2, aes(x = .data$x)) +
     geom_histogram(
-      fill = "#f44336", colour = bar_color,
+      fill = "#f44336",
+      colour = bar_color,
       binwidth = sqrt(length(vars(.data$x))),
       na.rm = TRUE
     ) +
@@ -116,12 +125,13 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
 }
 
 
-
 #' @export
-plot.see_check_distribution_numeric <- function(x,
-                                                size_point = 2,
-                                                panel = TRUE,
-                                                ...) {
+plot.see_check_distribution_numeric <- function(
+  x,
+  size_point = 2,
+  panel = TRUE,
+  ...
+) {
   vec <- .retrieve_data(x)
   x <- x[-which(x$p_Vector == 0), ]
 

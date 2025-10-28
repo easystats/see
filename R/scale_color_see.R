@@ -1,7 +1,8 @@
 #' See color palette
 #'
-#' The See color palette. Use `scale_color_see_d()` for *discrete*
-#' categories and `scale_color_see_c()` for a *continuous* scale.
+#' The See color palette. Use `scale_color_see_d()` for *discrete* categories
+#' and `scale_color_see_c()` for a *continuous* scale, or use the `discrete`
+#' argument in `scale_color_see()`.
 #'
 #' @inheritParams palette_see
 #' @inheritParams scale_color_flat
@@ -13,7 +14,7 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_boxplot() +
 #'   theme_modern() +
-#'   scale_fill_see_d()
+#'   scale_fill_see()
 #'
 #' ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 #'   geom_point() +
@@ -23,13 +24,22 @@
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_see_c(palette = "rainbow")
+#'   scale_color_see(discrete = FALSE)
 #' @export
-scale_color_see <- function(palette = "contrast",
-                            discrete = TRUE,
-                            reverse = FALSE,
-                            aesthetics = "color",
-                            ...) {
+scale_color_see <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "gradient"
+    }
+  }
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -40,17 +50,17 @@ scale_color_see <- function(palette = "contrast",
 }
 
 
-
 # Aliases -----------------------------------------------------------------
-
 
 #' @rdname scale_color_see
 #' @export
-scale_color_see_d <- function(palette = "contrast",
-                              discrete = TRUE,
-                              reverse = FALSE,
-                              aesthetics = "color",
-                              ...) {
+scale_color_see_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_see(
     palette = palette,
     discrete = discrete,
@@ -62,11 +72,13 @@ scale_color_see_d <- function(palette = "contrast",
 
 #' @rdname scale_color_see
 #' @export
-scale_color_see_c <- function(palette = "contrast",
-                              discrete = FALSE,
-                              reverse = FALSE,
-                              aesthetics = "color",
-                              ...) {
+scale_color_see_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_see(
     palette = palette,
     discrete = discrete,
@@ -89,20 +101,25 @@ scale_colour_see_c <- scale_color_see_c
 scale_colour_see_d <- scale_color_see_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
-
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see <- function(palette = "contrast",
-                           discrete = TRUE,
-                           reverse = FALSE,
-                           aesthetics = "fill",
-                           ...) {
+scale_fill_see <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "gradient"
+    }
+  }
+
   pal <- palette_see(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -115,11 +132,13 @@ scale_fill_see <- function(palette = "contrast",
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_d <- function(palette = "contrast",
-                             discrete = TRUE,
-                             reverse = FALSE,
-                             aesthetics = "fill",
-                             ...) {
+scale_fill_see_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_see(
     palette = palette,
     discrete = discrete,
@@ -131,11 +150,13 @@ scale_fill_see_d <- function(palette = "contrast",
 
 #' @rdname scale_color_see
 #' @export
-scale_fill_see_c <- function(palette = "contrast",
-                             discrete = FALSE,
-                             reverse = FALSE,
-                             aesthetics = "fill",
-                             ...) {
+scale_fill_see_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_see(
     palette = palette,
     discrete = discrete,
@@ -146,26 +167,24 @@ scale_fill_see_c <- function(palette = "contrast",
 }
 
 
-
 # Palette --------------------------------------------------------------------
 
-
 see_colors_list <- c(
-  `red` = "#d32626",
-  `pink` = "#b5076b",
-  `purple` = "#5c2a9d",
+  red = "#d32626",
+  pink = "#b5076b",
+  purple = "#5c2a9d",
   `deep purple` = "#45046a",
-  `indigo` = "#303960",
-  `blue` = "#1b6ca8",
+  indigo = "#303960",
+  blue = "#1b6ca8",
   `light blue` = "#03A9F4",
-  `cyan` = "#0a97b0",
-  `green` = "#438a5e",
+  cyan = "#0a97b0",
+  green = "#438a5e",
   `light green` = "#bac964",
-  `lime` = "#f7fbe1",
-  `yellow` = "#fbd46d",
-  `amber` = "#ff9c71",
-  `orange` = "#fb7813",
-  `grey` = "#e7dfd5",
+  lime = "#f7fbe1",
+  yellow = "#fbd46d",
+  amber = "#ff9c71",
+  orange = "#fb7813",
+  grey = "#e7dfd5",
   `blue grey` = "#3b6978"
 )
 
@@ -196,9 +215,10 @@ see_colors <- function(...) {
 
 
 see_palettes <- list(
-  `full` = see_colors(),
-  `ice` = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
-  `rainbow` = see_colors(
+  full = see_colors(),
+  ice = see_colors("indigo", "blue", "blue grey", "cyan", "light blue"),
+  gradient = see_colors("blue", "orange"),
+  rainbow = see_colors(
     "purple",
     "deep purple",
     "indigo",
@@ -212,8 +232,8 @@ see_palettes <- list(
     "red",
     "pink"
   ),
-  `contrast` = see_colors("blue", "orange", "yellow", "green", "red"),
-  `complement` = see_colors(
+  contrast = see_colors("blue", "orange", "yellow", "green", "red"),
+  complement = see_colors(
     "blue",
     "blue grey",
     "green",
@@ -222,7 +242,7 @@ see_palettes <- list(
     "amber",
     "red"
   ),
-  `light` = see_colors("light blue", "pink", "lime", "light green", "orange")
+  light = see_colors("light blue", "pink", "lime", "light green", "orange")
 )
 
 
@@ -239,22 +259,30 @@ palette_see <- function(palette = "contrast", reverse = FALSE, ...) {
 }
 
 
-
 # helper -----------------------
 
 .retrieve_palette <- function(palette, palette_list, reverse = FALSE, ...) {
   if (!palette %in% names(palette_list)) {
-    msg <- c(paste0(
-      "Palette name not available. `palette` must be one of ",
-      datawizard::text_concatenate(names(palette_list), last = " or ", enclose = "`"),
-      "."
-    ), "Using default palette now.")
+    msg <- c(
+      paste0(
+        "Palette name not available. `palette` must be one of ",
+        datawizard::text_concatenate(
+          names(palette_list),
+          last = " or ",
+          enclose = "`"
+        ),
+        "."
+      ),
+      "Using default palette now."
+    )
     insight::format_warning(msg)
     palette <- 1
   }
   pal <- palette_list[[palette]]
 
-  if (reverse) pal <- rev(pal)
+  if (reverse) {
+    pal <- rev(pal)
+  }
 
   grDevices::colorRampPalette(pal, ...)
 }

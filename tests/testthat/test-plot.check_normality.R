@@ -41,3 +41,37 @@ test_that("`plot.see_check_normality()` works", {
     fig = plot(result5)
   )
 })
+
+
+test_that("`plot.see_check_normality()` works with FA", {
+  skip_if_not_installed("psych")
+  skip_if_not_installed("discovr")
+  skip_if_not_installed("parameters")
+  skip_if_not_installed("performance")
+  skip_if_not_installed("qqplotr")
+
+  raq_items <- as.data.frame(discovr::raq)
+  raq_items$id <- NULL
+
+  raq_fa <- parameters::factor_analysis(
+    raq_items,
+    n = 4,
+    scores = "tenBerge",
+    cor = "poly",
+    standardize = FALSE
+  )
+
+  out <- performance::check_normality(raq_fa)
+  vdiffr::expect_doppelganger(
+    title = "check_normality works - FA - nodetrend",
+    fig = plot(out, detrend = FALSE)
+  )
+  vdiffr::expect_doppelganger(
+    title = "check_normality works - FA - detrend",
+    fig = plot(out, detrend = TRUE)
+  )
+  vdiffr::expect_doppelganger(
+    title = "check_normality works - FA - pp",
+    fig = plot(out, type = "pp")
+  )
+})

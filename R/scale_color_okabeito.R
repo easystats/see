@@ -6,8 +6,9 @@
 #' includes 9 vivid colors that are readily nameable and include colors that
 #' correspond to major primary and secondary colors (e.g., red, yellow, blue).
 #'
-#' The Okabe-Ito palette is included in the base R [grDevices::palette.colors()].
-#' These functions make this palette easier to use with *ggplot2*.
+#' The Okabe-Ito palette is included in the base R
+#' [grDevices::palette.colors()]. These functions make this palette easier to
+#' use with *ggplot2*.
 #'
 #' The original Okabe-Ito palette's "yellow" color is `"#F0E442"`. This color is
 #' very bright and often does not show up well on white backgrounds (see
@@ -58,10 +59,20 @@
 #'   theme_modern() +
 #'   scale_fill_oi(order = c(1, 5, 6, 2, 4, 3, 7))
 #' @export
-scale_color_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, aesthetics = "color", ...) {
+scale_color_okabeito <- function(
+  palette = "full",
+  reverse = FALSE,
+  order = 1:9,
+  aesthetics = "color",
+  ...
+) {
   discrete_scale(
     aesthetics = aesthetics,
-    palette = palette_okabeito(palette = palette, reverse = reverse, order = order),
+    palette = palette_okabeito(
+      palette = palette,
+      reverse = reverse,
+      order = order
+    ),
     ...
   )
 }
@@ -70,10 +81,20 @@ scale_color_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9,
 
 #' @rdname scale_color_okabeito
 #' @export
-scale_fill_okabeito <- function(palette = "full", reverse = FALSE, order = 1:9, aesthetics = "fill", ...) {
+scale_fill_okabeito <- function(
+  palette = "full",
+  reverse = FALSE,
+  order = 1:9,
+  aesthetics = "fill",
+  ...
+) {
   discrete_scale(
     aesthetics = aesthetics,
-    palette = palette_okabeito(palette = palette, reverse = reverse, order = order),
+    palette = palette_okabeito(
+      palette = palette,
+      reverse = reverse,
+      order = order
+    ),
     ...
   )
 }
@@ -95,7 +116,6 @@ scale_color_oi <- scale_color_okabeito
 #' @rdname scale_color_okabeito
 #' @export
 scale_fill_oi <- scale_fill_okabeito
-
 
 
 # Palette --------------------------------------------------------------------
@@ -147,7 +167,12 @@ okabeito_colors_list <- c(
 #'
 #' okabeito_colors(black_first = TRUE)
 #' @export
-okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, amber = TRUE) {
+okabeito_colors <- function(
+  ...,
+  original_names = FALSE,
+  black_first = FALSE,
+  amber = TRUE
+) {
   cols <- c(...)
 
   if (!is.null(cols)) {
@@ -157,12 +182,34 @@ okabeito_colors <- function(..., original_names = FALSE, black_first = FALSE, am
   yellow_col <- if (isTRUE(amber)) "amber" else "yellow"
 
   if (isTRUE(original_names)) {
-    cols <- c("orange", "sky blue", "bluish green", yellow_col, "blue", "vermillion", "reddish purple", "grey", "black")
+    cols <- c(
+      "orange",
+      "sky blue",
+      "bluish green",
+      yellow_col,
+      "blue",
+      "vermillion",
+      "reddish purple",
+      "grey",
+      "black"
+    )
   } else {
-    cols <- c("orange", "light blue", "green", yellow_col, "blue", "red", "purple", "grey", "black")
+    cols <- c(
+      "orange",
+      "light blue",
+      "green",
+      yellow_col,
+      "blue",
+      "red",
+      "purple",
+      "grey",
+      "black"
+    )
   }
 
-  if (isTRUE(black_first)) cols <- union("black", cols)
+  if (isTRUE(black_first)) {
+    cols <- union("black", cols)
+  }
 
   okabeito_colors_list[cols]
 }
@@ -196,13 +243,25 @@ okabeito_palettes <- list(
 #'   [`scale_color_okabeito()`][scale_color_okabeito].
 #'
 #' @export
-palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:9, ...) {
+palette_okabeito <- function(
+  palette = "full_amber",
+  reverse = FALSE,
+  order = 1:9,
+  ...
+) {
   if (!palette %in% names(okabeito_palettes)) {
-    msg <- c(paste0(
-      "Palette name not available. `palette` must be one of ",
-      datawizard::text_concatenate(names(okabeito_palettes), last = " or ", enclose = "`"),
-      "."
-    ), "Using default palette now.")
+    msg <- c(
+      paste0(
+        "Palette name not available. `palette` must be one of ",
+        datawizard::text_concatenate(
+          names(okabeito_palettes),
+          last = " or ",
+          enclose = "`"
+        ),
+        "."
+      ),
+      "Using default palette now."
+    )
     insight::format_warning(msg)
     palette <- "full"
   }
@@ -211,11 +270,15 @@ palette_okabeito <- function(palette = "full_amber", reverse = FALSE, order = 1:
 
   stopifnot(
     "`order` must be a vector of integers." = is.numeric(order),
-    "All elements of `order` must be greater than 0 and less than 10." = order > 0 & order <= 9
+    "All elements of `order` must be greater than 0 and less than 10." = all(
+      order > 0 & order <= 9
+    )
   )
   pal <- pal[order]
 
-  if (reverse) pal <- rev(pal)
+  if (reverse) {
+    pal <- rev(pal)
+  }
 
   function(n) {
     if (n > length(pal)) {

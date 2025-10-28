@@ -6,15 +6,15 @@
 \usage{
 \method{plot}{see_check_normality}(
   x,
-  type = c("qq", "pp", "density"),
+  type = "qq",
   data = NULL,
-  size_line = 0.8,
+  linewidth = 0.8,
   size_point = 2,
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
   alpha = 0.2,
-  dot_alpha = 0.8,
+  alpha_dot = 0.8,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = TRUE,
   method = "ell",
@@ -32,7 +32,7 @@ Options are \code{"qq"} (default) for quantile-quantile (Q-Q) plots,
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{linewidth}{Numeric value specifying size of line geoms.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 
@@ -41,7 +41,7 @@ axis and plot titles.}
 
 \item{alpha}{Numeric value specifying alpha level of the confidence bands.}
 
-\item{dot_alpha}{Numeric value specifying alpha level of the point geoms.}
+\item{alpha_dot}{Numeric value specifying alpha level of the point geoms.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
@@ -71,7 +71,7 @@ m <<- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 result <- check_normality(m)
 plot(result)
 
-\dontshow{if (require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("qqplotr")) withAutoprint(\{ # examplesIf}
 plot(result, type = "qq", detrend = TRUE)
 \dontshow{\}) # examplesIf}
 }

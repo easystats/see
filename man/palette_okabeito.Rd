@@ -11,9 +11,13 @@ palette_oi(palette = "full_amber", reverse = FALSE, order = 1:9, ...)
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
-be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
-or \code{black_first_original}.}
+be one of \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"},
+\code{"light"} (for dark themes), \code{"black_first"}, \code{full_original}, or
+\code{black_first_original}. The latter three options are especially for the
+Okabe-Ito color palette. The default is \code{NULL} and either \code{"contrast"} or
+\code{"gradient"} is used (depending on whether \code{discrete} is \code{TRUE} or \code{FALSE}),
+which are the two scale useful for discrete or gradient color scales,
+respectively.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 

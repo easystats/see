@@ -1,20 +1,19 @@
-skip_if(TRUE)
-
-## FIXME: currently does not retrieve the data
+skip("Fails at retrieving data")
 
 skip_on_cran()
 skip_if_offline()
 skip_if_not_installed("mclogit")
 skip_if_not_installed("parameters")
-skip_if_not_installed("vdiffr")
+
 
 test_that("`plot()` for simulate_parameters", {
   pict <- base::readRDS(url("https://slcladal.github.io/data/pict.rda", "rb"))
+  d <<- pict
   suppressWarnings({
     m1.mn <- mclogit::mblogit(
       formula = Response ~ Gender + Group,
       random = ~ 1 | Item,
-      data = pict
+      data = d
     )
   })
   set.seed(1234)
@@ -32,7 +31,12 @@ test_that("`plot()` for simulate_parameters", {
   set.seed(1234)
   vdiffr::expect_doppelganger(
     title = "plot.simulate_parameters works-3",
-    fig = plot(ms, stack = FALSE, show_intercept = TRUE, normalize_height = TRUE)
+    fig = plot(
+      ms,
+      stack = FALSE,
+      show_intercept = TRUE,
+      normalize_height = TRUE
+    )
   )
   set.seed(1234)
   vdiffr::expect_doppelganger(

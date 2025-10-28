@@ -7,12 +7,12 @@
 \method{plot}{see_parameters_distribution}(
   x,
   dispersion = FALSE,
-  dispersion_alpha = 0.3,
-  dispersion_color = "#3498db",
+  alpha_dispersion = 0.3,
+  color_dispersion = "#3498db",
   dispersion_style = c("ribbon", "curve"),
   size_bar = 0.7,
   highlight = NULL,
-  highlight_color = NULL,
+  color_highlight = NULL,
   ...
 )
 }
@@ -22,9 +22,9 @@
 \item{dispersion}{Logical. If \code{TRUE}, a range of dispersion for
 each variable to the plot will be added.}
 
-\item{dispersion_alpha}{Numeric value specifying the transparency level of dispersion ribbon.}
+\item{alpha_dispersion}{Numeric value specifying the transparency level of dispersion ribbon.}
 
-\item{dispersion_color}{Character specifying the color of dispersion ribbon.}
+\item{color_dispersion}{Character specifying the color of dispersion ribbon.}
 
 \item{dispersion_style}{Character describing the style of dispersion area.
 \code{"ribbon"} for a ribbon, \code{"curve"} for a normal-curve.}
@@ -34,7 +34,7 @@ each variable to the plot will be added.}
 \item{highlight}{A vector with names of categories in \code{x} that should be
 highlighted.}
 
-\item{highlight_color}{A vector of color values for highlighted categories.
+\item{color_highlight}{A vector of color values for highlighted categories.
 The remaining (non-highlighted) categories will be filled with a lighter
 grey.}
 

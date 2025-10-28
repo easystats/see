@@ -7,13 +7,23 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @keywords internal
 .data_plot_estimate_contrasts <- function(x, means = NULL, ...) {
   if (is.null(means)) {
-    stop("Please provide the estimated means data obtained via 'estimate_means()'.", call. = FALSE)
+    stop(
+      "Please provide the estimated means data obtained via 'estimate_means()'.",
+      call. = FALSE
+    )
   } else {
     x_name <- names(means)[1]
   }
 
-  y_name <- c("Median", "Mean", "MAP", "Coefficient")[c("Median", "Mean", "MAP", "Coefficient") %in% names(means)][1]
-  dataplot <- .data_contrasts_and_means(x, means, x_name = x_name, y_name = y_name)
+  y_name <- c("Median", "Mean", "MAP", "Coefficient")[
+    c("Median", "Mean", "MAP", "Coefficient") %in% names(means)
+  ][1]
+  dataplot <- .data_contrasts_and_means(
+    x,
+    means,
+    x_name = x_name,
+    y_name = y_name
+  )
 
   attr(dataplot, "info") <- list(
     xlab = x_name,
@@ -24,8 +34,6 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
   dataplot
 }
-
-
 
 
 #' @keywords internal
@@ -46,8 +54,14 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   polygons <- rbind(
     cbind(polygons, data.frame(x = polygons$Level1, y = polygons$Mean1)),
-    cbind(polygons, data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_low)),
-    cbind(polygons, data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_high))
+    cbind(
+      polygons,
+      data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_low)
+    ),
+    cbind(
+      polygons,
+      data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_high)
+    )
   )
 
   list(
@@ -55,7 +69,6 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     geom_pointrange = data_means
   )
 }
-
 
 
 # Plot --------------------------------------------------------------------
@@ -69,7 +82,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' @return A ggplot2-object.
 #'
-#' @examplesIf require("emmeans")
+#' @examplesIf all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))
 #' \donttest{
 #' library(modelbased)
 #'

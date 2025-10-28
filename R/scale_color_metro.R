@@ -2,7 +2,8 @@
 #'
 #' The palette based on Metro [Metro colors](https://materialui.co/metrocolors).
 #' Use `scale_color_metro_d` for *discrete* categories and `scale_color_metro_c`
-#' for a *continuous* scale.
+#' for a *continuous* scale, or use the `discrete` argument in
+#' `scale_color_metro()`.
 #'
 #' @inheritParams palette_metro
 #' @inheritParams scale_color_flat
@@ -14,23 +15,33 @@
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_boxplot() +
 #'   theme_modern() +
-#'   scale_fill_metro_d()
+#'   scale_fill_metro()
 #'
 #' ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
 #'   geom_violin() +
 #'   theme_modern() +
-#'   scale_fill_metro_d(palette = "ice")
+#'   scale_fill_metro(palette = "ice")
 #'
 #' ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
 #'   geom_point() +
 #'   theme_modern() +
-#'   scale_color_metro_c(palette = "rainbow")
+#'   scale_color_metro(discrete = FALSE)
 #' @export
-scale_color_metro <- function(palette = "complement",
-                              discrete = TRUE,
-                              reverse = FALSE,
-                              aesthetics = "color",
-                              ...) {
+scale_color_metro <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "gradient"
+    }
+  }
+
   pal <- palette_metro(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -41,17 +52,17 @@ scale_color_metro <- function(palette = "complement",
 }
 
 
-
 # Aliases -----------------------------------------------------------------
-
 
 #' @rdname scale_color_metro
 #' @export
-scale_color_metro_d <- function(palette = "complement",
-                                discrete = TRUE,
-                                reverse = FALSE,
-                                aesthetics = "color",
-                                ...) {
+scale_color_metro_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_metro(
     palette = palette,
     discrete = discrete,
@@ -63,11 +74,13 @@ scale_color_metro_d <- function(palette = "complement",
 
 #' @rdname scale_color_metro
 #' @export
-scale_color_metro_c <- function(palette = "complement",
-                                discrete = FALSE,
-                                reverse = FALSE,
-                                aesthetics = "color",
-                                ...) {
+scale_color_metro_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "color",
+  ...
+) {
   scale_color_metro(
     palette = palette,
     discrete = discrete,
@@ -90,20 +103,25 @@ scale_colour_metro_c <- scale_color_metro_c
 scale_colour_metro_d <- scale_color_metro_d
 
 
-
-
-
 # Fill --------------------------------------------------------------------
-
-
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro <- function(palette = "complement",
-                             discrete = TRUE,
-                             reverse = FALSE,
-                             aesthetics = "fill",
-                             ...) {
+scale_fill_metro <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
+  if (is.null(palette)) {
+    if (discrete) {
+      palette <- "contrast"
+    } else {
+      palette <- "gradient"
+    }
+  }
+
   pal <- palette_metro(palette = palette, reverse = reverse)
 
   if (discrete) {
@@ -116,11 +134,13 @@ scale_fill_metro <- function(palette = "complement",
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro_d <- function(palette = "complement",
-                               discrete = TRUE,
-                               reverse = FALSE,
-                               aesthetics = "fill",
-                               ...) {
+scale_fill_metro_d <- function(
+  palette = NULL,
+  discrete = TRUE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_metro(
     palette = palette,
     discrete = discrete,
@@ -132,11 +152,13 @@ scale_fill_metro_d <- function(palette = "complement",
 
 #' @rdname scale_color_metro
 #' @export
-scale_fill_metro_c <- function(palette = "complement",
-                               discrete = FALSE,
-                               reverse = FALSE,
-                               aesthetics = "fill",
-                               ...) {
+scale_fill_metro_c <- function(
+  palette = NULL,
+  discrete = FALSE,
+  reverse = FALSE,
+  aesthetics = "fill",
+  ...
+) {
   scale_fill_metro(
     palette = palette,
     discrete = discrete,
@@ -147,13 +169,7 @@ scale_fill_metro_c <- function(palette = "complement",
 }
 
 
-
-
-
 # Palette --------------------------------------------------------------------
-
-
-
 
 # The palette based on metro design colors: https://www.materialui.co/metrocolors
 metro_colors_list <- c(
@@ -199,11 +215,10 @@ metro_colors <- function(...) {
 }
 
 
-
-
 metro_palettes <- list(
   full = metro_colors(),
   ice = metro_colors("purple", "deep purple", "blue", "light blue"),
+  gradient = metro_colors("blue", "orange"),
   rainbow = metro_colors(
     "purple",
     "deep purple",
@@ -217,7 +232,13 @@ metro_palettes <- list(
     "red"
   ),
   contrast = metro_colors("blue", "green", "amber", "purple", "red"),
-  light = material_colors("light blue", "red", "yellow", "light green", "orange"),
+  light = metro_colors(
+    "light blue",
+    "red",
+    "yellow",
+    "light green",
+    "orange"
+  ),
   complement = metro_colors(
     "blue grey",
     "blue",
@@ -230,10 +251,6 @@ metro_palettes <- list(
     "red"
   )
 )
-
-
-
-
 
 
 #' Metro color palette

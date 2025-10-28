@@ -13,7 +13,7 @@
 \title{Flat UI color palette}
 \usage{
 scale_color_flat(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -21,7 +21,7 @@ scale_color_flat(
 )
 
 scale_color_flat_d(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -29,7 +29,7 @@ scale_color_flat_d(
 )
 
 scale_color_flat_c(
-  palette = "contrast",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "color",
@@ -37,7 +37,7 @@ scale_color_flat_c(
 )
 
 scale_colour_flat(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -45,7 +45,7 @@ scale_colour_flat(
 )
 
 scale_colour_flat_c(
-  palette = "contrast",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "color",
@@ -53,7 +53,7 @@ scale_colour_flat_c(
 )
 
 scale_colour_flat_d(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "color",
@@ -61,7 +61,7 @@ scale_colour_flat_d(
 )
 
 scale_fill_flat(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -69,7 +69,7 @@ scale_fill_flat(
 )
 
 scale_fill_flat_d(
-  palette = "contrast",
+  palette = NULL,
   discrete = TRUE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -77,7 +77,7 @@ scale_fill_flat_d(
 )
 
 scale_fill_flat_c(
-  palette = "contrast",
+  palette = NULL,
   discrete = FALSE,
   reverse = FALSE,
   aesthetics = "fill",
@@ -86,9 +86,13 @@ scale_fill_flat_c(
 }
 \arguments{
 \item{palette}{Character name of palette. Depending on the color scale, can
-be \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"},
-\code{"contrast"}, \code{"light"} (for dark themes), \code{"black_first"}, \code{full_original},
-or \code{black_first_original}.}
+be one of \code{"full"}, \code{"ice"}, \code{"rainbow"}, \code{"complement"}, \code{"contrast"},
+\code{"light"} (for dark themes), \code{"black_first"}, \code{full_original}, or
+\code{black_first_original}. The latter three options are especially for the
+Okabe-Ito color palette. The default is \code{NULL} and either \code{"contrast"} or
+\code{"gradient"} is used (depending on whether \code{discrete} is \code{TRUE} or \code{FALSE}),
+which are the two scale useful for discrete or gradient color scales,
+respectively.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
@@ -101,9 +105,9 @@ should be applied to (e.g., \code{c('color', 'fill')}).}
 is \code{TRUE} or to \code{scale_color_gradientn()} when \code{discrete} is \code{FALSE}.}
 }
 \description{
-The palette based on \href{https://materialui.co/flatuicolors}{Flat UI}.
-Use \code{scale_color_flat_d} for \emph{discrete} categories and
-\code{scale_color_flat_c} for a \emph{continuous} scale.
+The palette based on \href{https://materialui.co/flatuicolors}{Flat UI}. Use
+\code{scale_color_flat_d} for \emph{discrete} categories and \code{scale_color_flat_c} for a
+\emph{continuous} scale, or use the \code{discrete} argument in \code{scale_color_flat()}.
 }
 \examples{
 library(ggplot2)
@@ -112,15 +116,15 @@ library(see)
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_boxplot() +
   theme_modern() +
-  scale_fill_flat_d()
+  scale_fill_flat()
 
 ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violin() +
   theme_modern() +
-  scale_fill_flat_d(palette = "ice")
+  scale_fill_flat(palette = "ice")
 
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
   geom_point() +
   theme_modern() +
-  scale_color_flat_c(palette = "rainbow")
+  scale_color_flat(discrete = FALSE)
 }

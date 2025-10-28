@@ -14,19 +14,22 @@
 #' result <- eta_squared(m)
 #' plot(result)
 #' @export
-plot.see_equivalence_test <- function(x,
-                                      rope_color = "#0171D3",
-                                      rope_alpha = 0.2,
-                                      show_intercept = FALSE,
-                                      n_columns = 1,
-                                      ...) {
+plot.see_equivalence_test <- function(
+  x,
+  color_rope = "#0171D3",
+  alpha_rope = 0.2,
+  show_intercept = FALSE,
+  n_columns = 1,
+  ...
+) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
-    insight::format_alert("`plot()` only works for `equivalence_test()` with model-objects.")
+    insight::format_alert(
+      "`plot()` only works for `equivalence_test()` with model-objects."
+    )
     return(x)
   }
-
 
   # retrieve model
   model <- tryCatch(
@@ -66,11 +69,21 @@ plot.see_equivalence_test <- function(x,
 
   result <- lapply(tests, function(i) {
     if (inherits(model, "emmGrid")) {
-      tmp <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(model, names = FALSE)))[, i$Parameter, drop = FALSE]
+      tmp <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(
+        model,
+        names = FALSE
+      )))[, i$Parameter, drop = FALSE]
     } else if (inherits(x, "equivalence_test_simulate_model")) {
-      tmp <- as.data.frame(attr(x, "data"), stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
+      tmp <- as.data.frame(
+        attr(x, "data"),
+        stringsAsFactors = FALSE,
+        optional = FALSE
+      )[, i$Parameter, drop = FALSE]
     } else {
-      tmp <- as.data.frame(model, stringsAsFactors = FALSE, optional = FALSE)[, i$Parameter, drop = FALSE]
+      tmp <- as.data.frame(model, stringsAsFactors = FALSE, optional = FALSE)[,
+        i$Parameter,
+        drop = FALSE
+      ]
     }
 
     tmp2 <- lapply(seq_len(nrow(i)), function(j) {
@@ -110,7 +123,10 @@ plot.see_equivalence_test <- function(x,
   }
 
   # get labels
-  axis_labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
+  axis_labels <- .clean_parameter_names(
+    tmp$predictor,
+    grid = !is.null(n_columns)
+  )
 
   tmp <- .fix_facet_names(tmp)
 
@@ -120,44 +136,63 @@ plot.see_equivalence_test <- function(x,
   if (length(unique(tmp$HDI)) > 1L) {
     x.title <- "Highest Density Region of Posterior Samples"
   } else {
-    x.title <- sprintf("%g%% Highest Density Region of Posterior Samples", 100 * x$CI[1])
+    x.title <- sprintf(
+      "%g%% Highest Density Region of Posterior Samples",
+      100 * x$CI[1]
+    )
   }
   legend.title <- "Decision on H0"
 
-  fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
+  fill.color <- fill.color[sort(unique(match(
+    x$ROPE_Equivalence,
+    c("Accepted", "Rejected", "Undecided")
+  )))]
 
   add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
-  if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
-  if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
-  if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
-  if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
+  if ("colors" %in% names(add.args)) {
+    fill.color <- eval(add.args[["colors"]])
+  }
+  if ("x.title" %in% names(add.args)) {
+    x.title <- eval(add.args[["x.title"]])
+  }
+  if ("legend.title" %in% names(add.args)) {
+    legend.title <- eval(add.args[["legend.title"]])
+  }
+  if ("labels" %in% names(add.args)) {
+    axis_labels <- eval(add.args[["labels"]])
+  }
 
-  rope.line.alpha <- 1.25 * rope_alpha
-  if (rope.line.alpha > 1) rope.line.alpha <- 1
+  rope.line.alpha <- 1.25 * alpha_rope
+  if (rope.line.alpha > 1) {
+    rope.line.alpha <- 1
+  }
 
   insight::check_if_installed("ggridges")
 
-  p <- ggplot(tmp, aes(x = estimate, y = predictor, fill = grp)) +
+  p <- ggplot(
+    tmp,
+    aes(x = .data$estimate, y = .data$predictor, fill = .data$grp)
+  ) +
     annotate(
       "rect",
       xmin = .rope[1],
       xmax = .rope[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
-      alpha = (rope_alpha / 3),
+      fill = color_rope,
+      alpha = (alpha_rope / 3),
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
-      colour = rope_color,
+      colour = color_rope,
       alpha = rope.line.alpha,
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE
@@ -176,9 +211,15 @@ plot.see_equivalence_test <- function(x,
   if (!is.null(n_columns)) {
     if ("Component" %in% names(x) && "Effects" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1L) {
-        p <- p + facet_wrap(~ Effects + Component + HDI, scales = "free", ncol = n_columns)
+        p <- p +
+          facet_wrap(
+            ~ Effects + Component + HDI,
+            scales = "free",
+            ncol = n_columns
+          )
       } else {
-        p <- p + facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
+        p <- p +
+          facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
       }
     } else if ("Effects" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1L) {
@@ -188,7 +229,8 @@ plot.see_equivalence_test <- function(x,
       }
     } else if ("Component" %in% names(x)) {
       if (length(unique(tmp$HDI)) > 1L) {
-        p <- p + facet_wrap(~ Component + HDI, scales = "free", ncol = n_columns)
+        p <- p +
+          facet_wrap(~ Component + HDI, scales = "free", ncol = n_columns)
       } else {
         p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
       }
@@ -201,21 +243,25 @@ plot.see_equivalence_test <- function(x,
 }
 
 
-
-
 # data frame method --------------------------------
 
 #' @export
-plot.see_equivalence_test_df <- function(x,
-                                         rope_color = "#0171D3",
-                                         rope_alpha = 0.2,
-                                         data = NULL,
-                                         n_columns = 1,
-                                         ...) {
-  if (is.null(data)) data <- .retrieve_data(x)
+plot.see_equivalence_test_df <- function(
+  x,
+  color_rope = "#0171D3",
+  alpha_rope = 0.2,
+  data = NULL,
+  n_columns = 1,
+  ...
+) {
+  if (is.null(data)) {
+    data <- .retrieve_data(x)
+  }
 
   if (is.null(data)) {
-    insight::format_warning("plot() only works for equivalence_test() when original data frame is available.")
+    insight::format_warning(
+      "plot() only works for equivalence_test() when original data frame is available."
+    )
     return(x)
   }
 
@@ -257,7 +303,10 @@ plot.see_equivalence_test_df <- function(x,
   tmp$predictor <- factor(tmp$predictor, levels = rev(unique(tmp$predictor)))
 
   # get labels
-  axis_labels <- .clean_parameter_names(tmp$predictor, grid = !is.null(n_columns))
+  axis_labels <- .clean_parameter_names(
+    tmp$predictor,
+    grid = !is.null(n_columns)
+  )
 
   # check for user defined arguments
 
@@ -265,44 +314,63 @@ plot.see_equivalence_test_df <- function(x,
   if (length(unique(tmp$HDI)) > 1L) {
     x.title <- "Highest Density Region of Posterior Samples"
   } else {
-    x.title <- sprintf("%i%% Highest Density Region of Posterior Samples", x$CI[1])
+    x.title <- sprintf(
+      "%i%% Highest Density Region of Posterior Samples",
+      x$CI[1]
+    )
   }
   legend.title <- "Decision on H0"
 
-  fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
+  fill.color <- fill.color[sort(unique(match(
+    x$ROPE_Equivalence,
+    c("Accepted", "Rejected", "Undecided")
+  )))]
 
   add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
-  if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
-  if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
-  if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
-  if ("labels" %in% names(add.args)) axis_labels <- eval(add.args[["labels"]])
+  if ("colors" %in% names(add.args)) {
+    fill.color <- eval(add.args[["colors"]])
+  }
+  if ("x.title" %in% names(add.args)) {
+    x.title <- eval(add.args[["x.title"]])
+  }
+  if ("legend.title" %in% names(add.args)) {
+    legend.title <- eval(add.args[["legend.title"]])
+  }
+  if ("labels" %in% names(add.args)) {
+    axis_labels <- eval(add.args[["labels"]])
+  }
 
-  rope.line.alpha <- 1.25 * rope_alpha
+  rope.line.alpha <- 1.25 * alpha_rope
 
-  if (rope.line.alpha > 1) rope.line.alpha <- 1
+  if (rope.line.alpha > 1) {
+    rope.line.alpha <- 1
+  }
 
   insight::check_if_installed("ggridges")
 
-  p <- ggplot(tmp, aes(x = estimate, y = predictor, fill = grp)) +
+  p <- ggplot(
+    tmp,
+    aes(x = .data$estimate, y = .data$predictor, fill = .data$grp)
+  ) +
     annotate(
       "rect",
       xmin = .rope[1],
       xmax = .rope[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
-      alpha = (rope_alpha / 3)
+      fill = color_rope,
+      alpha = (alpha_rope / 3)
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
-      colour = rope_color,
+      colour = color_rope,
       alpha = rope.line.alpha,
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE
@@ -326,25 +394,27 @@ plot.see_equivalence_test_df <- function(x,
 }
 
 
-
 # freq models method --------------------------------
 
 #' @rdname plot.see_equivalence_test
 #' @export
-plot.see_equivalence_test_lm <- function(x,
-                                         size_point = 0.7,
-                                         rope_color = "#0171D3",
-                                         rope_alpha = 0.2,
-                                         show_intercept = FALSE,
-                                         n_columns = 1,
-                                         ...) {
+plot.see_equivalence_test_lm <- function(
+  x,
+  size_point = 0.7,
+  color_rope = "#0171D3",
+  alpha_rope = 0.2,
+  show_intercept = FALSE,
+  n_columns = 1,
+  ...
+) {
   model_name <- attr(x, "object_name", exact = TRUE)
 
   if (is.null(model_name)) {
-    insight::format_alert("`plot()` only works for `equivalence_test()` with model-objects.")
+    insight::format_alert(
+      "`plot()` only works for `equivalence_test()` with model-objects."
+    )
     return(x)
   }
-
 
   # retrieve model
   model <- tryCatch(
@@ -362,7 +432,11 @@ plot.see_equivalence_test_lm <- function(x,
   }
 
   if (!"Estimate" %in% colnames(x)) {
-    params <- insight::get_parameters(model, effects = "fixed", component = "conditional")
+    params <- insight::get_parameters(
+      model,
+      effects = "fixed",
+      component = "conditional"
+    )
     x <- merge(x, params, sort = FALSE)
   }
 
@@ -386,24 +460,35 @@ plot.see_equivalence_test_lm <- function(x,
   legend.title <- "Equivalence"
   x.title <- NULL
 
-  fill.color <- fill.color[sort(unique(match(x$ROPE_Equivalence, c("Accepted", "Rejected", "Undecided"))))]
+  fill.color <- fill.color[sort(unique(match(
+    x$ROPE_Equivalence,
+    c("Accepted", "Rejected", "Undecided")
+  )))]
 
   add.args <- lapply(match.call(expand.dots = FALSE)[["..."]], function(x) x)
-  if ("colors" %in% names(add.args)) fill.color <- eval(add.args[["colors"]])
-  if ("x.title" %in% names(add.args)) x.title <- eval(add.args[["x.title"]])
-  if ("legend.title" %in% names(add.args)) legend.title <- eval(add.args[["legend.title"]])
+  if ("colors" %in% names(add.args)) {
+    fill.color <- eval(add.args[["colors"]])
+  }
+  if ("x.title" %in% names(add.args)) {
+    x.title <- eval(add.args[["x.title"]])
+  }
+  if ("legend.title" %in% names(add.args)) {
+    legend.title <- eval(add.args[["legend.title"]])
+  }
 
-  rope.line.alpha <- 1.25 * rope_alpha
-  if (rope.line.alpha > 1) rope.line.alpha <- 1
+  rope.line.alpha <- 1.25 * alpha_rope
+  if (rope.line.alpha > 1) {
+    rope.line.alpha <- 1
+  }
 
   p <- ggplot(
     x,
     aes(
-      y = Parameter,
-      x = Estimate,
-      xmin = CI_low,
-      xmax = CI_high,
-      colour = ROPE_Equivalence
+      y = .data$Parameter,
+      x = .data$Estimate,
+      xmin = .data$CI_low,
+      xmax = .data$CI_high,
+      colour = .data$ROPE_Equivalence
     )
   ) +
     annotate(
@@ -412,20 +497,20 @@ plot.see_equivalence_test_lm <- function(x,
       xmax = .rope[2],
       ymin = 0,
       ymax = Inf,
-      fill = rope_color,
-      alpha = (rope_alpha / 3)
+      fill = color_rope,
+      alpha = (alpha_rope / 3)
     ) +
     geom_vline(
       xintercept = .rope,
       linetype = "dashed",
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE
     ) +
     geom_vline(
       xintercept = 0,
-      colour = rope_color,
+      colour = color_rope,
       linewidth = 0.8,
       alpha = rope.line.alpha,
       na.rm = TRUE

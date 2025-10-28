@@ -45,8 +45,7 @@
 #' l2 <- list(
 #'   geom = "boxplot",
 #'   data = iris,
-#'   aes = list(x = "Species", y = "Sepal.Width"),
-#'   outlier.shape = NA
+#'   aes = list(x = "Species", y = "Sepal.Width")
 #' )
 #' l3 <- list(
 #'   geom = "jitter",
@@ -79,10 +78,9 @@
 #' ggplot() +
 #'   geom_from_list(list(
 #'     geom = "density_2d_raster", data = iris,
-#'     aes = list(x = "Sepal.Width", y = "Petal.Length")
-#'   )) +
-#'   scale_x_continuous(expand = c(0, 0)) +
-#'   scale_y_continuous(expand = c(0, 0))
+#'     aes = list(x = "Sepal.Width", y = "Petal.Length"),
+#'     contour = FALSE
+#'   ))
 #'
 #' # Example 4 (facet and coord flip) --------------------------
 #'
@@ -114,7 +112,10 @@
 #' @export
 geom_from_list <- function(x, ...) {
   # Additional parameters ------------------------------------------------------
-  arguments <- x[!names(x) %in% c("geom", "aes", "data", "width", "height", "position", "show.legend")]
+  arguments <- x[
+    !names(x) %in%
+      c("geom", "aes", "data", "width", "height", "position", "show.legend")
+  ]
 
   if (is.null(x$geom)) {
     return(NULL)
@@ -125,7 +126,9 @@ geom_from_list <- function(x, ...) {
   }
 
   if (x$geom %in% c("density_2d", "density_2d_filled", "density_2d_polygon")) {
-    if (!"contour" %in% names(arguments)) arguments$contour <- TRUE
+    if (!"contour" %in% names(arguments)) {
+      arguments$contour <- TRUE
+    }
     if (!"contour_var" %in% names(arguments)) arguments$contour_var <- "density"
   }
 
@@ -147,7 +150,10 @@ geom_from_list <- function(x, ...) {
   }
   if (x$geom == "smooth") {
     if (!is.null(x$aes)) {
-      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+      arguments$mapping <- do.call(
+        ggplot2::aes,
+        args = lapply(x$aes, .str_to_sym)
+      )
     }
     if (!"method" %in% names(arguments)) {
       arguments$method <- "loess"
@@ -158,14 +164,21 @@ geom_from_list <- function(x, ...) {
     return(do.call(ggplot2::geom_smooth, args = arguments))
   }
 
-  if (startsWith(x$geom, "scale_") || startsWith(x$geom, "theme") || startsWith(x$geom, "see_")) {
+  if (
+    startsWith(x$geom, "scale_") ||
+      startsWith(x$geom, "theme") ||
+      startsWith(x$geom, "see_")
+  ) {
     return(do.call(x$geom, args = arguments))
   }
 
   if (startsWith(x$geom, "ggside::")) {
     insight::check_if_installed("ggside")
     if (!is.null(x$aes)) {
-      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+      arguments$mapping <- do.call(
+        ggplot2::aes,
+        args = lapply(x$aes, .str_to_sym)
+      )
     }
     return(do.call(eval(parse(text = x$geom)), args = arguments))
   }
@@ -173,7 +186,10 @@ geom_from_list <- function(x, ...) {
   if (startsWith(x$geom, "ggraph::")) {
     insight::check_if_installed("ggraph")
     if (!is.null(x$aes)) {
-      arguments$mapping <- do.call(ggplot2::aes, args = lapply(x$aes, .str_to_sym))
+      arguments$mapping <- do.call(
+        ggplot2::aes,
+        args = lapply(x$aes, .str_to_sym)
+      )
     }
     return(do.call(eval(parse(text = x$geom)), args = arguments))
   }
@@ -189,7 +205,8 @@ geom_from_list <- function(x, ...) {
   }
 
   # Default for violin
-  if (x$geom == "violin") { # nolint
+  if (x$geom == "violin") {
+    # nolint
     stat <- "ydensity"
     position <- "dodge"
   } else if (x$geom == "boxplot") {
@@ -253,7 +270,9 @@ geoms_from_list <- function(x, ...) {
   # Get name of layers
   n <- length(x)
   l_names <- paste0("l", 1:n)
-  if (!all(l_names %in% names(x))) l_names <- names(x)
+  if (!all(l_names %in% names(x))) {
+    l_names <- names(x)
+  }
 
   layers <- list()
   for (i in l_names) {

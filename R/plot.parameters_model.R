@@ -47,23 +47,35 @@
 #' result
 #' plot(result)
 #' @export
-plot.see_parameters_model <- function(x,
-                                      show_intercept = FALSE,
-                                      size_point = 0.8,
-                                      size_text = NA,
-                                      sort = NULL,
-                                      n_columns = NULL,
-                                      type = c("forest", "funnel"),
-                                      weight_points = TRUE,
-                                      show_labels = FALSE,
-                                      show_estimate = TRUE,
-                                      show_interval = TRUE,
-                                      show_density = FALSE,
-                                      show_direction = TRUE,
-                                      log_scale = FALSE,
-                                      ...) {
+plot.see_parameters_model <- function(
+  x,
+  show_intercept = FALSE,
+  size_point = 0.8,
+  size_text = NA,
+  sort = NULL,
+  n_columns = NULL,
+  type = c("forest", "funnel"),
+  weight_points = TRUE,
+  show_labels = FALSE,
+  show_estimate = TRUE,
+  show_interval = TRUE,
+  show_density = FALSE,
+  show_direction = TRUE,
+  log_scale = FALSE,
+  ...
+) {
   # retrieve settings ----------------
-  model_attributes <- attributes(x)[!names(attributes(x)) %in% c("names", "row.names", "class")]
+  model_attributes <- attributes(x)[
+    !names(attributes(x)) %in% c("names", "row.names", "class")
+  ]
+
+  # no plot for anova
+  model_class <- attributes(x)$model_class
+  if (!is.null(model_class) && any(model_class %in% c("aov", "anova"))) {
+    insight::format_error(
+      "Plots cannot be created for Anova tables. Please fit a (linear) regression model and try again."
+    ) # nolint
+  }
 
   # for GAMs, remove smooth terms
   if (!is.null(x$Component) && any(x$Component == "smooth_terms")) {
@@ -75,13 +87,24 @@ plot.see_parameters_model <- function(x,
   }
 
   # user wants to plot random effects (group levels)?
-  if (isFALSE(model_attributes$ignore_group) &&
-    isTRUE(model_attributes$mixed_model) &&
-    !"brmsfit" %in% model_attributes$model_class) {
+  if (
+    isFALSE(model_attributes$ignore_group) &&
+      isTRUE(model_attributes$mixed_model) &&
+      !"brmsfit" %in% model_attributes$model_class
+  ) {
     if (missing(show_intercept)) {
       show_intercept <- TRUE
     }
-    return(.group_level_plot(x, size_point, size_text, sort, n_columns, show_intercept, show_labels, ...))
+    return(.group_level_plot(
+      x,
+      size_point,
+      size_text,
+      sort,
+      n_columns,
+      show_intercept,
+      show_labels,
+      ...
+    ))
   }
 
   # show intercept for intercept-only models
@@ -91,7 +114,10 @@ plot.see_parameters_model <- function(x,
 
   # Clean up column names
   if (!any(grepl("Coefficient", colnames(x), fixed = TRUE))) {
-    colnames(x)[which.min(match(colnames(x), c("Median", "Mean", "Map", "MAP", model_attributes$coefficient_name)))] <- "Coefficient"
+    colnames(x)[which.min(match(
+      colnames(x),
+      c("Median", "Mean", "Map", "MAP", model_attributes$coefficient_name)
+    ))] <- "Coefficient"
   }
 
   if (!any(grepl("Parameter", colnames(x), fixed = TRUE))) {
@@ -103,13 +129,17 @@ plot.see_parameters_model <- function(x,
             model_attributes$parameter_names,
             function(param) paste(param, "=", x[[param]])
           )
-        ), 1,
+        ),
+        1,
         paste,
         collapse = ", "
       )
       x$Parameter <- collapsed_params
     } else {
-      colnames(x)[which.min(match(colnames(x), model_attributes$parameter_names))] <- "Parameter"
+      colnames(x)[which.min(match(
+        colnames(x),
+        model_attributes$parameter_names
+      ))] <- "Parameter"
     }
   }
 
@@ -150,7 +180,13 @@ plot.see_parameters_model <- function(x,
   x$Estimate_CI <- sprintf(
     "%.2f %s",
     x$Coefficient,
-    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2, zap_small = TRUE)
+    insight::format_ci(
+      x$CI_low,
+      x$CI_high,
+      ci = NULL,
+      digits = 2,
+      zap_small = TRUE
+    )
   )
 
   # do we have a measure for meta analysis (to label axis)
@@ -180,23 +216,39 @@ plot.see_parameters_model <- function(x,
   x <- .fix_facet_names(x)
 
   if (is_bayesian && "Group" %in% colnames(x)) {
-    x$Effects[x$Group != ""] <- paste0(x$Effects[x$Group != ""], " (", x$Group[x$Group != ""], ")")
+    x$Effects[x$Group != ""] <- paste0(
+      x$Effects[x$Group != ""],
+      " (",
+      x$Group[x$Group != ""],
+      ")"
+    )
   }
 
   # remember components
   has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1L
-  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1L
+  has_component <- "Component" %in%
+    colnames(x) &&
+    length(unique(x$Component)) > 1L
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1L
-  has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1L
+  has_subgroups <- "Subgroup" %in%
+    colnames(x) &&
+    length(unique(x$Subgroup)) > 1L
 
   mc <- model_attributes$model_class
   cp <- model_attributes$cleaned_parameters
   is_linear <- model_attributes$linear_model
-  is_meta <- !is.null(mc) && any(mc %in% c("rma", "rma.mv", "rma.uni", "metaplus"))
-  is_meta_bma <- !is.null(mc) && any(mc %in% c("meta_random", "meta_fixed", "meta_bma"))
+  is_meta <- !is.null(mc) &&
+    any(mc %in% c("rma", "rma.mv", "rma.uni", "metaplus"))
+  is_meta_bma <- !is.null(mc) &&
+    any(mc %in% c("meta_random", "meta_fixed", "meta_bma"))
 
   # minor fixes for Bayesian models
-  if (!is.null(mc) && !is.null(cp) && any(mc %in% c("stanreg", "stanmvreg", "brmsfit")) && length(cp) == length(x$Parameter)) {
+  if (
+    !is.null(mc) &&
+      !is.null(cp) &&
+      any(mc %in% c("stanreg", "stanmvreg", "brmsfit")) &&
+      length(cp) == length(x$Parameter)
+  ) {
     x$Parameter <- cp
   }
 
@@ -225,7 +277,10 @@ plot.see_parameters_model <- function(x,
         values_to = "Coefficient"
       )
       group <- x[, "Parameter", drop = FALSE]
-      group$group <- factor(x$Coefficient < y_intercept, levels = c(FALSE, TRUE))
+      group$group <- factor(
+        x$Coefficient < y_intercept,
+        levels = c(FALSE, TRUE)
+      )
       data <- merge(data, group, by = "Parameter")
       if (isTRUE(exponentiated_coefs)) {
         data$Coefficient <- exp(data$Coefficient)
@@ -233,7 +288,8 @@ plot.see_parameters_model <- function(x,
 
       density_layer <- ggdist::stat_slab(
         ggplot2::aes(fill = ggplot2::after_scale(.data$color)),
-        size = NA, alpha = 0.2,
+        size = NA,
+        alpha = 0.2,
         data = data
       )
     } else if (isTRUE(exponentiated_coefs)) {
@@ -244,7 +300,8 @@ plot.see_parameters_model <- function(x,
           arg2 = .data$SE / .data$Coefficient,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = 0.2,
+        size = NA,
+        alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     } else if (model_attributes$test_statistic == "t-statistic") {
@@ -257,7 +314,8 @@ plot.see_parameters_model <- function(x,
           arg3 = .data$SE,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = 0.2,
+        size = NA,
+        alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     } else {
@@ -269,7 +327,8 @@ plot.see_parameters_model <- function(x,
           arg2 = .data$SE,
           fill = ggplot2::after_scale(.data$color)
         ),
-        size = NA, alpha = 0.2,
+        size = NA,
+        alpha = 0.2,
         data = function(x) x[x$CI == x$CI[1], ]
       )
     }
@@ -278,7 +337,9 @@ plot.see_parameters_model <- function(x,
   # data preparation for metafor-objects
   if (is_meta) {
     overall <- which(x$Parameter == "(Intercept)")
-    if (length(overall) == 0) overall <- which(x$Parameter == "Overall")
+    if (length(overall) == 0) {
+      overall <- which(x$Parameter == "Overall")
+    }
     x$Parameter[overall] <- "Overall"
     x$group <- "study"
     x$group[overall] <- "Overall"
@@ -294,7 +355,9 @@ plot.see_parameters_model <- function(x,
     type <- match.arg(type)
 
     if (type == "funnel") {
-      if (missing(size_point)) size_point <- 2.5
+      if (missing(size_point)) {
+        size_point <- 2.5
+      }
       return(.funnel_plot(x, size_point, meta_measure))
     }
   }
@@ -336,7 +399,6 @@ plot.see_parameters_model <- function(x,
     x$Component <- factor(x$Component, levels = unique(x$Component))
   }
 
-
   if (!show_intercept && length(.is_intercept(x$Parameter)) > 0L) {
     x <- x[!.is_intercept(x$Parameter), ]
     if (show_density && (is_bayesian || is_bootstrap)) {
@@ -346,19 +408,34 @@ plot.see_parameters_model <- function(x,
   }
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
-    x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)[order(x$Coefficient)]))
+    x$Parameter <- factor(
+      x$Parameter,
+      levels = rev(unique(x$Parameter)[order(x$Coefficient)])
+    )
   } else if (!is.null(sort) && sort == "descending") {
-    x$Parameter <- factor(x$Parameter, levels = unique(x$Parameter)[order(x$Coefficient)])
+    x$Parameter <- factor(
+      x$Parameter,
+      levels = unique(x$Parameter)[order(x$Coefficient)]
+    )
   } else {
     # sort coefficients as they appear in the classical summary output by default
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   }
 
-
   if (is_meta || is_meta_bma) {
     # plot setup for metafor-objects
-    p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
-      ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
+    p <- ggplot2::ggplot(
+      x,
+      ggplot2::aes(
+        y = .data$Parameter,
+        x = .data$Coefficient,
+        color = .data$group
+      )
+    ) +
+      ggplot2::geom_vline(
+        ggplot2::aes(xintercept = y_intercept),
+        linetype = "dotted"
+      ) +
       theme_modern(legend.position = "none") +
       scale_color_material() +
       ggplot2::guides(color = "none", size = "none", shape = "none")
@@ -366,21 +443,25 @@ plot.see_parameters_model <- function(x,
     if (show_density) {
       # p <- p + density_layer
       message(
-        insight::format_message("Plotting densities not yet supported for meta-analysis models.")
+        insight::format_message(
+          "Plotting densities not yet supported for meta-analysis models."
+        )
       )
     }
 
     if (show_interval) {
       # TODO: Handle NA boundaries
-      p <- p + ggplot2::geom_errorbar(
-        ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
-        width = 0,
-        linewidth = size_point
-      )
+      p <- p +
+        ggplot2::geom_errorbar(
+          ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
+          width = 0,
+          linewidth = size_point
+        )
     }
 
     if (show_estimate) {
-      p <- p + ggplot2::geom_point(size = x$size_point * size_point, shape = x$shape)
+      p <- p +
+        ggplot2::geom_point(size = x$size_point * size_point, shape = x$shape)
     }
   } else if (isTRUE(multiple_ci)) {
     # plot setup for model parameters with multiple CIs
@@ -395,19 +476,31 @@ plot.see_parameters_model <- function(x,
 
     # should positive/negative coefficients be highlighted?
     if (show_direction) {
-      p <- ggplot2::ggplot(x, ggplot2::aes(
-        y = .data$Parameter, x = .data$Coefficient,
-        size = rev(.data$CI), color = .data$group
-      ))
+      p <- ggplot2::ggplot(
+        x,
+        ggplot2::aes(
+          y = .data$Parameter,
+          x = .data$Coefficient,
+          size = rev(.data$CI),
+          color = .data$group
+        )
+      )
     } else {
-      p <- ggplot2::ggplot(x, ggplot2::aes(
-        y = .data$Parameter, x = .data$Coefficient,
-        size = rev(.data$CI)
-      ))
+      p <- ggplot2::ggplot(
+        x,
+        ggplot2::aes(
+          y = .data$Parameter,
+          x = .data$Coefficient,
+          size = rev(.data$CI)
+        )
+      )
     }
 
     p <- p +
-      ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
+      ggplot2::geom_vline(
+        ggplot2::aes(xintercept = y_intercept),
+        linetype = "dotted"
+      ) +
       theme_modern(legend.position = "none") +
       color_scale
 
@@ -417,17 +510,19 @@ plot.see_parameters_model <- function(x,
 
     if (show_interval) {
       # TODO: Handle NA boundaries
-      p <- p + ggplot2::geom_errorbar(
-        ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
-        width = 0
-      ) +
+      p <- p +
+        ggplot2::geom_errorbar(
+          ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
+          width = 0
+        ) +
         ggplot2::scale_size_ordinal(range = c(size_point, 3 * size_point))
     }
 
     if (show_estimate) {
-      p <- p + ggplot2::geom_point(
-        size = 4 * size_point
-      )
+      p <- p +
+        ggplot2::geom_point(
+          size = 4 * size_point
+        )
     }
   } else {
     # plot setup for regular model parameters
@@ -439,13 +534,29 @@ plot.see_parameters_model <- function(x,
     }
 
     if (show_direction) {
-      p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
-        ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
+      p <- ggplot2::ggplot(
+        x,
+        ggplot2::aes(
+          y = .data$Parameter,
+          x = .data$Coefficient,
+          color = .data$group
+        )
+      ) +
+        ggplot2::geom_vline(
+          ggplot2::aes(xintercept = y_intercept),
+          linetype = "dotted"
+        ) +
         theme_modern(legend.position = "none") +
         color_scale
     } else {
-      p <- ggplot2::ggplot(x, ggplot2::aes(y = .data$Parameter, x = .data$Coefficient)) +
-        ggplot2::geom_vline(ggplot2::aes(xintercept = y_intercept), linetype = "dotted") +
+      p <- ggplot2::ggplot(
+        x,
+        ggplot2::aes(y = .data$Parameter, x = .data$Coefficient)
+      ) +
+        ggplot2::geom_vline(
+          ggplot2::aes(xintercept = y_intercept),
+          linetype = "dotted"
+        ) +
         theme_modern(legend.position = "none") +
         color_scale
     }
@@ -456,25 +567,27 @@ plot.see_parameters_model <- function(x,
 
     if (show_interval) {
       # TODO: Handle NA boundaries
-      p <- p + ggplot2::geom_errorbar(ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
-        width = 0,
-        linewidth = size_point
-      )
+      p <- p +
+        ggplot2::geom_errorbar(
+          ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
+          width = 0,
+          linewidth = size_point
+        )
     }
 
     if (show_estimate) {
       if (show_density) {
-        p <- p + ggplot2::geom_point(
-          size = 4 * size_point,
-          fill = "white",
-          shape = 21
-        )
+        p <- p +
+          ggplot2::geom_point(
+            size = 4 * size_point,
+            fill = "white",
+            shape = 21
+          )
       } else {
         p <- p + ggplot2::geom_point(size = 4 * size_point)
       }
     }
   }
-
 
   if (!is.null(pretty_names)) {
     p <- p + ggplot2::scale_y_discrete(labels = pretty_names)
@@ -495,7 +608,9 @@ plot.see_parameters_model <- function(x,
       p <- p +
         geom_text(
           mapping = aes(label = .data$Estimate_CI, x = Inf),
-          colour = "black", hjust = "inward", size = size_text
+          colour = "black",
+          hjust = "inward",
+          size = size_text
         ) +
         xlim(c(min(new_range), max(new_range)))
     }
@@ -519,16 +634,19 @@ plot.see_parameters_model <- function(x,
       x_high <- which.max(max(new_range) < axis_range)
     }
 
-    p <- p + scale_x_continuous(
-      trans = "log",
-      breaks = axis_range[x_low:x_high],
-      limits = c(axis_range[x_low], axis_range[x_high]),
-      labels = sprintf("%g", axis_range[x_low:x_high])
-    )
+    p <- p +
+      scale_x_continuous(
+        trans = "log",
+        breaks = axis_range[x_low:x_high],
+        limits = c(axis_range[x_low], axis_range[x_high]),
+        labels = sprintf("%g", axis_range[x_low:x_high])
+      )
   }
 
   # wrap plot into facets, depending on the components
-  if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
+  if (is.null(n_columns)) {
+    n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1, 2, 1)
+  }
 
   if (ordinal_model) {
     facet_scales <- "free_x"
@@ -539,19 +657,46 @@ plot.see_parameters_model <- function(x,
   axis_title_in_facet <- FALSE
 
   if (has_component && has_response && has_effects) {
-    p <- p + facet_wrap(~ Response + Effects + Component, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(
+        ~ Response + Effects + Component,
+        ncol = n_columns,
+        scales = facet_scales
+      )
   } else if (has_component && has_effects) {
-    p <- p + facet_wrap(~ Effects + Component, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(~ Effects + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_component && has_response) {
-    p <- p + facet_wrap(~ Response + Component, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(
+        ~ Response + Component,
+        ncol = n_columns,
+        scales = facet_scales
+      )
   } else if (has_effects && has_response) {
-    p <- p + facet_wrap(~ Response + Effects, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(~ Response + Effects, ncol = n_columns, scales = facet_scales)
   } else if (has_component) {
-    if (!is.null(zi_coefficient_name) && !is.null(coefficient_name) && zi_coefficient_name != coefficient_name) {
+    if (
+      !is.null(zi_coefficient_name) &&
+        !is.null(coefficient_name) &&
+        zi_coefficient_name != coefficient_name
+    ) {
       coef_labeller <- function(string) {
-        paste0(gsub("(\\(|\\))", "", string), " (", c(coefficient_name, zi_coefficient_name), ")")
+        paste0(
+          gsub("(\\(|\\))", "", string),
+          " (",
+          c(coefficient_name, zi_coefficient_name),
+          ")"
+        )
       }
-      p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales, labeller = as_labeller(coef_labeller))
+      p <- p +
+        facet_wrap(
+          ~Component,
+          ncol = n_columns,
+          scales = facet_scales,
+          labeller = as_labeller(coef_labeller)
+        )
       axis_title_in_facet <- TRUE
     } else {
       p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales)
@@ -574,31 +719,44 @@ plot.see_parameters_model <- function(x,
 
   if (isTRUE(is_meta)) {
     measure <- .meta_measure(meta_measure)
-    p + ggplot2::labs(
-      y = "",
-      x = measure,
-      colour = "CI"
-    )
+    p +
+      ggplot2::labs(
+        y = "",
+        x = measure,
+        colour = "CI"
+      )
   } else if (isTRUE(axis_title_in_facet)) {
-    p + ggplot2::labs(
-      y = parameter_label,
-      x = NULL,
-      colour = "CI"
-    )
+    p +
+      ggplot2::labs(
+        y = parameter_label,
+        x = NULL,
+        colour = "CI"
+      )
   } else {
-    p + ggplot2::labs(
-      y = parameter_label,
-      x = ifelse(is.null(coefficient_name),
-        ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), # nolint
-        coefficient_name
-      ),
-      colour = "CI"
-    )
+    p +
+      ggplot2::labs(
+        y = parameter_label,
+        x = ifelse(
+          is.null(coefficient_name),
+          ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), # nolint
+          coefficient_name
+        ),
+        colour = "CI"
+      )
   }
 }
 
 
-.group_level_plot <- function(x, size_point, size_text, sort, n_columns, show_intercept, show_labels, ...) {
+.group_level_plot <- function(
+  x,
+  size_point,
+  size_text,
+  sort,
+  n_columns,
+  show_intercept,
+  show_labels,
+  ...
+) {
   # filter random effects
   x <- x[x$Effects == "random", ]
   # remove intercept?
@@ -636,12 +794,21 @@ plot.see_parameters_model <- function(x,
   x$Estimate_CI <- sprintf(
     "%.2f %s",
     x$Coefficient,
-    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2, zap_small = TRUE)
+    insight::format_ci(
+      x$CI_low,
+      x$CI_high,
+      ci = NULL,
+      digits = 2,
+      zap_small = TRUE
+    )
   )
 
   # handle sorting
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
-    x$Level <- factor(x$Level, levels = rev(unique(x$Level)[order(x$Coefficient)]))
+    x$Level <- factor(
+      x$Level,
+      levels = rev(unique(x$Level)[order(x$Coefficient)])
+    )
   } else if (!is.null(sort) && sort == "descending") {
     x$Level <- factor(x$Level, levels = unique(x$Level)[order(x$Coefficient)])
   } else {
@@ -657,7 +824,12 @@ plot.see_parameters_model <- function(x,
   # to fixed, otherwise we set them to free_y (in facet_wrap). This removes
   # a redundant scale for plots with identical scales.
   check_scales <- split(x$Level, x$Group)
-  if (isTRUE(identical(unname(check_scales[-length(check_scales)]), unname(check_scales[-1])))) {
+  if (
+    isTRUE(identical(
+      unname(check_scales[-length(check_scales)]),
+      unname(check_scales[-1])
+    ))
+  ) {
     facet_scales <- "fixed"
   } else {
     facet_scales <- "free_y"
@@ -682,8 +854,9 @@ plot.see_parameters_model <- function(x,
     theme_modern(legend.position = "none") +
     color_scale +
     fill_scale +
-    ggplot2::geom_errorbarh(
-      height = 0,
+    ggplot2::geom_errorbar(
+      orientation = "y",
+      width = 0,
       linewidth = size_point
     ) +
     ggplot2::geom_point(
@@ -696,7 +869,8 @@ plot.see_parameters_model <- function(x,
   # add coefficients and CIs?
   if (isTRUE(show_labels)) {
     # add some space to the right panel for text
-    space_factor <- (n_columns^(size_text / 1.2)) * sqrt(ceiling(diff(c(min_ci, max_ci))) / 5)
+    space_factor <- (n_columns^(size_text / 1.2)) *
+      sqrt(ceiling(diff(c(min_ci, max_ci))) / 5)
     new_range <- pretty(c(min_ci, max_ci + space_factor))
 
     # expand scale range and add numbers to the right border
@@ -704,7 +878,9 @@ plot.see_parameters_model <- function(x,
       p <- p +
         ggplot2::geom_text(
           mapping = ggplot2::aes(label = .data$Estimate_CI, x = Inf),
-          colour = "black", hjust = "inward", size = size_text
+          colour = "black",
+          hjust = "inward",
+          size = size_text
         ) +
         ggplot2::xlim(c(min(new_range), max(new_range)))
     }
@@ -733,7 +909,12 @@ plot.see_parameters_model <- function(x,
 
   ggplot(x, aes(x = .data$Coefficient, y = .data$SE)) +
     scale_y_reverse(expand = c(0, 0), limits = c(max_y, 0)) +
-    geom_polygon(data = d_polygon, aes(.data$x, .data$y), fill = "grey80", alpha = 0.3) +
+    geom_polygon(
+      data = d_polygon,
+      aes(.data$x, .data$y),
+      fill = "grey80",
+      alpha = 0.3
+    ) +
     geom_line(
       data = dat_funnel,
       mapping = aes(x = .data$ci_low, y = .data$se_range),
@@ -753,9 +934,9 @@ plot.see_parameters_model <- function(x,
 }
 
 
-
 .meta_measure <- function(meta_measure) {
-  switch(meta_measure,
+  switch(
+    meta_measure,
     MD = "Raw Mean Difference",
     SMDH = ,
     SMD = "Standardized Mean Difference",

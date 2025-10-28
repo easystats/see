@@ -23,7 +23,7 @@ level (see examples).}
 Add dot-densities for binary \code{y} variables
 }
 \examples{
-\dontshow{if (require("ggdist")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggdist")) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 
@@ -47,7 +47,8 @@ ggplot() +
 ggplot() +
   geom_binomdensity(data, x = "Sepal.Length", y = "Species", scale = "proportion")
 ggplot() +
-  geom_binomdensity(data,
+  geom_binomdensity(
+    data,
     x = "Sepal.Length", y = "Species",
     scale = list("setosa" = 0.4, "versicolor" = 0.6)
   )

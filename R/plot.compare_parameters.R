@@ -22,15 +22,17 @@
 #' result <- parameters::compare_parameters(lm1, lm2, lm3)
 #' plot(result)
 #' @export
-plot.see_compare_parameters <- function(x,
-                                        show_intercept = FALSE,
-                                        size_point = 0.8,
-                                        size_text = NA,
-                                        dodge_position = 0.8,
-                                        sort = NULL,
-                                        n_columns = NULL,
-                                        show_labels = FALSE,
-                                        ...) {
+plot.see_compare_parameters <- function(
+  x,
+  show_intercept = FALSE,
+  size_point = 0.8,
+  size_text = NA,
+  dodge_position = 0.8,
+  sort = NULL,
+  n_columns = NULL,
+  show_labels = FALSE,
+  ...
+) {
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x)
   }
@@ -51,7 +53,13 @@ plot.see_compare_parameters <- function(x,
   x$Estimate_CI <- trimws(sprintf(
     "%.2f %s",
     x$Coefficient,
-    insight::format_ci(x$CI_low, x$CI_high, ci = NULL, digits = 2, zap_small = TRUE)
+    insight::format_ci(
+      x$CI_low,
+      x$CI_high,
+      ci = NULL,
+      digits = 2,
+      zap_small = TRUE
+    )
   ))
   x$Estimate_CI[x$Estimate_CI == "NA"] <- ""
 
@@ -63,7 +71,9 @@ plot.see_compare_parameters <- function(x,
 
   # remember components
   has_effects <- "Effects" %in% colnames(x) && length(unique(x$Effects)) > 1
-  has_component <- "Component" %in% colnames(x) && length(unique(x$Component)) > 1
+  has_component <- "Component" %in%
+    colnames(x) &&
+    length(unique(x$Component)) > 1
   has_response <- "Response" %in% colnames(x) && length(unique(x$Response)) > 1
   has_subgroups <- "Subgroup" %in% colnames(x) && length(unique(x$Subgroup)) > 1
 
@@ -80,20 +90,31 @@ plot.see_compare_parameters <- function(x,
     x <- x[!.is_intercept(x$Parameter), ]
     # sanity check - any data left?
     if (nrow(x) == 0) {
-      insight::format_warning("No data left after removing intercepts. Returning empty plot. Try `show_intercept = TRUE`.") # nolint
+      insight::format_warning(
+        "No data left after removing intercepts. Returning empty plot. Try `show_intercept = TRUE`."
+      ) # nolint
     }
   }
 
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
-    x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)[order(x$Coefficient)]))
+    x$Parameter <- factor(
+      x$Parameter,
+      levels = rev(unique(x$Parameter)[order(x$Coefficient)])
+    )
   } else if (!is.null(sort) && sort == "descending") {
-    x$Parameter <- factor(x$Parameter, levels = unique(x$Parameter)[order(x$Coefficient)])
+    x$Parameter <- factor(
+      x$Parameter,
+      levels = unique(x$Parameter)[order(x$Coefficient)]
+    )
   } else {
     # sort coefficients as they appear in the classical summary output by default
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   }
 
-  p <- ggplot(x, aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)) +
+  p <- ggplot(
+    x,
+    aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)
+  ) +
     geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
     geom_pointrange(
       aes(xmin = .data$CI_low, xmax = .data$CI_high),
@@ -107,8 +128,17 @@ plot.see_compare_parameters <- function(x,
   # add coefficients and CIs?
   if (add_values) {
     # add some space to the right panel for text
-    space_factor <- sqrt(ceiling(diff(c(min(x$CI_low, na.rm = TRUE), max(x$CI_high, na.rm = TRUE)))) / 5)
-    new_range <- pretty(c(min(x$CI_low, na.rm = TRUE), max(x$CI_high, na.rm = TRUE) + space_factor))
+    space_factor <- sqrt(
+      ceiling(diff(c(
+        min(x$CI_low, na.rm = TRUE),
+        max(x$CI_high, na.rm = TRUE)
+      ))) /
+        5
+    )
+    new_range <- pretty(c(
+      min(x$CI_low, na.rm = TRUE),
+      max(x$CI_high, na.rm = TRUE) + space_factor
+    ))
 
     p <- p +
       geom_text(
@@ -135,16 +165,23 @@ plot.see_compare_parameters <- function(x,
       new_range <- pretty(2 * max(x$CI_high))
       x_high <- which.max(max(new_range) < exp_range)
     }
-    p <- p + scale_x_continuous(
-      trans = "log",
-      breaks = exp_range[x_low:x_high],
-      limits = c(exp_range[x_low], exp_range[x_high]),
-      labels = sprintf("%g", exp_range[x_low:x_high])
-    )
+    p <- p +
+      scale_x_continuous(
+        trans = "log",
+        breaks = exp_range[x_low:x_high],
+        limits = c(exp_range[x_low], exp_range[x_high]),
+        labels = sprintf("%g", exp_range[x_low:x_high])
+      )
   }
 
   # wrap plot into facets, depending on the components
-  if (is.null(n_columns)) n_columns <- ifelse(sum(has_component, has_response, has_effects) > 1L, 2L, 1L)
+  if (is.null(n_columns)) {
+    n_columns <- ifelse(
+      sum(has_component, has_response, has_effects) > 1L,
+      2L,
+      1L
+    )
+  }
 
   if (ordinal_model) {
     facet_scales <- "free_x"
@@ -155,13 +192,25 @@ plot.see_compare_parameters <- function(x,
   axis_title_in_facet <- FALSE
 
   if (has_component && has_response && has_effects) {
-    p <- p + facet_wrap(~ Response + Effects + Component, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(
+        ~ Response + Effects + Component,
+        ncol = n_columns,
+        scales = facet_scales
+      )
   } else if (has_component && has_effects) {
-    p <- p + facet_wrap(~ Effects + Component, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(~ Effects + Component, ncol = n_columns, scales = facet_scales)
   } else if (has_component && has_response) {
-    p <- p + facet_wrap(~ Response + Component, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(
+        ~ Response + Component,
+        ncol = n_columns,
+        scales = facet_scales
+      )
   } else if (has_effects && has_response) {
-    p <- p + facet_wrap(~ Response + Effects, ncol = n_columns, scales = facet_scales)
+    p <- p +
+      facet_wrap(~ Response + Effects, ncol = n_columns, scales = facet_scales)
   } else if (has_component) {
     p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales)
   } else if (has_effects) {
@@ -173,26 +222,29 @@ plot.see_compare_parameters <- function(x,
   }
 
   if (isTRUE(axis_title_in_facet)) {
-    p + labs(
-      y = "Parameter",
-      x = NULL,
-      colour = "Model"
-    )
+    p +
+      labs(
+        y = "Parameter",
+        x = NULL,
+        colour = "Model"
+      )
   } else {
-    p + labs(
-      y = "Parameter",
-      x = "Estimate",
-      colour = "Model"
-    )
+    p +
+      labs(
+        y = "Parameter",
+        x = "Estimate",
+        colour = "Model"
+      )
   }
 }
 
 
-
-
 #' @export
 data_plot.see_compare_parameters <- function(x, ...) {
-  col_coefficient <- grep("^(Coefficient|Log-Odds|Log-Mean|Odds Ratio|Risk Ratio|IRR)\\.", colnames(x))
+  col_coefficient <- grep(
+    "^(Coefficient|Log-Odds|Log-Mean|Odds Ratio|Risk Ratio|IRR)\\.",
+    colnames(x)
+  )
   col_ci_low <- which(startsWith(colnames(x), "CI_low."))
   col_ci_high <- which(startsWith(colnames(x), "CI_high."))
   col_p <- which(startsWith(colnames(x), "p."))
@@ -233,7 +285,10 @@ data_plot.see_compare_parameters <- function(x, ...) {
 
   rownames(dataplot) <- NULL
 
-  exp_coef <- unique(unlist(insight::compact_list(lapply(x, function(i) attributes(i)$exponentiate))))
+  exp_coef <- unique(unlist(insight::compact_list(lapply(
+    x,
+    function(i) attributes(i)$exponentiate
+  ))))
   attr(dataplot, "exponentiate") <- !is.null(exp_coef) && any(exp_coef)
 
   class(dataplot) <- c("data_plot", "see_compare_parameters", class(dataplot))

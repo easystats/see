@@ -1,6 +1,6 @@
-skip_if_not_installed("vdiffr")
 skip_if_not_installed("ggdag")
 skip_if_not_installed("dagitty")
+skip_if_not_installed("vdiffr")
 
 test_that("`plot()` for check_dag", {
   set.seed(1234)

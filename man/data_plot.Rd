@@ -65,7 +65,7 @@ allow to specify arguments to modify the transparency or color of geoms,
 these are shown in the 'Usage' section.
 }
 \examples{
-\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (identical(Sys.getenv("NOT_CRAN"), "true") && require("rstanarm")) withAutoprint(\{ # examplesIf}
 library(bayestestR)
 library(rstanarm)
 

@@ -1,9 +1,11 @@
-.add_prior_layer_ridgeline <- function(model,
-                                       parameter = NULL,
-                                       show_intercept = FALSE,
-                                       priors_alpha = 0.5,
-                                       fill_color = NULL,
-                                       show_ridge_line = TRUE) {
+.add_prior_layer_ridgeline <- function(
+  model,
+  parameter = NULL,
+  show_intercept = FALSE,
+  alpha_priors = 0.5,
+  fill_color = NULL,
+  show_ridge_line = TRUE
+) {
   dat <- tryCatch(
     {
       priors <- bayestestR::simulate_prior(model)
@@ -18,7 +20,9 @@
       x_range <- stats::median(dens$x) + 7 * stats::mad(dens$x) * c(-1, 1)
 
       to_remove <- which(dens$x <= x_range[1] | dens$x >= x_range[2])
-      if (length(to_remove)) dens <- dens[-to_remove, ]
+      if (length(to_remove)) {
+        dens <- dens[-to_remove, ]
+      }
 
       # remove intercept from output, if requested
       .remove_intercept(dens, column = "Parameter", show_intercept)
@@ -42,7 +46,7 @@
             group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
-          alpha = priors_alpha,
+          alpha = alpha_priors,
           na.rm = TRUE
         )
       } else {
@@ -55,7 +59,7 @@
             group = as.factor(.data$Parameter)
           ),
           fill = fill_color,
-          alpha = priors_alpha,
+          alpha = alpha_priors,
           color = NA,
           na.rm = TRUE
         )
@@ -70,7 +74,7 @@
           group = as.factor(.data$Parameter),
           fill = "Priors"
         ),
-        alpha = priors_alpha,
+        alpha = alpha_priors,
         na.rm = TRUE
       )
     } else {
@@ -83,7 +87,7 @@
           group = as.factor(.data$Parameter),
           fill = "Priors"
         ),
-        alpha = priors_alpha,
+        alpha = alpha_priors,
         color = NA,
         na.rm = TRUE
       )
@@ -92,14 +96,13 @@
 }
 
 
-
-
-
-.add_prior_layer_ribbon <- function(model,
-                                    parameter = NULL,
-                                    show_intercept = FALSE,
-                                    priors_alpha = 0.5,
-                                    fill_color = NULL) {
+.add_prior_layer_ribbon <- function(
+  model,
+  parameter = NULL,
+  show_intercept = FALSE,
+  alpha_priors = 0.5,
+  fill_color = NULL
+) {
   dat <- tryCatch(
     {
       priors <- bayestestR::simulate_prior(model)
@@ -114,7 +117,9 @@
       x_range <- stats::median(dens$x) + 7 * stats::mad(dens$x) * c(-1, 1)
 
       to_remove <- which(dens$x <= x_range[1] | dens$x >= x_range[2])
-      if (length(to_remove)) dens <- dens[-to_remove, ]
+      if (length(to_remove)) {
+        dens <- dens[-to_remove, ]
+      }
 
       # remove intercept from output, if requested
       .remove_intercept(dens, column = "Parameter", show_intercept)
@@ -135,7 +140,7 @@
           group = as.factor(.data$Parameter)
         ),
         fill = fill_color,
-        alpha = priors_alpha
+        alpha = alpha_priors
       )
     } else {
       geom_ribbon(
@@ -147,7 +152,7 @@
           group = as.factor(.data$Parameter),
           fill = "Prior"
         ),
-        alpha = priors_alpha
+        alpha = alpha_priors
       )
     }
   }

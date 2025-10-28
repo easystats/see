@@ -16,14 +16,16 @@
 #' result
 #' plot(result, data = m) # data required for pkgdown
 #' @export
-plot.see_check_heteroscedasticity <- function(x,
-                                              data = NULL,
-                                              size_point = 2,
-                                              size_line = 0.8,
-                                              size_title = 12,
-                                              size_axis_title = base_size,
-                                              base_size = 10,
-                                              ...) {
+plot.see_check_heteroscedasticity <- function(
+  x,
+  data = NULL,
+  size_point = 2,
+  linewidth = 0.8,
+  size_title = 12,
+  size_axis_title = base_size,
+  base_size = 10,
+  ...
+) {
   if (is.null(data)) {
     model <- .retrieve_data(x)
   } else {
@@ -79,7 +81,7 @@ plot.see_check_heteroscedasticity <- function(x,
   .plot_diag_homogeneity(
     dat,
     size_point = size_point,
-    size_line = size_line,
+    linewidth = linewidth,
     base_size = base_size,
     size_title = size_title,
     size_axis_title = size_axis_title,
@@ -89,12 +91,15 @@ plot.see_check_heteroscedasticity <- function(x,
 
 
 .sigma_glmmTMB_nonmixed <- function(model, faminfo) {
-  if (!is.na(match(faminfo$family, c("binomial", "poisson", "truncated_poisson")))) {
+  if (
+    !is.na(match(faminfo$family, c("binomial", "poisson", "truncated_poisson")))
+  ) {
     return(1)
   }
   betad <- model$fit$par["betad"]
 
-  switch(faminfo$family,
+  switch(
+    faminfo$family,
     gaussian = exp(0.5 * betad),
     Gamma = exp(-0.5 * betad),
     exp(betad)
