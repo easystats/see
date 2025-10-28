@@ -20,7 +20,7 @@
 #' sequential palettes. Available palettes for each type of data are:
 #' - Qualitative: `bright`, `high-contrast`, `vibrant`, `muted`,
 #'   `medium-contrast`, `pale`, `dark`, `light`, `ground_cover`
-#' - Diverging: `sunset`, `BuRd`, `PRGn`
+#' - Diverging: `sunset`, `nightfall`, `BuRd`, `PRGn`
 #' - Sequential: `YlOrBr`, `iridescent`, `rainbow_discrete`, `rainbow_smooth`
 #'
 #' <!-- For rainbow_discrete, pick the optimal set based on the number of colors,
@@ -107,8 +107,9 @@ tol_colors_discrete_list <- list(
   dark = c(blue = "#222255", cyan = "#225555", green = "#225522", yellow = "#666633", red = "#663333", grey = "#555555"),
   light = c(blue = "#77AADD", orange = "#EE8866", yellow = "#EEDD88", pink = "#FFAABB", cyan = "#99DDFF", mint = "#44BB99", pear = "#BBCC33", olive = "#AAAA00", grey = "#DDDDDD"),
   # TODO: Finish rainbow color schemes
-  rainbow14 = c("3", "6", "9", "10", "12", "14", "15", "16", "17", "18", "20", "22", "24", "26" = "#DC050C", "grey"),
-  rainbow23 = c("1", "2", "4", "5", "7", "8", "9", "10", "11", "13", "14", "15", "16", "17", "18", "19", "21", "23", "25", "26" = "#DC050C", "27" = "#A5170E", "28" = "#72190E", "29" = "#42150A", grey = "#777777"),
+  rainbow14 = c("3" = "#D1BBD7", "6" = "#AE76A3", "9" = "#882E72", "10" = "#1965B0", "12" = "#5289C7", "14" = "#7BAFDE", "15" = "#4EB265", "16" = "#90C987", "17" = "#CAE0AB", "18" = "#F7F056", "20" = "#F6C141", "22" = "#F1932D", "24" = "#E8601C", "26" = "#DC050C", grey = "#777777"),
+  rainbow23 = c("1" = "#E8ECFB", "2" = "#D9CCE3", "4" = "#CAACCB", "5" = "#BA8DB4", "7" = "#AA6F9E", "8" = "#994F88", "9" = "#882E72", "10" = "#1965B0", "11" = "#437DBF", "13" = "#6195CF", "14" = "#7BAFDE", "15" = "#4EB265", "16" = "#90C987", "17" = "#CAE0AB", "18" = "#F7F056", "19" = "#F7CB45", "21" = "#F4A736", "23" = "#EE8026", "25" = "#E65518", "26" = "#DC050C", "27" = "#A5170E", "28" = "#72190E", "29" = "#42150A", grey = "#777777"),
+  rainbow_all = c("1" = "#E8ECFB", "2" = "#D9CCE3", "3" = "#D1BBD7", "4" = "#CAACCB", "5" = "#BA8DB4", "6" = "#AE76A3", "7" = "#AA6F9E", "8" = "#994F88", "9" = "#882E72", "10" = "#1965B0", "11" = "#437DBF", "12" = "#5289C7", "13" = "#6195CF", "14" = "#7BAFDE", "15" = "#4EB265", "16" = "#90C987", "17" = "#CAE0AB", "18" = "#F7F056", "19" = "#F7CB45", "20" = "#F6C141", "21" = "#F4A736", "22" = "#F1932D", "23" = "#EE8026", "24" = "#E8601C", "25" = "#E65518", "26" = "#DC050C", "27" = "#A5170E", "28" = "#72190E", "29" = "#42150A", "grey" = "#777777"),
   ground_cover = c(
     water = "#5566AA", "evergreen needleleaf forest" = "#117733", "deciduous needleleaf forest" = "#44AA66",
     "mixed forest" = "#55AA22", "evergreen broadleaf forest" = "#668822", "deciduous broadleaf forest" = "#88BB55",
@@ -117,9 +118,13 @@ tol_colors_discrete_list <- list(
   )
 )
 
+#TODO: Add function for rainbow palettes of 1-23
+
+# TODO: Add smooth palettes
 tol_colors_smooth_list <- list(
   # Diverging
-  sunset = "#",
+  sunset = NULL,
+  nightfall = NULL
   BuRd = NULL,
   PRGn = NULL,
   # Sequential
@@ -139,7 +144,7 @@ tol_colors_smooth_list <- list(
 #' @param palette Character name of palette. Can be:
 #' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,`
 #'   "medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
-#' - Diverging: `"sunset"`, `"BuRd"`, `"PRGn"`
+#' - Diverging: `"sunset"`, `"nightfall"`, `"BuRd"`, `"PRGn"`
 #' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`,
 #'   `"rainbow_smooth"`
 #'
@@ -157,6 +162,7 @@ tol_colors_smooth_list <- list(
 tol_colors <- function(..., palette = "bright") {
   cols <- c(...)
 
+  # TODO: Extract Tol palettes instead of O-I
   if (!is.null(cols)) {
     return(okabeito_colors_list[cols])
   }
@@ -182,7 +188,7 @@ tol_colors <- function(..., palette = "bright") {
 #' @param palette Character name of palette. Can be:
 #' - Qualitative: `"bright"`, `"high-contrast"`, `"vibrant"`, `"muted"`,
 #'   `"medium-contrast"`, `"pale"`, `"dark"`, `"light"`, `"ground_cover"`
-#' - Diverging: `"sunset"`, `"BuRd"`, `"PRGn"`
+#' - Diverging: `"sunset"`, `"nightfall",` `"BuRd"`, `"PRGn"`
 #' - Sequential: `"YlOrBr"`, `"iridescent"`, `"rainbow_discrete"`,
 #' - `"rainbow_smooth"`
 #' @param reverse Boolean indicating whether the palette should be reversed.
@@ -210,11 +216,12 @@ palette_tol_discrete <- function(palette = "bright", reverse = FALSE, order = NU
     palette <- "full"
   }
 
+  # TODO: Extract Tol palettes instead of O-I
   pal <- okabeito_palettes[[palette]]
 
   stopifnot(
     "`order` must be a vector of integers." = is.numeric(order),
-    "All elements of `order` must be greater than 0 and less than 10." = order > 0 & order <= 9
+    "All elements of `order` must be greater than 0 and less than 23." = all(order > 0 & order <= 23)
   )
   pal <- pal[order]
 
