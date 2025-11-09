@@ -2,6 +2,12 @@
 # These tests verify that diagnostic plots render consistently across versions.
 # Related to #236 (snapshot tests) and #420 (large dataset performance).
 
+# Helper function for reproducible vdiffr tests
+expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
+  set.seed(seed)
+  vdiffr::expect_doppelganger(title = title, fig = fig)
+}
+
 test_that("plot.see_check_model() renders correctly", {
   skip_if_not_installed("performance")
   skip_if_not_installed("see")
@@ -11,36 +17,31 @@ test_that("plot.see_check_model() renders correctly", {
   model <- lm(mpg ~ wt + hp + cyl, data = mtcars)
 
   # Test linearity check (NCV)
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_linearity",
     fig = plot(performance::check_model(model, check = "linearity"))
   )
 
   # Test homogeneity of variance
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_homogeneity",
     fig = plot(performance::check_model(model, check = "homogeneity"))
   )
 
   # Test normality (QQ plot)
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_qq",
     fig = plot(performance::check_model(model, check = "qq"))
   )
 
   # Test outliers
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_outliers",
     fig = plot(performance::check_model(model, check = "outliers"))
   )
 
   # Test full panel plot
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_panel",
     fig = plot(performance::check_model(model))
   )
@@ -56,15 +57,13 @@ test_that("plot.see_check_model() works with themes", {
   model <- lm(mpg ~ wt + hp, data = mtcars)
 
   # Test with modern theme
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_theme_modern",
     fig = plot(performance::check_model(model, check = "linearity")) + theme_modern()
   )
 
   # Test with lucid theme
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_theme_lucid",
     fig = plot(performance::check_model(model, check = "linearity")) + theme_lucid()
   )
@@ -80,8 +79,7 @@ test_that("plot.see_check_model() works with custom colors", {
   model <- lm(mpg ~ wt + hp, data = mtcars)
 
   # Test with custom colors
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_custom_colors",
     fig = plot(
       performance::check_model(model, check = "linearity"),
@@ -100,14 +98,12 @@ test_that("plot.see_check_normality() renders correctly", {
   model <- lm(mpg ~ wt + hp + cyl, data = mtcars)
   norm_result <- performance::check_normality(model)
 
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_normality_default",
     fig = plot(norm_result)
   )
 
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_normality_detrend",
     fig = plot(norm_result, detrend = TRUE)
   )
@@ -123,15 +119,13 @@ test_that("plot.see_check_homogeneity() renders correctly", {
   model <- lm(mpg ~ wt, data = mtcars)
 
   # Test homogeneity with default theme
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_homogeneity_default",
     fig = plot(performance::check_model(model, check = "homogeneity"))
   )
 
   # Test with modern theme
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_homogeneity_modern",
     fig = plot(performance::check_model(model, check = "homogeneity")) + theme_modern()
   )
@@ -147,15 +141,13 @@ test_that("plot.see_check_outliers() renders correctly", {
   model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 
   # Test outliers with default theme
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_outliers_default",
     fig = plot(performance::check_model(model, check = "outliers"))
   )
 
   # Test with modern theme
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_outliers_modern",
     fig = plot(performance::check_model(model, check = "outliers")) + theme_modern()
   )
@@ -177,15 +169,13 @@ test_that("plot.see_check_model() handles large datasets efficiently", {
   model_large <- lm(y ~ x + z, data = large_data)
 
   # Test linearity with large dataset
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_large_linearity",
     fig = plot(performance::check_model(model_large, check = "linearity"))
   )
 
   # Test QQ plot with large dataset
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_large_qq",
     fig = plot(performance::check_model(model_large, check = "qq"))
   )
@@ -201,15 +191,13 @@ test_that("plot.see_check_model() works with show_dots parameter", {
   model <- lm(mpg ~ wt + hp, data = mtcars)
 
   # Test without dots
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_no_dots",
     fig = plot(performance::check_model(model, check = "linearity", show_dots = FALSE))
   )
 
   # Test with dots
-  set.seed(123)
-  vdiffr::expect_doppelganger(
+  expect_doppelganger_with_seed(
     title = "check_model_with_dots",
     fig = plot(performance::check_model(model, check = "linearity", show_dots = TRUE))
   )
