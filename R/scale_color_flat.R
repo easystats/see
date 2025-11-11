@@ -153,6 +153,7 @@ scale_fill_flat_d <- function(
   )
 }
 
+
 #' @rdname scale_color_flat
 #' @export
 scale_fill_flat_c <- function(
@@ -271,10 +272,10 @@ flat_palettes <- list(
 #' which are the two scale useful for discrete or gradient color scales,
 #' respectively.
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
+#' @param ... Additional arguments to pass to [`grDevices::colorRampPalette()`].
 #'
 #' @details This function is usually not called directly, but from within
-#'   [`scale_color_flat()`][scale_color_flat].
+#'   [`scale_color_flat()`].
 #'
 #' @export
 palette_flat <- function(palette = "contrast", reverse = FALSE, ...) {

@@ -21,9 +21,10 @@
 #' the original yellow color suggested by Okabe and Ito (`"#F0E442"`), use
 #' palettes `"full_original"` or `"black_first_original"`.
 #'
-#' The Okabe-Ito palette is only available as a discrete palette. For
-#' color-accessible continuous variables, consider [the viridis
-#' palettes][ggplot2::scale_colour_viridis_d()].
+#' The Okabe-Ito palette is only available as a discrete palette.
+#' For color-accessible continuous variables, consider
+#' [Paul Tol's palettes][scale_color_tol_discrete()] or
+#' [the viridis palettes][ggplot2::scale_colour_viridis_d()].
 #'
 #' @inheritParams palette_okabeito
 #' @inheritParams scale_color_flat
@@ -120,6 +121,7 @@ scale_fill_oi <- scale_fill_okabeito
 # Palette --------------------------------------------------------------------
 
 # The palette from: https://jfly.uni-koeln.de/color/#pallet
+# or grDevices::palette.colors()
 okabeito_colors_list <- c(
   orange = "#E69F00",
   `light blue` = "#56B4E9",
@@ -147,11 +149,11 @@ okabeito_colors_list <- c(
 #' @inheritParams flat_colors
 #' @param original_names Logical. Should the colors be named using the original
 #'   names used by Okabe and Ito (2008), such as "vermillion" (`TRUE`), or
-#'   simplified names, such as "red" (`FALSE`, default)?
-#'   Only used if no colors are specified (to see all available colors).
-#' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`, default)
-#'   in the color palette? Only used if no colors are specified (to see all
-#'   available colors).
+#'   simplified names, such as "red" (`FALSE`, default)? Only used if no colors
+#'   are specified (to see all available colors).
+#' @param black_first Logical. Should black be first (`TRUE`) or last (`FALSE`,
+#'   default) in the color palette? Only used if no colors are specified (to see
+#'   all available colors).
 #' @param amber If amber color should replace yellow in the palette.
 #'
 #' @return A character vector with color-codes.
@@ -226,7 +228,7 @@ okabeito_palettes <- list(
 
 #' Okabe-Ito color palette
 #'
-#' The palette based proposed by Okabe and Ito (2008).
+#' The palette based on Okabe and Ito (2008).
 #'
 #' @inheritParams palette_flat
 #' @param order A vector of numbers from 1 to 9 indicating the order of colors to use
@@ -238,7 +240,7 @@ okabeito_palettes <- list(
 #' https://jfly.uni-koeln.de/color/#pallet (Original work published 2002)
 #'
 #' @details This function is usually not called directly, but from within
-#'   [`scale_color_material()`][scale_color_material].
+#'   [`scale_color_okabeito()`][scale_color_okabeito].
 #'
 #' @export
 palette_okabeito <- function(

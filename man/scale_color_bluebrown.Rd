@@ -101,7 +101,7 @@ respectively.}
 \item{aesthetics}{A vector of names of the aesthetics that this scale
 should be applied to (e.g., \code{c('color', 'fill')}).}
 
-\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{Additional arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 A blue-brown color palette. Use \code{scale_color_bluebrown_d()} for
