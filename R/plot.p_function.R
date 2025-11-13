@@ -66,7 +66,9 @@ plot.see_p_function <- function(
 
   # sanity check - linewidth must be of length two, when we have more than
   # one group (i.e. when we emphasize CI lines)
-  if (length(linewidth) != 2 && insight::n_unique(data_ci_segments$group) == 2) {
+  if (
+    length(linewidth) != 2 && insight::n_unique(data_ci_segments$group) == 2
+  ) {
     insight::format_error(
       "Length of `linewidth` must of length 2, to match regular and emphasized interval lines."
     ) # nolint

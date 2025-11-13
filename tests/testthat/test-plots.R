@@ -57,7 +57,10 @@ test_that("plots() works correctly", {
   # Different number of rows/columns
   set.seed(123)
   vdiffr::expect_doppelganger(title = "plots() with 2x2 layout works", fig = {
-    p4 <- ggplot2::ggplot(mtcars, ggplot2::aes(x = factor(cyl), fill = factor(cyl))) +
+    p4 <- ggplot2::ggplot(
+      mtcars,
+      ggplot2::aes(x = factor(cyl), fill = factor(cyl))
+    ) +
       ggplot2::geom_bar() +
       theme_modern() +
       scale_fill_see()

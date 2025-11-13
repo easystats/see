@@ -226,7 +226,9 @@ plot.see_check_model <- function(
     )
   }
 
-  if ("VIF" %in% names(x) && !is.null(x$VIF) && any(c("vif", "all") %in% check)) {
+  if (
+    "VIF" %in% names(x) && !is.null(x$VIF) && any(c("vif", "all") %in% check)
+  ) {
     p$VIF <- .plot_diag_vif(
       x$VIF,
       size_point = 1.5 * size_point,
@@ -294,7 +296,9 @@ plot.see_check_model <- function(
     )
   }
 
-  if ("REQQ" %in% names(x) && !is.null(x$REQQ) && any(c("reqq", "all") %in% check)) {
+  if (
+    "REQQ" %in% names(x) && !is.null(x$REQQ) && any(c("reqq", "all") %in% check)
+  ) {
     ps <- .plot_diag_reqq(
       x$REQQ,
       size_point,

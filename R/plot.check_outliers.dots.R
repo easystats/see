@@ -26,7 +26,10 @@
   n_above <- sum(plot_data$Cooks_Distance >= min_cook_level, na.rm = TRUE)
   label.n <- pmax(n_above, 5)
 
-  p <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$Hat, .data$Std_Residuals))
+  p <- ggplot2::ggplot(
+    plot_data,
+    ggplot2::aes(x = .data$Hat, .data$Std_Residuals)
+  )
 
   if (isTRUE(show_dots)) {
     p <- p +
@@ -57,7 +60,9 @@
       color = colors[1],
       linewidth = linewidth
     ) +
-    ggplot2::scale_colour_manual(values = c(OK = colors[2], Influential = colors[3])) +
+    ggplot2::scale_colour_manual(
+      values = c(OK = colors[2], Influential = colors[3])
+    ) +
     (if (isTRUE(show_labels)) {
       if (requireNamespace("ggrepel", quietly = TRUE)) {
         ggrepel::geom_text_repel(
