@@ -14,6 +14,34 @@ test_that("`plot.see_parameters_model()` works", {
 })
 
 
+test_that("`plot.see_parameters_model()` sort parameter works for fixed effects", {
+  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+  result <- parameters::model_parameters(m)
+  # Test sort = TRUE (should be same as ascending)
+  p1 <- plot(result, sort = TRUE)
+  expect_s3_class(p1, "gg")
+  
+  # Test sort = "ascending"
+  p2 <- plot(result, sort = "ascending")
+  expect_s3_class(p2, "gg")
+  
+  # Test sort = "descending"
+  p3 <- plot(result, sort = "descending")
+  expect_s3_class(p3, "gg")
+  # Test with labels
+  p4 <- plot(result, sort = "ascending", show_labels = TRUE)
+  expect_s3_class(p4, "gg")
+  vdiffr::expect_doppelganger(
+    title = "plot.model_parameters_sort_ascending",
+    fig = plot(result, sort = "ascending", show_labels = TRUE)
+  )
+  vdiffr::expect_doppelganger(
+    title = "plot.model_parameters_sort_descending",
+    fig = plot(result, sort = "descending", show_labels = TRUE)
+  )
+})
+
+
 test_that("`plot.see_parameters_model()` errors for anova tables", {
   skip_if_not_installed("parameters")
   data(iris)

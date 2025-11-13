@@ -410,12 +410,12 @@ plot.see_parameters_model <- function(
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
     x$Parameter <- factor(
       x$Parameter,
-      levels = rev(unique(x$Parameter)[order(x$Coefficient)])
+      levels = unique(x$Parameter)[order(x$Coefficient)]
     )
   } else if (!is.null(sort) && sort == "descending") {
     x$Parameter <- factor(
       x$Parameter,
-      levels = unique(x$Parameter)[order(x$Coefficient)]
+      levels = rev(unique(x$Parameter)[order(x$Coefficient)])
     )
   } else {
     # sort coefficients as they appear in the classical summary output by default
@@ -807,10 +807,10 @@ plot.see_parameters_model <- function(
   if (isTRUE(sort) || (!is.null(sort) && sort == "ascending")) {
     x$Level <- factor(
       x$Level,
-      levels = rev(unique(x$Level)[order(x$Coefficient)])
+      levels = unique(x$Level)[order(x$Coefficient)]
     )
   } else if (!is.null(sort) && sort == "descending") {
-    x$Level <- factor(x$Level, levels = unique(x$Level)[order(x$Coefficient)])
+    x$Level <- factor(x$Level, levels = rev(unique(x$Level)[order(x$Coefficient)]))
   } else {
     # sort coefficients as they appear in the classical summary output by default
     x$Level <- factor(x$Level, levels = rev(unique(x$Level)))
