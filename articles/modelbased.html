@@ -143,7 +143,7 @@ theme for all plots:</p>
 <span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html" class="external-link">estimate_means</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">contrasts</span>, <span class="va">means</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/pairwise-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/pairwise-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="estimate-model-based-predictions-for-the-response">Estimate model-based predictions for the response<a class="anchor" aria-label="anchor" href="#estimate-model-based-predictions-for-the-response"></a>
@@ -156,7 +156,7 @@ theme for all plots:</p>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_expectation</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="st">"grid"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="interactions-with-continuous-interaction-terms-1">Interactions, with continuous interaction terms<a class="anchor" aria-label="anchor" href="#interactions-with-continuous-interaction-terms-1"></a>
@@ -167,12 +167,12 @@ theme for all plots:</p>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_expectation</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="st">"grid"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># full range</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_relation</a></span><span class="op">(</span><span class="va">model</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wt"</span>, <span class="st">"gear"</span><span class="op">)</span>, preserve_range <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="interactions-between-two-continuous-variables">Interactions between two continuous variables<a class="anchor" aria-label="anchor" href="#interactions-between-two-continuous-variables"></a>
@@ -183,7 +183,7 @@ theme for all plots:</p>
 <span><span class="va">slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html" class="external-link">estimate_slopes</a></span><span class="op">(</span><span class="va">model</span>, trend <span class="op">=</span> <span class="st">"hp"</span>, by <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">slopes</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/np-interval-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/np-interval-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -194,13 +194,13 @@ theme for all plots:</p>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_grouplevel.html" class="external-link">estimate_grouplevel</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/mixed-intercept-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/mixed-intercept-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_grouplevel.html" class="external-link">estimate_grouplevel</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/mixed-slope-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/mixed-slope-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="estimate-slopes">Estimate slopes<a class="anchor" aria-label="anchor" href="#estimate-slopes"></a>
@@ -210,13 +210,13 @@ theme for all plots:</p>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html" class="external-link">estimate_slopes</a></span><span class="op">(</span><span class="va">model</span>, trend <span class="op">=</span> <span class="st">"Petal.Length"</span>, by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/slopes-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/slopes-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">Sepal.Width</span>, <span class="fl">3</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html" class="external-link">estimate_slopes</a></span><span class="op">(</span><span class="va">model</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Width"</span>, <span class="st">"Species"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/slopes-poly2-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/slopes-poly2-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="estimate-derivatives">Estimate derivatives<a class="anchor" aria-label="anchor" href="#estimate-derivatives"></a>
@@ -226,7 +226,7 @@ theme for all plots:</p>
 <code class="sourceCode R"><span><span class="va">model_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_relation</a></span><span class="op">(</span><span class="va">model_lm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/derivatives-l-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/derivatives-l-1.png" class="r-plt" alt="" width="672"></p>
 <p>Non-linear model</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit a non-linear General Additive Model (GAM)</span></span>
@@ -245,7 +245,7 @@ theme for all plots:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">deriv</span><span class="op">)</span>,</span>
 <span>  n_rows <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="modelbased_files/figure-html/derivatives-nl-1.png" class="r-plt" width="672"></p>
+<p><img src="modelbased_files/figure-html/derivatives-nl-1.png" class="r-plt" alt="" width="672"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

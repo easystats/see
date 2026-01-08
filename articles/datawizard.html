@@ -153,14 +153,14 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; 5.84 | 0.83 | 1.30 | [4.30, 7.90] |     0.31 |    -0.55 | 150 |         0</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="datawizard_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" width="672"></p>
+<p><img src="datawizard_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="add-range-of-dispersion-sd-or-mad">Add Range of Dispersion (SD or MAD)<a class="anchor" aria-label="anchor" href="#add-range-of-dispersion-sd-or-mad"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, dispersion <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="datawizard_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" width="672"></p>
+<p><img src="datawizard_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="thin-bars-for-integer-values">Thin Bars for Integer Values<a class="anchor" aria-label="anchor" href="#thin-bars-for-integer-values"></a>
@@ -175,14 +175,14 @@ function documentation</a>)</em></p>
 <span><span class="co">#&gt; 50.18 | 28.66 | 48.75 | [1.00, 100.00] |     0.02 |    -1.16 | 1000 |         0</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="datawizard_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" width="672"></p>
+<p><img src="datawizard_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="use-a-normal-curve-instead-of-ribbon">Use a Normal Curve instead of Ribbon<a class="anchor" aria-label="anchor" href="#use-a-normal-curve-instead-of-ribbon"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, dispersion <span class="op">=</span> <span class="cn">TRUE</span>, dispersion_style <span class="op">=</span> <span class="st">"curve"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="datawizard_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" width="672"></p>
+<p><img src="datawizard_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="highlighting-categories">Highlighting Categories<a class="anchor" aria-label="anchor" href="#highlighting-categories"></a>
@@ -193,19 +193,19 @@ function documentation</a>)</em></p>
 <span></span>
 <span><span class="co"># highlight one category</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="datawizard_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" width="672"></p>
+<p><img src="datawizard_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># highlight multiple categories</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"H"</span><span class="op">)</span>, size_bar <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="datawizard_files/figure-html/unnamed-chunk-7-2.png" class="r-plt" width="672"></p>
+<p><img src="datawizard_files/figure-html/unnamed-chunk-7-2.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># own color scales - pass a named vector to 'scale_fill_manual()'</span></span>
 <span><span class="co"># the name of the non-highlighted color is "no_highlight".</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"H"</span>, <span class="st">"A"</span><span class="op">)</span>, size_bar <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>D <span class="op">=</span> <span class="st">"red"</span>, H <span class="op">=</span> <span class="st">"green"</span>, A <span class="op">=</span> <span class="st">"gold"</span>, no_highlight <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="datawizard_files/figure-html/unnamed-chunk-7-3.png" class="r-plt" width="672"></p>
+<p><img src="datawizard_files/figure-html/unnamed-chunk-7-3.png" class="r-plt" alt="" width="672"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
