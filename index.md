@@ -268,7 +268,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
   theme_modern()
 ```
 
-![](reference/figures/unnamed-chunk-4-1.png)
+![](reference/figures/unnamed-chunk-3-1.png)
 
 ### Lucid
 
@@ -282,7 +282,7 @@ p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 p + theme_lucid()
 ```
 
-![](reference/figures/unnamed-chunk-5-1.png)
+![](reference/figures/unnamed-chunk-4-1.png)
 
 ### Blackboard
 
@@ -291,7 +291,7 @@ p + theme_lucid()
 p + theme_blackboard()
 ```
 
-![](reference/figures/unnamed-chunk-6-1.png)
+![](reference/figures/unnamed-chunk-5-1.png)
 
 ### Abyss
 
@@ -300,7 +300,7 @@ p + theme_blackboard()
 p + theme_abyss()
 ```
 
-![](reference/figures/unnamed-chunk-7-1.png)
+![](reference/figures/unnamed-chunk-6-1.png)
 
 # Palettes
 
@@ -338,7 +338,7 @@ function allows us to plot the figures side by side.
 plots(p1, p2, p3, n_columns = 2)
 ```
 
-![](reference/figures/unnamed-chunk-9-1.png)
+![](reference/figures/unnamed-chunk-8-1.png)
 
 The [`plots()`](https://easystats.github.io/see/reference/plots.md)
 function can also be used to add **tags** (*i.e.*, labels for
@@ -352,7 +352,7 @@ plots(p1, p2, p3,
 )
 ```
 
-![](reference/figures/unnamed-chunk-10-1.png)
+![](reference/figures/unnamed-chunk-9-1.png)
 
 # Geoms
 
@@ -375,7 +375,7 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, n_columns = 2)
 ```
 
-![](reference/figures/unnamed-chunk-11-1.png)
+![](reference/figures/unnamed-chunk-10-1.png)
 
 ## Half-violin Half-dot plot
 
@@ -390,7 +390,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-![](reference/figures/unnamed-chunk-12-1.png)
+![](reference/figures/unnamed-chunk-11-1.png)
 
 ## Radar chart (Spider plot)
 
@@ -427,7 +427,7 @@ data |>
   theme_radar()
 ```
 
-![](reference/figures/unnamed-chunk-13-1.png)
+![](reference/figures/unnamed-chunk-12-1.png)
 
 # Contributing and Support
 

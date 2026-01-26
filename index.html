@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,29 +93,6 @@
 <p><a href="https://doi.org/10.21105/joss.03393" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.03393/status.svg" alt="DOI"></a> <a href="https://cran.r-project.org/package=see" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/see" alt="downloads"></a> <a href="https://cranlogs.r-pkg.org/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/see" alt="total"></a></p>
 <p><strong><em>“Damned are those who believe without seeing”</em></strong></p>
 <p><em>easystats</em> is a collection of packages that operate in synergy to provide a consistent and intuitive syntax when working with statistical models in the R programming language (R Core Team, 2021). Most <em>easystats</em> packages return comprehensive numeric summaries of model parameters and performance. The <em>see</em> package complements these numeric summaries with a host of functions and tools to produce a range of publication-ready visualizations for model parameters, predictions, and performance diagnostics. As a core pillar of <em>easystats</em>, the <em>see</em> package helps users to utilize visualization for more informative, communicable, and well-rounded scientific reporting.</p>
-<!--
-&#10;# Statement of Need
-&#10;The grammar of graphics [@wilkinson2012grammar], largely due to its implementation in the *ggplot2* package [@Wickham2016], has become the dominant approach to visualization in R. Building a model visualization with *ggplot2* is somewhat disconnected from the model fitting and evaluation process. Generally, this process entails:
-&#10;  1. Fitting a model.
-  2. Extracting desired results from the model (e.g., model parameters and intervals, model predictions, diagnostic statistics) and arranging them into a data frame.
-  3. Passing the results data frame to `ggplot()` and specifying the graphical parameters. For example:
-&#10;
-``` r
-library(ggplot2)
-&#10;# step-1
-model <- lm(mpg ~ factor(cyl) * wt, data = mtcars)
-&#10;# step-2
-results <- fortify(model)
-&#10;# step-3
-ggplot(results) +
-  geom_point(aes(x = wt, y = mpg, color = `factor(cyl)`)) +
-  geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
-```
-&#10;<img src="man/figures/unnamed-chunk-2-1.png" width="100%" />
-&#10;A number of packages have been developed to extend *ggplot2* and assist with model visualization (for a sampling of these packages, visit [ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects.
-&#10;The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
-&#10;The central goal of *easystats* is to make the task of doing statistics in R as easy as possible. This goal is realized through intuitive and consistent syntax, consistent and transparent argument names, comprehensive documentation, informative warnings and error messages, and smart functions with sensible default parameter values. The *see* package follows this philosophy by using a single access point---the generic `plot()` method---for visualization of all manner of statistical results supported by *easystats*.
-&#10;//-->
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -177,7 +154,7 @@ ggplot(results) +
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">*</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/parameters1-1.png" width="100%"></p>
+<p><img src="reference/figures/parameters1-1.png" alt="" width="100%"></p>
 <p>As <em>see</em> outputs objects of class <code>ggplot</code>, <em>ggplot2</em> functions can be added as layers to the plot the same as with all other <em>ggplot2</em> visualizations. For example, we might add a title using <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs()</a></code> from <em>ggplot2</em>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/parameters/" class="external-link">parameters</a></span><span class="op">)</span></span>
@@ -187,7 +164,7 @@ ggplot(results) +
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"A Dot-and-Whisker Plot"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/parameters2-1.png" width="100%"></p>
+<p><img src="reference/figures/parameters2-1.png" alt="" width="100%"></p>
 <p>Plotting functions for the <strong>parameters</strong> package are demonstrated <a href="https://easystats.github.io/see/articles/parameters.html">in this vignette</a>.</p>
 </div>
 <div class="section level2">
@@ -205,7 +182,7 @@ ggplot(results) +
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/hdi.html" class="external-link">hdi</a></span><span class="op">(</span><span class="va">model</span>, ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.89</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/bayestestR-1.png" width="100%"></p>
+<p><img src="reference/figures/bayestestR-1.png" alt="" width="100%"></p>
 <p>Plotting functions for the <strong>bayestestR</strong> package are demonstrated <a href="https://easystats.github.io/see/articles/bayestestR.html">in this vignette</a>.</p>
 </div>
 <div class="section level2">
@@ -221,7 +198,7 @@ ggplot(results) +
 <span><span class="va">check</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/performance/reference/check_normality.html" class="external-link">check_normality</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">check</span>, type <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/performance-1.png" width="100%"></p>
+<p><img src="reference/figures/performance-1.png" alt="" width="100%"></p>
 <p>Plotting functions for the <strong>performance</strong> package are demonstrated <a href="https://easystats.github.io/see/articles/performance.html">in this vignette</a>.</p>
 </div>
 <div class="section level2">
@@ -236,7 +213,7 @@ ggplot(results) +
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">*</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/eta_squared.html" class="external-link">omega_squared</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/effectsize-1.png" width="100%"></p>
+<p><img src="reference/figures/effectsize-1.png" alt="" width="100%"></p>
 <p>Plotting functions for the <strong>effectsize</strong> package are demonstrated <a href="https://easystats.github.io/see/articles/effectsize.html">in this vignette</a>.</p>
 </div>
 <div class="section level2">
@@ -254,13 +231,13 @@ ggplot(results) +
 <span></span>
 <span><span class="va">predicted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html" class="external-link">estimate_expectation</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="st">"grid"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">predicted</span>, show_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/modelbased1-1.png" width="100%"></p>
+<p><img src="reference/figures/modelbased1-1.png" alt="" width="100%"></p>
 <p>One can also visualize <em>marginal means</em> (i.e., the mean at each factor level averaged over other predictors) using <code><a href="https://easystats.github.io/modelbased/reference/estimate_means.html" class="external-link">estimate_means()</a></code>, that is then passed to <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html" class="external-link">estimate_means</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">means</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/modelbased2-1.png" width="100%"></p>
+<p><img src="reference/figures/modelbased2-1.png" alt="" width="100%"></p>
 <p>Plotting functions for the <strong>modelbased</strong> package are demonstrated <a href="https://easystats.github.io/see/articles/modelbased.html">in this vignette</a>.</p>
 </div>
 <div class="section level2">
@@ -275,7 +252,7 @@ ggplot(results) +
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">results</span>, show_data <span class="op">=</span> <span class="st">"points"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/correlation-1.png" width="100%"></p>
+<p><img src="reference/figures/correlation-1.png" alt="" width="100%"></p>
 <p>Plotting functions for the <strong>correlation</strong> package are demonstrated <a href="https://easystats.github.io/see/articles/correlation.html">in this vignette</a>.</p>
 </div>
 </div>
@@ -291,7 +268,7 @@ ggplot(results) +
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-3-1.png" alt="" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="lucid">Lucid<a class="anchor" aria-label="anchor" href="#lucid"></a>
@@ -303,21 +280,21 @@ ggplot(results) +
 <span>  <span class="fu"><a href="reference/geom_point2.html">geom_point2</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/theme_lucid.html">theme_lucid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-5-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-4-1.png" alt="" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="blackboard">Blackboard<a class="anchor" aria-label="anchor" href="#blackboard"></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/theme_blackboard.html">theme_blackboard</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-6-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-5-1.png" alt="" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="abyss">Abyss<a class="anchor" aria-label="anchor" href="#abyss"></a>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/theme_abyss.html">theme_abyss</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-7-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-6-1.png" alt="" width="100%"></p>
 </div>
 </div>
 <div class="section level1">
@@ -349,14 +326,14 @@ ggplot(results) +
 <p>The <code><a href="reference/plots.html">plots()</a></code> function allows us to plot the figures side by side.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-9-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-8-1.png" alt="" width="100%"></p>
 <p>The <code><a href="reference/plots.html">plots()</a></code> function can also be used to add <strong>tags</strong> (<em>i.e.</em>, labels for subfigures).</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>,</span>
 <span>  n_columns <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  tags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Fig. "</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-10-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-9-1.png" alt="" width="100%"></p>
 </div>
 </div>
 <div class="section level1">
@@ -376,7 +353,7 @@ ggplot(results) +
 <span>  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">normal</span>, <span class="va">new</span>, n_columns <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-11-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-10-1.png" alt="" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="half-violin-half-dot-plot">Half-violin Half-dot plot<a class="anchor" aria-label="anchor" href="#half-violin-half-dot-plot"></a>
@@ -387,7 +364,7 @@ ggplot(results) +
 <span>  <span class="fu"><a href="reference/geom_violindot.html">geom_violindot</a></span><span class="op">(</span>fill_dots <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/theme_modern.html">theme_modern</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/scale_color_material.html">scale_fill_material_d</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-12-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-11-1.png" alt="" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="radar-chart-spider-plot">Radar chart (Spider plot)<a class="anchor" aria-label="anchor" href="#radar-chart-spider-plot"></a>
@@ -422,7 +399,7 @@ ggplot(results) +
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html" class="external-link">geom_polygon</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/coord_radar.html">coord_radar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/theme_radar.html">theme_radar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-13-1.png" width="100%"></p>
+<p><img src="reference/figures/unnamed-chunk-12-1.png" alt="" width="100%"></p>
 </div>
 </div>
 <div class="section level1">

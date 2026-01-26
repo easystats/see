@@ -22,16 +22,16 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Indrajeet Patil <patilindrajeet.science@gmail.com>
-([ORCID](https://orcid.org/0000-0003-1995-6531))
+**Maintainer**: Daniel Lüdecke <officialeasystats@gmail.com>
+([ORCID](https://orcid.org/0000-0002-8895-3206))
 
 Authors:
 
-- Daniel Lüdecke <d.luedecke@uke.de>
-  ([ORCID](https://orcid.org/0000-0002-8895-3206)) \[contributor\]
-
 - Dominique Makowski <dom.makowski@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-5375-9967)) \[inventor\]
+
+- Indrajeet Patil <patilindrajeet.science@gmail.com>
+  ([ORCID](https://orcid.org/0000-0003-1995-6531))
 
 - Mattan S. Ben-Shachar <matanshm@post.bgu.ac.il>
   ([ORCID](https://orcid.org/0000-0002-4287-4801)) \[contributor\]
