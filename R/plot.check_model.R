@@ -28,6 +28,7 @@ plot.see_check_model <- function(
   ...
 ) {
   p <- list()
+  dots <- list(...)
 
   # read arguments / settings from "check_model()" -----
 
@@ -48,6 +49,11 @@ plot.see_check_model <- function(
   overdisp_type <- attr(x, "overdisp_type")
   plot_type <- attr(x, "type")
   model_class <- attr(x, "model_class")
+  max_dots <- attr(x, "max_dots")
+
+  if (is.null(max_dots) && !is.null(dots$max_points)) {
+    max_dots <- dots$max_points
+  }
 
   if (
     missing(type) &&
@@ -143,7 +149,7 @@ plot.see_check_model <- function(
       colors = colors,
       alpha_dot = alpha_dot,
       show_dots = show_dots,
-      ...
+      max_points = max_dots
     )
   }
 
@@ -203,7 +209,7 @@ plot.see_check_model <- function(
       colors = colors,
       alpha_dot = alpha_dot,
       show_dots = show_dots,
-      ...
+      max_points = max_dots
     )
   }
 
@@ -277,7 +283,7 @@ plot.see_check_model <- function(
         show_dots = TRUE, # qq-plots w/o dots makes no sense
         model_info = model_info,
         model_class = model_class,
-        ...
+        max_points = max_dots
       )
     }
   }
@@ -315,7 +321,7 @@ plot.see_check_model <- function(
       colors = colors,
       alpha_dot = alpha_dot,
       show_dots = TRUE, # qq-plots w/o dots makes no sense
-      ...
+      max_points = max_dots
     )
 
     for (i in seq_along(ps)) {
