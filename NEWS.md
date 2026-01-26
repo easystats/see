@@ -4,6 +4,12 @@
 
 * Daniel Lüdecke is now the main maintainer of the package.
 
+## Changes
+
+* `plot()` for `check_model()` now limits the number of data points for models
+  with many observations, to reduce the time for rendering the plot. Use argument
+  `maximum_dots` to define the maximum number of data points to show.
+
 # see 0.12.0
 
 ## Major Changes
