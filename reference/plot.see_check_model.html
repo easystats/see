@@ -111,6 +111,14 @@ or ordinal etc. - outcomes).</p></dd>
     <p>A ggplot2-object.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Larger models (with many observations) may take a longer time to render.
+Thus, the number of data points is limited to 2000 by default. Use
+<code>plot(check_model(), maximum_dots = &lt;number&gt;)</code> (or
+<code>check_model(maximum_dots = &lt;number&gt;)</code>) to define the number of data points
+that should be shown in the plots.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>See also the vignette about
 <a href="https://easystats.github.io/performance/articles/check_model.html" class="external-link"><code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code></a>.</p></div>

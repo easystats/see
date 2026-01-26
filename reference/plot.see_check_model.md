@@ -53,6 +53,14 @@ plot(
 
 A ggplot2-object.
 
+## Details
+
+Larger models (with many observations) may take a longer time to render.
+Thus, the number of data points is limited to 2000 by default. Use
+`plot(check_model(), maximum_dots = <number>)` (or
+`check_model(maximum_dots = <number>)`) to define the number of data
+points that should be shown in the plots.
+
 ## See also
 
 See also the vignette about
