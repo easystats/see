@@ -37,6 +37,13 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_model()} function.
 Diagnostic plots for regression models.
 }
+\details{
+Larger models (with many observations) may take a longer time to render.
+Thus, the number of data points is limited to 2000 by default. Use
+\verb{plot(check_model(), maximum_dots = <number>)} (or
+\verb{check_model(maximum_dots = <number>)}) to define the number of data points
+that should be shown in the plots.
+}
 \examples{
 \dontshow{if (require("patchwork")) withAutoprint(\{ # examplesIf}
 library(performance)

@@ -12,6 +12,13 @@
 #' @seealso See also the vignette about
 #'   [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
+#' @details
+#' Larger models (with many observations) may take a longer time to render.
+#' Thus, the number of data points is limited to 2000 by default. Use
+#' `plot(check_model(), maximum_dots = <number>)` (or
+#' `check_model(maximum_dots = <number>)`) to define the number of data points
+#' that should be shown in the plots.
+#'
 #' @examplesIf require("patchwork")
 #' library(performance)
 #'
@@ -342,7 +349,7 @@ plot.see_check_model <- function(
 
 # Helper function to sample large datasets for performance
 # See issue #420: https://github.com/easystats/see/issues/420
-.sample_for_plot <- function(data, maximum_dots = 2000, verbose = TRUE, ...) {
+.sample_for_plot <- function(data, maximum_dots = 2000, ...) {
   if (is.null(data) || !is.data.frame(data)) {
     return(data)
   }
@@ -365,16 +372,6 @@ plot.see_check_model <- function(
     attr(data, "was_sampled") <- TRUE
     attr(data, "original_n") <- n_obs
     attr(data, "sampled_n") <- maximum_dots
-
-    if (verbose) {
-      insight::format_alert(paste0(
-        "Plot data contains more than ",
-        maximum_dots,
-        " observations. For performance reasons, only ",
-        maximum_dots,
-        " data points are shown. Use `maximum_dots = <number> to define how many data points to show."
-      ))
-    }
   }
 
   data
