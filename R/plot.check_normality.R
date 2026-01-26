@@ -282,11 +282,11 @@ plot.see_check_normality <- function(
   show_dots = TRUE,
   model_info = NULL,
   model_class = NULL,
-  max_points = 3000,
+  maximum_dots = 2000,
   ...
 ) {
   # Sample data if too large for performance (issue #420)
-  x <- .sample_for_plot(x, max_points = max_points)
+  x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
 
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
 
@@ -521,14 +521,14 @@ plot.see_check_normality <- function(
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
   show_dots = TRUE,
-  max_points = 3000,
+  maximum_dots = 2000,
   ...
 ) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
 
     # Sample data if too large for performance (issue #420)
-    dat <- .sample_for_plot(dat, max_points = max_points)
+    dat <- .sample_for_plot(dat, maximum_dots = maximum_dots, ...)
 
     p <- ggplot2::ggplot(dat, ggplot2::aes(x = .data$x, y = .data$y)) +
       ggplot2::labs(

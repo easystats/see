@@ -13,25 +13,46 @@
   base_size = 10,
   colors = unname(social_colors(c("green", "blue grey", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  maximum_dots = 2000
 ) {
   linewidth <- linewidth %||% 0.7
   size_text <- size_text %||% 3
 
   plot_data <- x
 
+  if (is.null(maximum_dots)) {
+    maximum_dots <- 2000
+  }
+
   # Sample data if too large for performance (issue #420)
   # But preserve influential points for labeling
-  if (nrow(plot_data) > 3000) {
+  if (nrow(plot_data) > maximum_dots) {
     # Keep all influential points
-    influential_points <- plot_data[plot_data$Influential == "Influential", , drop = FALSE]
-    non_influential_points <- plot_data[plot_data$Influential != "Influential", , drop = FALSE]
+    influential_points <- plot_data[
+      plot_data$Influential == "Influential",
+      ,
+      drop = FALSE
+    ]
+    non_influential_points <- plot_data[
+      plot_data$Influential != "Influential",
+      ,
+      drop = FALSE
+    ]
 
     # Sample from non-influential points
-    if (nrow(non_influential_points) > 2500) {
+    if (nrow(non_influential_points) > (maximum_dots * 0.8)) {
       set.seed(123)
-      sample_indices <- sample.int(nrow(non_influential_points), 2500, replace = FALSE)
-      non_influential_points <- non_influential_points[sample_indices, , drop = FALSE]
+      sample_indices <- sample.int(
+        nrow(non_influential_points),
+        round((maximum_dots * 0.8)),
+        replace = FALSE
+      )
+      non_influential_points <- non_influential_points[
+        sample_indices,
+        ,
+        drop = FALSE
+      ]
     }
 
     # Combine back
@@ -194,7 +215,8 @@
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
   d$Id[d$Outliers == "0"] <- NA
 
-  method <- switch(attr(x, "method", exact = TRUE),
+  method <- switch(
+    attr(x, "method", exact = TRUE),
     cook = "Cook's Distance",
     pareto = "Pareto",
     mahalanobis = "Mahalanobis Distance",
