@@ -77,7 +77,8 @@ plot.see_check_normality <- function(
       alpha_level = alpha,
       size_axis_title = size_axis_title,
       size_title = size_title,
-      base_size = base_size
+      base_size = base_size,
+      ...
     )
   } else if (type == "qq") {
     # return early for simres
@@ -110,7 +111,8 @@ plot.see_check_normality <- function(
       alpha_dot = alpha_dot,
       model_info = model_info,
       method = method,
-      model_class = class(model)[1]
+      model_class = class(model)[1],
+      ...
     )
   } else if (type == "density") {
     dat <- .residuals_density(model)
@@ -279,8 +281,13 @@ plot.see_check_normality <- function(
   alpha_dot = 0.8,
   show_dots = TRUE,
   model_info = NULL,
-  model_class = NULL
+  model_class = NULL,
+  maximum_dots = 2000,
+  ...
 ) {
+  # Sample data if too large for performance (issue #420)
+  x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
+
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
 
   # set default y-range for FA / PCA
@@ -513,10 +520,16 @@ plot.see_check_normality <- function(
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  maximum_dots = 2000,
+  ...
 ) {
   lapply(names(x), function(i) {
     dat <- x[[i]]
+
+    # Sample data if too large for performance (issue #420)
+    dat <- .sample_for_plot(dat, maximum_dots = maximum_dots, ...)
+
     p <- ggplot2::ggplot(dat, ggplot2::aes(x = .data$x, y = .data$y)) +
       ggplot2::labs(
         x = "Theoretical Quantiles",

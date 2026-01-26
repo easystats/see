@@ -18,30 +18,6 @@ performance diagnostics. As a core pillar of *easystats*, the *see*
 package helps users to utilize visualization for more informative,
 communicable, and well-rounded scientific reporting.
 
-<!--
-&#10;# Statement of Need
-&#10;The grammar of graphics [@wilkinson2012grammar], largely due to its implementation in the *ggplot2* package [@Wickham2016], has become the dominant approach to visualization in R. Building a model visualization with *ggplot2* is somewhat disconnected from the model fitting and evaluation process. Generally, this process entails:
-&#10;  1. Fitting a model.
-  2. Extracting desired results from the model (e.g., model parameters and intervals, model predictions, diagnostic statistics) and arranging them into a data frame.
-  3. Passing the results data frame to `ggplot()` and specifying the graphical parameters. For example:
-&#10;
-``` r
-library(ggplot2)
-&#10;# step-1
-model <- lm(mpg ~ factor(cyl) * wt, data = mtcars)
-&#10;# step-2
-results <- fortify(model)
-&#10;# step-3
-ggplot(results) +
-  geom_point(aes(x = wt, y = mpg, color = `factor(cyl)`)) +
-  geom_line(aes(x = wt, y = .fitted, color = `factor(cyl)`))
-```
-&#10;<img src="man/figures/unnamed-chunk-2-1.png" width="100%" />
-&#10;A number of packages have been developed to extend *ggplot2* and assist with model visualization (for a sampling of these packages, visit [ggplot2-gallery](https://exts.ggplot2.tidyverse.org/gallery/)). Some of these packages provide functions for additional geoms, annotations, or common visualization types without linking them to a specific statistical analysis or fundamentally changing the *ggplot2* workflow (e.g., *ggrepel*, *ggalluvial*, *ggridges*, *ggdist*, *ggpubr*, etc.). Other *ggplot2* extensions provide functions to generate publication-ready visualizations for specific types of models (e.g., *metaviz*, *tidymv*, *sjPlot*, *survminer*). For example, the *ggstatsplot* package [@Patil2021] offers visualizations for statistical analysis of one-way factorial designs, and the *plotmm* package [@Waggoner2020] supports specific types of mixture model objects.
-&#10;The aim of the *see* package is to produce visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow. *see* accomplishes this aim by providing a single `plot()` method for objects created by the other *easystats* packages, such as *parameters* tables, *modelbased* predictions, *performance* diagnostic tests, *correlation* matrices, and so on. The *easystats* packages compute numeric results for a wide range of statistical models, and the *see* package acts as a visual support to the entire *easystats* ecosystem. As such, visualizations corresponding to all stages of statistical analysis, from model fitting to diagnostics to reporting, can be easily created using *see*. *see* plots are compatible with other *ggplot2* functions for further customization (e.g., `labs()` for a plot title). In addition, *see* provides several aesthetic utilities to embellish both *easystats* plots and other *ggplot2* plots. The result is a package that minimizes the barrier to producing high-quality statistical visualizations in R.
-&#10;The central goal of *easystats* is to make the task of doing statistics in R as easy as possible. This goal is realized through intuitive and consistent syntax, consistent and transparent argument names, comprehensive documentation, informative warnings and error messages, and smart functions with sensible default parameter values. The *see* package follows this philosophy by using a single access point---the generic `plot()` method---for visualization of all manner of statistical results supported by *easystats*.
-&#10;//-->
-
 # Installation
 
 [![CRAN](https://www.r-pkg.org/badges/version/see)](https://cran.r-project.org/package=see)
@@ -100,7 +76,7 @@ model <- lm(wt ~ am * cyl, data = mtcars)
 plot(parameters(model))
 ```
 
-<img src="man/figures/parameters1-1.png" width="100%" />
+<img src="man/figures/parameters1-1.png" alt="" width="100%" />
 
 As *see* outputs objects of class `ggplot`, *ggplot2* functions can be
 added as layers to the plot the same as with all other *ggplot2*
@@ -117,7 +93,7 @@ plot(parameters(model)) +
   ggplot2::labs(title = "A Dot-and-Whisker Plot")
 ```
 
-<img src="man/figures/parameters2-1.png" width="100%" />
+<img src="man/figures/parameters2-1.png" alt="" width="100%" />
 
 Plotting functions for the **parameters** package are demonstrated [in
 this
@@ -143,7 +119,7 @@ result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
 plot(result)
 ```
 
-<img src="man/figures/bayestestR-1.png" width="100%" />
+<img src="man/figures/bayestestR-1.png" alt="" width="100%" />
 
 Plotting functions for the **bayestestR** package are demonstrated [in
 this
@@ -169,7 +145,7 @@ check <- check_normality(model)
 plot(check, type = "qq")
 ```
 
-<img src="man/figures/performance-1.png" width="100%" />
+<img src="man/figures/performance-1.png" alt="" width="100%" />
 
 Plotting functions for the **performance** package are demonstrated [in
 this
@@ -193,7 +169,7 @@ model <- aov(wt ~ am * cyl, data = mtcars)
 plot(omega_squared(model))
 ```
 
-<img src="man/figures/effectsize-1.png" width="100%" />
+<img src="man/figures/effectsize-1.png" alt="" width="100%" />
 
 Plotting functions for the **effectsize** package are demonstrated [in
 this
@@ -218,7 +194,7 @@ predicted <- estimate_expectation(model, data = "grid")
 plot(predicted, show_data = TRUE)
 ```
 
-<img src="man/figures/modelbased1-1.png" width="100%" />
+<img src="man/figures/modelbased1-1.png" alt="" width="100%" />
 
 One can also visualize *marginal means* (i.e., the mean at each factor
 level averaged over other predictors) using `estimate_means()`, that is
@@ -230,7 +206,7 @@ means <- estimate_means(model)
 plot(means)
 ```
 
-<img src="man/figures/modelbased2-1.png" width="100%" />
+<img src="man/figures/modelbased2-1.png" alt="" width="100%" />
 
 Plotting functions for the **modelbased** package are demonstrated [in
 this
@@ -254,7 +230,7 @@ results <- summary(correlation(iris))
 plot(results, show_data = "points")
 ```
 
-<img src="man/figures/correlation-1.png" width="100%" />
+<img src="man/figures/correlation-1.png" alt="" width="100%" />
 
 Plotting functions for the **correlation** package are demonstrated [in
 this
@@ -272,7 +248,7 @@ ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
   theme_modern()
 ```
 
-<img src="man/figures/unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-3-1.png" alt="" width="100%" />
 
 ### Lucid
 
@@ -285,7 +261,7 @@ p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 p + theme_lucid()
 ```
 
-<img src="man/figures/unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-4-1.png" alt="" width="100%" />
 
 ### Blackboard
 
@@ -293,7 +269,7 @@ p + theme_lucid()
 p + theme_blackboard()
 ```
 
-<img src="man/figures/unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-5-1.png" alt="" width="100%" />
 
 ### Abyss
 
@@ -301,7 +277,7 @@ p + theme_blackboard()
 p + theme_abyss()
 ```
 
-<img src="man/figures/unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-6-1.png" alt="" width="100%" />
 
 # Palettes
 
@@ -336,7 +312,7 @@ The `plots()` function allows us to plot the figures side by side.
 plots(p1, p2, p3, n_columns = 2)
 ```
 
-<img src="man/figures/unnamed-chunk-9-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-8-1.png" alt="" width="100%" />
 
 The `plots()` function can also be used to add **tags** (*i.e.*, labels
 for subfigures).
@@ -348,7 +324,7 @@ plots(p1, p2, p3,
 )
 ```
 
-<img src="man/figures/unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-9-1.png" alt="" width="100%" />
 
 # Geoms
 
@@ -369,7 +345,7 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, n_columns = 2)
 ```
 
-<img src="man/figures/unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-10-1.png" alt="" width="100%" />
 
 ## Half-violin Half-dot plot
 
@@ -383,7 +359,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   scale_fill_material_d()
 ```
 
-<img src="man/figures/unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-11-1.png" alt="" width="100%" />
 
 ## Radar chart (Spider plot)
 
@@ -419,7 +395,7 @@ data |>
   theme_radar()
 ```
 
-<img src="man/figures/unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-12-1.png" alt="" width="100%" />
 
 # Contributing and Support
 

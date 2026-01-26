@@ -46,5 +46,6 @@ plot(check_model(model))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-See also the vignette about \href{https://easystats.github.io/performance/articles/check_model.html}{\code{check_model()}}.
+See also the vignette about
+\href{https://easystats.github.io/performance/articles/check_model.html}{\code{check_model()}}.
 }

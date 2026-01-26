@@ -9,7 +9,8 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
+#' @seealso See also the vignette about
+#'   [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
 #' @examplesIf require("patchwork")
 #' library(performance)
@@ -27,6 +28,7 @@ plot.see_check_model <- function(
   ...
 ) {
   p <- list()
+  dots <- list(...)
 
   # read arguments / settings from "check_model()" -----
 
@@ -47,6 +49,11 @@ plot.see_check_model <- function(
   overdisp_type <- attr(x, "overdisp_type")
   plot_type <- attr(x, "type")
   model_class <- attr(x, "model_class")
+  max_dots <- attr(x, "maximum_dots")
+
+  if (is.null(max_dots) && !is.null(dots$maximum_dots)) {
+    max_dots <- dots$maximum_dots
+  }
 
   if (
     missing(type) &&
@@ -141,7 +148,8 @@ plot.see_check_model <- function(
       size_title = size_title,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      maximum_dots = max_dots
     )
   }
 
@@ -200,7 +208,8 @@ plot.see_check_model <- function(
       size_title = size_title,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      maximum_dots = max_dots
     )
   }
 
@@ -222,7 +231,8 @@ plot.see_check_model <- function(
       base_size = base_size,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      maximum_dots = max_dots
     )
   }
 
@@ -273,7 +283,8 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         show_dots = TRUE, # qq-plots w/o dots makes no sense
         model_info = model_info,
-        model_class = model_class
+        model_class = model_class,
+        maximum_dots = max_dots
       )
     }
   }
@@ -310,7 +321,8 @@ plot.see_check_model <- function(
       base_size = base_size,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = TRUE # qq-plots w/o dots makes no sense
+      show_dots = TRUE, # qq-plots w/o dots makes no sense
+      maximum_dots = max_dots
     )
 
     for (i in seq_along(ps)) {
@@ -321,10 +333,51 @@ plot.see_check_model <- function(
   if (panel) {
     pw <- plots(p, n_columns = n_columns)
     .safe_print_plots(pw, ...)
-    return(invisible(pw))
+    invisible(pw)
   } else {
-    return(p)
+    p
   }
+}
+
+
+# Helper function to sample large datasets for performance
+# See issue #420: https://github.com/easystats/see/issues/420
+.sample_for_plot <- function(data, maximum_dots = 2000, verbose = TRUE, ...) {
+  if (is.null(data) || !is.data.frame(data)) {
+    return(data)
+  }
+
+  n_obs <- nrow(data)
+
+  if (is.null(maximum_dots)) {
+    maximum_dots <- 2000
+  }
+
+  # Only sample if dataset exceeds threshold
+  if (n_obs > maximum_dots) {
+    # Use stratified sampling if there are grouping variables
+    # Otherwise use simple random sampling
+    set.seed(123) # For reproducibility in plots
+    sample_indices <- sample.int(n_obs, maximum_dots, replace = FALSE)
+    data <- data[sample_indices, , drop = FALSE]
+
+    # Add attribute to track sampling
+    attr(data, "was_sampled") <- TRUE
+    attr(data, "original_n") <- n_obs
+    attr(data, "sampled_n") <- maximum_dots
+
+    if (verbose) {
+      insight::format_alert(paste0(
+        "Plot data contains more than ",
+        maximum_dots,
+        " observations. For performance reasons, only ",
+        maximum_dots,
+        " data points are shown. Use `maximum_dots = <number> to define how many data points to show."
+      ))
+    }
+  }
+
+  data
 }
 
 
@@ -339,8 +392,13 @@ plot.see_check_model <- function(
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  maximum_dots = 2000,
+  ...
 ) {
+  # Sample data if too large for performance (issue #420)
+  x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
+
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
   if (isTRUE(show_dots)) {
