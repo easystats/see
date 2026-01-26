@@ -1,3 +1,5 @@
+skip_on_cran()
+
 # Snapshot tests for check_model() plots
 # These tests verify that diagnostic plots render consistently across versions.
 # Related to #236 (snapshot tests) and #420 (large dataset performance).
@@ -59,13 +61,15 @@ test_that("plot.see_check_model() works with themes", {
   # Test with modern theme
   expect_doppelganger_with_seed(
     title = "check_model_theme_modern",
-    fig = plot(performance::check_model(model, check = "linearity")) + theme_modern()
+    fig = plot(performance::check_model(model, check = "linearity")) +
+      theme_modern()
   )
 
   # Test with lucid theme
   expect_doppelganger_with_seed(
     title = "check_model_theme_lucid",
-    fig = plot(performance::check_model(model, check = "linearity")) + theme_lucid()
+    fig = plot(performance::check_model(model, check = "linearity")) +
+      theme_lucid()
   )
 })
 
@@ -127,7 +131,8 @@ test_that("plot.see_check_homogeneity() renders correctly", {
   # Test with modern theme
   expect_doppelganger_with_seed(
     title = "check_homogeneity_modern",
-    fig = plot(performance::check_model(model, check = "homogeneity")) + theme_modern()
+    fig = plot(performance::check_model(model, check = "homogeneity")) +
+      theme_modern()
   )
 })
 
@@ -149,7 +154,8 @@ test_that("plot.see_check_outliers() renders correctly", {
   # Test with modern theme
   expect_doppelganger_with_seed(
     title = "check_outliers_modern",
-    fig = plot(performance::check_model(model, check = "outliers")) + theme_modern()
+    fig = plot(performance::check_model(model, check = "outliers")) +
+      theme_modern()
   )
 })
 
@@ -193,12 +199,20 @@ test_that("plot.see_check_model() works with show_dots parameter", {
   # Test without dots
   expect_doppelganger_with_seed(
     title = "check_model_no_dots",
-    fig = plot(performance::check_model(model, check = "linearity", show_dots = FALSE))
+    fig = plot(performance::check_model(
+      model,
+      check = "linearity",
+      show_dots = FALSE
+    ))
   )
 
   # Test with dots
   expect_doppelganger_with_seed(
     title = "check_model_with_dots",
-    fig = plot(performance::check_model(model, check = "linearity", show_dots = TRUE))
+    fig = plot(performance::check_model(
+      model,
+      check = "linearity",
+      show_dots = TRUE
+    ))
   )
 })
