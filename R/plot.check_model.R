@@ -142,7 +142,8 @@ plot.see_check_model <- function(
       size_title = size_title,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      ...
     )
   }
 
@@ -201,7 +202,8 @@ plot.see_check_model <- function(
       size_title = size_title,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      ...
     )
   }
 
@@ -274,7 +276,8 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         show_dots = TRUE, # qq-plots w/o dots makes no sense
         model_info = model_info,
-        model_class = model_class
+        model_class = model_class,
+        ...
       )
     }
   }
@@ -311,7 +314,8 @@ plot.see_check_model <- function(
       base_size = base_size,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = TRUE # qq-plots w/o dots makes no sense
+      show_dots = TRUE, # qq-plots w/o dots makes no sense
+      ...
     )
 
     for (i in seq_along(ps)) {
@@ -367,10 +371,12 @@ plot.see_check_model <- function(
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  max_points = 3000,
+  ...
 ) {
   # Sample data if too large for performance (issue #420)
-  x <- .sample_for_plot(x, max_points = 3000)
+  x <- .sample_for_plot(x, max_points = max_points)
 
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 

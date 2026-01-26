@@ -155,10 +155,12 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  max_points = 3000,
+  ...
 ) {
   # Sample data if too large for performance (issue #420)
-  x <- .sample_for_plot(x, max_points = 3000)
+  x <- .sample_for_plot(x, max_points = max_points)
 
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
