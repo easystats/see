@@ -6,6 +6,14 @@
 
 - Daniel Lüdecke is now the main maintainer of the package.
 
+### Changes
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html)
+  now limits the number of data points for models with many
+  observations, to reduce the time for rendering the plot. Use argument
+  `maximum_dots` to define the maximum number of data points to show.
+
 ## see 0.12.0
 
 CRAN release: 2025-09-14
