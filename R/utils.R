@@ -1,3 +1,34 @@
+# Helper function to sample large datasets for performance
+# See issue #420: https://github.com/easystats/see/issues/420
+.sample_for_plot <- function(data, maximum_dots = 2000, ...) {
+  if (is.null(data) || !is.data.frame(data)) {
+    return(data)
+  }
+
+  n_obs <- nrow(data)
+
+  if (is.null(maximum_dots)) {
+    maximum_dots <- 2000
+  }
+
+  # Only sample if dataset exceeds threshold
+  if (n_obs > maximum_dots) {
+    # Use stratified sampling if there are grouping variables
+    # Otherwise use simple random sampling
+    set.seed(123) # For reproducibility in plots
+    sample_indices <- sample.int(n_obs, maximum_dots, replace = FALSE)
+    data <- data[sample_indices, , drop = FALSE]
+
+    # Add attribute to track sampling
+    attr(data, "was_sampled") <- TRUE
+    attr(data, "original_n") <- n_obs
+    attr(data, "sampled_n") <- maximum_dots
+  }
+
+  data
+}
+
+
 # small helper to set default theme for plots
 .set_default_theme <- function(
   x,
