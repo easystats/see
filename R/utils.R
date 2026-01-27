@@ -38,31 +38,29 @@
   size_title = 12
 ) {
   if (is.null(theme)) {
-    plot_theme <- attr(x, "theme")
-    if (!is.null(plot_theme)) {
-      if (is.character(plot_theme)) {
-        theme_parts <- unlist(strsplit(plot_theme, "::", fixed = TRUE))
-        if (length(theme_parts) == 2) {
-          theme <- get(theme_parts[2], asNamespace(theme_parts[1]))
-        } else {
-          theme <- get(theme_parts[1], mode = "function")
-        }
-      } else if (is.function(plot_theme)) {
-        theme <- plot_theme
+    theme <- attr(x, "theme")
+  }
+  if (!is.null(theme)) {
+    if (is.character(theme)) {
+      theme_parts <- unlist(strsplit(theme, "::", fixed = TRUE))
+      if (length(theme_parts) == 2) {
+        theme <- get(theme_parts[2], asNamespace(theme_parts[1]))
       } else {
-        insight::format_error(
-          "Plot theme must be a function, or a string naming a theme function."
-        )
+        theme <- get(theme_parts[1], mode = "function")
       }
-    } else {
-      theme <- theme_lucid(
-        base_size = base_size,
-        plot.title.space = 3,
-        axis.title.space = 5,
-        axis.title.size = size_axis_title,
-        plot.title.size = size_title
+    } else if (!is.function(theme)) {
+      insight::format_error(
+        "Plot theme must be a function, or a string naming a theme function."
       )
     }
+  } else {
+    theme <- theme_lucid(
+      base_size = base_size,
+      plot.title.space = 3,
+      axis.title.space = 5,
+      axis.title.size = size_axis_title,
+      plot.title.size = size_title
+    )
   }
   theme
 }
