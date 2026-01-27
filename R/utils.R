@@ -41,8 +41,12 @@
     plot_theme <- attr(x, "theme")
     if (!is.null(plot_theme)) {
       if (is.character(plot_theme)) {
-        theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
-        theme <- get(theme_style[2], asNamespace(theme_style[1]))
+        theme_parts <- unlist(strsplit(plot_theme, "::", fixed = TRUE))
+        if (length(theme_parts) == 2) {
+          theme <- get(theme_parts[2], asNamespace(theme_parts[1]))
+        } else {
+          theme <- get(theme_parts[1], mode = "function")
+        }
       } else if (is.function(plot_theme)) {
         theme <- plot_theme
       } else {
