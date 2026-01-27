@@ -243,7 +243,7 @@ plot.see_performance_pp_check <- function(
   linewidth,
   size_point,
   alpha_line,
-  theme,
+  theme = NULL,
   base_size = 10,
   size_axis_title = 10,
   size_title = 12,
@@ -254,6 +254,14 @@ plot.see_performance_pp_check <- function(
   ...
 ) {
   info <- attr(x, "info")
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
 
   # discrete plot type from "bayesplot::pp_check()" returns a different data
   # structure, so we need to handle it differently
