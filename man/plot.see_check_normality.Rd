@@ -15,6 +15,7 @@
   base_size = 10,
   alpha = 0.2,
   alpha_dot = 0.8,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = TRUE,
   method = "ell",

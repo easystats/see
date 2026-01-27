@@ -58,7 +58,8 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #' The `plot()` method for the `performance::check_predictions()` function.
 #'
 #' @param alpha_line Numeric value specifying alpha of lines indicating `yrep`.
-#' @param theme A ggplot2-theme function or a character string naming aggplot2-theme.
+#' @param theme A ggplot2-theme function, e.g. `theme = theme_lucid` or
+#' `theme = ggplot2::theme_dark`.
 #' @param type Plot type for the posterior predictive checks plot. Can be `"density"`
 #' (default), `"discrete_dots"`, `"discrete_interval"` or `"discrete_both"` (the
 #' `discrete_*` options are appropriate for models with discrete - binary, integer
