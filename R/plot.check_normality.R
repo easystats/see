@@ -229,7 +229,7 @@ plot.see_check_normality <- function(
   size_axis_title = 10,
   size_title = 12,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme_style = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red")))
 ) {
@@ -253,13 +253,7 @@ plot.see_check_normality <- function(
       title = "Normality of Residuals",
       subtitle = "Distribution should be close to the normal curve"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    ) +
+    theme_style +
     ggplot2::scale_y_continuous(labels = NULL)
 }
 
@@ -275,7 +269,7 @@ plot.see_check_normality <- function(
   alpha_level = 0.2,
   detrend = FALSE,
   method = "ell",
-  theme_style = theme_lucid,
+  theme_style = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
@@ -407,13 +401,7 @@ plot.see_check_normality <- function(
       y = y_lab,
       x = "Standard Normal Distribution Quantiles"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    )
+    theme_style
 
   if (!is.null(y_range)) {
     p <- p + ggplot2::ylim(y_range)
@@ -434,7 +422,7 @@ plot.see_check_normality <- function(
   alpha_level = 0.2,
   detrend = FALSE,
   method = "ell",
-  theme_style = theme_lucid,
+  theme_style = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8
@@ -496,13 +484,7 @@ plot.see_check_normality <- function(
       y = y_lab,
       x = "Standard Normal Cumulative Probability"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    )
+    theme_style
 }
 
 
@@ -516,7 +498,7 @@ plot.see_check_normality <- function(
   size_title = 12,
   panel = TRUE,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme_style = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
@@ -550,13 +532,7 @@ plot.see_check_normality <- function(
         colour = colors[2],
         alpha = alpha_dot
       ) +
-      theme_style(
-        base_size = base_size,
-        plot.title.space = 3,
-        axis.title.space = 5,
-        plot.title.size = size_title,
-        axis.title.size = size_axis_title
-      )
+      theme_style
 
     if (isTRUE(show_dots)) {
       p <- p +

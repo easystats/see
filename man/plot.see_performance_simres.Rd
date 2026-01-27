@@ -44,8 +44,6 @@ hex-format) for points and line.}
 no transformation is applied and uniformly distributed residuals are expected.
 See argument \code{quantileFuntion} in \code{?DHARMa:::residuals.DHARMa} for more details.}
 
-\item{style}{A ggplot2-theme.}
-
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{

@@ -1,26 +1,26 @@
 # small helper to set default theme for plots
 .set_default_theme <- function(
   x,
-  style,
+  theme,
   base_size = 10,
   size_axis_title = 10,
   size_title = 12
 ) {
-  if (is.null(style)) {
+  if (is.null(theme)) {
     plot_theme <- attr(x, "theme")
     if (!is.null(plot_theme)) {
       if (is.character(plot_theme)) {
         theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
-        style <- get(theme_style[2], asNamespace(theme_style[1]))
+        theme <- get(theme_style[2], asNamespace(theme_style[1]))
       } else if (is.function(plot_theme)) {
-        style <- plot_theme
+        theme <- plot_theme
       } else {
         insight::format_error(
           "Plot theme must be a function, or a string naming a theme function."
         )
       }
     } else {
-      style <- theme_lucid(
+      theme <- theme_lucid(
         base_size = base_size,
         plot.title.space = 3,
         axis.title.space = 5,
@@ -29,7 +29,7 @@
       )
     }
   }
-  style
+  theme
 }
 
 

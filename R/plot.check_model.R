@@ -28,7 +28,7 @@
 #' @export
 plot.see_check_model <- function(
   x,
-  style = NULL,
+  theme = NULL,
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
@@ -75,9 +75,9 @@ plot.see_check_model <- function(
 
   # set default values for arguments ------
 
-  style <- .set_default_theme(
+  theme <- .set_default_theme(
     x,
-    style,
+    theme,
     base_size,
     size_axis_title,
     size_title
@@ -128,7 +128,7 @@ plot.see_check_model <- function(
     x$NORM <- NULL
     p$PP_CHECK <- plot.see_performance_pp_check(
       x$PP_CHECK,
-      style = style,
+      theme = theme,
       linewidth = linewidth,
       size_point = size_point,
       base_size = base_size,
@@ -152,7 +152,7 @@ plot.see_check_model <- function(
       size_point = size_point,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme_style = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -172,7 +172,7 @@ plot.see_check_model <- function(
     x$HOMOGENEITY <- NULL
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
-      style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -191,7 +191,7 @@ plot.see_check_model <- function(
   ) {
     p$OVERDISPERSION <- .plot_diag_overdispersion(
       x$OVERDISPERSION,
-      style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -212,7 +212,7 @@ plot.see_check_model <- function(
       size_point = size_point,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme_style = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -235,7 +235,7 @@ plot.see_check_model <- function(
       size_text = size_text,
       linewidth = linewidth,
       size_point = size_point,
-      theme_style = style,
+      theme_style = theme,
       size_axis_title = size_axis_title,
       size_title = size_title,
       base_size = base_size,
@@ -253,7 +253,7 @@ plot.see_check_model <- function(
       x$VIF,
       size_point = 1.5 * size_point,
       linewidth = linewidth,
-      theme_style = style,
+      theme_style = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -273,7 +273,7 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         colors = colors,
         detrend = detrend,
-        style = style,
+        theme = theme,
         base_size = base_size,
         size_axis_title = size_axis_title,
         size_title = size_title
@@ -287,7 +287,7 @@ plot.see_check_model <- function(
         size_title = size_title,
         alpha_level = alpha_level,
         detrend = detrend,
-        theme_style = style,
+        theme_style = theme,
         base_size = base_size,
         colors = colors,
         alpha_dot = alpha_dot,
@@ -309,7 +309,7 @@ plot.see_check_model <- function(
       x$NORM,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme_style = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -327,7 +327,7 @@ plot.see_check_model <- function(
       size_axis_title = size_axis_title,
       size_title = size_title,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme_style = theme,
       base_size = base_size,
       colors = colors,
       alpha_dot = alpha_dot,
@@ -388,7 +388,7 @@ plot.see_check_model <- function(
   size_axis_title = 10,
   size_title = 12,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme_style = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
@@ -426,11 +426,5 @@ plot.see_check_model <- function(
       title = "Linearity",
       subtitle = "Reference line should be flat and horizontal"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      axis.title.size = size_axis_title,
-      plot.title.size = size_title
-    )
+    theme_style
 }
