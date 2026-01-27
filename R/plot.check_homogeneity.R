@@ -149,7 +149,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   size_point,
   linewidth,
   alpha_level = 0.2,
-  theme_style = NULL,
+  theme = NULL,
   size_title = 12,
   size_axis_title = 10,
   base_size = 10,
@@ -188,5 +188,5 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       y = expression(sqrt("|Std. residuals|")),
       x = "Fitted values"
     ) +
-    theme_style
+    theme
 }

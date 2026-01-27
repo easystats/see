@@ -5,13 +5,21 @@ plot.see_check_overdisp <- function(
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8"),
   type = 1,
   ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
   .plot_diag_overdispersion(
     x,
-    theme_style = theme_lucid,
+    theme = theme,
     colors = colors,
     linewidth = linewidth,
     size_title = size_title,
@@ -24,7 +32,7 @@ plot.see_check_overdisp <- function(
 
 .plot_diag_overdispersion <- function(
   x,
-  theme_style = NULL,
+  theme = NULL,
   size_axis_title = base_size,
   size_title = 12,
   base_size = 10,
@@ -53,7 +61,7 @@ plot.see_check_overdisp <- function(
         x = "Predicted mean",
         y = "Residual variance"
       ) +
-      theme_style
+      theme
   } else {
     p <- ggplot2::ggplot(x) +
       ggplot2::aes(x = .data$Predicted) +
@@ -69,7 +77,7 @@ plot.see_check_overdisp <- function(
         x = "Predicted mean",
         y = "Standardized resiuduals"
       ) +
-      theme_style
+      theme
   }
 
   p

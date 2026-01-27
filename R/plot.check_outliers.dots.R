@@ -9,7 +9,7 @@
   size_text = NULL,
   size_axis_title = base_size,
   size_title = 12,
-  theme_style = NULL,
+  theme = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue grey", "red"))),
   alpha_dot = 0.8,
@@ -191,7 +191,7 @@
 
     p <- p +
       .cook_lines +
-      theme_style +
+      theme +
       ggplot2::guides(colour = "none", text = "none")
   }
 

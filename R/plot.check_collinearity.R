@@ -67,7 +67,7 @@ plot.see_check_collinearity <- function(
   x,
   size_point,
   linewidth,
-  theme_style = NULL,
+  theme = NULL,
   size_title = 12,
   size_axis_title = 10,
   base_size = 10,
@@ -178,7 +178,7 @@ plot.see_check_collinearity <- function(
       aesthetics = c("color", "fill"),
       guide = ggplot2::guide_legend(title = NULL)
     ) +
-    theme_style +
+    theme +
     ggplot2::scale_y_continuous(
       limits = c(1, ylim * 1.15),
       oob = scales::oob_squish,

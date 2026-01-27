@@ -133,7 +133,7 @@ print.see_performance_pp_check <- function(
     linewidth = linewidth,
     size_point = size_point,
     alpha_line = alpha_line,
-    theme_style = theme,
+    theme = theme,
     colors = colors,
     base_size = base_size,
     size_title = size_title,
@@ -177,6 +177,14 @@ plot.see_performance_pp_check <- function(
   plot_type <- attributes(x)$type
   is_stan <- attributes(x)$is_stan
 
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
+
   if (
     missing(type) &&
       !is.null(plot_type) &&
@@ -201,7 +209,7 @@ plot.see_performance_pp_check <- function(
     linewidth = linewidth,
     size_point = size_point,
     alpha_line = alpha_line,
-    theme_style = theme,
+    theme = theme,
     base_size = base_size,
     size_axis_title = size_axis_title,
     size_title = size_title,
@@ -226,7 +234,7 @@ plot.see_performance_pp_check <- function(
   linewidth,
   size_point,
   alpha_line,
-  theme_style,
+  theme,
   base_size = 10,
   size_axis_title = 10,
   size_title = 12,
@@ -300,7 +308,7 @@ plot.see_performance_pp_check <- function(
 
   dots <- list(...)
   if (isTRUE(dots[["check_model"]])) {
-    out <- out + theme_style
+    out <- out + theme
   }
 
   if (isTRUE(dots[["adjust_legend"]]) || isTRUE(info$check_range)) {

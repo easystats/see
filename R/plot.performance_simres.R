@@ -39,6 +39,7 @@ plot.see_performance_simres <- function(
   base_size = 10,
   alpha = 0.2,
   alpha_dot = 0.8,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   transform = NULL,
@@ -48,6 +49,14 @@ plot.see_performance_simres <- function(
   # need DHARMa to be installed
   insight::check_if_installed("DHARMa")
   qqplotr_installed <- insight::check_if_installed("qqplotr", quietly = TRUE)
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
 
   # extract data, if from check_residuals
   if (inherits(x, "see_check_residuals")) {
@@ -160,13 +169,7 @@ plot.see_performance_simres <- function(
       x = p_x,
       y = y_lab
     ) +
-    style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    )
+    theme
 }
 
 #' @export

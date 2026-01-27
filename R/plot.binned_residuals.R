@@ -27,7 +27,7 @@ plot.see_binned_residuals <- function(
     show_dots <- isTRUE(dots[["show_dots"]])
   }
 
-  theme_style <- .set_default_theme(
+  theme <- .set_default_theme(
     x,
     theme,
     base_size,
@@ -127,7 +127,7 @@ plot.see_binned_residuals <- function(
   }
 
   if (isTRUE(dots[["check_model"]])) {
-    p <- p + theme_style
+    p <- p + theme
   }
 
   if (isTRUE(dots[["adjust_legend"]])) {
