@@ -2,6 +2,7 @@
   x,
   elbow_threshold = NULL,
   rescale_distance = FALSE,
+  theme = NULL,
   verbose = TRUE,
   ...
 ) {
@@ -90,7 +91,7 @@
       x = "Observations (sorted)",
       y = y_lab
     ) +
-    see::theme_modern()
+    theme
 
   # Add elbow guideline segments (scree-style) — solid, with gap
   if (length(elbow_idx) > 0) {

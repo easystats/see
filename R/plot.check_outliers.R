@@ -68,6 +68,7 @@ plot.see_check_outliers <- function(
   size_axis_title = base_size,
   base_size = 10,
   alpha_dot = 0.8,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = FALSE,
   type = "dots",
@@ -79,6 +80,14 @@ plot.see_check_outliers <- function(
   # need to know the method first, because we change the default plot type
   # depending on the method
   outlier_methods <- attr(x, "method", exact = TRUE)
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
 
   # validate that the method is correct
   if (length(outlier_methods) == 0) {
@@ -117,6 +126,7 @@ plot.see_check_outliers <- function(
       size_title = size_title,
       base_size = base_size,
       alpha_dot = alpha_dot,
+      theme = theme,
       colors = colors
     )
   } else if (type == "count") {
@@ -125,6 +135,7 @@ plot.see_check_outliers <- function(
       show_labels = show_labels,
       size_text = size_text,
       rescale_distance = rescale_distance,
+      theme = theme,
       ... # to change bins because of warning
     )
   } else {
@@ -132,6 +143,7 @@ plot.see_check_outliers <- function(
       x,
       rescale_distance = rescale_distance,
       elbow_threshold = elbow_threshold,
+      theme = theme,
       verbose = verbose,
       ...
     )

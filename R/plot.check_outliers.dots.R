@@ -202,7 +202,8 @@
   x,
   show_labels = TRUE,
   size_text = 3.5,
-  rescale_distance = TRUE
+  rescale_distance = TRUE,
+  theme = NULL
 ) {
   d <- data_plot(x, rescale_distance = rescale_distance)
   d$Id <- seq_len(nrow(d))
@@ -268,5 +269,5 @@
     }
   }
 
-  p + ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 2))
+  p + ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 2)) + theme
 }
