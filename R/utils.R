@@ -32,7 +32,7 @@
 # small helper to set default theme for plots
 .set_default_theme <- function(
   x,
-  theme,
+  theme = NULL,
   base_size = 10,
   size_axis_title = 10,
   size_title = 12

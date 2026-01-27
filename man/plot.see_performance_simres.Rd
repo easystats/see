@@ -35,8 +35,8 @@ axis and plot titles.}
 
 \item{alpha_dot}{Numeric value specifying alpha level of the point geoms.}
 
-\item{theme}{A ggplot2-theme function, e.g. \code{theme = theme_lucid} or
-\code{theme = ggplot2::theme_dark}.}
+\item{theme}{A ggplot2-theme function, e.g. \code{theme = theme_lucid()} or
+\code{theme = ggplot2::theme_dark()}.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
