@@ -350,40 +350,6 @@ plot.see_check_model <- function(
 }
 
 
-.set_default_theme <- function(
-  x,
-  style,
-  base_size = 10,
-  size_axis_title = 10,
-  size_title = 12
-) {
-  if (is.null(style)) {
-    plot_theme <- attr(x, "theme")
-    if (!is.null(plot_theme)) {
-      if (is.character(plot_theme)) {
-        theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
-        style <- get(theme_style[2], asNamespace(theme_style[1]))
-      } else if (is.function(plot_theme)) {
-        style <- plot_theme
-      } else {
-        insight::format_error(
-          "Plot theme must be a function, or a string naming a theme function."
-        )
-      }
-    } else {
-      style <- theme_lucid(
-        base_size = base_size,
-        plot.title.space = 3,
-        axis.title.space = 5,
-        axis.title.size = size_axis_title,
-        plot.title.size = size_title
-      )
-    }
-  }
-  style
-}
-
-
 # Helper function to sample large datasets for performance
 # See issue #420: https://github.com/easystats/see/issues/420
 .sample_for_plot <- function(data, maximum_dots = 2000, ...) {
