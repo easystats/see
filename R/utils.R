@@ -48,7 +48,7 @@
       } else {
         theme <- get(theme_parts[1], mode = "function")
       }
-    } else if (!is.function(theme)) {
+    } else if (!is.function(theme) || !"theme" %in% class(theme)) {
       insight::format_error(
         "Plot theme must be a function, or a string naming a theme function."
       )
