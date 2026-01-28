@@ -20,6 +20,12 @@
   observations, to reduce the time for rendering the plot. Use argument
   `maximum_dots` to define the maximum number of data points to show.
 
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html)
+  extracts the `show_ci` attribute from objects returned by
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html),
+  to show or hide confidence intervals.
+
 ## see 0.12.0
 
 CRAN release: 2025-09-14
