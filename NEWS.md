@@ -14,6 +14,9 @@
   with many observations, to reduce the time for rendering the plot. Use argument
   `maximum_dots` to define the maximum number of data points to show.
 
+* `plot()` for `check_model()` extracts the `show_ci` attribute from objects
+  returned by `check_model()`, to show or hide confidence intervals.
+
 # see 0.12.0
 
 ## Major Changes

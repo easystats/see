@@ -156,6 +156,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
   show_dots = TRUE,
+  show_ci = TRUE,
   maximum_dots = 2000,
   ...
 ) {
@@ -185,7 +186,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   p +
     ggplot2::stat_smooth(
       method = "loess",
-      se = TRUE,
+      se = show_ci,
       alpha = alpha_level,
       formula = y ~ x,
       linewidth = linewidth,

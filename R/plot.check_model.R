@@ -51,6 +51,7 @@ plot.see_check_model <- function(
   alpha_level <- attr(x, "alpha")
   alpha_dot <- attr(x, "alpha_dot")
   show_dots <- attr(x, "show_dots")
+  show_ci <- attr(x, "show_ci")
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
@@ -159,6 +160,7 @@ plot.see_check_model <- function(
       colors = colors,
       alpha_dot = alpha_dot,
       show_dots = show_dots,
+      show_ci = show_ci,
       maximum_dots = max_dots
     )
   }
@@ -219,6 +221,7 @@ plot.see_check_model <- function(
       colors = colors,
       alpha_dot = alpha_dot,
       show_dots = show_dots,
+      show_ci = show_ci,
       maximum_dots = max_dots
     )
   }
@@ -362,6 +365,7 @@ plot.see_check_model <- function(
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
   show_dots = TRUE,
+  show_ci = TRUE,
   maximum_dots = 2000,
   ...
 ) {
@@ -391,7 +395,7 @@ plot.see_check_model <- function(
   p +
     ggplot2::geom_smooth(
       method = "loess",
-      se = TRUE,
+      se = show_ci,
       formula = y ~ x,
       alpha = alpha_level,
       linewidth = linewidth,
