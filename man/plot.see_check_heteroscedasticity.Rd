@@ -29,6 +29,9 @@ statistical model.}
 \item{base_size, size_axis_title, size_title}{Numeric value specifying size of
 axis and plot titles.}
 
+\item{theme}{A ggplot2-theme function, e.g. \code{theme = theme_lucid()} or
+\code{theme = ggplot2::theme_dark()}.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{

@@ -4,6 +4,7 @@
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams print.see_performance_pp_check
 #'
 #' @return A ggplot2-object.
 #'

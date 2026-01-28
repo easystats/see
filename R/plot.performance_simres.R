@@ -43,7 +43,6 @@ plot.see_performance_simres <- function(
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   transform = NULL,
-  style = theme_lucid,
   ...
 ) {
   # need DHARMa to be installed

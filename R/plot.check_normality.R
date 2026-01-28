@@ -23,6 +23,7 @@
 #' axis and plot titles.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams print.see_performance_pp_check
 #'
 #' @return A ggplot2-object.
 #'

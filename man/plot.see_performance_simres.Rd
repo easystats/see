@@ -17,7 +17,6 @@
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   transform = NULL,
-  style = theme_lucid,
   ...
 )
 }

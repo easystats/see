@@ -29,6 +29,7 @@
 #' @param verbose Logical. If `TRUE` (default), prints a summary list of outliers.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams print.see_performance_pp_check
 #'
 #' @details When using `type = "scree"`, the function will provide a
 #' scree-style distance plot that highlights two types of outliers.
