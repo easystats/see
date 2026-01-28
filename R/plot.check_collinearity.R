@@ -82,8 +82,7 @@ plot.see_check_collinearity <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
+    size_title
   )
 
   ylim <- ceiling(max(x$y, na.rm = TRUE))

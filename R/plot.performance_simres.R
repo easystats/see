@@ -55,8 +55,7 @@ plot.see_performance_simres <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
+    size_title
   )
 
   # extract data, if from check_residuals

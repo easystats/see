@@ -244,8 +244,7 @@ plot.see_check_normality <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
+    size_title
   )
 
   ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
@@ -299,8 +298,7 @@ plot.see_check_normality <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
+    size_title
   )
 
   # Sample data if too large for performance (issue #420)
@@ -456,8 +454,7 @@ plot.see_check_normality <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
+    size_title
   )
 
   if (requireNamespace("qqplotr", quietly = TRUE)) {
@@ -544,8 +541,7 @@ plot.see_check_normality <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
+    size_title
   )
 
   lapply(names(x), function(i) {
