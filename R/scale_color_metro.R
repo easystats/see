@@ -232,7 +232,7 @@ metro_palettes <- list(
     "red"
   ),
   contrast = metro_colors("blue", "green", "amber", "purple", "red"),
-  light = material_colors(
+  light = metro_colors(
     "light blue",
     "red",
     "yellow",

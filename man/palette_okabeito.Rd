@@ -24,14 +24,14 @@ respectively.}
 \item{order}{A vector of numbers from 1 to 9 indicating the order of colors to use
 (default: \code{1:9})}
 
-\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{Additional arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
-The palette based proposed by Okabe and Ito (2008).
+The palette based on Okabe and Ito (2008).
 }
 \details{
 This function is usually not called directly, but from within
-\code{\link[=scale_color_material]{scale_color_material()}}.
+\code{\link[=scale_color_okabeito]{scale_color_okabeito()}}.
 }
 \references{
 Okabe, M., & Ito, K. (2008). Color universal design (CUD):

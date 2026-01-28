@@ -101,7 +101,7 @@ respectively.}
 \item{aesthetics}{A vector of names of the aesthetics that this scale
 should be applied to (e.g., \code{c('color', 'fill')}).}
 
-\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{Additional arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 The palette based on \href{https://materialui.co/}{material design colors}. Use
