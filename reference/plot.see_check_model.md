@@ -11,7 +11,7 @@ function. Diagnostic plots for regression models.
 # S3 method for class 'see_check_model'
 plot(
   x,
-  style = theme_lucid,
+  theme = NULL,
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
@@ -25,9 +25,10 @@ plot(
 
   An object.
 
-- style:
+- theme:
 
-  A ggplot2-theme.
+  A ggplot2-theme function, e.g. `theme = theme_lucid()` or
+  `theme = ggplot2::theme_dark()`.
 
 - colors:
 
@@ -69,10 +70,10 @@ See also the vignette about
 ## Examples
 
 ``` r
+if (FALSE) { # require("patchwork") && FALSE
 library(performance)
 
 model <- lm(qsec ~ drat + wt, data = mtcars)
 plot(check_model(model))
-#> Ignoring unknown labels:
-#> • size : ""
+}
 ```

@@ -17,6 +17,7 @@ plot(
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
+  theme = NULL,
   ...
 )
 ```
@@ -43,6 +44,11 @@ plot(
 - base_size, size_axis_title, size_title:
 
   Numeric value specifying size of axis and plot titles.
+
+- theme:
+
+  A ggplot2-theme function, e.g. `theme = theme_lucid()` or
+  `theme = ggplot2::theme_dark()`.
 
 - ...:
 

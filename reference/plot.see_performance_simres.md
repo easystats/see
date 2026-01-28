@@ -20,10 +20,10 @@ plot(
   base_size = 10,
   alpha = 0.2,
   alpha_dot = 0.8,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   transform = NULL,
-  style = theme_lucid,
   ...
 )
 ```
@@ -54,6 +54,11 @@ plot(
 
   Numeric value specifying alpha level of the point geoms.
 
+- theme:
+
+  A ggplot2-theme function, e.g. `theme = theme_lucid()` or
+  `theme = ggplot2::theme_dark()`.
+
 - colors:
 
   Character vector of length two, indicating the colors (in hex-format)
@@ -70,10 +75,6 @@ plot(
   transformation is applied and uniformly distributed residuals are
   expected. See argument `quantileFuntion` in
   `?DHARMa:::residuals.DHARMa` for more details.
-
-- style:
-
-  A ggplot2-theme.
 
 - ...:
 

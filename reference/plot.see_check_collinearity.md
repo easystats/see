@@ -12,6 +12,7 @@ function.
 plot(
   x,
   data = NULL,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   size_point = 3.5,
   linewidth = 0.8,
@@ -32,6 +33,11 @@ plot(
 
   The original data used to create this object. Can be a statistical
   model.
+
+- theme:
+
+  A ggplot2-theme function, e.g. `theme = theme_lucid()` or
+  `theme = ggplot2::theme_dark()`.
 
 - colors:
 

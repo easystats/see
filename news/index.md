@@ -6,6 +6,12 @@
 
 - Daniel Lüdecke is now the main maintainer of the package.
 
+- Several [`plot()`](https://rdrr.io/r/graphics/plot.default.html)
+  methods gain a `theme` argument, to control the visual themes for
+  plots. This is in particular useful for plots that consist of several
+  single plots, like the one returned by
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html).
+
 ### Changes
 
 - [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for

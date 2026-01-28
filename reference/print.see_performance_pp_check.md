@@ -18,7 +18,7 @@ print(
   size_title = 12,
   base_size = 10,
   alpha_line = 0.15,
-  style = theme_lucid,
+  theme = NULL,
   colors = unname(social_colors(c("green", "blue"))),
   type = "density",
   x_limits = NULL,
@@ -35,7 +35,7 @@ plot(
   size_title = 12,
   base_size = 10,
   alpha_line = 0.15,
-  style = theme_lucid,
+  theme = NULL,
   colors = unname(social_colors(c("green", "blue"))),
   type = "density",
   x_limits = NULL,
@@ -69,9 +69,10 @@ plot(
 
   Numeric value specifying alpha of lines indicating `yrep`.
 
-- style:
+- theme:
 
-  A ggplot2-theme.
+  A ggplot2-theme function, e.g. `theme = theme_lucid()` or
+  `theme = ggplot2::theme_dark()`.
 
 - colors:
 
