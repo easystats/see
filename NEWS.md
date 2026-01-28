@@ -4,6 +4,10 @@
 
 * Daniel Lüdecke is now the main maintainer of the package.
 
+* Several `plot()` methods gain a `theme` argument, to control the visual
+  themes for plots. This is in particular useful for plots that consist of
+  several single plots, like the one returned by `check_model()`.
+
 ## Changes
 
 * `plot()` for `check_model()` now limits the number of data points for models
