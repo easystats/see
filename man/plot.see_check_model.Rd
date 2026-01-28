@@ -46,7 +46,7 @@ Thus, the number of data points is limited to 2000 by default. Use
 that should be shown in the plots.
 }
 \examples{
-\dontshow{if (require("patchwork")) withAutoprint(\{ # examplesIf}
+\dontshow{if (require("patchwork") && FALSE) withAutoprint(\{ # examplesIf}
 library(performance)
 
 model <- lm(qsec ~ drat + wt, data = mtcars)

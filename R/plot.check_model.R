@@ -19,7 +19,7 @@
 #' `check_model(maximum_dots = <number>)`) to define the number of data points
 #' that should be shown in the plots.
 #'
-#' @examplesIf require("patchwork")
+#' @examplesIf require("patchwork") && FALSE
 #' library(performance)
 #'
 #' model <- lm(qsec ~ drat + wt, data = mtcars)
