@@ -69,14 +69,6 @@ plot.see_check_normality <- function(
     type <- "qq"
   }
 
-  theme <- .set_default_theme(
-    x,
-    theme,
-    base_size,
-    size_axis_title,
-    size_title
-  )
-
   # check type
   if (!is.null(attributes(x)$effects) && attributes(x)$effects == "random") {
     .plot_diag_reqq(
@@ -247,6 +239,15 @@ plot.see_check_normality <- function(
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red")))
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
     ggplot2::geom_ribbon(
       mapping = ggplot2::aes(ymin = 0, ymax = .data$y),
@@ -293,6 +294,15 @@ plot.see_check_normality <- function(
   maximum_dots = 2000,
   ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   # Sample data if too large for performance (issue #420)
   x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
 
@@ -441,6 +451,15 @@ plot.see_check_normality <- function(
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
       qqplotr::stat_pp_band(
@@ -520,6 +539,15 @@ plot.see_check_normality <- function(
   maximum_dots = 2000,
   ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   lapply(names(x), function(i) {
     dat <- x[[i]]
 

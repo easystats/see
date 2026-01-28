@@ -12,6 +12,7 @@
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
+  theme = NULL,
   ...
 )
 }

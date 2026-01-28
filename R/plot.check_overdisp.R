@@ -10,14 +10,6 @@ plot.see_check_overdisp <- function(
   type = 1,
   ...
 ) {
-  theme <- .set_default_theme(
-    x,
-    theme,
-    base_size,
-    size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
-  )
   .plot_diag_overdispersion(
     x,
     theme = theme,
@@ -42,6 +34,15 @@ plot.see_check_overdisp <- function(
   type = 1,
   ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   if (is.null(type) || type == 1) {
     p <- ggplot2::ggplot(x) +
       ggplot2::aes(x = .data$Predicted) +

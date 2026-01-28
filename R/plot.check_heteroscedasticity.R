@@ -24,6 +24,7 @@ plot.see_check_heteroscedasticity <- function(
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
+  theme = NULL,
   ...
 ) {
   if (is.null(data)) {
@@ -85,6 +86,7 @@ plot.see_check_heteroscedasticity <- function(
     base_size = base_size,
     size_title = size_title,
     size_axis_title = size_axis_title,
+    theme = theme,
     ...
   )
 }

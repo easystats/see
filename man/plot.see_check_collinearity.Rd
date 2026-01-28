@@ -7,6 +7,7 @@
 \method{plot}{see_check_collinearity}(
   x,
   data = NULL,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   size_point = 3.5,
   linewidth = 0.8,

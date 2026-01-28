@@ -18,6 +18,7 @@
 plot.see_check_collinearity <- function(
   x,
   data = NULL,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   size_point = 3.5,
   linewidth = 0.8,
@@ -56,6 +57,7 @@ plot.see_check_collinearity <- function(
     size_title = size_title,
     size_axis_title = size_axis_title,
     base_size = base_size,
+    theme = theme,
     colors = colors,
     ci_data = attributes(x)$CI,
     is_check_model = FALSE

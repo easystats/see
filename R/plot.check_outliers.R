@@ -77,15 +77,6 @@ plot.see_check_outliers <- function(
   verbose = TRUE,
   ...
 ) {
-  theme <- .set_default_theme(
-    x,
-    theme,
-    base_size,
-    size_axis_title,
-    size_title,
-    default_theme = ggplot2::theme_grey()
-  )
-
   # need to know the method first, because we change the default plot type
   # depending on the method
   outlier_methods <- attr(x, "method", exact = TRUE)

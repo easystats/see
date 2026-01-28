@@ -191,7 +191,8 @@ plot.see_performance_pp_check <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title
+    size_title,
+    default_theme = ggplot2::theme_grey()
   )
 
   if (
@@ -260,7 +261,8 @@ plot.see_performance_pp_check <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title
+    size_title,
+    default_theme = ggplot2::theme_grey()
   )
 
   # discrete plot type from "bayesplot::pp_check()" returns a different data
