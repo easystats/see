@@ -29,6 +29,7 @@
 #' @param verbose Logical. If `TRUE` (default), prints a summary list of outliers.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams print.see_performance_pp_check
 #'
 #' @details When using `type = "scree"`, the function will provide a
 #' scree-style distance plot that highlights two types of outliers.
@@ -68,6 +69,7 @@ plot.see_check_outliers <- function(
   size_axis_title = base_size,
   base_size = 10,
   alpha_dot = 0.8,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   rescale_distance = FALSE,
   type = "dots",
@@ -117,6 +119,7 @@ plot.see_check_outliers <- function(
       size_title = size_title,
       base_size = base_size,
       alpha_dot = alpha_dot,
+      theme = theme,
       colors = colors
     )
   } else if (type == "count") {
@@ -124,7 +127,11 @@ plot.see_check_outliers <- function(
       x,
       show_labels = show_labels,
       size_text = size_text,
+      size_axis_title = size_axis_title,
+      size_title = size_title,
+      base_size = base_size,
       rescale_distance = rescale_distance,
+      theme = theme,
       ... # to change bins because of warning
     )
   } else {
@@ -132,6 +139,10 @@ plot.see_check_outliers <- function(
       x,
       rescale_distance = rescale_distance,
       elbow_threshold = elbow_threshold,
+      size_axis_title = size_axis_title,
+      size_title = size_title,
+      base_size = base_size,
+      theme = theme,
       verbose = verbose,
       ...
     )

@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{see_check_model}(
   x,
-  style = theme_lucid,
+  theme = NULL,
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
@@ -16,7 +16,8 @@
 \arguments{
 \item{x}{An object.}
 
-\item{style}{A ggplot2-theme.}
+\item{theme}{A ggplot2-theme function, e.g. \code{theme = theme_lucid()} or
+\code{theme = ggplot2::theme_dark()}.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}

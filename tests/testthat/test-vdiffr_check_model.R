@@ -71,6 +71,12 @@ test_that("plot.see_check_model() works with themes", {
     fig = plot(performance::check_model(model, check = "linearity")) +
       theme_lucid()
   )
+
+  # Test with modern theme
+  expect_doppelganger_with_seed(
+    title = "check_model_theme_modern_2",
+    fig = plot(performance::check_model(model, theme = theme_modern()))
+  )
 })
 
 

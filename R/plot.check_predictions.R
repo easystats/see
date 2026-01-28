@@ -58,7 +58,8 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #' The `plot()` method for the `performance::check_predictions()` function.
 #'
 #' @param alpha_line Numeric value specifying alpha of lines indicating `yrep`.
-#' @param style A ggplot2-theme.
+#' @param theme A ggplot2-theme function, e.g. `theme = theme_lucid()` or
+#' `theme = ggplot2::theme_dark()`.
 #' @param type Plot type for the posterior predictive checks plot. Can be `"density"`
 #' (default), `"discrete_dots"`, `"discrete_interval"` or `"discrete_both"` (the
 #' `discrete_*` options are appropriate for models with discrete - binary, integer
@@ -99,7 +100,7 @@ print.see_performance_pp_check <- function(
   size_title = 12,
   base_size = 10,
   alpha_line = 0.15,
-  style = theme_lucid,
+  theme = NULL,
   colors = unname(social_colors(c("green", "blue"))),
   type = "density",
   x_limits = NULL,
@@ -109,6 +110,14 @@ print.see_performance_pp_check <- function(
   check_range <- isTRUE(attributes(x)$check_range)
   plot_type <- attributes(x)$type
   is_stan <- attributes(x)$is_stan
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
 
   if (
     missing(type) &&
@@ -133,7 +142,7 @@ print.see_performance_pp_check <- function(
     linewidth = linewidth,
     size_point = size_point,
     alpha_line = alpha_line,
-    theme_style = style,
+    theme = theme,
     colors = colors,
     base_size = base_size,
     size_title = size_title,
@@ -166,7 +175,7 @@ plot.see_performance_pp_check <- function(
   size_title = 12,
   base_size = 10,
   alpha_line = 0.15,
-  style = theme_lucid,
+  theme = NULL,
   colors = unname(social_colors(c("green", "blue"))),
   type = "density",
   x_limits = NULL,
@@ -176,6 +185,15 @@ plot.see_performance_pp_check <- function(
   check_range <- isTRUE(attributes(x)$check_range)
   plot_type <- attributes(x)$type
   is_stan <- attributes(x)$is_stan
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
 
   if (
     missing(type) &&
@@ -201,7 +219,7 @@ plot.see_performance_pp_check <- function(
     linewidth = linewidth,
     size_point = size_point,
     alpha_line = alpha_line,
-    theme_style = style,
+    theme = theme,
     base_size = base_size,
     size_axis_title = size_axis_title,
     size_title = size_title,
@@ -226,7 +244,7 @@ plot.see_performance_pp_check <- function(
   linewidth,
   size_point,
   alpha_line,
-  theme_style,
+  theme = NULL,
   base_size = 10,
   size_axis_title = 10,
   size_title = 12,
@@ -237,6 +255,15 @@ plot.see_performance_pp_check <- function(
   ...
 ) {
   info <- attr(x, "info")
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
 
   # discrete plot type from "bayesplot::pp_check()" returns a different data
   # structure, so we need to handle it differently
@@ -300,14 +327,7 @@ plot.see_performance_pp_check <- function(
 
   dots <- list(...)
   if (isTRUE(dots[["check_model"]])) {
-    out <- out +
-      theme_style(
-        base_size = base_size,
-        plot.title.space = 3,
-        axis.title.space = 5,
-        axis.title.size = size_axis_title,
-        plot.title.size = size_title
-      )
+    out <- out + theme
   }
 
   if (isTRUE(dots[["adjust_legend"]]) || isTRUE(info$check_range)) {

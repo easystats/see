@@ -8,9 +8,18 @@ plot.see_binned_residuals <- function(
   base_size = 10,
   colors = social_colors(c("blue", "red", "green")),
   show_smooth = FALSE,
-  style = theme_lucid,
+  theme = NULL,
   ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   x$se.lo <- -x$se
   if (length(unique(x$group)) > 1L) {
     ltitle <- "Within error bounds"
@@ -26,12 +35,6 @@ plot.see_binned_residuals <- function(
   } else {
     show_dots <- isTRUE(dots[["show_dots"]])
   }
-
-  if (missing(style) && !is.null(attr(x, "theme"))) {
-    theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
-    style <- get(theme_style[2], asNamespace(theme_style[1]))
-  }
-  theme_style <- style
 
   if (is.null(colors) || length(colors) != 3) {
     colors <- social_colors(c("blue", "red", "green"))
@@ -124,16 +127,7 @@ plot.see_binned_residuals <- function(
       )
   }
 
-  if (isTRUE(dots[["check_model"]])) {
-    p <- p +
-      theme_style(
-        base_size = base_size,
-        plot.title.space = 3,
-        axis.title.space = 5,
-        axis.title.size = size_axis_title,
-        plot.title.size = size_title
-      )
-  }
+  p <- p + theme
 
   if (isTRUE(dots[["adjust_legend"]])) {
     p <- p +

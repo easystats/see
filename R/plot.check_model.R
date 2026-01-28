@@ -28,7 +28,7 @@
 #' @export
 plot.see_check_model <- function(
   x,
-  style = theme_lucid,
+  theme = NULL,
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
@@ -75,10 +75,13 @@ plot.see_check_model <- function(
 
   # set default values for arguments ------
 
-  if (missing(style) && !is.null(attr(x, "theme"))) {
-    theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
-    style <- get(theme_style[2], asNamespace(theme_style[1]))
-  }
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
 
   if (is.null(colors)) {
     colors <- attr(x, "colors")
@@ -125,7 +128,7 @@ plot.see_check_model <- function(
     x$NORM <- NULL
     p$PP_CHECK <- plot.see_performance_pp_check(
       x$PP_CHECK,
-      style = style,
+      theme = theme,
       linewidth = linewidth,
       size_point = size_point,
       base_size = base_size,
@@ -149,7 +152,7 @@ plot.see_check_model <- function(
       size_point = size_point,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -169,7 +172,7 @@ plot.see_check_model <- function(
     x$HOMOGENEITY <- NULL
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
-      style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -188,7 +191,7 @@ plot.see_check_model <- function(
   ) {
     p$OVERDISPERSION <- .plot_diag_overdispersion(
       x$OVERDISPERSION,
-      style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -209,7 +212,7 @@ plot.see_check_model <- function(
       size_point = size_point,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -232,7 +235,7 @@ plot.see_check_model <- function(
       size_text = size_text,
       linewidth = linewidth,
       size_point = size_point,
-      theme_style = style,
+      theme = theme,
       size_axis_title = size_axis_title,
       size_title = size_title,
       base_size = base_size,
@@ -250,7 +253,7 @@ plot.see_check_model <- function(
       x$VIF,
       size_point = 1.5 * size_point,
       linewidth = linewidth,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -270,7 +273,7 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         colors = colors,
         detrend = detrend,
-        style = style,
+        theme = theme,
         base_size = base_size,
         size_axis_title = size_axis_title,
         size_title = size_title
@@ -284,7 +287,7 @@ plot.see_check_model <- function(
         size_title = size_title,
         alpha_level = alpha_level,
         detrend = detrend,
-        theme_style = style,
+        theme = theme,
         base_size = base_size,
         colors = colors,
         alpha_dot = alpha_dot,
@@ -306,7 +309,7 @@ plot.see_check_model <- function(
       x$NORM,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -324,7 +327,7 @@ plot.see_check_model <- function(
       size_axis_title = size_axis_title,
       size_title = size_title,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       colors = colors,
       alpha_dot = alpha_dot,
@@ -347,37 +350,6 @@ plot.see_check_model <- function(
 }
 
 
-# Helper function to sample large datasets for performance
-# See issue #420: https://github.com/easystats/see/issues/420
-.sample_for_plot <- function(data, maximum_dots = 2000, ...) {
-  if (is.null(data) || !is.data.frame(data)) {
-    return(data)
-  }
-
-  n_obs <- nrow(data)
-
-  if (is.null(maximum_dots)) {
-    maximum_dots <- 2000
-  }
-
-  # Only sample if dataset exceeds threshold
-  if (n_obs > maximum_dots) {
-    # Use stratified sampling if there are grouping variables
-    # Otherwise use simple random sampling
-    set.seed(123) # For reproducibility in plots
-    sample_indices <- sample.int(n_obs, maximum_dots, replace = FALSE)
-    data <- data[sample_indices, , drop = FALSE]
-
-    # Add attribute to track sampling
-    attr(data, "was_sampled") <- TRUE
-    attr(data, "original_n") <- n_obs
-    attr(data, "sampled_n") <- maximum_dots
-  }
-
-  data
-}
-
-
 .plot_diag_linearity <- function(
   x,
   size_point,
@@ -385,7 +357,7 @@ plot.see_check_model <- function(
   size_axis_title = 10,
   size_title = 12,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
@@ -393,6 +365,15 @@ plot.see_check_model <- function(
   maximum_dots = 2000,
   ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   # Sample data if too large for performance (issue #420)
   x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
 
@@ -423,11 +404,5 @@ plot.see_check_model <- function(
       title = "Linearity",
       subtitle = "Reference line should be flat and horizontal"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      axis.title.size = size_axis_title,
-      plot.title.size = size_title
-    )
+    theme
 }

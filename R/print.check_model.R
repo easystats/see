@@ -1,7 +1,7 @@
 #' @export
 print.see_check_model <- function(
   x,
-  style = theme_lucid,
+  style = NULL,
   colors = NULL,
   type = "density",
   n_columns = 2,

@@ -4,6 +4,7 @@
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams print.see_performance_pp_check
 #'
 #' @return A ggplot2-object.
 #'
@@ -18,6 +19,7 @@
 plot.see_check_collinearity <- function(
   x,
   data = NULL,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8", "#cd201f"),
   size_point = 3.5,
   linewidth = 0.8,
@@ -56,6 +58,7 @@ plot.see_check_collinearity <- function(
     size_title = size_title,
     size_axis_title = size_axis_title,
     base_size = base_size,
+    theme = theme,
     colors = colors,
     ci_data = attributes(x)$CI,
     is_check_model = FALSE
@@ -67,7 +70,7 @@ plot.see_check_collinearity <- function(
   x,
   size_point,
   linewidth,
-  theme_style = theme_lucid,
+  theme = NULL,
   size_title = 12,
   size_axis_title = 10,
   base_size = 10,
@@ -75,6 +78,14 @@ plot.see_check_collinearity <- function(
   ci_data = NULL,
   is_check_model = FALSE
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
+
   ylim <- ceiling(max(x$y, na.rm = TRUE))
   xlim <- nrow(x)
   if (ylim < 10) {
@@ -178,13 +189,7 @@ plot.see_check_collinearity <- function(
       aesthetics = c("color", "fill"),
       guide = ggplot2::guide_legend(title = NULL)
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    ) +
+    theme +
     ggplot2::scale_y_continuous(
       limits = c(1, ylim * 1.15),
       oob = scales::oob_squish,
