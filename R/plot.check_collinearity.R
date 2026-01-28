@@ -75,6 +75,15 @@ plot.see_check_collinearity <- function(
   ci_data = NULL,
   is_check_model = FALSE
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   ylim <- ceiling(max(x$y, na.rm = TRUE))
   xlim <- nrow(x)
   if (ylim < 10) {

@@ -9,13 +9,22 @@
   size_text = NULL,
   size_axis_title = base_size,
   size_title = 12,
-  theme = NULL,
   base_size = 10,
+  theme = NULL,
   colors = unname(social_colors(c("green", "blue grey", "red"))),
   alpha_dot = 0.8,
   show_dots = TRUE,
   maximum_dots = 2000
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   linewidth <- linewidth %||% 0.7
   size_text <- size_text %||% 3
 
@@ -202,9 +211,21 @@
   x,
   show_labels = TRUE,
   size_text = 3.5,
+  size_title = 12,
+  base_size = 10,
+  size_axis_title = base_size,
   rescale_distance = TRUE,
   theme = NULL
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   d <- data_plot(x, rescale_distance = rescale_distance)
   d$Id <- seq_len(nrow(d))
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])

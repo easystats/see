@@ -15,7 +15,8 @@ plot.see_check_overdisp <- function(
     theme,
     base_size,
     size_axis_title,
-    size_title
+    size_title,
+    default_theme = ggplot2::theme_grey()
   )
   .plot_diag_overdispersion(
     x,

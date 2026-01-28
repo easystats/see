@@ -35,7 +35,8 @@
   theme = NULL,
   base_size = 10,
   size_axis_title = 10,
-  size_title = 12
+  size_title = 12,
+  default_theme = NULL
 ) {
   if (is.null(theme)) {
     theme <- attr(x, "theme")
@@ -53,7 +54,7 @@
         "Plot theme must be a function, or a string naming a theme function."
       )
     }
-  } else {
+  } else if (is.null(default_theme)) {
     theme <- theme_lucid(
       base_size = base_size,
       plot.title.space = 3,
@@ -61,6 +62,8 @@
       axis.title.size = size_axis_title,
       plot.title.size = size_title
     )
+  } else {
+    theme <- default_theme
   }
   theme
 }

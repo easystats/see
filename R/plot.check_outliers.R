@@ -77,17 +77,18 @@ plot.see_check_outliers <- function(
   verbose = TRUE,
   ...
 ) {
-  # need to know the method first, because we change the default plot type
-  # depending on the method
-  outlier_methods <- attr(x, "method", exact = TRUE)
-
   theme <- .set_default_theme(
     x,
     theme,
     base_size,
     size_axis_title,
-    size_title
+    size_title,
+    default_theme = ggplot2::theme_grey()
   )
+
+  # need to know the method first, because we change the default plot type
+  # depending on the method
+  outlier_methods <- attr(x, "method", exact = TRUE)
 
   # validate that the method is correct
   if (length(outlier_methods) == 0) {
@@ -134,6 +135,9 @@ plot.see_check_outliers <- function(
       x,
       show_labels = show_labels,
       size_text = size_text,
+      size_axis_title = size_axis_title,
+      size_title = size_title,
+      base_size = base_size,
       rescale_distance = rescale_distance,
       theme = theme,
       ... # to change bins because of warning
@@ -143,6 +147,9 @@ plot.see_check_outliers <- function(
       x,
       rescale_distance = rescale_distance,
       elbow_threshold = elbow_threshold,
+      size_axis_title = size_axis_title,
+      size_title = size_title,
+      base_size = base_size,
       theme = theme,
       verbose = verbose,
       ...

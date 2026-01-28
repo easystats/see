@@ -2,11 +2,23 @@
   x,
   elbow_threshold = NULL,
   rescale_distance = FALSE,
+  size_title = 12,
+  base_size = 10,
+  size_axis_title = base_size,
   theme = NULL,
   verbose = TRUE,
   ...
 ) {
   insight::check_if_installed("ggrepel")
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
 
   att <- attributes(x)
   method <- tools::toTitleCase(att$method)
