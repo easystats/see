@@ -2,6 +2,16 @@
 
 ## see (development version)
 
+### Breaking Changes
+
+- Data points in
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for objects
+  from
+  [`parameters::model_parameters()`](https://easystats.github.io/parameters/reference/model_parameters.html)
+  were sorted in reverse order when using the `sort` argument. This was
+  fixed, thus, `sort = "ascending"` now sorts the data in ascending
+  order in plot/math logic.
+
 ### Major Changes
 
 - Daniel Lüdecke is now the main maintainer of the package.
@@ -25,6 +35,13 @@
   extracts the `show_ci` attribute from objects returned by
   [`check_model()`](https://easystats.github.io/performance/reference/check_model.html),
   to show or hide confidence intervals.
+
+### Bug fixes
+
+- Fixed issue in the
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method for
+  [`estimate_density()`](https://easystats.github.io/bayestestR/reference/estimate_density.html)
+  with vector input and `group_by` argument.
 
 ## see 0.12.0
 
