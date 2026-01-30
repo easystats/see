@@ -1,5 +1,11 @@
 # see (development version)
 
+## Breaking Changes
+
+* Data points in `plot()` for objects from `parameters::model_parameters()` were
+  sorted in reverse order when using the `sort` argument. This was fixed, thus,
+  `sort = "ascending"` now sorts the data in ascending order in plot/math logic.
+
 ## Major Changes
 
 * Daniel Lüdecke is now the main maintainer of the package.
@@ -16,6 +22,11 @@
 
 * `plot()` for `check_model()` extracts the `show_ci` attribute from objects
   returned by `check_model()`, to show or hide confidence intervals.
+
+## Bug fixes
+
+* Fixed issue in the `plot()` method for `estimate_density()` with vector input
+  and `group_by` argument.
 
 # see 0.12.0
 
