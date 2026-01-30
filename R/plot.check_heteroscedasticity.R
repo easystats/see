@@ -5,6 +5,7 @@
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
+#' @inheritParams print.see_performance_pp_check
 #'
 #' @return A ggplot2-object.
 #'
@@ -24,6 +25,7 @@ plot.see_check_heteroscedasticity <- function(
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
+  theme = NULL,
   ...
 ) {
   if (is.null(data)) {
@@ -85,13 +87,16 @@ plot.see_check_heteroscedasticity <- function(
     base_size = base_size,
     size_title = size_title,
     size_axis_title = size_axis_title,
+    theme = theme,
     ...
   )
 }
 
 
 .sigma_glmmTMB_nonmixed <- function(model, faminfo) {
-  if (!is.na(match(faminfo$family, c("binomial", "poisson", "truncated_poisson")))) {
+  if (
+    !is.na(match(faminfo$family, c("binomial", "poisson", "truncated_poisson")))
+  ) {
     return(1)
   }
   betad <- model$fit$par["betad"]

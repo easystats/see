@@ -149,14 +149,29 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   size_point,
   linewidth,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme = NULL,
   size_title = 12,
   size_axis_title = 10,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  show_ci = TRUE,
+  maximum_dots = 2000,
+  ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
+  # Sample data if too large for performance (issue #420)
+  x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
+
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
 
   if (isTRUE(show_dots)) {
@@ -171,7 +186,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   p +
     ggplot2::stat_smooth(
       method = "loess",
-      se = TRUE,
+      se = show_ci,
       alpha = alpha_level,
       formula = y ~ x,
       linewidth = linewidth,
@@ -183,11 +198,5 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       y = expression(sqrt("|Std. residuals|")),
       x = "Fitted values"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    )
+    theme
 }

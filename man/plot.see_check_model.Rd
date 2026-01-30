@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{see_check_model}(
   x,
-  style = theme_lucid,
+  theme = NULL,
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
@@ -16,7 +16,8 @@
 \arguments{
 \item{x}{An object.}
 
-\item{style}{A ggplot2-theme.}
+\item{theme}{A ggplot2-theme function, e.g. \code{theme = theme_lucid()} or
+\code{theme = ggplot2::theme_dark()}.}
 
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
@@ -37,8 +38,15 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_model()} function.
 Diagnostic plots for regression models.
 }
+\details{
+Larger models (with many observations) may take a longer time to render.
+Thus, the number of data points is limited to 2000 by default. Use
+\verb{plot(check_model(), maximum_dots = <number>)} (or
+\verb{check_model(maximum_dots = <number>)}) to define the number of data points
+that should be shown in the plots.
+}
 \examples{
-\dontshow{if (require("patchwork")) withAutoprint(\{ # examplesIf}
+\dontshow{if (require("patchwork") && FALSE) withAutoprint(\{ # examplesIf}
 library(performance)
 
 model <- lm(qsec ~ drat + wt, data = mtcars)
@@ -46,5 +54,6 @@ plot(check_model(model))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-See also the vignette about \href{https://easystats.github.io/performance/articles/check_model.html}{\code{check_model()}}.
+See also the vignette about
+\href{https://easystats.github.io/performance/articles/check_model.html}{\code{check_model()}}.
 }

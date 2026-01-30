@@ -69,3 +69,5 @@ revdep/data.sqlite
 CRAN-SUBMISSION
 
 *.bak
+/.quarto/
+**/*.quarto_ipynb

@@ -23,6 +23,7 @@
 #' axis and plot titles.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
+#' @inheritParams print.see_performance_pp_check
 #'
 #' @return A ggplot2-object.
 #'
@@ -50,6 +51,7 @@ plot.see_check_normality <- function(
   base_size = 10,
   alpha = 0.2,
   alpha_dot = 0.8,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = TRUE,
   method = "ell",
@@ -72,12 +74,14 @@ plot.see_check_normality <- function(
   if (!is.null(attributes(x)$effects) && attributes(x)$effects == "random") {
     .plot_diag_reqq(
       attributes(x)$re_qq,
+      theme = theme,
       size_point = size_point,
       linewidth = linewidth,
       alpha_level = alpha,
       size_axis_title = size_axis_title,
       size_title = size_title,
-      base_size = base_size
+      base_size = base_size,
+      ...
     )
   } else if (type == "qq") {
     # return early for simres
@@ -88,6 +92,7 @@ plot.see_check_normality <- function(
         size_point = size_point,
         alpha = alpha,
         alpha_dot = alpha_dot,
+        theme = theme,
         colors = colors,
         detrend = detrend,
         base_size = base_size,
@@ -109,8 +114,10 @@ plot.see_check_normality <- function(
       detrend = detrend,
       alpha_dot = alpha_dot,
       model_info = model_info,
+      theme = theme,
       method = method,
-      model_class = class(model)[1]
+      model_class = class(model)[1],
+      ...
     )
   } else if (type == "density") {
     dat <- .residuals_density(model)
@@ -120,7 +127,8 @@ plot.see_check_normality <- function(
       alpha_level = alpha,
       base_size = base_size,
       size_axis_title = size_axis_title,
-      size_title = size_title
+      size_title = size_title,
+      theme = theme
     )
   } else if (type == "pp") {
     dat <- .residuals_pp(model)
@@ -134,7 +142,8 @@ plot.see_check_normality <- function(
       alpha_level = alpha,
       detrend = detrend,
       alpha_dot = alpha_dot,
-      method = method
+      method = method,
+      theme = theme
     )
   }
 }
@@ -143,7 +152,9 @@ plot.see_check_normality <- function(
 # extract residuals
 
 .residuals_qq <- function(model) {
-  if (inherits(model, c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor"))) {
+  if (
+    inherits(model, c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor"))
+  ) {
     res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
     dat <- stats::na.omit(data.frame(y = res_))
   } else if (inherits(model, "glmmTMB")) {
@@ -225,10 +236,18 @@ plot.see_check_normality <- function(
   size_axis_title = 10,
   size_title = 12,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red")))
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
+
   ggplot2::ggplot(x, ggplot2::aes(x = .data$x)) +
     ggplot2::geom_ribbon(
       mapping = ggplot2::aes(ymin = 0, ymax = .data$y),
@@ -249,13 +268,7 @@ plot.see_check_normality <- function(
       title = "Normality of Residuals",
       subtitle = "Distribution should be close to the normal curve"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    ) +
+    theme +
     ggplot2::scale_y_continuous(labels = NULL)
 }
 
@@ -271,14 +284,27 @@ plot.see_check_normality <- function(
   alpha_level = 0.2,
   detrend = FALSE,
   method = "ell",
-  theme_style = theme_lucid,
+  theme = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
   show_dots = TRUE,
   model_info = NULL,
-  model_class = NULL
+  model_class = NULL,
+  maximum_dots = 2000,
+  ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
+
+  # Sample data if too large for performance (issue #420)
+  x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
+
   qhalfnorm <- function(p) stats::qnorm((p + 1) / 2)
 
   # set default y-range for FA / PCA
@@ -398,13 +424,7 @@ plot.see_check_normality <- function(
       y = y_lab,
       x = "Standard Normal Distribution Quantiles"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    )
+    theme
 
   if (!is.null(y_range)) {
     p <- p + ggplot2::ylim(y_range)
@@ -425,11 +445,19 @@ plot.see_check_normality <- function(
   alpha_level = 0.2,
   detrend = FALSE,
   method = "ell",
-  theme_style = theme_lucid,
+  theme = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
+
   if (requireNamespace("qqplotr", quietly = TRUE)) {
     p_plot <- ggplot2::ggplot(x, ggplot2::aes(sample = .data$res)) +
       qqplotr::stat_pp_band(
@@ -487,13 +515,7 @@ plot.see_check_normality <- function(
       y = y_lab,
       x = "Standard Normal Cumulative Probability"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      plot.title.size = size_title,
-      axis.title.size = size_axis_title
-    )
+    theme
 }
 
 
@@ -507,14 +529,28 @@ plot.see_check_normality <- function(
   size_title = 12,
   panel = TRUE,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  maximum_dots = 2000,
+  ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
+
   lapply(names(x), function(i) {
     dat <- x[[i]]
+
+    # Sample data if too large for performance (issue #420)
+    dat <- .sample_for_plot(dat, maximum_dots = maximum_dots, ...)
+
     p <- ggplot2::ggplot(dat, ggplot2::aes(x = .data$x, y = .data$y)) +
       ggplot2::labs(
         x = "Theoretical Quantiles",
@@ -535,13 +571,7 @@ plot.see_check_normality <- function(
         colour = colors[2],
         alpha = alpha_dot
       ) +
-      theme_style(
-        base_size = base_size,
-        plot.title.space = 3,
-        axis.title.space = 5,
-        plot.title.size = size_title,
-        axis.title.size = size_axis_title
-      )
+      theme
 
     if (isTRUE(show_dots)) {
       p <- p +

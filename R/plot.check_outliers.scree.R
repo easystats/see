@@ -2,10 +2,23 @@
   x,
   elbow_threshold = NULL,
   rescale_distance = FALSE,
+  size_title = 12,
+  base_size = 10,
+  size_axis_title = base_size,
+  theme = NULL,
   verbose = TRUE,
   ...
 ) {
   insight::check_if_installed("ggrepel")
+
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
 
   att <- attributes(x)
   method <- tools::toTitleCase(att$method)
@@ -90,12 +103,13 @@
       x = "Observations (sorted)",
       y = y_lab
     ) +
-    see::theme_modern()
+    theme
 
   # Add elbow guideline segments (scree-style) — solid, with gap
   if (length(elbow_idx) > 0) {
     gap_proportion <- 0.15
-    gaps <- (df_plot$mdist[elbow_idx + 1] - df_plot$mdist[elbow_idx]) * gap_proportion
+    gaps <- (df_plot$mdist[elbow_idx + 1] - df_plot$mdist[elbow_idx]) *
+      gap_proportion
     elbow_lines <- data.frame(
       x = df_plot$obs[elbow_idx],
       xend = df_plot$obs[elbow_idx + 1],
@@ -105,7 +119,12 @@
     p <- p +
       ggplot2::geom_segment(
         data = elbow_lines,
-        ggplot2::aes(x = .data$x, xend = .data$xend, y = .data$y, yend = .data$yend),
+        ggplot2::aes(
+          x = .data$x,
+          xend = .data$xend,
+          y = .data$y,
+          yend = .data$yend
+        ),
         inherit.aes = FALSE,
         colour = "#5b9bd5",
         linetype = "solid",

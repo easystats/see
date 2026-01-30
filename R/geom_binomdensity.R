@@ -101,7 +101,9 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
     }
 
     out <- as.vector(prop[as.character(data[[y]])] * 0.9)
-  } else if (length(scale) == 1 && is.character(scale) && scale %in% names(data)) {
+  } else if (
+    length(scale) == 1 && is.character(scale) && scale %in% names(data)
+  ) {
     out <- data[[scale]]
   } else if (is.list(scale) && all(names(prop) %in% names(scale))) {
     # replace vals
