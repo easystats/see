@@ -8,4 +8,6 @@ test_that("`check_model()` works with lm", {
   x <- performance::check_model(m)
   # vdiffr test is too fragile for this complex of an output
   expect_s3_class(x, "check_model")
+  # still works with character values for theme
+  x <- performance::check_model(m, theme = "ggplot2::theme_dark")
 })

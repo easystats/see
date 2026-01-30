@@ -44,11 +44,15 @@
   if (!is.null(theme)) {
     if (is.character(theme)) {
       theme_parts <- unlist(strsplit(theme, "::", fixed = TRUE))
+      # we have the "theme" as string, now we need to get the related function
       if (length(theme_parts) == 2) {
         theme <- get(theme_parts[2], asNamespace(theme_parts[1]))
       } else {
         theme <- get(theme_parts[1], mode = "function")
       }
+      # the function has no proper class attributes, so we call that function
+      # which returns the function with correct classes
+      theme <- do.call(theme, args = list())
     } else if (!is.function(theme) && !"theme" %in% class(theme)) {
       insight::format_error(
         "Plot theme must be a function, or a string naming a theme function."
