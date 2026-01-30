@@ -51,7 +51,7 @@ Authors@R:
              family = "Bossek",
              role = "rev",
              email = "bossek@wi.uni-muenster.de"))
-Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
+Maintainer: Daniel Lüdecke <officialeasystats@gmail.com>
 Description: Provides plotting utilities supporting packages in the 'easystats'
     ecosystem (<https://github.com/easystats/easystats>) and some extra themes,
     geoms, and scales for 'ggplot2'. Color scales are based on
