@@ -1,6 +1,6 @@
 # Changelog
 
-## see (development version)
+## see 0.13.0
 
 ### Breaking Changes
 

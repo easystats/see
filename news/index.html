@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,23 +54,23 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="see-development-version">see (development version)<a class="anchor" aria-label="anchor" href="#see-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.13.0" id="see-0130">see 0.13.0<a class="anchor" aria-label="anchor" href="#see-0130"></a></h2>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="breaking-changes-0-13-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-13-0"></a></h3>
 <ul><li>Data points in <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for objects from <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code> were sorted in reverse order when using the <code>sort</code> argument. This was fixed, thus, <code>sort = "ascending"</code> now sorts the data in ascending order in plot/math logic.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="major-changes-development-version">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-development-version"></a></h3>
+<h3 id="major-changes-0-13-0">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-0-13-0"></a></h3>
 <ul><li><p>Daniel Lüdecke is now the main maintainer of the package.</p></li>
 <li><p>Several <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> methods gain a <code>theme</code> argument, to control the visual themes for plots. This is in particular useful for plots that consist of several single plots, like the one returned by <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code>.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="changes-development-version">Changes<a class="anchor" aria-label="anchor" href="#changes-development-version"></a></h3>
+<h3 id="changes-0-13-0">Changes<a class="anchor" aria-label="anchor" href="#changes-0-13-0"></a></h3>
 <ul><li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code> now limits the number of data points for models with many observations, to reduce the time for rendering the plot. Use argument <code>maximum_dots</code> to define the maximum number of data points to show.</p></li>
 <li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code> extracts the <code>show_ci</code> attribute from objects returned by <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code>, to show or hide confidence intervals.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-13-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-0"></a></h3>
 <ul><li>Fixed issue in the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method for <code><a href="https://easystats.github.io/bayestestR/reference/estimate_density.html" class="external-link">estimate_density()</a></code> with vector input and <code>group_by</code> argument.</li>
 </ul></div>
 </div>
