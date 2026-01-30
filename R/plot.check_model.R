@@ -51,7 +51,10 @@ plot.see_check_model <- function(
   alpha_level <- attr(x, "alpha")
   alpha_dot <- attr(x, "alpha_dot")
   show_dots <- attr(x, "show_dots")
-  show_ci <- attr(x, "show_ci")
+  # for backwards compatibility, this attribute is NULL, and we want to show
+  # confidence intervals then. checking for isTRUE would return FALSE for older
+  # performance package versions, thus hiding CIs by default
+  show_ci <- !isFALSE(attr(x, "show_ci"))
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")

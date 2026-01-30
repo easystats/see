@@ -1,7 +1,7 @@
 Type: Package
 Package: see
 Title: Model Visualisation Toolbox for 'easystats' and 'ggplot2'
-Version: 0.12.0.6
+Version: 0.13.0
 Authors@R:
     c(person(given = "Daniel",
              family = "Lüdecke",
@@ -51,7 +51,7 @@ Authors@R:
              family = "Bossek",
              role = "rev",
              email = "bossek@wi.uni-muenster.de"))
-Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
+Maintainer: Daniel Lüdecke <officialeasystats@gmail.com>
 Description: Provides plotting utilities supporting packages in the 'easystats'
     ecosystem (<https://github.com/easystats/easystats>) and some extra themes,
     geoms, and scales for 'ggplot2'. Color scales are based on
@@ -127,4 +127,3 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/Needs/website: easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Remotes: easystats/performance
