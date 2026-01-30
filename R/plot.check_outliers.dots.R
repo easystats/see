@@ -9,16 +9,65 @@
   size_text = NULL,
   size_axis_title = base_size,
   size_title = 12,
-  theme_style = theme_lucid,
   base_size = 10,
+  theme = NULL,
   colors = unname(social_colors(c("green", "blue grey", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  maximum_dots = 2000
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   linewidth <- linewidth %||% 0.7
   size_text <- size_text %||% 3
 
   plot_data <- x
+
+  if (is.null(maximum_dots)) {
+    maximum_dots <- 2000
+  }
+
+  # Sample data if too large for performance (issue #420)
+  # But preserve influential points for labeling
+  if (nrow(plot_data) > maximum_dots) {
+    # Keep all influential points
+    influential_points <- plot_data[
+      plot_data$Influential == "Influential",
+      ,
+      drop = FALSE
+    ]
+    non_influential_points <- plot_data[
+      plot_data$Influential != "Influential",
+      ,
+      drop = FALSE
+    ]
+
+    # Sample from non-influential points
+    if (nrow(non_influential_points) > (maximum_dots * 0.8)) {
+      set.seed(123)
+      sample_indices <- sample.int(
+        nrow(non_influential_points),
+        round((maximum_dots * 0.8)),
+        replace = FALSE
+      )
+      non_influential_points <- non_influential_points[
+        sample_indices,
+        ,
+        drop = FALSE
+      ]
+    }
+
+    # Combine back
+    plot_data <- rbind(influential_points, non_influential_points)
+  }
+
   cook.levels <- attributes(x)$cook_levels
   n_params <- attributes(x)$n_params
 
@@ -151,13 +200,7 @@
 
     p <- p +
       .cook_lines +
-      theme_style(
-        base_size = base_size,
-        plot.title.space = 3,
-        axis.title.space = 5,
-        plot.title.size = size_title,
-        axis.title.size = size_axis_title
-      ) +
+      theme +
       ggplot2::guides(colour = "none", text = "none")
   }
 
@@ -168,8 +211,21 @@
   x,
   show_labels = TRUE,
   size_text = 3.5,
-  rescale_distance = TRUE
+  size_title = 12,
+  base_size = 10,
+  size_axis_title = base_size,
+  rescale_distance = TRUE,
+  theme = NULL
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
   d <- data_plot(x, rescale_distance = rescale_distance)
   d$Id <- seq_len(nrow(d))
   d$Outliers <- as.factor(attr(x, "data", exact = TRUE)[["Outlier"]])
@@ -234,5 +290,5 @@
     }
   }
 
-  p + ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 2))
+  p + ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 2)) + theme
 }

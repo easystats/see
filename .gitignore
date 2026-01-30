@@ -67,3 +67,6 @@ revdep/checks.noindex
 revdep/library.noindex
 revdep/data.sqlite
 CRAN-SUBMISSION
+
+/.quarto/
+**/*.quarto_ipynb

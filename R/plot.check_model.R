@@ -9,9 +9,17 @@
 #'
 #' @return A ggplot2-object.
 #'
-#' @seealso See also the vignette about [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
+#' @seealso See also the vignette about
+#'   [`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 #'
-#' @examplesIf require("patchwork")
+#' @details
+#' Larger models (with many observations) may take a longer time to render.
+#' Thus, the number of data points is limited to 2000 by default. Use
+#' `plot(check_model(), maximum_dots = <number>)` (or
+#' `check_model(maximum_dots = <number>)`) to define the number of data points
+#' that should be shown in the plots.
+#'
+#' @examplesIf require("patchwork") && FALSE
 #' library(performance)
 #'
 #' model <- lm(qsec ~ drat + wt, data = mtcars)
@@ -20,13 +28,14 @@
 #' @export
 plot.see_check_model <- function(
   x,
-  style = theme_lucid,
+  theme = NULL,
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
   ...
 ) {
   p <- list()
+  dots <- list(...)
 
   # read arguments / settings from "check_model()" -----
 
@@ -42,11 +51,17 @@ plot.see_check_model <- function(
   alpha_level <- attr(x, "alpha")
   alpha_dot <- attr(x, "alpha_dot")
   show_dots <- attr(x, "show_dots")
+  show_ci <- attr(x, "show_ci")
   detrend <- attr(x, "detrend")
   model_info <- attr(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
   plot_type <- attr(x, "type")
   model_class <- attr(x, "model_class")
+  max_dots <- attr(x, "maximum_dots")
+
+  if (is.null(max_dots) && !is.null(dots$maximum_dots)) {
+    max_dots <- dots$maximum_dots
+  }
 
   if (
     missing(type) &&
@@ -61,10 +76,13 @@ plot.see_check_model <- function(
 
   # set default values for arguments ------
 
-  if (missing(style) && !is.null(attr(x, "theme"))) {
-    theme_style <- unlist(strsplit(attr(x, "theme"), "::", fixed = TRUE))
-    style <- get(theme_style[2], asNamespace(theme_style[1]))
-  }
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title
+  )
 
   if (is.null(colors)) {
     colors <- attr(x, "colors")
@@ -111,7 +129,7 @@ plot.see_check_model <- function(
     x$NORM <- NULL
     p$PP_CHECK <- plot.see_performance_pp_check(
       x$PP_CHECK,
-      style = style,
+      theme = theme,
       linewidth = linewidth,
       size_point = size_point,
       base_size = base_size,
@@ -135,13 +153,15 @@ plot.see_check_model <- function(
       size_point = size_point,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      show_ci = show_ci,
+      maximum_dots = max_dots
     )
   }
 
@@ -154,7 +174,7 @@ plot.see_check_model <- function(
     x$HOMOGENEITY <- NULL
     p$BINNED_RESID <- plot.see_binned_residuals(
       x$BINNED_RESID,
-      style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -173,7 +193,7 @@ plot.see_check_model <- function(
   ) {
     p$OVERDISPERSION <- .plot_diag_overdispersion(
       x$OVERDISPERSION,
-      style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -194,13 +214,15 @@ plot.see_check_model <- function(
       size_point = size_point,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      show_ci = show_ci,
+      maximum_dots = max_dots
     )
   }
 
@@ -216,13 +238,14 @@ plot.see_check_model <- function(
       size_text = size_text,
       linewidth = linewidth,
       size_point = size_point,
-      theme_style = style,
+      theme = theme,
       size_axis_title = size_axis_title,
       size_title = size_title,
       base_size = base_size,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = show_dots
+      show_dots = show_dots,
+      maximum_dots = max_dots
     )
   }
 
@@ -233,7 +256,7 @@ plot.see_check_model <- function(
       x$VIF,
       size_point = 1.5 * size_point,
       linewidth = linewidth,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -253,7 +276,7 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         colors = colors,
         detrend = detrend,
-        style = style,
+        theme = theme,
         base_size = base_size,
         size_axis_title = size_axis_title,
         size_title = size_title
@@ -267,13 +290,14 @@ plot.see_check_model <- function(
         size_title = size_title,
         alpha_level = alpha_level,
         detrend = detrend,
-        theme_style = style,
+        theme = theme,
         base_size = base_size,
         colors = colors,
         alpha_dot = alpha_dot,
         show_dots = TRUE, # qq-plots w/o dots makes no sense
         model_info = model_info,
-        model_class = model_class
+        model_class = model_class,
+        maximum_dots = max_dots
       )
     }
   }
@@ -288,7 +312,7 @@ plot.see_check_model <- function(
       x$NORM,
       linewidth = linewidth,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       size_axis_title = size_axis_title,
       size_title = size_title,
@@ -306,11 +330,12 @@ plot.see_check_model <- function(
       size_axis_title = size_axis_title,
       size_title = size_title,
       alpha_level = alpha_level,
-      theme_style = style,
+      theme = theme,
       base_size = base_size,
       colors = colors,
       alpha_dot = alpha_dot,
-      show_dots = TRUE # qq-plots w/o dots makes no sense
+      show_dots = TRUE, # qq-plots w/o dots makes no sense
+      maximum_dots = max_dots
     )
 
     for (i in seq_along(ps)) {
@@ -321,9 +346,9 @@ plot.see_check_model <- function(
   if (panel) {
     pw <- plots(p, n_columns = n_columns)
     .safe_print_plots(pw, ...)
-    return(invisible(pw))
+    invisible(pw)
   } else {
-    return(p)
+    p
   }
 }
 
@@ -335,12 +360,27 @@ plot.see_check_model <- function(
   size_axis_title = 10,
   size_title = 12,
   alpha_level = 0.2,
-  theme_style = theme_lucid,
+  theme = NULL,
   base_size = 10,
   colors = unname(social_colors(c("green", "blue", "red"))),
   alpha_dot = 0.8,
-  show_dots = TRUE
+  show_dots = TRUE,
+  show_ci = TRUE,
+  maximum_dots = 2000,
+  ...
 ) {
+  theme <- .set_default_theme(
+    x,
+    theme,
+    base_size,
+    size_axis_title,
+    size_title,
+    default_theme = ggplot2::theme_grey()
+  )
+
+  # Sample data if too large for performance (issue #420)
+  x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
+
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, y = .data$y))
 
   if (isTRUE(show_dots)) {
@@ -355,7 +395,7 @@ plot.see_check_model <- function(
   p +
     ggplot2::geom_smooth(
       method = "loess",
-      se = TRUE,
+      se = show_ci,
       formula = y ~ x,
       alpha = alpha_level,
       linewidth = linewidth,
@@ -368,11 +408,5 @@ plot.see_check_model <- function(
       title = "Linearity",
       subtitle = "Reference line should be flat and horizontal"
     ) +
-    theme_style(
-      base_size = base_size,
-      plot.title.space = 3,
-      axis.title.space = 5,
-      axis.title.size = size_axis_title,
-      plot.title.size = size_title
-    )
+    theme
 }

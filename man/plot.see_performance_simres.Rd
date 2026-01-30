@@ -13,10 +13,10 @@
   base_size = 10,
   alpha = 0.2,
   alpha_dot = 0.8,
+  theme = NULL,
   colors = c("#3aaf85", "#1b6ca8"),
   detrend = FALSE,
   transform = NULL,
-  style = theme_lucid,
   ...
 )
 }
@@ -34,6 +34,9 @@ axis and plot titles.}
 
 \item{alpha_dot}{Numeric value specifying alpha level of the point geoms.}
 
+\item{theme}{A ggplot2-theme function, e.g. \code{theme = theme_lucid()} or
+\code{theme = ggplot2::theme_dark()}.}
+
 \item{colors}{Character vector of length two, indicating the colors (in
 hex-format) for points and line.}
 
@@ -43,8 +46,6 @@ hex-format) for points and line.}
 \item{transform}{Function to transform the residuals. If \code{NULL} (default),
 no transformation is applied and uniformly distributed residuals are expected.
 See argument \code{quantileFuntion} in \code{?DHARMa:::residuals.DHARMa} for more details.}
-
-\item{style}{A ggplot2-theme.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

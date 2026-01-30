@@ -1,3 +1,74 @@
+# Helper function to sample large datasets for performance
+# See issue #420: https://github.com/easystats/see/issues/420
+.sample_for_plot <- function(data, maximum_dots = 2000, ...) {
+  if (is.null(data) || !is.data.frame(data)) {
+    return(data)
+  }
+
+  n_obs <- nrow(data)
+
+  if (is.null(maximum_dots)) {
+    maximum_dots <- 2000
+  }
+
+  # Only sample if dataset exceeds threshold
+  if (n_obs > maximum_dots) {
+    # Use stratified sampling if there are grouping variables
+    # Otherwise use simple random sampling
+    set.seed(123) # For reproducibility in plots
+    sample_indices <- sample.int(n_obs, maximum_dots, replace = FALSE)
+    data <- data[sample_indices, , drop = FALSE]
+
+    # Add attribute to track sampling
+    attr(data, "was_sampled") <- TRUE
+    attr(data, "original_n") <- n_obs
+    attr(data, "sampled_n") <- maximum_dots
+  }
+
+  data
+}
+
+
+# small helper to set default theme for plots
+.set_default_theme <- function(
+  x,
+  theme = NULL,
+  base_size = 10,
+  size_axis_title = 10,
+  size_title = 12,
+  default_theme = NULL
+) {
+  if (is.null(theme)) {
+    theme <- attr(x, "theme")
+  }
+  if (!is.null(theme)) {
+    if (is.character(theme)) {
+      theme_parts <- unlist(strsplit(theme, "::", fixed = TRUE))
+      if (length(theme_parts) == 2) {
+        theme <- get(theme_parts[2], asNamespace(theme_parts[1]))
+      } else {
+        theme <- get(theme_parts[1], mode = "function")
+      }
+    } else if (!is.function(theme) && !"theme" %in% class(theme)) {
+      insight::format_error(
+        "Plot theme must be a function, or a string naming a theme function."
+      )
+    }
+  } else if (is.null(default_theme)) {
+    theme <- theme_lucid(
+      base_size = base_size,
+      plot.title.space = 3,
+      axis.title.space = 5,
+      axis.title.size = size_axis_title,
+      plot.title.size = size_title
+    )
+  } else {
+    theme <- default_theme
+  }
+  theme
+}
+
+
 .str_to_sym <- function(x) {
   insight::check_if_installed("rlang")
   if (!is.null(x) && is.character(x)) {

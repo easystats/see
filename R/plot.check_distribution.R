@@ -46,39 +46,39 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
   # default legend-position
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
-  p1 <- ggplot(
+  p1 <- ggplot2::ggplot(
     dat,
-    aes(
+    ggplot2::aes(
       y = .data$x,
       x = .data$y,
       colour = .data$group
     )
   ) +
-    geom_linerange(
-      aes(xmin = 0, xmax = .data$y),
-      position = position_dodge(0.4),
+    ggplot2::geom_linerange(
+      ggplot2::aes(xmin = 0, xmax = .data$y),
+      position = ggplot2::position_dodge(0.4),
       linewidth = 0.8,
       na.rm = TRUE
     ) +
-    geom_point(
+    ggplot2::geom_point(
       size = size_point,
-      position = position_dodge(0.4),
+      position = ggplot2::position_dodge(0.4),
       na.rm = TRUE
     ) +
-    labs(
+    ggplot2::labs(
       y = NULL,
       x = NULL,
       fill = NULL,
       colour = NULL,
       title = "Predicted Distribution of Residuals and Response"
     ) +
-    scale_x_continuous(
+    ggplot2::scale_x_continuous(
       labels = .percents,
       expand = c(0, 0),
       limits = c(0, max_y)
     ) +
     scale_color_material_d(reverse = TRUE) +
-    guides(colour = guide_legend(reverse = TRUE)) +
+    ggplot2::guides(colour = ggplot2::guide_legend(reverse = TRUE)) +
     theme_lucid(legend.position = lp)
 
   dat1 <- as.data.frame(stats::density(stats::residuals(model)))
@@ -90,9 +90,9 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     dat2$x <- round(dat2$x)
   }
 
-  p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
-    geom_line(colour = "#2196F3") +
-    labs(x = NULL, y = NULL, title = "Density of Residuals") +
+  p2 <- ggplot2::ggplot(dat1, ggplot2::aes(x = .data$x, y = .data$y)) +
+    ggplot2::geom_line(colour = "#2196F3") +
+    ggplot2::labs(x = NULL, y = NULL, title = "Density of Residuals") +
     theme_lucid()
 
   # usually, we have an outline for the bars in the same color as the
@@ -106,14 +106,14 @@ plot.see_check_distribution <- function(x, size_point = 2, panel = TRUE, ...) {
     bar_color <- theme_lucid()$panel.background$fill
   }
 
-  p3 <- ggplot(dat2, aes(x = .data$x)) +
-    geom_histogram(
+  p3 <- ggplot2::ggplot(dat2, ggplot2::aes(x = .data$x)) +
+    ggplot2::geom_histogram(
       fill = "#f44336",
       colour = bar_color,
       binwidth = sqrt(length(vars(.data$x))),
       na.rm = TRUE
     ) +
-    labs(x = NULL, y = NULL, title = "Distribution of Response") +
+    ggplot2::labs(x = NULL, y = NULL, title = "Distribution of Response") +
     theme_lucid()
 
   if (panel) {
@@ -150,26 +150,26 @@ plot.see_check_distribution_numeric <- function(
   # default legend-position
   lp <- ifelse(isTRUE(panel), "right", "bottom")
 
-  p1 <- ggplot(dat, aes(y = .data$x, x = .data$y)) +
-    geom_linerange(
-      aes(xmin = 0, xmax = .data$y),
-      position = position_dodge(0.4),
+  p1 <- ggplot2::ggplot(dat, ggplot2::aes(y = .data$x, x = .data$y)) +
+    ggplot2::geom_linerange(
+      ggplot2::aes(xmin = 0, xmax = .data$y),
+      position = ggplot2::position_dodge(0.4),
       linewidth = 0.8,
       na.rm = TRUE
     ) +
-    geom_point(
+    ggplot2::geom_point(
       size = size_point,
-      position = position_dodge(0.4),
+      position = ggplot2::position_dodge(0.4),
       na.rm = TRUE
     ) +
-    labs(
+    ggplot2::labs(
       y = NULL,
       x = NULL,
       fill = NULL,
       colour = NULL,
       title = "Predicted Distribution of Vector"
     ) +
-    scale_x_continuous(
+    ggplot2::scale_x_continuous(
       labels = .percents,
       expand = c(0, 0),
       limits = c(0, max_y)
@@ -179,18 +179,18 @@ plot.see_check_distribution_numeric <- function(
   dat1 <- as.data.frame(stats::density(vec))
   dat2 <- data.frame(x = vec, stringsAsFactors = FALSE)
 
-  p2 <- ggplot(dat1, aes(x = .data$x, y = .data$y)) +
-    geom_line() +
-    labs(x = NULL, y = NULL, title = "Density of Vector") +
+  p2 <- ggplot2::ggplot(dat1, ggplot2::aes(x = .data$x, y = .data$y)) +
+    ggplot2::geom_line() +
+    ggplot2::labs(x = NULL, y = NULL, title = "Density of Vector") +
     theme_lucid()
 
-  p3 <- ggplot(dat2, aes(x = .data$x)) +
-    geom_histogram(
+  p3 <- ggplot2::ggplot(dat2, ggplot2::aes(x = .data$x)) +
+    ggplot2::geom_histogram(
       colour = theme_lucid()$panel.background$fill,
       binwidth = sqrt(length(vars(.data$x))),
       na.rm = TRUE
     ) +
-    labs(x = NULL, y = NULL, title = "Distribution of Vector") +
+    ggplot2::labs(x = NULL, y = NULL, title = "Distribution of Vector") +
     theme_lucid()
 
   if (panel) {
