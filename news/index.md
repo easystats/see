@@ -2,6 +2,8 @@
 
 ## see 0.13.0
 
+CRAN release: 2026-01-30
+
 ### Breaking Changes
 
 - Data points in
