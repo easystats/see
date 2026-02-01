@@ -71,7 +71,7 @@ Imports:
     datawizard (>= 1.3.0),
     effectsize (>= 1.0.1),
     ggplot2 (>= 4.0.1),
-    insight (>= 1.4.4),
+    insight (>= 1.4.5),
     modelbased (>= 0.13.1),
     patchwork (>= 1.3.2),
     parameters (>= 0.28.3),
