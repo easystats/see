@@ -70,12 +70,12 @@ Imports:
     correlation (>= 0.8.8),
     datawizard (>= 1.3.0),
     effectsize (>= 1.0.1),
-    ggplot2 (>= 4.0.1),
-    insight (>= 1.4.4),
-    modelbased (>= 0.13.1),
+    ggplot2 (>= 4.0.2),
+    insight (>= 1.4.6),
+    modelbased (>= 0.14.0),
     patchwork (>= 1.3.2),
     parameters (>= 0.28.3),
-    performance (>= 0.15.3)
+    performance (>= 0.16.0)
 Suggests:
     BH,
     brms,
