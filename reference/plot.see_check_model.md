@@ -65,7 +65,7 @@ points that should be shown in the plots.
 ## See also
 
 See also the vignette about
-[[`check_model()`](https://easystats.github.io/performance/reference/check_model.html)](https://easystats.github.io/performance/articles/check_model.html).
+[`check_model()`](https://easystats.github.io/performance/articles/check_model.html).
 
 ## Examples
 

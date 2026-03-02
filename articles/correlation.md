@@ -32,22 +32,22 @@ citation("see")
 on correlation analysis. It’s lightweight, easy to use, and allows for
 the computation of many different types of correlation, including:
 
-✅ **Pearson’s correlation**  
-✅ **Spearman’s rank correlation**  
-✅ **Kendall’s rank correlation**  
-✅ **Biweight midcorrelation**  
-✅ **Distance correlation**  
-✅ **Percentage bend correlation**  
-✅ **Shepherd’s Pi correlation**  
-✅ **Blomqvist’s coefficient**  
-✅ **Hoeffding’s D**  
-✅ **Gamma correlation**  
-✅ **Gaussian rank correlation**  
-✅ **Point-Biserial and biserial correlation**  
-✅ **Winsorized correlation**  
-✅ **Polychoric correlation**  
-✅ **Tetrachoric correlation**  
-✅ **Multilevel correlation**  
+✅ **Pearson’s correlation**\
+✅ **Spearman’s rank correlation**\
+✅ **Kendall’s rank correlation**\
+✅ **Biweight midcorrelation**\
+✅ **Distance correlation**\
+✅ **Percentage bend correlation**\
+✅ **Shepherd’s Pi correlation**\
+✅ **Blomqvist’s coefficient**\
+✅ **Hoeffding’s D**\
+✅ **Gamma correlation**\
+✅ **Gaussian rank correlation**\
+✅ **Point-Biserial and biserial correlation**\
+✅ **Winsorized correlation**\
+✅ **Polychoric correlation**\
+✅ **Tetrachoric correlation**\
+✅ **Multilevel correlation**\
 
 An overview and description of these correlations types is [**available
 here**](https://easystats.github.io/correlation/articles/types.html).

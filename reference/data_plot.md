@@ -85,14 +85,14 @@ data_plot(x, data = NULL, ...)
 `data_plot()` is in most situation not needed when the purpose is
 plotting, since most
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html)-functions in
-see internally call `data_plot()` to prepare the data for plotting.  
-  
+see internally call `data_plot()` to prepare the data for plotting.\
+\
 Many [`plot()`](https://rdrr.io/r/graphics/plot.default.html)-functions
 have a `data`-argument that is needed when the data or model for
 plotting can't be retrieved via `data_plot()`. In such cases,
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html) gives an error
-and asks for providing data or models.  
-  
+and asks for providing data or models.\
+\
 Most [`plot()`](https://rdrr.io/r/graphics/plot.default.html)-functions
 work out-of-the-box, i.e. you don't need to do much more than calling
 `plot(<object>)` (see 'Examples'). Some plot-functions allow to specify
