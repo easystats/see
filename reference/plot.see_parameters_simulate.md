@@ -101,7 +101,7 @@ result
 #> (Intercept) |       42.19 | [33.75, 51.65] | < .001
 #> wt          |       -3.39 | [-4.99, -1.75] | < .001
 #> cyl         |       -1.54 | [-2.40, -0.70] | < .001
-#> gear        |       -0.47 | [-2.11,  1.07] | 0.530 
+#> gear        |       -0.47 | [-2.11,  1.07] | 0.532 
 #> 
 #> Uncertainty intervals (equal-tailed) and p-values (two-tailed)
 #>   computed using a simulated multivariate normal distribution
