@@ -69,7 +69,7 @@ Imports:
     bayestestR (>= 0.17.0),
     correlation (>= 0.8.8),
     datawizard (>= 1.3.0),
-    effectsize (>= 1.0.1),
+    effectsize (>= 1.0.2),
     ggplot2 (>= 4.0.2),
     insight (>= 1.4.6),
     modelbased (>= 0.14.0),
