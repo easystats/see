@@ -8,7 +8,7 @@
 - **[Dominique Makowski](https://dominiquemakowski.github.io/)**.
   Author, inventor. [](https://orcid.org/0000-0001-5375-9967)
 
-- **[Indrajeet Patil](https://indrajeetpatil.github.io/)**. Author.
+- **[Indrajeet Patil](https://www.indrapatil.com/)**. Author.
   [](https://orcid.org/0000-0003-1995-6531)
 
 - **[Mattan S. Ben-Shachar](https://home.msbstats.info/)**. Author,
