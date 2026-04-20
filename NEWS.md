@@ -1,3 +1,10 @@
+# see (devel)
+
+## Changes
+
+* Updated plot-method for `performance::check_model()` for Bayesian ordinal
+  models.
+
 # see 0.13.0
 
 ## Breaking Changes

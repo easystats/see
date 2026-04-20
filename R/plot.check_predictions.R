@@ -15,6 +15,16 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
   }
 
   columns <- colnames(x)
+
+  # preparation for ordinal models - we may have numeric values for simulated
+  # response, but ordered for original response. Fix this here.
+  if (is.ordered(x$y) && is.numeric(x$sim_1)) {
+    sims <- startsWith(colnames(x), "sim_")
+    x[sims] <- lapply(x[sims], function(i) {
+      factor(i, labels = levels(x$y), ordered = TRUE)
+    })
+  }
+
   dataplot <- stats::reshape(
     x,
     times = columns,
