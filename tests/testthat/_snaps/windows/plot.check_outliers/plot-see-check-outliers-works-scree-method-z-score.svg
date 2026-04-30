@@ -78,8 +78,8 @@
 <circle cx='683.31' cy='151.01' r='2.42' style='stroke-width: 0.57; fill: #5B9BD5;' />
 <line x1='27.90' y1='46.53' x2='714.52' y2='46.53' style='stroke-width: 1.71; stroke: #D33F49; stroke-dasharray: 9.10,9.10; stroke-linecap: butt;' />
 <line x1='645.48' y1='262.89' x2='664.40' y2='219.81' style='stroke-width: 1.28; stroke: #5B9BD5; stroke-linecap: butt;' />
-<line x1='571.62' y1='210.57' x2='663.07' y2='210.57' style='stroke-width: 1.07; stroke: #999999;' />
-<line x1='590.54' y1='151.01' x2='681.98' y2='151.01' style='stroke-width: 1.07; stroke: #999999;' />
+<line x1='571.62' y1='210.57' x2='663.33' y2='210.57' style='stroke-width: 1.07; stroke: #999999;' />
+<line x1='590.54' y1='151.01' x2='682.24' y2='151.01' style='stroke-width: 1.07; stroke: #999999;' />
 <text x='569.82' y='213.31' text-anchor='end' style='font-size: 7.97px; fill: #5B9BD5; font-family: sans;' textLength='8.86px' lengthAdjust='spacingAndGlyphs'>33</text>
 <text x='588.74' y='153.75' text-anchor='end' style='font-size: 7.97px; fill: #5B9BD5; font-family: sans;' textLength='8.86px' lengthAdjust='spacingAndGlyphs'>34</text>
 </g>
