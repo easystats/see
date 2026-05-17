@@ -96,199 +96,183 @@ plot.see_check_model <- function(
   colors <- unname(colors)
 
   # 3. Build plot panels -------------------------------------------------------
+
+  # Define common arguments for plot functions to ensure consistency
+  common_args <- list(
+    theme = theme,
+    base_size = base_size,
+    size_title = size_title,
+    size_axis_title = size_axis_title,
+    size_point = size_point,
+    linewidth = linewidth
+  )
+
   # Each block below checks if the specific diagnostic test is requested in 'check'
   # and if the corresponding data exists in 'x'. If so, it generates the plot.
 
   # Posterior Predictive Check
   if (.should_plot(x, check, "PP_CHECK", "pp_check")) {
     x$NORM <- NULL # Prevent duplicate normality plotting if PP_CHECK is used
-    p$PP_CHECK <- plot.see_performance_pp_check(
-      x$PP_CHECK,
-      theme = theme,
-      linewidth = linewidth,
-      size_point = size_point,
-      base_size = base_size,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      type = type,
-      check_model = TRUE,
-      adjust_legend = TRUE,
-      colors = colors[1:2]
+    fun_args <- c(
+      list(x$PP_CHECK),
+      common_args,
+      list(
+        type = type,
+        check_model = TRUE,
+        adjust_legend = TRUE,
+        colors = colors[1:2]
+      )
     )
+    p$PP_CHECK <- do.call(plot.see_performance_pp_check, fun_args)
   }
 
   # Non-Constant Error Variance (Linearity/Homoscedasticity)
   if (.should_plot(x, check, "NCV", c("ncv", "linearity"))) {
-    p$NCV <- .plot_diag_linearity(
-      x$NCV,
-      size_point = size_point,
-      linewidth = linewidth,
-      alpha_level = alpha_level,
-      theme = theme,
-      base_size = base_size,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      colors = colors,
-      alpha_dot = alpha_dot,
-      show_dots = show_dots,
-      show_ci = show_ci,
-      maximum_dots = max_dots
+    fun_args <- c(
+      list(x$NCV),
+      common_args,
+      list(
+        alpha_level = alpha_level,
+        colors = colors,
+        alpha_dot = alpha_dot,
+        show_dots = show_dots,
+        show_ci = show_ci,
+        maximum_dots = max_dots
+      )
     )
+    p$NCV <- do.call(.plot_diag_linearity, fun_args)
   }
 
   # Binned Residuals
   if (.should_plot(x, check, "BINNED_RESID", "binned_residuals")) {
     x$HOMOGENEITY <- NULL # Prevent conflict with standard homogeneity plot
-    p$BINNED_RESID <- plot.see_binned_residuals(
-      x$BINNED_RESID,
-      theme = theme,
-      base_size = base_size,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      colors = colors[c(2, 3, 1)],
-      adjust_legend = TRUE,
-      check_model = TRUE,
-      show_dots = show_dots
+    fun_args <- c(
+      list(x$BINNED_RESID),
+      common_args,
+      list(
+        colors = colors[c(2, 3, 1)],
+        adjust_legend = TRUE,
+        check_model = TRUE,
+        show_dots = show_dots
+      )
     )
+    p$BINNED_RESID <- do.call(plot.see_binned_residuals, fun_args)
   }
 
   # Overdispersion
   if (.should_plot(x, check, "OVERDISPERSION", "overdispersion")) {
-    p$OVERDISPERSION <- .plot_diag_overdispersion(
-      x$OVERDISPERSION,
-      theme = theme,
-      base_size = base_size,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      colors = colors[c(1, 2)],
-      linewidth = linewidth,
-      type = overdisp_type
+    fun_args <- c(
+      list(x$OVERDISPERSION),
+      common_args,
+      list(colors = colors[c(1, 2)], type = overdisp_type)
     )
+    p$OVERDISPERSION <- do.call(.plot_diag_overdispersion, fun_args)
   }
 
   # Homogeneity of Variance
   if (.should_plot(x, check, "HOMOGENEITY", "homogeneity")) {
-    p$HOMOGENEITY <- .plot_diag_homogeneity(
-      x$HOMOGENEITY,
-      size_point = size_point,
-      linewidth = linewidth,
-      alpha_level = alpha_level,
-      theme = theme,
-      base_size = base_size,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      colors = colors,
-      alpha_dot = alpha_dot,
-      show_dots = show_dots,
-      show_ci = show_ci,
-      maximum_dots = max_dots
+    fun_args <- c(
+      list(x$HOMOGENEITY),
+      common_args,
+      list(
+        alpha_level = alpha_level,
+        colors = colors,
+        alpha_dot = alpha_dot,
+        show_dots = show_dots,
+        show_ci = show_ci,
+        maximum_dots = max_dots
+      )
     )
+    p$HOMOGENEITY <- do.call(.plot_diag_homogeneity, fun_args)
   }
 
   # Influential Observations (Outliers)
   if (.should_plot(x, check, "INFLUENTIAL", c("outliers", "influential"))) {
-    p$OUTLIERS <- .plot_diag_outliers_dots(
-      x$INFLUENTIAL,
-      show_labels = show_labels,
-      size_text = size_text,
-      linewidth = linewidth,
-      size_point = size_point,
-      theme = theme,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      base_size = base_size,
-      colors = colors,
-      alpha_dot = alpha_dot,
-      show_dots = show_dots,
-      maximum_dots = max_dots
+    fun_args <- c(
+      list(x$INFLUENTIAL),
+      common_args,
+      list(
+        show_labels = show_labels,
+        size_text = size_text,
+        colors = colors,
+        alpha_dot = alpha_dot,
+        show_dots = show_dots,
+        maximum_dots = max_dots
+      )
     )
+    p$OUTLIERS <- do.call(.plot_diag_outliers_dots, fun_args)
   }
 
   # Variance Inflation Factor (Multicollinearity)
   if (.should_plot(x, check, "VIF", "vif")) {
-    p$VIF <- .plot_diag_vif(
-      x$VIF,
-      size_point = 1.5 * size_point,
-      linewidth = linewidth,
-      theme = theme,
-      base_size = base_size,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      colors = colors,
-      ci_data = attributes(x$VIF)$CI,
-      is_check_model = TRUE
+    fun_args <- c(
+      list(x$VIF),
+      common_args,
+      list(
+        colors = colors,
+        ci_data = attributes(x$VIF)$CI,
+        is_check_model = TRUE
+      )
     )
+    fun_args$size_point <- 1.5 * fun_args$size_point
+    p$VIF <- do.call(.plot_diag_vif, fun_args)
   }
 
   # Quantile-Quantile (QQ) Plot for Residuals
   if (.should_plot(x, check, "QQ", "qq")) {
+    fun_args <- c(
+      list(x$QQ),
+      common_args,
+      list(
+        alpha_dot = alpha_dot,
+        colors = colors,
+        detrend = detrend
+      )
+    )
     # Check if object is from simulated residuals (e.g., DHARMa)
     if (inherits(x$QQ, "performance_simres")) {
-      p$QQ <- plot(
-        x$QQ,
-        linewidth = linewidth,
-        size_point = 0.9 * size_point,
-        alpha = alpha_level,
-        alpha_dot = alpha_dot,
-        colors = colors,
-        detrend = detrend,
-        theme = theme,
-        base_size = base_size,
-        size_axis_title = size_axis_title,
-        size_title = size_title
-      )
+      fun_args$size_point <- 0.9 * fun_args$size_point
+      fun_args$alpha <- alpha_level
+      p$QQ <- do.call(plot, fun_args)
     } else {
-      p$QQ <- .plot_diag_qq(
-        x$QQ,
-        size_point = size_point,
-        linewidth = linewidth,
-        size_axis_title = size_axis_title,
-        size_title = size_title,
-        alpha_level = alpha_level,
-        detrend = detrend,
-        theme = theme,
-        base_size = base_size,
-        colors = colors,
-        alpha_dot = alpha_dot,
-        show_dots = TRUE, # qq-plots w/o dots makes no sense
-        model_info = model_info,
-        model_class = model_class,
-        maximum_dots = max_dots
+      fun_args <- c(
+        fun_args,
+        list(
+          alpha_level = alpha_level,
+          show_dots = TRUE, # qq-plots w/o dots makes no sense
+          model_info = model_info,
+          model_class = model_class,
+          maximum_dots = max_dots
+        )
       )
+      p$QQ <- do.call(.plot_diag_qq, fun_args)
     }
   }
 
   # Normality of Residuals
   if (.should_plot(x, check, "NORM", "normality")) {
-    p$NORM <- .plot_diag_norm(
-      x$NORM,
-      linewidth = linewidth,
-      alpha_level = alpha_level,
-      theme = theme,
-      base_size = base_size,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      colors = colors
+    fun_args <- c(
+      list(x$NORM),
+      common_args,
+      list(alpha_level = alpha_level, colors = colors)
     )
+    p$NORM <- do.call(.plot_diag_norm, fun_args)
   }
 
   # Random Effects QQ Plot
   if (.should_plot(x, check, "REQQ", "reqq")) {
-    ps <- .plot_diag_reqq(
-      x$REQQ,
-      size_point,
-      linewidth,
-      size_axis_title = size_axis_title,
-      size_title = size_title,
-      alpha_level = alpha_level,
-      theme = theme,
-      base_size = base_size,
-      colors = colors,
-      alpha_dot = alpha_dot,
-      show_dots = TRUE, # qq-plots w/o dots makes no sense
-      maximum_dots = max_dots
+    fun_args <- c(
+      list(x$REQQ),
+      common_args,
+      list(
+        alpha_level = alpha_level,
+        colors = colors,
+        alpha_dot = alpha_dot,
+        show_dots = TRUE, # qq-plots w/o dots makes no sense
+        maximum_dots = max_dots
+      )
     )
-
+    ps <- do.call(.plot_diag_reqq, fun_args)
     # Append all random effects plots to the main list
     for (i in seq_along(ps)) {
       p[[length(p) + 1]] <- ps[[i]]
