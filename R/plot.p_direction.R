@@ -1,11 +1,17 @@
 #' @export
 data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
+  # 1. Retrieve Data -----------------------------------------------------------
+  # If no data is provided, attempt to retrieve the original model data
+  # stored in the 'x' object (which is likely a p_direction result object)
   if (is.null(data)) {
     data <- .retrieve_data(x)
   }
 
   params <- NULL
 
+  # 2. Format Data Based on Object Type ----------------------------------------
+  # Depending on the class of the retrieved data/model, extract the posterior
+  # samples and standard model parameters
   if (inherits(data, "emmGrid")) {
     insight::check_if_installed("emmeans")
     data <- as.data.frame(as.matrix(emmeans::as.mcmc.emmGrid(
@@ -25,31 +31,34 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
     data <- as.data.frame(data)
   }
 
+  # 3. Process Multiple Parameters ---------------------------------------------
   if (ncol(data) > 1L) {
+    # Store original order of parameters and subset data to those present in x
     levels_order <- rev(x$Parameter)
     data <- data[, x$Parameter, drop = FALSE]
     dataplot <- data.frame()
-    for (i in names(data)) {
+
+    # Iterate over each parameter column to compute its density
+    results_list <- lapply(names(data), function(i) {
+      df_dens <- .compute_densities_pd(
+        data[[i]],
+        name = i,
+        null = attr(x, "null")
+      )
       if (
         !is.null(params) && all(c("Effects", "Component") %in% colnames(params))
       ) {
-        dataplot <- rbind(
-          dataplot,
-          cbind(
-            .compute_densities_pd(data[[i]], name = i, null = attr(x, "null")),
-            Effects = params$Effects[params$Parameter == i],
-            Component = params$Component[params$Parameter == i]
-          )
-        )
-      } else {
-        dataplot <- rbind(
-          dataplot,
-          .compute_densities_pd(data[[i]], name = i, null = attr(x, "null"))
-        )
+        df_dens$Effects <- params$Effects[params$Parameter == i]
+        df_dens$Component <- params$Component[params$Parameter == i]
       }
-    }
+      df_dens
+    })
+    dataplot <- do.call(rbind, results_list)
 
+    # 4. Clean up Factor Levels for Faceting -----------------------------------
     if ("Effects" %in% names(dataplot) && "Component" %in% names(dataplot)) {
+      # If there's only one unique effect and component, these columns are
+      # redundant for faceting, so remove them.
       if (
         length(unique(dataplot$Effects)) == 1 &&
           length(unique(dataplot$Component)) == 1
@@ -57,31 +66,13 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
         dataplot$Effects <- NULL
         dataplot$Component <- NULL
       } else {
-        if (is.factor(dataplot$Effects)) {
-          dataplot$Effects <- factor(
-            dataplot$Effects,
-            levels = sort(levels(dataplot$Effects))
-          )
-        } else {
-          dataplot$Effects <- factor(
-            dataplot$Effects,
-            levels = unique(dataplot$Effects)
-          )
-        }
-        if (is.factor(dataplot$Component)) {
-          dataplot$Component <- factor(
-            dataplot$Component,
-            levels = sort(levels(dataplot$Component))
-          )
-        } else {
-          dataplot$Component <- factor(
-            dataplot$Component,
-            levels = unique(dataplot$Component)
-          )
-        }
+        # Otherwise, ensure they are correctly leveled factors to maintain order
+        dataplot$Effects <- .safe_refactor(dataplot$Effects)
+        dataplot$Component <- .safe_refactor(dataplot$Component)
       }
     }
   } else {
+    # 5. Process Single Parameter ----------------------------------------------
     levels_order <- NULL
     dataplot <- .compute_densities_pd(
       data[, 1],
@@ -90,44 +81,43 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
     )
   }
 
-  dataplot <- do.call(
-    rbind,
-    by(
-      dataplot,
-      list(dataplot$y, dataplot$fill),
-      function(df) {
-        df$n <- nrow(df)
-        df
-      }
-    )
+  # 6. Calculate Probability Proportions for Coloring --------------------------
+  # Calculate how many points fall on either side of the null (direction)
+  # Count total per parameter/fill combination
+  dataplot$n <- stats::ave(
+    rep(1, nrow(dataplot)),
+    dataplot$y,
+    dataplot$fill,
+    FUN = sum
   )
-  dataplot <- do.call(
-    rbind,
-    by(
-      dataplot,
-      dataplot$y,
-      function(df) {
-        df$prop <- df$n / nrow(df)
-        df
-      }
-    )
+  # Total per parameter
+  total_n <- stats::ave(rep(1, nrow(dataplot)), dataplot$y, FUN = sum)
+  # Proportion
+  dataplot$prop <- dataplot$n / total_n
+  # Determine labels
+  dataplot$fill2 <- ifelse(
+    dataplot$prop >= 0.5,
+    "Most probable",
+    "Less probable"
   )
-  dataplot$fill2 <- with(
-    dataplot,
-    ifelse(prop >= 0.5, "Most probable", "Less probable")
-  )
+  # Drop the intermediate calculation columns
   dataplot <- dataplot[, which(!names(dataplot) %in% c("n", "prop"))]
 
+  # 7. Final Formatting --------------------------------------------------------
+  # Apply original parameter ordering
   if (!is.null(levels_order)) {
     dataplot$y <- factor(dataplot$y, levels = levels_order)
   }
 
   groups <- unique(dataplot$y)
+
+  # Remove intercept if requested
   if (!show_intercept) {
     dataplot <- .remove_intercept(dataplot, column = "y", show_intercept)
     groups <- unique(setdiff(groups, .intercept_names))
   }
 
+  # Handle y-axis labels based on remaining parameters
   if (length(groups) == 1) {
     ylab <- groups
     dataplot$y <- 0
@@ -137,6 +127,7 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
   dataplot <- .fix_facet_names(dataplot)
 
+  # Attach metadata for the plot function
   attr(dataplot, "info") <- list(
     xlab = "Possible parameter values",
     ylab = ylab,
@@ -150,14 +141,30 @@ data_plot.p_direction <- function(x, data = NULL, show_intercept = FALSE, ...) {
 
 
 #' @keywords internal
+.safe_refactor <- function(col) {
+  if (is.factor(col)) {
+    factor(col, levels = sort(levels(col)))
+  } else {
+    factor(col, levels = unique(col))
+  }
+}
+
+
+#' @keywords internal
 .compute_densities_pd <- function(x, name = "Y", null = 0) {
+  # Estimate Kernel Density
   out <- .as.data.frame_density(
     stats::density(x)
   )
+
   if (is.null(null)) {
     null <- 0
   }
+
+  # Assign whether the x-value of the density falls below or above the null line
   out$fill <- ifelse(out$x < null, "Negative", "Positive")
+
+  # Normalize density heights to be between 0 and 1 (useful for ridgeline plots)
   out$height <- as.vector(
     (out$y - min(out$y, na.rm = TRUE)) /
       diff(range(out$y, na.rm = TRUE), na.rm = TRUE)
@@ -199,10 +206,10 @@ plot.see_p_direction <- function(
   n_columns = 1,
   ...
 ) {
-  # save model for later use
+  # Retrieve model for prior overlay calculation
   model <- .retrieve_data(x)
 
-  # retrieve and prepare data for plotting
+  # Ensure data is processed into plotting format
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data, show_intercept = show_intercept)
   }
@@ -211,29 +218,26 @@ plot.see_p_direction <- function(
     n_columns <- NULL
   }
 
-  # get parameter names for filtering
   params <- unique(x$y)
-
-  # get labels
   axis_labels <- .clean_parameter_names(x$y, grid = !is.null(n_columns))
 
   insight::check_if_installed("ggridges")
 
-  # base setup
-  p <- ggplot(
+  # 1. Base Setup: Construct the ridgeline plot mapping ------------------------
+  p <- ggplot2::ggplot(
     as.data.frame(x),
-    aes(
+    ggplot2::aes(
       x = .data$x,
       y = .data$y,
       height = .data$height,
       group = .data$y,
-      fill = .data$fill
+      fill = .data$fill # Fill is tied to Negative/Positive direction
     )
   ) +
     ggridges::geom_ridgeline_gradient() +
     add_plot_attributes(x)
 
-  # add prior layer
+  # 2. Overlay Priors ----------------------------------------------------------
   if (priors) {
     p <- p +
       .add_prior_layer_ridgeline(
@@ -244,24 +248,27 @@ plot.see_p_direction <- function(
       )
   }
 
-  p <- p + geom_vline(aes(xintercept = 0), linetype = "dotted")
+  # Add Reference null line
+  p <- p + ggplot2::geom_vline(aes(xintercept = 0), linetype = "dotted")
 
+  # Format Y axis based on parameter count
   if (length(unique(x$y)) == 1 && is.numeric(x$y)) {
-    p <- p + scale_y_continuous(breaks = NULL, labels = NULL)
+    p <- p + ggplot2::scale_y_continuous(breaks = NULL, labels = NULL)
   } else {
-    p <- p + scale_y_discrete(labels = axis_labels)
+    p <- p + ggplot2::scale_y_discrete(labels = axis_labels)
   }
 
+  # 3. Faceting ----------------------------------------------------------------
   if (!is.null(n_columns)) {
-    if ("Component" %in% names(x) && "Effects" %in% names(x)) {
-      p <- p +
-        facet_wrap(~ Effects + Component, scales = "free", ncol = n_columns)
-    } else if ("Effects" %in% names(x)) {
-      p <- p + facet_wrap(~Effects, scales = "free", ncol = n_columns)
-    } else if ("Component" %in% names(x)) {
-      p <- p + facet_wrap(~Component, scales = "free", ncol = n_columns)
+    # fmt: skip
+    facets <- c("Effects", "Component")[c("Effects", "Component") %in% names(x)]
+    if (length(facets) > 0) {
+      # Dynamically build formula (e.g. "~ Effects + Component")
+      fac_frml <- stats::as.formula(paste("~", paste(facets, collapse = " + ")))
+      p <- p + ggplot2::facet_wrap(fac_frml, scales = "free", ncol = n_columns)
     }
   }
 
+  # Apply customized continuous color scale
   p + scale_fill_flat(reverse = TRUE)
 }
