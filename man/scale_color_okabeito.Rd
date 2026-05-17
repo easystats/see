@@ -75,7 +75,7 @@ respectively.}
 \item{aesthetics}{A vector of names of the aesthetics that this scale
 should be applied to (e.g., \code{c('color', 'fill')}).}
 
-\item{...}{Additional arguments to pass to \code{\link[=colorRampPalette]{colorRampPalette()}}.}
+\item{...}{Additional arguments to pass to \code{\link[grDevices:colorRamp]{grDevices::colorRampPalette()}}.}
 }
 \description{
 The Okabe-Ito color palette was proposed by Okabe and Ito (2008) as a
@@ -99,8 +99,10 @@ The palettes \code{"full"} and \code{"black_first"} use this darker yellow color
 the original yellow color suggested by Okabe and Ito (\code{"#F0E442"}), use
 palettes \code{"full_original"} or \code{"black_first_original"}.
 
-The Okabe-Ito palette is only available as a discrete palette. For
-color-accessible continuous variables, consider \link[ggplot2:scale_viridis]{the viridis palettes}.
+The Okabe-Ito palette is only available as a discrete palette.
+For color-accessible continuous variables, consider
+\link[=scale_color_tol_discrete]{Paul Tol's palettes} or
+\link[ggplot2:scale_viridis]{the viridis palettes}.
 }
 \examples{
 library(ggplot2)

@@ -210,7 +210,7 @@ pizza_palettes <- list(
 #' @param palette Pizza type. Can be `"margherita"` (default), `"margherita crust"`,
 #' `"diavola"` or `"diavola crust"`.
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param ... Additional arguments to pass to [`colorRampPalette()`][colorRampPalette].
+#' @param ... Additional arguments to pass to [`grDevices::colorRampPalette()`].
 #'
 #' @details This function is usually not called directly, but from within
 #'   [`scale_color_pizza()`][scale_color_pizza].
