@@ -23,7 +23,6 @@
 #'
 #' @rdname plot.datawizard_table
 #' @export
-
 plot.datawizard_tables <- function(
   x,
   label_values = TRUE,
@@ -65,7 +64,6 @@ plot.datawizard_tables <- function(
 #' @rdname plot.datawizard_table
 #'
 #' @export
-
 plot.datawizard_table <- function(
   x,
   label_values = TRUE,

@@ -111,15 +111,22 @@ plot.see_compare_parameters <- function(
     x$Parameter <- factor(x$Parameter, levels = rev(unique(x$Parameter)))
   }
 
-  p <- ggplot(
+  p <- ggplot2::ggplot(
     x,
-    aes(y = .data$Parameter, x = .data$Coefficient, color = .data$group)
+    ggplot2::aes(
+      y = .data$Parameter,
+      x = .data$Coefficient,
+      color = .data$group
+    )
   ) +
-    geom_vline(aes(xintercept = y_intercept), linetype = "dotted") +
-    geom_pointrange(
-      aes(xmin = .data$CI_low, xmax = .data$CI_high),
+    ggplot2::geom_vline(
+      ggplot2::aes(xintercept = y_intercept),
+      linetype = "dotted"
+    ) +
+    ggplot2::geom_pointrange(
+      ggplot2::aes(xmin = .data$CI_low, xmax = .data$CI_high),
       size = size_point,
-      position = position_dodge(dodge_position),
+      position = ggplot2::position_dodge(dodge_position),
       na.rm = TRUE
     ) +
     theme_modern() +
@@ -141,8 +148,8 @@ plot.see_compare_parameters <- function(
     ))
 
     p <- p +
-      geom_text(
-        mapping = aes(label = .data$Estimate_CI, y = Inf),
+      ggplot2::geom_text(
+        mapping = ggplot2::aes(label = .data$Estimate_CI, y = Inf),
         colour = "black",
         hjust = "inward",
         size = size_text,
@@ -166,7 +173,7 @@ plot.see_compare_parameters <- function(
       x_high <- which.max(max(new_range) < exp_range)
     }
     p <- p +
-      scale_x_continuous(
+      ggplot2::scale_x_continuous(
         trans = "log",
         breaks = exp_range[x_low:x_high],
         limits = c(exp_range[x_low], exp_range[x_high]),
@@ -189,53 +196,29 @@ plot.see_compare_parameters <- function(
     facet_scales <- "free"
   }
 
-  axis_title_in_facet <- FALSE
+  # Create a vector of present faceting variables
+  # fmt: skip
+  facets <- c("Response", "Effects", "Component")[c(has_response, has_effects, has_component)]
 
-  if (has_component && has_response && has_effects) {
+  if (length(facets) > 0) {
+    # Dynamically build formula (e.g. "~ Response + Component")
+    formula_str <- paste("~", paste(facets, collapse = " + "))
     p <- p +
-      facet_wrap(
-        ~ Response + Effects + Component,
+      ggplot2::facet_wrap(
+        stats::as.formula(formula_str),
         ncol = n_columns,
         scales = facet_scales
       )
-  } else if (has_component && has_effects) {
-    p <- p +
-      facet_wrap(~ Effects + Component, ncol = n_columns, scales = facet_scales)
-  } else if (has_component && has_response) {
-    p <- p +
-      facet_wrap(
-        ~ Response + Component,
-        ncol = n_columns,
-        scales = facet_scales
-      )
-  } else if (has_effects && has_response) {
-    p <- p +
-      facet_wrap(~ Response + Effects, ncol = n_columns, scales = facet_scales)
-  } else if (has_component) {
-    p <- p + facet_wrap(~Component, ncol = n_columns, scales = facet_scales)
-  } else if (has_effects) {
-    p <- p + facet_wrap(~Effects, ncol = n_columns, scales = facet_scales)
-  } else if (has_response) {
-    p <- p + facet_wrap(~Response, ncol = n_columns, scales = facet_scales)
   } else if (has_subgroups) {
-    p <- p + facet_grid(Subgroup ~ ., scales = "free", space = "free")
+    p <- p + ggplot2::facet_grid(Subgroup ~ ., scales = "free", space = "free")
   }
 
-  if (isTRUE(axis_title_in_facet)) {
-    p +
-      labs(
-        y = "Parameter",
-        x = NULL,
-        colour = "Model"
-      )
-  } else {
-    p +
-      labs(
-        y = "Parameter",
-        x = "Estimate",
-        colour = "Model"
-      )
-  }
+  p +
+    ggplot2::labs(
+      y = "Parameter",
+      x = "Estimate",
+      colour = "Model"
+    )
 }
 
 
