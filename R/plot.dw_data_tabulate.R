@@ -35,28 +35,24 @@ plot.datawizard_tables <- function(
   ...
 ) {
   show_na <- insight::validate_argument(show_na, c("if_any", "always", "never"))
+  # setup argument list
+  fun_args <- list(
+    label_values = label_values,
+    show_na = show_na,
+    na_label = na_label,
+    error_bar = error_bar,
+    ci = ci,
+    color_fill = color_fill,
+    color_error_bar = color_error_bar
+  )
+  # plot cross table data
   if (length(x) == 1L) {
-    plot.datawizard_table(
-      x[[1]],
-      label_values = label_values,
-      show_na = show_na,
-      na_label = na_label,
-      error_bar = error_bar,
-      ci = ci,
-      color_fill = color_fill,
-      color_error_bar = color_error_bar
-    )
+    do.call(plot.datawizard_table, c(list(x[[1]]), fun_args))
   } else {
     lapply(
       x,
       plot.datawizard_table,
-      label_values = label_values,
-      show_na = show_na,
-      na_label = na_label,
-      error_bar = error_bar,
-      ci = ci,
-      color_fill = color_fill,
-      color_error_bar = color_error_bar
+      fun_args
     )
   }
 }
