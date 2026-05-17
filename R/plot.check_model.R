@@ -274,9 +274,7 @@ plot.see_check_model <- function(
     )
     ps <- do.call(.plot_diag_reqq, fun_args)
     # Append all random effects plots to the main list
-    for (i in seq_along(ps)) {
-      p[[length(p) + 1]] <- ps[[i]]
-    }
+    p <- c(p, ps)
   }
 
   # 4. Finalizing and returning the output -------------------------------------
