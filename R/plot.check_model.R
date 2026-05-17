@@ -39,28 +39,28 @@ plot.see_check_model <- function(
 
   # read arguments / settings from "check_model()" -----
 
-  panel <- attr(x, "panel")
-  check <- attr(x, "check")
-  size_point <- attr(x, "dot_size")
-  linewidth <- attr(x, "line_size")
-  show_labels <- attr(x, "show_labels") %||% TRUE
-  size_text <- attr(x, "text_size")
-  base_size <- attr(x, "base_size")
-  size_axis_title <- attr(x, "axis_title_size")
-  size_title <- attr(x, "title_size")
-  alpha_level <- attr(x, "alpha")
-  alpha_dot <- attr(x, "alpha_dot")
-  show_dots <- attr(x, "show_dots")
+  panel <- .default_value(x, "panel", TRUE)
+  check <- .default_value(x, "check", "all")
+  size_point <- .default_value(x, "dot_size", 2)
+  linewidth <- .default_value(x, "line_size", 0.8)
+  show_labels <- .default_value(x, "show_labels", TRUE)
+  size_text <- .default_value(x, "text_size")
+  base_size <- .default_value(x, "base_size", 10)
+  size_axis_title <- .default_value(x, "axis_title_size", base_size)
+  size_title <- .default_value(x, "title_size", 12)
+  alpha_level <- .default_value(x, "alpha", 0.2)
+  alpha_dot <- .default_value(x, "alpha_dot", 0.8)
+  show_dots <- .default_value(x, "show_dots", TRUE)
   # for backwards compatibility, this attribute is NULL, and we want to show
   # confidence intervals then. checking for isTRUE would return FALSE for older
   # performance package versions, thus hiding CIs by default
   show_ci <- !isFALSE(attr(x, "show_ci"))
-  detrend <- attr(x, "detrend")
-  model_info <- attr(x, "model_info")
+  detrend <- .default_value(x, "detrend", TRUE)
+  model_info <- .default_value(x, "model_info")
   overdisp_type <- attr(x, "overdisp_type")
   plot_type <- attr(x, "type")
   model_class <- attr(x, "model_class")
-  max_dots <- attr(x, "maximum_dots")
+  max_dots <- .default_value(x, "maximum_dots")
 
   if (is.null(max_dots) && !is.null(dots$maximum_dots)) {
     max_dots <- dots$maximum_dots
@@ -88,38 +88,9 @@ plot.see_check_model <- function(
   )
 
   if (is.null(colors)) {
-    colors <- attr(x, "colors")
+    colors <- .default_value(x, "colors", c("#3aaf85", "#1b6ca8", "#cd201f"))
   }
-
-  if (is.null(colors)) {
-    colors <- c("#3aaf85", "#1b6ca8", "#cd201f")
-  }
-
   colors <- unname(colors)
-
-  if (is.null(alpha_level)) {
-    alpha_level <- 0.2
-  }
-
-  if (is.null(alpha_dot)) {
-    alpha_dot <- 0.8
-  }
-
-  if (is.null(base_size)) {
-    base_size <- 10
-  }
-
-  if (is.null(size_axis_title)) {
-    size_axis_title <- base_size
-  }
-
-  if (is.null(size_title)) {
-    size_title <- 12
-  }
-
-  if (is.null(check)) {
-    check <- "all"
-  }
 
   # build plot panels --------------------
 

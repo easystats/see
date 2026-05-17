@@ -1,3 +1,13 @@
+# extract default value from attribute, or set default if NULL
+.default_value <- function(x, value, default = NULL) {
+  out <- attributes(x)[[value]]
+  if (is.null(out)) {
+    out <- default
+  }
+  out
+}
+
+
 # Helper function to sample large datasets for performance
 # See issue #420: https://github.com/easystats/see/issues/420
 .sample_for_plot <- function(data, maximum_dots = 2000, ...) {
