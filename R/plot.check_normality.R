@@ -238,7 +238,8 @@ plot.see_check_normality <- function(
   alpha_level = 0.2,
   theme = NULL,
   base_size = 10,
-  colors = unname(social_colors(c("green", "blue", "red")))
+  colors = unname(social_colors(c("green", "blue", "red"))),
+  ...
 ) {
   theme <- .set_default_theme(
     x,
