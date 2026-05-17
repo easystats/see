@@ -7,9 +7,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @keywords internal
 .data_plot_estimate_contrasts <- function(x, means = NULL, ...) {
   if (is.null(means)) {
-    stop(
-      "Please provide the estimated means data obtained via 'estimate_means()'.",
-      call. = FALSE
+    insight::format_error(
+      "Please provide the estimated means data obtained via `estimate_means()`."
     )
   } else {
     x_name <- names(means)[1]
@@ -98,15 +97,20 @@ plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
     x <- data_plot(x, data = data)
   }
 
-  p <- ggplot() +
-    geom_polygon(
+  p <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(
       data = x$geom_polygon,
-      aes(x = .data$x, y = .data$y, group = .data$group),
+      ggplot2::aes(x = .data$x, y = .data$y, group = .data$group),
       alpha = 0.1
     ) +
-    geom_pointrange(
+    ggplot2::geom_pointrange(
       data = x$geom_pointrange,
-      aes(x = .data$x, y = .data$y, ymax = .data$ymax, ymin = .data$ymin),
+      ggplot2::aes(
+        x = .data$x,
+        y = .data$y,
+        ymax = .data$ymax,
+        ymin = .data$ymin
+      ),
       color = "black"
     ) +
     add_plot_attributes(x)
