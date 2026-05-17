@@ -17,7 +17,6 @@ print.see_check_model <- function(
       plot_type %in%
         c("density", "discrete_dots", "discrete_interval", "discrete_both")
   ) {
-    # nolint
     type <- plot_type
   } else {
     type <- insight::validate_argument(

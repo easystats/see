@@ -276,3 +276,9 @@
 `%||%` <- function(x, y) {
   if (is.null(x)) y else x
 }
+
+
+# extract default value from attribute, or set default if NULL
+.default_value <- function(x, value, default = NULL) {
+  attr(x, value, exact = TRUE) %||% default
+}
