@@ -40,7 +40,7 @@
   }
   df_wide <- datawizard::data_remove(df_wide, meta_cols)
 
-  # need this workaround to avoid CRAN complaints about undefined variable
+  # select all except "Variable" for reshaping
   keep <- setdiff(colnames(df_wide), "Variable")
   df_all <- datawizard::data_to_long(
     df_wide,
