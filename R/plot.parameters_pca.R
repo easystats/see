@@ -157,7 +157,7 @@ plot.see_parameters_pca <- function(
     p <- p +
       geom_bar(stat = "identity", width = size, colour = NA) +
       scale_fill_gradientn(
-        colours = c("#cd201f", "#ffffff", "#0077B5"),
+        colours = unname(colors),
         limits = c(-1, 1)
       )
   } else {
@@ -168,7 +168,7 @@ plot.see_parameters_pca <- function(
       ) +
       geom_point(size = 2 * size) +
       scale_color_gradientn(
-        colours = c("#cd201f", "#ffffff", "#0077B5"),
+        colours = unname(colors),
         limits = c(-1, 1)
       )
   }
