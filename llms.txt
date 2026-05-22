@@ -578,6 +578,10 @@ computing*. R Foundation for Statistical Computing.
   [`geom_point_borderless()`](https://easystats.github.io/see/reference/geom_point2.md)
   [`geom_jitter_borderless()`](https://easystats.github.io/see/reference/geom_point2.md)
   [`geom_pointrange_borderless()`](https://easystats.github.io/see/reference/geom_point2.md)
+  [`geom_point_halo()`](https://easystats.github.io/see/reference/geom_point2.md)
+  [`geom_jitter_halo()`](https://easystats.github.io/see/reference/geom_point2.md)
+  [`geom_count_halo()`](https://easystats.github.io/see/reference/geom_point2.md)
+  [`geom_pointrange_halo()`](https://easystats.github.io/see/reference/geom_point2.md)
   : Better looking points
 
 - [`geom_poolpoint()`](https://easystats.github.io/see/reference/geom_poolpoint.md)

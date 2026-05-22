@@ -1,7 +1,13 @@
 # Better looking points
 
-Somewhat nicer points (especially in case of transparency) without
-outline strokes (borders, contours) by default.
+The `*_borderless` geoms (and their shortcuts ending in `2`, such as
+`geom_point2` or `geom_point_borderless`) render points without an
+outline stroke by default. This prevents harsh edges and yields a
+smoother, cleaner look, especially when using transparency.
+
+In contrast, the `*_halo` variants feature a border that automatically
+matches the plot's background color. This creates a subtle visual
+separation (a "halo" effect) that keeps overlapping points distinct.
 
 ## Usage
 
@@ -16,11 +22,19 @@ geom_count2(..., stroke = 0)
 
 geom_count_borderless(..., stroke = 0)
 
-geom_point_borderless(...)
+geom_point_borderless(..., stroke = 0, shape = 16)
 
-geom_jitter_borderless(...)
+geom_jitter_borderless(..., size = 2, stroke = 0, shape = 16)
 
-geom_pointrange_borderless(...)
+geom_pointrange_borderless(..., stroke = 0)
+
+geom_point_halo(...)
+
+geom_jitter_halo(...)
+
+geom_count_halo(...)
+
+geom_pointrange_halo(...)
 ```
 
 ## Arguments
@@ -48,7 +62,7 @@ geom_pointrange_borderless(...)
 
 ## Note
 
-The color aesthetics for `geom_point_borderless()` is `"fill"`, not
+The color aesthetics for the `*_halo()` functions is `"fill"`, not
 `"color"`. See 'Examples'.
 
 ## Examples
@@ -68,12 +82,18 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 plots(normal, new, n_columns = 2)
 
 
-ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species)) +
   geom_point_borderless(size = 4) +
   theme_modern()
 
 
 theme_set(theme_abyss())
-ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species)) +
   geom_point_borderless(size = 4)
+
+
+# add "halo" effect - note that the aesthetics is "fill", not "color"
+theme_set(theme_abyss())
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+  geom_point_halo(size = 12)
 ```
