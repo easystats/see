@@ -23,7 +23,15 @@
   # Remove metadata columns and melt the dataframe from wide to long format.
   # This creates a structure where each row represents a single
   # variable-to-factor relationship.
-  df_wide <- datawizard::data_remove(as.data.frame(object), meta_cols)
+  df_wide <- as.data.frame(object)
+  if ("Label" %in% colnames(df_wide)) {
+    # Some objects from the parameters package use a Label column instead of
+    # Variable. To ensure compatibility and consistency with the main data_plot
+    # method, you should check for and rename this column if it exists.
+    df_wide$Variable <- df_wide$Label
+    df_wide$Label <- NULL
+  }
+  df_wide <- datawizard::data_remove(df_wide, meta_cols)
 
   df_all <- datawizard::data_to_long(
     df_wide,
@@ -59,6 +67,10 @@
   display_factors <- stats::setNames(original_factors, original_factors)
 
   if (!is.null(names_factors)) {
+    # check if we have a named vector, if not, set names to original factors
+    if (is.null(names(names_factors))) {
+      names(names_factors) <- original_factors
+    }
     if (all(names(names_factors) %in% original_factors)) {
       # We know for sure names() are the old factors
       display_factors[names(names_factors)] <- unlist(names_factors)
