@@ -131,7 +131,7 @@ geom_pointrange_halo <- function(...) {
     dots$fill <- dots$colour
   }
 
-  dots$colour <- NULL
+  dots$colour <- dots$shape <- dots$pch <- NULL
   dots$color <- .get_theme_bg_color()
 
   fun_args <- c(list(pch = 21), dots)
@@ -142,14 +142,10 @@ geom_pointrange_halo <- function(...) {
 .get_theme_bg_color <- function() {
   current_theme <- ggplot2::theme_get()
 
-  if (is.null(current_theme$panel.grid.major)) {
-    current_theme$panel.grid.major <- current_theme$panel.grid
-  }
-
   bg_color <- ifelse(
-    is.null(current_theme$panel.grid.major$colour),
+    is.null(current_theme$panel.background$fill),
     "white",
-    current_theme$panel.grid.major$colour
+    current_theme$panel.background$fill
   )
 
   bg_color
