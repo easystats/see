@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,11 +63,18 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_parameters_pca'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bar"</span>, <span class="st">"line"</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"bar"</span>,</span>
 <span>  size_text <span class="op">=</span> <span class="fl">3.5</span>,</span>
 <span>  color_text <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#cd201f"</span>, <span class="st">"#ffffff"</span>, <span class="st">"#0077B5"</span><span class="op">)</span>,</span>
 <span>  size <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  show_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  arrow_end_gap <span class="op">=</span> <span class="fl">0.07</span>,</span>
+<span>  factor_node_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">35</span><span class="op">)</span>,</span>
+<span>  margins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.3</span><span class="op">)</span>,</span>
+<span>  names_factors <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fill_variables <span class="op">=</span> <span class="st">"#738b8d"</span>,</span>
+<span>  fill_factors <span class="op">=</span> <span class="st">"#2C3E50"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -81,9 +88,10 @@
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>Character vector, indicating the type of plot. Options are three
+<dd><p>Character vector, indicating the type of plot. Options are
 different shapes to represent component loadings; <code>"bar"</code> (default) for a
-horizontal bar chart, or <code>"line"</code> for a horizontal point and line chart.</p></dd>
+horizontal bar chart, <code>"line"</code> for a horizontal point and line chart, or
+<code>"graph"</code> for a graph.</p></dd>
 
 
 <dt id="arg-size-text">size_text<a class="anchor" aria-label="anchor" href="#arg-size-text"></a></dt>
@@ -94,6 +102,11 @@ horizontal bar chart, or <code>"line"</code> for a horizontal point and line cha
 <dd><p>Character specifying color of text labels.</p></dd>
 
 
+<dt id="arg-colors">colors<a class="anchor" aria-label="anchor" href="#arg-colors"></a></dt>
+<dd><p>Character vector of length three, indicating the colors for low
+(negative), mid (close to zero), and high (positive) values.</p></dd>
+
+
 <dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
 <dd><p>Depending on <code>type</code>, a numeric value specifying size of bars,
 lines, or segments.</p></dd>
@@ -101,6 +114,50 @@ lines, or segments.</p></dd>
 
 <dt id="arg-show-labels">show_labels<a class="anchor" aria-label="anchor" href="#arg-show-labels"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, text labels are displayed.</p></dd>
+
+
+<dt id="arg-arrow-end-gap">arrow_end_gap<a class="anchor" aria-label="anchor" href="#arg-arrow-end-gap"></a></dt>
+<dd><p>Numeric. Specifies the distance between the tip of the
+edge arrow and the variable node. Adjusting this value prevents the arrow
+from overlapping or clipping into the variable label. Default is <code>0.07</code>
+(measured in 'snpc' units). This argument is only used if <code>type = "graph"</code>.</p></dd>
+
+
+<dt id="arg-factor-node-size">factor_node_size<a class="anchor" aria-label="anchor" href="#arg-factor-node-size"></a></dt>
+<dd><p>Numeric vector of length 2. Determines the minimum
+and maximum size of the circular factor nodes. Factor nodes are scaled
+internally based on the proportion of variance they explain. This argument is
+only used if <code>type = "graph"</code>.</p></dd>
+
+
+<dt id="arg-margins">margins<a class="anchor" aria-label="anchor" href="#arg-margins"></a></dt>
+<dd><p>Numeric vector of length 2. Adds extra space to the left and
+right edges of the plot canvas (using <code><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">ggplot2::expansion</a></code>). This is
+particularly useful to prevent long variable labels on the edges from being
+cut off. This argument is only used if <code>type = "graph"</code>.</p></dd>
+
+
+<dt id="arg-names-factors">names_factors<a class="anchor" aria-label="anchor" href="#arg-names-factors"></a></dt>
+<dd><p>Named character vector. Allows providing custom labels
+for the factor nodes. The names of the vector must match the original factor
+names generated by the model (e.g.,
+<code>c("Component 1" = "Extraversion", "Component 2" = "Neuroticism")</code>).
+This argument is only used if <code>type = "graph"</code>.</p></dd>
+
+
+<dt id="arg-fill-variables">fill_variables<a class="anchor" aria-label="anchor" href="#arg-fill-variables"></a></dt>
+<dd><p>Character vector. Specifies the fill color for the
+variable nodes (rectangular labels). Can be a single color hex/name (applied
+to all variables), a vector of colors matching the exact number of variables,
+or a named vector to map specific colors to specific variables. This argument
+is only used if <code>type = "graph"</code>.</p></dd>
+
+
+<dt id="arg-fill-factors">fill_factors<a class="anchor" aria-label="anchor" href="#arg-fill-factors"></a></dt>
+<dd><p>Character vector. Specifies the fill color for the factor
+nodes (circular points). Similar to <code>fill_variables</code>, this accepts a single
+color, a vector of matching length, or a named vector for precise mapping.
+This argument is only used if <code>type = "graph"</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
