@@ -40,11 +40,14 @@
   }
   df_wide <- datawizard::data_remove(df_wide, meta_cols)
 
+  # need this workaround to avoid CRAN complaints about undefined variable
+  exclude <- "Variable"
   df_all <- datawizard::data_to_long(
     df_wide,
-    select = -contains("Variable"),
+    select = -exclude,
     names_to = "Factor",
-    values_to = "Loading"
+    values_to = "Loading",
+    regex = TRUE
   )
 
   # 2. Process node metadata (Colors and Ordering) ----------------------------
