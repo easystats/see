@@ -64,6 +64,8 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' horizontal bar chart, `"line"` for a horizontal point and line chart, or
 #' `"graph"` for a graph.
 #' @param color_text Character specifying color of text labels.
+#' @param colors Character vector of length three, indicating the colors (in
+#' hex-format) for low (negative), mid (close to zero), and high (positive) values.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_check_outliers
@@ -84,6 +86,7 @@ plot.see_parameters_pca <- function(
   type = "bar",
   size_text = 3.5,
   color_text = "black",
+  colors = c("#cd201f", "#ffffff", "#0077B5"),
   size = 1,
   show_labels = TRUE,
   ...
@@ -100,7 +103,12 @@ plot.see_parameters_pca <- function(
     # color_factors = "#2C3E50",
     # ...
 
-    return(.plot_pca_as_graph(object = x, size_text = size_text, ...))
+    return(.plot_pca_as_graph(
+      object = x,
+      size_text = size_text,
+      colors = colors,
+      ...
+    ))
   }
 
   if (!inherits(x, "data_plot")) {

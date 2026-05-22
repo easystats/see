@@ -1,12 +1,13 @@
 .plot_pca_as_graph <- function(
   object,
   size_text = 2.8,
+  colors = c("#cd201f", "#ffffff", "#0077B5"),
   arrow_end_gap = 0.07,
   factor_node_size = c(25, 35),
   margins = c(0.3, 0.3),
   names_factors = NULL,
   fill_variables = "#738b8d",
-  fill_factors = "#3b4f64",
+  fill_factors = "#2C3E50",
   ...
 ) {
   insight::check_if_installed(c("ggraph", "tidygraph"))
@@ -36,7 +37,7 @@
   var_processed <- .process_colors_and_order(
     unique(df_all$Variable),
     fill_variables,
-    "#95A5A6"
+    "#738b8d"
   )
   variables <- var_processed$items
   var_colors <- var_processed$colors
@@ -216,12 +217,9 @@
     ggplot2::scale_fill_identity() + # Evaluates our hex colors natively
     ggplot2::scale_size_continuous(range = factor_node_size, guide = "none") +
     ggraph::scale_edge_color_gradient2(
-      low = "#cd201f",
-      # low = "#E74C3C",
-      # mid = "grey85",
-      mid = "white",
-      # high = "#2ECC71",
-      high = "#0077B5",
+      low = colors[1],
+      mid = colors[2],
+      high = colors[3],
       midpoint = 0,
       guide = "none"
     ) +
