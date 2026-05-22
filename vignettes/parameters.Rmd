@@ -477,7 +477,7 @@ plot(result)
 ```{r}
 # Graph
 result <- principal_components(mtcars[, 1:7], n = 3, rotation = "varimax")
-plot(result, type = "graph")
+plot(result, type = "graph", arrow_end_gap = 0.15)
 ```
 
 ```{r}
