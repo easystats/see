@@ -766,6 +766,7 @@ documentation](https://easystats.github.io/parameters/reference/principal_compon
 
 ``` r
 
+# Bars
 data(mtcars)
 result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
 result
@@ -790,14 +791,16 @@ plot(result)
 
 ``` r
 
-
+# Graph
+result <- principal_components(mtcars[, 1:7], n = 3, rotation = "varimax")
 plot(result, type = "graph")
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-37-2.png)
+![](parameters_files/figure-html/unnamed-chunk-38-1.png)
 
 ``` r
 
+# lines
 result <- principal_components(
   mtcars[, 1:7],
   n = 3,
@@ -821,11 +824,11 @@ result
 #> 
 #> The 3 principal components (varimax rotation) accounted for 94.11% of the total variance of the original data (RC1 = 45.02%, RC2 = 27.79%, RC3 = 21.30%).
 
-plot(result, type = "line", text_color = "white") +
+plot(result, type = "line", color_text = "white") +
   theme_abyss()
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-38-1.png)
+![](parameters_files/figure-html/unnamed-chunk-39-1.png)
 
 ## Cluster Analysis
 
@@ -859,7 +862,7 @@ result
 plot(result)
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-39-1.png)
+![](parameters_files/figure-html/unnamed-chunk-40-1.png)
 
 ``` r
 
@@ -868,7 +871,7 @@ result <- cluster_analysis(iris[, 1:4], n = 4)
 plot(result)
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-39-2.png)
+![](parameters_files/figure-html/unnamed-chunk-40-2.png)
 
 ### Cluster centers
 
@@ -885,7 +888,7 @@ s
 plot(s)
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-40-1.png)
+![](parameters_files/figure-html/unnamed-chunk-41-1.png)
 
 ## Number of Components/Factors to Retain
 
@@ -904,14 +907,14 @@ result
 plot(result)
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-41-1.png)
+![](parameters_files/figure-html/unnamed-chunk-42-1.png)
 
 ``` r
 
 plot(result, type = "line")
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-41-2.png)
+![](parameters_files/figure-html/unnamed-chunk-42-2.png)
 
 ## Number of Clusters to Retain
 
@@ -930,11 +933,11 @@ result
 plot(result)
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-42-1.png)
+![](parameters_files/figure-html/unnamed-chunk-43-1.png)
 
 ``` r
 
 plot(result, type = "line")
 ```
 
-![](parameters_files/figure-html/unnamed-chunk-42-2.png)
+![](parameters_files/figure-html/unnamed-chunk-43-2.png)
