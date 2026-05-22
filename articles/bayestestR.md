@@ -864,7 +864,7 @@ plot(result, n_pies = "many", value = "BF") +
 
 ![](bayestestR_files/figure-html/unnamed-chunk-29-1.png)
 
-### Posterior Predictive Checks
+## Posterior Predictive Checks
 
 *([related function
 documentation](https://easystats.github.io/performance/reference/check_predictions.html))*

@@ -751,7 +751,7 @@ function documentation</a>)</em></p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Graph</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">principal_components</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">3</span>, rotation <span class="op">=</span> <span class="st">"varimax"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"graph"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span>, type <span class="op">=</span> <span class="st">"graph"</span>, arrow_end_gap <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span></code></pre></div>
 <p><img src="parameters_files/figure-html/unnamed-chunk-38-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># lines</span></span>

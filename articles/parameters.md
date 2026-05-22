@@ -793,7 +793,7 @@ plot(result)
 
 # Graph
 result <- principal_components(mtcars[, 1:7], n = 3, rotation = "varimax")
-plot(result, type = "graph")
+plot(result, type = "graph", arrow_end_gap = 0.15)
 ```
 
 ![](parameters_files/figure-html/unnamed-chunk-38-1.png)
