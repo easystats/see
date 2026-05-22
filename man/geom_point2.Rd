@@ -31,7 +31,7 @@ geom_pointrange_borderless(...)
 \item{...}{Other arguments to be passed to
 \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}},
 \code{\link[ggplot2:geom_jitter]{ggplot2::geom_jitter()}},
-\code{\link[ggplot2:geom_linerange]{ggplot2::geom_pointrange()}}, or
+\code{\link[ggplot2:geom_pointrange]{ggplot2::geom_pointrange()}}, or
 \code{\link[ggplot2:geom_count]{ggplot2::geom_count()}}.}
 
 \item{stroke}{Stroke thickness.}

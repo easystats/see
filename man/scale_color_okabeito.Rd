@@ -86,7 +86,7 @@ correspond to major primary and secondary colors (e.g., red, yellow, blue).
 }
 \details{
 The Okabe-Ito palette is included in the base R
-\code{\link[grDevices:palette]{grDevices::palette.colors()}}. These functions make this palette easier to
+\code{\link[grDevices:palette.colors]{grDevices::palette.colors()}}. These functions make this palette easier to
 use with \emph{ggplot2}.
 
 The original Okabe-Ito palette's "yellow" color is \code{"#F0E442"}. This color is
@@ -100,7 +100,7 @@ the original yellow color suggested by Okabe and Ito (\code{"#F0E442"}), use
 palettes \code{"full_original"} or \code{"black_first_original"}.
 
 The Okabe-Ito palette is only available as a discrete palette. For
-color-accessible continuous variables, consider \link[ggplot2:scale_viridis]{the viridis palettes}.
+color-accessible continuous variables, consider \link[ggplot2:scale_colour_viridis_d]{the viridis palettes}.
 }
 \examples{
 library(ggplot2)
