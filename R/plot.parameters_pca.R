@@ -131,6 +131,12 @@ plot.see_parameters_pca <- function(
       object = x,
       size_text = size_text,
       colors = colors,
+      arrow_end_gap = arrow_end_gap,
+      factor_node_size = factor_node_size,
+      margins = margins,
+      names_factors = names_factors,
+      fill_variables = fill_variables,
+      fill_factors = fill_factors,
       ...
     ))
   }
