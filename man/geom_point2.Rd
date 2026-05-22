@@ -9,6 +9,10 @@
 \alias{geom_point_borderless}
 \alias{geom_jitter_borderless}
 \alias{geom_pointrange_borderless}
+\alias{geom_point_halo}
+\alias{geom_jitter_halo}
+\alias{geom_count_halo}
+\alias{geom_pointrange_halo}
 \title{Better looking points}
 \usage{
 geom_point2(..., stroke = 0, shape = 16)
@@ -21,17 +25,23 @@ geom_count2(..., stroke = 0)
 
 geom_count_borderless(..., stroke = 0)
 
-geom_point_borderless(...)
+geom_point_borderless(..., stroke = 0, shape = 16)
 
-geom_jitter_borderless(...)
+geom_jitter_borderless(..., size = 2, stroke = 0, shape = 16)
 
-geom_pointrange_borderless(...)
+geom_pointrange_borderless(..., stroke = 0)
+
+geom_point_halo(...)
+
+geom_jitter_halo(...)
+
+geom_count_halo(...)
+
+geom_pointrange_halo(...)
 }
 \arguments{
-\item{...}{Other arguments to be passed to
-\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}},
-\code{\link[ggplot2:geom_jitter]{ggplot2::geom_jitter()}},
-\code{\link[ggplot2:geom_pointrange]{ggplot2::geom_pointrange()}}, or
+\item{...}{Other arguments to be passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}},
+\code{\link[ggplot2:geom_jitter]{ggplot2::geom_jitter()}}, \code{\link[ggplot2:geom_pointrange]{ggplot2::geom_pointrange()}}, or
 \code{\link[ggplot2:geom_count]{ggplot2::geom_count()}}.}
 
 \item{stroke}{Stroke thickness.}
@@ -41,12 +51,18 @@ geom_pointrange_borderless(...)
 \item{size}{Size of points.}
 }
 \description{
-Somewhat nicer points (especially in case of transparency) without outline
-strokes (borders, contours) by default.
+The \verb{*_borderless} geoms (and their shortcuts ending in \code{2}, such as \code{geom_point2}
+or \code{geom_point_borderless}) render points without an outline stroke by default.
+This prevents harsh edges and yields a smoother, cleaner look, especially when
+using transparency.
+
+In contrast, the \verb{*_halo} variants feature a border that automatically matches
+the plot's background color. This creates a subtle visual separation (a "halo"
+effect) that keeps overlapping points distinct.
 }
 \note{
-The color aesthetics for \code{geom_point_borderless()} is \code{"fill"}, not
-\code{"color"}. See 'Examples'.
+The color aesthetics for the \verb{*_borderless()} and \verb{*_halo()} functions
+are \code{"fill"}, not \code{"color"}. See 'Examples'.
 }
 \examples{
 \dontshow{if (requireNamespace("patchwork", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -63,12 +79,17 @@ new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
 
 plots(normal, new, n_columns = 2)
 
-ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species)) +
   geom_point_borderless(size = 4) +
   theme_modern()
 
 theme_set(theme_abyss())
-ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, color = Species)) +
   geom_point_borderless(size = 4)
+
+# add "halo" effect - note that the aesthetics is "fill", not "color"
+theme_set(theme_abyss())
+ggplot(iris, aes(x = Petal.Width, y = Sepal.Length, fill = Species)) +
+  geom_point_halo(size = 12)
 \dontshow{\}) # examplesIf}
 }

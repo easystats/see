@@ -5,6 +5,14 @@
 * Updated plot-method for `performance::check_model()` for Bayesian ordinal
   models.
 
+* New `geom_point_halo()`, `geom_pointrange_halo()`, `geom_jitter_halo()` and
+  `geom_count_halo()` geoms, which add a slight contour around the points
+
+## Bug fixes
+
+* Fixed the `*_borless` aliases for `geom_point2()` or `geom_jitter2()`, which
+  were broken and did not render as intended.
+
 # see 0.13.0
 
 ## Breaking Changes
