@@ -157,7 +157,7 @@
   graph <- tidygraph::tbl_graph(nodes = nodes, edges = edges, directed = TRUE)
 
   # Plot using ggraph
-  ggraph::ggraph(graph, layout = "manual", x = x, y = y) +
+  ggraph::ggraph(graph, layout = "manual", x = nodes$x, y = nodes$y) +
 
     # -- EDGES --
     ggraph::geom_edge_link(
@@ -168,11 +168,11 @@
         # Psychometric standard: drop the leading zero for numbers strictly between -1 and 1
         label = sub("^(-?)0\\.", "\\1.", sprintf("%.2f", weight))
       ),
-      arrow = ggplot2::arrow(length = unit(4, 'mm'), type = "closed"),
+      arrow = ggplot2::arrow(length = ggplot2::unit(4, 'mm'), type = "closed"),
       start_cap = ggraph::circle(0, 'mm'),
       end_cap = ggraph::circle(arrow_end_gap, 'snpc'),
       angle_calc = 'along',
-      label_dodge = unit(2.5, 'mm'),
+      label_dodge = ggplot2::unit(2.5, 'mm'),
       label_size = size_text
     ) +
 
@@ -227,7 +227,7 @@
     ggraph::scale_edge_alpha_continuous(range = c(0.4, 1), guide = "none") +
 
     # -- CANVAS EXPANSION & THEME --
-    ggplot2::scale_x_continuous(expand = expansion(add = margins)) +
+    ggplot2::scale_x_continuous(expand = ggplot2::expansion(add = margins)) +
     ggplot2::coord_cartesian(clip = "off") +
 
     ggraph::theme_graph() +
