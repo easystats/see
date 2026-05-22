@@ -46,8 +46,7 @@
     df_wide,
     select = -exclude,
     names_to = "Factor",
-    values_to = "Loading",
-    regex = TRUE
+    values_to = "Loading"
   )
 
   # 2. Process node metadata (Colors and Ordering) ----------------------------
@@ -184,7 +183,7 @@
   graph <- tidygraph::tbl_graph(nodes = nodes, edges = edges, directed = TRUE)
 
   # Plot using ggraph
-  ggraph::ggraph(graph, layout = "manual", x = nodes$x, y = nodes$y) +
+  p <- ggraph::ggraph(graph, layout = "manual", x = nodes$x, y = nodes$y) +
 
     # -- EDGES --
     ggraph::geom_edge_link(
@@ -263,6 +262,8 @@
       plot.margin = ggplot2::margin(20, 20, 20, 20)
     ) +
     ggplot2::labs(title = title)
+
+  suppressWarnings(p)
 }
 
 
