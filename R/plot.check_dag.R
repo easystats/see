@@ -144,7 +144,7 @@ plot.see_check_dag <- function(
   # these geoms are shared by both plots
   common_layers <- list(
     geom_point_borderless(
-      ggplot2::aes(fill = .data$type),
+      ggplot2::aes(color = .data$type),
       size = size_point
     ),
     ggdag::geom_dag_edges(
