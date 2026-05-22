@@ -418,3 +418,13 @@ model (and who doesn't like ***more*** pizza?):
 plot(result, n_pies = "many", value = "BF") +
   scale_fill_flat(palette = "rainbow", reverse = TRUE)
 ```
+
+### Posterior Predictive Checks
+
+_([related function documentation](https://easystats.github.io/performance/reference/check_predictions.html))_
+
+Posterior predictive checks can be used to look for systematic discrepancies between real and simulated data, in order to check how well the data fits to the distributional assumption of the model.
+
+```{r}
+plot(check_predictions(model))
+```
