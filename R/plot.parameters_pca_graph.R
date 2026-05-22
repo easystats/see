@@ -41,10 +41,10 @@
   df_wide <- datawizard::data_remove(df_wide, meta_cols)
 
   # need this workaround to avoid CRAN complaints about undefined variable
-  exclude <- "Variable"
+  keep <- setdiff(colnames(df_wide), "Variable")
   df_all <- datawizard::data_to_long(
     df_wide,
-    select = -exclude,
+    select = keep,
     names_to = "Factor",
     values_to = "Loading"
   )
