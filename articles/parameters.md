@@ -790,6 +790,14 @@ plot(result)
 
 ``` r
 
+
+plot(result, type = "graph")
+```
+
+![](parameters_files/figure-html/unnamed-chunk-37-2.png)
+
+``` r
+
 result <- principal_components(
   mtcars[, 1:7],
   n = 3,

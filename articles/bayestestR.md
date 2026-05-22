@@ -46,6 +46,7 @@ For more, see: <https://easystats.github.io/bayestestR/>
 
 library(bayestestR)
 library(insight)
+library(performance)
 library(see)
 library(rstanarm)
 library(ggplot2)
@@ -862,6 +863,22 @@ plot(result, n_pies = "many", value = "BF") +
 ```
 
 ![](bayestestR_files/figure-html/unnamed-chunk-29-1.png)
+
+### Posterior Predictive Checks
+
+*([related function
+documentation](https://easystats.github.io/performance/reference/check_predictions.html))*
+
+Posterior predictive checks can be used to look for systematic
+discrepancies between real and simulated data, in order to check how
+well the data fits to the distributional assumption of the model.
+
+``` r
+
+plot(check_predictions(model))
+```
+
+![](bayestestR_files/figure-html/unnamed-chunk-30-1.png)
 
 [^1]: When all models are given equal prior probabilities, then all
     prior odds are 1, and the posterior odds are equal to the Bayes
