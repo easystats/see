@@ -137,7 +137,7 @@ plot.see_parameters_pca <- function(
 
   # leave here for graph plot
   if (type == "graph") {
-    return(.plot_pca_as_graph(
+    return(suppressWarnings(.plot_pca_as_graph(
       object = x,
       size_text = size_text,
       colors = colors,
@@ -148,7 +148,7 @@ plot.see_parameters_pca <- function(
       fill_variables = fill_variables,
       fill_factors = fill_factors,
       ...
-    ))
+    )))
   }
 
   if (!inherits(x, "data_plot")) {

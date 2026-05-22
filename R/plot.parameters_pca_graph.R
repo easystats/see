@@ -33,8 +33,7 @@
   df_wide <- as.data.frame(object)
   if ("Label" %in% colnames(df_wide)) {
     # Some objects from the parameters package use a Label column instead of
-    # Variable. To ensure compatibility and consistency with the main data_plot
-    # method, you should check for and rename this column if it exists.
+    # Variable.
     df_wide$Variable <- df_wide$Label
     df_wide$Label <- NULL
   }
@@ -183,7 +182,7 @@
   graph <- tidygraph::tbl_graph(nodes = nodes, edges = edges, directed = TRUE)
 
   # Plot using ggraph
-  p <- ggraph::ggraph(graph, layout = "manual", x = nodes$x, y = nodes$y) +
+  ggraph::ggraph(graph, layout = "manual", x = nodes$x, y = nodes$y) +
 
     # -- EDGES --
     ggraph::geom_edge_link(
@@ -262,8 +261,6 @@
       plot.margin = ggplot2::margin(20, 20, 20, 20)
     ) +
     ggplot2::labs(title = title)
-
-  suppressWarnings(p)
 }
 
 

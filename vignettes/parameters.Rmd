@@ -466,16 +466,22 @@ plot(result)
 _([related function documentation](https://easystats.github.io/parameters/reference/principal_components.html))_
 
 ```{r}
+# Bars
 data(mtcars)
 result <- principal_components(mtcars[, 1:7], n = "all", threshold = 0.2)
 result
 
 plot(result)
+```
 
+```{r}
+# Graph
+result <- principal_components(mtcars[, 1:7], n = 3, rotation = "varimax")
 plot(result, type = "graph")
 ```
 
 ```{r}
+# lines
 result <- principal_components(
   mtcars[, 1:7],
   n = 3,
@@ -486,7 +492,7 @@ result <- principal_components(
 
 result
 
-plot(result, type = "line", text_color = "white") +
+plot(result, type = "line", color_text = "white") +
   theme_abyss()
 ```
 
