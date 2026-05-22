@@ -100,15 +100,22 @@
       yintercept = 0,
       color = ref.color,
       linetype = ref.linetype
-    ) +
-    ggplot2::stat_smooth(
-      formula = y ~ x,
-      method = "loess",
-      na.rm = na.rm,
-      se = FALSE,
-      color = colors[1],
-      linewidth = linewidth
-    ) +
+    )
+
+  # check if we have enough unique x-values to plot smoother
+  if (insight::n_unique(plot_data$Hat) > 30) {
+    p <- p +
+      ggplot2::stat_smooth(
+        formula = y ~ x,
+        method = "loess",
+        na.rm = na.rm,
+        se = FALSE,
+        color = colors[1],
+        linewidth = linewidth
+      )
+  }
+
+  p <- p +
     ggplot2::scale_colour_manual(
       values = c(OK = colors[2], Influential = colors[3])
     ) +
