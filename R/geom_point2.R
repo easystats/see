@@ -18,8 +18,8 @@
 #' [ggplot2::geom_jitter()], [ggplot2::geom_pointrange()], or
 #' [ggplot2::geom_count()].
 #'
-#' @note The color aesthetics for the `*_borderless()` and `*_halo()` functions
-#' are `"fill"`, not `"color"`. See 'Examples'.
+#' @note The color aesthetics for the `*_halo()` functions is `"fill"`, not
+#' `"color"`. See 'Examples'.
 #'
 #' @examplesIf requireNamespace("patchwork", quietly = TRUE)
 #' library(ggplot2)

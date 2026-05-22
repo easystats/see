@@ -61,8 +61,8 @@ the plot's background color. This creates a subtle visual separation (a "halo"
 effect) that keeps overlapping points distinct.
 }
 \note{
-The color aesthetics for the \verb{*_borderless()} and \verb{*_halo()} functions
-are \code{"fill"}, not \code{"color"}. See 'Examples'.
+The color aesthetics for the \verb{*_halo()} functions is \code{"fill"}, not
+\code{"color"}. See 'Examples'.
 }
 \examples{
 \dontshow{if (requireNamespace("patchwork", quietly = TRUE)) withAutoprint(\{ # examplesIf}
