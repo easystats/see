@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 # `{httr2}` is needed for `insight::download_model()`
 can_evaluate <- FALSE
-pkgs <- c("bayestestR", "brms", "curl", "ggplot2", "httr2", "insight", "logspline", "rstanarm")
+pkgs <- c("bayestestR", "brms", "curl", "ggplot2", "httr2", "insight", "logspline", "rstanarm", "performance")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 all_deps_available <- all(successfully_loaded)
 
@@ -56,6 +56,7 @@ For more, see: <https://easystats.github.io/bayestestR/>
 ```{r setup}
 library(bayestestR)
 library(insight)
+library(performance)
 library(see)
 library(rstanarm)
 library(ggplot2)
