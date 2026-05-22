@@ -420,7 +420,7 @@ plot(result, n_pies = "many", value = "BF") +
   scale_fill_flat(palette = "rainbow", reverse = TRUE)
 ```
 
-### Posterior Predictive Checks
+## Posterior Predictive Checks
 
 _([related function documentation](https://easystats.github.io/performance/reference/check_predictions.html))_
 
