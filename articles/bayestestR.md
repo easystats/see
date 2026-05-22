@@ -830,12 +830,12 @@ result <- bayesfactor_models(lm1, lm2, lm3, denominator = lm0)
 result
 #> Bayes Factors for Model Comparison
 #> 
-#>       Model        BF
-#> [lm1] drat      0.202
-#> [lm2] wt        0.290
-#> [lm3] drat + wt 0.053
+#>     Model        BF
+#> [1] drat      0.202
+#> [2] wt        0.290
+#> [3] drat + wt 0.053
 #> 
-#> * Against Denominator: [lm0] (Intercept only)
+#> * Against Denominator: [4] (Intercept only)
 #> *   Bayes Factor Type: BIC approximation
 ```
 

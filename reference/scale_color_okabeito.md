@@ -110,7 +110,8 @@ For the original yellow color suggested by Okabe and Ito (`"#F0E442"`),
 use palettes `"full_original"` or `"black_first_original"`.
 
 The Okabe-Ito palette is only available as a discrete palette. For
-color-accessible continuous variables, consider the viridis palettes.
+color-accessible continuous variables, consider [the viridis
+palettes](https://ggplot2.tidyverse.org/reference/scale_viridis.html).
 
 ## References
 

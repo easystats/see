@@ -27,6 +27,9 @@ Useful links:
 
 Authors:
 
+- Daniel Lüdecke <officialeasystats@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-8895-3206))
+
 - Dominique Makowski <dom.makowski@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-5375-9967)) \[inventor\]
 

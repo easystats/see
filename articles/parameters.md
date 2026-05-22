@@ -544,27 +544,27 @@ result
 #> r_Author[SongLindquist,Intercept]          |   0.59 | [ 0.25, 0.95] |   4.41
 #> r_Author[Warnecke.et.al.,Intercept]        |   0.58 | [ 0.21, 0.96] |   4.02
 #> 
-#> Parameter                                  |     pd |  Rhat |  ESS
-#> ------------------------------------------------------------------
-#> b_Intercept                                |   100% | 1.000 | 3921
-#> r_Author[Call.et.al.,Intercept]            | 99.95% |       |     
-#> r_Author[Cavanagh.et.al.,Intercept]        | 99.45% |       |     
-#> r_Author[DanitzOrsillo,Intercept]          |   100% |       |     
-#> r_Author[de.Vibe.et.al.,Intercept]         | 98.39% |       |     
-#> r_Author[Frazier.et.al.,Intercept]         | 99.91% |       |     
-#> r_Author[Frogeli.et.al.,Intercept]         | 99.99% |       |     
-#> r_Author[Gallego.et.al.,Intercept]         |   100% |       |     
-#> r_Author[Hazlett-Stevens.&.Oren,Intercept] | 99.85% |       |     
-#> r_Author[Hintz.et.al.,Intercept]           | 99.36% |       |     
-#> r_Author[Kang.et.al.,Intercept]            |   100% |       |     
-#> r_Author[Kuhlmann.et.al.,Intercept]        | 93.21% |       |     
-#> r_Author[Lever.Taylor.et.al.,Intercept]    | 99.34% |       |     
-#> r_Author[Phang.et.al.,Intercept]           | 99.83% |       |     
-#> r_Author[Rasanen.et.al.,Intercept]         | 99.26% |       |     
-#> r_Author[Ratanasiripong,Intercept]         | 99.01% |       |     
-#> r_Author[Shapiro.et.al.,Intercept]         |   100% |       |     
-#> r_Author[SongLindquist,Intercept]          | 99.95% |       |     
-#> r_Author[Warnecke.et.al.,Intercept]        | 99.81% |       |     
+#> Parameter                                  |     pd |  Rhat | ESS (tail)
+#> ------------------------------------------------------------------------
+#> b_Intercept                                |   100% | 1.000 |       4648
+#> r_Author[Call.et.al.,Intercept]            | 99.95% |       |           
+#> r_Author[Cavanagh.et.al.,Intercept]        | 99.45% |       |           
+#> r_Author[DanitzOrsillo,Intercept]          |   100% |       |           
+#> r_Author[de.Vibe.et.al.,Intercept]         | 98.39% |       |           
+#> r_Author[Frazier.et.al.,Intercept]         | 99.91% |       |           
+#> r_Author[Frogeli.et.al.,Intercept]         | 99.99% |       |           
+#> r_Author[Gallego.et.al.,Intercept]         |   100% |       |           
+#> r_Author[Hazlett-Stevens.&.Oren,Intercept] | 99.85% |       |           
+#> r_Author[Hintz.et.al.,Intercept]           | 99.36% |       |           
+#> r_Author[Kang.et.al.,Intercept]            |   100% |       |           
+#> r_Author[Kuhlmann.et.al.,Intercept]        | 93.21% |       |           
+#> r_Author[Lever.Taylor.et.al.,Intercept]    | 99.34% |       |           
+#> r_Author[Phang.et.al.,Intercept]           | 99.83% |       |           
+#> r_Author[Rasanen.et.al.,Intercept]         | 99.26% |       |           
+#> r_Author[Ratanasiripong,Intercept]         | 99.01% |       |           
+#> r_Author[Shapiro.et.al.,Intercept]         |   100% |       |           
+#> r_Author[SongLindquist,Intercept]          | 99.95% |       |           
+#> r_Author[Warnecke.et.al.,Intercept]        | 99.81% |       |           
 #> 
 #> # Tau
 #> 
