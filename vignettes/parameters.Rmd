@@ -24,7 +24,8 @@ knitr::opts_chunk$set(
 can_evaluate <- FALSE
 pkgs <- c(
   "brms", "curl", "factoextra", "ggplot2", "glmmTMB", "httr2",
-  "lavaan", "NbClust", "mclust", "metafor", "lme4", "splines"
+  "lavaan", "NbClust", "mclust", "metafor", "lme4", "splines",
+  "ggraph", "tidygraph"
 )
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 all_deps_available <- all(successfully_loaded)
