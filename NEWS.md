@@ -10,7 +10,7 @@
 
 ## Bug fixes
 
-* Fixed the `*_borless` aliases for `geom_point2()` or `geom_jitter2()`, which
+* Fixed the `*_borderless` aliases for `geom_point2()` or `geom_jitter2()`, which
   were broken and did not render as intended.
 
 # see 0.13.0
