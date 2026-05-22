@@ -42,7 +42,7 @@
 
   df_all <- datawizard::data_to_long(
     df_wide,
-    select = "-Variable",
+    select = -contains("Variable"),
     names_to = "Factor",
     values_to = "Loading"
   )
