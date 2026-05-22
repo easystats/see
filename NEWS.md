@@ -2,6 +2,10 @@
 
 ## Changes
 
+* `plot()` for `parameters::factor_analysis()` and `parameters::principal_components()`
+  gains a new `type` option, `"graph"`. This creates a graph with nodes/edges
+  indicating factor loadings.
+
 * Updated plot-method for `performance::check_model()` for Bayesian ordinal
   models.
 
