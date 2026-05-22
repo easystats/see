@@ -222,3 +222,41 @@ test_that("plot.see_check_model() works with show_dots parameter", {
     ))
   )
 })
+
+
+test_that("plot outliers skips smooth for low N", {
+  skip_if_not_installed("performance")
+  skip_if_not_installed("see")
+  skip_on_cran()
+
+  # fmt: skip
+  sdata <- data.frame(
+    TrtLin = factor(rep(
+      c("C1", "C2", "C3", "C4", "S1", "S2", "S3", "S4"),
+      rep(c(35L, 63L, 62L, 57L), 2)
+    )),
+    this_male_mated = rep(
+      c(rep(0:1, 98), 0),
+      c(
+        2L, 2L, 6L, 4L, 2L, 1L, 3L, 2L, 1L, 3L, 3L, 1L, 5L, 1L, 1L, 1L, 1L, 1L, 2L,
+        1L, 4L, 2L, 3L, 2L, 1L, 11L, 2L, 2L, 1L, 4L, 3L, 6L, 1L, 1L, 4L, 3L, 2L, 1L,
+        7L, 2L, 3L, 2L, 2L, 5L, 2L, 1L, 3L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 3L, 1L, 2L,
+        1L, 1L, 2L, 1L, 1L, 1L, 1L, 2L, 1L, 4L, 2L, 2L, 2L, 1L, 1L, 4L, 1L, 1L, 1L,
+        1L, 1L, 3L, 1L, 9L, 6L, 1L, 5L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L,
+        2L, 2L, 2L, 1L, 2L, 1L, 7L, 1L, 1L, 2L, 8L, 1L, 2L, 1L, 6L, 1L, 4L, 1L, 1L,
+        3L, 3L, 2L, 2L, 1L, 1L, 3L, 1L, 2L, 1L, 1L, 1L, 2L, 8L, 3L, 2L, 3L, 3L, 1L,
+        4L, 1L, 2L, 3L, 3L, 2L, 1L, 2L, 2L, 2L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 3L, 5L,
+        1L, 2L, 2L, 2L, 3L, 1L, 3L, 4L, 3L, 2L, 1L, 5L, 4L, 1L, 1L, 3L, 1L, 3L, 1L,
+        1L, 1L, 1L, 1L, 3L, 2L, 1L, 3L, 3L, 5L, 1L, 1L, 3L, 1L, 2L, 1L, 2L, 2L, 3L,
+        3L, 2L, 2L, 1L, 2L, 6L, 1L
+      )
+    )
+  )
+
+  themodel <- glm(this_male_mated ~ TrtLin, data = sdata, family = binomial)
+
+  expect_doppelganger_with_seed(
+    title = "outliers_plot_low_N",
+    fig = plot(performance::check_model(themodel))
+  )
+})

@@ -12,6 +12,9 @@
 * New `geom_point_halo()`, `geom_pointrange_halo()`, `geom_jitter_halo()` and
   `geom_count_halo()` geoms, which add a slight contour around the points
 
+* Outlier plots no longer show extreme smoother curves for models with a small
+  number of observations or a small number of outlier data points.
+
 ## Bug fixes
 
 * Fixed the `*_borderless` aliases for `geom_point2()` or `geom_jitter2()`, which
