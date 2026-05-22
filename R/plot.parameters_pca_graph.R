@@ -18,6 +18,13 @@
   meta_cols <- c("Complexity", "Uniqueness", "MSA", "Mean", "SD")
   threshold <- .default_value(object, "threshold", 0.3)
 
+  # Title
+  if (inherits(object, "parameters_efa")) {
+    title <- "Factor Analysis Loadings"
+  } else {
+    title <- "Principal Component Loadings"
+  }
+
   # 1. Extract ALL loadings first
 
   # Remove metadata columns and melt the dataframe from wide to long format.
@@ -247,7 +254,7 @@
       plot.title = ggplot2::element_text(size = 16, face = "bold", hjust = 0.5),
       plot.margin = ggplot2::margin(20, 20, 20, 20)
     ) +
-    ggplot2::labs(title = "Factor Analysis Loadings")
+    ggplot2::labs(title = title)
 }
 
 

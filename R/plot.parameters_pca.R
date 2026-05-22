@@ -125,6 +125,16 @@ plot.see_parameters_pca <- function(
 ) {
   type <- insight::validate_argument(type, c("bar", "line", "graph"))
 
+  # validate colors argument
+  if (is.null(colors)) {
+    colors <- c("#cd201f", "#ffffff", "#0077B5")
+  }
+  if (length(colors) != 3) {
+    insight::format_error(
+      "The `colors` argument must be a character vector of length 3."
+    )
+  }
+
   # leave here for graph plot
   if (type == "graph") {
     return(.plot_pca_as_graph(
