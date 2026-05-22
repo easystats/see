@@ -42,7 +42,7 @@
 
   df_all <- datawizard::data_to_long(
     df_wide,
-    select = -Variable,
+    select = "-Variable",
     names_to = "Factor",
     values_to = "Loading"
   )
@@ -76,6 +76,11 @@
   if (!is.null(names_factors)) {
     # check if we have a named vector, if not, set names to original factors
     if (is.null(names(names_factors))) {
+      if (length(names_factors) != length(original_factors)) {
+        insight::format_error(
+          "`names_factors` must either be a named vector, or of the same length as `original_factors`."
+        )
+      }
       names(names_factors) <- original_factors
     }
     if (all(names(names_factors) %in% original_factors)) {
@@ -130,7 +135,7 @@
   edges_subset <- subset(df_all, abs(Loading) >= threshold)
   edges <- datawizard::data_rename(
     edges_subset,
-    pattern = c("Variable", "Factor", "Loading"),
+    select = c("Variable", "Factor", "Loading"),
     replacement = c("from", "to", "weight")
   )
 

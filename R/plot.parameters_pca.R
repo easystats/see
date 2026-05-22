@@ -64,8 +64,8 @@ data_plot.parameters_efa <- data_plot.parameters_pca
 #' horizontal bar chart, `"line"` for a horizontal point and line chart, or
 #' `"graph"` for a graph.
 #' @param color_text Character specifying color of text labels.
-#' @param colors Character vector of length three, indicating the colors (in
-#' hex-format) for low (negative), mid (close to zero), and high (positive) values.
+#' @param colors Character vector of length three, indicating the colors for low
+#' (negative), mid (close to zero), and high (positive) values.
 #' @param arrow_end_gap Numeric. Specifies the distance between the tip of the
 #' edge arrow and the variable node. Adjusting this value prevents the arrow
 #' from overlapping or clipping into the variable label. Default is `0.07`

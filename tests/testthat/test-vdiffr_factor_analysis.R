@@ -11,7 +11,7 @@ expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
   vdiffr::expect_doppelganger(title = title, fig = fig)
 }
 
-test_that("plot.see_check_model() renders correctly", {
+test_that("plot.see_parameters_pca() renders correctly", {
   data(mtcars)
   f <- parameters::factor_analysis(mtcars, n = 3)
 

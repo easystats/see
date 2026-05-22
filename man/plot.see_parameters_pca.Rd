@@ -33,8 +33,8 @@ horizontal bar chart, \code{"line"} for a horizontal point and line chart, or
 
 \item{color_text}{Character specifying color of text labels.}
 
-\item{colors}{Character vector of length three, indicating the colors (in
-hex-format) for low (negative), mid (close to zero), and high (positive) values.}
+\item{colors}{Character vector of length three, indicating the colors for low
+(negative), mid (close to zero), and high (positive) values.}
 
 \item{size}{Depending on \code{type}, a numeric value specifying size of bars,
 lines, or segments.}
