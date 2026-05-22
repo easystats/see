@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{see_parameters_pca}(
   x,
-  type = c("bar", "line"),
+  type = "bar",
   size_text = 3.5,
   color_text = "black",
   size = 1,
@@ -17,9 +17,10 @@
 \arguments{
 \item{x}{An object.}
 
-\item{type}{Character vector, indicating the type of plot. Options are three
+\item{type}{Character vector, indicating the type of plot. Options are
 different shapes to represent component loadings; \code{"bar"} (default) for a
-horizontal bar chart, or \code{"line"} for a horizontal point and line chart.}
+horizontal bar chart, \code{"line"} for a horizontal point and line chart, or
+\code{"graph"} for a graph.}
 
 \item{size_text}{Numeric value specifying size of text labels.}
 
