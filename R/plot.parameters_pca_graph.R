@@ -1,12 +1,12 @@
 .plot_pca_as_graph <- function(
   object,
-  loading_text_size = 2.8,
-  arrow_end_gap = 0.10,
-  factor_node_size = c(22, 35),
-  expand = c(0.5, 0.5),
+  size_text = 2.8,
+  arrow_end_gap = 0.07,
+  factor_node_size = c(25, 35),
+  margins = c(0.3, 0.3),
   names_factors = NULL,
-  color_variables = "#738b8d",
-  color_factors = "#3b4f64",
+  fill_variables = "#738b8d",
+  fill_factors = "#3b4f64",
   ...
 ) {
   insight::check_if_installed(c("ggraph", "tidygraph"))
@@ -35,7 +35,7 @@
   # Process Variables (Color & Order)
   var_processed <- .process_colors_and_order(
     unique(df_all$Variable),
-    color_variables,
+    fill_variables,
     "#95A5A6"
   )
   variables <- var_processed$items
@@ -45,7 +45,7 @@
   # Process Factors (Color & Order)
   fac_processed <- .process_colors_and_order(
     unique(df_all$Factor),
-    color_factors,
+    fill_factors,
     "#2C3E50"
   )
   original_factors <- fac_processed$items
@@ -172,7 +172,7 @@
       end_cap = ggraph::circle(arrow_end_gap, 'snpc'),
       angle_calc = 'along',
       label_dodge = unit(2.5, 'mm'),
-      label_size = loading_text_size
+      label_size = size_text
     ) +
 
     # -- FACTOR NODES --
@@ -193,7 +193,7 @@
       ggplot2::aes(filter = type == "Factor", label = label_text),
       color = "white",
       fontface = "bold",
-      size = 3.5,
+      size = size_text,
       lineheight = 0.9
     ) +
 
@@ -206,7 +206,7 @@
       ),
       color = "white",
       fontface = "bold",
-      size = 3.5,
+      size = size_text,
       hjust = 1,
       label.padding = ggplot2::unit(0.5, "lines"),
       show.legend = FALSE
@@ -229,7 +229,7 @@
     ggraph::scale_edge_alpha_continuous(range = c(0.4, 1), guide = "none") +
 
     # -- CANVAS EXPANSION & THEME --
-    ggplot2::scale_x_continuous(expand = expansion(add = expand)) +
+    ggplot2::scale_x_continuous(expand = expansion(add = margins)) +
     ggplot2::coord_cartesian(clip = "off") +
 
     ggraph::theme_graph() +

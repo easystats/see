@@ -92,9 +92,6 @@ plot.see_parameters_pca <- function(
 
   # leave here for graph plot
   if (type == "graph") {
-    # object,
-    # threshold = 0.3,
-    # loading_text_size = 2.8,
     # arrow_end_gap = 0.10,
     # factor_node_size = c(22, 35),
     # expand = c(0.5, 0.5),
@@ -103,7 +100,7 @@ plot.see_parameters_pca <- function(
     # color_factors = "#2C3E50",
     # ...
 
-    return(.plot_pca_as_graph(object = x, loading_text_size = size_text, ...))
+    return(.plot_pca_as_graph(object = x, size_text = size_text, ...))
   }
 
   if (!inherits(x, "data_plot")) {
