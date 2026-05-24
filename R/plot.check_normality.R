@@ -153,7 +153,10 @@ plot.see_check_normality <- function(
 
 .residuals_qq <- function(model) {
   if (
-    inherits(model, c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor"))
+    inherits(
+      model,
+      c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor", "gam")
+    )
   ) {
     res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
     dat <- stats::na.omit(data.frame(y = res_))
