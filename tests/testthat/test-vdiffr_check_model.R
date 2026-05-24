@@ -56,6 +56,7 @@ test_that("plot.see_check_model() works with themes", {
   skip_on_cran()
 
   set.seed(123)
+  data(mtcars)
   model <- lm(mpg ~ wt + hp, data = mtcars)
 
   # Test with modern theme

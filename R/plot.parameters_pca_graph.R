@@ -11,6 +11,7 @@
   ...
 ) {
   insight::check_if_installed(c("ggraph", "tidygraph"))
+  .data <- NULL
 
   # 1. Gather info and clean data ---------------------------------------------
   # These columns are standard outputs in easystats PCA/FA objects that we don't
@@ -133,7 +134,7 @@
   # 5. Define Graph Edges -----------------------------------------------------
   # Filter out weak cross-loadings below the threshold. Rename columns to
   # strictly match ggraph's expected edge format (from, to, weight).
-  edges_subset <- subset(df_all, abs(Loading) >= threshold)
+  edges_subset <- subset(df_all, abs(df_all$Loading) >= threshold)
   edges <- datawizard::data_rename(
     edges_subset,
     select = c("Variable", "Factor", "Loading"),
@@ -187,11 +188,11 @@
     # -- EDGES --
     ggraph::geom_edge_link(
       ggplot2::aes(
-        edge_width = abs(weight),
-        edge_alpha = abs(weight),
-        color = weight,
+        edge_width = abs(.data$weight),
+        edge_alpha = abs(.data$weight),
+        color = .data$weight,
         # Psychometric standard: drop the leading zero for numbers strictly between -1 and 1
-        label = sub("^(-?)0\\.", "\\1.", sprintf("%.2f", weight))
+        label = sub("^(-?)0\\.", "\\1.", sprintf("%.2f", .data$weight))
       ),
       arrow = ggplot2::arrow(length = ggplot2::unit(4, 'mm'), type = "closed"),
       start_cap = ggraph::circle(0, 'mm'),
@@ -204,9 +205,9 @@
     # -- FACTOR NODES --
     ggraph::geom_node_point(
       ggplot2::aes(
-        filter = type == "Factor",
-        size = variance,
-        fill = node_color
+        filter = .data$type == "Factor",
+        size = .data$variance,
+        fill = .data$node_color
       ),
       shape = 21,
       color = "white",
@@ -216,7 +217,7 @@
 
     # -- FACTOR TEXT --
     ggraph::geom_node_text(
-      ggplot2::aes(filter = type == "Factor", label = label_text),
+      ggplot2::aes(filter = .data$type == "Factor", label = .data$label_text),
       color = "white",
       fontface = "bold",
       size = size_text,
@@ -226,9 +227,9 @@
     # -- VARIABLE NODES --
     ggraph::geom_node_label(
       ggplot2::aes(
-        filter = type == "Variable",
-        label = label_text,
-        fill = node_color
+        filter = .data$type == "Variable",
+        label = .data$label_text,
+        fill = .data$node_color
       ),
       color = "white",
       fontface = "bold",
@@ -306,5 +307,5 @@
   insight::format_alert(
     "Color vector length does not match number of nodes. Using default color."
   )
-  return(list(items = items, colors = rep(default_color, length(items))))
+  list(items = items, colors = rep(default_color, length(items)))
 }
