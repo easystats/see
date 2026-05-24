@@ -198,7 +198,7 @@ plot.see_performance_pp_check <- function(
 
   # Combine with range plot if requested, otherwise return just p1
   if (isTRUE(check_range)) {
-    p2 <- .plot_pp_check_range(orig_x, size_bar, colors = colors)
+    p2 <- .plot_pp_check_range(x, size_bar, colors = colors)
     plots(p1, p2)
   } else {
     p1
