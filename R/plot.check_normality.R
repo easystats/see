@@ -152,34 +152,32 @@ plot.see_check_normality <- function(
 # extract residuals
 
 .residuals_qq <- function(model) {
-  if (
-    inherits(
-      model,
-      c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor", "gam")
-    )
-  ) {
+  fitted_ <- NULL
+  # fmt: skip
+  if (inherits(model, c("lme", "lmerMod", "merMod", "afex_aov", "BFBayesFactor", "gam"))) {
     res_ <- suppressMessages(sort(stats::residuals(model), na.last = NA))
-    dat <- stats::na.omit(data.frame(y = res_))
   } else if (inherits(model, "glmmTMB")) {
     res_ <- abs(stats::residuals(model, type = "deviance"))
-    dat <- stats::na.omit(data.frame(y = res_))
+  } else if (inherits(model, "geeglm")) {
+    res_ <- stats::residuals(model, type = "pearson")
   } else if (inherits(model, "glm")) {
     res_ <- abs(stats::rstandard(model, type = "deviance"))
     fitted_ <- stats::qnorm(
       (stats::ppoints(length(res_)) + 1) / 2
     )[order(order(res_))]
-    dat <- stats::na.omit(data.frame(x = fitted_, y = res_))
   } else if (.is_efa(model)) {
     res_ <- suppressMessages(sort(insight::get_residuals(model), na.last = NA))
-    dat <- stats::na.omit(data.frame(y = res_))
   } else if (is.numeric(model)) {
     res_ <- sort(model[!is.infinite(model)])
-    dat <- stats::na.omit(data.frame(y = res_))
   } else {
     res_ <- sort(stats::rstudent(model), na.last = NA)
-    dat <- stats::na.omit(data.frame(y = res_))
   }
-  dat
+
+  if (is.null(fitted_)) {
+    stats::na.omit(data.frame(y = res_))
+  } else {
+    stats::na.omit(data.frame(x = fitted_, y = res_))
+  }
 }
 
 
