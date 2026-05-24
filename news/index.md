@@ -1,5 +1,39 @@
 # Changelog
 
+## see 0.14.0
+
+### Changes
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`parameters::factor_analysis()`](https://easystats.github.io/parameters/reference/principal_components.html)
+  and
+  [`parameters::principal_components()`](https://easystats.github.io/parameters/reference/principal_components.html)
+  gains a new `type` option, `"graph"`. This creates a graph with
+  nodes/edges indicating factor loadings.
+
+- Updated plot-method for
+  [`performance::check_model()`](https://easystats.github.io/performance/reference/check_model.html)
+  for Bayesian ordinal models.
+
+- New
+  [`geom_point_halo()`](https://easystats.github.io/see/reference/geom_point2.md),
+  [`geom_pointrange_halo()`](https://easystats.github.io/see/reference/geom_point2.md),
+  [`geom_jitter_halo()`](https://easystats.github.io/see/reference/geom_point2.md)
+  and
+  [`geom_count_halo()`](https://easystats.github.io/see/reference/geom_point2.md)
+  geoms, which add a slight contour around the points
+
+- Outlier plots no longer show extreme smoother curves for models with a
+  small number of observations or a small number of outlier data points.
+
+### Bug fixes
+
+- Fixed the `*_borderless` aliases for
+  [`geom_point2()`](https://easystats.github.io/see/reference/geom_point2.md)
+  or
+  [`geom_jitter2()`](https://easystats.github.io/see/reference/geom_point2.md),
+  which were broken and did not render as intended.
+
 ## see 0.13.0
 
 CRAN release: 2026-01-30

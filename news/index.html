@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,20 @@
       <small>Source: <a href="https://github.com/easystats/see/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.14.0" id="see-0140">see 0.14.0<a class="anchor" aria-label="anchor" href="#see-0140"></a></h2>
+<div class="section level3">
+<h3 id="changes-0-14-0">Changes<a class="anchor" aria-label="anchor" href="#changes-0-14-0"></a></h3>
+<ul><li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">parameters::factor_analysis()</a></code> and <code><a href="https://easystats.github.io/parameters/reference/principal_components.html" class="external-link">parameters::principal_components()</a></code> gains a new <code>type</code> option, <code>"graph"</code>. This creates a graph with nodes/edges indicating factor loadings.</p></li>
+<li><p>Updated plot-method for <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">performance::check_model()</a></code> for Bayesian ordinal models.</p></li>
+<li><p>New <code><a href="../reference/geom_point2.html">geom_point_halo()</a></code>, <code><a href="../reference/geom_point2.html">geom_pointrange_halo()</a></code>, <code><a href="../reference/geom_point2.html">geom_jitter_halo()</a></code> and <code><a href="../reference/geom_point2.html">geom_count_halo()</a></code> geoms, which add a slight contour around the points</p></li>
+<li><p>Outlier plots no longer show extreme smoother curves for models with a small number of observations or a small number of outlier data points.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-14-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-14-0"></a></h3>
+<ul><li>Fixed the <code>*_borderless</code> aliases for <code><a href="../reference/geom_point2.html">geom_point2()</a></code> or <code><a href="../reference/geom_point2.html">geom_jitter2()</a></code>, which were broken and did not render as intended.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.13.0" id="see-0130">see 0.13.0<a class="anchor" aria-label="anchor" href="#see-0130"></a></h2><p class="text-muted">CRAN release: 2026-01-30</p>
 <div class="section level3">
