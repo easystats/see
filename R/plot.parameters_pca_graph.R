@@ -307,5 +307,5 @@
   insight::format_alert(
     "Color vector length does not match number of nodes. Using default color."
   )
-  return(list(items = items, colors = rep(default_color, length(items))))
+  list(items = items, colors = rep(default_color, length(items)))
 }
