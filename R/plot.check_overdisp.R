@@ -77,7 +77,7 @@ plot.see_check_overdisp <- function(
         title = "Misspecified dispersion and zero-inflation",
         subtitle = "Most points should be within solid lines, few points outside dashed lines",
         x = "Predicted mean",
-        y = "Standardized resiuduals"
+        y = "Standardized residuals"
       ) +
       theme
   }
