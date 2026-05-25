@@ -2,6 +2,8 @@
 
 ## see 0.14.0
 
+CRAN release: 2026-05-24
+
 ### Changes
 
 - [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for

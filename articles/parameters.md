@@ -522,55 +522,33 @@ result <- model_parameters(model)
 result
 #> # Studies
 #> 
-#> Parameter                                  | Median |        95% CI | Weight
-#> ----------------------------------------------------------------------------
-#> b_Intercept                                |   0.57 | [ 0.40, 0.76] |       
-#> r_Author[Call.et.al.,Intercept]            |   0.63 | [ 0.28, 1.03] |   3.83
-#> r_Author[Cavanagh.et.al.,Intercept]        |   0.43 | [ 0.10, 0.75] |   5.09
-#> r_Author[DanitzOrsillo,Intercept]          |   1.05 | [ 0.54, 1.67] |   2.89
-#> r_Author[de.Vibe.et.al.,Intercept]         |   0.25 | [ 0.02, 0.47] |   8.49
-#> r_Author[Frazier.et.al.,Intercept]         |   0.45 | [ 0.20, 0.71] |   6.91
-#> r_Author[Frogeli.et.al.,Intercept]         |   0.60 | [ 0.30, 0.93] |   5.10
-#> r_Author[Gallego.et.al.,Intercept]         |   0.65 | [ 0.31, 1.03] |   4.45
-#> r_Author[Hazlett-Stevens.&.Oren,Intercept] |   0.54 | [ 0.20, 0.88] |   4.75
-#> r_Author[Hintz.et.al.,Intercept]           |   0.36 | [ 0.08, 0.64] |   5.95
-#> r_Author[Kang.et.al.,Intercept]            |   0.84 | [ 0.41, 1.40] |   2.97
-#> r_Author[Kuhlmann.et.al.,Intercept]        |   0.27 | [-0.09, 0.57] |   5.14
-#> r_Author[Lever.Taylor.et.al.,Intercept]    |   0.46 | [ 0.10, 0.81] |   4.33
-#> r_Author[Phang.et.al.,Intercept]           |   0.55 | [ 0.19, 0.92] |   4.09
-#> r_Author[Rasanen.et.al.,Intercept]         |   0.49 | [ 0.10, 0.87] |   3.88
-#> r_Author[Ratanasiripong,Intercept]         |   0.54 | [ 0.09, 0.99] |   2.85
-#> r_Author[Shapiro.et.al.,Intercept]         |   0.96 | [ 0.50, 1.53] |   3.17
-#> r_Author[SongLindquist,Intercept]          |   0.59 | [ 0.25, 0.95] |   4.41
-#> r_Author[Warnecke.et.al.,Intercept]        |   0.58 | [ 0.21, 0.96] |   4.02
-#> 
-#> Parameter                                  |     pd |  Rhat | ESS (tail)
-#> ------------------------------------------------------------------------
-#> b_Intercept                                |   100% | 1.000 |       4648
-#> r_Author[Call.et.al.,Intercept]            | 99.95% |       |           
-#> r_Author[Cavanagh.et.al.,Intercept]        | 99.45% |       |           
-#> r_Author[DanitzOrsillo,Intercept]          |   100% |       |           
-#> r_Author[de.Vibe.et.al.,Intercept]         | 98.39% |       |           
-#> r_Author[Frazier.et.al.,Intercept]         | 99.91% |       |           
-#> r_Author[Frogeli.et.al.,Intercept]         | 99.99% |       |           
-#> r_Author[Gallego.et.al.,Intercept]         |   100% |       |           
-#> r_Author[Hazlett-Stevens.&.Oren,Intercept] | 99.85% |       |           
-#> r_Author[Hintz.et.al.,Intercept]           | 99.36% |       |           
-#> r_Author[Kang.et.al.,Intercept]            |   100% |       |           
-#> r_Author[Kuhlmann.et.al.,Intercept]        | 93.21% |       |           
-#> r_Author[Lever.Taylor.et.al.,Intercept]    | 99.34% |       |           
-#> r_Author[Phang.et.al.,Intercept]           | 99.83% |       |           
-#> r_Author[Rasanen.et.al.,Intercept]         | 99.26% |       |           
-#> r_Author[Ratanasiripong,Intercept]         | 99.01% |       |           
-#> r_Author[Shapiro.et.al.,Intercept]         |   100% |       |           
-#> r_Author[SongLindquist,Intercept]          | 99.95% |       |           
-#> r_Author[Warnecke.et.al.,Intercept]        | 99.81% |       |           
+#> Parameter              | Median |        95% CI | Weight |     pd |  Rhat | ESS (tail)
+#> --------------------------------------------------------------------------------------
+#> Overall                |   0.57 | [ 0.40, 0.76] |        |   100% | 1.000 |       4648
+#> Call et al             |   0.63 | [ 0.28, 1.03] |   3.83 | 99.95% |       |           
+#> Cavanagh et al         |   0.43 | [ 0.10, 0.75] |   5.09 | 99.45% |       |           
+#> DanitzOrsillo          |   1.05 | [ 0.54, 1.67] |   2.89 |   100% |       |           
+#> de Vibe et al          |   0.25 | [ 0.02, 0.47] |   8.49 | 98.39% |       |           
+#> Frazier et al          |   0.45 | [ 0.20, 0.71] |   6.91 | 99.91% |       |           
+#> Frogeli et al          |   0.60 | [ 0.30, 0.93] |   5.10 | 99.99% |       |           
+#> Gallego et al          |   0.65 | [ 0.31, 1.03] |   4.45 |   100% |       |           
+#> Hazlett-Stevens & Oren |   0.54 | [ 0.20, 0.88] |   4.75 | 99.85% |       |           
+#> Hintz et al            |   0.36 | [ 0.08, 0.64] |   5.95 | 99.36% |       |           
+#> Kang et al             |   0.84 | [ 0.41, 1.40] |   2.97 |   100% |       |           
+#> Kuhlmann et al         |   0.27 | [-0.09, 0.57] |   5.14 | 93.21% |       |           
+#> Lever Taylor et al     |   0.46 | [ 0.10, 0.81] |   4.33 | 99.34% |       |           
+#> Phang et al            |   0.55 | [ 0.19, 0.92] |   4.09 | 99.83% |       |           
+#> Rasanen et al          |   0.49 | [ 0.10, 0.87] |   3.88 | 99.26% |       |           
+#> Ratanasiripong         |   0.54 | [ 0.09, 0.99] |   2.85 | 99.01% |       |           
+#> Shapiro et al          |   0.96 | [ 0.50, 1.53] |   3.17 |   100% |       |           
+#> SongLindquist          |   0.59 | [ 0.25, 0.95] |   4.41 | 99.95% |       |           
+#> Warnecke et al         |   0.58 | [ 0.21, 0.96] |   4.02 | 99.81% |       |           
 #> 
 #> # Tau
 #> 
-#> Parameter            | Median |       95% CI |   pd
-#> ---------------------------------------------------
-#> sd_Author__Intercept |   0.29 | [0.12, 0.51] | 100%
+#> Parameter | Median |       95% CI |   pd
+#> ----------------------------------------
+#> tau       |   0.29 | [0.12, 0.51] | 100%
 plot(result)
 ```
 
