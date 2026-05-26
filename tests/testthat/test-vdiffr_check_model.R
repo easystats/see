@@ -261,3 +261,23 @@ test_that("plot outliers skips smooth for low N", {
     fig = plot(performance::check_model(themodel))
   )
 })
+
+
+test_that("ppc_range works", {
+  skip_if_not_installed("MASS")
+  skip_if_not_installed("performance")
+  set.seed(3)
+  mu <- rpois(500, lambda = 3)
+  x <- pmax(ceiling(rnorm(500, mu, mu * 3)), 0)
+  quine.nb1 <- MASS::glm.nb(x ~ mu)
+
+  expect_doppelganger_with_seed(
+    title = "ppc_range_works-1",
+    fig = plot(performance::check_model(quine.nb1, ppc_range = c(0, 10)))
+  )
+
+  expect_doppelganger_with_seed(
+    title = "ppc_range_works-2",
+    fig = plot(performance::check_model(quine.nb1, x_limits = c(0, 10)))
+  )
+})

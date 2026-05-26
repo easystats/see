@@ -178,6 +178,8 @@ plot.see_performance_pp_check <- function(
   ...
 ) {
   check_range <- isTRUE(attributes(x)$check_range)
+  x_limits <- .default_value(x, "x_limits", x_limits)
+  type <- .default_value(x, "type", type)
 
   p1 <- .prepare_pp_check(
     x,

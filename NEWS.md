@@ -1,3 +1,10 @@
+# see (devel)
+
+## Bug fixes
+
+* The `type` argument in `performance::check_predictons()` was not recognized in
+  the `plot()` method.
+
 # see 0.14.0
 
 ## Changes

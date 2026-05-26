@@ -52,6 +52,7 @@ plot.see_check_model <- function(
   alpha_level <- .default_value(x, "alpha", 0.2)
   alpha_dot <- .default_value(x, "alpha_dot", 0.8)
   show_dots <- .default_value(x, "show_dots", TRUE)
+  ppc_range <- .default_value(x, "ppc_range")
 
   # Check for Confidence Intervals: Backwards compatibility for older package
   # versions
@@ -120,7 +121,8 @@ plot.see_check_model <- function(
         type = type,
         check_model = TRUE,
         adjust_legend = TRUE,
-        colors = colors[1:2]
+        colors = colors[1:2],
+        x_limits = ppc_range
       )
     )
     p$PP_CHECK <- do.call(plot.see_performance_pp_check, fun_args)
