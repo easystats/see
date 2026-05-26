@@ -383,7 +383,7 @@ check will not be shown in the visual check.
 ``` r
 
 check_autocorrelation(lm(formula = wt ~ mpg, data = mtcars))
-#> Warning: Autocorrelated residuals detected (p = 0.008).
+#> Warning: Autocorrelated residuals detected (p = 0.006).
 ```
 
 ## Compare Model Performances
