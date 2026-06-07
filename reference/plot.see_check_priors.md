@@ -1,7 +1,9 @@
 # Plot method for prior predictive checks
 
 The [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method for
-the `performance::check_priors()` function.
+the
+[`performance::check_priors()`](https://easystats.github.io/performance/reference/check_priors.html)
+function.
 
 ## Usage
 
@@ -73,6 +75,8 @@ A ggplot2-object.
 library(performance)
 model <- insight::download_model("stan_prior_checks_1")
 plot(performance::check_priors(model, "mmse"))
-#> Error: 'check_priors' is not an exported object from 'namespace:performance'
+#> Warning: Logistic regression model has a categorical response variable. You may
+#>   need to set `include_response=TRUE` to make it work for predictions.
+
 # }
 ```
