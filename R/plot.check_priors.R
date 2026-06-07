@@ -3,7 +3,8 @@ data_plot.performance_check_priors <- function(x, predictor = NULL, ...) {
   result <- modelbased::estimate_relation(
     x$model,
     by = predictor,
-    keep_iterations = TRUE
+    keep_iterations = TRUE,
+    verbose = FALSE
   )
   # reshape iterations for plotting. These are by default in wide format, but
   # for ggplot, we need them in long format.
