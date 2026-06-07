@@ -47,9 +47,10 @@ A ggplot2-object.
 The \code{plot()} method for the \code{performance::check_priors()} function.
 }
 \examples{
-\donttest{
+\dontrun{
 library(performance)
-# TODO: add example
+model <- insight::download_model("stan_prior_checks_1")
+plot(performance::check_priors(model, "mmse"))
 }
 
 }

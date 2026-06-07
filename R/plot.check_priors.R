@@ -1,11 +1,5 @@
 #' @export
 data_plot.performance_check_priors <- function(x, predictor = NULL, ...) {
-  if (is.null(predictor)) {
-    insight::format_error(
-      "No predictor was specified. Cannot plot prior predictive checks."
-    )
-  }
-
   result <- modelbased::estimate_relation(
     x$model,
     by = predictor,
@@ -39,9 +33,10 @@ data_plot.performance_check_priors <- function(x, predictor = NULL, ...) {
 #' @return A ggplot2-object.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' library(performance)
-#' # TODO: add example
+#' model <- insight::download_model("stan_prior_checks_1")
+#' plot(performance::check_priors(model, "mmse"))
 #' }
 #'
 #' @export
