@@ -75,8 +75,6 @@ A ggplot2-object.
 library(performance)
 model <- insight::download_model("stan_prior_checks_1")
 plot(performance::check_priors(model, "mmse"))
-#> Warning: Logistic regression model has a categorical response variable. You may
-#>   need to set `include_response=TRUE` to make it work for predictions.
 
 # }
 ```
