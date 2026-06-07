@@ -29,6 +29,8 @@
   : Plot method for check model for (non-)normality of residuals
 - [`plot(`*`<see_check_outliers>`*`)`](https://easystats.github.io/see/reference/plot.see_check_outliers.md)
   : Plot method for checking outliers
+- [`plot(`*`<see_check_priors>`*`)`](https://easystats.github.io/see/reference/plot.see_check_priors.md)
+  : Plot method for prior predictive checks
 - [`plot(`*`<see_compare_parameters>`*`)`](https://easystats.github.io/see/reference/plot.see_compare_parameters.md)
   : Plot method for comparison of model parameters
 - [`plot(`*`<see_compare_performance>`*`)`](https://easystats.github.io/see/reference/plot.see_compare_performance.md)
