@@ -62,7 +62,6 @@ plot.see_check_priors <- function(
   alpha_dot = 0.15,
   alpha_boxplot = 0.35,
   theme = NULL,
-  colors = NULL,
   ...
 ) {
   theme <- .set_default_theme(
@@ -85,19 +84,24 @@ plot.see_check_priors <- function(
   out <- lapply(predictors, function(p) {
     pdata <- data_plot(x, predictor = p)
 
-    ggplot2::ggplot(
-      pdata,
-      ggplot2::aes(
+    if (is.numeric(pdata[["predictor"]])) {
+      aes_args <- ggplot2::aes(
         x = .data$predictor,
-        group = .data$iter_group,
+        y = .data$iter_value,
+        group = .data$predictor
+      )
+    } else {
+      aes_args <- ggplot2::aes(
+        x = .data$predictor,
         y = .data$iter_value,
         color = .data$predictor,
         fill = .data$predictor
       )
-    ) +
+    }
+
+    ggplot2::ggplot(pdata, mapping = aes_args) +
       geom_jitter2(alpha = alpha_dot, size = size_point) +
       ggplot2::geom_boxplot(
-        ggplot2::aes(group = NULL),
         alpha = alpha_boxplot,
         fill = "white",
         outliers = FALSE,

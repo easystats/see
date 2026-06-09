@@ -14,7 +14,6 @@
   alpha_dot = 0.15,
   alpha_boxplot = 0.35,
   theme = NULL,
-  colors = NULL,
   ...
 )
 }
@@ -34,9 +33,6 @@ axis and plot titles.}
 
 \item{theme}{A ggplot2-theme function, e.g. \code{theme = theme_lucid()} or
 \code{theme = ggplot2::theme_dark()}.}
-
-\item{colors}{Character vector of length two, indicating the colors (in
-hex-format) for points and line.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
