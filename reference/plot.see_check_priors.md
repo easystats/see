@@ -19,7 +19,6 @@ plot(
   alpha_dot = 0.15,
   alpha_boxplot = 0.35,
   theme = NULL,
-  colors = NULL,
   ...
 )
 ```
@@ -54,11 +53,6 @@ plot(
 
   A ggplot2-theme function, e.g. `theme = theme_lucid()` or
   `theme = ggplot2::theme_dark()`.
-
-- colors:
-
-  Character vector of length two, indicating the colors (in hex-format)
-  for points and line.
 
 - ...:
 
