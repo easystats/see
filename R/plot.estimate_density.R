@@ -253,7 +253,8 @@ plot.see_estimate_density <- function(
           color = "Posterior"
         ),
         orientation = "y",
-        linewidth = linewidth
+        linewidth = linewidth,
+        width = 0
       ) +
       geom_point(
         data = my_summary,

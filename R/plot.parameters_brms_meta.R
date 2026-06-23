@@ -211,7 +211,8 @@ plot.see_parameters_brms_meta <- function(
         color = .data$Color
       ),
       orientation = "y",
-      linewidth = linewidth
+      linewidth = linewidth,
+      width = 0
     ) +
     ggplot2::geom_point(
       data = datasummary,
