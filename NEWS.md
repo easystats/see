@@ -10,6 +10,9 @@
 * The `type` argument in `performance::check_predictons()` was not recognized in
   the `plot()` method.
 
+* `plot()` for `model_parameters()` with *lavaan* objects did not work when the
+  object contained no `loadings` component.
+
 # see 0.14.0
 
 ## Changes

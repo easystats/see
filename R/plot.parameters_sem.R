@@ -80,11 +80,16 @@ data_plot.parameters_sem <- function(
   edges <- edges[colSums(!is.na(edges)) > 0L]
 
   # Identify nodes
-  latent_nodes <- data.frame(
-    Name = as.character(edges[edges$Component == "Loading", "to"]),
-    Latent = TRUE,
-    stringsAsFactors = FALSE
-  )
+  if ("loading" %in% type) {
+    latent_nodes <- data.frame(
+      Name = as.character(edges[edges$Component == "Loading", "to"]),
+      Latent = TRUE,
+      stringsAsFactors = FALSE
+    )
+  } else {
+    latent_nodes <- NULL
+  }
+
   manifest_nodes <- data.frame(
     Name = unique(c(edges$from, edges$to)),
     Latent = FALSE,
