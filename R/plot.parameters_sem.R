@@ -80,7 +80,7 @@ data_plot.parameters_sem <- function(
   edges <- edges[colSums(!is.na(edges)) > 0L]
 
   # Identify nodes
-  if ("loading" %in% type) {
+  if ("loading" %in% type && "Loading" %in% edges$Component) {
     latent_nodes <- data.frame(
       Name = as.character(edges[edges$Component == "Loading", "to"]),
       Latent = TRUE,
