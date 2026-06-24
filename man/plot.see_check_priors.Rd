@@ -40,7 +40,8 @@ axis and plot titles.}
 A ggplot2-object.
 }
 \description{
-The \code{plot()} method for the \code{performance::check_priors()} function.
+The \code{plot()} method for the \code{performance::check_priors()} function. For
+details, see \emph{Lüdecke et al. 2026}.
 }
 \examples{
 \dontrun{
@@ -60,4 +61,10 @@ model <- insight::download_model("stan_prior_checks_2")
 plot(performance::check_priors(model, "mmse"))
 }
 
+}
+\references{
+Lüdecke D, Makowski AC, Klein J, Ben-Shachar MS and Makowski D (2026)
+Choosing informative priors in Bayesian regression models: a simulation study
+and tutorial using Stan and R. Front. Psychol. 17:1856582.
+\doi{10.3389/fpsyg.2026.1856582}
 }

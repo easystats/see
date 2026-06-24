@@ -23,7 +23,8 @@ data_plot.performance_check_priors <- function(x, predictor = NULL, ...) {
 
 #' Plot method for prior predictive checks
 #'
-#' The `plot()` method for the `performance::check_priors()` function.
+#' The `plot()` method for the `performance::check_priors()` function. For
+#' details, see *Lüdecke et al. 2026*.
 #'
 #' @param size_boxplot Numeric value specifying size of boxplot geoms.
 #' @param alpha_boxplot Numeric value specifying alpha of boxplot geoms.
@@ -32,6 +33,12 @@ data_plot.performance_check_priors <- function(x, predictor = NULL, ...) {
 #' @inheritParams plot.see_bayesfactor_parameters
 #'
 #' @return A ggplot2-object.
+#'
+#' @references
+#' Lüdecke D, Makowski AC, Klein J, Ben-Shachar MS and Makowski D (2026)
+#' Choosing informative priors in Bayesian regression models: a simulation study
+#' and tutorial using Stan and R. Front. Psychol. 17:1856582.
+#' \doi{10.3389/fpsyg.2026.1856582}
 #'
 #' @examples
 #' \dontrun{
