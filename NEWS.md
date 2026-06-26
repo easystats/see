@@ -5,6 +5,9 @@
 * Added plot method for prior predictive checks, from the `performance::check_priors()`
   function.
 
+* The `plot()` method for `performance::check_dag()` gains a `size_arrow` argument,
+  to control the size of arrows in the DAG.
+
 ## Bug fixes
 
 * The `type` argument in `performance::check_predictons()` was not recognized in

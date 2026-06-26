@@ -5,6 +5,7 @@
 #' @param x A `check_dag` object.
 #' @param size_point Numeric value specifying size of point geoms.
 #' @param size_text Numeric value specifying size of text elements.
+#' @param size_arrow Numeric value specifying size of the arrows.
 #' @param colors Character vector of length five, indicating the colors (in
 #' hex-format) for different types of variables, which are assigned in following
 #' order: `outcome`, `exposure`, `adjusted`, `unadjusted`, and `collider`.
@@ -56,6 +57,7 @@ plot.see_check_dag <- function(
   x,
   size_point = 20,
   size_text = 4.5,
+  size_arrow = 5,
   colors = NULL,
   which = "all",
   effect = "total",
@@ -152,6 +154,15 @@ plot.see_check_dag <- function(
         xend = .data$xend,
         yend = .data$yend,
         edge_alpha = .data$adjusted
+      ),
+      arrow_directed = grid::arrow(
+        length = grid::unit(size_arrow, "pt"),
+        type = "closed"
+      ),
+      arrow_bidirected = grid::arrow(
+        length = grid::unit(size_arrow, "pt"),
+        ends = "both",
+        type = "closed"
       )
     ),
     ggdag::scale_adjusted(),

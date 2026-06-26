@@ -26,6 +26,11 @@ test_that("`plot()` for check_dag", {
     title = "plot.check_dag required",
     fig = plot(dag, which = "required")
   )
+  vdiffr::expect_doppelganger(
+    title = "plot.check_dag arrow-size",
+    fig = plot(dag, size_arrow = 10)
+  )
+
   set.seed(1234)
   dag <- performance::check_dag(
     y ~ x + b + c,
