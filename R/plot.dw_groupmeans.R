@@ -1,156 +1,142 @@
-#' Plot group means
+#' Plot method for grouped means.
 #'
-#' @param x  A dw_groupmeans data frame.
-#' @param y  Always `NULL` for this plot type
-#' @param ... Arguments to be passed to methods. `title`
-#' can be used to specify a string to use a title. `caption`
-#' is a logical indicating if a caption summarizing the anova
-#' results for the analysis should be included. By default this
-#' is `TRUE`. `ci` is a logical indicating if the confidence
-#' intervals from the `x` dw_groupmeans object should be included in the graph.
+#' The `plot()` method for the `datawizard::means_by_group()` function.
+#'
+#' @param x  An object returned `datawizard::means_by_group()`.
+#' @param title String, can be used to specify a plot title.
+#' @param caption Logical, indicating if a caption summarizing the anova results
+#' for the analysis should be included.
+#' @param ci Logical, indicating if the confidence intervals should be included
+#' in the graph.
+#' @param ... Currently not used.
+#'
+#' @details
+#' Produces a faceted plot when there is more than one means-table.
 #'
 #' @examples
 #' group_means_object <-  datawizard::means_by_group(iris$Sepal.Width, iris$Species)
 #' plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
 #'
+#' group_means_object <- datawizard::means_by_group(
+#'   iris,
+#'   c("Sepal.Width", "Petal.Width"),
+#'   "Species"
+#' )
+#' plot(group_means_object, title = "group means")
 #' @export
-
 plot.dw_groupmeans <- function(
   x,
-  y,
+  title = "",
+  ci = TRUE,
+  caption = TRUE,
   ...
 ) {
-  dotargs <- eval(substitute(alist(...)))
-  dotargsnames <- names(dotargs)
+  .data <- NULL
+  caption_text <- if (isTRUE(caption)) .build_caption(x) else ""
 
-  # set arguments to defaults if not specified.
-  title <- ifelse("title" %in% dotargsnames, dotargs[["title"]], "")
-  ci <- ifelse("ci" %in% dotargsnames, dotargs[["ci"]], TRUE)
-  captionl <- ifelse("caption" %in% dotargsnames, dotargs[["caption"]], TRUE)
+  trimmed <- datawizard::data_filter(x, Category != "Total")
 
-  caption <- ifelse(captionl == TRUE, build_caption(x), "")
-
-  x |>
-    datawizard::data_filter(x$Category != "Total") -> trimmed
-
-  p <- ggplot2::ggplot(trimmed, aes(x = .data$Category, y = .data$Mean)) +
-    geom_point() +
-    labs(title = title, caption = caption)
+  p <- ggplot2::ggplot(
+    trimmed,
+    ggplot2::aes(x = .data$Category, y = .data$Mean)
+  ) +
+    ggplot2::geom_point() +
+    ggplot2::labs(title = title, caption = caption_text)
 
   # There is an option not to return ci in data_group_means()
-  if ("CI_low" %in% names(x) & ci != FALSE) {
+  if ("CI_low" %in% names(x) && isTRUE(ci)) {
     p <- p +
-      geom_linerange(aes(ymin = .data$CI_low, ymax = .data$CI_high))
+      ggplot2::geom_linerange(ggplot2::aes(
+        ymin = .data$CI_low,
+        ymax = .data$CI_high
+      ))
   }
 
-  p
+  p + ggplot2::coord_flip()
 }
 
 
-#' function to plot lists of `dw_groupmeans`
-#'
-#'
-#' @param x  A dw_groupmeans data frame.
-#' @param ... Other options. The function recognizes `title`,
-#' `caption`, and `ci `. `title` is an overall title.
-#'
-#' @details
-#' Produces a faceted plot when there is more than one
-#' `dwtable`
-#'
-#'
-#' @examples
-#' group_means_object <-  datawizard::means_by_group(iris, Sepal.Width, Species)
-#' plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
-#'
-#'
 #' @export
 plot.dw_groupmeans_list <- function(
   x,
-  y,
+  title = "",
+  ci = TRUE,
+  caption = TRUE,
   ...
 ) {
-  if (length(x) == 0L) {
-    return("x is an empty list")
-  }
+  .data <- NULL
 
-  dotargs <- list(...)
-  if (length(dotargs) == 0L) {
-    dotargs <- list(title = "", caption = TRUE, ci = TRUE)
-    dotargsnames <- names(dotargs)
-  } else {
-    dotargsnames <- names(dotargs)
-    if (!"title" %in% dotargsnames) {
-      dotargs[["title"]] <- ""
-    }
-    if (!"caption" %in% dotargsnames) {
-      dotargs[["caption"]] <- TRUE
-    } else {
-      (dotargs[["caption"]] <- dotargs[["caption"]])
-    }
-    if (!"ci" %in% dotargsnames) {
-      dotargs[["ci"]] <- TRUE
-    }
-  }
-  # Need to update the names
-  dotargsnames <- names(dotargs)
-
-  title <- ifelse("title" %in% dotargsnames, dotargs[["title"]], "")
-  ci <- ifelse("ci" %in% dotargsnames, dotargs[["ci"]], TRUE)
-  caption <- ifelse("caption" %in% dotargsnames, dotargs[["caption"]], TRUE)
   if (length(x) == 1L) {
     p <- plot(
       x[[1]],
       title = title,
       ci = ci,
-      caption = caption
+      caption = caption,
+      ...
     )
     return(p)
   }
 
+  if (!length(x)) {
+    insight::format_error("`x` is an empty object.")
+  }
+
   x_attributes <- lapply(x, attributes)
-  x_captions <- lapply(x, build_caption)
+  x_var_names <- lapply(x_attributes, `[[`, "var_mean_label")
+  x_captions <- mapply(.build_caption, x, x_var_names)
   x_caption <- paste(x_captions, collapse = "")
 
-  x_var_names <- lapply(x_attributes, `[[`, "var_mean_label")
-  x_var_names <- as.character(x_var_names)
+  x <- lapply(seq_along(x_var_names), function(i) {
+    x[[i]]$origin_df <- x_var_names[[i]]
+    x[[i]]
+  })
 
-  x_long <- dplyr::bind_rows(x, .id = "origin_df")
-
-  lengthx <- length(x)
-  for (x_sub in 1:lengthx) {
-    x_long$origin_df[x_long$origin_df == x_sub] <- x_var_names[x_sub]
-  }
-
+  x_long <- do.call(rbind, x)
   trimmed <- datawizard::data_filter(x_long, Category != "Total")
 
-  p <- ggplot(trimmed, aes(x = .data$Category, y = .data$Mean)) +
-    geom_point() +
-    facet_wrap(vars(origin_df))
-  if (dotargs[["caption"]] == TRUE) {
-    p <- p + labs(title = title, caption = x_caption)
+  p <- ggplot2::ggplot(
+    trimmed,
+    ggplot2::aes(x = .data$Category, y = .data$Mean)
+  ) +
+    ggplot2::geom_point() +
+    ggplot2::facet_wrap(~origin_df)
+
+  if (isTRUE(caption)) {
+    p <- p + ggplot2::labs(title = title, caption = x_caption)
   } else {
-    p <- p + labs(title = title)
+    p <- p + ggplot2::labs(title = title)
   }
-  if ("CI_low" %in% names(trimmed) & dotargs["ci"] == TRUE) {
+  if ("CI_low" %in% names(trimmed) & isTRUE(ci)) {
     p <- p +
-      geom_linerange(aes(ymin = .data$CI_low, ymax = .data$CI_high))
+      ggplot2::geom_linerange(ggplot2::aes(
+        ymin = .data$CI_low,
+        ymax = .data$CI_high
+      ))
   }
 
-  p
+  p + ggplot2::coord_flip()
 }
 
-build_caption <- function(x) {
+
+.build_caption <- function(x, label = NULL) {
+  if (is.null(label)) {
+    label <- ""
+  } else {
+    label <- paste0(label, ": ")
+  }
+
   caption <- paste0(
-    "\nAnova: R2=",
+    "\n",
+    label,
+    "Anova: R2=",
     insight::format_value(attributes(x)$r2, digits = 3),
     "; adj.R2=",
     insight::format_value(attributes(x)$adj.r2, digits = 3),
     "; F=",
     insight::format_value(attributes(x)$fstat, digits = 3),
     "; ",
-    insight::format_p(attributes(x)$p.value, whitespace = FALSE),
-    "\n"
+    insight::format_p(attributes(x)$p.value, whitespace = FALSE)
   )
+
   caption
 }

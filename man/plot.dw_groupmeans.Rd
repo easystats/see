@@ -2,27 +2,37 @@
 % Please edit documentation in R/plot.dw_groupmeans.R
 \name{plot.dw_groupmeans}
 \alias{plot.dw_groupmeans}
-\title{Plot group means}
+\title{Plot method for grouped means.}
 \usage{
-\method{plot}{dw_groupmeans}(x, y, ...)
+\method{plot}{dw_groupmeans}(x, title = "", ci = TRUE, caption = TRUE, ...)
 }
 \arguments{
-\item{x}{A dw_groupmeans data frame.}
+\item{x}{An object returned \code{datawizard::means_by_group()}.}
 
-\item{y}{Always \code{NULL} for this plot type}
+\item{title}{String, can be used to specify a plot title.}
 
-\item{...}{Arguments to be passed to methods. \code{title}
-can be used to specify a string to use a title. \code{caption}
-is a logical indicating if a caption summarizing the anova
-results for the analysis should be included. By default this
-is \code{TRUE}. \code{ci} is a logical indicating if the confidence
-intervals from the \code{x} dw_groupmeans object should be included in the graph.}
+\item{ci}{Logical, indicating if the confidence intervals should be included
+in the graph.}
+
+\item{caption}{Logical, indicating if a caption summarizing the anova results
+for the analysis should be included.}
+
+\item{...}{Currently not used.}
 }
 \description{
-Plot group means
+The \code{plot()} method for the \code{datawizard::means_by_group()} function.
+}
+\details{
+Produces a faceted plot when there is more than one \code{dwtable}.
 }
 \examples{
 group_means_object <-  datawizard::means_by_group(iris$Sepal.Width, iris$Species)
 plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
 
+group_means_object <- datawizard::means_by_group(
+  iris,
+  c("Sepal.Width", "Petal.Width"),
+  "Species"
+)
+plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
 }
