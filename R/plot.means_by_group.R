@@ -34,7 +34,7 @@ plot.see_dw_groupmeans <- function(
   .data <- NULL
   caption_text <- if (isTRUE(caption)) .build_caption(x) else ""
 
-  trimmed <- datawizard::data_filter(x, Category != "Total")
+  trimmed <- x[x$Category != "Total", ]
 
   p <- ggplot2::ggplot(
     trimmed,
@@ -96,7 +96,7 @@ plot.see_dw_groupmeans_list <- function(
   })
 
   x_long <- do.call(rbind, x)
-  trimmed <- datawizard::data_filter(x_long, Category != "Total")
+  trimmed <- trimmed <- x_long[x_long$Category != "Total", ]
 
   p <- ggplot2::ggplot(
     trimmed,
