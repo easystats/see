@@ -110,7 +110,7 @@ plot.see_dw_groupmeans_list <- function(
   } else {
     p <- p + ggplot2::labs(title = title)
   }
-  if ("CI_low" %in% names(trimmed) & isTRUE(ci)) {
+  if ("CI_low" %in% names(trimmed) && isTRUE(ci)) {
     p <- p +
       ggplot2::geom_linerange(ggplot2::aes(
         ymin = .data$CI_low,
