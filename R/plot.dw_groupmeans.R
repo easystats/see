@@ -64,7 +64,32 @@ plot.see_dw_groupmeans_list <- function(
   caption = TRUE,
   ...
 ) {
-  .data <- NULL
+  if (length(x) == 0L) {
+    stop("x is an empty list")
+  }
+
+  dotargs <- list(...)
+  if (length(dotargs) == 0L) {
+    dotargs <- list(title = "", caption = TRUE, ci = TRUE)
+    dotargsnames <- names(dotargs)
+  } else {
+    dotargsnames <- names(dotargs)
+    if (!"title" %in% dotargsnames) {
+      dotargs[["title"]] <- ""
+    }
+    if (!"caption" %in% dotargsnames) {
+      dotargs[["caption"]] <- TRUE
+    }
+    if (!"ci" %in% dotargsnames) {
+      dotargs[["ci"]] <- TRUE
+    }
+  }
+  # Need to update the names
+  dotargsnames <- names(dotargs)
+
+  title <- ifelse("title" %in% dotargsnames, dotargs[["title"]], "")
+  ci <- ifelse("ci" %in% dotargsnames, dotargs[["ci"]], TRUE)
+  caption <- ifelse("caption" %in% dotargsnames, dotargs[["caption"]], TRUE)
 
   if (length(x) == 1L) {
     p <- plot(
