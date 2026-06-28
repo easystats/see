@@ -24,7 +24,7 @@
 #' )
 #' plot(group_means_object, title = "group means")
 #' @export
-plot.dw_groupmeans <- function(
+plot.see_dw_groupmeans <- function(
   x,
   title = "",
   ci = TRUE,
@@ -57,7 +57,7 @@ plot.dw_groupmeans <- function(
 
 
 #' @export
-plot.dw_groupmeans_list <- function(
+plot.see_dw_groupmeans_list <- function(
   x,
   title = "",
   ci = TRUE,
