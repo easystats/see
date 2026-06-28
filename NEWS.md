@@ -4,6 +4,8 @@
 
 * Added plot method for prior predictive checks, from the `performance::check_priors()`
   function.
+  
+* Added plot method for `datawizard::means_by_groups()` objects.
 
 ## Bug fixes
 
@@ -12,6 +14,7 @@
 
 * `plot()` for `model_parameters()` with *lavaan* objects did not work when the
   object contained no `loadings` component.
+  
 
 # see 0.14.0
 
