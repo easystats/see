@@ -8,6 +8,7 @@
   x,
   size_point = 20,
   size_text = 4.5,
+  size_arrow = 5,
   colors = NULL,
   which = "all",
   effect = "total",
@@ -21,6 +22,8 @@
 \item{size_point}{Numeric value specifying size of point geoms.}
 
 \item{size_text}{Numeric value specifying size of text elements.}
+
+\item{size_arrow}{Numeric value specifying size of the arrows.}
 
 \item{colors}{Character vector of length five, indicating the colors (in
 hex-format) for different types of variables, which are assigned in following

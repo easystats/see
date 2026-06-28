@@ -87,7 +87,11 @@ plot.see_dw_groupmeans_list <- function(
   x_caption <- paste(x_captions, collapse = "")
 
   x <- lapply(seq_along(x_var_names), function(i) {
-    x[[i]]$origin_df <- x_var_names[[i]]
+    grp_name <- x_var_names[[i]]
+    if (is.null(grp_name)) {
+      grp_name <- paste0("Group ", i, ":")
+    }
+    x[[i]]$origin_df <- grp_name
     x[[i]]
   })
 

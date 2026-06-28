@@ -8,6 +8,8 @@
 * The `plot()` method for `performance::check_dag()` gains a `size_arrow` argument,
   to control the size of arrows in the DAG.
 
+* Added plot method for `datawizard::means_by_groups()` objects.
+
 ## Bug fixes
 
 * The `type` argument in `performance::check_predictons()` was not recognized in
