@@ -514,6 +514,8 @@ computing*. R Foundation for Statistical Computing.
   : Plot method for comparison of model parameters
 - [`plot(`*`<see_compare_performance>`*`)`](https://easystats.github.io/see/reference/plot.see_compare_performance.md)
   : Plot method for comparing model performances
+- [`plot(`*`<see_dw_groupmeans>`*`)`](https://easystats.github.io/see/reference/plot.see_dw_groupmeans.md)
+  : Plot method for grouped means.
 - [`plot(`*`<see_effectsize_table>`*`)`](https://easystats.github.io/see/reference/plot.see_effectsize_table.md)
   : Plot method for effect size tables
 - [`plot(`*`<see_equivalence_test_effectsize>`*`)`](https://easystats.github.io/see/reference/plot.see_equivalence_test.md)

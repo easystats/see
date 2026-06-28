@@ -13,6 +13,7 @@ plot(
   x,
   size_point = 20,
   size_text = 4.5,
+  size_arrow = 5,
   colors = NULL,
   which = "all",
   effect = "total",
@@ -34,6 +35,10 @@ plot(
 - size_text:
 
   Numeric value specifying size of text elements.
+
+- size_arrow:
+
+  Numeric value specifying size of the arrows.
 
 - colors:
 
