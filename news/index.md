@@ -431,8 +431,7 @@ CRAN release: 2022-11-25
 
 - New function
   [`scale_color_colorhex()`](https://easystats.github.io/see/reference/scale_color_colorhex.md)
-  provides color scales based on palettes from
-  <https://www.color-hex.com>
+  provides color scales based on palettes from color-hex.com
   ([\#245](https://github.com/easystats/see/issues/245)).
 
 - The default for the smoothing bandwidth from

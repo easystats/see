@@ -44,6 +44,7 @@ Produces a faceted plot when there is more than one means-table.
 ## Examples
 
 ``` r
+# \dontrun{
 group_means_object <-  datawizard::means_by_group(iris$Sepal.Width, iris$Species)
 plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
 #> Warning: "title" is not a graphical parameter
@@ -664,4 +665,5 @@ group_means_object <- datawizard::means_by_group(
 )
 plot(group_means_object, title = "group means")
 #> Error in xy.coords(x, y, xlabel, ylabel, log): 'x' is a list, but does not have components 'x' and 'y'
+# }
 ```
