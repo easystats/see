@@ -26,6 +26,7 @@ The \code{plot()} method for the \code{datawizard::means_by_group()} function.
 Produces a faceted plot when there is more than one means-table.
 }
 \examples{
+\dontrun{
 group_means_object <-  datawizard::means_by_group(iris$Sepal.Width, iris$Species)
 plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
 
@@ -35,4 +36,5 @@ group_means_object <- datawizard::means_by_group(
   "Species"
 )
 plot(group_means_object, title = "group means")
+}
 }

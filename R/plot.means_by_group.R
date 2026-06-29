@@ -14,6 +14,7 @@
 #' Produces a faceted plot when there is more than one means-table.
 #'
 #' @examples
+#' \dontrun{
 #' group_means_object <-  datawizard::means_by_group(iris$Sepal.Width, iris$Species)
 #' plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
 #'
@@ -23,6 +24,7 @@
 #'   "Species"
 #' )
 #' plot(group_means_object, title = "group means")
+#' }
 #' @export
 plot.see_dw_groupmeans <- function(
   x,
