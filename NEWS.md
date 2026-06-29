@@ -12,7 +12,7 @@
 
 ## Bug fixes
 
-* The `type` argument in `performance::check_predictons()` was not recognized in
+* The `type` argument in `performance::check_predictions()` was not recognized in
   the `plot()` method.
 
 * `plot()` for `model_parameters()` with *lavaan* objects did not work when the
