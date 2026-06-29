@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,20 @@
       <small>Source: <a href="https://github.com/easystats/see/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.14.1" id="see-0141">see 0.14.1<a class="anchor" aria-label="anchor" href="#see-0141"></a></h2>
+<div class="section level3">
+<h3 id="changes-0-14-1">Changes<a class="anchor" aria-label="anchor" href="#changes-0-14-1"></a></h3>
+<ul><li><p>Added plot method for prior predictive checks, from the <code>performance::check_priors()</code> function.</p></li>
+<li><p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method for <code><a href="https://easystats.github.io/performance/reference/check_dag.html" class="external-link">performance::check_dag()</a></code> gains a <code>size_arrow</code> argument, to control the size of arrows in the DAG.</p></li>
+<li><p>Added plot method for <code>datawizard::means_by_groups()</code> objects.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-14-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-14-1"></a></h3>
+<ul><li><p>The <code>type</code> argument in <code><a href="https://easystats.github.io/performance/reference/check_predictions.html" class="external-link">performance::check_predictions()</a></code> was not recognized in the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method.</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> for <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">model_parameters()</a></code> with <em>lavaan</em> objects did not work when the object contained no <code>loadings</code> component.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.14.0" id="see-0140">see 0.14.0<a class="anchor" aria-label="anchor" href="#see-0140"></a></h2><p class="text-muted">CRAN release: 2026-05-24</p>
 <div class="section level3">

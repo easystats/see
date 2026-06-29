@@ -1,5 +1,32 @@
 # Changelog
 
+## see 0.14.1
+
+### Changes
+
+- Added plot method for prior predictive checks, from the
+  `performance::check_priors()` function.
+
+- The [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method
+  for
+  [`performance::check_dag()`](https://easystats.github.io/performance/reference/check_dag.html)
+  gains a `size_arrow` argument, to control the size of arrows in the
+  DAG.
+
+- Added plot method for `datawizard::means_by_groups()` objects.
+
+### Bug fixes
+
+- The `type` argument in
+  [`performance::check_predictions()`](https://easystats.github.io/performance/reference/check_predictions.html)
+  was not recognized in the
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method.
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`model_parameters()`](https://easystats.github.io/parameters/reference/model_parameters.html)
+  with *lavaan* objects did not work when the object contained no
+  `loadings` component.
+
 ## see 0.14.0
 
 CRAN release: 2026-05-24
