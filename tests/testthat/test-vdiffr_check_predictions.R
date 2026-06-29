@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_if_not_installed("vdiffr")
 
 # Snapshot tests for check_model() plots
 # These tests verify that diagnostic plots render consistently across versions.
@@ -12,8 +13,6 @@ expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
 
 test_that("plot.see_check_predictions() renders correctly", {
   skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
 
   data(mtcars)
   model <- lm(mpg ~ disp, data = mtcars)
@@ -32,7 +31,7 @@ test_that("plot.see_check_predictions() renders correctly", {
 
 test_that("check_predicions - type and x_limits arguments work", {
   skip_if_not_installed("MASS")
-  skip_if_not_installed("performance", minimum_version = "0.17.0.3")
+  skip_if_not_installed("performance")
   set.seed(3)
   mu <- rpois(500, lambda = 3)
   x <- pmax(ceiling(rnorm(500, mu, mu * 3)), 0)

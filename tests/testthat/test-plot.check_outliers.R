@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 test_that("`plot.see_check_outliers()` works", {
   mt1 <- mtcars[, c(1, 3, 4)]
   mt2 <- rbind(

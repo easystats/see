@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 test_that("scale_color_ functions work correctly", {
   vdiffr::expect_doppelganger(
     title = "scale_color_bluebrown_d() works",

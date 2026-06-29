@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 test_that("geom and coord functions work correctly", {
   skip_if_not_installed("ggplot2")
   # coord_radar() ------------------

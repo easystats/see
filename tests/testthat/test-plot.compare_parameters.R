@@ -2,6 +2,8 @@ test_that("`plot()` for compare_parameters", {
   skip_if_not_installed("glmmTMB")
   skip_if_not_installed("lme4")
   skip_if_not_installed("parameters")
+  skip_if_not_installed("vdiffr")
+
   gdat <- readRDS(system.file(
     "vignette_data",
     "gophertortoise.rds",

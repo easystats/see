@@ -1,5 +1,6 @@
 test_that("bayestestR package plots rendered correctly", {
   # plot.see_bayesfactor_models() --------------------
+  skip_if_not_installed("vdiffr")
 
   lm0 <- stats::lm(qsec ~ 1, data = mtcars)
   lm1 <- stats::lm(qsec ~ drat, data = mtcars)

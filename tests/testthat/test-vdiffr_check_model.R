@@ -1,4 +1,6 @@
 skip_on_cran()
+skip_if_not_installed("vdiffr")
+skip_if_not_installed("performance")
 
 # Snapshot tests for check_model() plots
 # These tests verify that diagnostic plots render consistently across versions.
@@ -11,10 +13,6 @@ expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
 }
 
 test_that("plot.see_check_model() renders correctly", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   set.seed(123)
   model <- lm(mpg ~ wt + hp + cyl, data = mtcars)
 
@@ -51,10 +49,6 @@ test_that("plot.see_check_model() renders correctly", {
 
 
 test_that("plot.see_check_model() works with themes", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   set.seed(123)
   data(mtcars)
   model <- lm(mpg ~ wt + hp, data = mtcars)
@@ -82,10 +76,6 @@ test_that("plot.see_check_model() works with themes", {
 
 
 test_that("plot.see_check_model() works with custom colors", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   set.seed(123)
   model <- lm(mpg ~ wt + hp, data = mtcars)
 
@@ -101,10 +91,6 @@ test_that("plot.see_check_model() works with custom colors", {
 
 
 test_that("plot.see_check_normality() renders correctly", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   set.seed(123)
   model <- lm(mpg ~ wt + hp + cyl, data = mtcars)
   norm_result <- performance::check_normality(model)
@@ -122,10 +108,6 @@ test_that("plot.see_check_normality() renders correctly", {
 
 
 test_that("plot.see_check_homogeneity() renders correctly", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   set.seed(123)
   model <- lm(mpg ~ wt, data = mtcars)
 
@@ -145,10 +127,6 @@ test_that("plot.see_check_homogeneity() renders correctly", {
 
 
 test_that("plot.see_check_outliers() renders correctly", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   set.seed(123)
   model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 
@@ -168,10 +146,6 @@ test_that("plot.see_check_outliers() renders correctly", {
 
 
 test_that("plot.see_check_model() handles large datasets efficiently", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   # Test that sampling produces consistent plots with larger datasets
   set.seed(123)
   large_data <- data.frame(
@@ -196,10 +170,6 @@ test_that("plot.see_check_model() handles large datasets efficiently", {
 
 
 test_that("plot.see_check_model() works with show_dots parameter", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   set.seed(123)
   model <- lm(mpg ~ wt + hp, data = mtcars)
 
@@ -226,10 +196,6 @@ test_that("plot.see_check_model() works with show_dots parameter", {
 
 
 test_that("plot outliers skips smooth for low N", {
-  skip_if_not_installed("performance")
-  skip_if_not_installed("see")
-  skip_on_cran()
-
   # fmt: skip
   sdata <- data.frame(
     TrtLin = factor(rep(
@@ -265,7 +231,6 @@ test_that("plot outliers skips smooth for low N", {
 
 test_that("ppc_range works", {
   skip_if_not_installed("MASS")
-  skip_if_not_installed("performance")
   set.seed(3)
   mu <- rpois(500, lambda = 3)
   x <- pmax(ceiling(rnorm(500, mu, mu * 3)), 0)

@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 test_that("`plot.see_p_direction()` works", {
   skip_if_not_installed("rstanarm")
   skip_if_not_installed("ggridges")

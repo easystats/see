@@ -1,3 +1,6 @@
+skip_on_cran()
+skip_if_not_installed("vdiffr")
+
 test_that("datawizard means_by_group rendered correctly", {
   set.seed(123)
   vdiffr::expect_doppelganger(
