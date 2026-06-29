@@ -85,9 +85,8 @@ scale_fill_colorhex_c(
 )
 }
 \arguments{
-\item{palette}{The numeric code for a palette at \url{https://www.color-hex.com/}.
-For example, \code{1014416} for the
-\href{https://www.color-hex.com/color-palette/1014416}{Josiah color palette (number 1014416)}.}
+\item{palette}{The numeric code for a palette at color-hex.com. For example,
+\code{1014416} for the Josiah color palette (number 1014416).}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
