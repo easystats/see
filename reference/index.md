@@ -229,56 +229,38 @@
 
 - [`bluebrown_colors()`](https://easystats.github.io/see/reference/bluebrown_colors.md)
   : Extract blue-brown colors as hex codes
-
 - [`flat_colors()`](https://easystats.github.io/see/reference/flat_colors.md)
   : Extract Flat UI colors as hex codes
-
 - [`material_colors()`](https://easystats.github.io/see/reference/material_colors.md)
   : Extract material design colors as hex codes
-
 - [`metro_colors()`](https://easystats.github.io/see/reference/metro_colors.md)
   : Extract Metro colors as hex codes
-
 - [`okabeito_colors()`](https://easystats.github.io/see/reference/okabeito_colors.md)
   [`oi_colors()`](https://easystats.github.io/see/reference/okabeito_colors.md)
   : Extract Okabe-Ito colors as hex codes
-
 - [`pizza_colors()`](https://easystats.github.io/see/reference/pizza_colors.md)
   : Extract pizza colors as hex codes
-
 - [`see_colors()`](https://easystats.github.io/see/reference/see_colors.md)
   : Extract See colors as hex codes
-
 - [`social_colors()`](https://easystats.github.io/see/reference/social_colors.md)
   : Extract Social colors as hex codes
-
 - [`palette_bluebrown()`](https://easystats.github.io/see/reference/palette_bluebrown.md)
   : Blue-brown design color palette
-
 - [`palette_colorhex()`](https://easystats.github.io/see/reference/palette_colorhex.md)
-  :
-
-  Color palettes from <https://www.color-hex.com/>
-
+  : Color palettes from color-hex.com.
 - [`palette_flat()`](https://easystats.github.io/see/reference/palette_flat.md)
   : Flat UI color palette
-
 - [`palette_material()`](https://easystats.github.io/see/reference/palette_material.md)
   : Material design color palette
-
 - [`palette_metro()`](https://easystats.github.io/see/reference/palette_metro.md)
   : Metro color palette
-
 - [`palette_okabeito()`](https://easystats.github.io/see/reference/palette_okabeito.md)
   [`palette_oi()`](https://easystats.github.io/see/reference/palette_okabeito.md)
   : Okabe-Ito color palette
-
 - [`palette_pizza()`](https://easystats.github.io/see/reference/palette_pizza.md)
   : Pizza color palette
-
 - [`palette_see()`](https://easystats.github.io/see/reference/palette_see.md)
   : See design color palette
-
 - [`palette_social()`](https://easystats.github.io/see/reference/palette_social.md)
   : Social color palette
 

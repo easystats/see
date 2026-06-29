@@ -88,9 +88,8 @@ scale_fill_colorhex_c(
 
 - palette:
 
-  The numeric code for a palette at <https://www.color-hex.com/>. For
-  example, `1014416` for the [Josiah color palette (number
-  1014416)](https://www.color-hex.com/color-palette/1014416).
+  The numeric code for a palette at color-hex.com. For example,
+  `1014416` for the Josiah color palette (number 1014416).
 
 - discrete:
 
