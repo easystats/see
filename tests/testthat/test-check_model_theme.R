@@ -37,6 +37,7 @@ test_that("performance::check_model accepts standard ggplot2 themes as functions
 
   # Test with theme_dark passed as function (not string)
   # Explicit namespace call for clarity and to avoid conflicts
+  set.seed(123)
   p1 <- performance::check_model(m, theme = ggplot2::theme_dark())
   # The plot method should handle the theme attribute correctly
   expect_doppelganger_with_seed(
@@ -45,6 +46,7 @@ test_that("performance::check_model accepts standard ggplot2 themes as functions
   )
 
   # Test with theme_minimal
+  set.seed(123)
   p2 <- performance::check_model(m, theme = ggplot2::theme_minimal())
   expect_doppelganger_with_seed(
     title = "check_model-theme_minimal",
@@ -52,6 +54,7 @@ test_that("performance::check_model accepts standard ggplot2 themes as functions
   )
 
   # Test with theme_bw
+  set.seed(123)
   p3 <- performance::check_model(m, theme = ggplot2::theme_bw())
   expect_doppelganger_with_seed(
     title = "check_model-theme_bw",
