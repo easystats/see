@@ -1,6 +1,7 @@
 skip_on_cran()
 skip_if_not_installed("performance")
 skip_if_not_installed("ggplot2")
+skip_if_not_installed("vdiffr")
 
 expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
   set.seed(seed)
