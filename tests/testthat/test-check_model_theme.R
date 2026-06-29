@@ -114,13 +114,6 @@ test_that("performance::check_model accepts custom theme functions from user env
     title = "check_model-theme_custom",
     fig = plot(p1)
   )
-
-  # Also test passing custom theme to plot method's style argument
-  p2 <- performance::check_model(m)
-  expect_doppelganger_with_seed(
-    title = "check_model-theme_custom_style",
-    fig = plot(p2, style = my_custom_theme)
-  )
 })
 
 
@@ -179,11 +172,11 @@ test_that("performance::check_model works without theme argument (default behavi
 })
 
 
-# Test 6: style argument in plot() should override theme from performance::check_model()
+# Test 6: theme argument in plot() should override theme from performance::check_model()
 # -----------------------------------------------------------------------------
-# This tests that the plot method's style parameter can override the theme
+# This tests that the plot method's theme parameter can override the theme
 # set during performance::check_model() call.
-test_that("plot style argument overrides performance::check_model theme", {
+test_that("plot theme argument overrides performance::check_model theme", {
   m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
 
   # Create with one theme
@@ -192,10 +185,10 @@ test_that("plot style argument overrides performance::check_model theme", {
   # Plot with different theme - should work
   expect_doppelganger_with_seed(
     title = "check_model-different_theme-1",
-    fig = plot(p, style = ggplot2::theme_minimal())
+    fig = plot(p, theme = ggplot2::theme_minimal())
   )
   expect_doppelganger_with_seed(
     title = "check_model-different_theme-2",
-    fig = plot(p, style = ggplot2::theme_bw())
+    fig = plot(p, theme = ggplot2::theme_bw())
   )
 })
