@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 test_that("`plot.see_check_normality()` works", {
   skip_if_not_installed("lme4")
   skip_if_not_installed("qqplotr")

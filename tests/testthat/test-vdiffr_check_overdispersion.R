@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_if_not_installed("vdiffr")
 
 # Snapshot tests for check_model() plots
 # These tests verify that diagnostic plots render consistently across versions.
@@ -11,9 +12,9 @@ expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
 }
 
 test_that("plot.see_check_model() renders correctly", {
-  skip_if_not_installed("performance", minimum_version = "0.17.0.2")
-  skip_if_not_installed("see")
+  skip_if_not_installed("performance")
   skip_if_not_installed("DHARMa")
+  skip_if_not_installed("glmmTMB")
 
   set.seed(123)
 

@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_if_not_installed("vdiffr")
 
 # Helper function for reproducible vdiffr tests
 expect_doppelganger_with_seed <- function(title, fig, seed = 123) {

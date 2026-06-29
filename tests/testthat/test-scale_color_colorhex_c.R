@@ -1,4 +1,5 @@
 test_that("scale_fill_colorhex works as expected", {
+  skip_if_not_installed("vdiffr")
   set.seed(123)
   vdiffr::expect_doppelganger(
     title = "scale_fill_colorhex_d works",

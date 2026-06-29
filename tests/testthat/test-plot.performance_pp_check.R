@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 test_that("`print.see_performance_pp_check()` works", {
   set.seed(123)
   model <- lm(Sepal.Length ~ Species * Petal.Width + Petal.Length, data = iris)

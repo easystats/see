@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 test_that("`plot.see_p_significance()` works", {
   skip_if_not_installed("rstanarm")
   skip_if_not_installed("ggridges")
@@ -9,8 +11,8 @@ test_that("`plot.see_p_significance()` works", {
 })
 
 skip_on_cran()
-skip_if_not_installed("bayestestR", minimum_version = "0.14.1")
-skip_if_not_installed("parameters", minimum_version = "0.22.3")
+skip_if_not_installed("bayestestR")
+skip_if_not_installed("parameters")
 
 test_that("`plot.see_p_significance works for two thresholds", {
   skip_if_not_installed("ggridges")

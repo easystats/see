@@ -173,29 +173,28 @@ scale_fill_colorhex_c <- function(
 
 # Palette --------------------------------------------------------------------
 
-#' Color palettes from <https://www.color-hex.com/>
+#' Color palettes from color-hex.com.
 #'
-#' This function downloads a requested color palette from <https://www.color-hex.com/>.
+#' This function downloads a requested color palette from color-hex.com.
 #' This website provides a large number of user-submitted color palettes.
 #'
 #' @note
-#' The default [Josiah color palette (number 1014416)](https://www.color-hex.com/color-palette/1014416)
-#' is available without an internet connection. All other color palettes require
-#' an internet connection to download and access.
+#' The default Josiah color palette (number 1014416) is available without an
+#' internet connection. All other color palettes require an internet connection
+#' to download and access.
 #'
-#' @param palette The numeric code for a palette at <https://www.color-hex.com/>.
-#'   For example, `1014416` for the
-#'   [Josiah color palette (number 1014416)](https://www.color-hex.com/color-palette/1014416).
+#' @param palette The numeric code for a palette at color-hex.com. For example,
+#' `1014416` for the Josiah color palette (number 1014416).
 #' @inheritParams palette_flat
 #'
 #' @details This function is usually not called directly, but from within
-#'   [`scale_color_colorhex()`][scale_color_colorhex].
+#' [`scale_color_colorhex()`][scale_color_colorhex].
 #'
 #' @export
 palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
   if (!is.numeric(palette) && suppressWarnings(is.na(as.numeric(palette)))) {
     insight::format_error(
-      "`palette` must be the numeric code for a color palette at <https://www.color-hex.com/>"
+      "`palette` must be the numeric code for a color palette at color-hex.com"
     )
   }
 
@@ -205,7 +204,7 @@ palette_colorhex <- function(palette = 1014416, reverse = FALSE, ...) {
   } else {
     insight::check_if_installed(
       "curl",
-      reason = "to retrieve palettes from <https://www.color-hex.com/>"
+      reason = "to retrieve palettes from color-hex.com"
     )
 
     curl_url <- paste0("https://www.color-hex.com//color-palette/", palette)

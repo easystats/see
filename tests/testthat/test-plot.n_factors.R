@@ -1,5 +1,6 @@
 test_that("`plot.see_n_factors()` works", {
   skip_if_not_installed("nFactors")
+  skip_if_not_installed("vdiffr")
 
   result <- parameters::n_factors(datasets::mtcars, type = "PCA")
 
