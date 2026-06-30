@@ -2,6 +2,8 @@
 
 ## see 0.14.1
 
+CRAN release: 2026-06-29
+
 ### Changes
 
 - Added plot method for prior predictive checks, from the
