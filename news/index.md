@@ -7,7 +7,8 @@ CRAN release: 2026-06-29
 ### Changes
 
 - Added plot method for prior predictive checks, from the
-  `performance::check_priors()` function.
+  [`performance::check_priors()`](https://easystats.github.io/performance/reference/check_priors.html)
+  function.
 
 - The [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method
   for

@@ -1,8 +1,9 @@
 # Plot method for prior predictive checks
 
 The [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method for
-the `performance::check_priors()` function. For details, see *Lüdecke et
-al. 2026*.
+the
+[`performance::check_priors()`](https://easystats.github.io/performance/reference/check_priors.html)
+function. For details, see *Lüdecke et al. 2026*.
 
 ## Usage
 
@@ -79,7 +80,7 @@ library(performance)
 # our real-world assumptions
 model <- insight::download_model("stan_prior_checks_1")
 plot(performance::check_priors(model, "mmse"))
-#> Error: 'check_priors' is not an exported object from 'namespace:performance'
+
 
 # model with default (weakly informative) priors, which is poorly
 # calibrated. It pushes probability mass almost exclusively to the
@@ -87,6 +88,6 @@ plot(performance::check_priors(model, "mmse"))
 # unsupported
 model <- insight::download_model("stan_prior_checks_2")
 plot(performance::check_priors(model, "mmse"))
-#> Error: 'check_priors' is not an exported object from 'namespace:performance'
+
 # }
 ```
