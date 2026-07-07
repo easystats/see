@@ -12,7 +12,7 @@ function.
 plot(
   x,
   size_text = 3.5,
-  linewidth = 0.8,
+  size_line = 0.8,
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
@@ -38,7 +38,7 @@ plot(
 
   Numeric value specifying size of text labels.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 

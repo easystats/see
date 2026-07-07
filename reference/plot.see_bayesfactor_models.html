@@ -9,7 +9,7 @@ These plots visualize the posterior probabilities of the compared models."><meta
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,8 +66,8 @@ These plots visualize the <strong>posterior probabilities</strong> of the compar
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_bayesfactor_models'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  n_pies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"one"</span>, <span class="st">"many"</span><span class="op">)</span>,</span>
-<span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"BF"</span>, <span class="st">"probability"</span><span class="op">)</span>,</span>
+<span>  n_pies <span class="op">=</span> <span class="st">"one"</span>,</span>
+<span>  value <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>  sort <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  log <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  prior_odds <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -84,11 +84,11 @@ These plots visualize the <strong>posterior probabilities</strong> of the compar
 
 
 <dt id="arg-n-pies">n_pies<a class="anchor" aria-label="anchor" href="#arg-n-pies"></a></dt>
-<dd><p>Number of pies.</p></dd>
+<dd><p>Number of pies. Can be <code>"one"</code> or <code>"many"</code>.</p></dd>
 
 
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
-<dd><p>What value to display.</p></dd>
+<dd><p>What value to display. Can be <code>"none"</code>, <code>"BF"</code>, or <code>"probability"</code>.</p></dd>
 
 
 <dt id="arg-sort">sort<a class="anchor" aria-label="anchor" href="#arg-sort"></a></dt>

@@ -9,7 +9,7 @@ function.
 
 ``` r
 # S3 method for class 'see_compare_performance'
-plot(x, linewidth = 1, ...)
+plot(x, size_line = 1, ...)
 ```
 
 ## Arguments
@@ -18,7 +18,7 @@ plot(x, linewidth = 1, ...)
 
   An object.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 

@@ -13,7 +13,7 @@ plot(
   x,
   type = "qq",
   data = NULL,
-  linewidth = 0.8,
+  size_line = 0.8,
   size_point = 2,
   size_title = 12,
   size_axis_title = base_size,
@@ -46,7 +46,7 @@ plot(
   The original data used to create this object. Can be a statistical
   model.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 

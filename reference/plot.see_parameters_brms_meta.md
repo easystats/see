@@ -12,7 +12,7 @@ function when used with brms-meta-analysis models.
 plot(
   x,
   size_point = 2,
-  linewidth = 0.8,
+  size_line = 0.8,
   size_text = 3.5,
   alpha_posteriors = 0.7,
   alpha_rope = 0.15,
@@ -33,7 +33,7 @@ plot(
 
   Numeric specifying size of point-geoms.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 

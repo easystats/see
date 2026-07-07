@@ -12,7 +12,7 @@ plot(
   x,
   colors = c("black", "#1b6ca8"),
   size_point = 1.2,
-  linewidth = c(0.7, 0.9),
+  size_line = c(0.7, 0.9),
   size_text = 3,
   alpha_line = 0.15,
   show_labels = TRUE,
@@ -39,7 +39,7 @@ plot(
 
   Numeric specifying size of point-geoms.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 

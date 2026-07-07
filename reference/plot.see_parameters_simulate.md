@@ -16,7 +16,7 @@ plot(
   show_intercept = FALSE,
   n_columns = NULL,
   normalize_height = FALSE,
-  linewidth = 0.9,
+  size_line = 0.9,
   alpha_posteriors = 0.7,
   centrality = "median",
   ci = 0.95,
@@ -61,7 +61,7 @@ plot(
   simulated draws is narrow for some parameters, this may result in very
   flat density-areas. In such cases, set `normalize_height = FALSE`.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 
@@ -98,10 +98,10 @@ result
 #> 
 #> Parameter   | Coefficient |         95% CI |      p
 #> ---------------------------------------------------
-#> (Intercept) |       42.19 | [33.75, 51.65] | < .001
-#> wt          |       -3.39 | [-4.99, -1.75] | < .001
-#> cyl         |       -1.54 | [-2.40, -0.70] | < .001
-#> gear        |       -0.47 | [-2.11,  1.07] | 0.532 
+#> (Intercept) |       42.19 | [33.77, 51.64] | < .001
+#> wt          |       -3.37 | [-4.94, -1.68] | < .001
+#> cyl         |       -1.54 | [-2.41, -0.70] | < .001
+#> gear        |       -0.52 | [-2.02,  0.92] | 0.454 
 #> 
 #> Uncertainty intervals (equal-tailed) and p-values (two-tailed)
 #>   computed using a simulated multivariate normal distribution

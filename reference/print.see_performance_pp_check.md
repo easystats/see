@@ -11,7 +11,7 @@ function.
 # S3 method for class 'see_performance_pp_check'
 print(
   x,
-  linewidth = 0.5,
+  size_line = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
@@ -28,7 +28,7 @@ print(
 # S3 method for class 'see_performance_pp_check'
 plot(
   x,
-  linewidth = 0.5,
+  size_line = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
@@ -49,7 +49,7 @@ plot(
 
   An object.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 

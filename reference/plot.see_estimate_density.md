@@ -17,7 +17,7 @@ plot(
   priors = FALSE,
   alpha_priors = 0.4,
   alpha_posteriors = 0.7,
-  linewidth = 0.9,
+  size_line = 0.9,
   size_point = 2,
   centrality = "median",
   ci = 0.95,
@@ -64,7 +64,7 @@ plot(
 
   Numeric value specifying alpha for the posterior distributions.
 
-- linewidth:
+- size_line:
 
   Numeric value specifying size of line geoms.
 

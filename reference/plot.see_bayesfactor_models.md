@@ -12,8 +12,8 @@ compared models.
 # S3 method for class 'see_bayesfactor_models'
 plot(
   x,
-  n_pies = c("one", "many"),
-  value = c("none", "BF", "probability"),
+  n_pies = "one",
+  value = "none",
   sort = FALSE,
   log = FALSE,
   prior_odds = NULL,
@@ -29,11 +29,11 @@ plot(
 
 - n_pies:
 
-  Number of pies.
+  Number of pies. Can be `"one"` or `"many"`.
 
 - value:
 
-  What value to display.
+  What value to display. Can be `"none"`, `"BF"`, or `"probability"`.
 
 - sort:
 
