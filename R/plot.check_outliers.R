@@ -64,7 +64,7 @@
 plot.see_check_outliers <- function(
   x,
   size_text = 3.5,
-  linewidth = 0.8,
+  size_line = 0.8,
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
@@ -114,7 +114,7 @@ plot.see_check_outliers <- function(
       influential_obs,
       show_labels = show_labels,
       size_text = size_text,
-      linewidth = linewidth,
+      size_line = size_line,
       size_axis_title = size_axis_title,
       size_title = size_title,
       base_size = base_size,

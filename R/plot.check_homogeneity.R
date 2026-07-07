@@ -147,7 +147,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
 .plot_diag_homogeneity <- function(
   x,
   size_point,
-  linewidth,
+  size_line,
   alpha_level = 0.2,
   theme = NULL,
   size_title = 12,
@@ -189,7 +189,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       se = show_ci,
       alpha = alpha_level,
       formula = y ~ x,
-      linewidth = linewidth,
+      linewidth = size_line,
       colour = colors[1]
     ) +
     ggplot2::labs(

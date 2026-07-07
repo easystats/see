@@ -4,7 +4,7 @@
   ref.color = "darkgray",
   ref.linetype = "dashed",
   show_labels = TRUE,
-  linewidth = NULL,
+  size_line = NULL,
   size_point = 2,
   size_text = NULL,
   size_axis_title = base_size,
@@ -25,7 +25,7 @@
     default_theme = ggplot2::theme_grey()
   )
 
-  linewidth <- linewidth %||% 0.7
+  size_line <- size_line %||% 0.7
   size_text <- size_text %||% 3
 
   plot_data <- x
@@ -111,7 +111,7 @@
         na.rm = na.rm,
         se = FALSE,
         color = colors[1],
-        linewidth = linewidth
+        linewidth = size_line
       )
   }
 
@@ -166,7 +166,7 @@
           y = .cook_ref[[.level]],
           color = colors[1],
           linetype = ref.linetype,
-          linewidth = linewidth
+          linewidth = size_line
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {
@@ -176,7 +176,7 @@
           y = -1 * .cook_ref[[.level]],
           color = colors[1],
           linetype = ref.linetype,
-          linewidth = linewidth
+          linewidth = size_line
         )
       }),
       lapply(seq_along(cook.levels), function(.level) {

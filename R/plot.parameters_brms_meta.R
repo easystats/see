@@ -151,7 +151,7 @@ data_plot.parameters_brms_meta <- function(
 plot.see_parameters_brms_meta <- function(
   x,
   size_point = 2,
-  linewidth = 0.8,
+  size_line = 0.8,
   size_text = 3.5,
   alpha_posteriors = 0.7,
   alpha_rope = 0.15,
@@ -211,7 +211,7 @@ plot.see_parameters_brms_meta <- function(
         color = .data$Color
       ),
       orientation = "y",
-      linewidth = linewidth,
+      linewidth = size_line,
       width = 0
     ) +
     ggplot2::geom_point(

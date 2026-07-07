@@ -1,7 +1,7 @@
 #' @export
 plot.see_binned_residuals <- function(
   x,
-  linewidth = 0.7,
+  size_line = 0.7,
   size_point = 2.2,
   size_title = 12,
   size_axis_title = base_size,
@@ -72,7 +72,7 @@ plot.see_binned_residuals <- function(
         se = FALSE,
         formula = y ~ s(x, bs = "tp"),
         colour = colors[3],
-        linewidth = linewidth
+        linewidth = size_line
       )
   }
 
@@ -107,7 +107,7 @@ plot.see_binned_residuals <- function(
       ggplot2::geom_point(ggplot2::aes(y = .data$ybar), size = size_point) +
       ggplot2::geom_errorbar(
         ggplot2::aes(ymin = .data$CI_low, ymax = .data$CI_high),
-        linewidth = linewidth,
+        linewidth = size_line,
         width = 0
       )
   } else {
@@ -122,7 +122,7 @@ plot.see_binned_residuals <- function(
           ymax = .data$CI_high,
           colour = .data$group
         ),
-        linewidth = linewidth,
+        linewidth = size_line,
         width = 0
       )
   }

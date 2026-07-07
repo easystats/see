@@ -30,7 +30,7 @@ plot.see_p_function <- function(
   x,
   colors = c("black", "#1b6ca8"),
   size_point = 1.2,
-  linewidth = c(0.7, 0.9),
+  size_line = c(0.7, 0.9),
   size_text = 3,
   alpha_line = 0.15,
   show_labels = TRUE,
@@ -64,13 +64,13 @@ plot.see_p_function <- function(
   # make sure group is factor
   data_ci_segments$group <- as.factor(data_ci_segments$group)
 
-  # sanity check - linewidth must be of length two, when we have more than
+  # sanity check - size_line must be of length two, when we have more than
   # one group (i.e. when we emphasize CI lines)
   if (
-    length(linewidth) != 2 && insight::n_unique(data_ci_segments$group) == 2
+    length(size_line) != 2 && insight::n_unique(data_ci_segments$group) == 2
   ) {
     insight::format_error(
-      "Length of `linewidth` must of length 2, to match regular and emphasized interval lines."
+      "Length of `size_line` must of length 2, to match regular and emphasized interval lines."
     ) # nolint
   }
 
@@ -185,7 +185,7 @@ plot.see_p_function <- function(
       colour = NULL
     ) +
     theme_lucid() +
-    ggplot2::scale_linewidth_manual(values = linewidth, guide = "none")
+    ggplot2::scale_linewidth_manual(values = size_line, guide = "none")
 
   # facets for grids, different color/fill when no grids
   if (!is.null(n_columns)) {

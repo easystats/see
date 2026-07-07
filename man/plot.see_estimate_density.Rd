@@ -12,7 +12,7 @@
   priors = FALSE,
   alpha_priors = 0.4,
   alpha_posteriors = 0.7,
-  linewidth = 0.9,
+  size_line = 0.9,
   size_point = 2,
   centrality = "median",
   ci = 0.95,
@@ -45,7 +45,7 @@ distributions.}
 \item{alpha_posteriors}{Numeric value specifying alpha for the posterior
 distributions.}
 
-\item{linewidth}{Numeric value specifying size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 

@@ -116,7 +116,7 @@ data_plot.performance_pp_check <- function(x, type = "density", ...) {
 #' @export
 print.see_performance_pp_check <- function(
   x,
-  linewidth = 0.5,
+  size_line = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
@@ -134,7 +134,7 @@ print.see_performance_pp_check <- function(
 
   p1 <- .prepare_pp_check(
     x,
-    linewidth = linewidth,
+    size_line = size_line,
     size_point = size_point,
     size_bar = size_bar,
     size_axis_title = size_axis_title,
@@ -164,7 +164,7 @@ print.see_performance_pp_check <- function(
 #' @export
 plot.see_performance_pp_check <- function(
   x,
-  linewidth = 0.5,
+  size_line = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
@@ -183,7 +183,7 @@ plot.see_performance_pp_check <- function(
 
   p1 <- .prepare_pp_check(
     x,
-    linewidth = linewidth,
+    size_line = size_line,
     size_point = size_point,
     size_bar = size_bar,
     size_axis_title = size_axis_title,
@@ -211,7 +211,7 @@ plot.see_performance_pp_check <- function(
 # internal function, used by both the `print()` and `plot()` -----------------
 .prepare_pp_check <- function(
   x,
-  linewidth = 0.5,
+  size_line = 0.5,
   size_point = 2,
   size_bar = 0.7,
   size_axis_title = base_size,
@@ -261,7 +261,7 @@ plot.see_performance_pp_check <- function(
   # Build main plot
   .plot_pp_check(
     x,
-    linewidth = linewidth,
+    size_line = size_line,
     size_point = size_point,
     alpha_line = alpha_line,
     theme = theme,
@@ -279,7 +279,7 @@ plot.see_performance_pp_check <- function(
 
 .plot_pp_check <- function(
   x,
-  linewidth,
+  size_line,
   size_point,
   alpha_line,
   theme = NULL,
@@ -311,7 +311,7 @@ plot.see_performance_pp_check <- function(
       x,
       colors,
       info,
-      linewidth,
+      size_line,
       size_point,
       alpha_line,
       ...
@@ -342,7 +342,7 @@ plot.see_performance_pp_check <- function(
       x,
       colors,
       info,
-      linewidth,
+      size_line,
       size_point,
       alpha_line,
       type,
@@ -361,7 +361,7 @@ plot.see_performance_pp_check <- function(
       x,
       colors,
       info,
-      linewidth,
+      size_line,
       alpha_line,
       bandwidth,
       ...
@@ -397,7 +397,7 @@ plot.see_performance_pp_check <- function(
   x,
   colors,
   info,
-  linewidth,
+  size_line,
   alpha_line,
   bandwidth,
   ...
@@ -425,8 +425,8 @@ plot.see_performance_pp_check <- function(
     ) +
     ggplot2::scale_linewidth_manual(
       values = c(
-        "Observed data" = 1.7 * linewidth,
-        "Model-predicted data" = linewidth
+        "Observed data" = 1.7 * size_line,
+        "Model-predicted data" = size_line
       ),
       guide = "none"
     ) +
@@ -457,7 +457,7 @@ plot.see_performance_pp_check <- function(
   x,
   colors,
   info,
-  linewidth,
+  size_line,
   size_point,
   alpha_line,
   type = "discrete_dots",
@@ -531,7 +531,7 @@ plot.see_performance_pp_check <- function(
         ),
         position = ggplot2::position_nudge(x = 0.2),
         size = 0.4 * size_point,
-        linewidth = linewidth,
+        linewidth = size_line,
         stroke = 0,
         shape = 16
       ) +
@@ -632,7 +632,7 @@ plot.see_performance_pp_check <- function(
   x,
   colors,
   info,
-  linewidth,
+  size_line,
   size_point,
   alpha_line,
   ...
@@ -656,7 +656,7 @@ plot.see_performance_pp_check <- function(
       ),
       position = ggplot2::position_nudge(x = 0.2),
       size = 0.4 * size_point,
-      linewidth = linewidth,
+      linewidth = size_line,
       stroke = 0,
       shape = 16
     ) +

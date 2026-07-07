@@ -32,7 +32,7 @@
 #' @export
 plot.see_performance_simres <- function(
   x,
-  linewidth = 0.8,
+  size_line = 0.8,
   size_point = 2,
   size_title = 12,
   size_axis_title = base_size,
@@ -109,7 +109,7 @@ plot.see_performance_simres <- function(
       qqplotr::stat_qq_line(
         distribution = dfun,
         dparams = dp,
-        linewidth = linewidth,
+        linewidth = size_line,
         colour = colors[1],
         detrend = detrend
       ),
@@ -139,7 +139,7 @@ plot.see_performance_simres <- function(
         colour = colors[2]
       ),
       ggplot2::geom_qq_line(
-        linewidth = linewidth,
+        linewidth = size_line,
         colour = colors[1],
         na.rm = TRUE,
         distribution = dfun,

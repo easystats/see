@@ -21,7 +21,7 @@ plot.see_check_heteroscedasticity <- function(
   x,
   data = NULL,
   size_point = 2,
-  linewidth = 0.8,
+  size_line = 0.8,
   size_title = 12,
   size_axis_title = base_size,
   base_size = 10,
@@ -83,7 +83,7 @@ plot.see_check_heteroscedasticity <- function(
   .plot_diag_homogeneity(
     dat,
     size_point = size_point,
-    linewidth = linewidth,
+    size_line = size_line,
     base_size = base_size,
     size_title = size_title,
     size_axis_title = size_axis_title,
