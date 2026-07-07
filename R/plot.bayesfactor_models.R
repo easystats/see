@@ -42,19 +42,20 @@
 #' @export
 plot.see_bayesfactor_models <- function(
   x,
-  n_pies = c("one", "many"),
-  value = c("none", "BF", "probability"),
+  n_pies = "one",
+  value = "none",
   sort = FALSE,
   log = FALSE,
   prior_odds = NULL,
   ...
 ) {
+  .data <- NULL
   if ("log_BF" %in% names(x) && !"BF" %in% names(x)) {
     x$BF <- exp(x$log_BF)
   }
 
-  n_pies <- match.arg(n_pies)
-  value <- match.arg(value)
+  n_pies <- insight::validate_argument(n_pies, c("one", "many"))
+  value <- insight::validate_argument(value, c("none", "BF", "probability"))
 
   denominator <- attr(x, "denominator")
   denominator_name <- x$Model[denominator]
@@ -127,27 +128,32 @@ plot.see_bayesfactor_models <- function(
 
   ## Plot
   if (n_pies == "one") {
-    p <- ggplot(
+    p <- ggplot2::ggplot(
       one_pie_data,
-      aes(x = "", y = .data$PostProb, fill = .data$Model)
+      ggplot2::aes(x = "", y = .data$PostProb, fill = .data$Model)
     )
   } else {
-    p <- ggplot(
+    p <- ggplot2::ggplot(
       many_pies_data,
-      aes(x = "", y = .data$bar_pos, fill = .data$Model)
+      ggplot2::aes(x = "", y = .data$bar_pos, fill = .data$Model)
     ) +
-      facet_wrap(~ .data$panel)
+      ggplot2::facet_wrap(~ .data$panel)
   }
 
   p +
-    geom_bar(width = 1, stat = "identity", color = "white", linewidth = 0.5) +
-    geom_text(
-      aes(label = .data$label),
-      position = position_stack(vjust = 0.5)
+    ggplot2::geom_bar(
+      width = 1,
+      stat = "identity",
+      color = "white",
+      linewidth = 0.5
     ) +
-    coord_polar("y", start = 0) +
-    scale_y_continuous(expand = c(0, 0)) +
-    labs(x = "", y = "", fill = "Model") +
-    theme_void() +
-    labs(caption = po_txt)
+    ggplot2::geom_text(
+      ggplot2::aes(label = .data$label),
+      position = ggplot2::position_stack(vjust = 0.5)
+    ) +
+    ggplot2::coord_polar("y", start = 0) +
+    ggplot2::scale_y_continuous(expand = c(0, 0)) +
+    ggplot2::labs(x = "", y = "", fill = "Model") +
+    ggplot2::theme_void() +
+    ggplot2::labs(caption = po_txt)
 }

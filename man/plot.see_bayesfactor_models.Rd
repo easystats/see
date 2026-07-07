@@ -6,8 +6,8 @@
 \usage{
 \method{plot}{see_bayesfactor_models}(
   x,
-  n_pies = c("one", "many"),
-  value = c("none", "BF", "probability"),
+  n_pies = "one",
+  value = "none",
   sort = FALSE,
   log = FALSE,
   prior_odds = NULL,
