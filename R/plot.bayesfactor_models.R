@@ -3,8 +3,8 @@
 #' The `plot()` method for the `bayestestR::bayesfactor_models()` function.
 #' These plots visualize the **posterior probabilities** of the compared models.
 #'
-#' @param n_pies Number of pies.
-#' @param value What value to display.
+#' @param n_pies Number of pies. Can be `"one"` or `"many"`.
+#' @param value What value to display. Can be `"none"`, `"BF"`, or `"probability"`.
 #' @param sort The behavior of this argument depends on the plotting contexts.
 #' - *Plotting model parameters*:
 #'   If `NULL`, coefficients are plotted in the order as they appear in the
