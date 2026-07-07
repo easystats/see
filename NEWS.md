@@ -1,3 +1,10 @@
+# see (devel)
+
+## Breaking Changes
+
+* Argument `linewidth` was renamed to `size_line`, to be consistent across the
+  easystats-ecosystem.
+
 # see 0.14.1
 
 ## Changes
