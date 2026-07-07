@@ -70,8 +70,8 @@ plot.see_p_function <- function(
     length(size_line) != 2 && insight::n_unique(data_ci_segments$group) == 2
   ) {
     insight::format_error(
-      "Length of `size_line` must of length 2, to match regular and emphasized interval lines."
-    ) # nolint
+      "Length of `size_line` must be of length 2 to match regular and emphasized interval lines."
+    )
   }
 
   # setup - no color/fill aes for ribbons when we have no facets

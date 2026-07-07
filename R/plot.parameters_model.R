@@ -74,7 +74,7 @@ plot.see_parameters_model <- function(
   if (!is.null(model_class) && any(model_class %in% c("aov", "anova"))) {
     insight::format_error(
       "Plots cannot be created for Anova tables. Please fit a (linear) regression model and try again."
-    ) # nolint
+    )
   }
 
   # for GAMs, remove smooth terms
@@ -738,7 +738,7 @@ plot.see_parameters_model <- function(
         y = parameter_label,
         x = ifelse(
           is.null(coefficient_name),
-          ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"), # nolint
+          ifelse(exponentiated_coefs, "Exp(Estimate)", "Estimate"),
           coefficient_name
         ),
         colour = "CI"
@@ -810,7 +810,10 @@ plot.see_parameters_model <- function(
       levels = unique(x$Level)[order(x$Coefficient)]
     )
   } else if (!is.null(sort) && sort == "descending") {
-    x$Level <- factor(x$Level, levels = rev(unique(x$Level)[order(x$Coefficient)]))
+    x$Level <- factor(
+      x$Level,
+      levels = rev(unique(x$Level)[order(x$Coefficient)])
+    )
   } else {
     # sort coefficients as they appear in the classical summary output by default
     x$Level <- factor(x$Level, levels = rev(unique(x$Level)))

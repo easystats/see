@@ -87,7 +87,7 @@ plot.see_performance_simres <- function(
   } else {
     insight::format_error(
       "The transformation specified in `transform` is currently not supported."
-    ) # nolint
+    )
   }
   res <- res[!is.infinite(res) & !is.na(res)]
 

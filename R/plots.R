@@ -110,7 +110,7 @@ plots <- function(
 
     if (Sys.getenv("RSTUDIO") == "1") {
       msg <- "The RStudio 'Plots' window is too small to show this set of plots."
-      msg_display2 <- "\n- If this doesn't help, try to reset your zoom settings. In RStudio, go to Menu \"View > Actual Size\" and then retry." # nolint
+      msg_display2 <- "\n- If this doesn't help, try to reset your zoom settings. In RStudio, go to Menu \"View > Actual Size\" and then retry."
     } else {
       msg <- "The viewport is too small to show this set of plots."
       msg_display2 <- "\n- If this doesn't help, try to reset the zoom settings of your IDE and then retry."

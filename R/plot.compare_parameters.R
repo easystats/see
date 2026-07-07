@@ -92,7 +92,7 @@ plot.see_compare_parameters <- function(
     if (nrow(x) == 0) {
       insight::format_warning(
         "No data left after removing intercepts. Returning empty plot. Try `show_intercept = TRUE`."
-      ) # nolint
+      )
     }
   }
 
