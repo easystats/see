@@ -34,6 +34,12 @@ plot.see_check_heteroscedasticity <- function(
     model <- data
   }
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   faminfo <- insight::model_info(model)
   r <- tryCatch(
     if (inherits(model, "merMod")) {

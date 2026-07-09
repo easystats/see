@@ -27,7 +27,8 @@
 
 \item{size_text}{Numeric value specifying size of text labels.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms. \code{linewidth} is
+an alias for \code{size_line}.}
 
 \item{base_size, size_axis_title, size_title}{Numeric value specifying size of
 axis and plot titles.}

@@ -132,6 +132,12 @@ print.see_performance_pp_check <- function(
   orig_x <- x
   check_range <- isTRUE(attributes(x)$check_range)
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   p1 <- .prepare_pp_check(
     x,
     size_line = size_line,
@@ -180,6 +186,12 @@ plot.see_performance_pp_check <- function(
   check_range <- isTRUE(attributes(x)$check_range)
   x_limits <- .default_value(x, "x_limits", x_limits)
   type <- .default_value(x, "type", type)
+
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
 
   p1 <- .prepare_pp_check(
     x,

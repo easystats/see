@@ -1,9 +1,10 @@
 # see (devel)
 
-## Breaking Changes
+## Changes
 
 * Argument `linewidth` was renamed to `size_line`, to be consistent across the
-  easystats-ecosystem.
+  easystats-ecosystem. However, `linewidth` remains as an alias, since this is
+  the name of the corresponding ggplot2-argument.
 
 # see 0.14.1
 

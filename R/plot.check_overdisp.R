@@ -10,6 +10,12 @@ plot.see_check_overdisp <- function(
   type = 1,
   ...
 ) {
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   .plot_diag_overdispersion(
     x,
     theme = theme,

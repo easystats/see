@@ -109,8 +109,15 @@ plot.see_parameters_simulate <- function(
 ) {
   is_mlm <- !is.null(attributes(x)$object_class) &&
     "mlm" %in% attributes(x)$object_class
+
   if (is.null(n_columns) && (isTRUE(is_mlm) || "Response" %in% colnames(x))) {
     n_columns <- 1
+  }
+
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
   }
 
   # check for defaults

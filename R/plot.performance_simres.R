@@ -49,6 +49,12 @@ plot.see_performance_simres <- function(
   insight::check_if_installed("DHARMa")
   qqplotr_installed <- insight::check_if_installed("qqplotr", quietly = TRUE)
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   theme <- .set_default_theme(
     x,
     theme,

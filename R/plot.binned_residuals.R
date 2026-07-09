@@ -28,6 +28,11 @@ plot.see_binned_residuals <- function(
   }
   dots <- list(...)
 
+  # handle alias
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   # set defaults
   term <- attr(x, "term", exact = TRUE)
   if (is.null(dots[["show_dots"]])) {

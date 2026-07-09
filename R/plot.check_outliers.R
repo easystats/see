@@ -82,6 +82,12 @@ plot.see_check_outliers <- function(
   # depending on the method
   outlier_methods <- attr(x, "method", exact = TRUE)
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   # validate that the method is correct
   if (length(outlier_methods) == 0) {
     insight::format_error(

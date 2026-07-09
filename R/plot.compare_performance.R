@@ -97,6 +97,12 @@ plot.see_compare_performance <- function(x, size_line = 1, ...) {
     x <- data_plot(x)
   }
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   p <- ggplot2::ggplot(
     x,
     ggplot2::aes(

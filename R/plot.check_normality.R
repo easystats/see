@@ -7,7 +7,8 @@
 #'   Options are `"qq"` (default) for quantile-quantile (Q-Q) plots,
 #'   `"pp"` for probability-probability (P-P) plots, or
 #'   `"density"` for density overlay plots.
-#' @param size_line Numeric value specifying size of line geoms.
+#' @param size_line Numeric value specifying size of line geoms. `linewidth` is
+#'   an alias for `size_line`.
 #' @param alpha_dot Numeric value specifying alpha level of the point geoms.
 #' @param alpha Numeric value specifying alpha level of the confidence bands.
 #' @param colors Character vector of length two, indicating the colors (in
@@ -63,6 +64,12 @@ plot.see_check_normality <- function(
     model <- .retrieve_data(x)
   } else {
     model <- data
+  }
+
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
   }
 
   # for GLM, only halfnormal Q-Q plots

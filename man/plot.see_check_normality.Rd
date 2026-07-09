@@ -33,7 +33,8 @@ Options are \code{"qq"} (default) for quantile-quantile (Q-Q) plots,
 \item{data}{The original data used to create this object. Can be a
 statistical model.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms. \code{linewidth} is
+an alias for \code{size_line}.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 

@@ -178,6 +178,12 @@ plot.see_estimate_density <- function(
     }
   )
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = model, centrality = centrality, ci = ci, ...)
   }

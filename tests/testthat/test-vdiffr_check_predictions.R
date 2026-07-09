@@ -26,6 +26,16 @@ test_that("plot.see_check_predictions() renders correctly", {
     title = "check_predictions_with_range",
     fig = plot(performance::check_predictions(model, check_range = TRUE))
   )
+
+  expect_doppelganger_with_seed(
+    title = "check_predictions_size_line",
+    fig = plot(performance::check_predictions(model), size_line = 2)
+  )
+
+  expect_doppelganger_with_seed(
+    title = "check_predictions_linewidth",
+    fig = plot(performance::check_predictions(model), linewidth = 2)
+  )
 })
 
 
