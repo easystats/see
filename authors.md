@@ -39,13 +39,9 @@ Lüdecke et al., (2021). see: An R Package for Visualizing Statistical
 Models. Journal of Open Source Software, 6(64), 3393.
 https://doi.org/10.21105/joss.03393
 
-    @Article{,
-      title = {{see}: An {R} Package for Visualizing Statistical Models},
-      author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},
-      journal = {Journal of Open Source Software},
-      year = {2021},
-      volume = {6},
-      number = {64},
-      pages = {3393},
-      doi = {10.21105/joss.03393},
-    }
+@Article{, title = {{see}: An {R} Package for Visualizing Statistical
+Models}, author = {Daniel Lüdecke and Indrajeet Patil and Mattan S.
+Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique
+Makowski}, journal = {Journal of Open Source Software}, year = {2021},
+volume = {6}, number = {64}, pages = {3393}, doi =
+{10.21105/joss.03393}, }

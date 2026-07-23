@@ -36,10 +36,7 @@ version is available on R-universe (from *rOpenSci*).
 
 Once you have downloaded the package, you can then load it using:
 
-``` r
-
-library("see")
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`"see"`](https://easystats.github.io/see/)`)`
 
 > **Tip**
 >
@@ -69,15 +66,7 @@ the extracted regression estimates simply by passing the `parameters`
 class object to
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html).
 
-``` r
-
-library(parameters)
-library(see)
-
-model <- lm(wt ~ am * cyl, data = mtcars)
-
-plot(parameters(model))
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`parameters`](https://easystats.github.io/parameters/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `` ``model`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``wt`` ``~`` ``am`` ``*`` ``cyl``, data ``=`` ``mtcars``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(`[`parameters`](https://easystats.github.io/parameters/reference/model_parameters.html)`(``model``)``)`
 
 ![](reference/figures/parameters1-1.png)
 
@@ -87,16 +76,7 @@ visualizations. For example, we might add a title using
 [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html) from
 *ggplot2*.
 
-``` r
-
-library(parameters)
-library(see)
-
-model <- lm(wt ~ am * cyl, data = mtcars)
-
-plot(parameters(model)) +
-  ggplot2::labs(title = "A Dot-and-Whisker Plot")
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`parameters`](https://easystats.github.io/parameters/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `` ``model`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``wt`` ``~`` ``am`` ``*`` ``cyl``, data ``=`` ``mtcars``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(`[`parameters`](https://easystats.github.io/parameters/reference/model_parameters.html)`(``model``)``)`` ``+`` `` ``ggplot2``::`[`labs`](https://ggplot2.tidyverse.org/reference/labs.html)`(``title ``=`` ``"A Dot-and-Whisker Plot"``)`
 
 ![](reference/figures/parameters2-1.png)
 
@@ -113,18 +93,7 @@ Highest Density Interval, or *HDI*). Users can fit the model and pass
 the model results, extracted via *bayestestR*, to
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html).
 
-``` r
-
-library(bayestestR)
-library(rstanarm)
-library(see)
-
-set.seed(123)
-model <- stan_glm(wt ~ mpg, data = mtcars, refresh = 0)
-result <- hdi(model, ci = c(0.5, 0.75, 0.89, 0.95))
-
-plot(result)
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`bayestestR`](https://easystats.github.io/bayestestR/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`rstanarm`](https://mc-stan.org/rstanarm/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `` `[`set.seed`](https://rdrr.io/r/base/Random.html)`(``123``)`` ``model`` ``<-`` `[`stan_glm`](https://mc-stan.org/rstanarm/reference/stan_glm.html)`(``wt`` ``~`` ``mpg``, data ``=`` ``mtcars``, refresh ``=`` ``0``)`` ``result`` ``<-`` `[`hdi`](https://easystats.github.io/bayestestR/reference/hdi.html)`(``model``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.5``, ``0.75``, ``0.89``, ``0.95``)``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](reference/figures/bayestestR-1.png)
 
@@ -144,16 +113,7 @@ in the example below). Then, this result can be passed to
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html) to produce a
 *ggplot2* visualization of the check on normality of the residuals.
 
-``` r
-
-library(performance)
-library(see)
-
-model <- lm(wt ~ mpg, data = mtcars)
-check <- check_normality(model)
-
-plot(check, type = "qq")
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`performance`](https://easystats.github.io/performance/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `` ``model`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``wt`` ``~`` ``mpg``, data ``=`` ``mtcars``)`` ``check`` ``<-`` `[`check_normality`](https://easystats.github.io/performance/reference/check_normality.html)`(``model``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``check``, type ``=`` ``"qq"``)`
 
 ![](reference/figures/performance-1.png)
 
@@ -172,15 +132,7 @@ model object to the relevant *effectsize* function
 in the following example), and then to
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html).
 
-``` r
-
-library(effectsize)
-library(see)
-
-model <- aov(wt ~ am * cyl, data = mtcars)
-
-plot(omega_squared(model))
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`effectsize`](https://easystats.github.io/effectsize/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `` ``model`` ``<-`` `[`aov`](https://rdrr.io/r/stats/aov.html)`(``wt`` ``~`` ``am`` ``*`` ``cyl``, data ``=`` ``mtcars``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(`[`omega_squared`](https://easystats.github.io/effectsize/reference/eta_squared.html)`(``model``)``)`
 
 ![](reference/figures/effectsize-1.png)
 
@@ -195,18 +147,7 @@ from fitted models (Makowski et al., 2020a). *see* provides methods to
 quickly visualize these model predictions. For the following example to
 work, you need to have installed the *emmeans* package first.
 
-``` r
-
-library(modelbased)
-library(see)
-
-data(mtcars)
-mtcars$gear <- as.factor(mtcars$gear)
-model <- lm(mpg ~ wt * gear, data = mtcars)
-
-predicted <- estimate_expectation(model, data = "grid")
-plot(predicted, show_data = TRUE)
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`modelbased`](https://easystats.github.io/modelbased/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `` `[`data`](https://rdrr.io/r/utils/data.html)`(``mtcars``)`` ``mtcars``$``gear`` ``<-`` `[`as.factor`](https://rdrr.io/r/base/factor.html)`(``mtcars``$``gear``)`` ``model`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``mpg`` ``~`` ``wt`` ``*`` ``gear``, data ``=`` ``mtcars``)`` `` ``predicted`` ``<-`` `[`estimate_expectation`](https://easystats.github.io/modelbased/reference/estimate_expectation.html)`(``model``, data ``=`` ``"grid"``)`` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``predicted``, show_data ``=`` ``TRUE``)`
 
 ![](reference/figures/modelbased1-1.png)
 
@@ -216,12 +157,7 @@ level averaged over other predictors) using
 that is then passed to
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html).
 
-``` r
-
-means <- estimate_means(model)
-
-plot(means)
-```
+`means`` ``<-`` `[`estimate_means`](https://easystats.github.io/modelbased/reference/estimate_means.html)`(``model``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``means``)`
 
 ![](reference/figures/modelbased2-1.png)
 
@@ -239,15 +175,7 @@ construct a correlation matrix for the variables in a dataframe. With
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html) to visualize
 these correlations in a correlation matrix.
 
-``` r
-
-library(correlation)
-library(see)
-
-results <- summary(correlation(iris))
-
-plot(results, show_data = "points")
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`correlation`](https://easystats.github.io/correlation/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `` ``results`` ``<-`` `[`summary`](https://rdrr.io/r/base/summary.html)`(`[`correlation`](https://easystats.github.io/correlation/reference/correlation.html)`(``iris``)``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``results``, show_data ``=`` ``"points"``)`
 
 ![](reference/figures/correlation-1.png)
 
@@ -259,46 +187,25 @@ vignette](https://easystats.github.io/see/articles/correlation.html).
 
 ### Modern
 
-``` r
-
-library(ggplot2)
-
-ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point2() +
-  theme_modern()
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`ggplot2`](https://ggplot2.tidyverse.org)`)`` `` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Sepal.Width``, y ``=`` ``Sepal.Length``, color ``=`` ``Species``)``)`` ``+`` `` `[`geom_point2`](https://easystats.github.io/see/reference/geom_point2.md)`(``)`` ``+`` `` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)`
 
 ![](reference/figures/unnamed-chunk-3-1.png)
 
 ### Lucid
 
-``` r
-
-library(ggplot2)
-
-p <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point2()
-
-p + theme_lucid()
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`ggplot2`](https://ggplot2.tidyverse.org)`)`` `` ``p`` ``<-`` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Sepal.Width``, y ``=`` ``Sepal.Length``, color ``=`` ``Species``)``)`` ``+`` `` `[`geom_point2`](https://easystats.github.io/see/reference/geom_point2.md)`(``)`` `` ``p`` ``+`` `[`theme_lucid`](https://easystats.github.io/see/reference/theme_lucid.md)`(``)`
 
 ![](reference/figures/unnamed-chunk-4-1.png)
 
 ### Blackboard
 
-``` r
-
-p + theme_blackboard()
-```
+`p`` ``+`` `[`theme_blackboard`](https://easystats.github.io/see/reference/theme_blackboard.md)`(``)`
 
 ![](reference/figures/unnamed-chunk-5-1.png)
 
 ### Abyss
 
-``` r
-
-p + theme_abyss()
-```
+`p`` ``+`` `[`theme_abyss`](https://easystats.github.io/see/reference/theme_abyss.md)`(``)`
 
 ![](reference/figures/unnamed-chunk-6-1.png)
 
@@ -310,33 +217,14 @@ for a detailed overview of palettes and color scales.
 
 ### Material design
 
-``` r
-
-p1 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_boxplot() +
-  theme_modern(axis.text.angle = 45) +
-  scale_fill_material_d()
-
-p2 <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_violin() +
-  theme_modern(axis.text.angle = 45) +
-  scale_fill_material_d(palette = "ice")
-
-p3 <- ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Sepal.Length)) +
-  geom_point2() +
-  theme_modern() +
-  scale_color_material(discrete = FALSE)
-```
+`p1`` ``<-`` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Species``, y ``=`` ``Sepal.Length``, fill ``=`` ``Species``)``)`` ``+`` `` `[`geom_boxplot`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)`(``)`` ``+`` `` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``axis.text.angle ``=`` ``45``)`` ``+`` `` `[`scale_fill_material_d`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`` `` ``p2`` ``<-`` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Species``, y ``=`` ``Sepal.Length``, fill ``=`` ``Species``)``)`` ``+`` `` `[`geom_violin`](https://ggplot2.tidyverse.org/reference/geom_violin.html)`(``)`` ``+`` `` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``axis.text.angle ``=`` ``45``)`` ``+`` `` `[`scale_fill_material_d`](https://easystats.github.io/see/reference/scale_color_material.md)`(``palette ``=`` ``"ice"``)`` `` ``p3`` ``<-`` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Petal.Length``, y ``=`` ``Petal.Width``, color ``=`` ``Sepal.Length``)``)`` ``+`` `` `[`geom_point2`](https://easystats.github.io/see/reference/geom_point2.md)`(``)`` ``+`` `` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)`` ``+`` `` `[`scale_color_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``discrete ``=`` ``FALSE``)`
 
 ## Multiple plots
 
 The [`plots()`](https://easystats.github.io/see/reference/plots.md)
 function allows us to plot the figures side by side.
 
-``` r
-
-plots(p1, p2, p3, n_columns = 2)
-```
+[`plots`](https://easystats.github.io/see/reference/plots.md)`(``p1``, ``p2``, ``p3``, n_columns ``=`` ``2``)`
 
 ![](reference/figures/unnamed-chunk-8-1.png)
 
@@ -344,13 +232,7 @@ The [`plots()`](https://easystats.github.io/see/reference/plots.md)
 function can also be used to add **tags** (*i.e.*, labels for
 subfigures).
 
-``` r
-
-plots(p1, p2, p3,
-  n_columns = 2,
-  tags = paste("Fig. ", 1:3)
-)
-```
+[`plots`](https://easystats.github.io/see/reference/plots.md)`(``p1``, ``p2``, ``p3``,`` `` n_columns ``=`` ``2``,`` `` tags ``=`` `[`paste`](https://rdrr.io/r/base/paste.html)`(``"Fig. "``, ``1``:``3``)`` ``)`
 
 ![](reference/figures/unnamed-chunk-9-1.png)
 
@@ -362,18 +244,7 @@ plots(p1, p2, p3,
 [`geom_jitter2()`](https://easystats.github.io/see/reference/geom_point2.md)
 allow points without borders and contour.
 
-``` r
-
-normal <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-  geom_point(size = 8, alpha = 0.3) +
-  theme_modern()
-
-new <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) +
-  geom_point2(size = 8, alpha = 0.3) +
-  theme_modern()
-
-plots(normal, new, n_columns = 2)
-```
+`normal`` ``<-`` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Petal.Width``, y ``=`` ``Sepal.Length``)``)`` ``+`` `` `[`geom_point`](https://ggplot2.tidyverse.org/reference/geom_point.html)`(``size ``=`` ``8``, alpha ``=`` ``0.3``)`` ``+`` `` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)`` `` ``new`` ``<-`` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Petal.Width``, y ``=`` ``Sepal.Length``)``)`` ``+`` `` `[`geom_point2`](https://easystats.github.io/see/reference/geom_point2.md)`(``size ``=`` ``8``, alpha ``=`` ``0.3``)`` ``+`` `` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)`` `` `[`plots`](https://easystats.github.io/see/reference/plots.md)`(``normal``, ``new``, n_columns ``=`` ``2``)`
 
 ![](reference/figures/unnamed-chunk-10-1.png)
 
@@ -382,50 +253,13 @@ plots(normal, new, n_columns = 2)
 Create a half-violin half-dot plot, useful for visualising the
 distribution and the sample size at the same time.
 
-``` r
-
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  geom_violindot(fill_dots = "black") +
-  theme_modern() +
-  scale_fill_material_d()
-```
+[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(``iris``, `[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(``x ``=`` ``Species``, y ``=`` ``Sepal.Length``, fill ``=`` ``Species``)``)`` ``+`` `` `[`geom_violindot`](https://easystats.github.io/see/reference/geom_violindot.md)`(``fill_dots ``=`` ``"black"``)`` ``+`` `` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)`` ``+`` `` `[`scale_fill_material_d`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
 
 ![](reference/figures/unnamed-chunk-11-1.png)
 
 ## Radar chart (Spider plot)
 
-``` r
-
-library(datawizard)
-
-# prepare the data in tidy format
-data <- iris |>
-  datawizard::data_group("Species") |>
-  datawizard::data_summary(
-    Sepal.Length = mean(Sepal.Length),
-    Sepal.Width = mean(Sepal.Width),
-    Petal.Length = mean(Petal.Length),
-    Petal.Width = mean(Petal.Width)
-  ) |>
-  datawizard::reshape_longer(c(
-    "Sepal.Length",
-    "Sepal.Width",
-    "Petal.Length",
-    "Petal.Width"
-  ))
-
-data |>
-  ggplot(aes(
-    x = name,
-    y = value,
-    color = Species,
-    group = Species,
-    fill = Species
-  )) +
-  geom_polygon(linewidth = 1, alpha = 0.1) +
-  coord_radar() +
-  theme_radar()
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`datawizard`](https://easystats.github.io/datawizard/)`)`` `` ``# prepare the data in tidy format`` ``data`` ``<-`` ``iris`` ``|>`` `` ``datawizard``::`[`data_group`](https://easystats.github.io/datawizard/reference/data_group.html)`(``"Species"``)`` ``|>`` `` ``datawizard``::`[`data_summary`](https://easystats.github.io/datawizard/reference/data_summary.html)`(`` `` Sepal.Length ``=`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``Sepal.Length``)``,`` `` Sepal.Width ``=`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``Sepal.Width``)``,`` `` Petal.Length ``=`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``Petal.Length``)``,`` `` Petal.Width ``=`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``Petal.Width``)`` `` ``)`` ``|>`` `` ``datawizard``::`[`reshape_longer`](https://easystats.github.io/datawizard/reference/data_to_long.html)`(`[`c`](https://rdrr.io/r/base/c.html)`(`` `` ``"Sepal.Length"``,`` `` ``"Sepal.Width"``,`` `` ``"Petal.Length"``,`` `` ``"Petal.Width"`` `` ``)``)`` `` ``data`` ``|>`` `` `[`ggplot`](https://ggplot2.tidyverse.org/reference/ggplot.html)`(`[`aes`](https://ggplot2.tidyverse.org/reference/aes.html)`(`` `` x ``=`` ``name``,`` `` y ``=`` ``value``,`` `` color ``=`` ``Species``,`` `` group ``=`` ``Species``,`` `` fill ``=`` ``Species`` `` ``)``)`` ``+`` `` `[`geom_polygon`](https://ggplot2.tidyverse.org/reference/geom_polygon.html)`(``linewidth ``=`` ``1``, alpha ``=`` ``0.1``)`` ``+`` `` `[`coord_radar`](https://easystats.github.io/see/reference/coord_radar.md)`(``)`` ``+`` `` `[`theme_radar`](https://easystats.github.io/see/reference/theme_radar.md)`(``)`
 
 ![](reference/figures/unnamed-chunk-12-1.png)
 
