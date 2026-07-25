@@ -6,3 +6,19 @@ test_that("`plot.see_parameters_pca()` works", {
   )
   expect_s3_class(plot(result), "gg")
 })
+
+test_that("`plot.see_parameters_pca()` snapshot", {
+  skip_if_not_installed("vdiffr")
+
+  result <- parameters::principal_components(
+    mtcars[, 1:7],
+    n = "all",
+    threshold = 0.2
+  )
+  expect_s3_class(plot(result), c("gg", "ggplot"))
+
+  vdiffr::expect_doppelganger(
+    title = "plot.parameters_pca",
+    fig = plot(result)
+  )
+})

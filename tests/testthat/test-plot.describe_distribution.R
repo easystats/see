@@ -20,3 +20,17 @@ test_that("`plot.see_parameters_distribution()` works", {
     FUN.VALUE = logical(1L)
   )))
 })
+
+test_that("`plot.see_parameters_distribution()` snapshot", {
+  skip_if_not_installed("vdiffr")
+
+  set.seed(333)
+  x <- sample.int(100, 1000, replace = TRUE)
+  result <- datawizard::describe_distribution(x)
+  expect_s3_class(plot(result), c("gg", "ggplot"))
+
+  vdiffr::expect_doppelganger(
+    title = "plot.describe_distribution",
+    fig = plot(result)
+  )
+})

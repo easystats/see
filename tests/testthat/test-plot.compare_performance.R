@@ -6,3 +6,18 @@ test_that("`plot.see_compare_performance()` works", {
 
   expect_s3_class(plot(result), "gg")
 })
+
+test_that("`plot.see_compare_performance()` snapshot", {
+  skip_if_not_installed("vdiffr")
+
+  lm1 <- stats::lm(Sepal.Length ~ Species, data = iris)
+  lm2 <- stats::lm(Sepal.Length ~ Species + Petal.Length, data = iris)
+  lm3 <- stats::lm(Sepal.Length ~ Species * Petal.Length, data = iris)
+  result <- performance::compare_performance(lm1, lm2, lm3)
+  expect_s3_class(plot(result), c("gg", "ggplot"))
+
+  vdiffr::expect_doppelganger(
+    title = "plot.compare_performance",
+    fig = plot(result)
+  )
+})
