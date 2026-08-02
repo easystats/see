@@ -39,12 +39,25 @@ plot.see_check_heteroscedasticity <- function(
     if (inherits(model, "merMod")) {
       stats::residuals(model, scaled = TRUE)
     } else if (inherits(model, c("glmmTMB", "MixMod"))) {
-      sig <- if (faminfo$is_mixed) {
-        sqrt(insight::get_variance_residual(model))
+      ## Pearson residuals are scaled by the family's variance function V(mu_i),
+      ## which varies across observations. The fallback below divides by a single
+      ## scalar, which is only correct when V() does not depend on mu (e.g.
+      ## gaussian). For non-mixed binomial/poisson models `.sigma_glmmTMB_nonmixed()`
+      ## returns 1, i.e. no standardization at all.
+      r_pearson <- tryCatch(
+        stats::residuals(model, type = "pearson"),
+        error = function(e) NULL
+      )
+      if (is.null(r_pearson) || all(is.na(r_pearson))) {
+        sig <- if (faminfo$is_mixed) {
+          sqrt(insight::get_variance_residual(model))
+        } else {
+          .sigma_glmmTMB_nonmixed(model, faminfo)
+        }
+        stats::residuals(model, type = "response") / sig
       } else {
-        .sigma_glmmTMB_nonmixed(model, faminfo)
+        r_pearson
       }
-      stats::residuals(model) / sig
     } else if (inherits(model, "glm")) {
       stats::rstandard(model, type = "pearson")
     } else {
