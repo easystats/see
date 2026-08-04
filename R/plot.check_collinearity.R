@@ -38,6 +38,12 @@ plot.see_check_collinearity <- function(
     return(NULL)
   }
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   dat$group <- "low"
   dat$group[dat$VIF >= 5 & dat$VIF < 10] <- "moderate"
   dat$group[dat$VIF >= 10] <- "high"

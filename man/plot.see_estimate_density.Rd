@@ -45,7 +45,8 @@ distributions.}
 \item{alpha_posteriors}{Numeric value specifying alpha for the posterior
 distributions.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms. \code{linewidth} is
+an alias for \code{size_line}.}
 
 \item{size_point}{Numeric specifying size of point-geoms.}
 

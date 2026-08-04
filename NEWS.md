@@ -1,9 +1,10 @@
 # see (devel)
 
-## Breaking Changes
+## Changes
 
 * Argument `linewidth` was renamed to `size_line`, to be consistent across the
-  easystats-ecosystem.
+  easystats-ecosystem. However, `linewidth` remains as an alias, since this is
+  the name of the corresponding ggplot2-argument.
 
 * `plot()` for `check_heteroscedasticity()` now works for GLM's and models from
   package *glmmTMB*. Previously, `check_heteroscedasticity()` worked for linear

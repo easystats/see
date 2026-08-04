@@ -43,7 +43,8 @@ distribution of simulated draws is narrow for some parameters, this may
 result in very flat density-areas. In such cases, set
 \code{normalize_height = FALSE}.}
 
-\item{size_line}{Numeric value specifying size of line geoms.}
+\item{size_line}{Numeric value specifying size of line geoms. \code{linewidth} is
+an alias for \code{size_line}.}
 
 \item{alpha_posteriors}{Numeric value specifying alpha for the posterior
 distributions.}

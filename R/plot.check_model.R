@@ -54,6 +54,11 @@ plot.see_check_model <- function(
   show_dots <- .default_value(x, "show_dots", TRUE)
   ppc_range <- .default_value(x, "ppc_range")
 
+  # handle alias
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   # Check for Confidence Intervals: Backwards compatibility for older package
   # versions
   show_ci <- !isFALSE(attr(x, "show_ci"))

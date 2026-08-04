@@ -34,6 +34,12 @@ plot.see_check_heteroscedasticity <- function(
     model <- data
   }
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   ## TODO: this code, which returns scaled (Pearson) residuals, is
   #        a duplicate and also present in the performance package.
   #        we should think about refactoring and move this to

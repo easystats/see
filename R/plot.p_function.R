@@ -44,6 +44,12 @@ plot.see_p_function <- function(
   # data for vertical CI level lines
   data_ci_segments <- x
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   # remove intercept?
   data_ribbon <- .remove_intercept(data_ribbon, show_intercept = show_intercept)
   data_ci_segments <- .remove_intercept(

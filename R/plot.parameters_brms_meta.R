@@ -169,6 +169,12 @@ plot.see_parameters_brms_meta <- function(
     }
   )
 
+  # handle alias
+  dots <- list(...)
+  if (!is.null(dots[["linewidth"]])) {
+    size_line <- dots[["linewidth"]]
+  }
+
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = model, normalize_height = normalize_height, ...)
   }
