@@ -34,6 +34,12 @@ plot.see_check_heteroscedasticity <- function(
     model <- data
   }
 
+  ## TODO: this code, which returns scaled (Pearson) residuals, is
+  #        a duplicate and also present in the performance package.
+  #        we should think about refactoring and move this to
+  #        `insight::get_residuals()`, adding a `standardize` argument. We
+  #        could then. e.g., call `get_residuals(type = "pearson", standardized = TRUE)`
+
   faminfo <- insight::model_info(model)
   r <- tryCatch(
     if (inherits(model, "merMod")) {
@@ -112,12 +118,12 @@ plot.see_check_heteroscedasticity <- function(
   ) {
     return(1)
   }
-  betad <- model$fit$par["betad"]
+  betadisp <- model$fit$par["betadisp"]
 
   switch(
     faminfo$family,
-    gaussian = exp(0.5 * betad),
-    Gamma = exp(-0.5 * betad),
-    exp(betad)
+    gaussian = exp(0.5 * betadisp),
+    Gamma = exp(-0.5 * betadisp),
+    exp(betadisp)
   )
 }
