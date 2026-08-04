@@ -26,6 +26,9 @@
 - **Jeffrey R. Stevens**. Contributor.
   [](https://orcid.org/0000-0003-2375-1360)
 
+- **Julius Bogomolovas**. Contributor.
+  [](https://orcid.org/0000-0001-8344-1909)
+
 - **Matthew Smith**. Reviewer.
 
 - **Jakob Bossek**. Reviewer.
