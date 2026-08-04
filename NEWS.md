@@ -5,6 +5,10 @@
 * Argument `linewidth` was renamed to `size_line`, to be consistent across the
   easystats-ecosystem.
 
+* `plot()` for `check_heteroscedasticity()` now works for GLM's and models from
+  package *glmmTMB*. Previously, `check_heteroscedasticity()` worked for linear
+  models only.
+
 ## Bug fixes
 
 * `plot()` for `check_heteroscedasticity()` now uses Pearson residuals for
