@@ -20,7 +20,8 @@ plot(x, size_line = 1, ...)
 
 - size_line:
 
-  Numeric value specifying size of line geoms.
+  Numeric value specifying size of line geoms. `linewidth` is an alias
+  for `size_line`.
 
 - ...:
 

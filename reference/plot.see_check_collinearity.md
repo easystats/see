@@ -50,7 +50,8 @@ plot(
 
 - size_line:
 
-  Numeric value specifying size of line geoms.
+  Numeric value specifying size of line geoms. `linewidth` is an alias
+  for `size_line`.
 
 - base_size, size_axis_title, size_title:
 
