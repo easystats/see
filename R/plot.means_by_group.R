@@ -38,6 +38,11 @@ plot.see_dw_groupmeans <- function(
 
   trimmed <- x[x$Category != "Total", ]
 
+  trimmed$Category <- factor(
+    trimmed$Category,
+    levels = unique(trimmed$Category)
+  )
+  
   p <- ggplot2::ggplot(
     trimmed,
     ggplot2::aes(x = .data$Category, y = .data$Mean)
@@ -98,8 +103,11 @@ plot.see_dw_groupmeans_list <- function(
   })
 
   x_long <- do.call(rbind, x)
-  trimmed <- trimmed <- x_long[x_long$Category != "Total", ]
-
+  trimmed <- x_long[x_long$Category != "Total", ]
+  trimmed$Category <- factor(
+    trimmed$Category,
+    levels = unique(trimmed$Category)
+  )
   p <- ggplot2::ggplot(
     trimmed,
     ggplot2::aes(x = .data$Category, y = .data$Mean)
