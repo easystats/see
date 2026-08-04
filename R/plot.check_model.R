@@ -152,7 +152,6 @@ plot.see_check_model <- function(
 
   # Binned Residuals
   if (.should_plot(x, check, "BINNED_RESID", "binned_residuals")) {
-    x$HOMOGENEITY <- NULL # Prevent conflict with standard homogeneity plot
     fun_args <- c(
       list(x$BINNED_RESID),
       common_args,
