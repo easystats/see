@@ -130,5 +130,5 @@ Config/testthat/edition: 3
 Config/testthat/parallel: false
 Config/Needs/website: easystats/easystatstemplate
 Config/rcmdcheck/ignore-inconsequential-notes: true
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
 Remotes: easystats/datawizard
