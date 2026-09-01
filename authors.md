@@ -36,7 +36,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/easystats/see/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/easystats/see/blob/v0.14.2/inst/CITATION)
 
 Lüdecke et al., (2021). see: An R Package for Visualizing Statistical
 Models. Journal of Open Source Software, 6(64), 3393.
