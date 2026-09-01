@@ -1,3 +1,4 @@
 # License
 
-YEAR: 2023 COPYRIGHT HOLDER: see authors
+YEAR: 2023\
+COPYRIGHT HOLDER: see authors\

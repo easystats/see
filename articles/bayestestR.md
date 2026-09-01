@@ -2,7 +2,26 @@
 
 This vignette can be referred to by citing the package:
 
-[`citation`](https://rdrr.io/r/utils/citation.html)`(``"see"``)`` ``#> To cite package 'see' in publications use:`` ``#> `` ``#> Lüdecke et al., (2021). see: An R Package for Visualizing Statistical`` ``#> Models. Journal of Open Source Software, 6(64), 3393.`` ``#> https://doi.org/10.21105/joss.03393`` ``#> `` ``#> A BibTeX entry for LaTeX users is`` ``#> `` ``#> @Article{,`` ``#> title = {{see}: An {R} Package for Visualizing Statistical Models},`` ``#> author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},`` ``#> journal = {Journal of Open Source Software},`` ``#> year = {2021},`` ``#> volume = {6},`` ``#> number = {64},`` ``#> pages = {3393},`` ``#> doi = {10.21105/joss.03393},`` ``#> }`
+\
+[`citation`](https://rdrr.io/r/utils/citation.html)`(``"see"``)`\
+`#> To cite package 'see' in publications use:`\
+`#> `\
+`#>   Lüdecke et al., (2021). see: An R Package for Visualizing Statistical`\
+`#>   Models. Journal of Open Source Software, 6(64), 3393.`\
+`#>   https://doi.org/10.21105/joss.03393`\
+`#> `\
+`#> A BibTeX entry for LaTeX users is`\
+`#> `\
+`#>   @Article{,`\
+`#>     title = {{see}: An {R} Package for Visualizing Statistical Models},`\
+`#>     author = {Daniel Lüdecke and Indrajeet Patil and Mattan S. Ben-Shachar and Brenton M. Wiernik and Philip Waggoner and Dominique Makowski},`\
+`#>     journal = {Journal of Open Source Software},`\
+`#>     year = {2021},`\
+`#>     volume = {6},`\
+`#>     number = {64},`\
+`#>     pages = {3393},`\
+`#>     doi = {10.21105/joss.03393},`\
+`#>   }`
 
 ------------------------------------------------------------------------
 
@@ -21,9 +40,23 @@ For more, see: <https://easystats.github.io/bayestestR/>
 
 ## Setup and Model Fitting
 
-[`library`](https://rdrr.io/r/base/library.html)`(`[`bayestestR`](https://easystats.github.io/bayestestR/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`insight`](https://easystats.github.io/insight/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`performance`](https://easystats.github.io/performance/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`rstanarm`](https://mc-stan.org/rstanarm/)`)`` `[`library`](https://rdrr.io/r/base/library.html)`(`[`ggplot2`](https://ggplot2.tidyverse.org)`)`` `` `[`theme_set`](https://ggplot2.tidyverse.org/reference/get_theme.html)`(`[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)``)`
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`bayestestR`](https://easystats.github.io/bayestestR/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`insight`](https://easystats.github.io/insight/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`performance`](https://easystats.github.io/performance/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`see`](https://easystats.github.io/see/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`rstanarm`](https://mc-stan.org/rstanarm/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`ggplot2`](https://ggplot2.tidyverse.org)`)`\
+\
+[`theme_set`](https://ggplot2.tidyverse.org/reference/get_theme.html)`(`[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)``)`
 
-[`set.seed`](https://rdrr.io/r/base/Random.html)`(``123``)`` ``# model with fixed effects only`` ``model`` ``<<-`` ``rstanarm``::`[`stan_glm`](https://mc-stan.org/rstanarm/reference/stan_glm.html)`(``Sepal.Length`` ``~`` ``Petal.Width`` ``*`` ``Species``, data ``=`` ``iris``, refresh ``=`` ``0``)`` `` ``# model with fixed and random effects as well as zero-inflation component`` ``model2`` ``<<-`` ``insight``::`[`download_model`](https://easystats.github.io/insight/reference/download_model.html)`(``"brms_zi_3"``)`
+\
+[`set.seed`](https://rdrr.io/r/base/Random.html)`(``123``)`\
+`# model with fixed effects only`\
+`model`` ``<<-`` ``rstanarm``::`[`stan_glm`](https://mc-stan.org/rstanarm/reference/stan_glm.html)`(``Sepal.Length`` ``~`` ``Petal.Width`` ``*`` ``Species``, data ``=`` ``iris``, refresh ``=`` ``0``)`\
+\
+`# model with fixed and random effects as well as zero-inflation component`\
+`model2`` ``<<-`` ``insight``::`[`download_model`](https://easystats.github.io/insight/reference/download_model.html)`(``"brms_zi_3"``)`
 
 ## Density Estimation
 
@@ -36,13 +69,17 @@ i.e. posterior interval estimates from MCMC draws.
 
 By default, all distributions are “stacked”, i.e. overlaying each other.
 
-`result`` ``<-`` `[`estimate_density`](https://easystats.github.io/bayestestR/reference/estimate_density.html)`(``model``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
+\
+`result`` ``<-`` `[`estimate_density`](https://easystats.github.io/bayestestR/reference/estimate_density.html)`(``model``)`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-4-1.png)
 
 To get ridge lines separated by parameters, use `stack = FALSE`.
 
-[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, stack ``=`` ``FALSE``)`
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, stack ``=`` ``FALSE``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-5-1.png)
 
@@ -51,7 +88,8 @@ To get ridge lines separated by parameters, use `stack = FALSE`.
 For many plots, when the model has defined priors, you can add a layer
 from the prior distribution for the parameters with `priors = TRUE`.
 
-[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, stack ``=`` ``FALSE``, priors ``=`` ``TRUE``)`
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, stack ``=`` ``FALSE``, priors ``=`` ``TRUE``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-6-1.png)
 
@@ -66,7 +104,9 @@ which internally calls
 [`estimate_density()`](https://easystats.github.io/bayestestR/reference/estimate_density.html)
 and [`plot()`](https://rdrr.io/r/graphics/plot.default.html):
 
-`result`` ``<-`` `[`describe_posterior`](https://easystats.github.io/bayestestR/reference/describe_posterior.html)`(``model``)`` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
+\
+`result`` ``<-`` `[`describe_posterior`](https://easystats.github.io/bayestestR/reference/describe_posterior.html)`(``model``)`\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-7-1.png)
 
@@ -86,7 +126,22 @@ distribution that is of the median’s sign. Although differently
 expressed, this index is fairly similar (i.e., is strongly correlated)
 to the frequentist p-value
 
-`result`` ``<-`` `[`p_direction`](https://easystats.github.io/bayestestR/reference/p_direction.html)`(``model``)`` `` ``result`` ``#> Probability of Direction`` ``#> `` ``#> Parameter | pd`` ``#> --------------------------------------`` ``#> (Intercept) | 100%`` ``#> Petal.Width | 92.97%`` ``#> Speciesversicolor | 94.08%`` ``#> Speciesvirginica | 80.53%`` ``#> Petal.Width:Speciesversicolor | 79.20%`` ``#> Petal.Width:Speciesvirginica | 62.60%`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
+\
+`result`` ``<-`` `[`p_direction`](https://easystats.github.io/bayestestR/reference/p_direction.html)`(``model``)`\
+\
+`result`\
+`#> Probability of Direction`\
+`#> `\
+`#> Parameter                     |     pd`\
+`#> --------------------------------------`\
+`#> (Intercept)                   |   100%`\
+`#> Petal.Width                   | 92.97%`\
+`#> Speciesversicolor             | 94.08%`\
+`#> Speciesvirginica              | 80.53%`\
+`#> Petal.Width:Speciesversicolor | 79.20%`\
+`#> Petal.Width:Speciesvirginica  | 62.60%`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-8-1.png)
 
@@ -94,17 +149,52 @@ For more complex models with different components, each component is
 displayed in a separate facet. Use `n_columns` to define the layout,
 i.e. how many columns are used to display the facets.
 
-`result`` ``<-`` `[`p_direction`](https://easystats.github.io/bayestestR/reference/p_direction.html)`(``model2``, effects ``=`` ``"all"``, component ``=`` ``"all"``)`` `` ``result`` ``#> Probability of Direction`` ``#> `` ``#> Parameter | pd`` ``#> --------------------`` ``#> (Intercept) | 90.00%`` ``#> child | 100%`` ``#> camper | 100%`` ``#> `` ``#> # Fixed effects (zero-inflated)`` ``#> `` ``#> Parameter | pd`` ``#> --------------------`` ``#> (Intercept) | 78.00%`` ``#> child | 100%`` ``#> camper | 98.40%`` ``#> `` ``#> # Random effects (conditional) (SD/Cor: persons)`` ``#> `` ``#> Parameter | pd`` ``#> ------------------`` ``#> (Intercept) | 100%`` ``#> `` ``#> # Random effects (zero-inflated) (SD/Cor: persons)`` ``#> `` ``#> Parameter | pd`` ``#> ------------------`` ``#> (Intercept) | 100%`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
+\
+`result`` ``<-`` `[`p_direction`](https://easystats.github.io/bayestestR/reference/p_direction.html)`(``model2``, effects ``=`` ``"all"``, component ``=`` ``"all"``)`\
+\
+`result`\
+`#> Probability of Direction`\
+`#> `\
+`#> Parameter   |     pd`\
+`#> --------------------`\
+`#> (Intercept) | 90.00%`\
+`#> child       |   100%`\
+`#> camper      |   100%`\
+`#> `\
+`#> # Fixed effects (zero-inflated)`\
+`#> `\
+`#> Parameter   |     pd`\
+`#> --------------------`\
+`#> (Intercept) | 78.00%`\
+`#> child       |   100%`\
+`#> camper      | 98.40%`\
+`#> `\
+`#> # Random effects (conditional) (SD/Cor: persons)`\
+`#> `\
+`#> Parameter   |   pd`\
+`#> ------------------`\
+`#> (Intercept) | 100%`\
+`#> `\
+`#> # Random effects (zero-inflated) (SD/Cor: persons)`\
+`#> `\
+`#> Parameter   |   pd`\
+`#> ------------------`\
+`#> (Intercept) | 100%`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-9-1.png)
 
-[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``NULL``)`
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``NULL``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-9-2.png)
 
 ### Adding Prior Samples
 
-`result`` ``<-`` `[`p_direction`](https://easystats.github.io/bayestestR/reference/p_direction.html)`(``model``)`` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, priors ``=`` ``TRUE``)`
+\
+`result`` ``<-`` `[`p_direction`](https://easystats.github.io/bayestestR/reference/p_direction.html)`(``model``)`\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, priors ``=`` ``TRUE``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-10-1.png)
 
@@ -121,21 +211,71 @@ in the median’s direction.
 Mathematically, it is defined as the proportion of the posterior
 distribution of the median sign above the threshold.
 
-`result`` ``<-`` `[`p_significance`](https://easystats.github.io/bayestestR/reference/p_significance.html)`(``model``)`` `` ``result`` ``#> Practical Significance (threshold: 0.08)`` ``#> `` ``#> Parameter | ps`` ``#> ------------------------------------`` ``#> (Intercept) | 1.00`` ``#> Petal.Width | 0.91`` ``#> Speciesversicolor | 0.92`` ``#> Speciesvirginica | 0.76`` ``#> Petal.Width:Speciesversicolor | 0.76`` ``#> Petal.Width:Speciesvirginica | 0.57`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
+\
+`result`` ``<-`` `[`p_significance`](https://easystats.github.io/bayestestR/reference/p_significance.html)`(``model``)`\
+\
+`result`\
+`#> Practical Significance (threshold: 0.08)`\
+`#> `\
+`#> Parameter                     |   ps`\
+`#> ------------------------------------`\
+`#> (Intercept)                   | 1.00`\
+`#> Petal.Width                   | 0.91`\
+`#> Speciesversicolor             | 0.92`\
+`#> Speciesvirginica              | 0.76`\
+`#> Petal.Width:Speciesversicolor | 0.76`\
+`#> Petal.Width:Speciesvirginica  | 0.57`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-11-1.png)
 
-`result`` ``<-`` `[`p_significance`](https://easystats.github.io/bayestestR/reference/p_significance.html)`(``model2``, effects ``=`` ``"all"``, component ``=`` ``"all"``, verbose ``=`` ``FALSE``)`` `` ``result`` ``#> Practical Significance (threshold: 0.10)`` ``#> `` ``#> Parameter | ps`` ``#> ------------------`` ``#> (Intercept) | 0.88`` ``#> child | 1.00`` ``#> camper | 1.00`` ``#> `` ``#> # Fixed effects (zero-inflated)`` ``#> `` ``#> Parameter | ps`` ``#> ------------------`` ``#> (Intercept) | 0.73`` ``#> child | 1.00`` ``#> camper | 0.96`` ``#> `` ``#> # Random effects (conditional) (SD/Cor: persons)`` ``#> `` ``#> Parameter | ps`` ``#> ------------------`` ``#> (Intercept) | 1.00`` ``#> `` ``#> # Random effects (zero-inflated) (SD/Cor: persons)`` ``#> `` ``#> Parameter | ps`` ``#> ------------------`` ``#> (Intercept) | 1.00`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
+\
+`result`` ``<-`` `[`p_significance`](https://easystats.github.io/bayestestR/reference/p_significance.html)`(``model2``, effects ``=`` ``"all"``, component ``=`` ``"all"``, verbose ``=`` ``FALSE``)`\
+\
+`result`\
+`#> Practical Significance (threshold: 0.10)`\
+`#> `\
+`#> Parameter   |   ps`\
+`#> ------------------`\
+`#> (Intercept) | 0.88`\
+`#> child       | 1.00`\
+`#> camper      | 1.00`\
+`#> `\
+`#> # Fixed effects (zero-inflated)`\
+`#> `\
+`#> Parameter   |   ps`\
+`#> ------------------`\
+`#> (Intercept) | 0.73`\
+`#> child       | 1.00`\
+`#> camper      | 0.96`\
+`#> `\
+`#> # Random effects (conditional) (SD/Cor: persons)`\
+`#> `\
+`#> Parameter   |   ps`\
+`#> ------------------`\
+`#> (Intercept) | 1.00`\
+`#> `\
+`#> # Random effects (zero-inflated) (SD/Cor: persons)`\
+`#> `\
+`#> Parameter   |   ps`\
+`#> ------------------`\
+`#> (Intercept) | 1.00`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-12-1.png)
 
-[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``NULL``)`
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``NULL``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-12-2.png)
 
 ### Adding Prior Samples
 
-`result`` ``<-`` `[`p_significance`](https://easystats.github.io/bayestestR/reference/p_significance.html)`(``model``)`` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, priors ``=`` ``TRUE``)`
+\
+`result`` ``<-`` `[`p_significance`](https://easystats.github.io/bayestestR/reference/p_significance.html)`(``model``)`\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, priors ``=`` ``TRUE``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-13-1.png)
 
@@ -151,17 +291,49 @@ MAP, to describe posterior distributions. The
 the posterior distribution of related parameters and emphasizes the
 point estimate within the plot.
 
-`result`` ``<-`` `[`point_estimate`](https://easystats.github.io/bayestestR/reference/point_estimate.html)`(``model``)`` `` ``result`` ``#> Point Estimate`` ``#> `` ``#> Parameter | Median | Mean | MAP`` ``#> ------------------------------------------------------`` ``#> (Intercept) | 4.79 | 4.79 | 4.79`` ``#> Petal.Width | 0.86 | 0.87 | 0.82`` ``#> Speciesversicolor | -0.74 | -0.73 | -0.76`` ``#> Speciesvirginica | 0.46 | 0.46 | 0.55`` ``#> Petal.Width:Speciesversicolor | 0.55 | 0.54 | 0.56`` ``#> Petal.Width:Speciesvirginica | -0.20 | -0.21 | -0.17`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
+\
+`result`` ``<-`` `[`point_estimate`](https://easystats.github.io/bayestestR/reference/point_estimate.html)`(``model``)`\
+\
+`result`\
+`#> Point Estimate`\
+`#> `\
+`#> Parameter                     | Median |  Mean |   MAP`\
+`#> ------------------------------------------------------`\
+`#> (Intercept)                   |   4.79 |  4.79 |  4.79`\
+`#> Petal.Width                   |   0.86 |  0.87 |  0.82`\
+`#> Speciesversicolor             |  -0.74 | -0.73 | -0.76`\
+`#> Speciesvirginica              |   0.46 |  0.46 |  0.55`\
+`#> Petal.Width:Speciesversicolor |   0.55 |  0.54 |  0.56`\
+`#> Petal.Width:Speciesvirginica  |  -0.20 | -0.21 | -0.17`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-14-1.png)
 
-`result`` ``<-`` `[`point_estimate`](https://easystats.github.io/bayestestR/reference/point_estimate.html)`(``model``, centrality ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"map"``, ``"mean"``)``)`` `` ``result`` ``#> Point Estimate`` ``#> `` ``#> Parameter | Mean | MAP`` ``#> ---------------------------------------------`` ``#> (Intercept) | 4.79 | 4.79`` ``#> Petal.Width | 0.87 | 0.82`` ``#> Speciesversicolor | -0.73 | -0.76`` ``#> Speciesvirginica | 0.46 | 0.55`` ``#> Petal.Width:Speciesversicolor | 0.54 | 0.56`` ``#> Petal.Width:Speciesvirginica | -0.21 | -0.17`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, panel ``=`` ``FALSE``)``[[``2``]``]`
+\
+`result`` ``<-`` `[`point_estimate`](https://easystats.github.io/bayestestR/reference/point_estimate.html)`(``model``, centrality ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"map"``, ``"mean"``)``)`\
+\
+`result`\
+`#> Point Estimate`\
+`#> `\
+`#> Parameter                     |  Mean |   MAP`\
+`#> ---------------------------------------------`\
+`#> (Intercept)                   |  4.79 |  4.79`\
+`#> Petal.Width                   |  0.87 |  0.82`\
+`#> Speciesversicolor             | -0.73 | -0.76`\
+`#> Speciesvirginica              |  0.46 |  0.55`\
+`#> Petal.Width:Speciesversicolor |  0.54 |  0.56`\
+`#> Petal.Width:Speciesvirginica  | -0.21 | -0.17`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, panel ``=`` ``FALSE``)``[[``2``]``]`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-15-1.png)
 
 ### Adding Prior Samples
 
-`result`` ``<-`` `[`point_estimate`](https://easystats.github.io/bayestestR/reference/point_estimate.html)`(``model``)`` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, priors ``=`` ``TRUE``)`
+\
+`result`` ``<-`` `[`point_estimate`](https://easystats.github.io/bayestestR/reference/point_estimate.html)`(``model``)`\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, priors ``=`` ``TRUE``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-16-1.png)
 
@@ -178,15 +350,34 @@ points outside the interval.
 The HDI can be used in the context of uncertainty characterisation of
 posterior distributions as Credible Interval (CI).
 
-`result`` ``<-`` `[`hdi`](https://easystats.github.io/bayestestR/reference/hdi.html)`(``model``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.5``, ``0.75``, ``0.89``, ``0.95``)``)`` `` ``result`` ``#> Highest Density Interval`` ``#> `` ``#> Parameter | 50% HDI | 75% HDI | 89% HDI | 95% HDI`` ``#> -----------------------------------------------------------------------------------------------`` ``#> (Intercept) | [ 4.69, 4.91] | [ 4.62, 4.98] | [ 4.53, 5.05] | [ 4.48, 5.11]`` ``#> Petal.Width | [ 0.53, 1.33] | [ 0.22, 1.58] | [-0.09, 1.82] | [-0.25, 2.10]`` ``#> Speciesversicolor | [-1.03, -0.40] | [-1.32, -0.25] | [-1.44, 0.04] | [-1.66, 0.20]`` ``#> Speciesvirginica | [ 0.08, 0.80] | [-0.19, 1.04] | [-0.37, 1.31] | [-0.58, 1.47]`` ``#> Petal.Width:Speciesversicolor | [ 0.04, 0.93] | [-0.25, 1.30] | [-0.53, 1.59] | [-0.78, 1.81]`` ``#> Petal.Width:Speciesvirginica | [-0.53, 0.31] | [-0.91, 0.54] | [-1.18, 0.85] | [-1.41, 1.08]`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`` `[`scale_fill_flat`](https://easystats.github.io/see/reference/scale_color_flat.md)`(``)`
+\
+`result`` ``<-`` `[`hdi`](https://easystats.github.io/bayestestR/reference/hdi.html)`(``model``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.5``, ``0.75``, ``0.89``, ``0.95``)``)`\
+\
+`result`\
+`#> Highest Density Interval`\
+`#> `\
+`#> Parameter                     |        50% HDI |        75% HDI |       89% HDI |       95% HDI`\
+`#> -----------------------------------------------------------------------------------------------`\
+`#> (Intercept)                   | [ 4.69,  4.91] | [ 4.62,  4.98] | [ 4.53, 5.05] | [ 4.48, 5.11]`\
+`#> Petal.Width                   | [ 0.53,  1.33] | [ 0.22,  1.58] | [-0.09, 1.82] | [-0.25, 2.10]`\
+`#> Speciesversicolor             | [-1.03, -0.40] | [-1.32, -0.25] | [-1.44, 0.04] | [-1.66, 0.20]`\
+`#> Speciesvirginica              | [ 0.08,  0.80] | [-0.19,  1.04] | [-0.37, 1.31] | [-0.58, 1.47]`\
+`#> Petal.Width:Speciesversicolor | [ 0.04,  0.93] | [-0.25,  1.30] | [-0.53, 1.59] | [-0.78, 1.81]`\
+`#> Petal.Width:Speciesvirginica  | [-0.53,  0.31] | [-0.91,  0.54] | [-1.18, 0.85] | [-1.41, 1.08]`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`` `[`scale_fill_flat`](https://easystats.github.io/see/reference/scale_color_flat.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-17-1.png)
 
-`result`` ``<-`` `[`hdi`](https://easystats.github.io/bayestestR/reference/hdi.html)`(``model2``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.5``, ``0.75``, ``0.89``)``, effects ``=`` ``"all"``, component ``=`` ``"all"``)`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``2``)`` ``+`` `[`scale_fill_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``)`
+\
+`result`` ``<-`` `[`hdi`](https://easystats.github.io/bayestestR/reference/hdi.html)`(``model2``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.5``, ``0.75``, ``0.89``)``, effects ``=`` ``"all"``, component ``=`` ``"all"``)`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``2``)`` ``+`` `[`scale_fill_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-18-1.png)
 
-[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``NULL``)`` ``+`` `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``NULL``)`` ``+`` `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-18-2.png)
 
@@ -201,11 +392,33 @@ results in a plot presenting the prior and posterior distributions for
 each parameter (note that by default `show_intercept = FALSE`). The
 support interval will be denoted by a shaded border.
 
-[`library`](https://rdrr.io/r/base/library.html)`(``logspline``)`` ``` # needed for `si()` ``` `` ``result`` ``<-`` `[`si`](https://easystats.github.io/bayestestR/reference/si.html)`(``model``, verbose ``=`` ``FALSE``)`` ``result`` ``#> Support Interval`` ``#> `` ``#> Parameter | BF = 1 SI | Effects | Component`` ``#> ---------------------------------------------------------------------`` ``#> (Intercept) | [ 4.39, 5.18] | fixed | conditional`` ``#> Petal.Width | [-0.16, 2.00] | fixed | conditional`` ``#> Speciesversicolor | [-1.68, 0.21] | fixed | conditional`` ``#> Speciesvirginica | [-0.59, 1.54] | fixed | conditional`` ``#> Petal.Width:Speciesversicolor | [-0.61, 1.73] | fixed | conditional`` ``#> Petal.Width:Speciesvirginica | [-1.27, 0.77] | fixed | conditional`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`` `` `[`scale_color_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`` ``+`` `` `[`scale_fill_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`
+\
+[`library`](https://rdrr.io/r/base/library.html)`(``logspline``)`` ``` # needed for `si()` ``\
+\
+`result`` ``<-`` `[`si`](https://easystats.github.io/bayestestR/reference/si.html)`(``model``, verbose ``=`` ``FALSE``)`\
+`result`\
+`#> Support Interval`\
+`#> `\
+`#> Parameter                     |     BF = 1 SI | Effects |   Component`\
+`#> ---------------------------------------------------------------------`\
+`#> (Intercept)                   | [ 4.39, 5.18] |   fixed | conditional`\
+`#> Petal.Width                   | [-0.16, 2.00] |   fixed | conditional`\
+`#> Speciesversicolor             | [-1.68, 0.21] |   fixed | conditional`\
+`#> Speciesvirginica              | [-0.59, 1.54] |   fixed | conditional`\
+`#> Petal.Width:Speciesversicolor | [-0.61, 1.73] |   fixed | conditional`\
+`#> Petal.Width:Speciesvirginica  | [-1.27, 0.77] |   fixed | conditional`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`\
+`  `[`scale_color_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`` ``+`\
+`  `[`scale_fill_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-19-1.png)
 
-` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, support_only ``=`` ``TRUE``)`` ``+`` `` `[`scale_color_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`` ``+`` `` `[`scale_fill_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`
+\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, support_only ``=`` ``TRUE``)`` ``+`\
+`  `[`scale_color_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`` ``+`\
+`  `[`scale_fill_metro`](https://easystats.github.io/see/reference/scale_color_metro.md)`(``palette ``=`` ``"ice"``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-19-2.png)
 
@@ -225,11 +438,109 @@ posterior distributions, coloring different HDI levels, and adds a
 “rope” region to the plot that indicates which portion of the posterior
 distributions lies inside (and outside) the ROPE.
 
-`result`` ``<-`` `[`rope`](https://easystats.github.io/bayestestR/reference/rope.html)`(``model``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.9``, ``0.95``)``)`` `` ``result`` ``#> # Proportions of samples inside the ROPE [-0.08, 0.08]:`` ``#> `` ``#> ROPE for the 90% HDI:`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> -------------------------------------------`` ``#> (Intercept) | 0.00 %`` ``#> Petal.Width | 4.11 %`` ``#> Speciesversicolor | 3.86 %`` ``#> Speciesvirginica | 8.97 %`` ``#> Petal.Width:Speciesversicolor | 7.17 %`` ``#> Petal.Width:Speciesvirginica | 11.33 %`` ``#> `` ``#> `` ``#> ROPE for the 95% HDI:`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> -------------------------------------------`` ``#> (Intercept) | 0.00 %`` ``#> Petal.Width | 3.89 %`` ``#> Speciesversicolor | 4.63 %`` ``#> Speciesvirginica | 8.50 %`` ``#> Petal.Width:Speciesversicolor | 6.79 %`` ``#> Petal.Width:Speciesvirginica | 10.74 %`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, rope_color ``=`` ``"red"``)`` ``+`` `` `[`scale_fill_brewer`](https://ggplot2.tidyverse.org/reference/scale_brewer.html)`(``palette ``=`` ``"Greens"``, direction ``=`` ``-``1``)`
+\
+`result`` ``<-`` `[`rope`](https://easystats.github.io/bayestestR/reference/rope.html)`(``model``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.9``, ``0.95``)``)`\
+\
+`result`\
+`#> # Proportions of samples inside the ROPE [-0.08, 0.08]:`\
+`#> `\
+`#> ROPE for the 90% HDI:`\
+`#> `\
+`#> Parameter                     | Inside ROPE`\
+`#> -------------------------------------------`\
+`#> (Intercept)                   |      0.00 %`\
+`#> Petal.Width                   |      4.11 %`\
+`#> Speciesversicolor             |      3.86 %`\
+`#> Speciesvirginica              |      8.97 %`\
+`#> Petal.Width:Speciesversicolor |      7.17 %`\
+`#> Petal.Width:Speciesvirginica  |     11.33 %`\
+`#> `\
+`#> `\
+`#> ROPE for the 95% HDI:`\
+`#> `\
+`#> Parameter                     | Inside ROPE`\
+`#> -------------------------------------------`\
+`#> (Intercept)                   |      0.00 %`\
+`#> Petal.Width                   |      3.89 %`\
+`#> Speciesversicolor             |      4.63 %`\
+`#> Speciesvirginica              |      8.50 %`\
+`#> Petal.Width:Speciesversicolor |      6.79 %`\
+`#> Petal.Width:Speciesvirginica  |     10.74 %`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, rope_color ``=`` ``"red"``)`` ``+`\
+`  `[`scale_fill_brewer`](https://ggplot2.tidyverse.org/reference/scale_brewer.html)`(``palette ``=`` ``"Greens"``, direction ``=`` ``-``1``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-20-1.png)
 
-`result`` ``<-`` `[`rope`](https://easystats.github.io/bayestestR/reference/rope.html)`(``model2``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.9``, ``0.95``)``, effects ``=`` ``"all"``, component ``=`` ``"all"``, verbose ``=`` ``FALSE``)`` `` ``result`` ``#> # Proportions of samples inside the ROPE [-0.10, 0.10]:`` ``#> `` ``#> ROPE for the 90% HDI:`` ``#> `` ``#> # Fixed Effects (Conditional Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> -----------------------`` ``#> Intercept | 2.68 %`` ``#> child | 0.00 %`` ``#> camper | 0.00 %`` ``#> `` ``#> # Fixed Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> -----------------------`` ``#> Intercept | 11.16 %`` ``#> child | 0.00 %`` ``#> camper | 0.00 %`` ``#> `` ``#> # Random Effects (Conditional Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> ------------------------------------`` ``#> SD persons (Intercept) | 0.00 %`` ``#> `` ``#> # Random Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> ------------------------------------`` ``#> SD persons (Intercept) | 0.00 %`` ``#> `` ``#> `` ``#> ROPE for the 95% HDI:`` ``#> `` ``#> # Fixed Effects (Conditional Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> -----------------------`` ``#> Intercept | 2.54 %`` ``#> child | 0.00 %`` ``#> camper | 0.00 %`` ``#> `` ``#> # Fixed Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> -----------------------`` ``#> Intercept | 10.59 %`` ``#> child | 0.00 %`` ``#> camper | 0.85 %`` ``#> `` ``#> # Random Effects (Conditional Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> ------------------------------------`` ``#> SD persons (Intercept) | 0.00 %`` ``#> `` ``#> # Random Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | Inside ROPE`` ``#> ------------------------------------`` ``#> SD persons (Intercept) | 0.00 %`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, rope_color ``=`` ``"grey70"``)`` ``+`` `` `[`scale_fill_social`](https://easystats.github.io/see/reference/scale_color_social.md)`(``)`
+\
+`result`` ``<-`` `[`rope`](https://easystats.github.io/bayestestR/reference/rope.html)`(``model2``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.9``, ``0.95``)``, effects ``=`` ``"all"``, component ``=`` ``"all"``, verbose ``=`` ``FALSE``)`\
+\
+`result`\
+`#> # Proportions of samples inside the ROPE [-0.10, 0.10]:`\
+`#> `\
+`#> ROPE for the 90% HDI:`\
+`#> `\
+`#> # Fixed Effects (Conditional Model)`\
+`#> `\
+`#> Parameter | Inside ROPE`\
+`#> -----------------------`\
+`#> Intercept |      2.68 %`\
+`#> child     |      0.00 %`\
+`#> camper    |      0.00 %`\
+`#> `\
+`#> # Fixed Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter | Inside ROPE`\
+`#> -----------------------`\
+`#> Intercept |     11.16 %`\
+`#> child     |      0.00 %`\
+`#> camper    |      0.00 %`\
+`#> `\
+`#> # Random Effects (Conditional Model)`\
+`#> `\
+`#> Parameter              | Inside ROPE`\
+`#> ------------------------------------`\
+`#> SD persons (Intercept) |      0.00 %`\
+`#> `\
+`#> # Random Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter              | Inside ROPE`\
+`#> ------------------------------------`\
+`#> SD persons (Intercept) |      0.00 %`\
+`#> `\
+`#> `\
+`#> ROPE for the 95% HDI:`\
+`#> `\
+`#> # Fixed Effects (Conditional Model)`\
+`#> `\
+`#> Parameter | Inside ROPE`\
+`#> -----------------------`\
+`#> Intercept |      2.54 %`\
+`#> child     |      0.00 %`\
+`#> camper    |      0.00 %`\
+`#> `\
+`#> # Fixed Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter | Inside ROPE`\
+`#> -----------------------`\
+`#> Intercept |     10.59 %`\
+`#> child     |      0.00 %`\
+`#> camper    |      0.85 %`\
+`#> `\
+`#> # Random Effects (Conditional Model)`\
+`#> `\
+`#> Parameter              | Inside ROPE`\
+`#> ------------------------------------`\
+`#> SD persons (Intercept) |      0.00 %`\
+`#> `\
+`#> # Random Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter              | Inside ROPE`\
+`#> ------------------------------------`\
+`#> SD persons (Intercept) |      0.00 %`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, rope_color ``=`` ``"grey70"``)`` ``+`\
+`  `[`scale_fill_social`](https://easystats.github.io/see/reference/scale_color_social.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-21-1.png)
 
@@ -246,15 +557,134 @@ region (the ROPE). If this percentage is sufficiently low, the null
 hypothesis is rejected. If this percentage is sufficiently high, the
 null hypothesis is accepted.
 
-`result`` ``<-`` `[`equivalence_test`](https://easystats.github.io/bayestestR/reference/equivalence_test.html)`(``model``, verbose ``=`` ``FALSE``)`` `` ``result`` ``#> # Test for Practical Equivalence`` ``#> `` ``#> ROPE: [-0.08 0.08]`` ``#> `` ``#> Parameter | H0 | inside ROPE | 95% HDI`` ``#> -----------------------------------------------------------------------`` ``#> (Intercept) | Rejected | 0.00 % | [4.48, 5.11]`` ``#> Petal.Width | Undecided | 3.89 % | [-0.30, 2.06]`` ``#> Speciesversicolor | Undecided | 4.63 % | [-1.66, 0.20]`` ``#> Speciesvirginica | Undecided | 8.50 % | [-0.56, 1.52]`` ``#> Petal.Width:Speciesversicolor | Undecided | 6.79 % | [-0.75, 1.86]`` ``#> Petal.Width:Speciesvirginica | Undecided | 10.74 % | [-1.49, 1.01]`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`` `` `[`theme_blackboard`](https://easystats.github.io/see/reference/theme_blackboard.md)`(``)`` ``+`` `` `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
+\
+`result`` ``<-`` `[`equivalence_test`](https://easystats.github.io/bayestestR/reference/equivalence_test.html)`(``model``, verbose ``=`` ``FALSE``)`\
+\
+`result`\
+`#> # Test for Practical Equivalence`\
+`#> `\
+`#>   ROPE: [-0.08 0.08]`\
+`#> `\
+`#> Parameter                     |        H0 | inside ROPE |       95% HDI`\
+`#> -----------------------------------------------------------------------`\
+`#> (Intercept)                   |  Rejected |      0.00 % |  [4.48, 5.11]`\
+`#> Petal.Width                   | Undecided |      3.89 % | [-0.30, 2.06]`\
+`#> Speciesversicolor             | Undecided |      4.63 % | [-1.66, 0.20]`\
+`#> Speciesvirginica              | Undecided |      8.50 % | [-0.56, 1.52]`\
+`#> Petal.Width:Speciesversicolor | Undecided |      6.79 % | [-0.75, 1.86]`\
+`#> Petal.Width:Speciesvirginica  | Undecided |     10.74 % | [-1.49, 1.01]`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`\
+`  `[`theme_blackboard`](https://easystats.github.io/see/reference/theme_blackboard.md)`(``)`` ``+`\
+`  `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-22-1.png)
 
-`result`` ``<-`` `[`equivalence_test`](https://easystats.github.io/bayestestR/reference/equivalence_test.html)`(``model``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.89``, ``0.95``)``)`` `` ``result`` ``#> # Test for Practical Equivalence`` ``#> `` ``#> ROPE: [-0.08 0.08]`` ``#> `` ``#> Parameter | H0 | inside ROPE | 89% HDI`` ``#> -----------------------------------------------------------------------`` ``#> (Intercept) | Rejected | 0.00 % | [4.53, 5.06]`` ``#> Petal.Width | Undecided | 4.16 % | [-0.09, 1.83]`` ``#> Speciesversicolor | Undecided | 3.34 % | [-1.48, 0.01]`` ``#> Speciesvirginica | Undecided | 9.07 % | [-0.37, 1.30]`` ``#> Petal.Width:Speciesversicolor | Undecided | 7.25 % | [-0.52, 1.61]`` ``#> Petal.Width:Speciesvirginica | Undecided | 11.46 % | [-1.22, 0.81]`` ``#> `` ``#> `` ``#> Parameter | H0 | inside ROPE | 95% HDI`` ``#> -----------------------------------------------------------------------`` ``#> (Intercept) | Rejected | 0.00 % | [4.48, 5.11]`` ``#> Petal.Width | Undecided | 3.89 % | [-0.30, 2.06]`` ``#> Speciesversicolor | Undecided | 4.63 % | [-1.66, 0.20]`` ``#> Speciesvirginica | Undecided | 8.50 % | [-0.56, 1.52]`` ``#> Petal.Width:Speciesversicolor | Undecided | 6.79 % | [-0.75, 1.86]`` ``#> Petal.Width:Speciesvirginica | Undecided | 10.74 % | [-1.49, 1.01]`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`` `` `[`theme_abyss`](https://easystats.github.io/see/reference/theme_abyss.md)`(``)`` ``+`` `` `[`scale_fill_flat`](https://easystats.github.io/see/reference/scale_color_flat.md)`(``)`
+\
+`result`` ``<-`` `[`equivalence_test`](https://easystats.github.io/bayestestR/reference/equivalence_test.html)`(``model``, ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.89``, ``0.95``)``)`\
+\
+`result`\
+`#> # Test for Practical Equivalence`\
+`#> `\
+`#>   ROPE: [-0.08 0.08]`\
+`#> `\
+`#> Parameter                     |        H0 | inside ROPE |       89% HDI`\
+`#> -----------------------------------------------------------------------`\
+`#> (Intercept)                   |  Rejected |      0.00 % |  [4.53, 5.06]`\
+`#> Petal.Width                   | Undecided |      4.16 % | [-0.09, 1.83]`\
+`#> Speciesversicolor             | Undecided |      3.34 % | [-1.48, 0.01]`\
+`#> Speciesvirginica              | Undecided |      9.07 % | [-0.37, 1.30]`\
+`#> Petal.Width:Speciesversicolor | Undecided |      7.25 % | [-0.52, 1.61]`\
+`#> Petal.Width:Speciesvirginica  | Undecided |     11.46 % | [-1.22, 0.81]`\
+`#> `\
+`#> `\
+`#> Parameter                     |        H0 | inside ROPE |       95% HDI`\
+`#> -----------------------------------------------------------------------`\
+`#> (Intercept)                   |  Rejected |      0.00 % |  [4.48, 5.11]`\
+`#> Petal.Width                   | Undecided |      3.89 % | [-0.30, 2.06]`\
+`#> Speciesversicolor             | Undecided |      4.63 % | [-1.66, 0.20]`\
+`#> Speciesvirginica              | Undecided |      8.50 % | [-0.56, 1.52]`\
+`#> Petal.Width:Speciesversicolor | Undecided |      6.79 % | [-0.75, 1.86]`\
+`#> Petal.Width:Speciesvirginica  | Undecided |     10.74 % | [-1.49, 1.01]`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`\
+`  `[`theme_abyss`](https://easystats.github.io/see/reference/theme_abyss.md)`(``)`` ``+`\
+`  `[`scale_fill_flat`](https://easystats.github.io/see/reference/scale_color_flat.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-23-1.png)
 
-`result`` ``<-`` `[`equivalence_test`](https://easystats.github.io/bayestestR/reference/equivalence_test.html)`(`` `` ``model2``,`` `` ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.89``, ``0.95``)``,`` `` effects ``=`` ``"all"``,`` `` component ``=`` ``"all"``,`` `` verbose ``=`` ``FALSE`` ``)`` `` ``result`` ``#> # Test for Practical Equivalence`` ``#> `` ``#> ROPE: [-0.10 0.10]`` ``#> `` ``#> # Fixed Effects (Conditional Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 89% HDI`` ``#> ----------------------------------------------------`` ``#> Intercept | Undecided | 2.70 % | [-0.32, 2.29]`` ``#> child | Rejected | 0.00 % | [-1.32, -1.00]`` ``#> camper | Rejected | 0.00 % | [0.56, 0.87]`` ``#> `` ``#> # Fixed Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 89% HDI`` ``#> ----------------------------------------------------`` ``#> Intercept | Undecided | 11.26 % | [-1.60, 0.48]`` ``#> child | Rejected | 0.00 % | [1.37, 2.46]`` ``#> camper | Rejected | 0.00 % | [-1.45, -0.21]`` ``#> `` ``#> # Random Effects (Conditional Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 89% HDI`` ``#> -----------------------------------------------------------`` ``#> SD/Cor: (Intercept) | Rejected | 0.00 % | [0.79, 2.91]`` ``#> `` ``#> # Random Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 89% HDI`` ``#> -----------------------------------------------------------`` ``#> SD/Cor: (Intercept) | Rejected | 0.00 % | [0.70, 2.82]`` ``#> `` ``#> `` ``#> # Fixed Effects (Conditional Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 95% HDI`` ``#> ----------------------------------------------------`` ``#> Intercept | Undecided | 2.54 % | [-0.81, 2.51]`` ``#> child | Rejected | 0.00 % | [-1.36, -0.94]`` ``#> camper | Rejected | 0.00 % | [0.54, 0.91]`` ``#> `` ``#> # Fixed Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 95% HDI`` ``#> ----------------------------------------------------`` ``#> Intercept | Undecided | 10.59 % | [-2.03, 0.89]`` ``#> child | Rejected | 0.00 % | [1.19, 2.54]`` ``#> camper | Undecided | 0.85 % | [-1.61, -0.07]`` ``#> `` ``#> # Random Effects (Conditional Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 95% HDI`` ``#> --------------------------------------------------------------`` ``#> SD persons (Intercept) | Rejected | 0.00 % | [0.71, 3.58]`` ``#> `` ``#> # Random Effects (Zero-Inflated Model)`` ``#> `` ``#> Parameter | H0 | inside ROPE | 95% HDI`` ``#> --------------------------------------------------------------`` ``#> SD persons (Intercept) | Rejected | 0.00 % | [0.63, 3.41]`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``3``)`` ``+`` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)`
+\
+`result`` ``<-`` `[`equivalence_test`](https://easystats.github.io/bayestestR/reference/equivalence_test.html)`(`\
+`  ``model2``,`\
+`  ci ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``0.89``, ``0.95``)``,`\
+`  effects ``=`` ``"all"``,`\
+`  component ``=`` ``"all"``,`\
+`  verbose ``=`` ``FALSE`\
+`)`\
+\
+`result`\
+`#> # Test for Practical Equivalence`\
+`#> `\
+`#>   ROPE: [-0.10 0.10]`\
+`#> `\
+`#> # Fixed Effects (Conditional Model)`\
+`#> `\
+`#> Parameter |        H0 | inside ROPE |        89% HDI`\
+`#> ----------------------------------------------------`\
+`#> Intercept | Undecided |      2.70 % |  [-0.32, 2.29]`\
+`#> child     |  Rejected |      0.00 % | [-1.32, -1.00]`\
+`#> camper    |  Rejected |      0.00 % |   [0.56, 0.87]`\
+`#> `\
+`#> # Fixed Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter |        H0 | inside ROPE |        89% HDI`\
+`#> ----------------------------------------------------`\
+`#> Intercept | Undecided |     11.26 % |  [-1.60, 0.48]`\
+`#> child     |  Rejected |      0.00 % |   [1.37, 2.46]`\
+`#> camper    |  Rejected |      0.00 % | [-1.45, -0.21]`\
+`#> `\
+`#> # Random Effects (Conditional Model)`\
+`#> `\
+`#> Parameter           |       H0 | inside ROPE |      89% HDI`\
+`#> -----------------------------------------------------------`\
+`#> SD/Cor: (Intercept) | Rejected |      0.00 % | [0.79, 2.91]`\
+`#> `\
+`#> # Random Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter           |       H0 | inside ROPE |      89% HDI`\
+`#> -----------------------------------------------------------`\
+`#> SD/Cor: (Intercept) | Rejected |      0.00 % | [0.70, 2.82]`\
+`#> `\
+`#> `\
+`#> # Fixed Effects (Conditional Model)`\
+`#> `\
+`#> Parameter |        H0 | inside ROPE |        95% HDI`\
+`#> ----------------------------------------------------`\
+`#> Intercept | Undecided |      2.54 % |  [-0.81, 2.51]`\
+`#> child     |  Rejected |      0.00 % | [-1.36, -0.94]`\
+`#> camper    |  Rejected |      0.00 % |   [0.54, 0.91]`\
+`#> `\
+`#> # Fixed Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter |        H0 | inside ROPE |        95% HDI`\
+`#> ----------------------------------------------------`\
+`#> Intercept | Undecided |     10.59 % |  [-2.03, 0.89]`\
+`#> child     |  Rejected |      0.00 % |   [1.19, 2.54]`\
+`#> camper    | Undecided |      0.85 % | [-1.61, -0.07]`\
+`#> `\
+`#> # Random Effects (Conditional Model)`\
+`#> `\
+`#> Parameter              |       H0 | inside ROPE |      95% HDI`\
+`#> --------------------------------------------------------------`\
+`#> SD persons (Intercept) | Rejected |      0.00 % | [0.71, 3.58]`\
+`#> `\
+`#> # Random Effects (Zero-Inflated Model)`\
+`#> `\
+`#> Parameter              |       H0 | inside ROPE |      95% HDI`\
+`#> --------------------------------------------------------------`\
+`#> SD persons (Intercept) | Rejected |      0.00 % | [0.63, 3.41]`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_columns ``=`` ``3``)`` ``+`` `[`theme_modern`](https://easystats.github.io/see/reference/theme_modern.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-24-1.png)
 
@@ -273,7 +703,26 @@ point null was tested, two dots represent the density of the null at the
 value - the ratio of their heights is the value of the Savage-Dickey
 Bayes factor:
 
-`result`` ``<-`` `[`bayesfactor_parameters`](https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html)`(``model``, verbose ``=`` ``FALSE``)`` `` ``result`` ``#> Bayes Factor (Savage-Dickey density ratio)`` ``#> `` ``#> Parameter | BF`` ``#> ----------------------------------------`` ``#> (Intercept) | 1.05e+52`` ``#> Petal.Width | 0.598`` ``#> Speciesversicolor | 0.353`` ``#> Speciesvirginica | 0.166`` ``#> Petal.Width:Speciesversicolor | 0.296`` ``#> Petal.Width:Speciesvirginica | 0.311`` ``#> `` ``#> * Evidence Against The Null: 0`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`` `` `[`scale_color_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`` ``+`` `` `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
+\
+`result`` ``<-`` `[`bayesfactor_parameters`](https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html)`(``model``, verbose ``=`` ``FALSE``)`\
+\
+`result`\
+`#> Bayes Factor (Savage-Dickey density ratio)`\
+`#> `\
+`#> Parameter                     |       BF`\
+`#> ----------------------------------------`\
+`#> (Intercept)                   | 1.05e+52`\
+`#> Petal.Width                   |    0.598`\
+`#> Speciesversicolor             |    0.353`\
+`#> Speciesvirginica              |    0.166`\
+`#> Petal.Width:Speciesversicolor |    0.296`\
+`#> Petal.Width:Speciesvirginica  |    0.311`\
+`#> `\
+`#> * Evidence Against The Null: 0`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`\
+`  `[`scale_color_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`` ``+`\
+`  `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-25-1.png)
 
@@ -282,7 +731,26 @@ null interval at the value - the Bayes factor represents the degree by
 which the distribution mass of the posterior has shifted outside or
 inside the null interval relative to the prior distribution:
 
-`result`` ``<-`` `[`bayesfactor_parameters`](https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html)`(``model``, null ``=`` `[`rope_range`](https://easystats.github.io/bayestestR/reference/rope_range.html)`(``model``)``)`` `` ``result`` ``#> Bayes Factor (Null-Interval)`` ``#> `` ``#> Parameter | BF`` ``#> ----------------------------------------`` ``#> (Intercept) | 4.93e+51`` ``#> Petal.Width | 0.605`` ``#> Speciesversicolor | 0.332`` ``#> Speciesvirginica | 0.159`` ``#> Petal.Width:Speciesversicolor | 0.275`` ``#> Petal.Width:Speciesvirginica | 0.293`` ``#> `` ``#> * Evidence Against The Null: [-0.083, 0.083]`` `` `[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`` `` `[`scale_color_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`` ``+`` `` `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
+\
+`result`` ``<-`` `[`bayesfactor_parameters`](https://easystats.github.io/bayestestR/reference/bayesfactor_parameters.html)`(``model``, null ``=`` `[`rope_range`](https://easystats.github.io/bayestestR/reference/rope_range.html)`(``model``)``)`\
+\
+`result`\
+`#> Bayes Factor (Null-Interval)`\
+`#> `\
+`#> Parameter                     |       BF`\
+`#> ----------------------------------------`\
+`#> (Intercept)                   | 4.93e+51`\
+`#> Petal.Width                   |    0.605`\
+`#> Speciesversicolor             |    0.332`\
+`#> Speciesvirginica              |    0.159`\
+`#> Petal.Width:Speciesversicolor |    0.275`\
+`#> Petal.Width:Speciesvirginica  |    0.293`\
+`#> `\
+`#> * Evidence Against The Null: [-0.083, 0.083]`\
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``)`` ``+`\
+`  `[`scale_color_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`` ``+`\
+`  `[`scale_fill_material`](https://easystats.github.io/see/reference/scale_color_material.md)`(``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-26-1.png)
 
@@ -291,21 +759,42 @@ inside the null interval relative to the prior distribution:
 *([related function
 documentation](https://easystats.github.io/bayestestR/reference/bayesfactor_models.html))*
 
-`lm0`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``1``, data ``=`` ``mtcars``)`` ``lm1`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``drat``, data ``=`` ``mtcars``)`` ``lm2`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``wt``, data ``=`` ``mtcars``)`` ``lm3`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``drat`` ``+`` ``wt``, data ``=`` ``mtcars``)`` `` ``result`` ``<-`` `[`bayesfactor_models`](https://easystats.github.io/bayestestR/reference/bayesfactor_models.html)`(``lm1``, ``lm2``, ``lm3``, denominator ``=`` ``lm0``)`` `` ``result`` ``#> Bayes Factors for Model Comparison`` ``#> `` ``#> Model BF`` ``#> [1] drat 0.202`` ``#> [2] wt 0.290`` ``#> [3] drat + wt 0.053`` ``#> `` ``#> * Against Denominator: [4] (Intercept only)`` ``#> * Bayes Factor Type: BIC approximation`
+\
+`lm0`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``1``, data ``=`` ``mtcars``)`\
+`lm1`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``drat``, data ``=`` ``mtcars``)`\
+`lm2`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``wt``, data ``=`` ``mtcars``)`\
+`lm3`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``qsec`` ``~`` ``drat`` ``+`` ``wt``, data ``=`` ``mtcars``)`\
+\
+`result`` ``<-`` `[`bayesfactor_models`](https://easystats.github.io/bayestestR/reference/bayesfactor_models.html)`(``lm1``, ``lm2``, ``lm3``, denominator ``=`` ``lm0``)`\
+\
+`result`\
+`#> Bayes Factors for Model Comparison`\
+`#> `\
+`#>     Model        BF`\
+`#> [1] drat      0.202`\
+`#> [2] wt        0.290`\
+`#> [3] drat + wt 0.053`\
+`#> `\
+`#> * Against Denominator: [4] (Intercept only)`\
+`#> *   Bayes Factor Type: BIC approximation`
 
 *Pizza plots* are a visual way of representing the posterior
 probabilities of several models, with ratio of the areas of any two
 models corresponding to their posterior odds.[^1] It is possible to plot
 all compared models on one (pizza) pie:
 
-[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_pies ``=`` ``"one"``, value ``=`` ``"probability"``)`` ``+`` `` `[`scale_fill_pizza`](https://easystats.github.io/see/reference/scale_color_pizza.md)`(``reverse ``=`` ``TRUE``)`
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_pies ``=`` ``"one"``, value ``=`` ``"probability"``)`` ``+`\
+`  `[`scale_fill_pizza`](https://easystats.github.io/see/reference/scale_color_pizza.md)`(``reverse ``=`` ``TRUE``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-28-1.png)
 
 But it is also possible to plot one pizza for each model and the
 denominator model (and who doesn’t like ***more*** pizza?):
 
-[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_pies ``=`` ``"many"``, value ``=`` ``"BF"``)`` ``+`` `` `[`scale_fill_flat`](https://easystats.github.io/see/reference/scale_color_flat.md)`(``palette ``=`` ``"rainbow"``, reverse ``=`` ``TRUE``)`
+\
+[`plot`](https://rdrr.io/r/graphics/plot.default.html)`(``result``, n_pies ``=`` ``"many"``, value ``=`` ``"BF"``)`` ``+`\
+`  `[`scale_fill_flat`](https://easystats.github.io/see/reference/scale_color_flat.md)`(``palette ``=`` ``"rainbow"``, reverse ``=`` ``TRUE``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-29-1.png)
 
@@ -318,6 +807,7 @@ Posterior predictive checks can be used to look for systematic
 discrepancies between real and simulated data, in order to check how
 well the data fits to the distributional assumption of the model.
 
+\
 [`plot`](https://rdrr.io/r/graphics/plot.default.html)`(`[`check_predictions`](https://easystats.github.io/performance/reference/check_predictions.html)`(``model``)``)`
 
 ![](bayestestR_files/figure-html/unnamed-chunk-30-1.png)
