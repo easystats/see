@@ -44,10 +44,10 @@ Produces a faceted plot when there is more than one means-table.
 ## Examples
 
 ``` r
+if (FALSE) { # insight::check_if_installed("datawizard", minimum_version = "1.3.2", quietly = TRUE)
 # \dontrun{
 group_means_object <-  datawizard::means_by_group(iris$Sepal.Width, iris$Species)
 plot(group_means_object, title = "group means", ci = FALSE, caption = FALSE)
-
 
 group_means_object <- datawizard::means_by_group(
   iris,
@@ -55,6 +55,6 @@ group_means_object <- datawizard::means_by_group(
   "Species"
 )
 plot(group_means_object, title = "group means")
-
 # }
+}
 ```

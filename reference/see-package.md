@@ -53,6 +53,9 @@ Other contributors:
 - Jeffrey R. Stevens <jeffrey.r.stevens@gmail.com>
   ([ORCID](https://orcid.org/0000-0003-2375-1360)) \[contributor\]
 
+- Julius Bogomolovas ([ORCID](https://orcid.org/0000-0001-8344-1909))
+  \[contributor\]
+
 - Matthew Smith <M.Smith3@napier.ac.uk> \[reviewer\]
 
 - Jakob Bossek <bossek@wi.uni-muenster.de> \[reviewer\]

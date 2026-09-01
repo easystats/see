@@ -1,5 +1,30 @@
 # Changelog
 
+## see 0.14.2
+
+### Changes
+
+- Argument `linewidth` was renamed to `size_line`, to be consistent
+  across the easystats-ecosystem. However, `linewidth` remains as an
+  alias, since this is the name of the corresponding ggplot2-argument.
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`check_heteroscedasticity()`](https://easystats.github.io/performance/reference/check_heteroscedasticity.html)
+  now works for GLM’s and models from package *glmmTMB*. Previously,
+  [`check_heteroscedasticity()`](https://easystats.github.io/performance/reference/check_heteroscedasticity.html)
+  worked for linear models only.
+
+### Bug fixes
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`check_heteroscedasticity()`](https://easystats.github.io/performance/reference/check_heteroscedasticity.html)
+  now uses Pearson residuals for `glmmTMB` and `MixMod` models.
+  Previously these residuals were divided by a single scalar, which is
+  only correct when the variance function does not depend on the mean;
+  for non-mixed binomial and Poisson models that scalar was 1, so the
+  plot could suggest heteroscedasticity for correctly specified models.
+  See easystats/performance#926.
+
 ## see 0.14.1
 
 CRAN release: 2026-06-29
