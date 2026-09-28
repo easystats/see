@@ -268,3 +268,28 @@ test_that("check_model() with heterogeneity plots works", {
     fig = plot(performance::check_model(m))
   )
 })
+
+test_that("check_model() RE-normality plots work with uncorrelated RE", {
+  skip_if_not_installed("lme4")
+  data(sleepstudy, package = "lme4")
+  set.seed(123)
+  sleepstudy$mygrp <- sample(1:5, size = 180, replace = TRUE)
+
+  m <- lme4::lmer(
+    Reaction ~ Days + (1 | mygrp) + (1 + Days | Subject),
+    data = sleepstudy
+  )
+  expect_doppelganger_with_seed(
+    title = "check_model_re_qq_noncor-1",
+    fig = plot(performance::check_model(m))
+  )
+
+  m <- lme4::lmer(
+    Reaction ~ Days + (1 | Subject) + (0 + Days | Subject),
+    data = lme4::sleepstudy
+  )
+  expect_doppelganger_with_seed(
+    title = "check_model_re_qq_noncor-2",
+    fig = plot(performance::check_model(m))
+  )
+})
