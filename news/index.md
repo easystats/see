@@ -2,6 +2,8 @@
 
 ## see 0.14.2
 
+CRAN release: 2026-09-01
+
 ### Changes
 
 - Argument `linewidth` was renamed to `size_line`, to be consistent

@@ -72,6 +72,9 @@ result <- rope(m)
 #>   Petal.Width (r = 0.87), Petal.Width:Speciesvirginica and
 #>   Petal.Width:Speciesversicolor (r = 0.79). This might lead to
 #>   inappropriate results. See 'Details' in '?rope'.
+#> Probable multicollinearity between Petal.Width:Speciesvirginica and
+#>   Petal.Width (r = 0.92). This might lead to inappropriate results. See
+#>   'Details' in '?rope'.
 result
 #> # Proportion of samples inside the ROPE [-0.08, 0.08]:
 #> 
