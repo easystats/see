@@ -212,6 +212,19 @@ test_that("plot.see_check_model() draws cell means for few fitted values", {
 })
 
 
+test_that("plot.see_check_model() omits trend lines with show_smooth = FALSE", {
+  model <- lm(mpg ~ wt, data = mtcars)
+
+  expect_doppelganger_with_seed(
+    title = "check_model_no_smooth_linearity",
+    fig = plot(
+      performance::check_model(model, check = "linearity"),
+      show_smooth = FALSE
+    )
+  )
+})
+
+
 test_that("plot outliers skips smooth for low N", {
   # fmt: skip
   sdata <- data.frame(
