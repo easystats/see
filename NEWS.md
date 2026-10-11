@@ -11,6 +11,12 @@
   bars. Note that *performance* currently turns `show_ci` off for models
   whose terms are all factors without interactions (#464).
 
+* `plot()` for `check_model()` and `check_heteroscedasticity()` gains a
+  `show_smooth` argument. With `show_smooth = FALSE`, the Linearity,
+  Homogeneity of Variance and Influential Observations panels draw no trend
+  line (neither LOESS nor cell means), and the subtitles of the Linearity and
+  Homogeneity of Variance panels no longer refer to a reference line (#464).
+
 # see 0.14.2
 
 ## Changes

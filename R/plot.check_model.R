@@ -6,6 +6,13 @@
 #' @inheritParams print.see_performance_pp_check
 #' @inheritParams data_plot
 #' @inheritParams plots
+#' @param show_smooth Logical, if `FALSE`, no trend line is drawn in the
+#'   Linearity, Homogeneity of Variance and Influential Observations panels.
+#'   This turns off the LOESS smoother and, for models whose fitted values take
+#'   only a few distinct values, the cell means with their line and error bars.
+#'   If `NULL`
+#'   (default), the value stored in the `check_model()` object is used, and
+#'   `TRUE` if there is none.
 #'
 #' @return A ggplot2-object.
 #'
@@ -32,6 +39,7 @@ plot.see_check_model <- function(
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
+  show_smooth = NULL,
   ...
 ) {
   # Initialize an empty list to store the individual ggplot objects
@@ -52,7 +60,7 @@ plot.see_check_model <- function(
   alpha_level <- .default_value(x, "alpha", 0.2)
   alpha_dot <- .default_value(x, "alpha_dot", 0.8)
   show_dots <- .default_value(x, "show_dots", TRUE)
-  show_smooth <- dots[["show_smooth"]] %||% .default_value(x, "show_smooth", TRUE)
+  show_smooth <- show_smooth %||% .default_value(x, "show_smooth", TRUE)
   ppc_range <- .default_value(x, "ppc_range")
 
   # handle alias

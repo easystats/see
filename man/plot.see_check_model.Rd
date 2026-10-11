@@ -10,6 +10,7 @@
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
+  show_smooth = NULL,
   ...
 )
 }
@@ -28,6 +29,14 @@ hex-format) for points and line.}
 or ordinal etc. - outcomes).}
 
 \item{n_columns}{Number of columns to align plots.}
+
+\item{show_smooth}{Logical, if \code{FALSE}, no trend line is drawn in the
+Linearity, Homogeneity of Variance and Influential Observations panels.
+This turns off the LOESS smoother and, for models whose fitted values take
+only a few distinct values, the cell means with their line and error bars.
+If \code{NULL}
+(default), the value stored in the \code{check_model()} object is used, and
+\code{TRUE} if there is none.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

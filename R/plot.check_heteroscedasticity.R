@@ -6,6 +6,10 @@
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams print.see_performance_pp_check
+#' @param show_smooth Logical, if `FALSE`, no trend line is drawn. This turns
+#'   off the LOESS smoother and, for models whose fitted values take only a few
+#'   distinct values, the cell means with their line and error bars. Default is
+#'   `TRUE`.
 #'
 #' @return A ggplot2-object.
 #'
