@@ -33,6 +33,8 @@ plot.see_check_heteroscedasticity <- function(
   show_smooth = TRUE,
   ...
 ) {
+  .check_show_smooth(show_smooth)
+
   if (is.null(data)) {
     model <- .retrieve_data(x)
   } else {

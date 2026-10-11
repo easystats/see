@@ -99,7 +99,6 @@ test_that("check_heteroscedasticity() plot accepts show_smooth", {
   for (model in list(loess_model, cell_model)) {
     h <- performance::check_heteroscedasticity(model)
     p_off <- plot(h, data = model, show_smooth = FALSE)
-    p_on <- plot(h, data = model)
     geoms <- .layer_geoms(p_off)
     expect_false(.has_smooth(p_off))
     expect_false(any(geoms %in% c("GeomLine", "GeomErrorbar")))
@@ -107,12 +106,35 @@ test_that("check_heteroscedasticity() plot accepts show_smooth", {
       p_off$labels$subtitle,
       no_line_subtitles[["HOMOGENEITY"]]
     )
-    expect_true(.has_smooth(p_on) || "GeomLine" %in% .layer_geoms(p_on))
   }
   expect_true(.has_smooth(plot(
     performance::check_heteroscedasticity(loess_model),
     data = loess_model
   )))
+  p_cells <- plot(
+    performance::check_heteroscedasticity(cell_model),
+    data = cell_model
+  )
+  expect_false(.has_smooth(p_cells))
+  expect_true("GeomLine" %in% .layer_geoms(p_cells))
+})
+
+
+test_that("show_smooth must be TRUE or FALSE", {
+  x <- performance::check_model(loess_model, panel = FALSE)
+  h <- performance::check_heteroscedasticity(loess_model)
+  for (value in list(NA, 1, "no", c(TRUE, FALSE))) {
+    expect_error(
+      plot(x, show_smooth = value),
+      "`show_smooth` must be either `TRUE` or `FALSE`",
+      fixed = TRUE
+    )
+    expect_error(
+      plot(h, data = loess_model, show_smooth = value),
+      "`show_smooth` must be either `TRUE` or `FALSE`",
+      fixed = TRUE
+    )
+  }
 })
 
 

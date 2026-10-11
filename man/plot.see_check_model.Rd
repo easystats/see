@@ -34,9 +34,9 @@ or ordinal etc. - outcomes).}
 Linearity, Homogeneity of Variance and Influential Observations panels.
 This turns off the LOESS smoother and, for models whose fitted values take
 only a few distinct values, the cell means with their line and error bars.
-If \code{NULL}
-(default), the value stored in the \code{check_model()} object is used, and
-\code{TRUE} if there is none.}
+If \code{NULL} (default), the value stored in the \code{check_model()} object is
+used, and \code{TRUE} if there is none. The binned residuals panel is not
+affected.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

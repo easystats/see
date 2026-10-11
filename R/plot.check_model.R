@@ -10,9 +10,9 @@
 #'   Linearity, Homogeneity of Variance and Influential Observations panels.
 #'   This turns off the LOESS smoother and, for models whose fitted values take
 #'   only a few distinct values, the cell means with their line and error bars.
-#'   If `NULL`
-#'   (default), the value stored in the `check_model()` object is used, and
-#'   `TRUE` if there is none.
+#'   If `NULL` (default), the value stored in the `check_model()` object is
+#'   used, and `TRUE` if there is none. The binned residuals panel is not
+#'   affected.
 #'
 #' @return A ggplot2-object.
 #'
@@ -61,6 +61,7 @@ plot.see_check_model <- function(
   alpha_dot <- .default_value(x, "alpha_dot", 0.8)
   show_dots <- .default_value(x, "show_dots", TRUE)
   show_smooth <- show_smooth %||% .default_value(x, "show_smooth", TRUE)
+  .check_show_smooth(show_smooth)
   ppc_range <- .default_value(x, "ppc_range")
 
   # handle alias
@@ -303,6 +304,13 @@ plot.see_check_model <- function(
     invisible(pw)
   } else {
     p
+  }
+}
+
+
+.check_show_smooth <- function(show_smooth) {
+  if (!isTRUE(show_smooth) && !isFALSE(show_smooth)) {
+    insight::format_error("`show_smooth` must be either `TRUE` or `FALSE`.")
   }
 }
 
