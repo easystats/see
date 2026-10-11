@@ -13,7 +13,7 @@ skip_if_not_installed("performance")
 
 .cell_means <- function(d) {
   m <- tapply(d$y, signif(d$x, 8), mean)
-  unname(m[order(as.numeric(names(m)))])
+  as.vector(m[order(as.numeric(names(m)))])
 }
 
 few_value_models <- list(
@@ -46,10 +46,17 @@ test_that("few-value panels draw cell means and no smoother", {
 })
 
 
+.with_show_ci <- function(model, show_ci) {
+  x <- performance::check_model(model, panel = FALSE)
+  attr(x, "show_ci") <- show_ci
+  plot(x)
+}
+
+
 test_that("few-value panels draw error bars only when show_ci is TRUE", {
   for (fm in few_value_models) {
-    p_ci <- plot(performance::check_model(fm$model, show_ci = TRUE, panel = FALSE))
-    p_no <- plot(performance::check_model(fm$model, show_ci = FALSE, panel = FALSE))
+    p_ci <- .with_show_ci(fm$model, TRUE)
+    p_no <- .with_show_ci(fm$model, FALSE)
     for (panel in c("NCV", "HOMOGENEITY")) {
       geoms <- .layer_geoms(p_ci[[panel]])
       expect_identical(sum(geoms == "GeomErrorbar"), 1L)
@@ -57,6 +64,16 @@ test_that("few-value panels draw error bars only when show_ci is TRUE", {
       expect_identical(nrow(built$data[[which(geoms == "GeomErrorbar")]]), as.integer(fm$k))
       expect_false("GeomErrorbar" %in% .layer_geoms(p_no[[panel]]))
     }
+  }
+
+  # performance keeps `show_ci = TRUE` for this model, so no attribute is set
+  m <- lm(mpg ~ factor(am) * factor(vs), data = mtcars)
+  p <- plot(performance::check_model(m, show_ci = TRUE, panel = FALSE))
+  for (panel in c("NCV", "HOMOGENEITY")) {
+    geoms <- .layer_geoms(p[[panel]])
+    expect_identical(sum(geoms == "GeomErrorbar"), 1L)
+    built <- ggplot2::ggplot_build(p[[panel]])
+    expect_identical(nrow(built$data[[which(geoms == "GeomErrorbar")]]), 4L)
   }
 })
 
@@ -67,7 +84,7 @@ test_that("a one-observation cell gets no error bar", {
     y = c(1, 2, 3, 4, 5, 3, 4, 5, 6, 7, 10)
   )
   m <- lm(y ~ g, data = d)
-  p <- plot(performance::check_model(m, show_ci = TRUE, panel = FALSE))
+  p <- .with_show_ci(m, TRUE)
   single_x <- signif(fitted(m)[d$g == "c"], 8)
   for (panel in c("NCV", "HOMOGENEITY")) {
     expect_no_warning(built <- ggplot2::ggplot_build(p[[panel]]))

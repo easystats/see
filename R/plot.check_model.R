@@ -347,15 +347,16 @@ plot.see_check_model <- function(
       )
   }
 
-  # Add smoother, reference line, labels, and theme
+  # Add smoother (or cell means, if fitted values take only a few distinct
+  # values, see issue #464), reference line, labels, and theme
   p +
-    ggplot2::geom_smooth(
-      method = "loess",
-      se = show_ci,
-      formula = y ~ x,
-      alpha = alpha_level,
-      linewidth = size_line,
-      colour = colors[1]
+    .smoother_or_cell_means(
+      x,
+      size_point = size_point,
+      size_line = size_line,
+      alpha_level = alpha_level,
+      colour = colors[1],
+      show_ci = show_ci
     ) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
     ggplot2::labs(
@@ -365,4 +366,92 @@ plot.see_check_model <- function(
       subtitle = "Reference line should be flat and horizontal"
     ) +
     theme
+}
+
+
+# Helper to check whether fitted values take only a few distinct values, e.g.
+# for models with only categorical predictors (one value per cell). Values are
+# rounded to 8 significant digits, because fitted values of the same cell may
+# differ by floating point noise (issue #464)
+.few_unique_values <- function(x, max_unique = 10) {
+  x <- x[!is.na(x)]
+  n_unique <- insight::n_unique(signif(x, 8))
+  n_unique <= max_unique && n_unique <= length(x) / 2
+}
+
+
+# Helper to draw a LOESS smoother, or, for few distinct fitted values, the
+# cell means of y joined by a line. A LOESS fit over only a few distinct
+# x-values is close to singular and can bend far outside the data (issue #464)
+.smoother_or_cell_means <- function(
+  x,
+  size_point,
+  size_line,
+  alpha_level = 0.2,
+  colour = "#3aaf85",
+  show_ci = TRUE
+) {
+  x <- x[stats::complete.cases(x[c("x", "y")]), ]
+
+  if (!.few_unique_values(x$x)) {
+    return(ggplot2::geom_smooth(
+      method = "loess",
+      se = show_ci,
+      formula = y ~ x,
+      alpha = alpha_level,
+      linewidth = size_line,
+      colour = colour
+    ))
+  }
+
+  cells <- signif(x$x, 8)
+  n <- as.vector(tapply(x$y, cells, length))
+  cell_means <- data.frame(
+    x = as.vector(tapply(x$x, cells, mean)),
+    y = as.vector(tapply(x$y, cells, mean)),
+    n = n
+  )
+
+  layers <- list()
+  if (isTRUE(show_ci)) {
+    # no confidence interval for cells with only one observation
+    ci_data <- cell_means[n > 1, , drop = FALSE]
+    if (nrow(ci_data) > 0) {
+      se <- as.vector(tapply(x$y, cells, stats::sd))[n > 1] / sqrt(ci_data$n)
+      t_crit <- stats::qt(0.975, df = ci_data$n - 1)
+      ci_data$ymin <- ci_data$y - t_crit * se
+      ci_data$ymax <- ci_data$y + t_crit * se
+      layers <- c(
+        layers,
+        list(ggplot2::geom_errorbar(
+          data = ci_data,
+          ggplot2::aes(x = .data$x, ymin = .data$ymin, ymax = .data$ymax),
+          width = 0.05 * diff(range(cell_means$x)),
+          linewidth = size_line,
+          colour = colour,
+          inherit.aes = FALSE
+        ))
+      )
+    }
+  }
+
+  c(
+    layers,
+    list(
+      ggplot2::geom_line(
+        data = cell_means,
+        ggplot2::aes(x = .data$x, y = .data$y),
+        linewidth = size_line,
+        colour = colour,
+        inherit.aes = FALSE
+      ),
+      ggplot2::geom_point(
+        data = cell_means,
+        ggplot2::aes(x = .data$x, y = .data$y),
+        size = 2 * size_point,
+        colour = colour,
+        inherit.aes = FALSE
+      )
+    )
+  )
 }

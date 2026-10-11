@@ -184,13 +184,13 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   }
 
   p +
-    ggplot2::stat_smooth(
-      method = "loess",
-      se = show_ci,
-      alpha = alpha_level,
-      formula = y ~ x,
-      linewidth = size_line,
-      colour = colors[1]
+    .smoother_or_cell_means(
+      x,
+      size_point = size_point,
+      size_line = size_line,
+      alpha_level = alpha_level,
+      colour = colors[1],
+      show_ci = show_ci
     ) +
     ggplot2::labs(
       title = "Homogeneity of Variance",
