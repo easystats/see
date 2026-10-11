@@ -52,6 +52,7 @@ plot.see_check_model <- function(
   alpha_level <- .default_value(x, "alpha", 0.2)
   alpha_dot <- .default_value(x, "alpha_dot", 0.8)
   show_dots <- .default_value(x, "show_dots", TRUE)
+  show_smooth <- dots[["show_smooth"]] %||% .default_value(x, "show_smooth", TRUE)
   ppc_range <- .default_value(x, "ppc_range")
 
   # handle alias
@@ -144,6 +145,7 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         show_dots = show_dots,
         show_ci = show_ci,
+        show_smooth = show_smooth,
         maximum_dots = max_dots
       )
     )
@@ -186,6 +188,7 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         show_dots = show_dots,
         show_ci = show_ci,
+        show_smooth = show_smooth,
         maximum_dots = max_dots
       )
     )
@@ -203,6 +206,7 @@ plot.see_check_model <- function(
         colors = colors,
         alpha_dot = alpha_dot,
         show_dots = show_dots,
+        show_smooth = show_smooth,
         maximum_dots = max_dots
       )
     )
@@ -317,6 +321,7 @@ plot.see_check_model <- function(
   alpha_dot = 0.8,
   show_dots = TRUE,
   show_ci = TRUE,
+  show_smooth = TRUE,
   maximum_dots = 2000,
   ...
 ) {
@@ -358,14 +363,19 @@ plot.see_check_model <- function(
       size_line = size_line,
       alpha_level = alpha_level,
       colour = colors[1],
-      show_ci = show_ci
+      show_ci = show_ci,
+      show_smooth = show_smooth
     ) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
     ggplot2::labs(
       x = "Fitted values",
       y = "Residuals",
       title = "Linearity",
-      subtitle = "Reference line should be flat and horizontal"
+      subtitle = if (isTRUE(show_smooth)) {
+        "Reference line should be flat and horizontal"
+      } else {
+        "Residuals should spread evenly around zero"
+      }
     ) +
     theme
 }
@@ -408,8 +418,14 @@ plot.see_check_model <- function(
   size_line,
   alpha_level = 0.2,
   colour = "#3aaf85",
-  show_ci = TRUE
+  show_ci = TRUE,
+  show_smooth = TRUE
 ) {
+  # no trend line at all, if the user turned it off
+  if (!isTRUE(show_smooth)) {
+    return(NULL)
+  }
+
   x <- x[stats::complete.cases(x[c("x", "y")]), ]
 
   if (!.few_unique_values(x$x)) {

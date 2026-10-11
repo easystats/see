@@ -157,6 +157,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   alpha_dot = 0.8,
   show_dots = TRUE,
   show_ci = TRUE,
+  show_smooth = TRUE,
   maximum_dots = 2000,
   ...
 ) {
@@ -192,11 +193,16 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
       size_line = size_line,
       alpha_level = alpha_level,
       colour = colors[1],
-      show_ci = show_ci
+      show_ci = show_ci,
+      show_smooth = show_smooth
     ) +
     ggplot2::labs(
       title = "Homogeneity of Variance",
-      subtitle = "Reference line should be flat and horizontal",
+      subtitle = if (isTRUE(show_smooth)) {
+        "Reference line should be flat and horizontal"
+      } else {
+        "Spread of residuals should not change across fitted values"
+      },
       y = expression(sqrt("|Std. residuals|")),
       x = "Fitted values"
     ) +

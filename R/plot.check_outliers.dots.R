@@ -14,6 +14,7 @@
   colors = unname(social_colors(c("green", "blue grey", "red"))),
   alpha_dot = 0.8,
   show_dots = TRUE,
+  show_smooth = TRUE,
   maximum_dots = 2000
 ) {
   theme <- .set_default_theme(
@@ -102,8 +103,9 @@
       linetype = ref.linetype
     )
 
-  # check if we have enough unique x-values to plot smoother
-  if (insight::n_unique(plot_data$Hat) > 30) {
+  # check if we have enough unique x-values to plot smoother, and if the user
+  # did not turn the smoother off
+  if (isTRUE(show_smooth) && insight::n_unique(plot_data$Hat) > 30) {
     p <- p +
       ggplot2::stat_smooth(
         formula = y ~ x,
