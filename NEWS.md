@@ -7,8 +7,9 @@
   by a line, in place of the LOESS smoother when the fitted values take only
   a few distinct values, for example in models with only categorical
   predictors. A LOESS fit over so few values warned and could bend far
-  outside the data. When `show_ci = TRUE`, the cell means get 95% error bars
-  (#464).
+  outside the data. When `show_ci` is `TRUE`, the cell means get 95% error
+  bars. Note that *performance* currently turns `show_ci` off for models
+  whose terms are all factors without interactions (#464).
 
 # see 0.14.2
 

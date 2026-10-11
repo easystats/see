@@ -66,7 +66,8 @@ test_that("few-value panels draw error bars only when show_ci is TRUE", {
     }
   }
 
-  # performance keeps `show_ci = TRUE` for this model, so no attribute is set
+  # performance sets `show_ci = TRUE` for this model (its interaction term is
+  # not of type factor), so the test does not override the attribute
   m <- lm(mpg ~ factor(am) * factor(vs), data = mtcars)
   p <- plot(performance::check_model(m, show_ci = TRUE, panel = FALSE))
   for (panel in c("NCV", "HOMOGENEITY")) {
