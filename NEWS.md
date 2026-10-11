@@ -1,3 +1,15 @@
+# see (devel)
+
+## Changes
+
+* The Linearity and Homogeneity of Variance panels of `check_model()` (and the
+  plot of `check_heteroscedasticity()`) now draw the mean of each cell, joined
+  by a line, in place of the LOESS smoother when the fitted values take only
+  a few distinct values, for example in models with only categorical
+  predictors. A LOESS fit over so few values warned and could bend far
+  outside the data. When `show_ci = TRUE`, the cell means get 95% error bars
+  (#464).
+
 # see 0.14.2
 
 ## Changes
