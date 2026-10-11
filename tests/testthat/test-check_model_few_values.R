@@ -110,6 +110,47 @@ test_that("heteroscedasticity and GLM homogeneity panels use cell means", {
 })
 
 
+test_that("a cell with a fitted value of zero stays one cell", {
+  d <- data.frame(
+    g = factor(rep(c("a", "b", "c"), each = 10)),
+    y = c(rep(c(-1, 1), 5) - 2, rep(c(-1, 1), 5), rep(c(-1, 1), 5) + 2)
+  )
+  d$y <- d$y + stats::rnorm(30, sd = 1e-10)
+  d$y <- d$y - mean(d$y[d$g == "b"])
+  m <- lm(y ~ g, data = d)
+  expect_true(.few_unique_values(stats::fitted(m)))
+
+  p <- plot(performance::check_model(m, panel = FALSE))
+  geoms <- .layer_geoms(p$NCV)
+  built <- ggplot2::ggplot_build(p$NCV)
+  expect_false(.has_smooth(p$NCV))
+  expect_identical(nrow(built$data[[which(geoms == "GeomLine")]]), 3L)
+})
+
+
+test_that("error bars do not overlap unevenly spaced cells", {
+  layers <- .smoother_or_cell_means(
+    data.frame(
+      x = rep(c(0, 0.001, 0.002, 100), each = 5),
+      y = rep(c(-1, 0, 1, 2, 3), 4)
+    ),
+    size_point = 2,
+    size_line = 0.8
+  )
+  errorbar <- layers[[1]]
+  expect_s3_class(errorbar$geom, "GeomErrorbar")
+  expect_lte(errorbar$geom_params$width, 0.0005)
+
+  # a single cell keeps ggplot2's default width
+  layers <- .smoother_or_cell_means(
+    data.frame(x = rep(1, 5), y = c(-1, 0, 1, 2, 3)),
+    size_point = 2,
+    size_line = 0.8
+  )
+  expect_null(layers[[1]]$geom_params$width)
+})
+
+
 test_that(".few_unique_values() detects few distinct values", {
   set.seed(123)
   expect_true(.few_unique_values(rep(1:10, 2)))

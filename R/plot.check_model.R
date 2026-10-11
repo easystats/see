@@ -369,13 +369,28 @@ plot.see_check_model <- function(
 }
 
 
+# Helper to group fitted values into cells. Fitted values of the same cell may
+# differ by floating point noise, so values are rounded to 8 digits relative to
+# the largest absolute value. Rounding relative to each value (`signif()`)
+# would keep the noise of cells whose fitted value is close to zero (#464)
+.cell_keys <- function(x) {
+  scale <- max(abs(x), na.rm = TRUE)
+  if (!is.finite(scale) || scale == 0) {
+    return(x)
+  }
+  round(x / scale, 8)
+}
+
+
 # Helper to check whether fitted values take only a few distinct values, e.g.
-# for models with only categorical predictors (one value per cell). Values are
-# rounded to 8 significant digits, because fitted values of the same cell may
-# differ by floating point noise (issue #464)
+# for models with only categorical predictors (one value per cell). The limit
+# of 10 values follows the suggestion in #431, and requiring at least two
+# observations per value on average keeps small models with continuous
+# predictors on the LOESS smoother. The outlier plot uses a stricter limit of
+# 30 values (#437), because there no cell means replace the smoother (#464)
 .few_unique_values <- function(x, max_unique = 10) {
   x <- x[!is.na(x)]
-  n_unique <- insight::n_unique(signif(x, 8))
+  n_unique <- insight::n_unique(.cell_keys(x))
   n_unique <= max_unique && n_unique <= length(x) / 2
 }
 
@@ -404,7 +419,7 @@ plot.see_check_model <- function(
     ))
   }
 
-  cells <- signif(x$x, 8)
+  cells <- .cell_keys(x$x)
   n <- as.vector(tapply(x$y, cells, length))
   cell_means <- data.frame(
     x = as.vector(tapply(x$x, cells, mean)),
@@ -421,16 +436,29 @@ plot.see_check_model <- function(
       t_crit <- stats::qt(0.975, df = ci_data$n - 1)
       ci_data$ymin <- ci_data$y - t_crit * se
       ci_data$ymax <- ci_data$y + t_crit * se
+      errorbar_args <- list(
+        data = ci_data,
+        mapping = ggplot2::aes(
+          x = .data$x,
+          ymin = .data$ymin,
+          ymax = .data$ymax
+        ),
+        linewidth = size_line,
+        colour = colour,
+        inherit.aes = FALSE
+      )
+      # error bars should not overlap neighbouring cells. For a single cell,
+      # ggplot2's default width is used
+      if (nrow(cell_means) > 1) {
+        cell_x <- sort(cell_means$x)
+        errorbar_args$width <- min(
+          0.05 * diff(range(cell_x)),
+          0.5 * min(diff(cell_x))
+        )
+      }
       layers <- c(
         layers,
-        list(ggplot2::geom_errorbar(
-          data = ci_data,
-          ggplot2::aes(x = .data$x, ymin = .data$ymin, ymax = .data$ymax),
-          width = 0.05 * diff(range(cell_means$x)),
-          linewidth = size_line,
-          colour = colour,
-          inherit.aes = FALSE
-        ))
+        list(do.call(ggplot2::geom_errorbar, errorbar_args))
       )
     }
   }
