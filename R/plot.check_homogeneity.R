@@ -170,6 +170,8 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
   )
 
   # Sample data if too large for performance (issue #420)
+  # cell means are computed from all rows, only the dots are downsampled
+  full_data <- x
   x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
 
   p <- ggplot2::ggplot(x, ggplot2::aes(x = .data$x, .data$y))
@@ -185,7 +187,7 @@ plot.see_check_homogeneity <- function(x, data = NULL, ...) {
 
   p +
     .smoother_or_cell_means(
-      x,
+      full_data,
       size_point = size_point,
       size_line = size_line,
       alpha_level = alpha_level,

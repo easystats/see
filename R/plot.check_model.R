@@ -332,6 +332,8 @@ plot.see_check_model <- function(
 
   # Downsample data if it exceeds the maximum dots threshold (for rendering
   # performance) (issue #420)
+  # cell means are computed from all rows, only the dots are downsampled
+  full_data <- x
   x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
 
   # Base plot initialization
@@ -351,7 +353,7 @@ plot.see_check_model <- function(
   # values, see issue #464), reference line, labels, and theme
   p +
     .smoother_or_cell_means(
-      x,
+      full_data,
       size_point = size_point,
       size_line = size_line,
       alpha_level = alpha_level,
@@ -398,6 +400,8 @@ plot.see_check_model <- function(
 # Helper to draw a LOESS smoother, or, for few distinct fitted values, the
 # cell means of y joined by a line. A LOESS fit over only a few distinct
 # x-values is close to singular and can bend far outside the data (issue #464)
+# `x` holds all rows, before downsampling, so cell means and intervals include
+# every observation. The LOESS smoother uses the (downsampled) plot data.
 .smoother_or_cell_means <- function(
   x,
   size_point,

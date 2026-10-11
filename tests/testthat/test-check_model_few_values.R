@@ -151,6 +151,45 @@ test_that("error bars do not overlap unevenly spaced cells", {
 })
 
 
+test_that("cell means use all rows when the dots are downsampled", {
+  d <- data.frame(
+    g = factor(c(rep("a", 2500), rep("b", 2497), rep("c", 3))),
+    y = c(
+      rep(c(-1, 1), 1250),
+      rep(c(-1, 1, 3), length.out = 2497) + 5,
+      c(20, 22, 24)
+    )
+  )
+  m <- lm(y ~ g, data = d)
+  x <- performance::check_model(m, panel = FALSE)
+  attr(x, "show_ci") <- TRUE
+  p <- plot(x)
+  for (panel in c("NCV", "HOMOGENEITY")) {
+    pp <- p[[panel]]
+    # the raw dots are downsampled to `maximum_dots`
+    expect_lte(nrow(pp$data), 2000)
+    geoms <- .layer_geoms(pp)
+    built <- ggplot2::ggplot_build(pp)
+    means_point <- built$data[[max(which(geoms == "GeomPoint"))]]
+    bars <- built$data[[which(geoms == "GeomErrorbar")]]
+    expect_identical(nrow(means_point), 3L)
+    expect_identical(nrow(bars), 3L)
+  }
+
+  # group means by factor level, ordered by fitted value
+  expected <- tapply(stats::residuals(m), d$g, mean)
+  expected <- as.vector(expected[order(tapply(stats::fitted(m), d$g, mean))])
+  means_point <- ggplot2::ggplot_build(p$NCV)$data[[
+    max(which(.layer_geoms(p$NCV) == "GeomPoint"))
+  ]]
+  expect_equal(
+    means_point$y[order(means_point$x)],
+    expected,
+    tolerance = 1e-8
+  )
+})
+
+
 test_that(".few_unique_values() detects few distinct values", {
   set.seed(123)
   expect_true(.few_unique_values(rep(1:10, 2)))
