@@ -101,12 +101,19 @@ plots <- function(
   if (isTRUE(getOption("easystats_errors", FALSE))) {
     insight::format_error(pw_drawn$message)
   }
-  if (inherits(pw_drawn, "simpleError")) {
+  if (inherits(pw_drawn, c("simpleError", "error", "rlang_error"))) {
     msg_display1 <- "\n- To fix this issue, please make the window larger."
     msg_display3 <- "\n- If this still doesn't resolve your problems, you may check whether your apps are rescaled. On Windows, this can be done in the display settings (Start > Settings > System > Display, \"Scale and layout\"). Reduce the scaling and try again."
     msg_display4 <- "\n- You can try to decrease the base font-size of your theme before plotting. Load `library(ggplot2)` and run: `theme_set(theme_classic(base_size = 6))`"
     msg_display5 <- "\n- Make sure to update your packages (in particular `ggplot2`, `qqplotr` and `patchwork`) using `update.packages(ask = FALSE)`."
     msg_display6 <- "\n- Finally, ensure your R version, and the IDE you use, are up to date. Running the most recent versions of R and, e.g., RStudio or Positron can resolve any remaining issues."
+    msg_display7 <- "\n- If none of the solutions above work, generate individual plots for each check using the `panel` argument: `plot(check_model(model, panel = FALSE))`."
+    msg_display8 <- paste0(
+      "\n- Instead of rendering plots interactively, you can save them directly to a file, for example:\n\n",
+      "  pdf(\"myfile.pdf\")\n",
+      "  check_model(model)\n",
+      "  dev.off()\n"
+    )
 
     if (Sys.getenv("RSTUDIO") == "1") {
       msg <- "The RStudio 'Plots' window is too small to show this set of plots."
@@ -127,7 +134,9 @@ plots <- function(
       msg_display3,
       msg_display4,
       msg_display5,
-      msg_display6
+      msg_display6,
+      msg_display7,
+      msg_display8
     )
   }
 }

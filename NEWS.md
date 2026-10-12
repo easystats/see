@@ -18,6 +18,12 @@
   subtitles of the Linearity and Homogeneity of Variance panels no longer refer
   to a reference line (#464).
 
+## Bug fixes
+
+* When `check_model()` failed to create plots, the informative message
+  about troubleshooting and workarounds was no longer printed. This should
+  now work again.
+
 # see 0.14.2
 
 ## Changes
