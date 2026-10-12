@@ -12,9 +12,9 @@ geom_violinhalf(
   trim = TRUE,
   flip = FALSE,
   scale = c("area", "count", "width"),
-  interval = FALSE,
   show.legend = NA,
   inherit.aes = TRUE,
+  interval = FALSE,
   ...
 )
 }
@@ -71,10 +71,6 @@ geoms should be flipped. See examples for more details.}
 \code{"count"}, areas are scaled proportionally to the number of observations.
 If \code{"width"}, all half violins have the same maximum width.}
 
-\item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
-quantile intervals of each group, drawn with
-\code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is \code{FALSE}.}
-
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
@@ -88,15 +84,23 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
+\item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
+quantile intervals of each group, drawn with
+\code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is \code{FALSE}.}
+
 \item{...}{Other arguments passed to \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, such as \code{colour},
-\code{fill}, or \code{alpha}.}
+\code{fill}, \code{alpha}, or \code{adjust}. As in \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}, \code{bw} sets the
+bandwidth (default \code{"nrd0"}) and \code{kernel} the kernel (default
+\code{"gaussian"}) of the density. Groups with fewer than two observations are
+not drawn.}
 }
 \value{
 A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.
 }
 \description{
 Create a half-violin plot. The half violins are drawn with
-\code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package. Each
+\code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package
+(version 3.3.3 or later). Each
 half violin is at most 0.45 x-axis units wide by default.
 }
 \examples{

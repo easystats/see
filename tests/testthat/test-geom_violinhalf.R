@@ -32,7 +32,9 @@ test_that("geom_violinhalf() computes each facet_grid() cell from its own data",
   p <- ggplot2::ggplot(mtcars, ggplot2::aes(factor(cyl), mpg)) +
     geom_violinhalf() +
     ggplot2::facet_grid(am ~ vs)
-  b <- ggplot2::ggplot_build(p)
+  # one cell (am = 1, vs = 0, cyl = 4) has a single car
+  expect_warning(ggplot2::ggplot_build(p), "fewer than two")
+  b <- suppressWarnings(ggplot2::ggplot_build(p))
   ld <- b$data[[1]]
   layout <- b$layout$layout
 
@@ -182,5 +184,140 @@ test_that("geom_violinhalf() keeps its old arguments working", {
     geom_violinhalf(stat = "identity"),
     regexp = "`stat` is ignored",
     fixed = TRUE
+  )
+})
+
+test_that("geom_violinhalf() works with a layer mapping outside see", {
+  # the added aesthetics must find see's helpers from the user's environment
+  p <- evalq(
+    ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+      see::geom_violinhalf(ggplot2::aes(fill = Species), scale = "width"),
+    globalenv()
+  )
+  ld <- ggplot2::layer_data(p)
+  expect_equal(
+    group_max(ld, "thickness"),
+    c(1, 1, 1),
+    tolerance = testthat::testthat_tolerance()
+  )
+})
+
+test_that("geom_violinhalf(scale = \"width\") scales each facet panel", {
+  d <- iris_long[iris_long$variable %in% c("Petal.Width", "Sepal.Width"), ]
+  p <- ggplot2::ggplot(d, ggplot2::aes(Species, values)) +
+    geom_violinhalf(scale = "width") +
+    ggplot2::facet_wrap(~variable, scales = "free_y")
+  ld <- ggplot2::layer_data(p)
+  per_cell <- tapply(ld$thickness, list(ld$PANEL, ld$group), max)
+  expect_equal(
+    as.vector(per_cell),
+    rep(1, 6),
+    tolerance = testthat::testthat_tolerance()
+  )
+})
+
+test_that("geom_violinhalf(interval = TRUE) dodges intervals with their slabs", {
+  p <- ggplot2::ggplot(
+    mtcars,
+    ggplot2::aes(factor(cyl), mpg, fill = factor(am))
+  ) +
+    geom_violinhalf(interval = TRUE)
+  slab <- suppressWarnings(ggplot2::layer_data(p, 1))
+  int <- suppressWarnings(ggplot2::layer_data(p, 2))
+  slab_x <- tapply(slab$x, slab$group, unique)
+  int_x <- tapply(int$x, int$group, unique)
+  expect_equal(
+    int_x,
+    slab_x[names(int_x)],
+    tolerance = testthat::testthat_tolerance()
+  )
+})
+
+test_that("geom_violinhalf() outlines the whole half violin", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf()
+  grob <- ggplot2::layer_grob(p)[[1]]
+  kids <- grob$children
+  expect_true(all(vapply(kids, inherits, logical(1), what = "polygon")))
+  cols <- unique(vapply(kids, function(k) k$gp$col, character(1)))
+  expect_identical(
+    grDevices::col2rgb(cols),
+    grDevices::col2rgb("grey20")
+  )
+})
+
+test_that("geom_violinhalf() keeps the 0.45 width in horizontal plots", {
+  p <- ggplot2::ggplot(
+    iris_unbalanced,
+    ggplot2::aes(Sepal.Length, Species)
+  ) +
+    geom_violinhalf(flip = c(1, 3))
+  ld <- ggplot2::layer_data(p)
+  left <- ld$group %in% c(1, 3)
+  expect_equal(
+    ld$ymin,
+    ifelse(left, ld$y - 0.45, ld$y),
+    tolerance = testthat::testthat_tolerance()
+  )
+  expect_equal(
+    ld$ymax,
+    ifelse(left, ld$y, ld$y + 0.45),
+    tolerance = testthat::testthat_tolerance()
+  )
+})
+
+test_that("geom_violinhalf() passes bw and kernel to the density", {
+  base <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length))
+  max_default <- group_max(
+    ggplot2::layer_data(base + geom_violinhalf()),
+    "thickness"
+  )
+
+  expect_no_warning(ggplot2::layer_data(base + geom_violinhalf(bw = 0.5)))
+  ld_bw <- ggplot2::layer_data(base + geom_violinhalf(bw = 0.5))
+  ref_bw <- ggplot2::layer_data(base + ggplot2::geom_violin(bw = 0.5))
+  expect_equal(
+    group_max(ld_bw, "thickness") / max(group_max(ld_bw, "thickness")),
+    group_max(ref_bw, "violinwidth") / max(group_max(ref_bw, "violinwidth")),
+    tolerance = 1e-3
+  )
+
+  ld_kernel <- ggplot2::layer_data(
+    base + geom_violinhalf(kernel = "rectangular")
+  )
+  expect_false(isTRUE(all.equal(
+    group_max(ld_kernel, "thickness"),
+    max_default
+  )))
+})
+
+test_that("geom_violinhalf() does not draw groups with one observation", {
+  d <- data.frame(
+    g = c("a", "a", "a", "b"),
+    y = c(1, 2, 3, 5),
+    stringsAsFactors = FALSE
+  )
+  p <- ggplot2::ggplot(d, ggplot2::aes(g, y)) + geom_violinhalf()
+  expect_warning(ggplot2::layer_data(p), "fewer than two")
+  ld <- suppressWarnings(ggplot2::layer_data(p))
+  expect_true(all(is.na(ld$thickness[ld$group == 2])))
+  expect_false(anyNA(ld$thickness[ld$group == 1]))
+})
+
+test_that("geom_violinhalf() keeps show.legend and inherit.aes in place", {
+  args <- names(formals(geom_violinhalf))
+  expect_identical(
+    args[1:9],
+    c(
+      "mapping",
+      "data",
+      "stat",
+      "position",
+      "trim",
+      "flip",
+      "scale",
+      "show.legend",
+      "inherit.aes"
+    )
   )
 })
