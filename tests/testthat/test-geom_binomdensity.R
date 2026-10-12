@@ -121,7 +121,7 @@ test_that("geom_binomdensity() keeps facet variables", {
 
   data <- iris[1:100, ]
   data$facet <- rep(c("A", "B"), 50)
-  p <- ggplot2::ggplot(data) +
+  p <- ggplot2::ggplot() +
     geom_binomdensity(data, x = "Sepal.Length", y = "Species") +
     ggplot2::facet_grid(~facet)
   ld <- ggplot2::layer_data(p)
@@ -135,11 +135,12 @@ test_that("geom_binomdensity() drops rows with missing x or y only", {
 
   data <- iris[1:100, ]
   data$facet <- rep(c("A", "B"), 50)
+  data$id <- seq_len(nrow(data))
   data$Sepal.Length[1] <- NA
   data$Petal.Width[2] <- NA
   layer <- geom_binomdensity(data, x = "Sepal.Length", y = "Species")
 
   # row 1 (missing x) is dropped, row 2 (missing other column) is kept
-  expect_identical(rownames(layer$data), rownames(data)[-1])
+  expect_identical(layer$data$id, 2:100)
   expect_true("facet" %in% names(layer$data))
 })
