@@ -25,7 +25,8 @@ test_that("geom_violindot() respects free scales in facet_wrap()", {
 
   expect_equal(
     y_ranges(base + geom_violindot()),
-    y_ranges(base + ggplot2::geom_violin())
+    y_ranges(base + ggplot2::geom_violin()),
+    tolerance = testthat::testthat_tolerance()
   )
 })
 

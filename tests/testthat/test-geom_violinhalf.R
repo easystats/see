@@ -23,7 +23,8 @@ test_that("geom_violinhalf() respects free scales in facet_wrap()", {
 
   expect_equal(
     panel_y_ranges(base + geom_violinhalf()),
-    panel_y_ranges(base + ggplot2::geom_violin())
+    panel_y_ranges(base + ggplot2::geom_violin()),
+    tolerance = testthat::testthat_tolerance()
   )
 })
 
@@ -116,13 +117,18 @@ test_that("geom_violinhalf() trims like geom_violin()", {
   )
 
   trimmed <- ggplot2::layer_data(base + geom_violinhalf(trim = TRUE))
-  expect_equal(unname(y_range_by_group(trimmed)), unname(data_ranges))
+  expect_equal(
+    unname(y_range_by_group(trimmed)),
+    unname(data_ranges),
+    tolerance = testthat::testthat_tolerance()
+  )
 
   untrimmed <- ggplot2::layer_data(base + geom_violinhalf(trim = FALSE))
   reference <- ggplot2::layer_data(base + ggplot2::geom_violin(trim = FALSE))
   expect_equal(
     unname(y_range_by_group(untrimmed)),
-    unname(y_range_by_group(reference))
+    unname(y_range_by_group(reference)),
+    tolerance = testthat::testthat_tolerance()
   )
 })
 
