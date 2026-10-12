@@ -1,5 +1,10 @@
 # see (devel)
 
+## Changes
+
+* `plot()` for `datawizard::means_by_group()` gets a `flip` argument. Use
+  `flip = FALSE` to show the groups on the horizontal axis (#455).
+
 ## Bug fixes
 
 * When `check_model()` failed to create plots, the informative message

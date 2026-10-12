@@ -8,15 +8,16 @@
 #' for the analysis should be included.
 #' @param ci Logical, indicating if the confidence intervals should be included
 #' in the graph.
+#' @param flip Logical. If `TRUE` (the default), the groups are on the
+#' vertical axis. If `FALSE`, the groups are on the horizontal axis.
 #' @param ... Currently not used.
 #'
 #' @details
 #' Produces a faceted plot when there is more than one means-table.
 #'
-#' The plot uses [ggplot2::coord_flip()], so the groups are on the vertical
-#' axis and the means are on the horizontal axis. To show the groups on the
-#' horizontal axis, add `ggplot2::coord_cartesian()` to the plot. It replaces
-#' the flipped coordinate system.
+#' By default, the plot uses [ggplot2::coord_flip()], so the groups are on the
+#' vertical axis and the means are on the horizontal axis. Use `flip = FALSE`
+#' to show the groups on the horizontal axis.
 #'
 #' @examplesIf insight::check_if_installed("datawizard", minimum_version = "1.3.2", quietly = TRUE)
 #' \dontrun{
@@ -36,8 +37,12 @@ plot.see_dw_groupmeans <- function(
   title = "",
   ci = TRUE,
   caption = TRUE,
+  flip = TRUE,
   ...
 ) {
+  if (!isTRUE(flip) && !isFALSE(flip)) {
+    insight::format_error("`flip` must be either `TRUE` or `FALSE`.")
+  }
   .data <- NULL
   caption_text <- if (isTRUE(caption)) .build_caption(x) else ""
 
@@ -64,7 +69,11 @@ plot.see_dw_groupmeans <- function(
       ))
   }
 
-  p + ggplot2::coord_flip()
+  if (flip) {
+    p <- p + ggplot2::coord_flip()
+  }
+
+  p
 }
 
 
@@ -74,8 +83,12 @@ plot.see_dw_groupmeans_list <- function(
   title = "",
   ci = TRUE,
   caption = TRUE,
+  flip = TRUE,
   ...
 ) {
+  if (!isTRUE(flip) && !isFALSE(flip)) {
+    insight::format_error("`flip` must be either `TRUE` or `FALSE`.")
+  }
   .data <- NULL
 
   if (length(x) == 1L) {
@@ -84,6 +97,7 @@ plot.see_dw_groupmeans_list <- function(
       title = title,
       ci = ci,
       caption = caption,
+      flip = flip,
       ...
     )
     return(p)
@@ -133,7 +147,11 @@ plot.see_dw_groupmeans_list <- function(
       ))
   }
 
-  p + ggplot2::coord_flip()
+  if (flip) {
+    p <- p + ggplot2::coord_flip()
+  }
+
+  p
 }
 
 
