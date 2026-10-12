@@ -14,8 +14,9 @@ geom_violindot(
   dots_size = 0.7,
   dots_color = NULL,
   dots_fill = NULL,
-  binwidth = 0.05,
+  binwidth = NA,
   position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
+  interval = FALSE,
   ...,
   size_dots = dots_size,
   color_dots = dots_color,
@@ -64,27 +65,39 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
-\item{binwidth}{When \code{method} is "dotdensity", this specifies maximum bin
-width. When \code{method} is "histodot", this specifies bin width.
-Defaults to 1/30 of the range of the data}
+\item{binwidth}{The bin width of the dots. The default, \code{NA}, lets
+\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}} choose a bin width that fits the dots into the space
+left of each half violin. A number sets a fixed bin width, in the units of
+the y axis.}
 
 \item{position_dots}{Position adjustment for dots, either as a string, or the
 result of a call to a position adjustment function.}
 
-\item{...}{Other arguments passed to \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, such as \code{colour},
-\code{fill}, or \code{alpha}.}
+\item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
+quantile intervals of each group, drawn with
+\code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is \code{FALSE}.}
 
-\item{size_dots, dots_size}{Size adjustment for dots.}
+\item{...}{Other arguments passed to \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}} and
+\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}
+
+\item{size_dots, dots_size}{Size adjustment for dots, passed to the
+\code{dotsize} argument of \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}
 
 \item{color_dots, dots_color}{Color adjustment for dots.}
 
 \item{fill_dots, dots_fill}{Fill adjustment for dots.}
 }
+\value{
+A list of ggplot2 layers.
+}
 \description{
 Create a half-violin half-dot plot, useful for visualising the distribution
-and the sample size at the same time.
+and the sample size at the same time. The half violins are drawn with
+\code{\link[ggdist:stat_slab]{ggdist::stat_slab()}} and the dots with \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}, so this
+function needs the \strong{ggdist} package.
 }
 \examples{
+\dontshow{if (requireNamespace("ggdist", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 
@@ -92,4 +105,9 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violindot() +
   theme_modern()
 
+# The dots adapt to the scale of the data
+ggplot(iris, aes(x = Species, y = Sepal.Length * 1000, fill = Species)) +
+  geom_violindot(interval = TRUE) +
+  theme_modern()
+\dontshow{\}) # examplesIf}
 }
