@@ -115,3 +115,30 @@ test_that("geom_binomdensity() works correctly", {
       theme_modern()
   )
 })
+
+test_that("geom_binomdensity() keeps facet variables", {
+  skip_if_not_installed("ggdist")
+
+  data <- iris[1:100, ]
+  data$facet <- rep(c("A", "B"), 50)
+  p <- ggplot2::ggplot(data) +
+    geom_binomdensity(data, x = "Sepal.Length", y = "Species") +
+    ggplot2::facet_grid(~facet)
+  ld <- ggplot2::layer_data(p)
+
+  expect_identical(nrow(ld), 100L)
+  expect_identical(as.vector(table(ld$PANEL)), c(50L, 50L))
+})
+
+test_that("geom_binomdensity() drops rows with missing x or y only", {
+  skip_if_not_installed("ggdist")
+
+  data <- iris[1:100, ]
+  data$facet <- rep(c("A", "B"), 50)
+  data$Sepal.Length[1] <- NA
+  data$Petal.Width[2] <- NA
+  layer <- geom_binomdensity(data, x = "Sepal.Length", y = "Species")
+
+  expect_identical(nrow(layer$data), 99L)
+  expect_true("facet" %in% names(layer$data))
+})

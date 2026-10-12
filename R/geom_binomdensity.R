@@ -53,9 +53,9 @@ geom_binomdensity <- function(data, x, y, scale = "auto", ...) {
     insight::format_error("The y-variable should have exactly two levels.")
   }
 
-  # Aesthetics
-  vars <- c(x, y)
-  data <- stats::na.omit(data[unique(vars)]) # Drop NaNs
+  # Drop rows with missing x or y, but keep the other columns (e.g., facets)
+  vars <- unique(c(x, y))
+  data <- data[stats::complete.cases(data[vars]), , drop = FALSE]
 
   # Other parameters
   data$.side <- ifelse(data[[y]] == y_levels[1], "top", "bottom")

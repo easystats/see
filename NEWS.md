@@ -2,6 +2,10 @@
 
 ## Bug fixes
 
+* `geom_binomdensity()` now works with facets. It no longer drops the
+  columns other than `x` and `y`, so each panel shows only its own data
+  (#192).
+
 * When `check_model()` failed to create plots, the informative message
   about troubleshooting and workarounds was no longer printed. This should
   now work again.
