@@ -21,8 +21,10 @@
 #'   interval (`flip`, `stat`, `bw`, `kernel`, `bounds`, `drop`, `adjust`, `n`,
 #'   `density`, `side`, `normalize`, `justification`, `fill_type`, `.width`,
 #'   `point_interval`, and the `point_` and `interval_` aesthetics) go to the
-#'   half violins only. `colour` and `fill` do not reach the dots when
-#'   `color_dots` or `fill_dots` is set. An argument named `position` matches
+#'   half violins only. `colour` does not reach the dots when `color_dots` is
+#'   set, and `fill` does not reach them when `fill_dots` is set. As for the
+#'   half violins, a `width` (or `height`) is the width of a whole violin, so
+#'   the dots take half of it. An argument named `position` matches
 #'   `position_dots`. The dots of groups with fewer than two observations are
 #'   still drawn.
 #'
@@ -81,12 +83,30 @@ geom_violindot <- function(
     violin <- list(violin)
   }
 
+  # the dots take the same space as an undodged half violin: 0.45 times the axis
+  # resolution, or half of a `width` (or `height`) in `...`
+  extra_args <- list(...)
+  names(extra_args) <- ggplot2::standardise_aes_names(names(extra_args))
+  dots_size_aes <- list()
+  if (is.null(extra_args$width)) {
+    dots_size_aes$width <- quote(ggplot2::after_stat(
+      0.45 * ggplot2::resolution(x, zero = FALSE)
+    ))
+  } else {
+    extra_args$width <- extra_args$width / 2
+  }
+  if (is.null(extra_args$height)) {
+    dots_size_aes$height <- quote(ggplot2::after_stat(
+      0.45 * ggplot2::resolution(y, zero = FALSE)
+    ))
+  } else {
+    extra_args$height <- extra_args$height / 2
+  }
+
   dots_args <- list(
-    mapping = mapping,
+    mapping = .add_to_mapping(mapping, dots_size_aes),
     data = data,
     side = "left",
-    width = 0.45,
-    height = 0.45,
     scale = 1,
     dotsize = size_dots,
     binwidth = binwidth,
@@ -99,8 +119,6 @@ geom_violindot <- function(
 
   # `...` reaches the dots too, except for arguments of the half violins only
   # and for the colours and position that the dot arguments set
-  extra_args <- list(...)
-  names(extra_args) <- ggplot2::standardise_aes_names(names(extra_args))
   half_violin_only <- c(
     "flip",
     "position",

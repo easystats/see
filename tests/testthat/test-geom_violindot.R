@@ -160,3 +160,35 @@ test_that("geom_violindot() dot arguments win over base-graphics aliases", {
   expect_identical(unique(dots$colour), "blue")
   expect_identical(unique(dots$fill), "green")
 })
+
+test_that("geom_violindot() gives the dots the same space as the half violins", {
+  set.seed(1)
+  d <- data.frame(x = rep(c(10, 20, 30), each = 20), y = stats::rnorm(60))
+  p <- ggplot2::ggplot(d, ggplot2::aes(x, y, group = x)) + geom_violindot()
+  is_dots <- vapply(
+    p$layers,
+    function(l) inherits(l$geom, "GeomDots"),
+    logical(1)
+  )
+  dots <- ggplot2::layer_data(p, which(is_dots))
+  expect_equal(
+    unique(round(dots$xmax - dots$xmin, 6)),
+    4.5,
+    tolerance = testthat::testthat_tolerance()
+  )
+
+  p2 <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violindot(width = 0.6)
+  dots2 <- ggplot2::layer_data(p2, 2)
+  slab2 <- ggplot2::layer_data(p2, 1)
+  expect_equal(
+    unique(round(dots2$xmax - dots2$xmin, 6)),
+    0.3,
+    tolerance = testthat::testthat_tolerance()
+  )
+  expect_equal(
+    unique(round(slab2$xmax - slab2$xmin, 6)),
+    0.3,
+    tolerance = testthat::testthat_tolerance()
+  )
+})

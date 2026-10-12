@@ -84,8 +84,10 @@ without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_poin
 interval (\code{flip}, \code{stat}, \code{bw}, \code{kernel}, \code{bounds}, \code{drop}, \code{adjust}, \code{n},
 \code{density}, \code{side}, \code{normalize}, \code{justification}, \code{fill_type}, \code{.width},
 \code{point_interval}, and the \code{point_} and \code{interval_} aesthetics) go to the
-half violins only. \code{colour} and \code{fill} do not reach the dots when
-\code{color_dots} or \code{fill_dots} is set. An argument named \code{position} matches
+half violins only. \code{colour} does not reach the dots when \code{color_dots} is
+set, and \code{fill} does not reach them when \code{fill_dots} is set. As for the
+half violins, a \code{width} (or \code{height}) is the width of a whole violin, so
+the dots take half of it. An argument named \code{position} matches
 \code{position_dots}. The dots of groups with fewer than two observations are
 still drawn.}
 

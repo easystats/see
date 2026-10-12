@@ -168,7 +168,8 @@ geom_violinhalf <- function(
   extra_args <- extra_args[!to_interval]
 
   # the slab and the interval share these, so that they dodge alike; an
-  # argument in `...`, such as `width`, replaces the default
+  # argument in `...`, such as `normalize` or `density`, replaces the default,
+  # and half of a `width` or `height` in `...` replaces the default size
   shared <- list(
     data = data,
     position = position,
@@ -305,10 +306,12 @@ geom_violinhalf <- function(
 
 
 # A slab grob is the fill polygon plus an outline path along the curved side.
-# Give the polygon the outline's colour (opaque, as in `geom_violin()`), width,
-# and type (one value per vertex, all the same), and drop the path. A slab
-# drawn in several pieces, for example with a fill that changes along it, keeps
-# ggdist's outline, so that no border runs across it.
+# Give the polygon the outline's colour, width, and type (one value per vertex,
+# all the same), and drop the path. The colour loses any transparency, so that
+# the `alpha` aesthetic fades only the fill, as in `geom_violin()` (unlike
+# `geom_violin()`, it also drops transparency that is part of the colour). A
+# slab drawn in several pieces, or with a gradient fill, keeps ggdist's outline
+# along the curved side only, so that no border runs across it.
 .close_slab_outline <- function(grob) {
   if (
     !inherits(grob, "gList") ||
