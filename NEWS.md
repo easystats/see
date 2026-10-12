@@ -1,5 +1,14 @@
 # see (devel)
 
+## Changes
+
+* `geom_violinhalf()` and `geom_violindot()` are now drawn with the *ggdist*
+  package (`ggdist::stat_slab()` and `ggdist::geom_dots()`), which they now
+  need. They work with facets and free scales (#81, #385), and the plots look
+  a little different. The new `interval` argument adds the median with 66%
+  and 95% intervals (#68). The `binwidth` default of `geom_violindot()` is
+  now `NA` (it was 0.05), so ggdist sizes the dots to the data (#44).
+
 ## Bug fixes
 
 * When `check_model()` failed to create plots, the informative message
