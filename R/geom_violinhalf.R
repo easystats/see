@@ -346,10 +346,12 @@ geom_violinhalf <- function(
 }
 
 
-# As in see 0.14, every half violin gets the box [x, x + width] before
-# dodging, whichever its side, so that flipped and unflipped groups at one
-# position are dodged into cells alike. (ggdist puts a left-side box at
-# [x - width, x], and ggplot2 dodges boxes with different xmin apart.)
+# As in see 0.14, every half violin gets the box [x, x + w] before dodging,
+# whichever its side, where w is the half violin's width (half of a user
+# `width`), so that flipped and unflipped groups at one position are dodged
+# into cells alike. (ggdist puts a left-side box at [x - w, x], and ggplot2
+# dodges only boxes that share an xmin, so a left-side and a right-side group
+# at one position would not be dodged at all.)
 .violinhalf_box <- function(data) {
   horizontal <- isTRUE(data$flipped_aes[1])
   if (horizontal) {
@@ -366,9 +368,9 @@ geom_violinhalf <- function(
 
 
 # ggdist draws each slab from its position across the narrowest box of the
-# panel. As in see 0.14, each half violin reaches only from its position to
-# the edge of its own box (xmax - x), which is half of its dodge cell when
-# groups are dodged, and the whole box when they are not.
+# panel. As in see 0.14, each half violin reaches at most xmax - x from its
+# position, toward its side: half of its dodge cell when groups are dodged,
+# and the whole box width when they are not.
 .violinhalf_extent <- function(s_data, orientation) {
   horizontal <- isTRUE(s_data$flipped_aes[1]) ||
     identical(orientation, "horizontal") ||
