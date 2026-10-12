@@ -116,7 +116,9 @@ Create a half-violin plot. The half violins are drawn with
 \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package
 (version 3.3.3 or later). By default, each half violin is at most 0.45
 times the spacing of the categorical axis wide (0.45 units on a discrete
-axis), as before.
+axis), as before. When groups are dodged, as with \code{fill} mapped to a second
+variable, each group takes half of its dodge cell, from the cell's centre
+toward its side, so that half violins do not overlap.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}

@@ -127,6 +127,19 @@ test_that("half-violin geoms render correctly", {
   )
 
   set.seed(123)
+  iris_ab <- iris
+  iris_ab$g <- factor(rep(c("a", "b"), 75))
+  vdiffr::expect_doppelganger(
+    title = "geom_violinhalf() dodges and flips groups",
+    fig = ggplot2::ggplot(
+      iris_ab,
+      ggplot2::aes(x = Species, y = Sepal.Length, fill = g)
+    ) +
+      geom_violinhalf(flip = c(1, 4)) +
+      theme_modern()
+  )
+
+  set.seed(123)
   vdiffr::expect_doppelganger(
     title = "geom_violindot() sizes dots for large y values",
     fig = ggplot2::ggplot(

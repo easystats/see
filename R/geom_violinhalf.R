@@ -4,7 +4,9 @@
 #' [ggdist::stat_slab()], so this function needs the **ggdist** package
 #' (version 3.3.3 or later). By default, each half violin is at most 0.45
 #' times the spacing of the categorical axis wide (0.45 units on a discrete
-#' axis), as before.
+#' axis), as before. When groups are dodged, as with `fill` mapped to a second
+#' variable, each group takes half of its dodge cell, from the cell's centre
+#' toward its side, so that half violins do not overlap.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_violin

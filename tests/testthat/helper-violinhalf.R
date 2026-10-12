@@ -28,14 +28,14 @@ slab_measure <- function(p, horizontal = FALSE) {
     val_range <- range(d[[val_axis]])
     hit <- vapply(
       polys,
-      function(poly) all(abs(range(poly[[val_axis]]) - val_range) < 1e-6),
+      function(shape) all(abs(range(shape[[val_axis]]) - val_range) < 1e-6),
       logical(1)
     )
-    poly <- polys[[which(hit)]]
+    shape <- polys[[which(hit)]]
     data.frame(
       group = d$group[1],
-      lo = min(poly[[cat_axis]]),
-      hi = max(poly[[cat_axis]]),
+      lo = min(shape[[cat_axis]]),
+      hi = max(shape[[cat_axis]]),
       pos = d[[cat_axis]][1],
       pos_min = d[[paste0(cat_axis, "min")]][1],
       pos_max = d[[paste0(cat_axis, "max")]][1],
