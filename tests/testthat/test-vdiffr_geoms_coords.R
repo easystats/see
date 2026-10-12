@@ -72,6 +72,10 @@ test_that("geom and coord functions work correctly", {
       scale_color_flat_d() +
       theme_modern()
   )
+})
+
+test_that("half-violin geoms render correctly", {
+  skip_if_not_installed("ggdist")
 
   # geom_violindot() ----------------------------
 
@@ -98,5 +102,38 @@ test_that("geom and coord functions work correctly", {
       geom_violinhalf() +
       theme_modern() +
       scale_fill_material_d()
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "geom_violinhalf() flips groups 1 and 3",
+    fig = ggplot2::ggplot(
+      iris,
+      ggplot2::aes(x = Species, y = Sepal.Length, fill = Species)
+    ) +
+      geom_violinhalf(flip = c(1, 3)) +
+      theme_modern()
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "geom_violinhalf() shows intervals",
+    fig = ggplot2::ggplot(
+      iris,
+      ggplot2::aes(x = Species, y = Sepal.Length, fill = Species)
+    ) +
+      geom_violinhalf(interval = TRUE) +
+      theme_modern()
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "geom_violindot() sizes dots for large y values",
+    fig = ggplot2::ggplot(
+      iris,
+      ggplot2::aes(x = Species, y = Sepal.Length * 1000, fill = Species)
+    ) +
+      geom_violindot() +
+      theme_modern()
   )
 })
