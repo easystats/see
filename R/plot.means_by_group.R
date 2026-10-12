@@ -109,7 +109,11 @@ plot.see_dw_groupmeans_list <- function(
 
   x_attributes <- lapply(x, attributes)
   x_var_names <- lapply(x_attributes, `[[`, "var_mean_label")
-  x_captions <- mapply(.build_caption, x, x_var_names)
+  x_captions <- vapply(
+    seq_along(x),
+    function(i) .build_caption(x[[i]], x_var_names[[i]]),
+    character(1)
+  )
   x_caption <- paste(x_captions, collapse = "")
 
   x <- lapply(seq_along(x_var_names), function(i) {
