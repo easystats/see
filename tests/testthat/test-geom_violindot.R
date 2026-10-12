@@ -192,3 +192,9 @@ test_that("geom_violindot() gives the dots the same space as the half violins", 
     tolerance = testthat::testthat_tolerance()
   )
 })
+
+test_that("geom_violindot() keeps slab-only arguments away from the dots", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violindot(expand = TRUE, outline_bars = FALSE, show_point = TRUE)
+  expect_no_warning(ggplot2::ggplot_build(p))
+})

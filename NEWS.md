@@ -11,9 +11,12 @@
   the data (#44). Other arguments in `...` of `geom_violindot()` now go to
   `ggdist::geom_dots()` (instead of `geom_dotplot()`) as well as to the half
   violins, except the arguments of the density, the layout, and the interval,
-  which go to the half violins only (see `?geom_violindot`). The `stat`
-  argument is now ignored, with a warning for any value other than
-  `"ydensity"`. `geom_violindot()` no longer works with `coord_polar()`.
+  which go to the half violins only (see `?geom_violindot`). A `width` in `...`
+  is the width of a whole violin, as in `geom_violin()`, so each half violin
+  is half as wide. `bounds` must contain all values; otherwise the half
+  violins are not drawn. The `stat` argument is now ignored, with a warning
+  for any value other than `"ydensity"` or `ggplot2::StatYdensity`.
+  `geom_violindot()` no longer works with `coord_polar()`.
 
 ## Bug fixes
 

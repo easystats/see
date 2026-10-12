@@ -422,3 +422,23 @@ test_that("geom_violinhalf() leaves a data frame as mapping to ggplot2", {
 test_that("geom_violinhalf() accepts a StatYdensity stat without a warning", {
   expect_no_warning(geom_violinhalf(stat = ggplot2::StatYdensity))
 })
+
+test_that("geom_violinhalf() errors clearly on a bad flip or scale", {
+  expect_error(geom_violinhalf(flip = "yes"), regexp = "`flip` must be")
+  expect_error(geom_violinhalf(scale = "arae"), regexp = "should be one of")
+})
+
+test_that("geom_violinhalf(show_interval = TRUE) keeps the half violins", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(interval = TRUE, show_interval = TRUE)
+  expect_no_warning(ggplot2::ggplot_build(p))
+  ld <- ggplot2::layer_data(p, 1)
+  expect_false(anyNA(ld$thickness))
+})
+
+test_that("geom_violinhalf(colour = \"transparent\") draws no outline", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(colour = "transparent")
+  kids <- ggplot2::layer_grob(p)[[1]]$children
+  expect_true(all(is.na(vapply(kids, function(k) k$gp$col, character(1)))))
+})

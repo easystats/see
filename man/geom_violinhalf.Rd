@@ -103,8 +103,10 @@ violin, so each half violin is half as wide.
 
 \code{drop} has no effect. The half violins of groups with fewer than two
 observations, or with all values equal, are not drawn, with a warning, but
-their intervals are. \code{.width}, \code{point_interval}, and the \code{point_} and
-\code{interval_} aesthetics, such as \code{point_size}, go to the interval.}
+they keep their space when dodged, and their intervals are drawn.
+\code{.width}, \code{point_interval}, \code{show_point}, \code{show_interval}, \code{fatten_point},
+\code{arrow}, and the \code{point_} and \code{interval_} aesthetics, such as \code{point_size},
+go to the interval.}
 }
 \value{
 A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.

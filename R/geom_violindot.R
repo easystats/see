@@ -19,14 +19,15 @@
 #' @param ... Other arguments passed to [geom_violinhalf()] and to
 #'   [ggdist::geom_dots()]. The arguments of the density, the layout, and the
 #'   interval (`flip`, `stat`, `bw`, `kernel`, `bounds`, `drop`, `adjust`, `n`,
-#'   `density`, `side`, `normalize`, `justification`, `fill_type`, `.width`,
-#'   `point_interval`, and the `point_` and `interval_` aesthetics) go to the
-#'   half violins only. `colour` does not reach the dots when `color_dots` is
-#'   set, and `fill` does not reach them when `fill_dots` is set. As for the
-#'   half violins, a `width` (or `height`) is the width of a whole violin, so
-#'   the dots take half of it. An argument named `position` matches
-#'   `position_dots`. The dots of groups with fewer than two observations are
-#'   still drawn.
+#'   `density`, `side`, `normalize`, `justification`, `fill_type`, `limits`,
+#'   `p_limits`, `expand`, `breaks`, `outline_bars`, `slab_type`, `.width`,
+#'   `point_interval`, `show_point`, `show_interval`, `fatten_point`, `arrow`,
+#'   and the `point_` and `interval_` aesthetics) go to the half violins only.
+#'   `colour` does not reach the dots when `color_dots` is set, and `fill` does
+#'   not reach them when `fill_dots` is set. As for the half violins, a `width`
+#'   (or `height`) is the width of a whole violin, so the dots take half of it.
+#'   An argument named `position` matches `position_dots`. The dots of groups
+#'   with fewer than two observations are still drawn.
 #'
 #' @return A list of ggplot2 layers.
 #'
@@ -134,8 +135,18 @@ geom_violindot <- function(
     "normalize",
     "justification",
     "fill_type",
+    "limits",
+    "p_limits",
+    "expand",
+    "breaks",
+    "outline_bars",
+    "slab_type",
     ".width",
-    "point_interval"
+    "point_interval",
+    "show_point",
+    "show_interval",
+    "fatten_point",
+    "arrow"
   )
   extra_args <- extra_args[
     !names(extra_args) %in% half_violin_only &

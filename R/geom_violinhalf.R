@@ -39,8 +39,10 @@
 #'
 #'   `drop` has no effect. The half violins of groups with fewer than two
 #'   observations, or with all values equal, are not drawn, with a warning, but
-#'   their intervals are. `.width`, `point_interval`, and the `point_` and
-#'   `interval_` aesthetics, such as `point_size`, go to the interval.
+#'   they keep their space when dodged, and their intervals are drawn.
+#'   `.width`, `point_interval`, `show_point`, `show_interval`, `fatten_point`,
+#'   `arrow`, and the `point_` and `interval_` aesthetics, such as `point_size`,
+#'   go to the interval.
 #'
 #' @return A ggplot2 layer, or a list of two layers if `interval = TRUE`.
 #'
@@ -161,7 +163,7 @@ geom_violinhalf <- function(
 
   # styles of the interval go to the interval only
   to_interval <- grepl(
-    "^(\\.width|point_interval|point_.+|interval_.+)$",
+    "^(\\.width|point_interval|point_.+|interval_.+|show_point|show_interval|fatten_point|arrow)$",
     names(extra_args)
   )
   interval_extra <- extra_args[to_interval]
@@ -243,7 +245,8 @@ geom_violinhalf <- function(
 # not drawn. This is a function because `after_stat()` renames a bare `max` to
 # `ymax`.
 .violinhalf_thickness <- function(pdf, n, group, panel, scale) {
-  no_spread <- stats::ave(as.numeric(!is.finite(pdf)), panel, group, FUN = max)
+  # (ggdist's interval rows, if any, have pdf NA and do not count)
+  no_spread <- stats::ave(as.numeric(is.infinite(pdf)), panel, group, FUN = max)
   skip <- n < 2 | no_spread > 0
   pdf[skip] <- NA
   thickness <- switch(
@@ -326,10 +329,13 @@ geom_violinhalf <- function(
   outline <- grob[[2]]
   outline_colour <- outline$gp$col[[1]]
   if (!is.na(outline_colour)) {
-    outline_colour <- grDevices::rgb(
-      t(grDevices::col2rgb(outline_colour)),
-      maxColorValue = 255
-    )
+    rgba <- grDevices::col2rgb(outline_colour, alpha = TRUE)
+    # a fully transparent colour, such as "transparent", stays invisible
+    outline_colour <- if (rgba["alpha", 1] == 0) {
+      NA_character_
+    } else {
+      grDevices::rgb(t(rgba[1:3, , drop = FALSE]), maxColorValue = 255)
+    }
   }
   fill_grob$gp$col <- outline_colour
   fill_grob$gp$lwd <- outline$gp$lwd[[1]]

@@ -82,14 +82,15 @@ without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_poin
 \item{...}{Other arguments passed to \code{\link[=geom_violinhalf]{geom_violinhalf()}} and to
 \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}. The arguments of the density, the layout, and the
 interval (\code{flip}, \code{stat}, \code{bw}, \code{kernel}, \code{bounds}, \code{drop}, \code{adjust}, \code{n},
-\code{density}, \code{side}, \code{normalize}, \code{justification}, \code{fill_type}, \code{.width},
-\code{point_interval}, and the \code{point_} and \code{interval_} aesthetics) go to the
-half violins only. \code{colour} does not reach the dots when \code{color_dots} is
-set, and \code{fill} does not reach them when \code{fill_dots} is set. As for the
-half violins, a \code{width} (or \code{height}) is the width of a whole violin, so
-the dots take half of it. An argument named \code{position} matches
-\code{position_dots}. The dots of groups with fewer than two observations are
-still drawn.}
+\code{density}, \code{side}, \code{normalize}, \code{justification}, \code{fill_type}, \code{limits},
+\code{p_limits}, \code{expand}, \code{breaks}, \code{outline_bars}, \code{slab_type}, \code{.width},
+\code{point_interval}, \code{show_point}, \code{show_interval}, \code{fatten_point}, \code{arrow},
+and the \code{point_} and \code{interval_} aesthetics) go to the half violins only.
+\code{colour} does not reach the dots when \code{color_dots} is set, and \code{fill} does
+not reach them when \code{fill_dots} is set. As for the half violins, a \code{width}
+(or \code{height}) is the width of a whole violin, so the dots take half of it.
+An argument named \code{position} matches \code{position_dots}. The dots of groups
+with fewer than two observations are still drawn.}
 
 \item{size_dots, dots_size}{Size adjustment for dots, passed to the
 \code{dotsize} argument of \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}
