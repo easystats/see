@@ -75,7 +75,7 @@ test_that("geom and coord functions work correctly", {
 })
 
 test_that("half-violin geoms render correctly", {
-  skip_if_not_installed("ggdist")
+  skip_if_not_installed("ggdist", "3.3.3")
 
   # geom_violindot() ----------------------------
 

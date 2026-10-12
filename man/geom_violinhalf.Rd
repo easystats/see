@@ -40,8 +40,8 @@ will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
 \item{stat}{Kept for backward compatibility. The density is always computed
-by \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, and any value other than \code{"ydensity"} is ignored
-with a warning.}
+by \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, and any value other than \code{"ydensity"} or
+\link[ggplot2:StatYdensity]{ggplot2::StatYdensity} is ignored with a warning.}
 
 \item{position}{A position adjustment to use on the data for this layer. This
 can be used in various ways, including to prevent overplotting and
@@ -61,8 +61,9 @@ range of the data. If \code{FALSE}, extend the tails as \code{\link[ggplot2:geom
 does.}
 
 \item{flip}{Should the half-violin plot switch directions? By default, this
-is \code{FALSE} and all half-violin geoms will have the flat side facing
-leftward. If \code{flip = TRUE}, then all flat sides will face rightward.
+is \code{FALSE} and each half violin extends to the right of its position (up,
+in a horizontal plot), with its flat side on the left. If \code{flip = TRUE},
+all half violins extend to the left (down).
 Optionally, a numeric vector can be supplied indicating which specific
 geoms should be flipped. See examples for more details.}
 
@@ -90,12 +91,20 @@ without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_poin
 \code{FALSE}.}
 
 \item{...}{Other arguments passed to \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, such as \code{colour},
-\code{fill}, \code{alpha}, or \code{adjust}. \code{bw} sets the bandwidth of the density
-(default \code{"nrd0"}): a number, or one of \code{"nrd0"}, \code{"nrd"}, \code{"ucv"},
-\code{"bcv"}, \code{"SJ"}, or \code{"dpi"}. \code{kernel} sets the kernel (default
-\code{"gaussian"}), as in \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}. The half violins of groups
-with fewer than two observations are not drawn, with a warning, but their
-intervals are.}
+\code{fill}, \code{alpha}, or \code{adjust}. As in \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}:
+\itemize{
+\item \code{bw} sets the bandwidth of the density (default \code{"nrd0"}): a number, or
+one of \code{"nrd0"}, \code{"nrd"}, \code{"ucv"}, \code{"bcv"}, \code{"SJ"}, or \code{"dpi"}.
+\item \code{kernel} sets the kernel (default \code{"gaussian"}).
+\item \code{bounds} sets known bounds of the data, which must contain all values.
+\item \code{width} (or \code{height}, in a horizontal plot) is the width of a whole
+violin, so each half violin is half as wide.
+}
+
+\code{drop} has no effect. The half violins of groups with fewer than two
+observations, or with all values equal, are not drawn, with a warning, but
+their intervals are. \code{.width}, \code{point_interval}, and the \code{point_} and
+\code{interval_} aesthetics, such as \code{point_size}, go to the interval.}
 }
 \value{
 A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.
@@ -103,11 +112,12 @@ A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.
 \description{
 Create a half-violin plot. The half violins are drawn with
 \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package
-(version 3.3.3 or later). Each half violin is at most 0.45 units of the
-categorical axis wide by default.
+(version 3.3.3 or later). By default, each half violin is at most 0.45
+times the spacing of the categorical axis wide (0.45 units on a discrete
+axis), as before.
 }
 \examples{
-\dontshow{if (requireNamespace("ggdist", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 

@@ -1,4 +1,4 @@
-skip_if_not_installed("ggdist")
+skip_if_not_installed("ggdist", "3.3.3")
 
 iris_long <- data.frame(
   Species = rep(iris$Species, times = 4),

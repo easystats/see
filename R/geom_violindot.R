@@ -3,13 +3,13 @@
 #' Create a half-violin half-dot plot, useful for visualising the distribution
 #' and the sample size at the same time. The half violins are drawn with
 #' [ggdist::stat_slab()] and the dots with [ggdist::geom_dots()], so this
-#' function needs the **ggdist** package.
+#' function needs the **ggdist** package (version 3.3.3 or later).
 #'
 #' @inheritParams geom_violinhalf
 #' @param binwidth The bin width of the dots. The default, `NA`, lets
 #'   [ggdist::geom_dots()] choose a bin width that fits the dots into the space
-#'   left of each half violin. A number sets a fixed bin width, in the units of
-#'   the y axis.
+#'   beside each half violin. A number sets a fixed bin width, in the units of
+#'   the value axis.
 #' @param position_dots Position adjustment for dots, either as a string, or the
 #'   result of a call to a position adjustment function.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
@@ -17,14 +17,18 @@
 #' @param color_dots,dots_color Color adjustment for dots.
 #' @param fill_dots,dots_fill Fill adjustment for dots.
 #' @param ... Other arguments passed to [geom_violinhalf()] and to
-#'   [ggdist::geom_dots()]. `flip`, `position`, `stat`, `bw`, `kernel`, and
-#'   `adjust` go to the half violins only. `colour` and `fill` do not reach the
-#'   dots when `color_dots` or `fill_dots` is set. The dots of groups with fewer
-#'   than two observations are still drawn.
+#'   [ggdist::geom_dots()]. The arguments of the density, the layout, and the
+#'   interval (`flip`, `stat`, `bw`, `kernel`, `bounds`, `drop`, `adjust`, `n`,
+#'   `density`, `side`, `normalize`, `justification`, `fill_type`, `.width`,
+#'   `point_interval`, and the `point_` and `interval_` aesthetics) go to the
+#'   half violins only. `colour` and `fill` do not reach the dots when
+#'   `color_dots` or `fill_dots` is set. An argument named `position` matches
+#'   `position_dots`. The dots of groups with fewer than two observations are
+#'   still drawn.
 #'
 #' @return A list of ggplot2 layers.
 #'
-#' @examplesIf requireNamespace("ggdist", quietly = TRUE)
+#' @examplesIf requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3"
 #' library(ggplot2)
 #' library(see)
 #'
@@ -96,8 +100,29 @@ geom_violindot <- function(
   # `...` reaches the dots too, except for arguments of the half violins only
   # and for the colours and position that the dot arguments set
   extra_args <- list(...)
-  names(extra_args)[names(extra_args) == "color"] <- "colour"
-  extra_args[c("flip", "position", "stat", "bw", "kernel", "adjust")] <- NULL
+  names(extra_args) <- ggplot2::standardise_aes_names(names(extra_args))
+  half_violin_only <- c(
+    "flip",
+    "position",
+    "stat",
+    "bw",
+    "kernel",
+    "bounds",
+    "drop",
+    "adjust",
+    "n",
+    "density",
+    "side",
+    "normalize",
+    "justification",
+    "fill_type",
+    ".width",
+    "point_interval"
+  )
+  extra_args <- extra_args[
+    !names(extra_args) %in% half_violin_only &
+      !grepl("^(point|interval)_", names(extra_args))
+  ]
   if (!is.null(color_dots)) {
     extra_args$colour <- NULL
   }

@@ -1,4 +1,4 @@
-skip_if_not_installed("ggdist")
+skip_if_not_installed("ggdist", "3.3.3")
 
 iris_long <- data.frame(
   Species = rep(iris$Species, times = 4),
@@ -131,4 +131,32 @@ test_that("geom_violindot(interval = TRUE) moves the dots clear of the interval"
     dots_layer(geom_violindot(interval = TRUE, position_dots = nudge))$position,
     nudge
   )
+})
+
+test_that("geom_violindot() keeps half-violin arguments away from the dots", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violindot(n = 100, bounds = c(4, 8), .width = 0.5)
+  expect_no_warning(ggplot2::ggplot_build(p))
+
+  both <- geom_violindot(side = "both")
+  expect_identical(dots_layer(both)$aes_params$side, "left")
+})
+
+test_that("geom_violindot() dot arguments win over base-graphics aliases", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violindot(
+      col = "red",
+      color_dots = "blue",
+      bg = "red",
+      fill_dots = "green"
+    )
+  expect_no_warning(ggplot2::ggplot_build(p))
+  is_dots <- vapply(
+    p$layers,
+    function(l) inherits(l$geom, "GeomDots"),
+    logical(1)
+  )
+  dots <- ggplot2::layer_data(p, which(is_dots))
+  expect_identical(unique(dots$colour), "blue")
+  expect_identical(unique(dots$fill), "green")
 })

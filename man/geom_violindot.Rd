@@ -68,8 +68,8 @@ the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{ann
 
 \item{binwidth}{The bin width of the dots. The default, \code{NA}, lets
 \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}} choose a bin width that fits the dots into the space
-left of each half violin. A number sets a fixed bin width, in the units of
-the y axis.}
+beside each half violin. A number sets a fixed bin width, in the units of
+the value axis.}
 
 \item{position_dots}{Position adjustment for dots, either as a string, or the
 result of a call to a position adjustment function.}
@@ -80,10 +80,14 @@ without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_poin
 \code{FALSE}.}
 
 \item{...}{Other arguments passed to \code{\link[=geom_violinhalf]{geom_violinhalf()}} and to
-\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}. \code{flip}, \code{position}, \code{stat}, \code{bw}, \code{kernel}, and
-\code{adjust} go to the half violins only. \code{colour} and \code{fill} do not reach the
-dots when \code{color_dots} or \code{fill_dots} is set. The dots of groups with fewer
-than two observations are still drawn.}
+\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}. The arguments of the density, the layout, and the
+interval (\code{flip}, \code{stat}, \code{bw}, \code{kernel}, \code{bounds}, \code{drop}, \code{adjust}, \code{n},
+\code{density}, \code{side}, \code{normalize}, \code{justification}, \code{fill_type}, \code{.width},
+\code{point_interval}, and the \code{point_} and \code{interval_} aesthetics) go to the
+half violins only. \code{colour} and \code{fill} do not reach the dots when
+\code{color_dots} or \code{fill_dots} is set. An argument named \code{position} matches
+\code{position_dots}. The dots of groups with fewer than two observations are
+still drawn.}
 
 \item{size_dots, dots_size}{Size adjustment for dots, passed to the
 \code{dotsize} argument of \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}
@@ -99,10 +103,10 @@ A list of ggplot2 layers.
 Create a half-violin half-dot plot, useful for visualising the distribution
 and the sample size at the same time. The half violins are drawn with
 \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}} and the dots with \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}, so this
-function needs the \strong{ggdist} package.
+function needs the \strong{ggdist} package (version 3.3.3 or later).
 }
 \examples{
-\dontshow{if (requireNamespace("ggdist", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 

@@ -2,20 +2,22 @@
 #'
 #' Create a half-violin plot. The half violins are drawn with
 #' [ggdist::stat_slab()], so this function needs the **ggdist** package
-#' (version 3.3.3 or later). Each half violin is at most 0.45 units of the
-#' categorical axis wide by default.
+#' (version 3.3.3 or later). By default, each half violin is at most 0.45
+#' times the spacing of the categorical axis wide (0.45 units on a discrete
+#' axis), as before.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_violin
 #' @param stat Kept for backward compatibility. The density is always computed
-#'   by [ggdist::stat_slab()], and any value other than `"ydensity"` is ignored
-#'   with a warning.
+#'   by [ggdist::stat_slab()], and any value other than `"ydensity"` or
+#'   [ggplot2::StatYdensity] is ignored with a warning.
 #' @param trim If `TRUE` (default), trim the tails of the half violins to the
 #'   range of the data. If `FALSE`, extend the tails as [ggplot2::geom_violin()]
 #'   does.
 #' @param flip Should the half-violin plot switch directions? By default, this
-#'   is `FALSE` and all half-violin geoms will have the flat side facing
-#'   leftward. If `flip = TRUE`, then all flat sides will face rightward.
+#'   is `FALSE` and each half violin extends to the right of its position (up,
+#'   in a horizontal plot), with its flat side on the left. If `flip = TRUE`,
+#'   all half violins extend to the left (down).
 #'   Optionally, a numeric vector can be supplied indicating which specific
 #'   geoms should be flipped. See examples for more details.
 #' @param scale If `"area"` (default), all half violins have the same area
@@ -27,16 +29,22 @@
 #'   without the slab, as in [ggdist::stat_pointinterval()]. Default is
 #'   `FALSE`.
 #' @param ... Other arguments passed to [ggdist::stat_slab()], such as `colour`,
-#'   `fill`, `alpha`, or `adjust`. `bw` sets the bandwidth of the density
-#'   (default `"nrd0"`): a number, or one of `"nrd0"`, `"nrd"`, `"ucv"`,
-#'   `"bcv"`, `"SJ"`, or `"dpi"`. `kernel` sets the kernel (default
-#'   `"gaussian"`), as in [ggplot2::geom_violin()]. The half violins of groups
-#'   with fewer than two observations are not drawn, with a warning, but their
-#'   intervals are.
+#'   `fill`, `alpha`, or `adjust`. As in [ggplot2::geom_violin()]:
+#'   - `bw` sets the bandwidth of the density (default `"nrd0"`): a number, or
+#'     one of `"nrd0"`, `"nrd"`, `"ucv"`, `"bcv"`, `"SJ"`, or `"dpi"`.
+#'   - `kernel` sets the kernel (default `"gaussian"`).
+#'   - `bounds` sets known bounds of the data, which must contain all values.
+#'   - `width` (or `height`, in a horizontal plot) is the width of a whole
+#'     violin, so each half violin is half as wide.
+#'
+#'   `drop` has no effect. The half violins of groups with fewer than two
+#'   observations, or with all values equal, are not drawn, with a warning, but
+#'   their intervals are. `.width`, `point_interval`, and the `point_` and
+#'   `interval_` aesthetics, such as `point_size`, go to the interval.
 #'
 #' @return A ggplot2 layer, or a list of two layers if `interval = TRUE`.
 #'
-#' @examplesIf requireNamespace("ggdist", quietly = TRUE)
+#' @examplesIf requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3"
 #' library(ggplot2)
 #' library(see)
 #'
