@@ -155,11 +155,32 @@ test_that("geom_violinhalf(interval = TRUE) adds a median and intervals", {
 })
 
 test_that("geom_violinhalf() keeps its old arguments working", {
-  expect_identical(geom_violinhalf()$aes_params$scale, 0.45)
+  # each half violin spans 0.45 x-units on its own side, so flipped
+  # neighbours do not overlap and the default dodge leaves them in place
+  p <- ggplot2::ggplot(
+    iris_unbalanced,
+    ggplot2::aes(Species, Sepal.Length)
+  ) +
+    geom_violinhalf(flip = c(1, 3))
+  ld <- ggplot2::layer_data(p, 1)
+  left <- ld$group %in% c(1, 3)
+  expect_equal(
+    ld$xmin,
+    ifelse(left, ld$x - 0.45, ld$x),
+    tolerance = testthat::testthat_tolerance()
+  )
+  expect_equal(
+    ld$xmax,
+    ifelse(left, ld$x, ld$x + 0.45),
+    tolerance = testthat::testthat_tolerance()
+  )
 
-  nudged <- geom_violinhalf(position = ggplot2::position_nudge(x = 0.1))
-  expect_s3_class(nudged$position, "PositionNudge")
-  expect_identical(nudged$position$x, 0.1)
+  nudge <- ggplot2::position_nudge(x = 0.1)
+  expect_identical(geom_violinhalf(position = nudge)$position, nudge)
 
-  expect_warning(geom_violinhalf(stat = "identity"), regexp = "stat")
+  expect_warning(
+    geom_violinhalf(stat = "identity"),
+    regexp = "`stat` is ignored",
+    fixed = TRUE
+  )
 })

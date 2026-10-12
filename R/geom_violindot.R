@@ -74,7 +74,8 @@ geom_violindot <- function(
     mapping = mapping,
     data = data,
     side = "left",
-    scale = 0.45,
+    width = 0.45,
+    scale = 1,
     dotsize = size_dots,
     binwidth = binwidth,
     position = position_dots,
@@ -84,6 +85,21 @@ geom_violindot <- function(
   dots_args$colour <- color_dots
   dots_args$fill <- fill_dots
   dots <- do.call(ggdist::geom_dots, c(dots_args, list(...)))
+  dots$geom <- .geom_violindot_dots()
 
   c(violin, list(dots))
+}
+
+
+# ggdist's dots geom with the outline of the old dot plot: black. Built on
+# call, because ggdist is only suggested.
+.geom_violindot_dots <- function() {
+  ggplot2::ggproto(
+    "GeomViolinDots",
+    ggdist::GeomDots,
+    default_aes = utils::modifyList(
+      ggdist::GeomDots$default_aes,
+      list(colour = "black")
+    )
+  )
 }

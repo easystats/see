@@ -81,9 +81,9 @@ test_that("geom_violindot() keeps its old dot arguments working", {
   expect_identical(unique(built_dots(dots_fill = "blue")$fill), "blue")
   expect_identical(unique(built_dots(fill_dots = "blue")$fill), "blue")
 
-  nudged <- dots_layer(
-    geom_violindot(position_dots = ggplot2::position_nudge(x = -0.1))
+  nudge <- ggplot2::position_nudge(x = -0.1)
+  expect_identical(
+    dots_layer(geom_violindot(position_dots = nudge))$position,
+    nudge
   )
-  expect_s3_class(nudged$position, "PositionNudge")
-  expect_identical(nudged$position$x, -0.1)
 })

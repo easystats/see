@@ -109,7 +109,8 @@ geom_violinhalf <- function(
     density = ggdist::density_unbounded(bandwidth = "nrd0"),
     trim = trim,
     normalize = "all",
-    scale = 0.45,
+    width = 0.45,
+    scale = 1,
     show.legend = show.legend,
     inherit.aes = inherit.aes
   )
