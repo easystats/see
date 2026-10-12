@@ -198,3 +198,46 @@ test_that("geom_violindot() keeps slab-only arguments away from the dots", {
     geom_violindot(expand = TRUE, outline_bars = FALSE, show_point = TRUE)
   expect_no_warning(ggplot2::ggplot_build(p))
 })
+
+test_that("geom_violindot() draws dodged dots in the free half of their cell", {
+  p <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot()
+  m <- dots_measure(p)
+
+  expect_setequal(unique(m$group), 1:6)
+  # each dot centre within [xmin, x] of its group's cell, within 1e-6
+  expect_gt(min(m$dot_x - m$pos_min), -1e-6)
+  expect_lt(max(m$dot_x - m$pos), 1e-6)
+  expect_extents(slab_measure(p))
+})
+
+test_that("geom_violindot() keeps the dot nudge for one group per position", {
+  built_x <- function(...) {
+    p <- ggplot2::ggplot(
+      iris,
+      ggplot2::aes(Species, Sepal.Length, fill = Species)
+    ) +
+      geom_violindot(...)
+    is_dots <- vapply(
+      p$layers,
+      function(l) inherits(l$geom, "GeomDots"),
+      logical(1)
+    )
+    sort(unique(as.numeric(ggplot2::layer_data(p, which(is_dots))$x)))
+  }
+  expect_equal(built_x(), c(0.975, 1.975, 2.975))
+  expect_equal(built_x(interval = TRUE), c(0.94, 1.94, 2.94))
+})
+
+test_that("geom_violindot() uses a user position_dots as given under dodge", {
+  nudge <- ggplot2::position_nudge(x = -0.1)
+  p <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot(position_dots = nudge)
+  expect_identical(dots_layer(p$layers)$position, nudge)
+})

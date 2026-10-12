@@ -45,6 +45,33 @@ slab_measure <- function(p, horizontal = FALSE, panel = 1) {
   do.call(rbind, out)
 }
 
+# The drawn dot centres of a plot along the x axis, in data units, matched to
+# the groups of the slab layer (layer 1) by fill
+dots_measure <- function(p) {
+  grDevices::pdf(NULL, width = 7, height = 5)
+  on.exit(grDevices::dev.off())
+  gt <- ggplot2::ggplotGrob(p)
+  grid::grid.draw(gt)
+  dots <- grid::getGrob(grid::grid.force(gt), "dots_grob", grep = TRUE)
+  kids <- Filter(function(k) inherits(k, "points"), dots$children)
+  b <- ggplot2::ggplot_build(p)
+  x_range <- b$layout$panel_params[[1]]$x.range
+  slab <- b$data[[1]]
+  slab <- slab[!duplicated(slab$group), ]
+  out <- lapply(kids, function(k) {
+    fill <- unique(k$gp$fill)
+    d <- slab[slab$fill == fill, ]
+    stopifnot(length(fill) == 1L, nrow(d) == 1L)
+    data.frame(
+      group = d$group,
+      dot_x = x_range[1] + as.numeric(k$x) * diff(x_range),
+      pos = d$x,
+      pos_min = d$xmin
+    )
+  })
+  do.call(rbind, out)
+}
+
 # right-side (or, for `left`, left-side) extents for every group
 expect_extents <- function(m, left = integer()) {
   is_left <- m$group %in% left
