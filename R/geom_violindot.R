@@ -6,22 +6,24 @@
 #' function needs the **ggdist** package (version 3.3.3 or later). When groups
 #' are dodged, as with `fill` mapped to a second variable, each half violin
 #' takes the right half of its dodge cell (the upper half in a horizontal plot,
-#' see [geom_violinhalf()]), and its dots go in the other half. The dots stay
-#' in that half when the half violin is flipped, so they overlap it.
+#' see [geom_violinhalf()]), and, with the default `position_dots`, its dots go
+#' in the other half. The dots stay in that half when the half violin is
+#' flipped, so they overlap it.
 #'
 #' @inheritParams geom_violinhalf
 #' @param binwidth The bin width of the dots. The default, `NA`, lets
 #'   [ggdist::geom_dots()] choose a bin width that fits the dots into the space
 #'   beside each half violin. A number sets a fixed bin width, in the units of
-#'   the value axis.
+#'   the value axis. Dodged groups leave the dots less room, so a fixed bin
+#'   width can make them overflow it, with a warning from ggdist.
 #' @param position_dots Position adjustment for dots, either as a string, or the
 #'   result of a call to a position adjustment function. The default nudges the
-#'   dots by `x = -0.025` (`-0.06` with `interval = TRUE`; in a dodged cell, at
-#'   most half the room beside the half violin), which moves them
-#'   left, away from the half violin, in a vertical plot, and along the value
-#'   axis in a horizontal plot. It also dodges them with their half violins.
-#'   A position that you set is used as given, so the
-#'   dots are not dodged unless that position dodges them.
+#'   dots by `x = -0.025` (`-0.06` with `interval = TRUE`). In a vertical plot,
+#'   this moves them toward smaller x, away from the half violin, and in a
+#'   dodged cell the nudge is at most half the room beside the half violin. In
+#'   a horizontal plot, it moves them along the value axis. The default also
+#'   dodges the dots with their half violins. A position that you set is used
+#'   as given, so the dots are not dodged unless that position dodges them.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
 #'   `dotsize` argument of [ggdist::geom_dots()].
 #' @param color_dots,dots_color Color adjustment for dots.
@@ -209,8 +211,8 @@ geom_violindot <- function(
 # as the half violins are (each box set to [x, x + w] first, as in
 # `.violinhalf_box()`), and the dots of each dodged group go between the lower
 # edge of its dodge cell and the cell's centre, which is the half of the cell
-# that an unflipped half violin leaves free. A group alone at its position keeps its box
-# [x - w, x]. Then the dots are nudged by `x` and `y`, but a dodged group's box
+# that an unflipped half violin leaves free. A group alone at its position
+# keeps its box [x - w, x]. Then the dots are nudged by `x` and `y`, but a dodged group's box
 # keeps its lower edge, and its nudge toward the lower edge is at most half of
 # its box. Built on call, like the geoms.
 .position_violindots <- function(x = 0, y = 0) {
@@ -219,9 +221,32 @@ geom_violindot <- function(
     ggplot2::position_dodge(),
     x = x,
     y = y,
-    # the groups are dodged in their own order, as the half violins are, and
-    # ggdist's `order` aesthetic (the stacking order of the dots) is kept
+    # The dots are dodged in the order of the half violins: by a mapped `order`
+    # that is constant within each group (the half violins keep it), else by
+    # group. Rows with a missing value, which the half violins drop, take no
+    # part. ggdist's `order` aesthetic (the stacking order of the dots) is kept.
     setup_data = function(self, data, params) {
+      value <- data[[if (isTRUE(params$flipped_aes)) "x" else "y"]]
+      ok <- !is.na(value)
+      data$violindot_missing <- !ok
+      data$violindot_order <- data$order
+      if (!is.null(data$order)) {
+        per_group <- stats::ave(
+          xtfrm(data$order[ok]),
+          data$PANEL[ok],
+          data$group[ok],
+          FUN = function(o) length(unique(o))
+        )
+        if (any(per_group > 1)) {
+          data$order <- NULL
+        }
+      }
+      dodge_order <- ggplot2::ggproto_parent(
+        ggplot2::PositionDodge,
+        self
+      )$setup_data(data[ok, , drop = FALSE], params)$order
+      data$order <- NA_integer_
+      data$order[ok] <- dodge_order
       data
     },
     compute_panel = function(self, data, params, scales) {
@@ -230,27 +255,27 @@ geom_violindot <- function(
       lo_col <- paste0(pos_col, "min")
       hi_col <- paste0(pos_col, "max")
       pos <- data[[pos_col]]
-      groups_here <- stats::ave(
-        data$group,
-        pos,
+      ok <- !data$violindot_missing
+      groups_here <- rep(1, nrow(data))
+      groups_here[ok] <- stats::ave(
+        data$group[ok],
+        pos[ok],
         FUN = function(g) length(unique(g))
       )
       data$violindot_dodged <- groups_here > 1
       data$violindot_lo <- data[[lo_col]]
       data$violindot_hi <- data[[hi_col]]
-      stacking_order <- data$order
-      data$order <- NULL
-      data$violindot_order <- stacking_order
 
       if (any(data$violindot_dodged)) {
-        data[[lo_col]] <- pos
-        data[[hi_col]] <- pos + (data$violindot_hi - data$violindot_lo)
+        data[[lo_col]][ok] <- pos[ok]
+        data[[hi_col]][ok] <- pos[ok] +
+          (data$violindot_hi - data$violindot_lo)[ok]
         # (the dodge can add columns, such as `ymax`, which are dropped)
         columns <- names(data)
-        data <- ggplot2::ggproto_parent(
+        data[ok, ] <- ggplot2::ggproto_parent(
           ggplot2::PositionDodge,
           self
-        )$compute_panel(data, params, scales)[columns]
+        )$compute_panel(data[ok, , drop = FALSE], params, scales)[columns]
         dodged <- data$violindot_dodged
         data[[hi_col]][dodged] <- data[[pos_col]][dodged]
         data[[lo_col]][!dodged] <- data$violindot_lo[!dodged]
@@ -280,7 +305,12 @@ geom_violindot <- function(
 
       data$order <- data$violindot_order
       data$violindot_box <- TRUE
-      data[c("violindot_dodged", "violindot_lo", "violindot_hi")] <- NULL
+      data[c(
+        "violindot_dodged",
+        "violindot_lo",
+        "violindot_hi",
+        "violindot_missing"
+      )] <- NULL
       data$violindot_order <- NULL
       data
     }
@@ -289,9 +319,10 @@ geom_violindot <- function(
 
 
 # ggdist stacks the dots of every group from its position across the narrowest
-# box of the panel. With see's default position, the dots of each group fill
-# their own box instead: a dodged group's half cell beside its (unflipped)
-# half violin, less the nudge, and a lone group's whole box.
+# box of the panel. With see's default position, the dots of each group are
+# stacked across their own box instead: a dodged group's half cell beside its
+# (unflipped) half violin, less the nudge, and a lone group's whole box. (ggdist
+# still uses one bin width for all groups, the one that fits every group.)
 .violindot_reach <- function(s_data, orientation) {
   if (is.null(s_data$violindot_box)) {
     return(s_data)

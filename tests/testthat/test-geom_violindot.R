@@ -229,6 +229,76 @@ test_that("geom_violindot() keeps dodged dots in narrow cells", {
   expect_lt(max(m$dot_x - m$pos), 1e-6)
 })
 
+test_that("geom_violindot() dodges dots in horizontal plots", {
+  p <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Sepal.Length, Species, fill = interaction(g, Species))
+  ) +
+    geom_violindot()
+  m <- dots_measure(p, horizontal = TRUE)
+
+  expect_setequal(unique(m$group), 1:6)
+  expect_gt(min(m$dot_x - m$pos_min), -1e-6)
+  expect_lt(max(m$dot_x - m$pos), 1e-6)
+})
+
+test_that("geom_violindot() dodges dots in the order of the half violins", {
+  d <- iris_ab
+  # an order that is constant within each group reverses the dodge order
+  d$o <- ifelse(d$g == "a", 2L, 1L)
+  p <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species), order = o)
+  ) +
+    geom_violindot()
+  m <- dots_measure(p)
+
+  slab <- ggplot2::layer_data(p, 1)
+  expect_gt(slab$x[slab$group == 1][1], slab$x[slab$group == 2][1])
+  expect_gt(min(m$dot_x - m$pos_min), -1e-6)
+  expect_lt(max(m$dot_x - m$pos), 1e-6)
+})
+
+test_that("geom_violindot() does not dodge dots for groups without values", {
+  d <- iris_ab
+  d$Sepal.Length[d$Species == "setosa" & d$g == "b"] <- NA
+  p <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot()
+  # (both layers warn about the removed rows)
+  m <- suppressWarnings(dots_measure(p))
+  dots <- suppressWarnings(ggplot2::layer_data(p, 2))
+  dots <- dots[!is.na(dots$y) & as.numeric(dots$x) < 1.5, ]
+
+  # the half violin of setosa a is alone, so its dots keep the box
+  # [x - 0.45, x], nudged by -0.025
+  expect_gt(nrow(dots), 0)
+  expect_equal(unique(as.numeric(dots$xmin)), 0.525)
+  expect_equal(unique(as.numeric(dots$xmax)), 0.975)
+  dodged <- m[m$pos != 1, ]
+  expect_gt(min(dodged$dot_x - dodged$pos_min), -1e-6)
+  expect_lt(max(dodged$dot_x - dodged$pos), 1e-6)
+})
+
+test_that("geom_violindot() stacks a lone group's dots across its whole box", {
+  set.seed(2)
+  d <- data.frame(
+    x = factor(rep(c("A", "B"), c(40, 400))),
+    g = factor(c(rep(c("a", "b"), 20), rep("c", 400))),
+    y = c(stats::rnorm(40), sample(1:5, 400, replace = TRUE))
+  )
+  p <- ggplot2::ggplot(d, ggplot2::aes(x, y, fill = g)) + geom_violindot()
+  m <- dots_measure(p)
+  alone <- m[m$group == 3, ]
+
+  # the dodged groups' dots have 0.1125 - 0.025 = 0.0875 of room; the lone
+  # group's stacks reach further, within its own box [x - 0.475, x - 0.025]
+  expect_gt(max(alone$dot_x) - min(alone$dot_x), 0.0875)
+  expect_gt(min(alone$dot_x - (alone$pos - 0.475)), -1e-6)
+})
+
 test_that("geom_violindot() keeps the dot nudge for one group per position", {
   built_x <- function(...) {
     p <- ggplot2::ggplot(

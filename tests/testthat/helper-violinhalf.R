@@ -45,9 +45,11 @@ slab_measure <- function(p, horizontal = FALSE, panel = 1) {
   do.call(rbind, out)
 }
 
-# The drawn dot centres of a plot along the x axis, in data units, matched to
-# the groups of the slab layer (layer 1) by fill
-dots_measure <- function(p) {
+# The drawn dot centres of a plot along the categorical axis (x, or y in a
+# horizontal plot), in data units, matched to the groups of the slab layer
+# (layer 1) by fill
+dots_measure <- function(p, horizontal = FALSE) {
+  cat_axis <- if (horizontal) "y" else "x"
   grDevices::pdf(NULL, width = 7, height = 5)
   on.exit(grDevices::dev.off())
   gt <- ggplot2::ggplotGrob(p)
@@ -55,7 +57,7 @@ dots_measure <- function(p) {
   dots <- grid::getGrob(grid::grid.force(gt), "dots_grob", grep = TRUE)
   kids <- Filter(function(k) inherits(k, "points"), dots$children)
   b <- ggplot2::ggplot_build(p)
-  x_range <- b$layout$panel_params[[1]]$x.range
+  cat_range <- b$layout$panel_params[[1]][[paste0(cat_axis, ".range")]]
   slab <- b$data[[1]]
   slab <- slab[!duplicated(slab$group), ]
   out <- lapply(kids, function(k) {
@@ -64,9 +66,9 @@ dots_measure <- function(p) {
     stopifnot(length(fill) == 1L, nrow(d) == 1L)
     data.frame(
       group = d$group,
-      dot_x = x_range[1] + as.numeric(k$x) * diff(x_range),
-      pos = d$x,
-      pos_min = d$xmin
+      dot_x = cat_range[1] + as.numeric(k[[cat_axis]]) * diff(cat_range),
+      pos = d[[cat_axis]],
+      pos_min = d[[paste0(cat_axis, "min")]]
     )
   })
   do.call(rbind, out)
