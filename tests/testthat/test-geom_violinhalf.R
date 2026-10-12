@@ -442,3 +442,150 @@ test_that("geom_violinhalf(colour = \"transparent\") draws no outline", {
   kids <- ggplot2::layer_grob(p)[[1]]$children
   expect_true(all(is.na(vapply(kids, function(k) k$gp$col, character(1)))))
 })
+
+# Dodged half violins -------------------------------------------------------
+
+iris_ab <- iris
+iris_ab$g <- factor(rep(c("a", "b"), 75))
+
+# The drawn extent of each half violin along the categorical axis, read from
+# the slab polygons and converted to data units, with the group's built data
+slab_measure <- function(p, horizontal = FALSE) {
+  b <- ggplot2::ggplot_build(p)
+  pp <- b$layout$panel_params[[1]]
+  ld <- b$data[[1]]
+  ld <- ld[!is.na(ld$thickness), ]
+  cat_axis <- if (horizontal) "y" else "x"
+  val_axis <- if (horizontal) "x" else "y"
+  kids <- Filter(
+    function(k) inherits(k, "polygon"),
+    ggplot2::layer_grob(p, 1)[[1]]$children
+  )
+  to_data <- function(v, range) range[1] + as.numeric(v) * diff(range)
+  polys <- lapply(kids, function(k) {
+    list(
+      x = to_data(k$x, pp$x.range),
+      y = to_data(k$y, pp$y.range)
+    )
+  })
+  t_max <- max(ld$thickness)
+  out <- lapply(split(ld, ld$group), function(d) {
+    val_range <- range(d[[val_axis]])
+    hit <- vapply(
+      polys,
+      function(q) all(abs(range(q[[val_axis]]) - val_range) < 1e-6),
+      logical(1)
+    )
+    q <- polys[[which(hit)]]
+    data.frame(
+      group = d$group[1],
+      lo = min(q[[cat_axis]]),
+      hi = max(q[[cat_axis]]),
+      pos = d[[cat_axis]][1],
+      pos_min = d[[paste0(cat_axis, "min")]][1],
+      pos_max = d[[paste0(cat_axis, "max")]][1],
+      share = max(d$thickness) / t_max
+    )
+  })
+  do.call(rbind, out)
+}
+
+# right-side (or, for `left`, left-side) extents for every group
+expect_extents <- function(m, left = integer()) {
+  is_left <- m$group %in% left
+  reach <- (m$pos_max - m$pos) * m$share
+  expect_equal(
+    m$lo,
+    ifelse(is_left, m$pos - reach, m$pos),
+    tolerance = 1e-6
+  )
+  expect_equal(
+    m$hi,
+    ifelse(is_left, m$pos, m$pos + reach),
+    tolerance = 1e-6
+  )
+}
+
+test_that("dodged half violins stay in their own dodge cell", {
+  p1 <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = g)
+  ) +
+    geom_violinhalf()
+  expect_extents(slab_measure(p1))
+})
+
+test_that("dodged half violins flip within their own dodge cell", {
+  base <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = g)
+  )
+  plain <- ggplot2::layer_data(base + geom_violinhalf())
+  flipped_plot <- base + geom_violinhalf(flip = c(1, 4))
+  flipped <- ggplot2::layer_data(flipped_plot)
+  for (col in c("x", "xmin", "xmax")) {
+    expect_equal(
+      tapply(flipped[[col]], flipped$group, unique),
+      tapply(plain[[col]], plain$group, unique),
+      tolerance = testthat::testthat_tolerance()
+    )
+  }
+  expect_extents(slab_measure(flipped_plot), left = c(1, 4))
+})
+
+test_that("half violins keep their cell with unequal groups per position", {
+  d <- iris_ab[!(iris_ab$Species == "virginica" & iris_ab$g == "b"), ]
+  base <- ggplot2::ggplot(d, ggplot2::aes(Species, Sepal.Length, fill = g))
+  expect_extents(slab_measure(base + geom_violinhalf()))
+  expect_extents(slab_measure(base + geom_violinhalf(flip = 5)), left = 5)
+})
+
+test_that("undodged half violins are 0.45 wide on either side", {
+  base <- ggplot2::ggplot(
+    iris,
+    ggplot2::aes(Species, Sepal.Length, fill = Species)
+  )
+  m <- slab_measure(base + geom_violinhalf())
+  expect_extents(m)
+  expect_equal(m$pos_max - m$pos, rep(0.45, 3), tolerance = 1e-6)
+  m_flip <- slab_measure(base + geom_violinhalf(flip = TRUE))
+  expect_extents(m_flip, left = 1:3)
+  expect_equal(m_flip$pos_max - m_flip$pos, rep(0.45, 3), tolerance = 1e-6)
+})
+
+test_that("dodged half violins stay in their cell in horizontal plots", {
+  base <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Sepal.Length, Species, fill = g)
+  )
+  plain_plot <- base + geom_violinhalf()
+  expect_extents(slab_measure(plain_plot, horizontal = TRUE))
+  flipped_plot <- base + geom_violinhalf(flip = c(1, 4))
+  plain <- ggplot2::layer_data(plain_plot)
+  flipped <- ggplot2::layer_data(flipped_plot)
+  for (col in c("y", "ymin", "ymax")) {
+    expect_equal(
+      tapply(flipped[[col]], flipped$group, unique),
+      tapply(plain[[col]], plain$group, unique),
+      tolerance = testthat::testthat_tolerance()
+    )
+  }
+  expect_extents(slab_measure(flipped_plot, horizontal = TRUE), left = c(1, 4))
+})
+
+test_that("intervals dodge with their half violins, also when flipped", {
+  base <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = g)
+  )
+  for (f in list(FALSE, c(1, 4))) {
+    p <- base + geom_violinhalf(interval = TRUE, flip = f)
+    slab <- ggplot2::layer_data(p, 1)
+    int <- ggplot2::layer_data(p, 2)
+    expect_equal(
+      tapply(int$x, int$group, unique),
+      tapply(slab$x, slab$group, unique),
+      tolerance = testthat::testthat_tolerance()
+    )
+  }
+})
