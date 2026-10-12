@@ -24,6 +24,11 @@ The \code{plot()} method for the \code{datawizard::means_by_group()} function.
 }
 \details{
 Produces a faceted plot when there is more than one means-table.
+
+The plot uses \code{\link[ggplot2:coord_flip]{ggplot2::coord_flip()}}, so the groups are on the vertical
+axis and the means are on the horizontal axis. To show the groups on the
+horizontal axis, add \code{ggplot2::coord_cartesian()} to the plot. It replaces
+the flipped coordinate system.
 }
 \examples{
 \dontshow{if (insight::check_if_installed("datawizard", minimum_version = "1.3.2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
