@@ -2,6 +2,15 @@
 
 ## Bug fixes
 
+* `plot()` for structural equation models from `parameters::model_parameters()`
+  drew latent factors as observed variables and indicators as latent
+  variables. Latent factors are now drawn as circles and indicators as
+  squares.
+
+* `plot()` for structural equation models now gives an informative error
+  when the selected `component` has no paths to plot, for example
+  `component = "regression"` for a confirmatory factor analysis (#243).
+
 * When `check_model()` failed to create plots, the informative message
   about troubleshooting and workarounds was no longer printed. This should
   now work again.
