@@ -2,8 +2,8 @@
 #'
 #' Create a half-violin plot. The half violins are drawn with
 #' [ggdist::stat_slab()], so this function needs the **ggdist** package
-#' (version 3.3.3 or later). Each
-#' half violin is at most 0.45 x-axis units wide by default.
+#' (version 3.3.3 or later). Each half violin is at most 0.45 x-axis units wide
+#' by default.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_violin

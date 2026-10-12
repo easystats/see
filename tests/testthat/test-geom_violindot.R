@@ -87,3 +87,48 @@ test_that("geom_violindot() keeps its old dot arguments working", {
     nudge
   )
 })
+
+test_that("geom_violindot() dot arguments win over the same names in ...", {
+  built <- function(...) {
+    p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+      geom_violindot(...)
+    is_dots <- vapply(
+      p$layers,
+      function(l) inherits(l$geom, "GeomDots"),
+      logical(1)
+    )
+    b <- ggplot2::ggplot_build(p)
+    list(dots = b$data[[which(is_dots)]], slab = b$data[[which(!is_dots)]])
+  }
+
+  fills <- built(fill = "red", fill_dots = "blue")
+  expect_identical(unique(fills$dots$fill), "blue")
+  expect_identical(unique(fills$slab$fill), "red")
+
+  expect_no_warning(built(color = "red", color_dots = "blue"))
+  cols <- built(color = "red", color_dots = "blue")
+  expect_identical(unique(cols$dots$colour), "blue")
+  expect_identical(
+    unique(built(colour = "red", color_dots = "blue")$dots$colour),
+    "blue"
+  )
+})
+
+test_that("geom_violindot(flip = TRUE) gives no warning from the dots", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violindot(flip = TRUE)
+  expect_no_warning(ggplot2::ggplot_build(p))
+})
+
+test_that("geom_violindot(interval = TRUE) moves the dots clear of the interval", {
+  expect_identical(dots_layer(geom_violindot())$position$x, -0.025)
+  expect_identical(
+    dots_layer(geom_violindot(interval = TRUE))$position$x,
+    -0.06
+  )
+  nudge <- ggplot2::position_nudge(x = -0.2)
+  expect_identical(
+    dots_layer(geom_violindot(interval = TRUE, position_dots = nudge))$position,
+    nudge
+  )
+})

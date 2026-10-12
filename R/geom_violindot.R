@@ -53,8 +53,12 @@ geom_violindot <- function(
   color_dots = dots_color,
   fill_dots = dots_fill
 ) {
-  insight::check_if_installed("ggdist")
+  insight::check_if_installed("ggdist", minimum_version = "3.3.3")
   scale <- match.arg(scale)
+  # leave room for the interval between the dots and the half violin
+  if (missing(position_dots) && isTRUE(interval)) {
+    position_dots <- ggplot2::position_nudge(x = -0.06, y = 0)
+  }
 
   violin <- geom_violinhalf(
     mapping = mapping,
@@ -75,6 +79,7 @@ geom_violindot <- function(
     data = data,
     side = "left",
     width = 0.45,
+    height = 0.45,
     scale = 1,
     dotsize = size_dots,
     binwidth = binwidth,
@@ -84,9 +89,20 @@ geom_violindot <- function(
   )
   dots_args$colour <- color_dots
   dots_args$fill <- fill_dots
+
+  # `...` reaches the dots too, except for arguments of the half violins only
+  # and for the colours and position that the dot arguments set
   extra_args <- list(...)
-  dots_args[names(extra_args)] <- NULL
-  dots <- do.call(ggdist::geom_dots, c(dots_args, extra_args))
+  names(extra_args)[names(extra_args) == "color"] <- "colour"
+  extra_args[c("flip", "position", "stat", "bw", "kernel", "adjust")] <- NULL
+  if (!is.null(color_dots)) {
+    extra_args$colour <- NULL
+  }
+  if (!is.null(fill_dots)) {
+    extra_args$fill <- NULL
+  }
+  dots_args[names(extra_args)] <- extra_args
+  dots <- do.call(ggdist::geom_dots, dots_args)
   dots$geom <- .geom_violindot_dots()
 
   c(violin, list(dots))
