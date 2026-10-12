@@ -84,17 +84,38 @@ geom_violinhalf <- function(
   if (!isTRUE(interval) && !isFALSE(interval)) {
     insight::format_error("`interval` must be either `TRUE` or `FALSE`.")
   }
-  if (!identical(stat, "ydensity")) {
+  if (!identical(stat, "ydensity") && !inherits(stat, "StatYdensity")) {
     insight::format_warning(
       "`stat` is ignored. The half violins are always computed by `ggdist::stat_slab()`."
     )
   }
 
+  extra_args <- list(...)
   extra_aes <- list(
     thickness = bquote(ggplot2::after_stat(
       .violinhalf_thickness(pdf, n, group, PANEL, .(scale))
     ))
   )
+  # each half violin is at most 0.45 times the resolution of the categorical
+  # axis wide, as before; a `width` (or `height`) in `...` is the width of a
+  # whole violin, as in `geom_violin()`, so the half violin gets half of it
+  half_size <- list()
+  if (is.null(extra_args$width)) {
+    extra_aes$width <- quote(ggplot2::after_stat(
+      0.45 * ggplot2::resolution(x, zero = FALSE)
+    ))
+  } else {
+    half_size$width <- extra_args$width / 2
+  }
+  if (is.null(extra_args$height)) {
+    extra_aes$height <- quote(ggplot2::after_stat(
+      0.45 * ggplot2::resolution(y, zero = FALSE)
+    ))
+  } else {
+    half_size$height <- extra_args$height / 2
+  }
+  extra_args$width <- NULL
+  extra_args$height <- NULL
   if (is.numeric(flip)) {
     extra_aes$side <- bquote(ggplot2::after_stat(
       ifelse(group %in% .(flip), "left", "right")
@@ -113,17 +134,30 @@ geom_violinhalf <- function(
   )
   mapping <- .add_to_mapping(mapping, extra_aes)
 
-  # `bw` and `kernel` are the density arguments of `geom_violin()`
-  extra_args <- list(...)
-  # (ggdist evaluates these lazily, so they are fixed in local variables)
+  # `bw`, `kernel`, and `bounds` are the density arguments of `geom_violin()`
+  # (ggdist evaluates these lazily, so they are fixed in local variables);
+  # `drop` has no effect, because small groups are never drawn
   bandwidth <- extra_args$bw %||% "nrd0"
   density_kernel <- extra_args$kernel %||% "gaussian"
-  slab_density <- ggdist::density_unbounded(
-    bandwidth = bandwidth,
-    kernel = density_kernel
+  density_bounds <- extra_args$bounds
+  slab_density <- if (is.null(density_bounds)) {
+    ggdist::density_unbounded(bandwidth = bandwidth, kernel = density_kernel)
+  } else {
+    ggdist::density_bounded(
+      bounds = density_bounds,
+      bandwidth = bandwidth,
+      kernel = density_kernel
+    )
+  }
+  extra_args[c("bw", "kernel", "bounds", "drop")] <- NULL
+
+  # styles of the interval go to the interval only
+  to_interval <- grepl(
+    "^(\\.width|point_interval|point_.+|interval_.+)$",
+    names(extra_args)
   )
-  extra_args$bw <- NULL
-  extra_args$kernel <- NULL
+  interval_extra <- extra_args[to_interval]
+  extra_args <- extra_args[!to_interval]
 
   # the slab and the interval share these, so that they dodge alike; an
   # argument in `...`, such as `width`, replaces the default
@@ -133,12 +167,11 @@ geom_violinhalf <- function(
     density = slab_density,
     trim = trim,
     normalize = "panels",
-    width = 0.45,
-    height = 0.45,
     scale = 1,
     inherit.aes = inherit.aes
   )
   shared$side <- side
+  shared[names(half_size)] <- half_size
   shared[names(extra_args)] <- extra_args
 
   slab <- do.call(
@@ -178,21 +211,17 @@ geom_violinhalf <- function(
       "n"
     )
   )]
+  interval_base <- list(
+    mapping = interval_mapping,
+    show_slab = FALSE,
+    point_interval = "median_qi",
+    .width = c(0.66, 0.95),
+    show.legend = FALSE
+  )
+  interval_base[names(interval_extra)] <- interval_extra
   list(
     slab,
-    do.call(
-      ggdist::stat_slabinterval,
-      c(
-        list(
-          mapping = interval_mapping,
-          show_slab = FALSE,
-          point_interval = "median_qi",
-          .width = c(0.66, 0.95),
-          show.legend = FALSE
-        ),
-        interval_args
-      )
-    )
+    do.call(ggdist::stat_slabinterval, c(interval_base, interval_args))
   )
 }
 
@@ -200,23 +229,27 @@ geom_violinhalf <- function(
 # Helpers ----------------------------------------------------------------
 
 # The thickness of each half violin for `scale`. "width" scales each group in
-# each panel to a maximum of 1. Groups with fewer than two observations get no
-# thickness, so they are not drawn, as in `geom_violin()`. This is a function
-# because `after_stat()` renames a bare `max` to `ymax`.
+# each panel to a maximum of 1. Groups with fewer than two observations, or
+# with all values equal (an infinite density), get no thickness, so they are
+# not drawn. This is a function because `after_stat()` renames a bare `max` to
+# `ymax`.
 .violinhalf_thickness <- function(pdf, n, group, panel, scale) {
+  no_spread <- stats::ave(as.numeric(!is.finite(pdf)), panel, group, FUN = max)
+  skip <- n < 2 | no_spread > 0
+  pdf[skip] <- NA
   thickness <- switch(
     scale,
     area = pdf,
     count = pdf * n,
     width = pdf /
-      stats::ave(pdf, panel, group, FUN = function(v) max(v, na.rm = TRUE))
+      stats::ave(pdf, panel, group, FUN = function(v) {
+        if (all(is.na(v))) NA_real_ else max(v, na.rm = TRUE)
+      })
   )
-  few <- n < 2
-  if (any(few)) {
+  if (any(skip)) {
     insight::format_warning(
-      "Groups with fewer than two observations are not drawn."
+      "Groups with fewer than two observations, or with all values equal, are not drawn."
     )
-    thickness[few] <- NA
   }
   thickness
 }
@@ -228,6 +261,11 @@ geom_violinhalf <- function(
   added <- do.call(ggplot2::aes, extra)
   if (is.null(mapping)) {
     return(added)
+  }
+  # anything else, such as a data frame passed first, is left to ggplot2's
+  # own check of `mapping`
+  if (!inherits(mapping, "uneval")) {
+    return(mapping)
   }
   for (name in names(added)) {
     if (is.null(mapping[[name]])) {
@@ -259,19 +297,30 @@ geom_violinhalf <- function(
 
 
 # A slab grob is the fill polygon plus an outline path along the curved side.
-# Give the polygon the outline's colour, width, and type (one value per
-# vertex, all the same), and drop the path.
+# Give the polygon the outline's colour (opaque, as in `geom_violin()`), width,
+# and type (one value per vertex, all the same), and drop the path. A slab
+# drawn in several pieces, for example with a fill that changes along it, keeps
+# ggdist's outline, so that no border runs across it.
 .close_slab_outline <- function(grob) {
   if (
     !inherits(grob, "gList") ||
       length(grob) != 2L ||
-      !inherits(grob[[1]], "polygon")
+      !inherits(grob[[1]], "polygon") ||
+      length(unique(grob[[1]]$id)) > 1L ||
+      length(unique(grob[[1]]$gp$fill)) > 1L
   ) {
     return(grob)
   }
   fill_grob <- grob[[1]]
   outline <- grob[[2]]
-  fill_grob$gp$col <- outline$gp$col[[1]]
+  outline_colour <- outline$gp$col[[1]]
+  if (!is.na(outline_colour)) {
+    outline_colour <- grDevices::rgb(
+      t(grDevices::col2rgb(outline_colour)),
+      maxColorValue = 255
+    )
+  }
+  fill_grob$gp$col <- outline_colour
   fill_grob$gp$lwd <- outline$gp$lwd[[1]]
   fill_grob$gp$lty <- outline$gp$lty[[1]]
   grid::gList(fill_grob)

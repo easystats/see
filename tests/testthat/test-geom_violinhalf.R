@@ -321,3 +321,104 @@ test_that("geom_violinhalf() keeps show.legend and inherit.aes in place", {
     )
   )
 })
+
+test_that("geom_violinhalf() scales the half-width by the axis resolution", {
+  set.seed(1)
+  d <- data.frame(x = rep(c(10, 20, 30), each = 20), y = stats::rnorm(60))
+  p <- ggplot2::ggplot(d, ggplot2::aes(x, y, group = x)) + geom_violinhalf()
+  ld <- ggplot2::layer_data(p)
+  expect_equal(
+    unique(ld$xmax - ld$xmin),
+    4.5,
+    tolerance = testthat::testthat_tolerance()
+  )
+})
+
+test_that("geom_violinhalf(width = ) is the width of a whole violin", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(width = 0.6)
+  ld <- ggplot2::layer_data(p)
+  expect_equal(
+    ld$xmax - ld$xmin,
+    rep(0.3, nrow(ld)),
+    tolerance = testthat::testthat_tolerance()
+  )
+})
+
+test_that("geom_violinhalf() does not draw groups with all values equal", {
+  d <- data.frame(
+    g = rep(c("a", "b"), each = 5),
+    y = c(1, 2, 3, 4, 5, 2, 2, 2, 2, 2),
+    stringsAsFactors = FALSE
+  )
+  for (s in c("area", "width")) {
+    p <- ggplot2::ggplot(d, ggplot2::aes(g, y)) + geom_violinhalf(scale = s)
+    expect_warning(ggplot2::layer_data(p), "all values equal")
+    ld <- suppressWarnings(ggplot2::layer_data(p))
+    expect_true(all(is.na(ld$thickness[ld$group == 2])), info = s)
+    expect_true(all(is.finite(ld$thickness[ld$group == 1])), info = s)
+  }
+})
+
+test_that("geom_violinhalf() passes bounds to the density", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(trim = FALSE, bounds = c(4, 8))
+  expect_no_warning(ggplot2::layer_data(p))
+  ld <- ggplot2::layer_data(p)
+  expect_gte(min(ld$y), 4)
+  expect_lte(max(ld$y), 8)
+  # without bounds, the tails reach below 4
+  unbounded <- ggplot2::layer_data(
+    ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+      geom_violinhalf(trim = FALSE)
+  )
+  expect_lt(min(unbounded$y), 4)
+})
+
+test_that("geom_violinhalf() keeps the outline opaque under alpha", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(alpha = 0.3, fill = "red")
+  kids <- ggplot2::layer_grob(p)[[1]]$children
+  cols <- vapply(kids, function(k) k$gp$col, character(1))
+  expect_true(all(grDevices::col2rgb(cols, alpha = TRUE)["alpha", ] == 255))
+})
+
+test_that("geom_violinhalf() draws no border inside a slab with several fills", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(ggplot2::aes(fill = ggplot2::after_stat(y > 6)))
+  kids <- ggplot2::layer_grob(p)[[1]]$children
+  pieces <- Filter(
+    function(k) inherits(k, "polygon") && length(unique(k$id)) > 1L,
+    kids
+  )
+  # versicolor and virginica cross y = 6, so their slabs have two pieces
+  expect_length(pieces, 2)
+  for (k in pieces) {
+    expect_true(all(is.na(k$gp$col)))
+  }
+})
+
+test_that("geom_violinhalf(interval = TRUE) passes interval styles on", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(interval = TRUE, .width = 0.5, point_interval = "mean_qi")
+  expect_no_warning(ggplot2::ggplot_build(p))
+  ld <- ggplot2::layer_data(p, 2)
+  expect_identical(unique(ld$.width), 0.5)
+  expect_equal(
+    ld$y[ld$group == 1],
+    mean(iris$Sepal.Length[iris$Species == "setosa"]),
+    tolerance = testthat::testthat_tolerance()
+  )
+})
+
+test_that("geom_violinhalf() leaves a data frame as mapping to ggplot2", {
+  expect_error(
+    geom_violinhalf(iris),
+    "must be created by `aes()`",
+    fixed = TRUE
+  )
+})
+
+test_that("geom_violinhalf() accepts a StatYdensity stat without a warning", {
+  expect_no_warning(geom_violinhalf(stat = ggplot2::StatYdensity))
+})
