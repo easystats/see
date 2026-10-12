@@ -1,7 +1,8 @@
 #' Half-violin plot
 #'
 #' Create a half-violin plot. The half violins are drawn with
-#' [ggdist::stat_slab()], so this function needs the **ggdist** package.
+#' [ggdist::stat_slab()], so this function needs the **ggdist** package. Each
+#' half violin is at most 0.45 x-axis units wide by default.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_violin
@@ -12,11 +13,12 @@
 #'   range of the data. If `FALSE`, extend the tails as [ggplot2::geom_violin()]
 #'   does.
 #' @param flip Should the half-violin plot switch directions? By default, this
-#'   is `FALSE` and all half-violin geoms will have the flat-side on facing
-#'   leftward. If `flip = TRUE`, then all flat-sides will face rightward.
+#'   is `FALSE` and all half-violin geoms will have the flat side facing
+#'   leftward. If `flip = TRUE`, then all flat sides will face rightward.
 #'   Optionally, a numeric vector can be supplied indicating which specific
 #'   geoms should be flipped. See examples for more details.
-#' @param scale If `"area"` (default), all half violins have the same area. If
+#' @param scale If `"area"` (default), all half violins have the same area
+#'   (before trimming the tails). If
 #'   `"count"`, areas are scaled proportionally to the number of observations.
 #'   If `"width"`, all half violins have the same maximum width.
 #' @param interval Logical. If `TRUE`, add the median and the 66% and 95%
@@ -115,7 +117,10 @@ geom_violinhalf <- function(
     inherit.aes = inherit.aes
   )
   slab_args$side <- side
-  slab <- do.call(ggdist::stat_slab, c(slab_args, list(...)))
+  # an argument in `...`, such as `width`, replaces the default
+  extra_args <- list(...)
+  slab_args[names(extra_args)] <- NULL
+  slab <- do.call(ggdist::stat_slab, c(slab_args, extra_args))
 
   if (!interval) {
     return(slab)

@@ -61,12 +61,13 @@ range of the data. If \code{FALSE}, extend the tails as \code{\link[ggplot2:geom
 does.}
 
 \item{flip}{Should the half-violin plot switch directions? By default, this
-is \code{FALSE} and all half-violin geoms will have the flat-side on facing
-leftward. If \code{flip = TRUE}, then all flat-sides will face rightward.
+is \code{FALSE} and all half-violin geoms will have the flat side facing
+leftward. If \code{flip = TRUE}, then all flat sides will face rightward.
 Optionally, a numeric vector can be supplied indicating which specific
 geoms should be flipped. See examples for more details.}
 
-\item{scale}{If \code{"area"} (default), all half violins have the same area. If
+\item{scale}{If \code{"area"} (default), all half violins have the same area
+(before trimming the tails). If
 \code{"count"}, areas are scaled proportionally to the number of observations.
 If \code{"width"}, all half violins have the same maximum width.}
 
@@ -95,7 +96,8 @@ A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.
 }
 \description{
 Create a half-violin plot. The half violins are drawn with
-\code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package.
+\code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package. Each
+half violin is at most 0.45 x-axis units wide by default.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE)) withAutoprint(\{ # examplesIf}

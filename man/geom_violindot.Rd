@@ -48,7 +48,8 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 range of the data. If \code{FALSE}, extend the tails as \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}
 does.}
 
-\item{scale}{If \code{"area"} (default), all half violins have the same area. If
+\item{scale}{If \code{"area"} (default), all half violins have the same area
+(before trimming the tails). If
 \code{"count"}, areas are scaled proportionally to the number of observations.
 If \code{"width"}, all half violins have the same maximum width.}
 

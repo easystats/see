@@ -84,7 +84,9 @@ geom_violindot <- function(
   )
   dots_args$colour <- color_dots
   dots_args$fill <- fill_dots
-  dots <- do.call(ggdist::geom_dots, c(dots_args, list(...)))
+  extra_args <- list(...)
+  dots_args[names(extra_args)] <- NULL
+  dots <- do.call(ggdist::geom_dots, c(dots_args, extra_args))
   dots$geom <- .geom_violindot_dots()
 
   c(violin, list(dots))
