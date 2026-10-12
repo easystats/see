@@ -73,8 +73,11 @@ the value axis.}
 
 \item{position_dots}{Position adjustment for dots, either as a string, or the
 result of a call to a position adjustment function. The default nudges the
-dots a little to the left (more with \code{interval = TRUE}) and dodges them
-with their half violins. A position that you set is used as given, so the
+dots by \code{x = -0.025} (\code{-0.06} with \code{interval = TRUE}; in a dodged cell, at
+most half the room beside the half violin), which moves them
+left, away from the half violin, in a vertical plot, and along the value
+axis in a horizontal plot. It also dodges them with their half violins.
+A position that you set is used as given, so the
 dots are not dodged unless that position dodges them.}
 
 \item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
@@ -111,8 +114,9 @@ and the sample size at the same time. The half violins are drawn with
 \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}} and the dots with \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}, so this
 function needs the \strong{ggdist} package (version 3.3.3 or later). When groups
 are dodged, as with \code{fill} mapped to a second variable, each half violin
-takes the right half of its dodge cell (see \code{\link[=geom_violinhalf]{geom_violinhalf()}}), and its
-dots go in the left half.
+takes the right half of its dodge cell (the upper half in a horizontal plot,
+see \code{\link[=geom_violinhalf]{geom_violinhalf()}}), and its dots go in the other half. The dots stay
+in that half when the half violin is flipped, so they overlap it.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}

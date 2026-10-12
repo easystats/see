@@ -6,8 +6,9 @@
   package (`ggdist::stat_slab()` and `ggdist::geom_dots()`), which they now
   need (version 3.3.3 or later). They work with facets and free scales (#81,
   #385), and the plots look a little different. Dodged groups each take half
-  of their dodge cell, from its centre, as before. The dots of
-  `geom_violindot()` now go in the other half of the cell. The new `interval` argument
+  of their dodge cell, from its centre, as before. By default, the dots of
+  `geom_violindot()` now go in the other half of the cell (they overlap a
+  flipped half violin). The new `interval` argument
   adds the median with 66% and 95% intervals (#68). The `binwidth` default of
   `geom_violindot()` is now `NA` (it was 0.05), so ggdist sizes the dots to
   the data (#44). Other arguments in `...` of `geom_violindot()` now go to

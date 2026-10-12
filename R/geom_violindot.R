@@ -5,8 +5,9 @@
 #' [ggdist::stat_slab()] and the dots with [ggdist::geom_dots()], so this
 #' function needs the **ggdist** package (version 3.3.3 or later). When groups
 #' are dodged, as with `fill` mapped to a second variable, each half violin
-#' takes the right half of its dodge cell (see [geom_violinhalf()]), and its
-#' dots go in the left half.
+#' takes the right half of its dodge cell (the upper half in a horizontal plot,
+#' see [geom_violinhalf()]), and its dots go in the other half. The dots stay
+#' in that half when the half violin is flipped, so they overlap it.
 #'
 #' @inheritParams geom_violinhalf
 #' @param binwidth The bin width of the dots. The default, `NA`, lets
@@ -15,8 +16,11 @@
 #'   the value axis.
 #' @param position_dots Position adjustment for dots, either as a string, or the
 #'   result of a call to a position adjustment function. The default nudges the
-#'   dots a little to the left (more with `interval = TRUE`) and dodges them
-#'   with their half violins. A position that you set is used as given, so the
+#'   dots by `x = -0.025` (`-0.06` with `interval = TRUE`; in a dodged cell, at
+#'   most half the room beside the half violin), which moves them
+#'   left, away from the half violin, in a vertical plot, and along the value
+#'   axis in a horizontal plot. It also dodges them with their half violins.
+#'   A position that you set is used as given, so the
 #'   dots are not dodged unless that position dodges them.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
 #'   `dotsize` argument of [ggdist::geom_dots()].
@@ -205,7 +209,7 @@ geom_violindot <- function(
 # as the half violins are (each box set to [x, x + w] first, as in
 # `.violinhalf_box()`), and the dots of each dodged group go between the lower
 # edge of its dodge cell and the cell's centre, which is the half of the cell
-# that its half violin leaves free. A group alone at its position keeps its box
+# that an unflipped half violin leaves free. A group alone at its position keeps its box
 # [x - w, x]. Then the dots are nudged by `x` and `y`, but a dodged group's box
 # keeps its lower edge, and its nudge toward the lower edge is at most half of
 # its box. Built on call, like the geoms.
@@ -286,8 +290,8 @@ geom_violindot <- function(
 
 # ggdist stacks the dots of every group from its position across the narrowest
 # box of the panel. With see's default position, the dots of each group fill
-# their own box instead: a dodged group's free half cell, and a lone group's
-# whole box.
+# their own box instead: a dodged group's half cell beside its (unflipped)
+# half violin, less the nudge, and a lone group's whole box.
 .violindot_reach <- function(s_data, orientation) {
   if (is.null(s_data$violindot_box)) {
     return(s_data)
