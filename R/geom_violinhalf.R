@@ -300,11 +300,61 @@ geom_violinhalf <- function(
       ggdist::GeomSlab$default_aes,
       list(colour = "grey20", fill = "white", linewidth = 0.5)
     ),
-    draw_slabs = function(self, ...) {
-      grobs <- ggplot2::ggproto_parent(ggdist::GeomSlab, self)$draw_slabs(...)
+    setup_data = function(self, data, params) {
+      data <- ggplot2::ggproto_parent(ggdist::GeomSlab, self)$setup_data(
+        data,
+        params
+      )
+      .violinhalf_box(data)
+    },
+    draw_slabs = function(self, s_data, panel_params, coord, orientation, ...) {
+      s_data <- .violinhalf_extent(s_data, orientation)
+      grobs <- ggplot2::ggproto_parent(ggdist::GeomSlab, self)$draw_slabs(
+        s_data,
+        panel_params,
+        coord,
+        orientation,
+        ...
+      )
       lapply(grobs, .close_slab_outline)
     }
   )
+}
+
+
+# As in see 0.14, every half violin gets the box [x, x + width] before
+# dodging, whichever its side, so that flipped and unflipped groups at one
+# position are dodged into cells alike. (ggdist puts a left-side box at
+# [x - width, x], and ggplot2 dodges boxes with different xmin apart.)
+.violinhalf_box <- function(data) {
+  horizontal <- isTRUE(data$flipped_aes[1])
+  if (horizontal) {
+    size <- data$ymax - data$ymin
+    data$ymin <- data$y
+    data$ymax <- data$y + size
+  } else {
+    size <- data$xmax - data$xmin
+    data$xmin <- data$x
+    data$xmax <- data$x + size
+  }
+  data
+}
+
+
+# ggdist draws each slab from its position across the narrowest box of the
+# panel. As in see 0.14, each half violin reaches only from its position to
+# the edge of its own box (xmax - x), which is half of its dodge cell when
+# groups are dodged, and the whole box when they are not.
+.violinhalf_extent <- function(s_data, orientation) {
+  horizontal <- isTRUE(s_data$flipped_aes[1]) ||
+    identical(orientation, "horizontal") ||
+    identical(orientation, "y")
+  pos <- if (horizontal) s_data$y else s_data$x
+  lo <- if (horizontal) s_data$ymin else s_data$xmin
+  hi <- if (horizontal) s_data$ymax else s_data$xmax
+  narrowest <- min(hi - lo, na.rm = TRUE)
+  s_data$scale <- s_data$scale * (hi - pos) / narrowest
+  s_data
 }
 
 
