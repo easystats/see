@@ -76,7 +76,7 @@ test_that("geom_violinhalf() scales widths like geom_violin()", {
   }
 
   layer <- geom_violinhalf()
-  expect_identical(layer$geom_params$normalize, "all")
+  expect_identical(layer$geom_params$normalize, "panels")
 })
 
 test_that("geom_violinhalf() puts slabs on the side that flip asks for", {

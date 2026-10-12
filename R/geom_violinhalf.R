@@ -108,7 +108,7 @@ geom_violinhalf <- function(
     position = position,
     density = ggdist::density_unbounded(bandwidth = "nrd0"),
     trim = trim,
-    normalize = "all",
+    normalize = "panels",
     width = 0.45,
     scale = 1,
     show.legend = show.legend,
