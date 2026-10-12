@@ -81,10 +81,12 @@ GeomViolinHalf <- ggproto(
       params$width %||%
       (resolution(data$x, FALSE) * 0.9)
 
-    # ymin, ymax, xmin, and xmax define the bounding rectangle for each group
+    # ymin, ymax, xmin, and xmax define the bounding rectangle for each group.
+    # Split by panel too: facets reuse group ids across panels.
+    cells <- split(data, list(data$PANEL, data$group), drop = TRUE)
     data <- do.call(
       rbind,
-      lapply(split(data, data$group), function(.group) {
+      lapply(cells, function(.group) {
         .group$ymin <- min(.group$y)
         .group$ymax <- max(.group$y)
         .group$xmin <- .group$x

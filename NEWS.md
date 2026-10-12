@@ -2,6 +2,11 @@
 
 ## Bug fixes
 
+* `geom_violinhalf()` and `geom_violindot()` now work with facets. Each
+  half violin uses the data of its own panel, so `scales = "free_y"` in
+  `facet_wrap()` and `facet_grid()` gives each panel its own y range (#81,
+  #385).
+
 * When `check_model()` failed to create plots, the informative message
   about troubleshooting and workarounds was no longer printed. This should
   now work again.
