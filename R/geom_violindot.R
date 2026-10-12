@@ -16,8 +16,11 @@
 #'   `dotsize` argument of [ggdist::geom_dots()].
 #' @param color_dots,dots_color Color adjustment for dots.
 #' @param fill_dots,dots_fill Fill adjustment for dots.
-#' @param ... Other arguments passed to [ggdist::stat_slab()] and
-#'   [ggdist::geom_dots()].
+#' @param ... Other arguments passed to [geom_violinhalf()] and to
+#'   [ggdist::geom_dots()]. `flip`, `position`, `stat`, `bw`, `kernel`, and
+#'   `adjust` go to the half violins only. `colour` and `fill` do not reach the
+#'   dots when `color_dots` or `fill_dots` is set. The dots of groups with fewer
+#'   than two observations are still drawn.
 #'
 #' @return A list of ggplot2 layers.
 #'

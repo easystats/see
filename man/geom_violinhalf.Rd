@@ -67,9 +67,9 @@ Optionally, a numeric vector can be supplied indicating which specific
 geoms should be flipped. See examples for more details.}
 
 \item{scale}{If \code{"area"} (default), all half violins have the same area
-(before trimming the tails). If
-\code{"count"}, areas are scaled proportionally to the number of observations.
-If \code{"width"}, all half violins have the same maximum width.}
+(before trimming the tails). If \code{"count"}, areas are scaled
+proportionally to the number of observations. If \code{"width"}, all half
+violins have the same maximum width.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -85,14 +85,17 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
 \item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
-quantile intervals of each group, drawn with
-\code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is \code{FALSE}.}
+quantile intervals of each group, drawn with \code{\link[ggdist:stat_slabinterval]{ggdist::stat_slabinterval()}}
+without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is
+\code{FALSE}.}
 
 \item{...}{Other arguments passed to \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, such as \code{colour},
-\code{fill}, \code{alpha}, or \code{adjust}. As in \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}, \code{bw} sets the
-bandwidth (default \code{"nrd0"}) and \code{kernel} the kernel (default
-\code{"gaussian"}) of the density. Groups with fewer than two observations are
-not drawn.}
+\code{fill}, \code{alpha}, or \code{adjust}. \code{bw} sets the bandwidth of the density
+(default \code{"nrd0"}): a number, or one of \code{"nrd0"}, \code{"nrd"}, \code{"ucv"},
+\code{"bcv"}, \code{"SJ"}, or \code{"dpi"}. \code{kernel} sets the kernel (default
+\code{"gaussian"}), as in \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}. The half violins of groups
+with fewer than two observations are not drawn, with a warning, but their
+intervals are.}
 }
 \value{
 A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.
@@ -100,8 +103,8 @@ A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.
 \description{
 Create a half-violin plot. The half violins are drawn with
 \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package
-(version 3.3.3 or later). Each half violin is at most 0.45 x-axis units wide
-by default.
+(version 3.3.3 or later). Each half violin is at most 0.45 units of the
+categorical axis wide by default.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE)) withAutoprint(\{ # examplesIf}

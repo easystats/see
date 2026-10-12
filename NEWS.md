@@ -9,7 +9,9 @@
   adds the median with 66% and 95% intervals (#68). The `binwidth` default of
   `geom_violindot()` is now `NA` (it was 0.05), so ggdist sizes the dots to
   the data (#44). Other arguments in `...` of `geom_violindot()` now go to
-  `ggdist::geom_dots()`, and `geom_violindot()` no longer works with
+  `ggdist::geom_dots()` (instead of `geom_dotplot()`) as well as to the half
+  violins, except `flip`, `position`, `stat`, `bw`, `kernel`, and `adjust`,
+  which go to the half violins only. `geom_violindot()` no longer works with
   `coord_polar()`.
 
 ## Bug fixes

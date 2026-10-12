@@ -2,8 +2,8 @@
 #'
 #' Create a half-violin plot. The half violins are drawn with
 #' [ggdist::stat_slab()], so this function needs the **ggdist** package
-#' (version 3.3.3 or later). Each half violin is at most 0.45 x-axis units wide
-#' by default.
+#' (version 3.3.3 or later). Each half violin is at most 0.45 units of the
+#' categorical axis wide by default.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_violin
@@ -19,17 +19,20 @@
 #'   Optionally, a numeric vector can be supplied indicating which specific
 #'   geoms should be flipped. See examples for more details.
 #' @param scale If `"area"` (default), all half violins have the same area
-#'   (before trimming the tails). If
-#'   `"count"`, areas are scaled proportionally to the number of observations.
-#'   If `"width"`, all half violins have the same maximum width.
+#'   (before trimming the tails). If `"count"`, areas are scaled
+#'   proportionally to the number of observations. If `"width"`, all half
+#'   violins have the same maximum width.
 #' @param interval Logical. If `TRUE`, add the median and the 66% and 95%
-#'   quantile intervals of each group, drawn with
-#'   [ggdist::stat_pointinterval()]. Default is `FALSE`.
+#'   quantile intervals of each group, drawn with [ggdist::stat_slabinterval()]
+#'   without the slab, as in [ggdist::stat_pointinterval()]. Default is
+#'   `FALSE`.
 #' @param ... Other arguments passed to [ggdist::stat_slab()], such as `colour`,
-#'   `fill`, `alpha`, or `adjust`. As in [ggplot2::geom_violin()], `bw` sets the
-#'   bandwidth (default `"nrd0"`) and `kernel` the kernel (default
-#'   `"gaussian"`) of the density. Groups with fewer than two observations are
-#'   not drawn.
+#'   `fill`, `alpha`, or `adjust`. `bw` sets the bandwidth of the density
+#'   (default `"nrd0"`): a number, or one of `"nrd0"`, `"nrd"`, `"ucv"`,
+#'   `"bcv"`, `"SJ"`, or `"dpi"`. `kernel` sets the kernel (default
+#'   `"gaussian"`), as in [ggplot2::geom_violin()]. The half violins of groups
+#'   with fewer than two observations are not drawn, with a warning, but their
+#'   intervals are.
 #'
 #' @return A ggplot2 layer, or a list of two layers if `interval = TRUE`.
 #'
@@ -154,8 +157,8 @@ geom_violinhalf <- function(
     return(slab)
   }
 
-  # the interval takes the layout and density arguments, not the slab's
-  # colours, so that it sits on the flat side of its own half violin
+  # the interval shares the slab's position and width, so that it dodges with
+  # its own half violin and sits on its flat side, but not the slab's colours
   interval_args <- shared[intersect(
     names(shared),
     c(

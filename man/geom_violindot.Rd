@@ -49,9 +49,9 @@ range of the data. If \code{FALSE}, extend the tails as \code{\link[ggplot2:geom
 does.}
 
 \item{scale}{If \code{"area"} (default), all half violins have the same area
-(before trimming the tails). If
-\code{"count"}, areas are scaled proportionally to the number of observations.
-If \code{"width"}, all half violins have the same maximum width.}
+(before trimming the tails). If \code{"count"}, areas are scaled
+proportionally to the number of observations. If \code{"width"}, all half
+violins have the same maximum width.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -75,11 +75,15 @@ the y axis.}
 result of a call to a position adjustment function.}
 
 \item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
-quantile intervals of each group, drawn with
-\code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is \code{FALSE}.}
+quantile intervals of each group, drawn with \code{\link[ggdist:stat_slabinterval]{ggdist::stat_slabinterval()}}
+without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is
+\code{FALSE}.}
 
-\item{...}{Other arguments passed to \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}} and
-\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}
+\item{...}{Other arguments passed to \code{\link[=geom_violinhalf]{geom_violinhalf()}} and to
+\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}. \code{flip}, \code{position}, \code{stat}, \code{bw}, \code{kernel}, and
+\code{adjust} go to the half violins only. \code{colour} and \code{fill} do not reach the
+dots when \code{color_dots} or \code{fill_dots} is set. The dots of groups with fewer
+than two observations are still drawn.}
 
 \item{size_dots, dots_size}{Size adjustment for dots, passed to the
 \code{dotsize} argument of \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}
