@@ -72,7 +72,10 @@ beside each half violin. A number sets a fixed bin width, in the units of
 the value axis.}
 
 \item{position_dots}{Position adjustment for dots, either as a string, or the
-result of a call to a position adjustment function.}
+result of a call to a position adjustment function. The default nudges the
+dots a little to the left (more with \code{interval = TRUE}) and dodges them
+with their half violins. A position that you set is used as given, so the
+dots are not dodged unless that position dodges them.}
 
 \item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
 quantile intervals of each group, drawn with \code{\link[ggdist:stat_slabinterval]{ggdist::stat_slabinterval()}}
@@ -106,7 +109,10 @@ A list of ggplot2 layers.
 Create a half-violin half-dot plot, useful for visualising the distribution
 and the sample size at the same time. The half violins are drawn with
 \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}} and the dots with \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}, so this
-function needs the \strong{ggdist} package (version 3.3.3 or later).
+function needs the \strong{ggdist} package (version 3.3.3 or later). When groups
+are dodged, as with \code{fill} mapped to a second variable, each half violin
+takes the right half of its dodge cell (see \code{\link[=geom_violinhalf]{geom_violinhalf()}}), and its
+dots go in the left half.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}

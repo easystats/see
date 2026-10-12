@@ -141,6 +141,17 @@ test_that("half-violin geoms render correctly", {
 
   set.seed(123)
   vdiffr::expect_doppelganger(
+    title = "geom_violindot() dodges dots with their half violins",
+    fig = ggplot2::ggplot(
+      iris_ab,
+      ggplot2::aes(x = Species, y = Sepal.Length, fill = g)
+    ) +
+      geom_violindot() +
+      theme_modern()
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
     title = "geom_violindot() sizes dots for large y values",
     fig = ggplot2::ggplot(
       iris,

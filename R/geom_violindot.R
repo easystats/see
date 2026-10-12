@@ -3,7 +3,10 @@
 #' Create a half-violin half-dot plot, useful for visualising the distribution
 #' and the sample size at the same time. The half violins are drawn with
 #' [ggdist::stat_slab()] and the dots with [ggdist::geom_dots()], so this
-#' function needs the **ggdist** package (version 3.3.3 or later).
+#' function needs the **ggdist** package (version 3.3.3 or later). When groups
+#' are dodged, as with `fill` mapped to a second variable, each half violin
+#' takes the right half of its dodge cell (see [geom_violinhalf()]), and its
+#' dots go in the left half.
 #'
 #' @inheritParams geom_violinhalf
 #' @param binwidth The bin width of the dots. The default, `NA`, lets
@@ -11,7 +14,10 @@
 #'   beside each half violin. A number sets a fixed bin width, in the units of
 #'   the value axis.
 #' @param position_dots Position adjustment for dots, either as a string, or the
-#'   result of a call to a position adjustment function.
+#'   result of a call to a position adjustment function. The default nudges the
+#'   dots a little to the left (more with `interval = TRUE`) and dodges them
+#'   with their half violins. A position that you set is used as given, so the
+#'   dots are not dodged unless that position dodges them.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
 #'   `dotsize` argument of [ggdist::geom_dots()].
 #' @param color_dots,dots_color Color adjustment for dots.
