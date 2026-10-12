@@ -224,6 +224,7 @@ geom_violinhalf <- function(
   )]
   interval_base <- list(
     mapping = interval_mapping,
+    geom = .geom_violinhalf_interval(),
     show_slab = FALSE,
     point_interval = "median_qi",
     .width = c(0.66, 0.95),
@@ -317,6 +318,27 @@ geom_violinhalf <- function(
         ...
       )
       lapply(grobs, .close_slab_outline)
+    }
+  )
+}
+
+
+# ggdist's slab-and-interval geom with the same box as the half violins, so
+# that the interval dodges with its own half violin. Built on call, because
+# ggdist is only suggested.
+.geom_violinhalf_interval <- function() {
+  ggplot2::ggproto(
+    "GeomViolinHalfInterval",
+    ggdist::GeomSlabinterval,
+    setup_data = function(self, data, params) {
+      data <- ggplot2::ggproto_parent(
+        ggdist::GeomSlabinterval,
+        self
+      )$setup_data(
+        data,
+        params
+      )
+      .violinhalf_box(data)
     }
   )
 }
