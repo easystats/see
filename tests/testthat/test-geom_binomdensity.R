@@ -126,7 +126,7 @@ test_that("geom_binomdensity() keeps facet variables", {
     ggplot2::facet_grid(~facet)
   ld <- ggplot2::layer_data(p)
 
-  expect_identical(nrow(ld), 100L)
+  # 50 points per panel, not all 100 points in each panel
   expect_identical(as.vector(table(ld$PANEL)), c(50L, 50L))
 })
 
@@ -139,6 +139,7 @@ test_that("geom_binomdensity() drops rows with missing x or y only", {
   data$Petal.Width[2] <- NA
   layer <- geom_binomdensity(data, x = "Sepal.Length", y = "Species")
 
-  expect_identical(nrow(layer$data), 99L)
+  # row 1 (missing x) is dropped, row 2 (missing other column) is kept
+  expect_identical(rownames(layer$data), rownames(data)[-1])
   expect_true("facet" %in% names(layer$data))
 })
