@@ -118,7 +118,7 @@ Create a half-violin plot. The half violins are drawn with
 times the spacing of the categorical axis wide (0.45 units on a discrete
 axis), as before. When groups are dodged, as with \code{fill} mapped to a second
 variable, each group takes half of its dodge cell, from the cell's centre
-toward its side, so that half violins do not overlap.
+toward its side, as in see 0.14.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}

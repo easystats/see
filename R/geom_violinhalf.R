@@ -6,7 +6,7 @@
 #' times the spacing of the categorical axis wide (0.45 units on a discrete
 #' axis), as before. When groups are dodged, as with `fill` mapped to a second
 #' variable, each group takes half of its dodge cell, from the cell's centre
-#' toward its side, so that half violins do not overlap.
+#' toward its side, as in see 0.14.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_violin
@@ -308,7 +308,7 @@ geom_violinhalf <- function(
         data,
         params
       )
-      .violinhalf_box(data)
+      .violinhalf_box(data, params)
     },
     draw_slabs = function(self, s_data, panel_params, coord, orientation, ...) {
       s_data <- .violinhalf_extent(s_data, orientation)
@@ -340,7 +340,7 @@ geom_violinhalf <- function(
         data,
         params
       )
-      .violinhalf_box(data)
+      .violinhalf_box(data, params)
     }
   )
 }
@@ -352,17 +352,40 @@ geom_violinhalf <- function(
 # into cells alike. (ggdist puts a left-side box at [x - w, x], and ggplot2
 # dodges only boxes that share an xmin, so a left-side and a right-side group
 # at one position would not be dodged at all.)
-.violinhalf_box <- function(data) {
-  horizontal <- isTRUE(data$flipped_aes[1])
-  if (horizontal) {
-    size <- data$ymax - data$ymin
-    data$ymin <- data$y
-    data$ymax <- data$y + size
-  } else {
-    size <- data$xmax - data$xmin
-    data$xmin <- data$x
-    data$xmax <- data$x + size
+.violinhalf_box <- function(data, params) {
+  # a user `justification` places the slab itself, so its box stays ggdist's
+  if (!is.null(params$justification) || !is.null(data$justification)) {
+    data$half_violin <- FALSE
+    return(data)
   }
+  side <- rep_len(data$side %||% params$side %||% "right", nrow(data))
+  one_sided <- side %in%
+    c("left", "right", "top", "bottom", "topright", "bottomleft")
+  left <- side %in% c("left", "bottom", "bottomleft")
+  horizontal <- isTRUE(data$flipped_aes[1])
+  pos_col <- if (horizontal) "y" else "x"
+  lo_col <- paste0(pos_col, "min")
+  hi_col <- paste0(pos_col, "max")
+  pos <- data[[pos_col]]
+  size <- data[[hi_col]] - data[[lo_col]]
+  data[[lo_col]][one_sided] <- pos[one_sided]
+  data[[hi_col]][one_sided] <- pos[one_sided] + size[one_sided]
+  # marks the rows that `.violinhalf_extent()` resizes
+  data$half_violin <- one_sided
+  # a left-facing half violin alone at its position is not dodged and is
+  # drawn over [x - w, x], so the position scale needs that room too
+  groups_here <- stats::ave(
+    data$group,
+    data$PANEL,
+    pos,
+    FUN = function(g) length(unique(g))
+  )
+  undodged_left <- one_sided & left & groups_here == 1
+  data[[paste0(pos_col, "lower")]] <- ifelse(
+    undodged_left,
+    pos - size,
+    data[[lo_col]]
+  )
   data
 }
 
@@ -375,11 +398,16 @@ geom_violinhalf <- function(
   horizontal <- isTRUE(s_data$flipped_aes[1]) ||
     identical(orientation, "horizontal") ||
     identical(orientation, "y")
+  one_sided <- s_data$half_violin %||% rep(TRUE, nrow(s_data))
   pos <- if (horizontal) s_data$y else s_data$x
   lo <- if (horizontal) s_data$ymin else s_data$xmin
   hi <- if (horizontal) s_data$ymax else s_data$xmax
   narrowest <- min(hi - lo, na.rm = TRUE)
-  s_data$scale <- s_data$scale * (hi - pos) / narrowest
+  if (!is.finite(narrowest) || narrowest <= 0) {
+    return(s_data)
+  }
+  reach_factor <- ifelse(one_sided, (hi - pos) / narrowest, 1)
+  s_data$scale <- s_data$scale * reach_factor
   s_data
 }
 

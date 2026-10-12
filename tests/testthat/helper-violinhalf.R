@@ -5,16 +5,16 @@ iris_ab$g <- factor(rep(c("a", "b"), 75))
 
 # The drawn extent of each half violin along the categorical axis, read from
 # the slab polygons and converted to data units, with the group's built data
-slab_measure <- function(p, horizontal = FALSE) {
+slab_measure <- function(p, horizontal = FALSE, panel = 1) {
   b <- ggplot2::ggplot_build(p)
-  pp <- b$layout$panel_params[[1]]
+  pp <- b$layout$panel_params[[panel]]
   ld <- b$data[[1]]
-  ld <- ld[!is.na(ld$thickness), ]
+  ld <- ld[!is.na(ld$thickness) & ld$PANEL == panel, ]
   cat_axis <- if (horizontal) "y" else "x"
   val_axis <- if (horizontal) "x" else "y"
   kids <- Filter(
     function(k) inherits(k, "polygon"),
-    ggplot2::layer_grob(p, 1)[[1]]$children
+    ggplot2::layer_grob(p, 1)[[panel]]$children
   )
   to_data <- function(v, range) range[1] + as.numeric(v) * diff(range)
   polys <- lapply(kids, function(k) {
@@ -49,14 +49,7 @@ slab_measure <- function(p, horizontal = FALSE) {
 expect_extents <- function(m, left = integer()) {
   is_left <- m$group %in% left
   reach <- (m$pos_max - m$pos) * m$share
-  expect_equal(
-    m$lo,
-    ifelse(is_left, m$pos - reach, m$pos),
-    tolerance = 1e-6
-  )
-  expect_equal(
-    m$hi,
-    ifelse(is_left, m$pos, m$pos + reach),
-    tolerance = 1e-6
-  )
+  # each value within 1e-6
+  expect_lt(max(abs(m$lo - ifelse(is_left, m$pos - reach, m$pos))), 1e-6)
+  expect_lt(max(abs(m$hi - ifelse(is_left, m$pos, m$pos + reach))), 1e-6)
 }

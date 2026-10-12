@@ -510,3 +510,45 @@ test_that("intervals dodge with their half violins, also when flipped", {
     )
   }
 })
+
+test_that("dodged half violins stay in their cell in each facet panel", {
+  d <- iris_ab
+  d$panel <- ifelse(d$Species == "setosa", "one", "two")
+  # panel "one" has two groups at its one position, panel "two" three
+  d$g3 <- factor(ifelse(
+    d$panel == "one",
+    as.character(d$g),
+    rep(c("a", "b", "c"), 50)
+  ))
+  p <- ggplot2::ggplot(d, ggplot2::aes(Species, Sepal.Length, fill = g3)) +
+    geom_violinhalf() +
+    ggplot2::facet_wrap(~panel, scales = "free_x")
+  expect_extents(slab_measure(p, panel = 1))
+  expect_extents(slab_measure(p, panel = 2))
+})
+
+test_that("flipped half violins on a numeric axis stay inside the panel", {
+  d <- data.frame(xn = rep(c(2, 4, 6), each = 50), y = iris$Sepal.Length)
+  p <- ggplot2::ggplot(d, ggplot2::aes(xn, y, group = xn)) +
+    geom_violinhalf(flip = TRUE)
+  m <- slab_measure(p)
+  x_range <- ggplot2::ggplot_build(p)$layout$panel_params[[1]]$x.range
+  expect_gte(min(m$lo), x_range[1])
+  expect_extents(m, left = m$group)
+})
+
+test_that("a user side = \"both\" keeps the whole dodge cell", {
+  p <- ggplot2::ggplot(iris_ab, ggplot2::aes(Species, Sepal.Length, fill = g)) +
+    geom_violinhalf(side = "both")
+  ld <- ggplot2::layer_data(p)
+  widths <- tapply(ld$xmax - ld$xmin, ld$group, unique)
+  expect_equal(as.vector(widths), rep(0.225, 6), tolerance = 1e-6)
+})
+
+test_that("geom_violinhalf(width = 0) draws without dropping rows", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violinhalf(width = 0)
+  grDevices::pdf(NULL)
+  on.exit(grDevices::dev.off(), add = TRUE)
+  expect_no_warning(ggplot2::ggplotGrob(p))
+})
