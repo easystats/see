@@ -66,8 +66,13 @@ geom_violindot <- function(
   insight::check_if_installed("ggdist", minimum_version = "3.3.3")
   scale <- match.arg(scale)
   # leave room for the interval between the dots and the half violin
-  if (missing(position_dots) && isTRUE(interval)) {
+  default_position <- missing(position_dots)
+  if (default_position && isTRUE(interval)) {
     position_dots <- ggplot2::position_nudge(x = -0.06, y = 0)
+  }
+  # the default nudge also dodges the dots with their half violins
+  if (default_position) {
+    position_dots <- .position_violindots(position_dots$x, position_dots$y)
   }
 
   violin <- geom_violinhalf(
@@ -175,6 +180,121 @@ geom_violindot <- function(
     default_aes = utils::modifyList(
       ggdist::GeomDots$default_aes,
       list(colour = "black")
-    )
+    ),
+    draw_slabs = function(self, s_data, panel_params, coord, orientation, ...) {
+      s_data <- .violindot_reach(s_data, orientation)
+      ggplot2::ggproto_parent(ggdist::GeomDots, self)$draw_slabs(
+        s_data,
+        panel_params,
+        coord,
+        orientation,
+        ...
+      )
+    }
   )
+}
+
+
+# The default position of the dots. Groups that share a position are dodged
+# as the half violins are (each box set to [x, x + w] first, as in
+# `.violinhalf_box()`), and the dots of each dodged group go between the lower
+# edge of its dodge cell and the cell's centre, which is the half of the cell
+# that its half violin leaves free. A group alone at its position keeps its box
+# [x - w, x]. Then the dots are nudged by `x` and `y`, but a dodged group's box
+# keeps its lower edge, and its nudge toward the lower edge is at most half of
+# its box. Built on call, like the geoms.
+.position_violindots <- function(x = 0, y = 0) {
+  ggplot2::ggproto(
+    "PositionViolinDots",
+    ggplot2::position_dodge(),
+    x = x,
+    y = y,
+    # the groups are dodged in their own order, as the half violins are, and
+    # ggdist's `order` aesthetic (the stacking order of the dots) is kept
+    setup_data = function(self, data, params) {
+      data
+    },
+    compute_panel = function(self, data, params, scales) {
+      horizontal <- isTRUE(params$flipped_aes)
+      pos_col <- if (horizontal) "y" else "x"
+      lo_col <- paste0(pos_col, "min")
+      hi_col <- paste0(pos_col, "max")
+      pos <- data[[pos_col]]
+      groups_here <- stats::ave(
+        data$group,
+        pos,
+        FUN = function(g) length(unique(g))
+      )
+      data$violindot_dodged <- groups_here > 1
+      data$violindot_lo <- data[[lo_col]]
+      data$violindot_hi <- data[[hi_col]]
+      stacking_order <- data$order
+      data$order <- NULL
+      data$violindot_order <- stacking_order
+
+      if (any(data$violindot_dodged)) {
+        data[[lo_col]] <- pos
+        data[[hi_col]] <- pos + (data$violindot_hi - data$violindot_lo)
+        # (the dodge can add columns, such as `ymax`, which are dropped)
+        columns <- names(data)
+        data <- ggplot2::ggproto_parent(
+          ggplot2::PositionDodge,
+          self
+        )$compute_panel(data, params, scales)[columns]
+        dodged <- data$violindot_dodged
+        data[[hi_col]][dodged] <- data[[pos_col]][dodged]
+        data[[lo_col]][!dodged] <- data$violindot_lo[!dodged]
+        data[[hi_col]][!dodged] <- data$violindot_hi[!dodged]
+      }
+      dodged <- data$violindot_dodged
+
+      # the nudge along the categorical axis, then along the value axis
+      pos_nudge <- if (horizontal) self$y else self$x
+      val_nudge <- if (horizontal) self$x else self$y
+      shift <- rep_len(pos_nudge, nrow(data))
+      if (pos_nudge < 0) {
+        room <- (data[[hi_col]] - data[[lo_col]])[dodged] / 2
+        shift[dodged] <- -pmin(-pos_nudge, room)
+      }
+      data[[pos_col]] <- data[[pos_col]] + shift
+      data[[hi_col]] <- data[[hi_col]] + shift
+      data[[lo_col]][!dodged] <- data[[lo_col]][!dodged] + shift[!dodged]
+      if (val_nudge != 0) {
+        nudge_value <- function(v) v + val_nudge
+        data <- ggplot2::transform_position(
+          data,
+          trans_x = if (horizontal) nudge_value,
+          trans_y = if (!horizontal) nudge_value
+        )
+      }
+
+      data$order <- data$violindot_order
+      data$violindot_box <- TRUE
+      data[c("violindot_dodged", "violindot_lo", "violindot_hi")] <- NULL
+      data$violindot_order <- NULL
+      data
+    }
+  )
+}
+
+
+# ggdist stacks the dots of every group from its position across the narrowest
+# box of the panel. With see's default position, the dots of each group fill
+# their own box instead: a dodged group's free half cell, and a lone group's
+# whole box.
+.violindot_reach <- function(s_data, orientation) {
+  if (is.null(s_data$violindot_box)) {
+    return(s_data)
+  }
+  horizontal <- isTRUE(s_data$flipped_aes[1]) ||
+    identical(orientation, "horizontal") ||
+    identical(orientation, "y")
+  lo <- if (horizontal) s_data$ymin else s_data$xmin
+  hi <- if (horizontal) s_data$ymax else s_data$xmax
+  narrowest <- min(hi - lo, na.rm = TRUE)
+  if (!is.finite(narrowest) || narrowest <= 0) {
+    return(s_data)
+  }
+  s_data$scale <- s_data$scale * (hi - lo) / narrowest
+  s_data
 }

@@ -214,6 +214,21 @@ test_that("geom_violindot() draws dodged dots in the free half of their cell", {
   expect_extents(slab_measure(p))
 })
 
+test_that("geom_violindot() keeps dodged dots in narrow cells", {
+  d <- iris
+  d$g <- factor(rep(1:4, length.out = nrow(d)))
+  p <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot(interval = TRUE)
+  expect_no_warning(m <- dots_measure(p))
+
+  expect_setequal(unique(m$group), 1:12)
+  expect_gt(min(m$dot_x - m$pos_min), -1e-6)
+  expect_lt(max(m$dot_x - m$pos), 1e-6)
+})
+
 test_that("geom_violindot() keeps the dot nudge for one group per position", {
   built_x <- function(...) {
     p <- ggplot2::ggplot(
