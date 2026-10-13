@@ -666,14 +666,18 @@ test_that("lighthouse plots draw back-transformed log contrasts as ratios", {
   skip_if_not_installed("marginaleffects")
 
   d <- contrasts_by_fixture()$data
+  # `transform = FALSE` is not accepted, so the default is left out
   estimates <- function(model, transform = TRUE) {
+    args <- if (transform) list(transform = TRUE)
     list(
-      contrasts = modelbased::estimate_contrasts(
-        model,
-        contrast = "am",
-        transform = transform
+      contrasts = do.call(
+        modelbased::estimate_contrasts,
+        c(list(model, contrast = "am"), args)
       ),
-      means = modelbased::estimate_means(model, by = "am", transform = transform)
+      means = do.call(
+        modelbased::estimate_means,
+        c(list(model, by = "am"), args)
+      )
     )
   }
   expect_geometry <- function(est, geometry) {
@@ -867,8 +871,8 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
   means_link <- modelbased::estimate_means(model, by = "am", predict = "link")
   expect_match(
-    error_message(plot(contrasts, means_link, show_data = TRUE)),
-    "the means were estimated with `predict = \"link\"`",
+    error_message(plot(contrasts, means_link)),
+    "the estimated means with `predict = \"link\"`",
     fixed = TRUE
   )
   # means in a data frame without the attributes are taken as estimated like

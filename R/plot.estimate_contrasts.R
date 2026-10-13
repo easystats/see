@@ -24,6 +24,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       "Lighthouse plots need pairwise contrasts with the columns `Level1` and `Level2`."
     )
   }
+  # an unknown transformation comes first: modelbased then sets
+  # `transform = FALSE` on the means
+  geometry <- .lighthouse_geometry(x)
+  .check_same_scale(x, means)
 
   # each contrast is drawn from the means of its own `by` level
   by_vars <- .clean_target_names(attr(x, "by"))
@@ -73,7 +77,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     y_name = y_name,
     by = by_columns,
     means_call = means_call,
-    geometry = .lighthouse_geometry(x)
+    geometry = geometry
   )
 
   attr(dataplot, "info") <- list(
@@ -134,7 +138,104 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   if ("Ratio" %in% names(contrasts)) {
     return("ratio")
   }
-  "difference"
+  if (!isTRUE(attr(contrasts, "transform", exact = TRUE))) {
+    return("difference")
+  }
+
+  # back-transformed contrasts of a log response are ratios of the
+  # back-transformed means
+  model <- attr(contrasts, "model", exact = TRUE)
+  transformation <- if (!is.null(model)) {
+    tryCatch(insight::find_transformation(model), error = function(e) NULL)
+  }
+  if (!is.character(transformation) || length(transformation) != 1L) {
+    insight::format_error(
+      paste(
+        "Lighthouse plots cannot draw contrasts estimated with",
+        "`transform = TRUE`, because the transformation of the response is",
+        "unknown. Please obtain the contrasts and means without `transform`."
+      )
+    )
+  }
+  if (identical(transformation, "identity")) {
+    return("difference")
+  }
+  if (.is_log_transformation(transformation)) {
+    return("ratio")
+  }
+  insight::format_error(
+    paste0(
+      "Lighthouse plots cannot draw contrasts back-transformed from the ",
+      "transformation `",
+      transformation,
+      "` of the response. With `transform = TRUE`, they draw only responses ",
+      "transformed with log(), log2(), or log10(). Please obtain the ",
+      "contrasts and means without `transform`."
+    )
+  )
+}
+
+
+#' @keywords internal
+.is_log_transformation <- function(x) {
+  is.character(x) &&
+    length(x) == 1L &&
+    (x %in% c("log", "log2", "log10") || grepl("^log\\(x,base=", x))
+}
+
+
+# the contrasts and means must be on one scale; values that modelbased gives
+# for the response scale count as the same
+#' @keywords internal
+.check_same_scale <- function(contrasts, means) {
+  response_scale <- c("response", "inverse_link", "invlink(link)")
+  predict_contrasts <- attr(contrasts, "predict", exact = TRUE)
+  predict_means <- attr(means, "predict", exact = TRUE)
+  if (
+    is.character(predict_contrasts) &&
+      length(predict_contrasts) == 1L &&
+      is.character(predict_means) &&
+      length(predict_means) == 1L &&
+      !identical(predict_contrasts, predict_means) &&
+      !all(c(predict_contrasts, predict_means) %in% response_scale)
+  ) {
+    insight::format_error(
+      paste0(
+        "The contrasts were estimated with `predict = \"",
+        predict_contrasts,
+        "\"` and the estimated means with `predict = \"",
+        predict_means,
+        "\"`. Lighthouse plots need both on the same scale. Please obtain ",
+        "the contrasts and means with the same `predict`."
+      )
+    )
+  }
+
+  transform_contrasts <- attr(contrasts, "transform", exact = TRUE)
+  transform_means <- attr(means, "transform", exact = TRUE)
+  if (
+    !is.null(transform_contrasts) &&
+      !is.null(transform_means) &&
+      !identical(transform_contrasts, transform_means, ignore.environment = TRUE)
+  ) {
+    describe <- function(transform) {
+      if (is.function(transform)) {
+        "a `transform` function"
+      } else {
+        paste0("`transform = ", deparse(transform), "`")
+      }
+    }
+    insight::format_error(
+      paste0(
+        "The contrasts were estimated with ",
+        describe(transform_contrasts),
+        " and the estimated means with ",
+        describe(transform_means),
+        ". Lighthouse plots need both on the same scale. Please obtain the ",
+        "contrasts and means with the same `transform`."
+      )
+    )
+  }
 }
 
 
