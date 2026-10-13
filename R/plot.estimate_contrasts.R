@@ -240,14 +240,20 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @param show_data Logical. If `TRUE`, the plot draws the raw data of the model
 #'   as jittered points behind the lighthouses. The raw data come from
 #'   `insight::get_data()` for the model stored in `x`, not from `data`. The
-#'   plot stops with an error if the contrasts or the estimated means are not on
-#'   the scale of the raw response, for example for a transformed response
-#'   without `transform = TRUE`, or with `predict = "link"`. Means without the
-#'   modelbased attributes, such as a plain data frame, are taken to be on the
-#'   same scale as the contrasts and are not checked. It also stops if
-#'   the estimated means do not include each value in the data of the
-#'   contrasted and `by` variables, for example for a numeric `by` variable
-#'   with values that the means were not estimated at.
+#'   plot stops with an error in these cases:
+#'   - `x` is the output of `data_plot()`, or it does not carry its model.
+#'   - The model transforms the response, for example `log(y)`. This also
+#'     applies with `transform = TRUE`, because the back-transformed contrasts
+#'     are then not differences on the scale of the raw data.
+#'   - The contrasts or the estimated means were estimated on another scale
+#'     than the response, for example with `predict = "link"`. Means without
+#'     this information, such as a plain data frame, are taken to be on the
+#'     same scale as the contrasts.
+#'   - The model data lack the response or a contrasted or `by` variable.
+#'   - The estimated means do not include each value in the data of the
+#'     contrasted and `by` variables, or each combination of their values. For
+#'     example, a numeric `by` variable has values that the means were not
+#'     estimated at.
 #'
 #' @return A ggplot2-object.
 #'
@@ -379,24 +385,34 @@ plot.see_estimate_contrasts <- function(
     )
   }
 
-  # the contrasts and the means must be on the scale of the raw response:
-  # estimated on the response scale, and of an untransformed response or
-  # back-transformed; means without these attributes (e.g. a plain data
-  # frame) are taken as estimated like the contrasts
-  transformation <- tryCatch(
-    insight::find_transformation(model),
+  # the response must be untransformed: back-transformed contrasts of a
+  # transformed response are not differences on the raw scale (for a log
+  # response they are ratios), so their lighthouses do not fit the raw data
+  response_term <- tryCatch(
+    insight::find_terms(model)$response,
     error = function(e) NULL
   )
-  untransformed <- identical(insight::find_terms(model)$response, response)
+  if (!identical(response_term, response)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs the contrasts and means on the scale of ",
+        "the raw data of ",
+        response,
+        ", but the model transforms the response",
+        if (!is.null(response_term)) paste0(" (", toString(response_term), ")"),
+        ". Please fit the model to the untransformed response to show the data."
+      )
+    )
+  }
+
+  # the contrasts and the means must be estimated on the response scale;
+  # means without the attribute (e.g. a plain data frame) are taken as
+  # estimated like the contrasts
   estimates <- list(contrasts = contrasts, means = means_object)
   for (i in names(estimates)) {
     predict <- attr(estimates[[i]], "predict", exact = TRUE)
-    transform <- attr(estimates[[i]], "transform", exact = TRUE)
     if (i == "means" && is.null(predict)) {
       predict <- "response"
-    }
-    if (i == "means" && is.null(transform)) {
-      transform <- TRUE
     }
 
     if (
@@ -416,24 +432,6 @@ plot.see_estimate_contrasts <- function(
           },
           ". Please obtain the contrasts and means with ",
           "`predict = \"response\"`."
-        )
-      )
-    }
-
-    back_transformed <- isTRUE(transform) &&
-      !is.null(transformation) &&
-      !identical(transformation, "identity")
-    if (!untransformed && !back_transformed) {
-      insight::format_error(
-        paste0(
-          "`show_data = TRUE` needs the contrasts and means on the scale of ",
-          "the raw data of ",
-          response,
-          ", but the model transforms the response and the ",
-          i,
-          " are not back-transformed. If modelbased can reverse the ",
-          "transformation, obtain the contrasts and means with ",
-          "`transform = TRUE`."
         )
       )
     }
@@ -489,6 +487,25 @@ plot.see_estimate_contrasts <- function(
         ". Please obtain the means for all combinations."
       )
     )
+  }
+
+  # with two or more `by` variables, each combination must have its facet
+  if (length(by) > 1) {
+    by_key <- function(d) {
+      do.call(paste, c(lapply(by, function(i) as.character(d[[i]])), sep = ", "))
+    }
+    lacking <- setdiff(unique(by_key(raw)), by_key(means))
+    if (length(lacking)) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs each combination of levels of ",
+          toString(by),
+          " in the data among the estimated means, but the means lack ",
+          toString(lacking),
+          ". Please obtain the means for all combinations."
+        )
+      )
+    }
   }
   y <- raw[[response]]
 

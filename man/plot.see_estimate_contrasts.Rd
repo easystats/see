@@ -15,14 +15,22 @@
 \item{show_data}{Logical. If \code{TRUE}, the plot draws the raw data of the model
 as jittered points behind the lighthouses. The raw data come from
 \code{insight::get_data()} for the model stored in \code{x}, not from \code{data}. The
-plot stops with an error if the contrasts or the estimated means are not on
-the scale of the raw response, for example for a transformed response
-without \code{transform = TRUE}, or with \code{predict = "link"}. Means without the
-modelbased attributes, such as a plain data frame, are taken to be on the
-same scale as the contrasts and are not checked. It also stops if
-the estimated means do not include each value in the data of the
-contrasted and \code{by} variables, for example for a numeric \code{by} variable
-with values that the means were not estimated at.}
+plot stops with an error in these cases:
+\itemize{
+\item \code{x} is the output of \code{data_plot()}, or it does not carry its model.
+\item The model transforms the response, for example \code{log(y)}. This also
+applies with \code{transform = TRUE}, because the back-transformed contrasts
+are then not differences on the scale of the raw data.
+\item The contrasts or the estimated means were estimated on another scale
+than the response, for example with \code{predict = "link"}. Means without
+this information, such as a plain data frame, are taken to be on the
+same scale as the contrasts.
+\item The model data lack the response or a contrasted or \code{by} variable.
+\item The estimated means do not include each value in the data of the
+contrasted and \code{by} variables, or each combination of their values. For
+example, a numeric \code{by} variable has values that the means were not
+estimated at.
+}}
 
 \item{...}{Arguments passed to or from other methods.}
 }

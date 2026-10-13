@@ -562,21 +562,9 @@ test_that("`show_data = TRUE` stops for a transformed response and a numeric `by
 })
 
 
-test_that("`show_data = TRUE` draws back-transformed means and a numeric `by` on the means' grid", {
+test_that("`show_data = TRUE` draws a numeric `by` on the means' grid", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
-
-  d <- contrasts_by_fixture()$data
-  model <- lm(log(mpg) ~ am, data = d)
-  contrasts <- modelbased::estimate_contrasts(
-    model,
-    contrast = "am",
-    transform = TRUE
-  )
-  means <- modelbased::estimate_means(model, by = "am", transform = TRUE)
-  p <- plot(contrasts, means, show_data = TRUE)
-  expect_s3_class(p$layers[[1]]$geom, "GeomPoint")
-  expect_equal(sort(p$layers[[1]]$data$y), sort(d$mpg), tolerance = 1e-8)
 
   # `cyl` stays numeric; modelbased estimates at its values 4, 6, and 8
   d_num <- mtcars
@@ -642,29 +630,45 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
     "the means were estimated with `predict = \"link\"`",
     fixed = TRUE
   )
+  # means in a data frame without the attributes are taken as estimated like
+  # the contrasts
+  means_plain <- data.frame(
+    am = means_link$am,
+    Mean = means_link$Mean,
+    CI_low = means_link$CI_low,
+    CI_high = means_link$CI_high
+  )
+  expect_null(attr(means_plain, "predict", exact = TRUE))
+  expect_no_error(plot(contrasts, means_plain, show_data = TRUE))
+
+  # back-transformed contrasts of a log response are ratios, not differences
+  # on the raw scale, so the response must not be transformed at all
   model <- lm(log(mpg) ~ am, data = d)
   contrasts <- modelbased::estimate_contrasts(
     model,
     contrast = "am",
     transform = TRUE
   )
-  means <- modelbased::estimate_means(model, by = "am")
+  means <- modelbased::estimate_means(model, by = "am", transform = TRUE)
+  expect_equal(
+    contrasts$Ratio %||% contrasts$Difference,
+    exp(stats::coef(model)[["ammanual"]]),
+    tolerance = 1e-6
+  )
+  expect_false(isTRUE(all.equal(
+    contrasts$Ratio %||% contrasts$Difference,
+    diff(means$Mean),
+    tolerance = 1e-6
+  )))
   expect_match(
     error_message(plot(contrasts, means, show_data = TRUE)),
-    "the means are not back-transformed",
+    "transforms the response",
     fixed = TRUE
   )
-
-  # means in a data frame without the attributes are taken as estimated like
-  # the contrasts
-  means_plain <- data.frame(
-    am = means$am,
-    Mean = means$Mean,
-    CI_low = means$CI_low,
-    CI_high = means$CI_high
+  expect_error(
+    plot_data(lm(exp(mpg / 10) ~ am, data = d), transform = TRUE),
+    regexp = "transform"
   )
-  expect_null(attr(means_plain, "transform", exact = TRUE))
-  expect_no_error(plot(contrasts, means_plain, show_data = TRUE))
 })
 
 
@@ -761,6 +765,35 @@ test_that("`show_data = TRUE` stops for joint levels the means lack", {
     suppressWarnings(plot(jf$contrasts, partial_means, show_data = TRUE)),
     regexp = "auto, 4"
   )
+})
+
+
+test_that("`show_data = TRUE` stops for combinations of `by` levels the means lack", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  d$vs <- factor(d$vs)
+  model <- lm(mpg ~ cyl * am + vs, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = c("cyl", "vs")
+  )
+  means <- as.data.frame(
+    modelbased::estimate_means(model, by = c("cyl", "vs", "am"))
+  )
+  partial_means <- means[!(means$cyl == "4" & means$vs == "1"), ]
+  # each level of cyl and of vs is still in the means, and the data have the
+  # dropped combination
+  expect_true("4" %in% as.character(partial_means$cyl))
+  expect_true("1" %in% as.character(partial_means$vs))
+  expect_gt(sum(d$cyl == "4" & d$vs == "1"), 0)
+  expect_error(
+    suppressWarnings(plot(contrasts, partial_means, show_data = TRUE)),
+    regexp = "combination of levels of cyl, vs"
+  )
+  expect_no_error(plot(contrasts, means, show_data = TRUE))
 })
 
 
