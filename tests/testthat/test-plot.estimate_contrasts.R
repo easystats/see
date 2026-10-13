@@ -560,3 +560,136 @@ test_that("`show_data = TRUE` stops for a transformed response and a numeric `by
   expect_error(plot(contrasts, means, show_data = TRUE), regexp = "numeric")
   expect_no_error(plot(contrasts, means))
 })
+
+
+test_that("`show_data = TRUE` draws back-transformed means and a numeric `by` on the means' grid", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(log(mpg) ~ am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    transform = TRUE
+  )
+  means <- modelbased::estimate_means(model, by = "am", transform = TRUE)
+  p <- plot(contrasts, means, show_data = TRUE)
+  expect_s3_class(p$layers[[1]]$geom, "GeomPoint")
+  expect_equal(sort(p$layers[[1]]$data$y), sort(d$mpg), tolerance = 1e-8)
+
+  # `cyl` stays numeric; modelbased estimates at its values 4, 6, and 8
+  d_num <- mtcars
+  d_num$am <- factor(d_num$am, labels = c("auto", "manual"))
+  model <- lm(mpg ~ cyl * am, data = d_num)
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "am", by = "cyl")
+  means <- modelbased::estimate_means(model, by = c("cyl", "am"))
+  p <- plot(contrasts, means, show_data = TRUE)
+  built <- ggplot2::ggplot_build(p)
+  expect_identical(nrow(built$layout$layout), 3L)
+  panels <- built$layout$layout
+  points <- built$data[[1]]
+  for (cyl in c(4, 6, 8)) {
+    panel <- panels$PANEL[panels$cyl == cyl]
+    expect_equal(
+      sort(points$y[points$PANEL == panel]),
+      sort(d_num$mpg[d_num$cyl == cyl]),
+      tolerance = 1e-8
+    )
+  }
+})
+
+
+test_that("`show_data = TRUE` stops when the means are not on the scale of the raw data", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  plot_data <- function(model, ...) {
+    contrasts <- modelbased::estimate_contrasts(model, contrast = "am", ...)
+    means <- modelbased::estimate_means(model, by = "am", ...)
+    expect_no_error(plot(contrasts, means))
+    plot(contrasts, means, show_data = TRUE)
+  }
+
+  # insight does not recognize this transformation
+  expect_null(insight::find_transformation(lm(I(mpg - 10) ~ am, data = d)))
+  expect_error(plot_data(lm(I(mpg - 10) ~ am, data = d)), regexp = "transform")
+  expect_error(
+    plot_data(lm(I(mpg - 10) ~ am, data = d), transform = TRUE),
+    regexp = "transform"
+  )
+  # insight calls this transformation "identity"
+  expect_identical(
+    insight::find_transformation(lm(scale(mpg) ~ am, data = d)),
+    "identity"
+  )
+  expect_error(plot_data(lm(scale(mpg) ~ am, data = d)), regexp = "transform")
+  # means on the link scale
+  model <- glm(gear ~ am, data = d, family = poisson)
+  expect_error(plot_data(model, predict = "link"), regexp = "predict")
+  expect_no_error(plot_data(model))
+})
+
+
+test_that("`show_data = TRUE` stops for data values the means lack", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(Sepal.Width ~ Species, data = iris)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "Species=c('setosa','virginica')"
+  )
+  means <- modelbased::estimate_means(
+    model,
+    by = "Species=c('setosa','virginica')"
+  )
+  expect_no_error(plot(contrasts, means))
+  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "versicolor")
+  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "Species")
+
+  d <- mtcars
+  d$am <- factor(d$am, labels = c("auto", "manual"))
+  model <- lm(mpg ~ am * wt, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = "wt=c(2,3)"
+  )
+  means <- modelbased::estimate_means(model, by = c("am", "wt=c(2,3)"))
+  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "wt")
+  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "numeric")
+})
+
+
+test_that("`show_data` must be TRUE or FALSE and needs the contrasts with their model", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  fx <- contrasts_by_fixture()
+  for (value in list("yes", NA, c(TRUE, FALSE), 1)) {
+    expect_error(
+      plot(fx$contrasts, fx$means, show_data = value),
+      regexp = "`show_data` must be"
+    )
+  }
+
+  dp <- data_plot(fx$contrasts, fx$means)
+  expect_error(plot(dp, show_data = TRUE), regexp = "estimate_contrasts")
+  expect_length(plot(dp)$layers, 2)
+
+  no_model <- fx$contrasts
+  attr(no_model, "model") <- NULL
+  expect_error(
+    plot(no_model, fx$means, show_data = TRUE),
+    regexp = "the contrasts do not carry it"
+  )
+
+  no_response <- fx$contrasts
+  attr(no_response, "response") <- "not_a_column"
+  expect_error(
+    plot(no_response, fx$means, show_data = TRUE),
+    regexp = "not_a_column"
+  )
+})

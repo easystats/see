@@ -76,6 +76,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     xlab = toString(x_name),
     ylab = y_name,
     title = paste0("Estimated ", y_name, "s and Contrasts"),
+    x_name = x_name,
     by = by_columns
   )
 
@@ -261,12 +262,42 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' }
 #'
 #' @export
-plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
-  if (!inherits(x, "data_plot")) {
-    x <- data_plot(x, data = data)
+plot.see_estimate_contrasts <- function(
+  x,
+  data = NULL,
+  show_data = FALSE,
+  ...
+) {
+  if (!is.logical(show_data) || length(show_data) != 1L || is.na(show_data)) {
+    insight::format_error("`show_data` must be `TRUE` or `FALSE`.")
   }
 
-  p <- ggplot2::ggplot() +
+  contrasts <- x
+  if (!inherits(x, "data_plot")) {
+    x <- data_plot(x, data = data)
+  } else if (show_data) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` needs the contrasts from `estimate_contrasts()`,",
+        "because the output of `data_plot()` does not carry the model."
+      )
+    )
+  }
+
+  p <- ggplot2::ggplot()
+
+  # the raw data are the first layer, behind the lighthouses
+  if (show_data) {
+    p <- p +
+      ggplot2::geom_point(
+        data = .raw_data_contrasts(contrasts, data, x),
+        ggplot2::aes(x = .data$x, y = .data$y),
+        position = ggplot2::position_jitter(width = 0.1, height = 0),
+        alpha = 0.3
+      )
+  }
+
+  p <- p +
     ggplot2::geom_polygon(
       data = x$geom_polygon,
       ggplot2::aes(x = .data$x, y = .data$y, group = .data$group),
@@ -291,4 +322,137 @@ plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   p
+}
+
+
+# the model's data, with x and y as the lighthouse plot `dataplot` draws them
+#' @keywords internal
+.raw_data_contrasts <- function(contrasts, means, dataplot) {
+  # exact lookups: "model" would also match the "model_info" attribute
+  model <- attr(contrasts, "model", exact = TRUE)
+  if (is.null(model)) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` needs the model, but the contrasts do not carry it.",
+        "Please obtain the contrasts with `estimate_contrasts()`."
+      )
+    )
+  }
+
+  info <- attr(dataplot, "info")
+  x_name <- info$x_name
+  by <- .clean_target_names(attr(contrasts, "by", exact = TRUE))
+  response <- attr(contrasts, "response", exact = TRUE)
+  means <- as.data.frame(means)
+
+  raw <- insight::get_data(model, verbose = FALSE)
+  if (is.null(raw)) {
+    insight::format_error(
+      "`show_data = TRUE` needs the model data, which could not be retrieved."
+    )
+  }
+  missing_columns <- setdiff(c(response, x_name, by), names(raw))
+  if (length(missing_columns)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs the column(s) ",
+        toString(missing_columns),
+        " in the model data, but the data lack them."
+      )
+    )
+  }
+
+  # the means must be on the scale of the raw response: estimated on the
+  # response scale, and of an untransformed response or back-transformed
+  predict <- attr(contrasts, "predict", exact = TRUE)
+  if (
+    !isTRUE(
+      predict %in% c("prediction", "response", "expectation", "invlink(link)")
+    )
+  ) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs the means on the scale of the response, but ",
+        "they were estimated with `predict = \"",
+        toString(predict),
+        "\"`. Please obtain the contrasts and means with ",
+        "`predict = \"response\"`."
+      )
+    )
+  }
+  transformation <- tryCatch(
+    insight::find_transformation(model),
+    error = function(e) NULL
+  )
+  untransformed <- identical(insight::find_terms(model)$response, response)
+  back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
+    !is.null(transformation) &&
+    !identical(transformation, "identity")
+  if (!untransformed && !back_transformed) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs the means on the scale of the raw data of ",
+        response,
+        ", but the model transforms the response. If modelbased can reverse ",
+        "the transformation, obtain the contrasts and means with ",
+        "`transform = TRUE`."
+      )
+    )
+  }
+
+  # each data value must have its place on the x axis and in the facets
+  for (i in c(x_name, by)) {
+    lacking <- setdiff(
+      unique(as.character(raw[[i]])),
+      as.character(means[[i]])
+    )
+    if (length(lacking)) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs each value of ",
+          i,
+          " in the data among the values in the estimated means, but the ",
+          "means lack ",
+          if (is.numeric(raw[[i]])) {
+            paste0(
+              length(lacking),
+              " of them. ",
+              i,
+              " is numeric, so the means hold only the values they were ",
+              "estimated at. Please convert it to a factor."
+            )
+          } else {
+            paste0(
+              toString(lacking),
+              ". Please obtain the means for all levels."
+            )
+          }
+        )
+      )
+    }
+  }
+
+  x_labels <- do.call(
+    paste,
+    c(lapply(x_name, function(i) as.character(raw[[i]])), sep = ", ")
+  )
+  y <- raw[[response]]
+
+  # the `by` columns get the names and types of the means in `dataplot`
+  for (j in seq_along(by)) {
+    target <- dataplot$geom_pointrange[[info$by[j]]]
+    values <- raw[[by[j]]]
+    raw[[by[j]]] <- NULL
+    raw[[info$by[j]]] <- if (is.factor(target)) {
+      factor(as.character(values), levels = levels(target))
+    } else if (is.character(target)) {
+      as.character(values)
+    } else {
+      values
+    }
+  }
+
+  raw$x <- factor(x_labels, levels = levels(dataplot$geom_pointrange$x))
+  raw$y <- y
+  raw
 }
