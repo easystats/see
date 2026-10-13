@@ -578,6 +578,16 @@ plot.see_estimate_contrasts <- function(
       )
     )
   }
+  if (startsWith(response, "cbind(")) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` cannot draw the response ",
+        response,
+        ". In a binomial model, a cbind() response holds counts of successes ",
+        "and failures, which are not one value per observation."
+      )
+    )
+  }
   missing_columns <- setdiff(c(response, x_name, by_vars), names(model_data))
   if (length(missing_columns)) {
     insight::format_error(
@@ -589,9 +599,8 @@ plot.see_estimate_contrasts <- function(
     )
   }
 
-  # the response must be untransformed: back-transformed contrasts of a
-  # transformed response are not differences on the raw scale (for a log
-  # response they are ratios), so their lighthouses do not fit the raw data
+  # the response must be untransformed, or log-transformed with contrasts and
+  # means back-transformed to the raw scale
   response_term <- tryCatch(
     insight::find_terms(model)$response,
     error = function(e) NULL
@@ -606,7 +615,12 @@ plot.see_estimate_contrasts <- function(
       )
     )
   }
-  if (!identical(response_term, response)) {
+  back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
+    isTRUE(attr(means_object, "transform", exact = TRUE)) &&
+    .is_log_transformation(
+      tryCatch(insight::find_transformation(model), error = function(e) NULL)
+    )
+  if (!identical(response_term, response) && !back_transformed) {
     insight::format_error(
       paste0(
         "`show_data = TRUE` needs the contrasts and means on the scale of ",
@@ -632,7 +646,13 @@ plot.see_estimate_contrasts <- function(
     if (
       !isTRUE(
         predict_type %in%
-          c("prediction", "response", "expectation", "invlink(link)")
+          c(
+            "prediction",
+            "response",
+            "expectation",
+            "invlink(link)",
+            "inverse_link"
+          )
       )
     ) {
       insight::format_error(
@@ -743,7 +763,13 @@ plot.see_estimate_contrasts <- function(
       )
     }
   }
+  # a binary response is drawn as 0 and 1, like the probabilities
   y <- model_data[[response]]
+  if (is.logical(y)) {
+    y <- as.numeric(y)
+  } else if (is.factor(y) && nlevels(y) == 2L) {
+    y <- as.numeric(y == levels(y)[2])
+  }
 
   # the `by` columns get the names and types of the means in `dataplot`
   for (j in seq_along(by_vars)) {

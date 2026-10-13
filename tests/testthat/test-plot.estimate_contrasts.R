@@ -848,9 +848,14 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   # insight does not recognize this transformation
   expect_null(insight::find_transformation(lm(I(mpg - 10) ~ am, data = d)))
   expect_error(plot_data(lm(I(mpg - 10) ~ am, data = d)), regexp = "transform")
+  # with `transform = TRUE`, the plot without `show_data` already stops
+  shifted <- lm(I(mpg - 10) ~ am, data = d)
   expect_error(
-    plot_data(lm(I(mpg - 10) ~ am, data = d), transform = TRUE),
-    regexp = "transform"
+    plot(
+      modelbased::estimate_contrasts(shifted, contrast = "am", transform = TRUE),
+      modelbased::estimate_means(shifted, by = "am", transform = TRUE)
+    ),
+    regexp = "unknown"
   )
   # insight calls this transformation "identity"
   expect_identical(
@@ -886,8 +891,9 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   expect_null(attr(means_plain, "predict", exact = TRUE))
   expect_no_error(plot(contrasts, means_plain, show_data = TRUE))
 
-  # back-transformed contrasts of a log response are ratios, not differences
-  # on the raw scale, so the response must not be transformed at all
+  # back-transformed contrasts of a log response are ratios of the
+  # back-transformed means; without `transform`, the contrasts and means of a
+  # log response are on the log scale, which the raw data are not
   model <- lm(log(mpg) ~ am, data = d)
   contrasts <- modelbased::estimate_contrasts(
     model,
@@ -896,24 +902,112 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   )
   means <- modelbased::estimate_means(model, by = "am", transform = TRUE)
   expect_equal(
-    contrasts$Ratio %||% contrasts$Difference,
+    contrasts$Difference,
     exp(stats::coef(model)[["ammanual"]]),
     tolerance = 1e-6
   )
-  expect_false(isTRUE(all.equal(
-    contrasts$Ratio %||% contrasts$Difference,
-    diff(means$Mean),
+  expect_equal(
+    contrasts$Difference,
+    means$Mean[means$am == "manual"] / means$Mean[means$am == "auto"],
     tolerance = 1e-6
-  )))
+  )
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
+  means <- modelbased::estimate_means(model, by = "am")
+  expect_no_error(plot(contrasts, means))
   expect_match(
     error_message(plot(contrasts, means, show_data = TRUE)),
     "transforms the response",
     fixed = TRUE
   )
+
+  # with `transform = TRUE`, the plot without `show_data` already stops for
+  # responses that are not log-transformed
+  model <- lm(exp(mpg / 10) ~ am, data = d)
   expect_error(
-    plot_data(lm(exp(mpg / 10) ~ am, data = d), transform = TRUE),
-    regexp = "transform"
+    plot(
+      modelbased::estimate_contrasts(model, contrast = "am", transform = TRUE),
+      modelbased::estimate_means(model, by = "am", transform = TRUE)
+    ),
+    regexp = "`exp`",
+    fixed = TRUE
   )
+})
+
+
+test_that("`show_data = TRUE` draws binary responses, ratio contrasts, and back-transformed log contrasts", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  raw_y <- function(contrasts, means) {
+    plot(contrasts, means, show_data = TRUE)$layers[[1]]$data$y
+  }
+
+  bf <- binomial_fixture(d)
+  expect_equal(raw_y(bf$contrasts, bf$means), d$vs, tolerance = 1e-8)
+
+  # a two-level factor and a logical response are drawn as 0 and 1
+  d$vsf <- factor(d$vs, labels = c("V", "S"))
+  d$vsl <- d$vs == 1
+  for (model in list(
+    glm(vsf ~ am, data = d, family = binomial),
+    glm(vsl ~ am, data = d, family = binomial)
+  )) {
+    expect_equal(
+      raw_y(
+        modelbased::estimate_contrasts(model, contrast = "am"),
+        modelbased::estimate_means(model, by = "am")
+      ),
+      d$vs,
+      tolerance = 1e-8
+    )
+  }
+
+  # successes and failures in cbind() have no single column of raw data
+  model <- glm(cbind(gear, carb) ~ am, data = d, family = binomial)
+  message <- error_text(plot(
+    modelbased::estimate_contrasts(model, contrast = "am"),
+    modelbased::estimate_means(model, by = "am"),
+    show_data = TRUE
+  ))
+  expect_match(message, "cbind", fixed = TRUE)
+  expect_match(message, "binomial", fixed = TRUE)
+  expect_no_match(message, "lack", fixed = TRUE)
+
+  # ratio contrasts
+  fx <- contrasts_by_fixture()
+  rc <- modelbased::estimate_contrasts(
+    fx$model,
+    contrast = "am",
+    by = "cyl",
+    comparison = ratio ~ pairwise
+  )
+  p <- plot(rc, fx$means, show_data = TRUE)
+  expect_equal(p$layers[[1]]$data$y, d$mpg, tolerance = 1e-8)
+  expect_lighthouses(
+    p$layers[[layer_index(p, "GeomPolygon")]]$data,
+    rc,
+    fx$means,
+    "am",
+    geometry = "ratio",
+    by = "cyl"
+  )
+
+  # back-transformed contrasts of a log response
+  lg <- lm(log(mpg) ~ am, data = d)
+  expect_equal(
+    raw_y(
+      modelbased::estimate_contrasts(lg, contrast = "am", transform = TRUE),
+      modelbased::estimate_means(lg, by = "am", transform = TRUE)
+    ),
+    d$mpg,
+    tolerance = 1e-8
+  )
+
+  # inverse_link is a response scale
+  bi <- binomial_fixture(d, predict = "inverse_link")
+  p <- plot(bi$contrasts, bi$means, show_data = TRUE)
+  expect_shape(p$layers[[1]]$data, nrow = 32L)
 })
 
 
