@@ -51,9 +51,9 @@ test_that("lighthouses of contrasts with `by` use the means of their `by` level"
   means <- fx$means
   polygons <- data_plot(contrasts, means)$geom_polygon
 
-  expect_identical(nrow(contrasts), 3L)
+  expect_shape(contrasts, nrow = 3L)
   expect_true("cyl" %in% names(polygons))
-  expect_identical(nrow(polygons), 9L)
+  expect_shape(polygons, nrow = 9L)
 
   for (i in seq_len(nrow(contrasts))) {
     level1 <- as.character(contrasts$Level1[i])
@@ -64,7 +64,7 @@ test_that("lighthouses of contrasts with `by` use the means of their `by` level"
         as.character(polygons$Level2) == level2 &
         as.character(polygons$cyl) == cyl,
     ]
-    expect_identical(nrow(rows), 3L)
+    expect_shape(rows, nrow = 3L)
 
     mean1 <- means$Mean[
       as.character(means$am) == level1 & as.character(means$cyl) == cyl
@@ -130,10 +130,10 @@ test_that("lighthouse plots of contrasts with `by` get one facet per `by` level"
   fx <- contrasts_by_fixture()
   p <- plot(fx$contrasts, fx$means)
   expect_s3_class(p$facet, "FacetWrap")
-  expect_identical(names(p$facet$params$facets), "cyl")
+  expect_named(p$facet$params$facets, "cyl")
 
   built <- ggplot2::ggplot_build(p)
-  expect_identical(nrow(built$layout$layout), 3L)
+  expect_shape(built$layout$layout, nrow = 3L)
   polygons <- built$data[[layer_index(p, "GeomPolygon")]]
   pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
   for (panel in 1:3) {
@@ -176,7 +176,7 @@ test_that("joint contrasts get one lighthouse per contrast from the matching mea
   means <- jf$means
   polygons <- data_plot(jc, means)$geom_polygon
 
-  expect_identical(nrow(jc), 15L)
+  expect_shape(jc, nrow = 15L)
   expect_identical(as.vector(table(polygons$group)), rep(3L, 15))
 
   means_labels <- paste(means$am, means$cyl, sep = ", ")
@@ -239,11 +239,11 @@ test_that("joint contrasts without matching means give one warning", {
 
   jf <- joint_contrasts_fixture(contrasts_by_fixture()$data)
   partial_means <- as.data.frame(jf$means)[-1, ]
-  warnings <- testthat::capture_warnings(
+  warnings <- testthat::capture_warnings({
     dp <- data_plot(jf$contrasts, partial_means)
-  )
+  })
   expect_length(warnings, 1)
-  expect_length(gregexpr("are not drawn", warnings)[[1]], 1)
+  expect_length(gregexpr("are not drawn", warnings, fixed = TRUE)[[1]], 1)
   expect_match(warnings, "5 of 15 contrasts are not drawn")
   expect_match(warnings, "combinations of levels of am, cyl")
   expect_identical(as.vector(table(dp$geom_polygon$group)), rep(3L, 10))
@@ -279,10 +279,10 @@ test_that("joint contrasts with `by` get one facet per `by` level", {
 
   p <- plot(jc3, means3)
   expect_s3_class(p$facet, "FacetWrap")
-  expect_identical(names(p$facet$params$facets), "f")
+  expect_named(p$facet$params$facets, "f")
 
   built <- ggplot2::ggplot_build(p)
-  expect_identical(nrow(built$layout$layout), 2L)
+  expect_shape(built$layout$layout, nrow = 2L)
   polygons <- built$data[[layer_index(p, "GeomPolygon")]]
   pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
   for (panel in 1:2) {
@@ -291,7 +291,7 @@ test_that("joint contrasts with `by` get one facet per `by` level", {
   }
 
   polygons <- data_plot(jc3, means3)$geom_polygon
-  expect_identical(nrow(jc3), 12L)
+  expect_shape(jc3, nrow = 12L)
   expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 12))
 
   means_labels <- paste(means3$a, means3$b, sep = ", ")
@@ -340,7 +340,7 @@ test_that("lighthouse plots accept `contrast` and `by` given with target values"
     rep(3L, nrow(contrasts))
   )
   p <- plot(contrasts, means)
-  expect_identical(names(p$facet$params$facets), "wt")
+  expect_named(p$facet$params$facets, "wt")
 })
 
 
@@ -362,7 +362,9 @@ test_that("lighthouse plots stop when the means have extra rows and warn when ro
   partial_means <- as.data.frame(fx$means)
   partial_means <- partial_means[partial_means$cyl != "8", ]
   expect_warning(
-    dp <- data_plot(fx$contrasts, partial_means),
+    {
+      dp <- data_plot(fx$contrasts, partial_means)
+    },
     regexp = "1 of 3 contrasts are not drawn"
   )
   expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 2))
@@ -382,10 +384,12 @@ test_that("lighthouse plots warn on trt_vs_ctrl and stop on contrasts without Le
   )
   means <- modelbased::estimate_means(model, by = "cyl")
   expect_warning(
-    dp <- data_plot(contrasts, means),
+    {
+      dp <- data_plot(contrasts, means)
+    },
     regexp = "1 of 1 contrasts are not drawn"
   )
-  expect_identical(nrow(dp$geom_polygon), 0L)
+  expect_shape(dp$geom_polygon, nrow = 0L)
 
   contrasts <- modelbased::estimate_contrasts(
     model,
@@ -410,7 +414,7 @@ test_that("lighthouse plots keep `by` and contrast variables named like plot col
     dp <- data_plot(contrasts, means)
     expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 2))
     built <- ggplot2::ggplot_build(plot(contrasts, means))
-    expect_identical(nrow(built$layout$layout), 2L)
+    expect_shape(built$layout$layout, nrow = 2L)
   }
 
   # the contrasted variable is named y
@@ -466,8 +470,8 @@ test_that("lighthouse plots work with two, numeric, and character `by` variables
   dp <- data_plot(contrasts, means)
   expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 4))
   p <- plot(contrasts, means)
-  expect_identical(names(p$facet$params$facets), c("b", "f"))
-  expect_identical(nrow(ggplot2::ggplot_build(p)$layout$layout), 4L)
+  expect_named(p$facet$params$facets, c("b", "f"))
+  expect_shape(ggplot2::ggplot_build(p)$layout$layout, nrow = 4L)
 
   # numeric `by` variable
   model <- lm(Sepal.Width ~ Species * Petal.Length, data = iris)
@@ -533,7 +537,7 @@ test_that("`show_data = TRUE` puts joint contrasts' raw data at their combined l
   jf <- joint_contrasts_fixture(contrasts_by_fixture()$data)
   p <- plot(jf$contrasts, jf$means, show_data = TRUE)
   raw <- p$layers[[1]]$data
-  expect_identical(nrow(raw), 32L)
+  expect_shape(raw, nrow = 32L)
   expect_identical(as.character(raw$x), paste(raw$am, raw$cyl, sep = ", "))
 })
 
@@ -574,7 +578,7 @@ test_that("`show_data = TRUE` draws a numeric `by` on the means' grid", {
   means <- modelbased::estimate_means(model, by = c("cyl", "am"))
   p <- plot(contrasts, means, show_data = TRUE)
   built <- ggplot2::ggplot_build(p)
-  expect_identical(nrow(built$layout$layout), 3L)
+  expect_shape(built$layout$layout, nrow = 3L)
   panels <- built$layout$layout
   points <- built$data[[1]]
   for (cyl in c(4, 6, 8)) {
@@ -594,10 +598,10 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
 
   d <- contrasts_by_fixture()$data
   plot_data <- function(model, ...) {
-    contrasts <- modelbased::estimate_contrasts(model, contrast = "am", ...)
+    contrast_est <- modelbased::estimate_contrasts(model, contrast = "am", ...)
     means <- modelbased::estimate_means(model, by = "am", ...)
-    expect_no_error(plot(contrasts, means))
-    plot(contrasts, means, show_data = TRUE)
+    expect_no_error(plot(contrast_est, means))
+    plot(contrast_est, means, show_data = TRUE)
   }
 
   # insight does not recognize this transformation
@@ -838,7 +842,7 @@ test_that("`show_data = TRUE` matches integer data to double means", {
   built <- ggplot2::ggplot_build(plot(contrasts, means, show_data = TRUE))
   panels <- built$layout$layout
   points <- built$data[[1]]
-  expect_identical(nrow(panels), 3L)
+  expect_shape(panels, nrow = 3L)
   for (size in c(100000, 200000, 300000)) {
     panel <- panels$PANEL[panels$size == size]
     expect_length(panel, 1)
@@ -864,7 +868,7 @@ test_that("`show_data = TRUE` stops when the response cannot be checked", {
   )
 
   local_mocked_bindings(
-    find_terms = function(...) stop("no terms"),
+    find_terms = function(...) stop("no terms", call. = FALSE),
     .package = "insight"
   )
   expect_error(
@@ -888,7 +892,7 @@ test_that("`show_data = TRUE` keeps `by` variables named like plot columns", {
     built <- ggplot2::ggplot_build(plot(contrasts, means, show_data = TRUE))
     panels <- built$layout$layout
     points <- built$data[[1]]
-    expect_identical(nrow(panels), 2L)
+    expect_shape(panels, nrow = 2L)
     for (level in levels(s[[by]])) {
       panel <- panels$PANEL[as.character(panels[[paste0(".by_", by)]]) == level]
       expect_length(panel, 1)

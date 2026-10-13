@@ -120,7 +120,7 @@ Suggests:
     rstanarm,
     scales (>= 1.4.0),
     splines,
-    testthat (>= 3.2.1),
+    testthat (>= 3.3.0),
     tidygraph,
     vdiffr (>= 1.0.8)
 Encoding: UTF-8

@@ -26,7 +26,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   # each contrast is drawn from the means of its own `by` level
-  by <- .clean_target_names(attr(x, "by"))
+  by_vars <- .clean_target_names(attr(x, "by"))
 
   # the means call to suggest keeps the target values of the contrasts
   means_terms <- c(attr(x, "contrast") %||% x_name, attr(x, "by"))
@@ -36,7 +36,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     "))`"
   )
 
-  missing_columns <- setdiff(c(x_name, by), names(means))
+  missing_columns <- setdiff(c(x_name, by_vars), names(means))
   if (length(missing_columns)) {
     insight::format_error(
       paste0(
@@ -50,21 +50,25 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   # `by` columns named like columns of the plot data are renamed
-  contrasts <- as.data.frame(x)
+  contrast_data <- as.data.frame(x)
   means <- as.data.frame(means)
-  by_columns <- by
-  collides <- by %in% c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
+  by_columns <- by_vars
+  collides <- by_vars %in%
+    c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
   if (any(collides)) {
-    by_columns[collides] <- paste0(".by_", by[collides])
-    names(contrasts)[match(by[collides], names(contrasts))] <- by_columns[collides]
-    names(means)[match(by[collides], names(means))] <- by_columns[collides]
+    by_columns[collides] <- paste0(".by_", by_vars[collides])
+    names(contrast_data)[match(
+      by_vars[collides],
+      names(contrast_data)
+    )] <- by_columns[collides]
+    names(means)[match(by_vars[collides], names(means))] <- by_columns[collides]
   }
 
   y_name <- c("Median", "Mean", "MAP", "Coefficient")[
     c("Median", "Mean", "MAP", "Coefficient") %in% names(means)
   ][1]
   dataplot <- .data_contrasts_and_means(
-    contrasts,
+    contrast_data,
     means,
     x_name = x_name,
     y_name = y_name,
@@ -178,11 +182,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   # contrasts without a means row on both sides (e.g. "trt_vs_ctrl", or
   # means estimated at other values) are not drawn
-  missing <- setdiff(seq_len(nrow(contrasts)), polygons$group)
-  if (length(missing)) {
+  not_drawn <- setdiff(seq_len(nrow(contrasts)), polygons$group)
+  if (length(not_drawn)) {
     insight::format_warning(
       paste0(
-        length(missing),
+        length(not_drawn),
         " of ",
         nrow(contrasts),
         " contrasts are not drawn, because the estimated means have no row for their levels.",
@@ -310,7 +314,7 @@ plot.see_estimate_contrasts <- function(
     insight::format_error("`show_data` must be `TRUE` or `FALSE`.")
   }
 
-  contrasts <- x
+  contrast_data <- x
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data)
   } else if (show_data) {
@@ -328,7 +332,7 @@ plot.see_estimate_contrasts <- function(
   if (show_data) {
     p <- p +
       ggplot2::geom_point(
-        data = .raw_data_contrasts(contrasts, data, x),
+        data = .raw_data_contrasts(contrast_data, data, x),
         ggplot2::aes(x = .data$x, y = .data$y),
         position = ggplot2::position_jitter(width = 0.1, height = 0),
         alpha = 0.3
@@ -354,9 +358,9 @@ plot.see_estimate_contrasts <- function(
     add_plot_attributes(x)
 
   # one panel per level, or combination of levels, of the `by` variables
-  by <- attr(x, "info")$by
-  if (length(by)) {
-    p <- p + ggplot2::facet_wrap(by)
+  by_columns <- attr(x, "info")$by
+  if (length(by_columns)) {
+    p <- p + ggplot2::facet_wrap(by_columns)
   }
 
   p
@@ -379,13 +383,13 @@ plot.see_estimate_contrasts <- function(
 
   info <- attr(dataplot, "info")
   x_name <- info$x_name
-  by <- .clean_target_names(attr(contrasts, "by", exact = TRUE))
+  by_vars <- .clean_target_names(attr(contrasts, "by", exact = TRUE))
   response <- attr(contrasts, "response", exact = TRUE)
   means_object <- means
   means <- as.data.frame(means)
 
-  raw <- insight::get_data(model, verbose = FALSE)
-  if (is.null(raw)) {
+  model_data <- insight::get_data(model, verbose = FALSE)
+  if (is.null(model_data)) {
     insight::format_error(
       "`show_data = TRUE` needs the model data, which could not be retrieved."
     )
@@ -398,7 +402,7 @@ plot.see_estimate_contrasts <- function(
       )
     )
   }
-  missing_columns <- setdiff(c(response, x_name, by), names(raw))
+  missing_columns <- setdiff(c(response, x_name, by_vars), names(model_data))
   if (length(missing_columns)) {
     insight::format_error(
       paste0(
@@ -444,14 +448,15 @@ plot.see_estimate_contrasts <- function(
   # estimated like the contrasts
   estimates <- list(contrasts = contrasts, means = means_object)
   for (i in names(estimates)) {
-    predict <- attr(estimates[[i]], "predict", exact = TRUE)
-    if (i == "means" && is.null(predict)) {
-      predict <- "response"
+    predict_type <- attr(estimates[[i]], "predict", exact = TRUE)
+    if (i == "means" && is.null(predict_type)) {
+      predict_type <- "response"
     }
 
     if (
       !isTRUE(
-        predict %in% c("prediction", "response", "expectation", "invlink(link)")
+        predict_type %in%
+          c("prediction", "response", "expectation", "invlink(link)")
       )
     ) {
       insight::format_error(
@@ -459,10 +464,14 @@ plot.see_estimate_contrasts <- function(
           "`show_data = TRUE` needs the contrasts and means on the scale of ",
           "the response, but the ",
           i,
-          if (is.null(predict)) {
+          if (is.null(predict_type)) {
             " do not say which `predict` they were estimated with"
           } else {
-            paste0(" were estimated with `predict = \"", toString(predict), "\"`")
+            paste0(
+              " were estimated with `predict = \"",
+              toString(predict_type),
+              "\"`"
+            )
           },
           ". Please obtain the contrasts and means with ",
           "`predict = \"response\"`."
@@ -472,9 +481,9 @@ plot.see_estimate_contrasts <- function(
   }
 
   # each data value must have its place on the x axis and in the facets
-  for (i in c(x_name, by)) {
+  for (i in c(x_name, by_vars)) {
     lacking <- setdiff(
-      unique(.value_key(raw[[i]])),
+      unique(.value_key(model_data[[i]])),
       .value_key(means[[i]])
     )
     if (length(lacking)) {
@@ -484,7 +493,7 @@ plot.see_estimate_contrasts <- function(
           i,
           " in the data among the values in the estimated means, but the ",
           "means lack ",
-          if (is.numeric(raw[[i]])) {
+          if (is.numeric(model_data[[i]])) {
             paste0(
               length(lacking),
               " of them. ",
@@ -509,12 +518,12 @@ plot.see_estimate_contrasts <- function(
       lapply(x_name, function(i) {
         # numeric values take the labels of the equal values in the means,
         # e.g. 100000L in the data and 1e5 in the means
-        if (is.numeric(raw[[i]]) && is.numeric(means[[i]])) {
+        if (is.numeric(model_data[[i]]) && is.numeric(means[[i]])) {
           as.character(means[[i]])[
-            match(as.numeric(raw[[i]]), as.numeric(means[[i]]))
+            match(as.numeric(model_data[[i]]), as.numeric(means[[i]]))
           ]
         } else {
-          as.character(raw[[i]])
+          as.character(model_data[[i]])
         }
       }),
       sep = ", "
@@ -537,15 +546,15 @@ plot.see_estimate_contrasts <- function(
   }
 
   # with `by`, each combination must have its place in its facet
-  if (length(by)) {
-    cells <- c(x_name, by)
+  if (length(by_vars)) {
+    cells <- c(x_name, by_vars)
     cell_key <- function(d) {
       do.call(
         paste,
         c(lapply(cells, function(i) .value_key(d[[i]])), sep = ", ")
       )
     }
-    lacking <- setdiff(unique(cell_key(raw)), cell_key(means))
+    lacking <- setdiff(unique(cell_key(model_data)), cell_key(means))
     if (length(lacking)) {
       insight::format_error(
         paste0(
@@ -558,14 +567,14 @@ plot.see_estimate_contrasts <- function(
       )
     }
   }
-  y <- raw[[response]]
+  y <- model_data[[response]]
 
   # the `by` columns get the names and types of the means in `dataplot`
-  for (j in seq_along(by)) {
+  for (j in seq_along(by_vars)) {
     target <- dataplot$geom_pointrange[[info$by[j]]]
-    values <- raw[[by[j]]]
-    raw[[by[j]]] <- NULL
-    raw[[info$by[j]]] <- if (is.factor(target)) {
+    values <- model_data[[by_vars[j]]]
+    model_data[[by_vars[j]]] <- NULL
+    model_data[[info$by[j]]] <- if (is.factor(target)) {
       factor(as.character(values), levels = levels(target))
     } else if (is.character(target)) {
       as.character(values)
@@ -577,7 +586,7 @@ plot.see_estimate_contrasts <- function(
     }
   }
 
-  raw$x <- factor(x_labels, levels = x_levels)
-  raw$y <- y
-  raw
+  model_data$x <- factor(x_labels, levels = x_levels)
+  model_data$y <- y
+  model_data
 }
