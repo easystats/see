@@ -18,11 +18,22 @@
   subtitles of the Linearity and Homogeneity of Variance panels no longer refer
   to a reference line (#464).
 
+* `plot()` for `modelbased::estimate_contrasts()` now draws joint contrasts of
+  two or more variables, such as `contrast = c("am", "cyl")`. The x axis shows
+  the combinations of levels, such as "auto, 4".
+
 ## Bug fixes
 
 * When `check_model()` failed to create plots, the informative message
   about troubleshooting and workarounds was no longer printed. This should
   now work again.
+
+* `plot()` for `modelbased::estimate_contrasts()` now draws each contrast
+  estimated with `by` from the means of its own `by` level. Previously, it mixed
+  the means of all `by` levels into each contrast. If the means listed the `by`
+  variable first, it drew no contrasts. The plot now shows one panel per level,
+  or combination of levels, of the `by` variables. The x axis now shows the
+  contrasted variable in the order of its levels (easystats/modelbased#267).
 
 # see 0.14.2
 
