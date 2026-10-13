@@ -49,6 +49,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     )
   }
 
+  y_name <- .estimate_column(means)
+
   # `by` columns named like columns of the plot data are renamed
   contrast_data <- as.data.frame(x)
   means <- as.data.frame(means)
@@ -64,28 +66,75 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     names(means)[match(by_vars[collides], names(means))] <- by_columns[collides]
   }
 
-  y_name <- c("Median", "Mean", "MAP", "Coefficient")[
-    c("Median", "Mean", "MAP", "Coefficient") %in% names(means)
-  ][1]
   dataplot <- .data_contrasts_and_means(
     contrast_data,
     means,
     x_name = x_name,
     y_name = y_name,
     by = by_columns,
-    means_call = means_call
+    means_call = means_call,
+    geometry = .lighthouse_geometry(x)
   )
 
   attr(dataplot, "info") <- list(
     xlab = toString(x_name),
     ylab = y_name,
-    title = paste0("Estimated ", y_name, "s and Contrasts"),
+    title = paste0("Estimated ", sub("y$", "ie", y_name), "s and Contrasts"),
     x_name = x_name,
     by = by_columns
   )
 
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
   dataplot
+}
+
+
+# the column of the estimates in the means: the one that modelbased names in
+# `coef_name`, else the first of the usual names
+#' @keywords internal
+.estimate_column <- function(means) {
+  coef_name <- attr(means, "coef_name", exact = TRUE)
+  if (
+    is.character(coef_name) &&
+      length(coef_name) == 1L &&
+      coef_name %in% names(means)
+  ) {
+    return(coef_name)
+  }
+
+  candidates <- c(
+    "Median",
+    "Mean",
+    "MAP",
+    "Coefficient",
+    "Probability",
+    "Proportion",
+    "Rate"
+  )
+  y_name <- candidates[candidates %in% names(means)][1]
+  if (is.na(y_name)) {
+    insight::format_error(
+      paste0(
+        "The estimated means have no column of estimates. Lighthouse plots ",
+        "look for the column that the `coef_name` attribute of the means ",
+        "names, and then for the columns ",
+        toString(candidates),
+        "."
+      )
+    )
+  }
+  y_name
+}
+
+
+# lighthouses span the estimate of Level1 minus the interval of a difference,
+# or divided by the interval of a ratio
+#' @keywords internal
+.lighthouse_geometry <- function(contrasts) {
+  if ("Ratio" %in% names(contrasts)) {
+    return("ratio")
+  }
+  "difference"
 }
 
 
@@ -119,12 +168,32 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   x_name,
   y_name,
   by = NULL,
-  means_call = NULL
+  means_call = NULL,
+  geometry = "difference"
 ) {
   polygons <- as.data.frame(contrasts)
   polygons$group <- seq_len(nrow(polygons))
   polygons$Level1 <- as.character(polygons$Level1)
   polygons$Level2 <- as.character(polygons$Level2)
+
+  # the estimate divided by an interval that includes 0 has no bounds
+  includes_0 <- geometry == "ratio" &
+    !is.na(polygons$CI_low) &
+    !is.na(polygons$CI_high) &
+    polygons$CI_low <= 0 &
+    polygons$CI_high >= 0
+  if (any(includes_0)) {
+    insight::format_warning(
+      paste0(
+        sum(includes_0),
+        " of ",
+        nrow(contrasts),
+        " ratio contrasts are not drawn, because their confidence interval ",
+        "includes 0."
+      )
+    )
+  }
+  polygons <- polygons[!includes_0, ]
 
   data_means <- as.data.frame(means)
 
@@ -182,7 +251,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   # contrasts without a means row on both sides (e.g. "trt_vs_ctrl", or
   # means estimated at other values) are not drawn
-  not_drawn <- setdiff(seq_len(nrow(contrasts)), polygons$group)
+  not_drawn <- setdiff(
+    seq_len(nrow(contrasts)),
+    c(polygons$group, which(includes_0))
+  )
   if (length(not_drawn)) {
     insight::format_warning(
       paste0(
@@ -200,6 +272,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     )
   }
 
+  # a difference is Mean1 - Mean2 and a ratio is Mean1 / Mean2, so the
+  # lighthouse at Level2 spans the values of Mean2 that the interval allows
+  tip <- if (geometry == "ratio") `/` else `-`
   polygons <- rbind(
     cbind(
       polygons,
@@ -212,14 +287,14 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       polygons,
       data.frame(
         x = factor(polygons$Level2, levels = x_levels),
-        y = polygons$Mean1 - polygons$CI_low
+        y = tip(polygons$Mean1, polygons$CI_low)
       )
     ),
     cbind(
       polygons,
       data.frame(
         x = factor(polygons$Level2, levels = x_levels),
-        y = polygons$Mean1 - polygons$CI_high
+        y = tip(polygons$Mean1, polygons$CI_high)
       )
     )
   )
