@@ -28,13 +28,20 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     )
   }
 
+  if (!all(c("Level1", "Level2") %in% names(x))) {
+    insight::format_error(
+      "Lighthouse plots need pairwise contrasts with the columns `Level1` and `Level2`."
+    )
+  }
+
   # each contrast is drawn from the means of its own `by` level
   by <- .clean_target_names(attr(x, "by"))
 
   # the means call to suggest keeps the target values of the contrasts
+  means_terms <- c(attr(x, "contrast") %||% x_name, attr(x, "by"))
   means_call <- paste0(
     "`estimate_means(by = c(",
-    toString(dQuote(c(attr(x, "contrast") %||% x_name, attr(x, "by")), FALSE)),
+    toString(vapply(means_terms, deparse, character(1), USE.NAMES = FALSE)),
     "))`"
   )
 
@@ -51,15 +58,26 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     )
   }
 
+  # `by` columns named like columns of the plot data are renamed
+  contrasts <- as.data.frame(x)
+  means <- as.data.frame(means)
+  by_columns <- by
+  collides <- by %in% c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
+  if (any(collides)) {
+    by_columns[collides] <- paste0(".by_", by[collides])
+    names(contrasts)[match(by[collides], names(contrasts))] <- by_columns[collides]
+    names(means)[match(by[collides], names(means))] <- by_columns[collides]
+  }
+
   y_name <- c("Median", "Mean", "MAP", "Coefficient")[
     c("Median", "Mean", "MAP", "Coefficient") %in% names(means)
   ][1]
   dataplot <- .data_contrasts_and_means(
-    x,
+    contrasts,
     means,
     x_name = x_name,
     y_name = y_name,
-    by = by,
+    by = by_columns,
     means_call = means_call
   )
 
@@ -67,7 +85,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     xlab = x_name,
     ylab = y_name,
     title = paste0("Estimated ", y_name, "s and Contrasts"),
-    by = by
+    by = by_columns
   )
 
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
@@ -109,9 +127,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   data_means <- as.data.frame(means)
-  data_means$x <- factor(as.character(data_means[[x_name]]), levels = x_levels)
+  x_labels <- as.character(data_means[[x_name]])
+  data_means$x <- factor(x_labels, levels = x_levels)
   data_means$y <- data_means[[y_name]]
-  data_means$Level2 <- data_means$Level1 <- as.character(data_means[[x_name]])
+  data_means$Level2 <- data_means$Level1 <- x_labels
   data_means$Mean2 <- data_means$Mean1 <- data_means[[y_name]]
   data_means$ymin <- data_means$CI_low
   data_means$ymax <- data_means$CI_high
@@ -140,12 +159,21 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     by = c("Level2", by)
   )
 
-  if (nrow(polygons) < nrow(contrasts)) {
-    insight::format_error(
+  # contrasts without a means row on both sides (e.g. "trt_vs_ctrl", or
+  # means estimated at other values) are not drawn
+  n_missing <- nrow(contrasts) - nrow(polygons)
+  if (n_missing > 0) {
+    insight::format_warning(
       paste0(
-        "The estimated means have no row for some levels of ",
-        toString(c(x_name, by)),
-        " that the contrasts compare."
+        n_missing,
+        " of ",
+        nrow(contrasts),
+        " contrasts are not drawn, because the estimated means have no row for their levels.",
+        " Lighthouse plots draw pairwise contrasts between levels of ",
+        x_name,
+        ", with the means estimated at the same values. Please obtain the means with ",
+        means_call,
+        "."
       )
     )
   }
@@ -192,7 +220,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' the estimated means of its own `by` level. The plot then has one panel per
 #' level, or combination of levels, of the `by` variables. The estimated means
 #' must include the contrasted variable and the `by` variables, and no other
-#' variables that split their rows further.
+#' variables that split their rows further. If the means have no row for the
+#' levels of a contrast, the plot does not draw that contrast and gives a
+#' warning.
 #'
 #' @inheritParams data_plot
 #'

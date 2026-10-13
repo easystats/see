@@ -228,7 +228,92 @@ test_that("lighthouse plots stop when the means have extra or missing rows", {
   fx <- contrasts_by_fixture()
   partial_means <- as.data.frame(fx$means)
   partial_means <- partial_means[partial_means$cyl != "8", ]
-  expect_error(data_plot(fx$contrasts, partial_means), regexp = "no row")
+  expect_warning(
+    dp <- data_plot(fx$contrasts, partial_means),
+    regexp = "1 of 3 contrasts"
+  )
+  expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 2))
+})
+
+
+test_that("lighthouse plots warn about contrasts that are not pairwise", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  fx <- contrasts_by_fixture()
+  model <- lm(mpg ~ cyl, data = fx$data)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "cyl",
+    comparison = "trt_vs_ctrl"
+  )
+  means <- modelbased::estimate_means(model, by = "cyl")
+  expect_warning(
+    dp <- data_plot(contrasts, means),
+    regexp = "contrasts are not drawn"
+  )
+  expect_identical(nrow(dp$geom_polygon), 0L)
+
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "cyl",
+    comparison = "poly"
+  )
+  expect_error(data_plot(contrasts, means), regexp = "Level1")
+})
+
+
+test_that("lighthouse plots keep `by` and contrast variables named like plot columns", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  s <- contrasts_factorial_data()
+  s <- data.frame(a = s$a, x = s$b, y = s$f, out = s$y)
+  model <- lm(out ~ a * x * y, data = s)
+
+  for (by in c("x", "y")) {
+    contrasts <- modelbased::estimate_contrasts(model, contrast = "a", by = by)
+    means <- modelbased::estimate_means(model, by = c("a", by))
+    dp <- data_plot(contrasts, means)
+    expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 2))
+    built <- ggplot2::ggplot_build(plot(contrasts, means))
+    expect_identical(nrow(built$layout$layout), 2L)
+  }
+
+  # the contrasted variable is named y
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "y", by = "a")
+  means <- modelbased::estimate_means(model, by = c("a", "y"))
+  polygons <- data_plot(contrasts, means)$geom_polygon
+  for (i in seq_len(nrow(contrasts))) {
+    level1 <- as.character(contrasts$Level1[i])
+    a <- as.character(contrasts$a[i])
+    tip <- polygons$y[
+      polygons$group == i & as.character(polygons$x) == level1
+    ]
+    expected <- means$Mean[
+      as.character(means$y) == level1 & as.character(means$a) == a
+    ]
+    expect_equal(tip, expected, tolerance = 1e-8)
+  }
+})
+
+
+test_that("the suggested estimate_means() call can be pasted", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(Sepal.Width ~ Species, data = iris)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = 'Species=c("setosa","virginica")'
+  )
+  means <- as.data.frame(modelbased::estimate_means(model, by = "Species"))
+  names(means)[1] <- "Group"
+  expect_error(
+    data_plot(contrasts, means),
+    regexp = 'c("Species=c(\\"setosa\\",\\"virginica\\")")',
+    fixed = TRUE
+  )
 })
 
 
