@@ -161,19 +161,30 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   # contrasts without a means row on both sides (e.g. "trt_vs_ctrl", or
   # means estimated at other values) are not drawn
-  n_missing <- nrow(contrasts) - nrow(polygons)
-  if (n_missing > 0) {
+  missing <- setdiff(seq_len(nrow(contrasts)), polygons$group)
+  if (length(missing)) {
+    not_levels <- !(contrasts$Level1[missing] %in% x_levels &
+      contrasts$Level2[missing] %in% x_levels)
+    if (any(not_levels)) {
+      advice <- paste0(
+        " Lighthouse plots draw only pairwise contrasts between levels of ",
+        x_name,
+        ", but these contrasts compare other quantities, such as a mean of several levels."
+      )
+    } else {
+      advice <- paste0(
+        " Please obtain the means at the same values as the contrasts, with ",
+        means_call,
+        "."
+      )
+    }
     insight::format_warning(
       paste0(
-        n_missing,
+        length(missing),
         " of ",
         nrow(contrasts),
         " contrasts are not drawn, because the estimated means have no row for their levels.",
-        " Lighthouse plots draw pairwise contrasts between levels of ",
-        x_name,
-        ", with the means estimated at the same values. Please obtain the means with ",
-        means_call,
-        "."
+        advice
       )
     )
   }

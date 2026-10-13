@@ -211,7 +211,7 @@ test_that("lighthouse plots accept `contrast` and `by` given with target values"
 })
 
 
-test_that("lighthouse plots stop when the means have extra or missing rows", {
+test_that("lighthouse plots stop when the means have extra rows and warn when rows are missing", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
@@ -230,13 +230,13 @@ test_that("lighthouse plots stop when the means have extra or missing rows", {
   partial_means <- partial_means[partial_means$cyl != "8", ]
   expect_warning(
     dp <- data_plot(fx$contrasts, partial_means),
-    regexp = "1 of 3 contrasts"
+    regexp = "1 of 3 contrasts.*same values"
   )
   expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 2))
 })
 
 
-test_that("lighthouse plots warn about contrasts that are not pairwise", {
+test_that("lighthouse plots warn on trt_vs_ctrl and stop on contrasts without Level1 and Level2", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
@@ -250,7 +250,7 @@ test_that("lighthouse plots warn about contrasts that are not pairwise", {
   means <- modelbased::estimate_means(model, by = "cyl")
   expect_warning(
     dp <- data_plot(contrasts, means),
-    regexp = "contrasts are not drawn"
+    regexp = "only pairwise contrasts"
   )
   expect_identical(nrow(dp$geom_polygon), 0L)
 
