@@ -230,7 +230,7 @@ test_that("lighthouse plots stop when the means have extra rows and warn when ro
   partial_means <- partial_means[partial_means$cyl != "8", ]
   expect_warning(
     dp <- data_plot(fx$contrasts, partial_means),
-    regexp = "1 of 3 contrasts.*same values"
+    regexp = "1 of 3 contrasts are not drawn"
   )
   expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 2))
 })
@@ -250,7 +250,7 @@ test_that("lighthouse plots warn on trt_vs_ctrl and stop on contrasts without Le
   means <- modelbased::estimate_means(model, by = "cyl")
   expect_warning(
     dp <- data_plot(contrasts, means),
-    regexp = "only pairwise contrasts"
+    regexp = "1 of 1 contrasts are not drawn"
   )
   expect_identical(nrow(dp$geom_polygon), 0L)
 
