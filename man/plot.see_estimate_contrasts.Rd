@@ -4,13 +4,22 @@
 \alias{plot.see_estimate_contrasts}
 \title{Plot method for estimating contrasts}
 \usage{
-\method{plot}{see_estimate_contrasts}(x, data = NULL, ...)
+\method{plot}{see_estimate_contrasts}(x, data = NULL, show_data = FALSE, ...)
 }
 \arguments{
 \item{x}{An object.}
 
-\item{data}{The original data used to create this object. Can be a
-statistical model.}
+\item{data}{The estimated means, obtained with
+\code{modelbased::estimate_means()}.}
+
+\item{show_data}{Logical. If \code{TRUE}, the plot draws the raw data of the model
+as jittered points behind the lighthouses. The raw data come from the model
+stored in \code{x}, not from \code{data}. The plot stops with an error if the
+estimated means are not on the scale of the raw response, for example for a
+transformed response without \code{transform = TRUE}, or with
+\code{predict = "link"}. It also stops if the estimated means do not include
+each value in the data of the contrasted and \code{by} variables, for example
+for a numeric \code{by} variable.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -43,6 +52,9 @@ model <- lm(Sepal.Width ~ Species, data = iris)
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
 plot(contrasts, means)
+
+# with the raw data as jittered points
+plot(contrasts, means, show_data = TRUE)
 
 # contrasts of `am` within each level of `cyl`, one panel per level
 d <- mtcars

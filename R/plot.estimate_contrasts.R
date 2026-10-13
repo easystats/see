@@ -235,6 +235,16 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' such as `"auto, 4"`. The first variable changes slowest along the axis.
 #'
 #' @inheritParams data_plot
+#' @param data The estimated means, obtained with
+#'   `modelbased::estimate_means()`.
+#' @param show_data Logical. If `TRUE`, the plot draws the raw data of the model
+#'   as jittered points behind the lighthouses. The raw data come from the model
+#'   stored in `x`, not from `data`. The plot stops with an error if the
+#'   estimated means are not on the scale of the raw response, for example for a
+#'   transformed response without `transform = TRUE`, or with
+#'   `predict = "link"`. It also stops if the estimated means do not include
+#'   each value in the data of the contrasted and `by` variables, for example
+#'   for a numeric `by` variable.
 #'
 #' @return A ggplot2-object.
 #'
@@ -246,6 +256,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' contrasts <- estimate_contrasts(model)
 #' means <- estimate_means(model)
 #' plot(contrasts, means)
+#'
+#' # with the raw data as jittered points
+#' plot(contrasts, means, show_data = TRUE)
 #'
 #' # contrasts of `am` within each level of `cyl`, one panel per level
 #' d <- mtcars
