@@ -1141,6 +1141,26 @@ test_that("`show_data = TRUE` accepts only the log of the response column itself
   )
   expect_lt(max(means$Mean), 3)
   expect_gt(min(d$mpg), 10)
+
+  # emmeans draws other transformed responses, but not with the raw data
+  skip_if_not_installed("emmeans")
+  model <- lm(sqrt(mpg) ~ am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    backend = "emmeans"
+  )
+  means <- modelbased::estimate_means(model, by = "am", backend = "emmeans")
+  expect_no_error(plot(contrasts, means))
+  expect_match(
+    error_text(plot(contrasts, means, show_data = TRUE)),
+    "transforms the response",
+    fixed = TRUE
+  )
+
+  # a namespaced call is not taken for the log of the response
+  expect_true(.is_log_of("log(mpg)", "mpg"))
+  expect_false(.is_log_of("base::log(mpg)", "mpg"))
 })
 
 

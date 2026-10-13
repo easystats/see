@@ -89,9 +89,10 @@ them as differences. For other transformations, such as \code{sqrt(y)}, and for
 transformations that \code{insight::find_transformation()} does not recognize,
 the plot stops with an error. With \code{backend = "emmeans"}, which sets
 \code{transform = TRUE} by default, the contrasts are differences of the
-back-transformed means, and the plot draws them as differences. Ratio
-contrasts estimated with \code{transform = TRUE} are not ratios of the
-back-transformed means, so the plot stops with an error for them.
+back-transformed means, and the plot draws them as differences. The plot
+stops with an error for ratio contrasts estimated with \code{transform = TRUE},
+because for a transformed response they are not ratios of the
+back-transformed means.
 
 The contrasts and the means must be on the same scale. The plot stops with
 an error if both record a \code{predict} value and the two differ. The \code{predict}

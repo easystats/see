@@ -147,10 +147,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     if (back_transformed) {
       insight::format_error(
         paste(
-          "Lighthouse plots cannot draw ratio contrasts estimated with",
-          "`transform = TRUE`, because they are not ratios of the",
-          "back-transformed means. Please obtain the contrasts and means",
-          "without `transform`."
+          "Lighthouse plots do not draw ratio contrasts estimated with",
+          "`transform = TRUE`, because for a transformed response they are",
+          "not ratios of the back-transformed means. Please obtain the",
+          "contrasts and means without `transform`."
         )
       )
     }
@@ -247,7 +247,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
         "\"` and the estimated means with `predict = \"",
         predict_means,
         "\"`. Lighthouse plots need both on the same scale. Please obtain ",
-        "the contrasts and means with the same `predict`."
+        "the contrasts and means with the same `predict` and the same ",
+        "`backend`."
       )
     )
   }
@@ -514,9 +515,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' transformations that `insight::find_transformation()` does not recognize,
 #' the plot stops with an error. With `backend = "emmeans"`, which sets
 #' `transform = TRUE` by default, the contrasts are differences of the
-#' back-transformed means, and the plot draws them as differences. Ratio
-#' contrasts estimated with `transform = TRUE` are not ratios of the
-#' back-transformed means, so the plot stops with an error for them.
+#' back-transformed means, and the plot draws them as differences. The plot
+#' stops with an error for ratio contrasts estimated with `transform = TRUE`,
+#' because for a transformed response they are not ratios of the
+#' back-transformed means.
 #'
 #' The contrasts and the means must be on the same scale. The plot stops with
 #' an error if both record a `predict` value and the two differ. The `predict`
@@ -873,6 +875,7 @@ plot.see_estimate_contrasts <- function(
 .is_log_of <- function(response_term, response) {
   term <- tryCatch(str2lang(response_term), error = function(e) NULL)
   is.call(term) &&
+    is.name(term[[1]]) &&
     as.character(term[[1]]) %in% c("log", "log2", "log10") &&
     length(term) >= 2L &&
     identical(term[[2]], as.name(response))
