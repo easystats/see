@@ -30,15 +30,23 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   # each contrast is drawn from the means of its own `by` level
   by <- .clean_target_names(attr(x, "by"))
+
+  # the means call to suggest keeps the target values of the contrasts
+  means_call <- paste0(
+    "`estimate_means(by = c(",
+    toString(dQuote(c(attr(x, "contrast") %||% x_name, attr(x, "by")), FALSE)),
+    "))`"
+  )
+
   missing_columns <- setdiff(c(x_name, by), names(means))
   if (length(missing_columns)) {
     insight::format_error(
       paste0(
         "The estimated means lack the column(s) ",
         toString(missing_columns),
-        " that the contrasts need. Please obtain the means with `estimate_means(by = c(",
-        toString(dQuote(c(x_name, by), FALSE)),
-        "))`."
+        " that the contrasts need. Please obtain the means with ",
+        means_call,
+        "."
       )
     )
   }
@@ -51,7 +59,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     means,
     x_name = x_name,
     y_name = y_name,
-    by = by
+    by = by,
+    means_call = means_call
   )
 
   attr(dataplot, "info") <- list(
@@ -83,7 +92,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   means,
   x_name,
   y_name,
-  by = NULL
+  by = NULL,
+  means_call = NULL
 ) {
   polygons <- as.data.frame(contrasts)
   polygons$group <- seq_len(nrow(polygons))
@@ -112,9 +122,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       paste0(
         "The estimated means have more than one row for some levels of ",
         toString(c(x_name, by)),
-        ". Please obtain the means with `estimate_means(by = c(",
-        toString(dQuote(c(x_name, by), FALSE)),
-        "))`, without other variables."
+        ". Please obtain the means with ",
+        means_call,
+        ", without other variables."
       )
     )
   }

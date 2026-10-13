@@ -211,7 +211,7 @@ test_that("lighthouse plots accept `contrast` and `by` given with target values"
 })
 
 
-test_that("lighthouse plots stop when the means have more rows than the contrasts can use", {
+test_that("lighthouse plots stop when the means have extra or missing rows", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
