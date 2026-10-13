@@ -96,6 +96,18 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 }
 
 
+# values as text for matching the data to the means; numbers as doubles, so
+# that 100000L in the data matches 1e5 in the means
+#' @keywords internal
+.value_key <- function(x) {
+  if (is.numeric(x)) {
+    as.character(as.numeric(x))
+  } else {
+    as.character(x)
+  }
+}
+
+
 #' @keywords internal
 .data_contrasts_and_means <- function(
   contrasts,
@@ -241,14 +253,18 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   as jittered points behind the lighthouses. The raw data come from
 #'   `insight::get_data()` for the model stored in `x`, not from `data`. The
 #'   plot stops with an error in these cases:
-#'   - `x` is the output of `data_plot()`, or it does not carry its model.
+#'   - `show_data` is not a single `TRUE` or `FALSE`.
+#'   - `x` is the output of `data_plot()`, or it does not carry its model, or
+#'     the model data cannot be retrieved.
 #'   - The model transforms the response, for example `log(y)`. This also
 #'     applies with `transform = TRUE`, because the back-transformed contrasts
 #'     are then not differences on the scale of the raw data.
-#'   - The contrasts or the estimated means were estimated on another scale
-#'     than the response, for example with `predict = "link"`. Means without
-#'     this information, such as a plain data frame, are taken to be on the
-#'     same scale as the contrasts.
+#'   - The `predict` of the contrasts or of the estimated means is not one of
+#'     `"prediction"`, `"response"`, `"expectation"`, and `"invlink(link)"`,
+#'     for example `predict = "link"`. Means without this information, such as
+#'     a plain data frame, are taken to be on the same scale as the contrasts.
+#'     Other scales, such as contrasts with `comparison = "ratio"` or a
+#'     `transform` function, are not checked.
 #'   - The model data lack the response or a contrasted or `by` variable.
 #'   - The estimated means do not include each value in the data of the
 #'     contrasted and `by` variables, or each combination of their values. For
@@ -374,6 +390,14 @@ plot.see_estimate_contrasts <- function(
       "`show_data = TRUE` needs the model data, which could not be retrieved."
     )
   }
+  if (!is.character(response) || length(response) != 1L) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` needs the name of the response, but the contrasts",
+        "do not carry it. Please obtain the contrasts with `estimate_contrasts()`."
+      )
+    )
+  }
   missing_columns <- setdiff(c(response, x_name, by), names(raw))
   if (length(missing_columns)) {
     insight::format_error(
@@ -392,15 +416,25 @@ plot.see_estimate_contrasts <- function(
     insight::find_terms(model)$response,
     error = function(e) NULL
   )
+  if (is.null(response_term)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs to know whether the model transforms the ",
+        "response ",
+        response,
+        ", but its response term could not be found."
+      )
+    )
+  }
   if (!identical(response_term, response)) {
     insight::format_error(
       paste0(
         "`show_data = TRUE` needs the contrasts and means on the scale of ",
         "the raw data of ",
         response,
-        ", but the model transforms the response",
-        if (!is.null(response_term)) paste0(" (", toString(response_term), ")"),
-        ". Please fit the model to the untransformed response to show the data."
+        ", but the model transforms the response (",
+        toString(response_term),
+        "). Please fit the model to the untransformed response to show the data."
       )
     )
   }
@@ -440,8 +474,8 @@ plot.see_estimate_contrasts <- function(
   # each data value must have its place on the x axis and in the facets
   for (i in c(x_name, by)) {
     lacking <- setdiff(
-      unique(as.character(raw[[i]])),
-      as.character(means[[i]])
+      unique(.value_key(raw[[i]])),
+      .value_key(means[[i]])
     )
     if (length(lacking)) {
       insight::format_error(
@@ -471,7 +505,20 @@ plot.see_estimate_contrasts <- function(
 
   x_labels <- do.call(
     paste,
-    c(lapply(x_name, function(i) as.character(raw[[i]])), sep = ", ")
+    c(
+      lapply(x_name, function(i) {
+        # numeric values take the labels of the equal values in the means,
+        # e.g. 100000L in the data and 1e5 in the means
+        if (is.numeric(raw[[i]]) && is.numeric(means[[i]])) {
+          as.character(means[[i]])[
+            match(as.numeric(raw[[i]]), as.numeric(means[[i]]))
+          ]
+        } else {
+          as.character(raw[[i]])
+        }
+      }),
+      sep = ", "
+    )
   )
   x_levels <- levels(dataplot$geom_pointrange$x)
 
@@ -495,7 +542,7 @@ plot.see_estimate_contrasts <- function(
     cell_key <- function(d) {
       do.call(
         paste,
-        c(lapply(cells, function(i) as.character(d[[i]])), sep = ", ")
+        c(lapply(cells, function(i) .value_key(d[[i]])), sep = ", ")
       )
     }
     lacking <- setdiff(unique(cell_key(raw)), cell_key(means))
@@ -522,6 +569,9 @@ plot.see_estimate_contrasts <- function(
       factor(as.character(values), levels = levels(target))
     } else if (is.character(target)) {
       as.character(values)
+    } else if (is.double(target)) {
+      # facets do not match integer data to double means
+      as.double(values)
     } else {
       values
     }

@@ -17,14 +17,18 @@ as jittered points behind the lighthouses. The raw data come from
 \code{insight::get_data()} for the model stored in \code{x}, not from \code{data}. The
 plot stops with an error in these cases:
 \itemize{
-\item \code{x} is the output of \code{data_plot()}, or it does not carry its model.
+\item \code{show_data} is not a single \code{TRUE} or \code{FALSE}.
+\item \code{x} is the output of \code{data_plot()}, or it does not carry its model, or
+the model data cannot be retrieved.
 \item The model transforms the response, for example \code{log(y)}. This also
 applies with \code{transform = TRUE}, because the back-transformed contrasts
 are then not differences on the scale of the raw data.
-\item The contrasts or the estimated means were estimated on another scale
-than the response, for example with \code{predict = "link"}. Means without
-this information, such as a plain data frame, are taken to be on the
-same scale as the contrasts.
+\item The \code{predict} of the contrasts or of the estimated means is not one of
+\code{"prediction"}, \code{"response"}, \code{"expectation"}, and \code{"invlink(link)"},
+for example \code{predict = "link"}. Means without this information, such as
+a plain data frame, are taken to be on the same scale as the contrasts.
+Other scales, such as contrasts with \code{comparison = "ratio"} or a
+\code{transform} function, are not checked.
 \item The model data lack the response or a contrasted or \code{by} variable.
 \item The estimated means do not include each value in the data of the
 contrasted and \code{by} variables, or each combination of their values. For

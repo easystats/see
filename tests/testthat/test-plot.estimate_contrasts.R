@@ -810,6 +810,70 @@ test_that("`show_data = TRUE` stops for combinations of `by` levels the means la
 })
 
 
+test_that("`show_data = TRUE` matches integer data to double means", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  set.seed(2)
+  d <- data.frame(
+    y = rnorm(60),
+    g = factor(rep(c("a", "b"), 30)),
+    size = rep(c(100000L, 200000L, 300000L), each = 20)
+  )
+  model <- lm(y ~ g * size, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "g",
+    by = "size=c(100000,200000,300000)"
+  )
+  means <- modelbased::estimate_means(
+    model,
+    by = c("g", "size=c(100000,200000,300000)")
+  )
+  # the data print 100000 and the means print 1e+05
+  expect_type(d$size, "integer")
+  expect_type(means$size, "double")
+  expect_false(as.character(d$size[1]) %in% as.character(means$size))
+
+  built <- ggplot2::ggplot_build(plot(contrasts, means, show_data = TRUE))
+  panels <- built$layout$layout
+  points <- built$data[[1]]
+  expect_identical(nrow(panels), 3L)
+  for (size in c(100000, 200000, 300000)) {
+    panel <- panels$PANEL[panels$size == size]
+    expect_length(panel, 1)
+    expect_equal(
+      sort(points$y[points$PANEL == panel]),
+      sort(d$y[d$size == size]),
+      tolerance = 1e-8
+    )
+  }
+})
+
+
+test_that("`show_data = TRUE` stops when the response cannot be checked", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  fx <- contrasts_by_fixture()
+  no_response <- fx$contrasts
+  attr(no_response, "response") <- NULL
+  expect_error(
+    plot(no_response, fx$means, show_data = TRUE),
+    regexp = "needs the name of the response"
+  )
+
+  local_mocked_bindings(
+    find_terms = function(...) stop("no terms"),
+    .package = "insight"
+  )
+  expect_error(
+    plot(fx$contrasts, fx$means, show_data = TRUE),
+    regexp = "its response term could not be found"
+  )
+})
+
+
 test_that("`show_data = TRUE` keeps `by` variables named like plot columns", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
