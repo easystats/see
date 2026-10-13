@@ -228,6 +228,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' levels of a contrast, the plot does not draw that contrast and gives a
 #' warning.
 #'
+#' If you contrast two or more variables jointly, for example with
+#' `contrast = c("am", "cyl")`, the x axis shows their combinations of levels,
+#' such as `"auto, 4"`. The first variable changes slowest along the axis.
+#'
 #' @inheritParams data_plot
 #'
 #' @return A ggplot2-object.
@@ -248,6 +252,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' model <- lm(mpg ~ cyl * am, data = d)
 #' contrasts <- estimate_contrasts(model, contrast = "am", by = "cyl")
 #' means <- estimate_means(model, by = c("cyl", "am"))
+#' plot(contrasts, means)
+#'
+#' # joint contrasts of `am` and `cyl`, on an axis of combined levels
+#' contrasts <- estimate_contrasts(model, contrast = c("am", "cyl"))
 #' plot(contrasts, means)
 #' }
 #'

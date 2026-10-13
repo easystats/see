@@ -1,5 +1,11 @@
 # see (devel)
 
+## Changes
+
+* `plot()` for `modelbased::estimate_contrasts()` now draws joint contrasts of
+  two or more variables, such as `contrast = c("am", "cyl")`. The x axis shows
+  the combinations of levels, such as "auto, 4".
+
 ## Bug fixes
 
 * When `check_model()` failed to create plots, the informative message
