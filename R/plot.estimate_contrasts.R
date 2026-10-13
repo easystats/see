@@ -12,20 +12,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     )
   }
 
-  # the contrasted variable is on the x axis; if the contrasts have no
+  # the contrasted variables are on the x axis; if the contrasts have no
   # `contrast` attribute, fall back to the first column of the means
   x_name <- .clean_target_names(attr(x, "contrast"))
   if (is.null(x_name)) {
     x_name <- names(means)[1]
-  }
-  if (length(x_name) > 1) {
-    insight::format_error(
-      paste0(
-        "Lighthouse plots support only one contrast variable, but the contrasts compare ",
-        toString(x_name),
-        " jointly."
-      )
-    )
   }
 
   if (!all(c("Level1", "Level2") %in% names(x))) {
@@ -82,7 +73,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   )
 
   attr(dataplot, "info") <- list(
-    xlab = x_name,
+    xlab = toString(x_name),
     ylab = y_name,
     title = paste0("Estimated ", y_name, "s and Contrasts"),
     by = by_columns
@@ -118,16 +109,29 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   polygons$Level1 <- as.character(polygons$Level1)
   polygons$Level2 <- as.character(polygons$Level2)
 
-  # keep the level order of the contrasted variable on the x axis
-  x_values <- means[[x_name]]
-  if (is.factor(x_values)) {
-    x_levels <- levels(x_values)[levels(x_values) %in% x_values]
-  } else {
-    x_levels <- unique(as.character(x_values))
-  }
-
   data_means <- as.data.frame(means)
-  x_labels <- as.character(data_means[[x_name]])
+
+  # a joint contrast compares combinations of levels, which modelbased labels
+  # by pasting the levels of the contrasted variables with ", "
+  x_labels <- do.call(
+    paste,
+    c(lapply(x_name, function(i) as.character(data_means[[i]])), sep = ", ")
+  )
+
+  # keep the level order of the contrasted variables on the x axis, with the
+  # first variable varying slowest
+  level_sets <- lapply(x_name, function(i) {
+    values <- data_means[[i]]
+    if (is.factor(values)) {
+      levels(values)[levels(values) %in% values]
+    } else {
+      unique(as.character(values))
+    }
+  })
+  level_grid <- expand.grid(rev(level_sets), stringsAsFactors = FALSE)
+  x_levels <- do.call(paste, c(rev(as.list(level_grid)), sep = ", "))
+  x_levels <- x_levels[x_levels %in% x_labels]
+
   data_means$x <- factor(x_labels, levels = x_levels)
   data_means$y <- data_means[[y_name]]
   data_means$Level2 <- data_means$Level1 <- x_labels
@@ -169,8 +173,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
         " of ",
         nrow(contrasts),
         " contrasts are not drawn, because the estimated means have no row for their levels.",
-        " Lighthouse plots draw only pairwise contrasts between levels of ",
-        x_name,
+        " Lighthouse plots draw only pairwise contrasts between ",
+        if (length(x_name) > 1) "combinations of levels of " else "levels of ",
+        toString(x_name),
         ", with the means estimated at the same values as the contrasts: ",
         means_call,
         "."
@@ -219,10 +224,14 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' If you estimate the contrasts with `by`, the plot draws each contrast from
 #' the estimated means of its own `by` level. The plot then has one panel per
 #' level, or combination of levels, of the `by` variables. The estimated means
-#' must include the contrasted variable and the `by` variables, and no other
+#' must include the contrasted variables and the `by` variables, and no other
 #' variables that split their rows further. If the means have no row for the
 #' levels of a contrast, the plot does not draw that contrast and gives a
 #' warning.
+#'
+#' If you contrast two or more variables jointly, for example with
+#' `contrast = c("am", "cyl")`, the x axis shows their combinations of levels,
+#' such as `"auto, 4"`. The first variable changes slowest along the axis.
 #'
 #' @inheritParams data_plot
 #'
@@ -244,6 +253,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' model <- lm(mpg ~ cyl * am, data = d)
 #' contrasts <- estimate_contrasts(model, contrast = "am", by = "cyl")
 #' means <- estimate_means(model, by = c("cyl", "am"))
+#' plot(contrasts, means)
+#'
+#' # joint contrasts of `am` and `cyl`, on an axis of combined levels
+#' contrasts <- estimate_contrasts(model, contrast = c("am", "cyl"))
 #' plot(contrasts, means)
 #' }
 #'

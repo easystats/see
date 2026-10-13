@@ -146,7 +146,7 @@ test_that("lighthouse plots of contrasts with `by` get one facet per `by` level"
 })
 
 
-test_that("lighthouse plots stop for means without the `by` columns and for joint contrasts", {
+test_that("lighthouse plots stop for means without the `by` columns", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
@@ -154,9 +154,99 @@ test_that("lighthouse plots stop for means without the `by` columns and for join
   means_am <- modelbased::estimate_means(fx$model, by = "am")
   expect_error(data_plot(fx$contrasts, means_am), regexp = "cyl")
   expect_error(data_plot(fx$contrasts, means_am), regexp = "lack")
+})
 
-  joint <- modelbased::estimate_contrasts(fx$model, contrast = c("am", "cyl"))
-  expect_error(data_plot(joint, fx$means), regexp = "one contrast variable")
+
+# joint contrasts of `am` and `cyl`
+joint_contrasts_fixture <- function(d) {
+  model <- lm(mpg ~ cyl * am, data = d)
+  list(
+    means = modelbased::estimate_means(model, by = c("cyl", "am")),
+    contrasts = modelbased::estimate_contrasts(model, contrast = c("am", "cyl"))
+  )
+}
+
+
+test_that("joint contrasts get one lighthouse per contrast from the matching means", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  jf <- joint_contrasts_fixture(contrasts_by_fixture()$data)
+  jc <- jf$contrasts
+  means <- jf$means
+  polygons <- data_plot(jc, means)$geom_polygon
+
+  expect_identical(nrow(jc), 15L)
+  expect_identical(as.vector(table(polygons$group)), rep(3L, 15))
+
+  means_labels <- paste(means$am, means$cyl, sep = ", ")
+  for (i in seq_len(nrow(jc))) {
+    level1 <- as.character(jc$Level1[i])
+    level2 <- as.character(jc$Level2[i])
+    rows <- polygons[polygons$group == i, ]
+    mean1 <- means$Mean[means_labels == level1]
+    expect_length(mean1, 1)
+    expect_equal(
+      rows$y[as.character(rows$x) == level1],
+      mean1,
+      tolerance = 1e-8
+    )
+    expect_equal(
+      sort(rows$y[as.character(rows$x) == level2]),
+      sort(c(mean1 - jc$CI_high[i], mean1 - jc$CI_low[i])),
+      tolerance = 1e-8
+    )
+  }
+})
+
+
+test_that("the x axis of joint contrasts shows combined levels in level order", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  x_limits <- function(jf) {
+    built <- ggplot2::ggplot_build(plot(jf$contrasts, jf$means))
+    built$layout$panel_params[[1]]$x$get_limits()
+  }
+
+  jf <- joint_contrasts_fixture(d)
+  expect_identical(
+    x_limits(jf),
+    c("auto, 4", "auto, 6", "auto, 8", "manual, 4", "manual, 6", "manual, 8")
+  )
+  expect_identical(attr(data_plot(jf$contrasts, jf$means), "info")$xlab, "am, cyl")
+
+  d_am <- d
+  d_am$am <- factor(d_am$am, levels = c("manual", "auto"))
+  expect_identical(
+    x_limits(joint_contrasts_fixture(d_am)),
+    c("manual, 4", "manual, 6", "manual, 8", "auto, 4", "auto, 6", "auto, 8")
+  )
+
+  d_cyl <- d
+  d_cyl$cyl <- factor(d_cyl$cyl, levels = c("8", "4", "6"))
+  expect_identical(
+    x_limits(joint_contrasts_fixture(d_cyl)),
+    c("auto, 8", "auto, 4", "auto, 6", "manual, 8", "manual, 4", "manual, 6")
+  )
+})
+
+
+test_that("joint contrasts without matching means give one warning", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  jf <- joint_contrasts_fixture(contrasts_by_fixture()$data)
+  partial_means <- as.data.frame(jf$means)[-1, ]
+  warnings <- testthat::capture_warnings(
+    dp <- data_plot(jf$contrasts, partial_means)
+  )
+  expect_length(warnings, 1)
+  expect_length(gregexpr("are not drawn", warnings)[[1]], 1)
+  expect_match(warnings, "5 of 15 contrasts are not drawn")
+  expect_match(warnings, "combinations of levels of am, cyl")
+  expect_identical(as.vector(table(dp$geom_polygon$group)), rep(3L, 10))
 })
 
 
@@ -176,6 +266,49 @@ contrasts_factorial_data <- function() {
 polygon_rows_per_contrast <- function(polygons) {
   as.vector(table(polygons$group))
 }
+
+
+test_that("joint contrasts with `by` get one facet per `by` level", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  s <- contrasts_factorial_data()
+  m3 <- lm(y ~ a * b * f, data = s)
+  means3 <- modelbased::estimate_means(m3, by = c("a", "b", "f"))
+  jc3 <- modelbased::estimate_contrasts(m3, contrast = c("a", "b"), by = "f")
+
+  p <- plot(jc3, means3)
+  expect_s3_class(p$facet, "FacetWrap")
+  expect_identical(names(p$facet$params$facets), "f")
+
+  built <- ggplot2::ggplot_build(p)
+  expect_identical(nrow(built$layout$layout), 2L)
+  polygons <- built$data[[layer_index(p, "GeomPolygon")]]
+  pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
+  for (panel in 1:2) {
+    expect_length(unique(polygons$group[polygons$PANEL == panel]), 6)
+    expect_identical(sum(pointranges$PANEL == panel), 4L)
+  }
+
+  polygons <- data_plot(jc3, means3)$geom_polygon
+  expect_identical(nrow(jc3), 12L)
+  expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 12))
+
+  means_labels <- paste(means3$a, means3$b, sep = ", ")
+  for (i in seq_len(nrow(jc3))) {
+    level1 <- as.character(jc3$Level1[i])
+    rows <- polygons[polygons$group == i, ]
+    mean1 <- means3$Mean[
+      means_labels == level1 & as.character(means3$f) == as.character(jc3$f[i])
+    ]
+    expect_length(mean1, 1)
+    expect_equal(
+      rows$y[as.character(rows$x) == level1],
+      mean1,
+      tolerance = 1e-8
+    )
+  }
+})
 
 
 test_that("lighthouse plots accept `contrast` and `by` given with target values", {

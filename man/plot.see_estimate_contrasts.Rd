@@ -25,10 +25,14 @@ function.
 If you estimate the contrasts with \code{by}, the plot draws each contrast from
 the estimated means of its own \code{by} level. The plot then has one panel per
 level, or combination of levels, of the \code{by} variables. The estimated means
-must include the contrasted variable and the \code{by} variables, and no other
+must include the contrasted variables and the \code{by} variables, and no other
 variables that split their rows further. If the means have no row for the
 levels of a contrast, the plot does not draw that contrast and gives a
 warning.
+
+If you contrast two or more variables jointly, for example with
+\code{contrast = c("am", "cyl")}, the x axis shows their combinations of levels,
+such as \code{"auto, 4"}. The first variable changes slowest along the axis.
 }
 \examples{
 \dontshow{if (all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}
@@ -47,6 +51,10 @@ d$am <- factor(d$am, labels = c("auto", "manual"))
 model <- lm(mpg ~ cyl * am, data = d)
 contrasts <- estimate_contrasts(model, contrast = "am", by = "cyl")
 means <- estimate_means(model, by = c("cyl", "am"))
+plot(contrasts, means)
+
+# joint contrasts of `am` and `cyl`, on an axis of combined levels
+contrasts <- estimate_contrasts(model, contrast = c("am", "cyl"))
 plot(contrasts, means)
 }
 \dontshow{\}) # examplesIf}
