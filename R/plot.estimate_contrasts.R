@@ -180,14 +180,21 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 .is_log_transformation <- function(x) {
   is.character(x) &&
     length(x) == 1L &&
-    (x %in% c("log", "log2", "log10") || grepl("^log\\(x,base=", x))
+    (x %in% c("log", "log2", "log10") || startsWith(x, "log(x,base="))
 }
 
 
-# the contrasts and means must be on one scale; values that modelbased gives
-# for the response scale count as the same
+# the contrasts and means must be on one scale
 #' @keywords internal
 .check_same_scale <- function(contrasts, means) {
+  .check_same_predict(contrasts, means)
+  .check_same_transform(contrasts, means)
+}
+
+
+# values that modelbased gives for the response scale count as the same
+#' @keywords internal
+.check_same_predict <- function(contrasts, means) {
   response_scale <- c("response", "inverse_link", "invlink(link)")
   predict_contrasts <- attr(contrasts, "predict", exact = TRUE)
   predict_means <- attr(means, "predict", exact = TRUE)
@@ -210,7 +217,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       )
     )
   }
+}
 
+
+#' @keywords internal
+.check_same_transform <- function(contrasts, means) {
   transform_contrasts <- attr(contrasts, "transform", exact = TRUE)
   transform_means <- attr(means, "transform", exact = TRUE)
   if (
@@ -426,25 +437,58 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' `contrast = c("am", "cyl")`, the x axis shows their combinations of levels,
 #' such as `"auto, 4"`. The first variable changes slowest along the axis.
 #'
+#' The plot takes the estimates from the column of the means that their
+#' `coef_name` attribute names. For means without this attribute, such as a
+#' plain data frame, it takes the first of the columns `Median`, `Mean`, `MAP`,
+#' `Coefficient`, `Probability`, `Proportion`, and `Rate`. If the means have
+#' none of these columns, the plot stops with an error.
+#'
+#' Each lighthouse starts at the estimated mean of `Level1` of a contrast. For
+#' a difference, the lighthouse at `Level2` spans that mean minus the bounds of
+#' the confidence interval. Contrasts with a `Ratio` column, from
+#' `comparison = ratio ~ pairwise`, are ratios of the means, so the lighthouse
+#' at `Level2` spans that mean divided by the bounds of the interval. If the
+#' interval of a ratio includes 0, the plot does not draw that contrast and
+#' gives a warning.
+#'
+#' Contrasts estimated with `transform = TRUE` are back-transformed to the scale
+#' of the response. If the model response is `log(y)`, `log(y, base = b)`,
+#' `log2(y)`, or `log10(y)`, these contrasts are ratios of the back-transformed
+#' means, and the plot draws them as ratios. If the response is not
+#' transformed, the plot draws them as differences. For other transformations,
+#' such as `sqrt(y)`, and for transformations that are unknown to
+#' `insight::find_transformation()`, the plot stops with an error.
+#'
+#' The contrasts and the means must be on the same scale. The plot stops with
+#' an error if both record a `predict` value and the two differ, or if both
+#' record a `transform` value and the two differ. The `predict` values
+#' `"response"`, `"inverse_link"`, and `"invlink(link)"` count as the same
+#' scale.
+#'
 #' @inheritParams data_plot
 #' @param data The estimated means, obtained with
 #'   `modelbased::estimate_means()`.
 #' @param show_data Logical. If `TRUE`, the plot draws the raw data of the model
 #'   as jittered points behind the lighthouses. The raw data come from
-#'   `insight::get_data()` for the model stored in `x`, not from `data`. The
-#'   plot stops with an error in these cases:
+#'   `insight::get_data()` for the model stored in `x`, not from `data`. A
+#'   response that is logical or a factor with two levels is drawn as 0 and 1,
+#'   with `TRUE` or the second level as 1. A log response, such as `log(y)`, is
+#'   drawn as the raw data of `y` if both the contrasts and the means were
+#'   estimated with `transform = TRUE`. Ratio contrasts are drawn with the raw
+#'   data. The plot stops with an error in these cases:
 #'   - `show_data` is not a single `TRUE` or `FALSE`.
 #'   - `x` is the output of `data_plot()`, or it does not carry its model, or
 #'     the model data cannot be retrieved.
-#'   - The model transforms the response, for example `log(y)`. This also
-#'     applies with `transform = TRUE`, because the back-transformed contrasts
-#'     are then not differences on the scale of the raw data.
+#'   - The response is a `cbind()` of successes and failures in a binomial
+#'     model.
+#'   - The model transforms the response, for example `log(y)`, and the
+#'     contrasts and means are not back-transformed log contrasts and means as
+#'     above.
 #'   - The `predict` of the contrasts or of the estimated means is not one of
-#'     `"prediction"`, `"response"`, `"expectation"`, and `"invlink(link)"`,
-#'     for example `predict = "link"`. Means without this information, such as
-#'     a plain data frame, are taken to be on the same scale as the contrasts.
-#'     Other scales, such as contrasts with `comparison = "ratio"` or a
-#'     `transform` function, are not checked.
+#'     `"prediction"`, `"response"`, `"expectation"`, `"invlink(link)"`, and
+#'     `"inverse_link"`, for example `predict = "link"`. Means without this
+#'     information, such as a plain data frame, are taken to be on the same
+#'     scale as the contrasts.
 #'   - The model data lack the response or a contrasted or `by` variable.
 #'   - The estimated means do not include each value in the data of the
 #'     contrasted and `by` variables, or each combination of their values. For
@@ -599,82 +643,8 @@ plot.see_estimate_contrasts <- function(
     )
   }
 
-  # the response must be untransformed, or log-transformed with contrasts and
-  # means back-transformed to the raw scale
-  response_term <- tryCatch(
-    insight::find_terms(model)$response,
-    error = function(e) NULL
-  )
-  if (is.null(response_term)) {
-    insight::format_error(
-      paste0(
-        "`show_data = TRUE` needs to know whether the model transforms the ",
-        "response ",
-        response,
-        ", but its response term could not be found."
-      )
-    )
-  }
-  back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
-    isTRUE(attr(means_object, "transform", exact = TRUE)) &&
-    .is_log_transformation(
-      tryCatch(insight::find_transformation(model), error = function(e) NULL)
-    )
-  if (!identical(response_term, response) && !back_transformed) {
-    insight::format_error(
-      paste0(
-        "`show_data = TRUE` needs the contrasts and means on the scale of ",
-        "the raw data of ",
-        response,
-        ", but the model transforms the response (",
-        toString(response_term),
-        "). Please fit the model to the untransformed response to show the data."
-      )
-    )
-  }
-
-  # the contrasts and the means must be estimated on the response scale;
-  # means without the attribute (e.g. a plain data frame) are taken as
-  # estimated like the contrasts
-  estimates <- list(contrasts = contrasts, means = means_object)
-  for (i in names(estimates)) {
-    predict_type <- attr(estimates[[i]], "predict", exact = TRUE)
-    if (i == "means" && is.null(predict_type)) {
-      predict_type <- "response"
-    }
-
-    if (
-      !isTRUE(
-        predict_type %in%
-          c(
-            "prediction",
-            "response",
-            "expectation",
-            "invlink(link)",
-            "inverse_link"
-          )
-      )
-    ) {
-      insight::format_error(
-        paste0(
-          "`show_data = TRUE` needs the contrasts and means on the scale of ",
-          "the response, but the ",
-          i,
-          if (is.null(predict_type)) {
-            " do not say which `predict` they were estimated with"
-          } else {
-            paste0(
-              " were estimated with `predict = \"",
-              toString(predict_type),
-              "\"`"
-            )
-          },
-          ". Please obtain the contrasts and means with ",
-          "`predict = \"response\"`."
-        )
-      )
-    }
-  }
+  .check_raw_response_scale(model, contrasts, means_object, response)
+  .check_raw_predict(contrasts, means_object)
 
   # each data value must have its place on the x axis and in the facets
   for (i in c(x_name, by_vars)) {
@@ -763,13 +733,7 @@ plot.see_estimate_contrasts <- function(
       )
     }
   }
-  # a binary response is drawn as 0 and 1, like the probabilities
-  y <- model_data[[response]]
-  if (is.logical(y)) {
-    y <- as.numeric(y)
-  } else if (is.factor(y) && nlevels(y) == 2L) {
-    y <- as.numeric(y == levels(y)[2])
-  }
+  y <- .binary_as_numeric(model_data[[response]])
 
   # the `by` columns get the names and types of the means in `dataplot`
   for (j in seq_along(by_vars)) {
@@ -791,4 +755,102 @@ plot.see_estimate_contrasts <- function(
   model_data$x <- factor(x_labels, levels = x_levels)
   model_data$y <- y
   model_data
+}
+
+
+# the response must be untransformed, or log-transformed with contrasts and
+# means back-transformed to the raw scale
+#' @keywords internal
+.check_raw_response_scale <- function(model, contrasts, means, response) {
+  response_term <- tryCatch(
+    insight::find_terms(model)$response,
+    error = function(e) NULL
+  )
+  if (is.null(response_term)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs to know whether the model transforms the ",
+        "response ",
+        response,
+        ", but its response term could not be found."
+      )
+    )
+  }
+  back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
+    isTRUE(attr(means, "transform", exact = TRUE)) &&
+    .is_log_transformation(
+      tryCatch(insight::find_transformation(model), error = function(e) NULL)
+    )
+  if (!identical(response_term, response) && !back_transformed) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs the contrasts and means on the scale of ",
+        "the raw data of ",
+        response,
+        ", but the model transforms the response (",
+        toString(response_term),
+        "). Please fit the model to the untransformed response to show the data."
+      )
+    )
+  }
+}
+
+
+# the contrasts and the means must be estimated on the response scale;
+# means without the attribute (e.g. a plain data frame) are taken as
+# estimated like the contrasts
+#' @keywords internal
+.check_raw_predict <- function(contrasts, means) {
+  estimates <- list(contrasts = contrasts, means = means)
+  for (i in names(estimates)) {
+    predict_type <- attr(estimates[[i]], "predict", exact = TRUE)
+    if (i == "means" && is.null(predict_type)) {
+      predict_type <- "response"
+    }
+
+    if (
+      !isTRUE(
+        predict_type %in%
+          c(
+            "prediction",
+            "response",
+            "expectation",
+            "invlink(link)",
+            "inverse_link"
+          )
+      )
+    ) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs the contrasts and means on the scale of ",
+          "the response, but the ",
+          i,
+          if (is.null(predict_type)) {
+            " do not say which `predict` they were estimated with"
+          } else {
+            paste0(
+              " were estimated with `predict = \"",
+              toString(predict_type),
+              "\"`"
+            )
+          },
+          ". Please obtain the contrasts and means with ",
+          "`predict = \"response\"`."
+        )
+      )
+    }
+  }
+}
+
+
+# a binary response is drawn as 0 and 1, like the probabilities
+#' @keywords internal
+.binary_as_numeric <- function(y) {
+  if (is.logical(y)) {
+    as.numeric(y)
+  } else if (is.factor(y) && nlevels(y) == 2L) {
+    as.numeric(y == levels(y)[2])
+  } else {
+    y
+  }
 }

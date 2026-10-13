@@ -668,15 +668,15 @@ test_that("lighthouse plots draw back-transformed log contrasts as ratios", {
   d <- contrasts_by_fixture()$data
   # `transform = FALSE` is not accepted, so the default is left out
   estimates <- function(model, transform = TRUE) {
-    args <- if (transform) list(transform = TRUE)
+    transform_arg <- if (transform) list(transform = TRUE)
     list(
       contrasts = do.call(
         modelbased::estimate_contrasts,
-        c(list(model, contrast = "am"), args)
+        c(list(model, contrast = "am"), transform_arg)
       ),
       means = do.call(
         modelbased::estimate_means,
-        c(list(model, by = "am"), args)
+        c(list(model, by = "am"), transform_arg)
       )
     )
   }

@@ -10,6 +10,15 @@
   With `show_data = TRUE`, the plot draws the raw data of the model as jittered
   points behind the lighthouses (easystats/modelbased#114).
 
+* `plot()` for `modelbased::estimate_contrasts()` now draws more kinds of
+  estimates. It draws means in a `Probability`, `Proportion`, or `Rate` column,
+  such as the probabilities of a logistic model. It draws ratio contrasts from
+  `comparison = ratio ~ pairwise` as ratios of the means. It draws contrasts of
+  a log response estimated with `transform = TRUE` as ratios of the
+  back-transformed means. For other transformed responses with
+  `transform = TRUE`, and for contrasts and means estimated with different
+  `predict` or `transform` arguments, the plot stops with an error.
+
 ## Bug fixes
 
 * When `check_model()` failed to create plots, the informative message
