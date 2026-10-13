@@ -265,14 +265,23 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   ) {
     return(invisible(NULL))
   }
+  describe <- function(transform) {
+    if (is.function(transform)) {
+      "a `transform` function"
+    } else {
+      paste0("`transform = ", deparse(transform), "`")
+    }
+  }
   if (is.function(transform_contrasts) || is.function(transform_means)) {
     insight::format_error(
-      paste(
-        "The contrasts were estimated with a `transform` function, which",
-        "modelbased records on the contrasts, while it records",
-        "`transform = TRUE` on the means. Lighthouse plots cannot check that",
-        "both are on the same scale. Please obtain the contrasts and means",
-        "without a `transform` function."
+      paste0(
+        "The contrasts were estimated with ",
+        describe(transform_contrasts),
+        " and the estimated means with ",
+        describe(transform_means),
+        ". Lighthouse plots cannot check that contrasts and means estimated ",
+        "with a `transform` function are on the same scale. Please obtain ",
+        "the contrasts and means without a `transform` function."
       )
     )
   }
@@ -513,10 +522,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' an error if both record a `predict` value and the two differ. The `predict`
 #' values `"response"`, `"inverse_link"`, and `"invlink(link)"` count as the
 #' same scale. The plot also stops with an error if both record a `transform`
-#' value and the two differ, unless `insight::find_transformation()` reports
-#' the transformation `"identity"`. Contrasts estimated with a `transform`
-#' function always differ, because modelbased records the function on the
-#' contrasts and `transform = TRUE` on the means.
+#' value and the two differ. If neither value is a `transform` function and
+#' `insight::find_transformation()` reports the transformation `"identity"`,
+#' the plot does not stop. Contrasts and means estimated with the same
+#' `transform` function also differ, because modelbased records the function
+#' on the contrasts and `transform = TRUE` on the means, so the plot stops.
 #'
 #' @inheritParams data_plot
 #' @param data The estimated means, obtained with

@@ -97,10 +97,11 @@ The contrasts and the means must be on the same scale. The plot stops with
 an error if both record a \code{predict} value and the two differ. The \code{predict}
 values \code{"response"}, \code{"inverse_link"}, and \code{"invlink(link)"} count as the
 same scale. The plot also stops with an error if both record a \code{transform}
-value and the two differ, unless \code{insight::find_transformation()} reports
-the transformation \code{"identity"}. Contrasts estimated with a \code{transform}
-function always differ, because modelbased records the function on the
-contrasts and \code{transform = TRUE} on the means.
+value and the two differ. If neither value is a \code{transform} function and
+\code{insight::find_transformation()} reports the transformation \code{"identity"},
+the plot does not stop. Contrasts and means estimated with the same
+\code{transform} function also differ, because modelbased records the function
+on the contrasts and \code{transform = TRUE} on the means, so the plot stops.
 }
 \examples{
 \dontshow{if (all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}

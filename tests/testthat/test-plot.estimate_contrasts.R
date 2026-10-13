@@ -1099,7 +1099,15 @@ test_that("the `transform` check passes the identity and names `transform` funct
     modelbased::estimate_means(lg, by = "am", transform = exp)
   ))
   expect_match(message, "a `transform` function", fixed = TRUE)
+  expect_match(message, "the estimated means with `transform = TRUE`", fixed = TRUE)
   expect_no_match(message, "with the same `transform`", fixed = TRUE)
+
+  # the message names what the means record
+  message <- error_text(plot(
+    modelbased::estimate_contrasts(lg, contrast = "am", transform = exp),
+    modelbased::estimate_means(lg, by = "am")
+  ))
+  expect_match(message, "the estimated means with `transform = FALSE`", fixed = TRUE)
 })
 
 
