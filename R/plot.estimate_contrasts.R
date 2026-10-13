@@ -163,8 +163,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   # means estimated at other values) are not drawn
   missing <- setdiff(seq_len(nrow(contrasts)), polygons$group)
   if (length(missing)) {
-    not_levels <- !(contrasts$Level1[missing] %in% x_levels &
-      contrasts$Level2[missing] %in% x_levels)
+    all_levels <- c(levels(x_values), x_levels)
+    not_levels <- !(contrasts$Level1[missing] %in% all_levels &
+      contrasts$Level2[missing] %in% all_levels)
     if (any(not_levels)) {
       advice <- paste0(
         " Lighthouse plots draw only pairwise contrasts between levels of ",
