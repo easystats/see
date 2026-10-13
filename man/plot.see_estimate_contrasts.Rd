@@ -19,8 +19,9 @@ response that is logical or a factor with two levels is drawn as 0 and 1,
 with \code{TRUE} or the second level as 1. A response \code{log(y)}, \code{log2(y)}, or
 \code{log10(y)}, with \code{y} a column of the data, is drawn as the raw data of \code{y}
 if both the contrasts and the means were estimated with
-\code{transform = TRUE}. Ratio contrasts are drawn with the raw
-data. The plot stops with an error in these cases:
+\code{transform = TRUE}. Means without the \code{transform} attribute, such as a
+plain data frame, then give an error. Ratio contrasts are drawn with the
+raw data. The plot stops with an error in these cases:
 \itemize{
 \item \code{show_data} is not a single \code{TRUE} or \code{FALSE}.
 \item \code{x} is the output of \code{data_plot()}, or it does not carry its model, or

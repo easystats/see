@@ -212,9 +212,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
 #' @keywords internal
 .is_log_transformation <- function(x) {
-  is.character(x) &&
-    length(x) == 1L &&
-    (x %in% c("log", "log2", "log10") || startsWith(x, "log(x,base="))
+  if (!is.character(x) || length(x) != 1L) {
+    return(FALSE)
+  }
+  # tolerate spaces, as in "log(x, base = 2)"
+  x <- gsub("\\s", "", x)
+  x %in% c("log", "log2", "log10") || startsWith(x, "log(x,base=")
 }
 
 
@@ -540,8 +543,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   with `TRUE` or the second level as 1. A response `log(y)`, `log2(y)`, or
 #'   `log10(y)`, with `y` a column of the data, is drawn as the raw data of `y`
 #'   if both the contrasts and the means were estimated with
-#'   `transform = TRUE`. Ratio contrasts are drawn with the raw
-#'   data. The plot stops with an error in these cases:
+#'   `transform = TRUE`. Means without the `transform` attribute, such as a
+#'   plain data frame, then give an error. Ratio contrasts are drawn with the
+#'   raw data. The plot stops with an error in these cases:
 #'   - `show_data` is not a single `TRUE` or `FALSE`.
 #'   - `x` is the output of `data_plot()`, or it does not carry its model, or
 #'     the model data cannot be retrieved.
@@ -845,6 +849,23 @@ plot.see_estimate_contrasts <- function(
   back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
     isTRUE(attr(means, "transform", exact = TRUE)) &&
     .is_log_of(response_term, response)
+  # means without the attribute, such as a plain data frame, do not say
+  # whether they are back-transformed
+  if (
+    isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
+      is.null(attr(means, "transform", exact = TRUE)) &&
+      .is_log_of(response_term, response)
+  ) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs to know whether the means of the response ",
+        response_term,
+        " are back-transformed, but the means do not carry the `transform` ",
+        "attribute. Please obtain the means with ",
+        "`estimate_means(transform = TRUE)`."
+      )
+    )
+  }
   if (!identical(response_term, response) && !back_transformed) {
     insight::format_error(
       paste0(

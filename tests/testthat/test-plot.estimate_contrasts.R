@@ -872,15 +872,11 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   expect_error(plot_data(model, predict = "link"), regexp = "predict")
   expect_no_error(plot_data(model))
 
-  # contrasts and means estimated on different scales; the messages are
-  # wrapped, so they are matched with single spaces
-  error_message <- function(expr) {
-    gsub("\\s+", " ", conditionMessage(expect_error(expr)))
-  }
+  # contrasts and means estimated on different scales
   contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
   means_link <- modelbased::estimate_means(model, by = "am", predict = "link")
   expect_match(
-    error_message(plot(contrasts, means_link)),
+    error_text(plot(contrasts, means_link)),
     "the estimated means with `predict = \"link\"`",
     fixed = TRUE
   )
@@ -915,11 +911,24 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
     means$Mean[means$am == "manual"] / means$Mean[means$am == "auto"],
     tolerance = 1e-6
   )
+  # means in a data frame do not say whether they are back-transformed
+  means_plain <- data.frame(
+    am = means$am,
+    Mean = means$Mean,
+    CI_low = means$CI_low,
+    CI_high = means$CI_high
+  )
+  expect_no_error(plot(contrasts, means_plain))
+  expect_match(
+    error_text(plot(contrasts, means_plain, show_data = TRUE)),
+    "the means do not carry the `transform` attribute",
+    fixed = TRUE
+  )
   contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
   means <- modelbased::estimate_means(model, by = "am")
   expect_no_error(plot(contrasts, means))
   expect_match(
-    error_message(plot(contrasts, means, show_data = TRUE)),
+    error_text(plot(contrasts, means, show_data = TRUE)),
     "transforms the response",
     fixed = TRUE
   )
@@ -1161,6 +1170,11 @@ test_that("`show_data = TRUE` accepts only the log of the response column itself
   # a namespaced call is not taken for the log of the response
   expect_true(.is_log_of("log(mpg)", "mpg"))
   expect_false(.is_log_of("base::log(mpg)", "mpg"))
+
+  # the base of a log is found with or without spaces
+  expect_true(.is_log_transformation("log(x,base=2)"))
+  expect_true(.is_log_transformation("log(x, base = 2)"))
+  expect_false(.is_log_transformation("sqrt"))
 })
 
 
