@@ -494,3 +494,69 @@ test_that("lighthouse plots work with two, numeric, and character `by` variables
   expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 3))
   expect_identical(levels(dp$geom_pointrange$x), c("auto", "manual"))
 })
+
+
+test_that("`show_data = TRUE` draws the raw data first, jittered within each facet", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  fx <- contrasts_by_fixture()
+  d <- fx$data
+
+  p <- plot(fx$contrasts, fx$means, show_data = TRUE)
+  expect_s3_class(p$layers[[1]]$geom, "GeomPoint")
+  expect_s3_class(p$layers[[1]]$position, "PositionJitter")
+  expect_identical(p$layers[[1]]$position$height, 0)
+
+  built <- ggplot2::ggplot_build(p)
+  panels <- built$layout$layout
+  points <- built$data[[1]]
+  for (cyl in c("4", "6", "8")) {
+    panel <- panels$PANEL[as.character(panels$cyl) == cyl]
+    expect_length(panel, 1)
+    y <- points$y[points$PANEL == panel]
+    expect_length(y, c("4" = 11L, "6" = 7L, "8" = 14L)[[cyl]])
+    expect_equal(sort(y), sort(d$mpg[d$cyl == cyl]), tolerance = 1e-8)
+  }
+
+  p_default <- plot(fx$contrasts, fx$means)
+  expect_length(p_default$layers, 2)
+  expect_s3_class(p_default$layers[[1]]$geom, "GeomPolygon")
+  expect_s3_class(p_default$layers[[2]]$geom, "GeomPointrange")
+})
+
+
+test_that("`show_data = TRUE` puts joint contrasts' raw data at their combined levels", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  jf <- joint_contrasts_fixture(contrasts_by_fixture()$data)
+  p <- plot(jf$contrasts, jf$means, show_data = TRUE)
+  raw <- p$layers[[1]]$data
+  expect_identical(nrow(raw), 32L)
+  expect_identical(as.character(raw$x), paste(raw$am, raw$cyl, sep = ", "))
+})
+
+
+test_that("`show_data = TRUE` stops for a transformed response and a numeric `by`", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(log(mpg) ~ am, data = d)
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
+  means <- modelbased::estimate_means(model, by = "am")
+  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "transform")
+  expect_no_error(plot(contrasts, means))
+
+  model <- lm(Sepal.Width ~ Species * Petal.Length, data = iris)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "Species",
+    by = "Petal.Length"
+  )
+  means <- modelbased::estimate_means(model, by = c("Species", "Petal.Length"))
+  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "Petal.Length")
+  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "numeric")
+  expect_no_error(plot(contrasts, means))
+})
