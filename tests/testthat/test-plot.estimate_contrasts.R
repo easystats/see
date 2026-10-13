@@ -233,6 +233,23 @@ test_that("the x axis of joint contrasts shows combined levels in level order", 
 })
 
 
+test_that("joint contrasts without matching means give one warning", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  jf <- joint_contrasts_fixture(contrasts_by_fixture()$data)
+  partial_means <- as.data.frame(jf$means)[-1, ]
+  warnings <- testthat::capture_warnings(
+    dp <- data_plot(jf$contrasts, partial_means)
+  )
+  expect_length(warnings, 1)
+  expect_length(gregexpr("are not drawn", warnings)[[1]], 1)
+  expect_match(warnings, "5 of 15 contrasts are not drawn")
+  expect_match(warnings, "combinations of levels of am, cyl")
+  expect_identical(as.vector(table(dp$geom_polygon$group)), rep(3L, 10))
+})
+
+
 # three crossed factors with two levels each
 contrasts_factorial_data <- function() {
   set.seed(1)

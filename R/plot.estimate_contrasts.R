@@ -173,8 +173,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
         " of ",
         nrow(contrasts),
         " contrasts are not drawn, because the estimated means have no row for their levels.",
-        " Lighthouse plots draw only pairwise contrasts between levels of ",
-        x_name,
+        " Lighthouse plots draw only pairwise contrasts between ",
+        if (length(x_name) > 1) "combinations of levels of " else "levels of ",
+        toString(x_name),
         ", with the means estimated at the same values as the contrasts: ",
         means_call,
         "."
@@ -223,7 +224,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' If you estimate the contrasts with `by`, the plot draws each contrast from
 #' the estimated means of its own `by` level. The plot then has one panel per
 #' level, or combination of levels, of the `by` variables. The estimated means
-#' must include the contrasted variable and the `by` variables, and no other
+#' must include the contrasted variables and the `by` variables, and no other
 #' variables that split their rows further. If the means have no row for the
 #' levels of a contrast, the plot does not draw that contrast and gives a
 #' warning.

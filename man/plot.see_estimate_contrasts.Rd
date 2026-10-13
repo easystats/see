@@ -25,7 +25,7 @@ function.
 If you estimate the contrasts with \code{by}, the plot draws each contrast from
 the estimated means of its own \code{by} level. The plot then has one panel per
 level, or combination of levels, of the \code{by} variables. The estimated means
-must include the contrasted variable and the \code{by} variables, and no other
+must include the contrasted variables and the \code{by} variables, and no other
 variables that split their rows further. If the means have no row for the
 levels of a contrast, the plot does not draw that contrast and gives a
 warning.
