@@ -144,6 +144,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' The `plot()` method for the `modelbased::estimate_contrasts()`
 #' function.
 #'
+#' If you estimate the contrasts with `by`, the plot draws each contrast from
+#' the estimated means of its own `by` level. The plot then has one panel per
+#' level of the `by` variables. The estimated means must include the `by`
+#' variables.
+#'
 #' @inheritParams data_plot
 #'
 #' @return A ggplot2-object.
@@ -155,6 +160,15 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' model <- lm(Sepal.Width ~ Species, data = iris)
 #' contrasts <- estimate_contrasts(model)
 #' means <- estimate_means(model)
+#' plot(contrasts, means)
+#'
+#' # contrasts of `am` within each level of `cyl`, one panel per level
+#' d <- mtcars
+#' d$cyl <- factor(d$cyl)
+#' d$am <- factor(d$am, labels = c("auto", "manual"))
+#' model <- lm(mpg ~ cyl * am, data = d)
+#' contrasts <- estimate_contrasts(model, contrast = "am", by = "cyl")
+#' means <- estimate_means(model, by = c("cyl", "am"))
 #' plot(contrasts, means)
 #' }
 #'

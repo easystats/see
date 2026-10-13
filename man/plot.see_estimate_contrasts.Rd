@@ -21,6 +21,12 @@ A ggplot2-object.
 The \code{plot()} method for the \code{modelbased::estimate_contrasts()}
 function.
 }
+\details{
+If you estimate the contrasts with \code{by}, the plot draws each contrast from
+the estimated means of its own \code{by} level. The plot then has one panel per
+level of the \code{by} variables. The estimated means must include the \code{by}
+variables.
+}
 \examples{
 \dontshow{if (all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}
 \donttest{
@@ -29,6 +35,15 @@ library(modelbased)
 model <- lm(Sepal.Width ~ Species, data = iris)
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
+plot(contrasts, means)
+
+# contrasts of `am` within each level of `cyl`, one panel per level
+d <- mtcars
+d$cyl <- factor(d$cyl)
+d$am <- factor(d$am, labels = c("auto", "manual"))
+model <- lm(mpg ~ cyl * am, data = d)
+contrasts <- estimate_contrasts(model, contrast = "am", by = "cyl")
+means <- estimate_means(model, by = c("cyl", "am"))
 plot(contrasts, means)
 }
 \dontshow{\}) # examplesIf}

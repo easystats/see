@@ -6,6 +6,13 @@
   about troubleshooting and workarounds was no longer printed. This should
   now work again.
 
+* `plot()` for `modelbased::estimate_contrasts()` now draws each contrast
+  estimated with `by` from the means of its own `by` level. Previously, it drew
+  each contrast from the means of all `by` levels. The plot now shows one panel
+  per level of the `by` variables. If the estimated means list another variable
+  first, the x axis still shows the contrasted variable, in the order of its
+  levels (easystats/modelbased#267).
+
 # see 0.14.2
 
 ## Changes
