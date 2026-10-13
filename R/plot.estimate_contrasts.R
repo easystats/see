@@ -409,9 +409,12 @@ plot.see_estimate_contrasts <- function(
           "`show_data = TRUE` needs the contrasts and means on the scale of ",
           "the response, but the ",
           i,
-          " were estimated with `predict = \"",
-          toString(predict),
-          "\"`. Please obtain the contrasts and means with ",
+          if (is.null(predict)) {
+            " do not say which `predict` they were estimated with"
+          } else {
+            paste0(" were estimated with `predict = \"", toString(predict), "\"`")
+          },
+          ". Please obtain the contrasts and means with ",
           "`predict = \"response\"`."
         )
       )
@@ -472,6 +475,21 @@ plot.see_estimate_contrasts <- function(
     paste,
     c(lapply(x_name, function(i) as.character(raw[[i]])), sep = ", ")
   )
+  x_levels <- levels(dataplot$geom_pointrange$x)
+
+  # in joint contrasts, each combination of levels must be on the x axis
+  lacking <- setdiff(unique(x_labels), x_levels)
+  if (length(lacking)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs each combination of levels of ",
+        toString(x_name),
+        " in the data among the estimated means, but the means lack ",
+        toString(lacking),
+        ". Please obtain the means for all combinations."
+      )
+    )
+  }
   y <- raw[[response]]
 
   # the `by` columns get the names and types of the means in `dataplot`
@@ -488,7 +506,7 @@ plot.see_estimate_contrasts <- function(
     }
   }
 
-  raw$x <- factor(x_labels, levels = levels(dataplot$geom_pointrange$x))
+  raw$x <- factor(x_labels, levels = x_levels)
   raw$y <- y
   raw
 }

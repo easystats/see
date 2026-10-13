@@ -728,4 +728,65 @@ test_that("`show_data` must be TRUE or FALSE and needs the contrasts with their 
     plot(no_response, fx$means, show_data = TRUE),
     regexp = "not_a_column"
   )
+
+  no_predict <- fx$contrasts
+  attr(no_predict, "predict") <- NULL
+  expect_error(
+    plot(no_predict, fx$means, show_data = TRUE),
+    regexp = "do not say which `predict`",
+    fixed = TRUE
+  )
+})
+
+
+test_that("`show_data = TRUE` stops for joint levels the means lack", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  jf <- joint_contrasts_fixture(contrasts_by_fixture()$data)
+  partial_means <- as.data.frame(jf$means)[-1, ]
+  # each level of am and of cyl is still in the means, but not "auto, 4"
+  first_row <- as.data.frame(jf$means)[1, ]
+  expect_identical(
+    c(as.character(first_row$am), as.character(first_row$cyl)),
+    c("auto", "4")
+  )
+  expect_true("auto" %in% as.character(partial_means$am))
+  expect_true("4" %in% as.character(partial_means$cyl))
+  expect_error(
+    suppressWarnings(plot(jf$contrasts, partial_means, show_data = TRUE)),
+    regexp = "combination of levels"
+  )
+  expect_error(
+    suppressWarnings(plot(jf$contrasts, partial_means, show_data = TRUE)),
+    regexp = "auto, 4"
+  )
+})
+
+
+test_that("`show_data = TRUE` keeps `by` variables named like plot columns", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  s <- contrasts_factorial_data()
+  s <- data.frame(a = s$a, x = s$b, y = s$f, out = s$y)
+  model <- lm(out ~ a * x * y, data = s)
+
+  for (by in c("x", "y")) {
+    contrasts <- modelbased::estimate_contrasts(model, contrast = "a", by = by)
+    means <- modelbased::estimate_means(model, by = c("a", by))
+    built <- ggplot2::ggplot_build(plot(contrasts, means, show_data = TRUE))
+    panels <- built$layout$layout
+    points <- built$data[[1]]
+    expect_identical(nrow(panels), 2L)
+    for (level in levels(s[[by]])) {
+      panel <- panels$PANEL[as.character(panels[[paste0(".by_", by)]]) == level]
+      expect_length(panel, 1)
+      expect_equal(
+        sort(points$y[points$PANEL == panel]),
+        sort(s$out[s[[by]] == level]),
+        tolerance = 1e-8
+      )
+    }
+  }
 })
