@@ -500,6 +500,243 @@ test_that("lighthouse plots work with two, numeric, and character `by` variables
 })
 
 
+# messages are wrapped, so they are matched with single spaces
+error_text <- function(expr) {
+  gsub("\\s+", " ", conditionMessage(expect_error(expr)))
+}
+
+# each lighthouse starts at the estimate of Level1 and spans, at Level2, that
+# estimate minus the interval of the difference ("difference") or divided by
+# the interval of the ratio ("ratio")
+expect_lighthouses <- function(
+  polygons,
+  contrasts,
+  means,
+  x_name,
+  y_name = "Mean",
+  geometry = "difference",
+  by = NULL
+) {
+  for (i in seq_len(nrow(contrasts))) {
+    level1 <- as.character(contrasts$Level1[i])
+    level2 <- as.character(contrasts$Level2[i])
+    rows <- polygons[polygons$group == i, ]
+    expect_shape(rows, nrow = 3L)
+
+    keep <- as.character(means[[x_name]]) == level1
+    for (b in by) {
+      keep <- keep & as.character(means[[b]]) == as.character(contrasts[[b]][i])
+    }
+    estimate1 <- means[[y_name]][keep]
+    expect_length(estimate1, 1)
+    expect_equal(
+      rows$y[as.character(rows$x) == level1],
+      estimate1,
+      tolerance = 1e-8
+    )
+
+    ci <- c(contrasts$CI_low[i], contrasts$CI_high[i])
+    tips <- if (geometry == "ratio") estimate1 / ci else estimate1 - ci
+    expect_equal(
+      sort(rows$y[as.character(rows$x) == level2]),
+      sort(tips),
+      tolerance = 1e-8
+    )
+  }
+}
+
+# a logistic model of vs, with probabilities as the means
+binomial_fixture <- function(d = contrasts_by_fixture()$data, ...) {
+  model <- glm(vs ~ am, data = d, family = binomial)
+  list(
+    model = model,
+    means = modelbased::estimate_means(model, by = "am", ...),
+    contrasts = modelbased::estimate_contrasts(model, contrast = "am", ...)
+  )
+}
+
+
+test_that("lighthouse plots draw probabilities and take the estimate column from `coef_name`", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  bf <- binomial_fixture()
+  bcon <- bf$contrasts
+  bmeans <- bf$means
+  dp <- data_plot(bcon, bmeans)
+  expect_equal(dp$geom_pointrange$y, bmeans$Probability, tolerance = 1e-8)
+  expect_identical(attr(dp, "info")$ylab, "Probability")
+  expect_lighthouses(dp$geom_polygon, bcon, bmeans, "am", y_name = "Probability")
+  expect_no_error(ggplot2::ggplot_build(plot(bcon, bmeans)))
+
+  # means without attributes use the list of column names
+  plain <- data.frame(
+    am = bmeans$am,
+    Probability = bmeans$Probability,
+    CI_low = bmeans$CI_low,
+    CI_high = bmeans$CI_high
+  )
+  expect_null(attr(plain, "coef_name", exact = TRUE))
+  expect_equal(
+    data_plot(bcon, plain)$geom_pointrange$y,
+    bmeans$Probability,
+    tolerance = 1e-8
+  )
+
+  rate <- plain
+  names(rate)[2] <- "Rate"
+  expect_equal(data_plot(bcon, rate)$geom_pointrange$y, rate$Rate, tolerance = 1e-8)
+
+  # `coef_name` comes before the list, in which Median comes before Mean
+  two <- data.frame(
+    am = plain$am,
+    Median = plain$Probability + 1,
+    Mean = plain$Probability,
+    CI_low = plain$CI_low,
+    CI_high = plain$CI_high
+  )
+  attr(two, "coef_name") <- "Mean"
+  expect_equal(data_plot(bcon, two)$geom_pointrange$y, two$Mean, tolerance = 1e-8)
+
+  unknown <- plain
+  names(unknown)[2] <- "Estimate"
+  message <- error_text(plot(bcon, unknown))
+  expect_match(message, "Probability", fixed = TRUE)
+  expect_match(message, "Rate", fixed = TRUE)
+  expect_match(message, "coef_name", fixed = TRUE)
+})
+
+
+test_that("lighthouse plots draw ratio contrasts and leave out ratios whose interval includes 0", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  fx <- contrasts_by_fixture()
+  rc <- modelbased::estimate_contrasts(
+    fx$model,
+    contrast = "am",
+    by = "cyl",
+    comparison = ratio ~ pairwise
+  )
+  expect_true("Ratio" %in% names(rc))
+  polygons <- data_plot(rc, fx$means)$geom_polygon
+  expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 3))
+  expect_lighthouses(
+    polygons,
+    rc,
+    fx$means,
+    "am",
+    geometry = "ratio",
+    by = "cyl"
+  )
+
+  # the mean of a is near 0, so the ratios of b and c to a have intervals
+  # that include 0
+  set.seed(1)
+  z <- data.frame(
+    g = factor(rep(c("a", "b", "c"), each = 10)),
+    y = c(rnorm(10, 0.1), rnorm(10, 2), rnorm(10, 3))
+  )
+  zm <- lm(y ~ g, data = z)
+  zc <- modelbased::estimate_contrasts(
+    zm,
+    contrast = "g",
+    comparison = ratio ~ pairwise
+  )
+  zmeans <- modelbased::estimate_means(zm, by = "g")
+  includes_0 <- zc$CI_low <= 0 & zc$CI_high >= 0
+  expect_identical(sum(includes_0), 2L)
+
+  warnings <- testthat::capture_warnings({
+    dp <- data_plot(zc, zmeans)
+  })
+  expect_length(warnings, 1)
+  warning_text <- gsub("\\s+", " ", warnings)
+  expect_match(warning_text, "ratio", fixed = TRUE)
+  expect_match(warning_text, "includes 0", fixed = TRUE)
+  expect_match(warning_text, "2 of 3", fixed = TRUE)
+  expect_shape(dp$geom_polygon, nrow = 3L)
+  expect_identical(unique(dp$geom_polygon$Level1), "c")
+  expect_identical(unique(dp$geom_polygon$Level2), "b")
+})
+
+
+test_that("lighthouse plots draw back-transformed log contrasts as ratios", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  estimates <- function(model, transform = TRUE) {
+    list(
+      contrasts = modelbased::estimate_contrasts(
+        model,
+        contrast = "am",
+        transform = transform
+      ),
+      means = modelbased::estimate_means(model, by = "am", transform = transform)
+    )
+  }
+  expect_geometry <- function(est, geometry) {
+    polygons <- data_plot(est$contrasts, est$means)$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), 3L)
+    expect_lighthouses(
+      polygons,
+      est$contrasts,
+      est$means,
+      "am",
+      geometry = geometry
+    )
+  }
+
+  lg <- lm(log(mpg) ~ am, data = d)
+  log_case <- estimates(lg)
+  expect_geometry(log_case, "ratio")
+  expect_geometry(estimates(lm(log10(mpg) ~ am, data = d)), "ratio")
+  expect_geometry(estimates(lm(log2(mpg) ~ am, data = d)), "ratio")
+  expect_geometry(estimates(lm(log(mpg, base = 2) ~ am, data = d)), "ratio")
+  expect_geometry(estimates(lm(mpg ~ am, data = d)), "difference")
+  expect_geometry(estimates(lg, transform = FALSE), "difference")
+
+  sqrt_case <- estimates(lm(sqrt(mpg) ~ am, data = d))
+  expect_match(
+    error_text(plot(sqrt_case$contrasts, sqrt_case$means)),
+    "sqrt",
+    fixed = TRUE
+  )
+  shifted <- estimates(lm(I(mpg - 10) ~ am, data = d))
+  expect_match(
+    error_text(plot(shifted$contrasts, shifted$means)),
+    "unknown",
+    fixed = TRUE
+  )
+
+  # contrasts and means on different scales
+  for (message in c(
+    error_text(plot(
+      log_case$contrasts,
+      modelbased::estimate_means(lg, by = "am")
+    )),
+    error_text(plot(
+      modelbased::estimate_contrasts(lg, contrast = "am"),
+      log_case$means
+    ))
+  )) {
+    expect_match(message, "`transform`", fixed = TRUE)
+    expect_match(message, "estimated means", fixed = TRUE)
+  }
+
+  bf <- binomial_fixture()
+  bcon_link <- modelbased::estimate_contrasts(
+    bf$model,
+    contrast = "am",
+    predict = "link"
+  )
+  message <- error_text(plot(bcon_link, bf$means))
+  expect_match(message, "`predict`", fixed = TRUE)
+  expect_match(message, "estimated means", fixed = TRUE)
+})
+
+
 test_that("`show_data = TRUE` draws the raw data first, jittered within each facet", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
