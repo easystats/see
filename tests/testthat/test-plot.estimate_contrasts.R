@@ -791,9 +791,22 @@ test_that("`show_data = TRUE` stops for combinations of `by` levels the means la
   expect_gt(sum(d$cyl == "4" & d$vs == "1"), 0)
   expect_error(
     suppressWarnings(plot(contrasts, partial_means, show_data = TRUE)),
-    regexp = "combination of levels of cyl, vs"
+    regexp = "combination of levels of am, cyl, vs"
   )
   expect_no_error(plot(contrasts, means, show_data = TRUE))
+
+  # a combination of the contrasted variable and `by`
+  fx <- contrasts_by_fixture()
+  partial_means <- as.data.frame(fx$means)
+  partial_means <- partial_means[
+    !(partial_means$cyl == "4" & partial_means$am == "auto"),
+  ]
+  expect_true("auto" %in% as.character(partial_means$am))
+  expect_true("4" %in% as.character(partial_means$cyl))
+  expect_error(
+    suppressWarnings(plot(fx$contrasts, partial_means, show_data = TRUE)),
+    regexp = "the means lack auto, 4"
+  )
 })
 
 

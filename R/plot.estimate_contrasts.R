@@ -489,17 +489,21 @@ plot.see_estimate_contrasts <- function(
     )
   }
 
-  # with two or more `by` variables, each combination must have its facet
-  if (length(by) > 1) {
-    by_key <- function(d) {
-      do.call(paste, c(lapply(by, function(i) as.character(d[[i]])), sep = ", "))
+  # with `by`, each combination must have its place in its facet
+  if (length(by)) {
+    cells <- c(x_name, by)
+    cell_key <- function(d) {
+      do.call(
+        paste,
+        c(lapply(cells, function(i) as.character(d[[i]])), sep = ", ")
+      )
     }
-    lacking <- setdiff(unique(by_key(raw)), by_key(means))
+    lacking <- setdiff(unique(cell_key(raw)), cell_key(means))
     if (length(lacking)) {
       insight::format_error(
         paste0(
           "`show_data = TRUE` needs each combination of levels of ",
-          toString(by),
+          toString(cells),
           " in the data among the estimated means, but the means lack ",
           toString(lacking),
           ". Please obtain the means for all combinations."
