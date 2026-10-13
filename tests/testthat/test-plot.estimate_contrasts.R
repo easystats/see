@@ -699,6 +699,10 @@ test_that("lighthouse plots draw back-transformed log contrasts as ratios", {
   expect_geometry(estimates(lm(log2(mpg) ~ am, data = d)), "ratio")
   expect_geometry(estimates(lm(log(mpg, base = 2) ~ am, data = d)), "ratio")
   expect_geometry(estimates(lm(mpg ~ am, data = d)), "difference")
+  # insight reports scale() as the identity
+  scaled <- lm(scale(mpg) ~ am, data = d)
+  expect_identical(insight::find_transformation(scaled), "identity")
+  expect_geometry(estimates(scaled), "difference")
   expect_geometry(estimates(lg, transform = FALSE), "difference")
 
   sqrt_case <- estimates(lm(sqrt(mpg) ~ am, data = d))
@@ -921,7 +925,7 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   )
 
   # with `transform = TRUE`, the plot without `show_data` already stops for
-  # responses that are not log-transformed
+  # this response
   model <- lm(exp(mpg / 10) ~ am, data = d)
   expect_error(
     plot(

@@ -15,9 +15,10 @@
   such as the probabilities of a logistic model. It draws ratio contrasts from
   `comparison = ratio ~ pairwise` as ratios of the means. It draws contrasts of
   a log response estimated with `transform = TRUE` as ratios of the
-  back-transformed means. For other transformed responses with
-  `transform = TRUE`, and for contrasts and means estimated with different
-  `predict` or `transform` arguments, the plot stops with an error.
+  back-transformed means. The plot stops with an error for contrasts
+  back-transformed from some other transformations, such as `sqrt(y)`. It also
+  stops for contrasts and means estimated with different `predict` or
+  `transform` arguments.
 
 ## Bug fixes
 

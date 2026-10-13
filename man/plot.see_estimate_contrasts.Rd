@@ -80,10 +80,12 @@ gives a warning.
 Contrasts estimated with \code{transform = TRUE} are back-transformed to the scale
 of the response. If the model response is \code{log(y)}, \code{log(y, base = b)},
 \code{log2(y)}, or \code{log10(y)}, these contrasts are ratios of the back-transformed
-means, and the plot draws them as ratios. If the response is not
-transformed, the plot draws them as differences. For other transformations,
-such as \code{sqrt(y)}, and for transformations that are unknown to
-\code{insight::find_transformation()}, the plot stops with an error.
+means, and the plot draws them as ratios. If
+\code{insight::find_transformation()} reports the transformation \code{"identity"},
+as it does for an untransformed response and for \code{scale(y)}, the plot draws
+them as differences. For other transformations, such as \code{sqrt(y)}, and for
+transformations that \code{insight::find_transformation()} does not recognize,
+the plot stops with an error.
 
 The contrasts and the means must be on the same scale. The plot stops with
 an error if both record a \code{predict} value and the two differ, or if both

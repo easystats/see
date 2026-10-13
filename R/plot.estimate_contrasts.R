@@ -168,9 +168,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       "Lighthouse plots cannot draw contrasts back-transformed from the ",
       "transformation `",
       transformation,
-      "` of the response. With `transform = TRUE`, they draw only responses ",
-      "transformed with log(), log2(), or log10(). Please obtain the ",
-      "contrasts and means without `transform`."
+      "` of the response. Please obtain the contrasts and means without ",
+      "`transform`, or fit the model to a response transformed with log(), ",
+      "log2(), or log10()."
     )
   )
 }
@@ -454,10 +454,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' Contrasts estimated with `transform = TRUE` are back-transformed to the scale
 #' of the response. If the model response is `log(y)`, `log(y, base = b)`,
 #' `log2(y)`, or `log10(y)`, these contrasts are ratios of the back-transformed
-#' means, and the plot draws them as ratios. If the response is not
-#' transformed, the plot draws them as differences. For other transformations,
-#' such as `sqrt(y)`, and for transformations that are unknown to
-#' `insight::find_transformation()`, the plot stops with an error.
+#' means, and the plot draws them as ratios. If
+#' `insight::find_transformation()` reports the transformation `"identity"`,
+#' as it does for an untransformed response and for `scale(y)`, the plot draws
+#' them as differences. For other transformations, such as `sqrt(y)`, and for
+#' transformations that `insight::find_transformation()` does not recognize,
+#' the plot stops with an error.
 #'
 #' The contrasts and the means must be on the same scale. The plot stops with
 #' an error if both record a `predict` value and the two differ, or if both
