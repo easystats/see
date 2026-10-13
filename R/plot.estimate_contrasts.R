@@ -10,8 +10,37 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     insight::format_error(
       "Please provide the estimated means data obtained via `estimate_means()`."
     )
-  } else {
+  }
+
+  # the contrasted variable is on the x axis; older versions of modelbased
+  # do not store it, so fall back to the first column of the means
+  x_name <- attr(x, "contrast")
+  if (is.null(x_name)) {
     x_name <- names(means)[1]
+  }
+  if (length(x_name) > 1) {
+    insight::format_error(
+      paste0(
+        "Lighthouse plots support only one contrast variable, but the contrasts compare ",
+        toString(x_name),
+        " jointly."
+      )
+    )
+  }
+
+  # each contrast is drawn from the means of its own `by` level
+  by <- attr(x, "by")
+  missing_columns <- setdiff(c(x_name, by), names(means))
+  if (length(missing_columns)) {
+    insight::format_error(
+      paste0(
+        "The estimated means lack the column(s) ",
+        toString(missing_columns),
+        " that the contrasts need. Please obtain the means with `estimate_means(by = c(",
+        toString(dQuote(c(x_name, by), FALSE)),
+        "))`."
+      )
+    )
   }
 
   y_name <- c("Median", "Mean", "MAP", "Coefficient")[
@@ -21,13 +50,15 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     x,
     means,
     x_name = x_name,
-    y_name = y_name
+    y_name = y_name,
+    by = by
   )
 
   attr(dataplot, "info") <- list(
     xlab = x_name,
     ylab = y_name,
-    title = paste0("Estimated ", y_name, "s and Contrasts")
+    title = paste0("Estimated ", y_name, "s and Contrasts"),
+    by = by
   )
 
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
@@ -36,30 +67,66 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
 
 #' @keywords internal
-.data_contrasts_and_means <- function(contrasts, means, x_name, y_name) {
-  polygons <- contrasts
+.data_contrasts_and_means <- function(
+  contrasts,
+  means,
+  x_name,
+  y_name,
+  by = NULL
+) {
+  polygons <- as.data.frame(contrasts)
   polygons$group <- seq_len(nrow(polygons))
+  polygons$Level1 <- as.character(polygons$Level1)
+  polygons$Level2 <- as.character(polygons$Level2)
 
-  data_means <- means
-  data_means$x <- data_means[, x_name]
-  data_means$y <- data_means[, y_name]
-  data_means$Level2 <- data_means$Level1 <- data_means[, x_name]
-  data_means$Mean2 <- data_means$Mean1 <- data_means[, y_name]
+  # keep the level order of the contrasted variable on the x axis
+  x_values <- means[[x_name]]
+  if (is.factor(x_values)) {
+    x_levels <- levels(x_values)[levels(x_values) %in% x_values]
+  } else {
+    x_levels <- unique(as.character(x_values))
+  }
+
+  data_means <- as.data.frame(means)
+  data_means$x <- factor(as.character(data_means[[x_name]]), levels = x_levels)
+  data_means$y <- data_means[[y_name]]
+  data_means$Level2 <- data_means$Level1 <- as.character(data_means[[x_name]])
+  data_means$Mean2 <- data_means$Mean1 <- data_means[[y_name]]
   data_means$ymin <- data_means$CI_low
   data_means$ymax <- data_means$CI_high
 
-  polygons <- merge(polygons, data_means[c("Level1", "Mean1")], by = "Level1")
-  polygons <- merge(polygons, data_means[c("Level2", "Mean2")], by = "Level2")
+  polygons <- merge(
+    polygons,
+    data_means[c("Level1", by, "Mean1")],
+    by = c("Level1", by)
+  )
+  polygons <- merge(
+    polygons,
+    data_means[c("Level2", by, "Mean2")],
+    by = c("Level2", by)
+  )
 
   polygons <- rbind(
-    cbind(polygons, data.frame(x = polygons$Level1, y = polygons$Mean1)),
     cbind(
       polygons,
-      data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_low)
+      data.frame(
+        x = factor(polygons$Level1, levels = x_levels),
+        y = polygons$Mean1
+      )
     ),
     cbind(
       polygons,
-      data.frame(x = polygons$Level2, y = polygons$Mean1 - polygons$CI_high)
+      data.frame(
+        x = factor(polygons$Level2, levels = x_levels),
+        y = polygons$Mean1 - polygons$CI_low
+      )
+    ),
+    cbind(
+      polygons,
+      data.frame(
+        x = factor(polygons$Level2, levels = x_levels),
+        y = polygons$Mean1 - polygons$CI_high
+      )
     )
   )
 
@@ -114,6 +181,12 @@ plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
       color = "black"
     ) +
     add_plot_attributes(x)
+
+  # one panel per level of the `by` variables
+  by <- attr(x, "info")$by
+  if (length(by)) {
+    p <- p + ggplot2::facet_wrap(by)
+  }
 
   p
 }
