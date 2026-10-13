@@ -14,7 +14,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   # the contrasted variable is on the x axis; if the contrasts have no
   # `contrast` attribute, fall back to the first column of the means
-  x_name <- attr(x, "contrast")
+  x_name <- .clean_target_names(attr(x, "contrast"))
   if (is.null(x_name)) {
     x_name <- names(means)[1]
   }
@@ -29,7 +29,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   # each contrast is drawn from the means of its own `by` level
-  by <- attr(x, "by")
+  by <- .clean_target_names(attr(x, "by"))
   missing_columns <- setdiff(c(x_name, by), names(means))
   if (length(missing_columns)) {
     insight::format_error(
@@ -66,6 +66,17 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 }
 
 
+# modelbased keeps target values in the attributes, e.g. "wt=c(2,3)";
+# the column in the data is named by the part before "="
+#' @keywords internal
+.clean_target_names <- function(x) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+  insight::trim_ws(sub("=.*$", "", x))
+}
+
+
 #' @keywords internal
 .data_contrasts_and_means <- function(
   contrasts,
@@ -95,6 +106,19 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   data_means$ymin <- data_means$CI_low
   data_means$ymax <- data_means$CI_high
 
+  # each contrast level must match exactly one row of the means
+  if (anyDuplicated(data_means[c("Level1", by)])) {
+    insight::format_error(
+      paste0(
+        "The estimated means have more than one row for some levels of ",
+        toString(c(x_name, by)),
+        ". Please obtain the means with `estimate_means(by = c(",
+        toString(dQuote(c(x_name, by), FALSE)),
+        "))`, without other variables."
+      )
+    )
+  }
+
   polygons <- merge(
     polygons,
     data_means[c("Level1", by, "Mean1")],
@@ -105,6 +129,16 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     data_means[c("Level2", by, "Mean2")],
     by = c("Level2", by)
   )
+
+  if (nrow(polygons) < nrow(contrasts)) {
+    insight::format_error(
+      paste0(
+        "The estimated means have no row for some levels of ",
+        toString(c(x_name, by)),
+        " that the contrasts compare."
+      )
+    )
+  }
 
   polygons <- rbind(
     cbind(
@@ -147,7 +181,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' If you estimate the contrasts with `by`, the plot draws each contrast from
 #' the estimated means of its own `by` level. The plot then has one panel per
 #' level, or combination of levels, of the `by` variables. The estimated means
-#' must include the contrasted variable and the `by` variables.
+#' must include the contrasted variable and the `by` variables, and no other
+#' variables that split their rows further.
 #'
 #' @inheritParams data_plot
 #'
