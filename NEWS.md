@@ -18,7 +18,10 @@
   back-transformed means. The plot stops with an error for contrasts
   back-transformed from some other transformations, such as `sqrt(y)`. It also
   stops for contrasts and means estimated with different `predict` or
-  `transform` arguments.
+  `transform` arguments. With `show_data = TRUE`, the plot draws a logical or
+  two-level factor response as 0 and 1. It also draws the raw data of `y` for
+  a response `log(y)`, `log2(y)`, or `log10(y)`. This needs contrasts and means
+  estimated with `transform = TRUE`.
 
 ## Bug fixes
 

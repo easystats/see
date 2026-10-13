@@ -1015,6 +1015,127 @@ test_that("`show_data = TRUE` draws binary responses, ratio contrasts, and back-
 })
 
 
+test_that("lighthouse plots draw emmeans contrasts of transformed responses as differences", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("emmeans")
+
+  d <- contrasts_by_fixture()$data
+  for (model in list(
+    lm(log(mpg) ~ am, data = d),
+    lm(sqrt(mpg) ~ am, data = d)
+  )) {
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "am",
+      backend = "emmeans"
+    )
+    means <- modelbased::estimate_means(model, by = "am", backend = "emmeans")
+    # emmeans back-transforms by default and takes differences of the
+    # back-transformed means
+    expect_true(isTRUE(attr(contrasts, "transform", exact = TRUE)))
+    expect_equal(
+      contrasts$Difference,
+      means$Mean[means$am == "manual"] - means$Mean[means$am == "auto"],
+      tolerance = 1e-6
+    )
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), 3L)
+    expect_lighthouses(polygons, contrasts, means, "am")
+  }
+})
+
+
+test_that("lighthouse plots stop for ratio contrasts with `transform = TRUE` and need the interval", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  lg <- lm(log(mpg) ~ am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    lg,
+    contrast = "am",
+    comparison = ratio ~ pairwise,
+    transform = TRUE
+  )
+  means <- modelbased::estimate_means(lg, by = "am", transform = TRUE)
+  # the ratio is not the ratio of the back-transformed means
+  expect_false(isTRUE(all.equal(
+    contrasts$Ratio,
+    means$Mean[means$am == "manual"] / means$Mean[means$am == "auto"],
+    tolerance = 1e-3
+  )))
+  message <- error_text(plot(contrasts, means))
+  expect_match(message, "ratio", fixed = TRUE)
+  expect_match(message, "`transform = TRUE`", fixed = TRUE)
+
+  fx <- contrasts_by_fixture()
+  no_interval <- fx$contrasts
+  no_interval$CI_low <- NULL
+  expect_error(data_plot(no_interval, fx$means), regexp = "CI_low")
+})
+
+
+test_that("the `transform` check passes the identity and names `transform` functions", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("emmeans")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(mpg ~ am, data = d)
+  means <- modelbased::estimate_means(model, by = "am")
+  for (contrasts in list(
+    modelbased::estimate_contrasts(model, contrast = "am", transform = TRUE),
+    modelbased::estimate_contrasts(model, contrast = "am", backend = "emmeans")
+  )) {
+    expect_true(isTRUE(attr(contrasts, "transform", exact = TRUE)))
+    expect_false(isTRUE(attr(means, "transform", exact = TRUE)))
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    expect_lighthouses(polygons, contrasts, means, "am")
+  }
+
+  lg <- lm(log(mpg) ~ am, data = d)
+  message <- error_text(plot(
+    modelbased::estimate_contrasts(lg, contrast = "am", transform = exp),
+    modelbased::estimate_means(lg, by = "am", transform = exp)
+  ))
+  expect_match(message, "a `transform` function", fixed = TRUE)
+  expect_no_match(message, "with the same `transform`", fixed = TRUE)
+})
+
+
+test_that("`show_data = TRUE` accepts only the log of the response column itself", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  for (model in list(
+    lm(log(mpg / 10) ~ am, data = d),
+    lm(scale(mpg) ~ am, data = d)
+  )) {
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "am",
+      transform = TRUE
+    )
+    means <- modelbased::estimate_means(model, by = "am", transform = TRUE)
+    expect_no_error(plot(contrasts, means))
+    expect_match(
+      error_text(plot(contrasts, means, show_data = TRUE)),
+      "transforms the response",
+      fixed = TRUE
+    )
+  }
+  # the back-transformed means of log(mpg / 10) are on the scale of mpg / 10
+  means <- modelbased::estimate_means(
+    lm(log(mpg / 10) ~ am, data = d),
+    by = "am",
+    transform = TRUE
+  )
+  expect_lt(max(means$Mean), 3)
+  expect_gt(min(d$mpg), 10)
+})
+
+
 test_that("`show_data = TRUE` stops for data values the means lack", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")

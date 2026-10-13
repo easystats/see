@@ -24,6 +24,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       "Lighthouse plots need pairwise contrasts with the columns `Level1` and `Level2`."
     )
   }
+  if (!all(c("CI_low", "CI_high") %in% names(x))) {
+    insight::format_error(
+      "Lighthouse plots need contrasts with the columns `CI_low` and `CI_high`."
+    )
+  }
   # an unknown transformation comes first: modelbased then sets
   # `transform = FALSE` on the means
   geometry <- .lighthouse_geometry(x)
@@ -135,20 +140,34 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 # or divided by the interval of a ratio
 #' @keywords internal
 .lighthouse_geometry <- function(contrasts) {
+  back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE))
   if ("Ratio" %in% names(contrasts)) {
+    # e.g. for a log response, the back-transformed ratio is
+    # exp(log(m1) / log(m2)), not a ratio of the back-transformed means
+    if (back_transformed) {
+      insight::format_error(
+        paste(
+          "Lighthouse plots cannot draw ratio contrasts estimated with",
+          "`transform = TRUE`, because they are not ratios of the",
+          "back-transformed means. Please obtain the contrasts and means",
+          "without `transform`."
+        )
+      )
+    }
     return("ratio")
   }
-  if (!isTRUE(attr(contrasts, "transform", exact = TRUE))) {
+  # emmeans back-transforms the means and then takes their differences
+  if (
+    !back_transformed ||
+      identical(attr(contrasts, "backend", exact = TRUE), "emmeans")
+  ) {
     return("difference")
   }
 
   # back-transformed contrasts of a log response are ratios of the
   # back-transformed means
-  model <- attr(contrasts, "model", exact = TRUE)
-  transformation <- if (!is.null(model)) {
-    tryCatch(insight::find_transformation(model), error = function(e) NULL)
-  }
-  if (!is.character(transformation) || length(transformation) != 1L) {
+  transformation <- .response_transformation(contrasts)
+  if (is.null(transformation)) {
     insight::format_error(
       paste(
         "Lighthouse plots cannot draw contrasts estimated with",
@@ -173,6 +192,21 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       "log2(), or log10()."
     )
   )
+}
+
+
+# the transformation of the response of the model that the contrasts carry,
+# or NULL if it is unknown
+#' @keywords internal
+.response_transformation <- function(contrasts) {
+  model <- attr(contrasts, "model", exact = TRUE)
+  transformation <- if (!is.null(model)) {
+    tryCatch(insight::find_transformation(model), error = function(e) NULL)
+  }
+  if (!is.character(transformation) || length(transformation) != 1L) {
+    return(NULL)
+  }
+  transformation
 }
 
 
@@ -225,28 +259,37 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   transform_contrasts <- attr(contrasts, "transform", exact = TRUE)
   transform_means <- attr(means, "transform", exact = TRUE)
   if (
-    !is.null(transform_contrasts) &&
-      !is.null(transform_means) &&
-      !identical(transform_contrasts, transform_means, ignore.environment = TRUE)
+    is.null(transform_contrasts) ||
+      is.null(transform_means) ||
+      identical(transform_contrasts, transform_means, ignore.environment = TRUE)
   ) {
-    describe <- function(transform) {
-      if (is.function(transform)) {
-        "a `transform` function"
-      } else {
-        paste0("`transform = ", deparse(transform), "`")
-      }
-    }
+    return(invisible(NULL))
+  }
+  if (is.function(transform_contrasts) || is.function(transform_means)) {
     insight::format_error(
-      paste0(
-        "The contrasts were estimated with ",
-        describe(transform_contrasts),
-        " and the estimated means with ",
-        describe(transform_means),
-        ". Lighthouse plots need both on the same scale. Please obtain the ",
-        "contrasts and means with the same `transform`."
+      paste(
+        "The contrasts were estimated with a `transform` function, which",
+        "modelbased records on the contrasts, while it records",
+        "`transform = TRUE` on the means. Lighthouse plots cannot check that",
+        "both are on the same scale. Please obtain the contrasts and means",
+        "without a `transform` function."
       )
     )
   }
+  # without a transformation, back-transforming changes nothing
+  if (identical(.response_transformation(contrasts), "identity")) {
+    return(invisible(NULL))
+  }
+  insight::format_error(
+    paste0(
+      "The contrasts were estimated with `transform = ",
+      deparse(transform_contrasts),
+      "` and the estimated means with `transform = ",
+      deparse(transform_means),
+      "`. Lighthouse plots need both on the same scale. Please obtain the ",
+      "contrasts and means with the same `transform`."
+    )
+  )
 }
 
 
@@ -449,23 +492,31 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' `comparison = ratio ~ pairwise`, are ratios of the means, so the lighthouse
 #' at `Level2` spans that mean divided by the bounds of the interval. If the
 #' interval of a ratio includes 0, the plot does not draw that contrast and
-#' gives a warning.
+#' gives a warning. The contrasts must have the columns `CI_low` and
+#' `CI_high`.
 #'
 #' Contrasts estimated with `transform = TRUE` are back-transformed to the scale
-#' of the response. If the model response is `log(y)`, `log(y, base = b)`,
-#' `log2(y)`, or `log10(y)`, these contrasts are ratios of the back-transformed
-#' means, and the plot draws them as ratios. If
+#' of the response. With the default backend, if the model response is
+#' `log(y)`, `log(y, base = b)`, `log2(y)`, or `log10(y)`, these contrasts are
+#' ratios of the back-transformed means, and the plot draws them as ratios. If
 #' `insight::find_transformation()` reports the transformation `"identity"`,
 #' as it does for an untransformed response and for `scale(y)`, the plot draws
 #' them as differences. For other transformations, such as `sqrt(y)`, and for
 #' transformations that `insight::find_transformation()` does not recognize,
-#' the plot stops with an error.
+#' the plot stops with an error. With `backend = "emmeans"`, which sets
+#' `transform = TRUE` by default, the contrasts are differences of the
+#' back-transformed means, and the plot draws them as differences. Ratio
+#' contrasts estimated with `transform = TRUE` are not ratios of the
+#' back-transformed means, so the plot stops with an error for them.
 #'
 #' The contrasts and the means must be on the same scale. The plot stops with
-#' an error if both record a `predict` value and the two differ, or if both
-#' record a `transform` value and the two differ. The `predict` values
-#' `"response"`, `"inverse_link"`, and `"invlink(link)"` count as the same
-#' scale.
+#' an error if both record a `predict` value and the two differ. The `predict`
+#' values `"response"`, `"inverse_link"`, and `"invlink(link)"` count as the
+#' same scale. The plot also stops with an error if both record a `transform`
+#' value and the two differ, unless `insight::find_transformation()` reports
+#' the transformation `"identity"`. Contrasts estimated with a `transform`
+#' function always differ, because modelbased records the function on the
+#' contrasts and `transform = TRUE` on the means.
 #'
 #' @inheritParams data_plot
 #' @param data The estimated means, obtained with
@@ -474,9 +525,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   as jittered points behind the lighthouses. The raw data come from
 #'   `insight::get_data()` for the model stored in `x`, not from `data`. A
 #'   response that is logical or a factor with two levels is drawn as 0 and 1,
-#'   with `TRUE` or the second level as 1. A log response, such as `log(y)`, is
-#'   drawn as the raw data of `y` if both the contrasts and the means were
-#'   estimated with `transform = TRUE`. Ratio contrasts are drawn with the raw
+#'   with `TRUE` or the second level as 1. A response `log(y)`, `log2(y)`, or
+#'   `log10(y)`, with `y` a column of the data, is drawn as the raw data of `y`
+#'   if both the contrasts and the means were estimated with
+#'   `transform = TRUE`. Ratio contrasts are drawn with the raw
 #'   data. The plot stops with an error in these cases:
 #'   - `show_data` is not a single `TRUE` or `FALSE`.
 #'   - `x` is the output of `data_plot()`, or it does not carry its model, or
@@ -780,9 +832,7 @@ plot.see_estimate_contrasts <- function(
   }
   back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
     isTRUE(attr(means, "transform", exact = TRUE)) &&
-    .is_log_transformation(
-      tryCatch(insight::find_transformation(model), error = function(e) NULL)
-    )
+    .is_log_of(response_term, response)
   if (!identical(response_term, response) && !back_transformed) {
     insight::format_error(
       paste0(
@@ -791,10 +841,31 @@ plot.see_estimate_contrasts <- function(
         response,
         ", but the model transforms the response (",
         toString(response_term),
-        "). Please fit the model to the untransformed response to show the data."
+        "). To show the data, please fit the model to ",
+        response,
+        ", or to log(",
+        response,
+        "), log2(",
+        response,
+        "), or log10(",
+        response,
+        ") with the contrasts and means obtained with `transform = TRUE`."
       )
     )
   }
+}
+
+
+# whether the response term is log(), log2(), or log10() of the response
+# column itself; insight reports log(y / 10) as "log" too, but its
+# back-transformed means are on the scale of y / 10
+#' @keywords internal
+.is_log_of <- function(response_term, response) {
+  term <- tryCatch(str2lang(response_term), error = function(e) NULL)
+  is.call(term) &&
+    as.character(term[[1]]) %in% c("log", "log2", "log10") &&
+    length(term) >= 2L &&
+    identical(term[[2]], as.name(response))
 }
 
 

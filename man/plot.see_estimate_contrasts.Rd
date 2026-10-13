@@ -16,9 +16,10 @@
 as jittered points behind the lighthouses. The raw data come from
 \code{insight::get_data()} for the model stored in \code{x}, not from \code{data}. A
 response that is logical or a factor with two levels is drawn as 0 and 1,
-with \code{TRUE} or the second level as 1. A log response, such as \code{log(y)}, is
-drawn as the raw data of \code{y} if both the contrasts and the means were
-estimated with \code{transform = TRUE}. Ratio contrasts are drawn with the raw
+with \code{TRUE} or the second level as 1. A response \code{log(y)}, \code{log2(y)}, or
+\code{log10(y)}, with \code{y} a column of the data, is drawn as the raw data of \code{y}
+if both the contrasts and the means were estimated with
+\code{transform = TRUE}. Ratio contrasts are drawn with the raw
 data. The plot stops with an error in these cases:
 \itemize{
 \item \code{show_data} is not a single \code{TRUE} or \code{FALSE}.
@@ -75,23 +76,31 @@ the confidence interval. Contrasts with a \code{Ratio} column, from
 \code{comparison = ratio ~ pairwise}, are ratios of the means, so the lighthouse
 at \code{Level2} spans that mean divided by the bounds of the interval. If the
 interval of a ratio includes 0, the plot does not draw that contrast and
-gives a warning.
+gives a warning. The contrasts must have the columns \code{CI_low} and
+\code{CI_high}.
 
 Contrasts estimated with \code{transform = TRUE} are back-transformed to the scale
-of the response. If the model response is \code{log(y)}, \code{log(y, base = b)},
-\code{log2(y)}, or \code{log10(y)}, these contrasts are ratios of the back-transformed
-means, and the plot draws them as ratios. If
+of the response. With the default backend, if the model response is
+\code{log(y)}, \code{log(y, base = b)}, \code{log2(y)}, or \code{log10(y)}, these contrasts are
+ratios of the back-transformed means, and the plot draws them as ratios. If
 \code{insight::find_transformation()} reports the transformation \code{"identity"},
 as it does for an untransformed response and for \code{scale(y)}, the plot draws
 them as differences. For other transformations, such as \code{sqrt(y)}, and for
 transformations that \code{insight::find_transformation()} does not recognize,
-the plot stops with an error.
+the plot stops with an error. With \code{backend = "emmeans"}, which sets
+\code{transform = TRUE} by default, the contrasts are differences of the
+back-transformed means, and the plot draws them as differences. Ratio
+contrasts estimated with \code{transform = TRUE} are not ratios of the
+back-transformed means, so the plot stops with an error for them.
 
 The contrasts and the means must be on the same scale. The plot stops with
-an error if both record a \code{predict} value and the two differ, or if both
-record a \code{transform} value and the two differ. The \code{predict} values
-\code{"response"}, \code{"inverse_link"}, and \code{"invlink(link)"} count as the same
-scale.
+an error if both record a \code{predict} value and the two differ. The \code{predict}
+values \code{"response"}, \code{"inverse_link"}, and \code{"invlink(link)"} count as the
+same scale. The plot also stops with an error if both record a \code{transform}
+value and the two differ, unless \code{insight::find_transformation()} reports
+the transformation \code{"identity"}. Contrasts estimated with a \code{transform}
+function always differ, because modelbased records the function on the
+contrasts and \code{transform = TRUE} on the means.
 }
 \examples{
 \dontshow{if (all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}
