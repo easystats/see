@@ -600,7 +600,7 @@ test_that("`show_data = TRUE` draws back-transformed means and a numeric `by` on
 })
 
 
-test_that("`show_data = TRUE` stops when the means are not on the scale of the raw data", {
+test_that("`show_data = TRUE` stops when the contrasts or means are not on the scale of the raw data", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
@@ -629,6 +629,42 @@ test_that("`show_data = TRUE` stops when the means are not on the scale of the r
   model <- glm(gear ~ am, data = d, family = poisson)
   expect_error(plot_data(model, predict = "link"), regexp = "predict")
   expect_no_error(plot_data(model))
+
+  # contrasts and means estimated on different scales; the messages are
+  # wrapped, so they are matched with single spaces
+  error_message <- function(expr) {
+    gsub("\\s+", " ", conditionMessage(expect_error(expr)))
+  }
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
+  means_link <- modelbased::estimate_means(model, by = "am", predict = "link")
+  expect_match(
+    error_message(plot(contrasts, means_link, show_data = TRUE)),
+    "the means were estimated with `predict = \"link\"`",
+    fixed = TRUE
+  )
+  model <- lm(log(mpg) ~ am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    transform = TRUE
+  )
+  means <- modelbased::estimate_means(model, by = "am")
+  expect_match(
+    error_message(plot(contrasts, means, show_data = TRUE)),
+    "the means are not back-transformed",
+    fixed = TRUE
+  )
+
+  # means in a data frame without the attributes are taken as estimated like
+  # the contrasts
+  means_plain <- data.frame(
+    am = means$am,
+    Mean = means$Mean,
+    CI_low = means$CI_low,
+    CI_high = means$CI_high
+  )
+  expect_null(attr(means_plain, "transform", exact = TRUE))
+  expect_no_error(plot(contrasts, means_plain, show_data = TRUE))
 })
 
 

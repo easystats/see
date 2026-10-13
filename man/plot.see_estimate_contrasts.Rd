@@ -13,13 +13,16 @@
 \code{modelbased::estimate_means()}.}
 
 \item{show_data}{Logical. If \code{TRUE}, the plot draws the raw data of the model
-as jittered points behind the lighthouses. The raw data come from the model
-stored in \code{x}, not from \code{data}. The plot stops with an error if the
-estimated means are not on the scale of the raw response, for example for a
-transformed response without \code{transform = TRUE}, or with
-\code{predict = "link"}. It also stops if the estimated means do not include
-each value in the data of the contrasted and \code{by} variables, for example
-for a numeric \code{by} variable.}
+as jittered points behind the lighthouses. The raw data come from
+\code{insight::get_data()} for the model stored in \code{x}, not from \code{data}. The
+plot stops with an error if the contrasts or the estimated means are not on
+the scale of the raw response, for example for a transformed response
+without \code{transform = TRUE}, or with \code{predict = "link"}. Means without the
+modelbased attributes, such as a plain data frame, are taken to be on the
+same scale as the contrasts and are not checked. It also stops if
+the estimated means do not include each value in the data of the
+contrasted and \code{by} variables, for example for a numeric \code{by} variable
+with values that the means were not estimated at.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

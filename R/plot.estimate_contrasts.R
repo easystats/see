@@ -238,13 +238,16 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @param data The estimated means, obtained with
 #'   `modelbased::estimate_means()`.
 #' @param show_data Logical. If `TRUE`, the plot draws the raw data of the model
-#'   as jittered points behind the lighthouses. The raw data come from the model
-#'   stored in `x`, not from `data`. The plot stops with an error if the
-#'   estimated means are not on the scale of the raw response, for example for a
-#'   transformed response without `transform = TRUE`, or with
-#'   `predict = "link"`. It also stops if the estimated means do not include
-#'   each value in the data of the contrasted and `by` variables, for example
-#'   for a numeric `by` variable.
+#'   as jittered points behind the lighthouses. The raw data come from
+#'   `insight::get_data()` for the model stored in `x`, not from `data`. The
+#'   plot stops with an error if the contrasts or the estimated means are not on
+#'   the scale of the raw response, for example for a transformed response
+#'   without `transform = TRUE`, or with `predict = "link"`. Means without the
+#'   modelbased attributes, such as a plain data frame, are taken to be on the
+#'   same scale as the contrasts and are not checked. It also stops if
+#'   the estimated means do not include each value in the data of the
+#'   contrasted and `by` variables, for example for a numeric `by` variable
+#'   with values that the means were not estimated at.
 #'
 #' @return A ggplot2-object.
 #'
@@ -356,6 +359,7 @@ plot.see_estimate_contrasts <- function(
   x_name <- info$x_name
   by <- .clean_target_names(attr(contrasts, "by", exact = TRUE))
   response <- attr(contrasts, "response", exact = TRUE)
+  means_object <- means
   means <- as.data.frame(means)
 
   raw <- insight::get_data(model, verbose = FALSE)
@@ -375,42 +379,61 @@ plot.see_estimate_contrasts <- function(
     )
   }
 
-  # the means must be on the scale of the raw response: estimated on the
-  # response scale, and of an untransformed response or back-transformed
-  predict <- attr(contrasts, "predict", exact = TRUE)
-  if (
-    !isTRUE(
-      predict %in% c("prediction", "response", "expectation", "invlink(link)")
-    )
-  ) {
-    insight::format_error(
-      paste0(
-        "`show_data = TRUE` needs the means on the scale of the response, but ",
-        "they were estimated with `predict = \"",
-        toString(predict),
-        "\"`. Please obtain the contrasts and means with ",
-        "`predict = \"response\"`."
-      )
-    )
-  }
+  # the contrasts and the means must be on the scale of the raw response:
+  # estimated on the response scale, and of an untransformed response or
+  # back-transformed; means without these attributes (e.g. a plain data
+  # frame) are taken as estimated like the contrasts
   transformation <- tryCatch(
     insight::find_transformation(model),
     error = function(e) NULL
   )
   untransformed <- identical(insight::find_terms(model)$response, response)
-  back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE)) &&
-    !is.null(transformation) &&
-    !identical(transformation, "identity")
-  if (!untransformed && !back_transformed) {
-    insight::format_error(
-      paste0(
-        "`show_data = TRUE` needs the means on the scale of the raw data of ",
-        response,
-        ", but the model transforms the response. If modelbased can reverse ",
-        "the transformation, obtain the contrasts and means with ",
-        "`transform = TRUE`."
+  estimates <- list(contrasts = contrasts, means = means_object)
+  for (i in names(estimates)) {
+    predict <- attr(estimates[[i]], "predict", exact = TRUE)
+    transform <- attr(estimates[[i]], "transform", exact = TRUE)
+    if (i == "means" && is.null(predict)) {
+      predict <- "response"
+    }
+    if (i == "means" && is.null(transform)) {
+      transform <- TRUE
+    }
+
+    if (
+      !isTRUE(
+        predict %in% c("prediction", "response", "expectation", "invlink(link)")
       )
-    )
+    ) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs the contrasts and means on the scale of ",
+          "the response, but the ",
+          i,
+          " were estimated with `predict = \"",
+          toString(predict),
+          "\"`. Please obtain the contrasts and means with ",
+          "`predict = \"response\"`."
+        )
+      )
+    }
+
+    back_transformed <- isTRUE(transform) &&
+      !is.null(transformation) &&
+      !identical(transformation, "identity")
+    if (!untransformed && !back_transformed) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs the contrasts and means on the scale of ",
+          "the raw data of ",
+          response,
+          ", but the model transforms the response and the ",
+          i,
+          " are not back-transformed. If modelbased can reverse the ",
+          "transformation, obtain the contrasts and means with ",
+          "`transform = TRUE`."
+        )
+      )
+    }
   }
 
   # each data value must have its place on the x axis and in the facets
