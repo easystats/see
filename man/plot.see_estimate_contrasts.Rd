@@ -24,8 +24,8 @@ function.
 \details{
 If you estimate the contrasts with \code{by}, the plot draws each contrast from
 the estimated means of its own \code{by} level. The plot then has one panel per
-level of the \code{by} variables. The estimated means must include the \code{by}
-variables.
+level, or combination of levels, of the \code{by} variables. The estimated means
+must include the contrasted variable and the \code{by} variables.
 }
 \examples{
 \dontshow{if (all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}

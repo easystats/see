@@ -12,8 +12,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     )
   }
 
-  # the contrasted variable is on the x axis; older versions of modelbased
-  # do not store it, so fall back to the first column of the means
+  # the contrasted variable is on the x axis; if the contrasts have no
+  # `contrast` attribute, fall back to the first column of the means
   x_name <- attr(x, "contrast")
   if (is.null(x_name)) {
     x_name <- names(means)[1]
@@ -146,8 +146,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' If you estimate the contrasts with `by`, the plot draws each contrast from
 #' the estimated means of its own `by` level. The plot then has one panel per
-#' level of the `by` variables. The estimated means must include the `by`
-#' variables.
+#' level, or combination of levels, of the `by` variables. The estimated means
+#' must include the contrasted variable and the `by` variables.
 #'
 #' @inheritParams data_plot
 #'
@@ -196,7 +196,7 @@ plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
     ) +
     add_plot_attributes(x)
 
-  # one panel per level of the `by` variables
+  # one panel per level, or combination of levels, of the `by` variables
   by <- attr(x, "info")$by
   if (length(by)) {
     p <- p + ggplot2::facet_wrap(by)
