@@ -22,8 +22,6 @@ if both the contrasts and the means were estimated with
 \code{transform = TRUE}. Means without the \code{transform} attribute, such as a
 plain data frame, then give an error. Ratio contrasts are drawn with the
 raw data. The plot stops with an error in these cases:
-\code{insight::get_data()} for the model stored in \code{x}, not from \code{data}. The
-plot stops with an error in these cases:
 \itemize{
 \item \code{show_data} is not a single \code{TRUE} or \code{FALSE}.
 \item \code{x} is the output of \code{data_plot()}, or it does not carry its model, or
@@ -38,15 +36,6 @@ above.
 \code{"inverse_link"}, for example \code{predict = "link"}. Means without this
 information, such as a plain data frame, are taken to be on the same
 scale as the contrasts.
-\item The model transforms the response, for example \code{log(y)}. This also
-applies with \code{transform = TRUE}, because the back-transformed contrasts
-are then not differences on the scale of the raw data.
-\item The \code{predict} of the contrasts or of the estimated means is not one of
-\code{"prediction"}, \code{"response"}, \code{"expectation"}, and \code{"invlink(link)"},
-for example \code{predict = "link"}. Means without this information, such as
-a plain data frame, are taken to be on the same scale as the contrasts.
-Other scales, such as contrasts with \code{comparison = "ratio"} or a
-\code{transform} function, are not checked.
 \item The model data lack the response or a contrasted or \code{by} variable.
 \item The estimated means do not include each value in the data of the
 contrasted and \code{by} variables, or each combination of their values. For
@@ -115,6 +104,7 @@ value and the two differ. If neither value is a \code{transform} function and
 the plot does not stop. Contrasts and means estimated with the same
 \code{transform} function also differ, because modelbased records the function
 on the contrasts and \code{transform = TRUE} on the means, so the plot stops.
+
 \strong{Interpreting Lighthouse Plots}
 
 Lighthouse plots display both estimated marginal means and the uncertainty
