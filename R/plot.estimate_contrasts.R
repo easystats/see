@@ -26,7 +26,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   # each contrast is drawn from the means of its own `by` level
-  by <- .clean_target_names(attr(x, "by"))
+  by_vars <- .clean_target_names(attr(x, "by"))
 
   # the means call to suggest keeps the target values of the contrasts
   means_terms <- c(attr(x, "contrast") %||% x_name, attr(x, "by"))
@@ -36,7 +36,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     "))`"
   )
 
-  missing_columns <- setdiff(c(x_name, by), names(means))
+  missing_columns <- setdiff(c(x_name, by_vars), names(means))
   if (length(missing_columns)) {
     insight::format_error(
       paste0(
@@ -50,21 +50,25 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   # `by` columns named like columns of the plot data are renamed
-  contrasts <- as.data.frame(x)
+  contrast_data <- as.data.frame(x)
   means <- as.data.frame(means)
-  by_columns <- by
-  collides <- by %in% c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
+  by_columns <- by_vars
+  collides <- by_vars %in%
+    c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
   if (any(collides)) {
-    by_columns[collides] <- paste0(".by_", by[collides])
-    names(contrasts)[match(by[collides], names(contrasts))] <- by_columns[collides]
-    names(means)[match(by[collides], names(means))] <- by_columns[collides]
+    by_columns[collides] <- paste0(".by_", by_vars[collides])
+    names(contrast_data)[match(
+      by_vars[collides],
+      names(contrast_data)
+    )] <- by_columns[collides]
+    names(means)[match(by_vars[collides], names(means))] <- by_columns[collides]
   }
 
   y_name <- c("Median", "Mean", "MAP", "Coefficient")[
     c("Median", "Mean", "MAP", "Coefficient") %in% names(means)
   ][1]
   dataplot <- .data_contrasts_and_means(
-    contrasts,
+    contrast_data,
     means,
     x_name = x_name,
     y_name = y_name,
@@ -76,6 +80,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     xlab = toString(x_name),
     ylab = y_name,
     title = paste0("Estimated ", y_name, "s and Contrasts"),
+    x_name = x_name,
     by = by_columns
   )
 
@@ -92,6 +97,18 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     return(NULL)
   }
   insight::trim_ws(sub("=.*$", "", x))
+}
+
+
+# values as text for matching the data to the means; numbers as doubles, so
+# that 100000L in the data matches 1e5 in the means
+#' @keywords internal
+.value_key <- function(x) {
+  if (is.numeric(x)) {
+    as.character(as.numeric(x))
+  } else {
+    as.character(x)
+  }
 }
 
 
@@ -165,11 +182,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   # contrasts without a means row on both sides (e.g. "trt_vs_ctrl", or
   # means estimated at other values) are not drawn
-  missing <- setdiff(seq_len(nrow(contrasts)), polygons$group)
-  if (length(missing)) {
+  not_drawn <- setdiff(seq_len(nrow(contrasts)), polygons$group)
+  if (length(not_drawn)) {
     insight::format_warning(
       paste0(
-        length(missing),
+        length(not_drawn),
         " of ",
         nrow(contrasts),
         " contrasts are not drawn, because the estimated means have no row for their levels.",
@@ -234,6 +251,71 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' such as `"auto, 4"`. The first variable changes slowest along the axis.
 #'
 #' @inheritParams data_plot
+#' @param data The estimated means, obtained with
+#'   `modelbased::estimate_means()`.
+#' @param show_data Logical. If `TRUE`, the plot draws the raw data of the model
+#'   as jittered points behind the lighthouses. The raw data come from
+#'   `insight::get_data()` for the model stored in `x`, not from `data`. The
+#'   plot stops with an error in these cases:
+#'   - `show_data` is not a single `TRUE` or `FALSE`.
+#'   - `x` is the output of `data_plot()`, or it does not carry its model, or
+#'     the model data cannot be retrieved.
+#'   - The model transforms the response, for example `log(y)`. This also
+#'     applies with `transform = TRUE`, because the back-transformed contrasts
+#'     are then not differences on the scale of the raw data.
+#'   - The `predict` of the contrasts or of the estimated means is not one of
+#'     `"prediction"`, `"response"`, `"expectation"`, and `"invlink(link)"`,
+#'     for example `predict = "link"`. Means without this information, such as
+#'     a plain data frame, are taken to be on the same scale as the contrasts.
+#'     Other scales, such as contrasts with `comparison = "ratio"` or a
+#'     `transform` function, are not checked.
+#'   - The model data lack the response or a contrasted or `by` variable.
+#'   - The estimated means do not include each value in the data of the
+#'     contrasted and `by` variables, or each combination of their values. For
+#'     example, a numeric `by` variable has values that the means were not
+#'     estimated at.
+#'
+#' @details
+#' **Interpreting Lighthouse Plots**
+#'
+#' Lighthouse plots display both estimated marginal means and the uncertainty
+#' around their pairwise differences (contrasts) in a single visual:
+#'
+#' - **Means and Error Bars:** The points and vertical line ranges display the
+#'   estimated marginal means for each level along with their individual confidence
+#'   intervals.
+#' - **Lighthouse Beams (Projected Uncertainty):** The shaded polygonal bands
+#'   ("beams") represent the pairwise contrasts. A beam originates at the point
+#'   estimate of a reference level and projects toward the comparison level.
+#'   At the target level, the vertical span of the beam represents the confidence
+#'   interval of the estimated difference, anchored at the reference mean.
+#' - **Interpretation:** The vertical span of the projected beam at the target
+#'   level corresponds to the confidence interval of the estimated difference,
+#'   evaluated *relative* to the reference point estimate. Intuitively, it answers:
+#'   *"If the reference level is at value Y, where do we expect the comparison
+#'   level to be based on the estimated contrast?"*
+#' - **Reading Significance:** Because the beam illustrates the confidence interval
+#'   of the difference, zero difference corresponds to a horizontal line from the
+#'   reference point. If both edges of the beam tilt in the same direction (both
+#'   rising or both falling), the confidence interval does not include zero (the
+#'   difference is statistically significant). If one edge rises while the other
+#'   falls, the beam straddles the horizontal line, indicating that a difference
+#'   of zero remains plausible.
+#'
+#' \if{html}{
+#'   \cr
+#'   \figure{lighthouse.png}{options: alt="Lighthouse plot for two studies: one with significant differences, one without."}
+#'   \out{<small>}
+#'     \emph{
+#'       Lighthouse plots of the two studies. In black, each condition's mean and
+#'       95\% CI, identical in both panels. In grey, the beam: the 95\% CI of the
+#'       difference between B and A, cast from B. The dashed horizontal line,
+#'       added here as a reading aid, makes it easier to see which way each edge
+#'       tilts.
+#'     }
+#'   \out{</small>}
+#'   \cr
+#' }
 #'
 #' @return A ggplot2-object.
 #'
@@ -245,6 +327,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' contrasts <- estimate_contrasts(model)
 #' means <- estimate_means(model)
 #' plot(contrasts, means)
+#'
+#' # with the raw data as jittered points
+#' plot(contrasts, means, show_data = TRUE)
 #'
 #' # contrasts of `am` within each level of `cyl`, one panel per level
 #' d <- mtcars
@@ -261,12 +346,42 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' }
 #'
 #' @export
-plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
-  if (!inherits(x, "data_plot")) {
-    x <- data_plot(x, data = data)
+plot.see_estimate_contrasts <- function(
+  x,
+  data = NULL,
+  show_data = FALSE,
+  ...
+) {
+  if (!is.logical(show_data) || length(show_data) != 1L || is.na(show_data)) {
+    insight::format_error("`show_data` must be `TRUE` or `FALSE`.")
   }
 
-  p <- ggplot2::ggplot() +
+  contrast_data <- x
+  if (!inherits(x, "data_plot")) {
+    x <- data_plot(x, data = data)
+  } else if (show_data) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` needs the contrasts from `estimate_contrasts()`,",
+        "because the output of `data_plot()` does not carry the model."
+      )
+    )
+  }
+
+  p <- ggplot2::ggplot()
+
+  # the raw data are the first layer, behind the lighthouses
+  if (show_data) {
+    p <- p +
+      ggplot2::geom_point(
+        data = .raw_data_contrasts(contrast_data, data, x),
+        ggplot2::aes(x = .data$x, y = .data$y),
+        position = ggplot2::position_jitter(width = 0.1, height = 0),
+        alpha = 0.3
+      )
+  }
+
+  p <- p +
     ggplot2::geom_polygon(
       data = x$geom_polygon,
       ggplot2::aes(x = .data$x, y = .data$y, group = .data$group),
@@ -285,10 +400,235 @@ plot.see_estimate_contrasts <- function(x, data = NULL, ...) {
     add_plot_attributes(x)
 
   # one panel per level, or combination of levels, of the `by` variables
-  by <- attr(x, "info")$by
-  if (length(by)) {
-    p <- p + ggplot2::facet_wrap(by)
+  by_columns <- attr(x, "info")$by
+  if (length(by_columns)) {
+    p <- p + ggplot2::facet_wrap(by_columns)
   }
 
   p
+}
+
+
+# the model's data, with x and y as the lighthouse plot `dataplot` draws them
+#' @keywords internal
+.raw_data_contrasts <- function(contrasts, means, dataplot) {
+  # exact lookups: "model" would also match the "model_info" attribute
+  model <- attr(contrasts, "model", exact = TRUE)
+  if (is.null(model)) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` needs the model, but the contrasts do not carry it.",
+        "Please obtain the contrasts with `estimate_contrasts()`."
+      )
+    )
+  }
+
+  info <- attr(dataplot, "info")
+  x_name <- info$x_name
+  by_vars <- .clean_target_names(attr(contrasts, "by", exact = TRUE))
+  response <- attr(contrasts, "response", exact = TRUE)
+  means_object <- means
+  means <- as.data.frame(means)
+
+  model_data <- insight::get_data(model, verbose = FALSE)
+  if (is.null(model_data)) {
+    insight::format_error(
+      "`show_data = TRUE` needs the model data, which could not be retrieved."
+    )
+  }
+  if (!is.character(response) || length(response) != 1L) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` needs the name of the response, but the contrasts",
+        "do not carry it. Please obtain the contrasts with `estimate_contrasts()`."
+      )
+    )
+  }
+  missing_columns <- setdiff(c(response, x_name, by_vars), names(model_data))
+  if (length(missing_columns)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs the column(s) ",
+        toString(missing_columns),
+        " in the model data, but the data lack them."
+      )
+    )
+  }
+
+  # the response must be untransformed: back-transformed contrasts of a
+  # transformed response are not differences on the raw scale (for a log
+  # response they are ratios), so their lighthouses do not fit the raw data
+  response_term <- tryCatch(
+    insight::find_terms(model)$response,
+    error = function(e) NULL
+  )
+  if (is.null(response_term)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs to know whether the model transforms the ",
+        "response ",
+        response,
+        ", but its response term could not be found."
+      )
+    )
+  }
+  if (!identical(response_term, response)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs the contrasts and means on the scale of ",
+        "the raw data of ",
+        response,
+        ", but the model transforms the response (",
+        toString(response_term),
+        "). Please fit the model to the untransformed response to show the data."
+      )
+    )
+  }
+
+  # the contrasts and the means must be estimated on the response scale;
+  # means without the attribute (e.g. a plain data frame) are taken as
+  # estimated like the contrasts
+  estimates <- list(contrasts = contrasts, means = means_object)
+  for (i in names(estimates)) {
+    predict_type <- attr(estimates[[i]], "predict", exact = TRUE)
+    if (i == "means" && is.null(predict_type)) {
+      predict_type <- "response"
+    }
+
+    if (
+      !isTRUE(
+        predict_type %in%
+          c("prediction", "response", "expectation", "invlink(link)")
+      )
+    ) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs the contrasts and means on the scale of ",
+          "the response, but the ",
+          i,
+          if (is.null(predict_type)) {
+            " do not say which `predict` they were estimated with"
+          } else {
+            paste0(
+              " were estimated with `predict = \"",
+              toString(predict_type),
+              "\"`"
+            )
+          },
+          ". Please obtain the contrasts and means with ",
+          "`predict = \"response\"`."
+        )
+      )
+    }
+  }
+
+  # each data value must have its place on the x axis and in the facets
+  for (i in c(x_name, by_vars)) {
+    lacking <- setdiff(
+      unique(.value_key(model_data[[i]])),
+      .value_key(means[[i]])
+    )
+    if (length(lacking)) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs each value of ",
+          i,
+          " in the data among the values in the estimated means, but the ",
+          "means lack ",
+          if (is.numeric(model_data[[i]])) {
+            paste0(
+              length(lacking),
+              " of them. ",
+              i,
+              " is numeric, so the means hold only the values they were ",
+              "estimated at. Please convert it to a factor."
+            )
+          } else {
+            paste0(
+              toString(lacking),
+              ". Please obtain the means for all levels."
+            )
+          }
+        )
+      )
+    }
+  }
+
+  x_labels <- do.call(
+    paste,
+    c(
+      lapply(x_name, function(i) {
+        # numeric values take the labels of the equal values in the means,
+        # e.g. 100000L in the data and 1e5 in the means
+        if (is.numeric(model_data[[i]]) && is.numeric(means[[i]])) {
+          as.character(means[[i]])[
+            match(as.numeric(model_data[[i]]), as.numeric(means[[i]]))
+          ]
+        } else {
+          as.character(model_data[[i]])
+        }
+      }),
+      sep = ", "
+    )
+  )
+  x_levels <- levels(dataplot$geom_pointrange$x)
+
+  # in joint contrasts, each combination of levels must be on the x axis
+  lacking <- setdiff(unique(x_labels), x_levels)
+  if (length(lacking)) {
+    insight::format_error(
+      paste0(
+        "`show_data = TRUE` needs each combination of levels of ",
+        toString(x_name),
+        " in the data among the estimated means, but the means lack ",
+        toString(lacking),
+        ". Please obtain the means for all combinations."
+      )
+    )
+  }
+
+  # with `by`, each combination must have its place in its facet
+  if (length(by_vars)) {
+    cells <- c(x_name, by_vars)
+    cell_key <- function(d) {
+      do.call(
+        paste,
+        c(lapply(cells, function(i) .value_key(d[[i]])), sep = ", ")
+      )
+    }
+    lacking <- setdiff(unique(cell_key(model_data)), cell_key(means))
+    if (length(lacking)) {
+      insight::format_error(
+        paste0(
+          "`show_data = TRUE` needs each combination of levels of ",
+          toString(cells),
+          " in the data among the estimated means, but the means lack ",
+          toString(lacking),
+          ". Please obtain the means for all combinations."
+        )
+      )
+    }
+  }
+  y <- model_data[[response]]
+
+  # the `by` columns get the names and types of the means in `dataplot`
+  for (j in seq_along(by_vars)) {
+    target <- dataplot$geom_pointrange[[info$by[j]]]
+    values <- model_data[[by_vars[j]]]
+    model_data[[by_vars[j]]] <- NULL
+    model_data[[info$by[j]]] <- if (is.factor(target)) {
+      factor(as.character(values), levels = levels(target))
+    } else if (is.character(target)) {
+      as.character(values)
+    } else if (is.double(target)) {
+      # facets do not match integer data to double means
+      as.double(values)
+    } else {
+      values
+    }
+  }
+
+  model_data$x <- factor(x_labels, levels = x_levels)
+  model_data$y <- y
+  model_data
 }

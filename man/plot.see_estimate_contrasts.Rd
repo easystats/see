@@ -4,13 +4,37 @@
 \alias{plot.see_estimate_contrasts}
 \title{Plot method for estimating contrasts}
 \usage{
-\method{plot}{see_estimate_contrasts}(x, data = NULL, ...)
+\method{plot}{see_estimate_contrasts}(x, data = NULL, show_data = FALSE, ...)
 }
 \arguments{
 \item{x}{An object.}
 
-\item{data}{The original data used to create this object. Can be a
-statistical model.}
+\item{data}{The estimated means, obtained with
+\code{modelbased::estimate_means()}.}
+
+\item{show_data}{Logical. If \code{TRUE}, the plot draws the raw data of the model
+as jittered points behind the lighthouses. The raw data come from
+\code{insight::get_data()} for the model stored in \code{x}, not from \code{data}. The
+plot stops with an error in these cases:
+\itemize{
+\item \code{show_data} is not a single \code{TRUE} or \code{FALSE}.
+\item \code{x} is the output of \code{data_plot()}, or it does not carry its model, or
+the model data cannot be retrieved.
+\item The model transforms the response, for example \code{log(y)}. This also
+applies with \code{transform = TRUE}, because the back-transformed contrasts
+are then not differences on the scale of the raw data.
+\item The \code{predict} of the contrasts or of the estimated means is not one of
+\code{"prediction"}, \code{"response"}, \code{"expectation"}, and \code{"invlink(link)"},
+for example \code{predict = "link"}. Means without this information, such as
+a plain data frame, are taken to be on the same scale as the contrasts.
+Other scales, such as contrasts with \code{comparison = "ratio"} or a
+\code{transform} function, are not checked.
+\item The model data lack the response or a contrasted or \code{by} variable.
+\item The estimated means do not include each value in the data of the
+contrasted and \code{by} variables, or each combination of their values. For
+example, a numeric \code{by} variable has values that the means were not
+estimated at.
+}}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -33,6 +57,48 @@ warning.
 If you contrast two or more variables jointly, for example with
 \code{contrast = c("am", "cyl")}, the x axis shows their combinations of levels,
 such as \code{"auto, 4"}. The first variable changes slowest along the axis.
+
+\strong{Interpreting Lighthouse Plots}
+
+Lighthouse plots display both estimated marginal means and the uncertainty
+around their pairwise differences (contrasts) in a single visual:
+\itemize{
+\item \strong{Means and Error Bars:} The points and vertical line ranges display the
+estimated marginal means for each level along with their individual confidence
+intervals.
+\item \strong{Lighthouse Beams (Projected Uncertainty):} The shaded polygonal bands
+("beams") represent the pairwise contrasts. A beam originates at the point
+estimate of a reference level and projects toward the comparison level.
+At the target level, the vertical span of the beam represents the confidence
+interval of the estimated difference, anchored at the reference mean.
+\item \strong{Interpretation:} The vertical span of the projected beam at the target
+level corresponds to the confidence interval of the estimated difference,
+evaluated \emph{relative} to the reference point estimate. Intuitively, it answers:
+\emph{"If the reference level is at value Y, where do we expect the comparison
+level to be based on the estimated contrast?"}
+\item \strong{Reading Significance:} Because the beam illustrates the confidence interval
+of the difference, zero difference corresponds to a horizontal line from the
+reference point. If both edges of the beam tilt in the same direction (both
+rising or both falling), the confidence interval does not include zero (the
+difference is statistically significant). If one edge rises while the other
+falls, the beam straddles the horizontal line, indicating that a difference
+of zero remains plausible.
+}
+
+\if{html}{
+  \cr
+  \figure{lighthouse.png}{options: alt="Lighthouse plot for two studies: one with significant differences, one without."}
+  \out{<small>}
+    \emph{
+      Lighthouse plots of the two studies. In black, each condition's mean and
+      95\% CI, identical in both panels. In grey, the beam: the 95\% CI of the
+      difference between B and A, cast from B. The dashed horizontal line,
+      added here as a reading aid, makes it easier to see which way each edge
+      tilts.
+    }
+  \out{</small>}
+  \cr
+}
 }
 \examples{
 \dontshow{if (all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}
@@ -43,6 +109,9 @@ model <- lm(Sepal.Width ~ Species, data = iris)
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
 plot(contrasts, means)
+
+# with the raw data as jittered points
+plot(contrasts, means, show_data = TRUE)
 
 # contrasts of `am` within each level of `cyl`, one panel per level
 d <- mtcars
