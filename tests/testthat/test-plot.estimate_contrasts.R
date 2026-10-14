@@ -500,6 +500,251 @@ test_that("lighthouse plots work with two, numeric, and character `by` variables
 })
 
 
+# messages are wrapped, so they are matched with single spaces
+error_text <- function(expr) {
+  gsub("\\s+", " ", conditionMessage(expect_error(expr)))
+}
+
+# each lighthouse starts at the estimate of Level1 and spans, at Level2, that
+# estimate minus the interval of the difference ("difference") or divided by
+# the interval of the ratio ("ratio")
+expect_lighthouses <- function(
+  polygons,
+  contrasts,
+  means,
+  x_name,
+  y_name = "Mean",
+  geometry = "difference",
+  by = NULL
+) {
+  for (i in seq_len(nrow(contrasts))) {
+    level1 <- as.character(contrasts$Level1[i])
+    level2 <- as.character(contrasts$Level2[i])
+    rows <- polygons[polygons$group == i, ]
+    expect_shape(rows, nrow = 3L)
+
+    keep <- as.character(means[[x_name]]) == level1
+    for (b in by) {
+      keep <- keep & as.character(means[[b]]) == as.character(contrasts[[b]][i])
+    }
+    estimate1 <- means[[y_name]][keep]
+    expect_length(estimate1, 1)
+    expect_equal(
+      rows$y[as.character(rows$x) == level1],
+      estimate1,
+      tolerance = 1e-8
+    )
+
+    ci <- c(contrasts$CI_low[i], contrasts$CI_high[i])
+    tips <- if (geometry == "ratio") estimate1 / ci else estimate1 - ci
+    expect_equal(
+      sort(rows$y[as.character(rows$x) == level2]),
+      sort(tips),
+      tolerance = 1e-8
+    )
+  }
+}
+
+# a logistic model of vs, with probabilities as the means
+binomial_fixture <- function(d = contrasts_by_fixture()$data, ...) {
+  model <- glm(vs ~ am, data = d, family = binomial)
+  list(
+    model = model,
+    means = modelbased::estimate_means(model, by = "am", ...),
+    contrasts = modelbased::estimate_contrasts(model, contrast = "am", ...)
+  )
+}
+
+
+test_that("lighthouse plots draw probabilities and take the estimate column from `coef_name`", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  bf <- binomial_fixture()
+  bcon <- bf$contrasts
+  bmeans <- bf$means
+  dp <- data_plot(bcon, bmeans)
+  expect_equal(dp$geom_pointrange$y, bmeans$Probability, tolerance = 1e-8)
+  expect_identical(attr(dp, "info")$ylab, "Probability")
+  expect_lighthouses(dp$geom_polygon, bcon, bmeans, "am", y_name = "Probability")
+  expect_no_error(ggplot2::ggplot_build(plot(bcon, bmeans)))
+
+  # means without attributes use the list of column names
+  plain <- data.frame(
+    am = bmeans$am,
+    Probability = bmeans$Probability,
+    CI_low = bmeans$CI_low,
+    CI_high = bmeans$CI_high
+  )
+  expect_null(attr(plain, "coef_name", exact = TRUE))
+  expect_equal(
+    data_plot(bcon, plain)$geom_pointrange$y,
+    bmeans$Probability,
+    tolerance = 1e-8
+  )
+
+  rate <- plain
+  names(rate)[2] <- "Rate"
+  expect_equal(data_plot(bcon, rate)$geom_pointrange$y, rate$Rate, tolerance = 1e-8)
+
+  # `coef_name` comes before the list, in which Median comes before Mean
+  two <- data.frame(
+    am = plain$am,
+    Median = plain$Probability + 1,
+    Mean = plain$Probability,
+    CI_low = plain$CI_low,
+    CI_high = plain$CI_high
+  )
+  attr(two, "coef_name") <- "Mean"
+  expect_equal(data_plot(bcon, two)$geom_pointrange$y, two$Mean, tolerance = 1e-8)
+
+  unknown <- plain
+  names(unknown)[2] <- "Estimate"
+  message <- error_text(plot(bcon, unknown))
+  expect_match(message, "Probability", fixed = TRUE)
+  expect_match(message, "Rate", fixed = TRUE)
+  expect_match(message, "coef_name", fixed = TRUE)
+})
+
+
+test_that("lighthouse plots draw ratio contrasts and leave out ratios whose interval includes 0", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  fx <- contrasts_by_fixture()
+  rc <- modelbased::estimate_contrasts(
+    fx$model,
+    contrast = "am",
+    by = "cyl",
+    comparison = ratio ~ pairwise
+  )
+  expect_true("Ratio" %in% names(rc))
+  polygons <- data_plot(rc, fx$means)$geom_polygon
+  expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 3))
+  expect_lighthouses(
+    polygons,
+    rc,
+    fx$means,
+    "am",
+    geometry = "ratio",
+    by = "cyl"
+  )
+
+  # the mean of a is near 0, so the ratios of b and c to a have intervals
+  # that include 0
+  set.seed(1)
+  z <- data.frame(
+    g = factor(rep(c("a", "b", "c"), each = 10)),
+    y = c(rnorm(10, 0.1), rnorm(10, 2), rnorm(10, 3))
+  )
+  zm <- lm(y ~ g, data = z)
+  zc <- modelbased::estimate_contrasts(
+    zm,
+    contrast = "g",
+    comparison = ratio ~ pairwise
+  )
+  zmeans <- modelbased::estimate_means(zm, by = "g")
+  includes_0 <- zc$CI_low <= 0 & zc$CI_high >= 0
+  expect_identical(sum(includes_0), 2L)
+
+  warnings <- testthat::capture_warnings({
+    dp <- data_plot(zc, zmeans)
+  })
+  expect_length(warnings, 1)
+  warning_text <- gsub("\\s+", " ", warnings)
+  expect_match(warning_text, "ratio", fixed = TRUE)
+  expect_match(warning_text, "includes 0", fixed = TRUE)
+  expect_match(warning_text, "2 of 3", fixed = TRUE)
+  expect_shape(dp$geom_polygon, nrow = 3L)
+  expect_identical(unique(dp$geom_polygon$Level1), "c")
+  expect_identical(unique(dp$geom_polygon$Level2), "b")
+})
+
+
+test_that("lighthouse plots draw back-transformed log contrasts as ratios", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  # `transform = FALSE` is not accepted, so the default is left out
+  estimates <- function(model, transform = TRUE) {
+    transform_arg <- if (transform) list(transform = TRUE)
+    list(
+      contrasts = do.call(
+        modelbased::estimate_contrasts,
+        c(list(model, contrast = "am"), transform_arg)
+      ),
+      means = do.call(
+        modelbased::estimate_means,
+        c(list(model, by = "am"), transform_arg)
+      )
+    )
+  }
+  expect_geometry <- function(est, geometry) {
+    polygons <- data_plot(est$contrasts, est$means)$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), 3L)
+    expect_lighthouses(
+      polygons,
+      est$contrasts,
+      est$means,
+      "am",
+      geometry = geometry
+    )
+  }
+
+  lg <- lm(log(mpg) ~ am, data = d)
+  log_case <- estimates(lg)
+  expect_geometry(log_case, "ratio")
+  expect_geometry(estimates(lm(log10(mpg) ~ am, data = d)), "ratio")
+  expect_geometry(estimates(lm(log2(mpg) ~ am, data = d)), "ratio")
+  expect_geometry(estimates(lm(log(mpg, base = 2) ~ am, data = d)), "ratio")
+  expect_geometry(estimates(lm(mpg ~ am, data = d)), "difference")
+  # insight reports scale() as the identity
+  scaled <- lm(scale(mpg) ~ am, data = d)
+  expect_identical(insight::find_transformation(scaled), "identity")
+  expect_geometry(estimates(scaled), "difference")
+  expect_geometry(estimates(lg, transform = FALSE), "difference")
+
+  sqrt_case <- estimates(lm(sqrt(mpg) ~ am, data = d))
+  expect_match(
+    error_text(plot(sqrt_case$contrasts, sqrt_case$means)),
+    "sqrt",
+    fixed = TRUE
+  )
+  shifted <- estimates(lm(I(mpg - 10) ~ am, data = d))
+  expect_match(
+    error_text(plot(shifted$contrasts, shifted$means)),
+    "unknown",
+    fixed = TRUE
+  )
+
+  # contrasts and means on different scales
+  for (message in c(
+    error_text(plot(
+      log_case$contrasts,
+      modelbased::estimate_means(lg, by = "am")
+    )),
+    error_text(plot(
+      modelbased::estimate_contrasts(lg, contrast = "am"),
+      log_case$means
+    ))
+  )) {
+    expect_match(message, "`transform`", fixed = TRUE)
+    expect_match(message, "estimated means", fixed = TRUE)
+  }
+
+  bf <- binomial_fixture()
+  bcon_link <- modelbased::estimate_contrasts(
+    bf$model,
+    contrast = "am",
+    predict = "link"
+  )
+  message <- error_text(plot(bcon_link, bf$means))
+  expect_match(message, "`predict`", fixed = TRUE)
+  expect_match(message, "estimated means", fixed = TRUE)
+})
+
+
 test_that("`show_data = TRUE` draws the raw data first, jittered within each facet", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
@@ -607,9 +852,14 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   # insight does not recognize this transformation
   expect_null(insight::find_transformation(lm(I(mpg - 10) ~ am, data = d)))
   expect_error(plot_data(lm(I(mpg - 10) ~ am, data = d)), regexp = "transform")
+  # with `transform = TRUE`, the plot without `show_data` already stops
+  shifted <- lm(I(mpg - 10) ~ am, data = d)
   expect_error(
-    plot_data(lm(I(mpg - 10) ~ am, data = d), transform = TRUE),
-    regexp = "transform"
+    plot(
+      modelbased::estimate_contrasts(shifted, contrast = "am", transform = TRUE),
+      modelbased::estimate_means(shifted, by = "am", transform = TRUE)
+    ),
+    regexp = "unknown"
   )
   # insight calls this transformation "identity"
   expect_identical(
@@ -622,16 +872,12 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   expect_error(plot_data(model, predict = "link"), regexp = "predict")
   expect_no_error(plot_data(model))
 
-  # contrasts and means estimated on different scales; the messages are
-  # wrapped, so they are matched with single spaces
-  error_message <- function(expr) {
-    gsub("\\s+", " ", conditionMessage(expect_error(expr)))
-  }
+  # contrasts and means estimated on different scales
   contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
   means_link <- modelbased::estimate_means(model, by = "am", predict = "link")
   expect_match(
-    error_message(plot(contrasts, means_link, show_data = TRUE)),
-    "the means were estimated with `predict = \"link\"`",
+    error_text(plot(contrasts, means_link)),
+    "the estimated means with `predict = \"link\"`",
     fixed = TRUE
   )
   # means in a data frame without the attributes are taken as estimated like
@@ -645,8 +891,9 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   expect_null(attr(means_plain, "predict", exact = TRUE))
   expect_no_error(plot(contrasts, means_plain, show_data = TRUE))
 
-  # back-transformed contrasts of a log response are ratios, not differences
-  # on the raw scale, so the response must not be transformed at all
+  # back-transformed contrasts of a log response are ratios of the
+  # back-transformed means; without `transform`, the contrasts and means of a
+  # log response are on the log scale, which the raw data are not
   model <- lm(log(mpg) ~ am, data = d)
   contrasts <- modelbased::estimate_contrasts(
     model,
@@ -655,24 +902,279 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   )
   means <- modelbased::estimate_means(model, by = "am", transform = TRUE)
   expect_equal(
-    contrasts$Ratio %||% contrasts$Difference,
+    contrasts$Difference,
     exp(stats::coef(model)[["ammanual"]]),
     tolerance = 1e-6
   )
-  expect_false(isTRUE(all.equal(
-    contrasts$Ratio %||% contrasts$Difference,
-    diff(means$Mean),
+  expect_equal(
+    contrasts$Difference,
+    means$Mean[means$am == "manual"] / means$Mean[means$am == "auto"],
     tolerance = 1e-6
-  )))
+  )
+  # means in a data frame do not say whether they are back-transformed
+  means_plain <- data.frame(
+    am = means$am,
+    Mean = means$Mean,
+    CI_low = means$CI_low,
+    CI_high = means$CI_high
+  )
+  expect_no_error(plot(contrasts, means_plain))
   expect_match(
-    error_message(plot(contrasts, means, show_data = TRUE)),
+    error_text(plot(contrasts, means_plain, show_data = TRUE)),
+    "the means do not carry the `transform` attribute",
+    fixed = TRUE
+  )
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "am")
+  means <- modelbased::estimate_means(model, by = "am")
+  expect_no_error(plot(contrasts, means))
+  expect_match(
+    error_text(plot(contrasts, means, show_data = TRUE)),
     "transforms the response",
     fixed = TRUE
   )
+
+  # with `transform = TRUE`, the plot without `show_data` already stops for
+  # this response
+  model <- lm(exp(mpg / 10) ~ am, data = d)
   expect_error(
-    plot_data(lm(exp(mpg / 10) ~ am, data = d), transform = TRUE),
-    regexp = "transform"
+    plot(
+      modelbased::estimate_contrasts(model, contrast = "am", transform = TRUE),
+      modelbased::estimate_means(model, by = "am", transform = TRUE)
+    ),
+    regexp = "`exp`",
+    fixed = TRUE
   )
+})
+
+
+test_that("`show_data = TRUE` draws binary responses, ratio contrasts, and back-transformed log contrasts", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  raw_y <- function(contrasts, means) {
+    plot(contrasts, means, show_data = TRUE)$layers[[1]]$data$y
+  }
+
+  bf <- binomial_fixture(d)
+  expect_equal(raw_y(bf$contrasts, bf$means), d$vs, tolerance = 1e-8)
+
+  # a two-level factor and a logical response are drawn as 0 and 1
+  d$vsf <- factor(d$vs, labels = c("V", "S"))
+  d$vsl <- d$vs == 1
+  for (model in list(
+    glm(vsf ~ am, data = d, family = binomial),
+    glm(vsl ~ am, data = d, family = binomial)
+  )) {
+    expect_equal(
+      raw_y(
+        modelbased::estimate_contrasts(model, contrast = "am"),
+        modelbased::estimate_means(model, by = "am")
+      ),
+      d$vs,
+      tolerance = 1e-8
+    )
+  }
+
+  # successes and failures in cbind() have no single column of raw data
+  model <- glm(cbind(gear, carb) ~ am, data = d, family = binomial)
+  message <- error_text(plot(
+    modelbased::estimate_contrasts(model, contrast = "am"),
+    modelbased::estimate_means(model, by = "am"),
+    show_data = TRUE
+  ))
+  expect_match(message, "cbind", fixed = TRUE)
+  expect_match(message, "binomial", fixed = TRUE)
+  expect_no_match(message, "lack", fixed = TRUE)
+
+  # ratio contrasts
+  fx <- contrasts_by_fixture()
+  rc <- modelbased::estimate_contrasts(
+    fx$model,
+    contrast = "am",
+    by = "cyl",
+    comparison = ratio ~ pairwise
+  )
+  p <- plot(rc, fx$means, show_data = TRUE)
+  expect_equal(p$layers[[1]]$data$y, d$mpg, tolerance = 1e-8)
+  expect_lighthouses(
+    p$layers[[layer_index(p, "GeomPolygon")]]$data,
+    rc,
+    fx$means,
+    "am",
+    geometry = "ratio",
+    by = "cyl"
+  )
+
+  # back-transformed contrasts of a log response
+  lg <- lm(log(mpg) ~ am, data = d)
+  expect_equal(
+    raw_y(
+      modelbased::estimate_contrasts(lg, contrast = "am", transform = TRUE),
+      modelbased::estimate_means(lg, by = "am", transform = TRUE)
+    ),
+    d$mpg,
+    tolerance = 1e-8
+  )
+
+  # inverse_link is a response scale
+  bi <- binomial_fixture(d, predict = "inverse_link")
+  p <- plot(bi$contrasts, bi$means, show_data = TRUE)
+  expect_shape(p$layers[[1]]$data, nrow = 32L)
+})
+
+
+test_that("lighthouse plots draw emmeans contrasts of transformed responses as differences", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("emmeans")
+
+  d <- contrasts_by_fixture()$data
+  for (model in list(
+    lm(log(mpg) ~ am, data = d),
+    lm(sqrt(mpg) ~ am, data = d)
+  )) {
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "am",
+      backend = "emmeans"
+    )
+    means <- modelbased::estimate_means(model, by = "am", backend = "emmeans")
+    # emmeans back-transforms by default and takes differences of the
+    # back-transformed means
+    expect_true(isTRUE(attr(contrasts, "transform", exact = TRUE)))
+    expect_equal(
+      contrasts$Difference,
+      means$Mean[means$am == "manual"] - means$Mean[means$am == "auto"],
+      tolerance = 1e-6
+    )
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), 3L)
+    expect_lighthouses(polygons, contrasts, means, "am")
+  }
+})
+
+
+test_that("lighthouse plots stop for ratio contrasts with `transform = TRUE` and need the interval", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  lg <- lm(log(mpg) ~ am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    lg,
+    contrast = "am",
+    comparison = ratio ~ pairwise,
+    transform = TRUE
+  )
+  means <- modelbased::estimate_means(lg, by = "am", transform = TRUE)
+  # the ratio is not the ratio of the back-transformed means
+  expect_false(isTRUE(all.equal(
+    contrasts$Ratio,
+    means$Mean[means$am == "manual"] / means$Mean[means$am == "auto"],
+    tolerance = 1e-3
+  )))
+  message <- error_text(plot(contrasts, means))
+  expect_match(message, "ratio", fixed = TRUE)
+  expect_match(message, "`transform = TRUE`", fixed = TRUE)
+
+  fx <- contrasts_by_fixture()
+  no_interval <- fx$contrasts
+  no_interval$CI_low <- NULL
+  expect_error(data_plot(no_interval, fx$means), regexp = "CI_low")
+})
+
+
+test_that("the `transform` check passes the identity and names `transform` functions", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("emmeans")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(mpg ~ am, data = d)
+  means <- modelbased::estimate_means(model, by = "am")
+  for (contrasts in list(
+    modelbased::estimate_contrasts(model, contrast = "am", transform = TRUE),
+    modelbased::estimate_contrasts(model, contrast = "am", backend = "emmeans")
+  )) {
+    expect_true(isTRUE(attr(contrasts, "transform", exact = TRUE)))
+    expect_false(isTRUE(attr(means, "transform", exact = TRUE)))
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    expect_lighthouses(polygons, contrasts, means, "am")
+  }
+
+  lg <- lm(log(mpg) ~ am, data = d)
+  message <- error_text(plot(
+    modelbased::estimate_contrasts(lg, contrast = "am", transform = exp),
+    modelbased::estimate_means(lg, by = "am", transform = exp)
+  ))
+  expect_match(message, "a `transform` function", fixed = TRUE)
+  expect_match(message, "the estimated means with `transform = TRUE`", fixed = TRUE)
+  expect_no_match(message, "with the same `transform`", fixed = TRUE)
+
+  # the message names what the means record
+  message <- error_text(plot(
+    modelbased::estimate_contrasts(lg, contrast = "am", transform = exp),
+    modelbased::estimate_means(lg, by = "am")
+  ))
+  expect_match(message, "the estimated means with `transform = FALSE`", fixed = TRUE)
+})
+
+
+test_that("`show_data = TRUE` accepts only the log of the response column itself", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  for (model in list(
+    lm(log(mpg / 10) ~ am, data = d),
+    lm(scale(mpg) ~ am, data = d)
+  )) {
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "am",
+      transform = TRUE
+    )
+    means <- modelbased::estimate_means(model, by = "am", transform = TRUE)
+    expect_no_error(plot(contrasts, means))
+    expect_match(
+      error_text(plot(contrasts, means, show_data = TRUE)),
+      "transforms the response",
+      fixed = TRUE
+    )
+  }
+  # the back-transformed means of log(mpg / 10) are on the scale of mpg / 10
+  means <- modelbased::estimate_means(
+    lm(log(mpg / 10) ~ am, data = d),
+    by = "am",
+    transform = TRUE
+  )
+  expect_lt(max(means$Mean), 3)
+  expect_gt(min(d$mpg), 10)
+
+  # emmeans draws other transformed responses, but not with the raw data
+  skip_if_not_installed("emmeans")
+  model <- lm(sqrt(mpg) ~ am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    backend = "emmeans"
+  )
+  means <- modelbased::estimate_means(model, by = "am", backend = "emmeans")
+  expect_no_error(plot(contrasts, means))
+  expect_match(
+    error_text(plot(contrasts, means, show_data = TRUE)),
+    "transforms the response",
+    fixed = TRUE
+  )
+
+  # a namespaced call is not taken for the log of the response
+  expect_true(.is_log_of("log(mpg)", "mpg"))
+  expect_false(.is_log_of("base::log(mpg)", "mpg"))
+
+  # the base of a log is found with or without spaces
+  expect_true(.is_log_transformation("log(x,base=2)"))
+  expect_true(.is_log_transformation("log(x, base = 2)"))
+  expect_false(.is_log_transformation("sqrt"))
 })
 
 
