@@ -9,7 +9,7 @@ function."><meta property="og:image" content="https://easystats.github.io/see/re
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,19 +83,26 @@ function.</p>
 <dt id="arg-show-data">show_data<a class="anchor" aria-label="anchor" href="#arg-show-data"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, the plot draws the raw data of the model
 as jittered points behind the lighthouses. The raw data come from
-<code><a href="https://easystats.github.io/insight/reference/get_data.html" class="external-link">insight::get_data()</a></code> for the model stored in <code>x</code>, not from <code>data</code>. The
-plot stops with an error in these cases:</p><ul><li><p><code>show_data</code> is not a single <code>TRUE</code> or <code>FALSE</code>.</p></li>
+<code><a href="https://easystats.github.io/insight/reference/get_data.html" class="external-link">insight::get_data()</a></code> for the model stored in <code>x</code>, not from <code>data</code>. A
+response that is logical or a factor with two levels is drawn as 0 and 1,
+with <code>TRUE</code> or the second level as 1. A response <code>log(y)</code>, <code>log2(y)</code>, or
+<code>log10(y)</code>, with <code>y</code> a column of the data, is drawn as the raw data of <code>y</code>
+if both the contrasts and the means were estimated with
+<code>transform = TRUE</code>. Means without the <code>transform</code> attribute, such as a
+plain data frame, then give an error. Ratio contrasts are drawn with the
+raw data. The plot stops with an error in these cases:</p><ul><li><p><code>show_data</code> is not a single <code>TRUE</code> or <code>FALSE</code>.</p></li>
 <li><p><code>x</code> is the output of <code><a href="data_plot.html">data_plot()</a></code>, or it does not carry its model, or
 the model data cannot be retrieved.</p></li>
-<li><p>The model transforms the response, for example <code>log(y)</code>. This also
-applies with <code>transform = TRUE</code>, because the back-transformed contrasts
-are then not differences on the scale of the raw data.</p></li>
+<li><p>The response is a <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code> of successes and failures in a binomial
+model.</p></li>
+<li><p>The model transforms the response, for example <code>log(y)</code>, and the
+contrasts and means are not back-transformed log contrasts and means as
+above.</p></li>
 <li><p>The <code>predict</code> of the contrasts or of the estimated means is not one of
-<code>"prediction"</code>, <code>"response"</code>, <code>"expectation"</code>, and <code>"invlink(link)"</code>,
-for example <code>predict = "link"</code>. Means without this information, such as
-a plain data frame, are taken to be on the same scale as the contrasts.
-Other scales, such as contrasts with <code>comparison = "ratio"</code> or a
-<code>transform</code> function, are not checked.</p></li>
+<code>"prediction"</code>, <code>"response"</code>, <code>"expectation"</code>, <code>"invlink(link)"</code>, and
+<code>"inverse_link"</code>, for example <code>predict = "link"</code>. Means without this
+information, such as a plain data frame, are taken to be on the same
+scale as the contrasts.</p></li>
 <li><p>The model data lack the response or a contrasted or <code>by</code> variable.</p></li>
 <li><p>The estimated means do not include each value in the data of the
 contrasted and <code>by</code> variables, or each combination of their values. For
@@ -124,6 +131,42 @@ warning.</p>
 <p>If you contrast two or more variables jointly, for example with
 <code>contrast = c("am", "cyl")</code>, the x axis shows their combinations of levels,
 such as <code>"auto, 4"</code>. The first variable changes slowest along the axis.</p>
+<p>The plot takes the estimates from the column of the means that their
+<code>coef_name</code> attribute names. For means without this attribute, such as a
+plain data frame, it takes the first of the columns <code>Median</code>, <code>Mean</code>, <code>MAP</code>,
+<code>Coefficient</code>, <code>Probability</code>, <code>Proportion</code>, and <code>Rate</code>. If the means have
+none of these columns, the plot stops with an error.</p>
+<p>Each lighthouse starts at the estimated mean of <code>Level1</code> of a contrast. For
+a difference, the lighthouse at <code>Level2</code> spans that mean minus the bounds of
+the confidence interval. Contrasts with a <code>Ratio</code> column, from
+<code>comparison = ratio ~ pairwise</code>, are ratios of the means, so the lighthouse
+at <code>Level2</code> spans that mean divided by the bounds of the interval. If the
+interval of a ratio includes 0, the plot does not draw that contrast and
+gives a warning. The contrasts must have the columns <code>CI_low</code> and
+<code>CI_high</code>.</p>
+<p>Contrasts estimated with <code>transform = TRUE</code> are back-transformed to the scale
+of the response. With the default backend, if the model response is
+<code>log(y)</code>, <code>log(y, base = b)</code>, <code>log2(y)</code>, or <code>log10(y)</code>, these contrasts are
+ratios of the back-transformed means, and the plot draws them as ratios. If
+<code><a href="https://easystats.github.io/insight/reference/find_transformation.html" class="external-link">insight::find_transformation()</a></code> reports the transformation <code>"identity"</code>,
+as it does for an untransformed response and for <code>scale(y)</code>, the plot draws
+them as differences. For other transformations, such as <code>sqrt(y)</code>, and for
+transformations that <code><a href="https://easystats.github.io/insight/reference/find_transformation.html" class="external-link">insight::find_transformation()</a></code> does not recognize,
+the plot stops with an error. With <code>backend = "emmeans"</code>, which sets
+<code>transform = TRUE</code> by default, the contrasts are differences of the
+back-transformed means, and the plot draws them as differences. The plot
+stops with an error for ratio contrasts estimated with <code>transform = TRUE</code>,
+because for a transformed response they are not ratios of the
+back-transformed means.</p>
+<p>The contrasts and the means must be on the same scale. The plot stops with
+an error if both record a <code>predict</code> value and the two differ. The <code>predict</code>
+values <code>"response"</code>, <code>"inverse_link"</code>, and <code>"invlink(link)"</code> count as the
+same scale. The plot also stops with an error if both record a <code>transform</code>
+value and the two differ. If neither value is a <code>transform</code> function and
+<code><a href="https://easystats.github.io/insight/reference/find_transformation.html" class="external-link">insight::find_transformation()</a></code> reports the transformation <code>"identity"</code>,
+the plot does not stop. Contrasts and means estimated with the same
+<code>transform</code> function also differ, because modelbased records the function
+on the contrasts and <code>transform = TRUE</code> on the means, so the plot stops.</p>
 <p><strong>Interpreting Lighthouse Plots</strong></p>
 <p>Lighthouse plots display both estimated marginal means and the uncertainty
 around their pairwise differences (contrasts) in a single visual:</p><ul><li><p><strong>Means and Error Bars:</strong> The points and vertical line ranges display the

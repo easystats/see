@@ -28,8 +28,14 @@ plot(x, data = NULL, show_data = FALSE, ...)
   Logical. If `TRUE`, the plot draws the raw data of the model as
   jittered points behind the lighthouses. The raw data come from
   [`insight::get_data()`](https://easystats.github.io/insight/reference/get_data.html)
-  for the model stored in `x`, not from `data`. The plot stops with an
-  error in these cases:
+  for the model stored in `x`, not from `data`. A response that is
+  logical or a factor with two levels is drawn as 0 and 1, with `TRUE`
+  or the second level as 1. A response `log(y)`, `log2(y)`, or
+  `log10(y)`, with `y` a column of the data, is drawn as the raw data of
+  `y` if both the contrasts and the means were estimated with
+  `transform = TRUE`. Means without the `transform` attribute, such as a
+  plain data frame, then give an error. Ratio contrasts are drawn with
+  the raw data. The plot stops with an error in these cases:
 
   - `show_data` is not a single `TRUE` or `FALSE`.
 
@@ -38,16 +44,18 @@ plot(x, data = NULL, show_data = FALSE, ...)
     or it does not carry its model, or the model data cannot be
     retrieved.
 
-  - The model transforms the response, for example `log(y)`. This also
-    applies with `transform = TRUE`, because the back-transformed
-    contrasts are then not differences on the scale of the raw data.
+  - The response is a [`cbind()`](https://rdrr.io/r/base/cbind.html) of
+    successes and failures in a binomial model.
+
+  - The model transforms the response, for example `log(y)`, and the
+    contrasts and means are not back-transformed log contrasts and means
+    as above.
 
   - The `predict` of the contrasts or of the estimated means is not one
-    of `"prediction"`, `"response"`, `"expectation"`, and
-    `"invlink(link)"`, for example `predict = "link"`. Means without
+    of `"prediction"`, `"response"`, `"expectation"`, `"invlink(link)"`,
+    and `"inverse_link"`, for example `predict = "link"`. Means without
     this information, such as a plain data frame, are taken to be on the
-    same scale as the contrasts. Other scales, such as contrasts with
-    `comparison = "ratio"` or a `transform` function, are not checked.
+    same scale as the contrasts.
 
   - The model data lack the response or a contrasted or `by` variable.
 
@@ -78,6 +86,50 @@ If you contrast two or more variables jointly, for example with
 `contrast = c("am", "cyl")`, the x axis shows their combinations of
 levels, such as `"auto, 4"`. The first variable changes slowest along
 the axis.
+
+The plot takes the estimates from the column of the means that their
+`coef_name` attribute names. For means without this attribute, such as a
+plain data frame, it takes the first of the columns `Median`, `Mean`,
+`MAP`, `Coefficient`, `Probability`, `Proportion`, and `Rate`. If the
+means have none of these columns, the plot stops with an error.
+
+Each lighthouse starts at the estimated mean of `Level1` of a contrast.
+For a difference, the lighthouse at `Level2` spans that mean minus the
+bounds of the confidence interval. Contrasts with a `Ratio` column, from
+`comparison = ratio ~ pairwise`, are ratios of the means, so the
+lighthouse at `Level2` spans that mean divided by the bounds of the
+interval. If the interval of a ratio includes 0, the plot does not draw
+that contrast and gives a warning. The contrasts must have the columns
+`CI_low` and `CI_high`.
+
+Contrasts estimated with `transform = TRUE` are back-transformed to the
+scale of the response. With the default backend, if the model response
+is `log(y)`, `log(y, base = b)`, `log2(y)`, or `log10(y)`, these
+contrasts are ratios of the back-transformed means, and the plot draws
+them as ratios. If
+[`insight::find_transformation()`](https://easystats.github.io/insight/reference/find_transformation.html)
+reports the transformation `"identity"`, as it does for an untransformed
+response and for `scale(y)`, the plot draws them as differences. For
+other transformations, such as `sqrt(y)`, and for transformations that
+[`insight::find_transformation()`](https://easystats.github.io/insight/reference/find_transformation.html)
+does not recognize, the plot stops with an error. With
+`backend = "emmeans"`, which sets `transform = TRUE` by default, the
+contrasts are differences of the back-transformed means, and the plot
+draws them as differences. The plot stops with an error for ratio
+contrasts estimated with `transform = TRUE`, because for a transformed
+response they are not ratios of the back-transformed means.
+
+The contrasts and the means must be on the same scale. The plot stops
+with an error if both record a `predict` value and the two differ. The
+`predict` values `"response"`, `"inverse_link"`, and `"invlink(link)"`
+count as the same scale. The plot also stops with an error if both
+record a `transform` value and the two differ. If neither value is a
+`transform` function and
+[`insight::find_transformation()`](https://easystats.github.io/insight/reference/find_transformation.html)
+reports the transformation `"identity"`, the plot does not stop.
+Contrasts and means estimated with the same `transform` function also
+differ, because modelbased records the function on the contrasts and
+`transform = TRUE` on the means, so the plot stops.
 
 **Interpreting Lighthouse Plots**
 
