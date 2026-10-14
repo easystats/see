@@ -275,6 +275,48 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'     example, a numeric `by` variable has values that the means were not
 #'     estimated at.
 #'
+#' @details
+#' **Interpreting Lighthouse Plots**
+#'
+#' Lighthouse plots display both estimated marginal means and the uncertainty
+#' around their pairwise differences (contrasts) in a single visual:
+#'
+#' - **Means and Error Bars:** The points and vertical line ranges display the
+#'   estimated marginal means for each level along with their individual confidence
+#'   intervals.
+#' - **Lighthouse Beams (Projected Uncertainty):** The shaded polygonal bands
+#'   ("beams") represent the pairwise contrasts. A beam originates at the point
+#'   estimate of a reference level and projects toward the comparison level.
+#'   At the target level, the vertical span of the beam represents the confidence
+#'   interval of the estimated difference, anchored at the reference mean.
+#' - **Interpretation:** The vertical span of the projected beam at the target
+#'   level corresponds to the confidence interval of the estimated difference,
+#'   evaluated *relative* to the reference point estimate. Intuitively, it answers:
+#'   *"If the reference level is at value Y, where do we expect the comparison
+#'   level to be based on the estimated contrast?"*
+#' - **Reading Significance:** Because the beam illustrates the confidence interval
+#'   of the difference, zero difference corresponds to a horizontal line from the
+#'   reference point. If both edges of the beam tilt in the same direction (both
+#'   rising or both falling), the confidence interval does not include zero (the
+#'   difference is statistically significant). If one edge rises while the other
+#'   falls, the beam straddles the horizontal line, indicating that a difference
+#'   of zero remains plausible.
+#'
+#' \if{html}{
+#'   \cr
+#'   \figure{lighthouse.png}{options: alt="Lighthouse plot for two studies: one with significant differences, one without."}
+#'   \out{<small>}
+#'     \emph{
+#'       Lighthouse plots of the two studies. In black, each condition's mean and
+#'       95\% CI, identical in both panels. In grey, the beam: the 95\% CI of the
+#'       difference between B and A, cast from B. The dashed horizontal line,
+#'       added here as a reading aid, makes it easier to see which way each edge
+#'       tilts.
+#'     }
+#'   \out{</small>}
+#'   \cr
+#' }
+#'
 #' @return A ggplot2-object.
 #'
 #' @examplesIf all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))
