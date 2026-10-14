@@ -9,7 +9,7 @@ function."><meta property="og:image" content="https://easystats.github.io/see/re
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@ function.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_estimate_contrasts'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, data <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, data <span class="op">=</span> <span class="cn">NULL</span>, show_data <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,8 +76,32 @@ function.</p>
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>The original data used to create this object. Can be a
-statistical model.</p></dd>
+<dd><p>The estimated means, obtained with
+<code><a href="https://easystats.github.io/modelbased/reference/estimate_means.html" class="external-link">modelbased::estimate_means()</a></code>.</p></dd>
+
+
+<dt id="arg-show-data">show_data<a class="anchor" aria-label="anchor" href="#arg-show-data"></a></dt>
+<dd><p>Logical. If <code>TRUE</code>, the plot draws the raw data of the model
+as jittered points behind the lighthouses. The raw data come from
+<code><a href="https://easystats.github.io/insight/reference/get_data.html" class="external-link">insight::get_data()</a></code> for the model stored in <code>x</code>, not from <code>data</code>. The
+plot stops with an error in these cases:</p><ul><li><p><code>show_data</code> is not a single <code>TRUE</code> or <code>FALSE</code>.</p></li>
+<li><p><code>x</code> is the output of <code><a href="data_plot.html">data_plot()</a></code>, or it does not carry its model, or
+the model data cannot be retrieved.</p></li>
+<li><p>The model transforms the response, for example <code>log(y)</code>. This also
+applies with <code>transform = TRUE</code>, because the back-transformed contrasts
+are then not differences on the scale of the raw data.</p></li>
+<li><p>The <code>predict</code> of the contrasts or of the estimated means is not one of
+<code>"prediction"</code>, <code>"response"</code>, <code>"expectation"</code>, and <code>"invlink(link)"</code>,
+for example <code>predict = "link"</code>. Means without this information, such as
+a plain data frame, are taken to be on the same scale as the contrasts.
+Other scales, such as contrasts with <code>comparison = "ratio"</code> or a
+<code>transform</code> function, are not checked.</p></li>
+<li><p>The model data lack the response or a contrasted or <code>by</code> variable.</p></li>
+<li><p>The estimated means do not include each value in the data of the
+contrasted and <code>by</code> variables, or each combination of their values. For
+example, a numeric <code>by</code> variable has values that the means were not
+estimated at.</p></li>
+</ul></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -100,6 +124,38 @@ warning.</p>
 <p>If you contrast two or more variables jointly, for example with
 <code>contrast = c("am", "cyl")</code>, the x axis shows their combinations of levels,
 such as <code>"auto, 4"</code>. The first variable changes slowest along the axis.</p>
+<p><strong>Interpreting Lighthouse Plots</strong></p>
+<p>Lighthouse plots display both estimated marginal means and the uncertainty
+around their pairwise differences (contrasts) in a single visual:</p><ul><li><p><strong>Means and Error Bars:</strong> The points and vertical line ranges display the
+estimated marginal means for each level along with their individual confidence
+intervals.</p></li>
+<li><p><strong>Lighthouse Beams (Projected Uncertainty):</strong> The shaded polygonal bands
+("beams") represent the pairwise contrasts. A beam originates at the point
+estimate of a reference level and projects toward the comparison level.
+At the target level, the vertical span of the beam represents the confidence
+interval of the estimated difference, anchored at the reference mean.</p></li>
+<li><p><strong>Interpretation:</strong> The vertical span of the projected beam at the target
+level corresponds to the confidence interval of the estimated difference,
+evaluated <em>relative</em> to the reference point estimate. Intuitively, it answers:
+<em>"If the reference level is at value Y, where do we expect the comparison
+level to be based on the estimated contrast?"</em></p></li>
+<li><p><strong>Reading Significance:</strong> Because the beam illustrates the confidence interval
+of the difference, zero difference corresponds to a horizontal line from the
+reference point. If both edges of the beam tilt in the same direction (both
+rising or both falling), the confidence interval does not include zero (the
+difference is statistically significant). If one edge rises while the other
+falls, the beam straddles the horizontal line, indicating that a difference
+of zero remains plausible.</p></li>
+</ul><p><br><img src="figures/lighthouse.png" alt="Lighthouse plot for two studies: one with significant differences, one without."><small>
+    <em>
+      Lighthouse plots of the two studies. In black, each condition's mean and
+      95% CI, identical in both panels. In grey, the beam: the 95% CI of the
+      difference between B and A, cast from B. The dashed horizontal line,
+      added here as a reading aid, makes it easier to see which way each edge
+      tilts.
+    </em>
+  </small>
+  <br></p>
     </div>
 
     <div class="section level2">
@@ -115,6 +171,10 @@ such as <code>"auto, 4"</code>. The first variable changes slowest along the axi
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">contrasts</span>, <span class="va">means</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.see_estimate_contrasts-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># with the raw data as jittered points</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">contrasts</span>, <span class="va">means</span>, show_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot.see_estimate_contrasts-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># contrasts of `am` within each level of `cyl`, one panel per level</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span></span>
 <span class="r-in"><span><span class="va">d</span><span class="op">$</span><span class="va">cyl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">cyl</span><span class="op">)</span></span></span>
@@ -123,12 +183,12 @@ such as <code>"auto, 4"</code>. The first variable changes slowest along the axi
 <span class="r-in"><span><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html" class="external-link">estimate_contrasts</a></span><span class="op">(</span><span class="va">model</span>, contrast <span class="op">=</span> <span class="st">"am"</span>, by <span class="op">=</span> <span class="st">"cyl"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html" class="external-link">estimate_means</a></span><span class="op">(</span><span class="va">model</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cyl"</span>, <span class="st">"am"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">contrasts</span>, <span class="va">means</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot.see_estimate_contrasts-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="plot.see_estimate_contrasts-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># joint contrasts of `am` and `cyl`, on an axis of combined levels</span></span></span>
 <span class="r-in"><span><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html" class="external-link">estimate_contrasts</a></span><span class="op">(</span><span class="va">model</span>, contrast <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"am"</span>, <span class="st">"cyl"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">contrasts</span>, <span class="va">means</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot.see_estimate_contrasts-3.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="plot.see_estimate_contrasts-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
