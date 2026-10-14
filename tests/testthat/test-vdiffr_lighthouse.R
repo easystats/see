@@ -15,6 +15,12 @@ test_that("lighthouse plots render correctly", {
     fig = plot(contrasts, means)
   )
 
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "`plot.estimate_contrasts()` works - lighthouse, with data",
+    fig = plot(contrasts, means, show_data = TRUE)
+  )
+
   data(mtcars)
   model <- lm(mpg ~ cyl * am, data = mtcars)
   means <- modelbased::estimate_means(model, by = c("cyl", "am"))
@@ -24,5 +30,11 @@ test_that("lighthouse plots render correctly", {
   vdiffr::expect_doppelganger(
     title = "`plot.estimate_contrasts()` works - lighthouse multiple",
     fig = plot(contrasts, means)
+  )
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "`plot.estimate_contrasts()` works - lighthouse multiple, with data",
+    fig = plot(contrasts, means, show_data = TRUE)
   )
 })
