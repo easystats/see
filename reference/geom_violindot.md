@@ -1,7 +1,19 @@
 # Half-violin Half-dot plot
 
 Create a half-violin half-dot plot, useful for visualising the
-distribution and the sample size at the same time.
+distribution and the sample size at the same time. The half violins are
+drawn with
+[`ggdist::stat_slab()`](https://mjskay.github.io/ggdist/reference/stat_slab.html)
+and the dots with
+[`ggdist::geom_dots()`](https://mjskay.github.io/ggdist/reference/geom_dots.html),
+so this function needs the **ggdist** package (version 3.3.3 or later).
+When groups are dodged, as with `fill` mapped to a second variable, each
+half violin takes the right half of its dodge cell (the upper half in a
+horizontal plot, see
+[`geom_violinhalf()`](https://easystats.github.io/see/reference/geom_violinhalf.md)),
+and, with the default `position_dots`, its dots go in the other half.
+The dots stay in that half when the half violin is flipped, so they
+overlap it.
 
 ## Usage
 
@@ -16,8 +28,9 @@ geom_violindot(
   dots_size = 0.7,
   dots_color = NULL,
   dots_fill = NULL,
-  binwidth = 0.05,
+  binwidth = NA,
   position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
+  interval = FALSE,
   ...,
   size_dots = dots_size,
   color_dots = dots_color,
@@ -55,14 +68,17 @@ geom_violindot(
 
 - trim:
 
-  If `TRUE` (default), trim the tails of the violins to the range of the
-  data. If `FALSE`, don't trim the tails.
+  If `TRUE` (default), trim the tails of the half violins to the range
+  of the data. If `FALSE`, extend the tails as
+  [`ggplot2::geom_violin()`](https://ggplot2.tidyverse.org/reference/geom_violin.html)
+  does.
 
 - scale:
 
-  if "area" (default), all violins have the same area (before trimming
-  the tails). If "count", areas are scaled proportionally to the number
-  of observations. If "width", all violins have the same maximum width.
+  If `"area"` (default), all half violins have the same area (before
+  trimming the tails). If `"count"`, areas are scaled proportionally to
+  the number of observations. If `"width"`, all half violins have the
+  same maximum width.
 
 - show.legend:
 
@@ -83,56 +99,57 @@ geom_violindot(
 
 - binwidth:
 
-  When `method` is "dotdensity", this specifies maximum bin width. When
-  `method` is "histodot", this specifies bin width. Defaults to 1/30 of
-  the range of the data
+  The bin width of the dots. The default, `NA`, lets
+  [`ggdist::geom_dots()`](https://mjskay.github.io/ggdist/reference/geom_dots.html)
+  choose a bin width that fits the dots into the space beside each half
+  violin. A number sets a fixed bin width, in the units of the value
+  axis. Dodged groups leave the dots less room, so a fixed bin width can
+  make them overflow it, with a warning from ggdist.
 
 - position_dots:
 
   Position adjustment for dots, either as a string, or the result of a
-  call to a position adjustment function.
+  call to a position adjustment function. The default nudges the dots by
+  `x = -0.025` (`-0.06` with `interval = TRUE`). In a vertical plot,
+  this moves them toward smaller x, away from the half violin, and in a
+  dodged cell the nudge is at most half the room beside the half violin.
+  In a horizontal plot, it moves them along the value axis. The default
+  also dodges the dots with their half violins. A position that you set
+  is used as given, so the dots are not dodged unless that position
+  dodges them.
+
+- interval:
+
+  Logical. If `TRUE`, add the median and the 66% and 95% quantile
+  intervals of each group, drawn with
+  [`ggdist::stat_slabinterval()`](https://mjskay.github.io/ggdist/reference/stat_slabinterval.html)
+  without the slab, as in
+  [`ggdist::stat_pointinterval()`](https://mjskay.github.io/ggdist/reference/stat_pointinterval.html).
+  Default is `FALSE`.
 
 - ...:
 
-  Other arguments passed on to
-  [`layer()`](https://ggplot2.tidyverse.org/reference/layer.html)'s
-  `params` argument. These arguments broadly fall into one of 4
-  categories below. Notably, further arguments to the `position`
-  argument, or aesthetics that are required can *not* be passed through
-  `...`. Unknown arguments that are not part of the 4 categories below
-  are ignored.
-
-  - Static aesthetics that are not mapped to a scale, but are at a fixed
-    value and apply to the layer as a whole. For example,
-    `colour = "red"` or `linewidth = 3`. The geom's documentation has an
-    **Aesthetics** section that lists the available options. The
-    'required' aesthetics cannot be passed on to the `params`. Please
-    note that while passing unmapped aesthetics as vectors is
-    technically possible, the order and required length is not
-    guaranteed to be parallel to the input data.
-
-  - When constructing a layer using a `stat_*()` function, the `...`
-    argument can be used to pass on parameters to the `geom` part of the
-    layer. An example of this is
-    `stat_density(geom = "area", outline.type = "both")`. The geom's
-    documentation lists which parameters it can accept.
-
-  - Inversely, when constructing a layer using a `geom_*()` function,
-    the `...` argument can be used to pass on parameters to the `stat`
-    part of the layer. An example of this is
-    `geom_area(stat = "density", adjust = 0.5)`. The stat's
-    documentation lists which parameters it can accept.
-
-  - The `key_glyph` argument of
-    [`layer()`](https://ggplot2.tidyverse.org/reference/layer.html) may
-    also be passed on through `...`. This can be one of the functions
-    described as [key
-    glyphs](https://ggplot2.tidyverse.org/reference/draw_key.html), to
-    change the display of the layer in the legend.
+  Other arguments passed to
+  [`geom_violinhalf()`](https://easystats.github.io/see/reference/geom_violinhalf.md)
+  and to
+  [`ggdist::geom_dots()`](https://mjskay.github.io/ggdist/reference/geom_dots.html).
+  The arguments of the density, the layout, and the interval (`flip`,
+  `stat`, `bw`, `kernel`, `bounds`, `drop`, `adjust`, `n`, `density`,
+  `side`, `normalize`, `justification`, `fill_type`, `limits`,
+  `p_limits`, `expand`, `breaks`, `outline_bars`, `slab_type`, `.width`,
+  `point_interval`, `show_point`, `show_interval`, `fatten_point`,
+  `arrow`, and the `point_` and `interval_` aesthetics) go to the half
+  violins only. `colour` does not reach the dots when `color_dots` is
+  set, and `fill` does not reach them when `fill_dots` is set. As for
+  the half violins, a `width` (or `height`) is the width of a whole
+  violin, so the dots take half of it. An argument named `position`
+  matches `position_dots`. The dots of groups with fewer than two
+  observations are still drawn.
 
 - size_dots, dots_size:
 
-  Size adjustment for dots.
+  Size adjustment for dots, passed to the `dotsize` argument of
+  [`ggdist::geom_dots()`](https://mjskay.github.io/ggdist/reference/geom_dots.html).
 
 - color_dots, dots_color:
 
@@ -141,6 +158,10 @@ geom_violindot(
 - fill_dots, dots_fill:
 
   Fill adjustment for dots.
+
+## Value
+
+A list of ggplot2 layers.
 
 ## Examples
 
@@ -152,4 +173,9 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violindot() +
   theme_modern()
 
+
+# The dots adapt to the scale of the data
+ggplot(iris, aes(x = Species, y = Sepal.Length * 1000, fill = Species)) +
+  geom_violindot(interval = TRUE) +
+  theme_modern()
 ```

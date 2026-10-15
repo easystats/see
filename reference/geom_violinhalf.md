@@ -1,6 +1,13 @@
 # Half-violin plot
 
-Create a half-violin plot.
+Create a half-violin plot. The half violins are drawn with
+[`ggdist::stat_slab()`](https://mjskay.github.io/ggdist/reference/stat_slab.html),
+so this function needs the **ggdist** package (version 3.3.3 or later).
+By default, each half violin is at most 0.45 times the spacing of the
+categorical axis wide (0.45 units on a discrete axis), as before. When
+groups are dodged, as with `fill` mapped to a second variable, each
+group takes half of its dodge cell, from the cell's centre toward its
+side, as in see 0.14.
 
 ## Usage
 
@@ -15,6 +22,7 @@ geom_violinhalf(
   scale = c("area", "count", "width"),
   show.legend = NA,
   inherit.aes = TRUE,
+  interval = FALSE,
   ...
 )
 ```
@@ -49,22 +57,11 @@ geom_violinhalf(
 
 - stat:
 
-  The statistical transformation to use on the data for this layer. When
-  using a `geom_*()` function to construct a layer, the `stat` argument
-  can be used to override the default coupling between geoms and stats.
-  The `stat` argument accepts the following:
-
-  - A `Stat` ggproto subclass, for example `StatCount`.
-
-  - A string naming the stat. To give the stat as a string, strip the
-    function name of the `stat_` prefix. For example, to use
-    [`stat_count()`](https://ggplot2.tidyverse.org/reference/geom_bar.html),
-    give the stat as `"count"`.
-
-  - For more information and other ways to specify the stat, see the
-    [layer
-    stat](https://ggplot2.tidyverse.org/reference/layer_stats.html)
-    documentation.
+  Kept for backward compatibility. The density is always computed by
+  [`ggdist::stat_slab()`](https://mjskay.github.io/ggdist/reference/stat_slab.html),
+  and any value other than `"ydensity"` or
+  [ggplot2::StatYdensity](https://ggplot2.tidyverse.org/reference/Stat.html)
+  is ignored with a warning.
 
 - position:
 
@@ -89,22 +86,26 @@ geom_violinhalf(
 
 - trim:
 
-  If `TRUE` (default), trim the tails of the violins to the range of the
-  data. If `FALSE`, don't trim the tails.
+  If `TRUE` (default), trim the tails of the half violins to the range
+  of the data. If `FALSE`, extend the tails as
+  [`ggplot2::geom_violin()`](https://ggplot2.tidyverse.org/reference/geom_violin.html)
+  does.
 
 - flip:
 
   Should the half-violin plot switch directions? By default, this is
-  `FALSE` and all half-violin geoms will have the flat-side on facing
-  leftward. If `flip = TRUE`, then all flat-sides will face rightward.
-  Optionally, a numeric vector can be supplied indicating which specific
-  geoms should be flipped. See examples for more details.
+  `FALSE` and each half violin extends to the right of its position (up,
+  in a horizontal plot), with its flat side on the left. If
+  `flip = TRUE`, all half violins extend to the left (down). Optionally,
+  a numeric vector can be supplied indicating which specific geoms
+  should be flipped. See examples for more details.
 
 - scale:
 
-  if "area" (default), all violins have the same area (before trimming
-  the tails). If "count", areas are scaled proportionally to the number
-  of observations. If "width", all violins have the same maximum width.
+  If `"area"` (default), all half violins have the same area (before
+  trimming the tails). If `"count"`, areas are scaled proportionally to
+  the number of observations. If `"width"`, all half violins have the
+  same maximum width.
 
 - show.legend:
 
@@ -123,43 +124,43 @@ geom_violinhalf(
   plot specification, e.g.
   [`annotation_borders()`](https://ggplot2.tidyverse.org/reference/annotation_borders.html).
 
+- interval:
+
+  Logical. If `TRUE`, add the median and the 66% and 95% quantile
+  intervals of each group, drawn with
+  [`ggdist::stat_slabinterval()`](https://mjskay.github.io/ggdist/reference/stat_slabinterval.html)
+  without the slab, as in
+  [`ggdist::stat_pointinterval()`](https://mjskay.github.io/ggdist/reference/stat_pointinterval.html).
+  Default is `FALSE`.
+
 - ...:
 
-  Other arguments passed on to
-  [`layer()`](https://ggplot2.tidyverse.org/reference/layer.html)'s
-  `params` argument. These arguments broadly fall into one of 4
-  categories below. Notably, further arguments to the `position`
-  argument, or aesthetics that are required can *not* be passed through
-  `...`. Unknown arguments that are not part of the 4 categories below
-  are ignored.
+  Other arguments passed to
+  [`ggdist::stat_slab()`](https://mjskay.github.io/ggdist/reference/stat_slab.html),
+  such as `colour`, `fill`, `alpha`, or `adjust`. As in
+  [`ggplot2::geom_violin()`](https://ggplot2.tidyverse.org/reference/geom_violin.html):
 
-  - Static aesthetics that are not mapped to a scale, but are at a fixed
-    value and apply to the layer as a whole. For example,
-    `colour = "red"` or `linewidth = 3`. The geom's documentation has an
-    **Aesthetics** section that lists the available options. The
-    'required' aesthetics cannot be passed on to the `params`. Please
-    note that while passing unmapped aesthetics as vectors is
-    technically possible, the order and required length is not
-    guaranteed to be parallel to the input data.
+  - `bw` sets the bandwidth of the density (default `"nrd0"`): a number,
+    or one of `"nrd0"`, `"nrd"`, `"ucv"`, `"bcv"`, `"SJ"`, or `"dpi"`.
 
-  - When constructing a layer using a `stat_*()` function, the `...`
-    argument can be used to pass on parameters to the `geom` part of the
-    layer. An example of this is
-    `stat_density(geom = "area", outline.type = "both")`. The geom's
-    documentation lists which parameters it can accept.
+  - `kernel` sets the kernel (default `"gaussian"`).
 
-  - Inversely, when constructing a layer using a `geom_*()` function,
-    the `...` argument can be used to pass on parameters to the `stat`
-    part of the layer. An example of this is
-    `geom_area(stat = "density", adjust = 0.5)`. The stat's
-    documentation lists which parameters it can accept.
+  - `bounds` sets known bounds of the data, which must contain all
+    values.
 
-  - The `key_glyph` argument of
-    [`layer()`](https://ggplot2.tidyverse.org/reference/layer.html) may
-    also be passed on through `...`. This can be one of the functions
-    described as [key
-    glyphs](https://ggplot2.tidyverse.org/reference/draw_key.html), to
-    change the display of the layer in the legend.
+  - `width` (or `height`, in a horizontal plot) is the width of a whole
+    violin, so each half violin is half as wide.
+
+  `drop` has no effect. The half violins of groups with fewer than two
+  observations, or with all values equal, are not drawn, with a warning,
+  but they keep their space when dodged, and their intervals are drawn.
+  `.width`, `point_interval`, `show_point`, `show_interval`,
+  `fatten_point`, `arrow`, and the `point_` and `interval_` aesthetics,
+  such as `point_size`, go to the interval.
+
+## Value
+
+A ggplot2 layer, or a list of two layers if `interval = TRUE`.
 
 ## Examples
 
@@ -187,4 +188,10 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   theme_modern() +
   scale_fill_material_d()
 
+
+# To add the median and quantile intervals
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violinhalf(interval = TRUE) +
+  theme_modern() +
+  scale_fill_material_d()
 ```
