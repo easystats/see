@@ -18,6 +18,25 @@
   subtitles of the Linearity and Homogeneity of Variance panels no longer refer
   to a reference line (#464).
 
+* `geom_violinhalf()` and `geom_violindot()` are now drawn with the *ggdist*
+  package (`ggdist::stat_slab()` and `ggdist::geom_dots()`), which they now
+  need (version 3.3.3 or later). They work with facets and free scales (#81,
+  #385), and the plots look a little different. Dodged groups each take half
+  of their dodge cell, from its centre, as before. The dots of
+  `geom_violindot()` were not dodged before. By default, they now go in the
+  other half of the cell (they overlap a flipped half violin). The new `interval` argument
+  adds the median with 66% and 95% intervals (#68). The `binwidth` default of
+  `geom_violindot()` is now `NA` (it was 0.05), so ggdist sizes the dots to
+  the data (#44). Other arguments in `...` of `geom_violindot()` now go to
+  `ggdist::geom_dots()` (instead of `geom_dotplot()`) as well as to the half
+  violins, except the arguments of the density, the layout, and the interval,
+  which go to the half violins only (see `?geom_violindot`). A `width` in `...`
+  is the width of a whole violin, as in `geom_violin()`, so each half violin
+  is half as wide. `bounds` must contain all values; otherwise the half
+  violins are not drawn. The `stat` argument is now ignored, with a warning
+  for any value other than `"ydensity"` or `ggplot2::StatYdensity`.
+  `geom_violindot()` no longer works with `coord_polar()`.
+
 * `plot()` for `modelbased::estimate_contrasts()` now draws joint contrasts of
   two or more variables, such as `contrast = c("am", "cyl")`. The x axis shows
   the combinations of levels, such as "auto, 4".

@@ -14,6 +14,7 @@ geom_violinhalf(
   scale = c("area", "count", "width"),
   show.legend = NA,
   inherit.aes = TRUE,
+  interval = FALSE,
   ...
 )
 }
@@ -38,18 +39,9 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this layer.
-When using a \verb{geom_*()} function to construct a layer, the \code{stat}
-argument can be used to override the default coupling between geoms and
-stats. The \code{stat} argument accepts the following:
-\itemize{
-\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
-\item A string naming the stat. To give the stat as a string, strip the
-function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
-give the stat as \code{"count"}.
-\item For more information and other ways to specify the stat, see the
-\link[ggplot2:layer_stats]{layer stat} documentation.
-}}
+\item{stat}{Kept for backward compatibility. The density is always computed
+by \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, and any value other than \code{"ydensity"} or
+\link[ggplot2:StatYdensity]{ggplot2::StatYdensity} is ignored with a warning.}
 
 \item{position}{A position adjustment to use on the data for this layer. This
 can be used in various ways, including to prevent overplotting and
@@ -64,18 +56,21 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{trim}{If \code{TRUE} (default), trim the tails of the violins
-to the range of the data. If \code{FALSE}, don't trim the tails.}
+\item{trim}{If \code{TRUE} (default), trim the tails of the half violins to the
+range of the data. If \code{FALSE}, extend the tails as \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}
+does.}
 
 \item{flip}{Should the half-violin plot switch directions? By default, this
-is \code{FALSE} and all half-violin geoms will have the flat-side on facing
-leftward. If \code{flip = TRUE}, then all flat-sides will face rightward.
+is \code{FALSE} and each half violin extends to the right of its position (up,
+in a horizontal plot), with its flat side on the left. If \code{flip = TRUE},
+all half violins extend to the left (down).
 Optionally, a numeric vector can be supplied indicating which specific
 geoms should be flipped. See examples for more details.}
 
-\item{scale}{if "area" (default), all violins have the same area (before trimming
-the tails). If "count", areas are scaled proportionally to the number of
-observations. If "width", all violins have the same maximum width.}
+\item{scale}{If \code{"area"} (default), all half violins have the same area
+(before trimming the tails). If \code{"count"}, areas are scaled
+proportionally to the number of observations. If \code{"width"}, all half
+violins have the same maximum width.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -90,38 +85,43 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}'s \code{params} argument. These
-arguments broadly fall into one of 4 categories below. Notably, further
-arguments to the \code{position} argument, or aesthetics that are required
-can \emph{not} be passed through \code{...}. Unknown arguments that are not part
-of the 4 categories below are ignored.
+\item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
+quantile intervals of each group, drawn with \code{\link[ggdist:stat_slabinterval]{ggdist::stat_slabinterval()}}
+without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is
+\code{FALSE}.}
+
+\item{...}{Other arguments passed to \code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, such as \code{colour},
+\code{fill}, \code{alpha}, or \code{adjust}. As in \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}:
 \itemize{
-\item Static aesthetics that are not mapped to a scale, but are at a fixed
-value and apply to the layer as a whole. For example, \code{colour = "red"}
-or \code{linewidth = 3}. The geom's documentation has an \strong{Aesthetics}
-section that lists the available options. The 'required' aesthetics
-cannot be passed on to the \code{params}. Please note that while passing
-unmapped aesthetics as vectors is technically possible, the order and
-required length is not guaranteed to be parallel to the input data.
-\item When constructing a layer using
-a \verb{stat_*()} function, the \code{...} argument can be used to pass on
-parameters to the \code{geom} part of the layer. An example of this is
-\code{stat_density(geom = "area", outline.type = "both")}. The geom's
-documentation lists which parameters it can accept.
-\item Inversely, when constructing a layer using a
-\verb{geom_*()} function, the \code{...} argument can be used to pass on parameters
-to the \code{stat} part of the layer. An example of this is
-\code{geom_area(stat = "density", adjust = 0.5)}. The stat's documentation
-lists which parameters it can accept.
-\item The \code{key_glyph} argument of \code{\link[ggplot2:layer]{layer()}} may also be passed on through
-\code{...}. This can be one of the functions described as
-\link[ggplot2:draw_key]{key glyphs}, to change the display of the layer in the legend.
-}}
+\item \code{bw} sets the bandwidth of the density (default \code{"nrd0"}): a number, or
+one of \code{"nrd0"}, \code{"nrd"}, \code{"ucv"}, \code{"bcv"}, \code{"SJ"}, or \code{"dpi"}.
+\item \code{kernel} sets the kernel (default \code{"gaussian"}).
+\item \code{bounds} sets known bounds of the data, which must contain all values.
+\item \code{width} (or \code{height}, in a horizontal plot) is the width of a whole
+violin, so each half violin is half as wide.
+}
+
+\code{drop} has no effect. The half violins of groups with fewer than two
+observations, or with all values equal, are not drawn, with a warning, but
+they keep their space when dodged, and their intervals are drawn.
+\code{.width}, \code{point_interval}, \code{show_point}, \code{show_interval}, \code{fatten_point},
+\code{arrow}, and the \code{point_} and \code{interval_} aesthetics, such as \code{point_size},
+go to the interval.}
+}
+\value{
+A ggplot2 layer, or a list of two layers if \code{interval = TRUE}.
 }
 \description{
-Create a half-violin plot.
+Create a half-violin plot. The half violins are drawn with
+\code{\link[ggdist:stat_slab]{ggdist::stat_slab()}}, so this function needs the \strong{ggdist} package
+(version 3.3.3 or later). By default, each half violin is at most 0.45
+times the spacing of the categorical axis wide (0.45 units on a discrete
+axis), as before. When groups are dodged, as with \code{fill} mapped to a second
+variable, each group takes half of its dodge cell, from the cell's centre
+toward its side, as in see 0.14.
 }
 \examples{
+\dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 
@@ -143,4 +143,10 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   theme_modern() +
   scale_fill_material_d()
 
+# To add the median and quantile intervals
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violinhalf(interval = TRUE) +
+  theme_modern() +
+  scale_fill_material_d()
+\dontshow{\}) # examplesIf}
 }
