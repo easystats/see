@@ -5,9 +5,47 @@
 * `plot()` for `datawizard::means_by_group()` gets a `flip` argument. Use
   `flip = FALSE` to show the groups on the horizontal axis (#455).
 
+* `geom_violinhalf()` and `geom_violindot()` are now drawn with the *ggdist*
+  package (`ggdist::stat_slab()` and `ggdist::geom_dots()`), which they now
+  need (version 3.3.3 or later). They work with facets and free scales (#81,
+  #385), and the plots look a little different. Dodged groups each take half
+  of their dodge cell, from its centre, as before. The dots of
+  `geom_violindot()` were not dodged before. By default, they now go in the
+  other half of the cell (they overlap a flipped half violin). The new `interval` argument
+  adds the median with 66% and 95% intervals (#68). The `binwidth` default of
+  `geom_violindot()` is now `NA` (it was 0.05), so ggdist sizes the dots to
+  the data (#44). Other arguments in `...` of `geom_violindot()` now go to
+  `ggdist::geom_dots()` (instead of `geom_dotplot()`) as well as to the half
+  violins, except the arguments of the density, the layout, and the interval,
+  which go to the half violins only (see `?geom_violindot`). A `width` in `...`
+  is the width of a whole violin, as in `geom_violin()`, so each half violin
+  is half as wide. `bounds` must contain all values; otherwise the half
+  violins are not drawn. The `stat` argument is now ignored, with a warning
+  for any value other than `"ydensity"` or `ggplot2::StatYdensity`.
+  `geom_violindot()` no longer works with `coord_polar()`.
+
 * `plot()` for `modelbased::estimate_contrasts()` now draws joint contrasts of
   two or more variables, such as `contrast = c("am", "cyl")`. The x axis shows
   the combinations of levels, such as "auto, 4".
+
+* `plot()` for `modelbased::estimate_contrasts()` gains a `show_data` argument.
+  With `show_data = TRUE`, the plot draws the raw data of the model as jittered
+  points behind the lighthouses (easystats/modelbased#114).
+
+* `plot()` for `modelbased::estimate_contrasts()` now draws more kinds of
+  estimates. It draws means in a `Probability`, `Proportion`, or `Rate` column,
+  such as the probabilities of a logistic model. It draws ratio contrasts from
+  `comparison = ratio ~ pairwise` as ratios of the means. With the default
+  backend, it draws contrasts of a log response estimated with
+  `transform = TRUE` as ratios of the back-transformed means. The plot stops
+  with an error for contrasts back-transformed from some other
+  transformations, such as `sqrt(y)`, and for ratio contrasts estimated with
+  `transform = TRUE`. It also stops for contrasts and means on different
+  scales, as their `predict` or `transform` arguments show. The help page
+  lists the exceptions. With `show_data = TRUE`, the plot draws a logical or
+  two-level factor response as 0 and 1. It also draws the raw data of `y` for
+  a response `log(y)`, `log2(y)`, or `log10(y)`. This needs contrasts and means
+  estimated with `transform = TRUE`.
 
 ## Bug fixes
 
