@@ -39,13 +39,29 @@
   backend, it draws contrasts of a log response estimated with
   `transform = TRUE` as ratios of the back-transformed means. The plot stops
   with an error for contrasts back-transformed from some other
-  transformations, such as `sqrt(y)`, and for ratio contrasts estimated with
-  `transform = TRUE`. It also stops for contrasts and means on different
-  scales, as their `predict` or `transform` arguments show. The help page
-  lists the exceptions. With `show_data = TRUE`, the plot draws a logical or
-  two-level factor response as 0 and 1. It also draws the raw data of `y` for
-  a response `log(y)`, `log2(y)`, or `log10(y)`. This needs contrasts and means
-  estimated with `transform = TRUE`.
+  transformations, such as `sqrt(y)`. When `insight::find_transformation()`
+  reports a transformation other than `"identity"`, it also stops for ratio
+  contrasts estimated with `transform = TRUE`. It also stops for contrasts and
+  means on different scales, as their `predict` or `transform` arguments
+  show. The help page lists the exceptions. With `show_data = TRUE`, the plot
+  draws a logical or two-level factor response as 0 and 1. It also draws the
+  raw data of `y` for a response `log(y)`, `log2(y)`, or `log10(y)`. This needs
+  contrasts and means estimated with `transform = TRUE`.
+
+* `plot()` for `modelbased::estimate_contrasts()` now draws ordinal and
+  multinomial models, such as `MASS::polr()` and `mclogit::mblogit()`, with one
+  panel per response category. Each panel shows the probabilities of that
+  category and the contrasts within it. Contrasts between two categories are
+  not drawn. `show_data = TRUE` stops with an error for these models. The plot
+  also draws Bayesian ratio contrasts from `comparison = ratio ~ pairwise` as
+  ratios. When `insight::find_transformation()` reports `"identity"`, it draws
+  ratio contrasts estimated with `transform = TRUE` as ratios. It accepts
+  contrasts and means on the link scale from the marginaleffects and emmeans
+  backends together. For some models, such as `lm(y ~ x)`, the link scale
+  counts as the response scale. These models have an identity link, and
+  `insight::find_transformation()` reports their response as `"identity"`.
+  The link scale does not count for a model with a zero-inflation or hurdle
+  part.
 
 ## Bug fixes
 

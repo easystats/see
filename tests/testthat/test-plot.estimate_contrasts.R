@@ -1406,3 +1406,410 @@ test_that("`show_data = TRUE` keeps `by` variables named like plot columns", {
     }
   }
 })
+
+
+# an ordinal (polr) and a multinomial (mblogit) model, each with a
+# three-level response and a three-level predictor
+ordinal_fixtures <- function() {
+  polr_model <- MASS::polr(Sat ~ Infl, weights = Freq, data = MASS::housing)
+  cells <- expand.grid(
+    y = c("lo", "mid", "hi"),
+    g = c("a", "b", "c"),
+    stringsAsFactors = FALSE
+  )
+  cells$n <- c(10, 6, 4, 5, 9, 6, 3, 7, 10)
+  d <- cells[rep(seq_len(nrow(cells)), cells$n), c("y", "g")]
+  d$y <- factor(d$y, levels = c("lo", "mid", "hi"))
+  d$g <- factor(d$g)
+  mblogit_model <- mclogit::mblogit(y ~ g, data = d, trace = FALSE)
+  list(
+    polr = list(
+      x_name = "Infl",
+      means = suppressMessages(
+        modelbased::estimate_means(polr_model, by = "Infl")
+      ),
+      contrasts = suppressMessages(
+        modelbased::estimate_contrasts(polr_model, contrast = "Infl")
+      )
+    ),
+    mblogit = list(
+      x_name = "g",
+      means = modelbased::estimate_means(mblogit_model, by = "g"),
+      contrasts = modelbased::estimate_contrasts(mblogit_model, contrast = "g")
+    )
+  )
+}
+
+# the contrasts within one response category, with that category as a
+# `Response` column
+within_category <- function(contrasts) {
+  contrasts <- as.data.frame(contrasts)
+  within <- contrasts[
+    as.character(contrasts$Response1) == as.character(contrasts$Response2),
+  ]
+  within$Response <- within$Response1
+  within
+}
+
+
+test_that("lighthouse plots of ordinal and multinomial models get one panel per response category", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+  skip_if_not_installed("mclogit")
+
+  for (fx in ordinal_fixtures()) {
+    categories <- levels(fx$means$Response)
+    expect_length(categories, 3L)
+    within <- within_category(fx$contrasts)
+    expect_identical(nrow(fx$contrasts), 36L)
+    expect_identical(nrow(within), 9L)
+
+    expect_no_warning({
+      dp <- data_plot(fx$contrasts, fx$means)
+    })
+    polygons <- dp$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 9))
+    expect_identical(
+      sort(unique(as.character(polygons$Level1))),
+      sort(unique(as.character(within$Level1)))
+    )
+    rownames(within) <- NULL
+    expect_lighthouses(
+      polygons,
+      within,
+      as.data.frame(fx$means),
+      fx$x_name,
+      y_name = "Probability",
+      by = "Response"
+    )
+
+    expect_no_warning({
+      p <- plot(fx$contrasts, fx$means)
+    })
+    layout <- ggplot2::ggplot_build(p)$layout$layout
+    expect_identical(as.character(layout$Response), categories)
+  }
+})
+
+
+test_that("ordinal lighthouse plots with `by` get one panel per category and `by` level", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+
+  model <- MASS::polr(
+    Sat ~ Infl + Type,
+    weights = Freq,
+    data = MASS::housing
+  )
+  contrasts <- suppressMessages(
+    modelbased::estimate_contrasts(model, contrast = "Infl", by = "Type")
+  )
+  means <- suppressMessages(
+    modelbased::estimate_means(model, by = c("Infl", "Type"))
+  )
+  expect_no_warning({
+    p <- plot(contrasts, means)
+  })
+  layout <- ggplot2::ggplot_build(p)$layout$layout
+  expect_identical(nrow(layout), 12L)
+  expect_identical(
+    sort(paste(layout$Response, layout$Type)),
+    sort(as.vector(outer(
+      levels(means$Response),
+      levels(means$Type),
+      paste
+    )))
+  )
+  polygons <- data_plot(contrasts, means)$geom_polygon
+  expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 36))
+})
+
+
+test_that("`show_data = TRUE` stops for ordinal and multinomial contrasts", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+  skip_if_not_installed("mclogit")
+
+  for (fx in ordinal_fixtures()) {
+    message <- error_text(plot(fx$contrasts, fx$means, show_data = TRUE))
+    expect_match(message, "ordinal or multinomial", fixed = TRUE)
+    expect_match(message, "`show_data = TRUE`", fixed = TRUE)
+  }
+})
+
+
+test_that("lighthouse plots draw Bayesian ratio contrasts as ratios", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("rstanarm")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl)
+  model <- suppressWarnings(rstanarm::stan_glm(
+    mpg ~ cyl,
+    data = d,
+    refresh = 0,
+    chains = 1,
+    iter = 500,
+    seed = 1
+  ))
+  means <- modelbased::estimate_means(model, by = "cyl")
+  ratios <- modelbased::estimate_contrasts(
+    model,
+    contrast = "cyl",
+    comparison = ratio ~ pairwise
+  )
+  # the ratios are in the `Median` column, and only the `comparison`
+  # attribute names them
+  expect_false("Ratio" %in% names(ratios))
+  expect_true("Median" %in% names(ratios))
+  polygons <- data_plot(ratios, means)$geom_polygon
+  expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 3))
+  expect_lighthouses(
+    polygons,
+    ratios,
+    means,
+    "cyl",
+    y_name = "Median",
+    geometry = "ratio"
+  )
+
+  differences <- modelbased::estimate_contrasts(
+    model,
+    contrast = "cyl",
+    comparison = ~pairwise
+  )
+  polygons <- data_plot(differences, means)$geom_polygon
+  expect_lighthouses(polygons, differences, means, "cyl", y_name = "Median")
+})
+
+
+test_that("lighthouse plots draw link-scale pairs from the marginaleffects and emmeans backends", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("emmeans")
+
+  # emmeans labels contrasts of levels like "6" as "cyl6", so the levels
+  # are words
+  d <- mtcars
+  d$cyl <- factor(d$cyl, labels = c("four", "six", "eight"))
+  estimates <- function(model, backend, predict) {
+    list(
+      means = modelbased::estimate_means(
+        model,
+        by = "cyl",
+        backend = backend,
+        predict = predict
+      ),
+      contrasts = modelbased::estimate_contrasts(
+        model,
+        contrast = "cyl",
+        backend = backend,
+        predict = predict
+      )
+    )
+  }
+  lighthouse_y <- function(contrasts, means) {
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    polygons <- polygons[order(polygons$Level1, polygons$Level2, polygons$y), ]
+    polygons$y
+  }
+
+  logit <- glm(am ~ cyl, data = d, family = binomial)
+  mfx <- estimates(logit, "marginaleffects", "link")
+  emm <- estimates(logit, "emmeans", "link")
+  # emmeans records `predict = "none"` for the link scale
+  expect_identical(attr(emm$means, "predict", exact = TRUE), "none")
+  expect_identical(attr(mfx$means, "predict", exact = TRUE), "link")
+  expected <- lighthouse_y(mfx$contrasts, mfx$means)
+  expect_equal(lighthouse_y(mfx$contrasts, emm$means), expected, tolerance = 1e-6)
+  expect_equal(lighthouse_y(emm$contrasts, mfx$means), expected, tolerance = 1e-6)
+
+  # with an identity link, the link scale is the response scale
+  linear <- lm(mpg ~ cyl, data = d)
+  emm_linear <- estimates(linear, "emmeans", "link")
+  mfx_contrasts <- modelbased::estimate_contrasts(linear, contrast = "cyl")
+  expect_identical(attr(mfx_contrasts, "predict", exact = TRUE), "response")
+  expect_no_error(data_plot(mfx_contrasts, emm_linear$means))
+
+  # response-scale contrasts and link-scale means stop
+  response_contrasts <- modelbased::estimate_contrasts(
+    logit,
+    contrast = "cyl",
+    predict = "response"
+  )
+  message <- error_text(plot(response_contrasts, emm$means))
+  expect_match(message, "`predict = \"response\"`", fixed = TRUE)
+  expect_match(message, "`predict = \"none\"`", fixed = TRUE)
+  expect_match(message, "same scale", fixed = TRUE)
+})
+
+
+test_that("lighthouse plots draw ratio contrasts with `transform = TRUE` of an untransformed response", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl)
+  lighthouse_y <- function(model, ...) {
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "cyl",
+      comparison = ratio ~ pairwise,
+      ...
+    )
+    means <- modelbased::estimate_means(model, by = "cyl", ...)
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    polygons <- polygons[order(polygons$Level1, polygons$Level2, polygons$y), ]
+    polygons$y
+  }
+
+  linear <- lm(mpg ~ cyl, data = d)
+  expected <- lighthouse_y(linear)
+  expect_length(expected, 9L)
+  expect_equal(lighthouse_y(linear, transform = TRUE), expected, tolerance = 1e-8)
+
+  logged <- lm(log(mpg) ~ cyl, data = d)
+  message <- error_text(lighthouse_y(logged, transform = TRUE))
+  expect_match(message, "ratio contrasts", fixed = TRUE)
+  expect_match(message, "`transform = TRUE`", fixed = TRUE)
+})
+
+
+test_that("lighthouse plots of back-transformed contrasts draw a geometry the estimates match, or stop", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl)
+  geometric_means <- tapply(d$mpg, d$cyl, function(v) exp(mean(log(v))))
+  expected <- c(
+    "mpg" = "difference",
+    "scale(mpg)" = "difference",
+    "log(mpg)" = "ratio",
+    "log2(mpg)" = "ratio",
+    "log10(mpg)" = "ratio",
+    "log(mpg, base = 2)" = "ratio",
+    "I(mpg / 2)" = "stop",
+    "sqrt(mpg)" = "stop"
+  )
+
+  for (response in names(expected)) {
+    model <- lm(as.formula(paste(response, "~ cyl")), data = d)
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "cyl",
+      transform = TRUE
+    )
+    means <- modelbased::estimate_means(model, by = "cyl", transform = TRUE)
+
+    if (expected[[response]] == "stop") {
+      message <- error_text(data_plot(contrasts, means))
+      expect_match(message, "`transform`", fixed = TRUE)
+      next
+    }
+
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 3))
+    expect_lighthouses(
+      polygons,
+      contrasts,
+      means,
+      "cyl",
+      geometry = expected[[response]]
+    )
+
+    # the estimates of the contrasts match the means on both sides
+    estimate <- if ("Ratio" %in% names(contrasts)) {
+      contrasts$Ratio
+    } else {
+      contrasts$Difference
+    }
+    mean_of <- setNames(means$Mean, as.character(means$cyl))
+    mean1 <- unname(mean_of[as.character(contrasts$Level1)])
+    mean2 <- unname(mean_of[as.character(contrasts$Level2)])
+    implied <- if (expected[[response]] == "ratio") {
+      mean1 / estimate
+    } else {
+      mean1 - estimate
+    }
+    expect_lt(max(abs(implied - mean2)), 1e-6)
+
+    # back-transformed means of a log response are geometric means
+    if (expected[[response]] == "ratio") {
+      expect_lt(
+        max(abs(mean_of[names(geometric_means)] - geometric_means)),
+        1e-6
+      )
+    }
+  }
+})
+
+
+test_that("link-scale estimates count as the response scale only without a transformation or zero-inflation", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("emmeans")
+  skip_if_not_installed("glmmTMB")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl, labels = c("four", "six", "eight"))
+  expect_predict_error <- function(contrasts, means) {
+    message <- error_text(data_plot(contrasts, means))
+    expect_match(message, "Lighthouse plots need both on the same scale", fixed = TRUE)
+    expect_match(message, "`predict", fixed = TRUE)
+  }
+
+  # emmeans link-scale estimates of a log response stay on the log scale
+  logged <- lm(log(mpg) ~ cyl, data = d)
+  link_means <- modelbased::estimate_means(
+    logged,
+    by = "cyl",
+    backend = "emmeans",
+    predict = "link"
+  )
+  expect_lt(max(link_means$Mean), 4)
+  expect_predict_error(
+    modelbased::estimate_contrasts(logged, contrast = "cyl", transform = TRUE),
+    link_means
+  )
+  expect_predict_error(
+    modelbased::estimate_contrasts(
+      logged,
+      contrast = "cyl",
+      backend = "emmeans",
+      predict = "link"
+    ),
+    modelbased::estimate_means(logged, by = "cyl", transform = TRUE)
+  )
+
+  # with zero-inflation, the response scale is not the link scale
+  d$y <- d$mpg
+  d$y[c(1, 5, 9, 13, 20, 25, 30)] <- 0
+  inflated <- suppressWarnings(glmmTMB::glmmTMB(
+    y ~ cyl,
+    ziformula = ~1,
+    family = gaussian,
+    data = d
+  ))
+  expect_predict_error(
+    modelbased::estimate_contrasts(inflated, contrast = "cyl", predict = "link"),
+    modelbased::estimate_means(inflated, by = "cyl", predict = "response")
+  )
+})
+
+
+test_that("`show_data = TRUE` names ordinal contrasts before it needs the model", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+
+  fx <- ordinal_fixtures()$polr
+  without_model <- fx$contrasts
+  attr(without_model, "model") <- NULL
+  message <- error_text(plot(without_model, fx$means, show_data = TRUE))
+  expect_match(message, "ordinal or multinomial", fixed = TRUE)
+})
