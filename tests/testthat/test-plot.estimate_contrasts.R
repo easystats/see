@@ -2122,7 +2122,7 @@ test_that("a continuous axis keeps the x values of a contrast variable named lik
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
-  for (name in c("y", "ymin", "Mean1")) {
+  for (name in c("x", "y", "ymin", "ymax", "Mean1", "Mean2", "Level1", "Level2")) {
     d <- mtcars
     d[[name]] <- d$wt
     model <- lm(as.formula(paste("mpg ~", name)), data = d)
@@ -2152,4 +2152,47 @@ test_that("continuous axis breaks print like the contrast levels", {
   fx <- contrasts_by_fixture()
   info <- attr(data_plot(fx$contrasts, fx$means), "info")
   expect_false("x_display" %in% names(info))
+})
+
+
+test_that("`show_data = TRUE` with a factor and a numeric `by` names the numeric values the means lack", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  set.seed(3)
+  d <- data.frame(
+    a = factor(rep(c("p", "q"), 60)),
+    g = factor(rep(c("A", "B", "C"), each = 2, length.out = 120)),
+    w = rep(c(2, 3, 5), each = 6, length.out = 120)
+  )
+  d$y <- rnorm(120)
+  model <- lm(y ~ a * g + w, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "a",
+    by = c("g=c('A','B')", "w=c(2,3)")
+  )
+  means <- modelbased::estimate_means(
+    model,
+    by = c("a", "g=c('A','B')", "w=c(2,3)")
+  )
+  message <- error_text(plot(contrasts, means, show_data = TRUE))
+  expect_match(message, "w is numeric", fixed = TRUE)
+
+  # without the values the means lack, the levels the contrasts lack are left out
+  on_grid <- d[d$w != 5, ]
+  model <- lm(y ~ a * g + w, data = on_grid)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "a",
+    by = c("g=c('A','B')", "w=c(2,3)")
+  )
+  means <- modelbased::estimate_means(
+    model,
+    by = c("a", "g=c('A','B')", "w=c(2,3)")
+  )
+  points <- ggplot2::ggplot_build(
+    plot(contrasts, means, show_data = TRUE)
+  )$data[[1]]
+  expect_identical(nrow(points), sum(on_grid$g != "C"))
 })

@@ -967,16 +967,24 @@ plot.see_estimate_contrasts <- function(
   # observations only for the `by` levels that the contrasts have; numeric
   # `by` values that the means lack are kept for the check below
   if (length(by_vars)) {
-    keep <- .by_key(model_data, by_vars) %in%
-      .by_key(as.data.frame(contrasts), by_vars)
+    contrast_rows <- as.data.frame(contrasts)
+    keep <- .by_key(model_data, by_vars) %in% .by_key(contrast_rows, by_vars)
     numeric_by <- by_vars[
       vapply(by_vars, function(i) is.numeric(model_data[[i]]), logical(1))
     ]
+    off_grid <- rep(FALSE, nrow(model_data))
     for (i in numeric_by) {
-      keep <- keep |
+      off_grid <- off_grid |
         !.value_key(model_data[[i]]) %in% .value_key(means[[i]])
     }
-    model_data <- model_data[keep, , drop = FALSE]
+    # only at factor or character `by` levels that the contrasts have
+    categorical_by <- setdiff(by_vars, numeric_by)
+    if (length(categorical_by)) {
+      off_grid <- off_grid &
+        .by_key(model_data, categorical_by) %in%
+          .by_key(contrast_rows, categorical_by)
+    }
+    model_data <- model_data[keep | off_grid, , drop = FALSE]
   }
 
   # each data value must have its place on the x axis and in the facets
