@@ -2056,14 +2056,9 @@ test_that("joint contrasts of three variables show one level per line", {
 })
 
 
-# the text of the facet strips, left to right
+# the text of the facet strips, in panel order
 strip_labels <- function(p) {
-  g <- ggplot2::ggplotGrob(p)
-  strips <- g$grobs[grepl("^strip", g$layout$name)]
-  order <- order(g$layout$l[grepl("^strip", g$layout$name)])
-  unlist(lapply(strips[order], function(s) {
-    s$grobs[[1]]$children[[2]]$children[[1]]$label
-  }))
+  unname(unlist(ggplot2::get_strip_labels(p)$facets))
 }
 
 test_that("lighthouse plots accept `by` variables with names that ggplot2 reserves", {
@@ -2120,4 +2115,41 @@ test_that("`show_data = TRUE` leaves out numeric `by` levels that the contrasts 
   built <- ggplot2::ggplot_build(p)
   expect_identical(nrow(built$layout$layout), 1L)
   expect_identical(nrow(built$data[[1]]), sum(d$cyl == 4))
+})
+
+
+test_that("a continuous axis keeps the x values of a contrast variable named like a plot column", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  for (name in c("y", "ymin", "Mean1")) {
+    d <- mtcars
+    d[[name]] <- d$wt
+    model <- lm(as.formula(paste("mpg ~", name)), data = d)
+    target <- paste0(name, "=c(2,2.5,4)")
+    contrasts <- modelbased::estimate_contrasts(model, contrast = target)
+    means <- modelbased::estimate_means(model, by = target)
+    dp <- data_plot(contrasts, means)
+    expect_identical(sort(unique(dp$geom_polygon$x)), c(2, 2.5, 4))
+    expect_identical(sort(dp$geom_pointrange$x), c(2, 2.5, 4))
+  }
+})
+
+
+test_that("continuous axis breaks print like the contrast levels", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(mpg ~ wt, data = mtcars)
+  p <- plot(
+    modelbased::estimate_contrasts(model, contrast = "wt=c(2,2.5,4)"),
+    modelbased::estimate_means(model, by = "wt=c(2,2.5,4)")
+  )
+  expect_identical(
+    ggplot2::ggplot_build(p)$layout$panel_params[[1]]$x$get_labels(),
+    c("2", "2.5", "4")
+  )
+  fx <- contrasts_by_fixture()
+  info <- attr(data_plot(fx$contrasts, fx$means), "info")
+  expect_false("x_display" %in% names(info))
 })

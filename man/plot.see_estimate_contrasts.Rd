@@ -38,9 +38,10 @@ information, such as a plain data frame, are taken to be on the same
 scale as the contrasts.
 \item The model data lack the response or a contrasted or \code{by} variable.
 \item The estimated means do not include each value in the data of the
-contrasted and \code{by} variables, or each combination of their values. For
-example, a numeric \code{by} variable has values that the means were not
-estimated at.
+contrasted variables, or of a numeric \code{by} variable, or each
+combination of their values. For example, a numeric \code{by} variable has
+values that the means were not estimated at. Data at factor or
+character \code{by} levels that the contrasts lack are left out instead.
 }}
 
 \item{...}{Arguments passed to or from other methods.}
@@ -62,7 +63,10 @@ ordinal and multinomial models. If the means have no row for the levels of
 a contrast, the plot does not draw that contrast and gives a warning. The
 plot shows only the \code{by} levels, or combinations of levels, that appear in
 the contrasts. It leaves out the means of other \code{by} levels, and with
-\code{show_data = TRUE} their raw data, and gives no warning for them. A \code{by}
+\code{show_data = TRUE} their raw data, and gives no warning for them. For a
+numeric \code{by} variable, \code{show_data = TRUE} leaves out the raw data only at
+values that the means hold. Data at other values still give the error
+described under \code{show_data}. A \code{by}
 variable named \code{PANEL}, \code{ROW}, \code{COL}, \code{SCALE_X}, or \code{SCALE_Y}, which
 ggplot2 reserves for facets, works too. The facet strips show its levels.
 

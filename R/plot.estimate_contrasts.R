@@ -132,13 +132,13 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   x_display <- attr(dataplot, "x_display", exact = TRUE)
   attr(dataplot, "x_display") <- NULL
   attr(dataplot, "info") <- list(
-    x_display = x_display,
     xlab = toString(x_name),
     ylab = y_name,
     title = paste0("Estimated ", sub("y$", "ie", y_name), "s and Contrasts"),
     x_name = x_name,
     by = by_columns
   )
+  attr(dataplot, "info")$x_display <- x_display
 
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
   dataplot
@@ -505,9 +505,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   numeric_x <- length(x_name) == 1L &&
     is.numeric(data_means[[x_name]]) &&
     .uneven_spacing(data_means[[x_name]])
+  # kept before the plot columns below can overwrite a contrast variable
+  # named like one of them
+  x_values <- if (numeric_x) as.numeric(data_means[[x_name]])
   x_position <- function(labels) {
     if (numeric_x) {
-      as.numeric(data_means[[x_name]])[match(labels, x_labels)]
+      x_values[match(labels, x_labels)]
     } else {
       factor(labels, levels = x_levels)
     }
@@ -621,7 +624,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' a contrast, the plot does not draw that contrast and gives a warning. The
 #' plot shows only the `by` levels, or combinations of levels, that appear in
 #' the contrasts. It leaves out the means of other `by` levels, and with
-#' `show_data = TRUE` their raw data, and gives no warning for them. A `by`
+#' `show_data = TRUE` their raw data, and gives no warning for them. For a
+#' numeric `by` variable, `show_data = TRUE` leaves out the raw data only at
+#' values that the means hold. Data at other values still give the error
+#' described under `show_data`. A `by`
 #' variable named `PANEL`, `ROW`, `COL`, `SCALE_X`, or `SCALE_Y`, which
 #' ggplot2 reserves for facets, works too. The facet strips show its levels.
 #'
@@ -721,9 +727,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'     scale as the contrasts.
 #'   - The model data lack the response or a contrasted or `by` variable.
 #'   - The estimated means do not include each value in the data of the
-#'     contrasted and `by` variables, or each combination of their values. For
-#'     example, a numeric `by` variable has values that the means were not
-#'     estimated at.
+#'     contrasted variables, or of a numeric `by` variable, or each
+#'     combination of their values. For example, a numeric `by` variable has
+#'     values that the means were not estimated at. Data at factor or
+#'     character `by` levels that the contrasts lack are left out instead.
 #'
 #' @details
 #' **Interpreting Lighthouse Plots**
@@ -867,11 +874,14 @@ plot.see_estimate_contrasts <- function(
       )
   }
 
-  # a continuous axis has its breaks at the values of the means
+  # a continuous axis has its breaks at the values of the means, printed
+  # like the contrast levels
   if (is.numeric(x$geom_pointrange$x)) {
+    breaks <- sort(unique(x$geom_pointrange$x))
     p <- p +
       ggplot2::scale_x_continuous(
-        breaks = sort(unique(x$geom_pointrange$x))
+        breaks = breaks,
+        labels = as.character(breaks)
       )
   }
 
