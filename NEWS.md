@@ -55,8 +55,9 @@
   ratio contrasts estimated with `transform = TRUE` as ratios. It accepts
   contrasts and means on the link scale from the marginaleffects and emmeans
   backends together. The link scale counts as the response scale for a model
-  with an identity link and an untransformed response, such as `lm(y ~ x)`.
-  It does not count for a model with a zero-inflation or hurdle part.
+  with an identity link and a response that `insight::find_transformation()`
+  reports as `"identity"`, such as `lm(y ~ x)`. It does not count for a model
+  with a zero-inflation or hurdle part.
 
 ## Bug fixes
 
