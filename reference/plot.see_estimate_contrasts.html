@@ -107,7 +107,8 @@ scale as the contrasts.</p></li>
 <li><p>The estimated means do not include each value in the data of the
 contrasted and <code>by</code> variables, or each combination of their values. For
 example, a numeric <code>by</code> variable has values that the means were not
-estimated at.</p></li>
+estimated at. Data at factor or character <code>by</code> levels that the
+contrasts lack are left out instead.</p></li>
 </ul></dd>
 
 
@@ -127,7 +128,15 @@ level, or combination of levels, of the <code>by</code> variables. The estimated
 must include the contrasted variables and the <code>by</code> variables, and no other
 variables that split their rows further, except the <code>Response</code> column of
 ordinal and multinomial models. If the means have no row for the levels of
-a contrast, the plot does not draw that contrast and gives a warning.</p>
+a contrast, the plot does not draw that contrast and gives a warning. The
+plot shows only the <code>by</code> levels, or combinations of levels, that appear in
+the contrasts. It leaves out the means of other <code>by</code> levels, and with
+<code>show_data = TRUE</code> their raw data, and gives no warning for them. For a
+numeric <code>by</code> variable, <code>show_data = TRUE</code> leaves out the raw data only at
+values that the means hold. Data at other values still give the error
+described under <code>show_data</code>. A <code>by</code>
+variable named <code>PANEL</code>, <code>ROW</code>, <code>COL</code>, <code>SCALE_X</code>, or <code>SCALE_Y</code>, which
+ggplot2 reserves for facets, works too. The facet strips show its levels.</p>
 <p>For ordinal and multinomial models, such as <code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code> and
 <code><a href="https://melff.github.io/mclogit/reference/mblogit.html" class="external-link">mclogit::mblogit()</a></code>, the means have one row per response category, in the
 column <code>Response</code>. The contrasts have the columns <code>Response1</code> and
@@ -138,7 +147,13 @@ category. The plot does not draw contrasts between two categories, and it
 gives no warning for them.</p>
 <p>If you contrast two or more variables jointly, for example with
 <code>contrast = c("am", "cyl")</code>, the x axis shows their combinations of levels,
-such as <code>"auto, 4"</code>. The first variable changes slowest along the axis.</p>
+such as <code>"auto, 4"</code>. The first variable changes slowest along the axis. For
+three or more variables, each label shows one level per line.</p>
+<p>If you contrast one numeric variable at unevenly spaced values, such as
+<code>contrast = "wt=c(2,2.5,4)"</code>, the x axis is continuous and keeps their
+spacing, with breaks at those values. Evenly spaced values, such as 1, 2,
+and 3, and two values or fewer keep an axis with one evenly spaced
+position per value.</p>
 <p>The plot takes the estimates from the column of the means that their
 <code>coef_name</code> attribute names. For means without this attribute, such as a
 plain data frame, it takes the first of the columns <code>Median</code>, <code>Mean</code>, <code>MAP</code>,
