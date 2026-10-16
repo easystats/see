@@ -245,9 +245,9 @@ geom_violindot <- function(
 # edge of its dodge cell and the cell's centre, which is the half of the cell
 # that an unflipped half violin leaves free. A group alone at its position
 # keeps its box [x - w, x]. Then the dots move away from the half violin, along
-# the categorical axis, by `gap` times the resolution of that axis, but a
-# dodged group's box keeps its lower edge, and its move is at most half of its
-# box. Built on call, like the geoms.
+# the categorical axis, by `gap` times the resolution of that axis. A dodged
+# group's box keeps its lower edge, and its move is that gap times the share of
+# its half cell in the lone box. Built on call, like the geoms.
 .position_violindots <- function(gap = 0.025, dodge = TRUE, width = NULL) {
   ggplot2::ggproto(
     "PositionViolinDots",
@@ -330,11 +330,13 @@ geom_violindot <- function(
       }
       dodged <- data$violindot_dodged
 
-      # the gap, along the categorical axis only
+      # the gap, along the categorical axis only; in a dodged cell it shrinks
+      # with the cell: by the share of the half cell in the lone box
       gap <- self$gap * params$violindot_res
       shift <- rep_len(-gap, nrow(data))
-      room <- (data[[hi_col]] - data[[lo_col]])[dodged] / 2
-      shift[dodged] <- -pmin(gap, room)
+      half_cell <- (data[[hi_col]] - data[[lo_col]])[dodged]
+      lone_box <- (data$violindot_hi - data$violindot_lo)[dodged]
+      shift[dodged] <- -gap * half_cell / lone_box
       data[[pos_col]] <- data[[pos_col]] + shift
       data[[hi_col]] <- data[[hi_col]] + shift
       data[[lo_col]][!dodged] <- data[[lo_col]][!dodged] + shift[!dodged]

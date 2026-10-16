@@ -288,9 +288,9 @@ test_that("geom_violindot() stacks a lone group's dots across its whole box", {
   m <- dots_measure(p)
   alone <- m[m$group == 3, ]
 
-  # the dodged groups' dots have 0.1125 - 0.025 = 0.0875 of room; the lone
+  # the dodged groups' dots have 0.1125 - 0.00625 = 0.10625 of room; the lone
   # group's stacks reach further, within its own box [x - 0.475, x - 0.025]
-  expect_gt(max(alone$dot_x) - min(alone$dot_x), 0.0875)
+  expect_gt(max(alone$dot_x) - min(alone$dot_x), 0.10625)
   expect_gt(min(alone$dot_x - (alone$pos - 0.475)), -1e-6)
 })
 
@@ -412,4 +412,47 @@ test_that("geom_violindot() scales the dot gap with the axis resolution", {
   level <- round(as.numeric(dots$x))
   expect_equal(as.numeric(dots$xmin), level - 0.475)
   expect_equal(as.numeric(dots$xmax), level - 0.025)
+})
+
+test_that("geom_violindot() shrinks the dot gap with the dodge cell", {
+  # each dodged group's dots box, as offsets from its half violin's cell:
+  # the box's lower edge less the cell's, and the cell centre less the box's
+  # upper edge (the gap)
+  offsets <- function(p, horizontal = FALSE) {
+    pos <- if (horizontal) "y" else "x"
+    lo <- paste0(pos, "min")
+    hi <- paste0(pos, "max")
+    slab <- unique(ggplot2::layer_data(p, 1)[c("group", pos, lo)])
+    dots <- ggplot2::layer_data(p, length(p$layers))[c("group", lo, hi)]
+    m <- merge(dots, slab, by = "group", suffixes = c("", "_cell"))
+    unique(round(
+      cbind(
+        as.numeric(m[[lo]]) - as.numeric(m[[paste0(lo, "_cell")]]),
+        as.numeric(m[[pos]]) - as.numeric(m[[hi]])
+      ),
+      6
+    ))
+  }
+  two <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  )
+  expect_equal(offsets(two + geom_violindot()), cbind(0, 0.00625))
+  expect_equal(offsets(two + geom_violindot(interval = TRUE)), cbind(0, 0.015))
+
+  d <- iris
+  d$g <- factor(rep(1:3, length.out = nrow(d)))
+  three <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot()
+  expect_equal(offsets(three), round(cbind(0, 0.025 / 6), 6))
+
+  horizontal <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Sepal.Length, Species, fill = interaction(g, Species))
+  ) +
+    geom_violindot(interval = TRUE)
+  expect_equal(offsets(horizontal, TRUE), cbind(0, 0.015))
 })
