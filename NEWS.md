@@ -2,6 +2,22 @@
 
 ## Changes
 
+* The Linearity and Homogeneity of Variance panels of `check_model()` (and the
+  plot of `check_heteroscedasticity()`) now draw the mean of each cell, joined
+  by a line, in place of the LOESS smoother when the fitted values take only
+  a few distinct values, for example in models with only categorical
+  predictors. A LOESS fit over so few values warned and could bend far
+  outside the data. When `show_ci` is `TRUE`, the cell means get 95% error
+  bars. Note that *performance* currently turns `show_ci` off for models
+  whose terms are all factors without interactions (#464).
+
+* `plot()` for `check_model()` and `check_heteroscedasticity()` gains a
+  `show_smooth` argument. With `show_smooth = FALSE`, the Linearity and
+  Homogeneity of Variance panels draw neither the LOESS smoother nor the cell
+  means, the Influential Observations panel draws no LOESS smoother, and the
+  subtitles of the Linearity and Homogeneity of Variance panels no longer refer
+  to a reference line (#464).
+
 * `plot()` for `datawizard::means_by_group()` gets a `flip` argument. Use
   `flip = FALSE` to show the groups on the horizontal axis (#455).
 

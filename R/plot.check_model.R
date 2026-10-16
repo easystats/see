@@ -6,6 +6,13 @@
 #' @inheritParams print.see_performance_pp_check
 #' @inheritParams data_plot
 #' @inheritParams plots
+#' @param show_smooth Logical, if `FALSE`, no trend line is drawn in the
+#'   Linearity, Homogeneity of Variance and Influential Observations panels.
+#'   This turns off the LOESS smoother and, for models whose fitted values take
+#'   only a few distinct values, the cell means with their line and error bars.
+#'   If `NULL` (default), the value stored in the `check_model()` object is
+#'   used, and `TRUE` if there is none. The binned residuals panel is not
+#'   affected.
 #'
 #' @return A ggplot2-object.
 #'
@@ -32,6 +39,7 @@ plot.see_check_model <- function(
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
+  show_smooth = NULL,
   ...
 ) {
   # Initialize an empty list to store the individual ggplot objects
@@ -52,6 +60,8 @@ plot.see_check_model <- function(
   alpha_level <- .default_value(x, "alpha", 0.2)
   alpha_dot <- .default_value(x, "alpha_dot", 0.8)
   show_dots <- .default_value(x, "show_dots", TRUE)
+  show_smooth <- show_smooth %||% .default_value(x, "show_smooth", TRUE)
+  .check_show_smooth(show_smooth)
   ppc_range <- .default_value(x, "ppc_range")
 
   # handle alias
@@ -144,6 +154,7 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         show_dots = show_dots,
         show_ci = show_ci,
+        show_smooth = show_smooth,
         maximum_dots = max_dots
       )
     )
@@ -186,6 +197,7 @@ plot.see_check_model <- function(
         alpha_dot = alpha_dot,
         show_dots = show_dots,
         show_ci = show_ci,
+        show_smooth = show_smooth,
         maximum_dots = max_dots
       )
     )
@@ -203,6 +215,7 @@ plot.see_check_model <- function(
         colors = colors,
         alpha_dot = alpha_dot,
         show_dots = show_dots,
+        show_smooth = show_smooth,
         maximum_dots = max_dots
       )
     )
@@ -295,6 +308,13 @@ plot.see_check_model <- function(
 }
 
 
+.check_show_smooth <- function(show_smooth) {
+  if (!isTRUE(show_smooth) && !isFALSE(show_smooth)) {
+    insight::format_error("`show_smooth` must be either `TRUE` or `FALSE`.")
+  }
+}
+
+
 .should_plot <- function(x, check, component, triggers) {
   component %in%
     names(x) &&
@@ -317,6 +337,7 @@ plot.see_check_model <- function(
   alpha_dot = 0.8,
   show_dots = TRUE,
   show_ci = TRUE,
+  show_smooth = TRUE,
   maximum_dots = 2000,
   ...
 ) {
@@ -332,6 +353,8 @@ plot.see_check_model <- function(
 
   # Downsample data if it exceeds the maximum dots threshold (for rendering
   # performance) (issue #420)
+  # cell means are computed from all rows, only the dots are downsampled
+  full_data <- x
   x <- .sample_for_plot(x, maximum_dots = maximum_dots, ...)
 
   # Base plot initialization
@@ -347,22 +370,152 @@ plot.see_check_model <- function(
       )
   }
 
-  # Add smoother, reference line, labels, and theme
+  # Add smoother (or cell means, if fitted values take only a few distinct
+  # values, see issue #464), reference line, labels, and theme
   p +
-    ggplot2::geom_smooth(
-      method = "loess",
-      se = show_ci,
-      formula = y ~ x,
-      alpha = alpha_level,
-      linewidth = size_line,
-      colour = colors[1]
+    .smoother_or_cell_means(
+      full_data,
+      size_point = size_point,
+      size_line = size_line,
+      alpha_level = alpha_level,
+      colour = colors[1],
+      show_ci = show_ci,
+      show_smooth = show_smooth
     ) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
     ggplot2::labs(
       x = "Fitted values",
       y = "Residuals",
       title = "Linearity",
-      subtitle = "Reference line should be flat and horizontal"
+      subtitle = if (isTRUE(show_smooth)) {
+        "Reference line should be flat and horizontal"
+      } else {
+        "Residuals should spread evenly around zero"
+      }
     ) +
     theme
+}
+
+
+# Helper to group fitted values into cells. Fitted values of the same cell may
+# differ by floating point noise, so values are rounded to 8 digits relative to
+# the largest absolute value. Rounding relative to each value (`signif()`)
+# would keep the noise of cells whose fitted value is close to zero (#464)
+.cell_keys <- function(x) {
+  scale <- max(abs(x), na.rm = TRUE)
+  if (!is.finite(scale) || scale == 0) {
+    return(x)
+  }
+  round(x / scale, 8)
+}
+
+
+# Helper to check whether fitted values take only a few distinct values, e.g.
+# for models with only categorical predictors (one value per cell). The limit
+# of 10 values follows the suggestion in #431, and requiring at least two
+# observations per value on average keeps small models with continuous
+# predictors on the LOESS smoother. The outlier plot uses a stricter limit of
+# 30 values (#437), because there no cell means replace the smoother (#464)
+.few_unique_values <- function(x, max_unique = 10) {
+  x <- x[!is.na(x)]
+  n_unique <- insight::n_unique(.cell_keys(x))
+  n_unique <= max_unique && n_unique <= length(x) / 2
+}
+
+
+# Helper to draw a LOESS smoother, or, for few distinct fitted values, the
+# cell means of y joined by a line. A LOESS fit over only a few distinct
+# x-values is close to singular and can bend far outside the data (issue #464)
+# `x` holds all rows, before downsampling, so cell means and intervals include
+# every observation. The LOESS smoother uses the (downsampled) plot data.
+.smoother_or_cell_means <- function(
+  x,
+  size_point,
+  size_line,
+  alpha_level = 0.2,
+  colour = "#3aaf85",
+  show_ci = TRUE,
+  show_smooth = TRUE
+) {
+  # no trend line at all, if the user turned it off
+  if (!isTRUE(show_smooth)) {
+    return(NULL)
+  }
+
+  x <- x[stats::complete.cases(x[c("x", "y")]), ]
+
+  if (!.few_unique_values(x$x)) {
+    return(ggplot2::geom_smooth(
+      method = "loess",
+      se = show_ci,
+      formula = y ~ x,
+      alpha = alpha_level,
+      linewidth = size_line,
+      colour = colour
+    ))
+  }
+
+  cells <- .cell_keys(x$x)
+  n <- as.vector(tapply(x$y, cells, length))
+  cell_means <- data.frame(
+    x = as.vector(tapply(x$x, cells, mean)),
+    y = as.vector(tapply(x$y, cells, mean)),
+    n = n
+  )
+
+  layers <- list()
+  if (isTRUE(show_ci)) {
+    # no confidence interval for cells with only one observation
+    ci_data <- cell_means[n > 1, , drop = FALSE]
+    if (nrow(ci_data) > 0) {
+      se <- as.vector(tapply(x$y, cells, stats::sd))[n > 1] / sqrt(ci_data$n)
+      t_crit <- stats::qt(0.975, df = ci_data$n - 1)
+      ci_data$ymin <- ci_data$y - t_crit * se
+      ci_data$ymax <- ci_data$y + t_crit * se
+      errorbar_args <- list(
+        data = ci_data,
+        mapping = ggplot2::aes(
+          x = .data$x,
+          ymin = .data$ymin,
+          ymax = .data$ymax
+        ),
+        linewidth = size_line,
+        colour = colour,
+        inherit.aes = FALSE
+      )
+      # error bars should not overlap neighbouring cells. For a single cell,
+      # ggplot2's default width is used
+      if (nrow(cell_means) > 1) {
+        cell_x <- sort(cell_means$x)
+        errorbar_args$width <- min(
+          0.05 * diff(range(cell_x)),
+          0.5 * min(diff(cell_x))
+        )
+      }
+      layers <- c(
+        layers,
+        list(do.call(ggplot2::geom_errorbar, errorbar_args))
+      )
+    }
+  }
+
+  c(
+    layers,
+    list(
+      ggplot2::geom_line(
+        data = cell_means,
+        ggplot2::aes(x = .data$x, y = .data$y),
+        linewidth = size_line,
+        colour = colour,
+        inherit.aes = FALSE
+      ),
+      ggplot2::geom_point(
+        data = cell_means,
+        ggplot2::aes(x = .data$x, y = .data$y),
+        size = 2 * size_point,
+        colour = colour,
+        inherit.aes = FALSE
+      )
+    )
+  )
 }
