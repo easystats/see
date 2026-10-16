@@ -22,8 +22,10 @@
 #'   this moves them toward smaller x, away from the half violin, and in a
 #'   dodged cell the nudge is at most half the room beside the half violin. In
 #'   a horizontal plot, it moves them along the value axis. The default also
-#'   dodges the dots with their half violins. A position that you set is used
-#'   as given, so the dots are not dodged unless that position dodges them.
+#'   dodges the dots with their half violins when `position` in `...` dodges
+#'   them. A position that you set is used as given, so the dots are not
+#'   dodged unless that position dodges them. Name this argument in full:
+#'   `position` goes to the half violins.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
 #'   `dotsize` argument of [ggdist::geom_dots()].
 #' @param color_dots,dots_color Color adjustment for dots.
@@ -38,8 +40,12 @@
 #'   `colour` does not reach the dots when `color_dots` is set, and `fill` does
 #'   not reach them when `fill_dots` is set. As for the half violins, a `width`
 #'   (or `height`) is the width of a whole violin, so the dots take half of it.
-#'   An argument named `position` matches `position_dots`. The dots of groups
-#'   with fewer than two observations are still drawn.
+#'   `position` goes to the half violins only (see [geom_violinhalf()]). With
+#'   the default `position_dots`, the dots are dodged with the half violins,
+#'   with the same dodge width, when `position` is `"dodge"` (the default) or
+#'   made by [ggplot2::position_dodge()]. Under a position such as
+#'   `"identity"`, the dots are not dodged. The dots of groups with fewer than
+#'   two observations are still drawn.
 #'
 #' @return A list of ggplot2 layers.
 #'
@@ -68,9 +74,9 @@ geom_violindot <- function(
   dots_color = NULL,
   dots_fill = NULL,
   binwidth = NA,
-  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
   interval = FALSE,
   ...,
+  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
   size_dots = dots_size,
   color_dots = dots_color,
   fill_dots = dots_fill
@@ -82,9 +88,16 @@ geom_violindot <- function(
   if (default_position && isTRUE(interval)) {
     position_dots <- ggplot2::position_nudge(x = -0.06, y = 0)
   }
-  # the default nudge also dodges the dots with their half violins
+  # the default nudge also dodges the dots with their half violins, when the
+  # half violins are dodged
   if (default_position) {
-    position_dots <- .position_violindots(position_dots$x, position_dots$y)
+    dodge <- .violindot_dodge(list(...)$position)
+    position_dots <- .position_violindots(
+      position_dots$x,
+      position_dots$y,
+      dodge = dodge$dodge,
+      width = dodge$width
+    )
   }
 
   violin <- geom_violinhalf(
@@ -217,6 +230,20 @@ geom_violindot <- function(
 }
 
 
+# Whether the half violins are dodged under the `position` given to
+# geom_violindot() (none means geom_violinhalf()'s default, "dodge"), and the
+# dodge width.
+.violindot_dodge <- function(position) {
+  if (is.null(position) || identical(position, "dodge")) {
+    return(list(dodge = TRUE, width = NULL))
+  }
+  if (inherits(position, "PositionDodge")) {
+    return(list(dodge = TRUE, width = position$width))
+  }
+  list(dodge = FALSE, width = NULL)
+}
+
+
 # The default position of the dots. Groups that share a position are dodged
 # as the half violins are (each box set to [x, x + w] first, as in
 # `.violinhalf_box()`), and the dots of each dodged group go between the lower
@@ -225,12 +252,13 @@ geom_violindot <- function(
 # keeps its box [x - w, x]. Then the dots are nudged by `x` and `y`, but a dodged group's box
 # keeps its lower edge, and its nudge toward the lower edge is at most half of
 # its box. Built on call, like the geoms.
-.position_violindots <- function(x = 0, y = 0) {
+.position_violindots <- function(x = 0, y = 0, dodge = TRUE, width = NULL) {
   ggplot2::ggproto(
     "PositionViolinDots",
-    ggplot2::position_dodge(),
+    ggplot2::position_dodge(width = width),
     x = x,
     y = y,
+    dodge = dodge,
     # The dots are dodged in the order of the half violins: by a mapped `order`
     # that is constant within each group (the half violins keep it), else by
     # group. Rows with a missing value, which the half violins drop, take no
@@ -272,7 +300,7 @@ geom_violindot <- function(
         pos[ok],
         FUN = function(g) length(unique(g))
       )
-      data$violindot_dodged <- groups_here > 1
+      data$violindot_dodged <- self$dodge & groups_here > 1
       data$violindot_lo <- data[[lo_col]]
       data$violindot_hi <- data[[hi_col]]
 

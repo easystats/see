@@ -339,3 +339,35 @@ test_that("geom_violindot() draws with only one position aesthetic mapped", {
   slab <- ggplot2::layer_data(p, 1)
   expect_lte(max(dots$ymax), min(slab$ymin))
 })
+
+test_that("geom_violindot() gives `position` to the half violins", {
+  dodge <- ggplot2::position_dodge(width = 0.5)
+  p <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot(position = dodge)
+  expect_identical(p$layers[[1]]$position, dodge)
+  expect_false(identical(dots_layer(p$layers)$position, dodge))
+
+  # each group's dots lie in the lower half of its half violin's cell
+  slab <- unique(ggplot2::layer_data(p, 1)[c("group", "x", "xmin")])
+  dots <- ggplot2::layer_data(p, 2)
+  cells <- merge(dots, slab, by = "group", suffixes = c("", "_cell"))
+  expect_setequal(unique(cells$group), 1:6)
+  expect_gt(min(cells$xmin - cells$xmin_cell), -1e-6)
+  expect_lt(max(cells$xmax - cells$x_cell), 1e-6)
+})
+
+test_that("geom_violindot() does not dodge the dots under position = \"identity\"", {
+  p <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot(position = "identity")
+  expect_s3_class(p$layers[[1]]$position, "PositionIdentity")
+  dots <- ggplot2::layer_data(p, 2)
+  level <- round(as.numeric(dots$x))
+  expect_equal(as.numeric(dots$xmax), level - 0.025)
+  expect_equal(as.numeric(dots$xmin), level - 0.475)
+})
