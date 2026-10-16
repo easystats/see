@@ -99,6 +99,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     names(means)[match(by_vars[collides], names(means))] <- by_columns[collides]
   }
 
+  # panels only for the `by` levels that the contrasts have
+  if (length(by_columns)) {
+    keep <- .by_key(means, by_columns) %in% .by_key(contrast_data, by_columns)
+    means <- means[keep, , drop = FALSE]
+  }
+
   dataplot <- .data_contrasts_and_means(
     contrast_data,
     means,
@@ -390,6 +396,16 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   } else {
     as.character(x)
   }
+}
+
+
+# one key per row for the combination of the values in `columns`
+#' @keywords internal
+.by_key <- function(data, columns) {
+  do.call(
+    paste,
+    c(lapply(columns, function(i) .value_key(data[[i]])), sep = "\r")
+  )
 }
 
 
@@ -848,6 +864,17 @@ plot.see_estimate_contrasts <- function(
 
   .check_raw_response_scale(model, contrasts, means_object, response)
   .check_raw_predict(contrasts, means_object)
+
+  # observations only for the `by` levels that the contrasts have; a numeric
+  # `by` variable keeps the check below
+  categorical_by <- by_vars[
+    !vapply(by_vars, function(i) is.numeric(model_data[[i]]), logical(1))
+  ]
+  if (length(categorical_by)) {
+    keep <- .by_key(model_data, categorical_by) %in%
+      .by_key(as.data.frame(contrasts), categorical_by)
+    model_data <- model_data[keep, , drop = FALSE]
+  }
 
   # each data value must have its place on the x axis and in the facets
   for (i in c(x_name, by_vars)) {

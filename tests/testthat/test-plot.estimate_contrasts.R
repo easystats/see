@@ -1813,3 +1813,87 @@ test_that("`show_data = TRUE` names ordinal contrasts before it needs the model"
   message <- error_text(plot(without_model, fx$means, show_data = TRUE))
   expect_match(message, "ordinal or multinomial", fixed = TRUE)
 })
+
+
+test_that("lighthouse plots show only the `by` levels that the contrasts have", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(mpg ~ cyl * am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = "cyl='4'"
+  )
+  means <- modelbased::estimate_means(model, by = c("cyl", "am"))
+  expect_setequal(as.character(means$cyl), c("4", "6", "8"))
+
+  expect_no_warning({
+    dp <- data_plot(contrasts, means)
+  })
+  expect_identical(unique(as.character(dp$geom_pointrange$cyl)), "4")
+  expect_identical(nrow(dp$geom_pointrange), 2L)
+  expect_no_warning({
+    p <- plot(contrasts, means)
+  })
+  layout <- ggplot2::ggplot_build(p)$layout$layout
+  expect_identical(as.character(layout$cyl), "4")
+
+  # two `by` variables, one of them restricted
+  d$vs <- factor(d$vs, labels = c("V", "S"))
+  model2 <- lm(mpg ~ cyl * am * vs, data = d)
+  contrasts2 <- modelbased::estimate_contrasts(
+    model2,
+    contrast = "am",
+    by = c("cyl='4'", "vs")
+  )
+  means2 <- modelbased::estimate_means(model2, by = c("cyl", "am", "vs"))
+  layout2 <- ggplot2::ggplot_build(plot(contrasts2, means2))$layout$layout
+  expect_identical(nrow(layout2), 2L)
+  expect_identical(unique(as.character(layout2$cyl)), "4")
+  expect_setequal(as.character(layout2$vs), c("V", "S"))
+})
+
+
+test_that("`show_data = TRUE` draws raw points only for the `by` levels of the contrasts", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(mpg ~ cyl * am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = "cyl='4'"
+  )
+  n_4 <- sum(d$cyl == "4")
+  expect_identical(n_4, 11L)
+  for (means in list(
+    modelbased::estimate_means(model, by = c("cyl", "am")),
+    modelbased::estimate_means(model, by = c("cyl='4'", "am"))
+  )) {
+    expect_no_warning({
+      p <- plot(contrasts, means, show_data = TRUE)
+    })
+    points <- ggplot2::ggplot_build(p)$data[[1]]
+    expect_identical(nrow(points), n_4)
+    expect_identical(unique(as.integer(points$PANEL)), 1L)
+  }
+
+  # a numeric `by` keeps the error that the means lack data values
+  numeric_model <- lm(mpg ~ wt * am, data = d)
+  numeric_contrasts <- modelbased::estimate_contrasts(
+    numeric_model,
+    contrast = "am",
+    by = "wt=c(2,3)"
+  )
+  numeric_means <- modelbased::estimate_means(
+    numeric_model,
+    by = c("am", "wt=c(2,3)")
+  )
+  message <- error_text(
+    plot(numeric_contrasts, numeric_means, show_data = TRUE)
+  )
+  expect_match(message, "wt is numeric", fixed = TRUE)
+})
