@@ -46,10 +46,22 @@ expect_draws <- function(p) {
   invisible(p)
 }
 
-# evaluates `code` while a global object `name` exists
+# evaluates `code` while a global object `name` exists, then restores the
+# global environment
 with_global <- function(name, value, code) {
+  had <- exists(name, envir = globalenv(), inherits = FALSE)
+  if (had) {
+    old <- get(name, envir = globalenv())
+  }
   assign(name, value, envir = globalenv())
-  on.exit(rm(list = name, envir = globalenv()), add = TRUE)
+  on.exit(
+    if (had) {
+      assign(name, old, envir = globalenv())
+    } else {
+      rm(list = name, envir = globalenv())
+    },
+    add = TRUE
+  )
   code
 }
 
@@ -185,6 +197,54 @@ test_that("an object of the stored name in a calling function is not used", {
     result <- bayestestR::p_direction(global_mod)
     outer_fn(result, inner_plot)
   })
+  expect_draws(p)
+  expect_identical(plotted_parameters(p), model_parameters(m_wt))
+})
+
+test_that("a wrapper argument of the stored name that holds the result is skipped", {
+  wrapper <- as_user_fn(function(data_mod) plot(data_mod))
+  p <- with_global("data_mod", m_wt, {
+    wrapper(bayestestR::p_direction(data_mod))
+  })
+  expect_draws(p)
+  expect_identical(plotted_parameters(p), model_parameters(m_wt))
+})
+
+test_that("plot() finds the model for `lapply(results, plot)`", {
+  # `X` is also the name of lapply()'s own argument
+  p_top <- with_global(
+    "X",
+    m_wt,
+    eval(
+      quote(lapply(list(bayestestR::p_direction(X)), plot)),
+      envir = globalenv()
+    )
+  )
+  expect_draws(p_top)
+  expect_identical(plotted_parameters(p_top[[1]]), model_parameters(m_wt))
+
+  plot_all <- as_user_fn(function(model_value) {
+    X <- model_value
+    lapply(list(bayestestR::p_direction(X)), plot)
+  })
+  p_local <- plot_all(m_wt)
+  expect_draws(p_local)
+  expect_identical(plotted_parameters(p_local[[1]]), model_parameters(m_wt))
+})
+
+test_that("plot() finds the local model of a user's own plot method", {
+  user_env <- new.env(parent = globalenv())
+  assign(
+    "plot.m13_fit",
+    function(x, ...) {
+      method_mod <- x$fit
+      plot(bayestestR::p_direction(method_mod))
+    },
+    envir = user_env
+  )
+  plot_fit <- function(obj) plot(obj)
+  environment(plot_fit) <- user_env
+  p <- plot_fit(structure(list(fit = m_wt), class = "m13_fit"))
   expect_draws(p)
   expect_identical(plotted_parameters(p), model_parameters(m_wt))
 })

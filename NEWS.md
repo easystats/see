@@ -98,6 +98,22 @@
 
 ## Bug fixes
 
+* If the model or data existed only inside a function, `plot()` for results of
+  `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
+  and `describe_distribution()` failed with "Failed at retrieving data". If
+  `plot()` is called inside that function, or in a function defined inside it,
+  `plot()` now finds it there. It uses it rather than a global object of the
+  same name (#311).
+
+* `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
+  uses the model given in `data`. If `data` is given and the model cannot be
+  found by its name, it no longer fails.
+
+* `plot()` for `estimate_density()` and `describe_distribution()` has a new
+  `data` argument. Before, `plot(estimate_density(m), data = m)` failed.
+
+* `plot()` now works for `describe_distribution()` on a list (#213).
+
 * `plot()` for structural equation models from `parameters::model_parameters()`
   drew latent factors as observed variables and indicators as latent
   variables. Latent factors are now drawn as circles and indicators as
@@ -126,22 +142,6 @@
   An example is rows with missing values in a model fitted with
   `na.action = na.exclude`. The scree and count plots now leave these
   observations out, and the labels still name the right rows.
-
-* If the model or data existed only inside a function, `plot()` for results of
-  `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
-  and `describe_distribution()` failed with "Failed at retrieving data". If
-  `plot()` is called inside that function, or in a function defined inside it,
-  `plot()` now finds it there. It uses it rather than a global object of the
-  same name (#311).
-
-* `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
-  uses the model given in `data`. If `data` is given and the model cannot be
-  found by its name, it no longer fails.
-
-* `plot()` for `estimate_density()` and `describe_distribution()` has a new
-  `data` argument. Before, `plot(estimate_density(m), data = m)` failed.
-
-* `plot()` now works for `describe_distribution()` on a list (#213).
 
 # see 0.14.2
 

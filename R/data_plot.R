@@ -156,10 +156,15 @@ add_plot_attributes <- function(x) {
     # environment and the search path. A missing argument or a failing default
     # of that name gives an error, which moves on to the next try; forcing that
     # default again warns "restarting interrupted promise evaluation".
+    # A result of that name, such as the argument of a wrapper
+    # `function(m) plot(m)`, is not the model and moves on too.
     dat <- tryCatch(
       suppressWarnings(get(obj_name, envir = .plot_call_env())),
       error = function(e) NULL
     )
+    if (.is_result_of(dat, obj_name)) {
+      dat <- NULL
+    }
 
     if (is.null(dat)) {
       # second try, global env and search path
@@ -167,6 +172,9 @@ add_plot_attributes <- function(x) {
         get(obj_name, envir = globalenv()),
         error = function(e) NULL
       )
+      if (.is_result_of(dat, obj_name)) {
+        dat <- NULL
+      }
     }
   }
 
@@ -215,10 +223,19 @@ add_plot_attributes <- function(x) {
 .plot_call_env <- function() {
   n_frames <- sys.nframe()
   parents <- sys.parents()
-  # the environment in which the outermost `plot()` was called
-  for (n in seq_len(n_frames)) {
+  # the environment in which the innermost `plot()` was called, such as a
+  # user's own plot method; when a package function made that call, such as
+  # `lapply(results, plot)`, the user code that called it
+  for (n in rev(seq_len(n_frames))) {
     if (identical(sys.function(n), base::plot)) {
-      return(sys.frame(parents[n]))
+      caller <- parents[n]
+      while (caller > 0L && .is_package_call(caller)) {
+        caller <- parents[caller]
+      }
+      if (caller > 0L) {
+        return(sys.frame(caller))
+      }
+      return(globalenv())
     }
   }
   # no `plot()` call, such as for `data_plot()`: the nearest frame of user code
@@ -281,6 +298,22 @@ add_plot_attributes <- function(x) {
   }
   # Inf, NaN and NA_real_ are parsed as constants, not as names
   (is.numeric(e) || is.character(e) || is.logical(e)) && length(e) == 1L
+}
+
+#' @keywords internal
+.is_package_call <- function(n) {
+  fun_env <- environment(sys.function(n))
+  # the frame of a function call encloses the function's environment; the
+  # frame of eval() or local(), such as a test block, does not
+  !is.null(fun_env) &&
+    identical(parent.env(sys.frame(n)), fun_env) &&
+    isNamespace(topenv(fun_env))
+}
+
+#' @keywords internal
+.is_result_of <- function(obj, obj_name) {
+  # a result such as `p_direction(m)` stores the name `m`; the model does not
+  identical(attr(obj, "object_name", exact = TRUE), obj_name)
 }
 
 #' @keywords internal
