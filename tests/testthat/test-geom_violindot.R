@@ -326,3 +326,16 @@ test_that("geom_violindot() uses a user position_dots as given under dodge", {
     geom_violindot(position_dots = nudge)
   expect_identical(dots_layer(p$layers)$position, nudge)
 })
+
+test_that("geom_violindot() draws with only one position aesthetic mapped", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(y = Sepal.Length)) + geom_violindot()
+  dots <- ggplot2::layer_data(p, 2)
+  slab <- ggplot2::layer_data(p, 1)
+  expect_lte(max(dots$xmax), min(slab$xmin))
+  expect_equal(sort(dots$y), sort(iris$Sepal.Length))
+
+  p <- ggplot2::ggplot(iris, ggplot2::aes(x = Sepal.Length)) + geom_violindot()
+  dots <- ggplot2::layer_data(p, 2)
+  slab <- ggplot2::layer_data(p, 1)
+  expect_lte(max(dots$ymax), min(slab$ymin))
+})

@@ -101,28 +101,20 @@ geom_violindot <- function(
     violin <- list(violin)
   }
 
-  # the dots take the same space as an undodged half violin: 0.45 times the axis
-  # resolution, or half of a `width` (or `height`) in `...`
+  # the dots take the same space as an undodged half violin: half of a `width`
+  # (or `height`) in `...`, else 0.45 times the axis resolution (set by the
+  # dots geom, see `.violindot_size()`)
   extra_args <- list(...)
   names(extra_args) <- ggplot2::standardise_aes_names(names(extra_args))
-  dots_size_aes <- list()
-  if (is.null(extra_args$width)) {
-    dots_size_aes$width <- quote(ggplot2::after_stat(
-      0.45 * ggplot2::resolution(x, zero = FALSE)
-    ))
-  } else {
+  if (!is.null(extra_args$width)) {
     extra_args$width <- extra_args$width / 2
   }
-  if (is.null(extra_args$height)) {
-    dots_size_aes$height <- quote(ggplot2::after_stat(
-      0.45 * ggplot2::resolution(y, zero = FALSE)
-    ))
-  } else {
+  if (!is.null(extra_args$height)) {
     extra_args$height <- extra_args$height / 2
   }
 
   dots_args <- list(
-    mapping = .add_to_mapping(mapping, dots_size_aes),
+    mapping = mapping,
     data = data,
     side = "left",
     scale = 1,
@@ -193,6 +185,10 @@ geom_violindot <- function(
       ggdist::GeomDots$default_aes,
       list(colour = "black")
     ),
+    setup_data = function(self, data, params) {
+      data <- .violindot_size(data, params)
+      ggplot2::ggproto_parent(ggdist::GeomDots, self)$setup_data(data, params)
+    },
     draw_slabs = function(self, s_data, panel_params, coord, orientation, ...) {
       s_data <- .violindot_reach(s_data, orientation)
       ggplot2::ggproto_parent(ggdist::GeomDots, self)$draw_slabs(
@@ -204,6 +200,20 @@ geom_violindot <- function(
       )
     }
   )
+}
+
+
+# Without a `width` (or `height`), the dots box is 0.45 times the resolution of
+# the categorical axis, as for the half violins. An axis that is not mapped is
+# at 0, as in ggdist, so its box is 0.45 wide.
+.violindot_size <- function(data, params) {
+  for (aes in c("width", "height")) {
+    if (is.null(params[[aes]]) && is.null(data[[aes]])) {
+      pos <- data[[if (aes == "width") "x" else "y"]] %||% 0
+      data[[aes]] <- 0.45 * ggplot2::resolution(as.numeric(pos), zero = FALSE)
+    }
+  }
+  data
 }
 
 
