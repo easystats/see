@@ -106,7 +106,7 @@
   `data` argument. Before, `plot(estimate_density(m), data = m)` failed (#311).
 
 * `plot()` now works for `describe_distribution()` on a list of numeric
-  vectors (#213).
+  vectors such as `list(mtcars$mpg, mtcars$cyl)` (#213).
 
 * `plot()` for structural equation models from `parameters::model_parameters()`
   drew latent factors as observed variables and indicators as latent

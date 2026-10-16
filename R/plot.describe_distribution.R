@@ -43,7 +43,8 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #'   grey.
 #' @param size_bar Size of bar geoms.
 #' @param data The data frame, vector or list that was given to
-#'   `describe_distribution()`. If `NULL`, it is found by its name.
+#'   `describe_distribution()`. If `NULL`, it is found by its name or, for a
+#'   list, rebuilt from the values stored in the result.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'
