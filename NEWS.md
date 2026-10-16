@@ -44,6 +44,12 @@
   a response `log(y)`, `log2(y)`, or `log10(y)`. This needs contrasts and means
   estimated with `transform = TRUE`.
 
+* If a VIF confidence interval has no upper limit (`Inf`), the collinearity
+  plot now has a caption that says so. This applies to `plot()` for
+  `check_collinearity()` and to the collinearity panel of `check_model()`. The
+  y axis now extends below VIF = 1, so the axis no longer cuts off points at 1
+  (#399).
+
 ## Bug fixes
 
 * When `check_model()` failed to create plots, the informative message

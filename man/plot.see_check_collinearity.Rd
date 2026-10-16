@@ -45,6 +45,10 @@ A ggplot2-object.
 \description{
 The \code{plot()} method for the \code{performance::check_collinearity()} function.
 }
+\details{
+If a VIF confidence interval has no upper limit (\code{Inf}), the plot
+has a caption that says so.
+}
 \examples{
 library(performance)
 m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)

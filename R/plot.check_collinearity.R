@@ -2,6 +2,9 @@
 #'
 #' The `plot()` method for the `performance::check_collinearity()` function.
 #'
+#' @details If a VIF confidence interval has no upper limit (`Inf`), the plot
+#' has a caption that says so.
+#'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #' @inheritParams print.see_performance_pp_check
