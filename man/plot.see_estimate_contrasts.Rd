@@ -112,7 +112,9 @@ an error if both record a \code{predict} value and the two differ. The \code{pre
 values \code{"response"}, \code{"inverse_link"}, and \code{"invlink(link)"} count as the
 same scale. With \code{backend = "emmeans"}, modelbased records the link scale as
 \code{predict = "none"}, which counts as \code{"link"}. For a model with an identity
-link, such as \code{lm()}, \code{"link"} and \code{"none"} count as the response scale.
+link, a response that \code{insight::find_transformation()} reports as
+\code{"identity"}, and no zero-inflation or hurdle part, such as \code{lm(y ~ x)},
+\code{"link"} and \code{"none"} count as the response scale.
 The plot also stops with an error if both record a \code{transform}
 value and the two differ. If neither value is a \code{transform} function and
 \code{insight::find_transformation()} reports the transformation \code{"identity"},

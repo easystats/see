@@ -39,9 +39,9 @@
   transformations, such as `sqrt(y)`. When `insight::find_transformation()`
   reports a transformation other than `"identity"`, it also stops for ratio
   contrasts estimated with `transform = TRUE`. It also stops for contrasts and
-  means on different scales, as their `predict` or `transform` arguments show. The help page
-  lists the exceptions. With `show_data = TRUE`, the plot draws a logical or
-  two-level factor response as 0 and 1. It also draws the raw data of `y` for
+  means on different scales, as their `predict` or `transform` arguments
+  show. The help page lists the exceptions. With `show_data = TRUE`, the plot
+  draws a logical or two-level factor response as 0 and 1. It also draws the raw data of `y` for
   a response `log(y)`, `log2(y)`, or `log10(y)`. This needs contrasts and means
   estimated with `transform = TRUE`.
 
@@ -51,10 +51,12 @@
   category and the contrasts within it. Contrasts between two categories are
   not drawn. `show_data = TRUE` stops with an error for these models. The plot
   also draws Bayesian ratio contrasts from `comparison = ratio ~ pairwise` as
-  ratios, and ratio contrasts of an untransformed response estimated with
-  `transform = TRUE`. It accepts contrasts and means on the link scale from the
-  marginaleffects and emmeans backends together. For a model with an identity
-  link, such as `lm()`, the link scale counts as the response scale.
+  ratios. When `insight::find_transformation()` reports `"identity"`, it draws
+  ratio contrasts estimated with `transform = TRUE` as ratios. It accepts
+  contrasts and means on the link scale from the marginaleffects and emmeans
+  backends together. The link scale counts as the response scale for a model
+  with an identity link and an untransformed response, such as `lm(y ~ x)`.
+  It does not count for a model with a zero-inflation or hurdle part.
 
 ## Bug fixes
 

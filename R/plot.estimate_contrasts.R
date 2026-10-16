@@ -264,8 +264,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
 
 # values that modelbased gives for the response scale count as the same;
-# emmeans records the link scale as "none", and with an identity link the
-# link scale is the response scale
+# emmeans records the link scale as "none"; the link scale is the response
+# scale only with an identity link, an untransformed response, and no
+# zero-inflation or hurdle part
 #' @keywords internal
 .check_same_predict <- function(contrasts, means) {
   predict_contrasts <- attr(contrasts, "predict", exact = TRUE)
@@ -280,14 +281,16 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   }
 
   model <- attr(contrasts, "model", exact = TRUE)
-  identity_link <- !is.null(model) &&
-    identical(
-      tryCatch(
-        insight::model_info(model, verbose = FALSE)$link_function,
-        error = function(e) NULL
-      ),
-      "identity"
+  info <- if (!is.null(model)) {
+    tryCatch(
+      insight::model_info(model, verbose = FALSE),
+      error = function(e) NULL
     )
+  }
+  identity_link <- identical(info$link_function, "identity") &&
+    !isTRUE(info$is_zero_inflated) &&
+    !isTRUE(info$is_hurdle) &&
+    identical(.response_transformation(contrasts), "identity")
   predict_scale <- function(predict) {
     if (predict %in% c("response", "inverse_link", "invlink(link)")) {
       return("response")
@@ -601,7 +604,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' values `"response"`, `"inverse_link"`, and `"invlink(link)"` count as the
 #' same scale. With `backend = "emmeans"`, modelbased records the link scale as
 #' `predict = "none"`, which counts as `"link"`. For a model with an identity
-#' link, such as `lm()`, `"link"` and `"none"` count as the response scale.
+#' link, a response that `insight::find_transformation()` reports as
+#' `"identity"`, and no zero-inflation or hurdle part, such as `lm(y ~ x)`,
+#' `"link"` and `"none"` count as the response scale.
 #' The plot also stops with an error if both record a `transform`
 #' value and the two differ. If neither value is a `transform` function and
 #' `insight::find_transformation()` reports the transformation `"identity"`,
@@ -778,6 +783,16 @@ plot.see_estimate_contrasts <- function(
 # the model's data, with x and y as the lighthouse plot `dataplot` draws them
 #' @keywords internal
 .raw_data_contrasts <- function(contrasts, means, dataplot) {
+  if (all(c("Response1", "Response2") %in% names(contrasts))) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` cannot draw the raw data of ordinal or",
+        "multinomial responses, because the plot shows the probability of",
+        "each response category, not values of the response."
+      )
+    )
+  }
+
   # exact lookups: "model" would also match the "model_info" attribute
   model <- attr(contrasts, "model", exact = TRUE)
   if (is.null(model)) {
@@ -785,16 +800,6 @@ plot.see_estimate_contrasts <- function(
       paste(
         "`show_data = TRUE` needs the model, but the contrasts do not carry it.",
         "Please obtain the contrasts with `estimate_contrasts()`."
-      )
-    )
-  }
-
-  if (all(c("Response1", "Response2") %in% names(contrasts))) {
-    insight::format_error(
-      paste(
-        "`show_data = TRUE` cannot draw the raw data of ordinal or",
-        "multinomial responses, because the plot shows the probability of",
-        "each response category, not values of the response."
       )
     )
   }

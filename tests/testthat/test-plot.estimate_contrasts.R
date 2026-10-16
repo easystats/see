@@ -1747,3 +1747,69 @@ test_that("lighthouse plots of back-transformed contrasts draw a geometry the es
     }
   }
 })
+
+
+test_that("link-scale estimates count as the response scale only without a transformation or zero-inflation", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("emmeans")
+  skip_if_not_installed("glmmTMB")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl, labels = c("four", "six", "eight"))
+  expect_predict_error <- function(contrasts, means) {
+    message <- error_text(data_plot(contrasts, means))
+    expect_match(message, "Lighthouse plots need both on the same scale", fixed = TRUE)
+    expect_match(message, "`predict", fixed = TRUE)
+  }
+
+  # emmeans link-scale estimates of a log response stay on the log scale
+  logged <- lm(log(mpg) ~ cyl, data = d)
+  link_means <- modelbased::estimate_means(
+    logged,
+    by = "cyl",
+    backend = "emmeans",
+    predict = "link"
+  )
+  expect_lt(max(link_means$Mean), 4)
+  expect_predict_error(
+    modelbased::estimate_contrasts(logged, contrast = "cyl", transform = TRUE),
+    link_means
+  )
+  expect_predict_error(
+    modelbased::estimate_contrasts(
+      logged,
+      contrast = "cyl",
+      backend = "emmeans",
+      predict = "link"
+    ),
+    modelbased::estimate_means(logged, by = "cyl", transform = TRUE)
+  )
+
+  # with zero-inflation, the response scale is not the link scale
+  d$y <- d$mpg
+  d$y[c(1, 5, 9, 13, 20, 25, 30)] <- 0
+  inflated <- suppressWarnings(glmmTMB::glmmTMB(
+    y ~ cyl,
+    ziformula = ~1,
+    family = gaussian,
+    data = d
+  ))
+  expect_predict_error(
+    modelbased::estimate_contrasts(inflated, contrast = "cyl", predict = "link"),
+    modelbased::estimate_means(inflated, by = "cyl", predict = "response")
+  )
+})
+
+
+test_that("`show_data = TRUE` names ordinal contrasts before it needs the model", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+
+  fx <- ordinal_fixtures()$polr
+  without_model <- fx$contrasts
+  attr(without_model, "model") <- NULL
+  message <- error_text(plot(without_model, fx$means, show_data = TRUE))
+  expect_match(message, "ordinal or multinomial", fixed = TRUE)
+})
