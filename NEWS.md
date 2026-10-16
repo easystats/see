@@ -36,8 +36,9 @@
   backend, it draws contrasts of a log response estimated with
   `transform = TRUE` as ratios of the back-transformed means. The plot stops
   with an error for contrasts back-transformed from some other
-  transformations, such as `sqrt(y)`, and for ratio contrasts of a
-  transformed response estimated with `transform = TRUE`. It also stops for contrasts and means on different
+  transformations, such as `sqrt(y)`. It also stops for ratio contrasts
+  estimated with `transform = TRUE` when `insight::find_transformation()`
+  reports a transformation other than `"identity"`. It also stops for contrasts and means on different
   scales, as their `predict` or `transform` arguments show. The help page
   lists the exceptions. With `show_data = TRUE`, the plot draws a logical or
   two-level factor response as 0 and 1. It also draws the raw data of `y` for

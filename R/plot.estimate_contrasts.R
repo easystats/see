@@ -38,7 +38,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   by_vars <- .clean_target_names(attr(x, "by"))
 
   # for ordinal and multinomial models, the means have one row per response
-  # category, and each contrast compares two levels in two categories; only
+  # category, and each contrast compares two level-by-category cells; only
   # contrasts within one category are drawn, with one panel per category
   response_categories <- all(c("Response1", "Response2") %in% names(x))
 
