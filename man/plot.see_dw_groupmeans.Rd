@@ -4,7 +4,7 @@
 \alias{plot.see_dw_groupmeans}
 \title{Plot method for grouped means.}
 \usage{
-\method{plot}{see_dw_groupmeans}(x, title = "", ci = TRUE, caption = TRUE, ...)
+\method{plot}{see_dw_groupmeans}(x, title = "", ci = TRUE, caption = TRUE, flip = TRUE, ...)
 }
 \arguments{
 \item{x}{An object returned \code{datawizard::means_by_group()}.}
@@ -17,6 +17,9 @@ in the graph.}
 \item{caption}{Logical, indicating if a caption summarizing the anova results
 for the analysis should be included.}
 
+\item{flip}{Logical. If \code{TRUE} (the default), the groups are on the
+vertical axis. If \code{FALSE}, the groups are on the horizontal axis.}
+
 \item{...}{Currently not used.}
 }
 \description{
@@ -24,6 +27,10 @@ The \code{plot()} method for the \code{datawizard::means_by_group()} function.
 }
 \details{
 Produces a faceted plot when there is more than one means-table.
+
+By default, the plot uses \code{\link[ggplot2:coord_flip]{ggplot2::coord_flip()}}, so the groups are on the
+vertical axis and the means are on the horizontal axis. Use \code{flip = FALSE}
+to show the groups on the horizontal axis.
 }
 \examples{
 \dontshow{if (insight::check_if_installed("datawizard", minimum_version = "1.3.2", quietly = TRUE)) withAutoprint(\{ # examplesIf}

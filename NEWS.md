@@ -2,6 +2,9 @@
 
 ## Changes
 
+* `plot()` for `datawizard::means_by_group()` gets a `flip` argument. Use
+  `flip = FALSE` to show the groups on the horizontal axis (#455).
+
 * `geom_violinhalf()` and `geom_violindot()` are now drawn with the *ggdist*
   package (`ggdist::stat_slab()` and `ggdist::geom_dots()`), which they now
   need (version 3.3.3 or later). They work with facets and free scales (#81,
