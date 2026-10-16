@@ -399,6 +399,19 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 }
 
 
+# three or more values whose gaps between neighbors differ by more than a
+# tolerance, so that 0.1, 0.2, 0.3 count as evenly spaced
+#' @keywords internal
+.uneven_spacing <- function(x) {
+  values <- sort(unique(as.numeric(x)))
+  if (length(values) < 3L) {
+    return(FALSE)
+  }
+  gaps <- diff(values)
+  max(gaps) - min(gaps) > 1e-8 * (max(values) - min(values))
+}
+
+
 # one key per row for the combination of the values in `columns`
 #' @keywords internal
 .by_key <- function(data, columns) {
@@ -466,7 +479,21 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   x_levels <- do.call(paste, c(rev(as.list(level_grid)), sep = ", "))
   x_levels <- x_levels[x_levels %in% x_labels]
 
-  data_means$x <- factor(x_labels, levels = x_levels)
+  # one numeric contrast variable with unevenly spaced values keeps its
+  # spacing on a continuous axis; the contrast levels are matched to the
+  # means by their labels
+  numeric_x <- length(x_name) == 1L &&
+    is.numeric(data_means[[x_name]]) &&
+    .uneven_spacing(data_means[[x_name]])
+  x_position <- function(labels) {
+    if (numeric_x) {
+      as.numeric(data_means[[x_name]])[match(labels, x_labels)]
+    } else {
+      factor(labels, levels = x_levels)
+    }
+  }
+
+  data_means$x <- x_position(x_labels)
   data_means$y <- data_means[[y_name]]
   data_means$Level2 <- data_means$Level1 <- x_labels
   data_means$Mean2 <- data_means$Mean1 <- data_means[[y_name]]
@@ -527,21 +554,21 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     cbind(
       polygons,
       data.frame(
-        x = factor(polygons$Level1, levels = x_levels),
+        x = x_position(polygons$Level1),
         y = polygons$Mean1
       )
     ),
     cbind(
       polygons,
       data.frame(
-        x = factor(polygons$Level2, levels = x_levels),
+        x = x_position(polygons$Level2),
         y = tip(polygons$Mean1, polygons$CI_low)
       )
     ),
     cbind(
       polygons,
       data.frame(
-        x = factor(polygons$Level2, levels = x_levels),
+        x = x_position(polygons$Level2),
         y = tip(polygons$Mean1, polygons$CI_high)
       )
     )
@@ -757,13 +784,20 @@ plot.see_estimate_contrasts <- function(
 
   p <- ggplot2::ggplot()
 
-  # the raw data are the first layer, behind the lighthouses
+  # the raw data are the first layer, behind the lighthouses; on a continuous
+  # axis the jitter is a tenth of the smallest gap between the x values
   if (show_data) {
+    x_values <- sort(unique(x$geom_pointrange$x))
+    jitter_width <- if (is.numeric(x_values) && length(x_values) > 1L) {
+      0.1 * min(diff(x_values))
+    } else {
+      0.1
+    }
     p <- p +
       ggplot2::geom_point(
         data = .raw_data_contrasts(contrast_data, data, x),
         ggplot2::aes(x = .data$x, y = .data$y),
-        position = ggplot2::position_jitter(width = 0.1, height = 0),
+        position = ggplot2::position_jitter(width = jitter_width, height = 0),
         alpha = 0.3
       )
   }
@@ -785,6 +819,14 @@ plot.see_estimate_contrasts <- function(
       color = "black"
     ) +
     add_plot_attributes(x)
+
+  # a continuous axis has its breaks at the values of the means
+  if (is.numeric(x$geom_pointrange$x)) {
+    p <- p +
+      ggplot2::scale_x_continuous(
+        breaks = sort(unique(x$geom_pointrange$x))
+      )
+  }
 
   # one panel per level, or combination of levels, of the `by` variables
   by_columns <- attr(x, "info")$by
@@ -925,10 +967,15 @@ plot.see_estimate_contrasts <- function(
       sep = ", "
     )
   )
+  numeric_x <- is.numeric(dataplot$geom_pointrange$x)
   x_levels <- levels(dataplot$geom_pointrange$x)
 
   # in joint contrasts, each combination of levels must be on the x axis
-  lacking <- setdiff(unique(x_labels), x_levels)
+  lacking <- if (numeric_x) {
+    character()
+  } else {
+    setdiff(unique(x_labels), x_levels)
+  }
   if (length(lacking)) {
     insight::format_error(
       paste0(
@@ -982,7 +1029,11 @@ plot.see_estimate_contrasts <- function(
     }
   }
 
-  model_data$x <- factor(x_labels, levels = x_levels)
+  model_data$x <- if (numeric_x) {
+    as.numeric(model_data[[x_name]])
+  } else {
+    factor(x_labels, levels = x_levels)
+  }
   model_data$y <- y
   model_data
 }

@@ -1897,3 +1897,113 @@ test_that("`show_data = TRUE` draws raw points only for the `by` levels of the c
   )
   expect_match(message, "wt is numeric", fixed = TRUE)
 })
+
+
+x_is_discrete <- function(p) {
+  ggplot2::ggplot_build(p)$layout$panel_scales_x[[1]]$is_discrete()
+}
+
+test_that("a numeric contrast variable with uneven values gets a continuous x axis", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(mpg ~ wt, data = mtcars)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "wt=c(2,2.5,4)"
+  )
+  means <- modelbased::estimate_means(model, by = "wt=c(2,2.5,4)")
+  dp <- data_plot(contrasts, means)
+  expect_type(dp$geom_pointrange$x, "double")
+  expect_identical(sort(dp$geom_pointrange$x), c(2, 2.5, 4))
+  expect_type(dp$geom_polygon$x, "double")
+  expect_identical(sort(unique(dp$geom_polygon$x)), c(2, 2.5, 4))
+  expect_lighthouses(dp$geom_polygon, contrasts, means, "wt")
+  p <- plot(contrasts, means)
+  expect_false(x_is_discrete(p))
+  expect_equal(
+    ggplot2::ggplot_build(p)$layout$panel_params[[1]]$x$breaks,
+    c(2, 2.5, 4),
+    ignore_attr = TRUE
+  )
+
+  # evenly spaced values, or only two, keep the discrete axis
+  cyl_model <- lm(mpg ~ cyl, data = mtcars)
+  cyl_plot <- plot(
+    suppressMessages(modelbased::estimate_contrasts(cyl_model, contrast = "cyl")),
+    suppressMessages(modelbased::estimate_means(cyl_model, by = "cyl"))
+  )
+  expect_true(x_is_discrete(cyl_plot))
+  tenths <- mtcars
+  tenths$z <- tenths$wt / 10
+  z_model <- lm(mpg ~ z, data = tenths)
+  z_means <- modelbased::estimate_means(z_model, by = "z=c(0.1,0.2,0.3)")
+  expect_type(z_means$z, "double")
+  expect_true(x_is_discrete(plot(
+    modelbased::estimate_contrasts(z_model, contrast = "z=c(0.1,0.2,0.3)"),
+    z_means
+  )))
+  expect_true(x_is_discrete(plot(
+    modelbased::estimate_contrasts(model, contrast = "wt=c(2,4)"),
+    modelbased::estimate_means(model, by = "wt=c(2,4)")
+  )))
+
+  # with `by`, each panel keeps the numeric x values
+  d <- contrasts_by_fixture()$data
+  by_model <- lm(mpg ~ wt * am, data = d)
+  by_contrasts <- modelbased::estimate_contrasts(
+    by_model,
+    contrast = "wt=c(2,2.5,4)",
+    by = "am"
+  )
+  by_means <- modelbased::estimate_means(
+    by_model,
+    by = c("wt=c(2,2.5,4)", "am")
+  )
+  built <- ggplot2::ggplot_build(plot(by_contrasts, by_means))
+  expect_identical(nrow(built$layout$layout), 2L)
+  pointranges <- built$data[[2]]
+  for (panel in c("1", "2")) {
+    expect_identical(
+      sort(pointranges$x[pointranges$PANEL == panel]),
+      c(2, 2.5, 4)
+    )
+  }
+
+  # joint contrasts with a numeric variable keep the discrete axis
+  joint <- modelbased::estimate_contrasts(
+    by_model,
+    contrast = c("am", "wt=c(2,4)")
+  )
+  joint_means <- modelbased::estimate_means(by_model, by = c("am", "wt=c(2,4)"))
+  joint_dp <- data_plot(joint, joint_means)
+  expect_s3_class(joint_dp$geom_pointrange$x, "factor")
+  expect_true(x_is_discrete(plot(joint, joint_means)))
+})
+
+
+test_that("`show_data = TRUE` puts raw points at a numeric contrast variable", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(mpg ~ carb, data = mtcars)
+  values <- c(1, 2, 3, 4, 6, 8)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "carb=c(1,2,3,4,6,8)"
+  )
+  means <- modelbased::estimate_means(model, by = "carb=c(1,2,3,4,6,8)")
+  expect_type(means$carb, "double")
+  set.seed(1)
+  p <- plot(contrasts, means, show_data = TRUE)
+  expect_false(x_is_discrete(p))
+  points <- ggplot2::ggplot_build(p)$data[[1]]
+  expect_identical(nrow(points), nrow(mtcars))
+  nearest <- values[vapply(
+    points$x,
+    function(x) which.min(abs(values - x)),
+    integer(1)
+  )]
+  expect_identical(nearest, as.numeric(mtcars$carb))
+  expect_gt(length(unique(points$x)), length(values))
+})
