@@ -47,6 +47,22 @@ data_plot.parameters_sem <- function(
       edges$p < threshold_p,
   ]
 
+  if (nrow(edges) == 0L) {
+    available <- intersect(
+      c("regression", "correlation", "loading"),
+      tolower(x$Component)
+    )
+    insight::format_error(
+      paste0(
+        "No paths to plot. The model has no paths of the selected component(s) (",
+        toString(component),
+        "), or none pass the thresholds. Available components: ",
+        toString(available),
+        "."
+      )
+    )
+  }
+
   edges$Coefficient_abs <- NULL
   edges$From <- NULL
   edges$To <- NULL
@@ -81,8 +97,9 @@ data_plot.parameters_sem <- function(
 
   # Identify nodes
   if ("loading" %in% type && "Loading" %in% edges$Component) {
+    # after the reversal above, latent factors are in "from"
     latent_nodes <- data.frame(
-      Name = as.character(edges[edges$Component == "Loading", "to"]),
+      Name = unique(as.character(edges[edges$Component == "Loading", "from"])),
       Latent = TRUE,
       stringsAsFactors = FALSE
     )

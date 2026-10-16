@@ -98,3 +98,42 @@ test_that("`plot.see_check_outliers()` multimethods", {
     variant = "windows"
   )
 })
+
+
+test_that("`plot.see_check_outliers()` leaves out rows without a distance", {
+  co <- performance::check_outliers(stats::lm(mpg ~ disp + drat, data = mtcars))
+  dat <- attr(co, "data")
+  dist <- dat$Distance_Cook
+
+  # rows the model was not fitted on have no distance, here the two largest
+  missing_rows <- order(dist, decreasing = TRUE)[1:2]
+  dat$Distance_Cook[missing_rows] <- c(NA, NaN)
+  attr(co, "data") <- dat
+  attr(co, "influential_obs") <- NULL
+  kept <- setdiff(seq_along(dist), missing_rows)
+  kept <- kept[order(dist[kept])]
+
+  p <- plot(co, type = "scree", verbose = FALSE)
+  expect_no_error(ggplot2::ggplot_build(p))
+  expect_identical(p$data$id, kept)
+  expect_identical(p$data$mdist, dist[kept])
+
+  p <- plot(co, type = "scree", rescale_distance = TRUE, verbose = FALSE)
+  expect_no_error(ggplot2::ggplot_build(p))
+  expect_identical(p$data$id, kept)
+
+  # "dots" falls back to the scree plot without leverage values
+  p <- plot(co, type = "dots", verbose = FALSE)
+  expect_no_error(ggplot2::ggplot_build(p))
+  expect_identical(nrow(p$data), length(kept))
+
+  p <- plot(co, type = "count")
+  expect_no_warning(suppressMessages(ggplot2::ggplot_build(p)))
+  expect_identical(nrow(p$data), length(kept))
+
+  # row labels stay with their rows
+  dat$ID <- rownames(mtcars)
+  attr(co, "data") <- dat
+  p <- plot(co, type = "scree", verbose = FALSE)
+  expect_identical(p$data$id, rownames(mtcars)[kept])
+})
