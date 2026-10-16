@@ -39,8 +39,8 @@ highlighted.}
 The remaining (non-highlighted) categories will be filled with a lighter
 grey.}
 
-\item{data}{The original data used to create this object. Can be a
-statistical model.}
+\item{data}{The data frame, vector or list that was given to
+\code{describe_distribution()}. If \code{NULL}, it is found by its name.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

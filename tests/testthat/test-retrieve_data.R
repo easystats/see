@@ -129,6 +129,24 @@ test_that("plot() finds a function-local data frame for `describe_distribution()
 })
 
 
+test_that("plot() finds a model made in local() or eval() in user code", {
+  plot_in_local <- as_user_fn(function(model_value) {
+    local({
+      local_mod <- model_value
+      plot(bayestestR::p_direction(local_mod))
+    })
+  })
+  expect_draws(plot_in_local(m_wt))
+
+  plot_in_eval <- as_user_fn(function(model_value) {
+    env <- new.env()
+    assign("eval_mod", model_value, envir = env)
+    eval(quote(plot(bayestestR::p_direction(eval_mod))), envir = env)
+  })
+  expect_draws(plot_in_eval(m_wt))
+})
+
+
 # local model before a global one of the same name ------------------------------
 
 test_that("plot() prefers the function-local model over a global one of the same name", {

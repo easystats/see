@@ -273,14 +273,8 @@ add_plot_attributes <- function(x) {
 
 #' @keywords internal
 .is_package_frame <- function(n) {
-  fun_env <- environment(sys.function(n))
-  if (is.null(fun_env)) {
-    return(TRUE)
-  }
-  # for eval(), local() and the like, the frame is the environment the code
-  # runs in (such as a knitr chunk or a test), not the function's own frame
-  if (!identical(parent.env(sys.frame(n)), fun_env)) {
-    return(FALSE)
-  }
-  isNamespace(topenv(fun_env))
+  # the frame of a package function encloses the package namespace; the frame
+  # of user code, or of eval() and local() in user code, encloses the global
+  # environment
+  isNamespace(topenv(sys.frame(n)))
 }

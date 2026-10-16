@@ -42,6 +42,8 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #'   The remaining (non-highlighted) categories will be filled with a lighter
 #'   grey.
 #' @param size_bar Size of bar geoms.
+#' @param data The data frame, vector or list that was given to
+#'   `describe_distribution()`. If `NULL`, it is found by its name.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'
