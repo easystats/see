@@ -19,12 +19,12 @@
 #' @param position_dots Position adjustment for dots, either as a string, or the
 #'   result of a call to a position adjustment function. If you do not set it,
 #'   the dots move away from the half violin along the categorical axis (x in
-#'   a vertical plot, y in a horizontal plot), and never along the value axis.
-#'   The gap is 0.025 times the resolution of the categorical axis (0.06 with
-#'   `interval = TRUE`). In a dodged cell, the gap shrinks with the cell: it is
-#'   multiplied by the half cell's share of the box of a group alone at its
-#'   position. This default also dodges the dots with their half violins when
-#'   `position` in `...` dodges them. A position that you set is used as given,
+#'   a vertical plot, y in a horizontal plot), and are not shifted along the
+#'   value axis. The gap is 0.025 times the resolution of the categorical axis
+#'   (0.06 with `interval = TRUE`). In a dodged cell, the gap is divided by
+#'   twice the number of groups at that position. This default also dodges the
+#'   dots with their half violins when `position` in `...` is `"dodge"` or
+#'   made by [ggplot2::position_dodge()]. A position that you set is used as given,
 #'   so the dots are not dodged unless that position dodges them. Name this
 #'   argument in full: `position` goes to the half violins.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
@@ -41,11 +41,13 @@
 #'   `colour` does not reach the dots when `color_dots` is set, and `fill` does
 #'   not reach them when `fill_dots` is set. As for the half violins, a `width`
 #'   (or `height`) is the width of a whole violin, so the dots take half of it.
-#'   `position` goes to the half violins only (see [geom_violinhalf()]). With
-#'   the default `position_dots`, the dots are dodged with the half violins,
-#'   with the same dodge width, when `position` is `"dodge"` (the default) or
-#'   made by [ggplot2::position_dodge()]. Under a position such as
-#'   `"identity"`, the dots are not dodged. The dots of groups with fewer than
+#'   `position` goes to the half violins and their interval, not to the dots
+#'   (see [geom_violinhalf()]). With the default `position_dots`, the dots are
+#'   dodged with the half violins, with the same `width` and `reverse`, when
+#'   `position` is `"dodge"` (the default) or made by
+#'   [ggplot2::position_dodge()]. Its `preserve` does not reach the dots. Under
+#'   any other position, such as `"identity"`, `"dodge2"`, or
+#'   [ggplot2::position_jitterdodge()], the dots are not dodged. The dots of groups with fewer than
 #'   two observations are still drawn.
 #'
 #' @return A list of ggplot2 layers.
@@ -86,13 +88,14 @@ geom_violindot <- function(
   scale <- match.arg(scale)
   # the default position leaves a gap between the dots and the half violin,
   # wider with an interval, and dodges the dots with their half violins when
-  # the half violins are dodged
+  # the half violins are dodged by position_dodge()
   if (missing(position_dots)) {
     dodge <- .violindot_dodge(list(...)$position)
     position_dots <- .position_violindots(
       gap = if (isTRUE(interval)) 0.06 else 0.025,
       dodge = dodge$dodge,
-      width = dodge$width
+      width = dodge$width,
+      reverse = dodge$reverse
     )
   }
 
@@ -226,17 +229,25 @@ geom_violindot <- function(
 }
 
 
-# Whether the half violins are dodged under the `position` given to
-# geom_violindot() (none means geom_violinhalf()'s default, "dodge"), and the
-# dodge width.
+# Whether the default dots are dodged under the `position` given to
+# geom_violindot(), and how: only for "dodge" (also when `position` is not
+# given, as it is geom_violinhalf()'s default) or a position_dodge() object,
+# whose width and reverse the dots take. position_dodge2() objects inherit
+# from PositionDodge but dodge otherwise, so the dots are not dodged under them.
 .violindot_dodge <- function(position) {
   if (is.null(position) || identical(position, "dodge")) {
-    return(list(dodge = TRUE, width = NULL))
+    return(list(dodge = TRUE, width = NULL, reverse = FALSE))
   }
-  if (inherits(position, "PositionDodge")) {
-    return(list(dodge = TRUE, width = position$width))
+  if (
+    inherits(position, "PositionDodge") && !inherits(position, "PositionDodge2")
+  ) {
+    return(list(
+      dodge = TRUE,
+      width = position$width,
+      reverse = isTRUE(position$reverse)
+    ))
   }
-  list(dodge = FALSE, width = NULL)
+  list(dodge = FALSE, width = NULL, reverse = FALSE)
 }
 
 
@@ -249,10 +260,15 @@ geom_violindot <- function(
 # the categorical axis, by `gap` times the resolution of that axis. A dodged
 # group's box keeps its lower edge, and its move is that gap times the share of
 # its half cell in the lone box. Built on call, like the geoms.
-.position_violindots <- function(gap = 0.025, dodge = TRUE, width = NULL) {
+.position_violindots <- function(
+  gap = 0.025,
+  dodge = TRUE,
+  width = NULL,
+  reverse = FALSE
+) {
   ggplot2::ggproto(
     "PositionViolinDots",
-    ggplot2::position_dodge(width = width),
+    ggplot2::position_dodge(width = width, reverse = reverse),
     gap = gap,
     dodge = dodge,
     # the resolution of the categorical axis over the whole layer, as for the

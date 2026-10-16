@@ -456,3 +456,24 @@ test_that("geom_violindot() shrinks the dot gap with the dodge cell", {
     geom_violindot(interval = TRUE)
   expect_equal(offsets(horizontal, TRUE), cbind(0, 0.015))
 })
+
+test_that("geom_violindot() dots follow a reversed dodge, but not dodge2", {
+  base <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  )
+  p <- base + geom_violindot(position = ggplot2::position_dodge(reverse = TRUE))
+  slab <- unique(ggplot2::layer_data(p, 1)[c("group", "x", "xmin")])
+  dots <- ggplot2::layer_data(p, 2)
+  cells <- merge(dots, slab, by = "group", suffixes = c("", "_cell"))
+  expect_setequal(unique(cells$group), 1:6)
+  expect_gt(min(cells$xmin - cells$xmin_cell), -1e-6)
+  expect_lt(max(cells$xmax - cells$x_cell), 1e-6)
+
+  for (dodge2 in list(ggplot2::position_dodge2(), "dodge2")) {
+    p <- base + geom_violindot(position = dodge2)
+    dots <- suppressWarnings(ggplot2::layer_data(p, 2))
+    level <- round(as.numeric(dots$x))
+    expect_equal(as.numeric(dots$xmax), level - 0.025)
+  }
+})

@@ -87,22 +87,24 @@ and the \code{point_} and \code{interval_} aesthetics) go to the half violins on
 \code{colour} does not reach the dots when \code{color_dots} is set, and \code{fill} does
 not reach them when \code{fill_dots} is set. As for the half violins, a \code{width}
 (or \code{height}) is the width of a whole violin, so the dots take half of it.
-\code{position} goes to the half violins only (see \code{\link[=geom_violinhalf]{geom_violinhalf()}}). With
-the default \code{position_dots}, the dots are dodged with the half violins,
-with the same dodge width, when \code{position} is \code{"dodge"} (the default) or
-made by \code{\link[ggplot2:position_dodge]{ggplot2::position_dodge()}}. Under a position such as
-\code{"identity"}, the dots are not dodged. The dots of groups with fewer than
+\code{position} goes to the half violins and their interval, not to the dots
+(see \code{\link[=geom_violinhalf]{geom_violinhalf()}}). With the default \code{position_dots}, the dots are
+dodged with the half violins, with the same \code{width} and \code{reverse}, when
+\code{position} is \code{"dodge"} (the default) or made by
+\code{\link[ggplot2:position_dodge]{ggplot2::position_dodge()}}. Its \code{preserve} does not reach the dots. Under
+any other position, such as \code{"identity"}, \code{"dodge2"}, or
+\code{\link[ggplot2:position_jitterdodge]{ggplot2::position_jitterdodge()}}, the dots are not dodged. The dots of groups with fewer than
 two observations are still drawn.}
 
 \item{position_dots}{Position adjustment for dots, either as a string, or the
 result of a call to a position adjustment function. If you do not set it,
 the dots move away from the half violin along the categorical axis (x in
-a vertical plot, y in a horizontal plot), and never along the value axis.
-The gap is 0.025 times the resolution of the categorical axis (0.06 with
-\code{interval = TRUE}). In a dodged cell, the gap shrinks with the cell: it is
-multiplied by the half cell's share of the box of a group alone at its
-position. This default also dodges the dots with their half violins when
-\code{position} in \code{...} dodges them. A position that you set is used as given,
+a vertical plot, y in a horizontal plot), and are not shifted along the
+value axis. The gap is 0.025 times the resolution of the categorical axis
+(0.06 with \code{interval = TRUE}). In a dodged cell, the gap is divided by
+twice the number of groups at that position. This default also dodges the
+dots with their half violins when \code{position} in \code{...} is \code{"dodge"} or
+made by \code{\link[ggplot2:position_dodge]{ggplot2::position_dodge()}}. A position that you set is used as given,
 so the dots are not dodged unless that position dodges them. Name this
 argument in full: \code{position} goes to the half violins.}
 

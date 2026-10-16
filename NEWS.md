@@ -8,12 +8,13 @@
 * `position` in `geom_violindot()` now sets the position of the half violins,
   as in `geom_violinhalf()`. Before, it matched `position_dots`, so it moved
   only the dots and turned off their dodge. With the default `position_dots`,
-  the dots now follow a dodge that `position` sets, with the same width. Under
-  a position such as `"identity"`, they are not dodged. `position_dots` now
-  comes after `...`, so give it by its full name.
+  the dots now follow a dodge set by `"dodge"` or `position_dodge()`, with the
+  same `width` and `reverse`. Under other positions, such as `"identity"`, they
+  are not dodged. `position_dots` now comes after `...`, so give it by its full
+  name.
 
 * In horizontal plots, the default `position_dots` of `geom_violindot()` no
-  longer moves the dots along the value axis, so each dot is at its value.
+  longer shifts the dots along the value axis.
   The gap between the dots and the half violin is now on the categorical axis
   in both orientations.
 
@@ -21,8 +22,9 @@
   is now 0.025 times the resolution of the categorical axis (0.06 with
   `interval = TRUE`). It was 0.025 data units at any resolution.
 
-* In a dodged cell, the default gap of `geom_violindot()` now shrinks with the
-  cell, so dodged dots have more room, most of all beside an interval.
+* In a dodged cell, the default gap of `geom_violindot()` is now divided by
+  twice the number of groups at that position, so dodged dots have more room,
+  most of all beside an interval.
 
 # see 0.15.0
 
