@@ -14,8 +14,9 @@ geom_violindot(
   dots_size = 0.7,
   dots_color = NULL,
   dots_fill = NULL,
-  binwidth = 0.05,
+  binwidth = NA,
   position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
+  interval = FALSE,
   ...,
   size_dots = dots_size,
   color_dots = dots_color,
@@ -43,12 +44,14 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{trim}{If \code{TRUE} (default), trim the tails of the violins
-to the range of the data. If \code{FALSE}, don't trim the tails.}
+\item{trim}{If \code{TRUE} (default), trim the tails of the half violins to the
+range of the data. If \code{FALSE}, extend the tails as \code{\link[ggplot2:geom_violin]{ggplot2::geom_violin()}}
+does.}
 
-\item{scale}{if "area" (default), all violins have the same area (before trimming
-the tails). If "count", areas are scaled proportionally to the number of
-observations. If "width", all violins have the same maximum width.}
+\item{scale}{If \code{"area"} (default), all half violins have the same area
+(before trimming the tails). If \code{"count"}, areas are scaled
+proportionally to the number of observations. If \code{"width"}, all half
+violins have the same maximum width.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -63,52 +66,62 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
-\item{binwidth}{When \code{method} is "dotdensity", this specifies maximum bin
-width. When \code{method} is "histodot", this specifies bin width.
-Defaults to 1/30 of the range of the data}
+\item{binwidth}{The bin width of the dots. The default, \code{NA}, lets
+\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}} choose a bin width that fits the dots into the space
+beside each half violin. A number sets a fixed bin width, in the units of
+the value axis. Dodged groups leave the dots less room, so a fixed bin
+width can make them overflow it, with a warning from ggdist.}
 
 \item{position_dots}{Position adjustment for dots, either as a string, or the
-result of a call to a position adjustment function.}
+result of a call to a position adjustment function. The default nudges the
+dots by \code{x = -0.025} (\code{-0.06} with \code{interval = TRUE}). In a vertical plot,
+this moves them toward smaller x, away from the half violin, and in a
+dodged cell the nudge is at most half the room beside the half violin. In
+a horizontal plot, it moves them along the value axis. The default also
+dodges the dots with their half violins. A position that you set is used
+as given, so the dots are not dodged unless that position dodges them.}
 
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}'s \code{params} argument. These
-arguments broadly fall into one of 4 categories below. Notably, further
-arguments to the \code{position} argument, or aesthetics that are required
-can \emph{not} be passed through \code{...}. Unknown arguments that are not part
-of the 4 categories below are ignored.
-\itemize{
-\item Static aesthetics that are not mapped to a scale, but are at a fixed
-value and apply to the layer as a whole. For example, \code{colour = "red"}
-or \code{linewidth = 3}. The geom's documentation has an \strong{Aesthetics}
-section that lists the available options. The 'required' aesthetics
-cannot be passed on to the \code{params}. Please note that while passing
-unmapped aesthetics as vectors is technically possible, the order and
-required length is not guaranteed to be parallel to the input data.
-\item When constructing a layer using
-a \verb{stat_*()} function, the \code{...} argument can be used to pass on
-parameters to the \code{geom} part of the layer. An example of this is
-\code{stat_density(geom = "area", outline.type = "both")}. The geom's
-documentation lists which parameters it can accept.
-\item Inversely, when constructing a layer using a
-\verb{geom_*()} function, the \code{...} argument can be used to pass on parameters
-to the \code{stat} part of the layer. An example of this is
-\code{geom_area(stat = "density", adjust = 0.5)}. The stat's documentation
-lists which parameters it can accept.
-\item The \code{key_glyph} argument of \code{\link[ggplot2:layer]{layer()}} may also be passed on through
-\code{...}. This can be one of the functions described as
-\link[ggplot2:draw_key]{key glyphs}, to change the display of the layer in the legend.
-}}
+\item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
+quantile intervals of each group, drawn with \code{\link[ggdist:stat_slabinterval]{ggdist::stat_slabinterval()}}
+without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is
+\code{FALSE}.}
 
-\item{size_dots, dots_size}{Size adjustment for dots.}
+\item{...}{Other arguments passed to \code{\link[=geom_violinhalf]{geom_violinhalf()}} and to
+\code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}. The arguments of the density, the layout, and the
+interval (\code{flip}, \code{stat}, \code{bw}, \code{kernel}, \code{bounds}, \code{drop}, \code{adjust}, \code{n},
+\code{density}, \code{side}, \code{normalize}, \code{justification}, \code{fill_type}, \code{limits},
+\code{p_limits}, \code{expand}, \code{breaks}, \code{outline_bars}, \code{slab_type}, \code{.width},
+\code{point_interval}, \code{show_point}, \code{show_interval}, \code{fatten_point}, \code{arrow},
+and the \code{point_} and \code{interval_} aesthetics) go to the half violins only.
+\code{colour} does not reach the dots when \code{color_dots} is set, and \code{fill} does
+not reach them when \code{fill_dots} is set. As for the half violins, a \code{width}
+(or \code{height}) is the width of a whole violin, so the dots take half of it.
+An argument named \code{position} matches \code{position_dots}. The dots of groups
+with fewer than two observations are still drawn.}
+
+\item{size_dots, dots_size}{Size adjustment for dots, passed to the
+\code{dotsize} argument of \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}
 
 \item{color_dots, dots_color}{Color adjustment for dots.}
 
 \item{fill_dots, dots_fill}{Fill adjustment for dots.}
 }
+\value{
+A list of ggplot2 layers.
+}
 \description{
 Create a half-violin half-dot plot, useful for visualising the distribution
-and the sample size at the same time.
+and the sample size at the same time. The half violins are drawn with
+\code{\link[ggdist:stat_slab]{ggdist::stat_slab()}} and the dots with \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}, so this
+function needs the \strong{ggdist} package (version 3.3.3 or later). When groups
+are dodged, as with \code{fill} mapped to a second variable, each half violin
+takes the right half of its dodge cell (the upper half in a horizontal plot,
+see \code{\link[=geom_violinhalf]{geom_violinhalf()}}), and, with the default \code{position_dots}, its dots go
+in the other half. The dots stay in that half when the half violin is
+flipped, so they overlap it.
 }
 \examples{
+\dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}
 library(ggplot2)
 library(see)
 
@@ -116,4 +129,9 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
   geom_violindot() +
   theme_modern()
 
+# The dots adapt to the scale of the data
+ggplot(iris, aes(x = Species, y = Sepal.Length * 1000, fill = Species)) +
+  geom_violindot(interval = TRUE) +
+  theme_modern()
+\dontshow{\}) # examplesIf}
 }

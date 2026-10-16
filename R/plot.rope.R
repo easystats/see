@@ -26,7 +26,7 @@ data_plot.rope <- function(x, data = NULL, show_intercept = FALSE, ...) {
   }
 
   # Recontruct hdi
-  hdi <- attributes(x)$HDI_area
+  hdi <- attributes(x)$CI_area
 
   if (!is.data.frame(hdi)) {
     for (i in names(hdi)) {

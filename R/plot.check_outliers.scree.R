@@ -25,7 +25,16 @@
 
   d <- data_plot(x, rescale_distance = rescale_distance)
 
-  md <- d$Distance
+  # leave out rows without a distance (e.g., rows the model was not fitted
+  # on), but keep the row numbers as IDs, so labels match the remaining rows
+  has_distance <- !is.na(d$Distance)
+  if (is.null(d$ID)) {
+    ID <- which(has_distance)
+  } else {
+    ID <- d$ID[has_distance]
+  }
+
+  md <- d$Distance[has_distance]
   crit <- att$threshold[[1]]
   ordered_idx <- order(md)
   obs <- seq_along(md)
@@ -38,11 +47,7 @@
     y_lab <- paste(method, "Distance")
   }
 
-  if (is.null(d$ID)) {
-    ID <- obs[ordered_idx]
-  } else {
-    ID <- d$ID[ordered_idx]
-  }
+  ID <- ID[ordered_idx]
 
   df_plot <- data.frame(
     obs = obs,

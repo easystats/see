@@ -4,13 +4,44 @@
 \alias{plot.see_estimate_contrasts}
 \title{Plot method for estimating contrasts}
 \usage{
-\method{plot}{see_estimate_contrasts}(x, data = NULL, ...)
+\method{plot}{see_estimate_contrasts}(x, data = NULL, show_data = FALSE, ...)
 }
 \arguments{
 \item{x}{An object.}
 
-\item{data}{The original data used to create this object. Can be a
-statistical model.}
+\item{data}{The estimated means, obtained with
+\code{modelbased::estimate_means()}.}
+
+\item{show_data}{Logical. If \code{TRUE}, the plot draws the raw data of the model
+as jittered points behind the lighthouses. The raw data come from
+\code{insight::get_data()} for the model stored in \code{x}, not from \code{data}. A
+response that is logical or a factor with two levels is drawn as 0 and 1,
+with \code{TRUE} or the second level as 1. A response \code{log(y)}, \code{log2(y)}, or
+\code{log10(y)}, with \code{y} a column of the data, is drawn as the raw data of \code{y}
+if both the contrasts and the means were estimated with
+\code{transform = TRUE}. Means without the \code{transform} attribute, such as a
+plain data frame, then give an error. Ratio contrasts are drawn with the
+raw data. The plot stops with an error in these cases:
+\itemize{
+\item \code{show_data} is not a single \code{TRUE} or \code{FALSE}.
+\item \code{x} is the output of \code{data_plot()}, or it does not carry its model, or
+the model data cannot be retrieved.
+\item The response is a \code{cbind()} of successes and failures in a binomial
+model.
+\item The model transforms the response, for example \code{log(y)}, and the
+contrasts and means are not back-transformed log contrasts and means as
+above.
+\item The \code{predict} of the contrasts or of the estimated means is not one of
+\code{"prediction"}, \code{"response"}, \code{"expectation"}, \code{"invlink(link)"}, and
+\code{"inverse_link"}, for example \code{predict = "link"}. Means without this
+information, such as a plain data frame, are taken to be on the same
+scale as the contrasts.
+\item The model data lack the response or a contrasted or \code{by} variable.
+\item The estimated means do not include each value in the data of the
+contrasted and \code{by} variables, or each combination of their values. For
+example, a numeric \code{by} variable has values that the means were not
+estimated at.
+}}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -21,6 +52,101 @@ A ggplot2-object.
 The \code{plot()} method for the \code{modelbased::estimate_contrasts()}
 function.
 }
+\details{
+If you estimate the contrasts with \code{by}, the plot draws each contrast from
+the estimated means of its own \code{by} level. The plot then has one panel per
+level, or combination of levels, of the \code{by} variables. The estimated means
+must include the contrasted variables and the \code{by} variables, and no other
+variables that split their rows further. If the means have no row for the
+levels of a contrast, the plot does not draw that contrast and gives a
+warning.
+
+If you contrast two or more variables jointly, for example with
+\code{contrast = c("am", "cyl")}, the x axis shows their combinations of levels,
+such as \code{"auto, 4"}. The first variable changes slowest along the axis.
+
+The plot takes the estimates from the column of the means that their
+\code{coef_name} attribute names. For means without this attribute, such as a
+plain data frame, it takes the first of the columns \code{Median}, \code{Mean}, \code{MAP},
+\code{Coefficient}, \code{Probability}, \code{Proportion}, and \code{Rate}. If the means have
+none of these columns, the plot stops with an error.
+
+Each lighthouse starts at the estimated mean of \code{Level1} of a contrast. For
+a difference, the lighthouse at \code{Level2} spans that mean minus the bounds of
+the confidence interval. Contrasts with a \code{Ratio} column, from
+\code{comparison = ratio ~ pairwise}, are ratios of the means, so the lighthouse
+at \code{Level2} spans that mean divided by the bounds of the interval. If the
+interval of a ratio includes 0, the plot does not draw that contrast and
+gives a warning. The contrasts must have the columns \code{CI_low} and
+\code{CI_high}.
+
+Contrasts estimated with \code{transform = TRUE} are back-transformed to the scale
+of the response. With the default backend, if the model response is
+\code{log(y)}, \code{log(y, base = b)}, \code{log2(y)}, or \code{log10(y)}, these contrasts are
+ratios of the back-transformed means, and the plot draws them as ratios. If
+\code{insight::find_transformation()} reports the transformation \code{"identity"},
+as it does for an untransformed response and for \code{scale(y)}, the plot draws
+them as differences. For other transformations, such as \code{sqrt(y)}, and for
+transformations that \code{insight::find_transformation()} does not recognize,
+the plot stops with an error. With \code{backend = "emmeans"}, which sets
+\code{transform = TRUE} by default, the contrasts are differences of the
+back-transformed means, and the plot draws them as differences. The plot
+stops with an error for ratio contrasts estimated with \code{transform = TRUE},
+because for a transformed response they are not ratios of the
+back-transformed means.
+
+The contrasts and the means must be on the same scale. The plot stops with
+an error if both record a \code{predict} value and the two differ. The \code{predict}
+values \code{"response"}, \code{"inverse_link"}, and \code{"invlink(link)"} count as the
+same scale. The plot also stops with an error if both record a \code{transform}
+value and the two differ. If neither value is a \code{transform} function and
+\code{insight::find_transformation()} reports the transformation \code{"identity"},
+the plot does not stop. Contrasts and means estimated with the same
+\code{transform} function also differ, because modelbased records the function
+on the contrasts and \code{transform = TRUE} on the means, so the plot stops.
+
+\strong{Interpreting Lighthouse Plots}
+
+Lighthouse plots display both estimated marginal means and the uncertainty
+around their pairwise differences (contrasts) in a single visual:
+\itemize{
+\item \strong{Means and Error Bars:} The points and vertical line ranges display the
+estimated marginal means for each level along with their individual confidence
+intervals.
+\item \strong{Lighthouse Beams (Projected Uncertainty):} The shaded polygonal bands
+("beams") represent the pairwise contrasts. A beam originates at the point
+estimate of a reference level and projects toward the comparison level.
+At the target level, the vertical span of the beam represents the confidence
+interval of the estimated difference, anchored at the reference mean.
+\item \strong{Interpretation:} The vertical span of the projected beam at the target
+level corresponds to the confidence interval of the estimated difference,
+evaluated \emph{relative} to the reference point estimate. Intuitively, it answers:
+\emph{"If the reference level is at value Y, where do we expect the comparison
+level to be based on the estimated contrast?"}
+\item \strong{Reading Significance:} Because the beam illustrates the confidence interval
+of the difference, zero difference corresponds to a horizontal line from the
+reference point. If both edges of the beam tilt in the same direction (both
+rising or both falling), the confidence interval does not include zero (the
+difference is statistically significant). If one edge rises while the other
+falls, the beam straddles the horizontal line, indicating that a difference
+of zero remains plausible.
+}
+
+\if{html}{
+  \cr
+  \figure{lighthouse.png}{options: alt="Lighthouse plot for two studies: one with significant differences, one without."}
+  \out{<small>}
+    \emph{
+      Lighthouse plots of the two studies. In black, each condition's mean and
+      95\% CI, identical in both panels. In grey, the beam: the 95\% CI of the
+      difference between B and A, cast from B. The dashed horizontal line,
+      added here as a reading aid, makes it easier to see which way each edge
+      tilts.
+    }
+  \out{</small>}
+  \cr
+}
+}
 \examples{
 \dontshow{if (all(insight::check_if_installed(c("marginaleffects", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}
 \donttest{
@@ -29,6 +155,22 @@ library(modelbased)
 model <- lm(Sepal.Width ~ Species, data = iris)
 contrasts <- estimate_contrasts(model)
 means <- estimate_means(model)
+plot(contrasts, means)
+
+# with the raw data as jittered points
+plot(contrasts, means, show_data = TRUE)
+
+# contrasts of `am` within each level of `cyl`, one panel per level
+d <- mtcars
+d$cyl <- factor(d$cyl)
+d$am <- factor(d$am, labels = c("auto", "manual"))
+model <- lm(mpg ~ cyl * am, data = d)
+contrasts <- estimate_contrasts(model, contrast = "am", by = "cyl")
+means <- estimate_means(model, by = c("cyl", "am"))
+plot(contrasts, means)
+
+# joint contrasts of `am` and `cyl`, on an axis of combined levels
+contrasts <- estimate_contrasts(model, contrast = c("am", "cyl"))
 plot(contrasts, means)
 }
 \dontshow{\}) # examplesIf}
