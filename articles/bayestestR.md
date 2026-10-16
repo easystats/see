@@ -565,7 +565,7 @@ null hypothesis is accepted.
 `#> `\
 `#>   ROPE: [-0.08 0.08]`\
 `#> `\
-`#> Parameter                     |        H0 | inside ROPE |       95% HDI`\
+`#> Parameter                     |        H0 | inside ROPE |       95% ETI`\
 `#> -----------------------------------------------------------------------`\
 `#> (Intercept)                   |  Rejected |      0.00 % |  [4.48, 5.11]`\
 `#> Petal.Width                   | Undecided |      3.89 % | [-0.30, 2.06]`\
@@ -588,7 +588,7 @@ null hypothesis is accepted.
 `#> `\
 `#>   ROPE: [-0.08 0.08]`\
 `#> `\
-`#> Parameter                     |        H0 | inside ROPE |       89% HDI`\
+`#> Parameter                     |        H0 | inside ROPE |       89% ETI`\
 `#> -----------------------------------------------------------------------`\
 `#> (Intercept)                   |  Rejected |      0.00 % |  [4.53, 5.06]`\
 `#> Petal.Width                   | Undecided |      4.16 % | [-0.09, 1.83]`\
@@ -598,7 +598,7 @@ null hypothesis is accepted.
 `#> Petal.Width:Speciesvirginica  | Undecided |     11.46 % | [-1.22, 0.81]`\
 `#> `\
 `#> `\
-`#> Parameter                     |        H0 | inside ROPE |       95% HDI`\
+`#> Parameter                     |        H0 | inside ROPE |       95% ETI`\
 `#> -----------------------------------------------------------------------`\
 `#> (Intercept)                   |  Rejected |      0.00 % |  [4.48, 5.11]`\
 `#> Petal.Width                   | Undecided |      3.89 % | [-0.30, 2.06]`\
@@ -629,7 +629,7 @@ null hypothesis is accepted.
 `#> `\
 `#> # Fixed Effects (Conditional Model)`\
 `#> `\
-`#> Parameter |        H0 | inside ROPE |        89% HDI`\
+`#> Parameter |        H0 | inside ROPE |        89% ETI`\
 `#> ----------------------------------------------------`\
 `#> Intercept | Undecided |      2.70 % |  [-0.32, 2.29]`\
 `#> child     |  Rejected |      0.00 % | [-1.32, -1.00]`\
@@ -637,7 +637,7 @@ null hypothesis is accepted.
 `#> `\
 `#> # Fixed Effects (Zero-Inflated Model)`\
 `#> `\
-`#> Parameter |        H0 | inside ROPE |        89% HDI`\
+`#> Parameter |        H0 | inside ROPE |        89% ETI`\
 `#> ----------------------------------------------------`\
 `#> Intercept | Undecided |     11.26 % |  [-1.60, 0.48]`\
 `#> child     |  Rejected |      0.00 % |   [1.37, 2.46]`\
@@ -645,20 +645,20 @@ null hypothesis is accepted.
 `#> `\
 `#> # Random Effects (Conditional Model)`\
 `#> `\
-`#> Parameter           |       H0 | inside ROPE |      89% HDI`\
+`#> Parameter           |       H0 | inside ROPE |      89% ETI`\
 `#> -----------------------------------------------------------`\
 `#> SD/Cor: (Intercept) | Rejected |      0.00 % | [0.79, 2.91]`\
 `#> `\
 `#> # Random Effects (Zero-Inflated Model)`\
 `#> `\
-`#> Parameter           |       H0 | inside ROPE |      89% HDI`\
+`#> Parameter           |       H0 | inside ROPE |      89% ETI`\
 `#> -----------------------------------------------------------`\
 `#> SD/Cor: (Intercept) | Rejected |      0.00 % | [0.70, 2.82]`\
 `#> `\
 `#> `\
 `#> # Fixed Effects (Conditional Model)`\
 `#> `\
-`#> Parameter |        H0 | inside ROPE |        95% HDI`\
+`#> Parameter |        H0 | inside ROPE |        95% ETI`\
 `#> ----------------------------------------------------`\
 `#> Intercept | Undecided |      2.54 % |  [-0.81, 2.51]`\
 `#> child     |  Rejected |      0.00 % | [-1.36, -0.94]`\
@@ -666,7 +666,7 @@ null hypothesis is accepted.
 `#> `\
 `#> # Fixed Effects (Zero-Inflated Model)`\
 `#> `\
-`#> Parameter |        H0 | inside ROPE |        95% HDI`\
+`#> Parameter |        H0 | inside ROPE |        95% ETI`\
 `#> ----------------------------------------------------`\
 `#> Intercept | Undecided |     10.59 % |  [-2.03, 0.89]`\
 `#> child     |  Rejected |      0.00 % |   [1.19, 2.54]`\
@@ -674,13 +674,13 @@ null hypothesis is accepted.
 `#> `\
 `#> # Random Effects (Conditional Model)`\
 `#> `\
-`#> Parameter              |       H0 | inside ROPE |      95% HDI`\
+`#> Parameter              |       H0 | inside ROPE |      95% ETI`\
 `#> --------------------------------------------------------------`\
 `#> SD persons (Intercept) | Rejected |      0.00 % | [0.71, 3.58]`\
 `#> `\
 `#> # Random Effects (Zero-Inflated Model)`\
 `#> `\
-`#> Parameter              |       H0 | inside ROPE |      95% HDI`\
+`#> Parameter              |       H0 | inside ROPE |      95% ETI`\
 `#> --------------------------------------------------------------`\
 `#> SD persons (Intercept) | Rejected |      0.00 % | [0.63, 3.41]`\
 \
