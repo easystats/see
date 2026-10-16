@@ -226,7 +226,8 @@ add_plot_attributes <- function(x) {
   parents <- sys.parents()
   # the environment in which the innermost `plot()` was called, such as a
   # user's own plot method; when `plot` was passed as a function to a package
-  # function, such as `lapply(results, plot)`, the code that called it
+  # function, such as `lapply(results, plot)`, the nearest code outside
+  # package functions that called it
   for (n in rev(seq_len(n_frames))) {
     if (identical(sys.function(n), base::plot)) {
       caller <- parents[n]
