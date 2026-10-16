@@ -129,8 +129,9 @@
 
 * If the model or data existed only inside a function, `plot()` for results of
   `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
-  and `describe_distribution()` failed with "Failed at retrieving data".
-  `plot()` now finds it there, and uses it rather than a global object of the
+  and `describe_distribution()` failed with "Failed at retrieving data". If
+  `plot()` is called inside that function, or in a function defined inside it,
+  `plot()` now finds it there. It uses it rather than a global object of the
   same name (#311).
 
 * `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
