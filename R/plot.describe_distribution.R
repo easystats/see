@@ -64,13 +64,16 @@ plot.see_parameters_distribution <- function(
   size_bar = 0.7,
   highlight = NULL,
   color_highlight = NULL,
+  data = NULL,
   ...
 ) {
   # get data
-  data <- .retrieve_data(x)
+  if (is.null(data)) {
+    data <- .retrieve_data(x)
+  }
 
   # only keep variables used in "describe_distribution()"
-  if (!is.null(x$Variable)) {
+  if (!is.null(x$Variable) && is.data.frame(data)) {
     data <- data[, x$Variable, drop = FALSE]
   }
 

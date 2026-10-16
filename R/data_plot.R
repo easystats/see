@@ -151,28 +151,28 @@ add_plot_attributes <- function(x) {
   }
 
   if (!is.null(obj_name)) {
-    # first try, parent frame
-    dat <- tryCatch(
-      get(obj_name, envir = parent.frame()),
-      error = function(e) NULL
-    )
+    # first try, the frames of the user's code on the call stack, so that an
+    # object made inside a function is found, and wins over a global object
+    # of the same name
+    dat <- .dynGet(obj_name, ifnotfound = NULL)
 
     if (is.null(dat)) {
-      # second try, global env
+      # second try, global env and search path
       dat <- tryCatch(
         get(obj_name, envir = globalenv()),
         error = function(e) NULL
       )
     }
-
-    if (is.null(dat)) {
-      # last try
-      dat <- .dynGet(obj_name, ifnotfound = NULL)
-    }
   }
 
   if (is.null(dat)) {
     dat <- attr(x, "data", exact = TRUE)
+  }
+
+  if (is.null(dat) && !is.null(obj_name)) {
+    # for a list, such as in `describe_distribution(list(...))`, the stored
+    # name is the deparsed list itself
+    dat <- .eval_constant_list(obj_name)
   }
 
   if (is.null(dat)) {
@@ -195,11 +195,20 @@ add_plot_attributes <- function(x) {
   minframe = 1L,
   inherits = FALSE
 ) {
-  x <- insight::safe_deparse(x)
+  # the stored object name is already a string; deparsing it would add quotes
+  if (!is.character(x)) {
+    x <- insight::safe_deparse(x)
+  }
   n <- sys.nframe()
   myObj <- structure(list(.b = as.raw(7)), foo = 47L)
   while (n > minframe) {
     n <- n - 1L
+    # skip calls of package functions (see, the generics, other packages'
+    # methods), whose local variables such as `x` or `data` are not the
+    # user's objects
+    if (.is_package_frame(n)) {
+      next
+    }
     env <- sys.frame(n)
     r <- get0(x, envir = env, inherits = inherits, ifnotfound = myObj)
     if (!identical(r, myObj)) {
@@ -207,4 +216,71 @@ add_plot_attributes <- function(x) {
     }
   }
   ifnotfound
+}
+
+#' @keywords internal
+.eval_constant_list <- function(obj_name) {
+  expr <- tryCatch(
+    str2lang(paste(obj_name, collapse = "")),
+    error = function(e) NULL
+  )
+  if (
+    !is.call(expr) ||
+      !identical(expr[[1]], as.name("list")) ||
+      !.is_constant_list(expr)
+  ) {
+    return(NULL)
+  }
+  # evaluate with nothing but list(), c() and the minus of negative numbers
+  allowed <- list(list = base::list, c = base::c, `-` = base::`-`)
+  eval(expr, envir = list2env(allowed, parent = emptyenv()))
+}
+
+#' @keywords internal
+.is_constant_list <- function(expr) {
+  all(vapply(
+    as.list(expr)[-1],
+    function(e) {
+      if (is.call(e) && identical(e[[1]], as.name("c"))) {
+        .is_constant_vector(e)
+      } else {
+        .is_constant(e)
+      }
+    },
+    logical(1)
+  ))
+}
+
+#' @keywords internal
+.is_constant_vector <- function(expr) {
+  all(vapply(as.list(expr)[-1], .is_constant, logical(1)))
+}
+
+#' @keywords internal
+.is_constant <- function(e) {
+  if (is.call(e)) {
+    # a negative number, such as -1.5 or -Inf
+    return(
+      identical(e[[1]], as.name("-")) &&
+        length(e) == 2L &&
+        is.numeric(e[[2]]) &&
+        length(e[[2]]) == 1L
+    )
+  }
+  # Inf, NaN and NA_real_ are parsed as constants, not as names
+  (is.numeric(e) || is.character(e) || is.logical(e)) && length(e) == 1L
+}
+
+#' @keywords internal
+.is_package_frame <- function(n) {
+  fun_env <- environment(sys.function(n))
+  if (is.null(fun_env)) {
+    return(TRUE)
+  }
+  # for eval(), local() and the like, the frame is the environment the code
+  # runs in (such as a knitr chunk or a test), not the function's own frame
+  if (!identical(parent.env(sys.frame(n)), fun_env)) {
+    return(FALSE)
+  }
+  isNamespace(topenv(fun_env))
 }

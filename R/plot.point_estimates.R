@@ -115,7 +115,11 @@ plot.see_point_estimate <- function(
   ...
 ) {
   # save model for later use
-  model <- .retrieve_data(x)
+  if (is.null(data)) {
+    model <- .retrieve_data(x)
+  } else {
+    model <- data
+  }
 
   if (!inherits(x, "data_plot")) {
     x <- data_plot(x, data = data)
