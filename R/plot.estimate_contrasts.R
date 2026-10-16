@@ -115,7 +115,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     geometry = geometry
   )
 
+  x_display <- attr(dataplot, "x_display", exact = TRUE)
+  attr(dataplot, "x_display") <- NULL
   attr(dataplot, "info") <- list(
+    x_display = x_display,
     xlab = toString(x_name),
     ylab = y_name,
     title = paste0("Estimated ", sub("y$", "ie", y_name), "s and Contrasts"),
@@ -477,6 +480,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   })
   level_grid <- expand.grid(rev(level_sets), stringsAsFactors = FALSE)
   x_levels <- do.call(paste, c(rev(as.list(level_grid)), sep = ", "))
+  # three or more contrasted variables show one level per line
+  x_display <- do.call(paste, c(rev(as.list(level_grid)), sep = "\n"))
+  x_display <- x_display[x_levels %in% x_labels]
   x_levels <- x_levels[x_levels %in% x_labels]
 
   # one numeric contrast variable with unevenly spaced values keeps its
@@ -574,10 +580,14 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     )
   )
 
-  list(
+  out <- list(
     geom_polygon = polygons,
     geom_pointrange = data_means
   )
+  if (length(x_name) >= 3L) {
+    attr(out, "x_display") <- stats::setNames(x_display, x_levels)
+  }
+  out
 }
 
 
@@ -819,6 +829,17 @@ plot.see_estimate_contrasts <- function(
       color = "black"
     ) +
     add_plot_attributes(x)
+
+  # labels of joint contrasts of three or more variables, in level order
+  # also when the raw data lack some combinations
+  x_display <- attr(x, "info")$x_display
+  if (!is.null(x_display)) {
+    p <- p +
+      ggplot2::scale_x_discrete(
+        limits = names(x_display),
+        labels = unname(x_display)
+      )
+  }
 
   # a continuous axis has its breaks at the values of the means
   if (is.numeric(x$geom_pointrange$x)) {

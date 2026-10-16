@@ -2007,3 +2007,50 @@ test_that("`show_data = TRUE` puts raw points at a numeric contrast variable", {
   expect_identical(nearest, as.numeric(mtcars$carb))
   expect_gt(length(unique(points$x)), length(values))
 })
+
+
+test_that("joint contrasts of three variables show one level per line", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  d$vs <- factor(d$vs, labels = c("V", "S"))
+  d$gear <- factor(d$gear)
+  model <- lm(mpg ~ am * vs * gear, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = c("am", "vs", "gear")
+  )
+  means <- modelbased::estimate_means(model, by = c("am", "vs", "gear"))
+  expect_identical(nrow(contrasts), 66L)
+
+  expect_no_warning({
+    dp <- data_plot(contrasts, means)
+  })
+  expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 66))
+  expect_no_warning({
+    p <- plot(contrasts, means)
+  })
+  labels <- ggplot2::ggplot_build(p)$layout$panel_params[[1]]$x$get_labels()
+  expect_identical(labels[1:2], c("auto\nV\n3", "auto\nV\n4"))
+  expect_length(labels, 12L)
+  expect_false(any(grepl(", ", labels, fixed = TRUE)))
+
+  expect_no_warning({
+    p_data <- plot(contrasts, means, show_data = TRUE)
+  })
+  built <- ggplot2::ggplot_build(p_data)
+  expect_identical(nrow(built$data[[1]]), nrow(d))
+  expect_identical(
+    built$layout$panel_params[[1]]$x$get_labels(),
+    labels
+  )
+
+  # two variables keep the "auto, 4" form
+  fx <- contrasts_by_fixture()
+  joint <- modelbased::estimate_contrasts(fx$model, contrast = c("am", "cyl"))
+  two_labels <- ggplot2::ggplot_build(
+    plot(joint, fx$means)
+  )$layout$panel_params[[1]]$x$get_labels()
+  expect_true("auto, 4" %in% two_labels)
+})
