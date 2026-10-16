@@ -120,12 +120,7 @@ test_that("geom_violindot(flip = TRUE) gives no warning from the dots", {
   expect_no_warning(ggplot2::ggplot_build(p))
 })
 
-test_that("geom_violindot(interval = TRUE) moves the dots clear of the interval", {
-  expect_identical(dots_layer(geom_violindot())$position$x, -0.025)
-  expect_identical(
-    dots_layer(geom_violindot(interval = TRUE))$position$x,
-    -0.06
-  )
+test_that("geom_violindot(interval = TRUE) keeps a position_dots given", {
   nudge <- ggplot2::position_nudge(x = -0.2)
   expect_identical(
     dots_layer(geom_violindot(interval = TRUE, position_dots = nudge))$position,
@@ -338,6 +333,7 @@ test_that("geom_violindot() draws with only one position aesthetic mapped", {
   dots <- ggplot2::layer_data(p, 2)
   slab <- ggplot2::layer_data(p, 1)
   expect_lte(max(dots$ymax), min(slab$ymin))
+  expect_equal(sort(dots$x), sort(iris$Sepal.Length))
 })
 
 test_that("geom_violindot() gives `position` to the half violins", {
@@ -370,4 +366,50 @@ test_that("geom_violindot() does not dodge the dots under position = \"identity\
   level <- round(as.numeric(dots$x))
   expect_equal(as.numeric(dots$xmax), level - 0.025)
   expect_equal(as.numeric(dots$xmin), level - 0.475)
+})
+
+test_that("geom_violindot() keeps the dots at their values in horizontal plots", {
+  built <- function(...) {
+    p <- ggplot2::ggplot(iris, ggplot2::aes(Sepal.Length, Species)) +
+      geom_violindot(...)
+    ggplot2::layer_data(p, length(p$layers))
+  }
+  for (interval in c(FALSE, TRUE)) {
+    dots <- built(interval = interval)
+    gap <- if (interval) 0.06 else 0.025
+    level <- round(as.numeric(dots$y))
+    expect_equal(sort(dots$x), sort(iris$Sepal.Length))
+    expect_equal(as.numeric(dots$ymax), level - gap)
+    expect_equal(as.numeric(dots$ymin), level - 0.45 - gap)
+  }
+})
+
+test_that("geom_violindot() scales the dot gap with the axis resolution", {
+  set.seed(1)
+  d <- data.frame(x = rep(c(10, 20, 30), each = 20), y = stats::rnorm(60))
+  boxes <- function(p, horizontal = FALSE) {
+    dots <- ggplot2::layer_data(p, length(p$layers))
+    pos <- if (horizontal) "y" else "x"
+    level <- round(as.numeric(dots[[pos]]) / 10) * 10
+    round(cbind(
+      as.numeric(dots[[paste0(pos, "min")]]) - level,
+      as.numeric(dots[[paste0(pos, "max")]]) - level
+    ), 6)
+  }
+  for (interval in c(FALSE, TRUE)) {
+    gap <- if (interval) 0.6 else 0.25
+    vertical <- ggplot2::ggplot(d, ggplot2::aes(x, y, group = x)) +
+      geom_violindot(interval = interval)
+    horizontal <- ggplot2::ggplot(d, ggplot2::aes(y, x, group = x)) +
+      geom_violindot(interval = interval, orientation = "y")
+    expect_equal(unique(boxes(vertical)), cbind(-4.5 - gap, -gap))
+    expect_equal(unique(boxes(horizontal, TRUE)), cbind(-4.5 - gap, -gap))
+  }
+
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Species, Sepal.Length)) +
+    geom_violindot()
+  dots <- ggplot2::layer_data(p, 2)
+  level <- round(as.numeric(dots$x))
+  expect_equal(as.numeric(dots$xmin), level - 0.475)
+  expect_equal(as.numeric(dots$xmax), level - 0.025)
 })

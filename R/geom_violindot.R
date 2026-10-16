@@ -83,18 +83,13 @@ geom_violindot <- function(
 ) {
   insight::check_if_installed("ggdist", minimum_version = "3.3.3")
   scale <- match.arg(scale)
-  # leave room for the interval between the dots and the half violin
-  default_position <- missing(position_dots)
-  if (default_position && isTRUE(interval)) {
-    position_dots <- ggplot2::position_nudge(x = -0.06, y = 0)
-  }
-  # the default nudge also dodges the dots with their half violins, when the
-  # half violins are dodged
-  if (default_position) {
+  # the default position leaves a gap between the dots and the half violin,
+  # wider with an interval, and dodges the dots with their half violins when
+  # the half violins are dodged
+  if (missing(position_dots)) {
     dodge <- .violindot_dodge(list(...)$position)
     position_dots <- .position_violindots(
-      position_dots$x,
-      position_dots$y,
+      gap = if (isTRUE(interval)) 0.06 else 0.025,
       dodge = dodge$dodge,
       width = dodge$width
     )
@@ -249,16 +244,30 @@ geom_violindot <- function(
 # `.violinhalf_box()`), and the dots of each dodged group go between the lower
 # edge of its dodge cell and the cell's centre, which is the half of the cell
 # that an unflipped half violin leaves free. A group alone at its position
-# keeps its box [x - w, x]. Then the dots are nudged by `x` and `y`, but a dodged group's box
-# keeps its lower edge, and its nudge toward the lower edge is at most half of
-# its box. Built on call, like the geoms.
-.position_violindots <- function(x = 0, y = 0, dodge = TRUE, width = NULL) {
+# keeps its box [x - w, x]. Then the dots move away from the half violin, along
+# the categorical axis, by `gap` times the resolution of that axis, but a
+# dodged group's box keeps its lower edge, and its move is at most half of its
+# box. Built on call, like the geoms.
+.position_violindots <- function(gap = 0.025, dodge = TRUE, width = NULL) {
   ggplot2::ggproto(
     "PositionViolinDots",
     ggplot2::position_dodge(width = width),
-    x = x,
-    y = y,
+    gap = gap,
     dodge = dodge,
+    # the resolution of the categorical axis over the whole layer, as for the
+    # width of the half violins
+    setup_params = function(self, data) {
+      params <- ggplot2::ggproto_parent(
+        ggplot2::PositionDodge,
+        self
+      )$setup_params(data)
+      pos <- data[[if (isTRUE(params$flipped_aes)) "y" else "x"]]
+      params$violindot_res <- ggplot2::resolution(
+        as.numeric(pos),
+        zero = FALSE
+      )
+      params
+    },
     # The dots are dodged in the order of the half violins: by a mapped `order`
     # that is constant within each group (the half violins keep it), else by
     # group. Rows with a missing value, which the half violins drop, take no
@@ -321,25 +330,14 @@ geom_violindot <- function(
       }
       dodged <- data$violindot_dodged
 
-      # the nudge along the categorical axis, then along the value axis
-      pos_nudge <- if (horizontal) self$y else self$x
-      val_nudge <- if (horizontal) self$x else self$y
-      shift <- rep_len(pos_nudge, nrow(data))
-      if (pos_nudge < 0) {
-        room <- (data[[hi_col]] - data[[lo_col]])[dodged] / 2
-        shift[dodged] <- -pmin(-pos_nudge, room)
-      }
+      # the gap, along the categorical axis only
+      gap <- self$gap * params$violindot_res
+      shift <- rep_len(-gap, nrow(data))
+      room <- (data[[hi_col]] - data[[lo_col]])[dodged] / 2
+      shift[dodged] <- -pmin(gap, room)
       data[[pos_col]] <- data[[pos_col]] + shift
       data[[hi_col]] <- data[[hi_col]] + shift
       data[[lo_col]][!dodged] <- data[[lo_col]][!dodged] + shift[!dodged]
-      if (val_nudge != 0) {
-        nudge_value <- function(v) v + val_nudge
-        data <- ggplot2::transform_position(
-          data,
-          trans_x = if (horizontal) nudge_value,
-          trans_y = if (!horizontal) nudge_value
-        )
-      }
 
       data$order <- data$violindot_order
       data$violindot_box <- TRUE
