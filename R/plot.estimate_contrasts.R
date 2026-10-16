@@ -618,7 +618,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' must include the contrasted variables and the `by` variables, and no other
 #' variables that split their rows further, except the `Response` column of
 #' ordinal and multinomial models. If the means have no row for the levels of
-#' a contrast, the plot does not draw that contrast and gives a warning.
+#' a contrast, the plot does not draw that contrast and gives a warning. The
+#' plot shows only the `by` levels, or combinations of levels, that appear in
+#' the contrasts. It leaves out the means of other `by` levels, and with
+#' `show_data = TRUE` their raw data, and gives no warning for them. A `by`
+#' variable named `PANEL`, `ROW`, `COL`, `SCALE_X`, or `SCALE_Y`, which
+#' ggplot2 reserves for facets, works too. The facet strips show its levels.
 #'
 #' For ordinal and multinomial models, such as `MASS::polr()` and
 #' `mclogit::mblogit()`, the means have one row per response category, in the
@@ -631,7 +636,14 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' If you contrast two or more variables jointly, for example with
 #' `contrast = c("am", "cyl")`, the x axis shows their combinations of levels,
-#' such as `"auto, 4"`. The first variable changes slowest along the axis.
+#' such as `"auto, 4"`. The first variable changes slowest along the axis. For
+#' three or more variables, each label shows one level per line.
+#'
+#' If you contrast one numeric variable at unevenly spaced values, such as
+#' `contrast = "wt=c(2,2.5,4)"`, the x axis is continuous and keeps their
+#' spacing, with breaks at those values. Evenly spaced values, such as 0 and
+#' 1, and two values or fewer keep an axis with one evenly spaced position
+#' per value.
 #'
 #' The plot takes the estimates from the column of the means that their
 #' `coef_name` attribute names. For means without this attribute, such as a

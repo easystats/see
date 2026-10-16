@@ -60,6 +60,15 @@
   The link scale does not count for a model with a zero-inflation or hurdle
   part.
 
+* `plot()` for `modelbased::estimate_contrasts()` now shows only the panels
+  of the `by` levels that the contrasts have. It leaves out the means and
+  raw data of other levels. A numeric contrast variable at unevenly spaced
+  values, such as `contrast = "wt=c(2,2.5,4)"`, gets a continuous x axis
+  that keeps their spacing, as in see 0.14. Joint contrasts of three or more
+  variables show one level per line in the axis labels. A `by` variable
+  named `PANEL`, `ROW`, `COL`, `SCALE_X`, or `SCALE_Y` no longer stops the
+  plot.
+
 ## Bug fixes
 
 * When `check_model()` failed to create plots, the informative message
