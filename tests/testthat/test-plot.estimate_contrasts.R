@@ -1406,3 +1406,136 @@ test_that("`show_data = TRUE` keeps `by` variables named like plot columns", {
     }
   }
 })
+
+
+# an ordinal (polr) and a multinomial (mblogit) model, each with a
+# three-level response and a three-level predictor
+ordinal_fixtures <- function() {
+  polr_model <- MASS::polr(Sat ~ Infl, weights = Freq, data = MASS::housing)
+  cells <- expand.grid(
+    y = c("lo", "mid", "hi"),
+    g = c("a", "b", "c"),
+    stringsAsFactors = FALSE
+  )
+  cells$n <- c(10, 6, 4, 5, 9, 6, 3, 7, 10)
+  d <- cells[rep(seq_len(nrow(cells)), cells$n), c("y", "g")]
+  d$y <- factor(d$y, levels = c("lo", "mid", "hi"))
+  d$g <- factor(d$g)
+  mblogit_model <- mclogit::mblogit(y ~ g, data = d, trace = FALSE)
+  list(
+    polr = list(
+      x_name = "Infl",
+      means = suppressMessages(
+        modelbased::estimate_means(polr_model, by = "Infl")
+      ),
+      contrasts = suppressMessages(
+        modelbased::estimate_contrasts(polr_model, contrast = "Infl")
+      )
+    ),
+    mblogit = list(
+      x_name = "g",
+      means = modelbased::estimate_means(mblogit_model, by = "g"),
+      contrasts = modelbased::estimate_contrasts(mblogit_model, contrast = "g")
+    )
+  )
+}
+
+# the contrasts within one response category, with that category as a
+# `Response` column
+within_category <- function(contrasts) {
+  contrasts <- as.data.frame(contrasts)
+  within <- contrasts[
+    as.character(contrasts$Response1) == as.character(contrasts$Response2),
+  ]
+  within$Response <- within$Response1
+  within
+}
+
+
+test_that("lighthouse plots of ordinal and multinomial models get one panel per response category", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+  skip_if_not_installed("mclogit")
+
+  for (fx in ordinal_fixtures()) {
+    categories <- levels(fx$means$Response)
+    expect_length(categories, 3L)
+    within <- within_category(fx$contrasts)
+    expect_identical(nrow(fx$contrasts), 36L)
+    expect_identical(nrow(within), 9L)
+
+    expect_no_warning({
+      dp <- data_plot(fx$contrasts, fx$means)
+    })
+    polygons <- dp$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 9))
+    expect_identical(
+      sort(unique(as.character(polygons$Level1))),
+      sort(unique(as.character(within$Level1)))
+    )
+    rownames(within) <- NULL
+    expect_lighthouses(
+      polygons,
+      within,
+      as.data.frame(fx$means),
+      fx$x_name,
+      y_name = "Probability",
+      by = "Response"
+    )
+
+    expect_no_warning({
+      p <- plot(fx$contrasts, fx$means)
+    })
+    layout <- ggplot2::ggplot_build(p)$layout$layout
+    expect_identical(as.character(layout$Response), categories)
+  }
+})
+
+
+test_that("ordinal lighthouse plots with `by` get one panel per category and `by` level", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+
+  model <- MASS::polr(
+    Sat ~ Infl + Type,
+    weights = Freq,
+    data = MASS::housing
+  )
+  contrasts <- suppressMessages(
+    modelbased::estimate_contrasts(model, contrast = "Infl", by = "Type")
+  )
+  means <- suppressMessages(
+    modelbased::estimate_means(model, by = c("Infl", "Type"))
+  )
+  expect_no_warning({
+    p <- plot(contrasts, means)
+  })
+  layout <- ggplot2::ggplot_build(p)$layout$layout
+  expect_identical(nrow(layout), 12L)
+  expect_identical(
+    sort(paste(layout$Response, layout$Type)),
+    sort(as.vector(outer(
+      levels(means$Response),
+      levels(means$Type),
+      paste
+    )))
+  )
+  polygons <- data_plot(contrasts, means)$geom_polygon
+  expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 36))
+})
+
+
+test_that("`show_data = TRUE` stops for ordinal and multinomial contrasts", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("MASS")
+  skip_if_not_installed("mclogit")
+
+  for (fx in ordinal_fixtures()) {
+    message <- error_text(plot(fx$contrasts, fx$means, show_data = TRUE))
+    expect_match(message, "ordinal or multinomial", fixed = TRUE)
+    expect_match(message, "`show_data = TRUE`", fixed = TRUE)
+  }
+})

@@ -37,6 +37,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   # each contrast is drawn from the means of its own `by` level
   by_vars <- .clean_target_names(attr(x, "by"))
 
+  # for ordinal and multinomial models, the means have one row per response
+  # category, and each contrast compares two levels in two categories; only
+  # contrasts within one category are drawn, with one panel per category
+  response_categories <- all(c("Response1", "Response2") %in% names(x))
+
   # the means call to suggest keeps the target values of the contrasts
   means_terms <- c(attr(x, "contrast") %||% x_name, attr(x, "by"))
   means_call <- paste0(
@@ -60,9 +65,28 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   y_name <- .estimate_column(means)
 
-  # `by` columns named like columns of the plot data are renamed
   contrast_data <- as.data.frame(x)
   means <- as.data.frame(means)
+  if (response_categories) {
+    if (!"Response" %in% names(means)) {
+      insight::format_error(
+        paste(
+          "The contrasts compare response categories, but the estimated",
+          "means lack the column `Response`. Please obtain the means with",
+          "`estimate_means()` for the same model."
+        )
+      )
+    }
+    within <- as.character(contrast_data$Response1) ==
+      as.character(contrast_data$Response2)
+    contrast_data <- contrast_data[within, , drop = FALSE]
+    rownames(contrast_data) <- NULL
+    contrast_data$Response <- contrast_data$Response1
+    contrast_data$Response1 <- contrast_data$Response2 <- NULL
+    by_vars <- c("Response", by_vars)
+  }
+
+  # `by` columns named like columns of the plot data are renamed
   by_columns <- by_vars
   collides <- by_vars %in%
     c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
@@ -709,6 +733,16 @@ plot.see_estimate_contrasts <- function(
       paste(
         "`show_data = TRUE` needs the model, but the contrasts do not carry it.",
         "Please obtain the contrasts with `estimate_contrasts()`."
+      )
+    )
+  }
+
+  if (all(c("Response1", "Response2") %in% names(contrasts))) {
+    insight::format_error(
+      paste(
+        "`show_data = TRUE` cannot draw the raw data of ordinal or",
+        "multinomial responses, because the plot shows the probability of",
+        "each response category, not values of the response."
       )
     )
   }
