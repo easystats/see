@@ -70,6 +70,9 @@ test_that("check_predicions - type and x_limits arguments work", {
 })
 
 test_that("check_predictions, brms-wiener", {
+  skip_if_not_installed("bayestestR", minimum_version = "0.20.0")
+  skip_if_not_installed("performance", minimum_version = "0.18.3")
+
   skip_on_cran()
   skip_if_not_installed("curl")
   skip_if_offline()

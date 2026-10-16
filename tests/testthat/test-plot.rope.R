@@ -1,3 +1,5 @@
+skip_if_not_installed("bayestestR", minimum_version = "0.20.0")
+
 test_that("`plot.see_rope()` works", {
   skip_if_not_installed("rstanarm")
 
