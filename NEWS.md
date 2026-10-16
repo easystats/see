@@ -98,21 +98,15 @@
 
 ## Bug fixes
 
-* If the model or data existed only inside a function, `plot()` for results of
-  `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
-  and `describe_distribution()` failed with "Failed at retrieving data". If
-  `plot()` is called inside that function, or in a function defined inside it,
-  `plot()` now finds it there. It uses it rather than a global object of the
-  same name (#311).
-
 * `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
   uses the model given in `data`. If `data` is given and the model cannot be
-  found by its name, it no longer fails.
+  found by its name, it no longer fails (#311).
 
 * `plot()` for `estimate_density()` and `describe_distribution()` has a new
-  `data` argument. Before, `plot(estimate_density(m), data = m)` failed.
+  `data` argument. Before, `plot(estimate_density(m), data = m)` failed (#311).
 
-* `plot()` now works for `describe_distribution()` on a list (#213).
+* `plot()` now works for `describe_distribution()` on a list of numeric
+  vectors (#213).
 
 * `plot()` for structural equation models from `parameters::model_parameters()`
   drew latent factors as observed variables and indicators as latent

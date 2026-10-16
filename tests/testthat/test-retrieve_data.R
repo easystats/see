@@ -20,8 +20,9 @@ m_hp <- suppressWarnings(rstanarm::stan_glm(
   iter = 500
 ))
 
-# Functions that call plot() stand in for user code, so their environment is a
-# child of the global environment and not of the test environment.
+# Functions that make or plot results stand in for user code, so their
+# environment is a child of the global environment and not of the test
+# environment.
 as_user_fn <- function(f) {
   environment(f) <- new.env(parent = globalenv())
   f
@@ -65,10 +66,6 @@ with_global <- function(name, value, code) {
   code
 }
 
-plotted_parameters <- function(p) {
-  sort(unique(as.character(p$data$y)))
-}
-
 # parameters of the prior layer, which is drawn from the model that plot() uses
 prior_parameters <- function(p) {
   layer_data <- lapply(p$layers, function(l) l$data)
@@ -83,13 +80,6 @@ model_parameters <- function(m) {
   sort(setdiff(insight::find_parameters(m)$conditional, "(Intercept)"))
 }
 
-# makes the result inside a user function from a local variable, then plots it
-plot_local <- as_user_fn(function(model_value, fun, ...) {
-  inner_mod <- model_value
-  result <- fun(inner_mod)
-  list(result = result, plot = plot(result, ...))
-})
-
 # makes the result inside a user function and returns it unplotted, so that its
 # stored name is unreachable afterwards
 result_local <- as_user_fn(function(model_value, fun) {
@@ -97,196 +87,10 @@ result_local <- as_user_fn(function(model_value, fun) {
   fun(inner_mod)
 })
 
-local_named <- function(name) {
-  sym <- as.name(name)
-  f <- eval(bquote(function(model_value) {
-    .(sym) <- model_value
-    result <- bayestestR::p_direction(.(sym))
-    list(result = result, plot = plot(result))
-  }))
-  as_user_fn(f)
-}
-
 expect_unreachable <- function(result) {
   name <- attr(result, "object_name", exact = TRUE)
   expect_type(name, "character")
   expect_false(exists(name, envir = globalenv()))
-}
-
-
-# a local variable of the function that calls plot() --------------------------
-
-for (fun_name in c(
-  "p_direction",
-  "p_significance",
-  "rope",
-  "hdi",
-  "point_estimate"
-)) {
-  test_that(
-    sprintf("plot() finds a function-local model for `%s()`", fun_name),
-    {
-      fun <- getExportedValue("bayestestR", fun_name)
-      out <- suppressMessages(suppressWarnings(plot_local(m_wt, fun)))
-      expect_identical(attr(out$result, "object_name"), "inner_mod")
-      expect_unreachable(out$result)
-      suppressMessages(expect_draws(out$plot))
-    }
-  )
-}
-
-test_that("plot() finds a function-local data frame for `describe_distribution()`", {
-  plot_local_df <- as_user_fn(function(df_value) {
-    inner_df <- df_value
-    result <- datawizard::describe_distribution(inner_df)
-    list(result = result, plot = plot(result))
-  })
-  out <- plot_local_df(mtcars[c("mpg", "cyl")])
-  expect_identical(attr(out$result, "object_name"), "inner_df")
-  expect_unreachable(out$result)
-  expect_draws(out$plot)
-})
-
-
-test_that("plot() finds a model made in local() or eval() in user code", {
-  plot_in_local <- as_user_fn(function(model_value) {
-    local({
-      local_mod <- model_value
-      plot(bayestestR::p_direction(local_mod))
-    })
-  })
-  expect_draws(plot_in_local(m_wt))
-
-  plot_in_eval <- as_user_fn(function(model_value) {
-    env <- new.env()
-    assign("eval_mod", model_value, envir = env)
-    eval(quote(plot(bayestestR::p_direction(eval_mod))), envir = env)
-  })
-  expect_draws(plot_in_eval(m_wt))
-})
-
-
-# local model before a global one of the same name ------------------------------
-
-test_that("plot() prefers the function-local model over a global one of the same name", {
-  expect_length(intersect(model_parameters(m_wt), model_parameters(m_hp)), 0)
-  out <- with_global("inner_mod", m_hp, plot_local(m_wt, bayestestR::p_direction))
-  expect_draws(out$plot)
-  expect_identical(plotted_parameters(out$plot), model_parameters(m_wt))
-})
-
-test_that("plot() finds a global model that is plotted at top level", {
-  p <- with_global(
-    "global_mod",
-    m_wt,
-    eval(quote(plot(bayestestR::p_direction(global_mod))), envir = globalenv())
-  )
-  expect_draws(p)
-  expect_identical(plotted_parameters(p), model_parameters(m_wt))
-})
-
-test_that("an object of the stored name in a calling function is not used", {
-  # `inner_plot()` is not defined inside `outer_fn()`, so the `global_mod`
-  # of `outer_fn()` is not visible where plot() is called
-  inner_plot <- as_user_fn(function(result) plot(result))
-  outer_fn <- as_user_fn(function(result, plot_fn) {
-    global_mod <- "not a model"
-    plot_fn(result)
-  })
-  p <- with_global("global_mod", m_wt, {
-    result <- bayestestR::p_direction(global_mod)
-    outer_fn(result, inner_plot)
-  })
-  expect_draws(p)
-  expect_identical(plotted_parameters(p), model_parameters(m_wt))
-})
-
-test_that("a wrapper argument of the stored name that holds the result is skipped", {
-  wrapper <- as_user_fn(function(data_mod) plot(data_mod))
-  p <- with_global("data_mod", m_wt, {
-    wrapper(bayestestR::p_direction(data_mod))
-  })
-  expect_draws(p)
-  expect_identical(plotted_parameters(p), model_parameters(m_wt))
-})
-
-test_that("plot() finds the model for `lapply(results, plot)`", {
-  # `X` is also the name of lapply()'s own argument
-  p_top <- with_global(
-    "X",
-    m_wt,
-    eval(
-      quote(lapply(list(bayestestR::p_direction(X)), plot)),
-      envir = globalenv()
-    )
-  )
-  expect_draws(p_top)
-  expect_identical(plotted_parameters(p_top[[1]]), model_parameters(m_wt))
-
-  plot_all <- as_user_fn(function(model_value) {
-    X <- model_value
-    lapply(list(bayestestR::p_direction(X)), plot)
-  })
-  p_local <- plot_all(m_wt)
-  expect_draws(p_local)
-  expect_identical(plotted_parameters(p_local[[1]]), model_parameters(m_wt))
-})
-
-test_that("plot() finds the local model of a function in a package", {
-  # the function's environment encloses a namespace, as in a package
-  plot_in_pkg <- function(model_value) {
-    pkg_mod <- model_value
-    plot(bayestestR::p_direction(pkg_mod))
-  }
-  environment(plot_in_pkg) <- new.env(parent = asNamespace("stats"))
-  p <- plot_in_pkg(m_wt)
-  expect_draws(p)
-  expect_identical(plotted_parameters(p), model_parameters(m_wt))
-})
-
-test_that("plot() finds the local model of a user's own plot method", {
-  user_env <- new.env(parent = globalenv())
-  assign(
-    "plot.m13_fit",
-    function(x, ...) {
-      method_mod <- x$fit
-      plot(bayestestR::p_direction(method_mod))
-    },
-    envir = user_env
-  )
-  plot_fit <- function(obj) plot(obj)
-  environment(plot_fit) <- user_env
-  p <- plot_fit(structure(list(fit = m_wt), class = "m13_fit"))
-  expect_draws(p)
-  expect_identical(plotted_parameters(p), model_parameters(m_wt))
-})
-
-test_that("a missing or failing argument of the stored name is skipped", {
-  missing_arg <- as_user_fn(function(result, global_mod) plot(result))
-  lazy_default <- as_user_fn(function(result, global_mod = stop("forced")) {
-    plot(result)
-  })
-  with_global("global_mod", m_wt, {
-    result <- bayestestR::p_direction(global_mod)
-    p_missing <- missing_arg(result)
-    p_lazy <- lazy_default(result)
-  })
-  expect_draws(p_missing)
-  expect_identical(plotted_parameters(p_missing), model_parameters(m_wt))
-  expect_draws(p_lazy)
-  expect_identical(plotted_parameters(p_lazy), model_parameters(m_wt))
-})
-
-
-# local names that see's own functions also use ---------------------------------
-
-for (name in c("x", "data", "model")) {
-  test_that(sprintf("plot() finds a function-local model named `%s`", name), {
-    out <- local_named(name)(m_wt)
-    expect_identical(attr(out$result, "object_name"), name)
-    expect_draws(out$plot)
-    expect_identical(plotted_parameters(out$plot), model_parameters(m_wt))
-  })
 }
 
 

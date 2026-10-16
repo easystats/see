@@ -150,32 +150,26 @@ add_plot_attributes <- function(x) {
     return(x$fittedModel)
   }
 
-  if (.is_object_name(obj_name)) {
-    # first try, the name as it reads where `plot()` was called (for
-    # `lapply(results, plot)`, where `lapply()` was called): the local
-    # variables there, then the functions it is defined in, then the global
-    # environment and the search path. A missing argument or a failing default
-    # of that name gives an error, which moves on to the next try; forcing that
-    # default again warns "restarting interrupted promise evaluation".
-    # A result of that name, such as the argument of a wrapper
-    # `function(m) plot(m)`, is not the model and moves on too.
+  # a long deparsed list, such as in `describe_distribution(list(...))`, is
+  # stored as several strings, which is no object name
+  if (!is.null(obj_name) && length(obj_name) == 1L) {
+    # first try, parent frame
     dat <- tryCatch(
-      suppressWarnings(get(obj_name, envir = .plot_call_env())),
+      get(obj_name, envir = parent.frame()),
       error = function(e) NULL
     )
-    if (.is_result_of(dat, obj_name)) {
-      dat <- NULL
-    }
 
     if (is.null(dat)) {
-      # second try, global env and search path
+      # second try, global env
       dat <- tryCatch(
         get(obj_name, envir = globalenv()),
         error = function(e) NULL
       )
-      if (.is_result_of(dat, obj_name)) {
-        dat <- NULL
-      }
+    }
+
+    if (is.null(dat)) {
+      # last try
+      dat <- .dynGet(obj_name, ifnotfound = NULL)
     }
   }
 
@@ -199,6 +193,31 @@ add_plot_attributes <- function(x) {
 }
 
 #' @keywords internal
+.dynGet <- function(
+  x,
+  ifnotfound = stop(
+    gettextf("%s not found", sQuote(x)),
+    domain = NA,
+    call. = FALSE
+  ),
+  minframe = 1L,
+  inherits = FALSE
+) {
+  x <- insight::safe_deparse(x)
+  n <- sys.nframe()
+  myObj <- structure(list(.b = as.raw(7)), foo = 47L)
+  while (n > minframe) {
+    n <- n - 1L
+    env <- sys.frame(n)
+    r <- get0(x, envir = env, inherits = inherits, ifnotfound = myObj)
+    if (!identical(r, myObj)) {
+      return(r)
+    }
+  }
+  ifnotfound
+}
+
+#' @keywords internal
 .model_for_priors <- function(x, data) {
   if (is.null(data)) {
     return(.retrieve_data(x))
@@ -209,46 +228,6 @@ add_plot_attributes <- function(x) {
     return(tryCatch(.retrieve_data(x), error = function(e) NULL))
   }
   data
-}
-
-#' @keywords internal
-.is_object_name <- function(obj_name) {
-  # a long deparsed list is stored as several strings, which is no name
-  is.character(obj_name) &&
-    length(obj_name) == 1L &&
-    !is.na(obj_name) &&
-    nzchar(obj_name)
-}
-
-#' @keywords internal
-.plot_call_env <- function() {
-  n_frames <- sys.nframe()
-  parents <- sys.parents()
-  # the environment in which the innermost `plot()` was called, such as a
-  # user's own plot method; when `plot` was passed as a function to a package
-  # function, such as `lapply(results, plot)`, the nearest code outside
-  # package functions that called it
-  for (n in rev(seq_len(n_frames))) {
-    if (identical(sys.function(n), base::plot)) {
-      caller <- parents[n]
-      if (!.calls_plot_by_name(sys.call(n))) {
-        while (caller > 0L && .is_package_call(caller)) {
-          caller <- parents[caller]
-        }
-      }
-      if (caller > 0L) {
-        return(sys.frame(caller))
-      }
-      return(globalenv())
-    }
-  }
-  # no `plot()` call, such as for `data_plot()`: the nearest frame of user code
-  for (n in rev(seq_len(n_frames))) {
-    if (!.is_package_frame(n)) {
-      return(sys.frame(n))
-    }
-  }
-  globalenv()
 }
 
 #' @keywords internal
@@ -302,38 +281,4 @@ add_plot_attributes <- function(x) {
   }
   # Inf, NaN and NA_real_ are parsed as constants, not as names
   (is.numeric(e) || is.character(e) || is.logical(e)) && length(e) == 1L
-}
-
-#' @keywords internal
-.calls_plot_by_name <- function(call) {
-  # `plot(x)`, `graphics::plot(x)` or `base::plot(x)`, not `FUN(X[[i]])`
-  fun <- call[[1]]
-  if (is.call(fun) && length(fun) == 3L) {
-    fun <- if (as.character(fun[[1]]) %in% c("::", ":::")) fun[[3]]
-  }
-  identical(fun, as.name("plot"))
-}
-
-#' @keywords internal
-.is_package_call <- function(n) {
-  fun_env <- environment(sys.function(n))
-  # the frame of a function call encloses the function's environment; the
-  # frame of eval() or local(), such as a test block, does not
-  !is.null(fun_env) &&
-    identical(parent.env(sys.frame(n)), fun_env) &&
-    isNamespace(topenv(fun_env))
-}
-
-#' @keywords internal
-.is_result_of <- function(obj, obj_name) {
-  # a result such as `p_direction(m)` stores the name `m`; the model does not
-  identical(attr(obj, "object_name", exact = TRUE), obj_name)
-}
-
-#' @keywords internal
-.is_package_frame <- function(n) {
-  # the frame of a package function encloses the package namespace; the frame
-  # of user code, or of eval() and local() in user code, encloses the global
-  # environment
-  isNamespace(topenv(sys.frame(n)))
 }
