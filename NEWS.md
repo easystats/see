@@ -49,6 +49,14 @@
 
 ## Bug fixes
 
+* `plot()` for structural equation models from `parameters::model_parameters()`
+  drew latent factors as observed variables and indicators as latent
+  variables. Latent factors are now drawn as circles and indicators as
+  squares.
+
+* `plot()` for structural equation models now gives an informative error
+  when the selected `component` has no paths to plot, for example
+  `component = "regression"` for a confirmatory factor analysis (#243).
 * `geom_binomdensity()` now works with facets. It no longer drops the
   columns other than `x` and `y`, so each panel shows only its own data
   (#192).
