@@ -46,6 +46,12 @@ test_that("plot of infinite VIF intervals has a caption", {
   # one infinite upper bound is enough
   attr(cc, "CI")$VIF_CI_high[2] <- 5
   expect_identical(plot(cc)$labels$caption, .vif_inf_caption)
+
+  skip_if_not_installed("vdiffr")
+  vdiffr::expect_doppelganger(
+    title = "plot.check_collinearity infinite intervals",
+    fig = plot(performance::check_collinearity(.vif_inf_model()))
+  )
 })
 
 
