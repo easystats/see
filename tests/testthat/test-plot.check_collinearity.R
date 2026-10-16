@@ -19,9 +19,26 @@ test_that("`plot.see_check_collinearity()` works", {
 }
 
 .vif_inf_caption <- paste(
-  "Some VIF intervals have no upper limit:",
-  "the data cannot show how much collinearity there is."
+  "Some VIF intervals run off the top:",
+  "the interval formula fails near VIF = 1. This is not high collinearity."
 )
+
+# VIFs wt 5.05, cyl 5.41, gear 1.53, disp 9.97; axis top 11.5
+.vif_mtcars <- function() {
+  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+  performance::check_collinearity(m)
+}
+
+# the plot reads the VIFs from the stored copy in attr(x, "data")
+.with_vif <- function(cc, term, vif = NULL, ci_high = NULL) {
+  if (!is.null(vif)) {
+    attr(cc, "data")$VIF[term] <- vif
+  }
+  if (!is.null(ci_high)) {
+    attr(cc, "CI")$VIF_CI_high[term] <- ci_high
+  }
+  cc
+}
 
 # the y range (log10 units) and the lower edge of the "Low" band
 .vif_axis <- function(p) {
@@ -38,14 +55,27 @@ test_that("`plot.see_check_collinearity()` works", {
 }
 
 
-test_that("plot of infinite VIF intervals has a caption", {
+test_that("plot of VIF intervals running off the top has a caption", {
   cc <- performance::check_collinearity(.vif_inf_model())
   expect_true(all(is.infinite(attributes(cc)$CI$VIF_CI_high)))
   expect_identical(plot(cc)$labels$caption, .vif_inf_caption)
 
   # one infinite upper bound is enough
-  attr(cc, "CI")$VIF_CI_high[2] <- 5
-  expect_identical(plot(cc)$labels$caption, .vif_inf_caption)
+  p <- plot(.with_vif(cc, 2, ci_high = 5))
+  expect_identical(p$labels$caption, .vif_inf_caption)
+
+  # finite upper bounds above the axis top
+  p <- plot(.with_vif(cc, 1:2, ci_high = c(1280, 1280)))
+  expect_identical(p$labels$caption, .vif_inf_caption)
+
+  # VIF below 2, finite bound above the axis top of 11.5
+  p <- plot(.with_vif(.vif_mtcars(), 3, vif = 1.9, ci_high = 12))
+  expect_identical(p$labels$caption, .vif_inf_caption)
+
+  # axis top 23 (largest VIF 20), bound above it
+  cc <- .with_vif(.vif_mtcars(), 4, vif = 20)
+  p <- plot(.with_vif(cc, 3, ci_high = 24))
+  expect_identical(p$labels$caption, .vif_inf_caption)
 
   skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger(
@@ -55,11 +85,25 @@ test_that("plot of infinite VIF intervals has a caption", {
 })
 
 
-test_that("plot of finite or missing VIF intervals has no caption", {
-  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-  cc <- performance::check_collinearity(m)
-  expect_false(any(is.infinite(attributes(cc)$CI$VIF_CI_high)))
+test_that("plot without low VIFs running off the top has no caption", {
+  cc <- .vif_mtcars()
+  vif <- attr(cc, "data")$VIF
+  ci_high <- attributes(cc)$CI$VIF_CI_high
+  above <- ci_high > max(10, ceiling(max(vif))) * 1.15
+  expect_true(any(above))
+  expect_true(all(vif[above] >= 2))
   expect_null(plot(cc)$labels$caption)
+
+  # infinite bound on a term with VIF 9.97
+  expect_null(plot(.with_vif(cc, 4, ci_high = Inf))$labels$caption)
+  # VIF between 2 and 5, bound above the axis top
+  p <- plot(.with_vif(cc, 3, vif = 4.9, ci_high = 11.7))
+  expect_null(p$labels$caption)
+  # VIF exactly 2
+  expect_null(plot(.with_vif(cc, 3, vif = 2, ci_high = 12))$labels$caption)
+  # axis top 23 (largest VIF 20), bound below it
+  cc <- .with_vif(cc, 4, vif = 20)
+  expect_null(plot(.with_vif(cc, 3, ci_high = 15))$labels$caption)
 
   cc <- performance::check_collinearity(.vif_inf_model())
   attr(cc, "CI") <- NULL

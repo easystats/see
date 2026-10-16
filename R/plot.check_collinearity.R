@@ -2,8 +2,10 @@
 #'
 #' The `plot()` method for the `performance::check_collinearity()` function.
 #'
-#' @details If a VIF confidence interval has no upper limit (`Inf`), the plot
-#' has a caption that says so.
+#' @details If a term with a VIF below 2 has an upper confidence limit that is
+#' infinite or above the top of the plot, the plot has a caption. The caption
+#' says that the interval formula fails near VIF = 1, and that this is not
+#' high collinearity.
 #'
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
@@ -108,13 +110,16 @@ plot.see_check_collinearity <- function(
     x <- cbind(x, ci_data)
   }
 
-  # infinite upper bounds are drawn as arrows to the top of the plot, which
-  # readers can mistake for high VIF (#399)
+  # near VIF = 1, the interval formula in performance gives infinite or huge
+  # upper bounds, drawn as arrows to the top of the plot, which readers can
+  # mistake for high VIF (#399)
+  off_top <- x$y < 2 &
+    (x$VIF_CI_high == Inf | x$VIF_CI_high > ylim * 1.15)
   caption <- NULL
-  if (any(is.infinite(x$VIF_CI_high) & x$VIF_CI_high > 0)) {
+  if (any(off_top, na.rm = TRUE)) {
     caption <- paste(
-      "Some VIF intervals have no upper limit:",
-      "the data cannot show how much collinearity there is.",
+      "Some VIF intervals run off the top:",
+      "the interval formula fails near VIF = 1. This is not high collinearity.",
       sep = ifelse(is_check_model, "\n", " ")
     )
   }

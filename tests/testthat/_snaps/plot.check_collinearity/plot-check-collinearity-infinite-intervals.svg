@@ -67,6 +67,6 @@
 <text x='369.20' y='558.31' style='font-size: 9.00px; fill: #4D4D4D; font-family: sans;' textLength='37.77px' lengthAdjust='spacingAndGlyphs'>Low (&lt; 5)</text>
 <text x='4.98' y='25.60' style='font-size: 10.00px; font-family: sans;' textLength='246.79px' lengthAdjust='spacingAndGlyphs'>High collinearity (VIF) may inflate parameter uncertainty</text>
 <text x='4.98' y='13.24' style='font-size: 12.00px; font-family: sans;' textLength='59.36px' lengthAdjust='spacingAndGlyphs'>Collinearity</text>
-<text x='715.02' y='569.36' text-anchor='end' style='font-size: 8.00px; font-family: sans;' textLength='327.31px' lengthAdjust='spacingAndGlyphs'>Some VIF intervals have no upper limit: the data cannot show how much collinearity there is.</text>
+<text x='715.02' y='569.36' text-anchor='end' style='font-size: 8.00px; font-family: sans;' textLength='355.08px' lengthAdjust='spacingAndGlyphs'>Some VIF intervals run off the top: the interval formula fails near VIF = 1. This is not high collinearity.</text>
 </g>
 </svg>
