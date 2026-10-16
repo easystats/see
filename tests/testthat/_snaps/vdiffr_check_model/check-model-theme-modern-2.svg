@@ -372,21 +372,21 @@
 </defs>
 <g clip-path='url(#cpOTEuMjh8MzYzLjAwfDQzNi43OHw0OTMuNDI=)'>
 <rect x='91.28' y='436.78' width='271.72' height='56.63' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='91.28' y='456.10' width='271.72' height='37.32' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3AAF85; fill-opacity: 0.15;' />
-<rect x='91.28' y='440.02' width='271.72' height='16.07' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #1B6CA8; fill-opacity: 0.15;' />
-<rect x='91.28' y='436.78' width='271.72' height='3.24' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CD201F; fill-opacity: 0.15;' />
-<line x1='288.89' y1='487.44' x2='288.89' y2='467.95' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
-<line x1='165.38' y1='487.44' x2='165.38' y2='467.95' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
-<circle cx='288.89' cy='480.22' r='3.20' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
-<circle cx='165.38' cy='480.22' r='3.20' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
+<rect x='91.28' y='455.00' width='271.72' height='35.21' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3AAF85; fill-opacity: 0.15;' />
+<rect x='91.28' y='439.84' width='271.72' height='15.16' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #1B6CA8; fill-opacity: 0.15;' />
+<rect x='91.28' y='436.78' width='271.72' height='3.06' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CD201F; fill-opacity: 0.15;' />
+<line x1='288.89' y1='484.57' x2='288.89' y2='466.19' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<line x1='165.38' y1='484.57' x2='165.38' y2='466.19' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<circle cx='288.89' cy='477.76' r='3.20' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
+<circle cx='165.38' cy='477.76' r='3.20' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <polyline points='91.28,493.42 91.28,436.78 ' style='stroke-width: 1.07; stroke-linecap: square;' />
-<text x='80.32' y='497.58' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='80.32' y='481.51' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='80.32' y='472.10' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='80.32' y='460.26' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='80.32' y='444.19' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='13.46px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='80.32' y='494.37' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='80.32' y='479.21' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='80.32' y='470.34' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='80.32' y='459.17' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='6.73px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='80.32' y='444.00' text-anchor='end' style='font-size: 12.10px; font-family: sans;' textLength='13.46px' lengthAdjust='spacingAndGlyphs'>10</text>
 <polyline points='91.28,493.42 363.00,493.42 ' style='stroke-width: 1.07; stroke-linecap: square;' />
 <text x='165.38' y='512.70' text-anchor='middle' style='font-size: 12.10px; font-family: sans;' textLength='13.46px' lengthAdjust='spacingAndGlyphs'>hp</text>
 <text x='288.89' y='512.70' text-anchor='middle' style='font-size: 12.10px; font-family: sans;' textLength='12.10px' lengthAdjust='spacingAndGlyphs'>wt</text>
