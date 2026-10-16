@@ -102,6 +102,8 @@ plot.see_check_collinearity <- function(
   if (ylim < 10) {
     ylim <- 10
   }
+  # top of the y axis; interval bounds above it are drawn as arrows
+  y_top <- ylim * 1.15
 
   if (is.null(ci_data)) {
     x$VIF_CI_low <- NA_real_
@@ -112,9 +114,10 @@ plot.see_check_collinearity <- function(
 
   # near VIF = 1, the interval formula in performance gives infinite or huge
   # upper bounds, drawn as arrows to the top of the plot, which readers can
-  # mistake for high VIF (#399)
-  off_top <- x$y < 2 &
-    (x$VIF_CI_high == Inf | x$VIF_CI_high > ylim * 1.15)
+  # mistake for high VIF (#399). At the 95% level this happens only below
+  # VIF of about 1.1. The cut at 2 leaves out terms with higher VIF, whose
+  # intervals can be wide for other reasons at high levels and small n.
+  off_top <- x$y < 2 & x$VIF_CI_high > y_top
   caption <- NULL
   if (any(off_top, na.rm = TRUE)) {
     caption <- paste(
@@ -175,7 +178,7 @@ plot.see_check_collinearity <- function(
         na.rm = TRUE
       ) +
       ggplot2::geom_segment(
-        data = x[x$VIF_CI_high > ylim * 1.15, ],
+        data = x[x$VIF_CI_high > y_top, ],
         mapping = aes(
           x = .data$x,
           xend = .data$x,
@@ -217,7 +220,7 @@ plot.see_check_collinearity <- function(
     ) +
     theme +
     ggplot2::scale_y_continuous(
-      limits = c(1, ylim * 1.15),
+      limits = c(1, y_top),
       oob = scales::oob_squish,
       trans = "log10",
       # room below VIF = 1, so that points at 1 are not cut in half

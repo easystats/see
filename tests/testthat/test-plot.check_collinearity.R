@@ -56,9 +56,13 @@ test_that("`plot.see_check_collinearity()` works", {
 
 
 test_that("plot of VIF intervals running off the top has a caption", {
+  # the infinite bounds come from the interval formula in performance;
+  # a fixed formula must not break reverse dependency checks
+  skip_on_cran()
   cc <- performance::check_collinearity(.vif_inf_model())
   expect_true(all(is.infinite(attributes(cc)$CI$VIF_CI_high)))
   expect_identical(plot(cc)$labels$caption, .vif_inf_caption)
+  expect_no_warning(ggplot2::ggplotGrob(plot(cc)))
 
   # one infinite upper bound is enough
   p <- plot(.with_vif(cc, 2, ci_high = 5))
@@ -101,6 +105,11 @@ test_that("plot without low VIFs running off the top has no caption", {
   expect_null(p$labels$caption)
   # VIF exactly 2
   expect_null(plot(.with_vif(cc, 3, vif = 2, ci_high = 12))$labels$caption)
+  # VIF below 2, bound above 10 but below the axis top of 11.5
+  p <- plot(.with_vif(cc, 3, vif = 1.9, ci_high = 11))
+  expect_null(p$labels$caption)
+  # NaN bound, as performance gives for VIF exactly 1
+  expect_null(plot(.with_vif(cc, 3, ci_high = NaN))$labels$caption)
   # axis top 23 (largest VIF 20), bound below it
   cc <- .with_vif(cc, 4, vif = 20)
   expect_null(plot(.with_vif(cc, 3, ci_high = 15))$labels$caption)
@@ -112,14 +121,18 @@ test_that("plot without low VIFs running off the top has no caption", {
 
 
 test_that("check_model() VIF panel has the caption for infinite intervals", {
-  p <- plot(performance::check_model(
-    .vif_inf_model(),
-    check = "vif",
-    panel = FALSE
-  ))
+  skip_on_cran()
+  cm <- performance::check_model(.vif_inf_model(), check = "vif", panel = FALSE)
+  expect_true(all(is.infinite(attributes(cm$VIF)$CI$VIF_CI_high)))
+  p <- plot(cm)
   expect_identical(
     gsub("\\s*\\n\\s*", " ", p$VIF$labels$caption),
     .vif_inf_caption
+  )
+  # two lines in the smaller panel, split at the colon
+  expect_identical(
+    strsplit(p$VIF$labels$caption, "\n", fixed = TRUE)[[1]][1],
+    "Some VIF intervals run off the top:"
   )
 
   m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
