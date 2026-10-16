@@ -173,8 +173,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     identical(comparison[[2]], as.name("ratio"))
   if ("Ratio" %in% names(contrasts) || ratio_comparison) {
     # e.g. for a log response, the back-transformed ratio is
-    # exp(log(m1) / log(m2)), not a ratio of the back-transformed means
-    if (back_transformed) {
+    # exp(log(m1) / log(m2)), not a ratio of the back-transformed means;
+    # without a transformation, back-transforming changes nothing
+    if (
+      back_transformed &&
+        !identical(.response_transformation(contrasts), "identity")
+    ) {
       insight::format_error(
         paste(
           "Lighthouse plots do not draw ratio contrasts estimated with",

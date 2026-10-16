@@ -1646,3 +1646,34 @@ test_that("lighthouse plots draw link-scale pairs from the marginaleffects and e
   expect_match(message, "`predict = \"none\"`", fixed = TRUE)
   expect_match(message, "same scale", fixed = TRUE)
 })
+
+
+test_that("lighthouse plots draw ratio contrasts with `transform = TRUE` of an untransformed response", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl)
+  lighthouse_y <- function(model, ...) {
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "cyl",
+      comparison = ratio ~ pairwise,
+      ...
+    )
+    means <- modelbased::estimate_means(model, by = "cyl", ...)
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    polygons <- polygons[order(polygons$Level1, polygons$Level2, polygons$y), ]
+    polygons$y
+  }
+
+  linear <- lm(mpg ~ cyl, data = d)
+  expected <- lighthouse_y(linear)
+  expect_length(expected, 9L)
+  expect_equal(lighthouse_y(linear, transform = TRUE), expected, tolerance = 1e-8)
+
+  logged <- lm(log(mpg) ~ cyl, data = d)
+  message <- error_text(lighthouse_y(logged, transform = TRUE))
+  expect_match(message, "ratio contrasts", fixed = TRUE)
+  expect_match(message, "`transform = TRUE`", fixed = TRUE)
+})
