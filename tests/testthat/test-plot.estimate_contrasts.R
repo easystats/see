@@ -2054,3 +2054,48 @@ test_that("joint contrasts of three variables show one level per line", {
   )$layout$panel_params[[1]]$x$get_labels()
   expect_true("auto, 4" %in% two_labels)
 })
+
+
+# the text of the facet strips, left to right
+strip_labels <- function(p) {
+  g <- ggplot2::ggplotGrob(p)
+  strips <- g$grobs[grepl("^strip", g$layout$name)]
+  order <- order(g$layout$l[grepl("^strip", g$layout$name)])
+  unlist(lapply(strips[order], function(s) {
+    s$grobs[[1]]$children[[2]]$children[[1]]$label
+  }))
+}
+
+test_that("lighthouse plots accept `by` variables with names that ggplot2 reserves", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  for (name in c("PANEL", "ROW", "COL", "SCALE_X", "SCALE_Y")) {
+    d_name <- d
+    d_name[[name]] <- d_name$cyl
+    model <- lm(as.formula(paste("mpg ~", name, "* am")), data = d_name)
+    contrasts <- modelbased::estimate_contrasts(model, contrast = "am", by = name)
+    means <- modelbased::estimate_means(model, by = c(name, "am"))
+    p <- plot(contrasts, means)
+    expect_identical(nrow(ggplot2::ggplot_build(p)$layout$layout), 3L)
+    expect_identical(strip_labels(p), c("4", "6", "8"))
+
+    if (name == "PANEL") {
+      p_data <- plot(contrasts, means, show_data = TRUE)
+      built <- ggplot2::ggplot_build(p_data)
+      expect_identical(nrow(built$data[[1]]), nrow(d))
+      expect_identical(strip_labels(p_data), c("4", "6", "8"))
+    }
+  }
+
+  # a `by` variable renamed to `.by_x` shows its levels, not the new name
+  d_x <- d
+  d_x$x <- d_x$cyl
+  model <- lm(mpg ~ x * am, data = d_x)
+  p <- plot(
+    modelbased::estimate_contrasts(model, contrast = "am", by = "x"),
+    modelbased::estimate_means(model, by = c("x", "am"))
+  )
+  expect_identical(strip_labels(p), c("4", "6", "8"))
+})

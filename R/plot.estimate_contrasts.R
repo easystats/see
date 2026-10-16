@@ -86,10 +86,24 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     by_vars <- c("Response", by_vars)
   }
 
-  # `by` columns named like columns of the plot data are renamed
+  # `by` columns named like columns of the plot data, or like the columns
+  # that ggplot2 reserves for facets, are renamed
   by_columns <- by_vars
   collides <- by_vars %in%
-    c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
+    c(
+      "x",
+      "y",
+      "ymin",
+      "ymax",
+      "group",
+      "Mean1",
+      "Mean2",
+      "PANEL",
+      "ROW",
+      "COL",
+      "SCALE_X",
+      "SCALE_Y"
+    )
   if (any(collides)) {
     by_columns[collides] <- paste0(".by_", by_vars[collides])
     names(contrast_data)[match(
