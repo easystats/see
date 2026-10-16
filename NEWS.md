@@ -127,6 +127,21 @@
   `na.action = na.exclude`. The scree and count plots now leave these
   observations out, and the labels still name the right rows.
 
+* If the model or data existed only inside a function, `plot()` for results of
+  `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
+  and `describe_distribution()` failed with "Failed at retrieving data".
+  `plot()` now finds it there, and uses it rather than a global object of the
+  same name (#311).
+
+* `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
+  uses the model given in `data`. If it cannot find the model by its name, it
+  no longer fails.
+
+* `plot()` for `estimate_density()` and `describe_distribution()` has a new
+  `data` argument. Before, `plot(estimate_density(m), data = m)` failed.
+
+* `plot()` now works for `describe_distribution()` on a list (#213).
+
 # see 0.14.2
 
 ## Changes
