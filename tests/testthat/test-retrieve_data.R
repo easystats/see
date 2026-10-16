@@ -46,6 +46,13 @@ expect_draws <- function(p) {
   invisible(p)
 }
 
+# evaluates `code` while a global object `name` exists
+with_global <- function(name, value, code) {
+  assign(name, value, envir = globalenv())
+  on.exit(rm(list = name, envir = globalenv()), add = TRUE)
+  code
+}
+
 plotted_parameters <- function(p) {
   sort(unique(as.character(p$data$y)))
 }
@@ -151,12 +158,51 @@ test_that("plot() finds a model made in local() or eval() in user code", {
 
 test_that("plot() prefers the function-local model over a global one of the same name", {
   expect_length(intersect(model_parameters(m_wt), model_parameters(m_hp)), 0)
-  assign("inner_mod", m_hp, envir = globalenv())
-  withr::defer(rm("inner_mod", envir = globalenv()))
-
-  out <- plot_local(m_wt, bayestestR::p_direction)
+  out <- with_global("inner_mod", m_hp, plot_local(m_wt, bayestestR::p_direction))
   expect_draws(out$plot)
   expect_identical(plotted_parameters(out$plot), model_parameters(m_wt))
+})
+
+test_that("plot() finds a global model that is plotted at top level", {
+  p <- with_global(
+    "global_mod",
+    m_wt,
+    eval(quote(plot(bayestestR::p_direction(global_mod))), envir = globalenv())
+  )
+  expect_draws(p)
+  expect_identical(plotted_parameters(p), model_parameters(m_wt))
+})
+
+test_that("an object of the stored name in a calling function is not used", {
+  # `inner_plot()` is not defined inside `outer_fn()`, so the `global_mod`
+  # of `outer_fn()` is not visible where plot() is called
+  inner_plot <- as_user_fn(function(result) plot(result))
+  outer_fn <- as_user_fn(function(result, plot_fn) {
+    global_mod <- "not a model"
+    plot_fn(result)
+  })
+  p <- with_global("global_mod", m_wt, {
+    result <- bayestestR::p_direction(global_mod)
+    outer_fn(result, inner_plot)
+  })
+  expect_draws(p)
+  expect_identical(plotted_parameters(p), model_parameters(m_wt))
+})
+
+test_that("a missing or failing argument of the stored name is skipped", {
+  missing_arg <- as_user_fn(function(result, global_mod) plot(result))
+  lazy_default <- as_user_fn(function(result, global_mod = stop("forced")) {
+    plot(result)
+  })
+  with_global("global_mod", m_wt, {
+    result <- bayestestR::p_direction(global_mod)
+    p_missing <- missing_arg(result)
+    p_lazy <- lazy_default(result)
+  })
+  expect_draws(p_missing)
+  expect_identical(plotted_parameters(p_missing), model_parameters(m_wt))
+  expect_draws(p_lazy)
+  expect_identical(plotted_parameters(p_lazy), model_parameters(m_wt))
 })
 
 
@@ -190,9 +236,27 @@ for (fun_name in c("p_direction", "p_significance", "point_estimate")) {
     {
       fun <- getExportedValue("bayestestR", fun_name)
       result <- suppressMessages(result_local(m_wt, fun))
-      assign("inner_mod", m_hp, envir = globalenv())
-      withr::defer(rm("inner_mod", envir = globalenv()))
-      p <- suppressMessages(plot(result, data = m_wt, priors = TRUE))
+      p <- with_global(
+        "inner_mod",
+        m_hp,
+        suppressMessages(plot(result, data = m_wt, priors = TRUE))
+      )
+      suppressMessages(expect_draws(p))
+      expect_identical(prior_parameters(p), model_parameters(m_wt))
+    }
+  )
+
+  test_that(
+    sprintf("plot(data = <draws>) keeps the priors of the model for `%s()`", fun_name),
+    {
+      fun <- getExportedValue("bayestestR", fun_name)
+      result <- suppressMessages(result_local(m_wt, fun))
+      draws <- as.data.frame(m_wt)
+      p <- with_global(
+        "inner_mod",
+        m_wt,
+        suppressMessages(plot(result, data = draws, priors = TRUE))
+      )
       suppressMessages(expect_draws(p))
       expect_identical(prior_parameters(p), model_parameters(m_wt))
     }
@@ -210,12 +274,23 @@ test_that("plot() works for `describe_distribution()` on a list", {
   expect_draws(p)
 })
 
+test_that("plot() works for `describe_distribution()` on a long list in a function", {
+  set.seed(123)
+  x <- datawizard::describe_distribution(list(rnorm(1000), rnorm(1000)))
+  # the deparsed list is stored as several strings
+  expect_gt(length(attr(x, "object_name")), 1)
+  p <- as_user_fn(function(result) plot(result))(x)
+  expect_length(p, 2)
+  expect_draws(p)
+})
+
 test_that("a stored name with other calls than list() and c() is not evaluated", {
   x <- datawizard::describe_distribution(list(mtcars$mpg, mtcars$cyl))
-  withr::defer(
+  on.exit(
     if (exists("hit", envir = globalenv(), inherits = FALSE)) {
       rm("hit", envir = globalenv())
-    }
+    },
+    add = TRUE
   )
   for (name in c(
     "stop(\"boom\")",

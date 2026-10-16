@@ -207,11 +207,7 @@ plot.see_p_direction <- function(
   ...
 ) {
   # Retrieve model for prior overlay calculation
-  if (is.null(data)) {
-    model <- .retrieve_data(x)
-  } else {
-    model <- data
-  }
+  model <- .model_for_priors(x, data)
 
   # Ensure data is processed into plotting format
   if (!inherits(x, "data_plot")) {

@@ -150,11 +150,16 @@ add_plot_attributes <- function(x) {
     return(x$fittedModel)
   }
 
-  if (!is.null(obj_name)) {
-    # first try, the frames of the user's code on the call stack, so that an
-    # object made inside a function is found, and wins over a global object
-    # of the same name
-    dat <- .dynGet(obj_name, ifnotfound = NULL)
+  if (.is_object_name(obj_name)) {
+    # first try, the name as it reads where `plot()` was called: the local
+    # variables there, then the functions it is defined in, then the global
+    # environment and the search path. A missing argument or a failing default
+    # of that name gives an error, which moves on to the next try; forcing that
+    # default again warns "restarting interrupted promise evaluation".
+    dat <- tryCatch(
+      suppressWarnings(get(obj_name, envir = .plot_call_env())),
+      error = function(e) NULL
+    )
 
     if (is.null(dat)) {
       # second try, global env and search path
@@ -185,43 +190,50 @@ add_plot_attributes <- function(x) {
 }
 
 #' @keywords internal
-.dynGet <- function(
-  x,
-  ifnotfound = stop(
-    gettextf("%s not found", sQuote(x)),
-    domain = NA,
-    call. = FALSE
-  ),
-  minframe = 1L,
-  inherits = FALSE
-) {
-  # the stored object name is already a string; deparsing it would add quotes
-  if (!is.character(x)) {
-    x <- insight::safe_deparse(x)
+.model_for_priors <- function(x, data) {
+  if (is.null(data)) {
+    return(.retrieve_data(x))
   }
-  n <- sys.nframe()
-  myObj <- structure(list(.b = as.raw(7)), foo = 47L)
-  while (n > minframe) {
-    n <- n - 1L
-    # skip calls of package functions (see, the generics, other packages'
-    # methods), whose local variables such as `x` or `data` are not the
-    # user's objects
-    if (.is_package_frame(n)) {
-      next
-    }
-    env <- sys.frame(n)
-    r <- get0(x, envir = env, inherits = inherits, ifnotfound = myObj)
-    if (!identical(r, myObj)) {
-      return(r)
+  if (is.data.frame(data)) {
+    # a data frame of posterior draws holds no priors, so the model for the
+    # prior layer is still looked up by its name
+    return(tryCatch(.retrieve_data(x), error = function(e) NULL))
+  }
+  data
+}
+
+#' @keywords internal
+.is_object_name <- function(obj_name) {
+  # a long deparsed list is stored as several strings, which is no name
+  is.character(obj_name) &&
+    length(obj_name) == 1L &&
+    !is.na(obj_name) &&
+    nzchar(obj_name)
+}
+
+#' @keywords internal
+.plot_call_env <- function() {
+  n_frames <- sys.nframe()
+  parents <- sys.parents()
+  # the environment in which the outermost `plot()` was called
+  for (n in seq_len(n_frames)) {
+    if (identical(sys.function(n), base::plot)) {
+      return(sys.frame(parents[n]))
     }
   }
-  ifnotfound
+  # no `plot()` call, such as for `data_plot()`: the nearest frame of user code
+  for (n in rev(seq_len(n_frames))) {
+    if (!.is_package_frame(n)) {
+      return(sys.frame(n))
+    }
+  }
+  globalenv()
 }
 
 #' @keywords internal
 .eval_constant_list <- function(obj_name) {
   expr <- tryCatch(
-    str2lang(paste(obj_name, collapse = "")),
+    str2lang(paste(obj_name, collapse = " ")),
     error = function(e) NULL
   )
   if (
