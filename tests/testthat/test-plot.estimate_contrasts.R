@@ -1813,3 +1813,386 @@ test_that("`show_data = TRUE` names ordinal contrasts before it needs the model"
   message <- error_text(plot(without_model, fx$means, show_data = TRUE))
   expect_match(message, "ordinal or multinomial", fixed = TRUE)
 })
+
+
+test_that("lighthouse plots show only the `by` levels that the contrasts have", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(mpg ~ cyl * am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = "cyl='4'"
+  )
+  means <- modelbased::estimate_means(model, by = c("cyl", "am"))
+  expect_setequal(as.character(means$cyl), c("4", "6", "8"))
+
+  expect_no_warning({
+    dp <- data_plot(contrasts, means)
+  })
+  expect_identical(unique(as.character(dp$geom_pointrange$cyl)), "4")
+  expect_identical(nrow(dp$geom_pointrange), 2L)
+  expect_no_warning({
+    p <- plot(contrasts, means)
+  })
+  layout <- ggplot2::ggplot_build(p)$layout$layout
+  expect_identical(as.character(layout$cyl), "4")
+
+  # two `by` variables, one of them restricted
+  d$vs <- factor(d$vs, labels = c("V", "S"))
+  model2 <- lm(mpg ~ cyl * am * vs, data = d)
+  contrasts2 <- modelbased::estimate_contrasts(
+    model2,
+    contrast = "am",
+    by = c("cyl='4'", "vs")
+  )
+  means2 <- modelbased::estimate_means(model2, by = c("cyl", "am", "vs"))
+  layout2 <- ggplot2::ggplot_build(plot(contrasts2, means2))$layout$layout
+  expect_identical(nrow(layout2), 2L)
+  expect_identical(unique(as.character(layout2$cyl)), "4")
+  expect_setequal(as.character(layout2$vs), c("V", "S"))
+})
+
+
+test_that("`show_data = TRUE` draws raw points only for the `by` levels of the contrasts", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  model <- lm(mpg ~ cyl * am, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = "cyl='4'"
+  )
+  n_4 <- sum(d$cyl == "4")
+  expect_identical(n_4, 11L)
+  for (means in list(
+    modelbased::estimate_means(model, by = c("cyl", "am")),
+    modelbased::estimate_means(model, by = c("cyl='4'", "am"))
+  )) {
+    expect_no_warning({
+      p <- plot(contrasts, means, show_data = TRUE)
+    })
+    points <- ggplot2::ggplot_build(p)$data[[1]]
+    expect_identical(nrow(points), n_4)
+    expect_identical(unique(as.integer(points$PANEL)), 1L)
+  }
+
+  # a numeric `by` keeps the error that the means lack data values
+  numeric_model <- lm(mpg ~ wt * am, data = d)
+  numeric_contrasts <- modelbased::estimate_contrasts(
+    numeric_model,
+    contrast = "am",
+    by = "wt=c(2,3)"
+  )
+  numeric_means <- modelbased::estimate_means(
+    numeric_model,
+    by = c("am", "wt=c(2,3)")
+  )
+  message <- error_text(
+    plot(numeric_contrasts, numeric_means, show_data = TRUE)
+  )
+  expect_match(message, "wt is numeric", fixed = TRUE)
+})
+
+
+x_is_discrete <- function(p) {
+  ggplot2::ggplot_build(p)$layout$panel_scales_x[[1]]$is_discrete()
+}
+
+test_that("a numeric contrast variable with uneven values gets a continuous x axis", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(mpg ~ wt, data = mtcars)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "wt=c(2,2.5,4)"
+  )
+  means <- modelbased::estimate_means(model, by = "wt=c(2,2.5,4)")
+  dp <- data_plot(contrasts, means)
+  expect_type(dp$geom_pointrange$x, "double")
+  expect_identical(sort(dp$geom_pointrange$x), c(2, 2.5, 4))
+  expect_type(dp$geom_polygon$x, "double")
+  expect_identical(sort(unique(dp$geom_polygon$x)), c(2, 2.5, 4))
+  expect_lighthouses(dp$geom_polygon, contrasts, means, "wt")
+  p <- plot(contrasts, means)
+  expect_false(x_is_discrete(p))
+  expect_equal(
+    ggplot2::ggplot_build(p)$layout$panel_params[[1]]$x$breaks,
+    c(2, 2.5, 4),
+    ignore_attr = TRUE
+  )
+
+  # evenly spaced values, or only two, keep the discrete axis
+  cyl_model <- lm(mpg ~ cyl, data = mtcars)
+  cyl_plot <- plot(
+    suppressMessages(modelbased::estimate_contrasts(cyl_model, contrast = "cyl")),
+    suppressMessages(modelbased::estimate_means(cyl_model, by = "cyl"))
+  )
+  expect_true(x_is_discrete(cyl_plot))
+  tenths <- mtcars
+  tenths$z <- tenths$wt / 10
+  z_model <- lm(mpg ~ z, data = tenths)
+  z_means <- modelbased::estimate_means(z_model, by = "z=c(0.1,0.2,0.3)")
+  expect_type(z_means$z, "double")
+  expect_true(x_is_discrete(plot(
+    modelbased::estimate_contrasts(z_model, contrast = "z=c(0.1,0.2,0.3)"),
+    z_means
+  )))
+  expect_true(x_is_discrete(plot(
+    modelbased::estimate_contrasts(model, contrast = "wt=c(2,4)"),
+    modelbased::estimate_means(model, by = "wt=c(2,4)")
+  )))
+
+  # with `by`, each panel keeps the numeric x values
+  d <- contrasts_by_fixture()$data
+  by_model <- lm(mpg ~ wt * am, data = d)
+  by_contrasts <- modelbased::estimate_contrasts(
+    by_model,
+    contrast = "wt=c(2,2.5,4)",
+    by = "am"
+  )
+  by_means <- modelbased::estimate_means(
+    by_model,
+    by = c("wt=c(2,2.5,4)", "am")
+  )
+  built <- ggplot2::ggplot_build(plot(by_contrasts, by_means))
+  expect_identical(nrow(built$layout$layout), 2L)
+  pointranges <- built$data[[2]]
+  for (panel in c("1", "2")) {
+    expect_identical(
+      sort(pointranges$x[pointranges$PANEL == panel]),
+      c(2, 2.5, 4)
+    )
+  }
+
+  # joint contrasts with a numeric variable keep the discrete axis
+  joint <- modelbased::estimate_contrasts(
+    by_model,
+    contrast = c("am", "wt=c(2,4)")
+  )
+  joint_means <- modelbased::estimate_means(by_model, by = c("am", "wt=c(2,4)"))
+  joint_dp <- data_plot(joint, joint_means)
+  expect_s3_class(joint_dp$geom_pointrange$x, "factor")
+  expect_true(x_is_discrete(plot(joint, joint_means)))
+})
+
+
+test_that("`show_data = TRUE` puts raw points at a numeric contrast variable", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(mpg ~ carb, data = mtcars)
+  values <- c(1, 2, 3, 4, 6, 8)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "carb=c(1,2,3,4,6,8)"
+  )
+  means <- modelbased::estimate_means(model, by = "carb=c(1,2,3,4,6,8)")
+  expect_type(means$carb, "double")
+  set.seed(1)
+  p <- plot(contrasts, means, show_data = TRUE)
+  expect_false(x_is_discrete(p))
+  points <- ggplot2::ggplot_build(p)$data[[1]]
+  expect_identical(nrow(points), nrow(mtcars))
+  nearest <- values[vapply(
+    points$x,
+    function(x) which.min(abs(values - x)),
+    integer(1)
+  )]
+  expect_identical(nearest, as.numeric(mtcars$carb))
+  expect_gt(length(unique(points$x)), length(values))
+})
+
+
+test_that("joint contrasts of three variables show one level per line", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  d$vs <- factor(d$vs, labels = c("V", "S"))
+  d$gear <- factor(d$gear)
+  model <- lm(mpg ~ am * vs * gear, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = c("am", "vs", "gear")
+  )
+  means <- modelbased::estimate_means(model, by = c("am", "vs", "gear"))
+  expect_identical(nrow(contrasts), 66L)
+
+  expect_no_warning({
+    dp <- data_plot(contrasts, means)
+  })
+  expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 66))
+  expect_no_warning({
+    p <- plot(contrasts, means)
+  })
+  labels <- ggplot2::ggplot_build(p)$layout$panel_params[[1]]$x$get_labels()
+  expect_identical(labels[1:2], c("auto\nV\n3", "auto\nV\n4"))
+  expect_length(labels, 12L)
+  expect_false(any(grepl(", ", labels, fixed = TRUE)))
+
+  expect_no_warning({
+    p_data <- plot(contrasts, means, show_data = TRUE)
+  })
+  built <- ggplot2::ggplot_build(p_data)
+  expect_identical(nrow(built$data[[1]]), nrow(d))
+  expect_identical(
+    built$layout$panel_params[[1]]$x$get_labels(),
+    labels
+  )
+
+  # two variables keep the "auto, 4" form
+  fx <- contrasts_by_fixture()
+  joint <- modelbased::estimate_contrasts(fx$model, contrast = c("am", "cyl"))
+  two_labels <- ggplot2::ggplot_build(
+    plot(joint, fx$means)
+  )$layout$panel_params[[1]]$x$get_labels()
+  expect_true("auto, 4" %in% two_labels)
+})
+
+
+# the text of the facet strips, in panel order, for one `by` variable
+strip_labels <- function(p) {
+  unname(unlist(ggplot2::get_strip_labels(p)$facets))
+}
+
+test_that("lighthouse plots accept `by` variables with names that ggplot2 reserves", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  for (name in c("PANEL", "ROW", "COL", "SCALE_X", "SCALE_Y")) {
+    d_name <- d
+    d_name[[name]] <- d_name$cyl
+    model <- lm(as.formula(paste("mpg ~", name, "* am")), data = d_name)
+    contrasts <- modelbased::estimate_contrasts(model, contrast = "am", by = name)
+    means <- modelbased::estimate_means(model, by = c(name, "am"))
+    p <- plot(contrasts, means)
+    expect_identical(nrow(ggplot2::ggplot_build(p)$layout$layout), 3L)
+    expect_identical(strip_labels(p), c("4", "6", "8"))
+
+    if (name == "PANEL") {
+      p_data <- plot(contrasts, means, show_data = TRUE)
+      built <- ggplot2::ggplot_build(p_data)
+      expect_identical(nrow(built$data[[1]]), nrow(d))
+      expect_identical(strip_labels(p_data), c("4", "6", "8"))
+    }
+  }
+
+  # a `by` variable renamed to `.by_x` shows its levels, not the new name
+  d_x <- d
+  d_x$x <- d_x$cyl
+  model <- lm(mpg ~ x * am, data = d_x)
+  p <- plot(
+    modelbased::estimate_contrasts(model, contrast = "am", by = "x"),
+    modelbased::estimate_means(model, by = c("x", "am"))
+  )
+  expect_identical(strip_labels(p), c("4", "6", "8"))
+})
+
+
+test_that("`show_data = TRUE` leaves out numeric `by` levels that the contrasts lack", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  d$cyl <- as.numeric(as.character(d$cyl))
+  model <- lm(mpg ~ cyl * am, data = d)
+  contrasts <- suppressMessages(
+    modelbased::estimate_contrasts(model, contrast = "am", by = "cyl=4")
+  )
+  means <- suppressMessages(
+    modelbased::estimate_means(model, by = c("cyl=c(4,6,8)", "am"))
+  )
+  expect_no_warning({
+    p <- plot(contrasts, means, show_data = TRUE)
+  })
+  built <- ggplot2::ggplot_build(p)
+  expect_identical(nrow(built$layout$layout), 1L)
+  expect_identical(nrow(built$data[[1]]), sum(d$cyl == 4))
+})
+
+
+test_that("a continuous axis keeps the x values of a contrast variable named like a plot column", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  for (name in c("x", "y", "ymin", "ymax", "Mean1", "Mean2", "Level1", "Level2")) {
+    d <- mtcars
+    d[[name]] <- d$wt
+    model <- lm(as.formula(paste("mpg ~", name)), data = d)
+    target <- paste0(name, "=c(2,2.5,4)")
+    contrasts <- modelbased::estimate_contrasts(model, contrast = target)
+    means <- modelbased::estimate_means(model, by = target)
+    dp <- data_plot(contrasts, means)
+    expect_identical(sort(unique(dp$geom_polygon$x)), c(2, 2.5, 4))
+    expect_identical(sort(dp$geom_pointrange$x), c(2, 2.5, 4))
+  }
+})
+
+
+test_that("continuous axis breaks print like the contrast levels", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  model <- lm(mpg ~ wt, data = mtcars)
+  p <- plot(
+    modelbased::estimate_contrasts(model, contrast = "wt=c(2,2.5,4)"),
+    modelbased::estimate_means(model, by = "wt=c(2,2.5,4)")
+  )
+  expect_identical(
+    ggplot2::ggplot_build(p)$layout$panel_params[[1]]$x$get_labels(),
+    c("2", "2.5", "4")
+  )
+  fx <- contrasts_by_fixture()
+  info <- attr(data_plot(fx$contrasts, fx$means), "info")
+  expect_false("x_display" %in% names(info))
+})
+
+
+test_that("`show_data = TRUE` with a factor and a numeric `by` names the numeric values the means lack", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  set.seed(3)
+  d <- data.frame(
+    a = factor(rep(c("p", "q"), 60)),
+    g = factor(rep(c("A", "B", "C"), each = 2, length.out = 120)),
+    w = rep(c(2, 3, 5), each = 6, length.out = 120)
+  )
+  d$y <- rnorm(120)
+  model <- lm(y ~ a * g + w, data = d)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "a",
+    by = c("g=c('A','B')", "w=c(2,3)")
+  )
+  means <- modelbased::estimate_means(
+    model,
+    by = c("a", "g=c('A','B')", "w=c(2,3)")
+  )
+  message <- error_text(plot(contrasts, means, show_data = TRUE))
+  expect_match(message, "w is numeric", fixed = TRUE)
+
+  # without the values the means lack, the levels the contrasts lack are left out
+  on_grid <- d[d$w != 5, ]
+  model <- lm(y ~ a * g + w, data = on_grid)
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "a",
+    by = c("g=c('A','B')", "w=c(2,3)")
+  )
+  means <- modelbased::estimate_means(
+    model,
+    by = c("a", "g=c('A','B')", "w=c(2,3)")
+  )
+  points <- ggplot2::ggplot_build(
+    plot(contrasts, means, show_data = TRUE)
+  )$data[[1]]
+  expect_identical(nrow(points), sum(on_grid$g != "C"))
+})

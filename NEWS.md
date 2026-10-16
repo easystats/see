@@ -63,6 +63,15 @@
   The link scale does not count for a model with a zero-inflation or hurdle
   part.
 
+* `plot()` for `modelbased::estimate_contrasts()` now shows only the panels
+  of the `by` levels that the contrasts have. It leaves out the means and
+  raw data of other levels. A numeric contrast variable at unevenly spaced
+  values, such as `contrast = "wt=c(2,2.5,4)"`, gets a continuous x axis
+  that keeps their spacing. Joint contrasts of three or more
+  variables show one level per line in the axis labels. A `by` variable
+  named `PANEL`, `ROW`, `COL`, `SCALE_X`, or `SCALE_Y` no longer stops the
+  plot.
+
 * If a term with a VIF below 2 has an upper confidence limit that is infinite
   or above the top of the plot, the collinearity plot now has a caption. The
   caption says that the interval formula (from *performance*) fails near

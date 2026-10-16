@@ -40,7 +40,8 @@ scale as the contrasts.
 \item The estimated means do not include each value in the data of the
 contrasted and \code{by} variables, or each combination of their values. For
 example, a numeric \code{by} variable has values that the means were not
-estimated at.
+estimated at. Data at factor or character \code{by} levels that the
+contrasts lack are left out instead.
 }}
 
 \item{...}{Arguments passed to or from other methods.}
@@ -59,7 +60,15 @@ level, or combination of levels, of the \code{by} variables. The estimated means
 must include the contrasted variables and the \code{by} variables, and no other
 variables that split their rows further, except the \code{Response} column of
 ordinal and multinomial models. If the means have no row for the levels of
-a contrast, the plot does not draw that contrast and gives a warning.
+a contrast, the plot does not draw that contrast and gives a warning. The
+plot shows only the \code{by} levels, or combinations of levels, that appear in
+the contrasts. It leaves out the means of other \code{by} levels, and with
+\code{show_data = TRUE} their raw data, and gives no warning for them. For a
+numeric \code{by} variable, \code{show_data = TRUE} leaves out the raw data only at
+values that the means hold. Data at other values still give the error
+described under \code{show_data}. A \code{by}
+variable named \code{PANEL}, \code{ROW}, \code{COL}, \code{SCALE_X}, or \code{SCALE_Y}, which
+ggplot2 reserves for facets, works too. The facet strips show its levels.
 
 For ordinal and multinomial models, such as \code{MASS::polr()} and
 \code{mclogit::mblogit()}, the means have one row per response category, in the
@@ -72,7 +81,14 @@ gives no warning for them.
 
 If you contrast two or more variables jointly, for example with
 \code{contrast = c("am", "cyl")}, the x axis shows their combinations of levels,
-such as \code{"auto, 4"}. The first variable changes slowest along the axis.
+such as \code{"auto, 4"}. The first variable changes slowest along the axis. For
+three or more variables, each label shows one level per line.
+
+If you contrast one numeric variable at unevenly spaced values, such as
+\code{contrast = "wt=c(2,2.5,4)"}, the x axis is continuous and keeps their
+spacing, with breaks at those values. Evenly spaced values, such as 1, 2,
+and 3, and two values or fewer keep an axis with one evenly spaced
+position per value.
 
 The plot takes the estimates from the column of the means that their
 \code{coef_name} attribute names. For means without this attribute, such as a

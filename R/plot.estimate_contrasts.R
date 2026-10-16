@@ -86,10 +86,24 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     by_vars <- c("Response", by_vars)
   }
 
-  # `by` columns named like columns of the plot data are renamed
+  # `by` columns named like columns of the plot data, or like the columns
+  # that ggplot2 reserves for facets, are renamed
   by_columns <- by_vars
   collides <- by_vars %in%
-    c("x", "y", "ymin", "ymax", "group", "Mean1", "Mean2")
+    c(
+      "x",
+      "y",
+      "ymin",
+      "ymax",
+      "group",
+      "Mean1",
+      "Mean2",
+      "PANEL",
+      "ROW",
+      "COL",
+      "SCALE_X",
+      "SCALE_Y"
+    )
   if (any(collides)) {
     by_columns[collides] <- paste0(".by_", by_vars[collides])
     names(contrast_data)[match(
@@ -97,6 +111,12 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
       names(contrast_data)
     )] <- by_columns[collides]
     names(means)[match(by_vars[collides], names(means))] <- by_columns[collides]
+  }
+
+  # panels only for the `by` levels that the contrasts have
+  if (length(by_columns)) {
+    keep <- .by_key(means, by_columns) %in% .by_key(contrast_data, by_columns)
+    means <- means[keep, , drop = FALSE]
   }
 
   dataplot <- .data_contrasts_and_means(
@@ -109,6 +129,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     geometry = geometry
   )
 
+  x_display <- attr(dataplot, "x_display", exact = TRUE)
+  attr(dataplot, "x_display") <- NULL
   attr(dataplot, "info") <- list(
     xlab = toString(x_name),
     ylab = y_name,
@@ -116,6 +138,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     x_name = x_name,
     by = by_columns
   )
+  attr(dataplot, "info")$x_display <- x_display
 
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
   dataplot
@@ -393,6 +416,29 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 }
 
 
+# three or more values whose gaps between neighbors differ by more than a
+# tolerance, so that 0.1, 0.2, 0.3 count as evenly spaced
+#' @keywords internal
+.uneven_spacing <- function(x) {
+  values <- sort(unique(as.numeric(x)))
+  if (length(values) < 3L) {
+    return(FALSE)
+  }
+  gaps <- diff(values)
+  max(gaps) - min(gaps) > 1e-8 * (max(values) - min(values))
+}
+
+
+# one key per row for the combination of the values in `columns`
+#' @keywords internal
+.by_key <- function(data, columns) {
+  do.call(
+    paste,
+    c(lapply(columns, function(i) .value_key(data[[i]])), sep = "\r")
+  )
+}
+
+
 #' @keywords internal
 .data_contrasts_and_means <- function(
   contrasts,
@@ -448,9 +494,29 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
   })
   level_grid <- expand.grid(rev(level_sets), stringsAsFactors = FALSE)
   x_levels <- do.call(paste, c(rev(as.list(level_grid)), sep = ", "))
+  # three or more contrasted variables show one level per line
+  x_display <- do.call(paste, c(rev(as.list(level_grid)), sep = "\n"))
+  x_display <- x_display[x_levels %in% x_labels]
   x_levels <- x_levels[x_levels %in% x_labels]
 
-  data_means$x <- factor(x_labels, levels = x_levels)
+  # one numeric contrast variable with unevenly spaced values keeps its
+  # spacing on a continuous axis; the contrast levels are matched to the
+  # means by their labels
+  numeric_x <- length(x_name) == 1L &&
+    is.numeric(data_means[[x_name]]) &&
+    .uneven_spacing(data_means[[x_name]])
+  # kept before the plot columns below can overwrite a contrast variable
+  # named like one of them
+  x_values <- if (numeric_x) as.numeric(data_means[[x_name]])
+  x_position <- function(labels) {
+    if (numeric_x) {
+      x_values[match(labels, x_labels)]
+    } else {
+      factor(labels, levels = x_levels)
+    }
+  }
+
+  data_means$x <- x_position(x_labels)
   data_means$y <- data_means[[y_name]]
   data_means$Level2 <- data_means$Level1 <- x_labels
   data_means$Mean2 <- data_means$Mean1 <- data_means[[y_name]]
@@ -511,30 +577,34 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     cbind(
       polygons,
       data.frame(
-        x = factor(polygons$Level1, levels = x_levels),
+        x = x_position(polygons$Level1),
         y = polygons$Mean1
       )
     ),
     cbind(
       polygons,
       data.frame(
-        x = factor(polygons$Level2, levels = x_levels),
+        x = x_position(polygons$Level2),
         y = tip(polygons$Mean1, polygons$CI_low)
       )
     ),
     cbind(
       polygons,
       data.frame(
-        x = factor(polygons$Level2, levels = x_levels),
+        x = x_position(polygons$Level2),
         y = tip(polygons$Mean1, polygons$CI_high)
       )
     )
   )
 
-  list(
+  out <- list(
     geom_polygon = polygons,
     geom_pointrange = data_means
   )
+  if (length(x_name) >= 3L) {
+    attr(out, "x_display") <- stats::setNames(x_display, x_levels)
+  }
+  out
 }
 
 
@@ -551,7 +621,15 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' must include the contrasted variables and the `by` variables, and no other
 #' variables that split their rows further, except the `Response` column of
 #' ordinal and multinomial models. If the means have no row for the levels of
-#' a contrast, the plot does not draw that contrast and gives a warning.
+#' a contrast, the plot does not draw that contrast and gives a warning. The
+#' plot shows only the `by` levels, or combinations of levels, that appear in
+#' the contrasts. It leaves out the means of other `by` levels, and with
+#' `show_data = TRUE` their raw data, and gives no warning for them. For a
+#' numeric `by` variable, `show_data = TRUE` leaves out the raw data only at
+#' values that the means hold. Data at other values still give the error
+#' described under `show_data`. A `by`
+#' variable named `PANEL`, `ROW`, `COL`, `SCALE_X`, or `SCALE_Y`, which
+#' ggplot2 reserves for facets, works too. The facet strips show its levels.
 #'
 #' For ordinal and multinomial models, such as `MASS::polr()` and
 #' `mclogit::mblogit()`, the means have one row per response category, in the
@@ -564,7 +642,14 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' If you contrast two or more variables jointly, for example with
 #' `contrast = c("am", "cyl")`, the x axis shows their combinations of levels,
-#' such as `"auto, 4"`. The first variable changes slowest along the axis.
+#' such as `"auto, 4"`. The first variable changes slowest along the axis. For
+#' three or more variables, each label shows one level per line.
+#'
+#' If you contrast one numeric variable at unevenly spaced values, such as
+#' `contrast = "wt=c(2,2.5,4)"`, the x axis is continuous and keeps their
+#' spacing, with breaks at those values. Evenly spaced values, such as 1, 2,
+#' and 3, and two values or fewer keep an axis with one evenly spaced
+#' position per value.
 #'
 #' The plot takes the estimates from the column of the means that their
 #' `coef_name` attribute names. For means without this attribute, such as a
@@ -644,7 +729,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   - The estimated means do not include each value in the data of the
 #'     contrasted and `by` variables, or each combination of their values. For
 #'     example, a numeric `by` variable has values that the means were not
-#'     estimated at.
+#'     estimated at. Data at factor or character `by` levels that the
+#'     contrasts lack are left out instead.
 #'
 #' @details
 #' **Interpreting Lighthouse Plots**
@@ -741,13 +827,20 @@ plot.see_estimate_contrasts <- function(
 
   p <- ggplot2::ggplot()
 
-  # the raw data are the first layer, behind the lighthouses
+  # the raw data are the first layer, behind the lighthouses; on a continuous
+  # axis the jitter is a tenth of the smallest gap between the x values
   if (show_data) {
+    x_values <- sort(unique(x$geom_pointrange$x))
+    jitter_width <- if (is.numeric(x_values) && length(x_values) > 1L) {
+      0.1 * min(diff(x_values))
+    } else {
+      0.1
+    }
     p <- p +
       ggplot2::geom_point(
         data = .raw_data_contrasts(contrast_data, data, x),
         ggplot2::aes(x = .data$x, y = .data$y),
-        position = ggplot2::position_jitter(width = 0.1, height = 0),
+        position = ggplot2::position_jitter(width = jitter_width, height = 0),
         alpha = 0.3
       )
   }
@@ -769,6 +862,28 @@ plot.see_estimate_contrasts <- function(
       color = "black"
     ) +
     add_plot_attributes(x)
+
+  # labels of joint contrasts of three or more variables, in level order
+  # also when the raw data lack some combinations
+  x_display <- attr(x, "info")$x_display
+  if (!is.null(x_display)) {
+    p <- p +
+      ggplot2::scale_x_discrete(
+        limits = names(x_display),
+        labels = unname(x_display)
+      )
+  }
+
+  # a continuous axis has its breaks at the values of the means, printed
+  # like the contrast levels
+  if (is.numeric(x$geom_pointrange$x)) {
+    breaks <- sort(unique(x$geom_pointrange$x))
+    p <- p +
+      ggplot2::scale_x_continuous(
+        breaks = breaks,
+        labels = as.character(breaks)
+      )
+  }
 
   # one panel per level, or combination of levels, of the `by` variables
   by_columns <- attr(x, "info")$by
@@ -849,6 +964,29 @@ plot.see_estimate_contrasts <- function(
   .check_raw_response_scale(model, contrasts, means_object, response)
   .check_raw_predict(contrasts, means_object)
 
+  # observations only for the `by` levels that the contrasts have; numeric
+  # `by` values that the means lack are kept for the check below
+  if (length(by_vars)) {
+    contrast_rows <- as.data.frame(contrasts)
+    keep <- .by_key(model_data, by_vars) %in% .by_key(contrast_rows, by_vars)
+    numeric_by <- by_vars[
+      vapply(by_vars, function(i) is.numeric(model_data[[i]]), logical(1))
+    ]
+    off_grid <- rep(FALSE, nrow(model_data))
+    for (i in numeric_by) {
+      off_grid <- off_grid |
+        !.value_key(model_data[[i]]) %in% .value_key(means[[i]])
+    }
+    # only at factor or character `by` levels that the contrasts have
+    categorical_by <- setdiff(by_vars, numeric_by)
+    if (length(categorical_by)) {
+      off_grid <- off_grid &
+        .by_key(model_data, categorical_by) %in%
+          .by_key(contrast_rows, categorical_by)
+    }
+    model_data <- model_data[keep | off_grid, , drop = FALSE]
+  }
+
   # each data value must have its place on the x axis and in the facets
   for (i in c(x_name, by_vars)) {
     lacking <- setdiff(
@@ -898,10 +1036,15 @@ plot.see_estimate_contrasts <- function(
       sep = ", "
     )
   )
+  numeric_x <- is.numeric(dataplot$geom_pointrange$x)
   x_levels <- levels(dataplot$geom_pointrange$x)
 
   # in joint contrasts, each combination of levels must be on the x axis
-  lacking <- setdiff(unique(x_labels), x_levels)
+  lacking <- if (numeric_x) {
+    character()
+  } else {
+    setdiff(unique(x_labels), x_levels)
+  }
   if (length(lacking)) {
     insight::format_error(
       paste0(
@@ -955,7 +1098,11 @@ plot.see_estimate_contrasts <- function(
     }
   }
 
-  model_data$x <- factor(x_labels, levels = x_levels)
+  model_data$x <- if (numeric_x) {
+    as.numeric(model_data[[x_name]])
+  } else {
+    factor(x_labels, levels = x_levels)
+  }
   model_data$y <- y
   model_data
 }
