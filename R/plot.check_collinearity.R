@@ -105,6 +105,17 @@ plot.see_check_collinearity <- function(
     x <- cbind(x, ci_data)
   }
 
+  # infinite upper bounds are drawn as arrows to the top of the plot, which
+  # readers can mistake for high VIF (#399)
+  caption <- NULL
+  if (any(is.infinite(x$VIF_CI_high) & x$VIF_CI_high > 0)) {
+    caption <- paste(
+      "Some VIF intervals have no upper limit:",
+      "the data cannot show how much collinearity there is.",
+      sep = ifelse(is_check_model, "\n", " ")
+    )
+  }
+
   # make sure legend is properly sorted
   x$group <- factor(x$group, levels = c("low", "moderate", "high"))
   levels(x$group) <- c("Low (< 5)", "Moderate (< 10)", "High (\u2265 10)")
@@ -188,7 +199,8 @@ plot.see_check_collinearity <- function(
         "Variance Inflation",
         "Factor (VIF, log-scaled)",
         sep = ifelse(is_check_model, "\n", " ")
-      )
+      ),
+      caption = caption
     ) +
     ggplot2::scale_color_manual(
       values = colors,
@@ -200,7 +212,8 @@ plot.see_check_collinearity <- function(
       limits = c(1, ylim * 1.15),
       oob = scales::oob_squish,
       trans = "log10",
-      expand = c(0, 0),
+      # room below VIF = 1, so that points at 1 are not cut in half
+      expand = ggplot2::expansion(mult = c(0.06, 0)),
       breaks = scales::log_breaks(n = 7, base = 10)
     ) +
     ggplot2::scale_x_discrete() +
