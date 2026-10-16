@@ -222,12 +222,12 @@ add_plot_attributes <- function(x) {
   if (is.null(data)) {
     return(.retrieve_data(x))
   }
-  if (is.data.frame(data)) {
-    # a data frame of posterior draws holds no priors, so the model for the
-    # prior layer is still looked up by its name
-    return(tryCatch(.retrieve_data(x), error = function(e) NULL))
+  if (insight::is_model(data)) {
+    return(data)
   }
-  data
+  # posterior draws, such as a data frame or a matrix, hold no priors, so the
+  # model for the prior layer is still looked up by its name
+  tryCatch(.retrieve_data(x), error = function(e) NULL)
 }
 
 #' @keywords internal

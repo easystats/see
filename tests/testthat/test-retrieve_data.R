@@ -1,6 +1,6 @@
 skip_on_cran()
 skip_if_not_installed("rstanarm")
-skip_if_not_installed("bayestestR")
+skip_if_not_installed("bayestestR", minimum_version = "0.20.0")
 skip_if_not_installed("datawizard")
 skip_if_not_installed("ggridges")
 
@@ -127,14 +127,15 @@ for (fun_name in c("p_direction", "p_significance", "point_estimate")) {
     {
       fun <- getExportedValue("bayestestR", fun_name)
       result <- suppressMessages(result_local(m_wt, fun))
-      draws <- as.data.frame(m_wt)
-      p <- with_global(
-        "inner_mod",
-        m_wt,
-        suppressMessages(plot(result, data = draws, priors = TRUE))
-      )
-      suppressMessages(expect_draws(p))
-      expect_identical(prior_parameters(p), model_parameters(m_wt))
+      for (draws in list(as.data.frame(m_wt), as.matrix(m_wt))) {
+        p <- with_global(
+          "inner_mod",
+          m_wt,
+          suppressMessages(plot(result, data = draws, priors = TRUE))
+        )
+        suppressMessages(expect_draws(p))
+        expect_identical(prior_parameters(p), model_parameters(m_wt))
+      }
     }
   )
 }
@@ -148,6 +149,17 @@ test_that("plot() works for `describe_distribution()` on a list", {
   expect_type(p, "list")
   expect_length(p, 2)
   expect_draws(p)
+})
+
+test_that("plot() works for `describe_distribution()` on a list with negative and missing values", {
+  x <- datawizard::describe_distribution(list(
+    c(-1.5, 2, -3, 4, -Inf),
+    c(1, 2, NA, 5.5, 3)
+  ))
+  expect_true(grepl("-1.5", paste(attr(x, "object_name"), collapse = " ")))
+  p <- suppressWarnings(plot(x))
+  expect_length(p, 2)
+  suppressWarnings(expect_draws(p))
 })
 
 test_that("plot() works for `describe_distribution()` on a long list in a function", {
