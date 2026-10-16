@@ -1,5 +1,5 @@
 skip_on_cran()
-skip_if_not_installed("performance")
+skip_if_not_installed("performance", minimum_version = "0.18.3")
 skip_if_not_installed("ggplot2")
 skip_if_not_installed("vdiffr")
 
