@@ -45,6 +45,12 @@ A ggplot2-object.
 \description{
 The \code{plot()} method for the \code{performance::check_collinearity()} function.
 }
+\details{
+If a term with a VIF below 2 has an upper confidence limit that is
+infinite or above the top of the plot, the plot has a caption. The caption
+says that the interval formula fails near VIF = 1, and that this is not
+high collinearity.
+}
 \examples{
 library(performance)
 m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)

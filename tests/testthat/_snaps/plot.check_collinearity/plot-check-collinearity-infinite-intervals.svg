@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 0.97; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<defs>
+  <clipPath id='cpMzguODl8NzE1LjAyfDMyLjY2fDUyMy41Nw=='>
+    <rect x='38.89' y='32.66' width='676.12' height='490.91' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzguODl8NzE1LjAyfDMyLjY2fDUyMy41Nw==)'>
+<rect x='38.89' y='32.66' width='676.12' height='490.91' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
+<polyline points='38.89,430.06 715.02,430.06 ' style='stroke-width: 0.48; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='38.89,325.90 715.02,325.90 ' style='stroke-width: 0.48; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='38.89,239.03 715.02,239.03 ' style='stroke-width: 0.48; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='38.89,124.88 715.02,124.88 ' style='stroke-width: 0.48; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='38.89,495.78 715.02,495.78 ' style='stroke-width: 0.97; stroke: #E5E5E5; stroke-linecap: butt;' />
+<polyline points='38.89,364.34 715.02,364.34 ' style='stroke-width: 0.97; stroke: #E5E5E5; stroke-linecap: butt;' />
+<polyline points='38.89,287.46 715.02,287.46 ' style='stroke-width: 0.97; stroke: #E5E5E5; stroke-linecap: butt;' />
+<polyline points='38.89,190.60 715.02,190.60 ' style='stroke-width: 0.97; stroke: #E5E5E5; stroke-linecap: butt;' />
+<polyline points='38.89,59.16 715.02,59.16 ' style='stroke-width: 0.97; stroke: #E5E5E5; stroke-linecap: butt;' />
+<polyline points='223.29,523.57 223.29,32.66 ' style='stroke-width: 0.97; stroke: #E5E5E5; stroke-linecap: butt;' />
+<polyline points='530.62,523.57 530.62,32.66 ' style='stroke-width: 0.97; stroke: #E5E5E5; stroke-linecap: butt;' />
+<rect x='38.89' y='190.60' width='676.12' height='305.18' style='stroke-width: 0.97; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3AAF85; fill-opacity: 0.15;' />
+<rect x='38.89' y='59.16' width='676.12' height='131.44' style='stroke-width: 0.97; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #1B6CA8; fill-opacity: 0.15;' />
+<rect x='38.89' y='32.66' width='676.12' height='26.50' style='stroke-width: 0.97; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CD201F; fill-opacity: 0.15;' />
+<line x1='223.29' y1='495.78' x2='223.29' y2='32.66' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<line x1='530.62' y1='495.78' x2='530.62' y2='32.66' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<line x1='223.29' y1='495.46' x2='223.29' y2='32.66' style='stroke-width: 0.97; stroke: #3AAF85;' />
+<polygon points='228.33,46.50 223.29,32.66 218.26,46.50 ' style='stroke-width: 0.97; stroke: #3AAF85; fill: #3AAF85;' />
+<line x1='530.62' y1='495.46' x2='530.62' y2='32.66' style='stroke-width: 0.97; stroke: #3AAF85;' />
+<polygon points='535.66,46.50 530.62,32.66 525.58,46.50 ' style='stroke-width: 0.97; stroke: #3AAF85; fill: #3AAF85;' />
+<circle cx='223.29' cy='495.46' r='3.73' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
+<circle cx='530.62' cy='495.46' r='3.73' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polyline points='38.89,523.57 38.89,32.66 ' style='stroke-width: 0.97; stroke: #CCCCCC; stroke-linecap: square;' />
+<text x='28.93' y='498.88' text-anchor='end' style='font-size: 9.00px; fill: #7F7F7F; font-family: sans;' textLength='5.01px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='28.93' y='367.44' text-anchor='end' style='font-size: 9.00px; fill: #7F7F7F; font-family: sans;' textLength='5.01px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='28.93' y='290.56' text-anchor='end' style='font-size: 9.00px; fill: #7F7F7F; font-family: sans;' textLength='5.01px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='28.93' y='193.69' text-anchor='end' style='font-size: 9.00px; fill: #7F7F7F; font-family: sans;' textLength='5.01px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='28.93' y='62.26' text-anchor='end' style='font-size: 9.00px; fill: #7F7F7F; font-family: sans;' textLength='10.01px' lengthAdjust='spacingAndGlyphs'>10</text>
+<polyline points='38.89,523.57 715.02,523.57 ' style='stroke-width: 0.97; stroke: #CCCCCC; stroke-linecap: square;' />
+<text x='223.29' y='539.72' text-anchor='middle' style='font-size: 9.00px; fill: #7F7F7F; font-family: sans;' textLength='5.01px' lengthAdjust='spacingAndGlyphs'>a</text>
+<text x='530.62' y='539.72' text-anchor='middle' style='font-size: 9.00px; fill: #7F7F7F; font-family: sans;' textLength='5.01px' lengthAdjust='spacingAndGlyphs'>b</text>
+<text transform='translate(11.86,278.11) rotate(-90)' text-anchor='middle' style='font-size: 10.00px; fill: #4D4D4D; font-family: sans;' textLength='184.54px' lengthAdjust='spacingAndGlyphs'>Variance Inflation Factor (VIF, log-scaled)</text>
+<rect x='346.94' y='546.57' width='60.03' height='17.28' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
+<line x1='355.58' y1='562.12' x2='355.58' y2='548.30' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<circle cx='355.58' cy='555.21' r='3.73' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
+<text x='369.20' y='558.31' style='font-size: 9.00px; fill: #4D4D4D; font-family: sans;' textLength='37.77px' lengthAdjust='spacingAndGlyphs'>Low (&lt; 5)</text>
+<text x='4.98' y='25.60' style='font-size: 10.00px; font-family: sans;' textLength='246.79px' lengthAdjust='spacingAndGlyphs'>High collinearity (VIF) may inflate parameter uncertainty</text>
+<text x='4.98' y='13.24' style='font-size: 12.00px; font-family: sans;' textLength='59.36px' lengthAdjust='spacingAndGlyphs'>Collinearity</text>
+<text x='715.02' y='569.36' text-anchor='end' style='font-size: 8.00px; font-family: sans;' textLength='355.08px' lengthAdjust='spacingAndGlyphs'>Some VIF intervals run off the top: the interval formula fails near VIF = 1. This is not high collinearity.</text>
+</g>
+</svg>
