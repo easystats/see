@@ -15,6 +15,7 @@ plot(
   colors = NULL,
   type = c("density", "discrete_dots", "discrete_interval", "discrete_both"),
   n_columns = 2,
+  show_smooth = NULL,
   ...
 )
 ```
@@ -45,6 +46,17 @@ plot(
 - n_columns:
 
   Number of columns to align plots.
+
+- show_smooth:
+
+  Logical, if `FALSE`, no trend line is drawn in the Linearity,
+  Homogeneity of Variance and Influential Observations panels. This
+  turns off the LOESS smoother and, for models whose fitted values take
+  only a few distinct values, the cell means with their line and error
+  bars. If `NULL` (default), the value stored in the
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html)
+  object is used, and `TRUE` if there is none. The binned residuals
+  panel is not affected.
 
 - ...:
 

@@ -18,6 +18,7 @@ plot(
   size_axis_title = base_size,
   base_size = 10,
   theme = NULL,
+  show_smooth = TRUE,
   ...
 )
 ```
@@ -50,6 +51,13 @@ plot(
 
   A ggplot2-theme function, e.g. `theme = theme_lucid()` or
   `theme = ggplot2::theme_dark()`.
+
+- show_smooth:
+
+  Logical, if `FALSE`, no trend line is drawn. This turns off the LOESS
+  smoother and, for models whose fitted values take only a few distinct
+  values, the cell means with their line and error bars. Default is
+  `TRUE`.
 
 - ...:
 

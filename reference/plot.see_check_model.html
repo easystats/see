@@ -70,6 +70,7 @@ Diagnostic plots for regression models.</p>
 <span>  colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"density"</span>, <span class="st">"discrete_dots"</span>, <span class="st">"discrete_interval"</span>, <span class="st">"discrete_both"</span><span class="op">)</span>,</span>
 <span>  n_columns <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  show_smooth <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -101,6 +102,16 @@ or ordinal etc. - outcomes).</p></dd>
 
 <dt id="arg-n-columns">n_columns<a class="anchor" aria-label="anchor" href="#arg-n-columns"></a></dt>
 <dd><p>Number of columns to align plots.</p></dd>
+
+
+<dt id="arg-show-smooth">show_smooth<a class="anchor" aria-label="anchor" href="#arg-show-smooth"></a></dt>
+<dd><p>Logical, if <code>FALSE</code>, no trend line is drawn in the
+Linearity, Homogeneity of Variance and Influential Observations panels.
+This turns off the LOESS smoother and, for models whose fitted values take
+only a few distinct values, the cell means with their line and error bars.
+If <code>NULL</code> (default), the value stored in the <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code> object is
+used, and <code>TRUE</code> if there is none. The binned residuals panel is not
+affected.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

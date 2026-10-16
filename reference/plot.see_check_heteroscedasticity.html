@@ -73,6 +73,7 @@ performance::check_heteroscedasticity() function."><meta property="og:image" con
 <span>  size_axis_title <span class="op">=</span> <span class="va">base_size</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  theme <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  show_smooth <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -107,6 +108,13 @@ axis and plot titles.</p></dd>
 <dt id="arg-theme">theme<a class="anchor" aria-label="anchor" href="#arg-theme"></a></dt>
 <dd><p>A ggplot2-theme function, e.g. <code>theme = theme_lucid()</code> or
 <code>theme = ggplot2::theme_dark()</code>.</p></dd>
+
+
+<dt id="arg-show-smooth">show_smooth<a class="anchor" aria-label="anchor" href="#arg-show-smooth"></a></dt>
+<dd><p>Logical, if <code>FALSE</code>, no trend line is drawn. This turns
+off the LOESS smoother and, for models whose fitted values take only a few
+distinct values, the cell means with their line and error bars. Default is
+<code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
