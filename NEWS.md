@@ -57,6 +57,12 @@
   or combination of levels, of the `by` variables. The x axis now shows the
   contrasted variable in the order of its levels (easystats/modelbased#267).
 
+* When some observations had a missing Cook's distance, `plot()` for
+  `check_outliers()` failed with "arguments imply differing number of rows".
+  An example is rows with missing values in a model fitted with
+  `na.action = na.exclude`. The scree and count plots now leave these
+  observations out, and the labels still name the right rows.
+
 # see 0.14.2
 
 ## Changes
