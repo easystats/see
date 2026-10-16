@@ -260,6 +260,9 @@
 
   size_text <- size_text %||% 3.5
 
+  # leave out rows without a distance (e.g., rows the model was not fitted on)
+  d <- d[!is.na(d$Distance), , drop = FALSE]
+
   p <- ggplot2::ggplot(
     d,
     ggplot2::aes(
