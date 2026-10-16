@@ -727,10 +727,10 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'     scale as the contrasts.
 #'   - The model data lack the response or a contrasted or `by` variable.
 #'   - The estimated means do not include each value in the data of the
-#'     contrasted variables, or of a numeric `by` variable, or each
-#'     combination of their values. For example, a numeric `by` variable has
-#'     values that the means were not estimated at. Data at factor or
-#'     character `by` levels that the contrasts lack are left out instead.
+#'     contrasted and `by` variables, or each combination of their values. For
+#'     example, a numeric `by` variable has values that the means were not
+#'     estimated at. Data at factor or character `by` levels that the
+#'     contrasts lack are left out instead.
 #'
 #' @details
 #' **Interpreting Lighthouse Plots**

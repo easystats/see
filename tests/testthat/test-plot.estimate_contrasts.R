@@ -2056,7 +2056,7 @@ test_that("joint contrasts of three variables show one level per line", {
 })
 
 
-# the text of the facet strips, in panel order
+# the text of the facet strips, in panel order, for one `by` variable
 strip_labels <- function(p) {
   unname(unlist(ggplot2::get_strip_labels(p)$facets))
 }

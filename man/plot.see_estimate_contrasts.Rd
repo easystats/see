@@ -38,10 +38,10 @@ information, such as a plain data frame, are taken to be on the same
 scale as the contrasts.
 \item The model data lack the response or a contrasted or \code{by} variable.
 \item The estimated means do not include each value in the data of the
-contrasted variables, or of a numeric \code{by} variable, or each
-combination of their values. For example, a numeric \code{by} variable has
-values that the means were not estimated at. Data at factor or
-character \code{by} levels that the contrasts lack are left out instead.
+contrasted and \code{by} variables, or each combination of their values. For
+example, a numeric \code{by} variable has values that the means were not
+estimated at. Data at factor or character \code{by} levels that the
+contrasts lack are left out instead.
 }}
 
 \item{...}{Arguments passed to or from other methods.}
