@@ -1677,3 +1677,73 @@ test_that("lighthouse plots draw ratio contrasts with `transform = TRUE` of an u
   expect_match(message, "ratio contrasts", fixed = TRUE)
   expect_match(message, "`transform = TRUE`", fixed = TRUE)
 })
+
+
+test_that("lighthouse plots of back-transformed contrasts draw a geometry the estimates match, or stop", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl)
+  geometric_means <- tapply(d$mpg, d$cyl, function(v) exp(mean(log(v))))
+  expected <- c(
+    "mpg" = "difference",
+    "scale(mpg)" = "difference",
+    "log(mpg)" = "ratio",
+    "log2(mpg)" = "ratio",
+    "log10(mpg)" = "ratio",
+    "log(mpg, base = 2)" = "ratio",
+    "I(mpg / 2)" = "stop",
+    "sqrt(mpg)" = "stop"
+  )
+
+  for (response in names(expected)) {
+    model <- lm(as.formula(paste(response, "~ cyl")), data = d)
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "cyl",
+      transform = TRUE
+    )
+    means <- modelbased::estimate_means(model, by = "cyl", transform = TRUE)
+
+    if (expected[[response]] == "stop") {
+      message <- error_text(data_plot(contrasts, means))
+      expect_match(message, "`transform`", fixed = TRUE)
+      next
+    }
+
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 3))
+    expect_lighthouses(
+      polygons,
+      contrasts,
+      means,
+      "cyl",
+      geometry = expected[[response]]
+    )
+
+    # the estimates of the contrasts match the means on both sides
+    estimate <- if ("Ratio" %in% names(contrasts)) {
+      contrasts$Ratio
+    } else {
+      contrasts$Difference
+    }
+    mean_of <- setNames(means$Mean, as.character(means$cyl))
+    mean1 <- unname(mean_of[as.character(contrasts$Level1)])
+    mean2 <- unname(mean_of[as.character(contrasts$Level2)])
+    implied <- if (expected[[response]] == "ratio") {
+      mean1 / estimate
+    } else {
+      mean1 - estimate
+    }
+    expect_lt(max(abs(implied - mean2)), 1e-6)
+
+    # back-transformed means of a log response are geometric means
+    if (expected[[response]] == "ratio") {
+      expect_lt(
+        max(abs(mean_of[names(geometric_means)] - geometric_means)),
+        1e-6
+      )
+    }
+  }
+})
