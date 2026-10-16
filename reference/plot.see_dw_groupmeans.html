@@ -61,7 +61,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'see_dw_groupmeans'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, title <span class="op">=</span> <span class="st">""</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, caption <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, title <span class="op">=</span> <span class="st">""</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, caption <span class="op">=</span> <span class="cn">TRUE</span>, flip <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -86,6 +86,11 @@ in the graph.</p></dd>
 for the analysis should be included.</p></dd>
 
 
+<dt id="arg-flip">flip<a class="anchor" aria-label="anchor" href="#arg-flip"></a></dt>
+<dd><p>Logical. If <code>TRUE</code> (the default), the groups are on the
+vertical axis. If <code>FALSE</code>, the groups are on the horizontal axis.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Currently not used.</p></dd>
 
@@ -93,6 +98,9 @@ for the analysis should be included.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Produces a faceted plot when there is more than one means-table.</p>
+<p>By default, the plot uses <code><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">ggplot2::coord_flip()</a></code>, so the groups are on the
+vertical axis and the means are on the horizontal axis. Use <code>flip = FALSE</code>
+to show the groups on the horizontal axis.</p>
     </div>
 
     <div class="section level2">

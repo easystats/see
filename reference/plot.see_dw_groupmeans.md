@@ -9,7 +9,7 @@ function.
 
 ``` r
 # S3 method for class 'see_dw_groupmeans'
-plot(x, title = "", ci = TRUE, caption = TRUE, ...)
+plot(x, title = "", ci = TRUE, caption = TRUE, flip = TRUE, ...)
 ```
 
 ## Arguments
@@ -33,6 +33,11 @@ plot(x, title = "", ci = TRUE, caption = TRUE, ...)
   Logical, indicating if a caption summarizing the anova results for the
   analysis should be included.
 
+- flip:
+
+  Logical. If `TRUE` (the default), the groups are on the vertical axis.
+  If `FALSE`, the groups are on the horizontal axis.
+
 - ...:
 
   Currently not used.
@@ -40,6 +45,12 @@ plot(x, title = "", ci = TRUE, caption = TRUE, ...)
 ## Details
 
 Produces a faceted plot when there is more than one means-table.
+
+By default, the plot uses
+[`ggplot2::coord_flip()`](https://ggplot2.tidyverse.org/reference/coord_flip.html),
+so the groups are on the vertical axis and the means are on the
+horizontal axis. Use `flip = FALSE` to show the groups on the horizontal
+axis.
 
 ## Examples
 

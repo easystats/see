@@ -125,9 +125,17 @@ estimated at.</p></li>
 the estimated means of its own <code>by</code> level. The plot then has one panel per
 level, or combination of levels, of the <code>by</code> variables. The estimated means
 must include the contrasted variables and the <code>by</code> variables, and no other
-variables that split their rows further. If the means have no row for the
-levels of a contrast, the plot does not draw that contrast and gives a
-warning.</p>
+variables that split their rows further, except the <code>Response</code> column of
+ordinal and multinomial models. If the means have no row for the levels of
+a contrast, the plot does not draw that contrast and gives a warning.</p>
+<p>For ordinal and multinomial models, such as <code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code> and
+<code><a href="https://melff.github.io/mclogit/reference/mblogit.html" class="external-link">mclogit::mblogit()</a></code>, the means have one row per response category, in the
+column <code>Response</code>. The contrasts have the columns <code>Response1</code> and
+<code>Response2</code>. The plot then has one panel per response category, or per
+combination of category and <code>by</code> levels. Each panel shows the means of that
+category and the contrasts whose <code>Response1</code> and <code>Response2</code> are both that
+category. The plot does not draw contrasts between two categories, and it
+gives no warning for them.</p>
 <p>If you contrast two or more variables jointly, for example with
 <code>contrast = c("am", "cyl")</code>, the x axis shows their combinations of levels,
 such as <code>"auto, 4"</code>. The first variable changes slowest along the axis.</p>
@@ -140,7 +148,9 @@ none of these columns, the plot stops with an error.</p>
 a difference, the lighthouse at <code>Level2</code> spans that mean minus the bounds of
 the confidence interval. Contrasts with a <code>Ratio</code> column, from
 <code>comparison = ratio ~ pairwise</code>, are ratios of the means, so the lighthouse
-at <code>Level2</code> spans that mean divided by the bounds of the interval. If the
+at <code>Level2</code> spans that mean divided by the bounds of the interval. Bayesian
+ratio contrasts have no <code>Ratio</code> column, so the plot reads the left side of
+their <code>comparison</code> formula, <code>ratio</code>, and draws them as ratios too. If the
 interval of a ratio includes 0, the plot does not draw that contrast and
 gives a warning. The contrasts must have the columns <code>CI_low</code> and
 <code>CI_high</code>.</p>
@@ -155,13 +165,19 @@ transformations that <code><a href="https://easystats.github.io/insight/referenc
 the plot stops with an error. With <code>backend = "emmeans"</code>, which sets
 <code>transform = TRUE</code> by default, the contrasts are differences of the
 back-transformed means, and the plot draws them as differences. The plot
-stops with an error for ratio contrasts estimated with <code>transform = TRUE</code>,
-because for a transformed response they are not ratios of the
-back-transformed means.</p>
+draws ratio contrasts estimated with <code>transform = TRUE</code> as ratios if
+<code><a href="https://easystats.github.io/insight/reference/find_transformation.html" class="external-link">insight::find_transformation()</a></code> reports the transformation <code>"identity"</code>.
+For other transformations, it stops with an error, because for a
+transformed response they are not ratios of the back-transformed means.</p>
 <p>The contrasts and the means must be on the same scale. The plot stops with
 an error if both record a <code>predict</code> value and the two differ. The <code>predict</code>
 values <code>"response"</code>, <code>"inverse_link"</code>, and <code>"invlink(link)"</code> count as the
-same scale. The plot also stops with an error if both record a <code>transform</code>
+same scale. With <code>backend = "emmeans"</code>, modelbased records the link scale as
+<code>predict = "none"</code>, which counts as <code>"link"</code>. For a model with an identity
+link, a response that <code><a href="https://easystats.github.io/insight/reference/find_transformation.html" class="external-link">insight::find_transformation()</a></code> reports as
+<code>"identity"</code>, and no zero-inflation or hurdle part, such as <code>lm(y ~ x)</code>,
+<code>"link"</code> and <code>"none"</code> count as the response scale.
+The plot also stops with an error if both record a <code>transform</code>
 value and the two differ. If neither value is a <code>transform</code> function and
 <code><a href="https://easystats.github.io/insight/reference/find_transformation.html" class="external-link">insight::find_transformation()</a></code> reports the transformation <code>"identity"</code>,
 the plot does not stop. Contrasts and means estimated with the same
