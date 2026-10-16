@@ -72,6 +72,14 @@
   named `PANEL`, `ROW`, `COL`, `SCALE_X`, or `SCALE_Y` no longer stops the
   plot.
 
+* If a term with a VIF below 2 has an upper confidence limit that is infinite
+  or above the top of the plot, the collinearity plot now has a caption. The
+  caption says that the interval formula (from *performance*) fails near
+  VIF = 1, and that this is not high collinearity. This applies to `plot()`
+  for `check_collinearity()` and to the collinearity panel of `check_model()`.
+  The y axis now extends below VIF = 1, so the axis no longer cuts off points
+  at 1 (#399).
+
 ## Bug fixes
 
 * `plot()` for structural equation models from `parameters::model_parameters()`
