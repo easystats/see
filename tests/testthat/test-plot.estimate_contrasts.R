@@ -1585,3 +1585,64 @@ test_that("lighthouse plots draw Bayesian ratio contrasts as ratios", {
   polygons <- data_plot(differences, means)$geom_polygon
   expect_lighthouses(polygons, differences, means, "cyl", y_name = "Median")
 })
+
+
+test_that("lighthouse plots draw link-scale pairs from the marginaleffects and emmeans backends", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("emmeans")
+
+  # emmeans labels contrasts of levels like "6" as "cyl6", so the levels
+  # are words
+  d <- mtcars
+  d$cyl <- factor(d$cyl, labels = c("four", "six", "eight"))
+  estimates <- function(model, backend, predict) {
+    list(
+      means = modelbased::estimate_means(
+        model,
+        by = "cyl",
+        backend = backend,
+        predict = predict
+      ),
+      contrasts = modelbased::estimate_contrasts(
+        model,
+        contrast = "cyl",
+        backend = backend,
+        predict = predict
+      )
+    )
+  }
+  lighthouse_y <- function(contrasts, means) {
+    polygons <- data_plot(contrasts, means)$geom_polygon
+    polygons <- polygons[order(polygons$Level1, polygons$Level2, polygons$y), ]
+    polygons$y
+  }
+
+  logit <- glm(am ~ cyl, data = d, family = binomial)
+  mfx <- estimates(logit, "marginaleffects", "link")
+  emm <- estimates(logit, "emmeans", "link")
+  # emmeans records `predict = "none"` for the link scale
+  expect_identical(attr(emm$means, "predict", exact = TRUE), "none")
+  expect_identical(attr(mfx$means, "predict", exact = TRUE), "link")
+  expected <- lighthouse_y(mfx$contrasts, mfx$means)
+  expect_equal(lighthouse_y(mfx$contrasts, emm$means), expected, tolerance = 1e-6)
+  expect_equal(lighthouse_y(emm$contrasts, mfx$means), expected, tolerance = 1e-6)
+
+  # with an identity link, the link scale is the response scale
+  linear <- lm(mpg ~ cyl, data = d)
+  emm_linear <- estimates(linear, "emmeans", "link")
+  mfx_contrasts <- modelbased::estimate_contrasts(linear, contrast = "cyl")
+  expect_identical(attr(mfx_contrasts, "predict", exact = TRUE), "response")
+  expect_no_error(data_plot(mfx_contrasts, emm_linear$means))
+
+  # response-scale contrasts and link-scale means stop
+  response_contrasts <- modelbased::estimate_contrasts(
+    logit,
+    contrast = "cyl",
+    predict = "response"
+  )
+  message <- error_text(plot(response_contrasts, emm$means))
+  expect_match(message, "`predict = \"response\"`", fixed = TRUE)
+  expect_match(message, "`predict = \"none\"`", fixed = TRUE)
+  expect_match(message, "same scale", fixed = TRUE)
+})

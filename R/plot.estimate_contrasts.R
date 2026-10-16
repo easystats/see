@@ -259,19 +259,46 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 }
 
 
-# values that modelbased gives for the response scale count as the same
+# values that modelbased gives for the response scale count as the same;
+# emmeans records the link scale as "none", and with an identity link the
+# link scale is the response scale
 #' @keywords internal
 .check_same_predict <- function(contrasts, means) {
-  response_scale <- c("response", "inverse_link", "invlink(link)")
   predict_contrasts <- attr(contrasts, "predict", exact = TRUE)
   predict_means <- attr(means, "predict", exact = TRUE)
   if (
-    is.character(predict_contrasts) &&
-      length(predict_contrasts) == 1L &&
-      is.character(predict_means) &&
-      length(predict_means) == 1L &&
-      !identical(predict_contrasts, predict_means) &&
-      !all(c(predict_contrasts, predict_means) %in% response_scale)
+    !is.character(predict_contrasts) ||
+      length(predict_contrasts) != 1L ||
+      !is.character(predict_means) ||
+      length(predict_means) != 1L
+  ) {
+    return(invisible(NULL))
+  }
+
+  model <- attr(contrasts, "model", exact = TRUE)
+  identity_link <- !is.null(model) &&
+    identical(
+      tryCatch(
+        insight::model_info(model, verbose = FALSE)$link_function,
+        error = function(e) NULL
+      ),
+      "identity"
+    )
+  predict_scale <- function(predict) {
+    if (predict %in% c("response", "inverse_link", "invlink(link)")) {
+      return("response")
+    }
+    if (predict == "none") {
+      predict <- "link"
+    }
+    if (predict == "link" && identity_link) {
+      return("response")
+    }
+    predict
+  }
+
+  if (
+    !identical(predict_scale(predict_contrasts), predict_scale(predict_means))
   ) {
     insight::format_error(
       paste0(
