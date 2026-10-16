@@ -82,9 +82,9 @@ three or more variables, each label shows one level per line.
 
 If you contrast one numeric variable at unevenly spaced values, such as
 \code{contrast = "wt=c(2,2.5,4)"}, the x axis is continuous and keeps their
-spacing, with breaks at those values. Evenly spaced values, such as 0 and
-1, and two values or fewer keep an axis with one evenly spaced position
-per value.
+spacing, with breaks at those values. Evenly spaced values, such as 1, 2,
+and 3, and two values or fewer keep an axis with one evenly spaced
+position per value.
 
 The plot takes the estimates from the column of the means that their
 \code{coef_name} attribute names. For means without this attribute, such as a

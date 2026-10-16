@@ -641,9 +641,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'
 #' If you contrast one numeric variable at unevenly spaced values, such as
 #' `contrast = "wt=c(2,2.5,4)"`, the x axis is continuous and keeps their
-#' spacing, with breaks at those values. Evenly spaced values, such as 0 and
-#' 1, and two values or fewer keep an axis with one evenly spaced position
-#' per value.
+#' spacing, with breaks at those values. Evenly spaced values, such as 1, 2,
+#' and 3, and two values or fewer keep an axis with one evenly spaced
+#' position per value.
 #'
 #' The plot takes the estimates from the column of the means that their
 #' `coef_name` attribute names. For means without this attribute, such as a
@@ -954,14 +954,18 @@ plot.see_estimate_contrasts <- function(
   .check_raw_response_scale(model, contrasts, means_object, response)
   .check_raw_predict(contrasts, means_object)
 
-  # observations only for the `by` levels that the contrasts have; a numeric
-  # `by` variable keeps the check below
-  categorical_by <- by_vars[
-    !vapply(by_vars, function(i) is.numeric(model_data[[i]]), logical(1))
-  ]
-  if (length(categorical_by)) {
-    keep <- .by_key(model_data, categorical_by) %in%
-      .by_key(as.data.frame(contrasts), categorical_by)
+  # observations only for the `by` levels that the contrasts have; numeric
+  # `by` values that the means lack are kept for the check below
+  if (length(by_vars)) {
+    keep <- .by_key(model_data, by_vars) %in%
+      .by_key(as.data.frame(contrasts), by_vars)
+    numeric_by <- by_vars[
+      vapply(by_vars, function(i) is.numeric(model_data[[i]]), logical(1))
+    ]
+    for (i in numeric_by) {
+      keep <- keep |
+        !.value_key(model_data[[i]]) %in% .value_key(means[[i]])
+    }
     model_data <- model_data[keep, , drop = FALSE]
   }
 

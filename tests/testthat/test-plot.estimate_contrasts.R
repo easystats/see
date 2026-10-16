@@ -2099,3 +2099,25 @@ test_that("lighthouse plots accept `by` variables with names that ggplot2 reserv
   )
   expect_identical(strip_labels(p), c("4", "6", "8"))
 })
+
+
+test_that("`show_data = TRUE` leaves out numeric `by` levels that the contrasts lack", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  d <- contrasts_by_fixture()$data
+  d$cyl <- as.numeric(as.character(d$cyl))
+  model <- lm(mpg ~ cyl * am, data = d)
+  contrasts <- suppressMessages(
+    modelbased::estimate_contrasts(model, contrast = "am", by = "cyl=4")
+  )
+  means <- suppressMessages(
+    modelbased::estimate_means(model, by = c("cyl=c(4,6,8)", "am"))
+  )
+  expect_no_warning({
+    p <- plot(contrasts, means, show_data = TRUE)
+  })
+  built <- ggplot2::ggplot_build(p)
+  expect_identical(nrow(built$layout$layout), 1L)
+  expect_identical(nrow(built$data[[1]]), sum(d$cyl == 4))
+})
