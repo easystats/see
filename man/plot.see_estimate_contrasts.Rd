@@ -57,9 +57,18 @@ If you estimate the contrasts with \code{by}, the plot draws each contrast from
 the estimated means of its own \code{by} level. The plot then has one panel per
 level, or combination of levels, of the \code{by} variables. The estimated means
 must include the contrasted variables and the \code{by} variables, and no other
-variables that split their rows further. If the means have no row for the
-levels of a contrast, the plot does not draw that contrast and gives a
-warning.
+variables that split their rows further, except the \code{Response} column of
+ordinal and multinomial models. If the means have no row for the levels of
+a contrast, the plot does not draw that contrast and gives a warning.
+
+For ordinal and multinomial models, such as \code{MASS::polr()} and
+\code{mclogit::mblogit()}, the means have one row per response category, in the
+column \code{Response}. The contrasts have the columns \code{Response1} and
+\code{Response2}. The plot then has one panel per response category, or per
+combination of category and \code{by} levels. Each panel shows the means of that
+category and the contrasts whose \code{Response1} and \code{Response2} are both that
+category. The plot does not draw contrasts between two categories, and it
+gives no warning for them.
 
 If you contrast two or more variables jointly, for example with
 \code{contrast = c("am", "cyl")}, the x axis shows their combinations of levels,
@@ -75,7 +84,9 @@ Each lighthouse starts at the estimated mean of \code{Level1} of a contrast. For
 a difference, the lighthouse at \code{Level2} spans that mean minus the bounds of
 the confidence interval. Contrasts with a \code{Ratio} column, from
 \code{comparison = ratio ~ pairwise}, are ratios of the means, so the lighthouse
-at \code{Level2} spans that mean divided by the bounds of the interval. If the
+at \code{Level2} spans that mean divided by the bounds of the interval. Bayesian
+ratio contrasts have no \code{Ratio} column, so the plot reads the left side of
+their \code{comparison} formula, \code{ratio}, and draws them as ratios too. If the
 interval of a ratio includes 0, the plot does not draw that contrast and
 gives a warning. The contrasts must have the columns \code{CI_low} and
 \code{CI_high}.
@@ -91,14 +102,18 @@ transformations that \code{insight::find_transformation()} does not recognize,
 the plot stops with an error. With \code{backend = "emmeans"}, which sets
 \code{transform = TRUE} by default, the contrasts are differences of the
 back-transformed means, and the plot draws them as differences. The plot
-stops with an error for ratio contrasts estimated with \code{transform = TRUE},
-because for a transformed response they are not ratios of the
-back-transformed means.
+draws ratio contrasts estimated with \code{transform = TRUE} as ratios if
+\code{insight::find_transformation()} reports the transformation \code{"identity"}.
+For other transformations, it stops with an error, because for a
+transformed response they are not ratios of the back-transformed means.
 
 The contrasts and the means must be on the same scale. The plot stops with
 an error if both record a \code{predict} value and the two differ. The \code{predict}
 values \code{"response"}, \code{"inverse_link"}, and \code{"invlink(link)"} count as the
-same scale. The plot also stops with an error if both record a \code{transform}
+same scale. With \code{backend = "emmeans"}, modelbased records the link scale as
+\code{predict = "none"}, which counts as \code{"link"}. For a model with an identity
+link, such as \code{lm()}, \code{"link"} and \code{"none"} count as the response scale.
+The plot also stops with an error if both record a \code{transform}
 value and the two differ. If neither value is a \code{transform} function and
 \code{insight::find_transformation()} reports the transformation \code{"identity"},
 the plot does not stop. Contrasts and means estimated with the same
