@@ -17,15 +17,16 @@
 #'   the value axis. Dodged groups leave the dots less room, so a fixed bin
 #'   width can make them overflow it, with a warning from ggdist.
 #' @param position_dots Position adjustment for dots, either as a string, or the
-#'   result of a call to a position adjustment function. The default nudges the
-#'   dots by `x = -0.025` (`-0.06` with `interval = TRUE`). In a vertical plot,
-#'   this moves them toward smaller x, away from the half violin, and in a
-#'   dodged cell the nudge is at most half the room beside the half violin. In
-#'   a horizontal plot, it moves them along the value axis. The default also
-#'   dodges the dots with their half violins when `position` in `...` dodges
-#'   them. A position that you set is used as given, so the dots are not
-#'   dodged unless that position dodges them. Name this argument in full:
-#'   `position` goes to the half violins.
+#'   result of a call to a position adjustment function. If you do not set it,
+#'   the dots move away from the half violin along the categorical axis (x in
+#'   a vertical plot, y in a horizontal plot), and never along the value axis.
+#'   The gap is 0.025 times the resolution of the categorical axis (0.06 with
+#'   `interval = TRUE`). In a dodged cell, the gap shrinks with the cell: it is
+#'   multiplied by the half cell's share of the box of a group alone at its
+#'   position. This default also dodges the dots with their half violins when
+#'   `position` in `...` dodges them. A position that you set is used as given,
+#'   so the dots are not dodged unless that position dodges them. Name this
+#'   argument in full: `position` goes to the half violins.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
 #'   `dotsize` argument of [ggdist::geom_dots()].
 #' @param color_dots,dots_color Color adjustment for dots.
