@@ -41,9 +41,9 @@
   contrasts estimated with `transform = TRUE`. It also stops for contrasts and
   means on different scales, as their `predict` or `transform` arguments
   show. The help page lists the exceptions. With `show_data = TRUE`, the plot
-  draws a logical or two-level factor response as 0 and 1. It also draws the raw data of `y` for
-  a response `log(y)`, `log2(y)`, or `log10(y)`. This needs contrasts and means
-  estimated with `transform = TRUE`.
+  draws a logical or two-level factor response as 0 and 1. It also draws the
+  raw data of `y` for a response `log(y)`, `log2(y)`, or `log10(y)`. This needs
+  contrasts and means estimated with `transform = TRUE`.
 
 * `plot()` for `modelbased::estimate_contrasts()` now draws ordinal and
   multinomial models, such as `MASS::polr()` and `mclogit::mblogit()`, with one
