@@ -232,6 +232,18 @@ test_that("plot() finds the model for `lapply(results, plot)`", {
   expect_identical(plotted_parameters(p_local[[1]]), model_parameters(m_wt))
 })
 
+test_that("plot() finds the local model of a function in a package", {
+  # the function's environment encloses a namespace, as in a package
+  plot_in_pkg <- function(model_value) {
+    pkg_mod <- model_value
+    plot(bayestestR::p_direction(pkg_mod))
+  }
+  environment(plot_in_pkg) <- new.env(parent = asNamespace("stats"))
+  p <- plot_in_pkg(m_wt)
+  expect_draws(p)
+  expect_identical(plotted_parameters(p), model_parameters(m_wt))
+})
+
 test_that("plot() finds the local model of a user's own plot method", {
   user_env <- new.env(parent = globalenv())
   assign(

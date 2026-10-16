@@ -151,7 +151,8 @@ add_plot_attributes <- function(x) {
   }
 
   if (.is_object_name(obj_name)) {
-    # first try, the name as it reads where `plot()` was called: the local
+    # first try, the name as it reads where `plot()` was called (for
+    # `lapply(results, plot)`, where `lapply()` was called): the local
     # variables there, then the functions it is defined in, then the global
     # environment and the search path. A missing argument or a failing default
     # of that name gives an error, which moves on to the next try; forcing that
@@ -224,13 +225,15 @@ add_plot_attributes <- function(x) {
   n_frames <- sys.nframe()
   parents <- sys.parents()
   # the environment in which the innermost `plot()` was called, such as a
-  # user's own plot method; when a package function made that call, such as
-  # `lapply(results, plot)`, the user code that called it
+  # user's own plot method; when `plot` was passed as a function to a package
+  # function, such as `lapply(results, plot)`, the code that called it
   for (n in rev(seq_len(n_frames))) {
     if (identical(sys.function(n), base::plot)) {
       caller <- parents[n]
-      while (caller > 0L && .is_package_call(caller)) {
-        caller <- parents[caller]
+      if (!.calls_plot_by_name(sys.call(n))) {
+        while (caller > 0L && .is_package_call(caller)) {
+          caller <- parents[caller]
+        }
       }
       if (caller > 0L) {
         return(sys.frame(caller))
@@ -298,6 +301,16 @@ add_plot_attributes <- function(x) {
   }
   # Inf, NaN and NA_real_ are parsed as constants, not as names
   (is.numeric(e) || is.character(e) || is.logical(e)) && length(e) == 1L
+}
+
+#' @keywords internal
+.calls_plot_by_name <- function(call) {
+  # `plot(x)`, `graphics::plot(x)` or `base::plot(x)`, not `FUN(X[[i]])`
+  fun <- call[[1]]
+  if (is.call(fun) && length(fun) == 3L) {
+    fun <- if (as.character(fun[[1]]) %in% c("::", ":::")) fun[[3]]
+  }
+  identical(fun, as.name("plot"))
 }
 
 #' @keywords internal
