@@ -2,6 +2,9 @@
 
 ## Changes
 
+* `plot()` for `datawizard::means_by_group()` gets a `flip` argument. Use
+  `flip = FALSE` to show the groups on the horizontal axis (#455).
+
 * `geom_violinhalf()` and `geom_violindot()` are now drawn with the *ggdist*
   package (`ggdist::stat_slab()` and `ggdist::geom_dots()`), which they now
   need (version 3.3.3 or later). They work with facets and free scales (#81,
@@ -71,6 +74,18 @@
 
 ## Bug fixes
 
+* `plot()` for structural equation models from `parameters::model_parameters()`
+  drew latent factors as observed variables and indicators as latent
+  variables. Latent factors are now drawn as circles and indicators as
+  squares.
+
+* `plot()` for structural equation models now gives an informative error
+  when the selected `component` has no paths to plot, for example
+  `component = "regression"` for a confirmatory factor analysis (#243).
+* `geom_binomdensity()` now works with facets. It no longer drops the
+  columns other than `x` and `y`, so each panel shows only its own data
+  (#192).
+
 * When `check_model()` failed to create plots, the informative message
   about troubleshooting and workarounds was no longer printed. This should
   now work again.
@@ -81,6 +96,12 @@
   variable first, it drew no contrasts. The plot now shows one panel per level,
   or combination of levels, of the `by` variables. The x axis now shows the
   contrasted variable in the order of its levels (easystats/modelbased#267).
+
+* When some observations had a missing Cook's distance, `plot()` for
+  `check_outliers()` failed with "arguments imply differing number of rows".
+  An example is rows with missing values in a model fitted with
+  `na.action = na.exclude`. The scree and count plots now leave these
+  observations out, and the labels still name the right rows.
 
 # see 0.14.2
 

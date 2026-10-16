@@ -88,8 +88,8 @@ plot.see_equivalence_test <- function(
 
     tmp2 <- lapply(seq_len(nrow(i)), function(j) {
       p <- i$Parameter[j]
-      tmp[[p]][tmp[[p]] < i$HDI_low[j]] <- NA
-      tmp[[p]][tmp[[p]] > i$HDI_high[j]] <- NA
+      tmp[[p]][tmp[[p]] < i$CI_low[j]] <- NA
+      tmp[[p]][tmp[[p]] > i$CI_high[j]] <- NA
       tmp[[p]]
     })
 
@@ -275,8 +275,8 @@ plot.see_equivalence_test_df <- function(
 
     tmp2 <- lapply(seq_len(nrow(i)), function(j) {
       p <- i$Parameter[j]
-      tmp[[p]][tmp[[p]] < i$HDI_low[j]] <- NA
-      tmp[[p]][tmp[[p]] > i$HDI_high[j]] <- NA
+      tmp[[p]][tmp[[p]] < i$CI_low[j]] <- NA
+      tmp[[p]][tmp[[p]] > i$CI_high[j]] <- NA
       tmp[[p]]
     })
 
