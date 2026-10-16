@@ -165,7 +165,13 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' @keywords internal
 .lighthouse_geometry <- function(contrasts) {
   back_transformed <- isTRUE(attr(contrasts, "transform", exact = TRUE))
-  if ("Ratio" %in% names(contrasts)) {
+  # Bayesian ratio contrasts have a `Median` column, not `Ratio`, so the
+  # `comparison` formula names the ratio
+  comparison <- attr(contrasts, "comparison", exact = TRUE)
+  ratio_comparison <- inherits(comparison, "formula") &&
+    length(comparison) == 3L &&
+    identical(comparison[[2]], as.name("ratio"))
+  if ("Ratio" %in% names(contrasts) || ratio_comparison) {
     # e.g. for a log response, the back-transformed ratio is
     # exp(log(m1) / log(m2)), not a ratio of the back-transformed means
     if (back_transformed) {

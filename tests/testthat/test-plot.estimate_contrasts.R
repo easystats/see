@@ -1539,3 +1539,49 @@ test_that("`show_data = TRUE` stops for ordinal and multinomial contrasts", {
     expect_match(message, "`show_data = TRUE`", fixed = TRUE)
   }
 })
+
+
+test_that("lighthouse plots draw Bayesian ratio contrasts as ratios", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+  skip_if_not_installed("rstanarm")
+
+  d <- mtcars
+  d$cyl <- factor(d$cyl)
+  model <- suppressWarnings(rstanarm::stan_glm(
+    mpg ~ cyl,
+    data = d,
+    refresh = 0,
+    chains = 1,
+    iter = 500,
+    seed = 1
+  ))
+  means <- modelbased::estimate_means(model, by = "cyl")
+  ratios <- modelbased::estimate_contrasts(
+    model,
+    contrast = "cyl",
+    comparison = ratio ~ pairwise
+  )
+  # the ratios are in the `Median` column, and only the `comparison`
+  # attribute names them
+  expect_false("Ratio" %in% names(ratios))
+  expect_true("Median" %in% names(ratios))
+  polygons <- data_plot(ratios, means)$geom_polygon
+  expect_identical(polygon_rows_per_contrast(polygons), rep(3L, 3))
+  expect_lighthouses(
+    polygons,
+    ratios,
+    means,
+    "cyl",
+    y_name = "Median",
+    geometry = "ratio"
+  )
+
+  differences <- modelbased::estimate_contrasts(
+    model,
+    contrast = "cyl",
+    comparison = ~pairwise
+  )
+  polygons <- data_plot(differences, means)$geom_polygon
+  expect_lighthouses(polygons, differences, means, "cyl", y_name = "Median")
+})
