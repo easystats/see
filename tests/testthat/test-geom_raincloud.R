@@ -147,7 +147,35 @@ test_that("geom_raincloud() checks its arguments", {
   expect_error(geom_raincloud(seed = "a"), regexp = "seed")
   expect_error(geom_raincloud(seed = c(1, 2)), regexp = "seed")
   expect_error(geom_raincloud(seed = NA), regexp = "seed")
+  expect_error(geom_raincloud(seed = 1.5), regexp = "seed")
+  expect_error(geom_raincloud(seed = 1e10), regexp = "seed")
   expect_error(geom_raincloud(flip = TRUE), regexp = "flip")
+  expect_length(geom_raincloud(flip = FALSE), 3L)
+})
+
+test_that("geom_raincloud() builds with shading when all values are missing", {
+  d <- data.frame(g = c("a", "b"), y = NA_real_)
+  p <- ggplot2::ggplot(d, ggplot2::aes(g, y)) + geom_raincloud(shade = 0.5)
+  expect_identical(nrow(suppressWarnings(ggplot2::layer_data(p, 1))), 0L)
+})
+
+test_that("geom_raincloud() lets the points take mapped size and alpha", {
+  p <- ggplot2::ggplot(
+    iris,
+    ggplot2::aes(Species, Sepal.Length, alpha = Petal.Width)
+  ) +
+    geom_raincloud(alpha_points = NULL)
+  expect_gt(length(unique(ggplot2::layer_data(p, 3)$alpha)), 1L)
+  p <- vertical + geom_raincloud()
+  expect_identical(unique(ggplot2::layer_data(p, 3)$alpha), 0.5)
+})
+
+test_that("geom_raincloud(na.rm = TRUE) removes missing values quietly", {
+  d <- data.frame(g = "a", y = c(1:9, NA))
+  p <- ggplot2::ggplot(d, ggplot2::aes(g, y)) +
+    geom_raincloud(shade = 0.5, na.rm = TRUE)
+  expect_no_warning(ggplot2::layer_data(p, 4))
+  expect_no_warning(ggplot2::layer_data(p, 1))
 })
 
 test_that("geom_raincloud() passes fill and alpha to the half violins", {

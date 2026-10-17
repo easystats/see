@@ -58,23 +58,27 @@ and 95\% quantile intervals of each group at its position, as in
 \item{shade}{A numeric vector of coverages between 0 and 1, such as
 \code{c(0.5, 0.8, 0.95)}. For each coverage, a rectangle behind the points of
 each group spans the central quantile interval of the group's values
-(\code{\link[stats:quantile]{stats::quantile()}}, type 7, without missing values). The rectangles
-overlap, so the inner intervals are shaded darker. If \code{NULL} (default),
-nothing is shaded.}
+(\code{\link[stats:quantile]{stats::quantile()}}, type 7, without missing values), computed on the
+scale of the axis (after a transformation such as \code{scale_y_log10()}).
+Each rectangle has an alpha of 0.2, so the inner intervals, where the
+rectangles overlap, are shaded darker. If \code{NULL} (default), nothing is
+shaded.}
 
-\item{seed}{The random seed of the jitter of the points, a single number.
-The same seed gives the same jitter.}
+\item{seed}{The random seed of the jitter of the points, a single whole
+number. The same seed gives the same jitter.}
 
 \item{...}{Other arguments passed to \code{\link[=geom_violinhalf]{geom_violinhalf()}}, such as \code{fill},
-\code{alpha}, \code{bw}, or \code{.width}. They do not reach the points or the shading, except for \code{width}
-and \code{height}. A \code{width} (or \code{height}, in a horizontal plot)
-is the width of a whole violin, as in \code{\link[=geom_violinhalf]{geom_violinhalf()}}, so each half
-violin and the band of the points take half of it. \code{flip} is not
-supported, because the half violins would cover the points.}
+\code{alpha}, \code{bw}, or \code{.width}. They do not reach the points or the shading,
+except for \code{width}, \code{height}, and \code{na.rm}. So \code{position} moves only the
+half violins and the intervals. A \code{width} (or \code{height}, in a horizontal
+plot) is the width of a whole violin, as in \code{\link[=geom_violinhalf]{geom_violinhalf()}}, so each
+half violin and the band of the points take half of it. \code{flip = TRUE} is
+not supported, because the half violins would cover the points.}
 
 \item{size_points, alpha_points, color_points}{The size, transparency, and
-color of the points. If \code{color_points} is \code{NULL} (default), the points
-take the \code{colour} aesthetic.}
+color of the points. If one of them is \code{NULL}, the points take the
+matching aesthetic (\code{size}, \code{alpha}, or \code{colour}) instead. By default,
+only \code{color_points} is \code{NULL}.}
 
 \item{fill_shade}{The fill color of the shaded intervals.}
 
@@ -103,7 +107,7 @@ shaded behind its points, for example as a background for estimated means
 and their confidence intervals. Dodged groups, as with \code{fill} mapped to a
 second variable, are not supported: the half violins are dodged, but the
 points and the shading of all groups at a position share one band, and the
-shading pools their values.
+shading pools their values. The categorical axis must be discrete.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}

@@ -13,7 +13,7 @@
 #' and their confidence intervals. Dodged groups, as with `fill` mapped to a
 #' second variable, are not supported: the half violins are dodged, but the
 #' points and the shading of all groups at a position share one band, and the
-#' shading pools their values.
+#' shading pools their values. The categorical axis must be discrete.
 #'
 #' @inheritParams geom_violinhalf
 #' @param interval Logical. If `TRUE` (default), add the median and the 66%
@@ -22,23 +22,27 @@
 #' @param shade A numeric vector of coverages between 0 and 1, such as
 #'   `c(0.5, 0.8, 0.95)`. For each coverage, a rectangle behind the points of
 #'   each group spans the central quantile interval of the group's values
-#'   ([stats::quantile()], type 7, without missing values). The rectangles
-#'   overlap, so the inner intervals are shaded darker. If `NULL` (default),
-#'   nothing is shaded.
-#' @param seed The random seed of the jitter of the points, a single number.
-#'   The same seed gives the same jitter.
+#'   ([stats::quantile()], type 7, without missing values), computed on the
+#'   scale of the axis (after a transformation such as `scale_y_log10()`).
+#'   Each rectangle has an alpha of 0.2, so the inner intervals, where the
+#'   rectangles overlap, are shaded darker. If `NULL` (default), nothing is
+#'   shaded.
+#' @param seed The random seed of the jitter of the points, a single whole
+#'   number. The same seed gives the same jitter.
 #' @param size_points,alpha_points,color_points The size, transparency, and
-#'   color of the points. If `color_points` is `NULL` (default), the points
-#'   take the `colour` aesthetic.
+#'   color of the points. If one of them is `NULL`, the points take the
+#'   matching aesthetic (`size`, `alpha`, or `colour`) instead. By default,
+#'   only `color_points` is `NULL`.
 #' @param fill_shade The fill color of the shaded intervals.
 #' @param show.legend Should the half violins be included in the legends? The
 #'   points and the shading are never included.
 #' @param ... Other arguments passed to [geom_violinhalf()], such as `fill`,
-#'   `alpha`, `bw`, or `.width`. They do not reach the points or the shading, except for `width`
-#'   and `height`. A `width` (or `height`, in a horizontal plot)
-#'   is the width of a whole violin, as in [geom_violinhalf()], so each half
-#'   violin and the band of the points take half of it. `flip` is not
-#'   supported, because the half violins would cover the points.
+#'   `alpha`, `bw`, or `.width`. They do not reach the points or the shading,
+#'   except for `width`, `height`, and `na.rm`. So `position` moves only the
+#'   half violins and the intervals. A `width` (or `height`, in a horizontal
+#'   plot) is the width of a whole violin, as in [geom_violinhalf()], so each
+#'   half violin and the band of the points take half of it. `flip = TRUE` is
+#'   not supported, because the half violins would cover the points.
 #'
 #' @return A list of ggplot2 layers.
 #'
@@ -94,11 +98,17 @@ geom_raincloud <- function(
       "`shade` must be `NULL` or a numeric vector of coverages between 0 and 1."
     )
   }
-  if (!is.numeric(seed) || length(seed) != 1 || !is.finite(seed)) {
-    insight::format_error("`seed` must be a single number.")
+  if (
+    !is.numeric(seed) ||
+      length(seed) != 1 ||
+      !is.finite(seed) ||
+      seed != round(seed) ||
+      abs(seed) > .Machine$integer.max
+  ) {
+    insight::format_error("`seed` must be a single whole number.")
   }
   extra_args <- list(...)
-  if (!is.null(extra_args$flip)) {
+  if (!is.null(extra_args[["flip"]]) && !isFALSE(extra_args[["flip"]])) {
     insight::format_error(
       "`flip` is not supported, because the half violins would cover the points."
     )
@@ -106,7 +116,10 @@ geom_raincloud <- function(
 
   # half of a whole violin's `width` (or `height`) sets the band of the points,
   # as it sets the half violins; otherwise both are 0.45 times the resolution
-  half_width <- list(width = extra_args$width, height = extra_args$height)
+  half_width <- list(
+    width = extra_args[["width"]],
+    height = extra_args[["height"]]
+  )
   half_width <- lapply(half_width, function(w) if (!is.null(w)) w / 2)
 
   violin <- geom_violinhalf(
@@ -127,12 +140,13 @@ geom_raincloud <- function(
     mapping = mapping,
     data = data,
     position = .position_raincloud(seed, half_width),
-    size = size_points,
-    alpha = alpha_points,
     show.legend = FALSE,
     inherit.aes = inherit.aes
   )
+  points_args$size <- size_points
+  points_args$alpha <- alpha_points
   points_args$colour <- color_points
+  points_args$na.rm <- extra_args[["na.rm"]]
   points <- do.call(ggplot2::geom_point, points_args)
 
   if (is.null(shade)) {
@@ -147,7 +161,12 @@ geom_raincloud <- function(
     position = "identity",
     show.legend = FALSE,
     inherit.aes = inherit.aes,
-    params = list(fill = fill_shade, colour = NA, alpha = 0.2)
+    params = list(
+      fill = fill_shade,
+      colour = NA,
+      alpha = 0.2,
+      na.rm = isTRUE(extra_args[["na.rm"]])
+    )
   )
   c(list(shading), violin, list(points))
 }
@@ -249,6 +268,9 @@ geom_raincloud <- function(
         rows
       })
       out <- do.call(rbind, out)
+      if (is.null(out)) {
+        return(data.frame())
+      }
       rownames(out) <- NULL
       out
     }
