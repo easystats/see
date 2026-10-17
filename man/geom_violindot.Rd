@@ -103,7 +103,8 @@ a vertical plot, y in a horizontal plot), and are not shifted along the
 value axis. The gap is 0.025 times the resolution of the categorical axis
 (0.06 with \code{interval = TRUE}). In a dodged cell, the gap is divided by
 twice the number of cells at that position (the number of groups there,
-or with \code{preserve = "single"} the largest number at any position), but it
+or with \code{preserve = "single"} the largest number at any position of the
+layer), but it
 is at most half of the room beside the half violin (which matters only
 for a narrow \code{width}).
 This default also dodges the dots with their half violins when \code{position}

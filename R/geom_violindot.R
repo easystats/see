@@ -23,7 +23,8 @@
 #'   value axis. The gap is 0.025 times the resolution of the categorical axis
 #'   (0.06 with `interval = TRUE`). In a dodged cell, the gap is divided by
 #'   twice the number of cells at that position (the number of groups there,
-#'   or with `preserve = "single"` the largest number at any position), but it
+#'   or with `preserve = "single"` the largest number at any position of the
+#'   layer), but it
 #'   is at most half of the room beside the half violin (which matters only
 #'   for a narrow `width`).
 #'   This default also dodges the dots with their half violins when `position`
@@ -93,8 +94,12 @@ geom_violindot <- function(
   # the default position leaves a gap between the dots and the half violin,
   # wider with an interval, and dodges the dots with their half violins when
   # the half violins are dodged by position_dodge()
+  # an argument in `...` named `position`, or a prefix of it such as `pos`,
+  # which R matches to the `position` of geom_violinhalf()
+  dots_names <- names(list(...)) %||% character(0)
+  is_position <- nzchar(dots_names) & startsWith("position", dots_names)
   if (missing(position_dots)) {
-    dodge <- .violindot_dodge(list(...)[["position"]])
+    dodge <- .violindot_dodge(list(...)[is_position][1][[1]])
     position_dots <- .position_violindots(
       gap = if (isTRUE(interval)) 0.06 else 0.025,
       dodge = dodge$dodge,
@@ -176,7 +181,8 @@ geom_violindot <- function(
   )
   extra_args <- extra_args[
     !names(extra_args) %in% half_violin_only &
-      !grepl("^(point|interval)_", names(extra_args))
+      !grepl("^(point|interval)_", names(extra_args)) &
+      !(nzchar(names(extra_args)) & startsWith("position", names(extra_args)))
   ]
   if (!is.null(color_dots)) {
     extra_args$colour <- NULL
@@ -289,12 +295,15 @@ geom_violindot <- function(
     gap = gap,
     dodge = dodge,
     # the resolution of the categorical axis over the whole layer, as for the
-    # width of the half violins
+    # width of the half violins; the group count of preserve = "single" leaves
+    # out rows with a missing value, as the half violins do
     setup_params = function(self, data) {
-      params <- ggplot2::ggproto_parent(
-        ggplot2::PositionDodge,
-        self
-      )$setup_params(data)
+      parent <- ggplot2::ggproto_parent(ggplot2::PositionDodge, self)
+      params <- parent$setup_params(data)
+      value <- data[[if (isTRUE(params$flipped_aes)) "x" else "y"]]
+      if (anyNA(value) && !all(is.na(value))) {
+        params$n <- parent$setup_params(data[!is.na(value), , drop = FALSE])$n
+      }
       pos <- data[[if (isTRUE(params$flipped_aes)) "y" else "x"]]
       params$violindot_res <- ggplot2::resolution(
         as.numeric(pos),
@@ -344,9 +353,9 @@ geom_violindot <- function(
         FUN = function(g) length(unique(g))
       )
       # (with preserve = "single", a lone group is dodged too, into a cell of
-      # the panel's largest group count)
+      # the layer's largest group count)
       single <- identical(self$preserve, "single") && isTRUE(params$n > 1)
-      data$violindot_dodged <- self$dodge & (groups_here > 1 | single)
+      data$violindot_dodged <- ok & self$dodge & (groups_here > 1 | single)
       data$violindot_lo <- data[[lo_col]]
       data$violindot_hi <- data[[hi_col]]
 
@@ -398,7 +407,7 @@ geom_violindot <- function(
 # ggdist stacks the dots of every group from its position across the narrowest
 # box of the panel. With see's default position, the dots of each group are
 # stacked across their own box instead: a dodged group's half cell beside its
-# (unflipped) half violin, less the nudge, and a lone group's whole box. (ggdist
+# (unflipped) half violin, less the gap, and a lone group's whole box. (ggdist
 # still uses one bin width for all groups, the one that fits every group.)
 .violindot_reach <- function(s_data, orientation) {
   if (is.null(s_data$violindot_box)) {

@@ -534,3 +534,33 @@ test_that("geom_violindot() dots share the cells of a preserved dodge", {
   expect_gt(min(cells$xmin - cells$xmin_cell), -1e-6)
   expect_lt(max(cells$xmax - cells$x_cell), 1e-6)
 })
+
+test_that("geom_violindot() leaves groups without values out of a preserved dodge", {
+  d <- data.frame(
+    x = factor(rep(c("a", "b"), each = 30)),
+    h = "u",
+    v = stats::rnorm(60)
+  )
+  d <- rbind(d, data.frame(x = "b", h = "v", v = NA))
+  p <- ggplot2::ggplot(d, ggplot2::aes(x, v, fill = h)) +
+    geom_violindot(position = ggplot2::position_dodge(preserve = "single"))
+  slab <- suppressWarnings(ggplot2::layer_data(p, 1))
+  dots <- suppressWarnings(ggplot2::layer_data(p, 2))
+  dots <- dots[!is.na(dots$y), ]
+  # one group per position: the half violins are not dodged, nor the dots
+  expect_equal(unique(round(as.numeric(slab$xmax - slab$xmin), 9)), 0.45)
+  level <- round(as.numeric(dots$x))
+  expect_equal(as.numeric(dots$xmax), level - 0.025)
+})
+
+test_that("geom_violindot() gives a partial `position` name to the half violins", {
+  p <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    expect_no_warning(geom_violindot(pos = "identity"))
+  expect_s3_class(p$layers[[1]]$position, "PositionIdentity")
+  dots <- ggplot2::layer_data(p, 2)
+  level <- round(as.numeric(dots$x))
+  expect_equal(as.numeric(dots$xmax), level - 0.025)
+})
