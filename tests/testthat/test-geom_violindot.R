@@ -391,10 +391,13 @@ test_that("geom_violindot() scales the dot gap with the axis resolution", {
     dots <- ggplot2::layer_data(p, length(p$layers))
     pos <- if (horizontal) "y" else "x"
     level <- round(as.numeric(dots[[pos]]) / 10) * 10
-    round(cbind(
-      as.numeric(dots[[paste0(pos, "min")]]) - level,
-      as.numeric(dots[[paste0(pos, "max")]]) - level
-    ), 6)
+    round(
+      cbind(
+        as.numeric(dots[[paste0(pos, "min")]]) - level,
+        as.numeric(dots[[paste0(pos, "max")]]) - level
+      ),
+      6
+    )
   }
   for (interval in c(FALSE, TRUE)) {
     gap <- if (interval) 0.6 else 0.25
