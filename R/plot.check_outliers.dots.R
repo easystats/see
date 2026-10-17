@@ -154,61 +154,99 @@
 
   if (length(cook.levels)) {
     .hat <- sort(plot_data$Hat)
-    .cook_ref <- lapply(cook.levels, function(crit) {
-      sqrt(crit * n_params * (1 - .hat) / .hat)
+    .hat80 <- min(.hat) + diff(range(.hat)) * 0.8
+
+    # Contour lines are cut where they leave the range of the residuals, so
+    # that the y axis follows the residuals and not the lines, which grow as
+    # leverage shrinks (with the number of observations). Without finite
+    # residuals, the lines are drawn in full.
+    .res <- plot_data$Std_Residuals[is.finite(plot_data$Std_Residuals)]
+    .bounds <- if (length(.res)) c(max(.res), -min(.res)) else c(Inf, Inf)
+
+    .cook_ref <- function(crit, hat) sqrt(crit * n_params * (1 - hat) / hat)
+
+    # the part of a contour line at or below `bound`, with the exact point
+    # where it crosses `bound`; NULL if no part of the line is inside
+    .cook_line <- function(crit, bound) {
+      y <- .cook_ref(crit, .hat)
+      keep <- !is.na(y) & y <= bound
+      if (!any(keep)) {
+        return(NULL)
+      }
+      x <- .hat[keep]
+      y <- y[keep]
+      if (is.finite(bound)) {
+        h_cross <- crit * n_params / (bound^2 + crit * n_params)
+        if (h_cross > min(.hat) && h_cross < x[1]) {
+          x <- c(h_cross, x)
+          y <- c(bound, y)
+        }
+      }
+      list(x = x, y = y)
+    }
+
+    .sides <- c(upper = 1, lower = -1)
+    .pieces <- list(
+      upper = lapply(cook.levels, .cook_line, bound = .bounds[1]),
+      lower = lapply(cook.levels, .cook_line, bound = .bounds[2])
+    )
+
+    .cook_lines <- lapply(names(.sides), function(.s) {
+      lapply(.pieces[[.s]], function(.piece) {
+        if (is.null(.piece)) {
+          return(NULL)
+        }
+        ggplot2::annotate(
+          geom = "line",
+          x = .piece$x,
+          y = .sides[[.s]] * .piece$y,
+          color = colors[1],
+          linetype = ref.linetype,
+          linewidth = size_line
+        )
+      })
     })
 
-    .hat80 <- min(.hat) + diff(range(.hat)) * 0.8
-    .cook_labels <- c("Cook's D = ", rep("", length(cook.levels) - 1))
-    .cook_lines <- c(
+    # labels sit at 80% of the leverage range, or at the largest leverage if
+    # the line does not reach that far; the label of a cut line is on the
+    # inner side, so the panel edge does not clip it
+    .cook_text <- lapply(names(.sides), function(.s) {
       lapply(seq_along(cook.levels), function(.level) {
-        ggplot2::annotate(
-          geom = "line",
-          x = .hat,
-          y = .cook_ref[[.level]],
-          color = colors[1],
-          linetype = ref.linetype,
-          linewidth = size_line
-        )
-      }),
-      lapply(seq_along(cook.levels), function(.level) {
-        ggplot2::annotate(
-          geom = "line",
-          x = .hat,
-          y = -1 * .cook_ref[[.level]],
-          color = colors[1],
-          linetype = ref.linetype,
-          linewidth = size_line
-        )
-      }),
-      lapply(seq_along(cook.levels), function(.level) {
+        .piece <- .pieces[[.s]][[.level]]
+        if (is.null(.piece)) {
+          return(NULL)
+        }
+        .x <- if (.piece$x[1] <= .hat80) .hat80 else max(.hat)
+        .cut <- .piece$x[1] > min(.hat)
+        .vjust <- if (xor(.cut, .s == "lower")) 1.5 else -1
         ggplot2::annotate(
           geom = "text",
           label = insight::format_value(cook.levels[.level], digits = 1),
-          x = .hat80,
-          y = sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
+          x = .x,
+          y = .sides[[.s]] * .cook_ref(cook.levels[.level], .x),
           hjust = "right",
-          vjust = -1,
+          vjust = .vjust,
           color = colors[1],
-          size = size_text
-        )
-      }),
-      lapply(seq_along(cook.levels), function(.level) {
-        ggplot2::annotate(
-          geom = "text",
-          label = insight::format_value(cook.levels[.level], digits = 1),
-          x = .hat80,
-          y = -1 * sqrt(cook.levels[.level] * n_params * (1 - .hat80) / .hat80),
-          color = colors[1],
-          hjust = "right",
-          vjust = 1.5,
           size = size_text
         )
       })
-    )
+    })
+
+    .cook_lines <- unlist(.cook_lines, recursive = FALSE)
+    .cook_text <- unlist(.cook_text, recursive = FALSE)
+    .cook_lines <- Filter(Negate(is.null), .cook_lines)
+    .cook_text <- Filter(Negate(is.null), .cook_text)
+
+    if (!length(.cook_lines)) {
+      p <- p +
+        ggplot2::labs(
+          subtitle = "All points are inside the contour lines (outside the plot area)"
+        )
+    }
 
     p <- p +
       .cook_lines +
+      .cook_text +
       theme +
       ggplot2::guides(colour = "none", text = "none")
   }
