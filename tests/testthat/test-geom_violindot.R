@@ -472,8 +472,65 @@ test_that("geom_violindot() dots follow a reversed dodge, but not dodge2", {
 
   for (dodge2 in list(ggplot2::position_dodge2(), "dodge2")) {
     p <- base + geom_violindot(position = dodge2)
-    dots <- suppressWarnings(ggplot2::layer_data(p, 2))
+    dots <- ggplot2::layer_data(p, 2)
     level <- round(as.numeric(dots$x))
     expect_equal(as.numeric(dots$xmax), level - 0.025)
   }
+})
+
+test_that("geom_violindot() caps the dot gap in narrow dodged cells", {
+  # the gap of each dodged group: its cell centre less its dots box's upper edge
+  gaps <- function(p) {
+    slab <- unique(ggplot2::layer_data(p, 1)[c("group", "x", "xmin")])
+    dots <- ggplot2::layer_data(p, length(p$layers))[c("group", "xmin", "xmax")]
+    m <- merge(dots, slab, by = "group", suffixes = c("", "_cell"))
+    expect_gt(min(as.numeric(m$xmin - m$xmin_cell)), -1e-9)
+    unique(round(as.numeric(m$x - m$xmax), 9))
+  }
+  two <- ggplot2::ggplot(
+    iris_ab,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  )
+  d <- iris
+  d$g <- factor(rep(1:3, length.out = nrow(d)))
+  three <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  )
+  expect_equal(gaps(two + geom_violindot(width = 0.04)), 0.0025)
+  expect_equal(gaps(three + geom_violindot(width = 0.04)), round(0.02 / 12, 9))
+
+  p <- two + geom_violindot(width = 0)
+  expect_equal(gaps(p), 0)
+  dots <- ggplot2::layer_data(p, 2)
+  expect_true(all(is.finite(c(dots$x, dots$xmin, dots$xmax))))
+  grDevices::pdf(NULL)
+  on.exit(grDevices::dev.off())
+  expect_no_warning(ggplot2::ggplotGrob(p))
+})
+
+test_that("geom_violindot() keeps a mapped width away from the dots box", {
+  d <- iris
+  d$w <- 0.6
+  p <- ggplot2::ggplot(d, ggplot2::aes(Species, Sepal.Length, width = w)) +
+    geom_violindot()
+  slab <- ggplot2::layer_data(p, 1)
+  dots <- ggplot2::layer_data(p, 2)
+  expect_equal(unique(round(slab$xmax - slab$xmin, 9)), 0.45)
+  expect_equal(unique(round(dots$xmax - dots$xmin, 9)), 0.45)
+})
+
+test_that("geom_violindot() dots share the cells of a preserved dodge", {
+  d <- iris_ab[!(iris_ab$Species == "versicolor" & iris_ab$g == "b"), ]
+  p <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot(position = ggplot2::position_dodge(preserve = "single"))
+  slab <- unique(ggplot2::layer_data(p, 1)[c("group", "x", "xmin")])
+  dots <- ggplot2::layer_data(p, 2)
+  cells <- merge(dots, slab, by = "group", suffixes = c("", "_cell"))
+  expect_setequal(unique(cells$group), unique(slab$group))
+  expect_gt(min(cells$xmin - cells$xmin_cell), -1e-6)
+  expect_lt(max(cells$xmax - cells$x_cell), 1e-6)
 })
