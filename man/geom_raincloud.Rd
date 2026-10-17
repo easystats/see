@@ -12,13 +12,13 @@ geom_raincloud(
   interval = TRUE,
   shade = NULL,
   seed = 1,
+  ...,
   size_points = 1.5,
   alpha_points = 0.5,
   color_points = NULL,
   fill_shade = "grey50",
   show.legend = NA,
-  inherit.aes = TRUE,
-  ...
+  inherit.aes = TRUE
 )
 }
 \arguments{
@@ -65,30 +65,26 @@ nothing is shaded.}
 \item{seed}{The random seed of the jitter of the points, a single number.
 The same seed gives the same jitter.}
 
+\item{...}{Other arguments passed to \code{\link[=geom_violinhalf]{geom_violinhalf()}}, such as \code{fill},
+\code{alpha}, \code{bw}, or \code{.width}. They do not reach the points or the shading, except for \code{width}
+and \code{height}. A \code{width} (or \code{height}, in a horizontal plot)
+is the width of a whole violin, as in \code{\link[=geom_violinhalf]{geom_violinhalf()}}, so each half
+violin and the band of the points take half of it. \code{flip} is not
+supported, because the half violins would cover the points.}
+
 \item{size_points, alpha_points, color_points}{The size, transparency, and
 color of the points. If \code{color_points} is \code{NULL} (default), the points
 take the \code{colour} aesthetic.}
 
 \item{fill_shade}{The fill color of the shaded intervals.}
 
-\item{show.legend}{logical. Should this layer be included in the legends?
-\code{NA}, the default, includes if any aesthetics are mapped.
-\code{FALSE} never includes, and \code{TRUE} always includes.
-It can also be a named logical vector to finely select the aesthetics to
-display. To include legend keys for all levels, even
-when no data exists, use \code{TRUE}.  If \code{NA}, all levels are shown in legend,
-but unobserved levels are omitted.}
+\item{show.legend}{Should the half violins be included in the legends? The
+points and the shading are never included.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
-
-\item{...}{Other arguments passed to \code{\link[=geom_violinhalf]{geom_violinhalf()}}, such as \code{fill},
-\code{alpha}, \code{bw}, or \code{.width}. A \code{width} (or \code{height}, in a horizontal plot)
-is the width of a whole violin, as in \code{\link[=geom_violinhalf]{geom_violinhalf()}}, so each half
-violin and the band of the points take half of it. \code{flip} is not
-supported, because the half violins would cover the points.}
 }
 \value{
 A list of ggplot2 layers.
@@ -101,9 +97,12 @@ half violins and the intervals are drawn with \code{\link[=geom_violinhalf]{geom
 function needs the \strong{ggdist} package (version 3.3.3 or later). Each half
 violin extends to the right of its position (up, in a horizontal plot), and
 the points are jittered in a band on the other side, from 0.45 to 0.05 times
-the spacing of the categorical axis away from the position. Optionally, the
-quantile intervals of each group can be shaded behind its points, for
-example as a background for estimated means and their confidence intervals.
+the spacing of the categorical axis away from the position (or closer, for a
+narrow \code{width}). Optionally, the quantile intervals of each group can be
+shaded behind its points, for example as a background for estimated means
+and their confidence intervals. Dodged groups, as with \code{fill} mapped to a
+second variable, are not supported: the half violins are dodged, but the
+points and the shading of all groups at a position share one band.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}

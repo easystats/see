@@ -7,9 +7,12 @@
 #' function needs the **ggdist** package (version 3.3.3 or later). Each half
 #' violin extends to the right of its position (up, in a horizontal plot), and
 #' the points are jittered in a band on the other side, from 0.45 to 0.05 times
-#' the spacing of the categorical axis away from the position. Optionally, the
-#' quantile intervals of each group can be shaded behind its points, for
-#' example as a background for estimated means and their confidence intervals.
+#' the spacing of the categorical axis away from the position (or closer, for a
+#' narrow `width`). Optionally, the quantile intervals of each group can be
+#' shaded behind its points, for example as a background for estimated means
+#' and their confidence intervals. Dodged groups, as with `fill` mapped to a
+#' second variable, are not supported: the half violins are dodged, but the
+#' points and the shading of all groups at a position share one band.
 #'
 #' @inheritParams geom_violinhalf
 #' @param interval Logical. If `TRUE` (default), add the median and the 66%
@@ -27,8 +30,11 @@
 #'   color of the points. If `color_points` is `NULL` (default), the points
 #'   take the `colour` aesthetic.
 #' @param fill_shade The fill color of the shaded intervals.
+#' @param show.legend Should the half violins be included in the legends? The
+#'   points and the shading are never included.
 #' @param ... Other arguments passed to [geom_violinhalf()], such as `fill`,
-#'   `alpha`, `bw`, or `.width`. A `width` (or `height`, in a horizontal plot)
+#'   `alpha`, `bw`, or `.width`. They do not reach the points or the shading, except for `width`
+#'   and `height`. A `width` (or `height`, in a horizontal plot)
 #'   is the width of a whole violin, as in [geom_violinhalf()], so each half
 #'   violin and the band of the points take half of it. `flip` is not
 #'   supported, because the half violins would cover the points.
@@ -62,13 +68,13 @@ geom_raincloud <- function(
   interval = TRUE,
   shade = NULL,
   seed = 1,
+  ...,
   size_points = 1.5,
   alpha_points = 0.5,
   color_points = NULL,
   fill_shade = "grey50",
   show.legend = NA,
-  inherit.aes = TRUE,
-  ...
+  inherit.aes = TRUE
 ) {
   insight::check_if_installed("ggdist", minimum_version = "3.3.3")
   scale <- match.arg(scale)

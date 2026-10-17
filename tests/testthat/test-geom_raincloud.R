@@ -150,6 +150,14 @@ test_that("geom_raincloud() checks its arguments", {
   expect_error(geom_raincloud(flip = TRUE), regexp = "flip")
 })
 
+test_that("geom_raincloud() passes fill and alpha to the half violins", {
+  # `fill` and `alpha` must not partially match `fill_shade` or `alpha_points`
+  p <- vertical + geom_raincloud(fill = "blue", alpha = 0.3, shade = 0.5)
+  expect_identical(unique(ggplot2::layer_data(p, 2)$fill), "blue")
+  expect_identical(unique(ggplot2::layer_data(p, 1)$fill), "grey50")
+  expect_identical(unique(ggplot2::layer_data(p, 4)$alpha), 0.5)
+})
+
 test_that("geom_raincloud() draws small groups without a half violin", {
   d <- data.frame(
     g = c("a", "a", "a", "b", "c", "c", "c"),
