@@ -229,7 +229,8 @@ test_that("a user coordinate system works on the outliers panel", {
 
 
 test_that("outliers panel without dots keeps the residual range", {
-  # F1: the LOESS line alone spans about -0.9 to 0.3
+  # F1: without a layer for the residuals, the y axis follows the LOESS line,
+  # about -0.9 to 0.3
   m1 <- stats::lm(y ~ x, data = .f1_data())
   b <- ggplot2::ggplot_build(.outliers_panel(
     m1,
@@ -269,7 +270,8 @@ test_that("outliers panel subtitle makes no claim without contour lines", {
   no_levels <- cm
   attr(no_levels$INFLUENTIAL, "cook_levels") <- NA_real_
   for (x in list(no_params, no_levels)) {
-    # all-NA levels also warn in the label count, as on origin/main
+    # all-NA levels warn in the label count (min() of no values), as on
+    # origin/main
     b <- suppressWarnings(ggplot2::ggplot_build(plot(x)))
     expect_identical(
       b$plot$labels$subtitle,

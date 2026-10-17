@@ -244,8 +244,10 @@
     .cook_lines <- Filter(Negate(is.null), .cook_lines)
     .cook_text <- Filter(Negate(is.null), .cook_text)
 
-    # say that all points are inside only if the lines could be computed
+    # say that all points are inside only with finite residuals, leverage
+    # values, one finite number of parameters, and a finite contour level
     .computable <- length(.res) > 0 &&
+      length(.hat) > 0 &&
       length(n_params) == 1 &&
       isTRUE(is.finite(n_params)) &&
       any(is.finite(cook.levels))
