@@ -12,7 +12,8 @@
 #' shaded behind its points, for example as a background for estimated means
 #' and their confidence intervals. Dodged groups, as with `fill` mapped to a
 #' second variable, are not supported: the half violins are dodged, but the
-#' points and the shading of all groups at a position share one band.
+#' points and the shading of all groups at a position share one band, and the
+#' shading pools their values.
 #'
 #' @inheritParams geom_violinhalf
 #' @param interval Logical. If `TRUE` (default), add the median and the 66%

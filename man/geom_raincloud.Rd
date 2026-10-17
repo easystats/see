@@ -102,7 +102,8 @@ narrow \code{width}). Optionally, the quantile intervals of each group can be
 shaded behind its points, for example as a background for estimated means
 and their confidence intervals. Dodged groups, as with \code{fill} mapped to a
 second variable, are not supported: the half violins are dodged, but the
-points and the shading of all groups at a position share one band.
+points and the shading of all groups at a position share one band, and the
+shading pools their values.
 }
 \examples{
 \dontshow{if (requireNamespace("ggdist", quietly = TRUE) && utils::packageVersion("ggdist") >= "3.3.3") withAutoprint(\{ # examplesIf}
