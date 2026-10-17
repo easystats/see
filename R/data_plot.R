@@ -150,7 +150,9 @@ add_plot_attributes <- function(x) {
     return(x$fittedModel)
   }
 
-  if (!is.null(obj_name)) {
+  # a long deparsed list, such as in `describe_distribution(list(...))`, is
+  # stored as several strings, which is no object name
+  if (!is.null(obj_name) && length(obj_name) == 1L) {
     # first try, parent frame
     dat <- tryCatch(
       get(obj_name, envir = parent.frame()),
@@ -173,6 +175,12 @@ add_plot_attributes <- function(x) {
 
   if (is.null(dat)) {
     dat <- attr(x, "data", exact = TRUE)
+  }
+
+  if (is.null(dat) && !is.null(obj_name)) {
+    # for a list, such as in `describe_distribution(list(...))`, the stored
+    # name is the deparsed list itself
+    dat <- .eval_constant_list(obj_name)
   }
 
   if (is.null(dat)) {
@@ -207,4 +215,70 @@ add_plot_attributes <- function(x) {
     }
   }
   ifnotfound
+}
+
+#' @keywords internal
+.model_for_priors <- function(x, data) {
+  if (is.null(data)) {
+    return(.retrieve_data(x))
+  }
+  if (insight::is_model(data)) {
+    return(data)
+  }
+  # posterior draws, such as a data frame or a matrix, hold no priors, so the
+  # model for the prior layer is still looked up by its name
+  tryCatch(.retrieve_data(x), error = function(e) NULL)
+}
+
+#' @keywords internal
+.eval_constant_list <- function(obj_name) {
+  expr <- tryCatch(
+    str2lang(paste(obj_name, collapse = " ")),
+    error = function(e) NULL
+  )
+  if (
+    !is.call(expr) ||
+      !identical(expr[[1]], as.name("list")) ||
+      !.is_constant_list(expr)
+  ) {
+    return(NULL)
+  }
+  # evaluate with nothing but list(), c() and the minus of negative numbers
+  allowed <- list(list = base::list, c = base::c, `-` = base::`-`)
+  eval(expr, envir = list2env(allowed, parent = emptyenv()))
+}
+
+#' @keywords internal
+.is_constant_list <- function(expr) {
+  all(vapply(
+    as.list(expr)[-1],
+    function(e) {
+      if (is.call(e) && identical(e[[1]], as.name("c"))) {
+        .is_constant_vector(e)
+      } else {
+        .is_constant(e)
+      }
+    },
+    logical(1)
+  ))
+}
+
+#' @keywords internal
+.is_constant_vector <- function(expr) {
+  all(vapply(as.list(expr)[-1], .is_constant, logical(1)))
+}
+
+#' @keywords internal
+.is_constant <- function(e) {
+  if (is.call(e)) {
+    # a negative number, such as -1.5 or -Inf
+    return(
+      identical(e[[1]], as.name("-")) &&
+        length(e) == 2L &&
+        is.numeric(e[[2]]) &&
+        length(e[[2]]) == 1L
+    )
+  }
+  # Inf, NaN and NA_real_ are parsed as constants, not as names
+  (is.numeric(e) || is.character(e) || is.logical(e)) && length(e) == 1L
 }

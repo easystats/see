@@ -1,3 +1,17 @@
+# see (devel)
+
+## Bug fixes
+
+* `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
+  uses the model given in `data`. If `data` is given and the model cannot be
+  found by its name, it no longer fails (#311).
+
+* `plot()` for `estimate_density()` and `describe_distribution()` has a new
+  `data` argument. Before, `plot(estimate_density(m), data = m)` failed (#311).
+
+* `plot()` now works for `describe_distribution()` on a list of numeric
+  vectors such as `list(mtcars$mpg, mtcars$cyl)` (#213).
+
 # see 0.15.0
 
 ## Changes

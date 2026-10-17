@@ -167,16 +167,21 @@ plot.see_estimate_density <- function(
   size_point = 2,
   centrality = "median",
   ci = 0.95,
+  data = NULL,
   ...
 ) {
   # save model for later use
-  model <- tryCatch(
-    .retrieve_data(x),
-    error = function(e) {
-      priors <- FALSE
-      NULL
-    }
-  )
+  if (is.null(data)) {
+    model <- tryCatch(
+      .retrieve_data(x),
+      error = function(e) {
+        priors <- FALSE
+        NULL
+      }
+    )
+  } else {
+    model <- data
+  }
 
   # handle alias
   dots <- list(...)
