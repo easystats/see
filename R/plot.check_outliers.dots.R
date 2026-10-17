@@ -89,6 +89,9 @@
         alpha = alpha_dot,
         size = size_point
       )
+  } else {
+    # keep the y axis on the residuals, where the contour lines are cut
+    p <- p + ggplot2::geom_blank()
   }
 
   p <- p +
@@ -182,6 +185,10 @@
           y <- c(bound, y)
         }
       }
+      # a single point draws no line
+      if (length(x) < 2) {
+        return(NULL)
+      }
       list(x = x, y = y)
     }
 
@@ -237,7 +244,12 @@
     .cook_lines <- Filter(Negate(is.null), .cook_lines)
     .cook_text <- Filter(Negate(is.null), .cook_text)
 
-    if (!length(.cook_lines)) {
+    # say that all points are inside only if the lines could be computed
+    .computable <- length(.res) > 0 &&
+      length(n_params) == 1 &&
+      isTRUE(is.finite(n_params)) &&
+      any(is.finite(cook.levels))
+    if (.computable && !length(.cook_lines)) {
       p <- p +
         ggplot2::labs(
           subtitle = "All points are inside the contour lines (outside the plot area)"

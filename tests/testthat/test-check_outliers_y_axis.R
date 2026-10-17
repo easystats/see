@@ -1,4 +1,7 @@
+skip_on_cran()
 skip_if_not_installed("performance")
+# without ggrepel, the fallback labels are nudged and widen the y range
+skip_if_not_installed("ggrepel")
 
 # 400 cases, residuals of about -2.7 to 3.6: no contour line comes near them
 .f1_data <- function() {
@@ -17,7 +20,9 @@ skip_if_not_installed("performance")
 .outliers_panel <- function(
   model,
   entry = c("check_model", "check_outliers"),
-  cook_levels = NULL
+  cook_levels = NULL,
+  show_labels = NULL,
+  ...
 ) {
   entry <- match.arg(entry)
   if (entry == "check_outliers") {
@@ -26,10 +31,15 @@ skip_if_not_installed("performance")
   cm <- suppressMessages(performance::check_model(
     model,
     check = "outliers",
-    residual_type = "normal"
+    residual_type = "normal",
+    ...
   ))
   if (!is.null(cook_levels)) {
     attr(cm$INFLUENTIAL, "cook_levels") <- cook_levels
+  }
+  # performance::check_model() has no `show_labels` argument
+  if (!is.null(show_labels)) {
+    attr(cm, "show_labels") <- show_labels
   }
   plot(cm)
 }
@@ -215,4 +225,55 @@ test_that("a user coordinate system works on the outliers panel", {
     )
   }))
   .expect_y_range_follows_residuals(b, stats::lm(y ~ x, data = .f1_data()))
+})
+
+
+test_that("outliers panel without dots keeps the residual range", {
+  # F1: the LOESS line alone spans about -0.9 to 0.3
+  m1 <- stats::lm(y ~ x, data = .f1_data())
+  b <- ggplot2::ggplot_build(.outliers_panel(
+    m1,
+    show_dots = FALSE,
+    show_labels = FALSE
+  ))
+  .expect_y_range_follows_residuals(b, m1)
+
+  m3 <- stats::lm(y ~ x, data = rbind(.f1_data(), data.frame(x = 6, y = -4)))
+  b <- ggplot2::ggplot_build(.outliers_panel(
+    m3,
+    show_dots = FALSE,
+    show_labels = FALSE
+  ))
+  expect_false(any(vapply(
+    b$plot$layers,
+    function(l) inherits(l$geom, "GeomPoint"),
+    logical(1)
+  )))
+  .expect_y_range_follows_residuals(b, m3)
+  expect_true(any(.contour_summary(b, cook_levels = 0.46)$inside))
+  expect_identical(
+    b$plot$labels$subtitle,
+    "Points should be inside the contour lines"
+  )
+})
+
+
+test_that("outliers panel subtitle makes no claim without contour lines", {
+  cm <- suppressMessages(performance::check_model(
+    stats::lm(y ~ x, data = .f1_data()),
+    check = "outliers",
+    residual_type = "normal"
+  ))
+  no_params <- cm
+  attr(no_params$INFLUENTIAL, "n_params") <- NULL
+  no_levels <- cm
+  attr(no_levels$INFLUENTIAL, "cook_levels") <- NA_real_
+  for (x in list(no_params, no_levels)) {
+    # all-NA levels also warn in the label count, as on origin/main
+    b <- suppressWarnings(ggplot2::ggplot_build(plot(x)))
+    expect_identical(
+      b$plot$labels$subtitle,
+      "Points should be inside the contour lines"
+    )
+  }
 })
