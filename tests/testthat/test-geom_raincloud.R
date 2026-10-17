@@ -126,6 +126,24 @@ test_that("geom_raincloud(shade = ) shades the quantile intervals", {
   )))
 })
 
+test_that("geom_raincloud(shade = ) pools the groups at a position", {
+  d <- iris
+  d$g <- factor(rep(c("a", "b"), 75))
+  for (aesthetic in c("fill", "linetype")) {
+    mapping <- ggplot2::aes(Species, Sepal.Length)
+    mapping[[aesthetic]] <- quote(g)
+    p <- ggplot2::ggplot(d, mapping) + geom_raincloud(shade = 0.5)
+    ld <- suppressWarnings(ggplot2::layer_data(p, 1))
+    expect_identical(nrow(ld), 3L)
+    for (i in 1:3) {
+      v <- d$Sepal.Length[as.integer(d$Species) == i]
+      q <- stats::quantile(v, c(0.25, 0.75), type = 7, names = FALSE)
+      row <- ld[ld$xmax == i - 0.05, ]
+      expect_equal(c(row$ymin, row$ymax), q, tolerance = 1e-10)
+    }
+  }
+})
+
 test_that("geom_raincloud(shade = ) skips missing values", {
   d <- data.frame(g = "a", y = c(1:9, NA))
   p <- ggplot2::ggplot(d, ggplot2::aes(g, y)) + geom_raincloud(shade = 0.5)

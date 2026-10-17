@@ -228,8 +228,10 @@ geom_raincloud <- function(
   )
 }
 
-# The stat of the shading: one rectangle per coverage and group, over the band
-# of the points and the central quantile interval of the group's values
+# The stat of the shading: one rectangle per coverage and position, over the
+# band of the points and the central quantile interval of the values there.
+# Groups that share a position (with another discrete aesthetic mapped) share
+# one band of points, so they share their shading too.
 .stat_raincloud_shade <- function(coverage, half_width) {
   ggplot2::ggproto(
     "StatRaincloudShade",
@@ -244,7 +246,8 @@ geom_raincloud <- function(
       band <- .raincloud_band(data, self$half_width)
       cat_axis <- band$cat_axis
       val_axis <- if (band$horizontal) "x" else "y"
-      groups <- split(data, list(data$PANEL, data$group), drop = TRUE)
+      positions <- as.numeric(data[[cat_axis]])
+      groups <- split(data, list(data$PANEL, positions), drop = TRUE)
       out <- lapply(groups, function(d) {
         v <- d[[val_axis]][!is.na(d[[val_axis]])]
         pos <- as.numeric(d[[cat_axis]][!is.na(d[[cat_axis]])][1])
@@ -254,7 +257,7 @@ geom_raincloud <- function(
         lo <- (1 - self$coverage) / 2
         rows <- data.frame(
           PANEL = d$PANEL[1],
-          group = d$group[1],
+          group = min(d$group),
           coverage = self$coverage,
           cat_min = pos - band$half,
           cat_max = pos - band$gap,
