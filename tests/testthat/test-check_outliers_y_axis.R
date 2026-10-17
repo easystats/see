@@ -7,7 +7,7 @@ skip_if_not_installed("performance")
   data.frame(x = x, y = x + stats::rnorm(400))
 }
 
-# Poisson data for a model with two contour levels
+# Poisson data, plotted with two contour levels set by hand
 .f5_data <- function() {
   set.seed(2)
   x <- stats::rnorm(200)

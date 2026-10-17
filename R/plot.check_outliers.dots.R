@@ -208,8 +208,8 @@
     })
 
     # labels sit at 80% of the leverage range, or at the largest leverage if
-    # the line does not reach that far; the label of a cut line is on the
-    # inner side, so the panel edge does not clip it
+    # the cut line starts to the right of that point; the label of a cut line
+    # is on the inner side, so the panel edge does not clip it
     .cook_text <- lapply(names(.sides), function(.s) {
       lapply(seq_along(cook.levels), function(.level) {
         .piece <- .pieces[[.s]][[.level]]
