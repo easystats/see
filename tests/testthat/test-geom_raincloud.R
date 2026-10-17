@@ -35,7 +35,7 @@ test_that("geom_raincloud() draws a half violin, an interval, and the points", {
   pts <- ld$points
   expect_identical(nrow(pts), nrow(iris))
   pos <- as.integer(iris$Species)
-  expect_identical(pts$group, pos)
+  expect_identical(as.vector(pts$group), pos)
   expect_true(all(pts$x >= pos - 0.45 - 1e-9))
   expect_true(all(pts$x <= pos - 0.05 + 1e-9))
   # the points are spread over the band, not stacked at one place
