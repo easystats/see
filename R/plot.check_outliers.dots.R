@@ -90,7 +90,8 @@
         size = size_point
       )
   } else {
-    # keep the y axis on the residuals, where the contour lines are cut
+    # keep the y axis on the residuals, as with dots (contour lines are cut
+    # at the residual range)
     p <- p + ggplot2::geom_blank()
   }
 
@@ -245,13 +246,17 @@
     .cook_text <- Filter(Negate(is.null), .cook_text)
 
     # say that all points are inside only with finite residuals, leverage
-    # values, one finite number of parameters, and a finite contour level
+    # values, one finite number of parameters, and a finite contour level, and
+    # only if every Cook's distance, also of rows left out by the sampling
+    # above, is below the smallest level
     .computable <- length(.res) > 0 &&
       length(.hat) > 0 &&
       length(n_params) == 1 &&
       isTRUE(is.finite(n_params)) &&
       any(is.finite(cook.levels))
-    if (.computable && !length(.cook_lines)) {
+    .all_inside <- .computable &&
+      all(x$Cooks_Distance < min_cook_level, na.rm = TRUE)
+    if (.all_inside && !length(.cook_lines)) {
       p <- p +
         ggplot2::labs(
           subtitle = "All points are inside the contour lines (outside the plot area)"

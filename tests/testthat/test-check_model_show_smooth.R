@@ -56,6 +56,8 @@ test_that("show_smooth = FALSE removes LOESS and cell means from panels", {
 
 
 test_that("show_smooth = FALSE removes LOESS from the outlier panel only", {
+  # the contour level comes from performance
+  skip_on_cran()
   model <- lm(mpg ~ wt + hp, data = mtcars)
   expect_gt(insight::n_unique(stats::hatvalues(model)), 30)
 
@@ -67,6 +69,10 @@ test_that("show_smooth = FALSE removes LOESS from the outlier panel only", {
   # line reaches the residuals)
   expect_identical(sum(.layer_geoms(p_off) == "GeomLine"), 1L)
   expect_identical(sum(.layer_geoms(p_on) == "GeomLine"), 1L)
+  for (p in list(p_off, p_on)) {
+    line <- p$layers[[which(.layer_geoms(p) == "GeomLine")]]
+    expect_true(all(line$data$y > 0))
+  }
   expect_identical(p_off$labels$subtitle, p_on$labels$subtitle)
 
   # the binned residuals panel keeps its own default

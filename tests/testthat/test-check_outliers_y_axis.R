@@ -1,7 +1,7 @@
 skip_on_cran()
 skip_if_not_installed("performance")
-# without ggrepel, the fallback labels are nudged and widen the y range
-skip_if_not_installed("ggrepel")
+# Tests of the y range with point labels skip without ggrepel, because the
+# fallback labels are nudged and widen the y range.
 
 # 400 cases, residuals of about -2.7 to 3.6: no contour line comes near them
 .f1_data <- function() {
@@ -121,6 +121,7 @@ skip_if_not_installed("ggrepel")
 
 
 test_that("outliers panel y range follows the residuals", {
+  skip_if_not_installed("ggrepel")
   m1 <- stats::lm(y ~ x, data = .f1_data())
   m2 <- stats::lm(mpg ~ wt + hp, data = mtcars)
   for (model in list(m1, m2)) {
@@ -133,6 +134,7 @@ test_that("outliers panel y range follows the residuals", {
 
 
 test_that("contour lines are drawn where they cross the panel", {
+  skip_if_not_installed("ggrepel")
   # F3: a high-leverage outlier with a Cook's distance above the level
   m3 <- stats::lm(y ~ x, data = rbind(.f1_data(), data.frame(x = 6, y = -4)))
   expect_gt(max(stats::cooks.distance(m3)), 0.46)
@@ -212,6 +214,7 @@ test_that("outliers panel subtitle says when no contour line is inside", {
 
 
 test_that("a user coordinate system works on the outliers panel", {
+  skip_if_not_installed("ggrepel")
   p <- .outliers_panel(stats::lm(y ~ x, data = .f1_data()))
 
   expect_no_message(expect_no_warning({
@@ -269,13 +272,41 @@ test_that("outliers panel subtitle makes no claim without contour lines", {
   attr(no_params$INFLUENTIAL, "n_params") <- NULL
   no_levels <- cm
   attr(no_levels$INFLUENTIAL, "cook_levels") <- NA_real_
-  for (x in list(no_params, no_levels)) {
-    # all-NA levels warn in the label count (min() of no values), as on
-    # origin/main
-    b <- suppressWarnings(ggplot2::ggplot_build(plot(x)))
+  b_params <- ggplot2::ggplot_build(plot(no_params))
+  # all-NA levels warn in the label count (min() of no values), as on
+  # origin/main
+  expect_warning(
+    p_levels <- plot(no_levels),
+    "no non-missing arguments to min"
+  )
+  b_levels <- ggplot2::ggplot_build(p_levels)
+  for (b in list(b_params, b_levels)) {
     expect_identical(
       b$plot$labels$subtitle,
       "Points should be inside the contour lines"
     )
   }
+
+  # a row left out by the sampling (here above 100 rows) has a Cook's
+  # distance of about 0.4, above the level 0.3, though no line reaches the
+  # sampled residuals
+  m6 <- stats::lm(
+    y ~ x,
+    data = rbind(.f1_data(), data.frame(x = 4.5, y = 0.3))
+  )
+  cm <- suppressMessages(performance::check_model(
+    m6,
+    check = "outliers",
+    residual_type = "normal",
+    maximum_dots = 100
+  ))
+  attr(cm$INFLUENTIAL, "cook_levels") <- c(0.3, 1)
+  expect_gt(max(cm$INFLUENTIAL$Cooks_Distance), 0.3)
+  b <- ggplot2::ggplot_build(plot(cm))
+  expect_lt(nrow(b$data[[1]]), nrow(cm$INFLUENTIAL))
+  expect_false(any(.contour_summary(b, cook_levels = c(0.3, 1))$inside))
+  expect_identical(
+    b$plot$labels$subtitle,
+    "Points should be inside the contour lines"
+  )
 })
