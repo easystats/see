@@ -8,6 +8,16 @@
   shades quantile intervals behind the points, for example
   `shade = c(0.5, 0.8, 0.95)`. It needs the *ggdist* package (#135).
 
+## Bug fixes
+
+* `plot()` for `bayestestR::equivalence_test()` of a data frame failed with
+  "invalid format '%i'". It now works.
+
+* `plot()` for `bayestestR::equivalence_test()` always labeled the interval
+  as "HDI". The facet labels and the x-axis title now name the interval type
+  that `equivalence_test()` used. For example, the default equal-tailed
+  interval gives "95% ETI".
+
 # see 0.15.0
 
 ## Changes
