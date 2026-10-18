@@ -171,22 +171,35 @@ test_that("check_model() VIF panel has the caption for infinite intervals", {
 })
 
 
+# rows of the arrow layer, one per interval bound above the axis top
+.vif_n_arrows <- function(p) {
+  segment <- vapply(
+    p$layers,
+    function(l) inherits(l$geom, "GeomSegment"),
+    logical(1)
+  )
+  nrow(ggplot2::layer_data(p, which(segment)))
+}
+
+
 test_that("missing upper bounds give no warning", {
   # terms 3 (VIF 1.53) and 4 (VIF 9.97, an arrow above the axis top)
   bounds <- list(
-    nan_low_vif = list(term = 3, ci_high = NaN),
-    na_low_vif = list(term = 3, ci_high = NA_real_),
-    na_arrow = list(term = 4, ci_high = NA_real_),
-    all_na = list(term = 1:4, ci_high = rep(NA_real_, 4))
+    nan_low_vif = list(term = 3, ci_high = NaN, arrows = 1L),
+    na_low_vif = list(term = 3, ci_high = NA_real_, arrows = 1L),
+    na_arrow = list(term = 4, ci_high = NA_real_, arrows = 0L),
+    all_na = list(term = 1:4, ci_high = rep(NA_real_, 4), arrows = 0L)
   )
   for (b in bounds) {
-    cc <- .with_vif(.vif_mtcars(), b$term, ci_high = b$ci_high)
-    expect_no_warning(ggplot2::ggplotGrob(plot(cc)))
+    p <- plot(.with_vif(.vif_mtcars(), b$term, ci_high = b$ci_high))
+    expect_no_warning(ggplot2::ggplotGrob(p))
+    expect_identical(.vif_n_arrows(p), b$arrows)
 
     ci <- .vif_mtcars_ci
     ci$VIF_CI_high[b$term] <- b$ci_high
     p <- plot(.vif_check_model(.vif_mtcars_model(), ci))
     expect_no_warning(ggplot2::ggplotGrob(p$VIF))
+    expect_identical(.vif_n_arrows(p$VIF), b$arrows)
   }
 })
 
@@ -195,7 +208,9 @@ test_that("faceted plot has the caption only for low VIFs running off the top", 
   # two panels, as for a zero-inflated model: wt and cyl in the first, gear
   # (VIF 1.53) and disp (VIF 9.97) in the second; axis top 11.5
   cc <- .vif_mtcars()
-  attr(cc, "data")$Component <- rep(c("conditional", "zero inflated"), each = 2)
+  component <- rep(c("conditional", "zero inflated"), each = 2)
+  attr(cc, "data")$Component <- component
+  attr(cc, "CI")$Component <- component
   cc <- .with_vif(cc, 4, ci_high = 11)
   expect_length(ggplot2::ggplot_build(plot(cc))$layout$panel_params, 2)
   expect_null(plot(cc)$labels$caption)
