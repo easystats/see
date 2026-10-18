@@ -171,6 +171,26 @@ test_that("check_model() VIF panel has the caption for infinite intervals", {
 })
 
 
+test_that("missing upper bounds give no warning", {
+  # terms 3 (VIF 1.53) and 4 (VIF 9.97, an arrow above the axis top)
+  bounds <- list(
+    nan_low_vif = list(term = 3, ci_high = NaN),
+    na_low_vif = list(term = 3, ci_high = NA_real_),
+    na_arrow = list(term = 4, ci_high = NA_real_),
+    all_na = list(term = 1:4, ci_high = rep(NA_real_, 4))
+  )
+  for (b in bounds) {
+    cc <- .with_vif(.vif_mtcars(), b$term, ci_high = b$ci_high)
+    expect_no_warning(ggplot2::ggplotGrob(plot(cc)))
+
+    ci <- .vif_mtcars_ci
+    ci$VIF_CI_high[b$term] <- b$ci_high
+    p <- plot(.vif_check_model(.vif_mtcars_model(), ci))
+    expect_no_warning(ggplot2::ggplotGrob(p$VIF))
+  }
+})
+
+
 test_that("VIF axis extends below 1, and the Low band starts at 1", {
   plots <- list(
     plot(.vif_inf()),
