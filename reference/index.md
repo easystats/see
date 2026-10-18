@@ -113,6 +113,9 @@
   [`geom_pooljitter()`](https://easystats.github.io/see/reference/geom_poolpoint.md)
   : Pool ball points
 
+- [`geom_raincloud()`](https://easystats.github.io/see/reference/geom_raincloud.md)
+  : Raincloud plot
+
 - [`geom_violindot()`](https://easystats.github.io/see/reference/geom_violindot.md)
   : Half-violin Half-dot plot
 

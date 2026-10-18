@@ -1,5 +1,197 @@
 # Changelog
 
+## see 0.15.0
+
+CRAN release: 2026-10-16
+
+### Changes
+
+- The Linearity and Homogeneity of Variance panels of
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html)
+  (and the plot of
+  [`check_heteroscedasticity()`](https://easystats.github.io/performance/reference/check_heteroscedasticity.html))
+  now draw the mean of each cell, joined by a line, in place of the
+  LOESS smoother when the fitted values take only a few distinct values,
+  for example in models with only categorical predictors. A LOESS fit
+  over so few values warned and could bend far outside the data. When
+  `show_ci` is `TRUE`, the cell means get 95% error bars. Note that
+  *performance* currently turns `show_ci` off for models whose terms are
+  all factors without interactions
+  ([\#464](https://github.com/easystats/see/issues/464)).
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html)
+  and
+  [`check_heteroscedasticity()`](https://easystats.github.io/performance/reference/check_heteroscedasticity.html)
+  gains a `show_smooth` argument. With `show_smooth = FALSE`, the
+  Linearity and Homogeneity of Variance panels draw neither the LOESS
+  smoother nor the cell means, the Influential Observations panel draws
+  no LOESS smoother, and the subtitles of the Linearity and Homogeneity
+  of Variance panels no longer refer to a reference line
+  ([\#464](https://github.com/easystats/see/issues/464)).
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`datawizard::means_by_group()`](https://easystats.github.io/datawizard/reference/means_by_group.html)
+  gets a `flip` argument. Use `flip = FALSE` to show the groups on the
+  horizontal axis
+  ([\#455](https://github.com/easystats/see/issues/455)).
+
+- [`geom_violinhalf()`](https://easystats.github.io/see/reference/geom_violinhalf.md)
+  and
+  [`geom_violindot()`](https://easystats.github.io/see/reference/geom_violindot.md)
+  are now drawn with the *ggdist* package
+  ([`ggdist::stat_slab()`](https://mjskay.github.io/ggdist/reference/stat_slab.html)
+  and
+  [`ggdist::geom_dots()`](https://mjskay.github.io/ggdist/reference/geom_dots.html)),
+  which they now need (version 3.3.3 or later). They work with facets
+  and free scales ([\#81](https://github.com/easystats/see/issues/81),
+  [\#385](https://github.com/easystats/see/issues/385)), and the plots
+  look a little different. Dodged groups each take half of their dodge
+  cell, from its centre, as before. The dots of
+  [`geom_violindot()`](https://easystats.github.io/see/reference/geom_violindot.md)
+  were not dodged before. By default, they now go in the other half of
+  the cell (they overlap a flipped half violin). The new `interval`
+  argument adds the median with 66% and 95% intervals
+  ([\#68](https://github.com/easystats/see/issues/68)). The `binwidth`
+  default of
+  [`geom_violindot()`](https://easystats.github.io/see/reference/geom_violindot.md)
+  is now `NA` (it was 0.05), so ggdist sizes the dots to the data
+  ([\#44](https://github.com/easystats/see/issues/44)). Other arguments
+  in `...` of
+  [`geom_violindot()`](https://easystats.github.io/see/reference/geom_violindot.md)
+  now go to
+  [`ggdist::geom_dots()`](https://mjskay.github.io/ggdist/reference/geom_dots.html)
+  (instead of
+  [`geom_dotplot()`](https://ggplot2.tidyverse.org/reference/geom_dotplot.html))
+  as well as to the half violins, except the arguments of the density,
+  the layout, and the interval, which go to the half violins only (see
+  [`?geom_violindot`](https://easystats.github.io/see/reference/geom_violindot.md)).
+  A `width` in `...` is the width of a whole violin, as in
+  [`geom_violin()`](https://ggplot2.tidyverse.org/reference/geom_violin.html),
+  so each half violin is half as wide. `bounds` must contain all values;
+  otherwise the half violins are not drawn. The `stat` argument is now
+  ignored, with a warning for any value other than `"ydensity"` or
+  [`ggplot2::StatYdensity`](https://ggplot2.tidyverse.org/reference/Stat.html).
+  [`geom_violindot()`](https://easystats.github.io/see/reference/geom_violindot.md)
+  no longer works with
+  [`coord_polar()`](https://ggplot2.tidyverse.org/reference/coord_radial.html).
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`modelbased::estimate_contrasts()`](https://easystats.github.io/modelbased/reference/estimate_contrasts.html)
+  now draws joint contrasts of two or more variables, such as
+  `contrast = c("am", "cyl")`. The x axis shows the combinations of
+  levels, such as “auto, 4”.
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`modelbased::estimate_contrasts()`](https://easystats.github.io/modelbased/reference/estimate_contrasts.html)
+  gains a `show_data` argument. With `show_data = TRUE`, the plot draws
+  the raw data of the model as jittered points behind the lighthouses
+  (easystats/modelbased#114).
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`modelbased::estimate_contrasts()`](https://easystats.github.io/modelbased/reference/estimate_contrasts.html)
+  now draws more kinds of estimates. It draws means in a `Probability`,
+  `Proportion`, or `Rate` column, such as the probabilities of a
+  logistic model. It draws ratio contrasts from
+  `comparison = ratio ~ pairwise` as ratios of the means. With the
+  default backend, it draws contrasts of a log response estimated with
+  `transform = TRUE` as ratios of the back-transformed means. The plot
+  stops with an error for contrasts back-transformed from some other
+  transformations, such as `sqrt(y)`. When
+  [`insight::find_transformation()`](https://easystats.github.io/insight/reference/find_transformation.html)
+  reports a transformation other than `"identity"`, it also stops for
+  ratio contrasts estimated with `transform = TRUE`. It also stops for
+  contrasts and means on different scales, as their `predict` or
+  `transform` arguments show. The help page lists the exceptions. With
+  `show_data = TRUE`, the plot draws a logical or two-level factor
+  response as 0 and 1. It also draws the raw data of `y` for a response
+  `log(y)`, `log2(y)`, or `log10(y)`. This needs contrasts and means
+  estimated with `transform = TRUE`.
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`modelbased::estimate_contrasts()`](https://easystats.github.io/modelbased/reference/estimate_contrasts.html)
+  now draws ordinal and multinomial models, such as
+  [`MASS::polr()`](https://rdrr.io/pkg/MASS/man/polr.html) and
+  [`mclogit::mblogit()`](https://melff.github.io/mclogit/reference/mblogit.html),
+  with one panel per response category. Each panel shows the
+  probabilities of that category and the contrasts within it. Contrasts
+  between two categories are not drawn. `show_data = TRUE` stops with an
+  error for these models. The plot also draws Bayesian ratio contrasts
+  from `comparison = ratio ~ pairwise` as ratios. When
+  [`insight::find_transformation()`](https://easystats.github.io/insight/reference/find_transformation.html)
+  reports `"identity"`, it draws ratio contrasts estimated with
+  `transform = TRUE` as ratios. It accepts contrasts and means on the
+  link scale from the marginaleffects and emmeans backends together. For
+  some models, such as `lm(y ~ x)`, the link scale counts as the
+  response scale. These models have an identity link, and
+  [`insight::find_transformation()`](https://easystats.github.io/insight/reference/find_transformation.html)
+  reports their response as `"identity"`. The link scale does not count
+  for a model with a zero-inflation or hurdle part.
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`modelbased::estimate_contrasts()`](https://easystats.github.io/modelbased/reference/estimate_contrasts.html)
+  now shows only the panels of the `by` levels that the contrasts have.
+  It leaves out the means and raw data of other levels. A numeric
+  contrast variable at unevenly spaced values, such as
+  `contrast = "wt=c(2,2.5,4)"`, gets a continuous x axis that keeps
+  their spacing. Joint contrasts of three or more variables show one
+  level per line in the axis labels. A `by` variable named `PANEL`,
+  `ROW`, `COL`, `SCALE_X`, or `SCALE_Y` no longer stops the plot.
+
+- If a term with a VIF below 2 has an upper confidence limit that is
+  infinite or above the top of the plot, the collinearity plot now has a
+  caption. The caption says that the interval formula (from
+  *performance*) fails near VIF = 1, and that this is not high
+  collinearity. This applies to
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`check_collinearity()`](https://easystats.github.io/performance/reference/check_collinearity.html)
+  and to the collinearity panel of
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html).
+  The y axis now extends below VIF = 1, so the axis no longer cuts off
+  points at 1 ([\#399](https://github.com/easystats/see/issues/399)).
+
+### Bug fixes
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  structural equation models from
+  [`parameters::model_parameters()`](https://easystats.github.io/parameters/reference/model_parameters.html)
+  drew latent factors as observed variables and indicators as latent
+  variables. Latent factors are now drawn as circles and indicators as
+  squares.
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  structural equation models now gives an informative error when the
+  selected `component` has no paths to plot, for example
+  `component = "regression"` for a confirmatory factor analysis
+  ([\#243](https://github.com/easystats/see/issues/243)).
+
+- [`geom_binomdensity()`](https://easystats.github.io/see/reference/geom_binomdensity.md)
+  now works with facets. It no longer drops the columns other than `x`
+  and `y`, so each panel shows only its own data
+  ([\#192](https://github.com/easystats/see/issues/192)).
+
+- When
+  [`check_model()`](https://easystats.github.io/performance/reference/check_model.html)
+  failed to create plots, the informative message about troubleshooting
+  and workarounds was no longer printed. This should now work again.
+
+- [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`modelbased::estimate_contrasts()`](https://easystats.github.io/modelbased/reference/estimate_contrasts.html)
+  now draws each contrast estimated with `by` from the means of its own
+  `by` level. Previously, it mixed the means of all `by` levels into
+  each contrast. If the means listed the `by` variable first, it drew no
+  contrasts. The plot now shows one panel per level, or combination of
+  levels, of the `by` variables. The x axis now shows the contrasted
+  variable in the order of its levels (easystats/modelbased#267).
+
+- When some observations had a missing Cook’s distance,
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) for
+  [`check_outliers()`](https://easystats.github.io/performance/reference/check_outliers.html)
+  failed with “arguments imply differing number of rows”. An example is
+  rows with missing values in a model fitted with
+  `na.action = na.exclude`. The scree and count plots now leave these
+  observations out, and the labels still name the right rows.
+
 ## see 0.14.2
 
 CRAN release: 2026-09-01
