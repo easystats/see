@@ -178,6 +178,7 @@ test_that("check_model() VIF panel has the caption for infinite intervals", {
     function(l) inherits(l$geom, "GeomSegment"),
     logical(1)
   )
+  stopifnot(sum(segment) == 1)
   nrow(ggplot2::layer_data(p, which(segment)))
 }
 
@@ -212,7 +213,7 @@ test_that("faceted plot has the caption only for low VIFs running off the top", 
   attr(cc, "data")$Component <- component
   attr(cc, "CI")$Component <- component
   cc <- .with_vif(cc, 4, ci_high = 11)
-  expect_length(ggplot2::ggplot_build(plot(cc))$layout$panel_params, 2)
+  expect_length(unique(ggplot2::layer_data(plot(cc))$PANEL), 2)
   expect_null(plot(cc)$labels$caption)
 
   # low VIF in the second panel only, bound above the axis top
