@@ -195,7 +195,7 @@ test_that("faceted plot has the caption only for low VIFs running off the top", 
   # two panels, as for a zero-inflated model: wt and cyl in the first, gear
   # (VIF 1.53) and disp (VIF 9.97) in the second; axis top 11.5
   cc <- .vif_mtcars()
-  attr(cc, "data")$Component <- rep(c("conditional", "zero_inflated"), each = 2)
+  attr(cc, "data")$Component <- rep(c("conditional", "zero inflated"), each = 2)
   cc <- .with_vif(cc, 4, ci_high = 11)
   expect_length(ggplot2::ggplot_build(plot(cc))$layout$panel_params, 2)
   expect_null(plot(cc)$labels$caption)
