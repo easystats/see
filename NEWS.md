@@ -12,6 +12,14 @@
 * `plot()` now works for `describe_distribution()` on a list of numeric
   vectors such as `list(mtcars$mpg, mtcars$cyl)` (#213).
 
+## Changes
+
+* New `geom_raincloud()` draws a raincloud plot. For each group, it draws a
+  half violin, the median with 66% and 95% quantile intervals, and the raw
+  observations as jittered points on the other side. Its `shade` argument
+  shades quantile intervals behind the points, for example
+  `shade = c(0.5, 0.8, 0.95)`. It needs the *ggdist* package (#135).
+
 # see 0.15.0
 
 ## Changes
