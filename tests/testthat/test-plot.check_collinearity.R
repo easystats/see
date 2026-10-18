@@ -191,6 +191,26 @@ test_that("missing upper bounds give no warning", {
 })
 
 
+test_that("faceted plot has the caption only for low VIFs running off the top", {
+  # two panels, as for a zero-inflated model: wt and cyl in the first, gear
+  # (VIF 1.53) and disp (VIF 9.97) in the second; axis top 11.5
+  cc <- .vif_mtcars()
+  attr(cc, "data")$Component <- rep(c("conditional", "zero_inflated"), each = 2)
+  cc <- .with_vif(cc, 4, ci_high = 11)
+  expect_length(ggplot2::ggplot_build(plot(cc))$layout$panel_params, 2)
+  expect_null(plot(cc)$labels$caption)
+
+  # low VIF in the second panel only, bound above the axis top
+  p <- plot(.with_vif(cc, 3, ci_high = 12))
+  expect_identical(p$labels$caption, .vif_inf_caption)
+
+  # low VIF in the second panel, bound above the axis top only on wt
+  # (VIF 5.05) in the first panel
+  p <- plot(.with_vif(cc, 1, ci_high = 12))
+  expect_null(p$labels$caption)
+})
+
+
 test_that("VIF axis extends below 1, and the Low band starts at 1", {
   plots <- list(
     plot(.vif_inf()),
