@@ -18,6 +18,10 @@
   that `equivalence_test()` used. For example, the default equal-tailed
   interval gives "95% ETI".
 
+* If an upper confidence limit of a VIF is `NA` or `NaN`, `plot()` for
+  `check_collinearity()` and the collinearity panel of `check_model()` no
+  longer warn about removed rows.
+
 # see 0.15.0
 
 ## Changes
