@@ -50,6 +50,9 @@ plot.see_equivalence_test <- function(
     insight::check_if_installed("emmeans")
   }
 
+  # read before subsetting, which drops the attribute
+  ci_method <- .equivalence_ci_method(x)
+
   # if we have intercept-only models, keep at least the intercept
   intercepts <- which(.is_intercept(x$Parameter))
   if (length(intercepts) && nrow(x) > length(intercepts) && !show_intercept) {
@@ -108,7 +111,7 @@ plot.see_equivalence_test <- function(
     tmp$predictor <- factor(tmp$predictor)
     tmp$predictor <- factor(tmp$predictor, levels = rev(levels(tmp$predictor)))
 
-    tmp$HDI <- sprintf("%g%% HDI", 100 * i$CI[1])
+    tmp$HDI <- sprintf("%g%% %s", 100 * i$CI[1], ci_method$short)
 
     tmp
   })
@@ -134,11 +137,12 @@ plot.see_equivalence_test <- function(
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
   if (length(unique(tmp$HDI)) > 1L) {
-    x.title <- "Highest Density Region of Posterior Samples"
+    x.title <- sprintf("%s of Posterior Samples", ci_method$long)
   } else {
     x.title <- sprintf(
-      "%g%% Highest Density Region of Posterior Samples",
-      100 * x$CI[1]
+      "%g%% %s of Posterior Samples",
+      100 * x$CI[1],
+      ci_method$long
     )
   }
   legend.title <- "Decision on H0"
@@ -266,6 +270,7 @@ plot.see_equivalence_test_df <- function(
   }
 
   .rope <- c(x$ROPE_low[1], x$ROPE_high[1])
+  ci_method <- .equivalence_ci_method(x)
 
   # split for multiple CIs
   tests <- split(x, x$CI)
@@ -294,7 +299,7 @@ plot.see_equivalence_test_df <- function(
     tmp$predictor <- factor(tmp$predictor)
     tmp$predictor <- factor(tmp$predictor, levels = rev(levels(tmp$predictor)))
 
-    tmp$HDI <- sprintf("%i%% HDI", i$CI[1])
+    tmp$HDI <- sprintf("%g%% %s", 100 * i$CI[1], ci_method$short)
 
     tmp
   })
@@ -312,11 +317,12 @@ plot.see_equivalence_test_df <- function(
 
   fill.color <- c("#CD423F", "#018F77", "#FCDA3B")
   if (length(unique(tmp$HDI)) > 1L) {
-    x.title <- "Highest Density Region of Posterior Samples"
+    x.title <- sprintf("%s of Posterior Samples", ci_method$long)
   } else {
     x.title <- sprintf(
-      "%i%% Highest Density Region of Posterior Samples",
-      x$CI[1]
+      "%g%% %s of Posterior Samples",
+      100 * x$CI[1],
+      ci_method$long
     )
   }
   legend.title <- "Decision on H0"
@@ -391,6 +397,24 @@ plot.see_equivalence_test_df <- function(
   }
 
   p
+}
+
+
+# interval type for the labels; results from bayestestR versions without the
+# `ci_method` attribute used the HDI
+.equivalence_ci_method <- function(x) {
+  ci_method <- attr(x, "ci_method", exact = TRUE)
+  if (is.null(ci_method)) {
+    ci_method <- "HDI"
+  }
+  ci_method <- toupper(ci_method)
+  long <- switch(
+    ci_method,
+    HDI = "Highest Density Region",
+    ETI = "Equal-Tailed Interval",
+    ci_method
+  )
+  list(short = ci_method, long = long)
 }
 
 
