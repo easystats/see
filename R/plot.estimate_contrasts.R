@@ -745,7 +745,9 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   ("beams") represent the pairwise contrasts. A beam originates at the point
 #'   estimate of a reference level and projects toward the comparison level.
 #'   At the target level, the vertical span of the beam represents the confidence
-#'   interval of the estimated difference, anchored at the reference mean.
+#'   interval of the estimated difference, anchored at the reference mean. The
+#'   beams are drawn with [geom_lightbeam()], which can also draw them in a
+#'   plot of your own.
 #' - **Interpretation:** The vertical span of the projected beam at the target
 #'   level corresponds to the confidence interval of the estimated difference,
 #'   evaluated *relative* to the reference point estimate. Intuitively, it answers:
