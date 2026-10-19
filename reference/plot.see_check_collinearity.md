@@ -84,14 +84,14 @@ result
 #> Low Correlation
 #> 
 #>  Term  VIF    VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
-#>  gear 1.53 [1.19,  2.51]     1.24      0.65     [0.40, 0.84]
+#>  gear 1.53 [1.04,  2.06]     1.24      0.65     [0.48, 0.96]
 #> 
 #> Moderate Correlation
 #> 
 #>  Term  VIF    VIF 95% CI adj. VIF Tolerance Tolerance 95% CI
-#>    wt 5.05 [3.21,  8.41]     2.25      0.20     [0.12, 0.31]
-#>   cyl 5.41 [3.42,  9.04]     2.33      0.18     [0.11, 0.29]
-#>  disp 9.97 [6.08, 16.85]     3.16      0.10     [0.06, 0.16]
+#>    wt 5.05 [2.57,  7.07]     2.25      0.20     [0.14, 0.39]
+#>   cyl 5.41 [2.74,  7.58]     2.33      0.18     [0.13, 0.36]
+#>  disp 9.97 [4.90, 13.93]     3.16      0.10     [0.07, 0.20]
 plot(result)
 
 ```
