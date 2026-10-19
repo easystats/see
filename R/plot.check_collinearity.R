@@ -178,7 +178,8 @@ plot.see_check_collinearity <- function(
         na.rm = TRUE
       ) +
       ggplot2::geom_segment(
-        data = x[x$VIF_CI_high > y_top, ],
+        # which() drops NA and NaN bounds, which would give all-NA rows
+        data = x[which(x$VIF_CI_high > y_top), ],
         mapping = aes(
           x = .data$x,
           xend = .data$x,
