@@ -1,5 +1,13 @@
 # see (devel)
 
+## Changes
+
+* New `geom_raincloud()` draws a raincloud plot. For each group, it draws a
+  half violin, the median with 66% and 95% quantile intervals, and the raw
+  observations as jittered points on the other side. Its `shade` argument
+  shades quantile intervals behind the points, for example
+  `shade = c(0.5, 0.8, 0.95)`. It needs the *ggdist* package (#135).
+
 ## Bug fixes
 
 * `geom_violindot()` now works with only `y` mapped (or only `x`). Before, it
@@ -26,6 +34,10 @@
   cell: it is divided by twice the number of cells at that position, and it is
   at most half of the room beside the half violin. So dodged dots have more
   room, most of all beside an interval.
+
+* If an upper confidence limit of a VIF is `NA` or `NaN`, `plot()` for
+  `check_collinearity()` and the collinearity panel of `check_model()` no
+  longer warn about removed rows.
 
 # see 0.15.0
 

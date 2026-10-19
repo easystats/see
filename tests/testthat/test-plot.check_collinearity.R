@@ -1,21 +1,29 @@
-test_that("`plot.see_check_collinearity()` works", {
-  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-  result <- performance::check_collinearity(m)
-  expect_s3_class(plot(result), c("gg", "ggplot"))
-
-  skip_if_not_installed("vdiffr")
-  vdiffr::expect_doppelganger(
-    title = "plot.check_collinearity",
-    fig = plot(result)
+# VIF intervals set by hand, so that the tests do not depend on the interval
+# formula in performance, which changed in easystats/performance#977
+.vif_ci <- function(low, high) {
+  data.frame(
+    VIF_CI_low = low,
+    VIF_CI_high = high,
+    Tolerance_CI_low = 1 / high,
+    Tolerance_CI_high = 1 / low
   )
-})
+}
 
-
-# model whose VIF intervals have no upper limit (easystats/see#399)
+# model with VIFs near 1, whose intervals had no upper limit before
+# easystats/performance#977 (easystats/see#399)
 .vif_inf_model <- function() {
   set.seed(1)
   d <- data.frame(y = rnorm(300), a = rnorm(300), b = rnorm(300))
   lm(y ~ a + b, data = d)
+}
+
+# VIFs 1.002; infinite upper bounds, as performance 0.18.2 gives them
+.vif_inf_ci <- .vif_ci(c(1, 1), c(Inf, Inf))
+
+.vif_inf <- function() {
+  cc <- performance::check_collinearity(.vif_inf_model())
+  attr(cc, "CI") <- .vif_inf_ci
+  cc
 }
 
 .vif_inf_caption <- paste(
@@ -23,10 +31,28 @@ test_that("`plot.see_check_collinearity()` works", {
   "the interval formula fails near VIF = 1. This is not high collinearity."
 )
 
+.vif_mtcars_model <- function() {
+  lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+}
+
+# the intervals of performance 0.18.2
+.vif_mtcars_ci <- .vif_ci(
+  c(3.209219, 3.42313, 1.186708, 6.082135),
+  c(8.41114, 9.03919, 2.511318, 16.84704)
+)
+
 # VIFs wt 5.05, cyl 5.41, gear 1.53, disp 9.97; axis top 11.5
 .vif_mtcars <- function() {
-  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-  performance::check_collinearity(m)
+  cc <- performance::check_collinearity(.vif_mtcars_model())
+  attr(cc, "CI") <- .vif_mtcars_ci
+  cc
+}
+
+# the check_model() panel reads the intervals from attr(x$VIF, "CI")
+.vif_check_model <- function(model, ci) {
+  cm <- performance::check_model(model, check = "vif", panel = FALSE)
+  attr(cm$VIF, "CI") <- ci
+  cm
 }
 
 # the plot reads the VIFs from the stored copy in attr(x, "data")
@@ -55,12 +81,20 @@ test_that("`plot.see_check_collinearity()` works", {
 }
 
 
+test_that("`plot.see_check_collinearity()` works", {
+  result <- .vif_mtcars()
+  expect_s3_class(plot(result), c("gg", "ggplot"))
+
+  skip_if_not_installed("vdiffr")
+  vdiffr::expect_doppelganger(
+    title = "plot.check_collinearity",
+    fig = plot(result)
+  )
+})
+
+
 test_that("plot of VIF intervals running off the top has a caption", {
-  # the infinite bounds come from the interval formula in performance;
-  # a fixed formula must not break reverse dependency checks
-  skip_on_cran()
-  cc <- performance::check_collinearity(.vif_inf_model())
-  expect_true(all(is.infinite(attributes(cc)$CI$VIF_CI_high)))
+  cc <- .vif_inf()
   expect_identical(plot(cc)$labels$caption, .vif_inf_caption)
   expect_no_warning(ggplot2::ggplotGrob(plot(cc)))
 
@@ -84,7 +118,7 @@ test_that("plot of VIF intervals running off the top has a caption", {
   skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger(
     title = "plot.check_collinearity infinite intervals",
-    fig = plot(performance::check_collinearity(.vif_inf_model()))
+    fig = plot(.vif_inf())
   )
 })
 
@@ -108,23 +142,20 @@ test_that("plot without low VIFs running off the top has no caption", {
   # VIF below 2, bound above 10 but below the axis top of 11.5
   p <- plot(.with_vif(cc, 3, vif = 1.9, ci_high = 11))
   expect_null(p$labels$caption)
-  # NaN bound, as performance gives for VIF exactly 1
+  # NaN bound, as performance 0.18.2 gives for VIF exactly 1
   expect_null(plot(.with_vif(cc, 3, ci_high = NaN))$labels$caption)
   # axis top 23 (largest VIF 20), bound below it
   cc <- .with_vif(cc, 4, vif = 20)
   expect_null(plot(.with_vif(cc, 3, ci_high = 15))$labels$caption)
 
-  cc <- performance::check_collinearity(.vif_inf_model())
+  cc <- .vif_inf()
   attr(cc, "CI") <- NULL
   expect_null(plot(cc)$labels$caption)
 })
 
 
 test_that("check_model() VIF panel has the caption for infinite intervals", {
-  skip_on_cran()
-  cm <- performance::check_model(.vif_inf_model(), check = "vif", panel = FALSE)
-  expect_true(all(is.infinite(attributes(cm$VIF)$CI$VIF_CI_high)))
-  p <- plot(cm)
+  p <- plot(.vif_check_model(.vif_inf_model(), .vif_inf_ci))
   expect_identical(
     gsub("\\s*\\n\\s*", " ", p$VIF$labels$caption),
     .vif_inf_caption
@@ -135,22 +166,72 @@ test_that("check_model() VIF panel has the caption for infinite intervals", {
     "Some VIF intervals run off the top:"
   )
 
-  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
-  p <- plot(performance::check_model(m, check = "vif", panel = FALSE))
+  p <- plot(.vif_check_model(.vif_mtcars_model(), .vif_mtcars_ci))
   expect_null(p$VIF$labels$caption)
 })
 
 
+# rows of the arrow layer, one per interval bound above the axis top
+.vif_n_arrows <- function(p) {
+  segment <- vapply(
+    p$layers,
+    function(l) inherits(l$geom, "GeomSegment"),
+    logical(1)
+  )
+  stopifnot(sum(segment) == 1)
+  nrow(ggplot2::layer_data(p, which(segment)))
+}
+
+
+test_that("missing upper bounds give no warning", {
+  # terms 3 (VIF 1.53) and 4 (VIF 9.97, an arrow above the axis top)
+  bounds <- list(
+    nan_low_vif = list(term = 3, ci_high = NaN, arrows = 1L),
+    na_low_vif = list(term = 3, ci_high = NA_real_, arrows = 1L),
+    na_arrow = list(term = 4, ci_high = NA_real_, arrows = 0L),
+    all_na = list(term = 1:4, ci_high = rep(NA_real_, 4), arrows = 0L)
+  )
+  for (b in bounds) {
+    p <- plot(.with_vif(.vif_mtcars(), b$term, ci_high = b$ci_high))
+    expect_no_warning(ggplot2::ggplotGrob(p))
+    expect_identical(.vif_n_arrows(p), b$arrows)
+
+    ci <- .vif_mtcars_ci
+    ci$VIF_CI_high[b$term] <- b$ci_high
+    p <- plot(.vif_check_model(.vif_mtcars_model(), ci))
+    expect_no_warning(ggplot2::ggplotGrob(p$VIF))
+    expect_identical(.vif_n_arrows(p$VIF), b$arrows)
+  }
+})
+
+
+test_that("faceted plot has the caption only for low VIFs running off the top", {
+  # two panels, as for a zero-inflated model: wt and cyl in the first, gear
+  # (VIF 1.53) and disp (VIF 9.97) in the second; axis top 11.5
+  cc <- .vif_mtcars()
+  component <- rep(c("conditional", "zero inflated"), each = 2)
+  attr(cc, "data")$Component <- component
+  attr(cc, "CI")$Component <- component
+  cc <- .with_vif(cc, 4, ci_high = 11)
+  expect_length(unique(ggplot2::layer_data(plot(cc))$PANEL), 2)
+  expect_null(plot(cc)$labels$caption)
+
+  # low VIF in the second panel only, bound above the axis top
+  p <- plot(.with_vif(cc, 3, ci_high = 12))
+  expect_identical(p$labels$caption, .vif_inf_caption)
+
+  # low VIF in the second panel, bound above the axis top only on wt
+  # (VIF 5.05) in the first panel
+  p <- plot(.with_vif(cc, 1, ci_high = 12))
+  expect_null(p$labels$caption)
+})
+
+
 test_that("VIF axis extends below 1, and the Low band starts at 1", {
-  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
   plots <- list(
-    plot(performance::check_collinearity(.vif_inf_model())),
-    plot(performance::check_collinearity(m)),
-    plot(performance::check_model(
-      .vif_inf_model(),
-      check = "vif",
-      panel = FALSE
-    ))$VIF
+    plot(.vif_inf()),
+    plot(.vif_mtcars()),
+    plot(.vif_check_model(.vif_inf_model(), .vif_inf_ci))$VIF
   )
   for (p in plots) {
     axis <- .vif_axis(p)
