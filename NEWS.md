@@ -8,6 +8,12 @@
   shades quantile intervals behind the points, for example
   `shade = c(0.5, 0.8, 0.95)`. It needs the *ggdist* package (#135).
 
+## Bug fixes
+
+* If an upper confidence limit of a VIF is `NA` or `NaN`, `plot()` for
+  `check_collinearity()` and the collinearity panel of `check_model()` no
+  longer warn about removed rows.
+
 # see 0.15.0
 
 ## Changes
