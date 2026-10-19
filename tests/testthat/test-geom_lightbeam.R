@@ -177,3 +177,32 @@ test_that("geom_lightbeam() drops rows with a missing x or xend on a continuous 
     expect_equal(drawn[[2]]$y, c(2, 1, 5), tolerance = 1e-8)
   }
 })
+
+
+test_that("geom_lightbeam() draws the rows in their order, whatever their group", {
+  d <- data.frame(
+    x = c(1, 1),
+    y = c(1, 1),
+    xend = c(2, 2),
+    ymin = c(0, 0.5),
+    ymax = c(3, 2),
+    g = c(2, 1)
+  )
+  p <- ggplot2::ggplot(d, beam_aes) +
+    geom_lightbeam(ggplot2::aes(group = g))
+  expect_identical(as.vector(ggplot2::layer_data(p)$group), c(2L, 1L))
+
+  drawn <- drawn_beams(p)
+  expect_equal(drawn[[1]]$y, c(1, 0, 3), tolerance = 1e-8)
+  expect_equal(drawn[[2]]$y, c(1, 0.5, 2), tolerance = 1e-8)
+})
+
+
+test_that("a mapped subgroup does not change the beams", {
+  d <- beams_continuous
+  d$g <- c("a", "b", "a")
+  p <- ggplot2::ggplot(d, beam_aes) +
+    suppressWarnings(geom_lightbeam(ggplot2::aes(subgroup = g)))
+  expect_s3_class(ggplot2::layer_grob(p)[[1]], "polygon")
+  expect_beams(p)
+})

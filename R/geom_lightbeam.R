@@ -11,20 +11,22 @@
 #' (`xend`, `ymax`), and `ymin` need not be smaller than `ymax`. The beams are
 #' drawn in the order of the rows, so later rows are on top.
 #'
-#' On a discrete x axis, when `x` is a factor, the axis takes its levels first
-#' and then the levels that only `xend` holds. Character values are sorted.
-#' Set the order with `scale_x_discrete(limits = ...)` where it matters.
+#' On a discrete x axis, the order of the levels depends on whether `x` and
+#' `xend` are factors or character vectors and on which levels each of them
+#' uses. Set the order with `scale_x_discrete(limits = ...)` where it matters.
 #' `position_dodge()` moves `x` only, so it moves the start of a beam but not
 #' its interval.
 #' `coord_flip()` draws the beams horizontally. The beams are translucent by
 #' default (`alpha = 0.1`), and so are their keys in a fill legend; use
 #' `guides(fill = guide_legend(override.aes = list(alpha = 1)))` to draw the
-#' keys opaque.
+#' keys opaque. `lineend`, `linejoin`, and `linemitre` in `...` set the
+#' outline, as in [ggplot2::geom_polygon()].
 #'
 #' @section Aesthetics:
 #' `geom_lightbeam()` understands the following aesthetics (required ones are
 #' in bold): **`x`**, **`y`**, **`xend`**, **`ymin`**, **`ymax`**, `alpha`,
-#' `colour`, `fill`, `group`, `linetype`, and `linewidth`. Rows with a missing
+#' `colour`, `fill`, `group`, `linetype`, and `linewidth`. Each row is its own
+#' beam, so `group` does not change the drawing. Rows with a missing
 #' `y`, `ymin`, or `ymax`, or a missing `x` or `xend` on a continuous axis, are
 #' not drawn, with a warning. On a discrete axis, a missing `x` or `xend` is
 #' drawn at the `NA` level of the axis.
@@ -141,7 +143,8 @@ GeomLightbeam <- ggplot2::ggproto(
     vertices$x <- as.vector(rbind(data$x, data$xend, data$xend))
     vertices$y <- as.vector(rbind(data$y, data$ymin, data$ymax))
     vertices$group <- rep(seq_len(n), each = 3)
-    vertices$xend <- vertices$ymin <- vertices$ymax <- NULL
+    # a beam has no holes, so a mapped `subgroup` is not passed on
+    vertices$xend <- vertices$ymin <- vertices$ymax <- vertices$subgroup <- NULL
     ggplot2::GeomPolygon$draw_panel(
       vertices,
       panel_params,

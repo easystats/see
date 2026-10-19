@@ -93,6 +93,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     c(
       "x",
       "y",
+      "xend",
       "ymin",
       "ymax",
       "group",
@@ -848,7 +849,9 @@ plot.see_estimate_contrasts <- function(
   }
 
   # the beams have the levels of Level1 in `x` and those of Level2 in `xend`,
-  # so an empty layer of the means first gives the x axis their order
+  # so an empty layer of the means, before the beams, gives the x axis their
+  # order; a beam with a missing tip is left out with no warning, as the
+  # polygon with a missing vertex drew nothing
   p <- p +
     ggplot2::geom_blank(
       data = x$geom_pointrange,
@@ -864,7 +867,8 @@ plot.see_estimate_contrasts <- function(
         ymax = .data$ymax,
         group = .data$group
       ),
-      alpha = 0.1
+      alpha = 0.1,
+      na.rm = TRUE
     ) +
     ggplot2::geom_pointrange(
       data = x$geom_pointrange,
@@ -916,6 +920,14 @@ plot.see_estimate_contrasts <- function(
 #' @keywords internal
 .lightbeams <- function(polygons) {
   rows <- split(seq_len(nrow(polygons)), polygons$group)
+  if (any(lengths(rows) != 3L)) {
+    insight::format_error(
+      paste(
+        "The lighthouse data must have three rows per contrast. Please use",
+        "the output of `data_plot()` without removing rows."
+      )
+    )
+  }
   vertex <- function(k) vapply(rows, `[`, integer(1), k)
   beams <- polygons[vertex(1L), , drop = FALSE]
   beams$xend <- polygons$x[vertex(2L)]

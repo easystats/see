@@ -2284,3 +2284,51 @@ test_that("the beams of lighthouse plots have the corners of `data_plot()`", {
     }
   }
 })
+
+
+test_that("lighthouse plots keep a `by` variable named xend", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  s <- contrasts_factorial_data()
+  s <- data.frame(a = s$a, xend = s$b, out = s$y)
+  model <- lm(out ~ a * xend, data = s)
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "a", by = "xend")
+  means <- modelbased::estimate_means(model, by = c("a", "xend"))
+  p <- plot(contrasts, means)
+  built <- ggplot2::ggplot_build(p)
+
+  expect_shape(built$layout$layout, nrow = 2L)
+  beams <- built$data[[layer_index(p, "GeomLightbeam")]]
+  pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
+  expect_setequal(as.character(beams$PANEL), c("1", "2"))
+  expect_identical(
+    sort(unique(as.character(beams$PANEL))),
+    sort(unique(as.character(pointranges$PANEL)))
+  )
+})
+
+
+test_that("lighthouse plots leave out a beam with a missing tip, with no warning", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  ir <- contrasts_iris()
+  contrasts <- ir$contrasts
+  contrasts$CI_low[2] <- NA
+  p <- plot(contrasts, ir$means)
+  expect_no_warning(ggplot2::ggplotGrob(p))
+  grob <- ggplot2::layer_grob(p, layer_index(p, "GeomLightbeam"))[[1]]
+  expect_length(unique(grob$id), 2L)
+})
+
+
+test_that("lighthouse plots stop for lighthouse data without three rows per contrast", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  ir <- contrasts_iris()
+  dp <- data_plot(ir$contrasts, ir$means)
+  dp$geom_polygon <- dp$geom_polygon[-1, ]
+  expect_error(plot(dp), regexp = "three rows per contrast", fixed = TRUE)
+})

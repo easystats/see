@@ -123,21 +123,23 @@ The three corners are drawn in the order (\code{x}, \code{y}), (\code{xend}, \co
 (\code{xend}, \code{ymax}), and \code{ymin} need not be smaller than \code{ymax}. The beams are
 drawn in the order of the rows, so later rows are on top.
 
-On a discrete x axis, when \code{x} is a factor, the axis takes its levels first
-and then the levels that only \code{xend} holds. Character values are sorted.
-Set the order with \code{scale_x_discrete(limits = ...)} where it matters.
+On a discrete x axis, the order of the levels depends on whether \code{x} and
+\code{xend} are factors or character vectors and on which levels each of them
+uses. Set the order with \code{scale_x_discrete(limits = ...)} where it matters.
 \code{position_dodge()} moves \code{x} only, so it moves the start of a beam but not
 its interval.
 \code{coord_flip()} draws the beams horizontally. The beams are translucent by
 default (\code{alpha = 0.1}), and so are their keys in a fill legend; use
 \code{guides(fill = guide_legend(override.aes = list(alpha = 1)))} to draw the
-keys opaque.
+keys opaque. \code{lineend}, \code{linejoin}, and \code{linemitre} in \code{...} set the
+outline, as in \code{\link[ggplot2:geom_polygon]{ggplot2::geom_polygon()}}.
 }
 \section{Aesthetics}{
 
 \code{geom_lightbeam()} understands the following aesthetics (required ones are
 in bold): \strong{\code{x}}, \strong{\code{y}}, \strong{\code{xend}}, \strong{\code{ymin}}, \strong{\code{ymax}}, \code{alpha},
-\code{colour}, \code{fill}, \code{group}, \code{linetype}, and \code{linewidth}. Rows with a missing
+\code{colour}, \code{fill}, \code{group}, \code{linetype}, and \code{linewidth}. Each row is its own
+beam, so \code{group} does not change the drawing. Rows with a missing
 \code{y}, \code{ymin}, or \code{ymax}, or a missing \code{x} or \code{xend} on a continuous axis, are
 not drawn, with a warning. On a discrete axis, a missing \code{x} or \code{xend} is
 drawn at the \code{NA} level of the axis.
