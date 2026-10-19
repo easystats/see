@@ -910,7 +910,7 @@ plot.see_estimate_contrasts <- function(
 }
 
 
-# one row per lighthouse, from the three rows per contrast of `polygons`: the
+# one row per beam, from the three rows per contrast of `polygons`: the
 # estimate of Level1, then the two tips at Level2. For a difference, `ymin` is
 # the estimate minus CI_low and so the upper tip.
 #' @keywords internal

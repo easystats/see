@@ -1,5 +1,6 @@
-# the drawn polygons of the lightbeam layer, in data units: one element per
-# polygon id, with the x and y of its vertices in drawing order
+# the drawn polygons of the lightbeam layer, in the units of the scales after
+# their transformation (discrete levels at 1, 2, ...): one element per polygon
+# id, with the x and y of its vertices in drawing order
 drawn_beams <- function(p, layer = 1, panel = 1) {
   pp <- ggplot2::ggplot_build(p)$layout$panel_params[[panel]]
   grob <- ggplot2::layer_grob(p, layer)[[panel]]
@@ -61,7 +62,7 @@ test_that("geom_lightbeam() draws one triangle per row on a discrete x axis", {
   p <- ggplot2::ggplot(beams_discrete, beam_aes) + geom_lightbeam()
   expect_beams(p)
 
-  # the corners in data units: a, b, and c are at 1, 2, and 3
+  # the corners in scale units: a, b, and c are at 1, 2, and 3
   drawn <- drawn_beams(p)
   expect_equal(drawn[[1]]$x, c(1, 2, 2), tolerance = 1e-8)
   expect_equal(drawn[[1]]$y, c(1, 0, 3), tolerance = 1e-8)

@@ -11,10 +11,11 @@
 #' (`xend`, `ymax`), and `ymin` need not be smaller than `ymax`. The beams are
 #' drawn in the order of the rows, so later rows are on top.
 #'
-#' On a discrete x axis, the axis takes the levels of `x` first and then the
-#' levels that only `xend` holds, so set the order with
-#' `scale_x_discrete(limits = ...)` where it matters. `position_dodge()` moves
-#' `x` only, so it moves the start of a beam but not its interval.
+#' On a discrete x axis, when `x` is a factor, the axis takes its levels first
+#' and then the levels that only `xend` holds. Character values are sorted.
+#' Set the order with `scale_x_discrete(limits = ...)` where it matters.
+#' `position_dodge()` moves `x` only, so it moves the start of a beam but not
+#' its interval.
 #' `coord_flip()` draws the beams horizontally. The beams are translucent by
 #' default (`alpha = 0.1`), and so are their keys in a fill legend; use
 #' `guides(fill = guide_legend(override.aes = list(alpha = 1)))` to draw the
@@ -24,7 +25,9 @@
 #' `geom_lightbeam()` understands the following aesthetics (required ones are
 #' in bold): **`x`**, **`y`**, **`xend`**, **`ymin`**, **`ymax`**, `alpha`,
 #' `colour`, `fill`, `group`, `linetype`, and `linewidth`. Rows with a missing
-#' value in a required aesthetic are not drawn, with a warning.
+#' `y`, `ymin`, or `ymax`, or a missing `x` or `xend` on a continuous axis, are
+#' not drawn, with a warning. On a discrete axis, a missing `x` or `xend` is
+#' drawn at the `NA` level of the axis.
 #'
 #' @inheritParams ggplot2::geom_polygon
 #'
