@@ -34,6 +34,13 @@
   cell: it is divided by twice the number of cells at that position, and it is
   at most half of the room beside the half violin. So dodged dots have more
   room, most of all beside an interval.
+* `plot()` for `bayestestR::equivalence_test()` of a data frame failed with
+  "invalid format '%i'". It now works.
+
+* `plot()` for `bayestestR::equivalence_test()` always labeled the interval
+  as "HDI". The facet labels and the x-axis title now name the interval type
+  that `equivalence_test()` used. For example, the default equal-tailed
+  interval gives "95% ETI".
 
 * If an upper confidence limit of a VIF is `NA` or `NaN`, `plot()` for
   `check_collinearity()` and the collinearity panel of `check_model()` no
