@@ -845,10 +845,23 @@ plot.see_estimate_contrasts <- function(
       )
   }
 
+  # the beams have the levels of Level1 in `x` and those of Level2 in `xend`,
+  # so an empty layer of the means first gives the x axis their order
   p <- p +
-    ggplot2::geom_polygon(
-      data = x$geom_polygon,
-      ggplot2::aes(x = .data$x, y = .data$y, group = .data$group),
+    ggplot2::geom_blank(
+      data = x$geom_pointrange,
+      ggplot2::aes(x = .data$x)
+    ) +
+    geom_lightbeam(
+      data = .lightbeams(x$geom_polygon),
+      ggplot2::aes(
+        x = .data$x,
+        y = .data$y,
+        xend = .data$xend,
+        ymin = .data$ymin,
+        ymax = .data$ymax,
+        group = .data$group
+      ),
       alpha = 0.1
     ) +
     ggplot2::geom_pointrange(
@@ -892,6 +905,21 @@ plot.see_estimate_contrasts <- function(
   }
 
   p
+}
+
+
+# one row per lighthouse, from the three rows per contrast of `polygons`: the
+# estimate of Level1, then the two tips at Level2. For a difference, `ymin` is
+# the estimate minus CI_low and so the upper tip.
+#' @keywords internal
+.lightbeams <- function(polygons) {
+  rows <- split(seq_len(nrow(polygons)), polygons$group)
+  vertex <- function(k) vapply(rows, `[`, integer(1), k)
+  beams <- polygons[vertex(1L), , drop = FALSE]
+  beams$xend <- polygons$x[vertex(2L)]
+  beams$ymin <- polygons$y[vertex(2L)]
+  beams$ymax <- polygons$y[vertex(3L)]
+  beams
 }
 
 
