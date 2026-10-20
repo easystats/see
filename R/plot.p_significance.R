@@ -242,7 +242,7 @@ plot.see_p_significance <- function(
   ...
 ) {
   # save model for later use
-  model <- .retrieve_data(x)
+  model <- .model_for_priors(x, data)
 
   # retrieve and prepare data for plotting
   if (!inherits(x, "data_plot")) {
