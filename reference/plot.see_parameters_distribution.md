@@ -18,6 +18,7 @@ plot(
   size_bar = 0.7,
   highlight = NULL,
   color_highlight = NULL,
+  data = NULL,
   ...
 )
 ```
@@ -58,6 +59,13 @@ plot(
 
   A vector of color values for highlighted categories. The remaining
   (non-highlighted) categories will be filled with a lighter grey.
+
+- data:
+
+  The data frame, vector or list that was given to
+  [`describe_distribution()`](https://easystats.github.io/datawizard/reference/describe_distribution.html).
+  If `NULL`, it is found by its name or, for a list, rebuilt from the
+  values stored in the result.
 
 - ...:
 

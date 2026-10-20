@@ -21,6 +21,7 @@ plot(
   size_point = 2,
   centrality = "median",
   ci = 0.95,
+  data = NULL,
   ...
 )
 ```
@@ -82,6 +83,11 @@ plot(
 
   Numeric value of probability of the CI (between 0 and 1) to be
   estimated. Default to `0.95`.
+
+- data:
+
+  The original data used to create this object. Can be a statistical
+  model.
 
 - ...:
 
