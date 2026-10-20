@@ -166,19 +166,15 @@ add_plot_attributes <- function(x) {
         error = function(e) NULL
       )
     }
-
-    if (is.null(dat)) {
-      # last try, the calling functions; a missing argument of that name in
-      # one of them gives an error
-      dat <- tryCatch(
-        .dynGet(obj_name, ifnotfound = NULL),
-        error = function(e) NULL
-      )
-    }
   }
 
   if (is.null(dat)) {
     dat <- attr(x, "data", exact = TRUE)
+  }
+
+  if (is.null(dat) && !is.null(obj_name) && length(obj_name) == 1L) {
+    # then the calling functions, starting with this one
+    dat <- .dynGet(obj_name, ifnotfound = NULL)
   }
 
   if (is.null(dat) && !is.null(obj_name)) {
@@ -216,7 +212,11 @@ add_plot_attributes <- function(x) {
   while (n > minframe) {
     n <- n - 1L
     env <- sys.frame(n)
-    r <- get0(x, envir = env, inherits = inherits, ifnotfound = myObj)
+    # a missing argument of that name gives an error, so that frame is skipped
+    r <- tryCatch(
+      get0(x, envir = env, inherits = inherits, ifnotfound = myObj),
+      error = function(e) myObj
+    )
     if (!identical(r, myObj)) {
       return(r)
     }

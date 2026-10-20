@@ -255,7 +255,7 @@ test_that("plot() finds a function-local data frame for `describe_distribution()
   expect_draws(out$plot)
 })
 
-test_that("a missing argument of the stored name does not stop the lookup with its own error", {
+test_that("a missing argument of the stored name gives the usual lookup error", {
   result_m <- as_user_fn(function(model_value) {
     m <- model_value
     bayestestR::p_direction(m)
@@ -271,4 +271,75 @@ test_that("a missing argument of the stored name does not stop the lookup with i
   }
   expect_false(exists("m"))
   expect_error(wrap(result), "Failed at retrieving data")
+})
+
+test_that("plot() finds a function-local model past a wrapper with a missing argument of its name", {
+  outer <- as_user_fn(function(model_value) {
+    wrap <- function(result, m) plot(result)
+    m <- model_value
+    wrap(bayestestR::p_direction(m))
+  })
+  if (exists("m", envir = globalenv(), inherits = FALSE)) {
+    old_m <- get("m", envir = globalenv())
+    rm("m", envir = globalenv())
+    on.exit(assign("m", old_m, envir = globalenv()), add = TRUE)
+  }
+  expect_false(exists("m"))
+  suppressMessages(expect_draws(outer(m_wt)))
+})
+
+test_that("plot() finds a function-local model named like a local of tryCatch()", {
+  # a tryCatch() around the lookup used to search its own locals, such as
+  # `name` and `handler`
+  plot_name <- as_user_fn(function(model_value) {
+    name <- model_value
+    plot(bayestestR::p_direction(name))
+  })
+  plot_handler <- as_user_fn(function(model_value) {
+    handler <- model_value
+    plot(bayestestR::p_direction(handler))
+  })
+  expect_false(exists("name"))
+  expect_false(exists("handler"))
+  suppressMessages(expect_draws(plot_name(m_wt)))
+  suppressMessages(expect_draws(plot_handler(m_wt)))
+})
+
+test_that("plot() uses the model stored in a check_normality() result inside a function", {
+  skip_if_not_installed("performance")
+  # `obj_name` is a local of the lookup, and `name` was a local of the
+  # tryCatch() that wrapped it
+  plot_name <- as_user_fn(function(model_value) {
+    name <- model_value
+    plot(performance::check_normality(name))
+  })
+  plot_obj_name <- as_user_fn(function(model_value) {
+    obj_name <- model_value
+    plot(performance::check_normality(obj_name))
+  })
+  expect_false(exists("name"))
+  expect_false(exists("obj_name"))
+  model <- lm(mpg ~ wt, data = mtcars)
+  expect_draws(plot_name(model))
+  expect_draws(plot_obj_name(model))
+})
+
+test_that("plot() still fails for a function-local model named `x`, `data` or `obj_name`", {
+  plot_x <- as_user_fn(function(model_value) {
+    x <- model_value
+    plot(bayestestR::p_direction(x))
+  })
+  plot_data <- as_user_fn(function(model_value) {
+    data <- model_value
+    plot(bayestestR::p_direction(data))
+  })
+  plot_obj_name <- as_user_fn(function(model_value) {
+    obj_name <- model_value
+    plot(bayestestR::p_direction(obj_name))
+  })
+  # the lookup finds `x` in see's own functions, `data` as `utils::data()`,
+  # and `obj_name` in its own frame, not in the user's function
+  expect_error(suppressMessages(plot_x(m_wt)), "undefined columns selected")
+  expect_error(suppressMessages(plot_data(m_wt)), "argument is of length zero")
+  expect_error(suppressMessages(plot_obj_name(m_wt)), "must be numeric")
 })
