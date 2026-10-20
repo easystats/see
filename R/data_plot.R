@@ -211,6 +211,13 @@ add_plot_attributes <- function(x) {
   myObj <- structure(list(.b = as.raw(7)), foo = 47L)
   while (n > minframe) {
     n <- n - 1L
+    # frames of functions in package base, such as tryCatch() or lapply(),
+    # hold only their own arguments and variables; code run by eval() or
+    # local() has no function environment and is searched
+    fun_env <- environment(sys.function(n))
+    if (!is.null(fun_env) && isBaseNamespace(topenv(fun_env))) {
+      next
+    }
     env <- sys.frame(n)
     # a missing argument of that name gives an error, so that frame is skipped
     r <- tryCatch(

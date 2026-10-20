@@ -343,3 +343,40 @@ test_that("plot() still fails for a function-local model named `x`, `data` or `o
   expect_error(suppressMessages(plot_data(m_wt)), "argument is of length zero")
   expect_error(suppressMessages(plot_obj_name(m_wt)), "must be numeric")
 })
+
+test_that("plot() of `estimate_density()` finds a function-local model named like a local of tryCatch()", {
+  # some of see's plot methods, such as plot() for estimate_density(), call
+  # the lookup inside tryCatch(), whose frames hold `name` and `classes`
+  plot_name <- as_user_fn(function(model_value) {
+    name <- model_value
+    plot(bayestestR::estimate_density(name))
+  })
+  plot_classes <- as_user_fn(function(model_value) {
+    classes <- model_value
+    plot(bayestestR::estimate_density(classes))
+  })
+  expect_false(exists("name"))
+  expect_false(exists("classes"))
+  suppressMessages(expect_draws(plot_name(m_wt)))
+  suppressMessages(expect_draws(plot_classes(m_wt)))
+})
+
+test_that("plot() inside suppressMessages() finds a function-local model named `classes`", {
+  plot_classes <- as_user_fn(function(model_value) {
+    classes <- model_value
+    suppressMessages(plot(bayestestR::p_direction(classes)))
+  })
+  expect_false(exists("classes"))
+  expect_draws(plot_classes(m_wt))
+})
+
+test_that("plot() finds a model in a local() block", {
+  plot_local_block <- as_user_fn(function(model_value) {
+    local({
+      inner_block <- model_value
+      plot(bayestestR::p_direction(inner_block))
+    })
+  })
+  expect_false(exists("inner_block"))
+  suppressMessages(expect_draws(plot_local_block(m_wt)))
+})
