@@ -211,3 +211,64 @@ test_that("plot(data = ) works for `describe_distribution()` with an unreachable
   expect_unreachable(result)
   expect_draws(plot(result, data = df))
 })
+
+
+# a model or data that exists only inside a function --------------------------
+
+# makes the result and plots it inside a user function, which holds the model
+plot_local <- as_user_fn(function(model_value, fun, ...) {
+  inner_mod <- model_value
+  result <- fun(inner_mod)
+  list(result = result, plot = plot(result, ...))
+})
+
+for (fun_name in c("p_direction", "p_significance", "rope", "hdi", "point_estimate")) {
+  test_that(
+    sprintf("plot() finds a function-local model for `%s()`", fun_name),
+    {
+      fun <- getExportedValue("bayestestR", fun_name)
+      out <- suppressMessages(plot_local(m_wt, fun))
+      expect_identical(attr(out$result, "object_name"), "inner_mod")
+      # not in the test environment, the global environment, or the search path
+      expect_false(exists("inner_mod"))
+      suppressMessages(expect_draws(out$plot))
+    }
+  )
+}
+
+test_that("plot() finds a function-local model for the priors of `p_direction()`", {
+  out <- suppressMessages(plot_local(m_wt, bayestestR::p_direction, priors = TRUE))
+  expect_false(exists("inner_mod"))
+  suppressMessages(expect_draws(out$plot))
+  expect_identical(prior_parameters(out$plot), model_parameters(m_wt))
+})
+
+test_that("plot() finds a function-local data frame for `describe_distribution()`", {
+  plot_local_df <- as_user_fn(function(df_value) {
+    inner_df <- df_value
+    result <- datawizard::describe_distribution(inner_df)
+    list(result = result, plot = plot(result))
+  })
+  out <- plot_local_df(mtcars[c("mpg", "cyl")])
+  expect_identical(attr(out$result, "object_name"), "inner_df")
+  expect_false(exists("inner_df"))
+  expect_draws(out$plot)
+})
+
+test_that("a missing argument of the stored name does not stop the lookup with its own error", {
+  result_m <- as_user_fn(function(model_value) {
+    m <- model_value
+    bayestestR::p_direction(m)
+  })
+  wrap <- as_user_fn(function(result, m) plot(result))
+  result <- result_m(m_wt)
+  expect_identical(attr(result, "object_name"), "m")
+  # other test files leave a global `m`
+  if (exists("m", envir = globalenv(), inherits = FALSE)) {
+    old_m <- get("m", envir = globalenv())
+    rm("m", envir = globalenv())
+    on.exit(assign("m", old_m, envir = globalenv()), add = TRUE)
+  }
+  expect_false(exists("m"))
+  expect_error(wrap(result), "Failed at retrieving data")
+})

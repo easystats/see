@@ -168,8 +168,12 @@ add_plot_attributes <- function(x) {
     }
 
     if (is.null(dat)) {
-      # last try
-      dat <- .dynGet(obj_name, ifnotfound = NULL)
+      # last try, the calling functions; a missing argument of that name in
+      # one of them gives an error
+      dat <- tryCatch(
+        .dynGet(obj_name, ifnotfound = NULL),
+        error = function(e) NULL
+      )
     }
   }
 
@@ -203,7 +207,10 @@ add_plot_attributes <- function(x) {
   minframe = 1L,
   inherits = FALSE
 ) {
-  x <- insight::safe_deparse(x)
+  # deparsing a string would add quotes, so `get0()` would look for `"\"m\""`
+  if (!is.character(x)) {
+    x <- insight::safe_deparse(x)
+  }
   n <- sys.nframe()
   myObj <- structure(list(.b = as.raw(7)), foo = 47L)
   while (n > minframe) {

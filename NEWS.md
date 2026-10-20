@@ -2,6 +2,12 @@
 
 ## Bug fixes
 
+* `plot()` now finds a model or data that exists only in the function that
+  calls `plot()`. This works for `p_direction()`, `p_significance()`,
+  `rope()`, `hdi()`, `point_estimate()` and `describe_distribution()`. If its
+  name is the name of a plot method argument, such as `x` or `data`, the plot
+  still fails (#311).
+
 * `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
   uses the model given in `data`. If `data` is given and the model cannot be
   found by its name, it no longer fails (#311).
