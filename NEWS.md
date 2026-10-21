@@ -10,30 +10,18 @@
 
 ## Bug fixes
 
-* `geom_violindot()` now works with only `y` mapped (or only `x`). Before, it
-  failed with an "object not found" error.
+* `geom_violindot()` now works when only `y` (or only `x`) is mapped.
 
 * `position` in `geom_violindot()` now sets the position of the half violins,
-  as in `geom_violinhalf()`. Before, it matched `position_dots`, so it moved
-  only the dots and turned off their dodge. The default dots now follow a dodge
-  set by `"dodge"` or `position_dodge()`, with its `width`, `preserve`, and
-  `reverse`. Under other positions, such as `"identity"`, they
-  are not dodged. `position_dots` now comes after `...`, so give it by its full
-  name.
-
-* In horizontal plots, the default `position_dots` of `geom_violindot()` no
-  longer shifts the dots along the value axis.
-  The gap between the dots and the half violin is now on the categorical axis
-  in both orientations.
+  as in `geom_violinhalf()`, and the dots follow its dodge. Before, it matched
+  `position_dots` and moved only the dots. `position_dots` now comes after
+  `...`, so it must be named in full.
 
 * The default gap between the dots and the half violins of `geom_violindot()`
-  is now 0.025 times the resolution of the categorical axis (0.06 with
-  `interval = TRUE`). It was 0.025 data units at any resolution.
+  now scales with the resolution of the categorical axis and shrinks in
+  dodged cells. In horizontal plots, the dots are no longer shifted along the
+  value axis.
 
-* In a dodged cell, the default gap of `geom_violindot()` now shrinks with the
-  cell: it is divided by twice the number of cells at that position, and it is
-  at most half of the room beside the half violin. So dodged dots have more
-  room, most of all beside an interval.
 * `plot()` for `bayestestR::equivalence_test()` of a data frame failed with
   "invalid format '%i'". It now works.
 

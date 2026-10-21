@@ -17,21 +17,12 @@
 #'   the value axis. Dodged groups leave the dots less room, so a fixed bin
 #'   width can make them overflow it, with a warning from ggdist.
 #' @param position_dots Position adjustment for dots, either as a string, or the
-#'   result of a call to a position adjustment function. If you do not set it,
-#'   the dots move away from the half violin along the categorical axis (x in
-#'   a vertical plot, y in a horizontal plot), and are not shifted along the
-#'   value axis. The gap is 0.025 times the resolution of the categorical axis
-#'   (0.06 with `interval = TRUE`). In a dodged cell, the gap is divided by
-#'   twice the number of cells at that position (the number of groups there,
-#'   or with `preserve = "single"` the largest number at any position of the
-#'   layer), but it
-#'   is at most half of the room beside the half violin (which matters only
-#'   for a narrow `width`).
-#'   This default also dodges the dots with their half violins when `position`
-#'   in `...` is `"dodge"` or made by [ggplot2::position_dodge()]. A position
-#'   that you set is used as given, so the dots are not dodged unless that
-#'   position dodges them. Name this argument in full: `position` goes to the
-#'   half violins.
+#'   result of a call to a position adjustment function. The default leaves a
+#'   gap of 0.025 times the resolution of the categorical axis (0.06 with
+#'   `interval = TRUE`) between the dots and the half violin, smaller in dodged
+#'   cells, and dodges the dots with their half violins. A position that you
+#'   set is used as given. Must be named in full, because `position` goes to
+#'   the half violins.
 #' @param size_dots,dots_size Size adjustment for dots, passed to the
 #'   `dotsize` argument of [ggdist::geom_dots()].
 #' @param color_dots,dots_color Color adjustment for dots.
@@ -46,14 +37,10 @@
 #'   `colour` does not reach the dots when `color_dots` is set, and `fill` does
 #'   not reach them when `fill_dots` is set. As for the half violins, a `width`
 #'   (or `height`) is the width of a whole violin, so the dots take half of it.
-#'   `position` goes to the half violins and their interval, not to the dots
-#'   (see [geom_violinhalf()]). With the default `position_dots`, the dots are
-#'   dodged with the half violins, with the same `width`, `preserve`, and
-#'   `reverse`, when `position` is `"dodge"` (the default) or made by
-#'   [ggplot2::position_dodge()]. Under any other position, such as
-#'   `"identity"`, `"dodge2"`, or [ggplot2::position_jitterdodge()], the dots
-#'   are not dodged. The dots of groups with fewer than two observations are
-#'   still drawn.
+#'   `position` goes to the half violins and their interval, as in
+#'   [geom_violinhalf()]. The default dots follow it only if it is `"dodge"`
+#'   or made by [ggplot2::position_dodge()]. The dots of groups with fewer than
+#'   two observations are still drawn.
 #'
 #' @return A list of ggplot2 layers.
 #'
@@ -91,11 +78,8 @@ geom_violindot <- function(
 ) {
   insight::check_if_installed("ggdist", minimum_version = "3.3.3")
   scale <- match.arg(scale)
-  # the default position leaves a gap between the dots and the half violin,
-  # wider with an interval, and dodges the dots with their half violins when
-  # the half violins are dodged by position_dodge()
-  # an argument in `...` named `position`, or a prefix of it such as `pos`,
-  # which R matches to the `position` of geom_violinhalf()
+  # find `position` (or a prefix of it, such as `pos`) in `...`, so that the
+  # default dots can follow its dodge
   dots_names <- names(list(...)) %||% character(0)
   is_position <- nzchar(dots_names) & startsWith("position", dots_names)
   if (missing(position_dots)) {
@@ -123,9 +107,8 @@ geom_violindot <- function(
     violin <- list(violin)
   }
 
-  # the dots take the same space as an undodged half violin: half of a `width`
-  # (or `height`) in `...`, else 0.45 times the axis resolution (set by the
-  # dots geom, see `.violindot_size()`)
+  # the dots take half of a `width` (or `height`) in `...`, as the half
+  # violins do; without one, see `.violindot_size()`
   extra_args <- list(...)
   names(extra_args) <- ggplot2::standardise_aes_names(names(extra_args))
   if (!is.null(extra_args$width)) {
@@ -226,10 +209,8 @@ geom_violindot <- function(
 }
 
 
-# Without a `width` (or `height`), the dots box is 0.45 times the resolution of
-# the categorical axis, as for the half violins. An axis that is not mapped is
-# at 0, as in ggdist, so its box is 0.45 wide. A mapped `width` (or `height`)
-# is replaced, as it is for the half violins.
+# Without a `width` (or `height`), the dots box is 0.45 times the axis
+# resolution, as for the half violins. An unmapped axis is at 0, as in ggdist.
 .violindot_size <- function(data, params) {
   for (aes in c("width", "height")) {
     if (is.null(params[[aes]])) {
@@ -241,12 +222,8 @@ geom_violindot <- function(
 }
 
 
-# Whether the default dots are dodged under the `position` given to
-# geom_violindot(), and how: only for "dodge" (also when `position` is not
-# given, as it is geom_violinhalf()'s default) or a position_dodge() object,
-# whose width, preserve, and reverse the dots take. position_dodge2() objects
-# inherit from PositionDodge but dodge otherwise, so the dots are not dodged
-# under them.
+# Whether and how the default dots are dodged under `position`: only for
+# "dodge" (the default) or position_dodge(), not position_dodge2()
 .violindot_dodge <- function(position) {
   no_dodge <- list(dodge = FALSE, width = NULL, preserve = "total")
   default <- list(dodge = TRUE, width = NULL, preserve = "total")
@@ -272,12 +249,9 @@ geom_violindot <- function(
 # `.violinhalf_box()`), and the dots of each dodged group go between the lower
 # edge of its dodge cell and the cell's centre, which is the half of the cell
 # that an unflipped half violin leaves free. A group alone at its position
-# keeps its box [x - w, x]. Then the dots move away from the half violin, along
-# the categorical axis, by `gap` times the resolution of that axis. A dodged
-# group's box keeps its lower edge, and its move is that gap times the share of
-# its half cell in the lone box, but at most half of its half cell. With
-# preserve = "single", every group is dodged, as the half violins are. Built on
-# call, like the geoms.
+# keeps its box [x - w, x]. Then the dots move away from the half violin by
+# `gap` times the axis resolution, less in a dodged cell. Built on call, like
+# the geoms.
 .position_violindots <- function(
   gap = 0.025,
   dodge = TRUE,
@@ -294,9 +268,8 @@ geom_violindot <- function(
     ),
     gap = gap,
     dodge = dodge,
-    # the resolution of the categorical axis over the whole layer, as for the
-    # width of the half violins; the group count of preserve = "single" leaves
-    # out rows with a missing value, as the half violins do
+    # the axis resolution over the whole layer; preserve = "single" counts
+    # groups without rows with a missing value, as the half violins do
     setup_params = function(self, data) {
       parent <- ggplot2::ggproto_parent(ggplot2::PositionDodge, self)
       params <- parent$setup_params(data)
@@ -352,8 +325,7 @@ geom_violindot <- function(
         pos[ok],
         FUN = function(g) length(unique(g))
       )
-      # (with preserve = "single", a lone group is dodged too, into a cell of
-      # the layer's largest group count)
+      # with preserve = "single", a lone group is dodged too
       single <- identical(self$preserve, "single") && isTRUE(params$n > 1)
       data$violindot_dodged <- ok & self$dodge & (groups_here > 1 | single)
       data$violindot_lo <- data[[lo_col]]
@@ -376,9 +348,8 @@ geom_violindot <- function(
       }
       dodged <- data$violindot_dodged
 
-      # the gap, along the categorical axis only; in a dodged cell it shrinks
-      # with the cell, by the share of the half cell in the lone box (0 for an
-      # empty box), and it is at most half of the half cell
+      # the gap, on the categorical axis; in a dodged cell it shrinks with the
+      # cell, and it is at most half of the half cell
       gap <- self$gap * params$violindot_res
       shift <- rep_len(-gap, nrow(data))
       half_cell <- (data[[hi_col]] - data[[lo_col]])[dodged]
