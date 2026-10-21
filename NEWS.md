@@ -27,14 +27,11 @@
   shades quantile intervals behind the points, for example
   `shade = c(0.5, 0.8, 0.95)`. It needs the *ggdist* package (#135).
 
-* The y axis of the Influential Observations (outliers) panel of
-  `check_model()` and of `plot()` for `check_outliers()` now follows the
-  standardized residuals. Before, the Cook's distance contour lines set it.
-  These lines grow as leverage shrinks, so the axis grew with the number of
-  observations. At 400 observations with residuals from -2.7 to 3.6, the axis
-  went from about -21 to 21. The contour lines are now drawn only inside the
-  range of the residuals. If no line is inside that range, the subtitle says
-  that all points are inside the contour lines (easystats/performance#894).
+* The y axis of the outliers panel in `check_model()` and in `plot()` for
+  `check_outliers()` now follows the standardized residuals. Before, the
+  Cook's distance contour lines set it, so it grew with the number of
+  observations. The contour lines are now cut at the range of the residuals,
+  and the subtitle says so when no line is left (easystats/performance#894).
 
 ## Bug fixes
 

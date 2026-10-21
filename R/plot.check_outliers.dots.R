@@ -90,8 +90,7 @@
         size = size_point
       )
   } else {
-    # keep the y axis on the residuals, as with dots (contour lines are cut
-    # at the residual range)
+    # keep the y axis on the residuals
     p <- p + ggplot2::geom_blank()
   }
 
@@ -160,17 +159,14 @@
     .hat <- sort(plot_data$Hat)
     .hat80 <- min(.hat) + diff(range(.hat)) * 0.8
 
-    # Contour lines are cut where they leave the range of the residuals, so
-    # that the y axis follows the residuals and not the lines, which grow as
-    # leverage shrinks (with the number of observations). Without finite
-    # residuals, the lines are drawn in full.
+    # cut contour lines at the range of the residuals, so they don't set the
+    # y axis (drawn in full if no residual is finite)
     .res <- plot_data$Std_Residuals[is.finite(plot_data$Std_Residuals)]
     .bounds <- if (length(.res)) c(max(.res), -min(.res)) else c(Inf, Inf)
 
     .cook_ref <- function(crit, hat) sqrt(crit * n_params * (1 - hat) / hat)
 
-    # the part of a contour line at or below `bound`, with the exact point
-    # where it crosses `bound`; NULL if no part of the line is inside
+    # part of a contour line up to `bound`, or NULL if none is inside
     .cook_line <- function(crit, bound) {
       y <- .cook_ref(crit, .hat)
       keep <- !is.na(y) & y <= bound
@@ -215,9 +211,8 @@
       })
     })
 
-    # labels sit at 80% of the leverage range, or at the largest leverage if
-    # the cut line starts to the right of that point; the label of a cut line
-    # is on the inner side, so the panel edge does not clip it
+    # labels at 80% of the leverage range, or at the largest leverage if the
+    # cut line starts right of it; labels of cut lines on the inner side
     .cook_text <- lapply(names(.sides), function(.s) {
       lapply(seq_along(cook.levels), function(.level) {
         .piece <- .pieces[[.s]][[.level]]
@@ -245,10 +240,7 @@
     .cook_lines <- Filter(Negate(is.null), .cook_lines)
     .cook_text <- Filter(Negate(is.null), .cook_text)
 
-    # say that all points are inside only with finite residuals, leverage
-    # values, one finite number of parameters, and a finite contour level, and
-    # only if every Cook's distance, also of rows left out by the sampling
-    # above, is below the smallest level
+    # check all Cook's distances, also of rows left out by the sampling above
     .computable <- length(.res) > 0 &&
       length(.hat) > 0 &&
       length(n_params) == 1 &&

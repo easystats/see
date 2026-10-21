@@ -1,17 +1,17 @@
 skip_on_cran()
 skip_if_not_installed("performance")
-# Tests of the y range with point labels skip without ggrepel, because the
-# fallback labels are nudged and widen the y range.
+# tests of the y range with point labels need ggrepel, because the fallback
+# labels widen the y range
 
-# 400 cases, residuals of about -2.7 to 3.6: no contour line comes near them
-.f1_data <- function() {
+# 400 cases, residuals of about -2.7 to 3.6, far from the contour lines
+.data_lm <- function() {
   set.seed(1)
   x <- stats::rnorm(400)
   data.frame(x = x, y = x + stats::rnorm(400))
 }
 
-# Poisson data, plotted with two contour levels set by hand
-.f5_data <- function() {
+# Poisson data, used with two contour levels
+.data_poisson <- function() {
   set.seed(2)
   x <- stats::rnorm(200)
   data.frame(x = x, y = stats::rpois(200, exp(0.5 + 0.3 * x)))
@@ -66,8 +66,8 @@ skip_if_not_installed("performance")
   line$y[1]^2 * h / ((1 - h) * n_params)
 }
 
-# for each contour level and side, whether a row of its line is inside the y
-# range, and the label anchors with that level's text on that side
+# for each contour level and side: is the line inside the y range, and where
+# are its labels
 .contour_summary <- function(b, cook_levels, n_params = 2) {
   r <- .panel_ranges(b)
   lines <- .annotation_layers(b, "GeomLine")
@@ -122,7 +122,7 @@ skip_if_not_installed("performance")
 
 test_that("outliers panel y range follows the residuals", {
   skip_if_not_installed("ggrepel")
-  m1 <- stats::lm(y ~ x, data = .f1_data())
+  m1 <- stats::lm(y ~ x, data = .data_lm())
   m2 <- stats::lm(mpg ~ wt + hp, data = mtcars)
   for (model in list(m1, m2)) {
     for (entry in c("check_model", "check_outliers")) {
@@ -135,19 +135,19 @@ test_that("outliers panel y range follows the residuals", {
 
 test_that("contour lines are drawn where they cross the panel", {
   skip_if_not_installed("ggrepel")
-  # F3: a high-leverage outlier with a Cook's distance above the level
-  m3 <- stats::lm(y ~ x, data = rbind(.f1_data(), data.frame(x = 6, y = -4)))
+  # a high-leverage outlier with a Cook's distance above the level
+  m3 <- stats::lm(y ~ x, data = rbind(.data_lm(), data.frame(x = 6, y = -4)))
   expect_gt(max(stats::cooks.distance(m3)), 0.46)
   b <- ggplot2::ggplot_build(.outliers_panel(m3))
   s <- .contour_summary(b, cook_levels = 0.46)
   expect_true(any(s$inside))
   .expect_y_range_follows_residuals(b, m3)
 
-  # F5: two levels, and only the lines of 0.5 reach the residuals
+  # two levels, and only the lines of 0.5 reach the residuals
   m5 <- stats::glm(
     y ~ x,
     family = stats::poisson(),
-    data = rbind(.f5_data(), data.frame(x = 3.5, y = 0))
+    data = rbind(.data_poisson(), data.frame(x = 3.5, y = 0))
   )
   b <- ggplot2::ggplot_build(.outliers_panel(m5, cook_levels = c(0.5, 1)))
   s <- .contour_summary(b, cook_levels = c(0.5, 1))
@@ -158,38 +158,38 @@ test_that("contour lines are drawn where they cross the panel", {
 
 
 test_that("contour labels are inside the panel only for lines inside it", {
-  f1 <- .f1_data()
+  f1 <- .data_lm()
   m5 <- stats::glm(
     y ~ x,
     family = stats::poisson(),
-    data = rbind(.f5_data(), data.frame(x = 3.5, y = 0))
+    data = rbind(.data_poisson(), data.frame(x = 3.5, y = 0))
   )
   fixtures <- list(
-    F1 = list(model = stats::lm(y ~ x, data = f1), levels = 0.46),
-    F3 = list(
+    no_outlier = list(model = stats::lm(y ~ x, data = f1), levels = 0.46),
+    outlier = list(
       model = stats::lm(y ~ x, data = rbind(f1, data.frame(x = 6, y = -4))),
       levels = 0.46
     ),
-    # F4: a low-leverage residual that reaches the line at the largest
-    # leverage but not at 80% of the leverage range
-    F4 = list(
+    # a low-leverage residual that reaches the line at the largest leverage,
+    # but not at 80% of the leverage range
+    low_leverage = list(
       model = stats::lm(y ~ x, data = rbind(f1, data.frame(x = 0, y = 6.8))),
       levels = 0.46
     ),
-    F5 = list(model = m5, levels = c(0.5, 1))
+    poisson = list(model = m5, levels = c(0.5, 1))
   )
   for (f in names(fixtures)) {
     fx <- fixtures[[f]]
     b <- ggplot2::ggplot_build(.outliers_panel(
       fx$model,
-      cook_levels = if (f == "F5") fx$levels
+      cook_levels = if (f == "poisson") fx$levels
     ))
     s <- .contour_summary(b, cook_levels = fx$levels)
     expect_identical(s$labels_inside > 0, s$inside, label = f)
     expect_true(all(s$labels_inside <= 1), label = f)
   }
 
-  b <- ggplot2::ggplot_build(.outliers_panel(fixtures$F4$model))
+  b <- ggplot2::ggplot_build(.outliers_panel(fixtures$low_leverage$model))
   s <- .contour_summary(b, cook_levels = 0.46)
   expect_identical(s$inside, c(TRUE, FALSE))
   expect_true(s$label_at_max_hat[s$side == 1])
@@ -197,7 +197,7 @@ test_that("contour labels are inside the panel only for lines inside it", {
 
 
 test_that("outliers panel subtitle says when no contour line is inside", {
-  f1 <- .f1_data()
+  f1 <- .data_lm()
   b <- ggplot2::ggplot_build(.outliers_panel(stats::lm(y ~ x, data = f1)))
   expect_identical(
     b$plot$labels$subtitle,
@@ -215,7 +215,7 @@ test_that("outliers panel subtitle says when no contour line is inside", {
 
 test_that("a user coordinate system works on the outliers panel", {
   skip_if_not_installed("ggrepel")
-  p <- .outliers_panel(stats::lm(y ~ x, data = .f1_data()))
+  p <- .outliers_panel(stats::lm(y ~ x, data = .data_lm()))
 
   expect_no_message(expect_no_warning({
     b <- ggplot2::ggplot_build(p + ggplot2::coord_cartesian(ylim = c(-4, 4)))
@@ -227,14 +227,13 @@ test_that("a user coordinate system works on the outliers panel", {
       p + ggplot2::coord_cartesian(xlim = c(0, 0.02))
     )
   }))
-  .expect_y_range_follows_residuals(b, stats::lm(y ~ x, data = .f1_data()))
+  .expect_y_range_follows_residuals(b, stats::lm(y ~ x, data = .data_lm()))
 })
 
 
 test_that("outliers panel without dots keeps the residual range", {
-  # F1: without a layer for the residuals, the y axis follows the LOESS line,
-  # about -0.9 to 0.3
-  m1 <- stats::lm(y ~ x, data = .f1_data())
+  # without a layer for the residuals, the y axis would follow the LOESS line
+  m1 <- stats::lm(y ~ x, data = .data_lm())
   b <- ggplot2::ggplot_build(.outliers_panel(
     m1,
     show_dots = FALSE,
@@ -242,7 +241,7 @@ test_that("outliers panel without dots keeps the residual range", {
   ))
   .expect_y_range_follows_residuals(b, m1)
 
-  m3 <- stats::lm(y ~ x, data = rbind(.f1_data(), data.frame(x = 6, y = -4)))
+  m3 <- stats::lm(y ~ x, data = rbind(.data_lm(), data.frame(x = 6, y = -4)))
   b <- ggplot2::ggplot_build(.outliers_panel(
     m3,
     show_dots = FALSE,
@@ -264,7 +263,7 @@ test_that("outliers panel without dots keeps the residual range", {
 
 test_that("outliers panel subtitle makes no claim without contour lines", {
   cm <- suppressMessages(performance::check_model(
-    stats::lm(y ~ x, data = .f1_data()),
+    stats::lm(y ~ x, data = .data_lm()),
     check = "outliers",
     residual_type = "normal"
   ))
@@ -273,8 +272,7 @@ test_that("outliers panel subtitle makes no claim without contour lines", {
   no_levels <- cm
   attr(no_levels$INFLUENTIAL, "cook_levels") <- NA_real_
   b_params <- ggplot2::ggplot_build(plot(no_params))
-  # all-NA levels warn in the label count (min() of no values), as on
-  # origin/main
+  # all-NA levels warn in the label count, as before
   expect_warning(
     p_levels <- plot(no_levels),
     "no non-missing arguments to min"
@@ -287,12 +285,11 @@ test_that("outliers panel subtitle makes no claim without contour lines", {
     )
   }
 
-  # a row left out by the sampling (here above 100 rows) has a Cook's
-  # distance of about 0.4, above the level 0.3, though no line reaches the
-  # sampled residuals
+  # a row left out by the sampling has a Cook's distance above the level 0.3,
+  # though no line reaches the sampled residuals
   m6 <- stats::lm(
     y ~ x,
-    data = rbind(.f1_data(), data.frame(x = 4.5, y = 0.3))
+    data = rbind(.data_lm(), data.frame(x = 4.5, y = 0.3))
   )
   cm <- suppressMessages(performance::check_model(
     m6,
