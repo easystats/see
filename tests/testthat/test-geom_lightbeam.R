@@ -1,6 +1,5 @@
-# the drawn polygons of the lightbeam layer, in the units of the scales after
-# their transformation (discrete levels at 1, 2, ...): one element per polygon
-# id, with the x and y of its vertices in drawing order
+# the drawn polygons of a layer, in scale units: one element per polygon, with
+# the x and y of its vertices in drawing order
 drawn_beams <- function(p, layer = 1, panel = 1) {
   pp <- ggplot2::ggplot_build(p)$layout$panel_params[[panel]]
   grob <- ggplot2::layer_grob(p, layer)[[panel]]

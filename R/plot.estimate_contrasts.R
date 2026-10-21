@@ -747,8 +747,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   estimate of a reference level and projects toward the comparison level.
 #'   At the target level, the vertical span of the beam represents the confidence
 #'   interval of the estimated difference, anchored at the reference mean. The
-#'   beams are drawn with [geom_lightbeam()], which can also draw them in a
-#'   plot of your own.
+#'   beams are drawn with [geom_lightbeam()].
 #' - **Interpretation:** The vertical span of the projected beam at the target
 #'   level corresponds to the confidence interval of the estimated difference,
 #'   evaluated *relative* to the reference point estimate. Intuitively, it answers:
@@ -848,10 +847,7 @@ plot.see_estimate_contrasts <- function(
       )
   }
 
-  # the beams have the levels of Level1 in `x` and those of Level2 in `xend`,
-  # so an empty layer of the means, before the beams, gives the x axis their
-  # order; a beam with a missing tip is left out with no warning, as the
-  # polygon with a missing vertex drew nothing
+  # blank layer of the means first, so the x axis keeps their order
   p <- p +
     ggplot2::geom_blank(
       data = x$geom_pointrange,
@@ -914,9 +910,8 @@ plot.see_estimate_contrasts <- function(
 }
 
 
-# one row per beam, from the three rows per contrast of `polygons`: the
-# estimate of Level1, then the two tips at Level2. For a difference, `ymin` is
-# the estimate minus CI_low and so the upper tip.
+# one row per beam, from the three polygon rows per contrast (the estimate of
+# Level1, then the two tips at Level2)
 #' @keywords internal
 .lightbeams <- function(polygons) {
   rows <- split(seq_len(nrow(polygons)), polygons$group)

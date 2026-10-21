@@ -111,44 +111,21 @@ the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{ann
 A ggplot2 layer.
 }
 \description{
-Draw the beams of a lighthouse plot. Each row of the data draws one beam: a
-filled triangle from the point (\code{x}, \code{y}) to the interval from \code{ymin} to
-\code{ymax} at \code{xend}. In a lighthouse plot of contrasts, as drawn by \code{plot()}
-for \code{modelbased::estimate_contrasts()}, \code{x} and \code{y} are a level and its
-estimated mean, and the interval at \code{xend} holds the values of the other
-level's mean that the confidence interval of the contrast allows.
-}
-\details{
-The three corners are drawn in the order (\code{x}, \code{y}), (\code{xend}, \code{ymin}),
-(\code{xend}, \code{ymax}), and \code{ymin} need not be smaller than \code{ymax}. The beams are
-drawn in the order of the rows, so later rows are on top.
-
-On a discrete x axis, the order of the levels depends on whether \code{x} and
-\code{xend} are factors or character vectors and on which levels each of them
-uses. Set the order with \code{scale_x_discrete(limits = ...)} where it matters.
-\code{position_dodge()} moves \code{x} only, so it moves the start of a beam but not
-its interval.
-\code{coord_flip()} draws the beams horizontally. The beams are translucent by
-default (\code{alpha = 0.1}), and so are their keys in a fill legend; use
-\code{guides(fill = guide_legend(override.aes = list(alpha = 1)))} to draw the
-keys opaque. \code{lineend}, \code{linejoin}, and \code{linemitre} in \code{...} set the
-outline, as in \code{\link[ggplot2:geom_polygon]{ggplot2::geom_polygon()}}.
+Draws the beams of a lighthouse plot, as in \code{plot()} for
+\code{modelbased::estimate_contrasts()}. Each row draws a filled triangle from
+(\code{x}, \code{y}) to the interval from \code{ymin} to \code{ymax} at \code{xend}. Use
+\code{coord_flip()} for horizontal beams.
 }
 \section{Aesthetics}{
 
 \code{geom_lightbeam()} understands the following aesthetics (required ones are
 in bold): \strong{\code{x}}, \strong{\code{y}}, \strong{\code{xend}}, \strong{\code{ymin}}, \strong{\code{ymax}}, \code{alpha},
-\code{colour}, \code{fill}, \code{group}, \code{linetype}, and \code{linewidth}. Each row is its own
-beam, so \code{group} does not change the drawing. Rows with a missing
-\code{y}, \code{ymin}, or \code{ymax}, or a missing \code{x} or \code{xend} on a continuous axis, are
-not drawn, with a warning. On a discrete axis, a missing \code{x} or \code{xend} is
-drawn at the \code{NA} level of the axis.
+\code{colour}, \code{fill}, \code{group}, \code{linetype}, and \code{linewidth}.
 }
 
 \examples{
 library(ggplot2)
 
-# estimated means of three groups, with their 95\% confidence intervals
 means <- data.frame(
   group = c("A", "B", "C"),
   mean = c(2, 3, 5),
@@ -156,21 +133,18 @@ means <- data.frame(
   high = c(2.5, 3.6, 5.7)
 )
 
-# pairwise differences (Level1 minus Level2), with their 95\% intervals
+# differences Level1 - Level2, with their 95\% intervals
 contrasts <- data.frame(
   Level1 = c("B", "C", "C"),
   Level2 = c("A", "A", "B"),
   CI_low = c(0.2, 2.1, 1.1),
   CI_high = c(1.8, 3.9, 2.9)
 )
-
-# each beam starts at the mean of Level1 and spans the values of the mean
-# of Level2 that the interval of the difference allows
 contrasts$Mean1 <- means$mean[match(contrasts$Level1, means$group)]
 contrasts$tip_low <- contrasts$Mean1 - contrasts$CI_low
 contrasts$tip_high <- contrasts$Mean1 - contrasts$CI_high
 
-ggplot() +
+p <- ggplot() +
   geom_lightbeam(
     data = contrasts,
     aes(x = Level1, y = Mean1, xend = Level2, ymin = tip_low, ymax = tip_high)
@@ -179,21 +153,10 @@ ggplot() +
     data = means,
     aes(x = group, y = mean, ymin = low, ymax = high)
   ) +
-  scale_x_discrete(limits = c("A", "B", "C")) +
-  labs(x = "Group", y = "Mean")
+  scale_x_discrete(limits = c("A", "B", "C"))
+p
 
-# a horizontal lighthouse
-ggplot() +
-  geom_lightbeam(
-    data = contrasts,
-    aes(x = Level1, y = Mean1, xend = Level2, ymin = tip_low, ymax = tip_high)
-  ) +
-  geom_pointrange(
-    data = means,
-    aes(x = group, y = mean, ymin = low, ymax = high)
-  ) +
-  scale_x_discrete(limits = c("A", "B", "C")) +
-  labs(x = "Group", y = "Mean") +
-  coord_flip()
+# horizontal beams
+p + coord_flip()
 
 }
