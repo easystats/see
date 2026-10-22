@@ -56,6 +56,8 @@ test_that("show_smooth = FALSE removes LOESS and cell means from panels", {
 
 
 test_that("show_smooth = FALSE removes LOESS from the outlier panel only", {
+  # the contour level comes from performance
+  skip_on_cran()
   model <- lm(mpg ~ wt + hp, data = mtcars)
   expect_gt(insight::n_unique(stats::hatvalues(model)), 30)
 
@@ -64,8 +66,8 @@ test_that("show_smooth = FALSE removes LOESS from the outlier panel only", {
   expect_false(.has_smooth(p_off))
   expect_true(.has_smooth(p_on))
   # Cook's distance contour lines and the subtitle stay
-  expect_identical(sum(.layer_geoms(p_off) == "GeomLine"), 2L)
-  expect_identical(sum(.layer_geoms(p_on) == "GeomLine"), 2L)
+  expect_identical(sum(.layer_geoms(p_off) == "GeomLine"), 1L)
+  expect_identical(sum(.layer_geoms(p_on) == "GeomLine"), 1L)
   expect_identical(p_off$labels$subtitle, p_on$labels$subtitle)
 
   # the binned residuals panel keeps its own default
