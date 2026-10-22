@@ -2,6 +2,11 @@
 
 ## Bug fixes
 
+* Collinearity plots label dimension-adjusted GVIFs supplied by *performance*
+  as `GVIF^(1/df)` with a superscript exponent, including in `check_model()`
+  panels. The 5/10 bands and plots containing only one-coefficient terms are
+  unchanged.
+
 * `plot()` now finds a model or data that exists only in the function that
   calls `plot()`, for example `m` in `plot(p_direction(m))`. This works for
   `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
