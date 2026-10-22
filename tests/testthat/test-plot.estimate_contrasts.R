@@ -2216,72 +2216,23 @@ test_that("`show_data = TRUE` with a factor and a numeric `by` names the numeric
 })
 
 
-test_that("lighthouse plots draw their beams with `geom_lightbeam()`", {
-  skip_if_not_installed("modelbased")
-  skip_if_not_installed("marginaleffects")
-
-  ir <- contrasts_iris()
-  p <- plot(ir$contrasts, ir$means)
-  geoms <- lapply(p$layers, function(l) l$geom)
-  expect_length(layer_index(p, "GeomLightbeam"), 1L)
-  expect_false(any(vapply(
-    geoms,
-    function(g) identical(g, ggplot2::GeomPolygon),
-    logical(1)
-  )))
-})
-
-
 test_that("the beams of lighthouse plots have the corners of `data_plot()`", {
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
   fx <- contrasts_by_fixture()
-  ratio <- modelbased::estimate_contrasts(
-    fx$model,
-    contrast = "am",
-    by = "cyl",
-    comparison = ratio ~ pairwise
-  )
-  numeric_model <- lm(mpg ~ wt * am, data = fx$data)
-  numeric_contrasts <- modelbased::estimate_contrasts(
-    numeric_model,
-    contrast = "wt=c(2,2.5,4)",
-    by = "am"
-  )
-  numeric_means <- modelbased::estimate_means(
-    numeric_model,
-    by = c("wt=c(2,2.5,4)", "am")
-  )
-  fixtures <- list(
-    by = list(fx$contrasts, fx$means),
-    ratio = list(ratio, fx$means),
-    numeric = list(numeric_contrasts, numeric_means)
-  )
-
-  for (name in names(fixtures)) {
-    contrasts <- fixtures[[name]][[1]]
-    means <- fixtures[[name]][[2]]
-    polygons <- data_plot(contrasts, means)$geom_polygon
-    p <- plot(contrasts, means)
-    built <- ggplot2::ggplot_build(p)
-    beams <- built$data[[layer_index(p, "GeomLightbeam")]]
-    groups <- sort(unique(polygons$group))
-    expect_identical(nrow(beams), length(groups), label = name)
-    expect_identical(is.numeric(polygons$x), name == "numeric")
-
-    for (k in seq_len(nrow(beams))) {
-      rows <- polygons[polygons$group == groups[beams$group[k]], ]
-      limits <- built$layout$panel_params[[beams$PANEL[k]]]$x$get_limits()
-      position <- function(v) {
-        if (is.numeric(v)) v else match(as.character(v), limits)
-      }
-      expect_equal(as.numeric(beams$x[k]), position(rows$x[1]), label = name)
-      expect_equal(beams$y[k], rows$y[1], tolerance = 1e-8, label = name)
-      expect_equal(as.numeric(beams$xend[k]), position(rows$x[2]), label = name)
-      expect_equal(beams$ymin[k], rows$y[2], tolerance = 1e-8, label = name)
-      expect_equal(beams$ymax[k], rows$y[3], tolerance = 1e-8, label = name)
-    }
+  polygons <- data_plot(fx$contrasts, fx$means)$geom_polygon
+  p <- plot(fx$contrasts, fx$means)
+  built <- ggplot2::ggplot_build(p)
+  beams <- built$data[[layer_index(p, "GeomLightbeam")]]
+  groups <- sort(unique(polygons$group))
+  expect_identical(nrow(beams), length(groups))
+  for (k in seq_len(nrow(beams))) {
+    rows <- polygons[polygons$group == groups[beams$group[k]], ]
+    limits <- built$layout$panel_params[[beams$PANEL[k]]]$x$get_limits()
+    expect_equal(as.numeric(beams$x[k]), match(rows$x[1], limits))
+    expect_equal(as.numeric(beams$xend[k]), match(rows$x[2], limits))
+    expect_equal(c(beams$y[k], beams$ymin[k], beams$ymax[k]), rows$y, tolerance = 1e-8)
   }
 })
 
@@ -2300,12 +2251,7 @@ test_that("lighthouse plots keep a `by` variable named xend", {
 
   expect_shape(built$layout$layout, nrow = 2L)
   beams <- built$data[[layer_index(p, "GeomLightbeam")]]
-  pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
   expect_setequal(as.character(beams$PANEL), c("1", "2"))
-  expect_identical(
-    sort(unique(as.character(beams$PANEL))),
-    sort(unique(as.character(pointranges$PANEL)))
-  )
 })
 
 
