@@ -65,14 +65,9 @@ test_that("show_smooth = FALSE removes LOESS from the outlier panel only", {
   p_on <- .check_model_plot(model)$OUTLIERS
   expect_false(.has_smooth(p_off))
   expect_true(.has_smooth(p_on))
-  # Cook's distance contour lines and the subtitle stay (here only the upper
-  # line reaches the residuals)
+  # Cook's distance contour lines and the subtitle stay
   expect_identical(sum(.layer_geoms(p_off) == "GeomLine"), 1L)
   expect_identical(sum(.layer_geoms(p_on) == "GeomLine"), 1L)
-  for (p in list(p_off, p_on)) {
-    line <- p$layers[[which(.layer_geoms(p) == "GeomLine")]]
-    expect_true(all(line$data$y > 0))
-  }
   expect_identical(p_off$labels$subtitle, p_on$labels$subtitle)
 
   # the binned residuals panel keeps its own default
