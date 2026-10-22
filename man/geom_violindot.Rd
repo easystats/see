@@ -15,9 +15,9 @@ geom_violindot(
   dots_color = NULL,
   dots_fill = NULL,
   binwidth = NA,
-  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
   interval = FALSE,
   ...,
+  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
   size_dots = dots_size,
   color_dots = dots_color,
   fill_dots = dots_fill
@@ -72,15 +72,6 @@ beside each half violin. A number sets a fixed bin width, in the units of
 the value axis. Dodged groups leave the dots less room, so a fixed bin
 width can make them overflow it, with a warning from ggdist.}
 
-\item{position_dots}{Position adjustment for dots, either as a string, or the
-result of a call to a position adjustment function. The default nudges the
-dots by \code{x = -0.025} (\code{-0.06} with \code{interval = TRUE}). In a vertical plot,
-this moves them toward smaller x, away from the half violin, and in a
-dodged cell the nudge is at most half the room beside the half violin. In
-a horizontal plot, it moves them along the value axis. The default also
-dodges the dots with their half violins. A position that you set is used
-as given, so the dots are not dodged unless that position dodges them.}
-
 \item{interval}{Logical. If \code{TRUE}, add the median and the 66\% and 95\%
 quantile intervals of each group, drawn with \code{\link[ggdist:stat_slabinterval]{ggdist::stat_slabinterval()}}
 without the slab, as in \code{\link[ggdist:stat_pointinterval]{ggdist::stat_pointinterval()}}. Default is
@@ -96,8 +87,18 @@ and the \code{point_} and \code{interval_} aesthetics) go to the half violins on
 \code{colour} does not reach the dots when \code{color_dots} is set, and \code{fill} does
 not reach them when \code{fill_dots} is set. As for the half violins, a \code{width}
 (or \code{height}) is the width of a whole violin, so the dots take half of it.
-An argument named \code{position} matches \code{position_dots}. The dots of groups
-with fewer than two observations are still drawn.}
+\code{position} goes to the half violins and their interval, as in
+\code{\link[=geom_violinhalf]{geom_violinhalf()}}. The default dots follow it only if it is \code{"dodge"}
+or made by \code{\link[ggplot2:position_dodge]{ggplot2::position_dodge()}}. The dots of groups with fewer than
+two observations are still drawn.}
+
+\item{position_dots}{Position adjustment for dots, either as a string, or the
+result of a call to a position adjustment function. The default leaves a
+gap of 0.025 times the resolution of the categorical axis (0.06 with
+\code{interval = TRUE}) between the dots and the half violin, smaller in dodged
+cells, and dodges the dots with their half violins. A position that you
+set is used as given. Must be named in full, because \code{position} goes to
+the half violins.}
 
 \item{size_dots, dots_size}{Size adjustment for dots, passed to the
 \code{dotsize} argument of \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}

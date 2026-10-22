@@ -120,12 +120,7 @@ test_that("geom_violindot(flip = TRUE) gives no warning from the dots", {
   expect_no_warning(ggplot2::ggplot_build(p))
 })
 
-test_that("geom_violindot(interval = TRUE) moves the dots clear of the interval", {
-  expect_identical(dots_layer(geom_violindot())$position$x, -0.025)
-  expect_identical(
-    dots_layer(geom_violindot(interval = TRUE))$position$x,
-    -0.06
-  )
+test_that("geom_violindot(interval = TRUE) keeps a position_dots given", {
   nudge <- ggplot2::position_nudge(x = -0.2)
   expect_identical(
     dots_layer(geom_violindot(interval = TRUE, position_dots = nudge))$position,
@@ -293,9 +288,9 @@ test_that("geom_violindot() stacks a lone group's dots across its whole box", {
   m <- dots_measure(p)
   alone <- m[m$group == 3, ]
 
-  # the dodged groups' dots have 0.1125 - 0.025 = 0.0875 of room; the lone
+  # the dodged groups' dots have 0.1125 - 0.00625 = 0.10625 of room; the lone
   # group's stacks reach further, within its own box [x - 0.475, x - 0.025]
-  expect_gt(max(alone$dot_x) - min(alone$dot_x), 0.0875)
+  expect_gt(max(alone$dot_x) - min(alone$dot_x), 0.10625)
   expect_gt(min(alone$dot_x - (alone$pos - 0.475)), -1e-6)
 })
 
@@ -325,4 +320,140 @@ test_that("geom_violindot() uses a user position_dots as given under dodge", {
   ) +
     geom_violindot(position_dots = nudge)
   expect_identical(dots_layer(p$layers)$position, nudge)
+})
+
+# each group's dots box, merged with the dodge cell of its half violin
+dots_cells <- function(p) {
+  slab <- unique(ggplot2::layer_data(p, 1)[c("group", "x", "xmin")])
+  dots <- ggplot2::layer_data(p, length(p$layers))
+  merge(dots, slab, by = "group", suffixes = c("", "_cell"))
+}
+
+# the dots box lies in the lower half of the cell; returns the gap
+expect_dots_in_cells <- function(p) {
+  cells <- dots_cells(p)
+  expect_gt(min(cells$xmin - cells$xmin_cell), -1e-6)
+  expect_lt(max(cells$xmax - cells$x_cell), 1e-6)
+  unique(round(as.numeric(cells$x_cell - cells$xmax), 9))
+}
+
+base_ab <- ggplot2::ggplot(
+  iris_ab,
+  ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+)
+
+test_that("geom_violindot() draws with only one position aesthetic mapped", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(y = Sepal.Length)) + geom_violindot()
+  dots <- ggplot2::layer_data(p, 2)
+  expect_lte(max(dots$xmax), min(ggplot2::layer_data(p, 1)$xmin))
+  expect_equal(sort(dots$y), sort(iris$Sepal.Length))
+})
+
+test_that("geom_violindot() gives `position` to the half violins", {
+  dodge <- ggplot2::position_dodge(width = 0.5)
+  p <- base_ab + geom_violindot(position = dodge)
+  expect_identical(p$layers[[1]]$position, dodge)
+  expect_false(identical(dots_layer(p$layers)$position, dodge))
+  expect_setequal(unique(dots_cells(p)$group), 1:6)
+  expect_dots_in_cells(p)
+})
+
+test_that("geom_violindot() does not dodge the dots under position = \"identity\"", {
+  p <- base_ab + geom_violindot(position = "identity")
+  expect_s3_class(p$layers[[1]]$position, "PositionIdentity")
+  dots <- ggplot2::layer_data(p, 2)
+  level <- round(as.numeric(dots$x))
+  expect_equal(as.numeric(dots$xmax), level - 0.025)
+  expect_equal(as.numeric(dots$xmin), level - 0.475)
+})
+
+test_that("geom_violindot() keeps the dots at their values in horizontal plots", {
+  p <- ggplot2::ggplot(iris, ggplot2::aes(Sepal.Length, Species)) +
+    geom_violindot()
+  dots <- ggplot2::layer_data(p, 2)
+  expect_equal(sort(dots$x), sort(iris$Sepal.Length))
+  expect_equal(as.numeric(dots$ymax), round(as.numeric(dots$y)) - 0.025)
+})
+
+test_that("geom_violindot() scales the dot gap with the axis resolution", {
+  set.seed(1)
+  d <- data.frame(x = rep(c(10, 20, 30), each = 20), y = stats::rnorm(60))
+  p <- ggplot2::ggplot(d, ggplot2::aes(x, y, group = x)) +
+    geom_violindot(interval = TRUE)
+  dots <- ggplot2::layer_data(p, length(p$layers))
+  level <- round(dots$x / 10) * 10
+  expect_equal(dots$xmax, level - 0.6)
+  expect_equal(dots$xmin, level - 5.1)
+})
+
+test_that("geom_violindot() shrinks the dot gap with the dodge cell", {
+  expect_equal(expect_dots_in_cells(base_ab + geom_violindot()), 0.00625)
+})
+
+test_that("geom_violindot() dots follow a reversed dodge, but not dodge2", {
+  p <- base_ab +
+    geom_violindot(position = ggplot2::position_dodge(reverse = TRUE))
+  expect_setequal(unique(dots_cells(p)$group), 1:6)
+  expect_dots_in_cells(p)
+
+  p <- base_ab + geom_violindot(position = ggplot2::position_dodge2())
+  dots <- ggplot2::layer_data(p, 2)
+  expect_equal(as.numeric(dots$xmax), round(as.numeric(dots$x)) - 0.025)
+})
+
+test_that("geom_violindot() caps the dot gap in narrow dodged cells", {
+  expect_equal(expect_dots_in_cells(base_ab + geom_violindot(width = 0.04)), 0.0025)
+
+  p <- base_ab + geom_violindot(width = 0)
+  expect_equal(expect_dots_in_cells(p), 0)
+  dots <- ggplot2::layer_data(p, 2)
+  expect_true(all(is.finite(c(dots$x, dots$xmin, dots$xmax))))
+  grDevices::pdf(NULL)
+  on.exit(grDevices::dev.off())
+  expect_no_warning(ggplot2::ggplotGrob(p))
+})
+
+test_that("geom_violindot() keeps a mapped width away from the dots box", {
+  d <- iris
+  d$w <- 0.6
+  p <- ggplot2::ggplot(d, ggplot2::aes(Species, Sepal.Length, width = w)) +
+    geom_violindot()
+  slab <- ggplot2::layer_data(p, 1)
+  dots <- ggplot2::layer_data(p, 2)
+  expect_equal(unique(round(slab$xmax - slab$xmin, 9)), 0.45)
+  expect_equal(unique(round(dots$xmax - dots$xmin, 9)), 0.45)
+})
+
+test_that("geom_violindot() dots share the cells of a preserved dodge", {
+  d <- iris_ab[!(iris_ab$Species == "versicolor" & iris_ab$g == "b"), ]
+  p <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot(position = ggplot2::position_dodge(preserve = "single"))
+  expect_setequal(unique(dots_cells(p)$group), 1:5)
+  expect_dots_in_cells(p)
+})
+
+test_that("geom_violindot() leaves groups without values out of a preserved dodge", {
+  d <- data.frame(
+    x = factor(rep(c("a", "b"), each = 30)),
+    h = "u",
+    v = stats::rnorm(60)
+  )
+  d <- rbind(d, data.frame(x = "b", h = "v", v = NA))
+  p <- ggplot2::ggplot(d, ggplot2::aes(x, v, fill = h)) +
+    geom_violindot(position = ggplot2::position_dodge(preserve = "single"))
+  slab <- suppressWarnings(ggplot2::layer_data(p, 1))
+  dots <- suppressWarnings(ggplot2::layer_data(p, 2))
+  dots <- dots[!is.na(dots$y), ]
+  expect_equal(unique(round(as.numeric(slab$xmax - slab$xmin), 9)), 0.45)
+  expect_equal(as.numeric(dots$xmax), round(as.numeric(dots$x)) - 0.025)
+})
+
+test_that("geom_violindot() gives a partial `position` name to the half violins", {
+  p <- base_ab + expect_no_warning(geom_violindot(pos = "identity"))
+  expect_s3_class(p$layers[[1]]$position, "PositionIdentity")
+  dots <- ggplot2::layer_data(p, 2)
+  expect_equal(as.numeric(dots$xmax), round(as.numeric(dots$x)) - 0.025)
 })
