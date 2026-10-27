@@ -8,7 +8,24 @@ University of the West of England (UWE Bristol)
 
 I am an MSc Artificial Intelligence student with interests in Data Science, Statistical Inference, Machine Learning, Reproducible Research, and Data Visualisation.
 
-### Featured Projects
+
+## Featured Projects
+
+### Week 4 Harvard Referencing Notebook
+Kaggle notebook demonstrating academic referencing workflows and reproducible documentation.
+
+### Week 4 Advanced Task Referencing Dataset
+Dataset supporting referencing and citation management exercises.
+
+### Kickstarter Statistical Analysis
+Statistical inference project involving exploratory data analysis, hypothesis testing, and research planning.
+
+### Iris Dataset Analysis
+Data visualization using ggplot2, including histograms, boxplots, and scatterplots.
+
+### Multiple Regression Analysis
+Model development, variable selection, AIC comparison, and interpretation.
+
 
 #### Statistical Inference
 - Hypothesis Testing
@@ -31,14 +48,32 @@ I am an MSc Artificial Intelligence student with interests in Data Science, Stat
 
 - Week 4 Harvard Referencing Notebook
 - Week 4 Advanced Task Referencing Dataset
-- IT Support Portfolio Website Source Files
+https://www.kaggle.com/datasets/bilalabdulkadir1/week-4-advanced-task-referencing
+
 
 ### Links
 
-- Kaggle: https://www.kaggle.com/bilalabdulkadir1
-- LinkedIn: https://www.linkedin.com/in/bilalabdulkadir
-- GitHub: https://github.com/Bilalabdulkadir
-- Portfolio: https://bilalmuhammed-msc-ai-portfolio.share.connect.posit.cloud
+- [Kaggle](https://www.kaggle.com/bilalabdulkadir1)
+- [LinkedIn](https://www.linkedin.com/in/bilalabdulkadir)
+- [GitHub](https://github.com/Bilalabdulkadir)
+- [Portfolio Website](https://bilalmuhammed-msc-ai-portfolio.share.connect.posit.cloud)
+
+  
+  ---
+
+# Open Source Contribution
+
+This repository is a fork of the easystats/see project.
+
+My contribution focused on documentation improvements, reproducible research workflows, and learning advanced data visualisation techniques within the R ecosystem.
+
+---
+
+# Original Project Documentation
+
+# see: Model Visualisation Toolbox for ‘easystats’ and ‘ggplot2’ man/figures/logo.png
+
+
 
 # see: Model Visualisation Toolbox for ‘easystats’ and ‘ggplot2’ <img src='man/figures/logo.png' align="right" height="139" />
 
