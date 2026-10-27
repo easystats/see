@@ -1,3 +1,44 @@
+# Bilal Abdulkadir Muhammed
+
+## MSc Artificial Intelligence Portfolio
+
+University of the West of England (UWE Bristol)
+
+### About Me
+
+I am an MSc Artificial Intelligence student with interests in Data Science, Statistical Inference, Machine Learning, Reproducible Research, and Data Visualisation.
+
+### Featured Projects
+
+#### Statistical Inference
+- Hypothesis Testing
+- Confidence Intervals
+- Correlation Analysis
+- ANOVA
+- Multiple Regression
+
+#### Data Visualisation
+- ggplot2
+- Tidyverse
+- Exploratory Data Analysis
+
+#### Reproducible Research
+- R Markdown
+- Interactive R Snippets
+- Documentation Workflows
+
+### Kaggle Portfolio
+
+- Week 4 Harvard Referencing Notebook
+- Week 4 Advanced Task Referencing Dataset
+- IT Support Portfolio Website Source Files
+
+### Links
+
+- Kaggle: https://www.kaggle.com/bilalabdulkadir1
+- LinkedIn: https://www.linkedin.com/in/bilalabdulkadir
+- GitHub: https://github.com/Bilalabdulkadir
+- Portfolio: https://bilalmuhammed-msc-ai-portfolio.share.connect.posit.cloud
 
 # see: Model Visualisation Toolbox for ‘easystats’ and ‘ggplot2’ <img src='man/figures/logo.png' align="right" height="139" />
 
