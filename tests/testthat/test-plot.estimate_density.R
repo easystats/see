@@ -58,7 +58,8 @@ test_that("`plot.see_estimate_density()` prior layer keeps all rows of several p
     m_rstan,
     parameters = c("Petal.Width", "Speciesversicolor")
   )
-  prior_dens <- bayestestR::estimate_density(bayestestR::simulate_prior(m_rstan))
+  priors <- bayestestR::simulate_prior(m_rstan)
+  prior_dens <- bayestestR::estimate_density(priors)
   n_grid <- sum(prior_dens$Parameter == "Petal.Width")
 
   # `==` recycled the parameter names and kept only some prior rows (#494)
