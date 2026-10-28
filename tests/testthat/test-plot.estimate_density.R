@@ -47,3 +47,25 @@ test_that("`plot.see_estimate_density()`, adding prior layers works", {
     fig = plot(result, stack = FALSE, priors = TRUE)
   )
 })
+
+
+test_that("`plot.see_estimate_density()` prior layer keeps all rows of several parameters", {
+  skip_if_not_installed("rstanarm")
+  skip_if_not_installed("ggridges")
+
+  set.seed(123)
+  result <- bayestestR::estimate_density(
+    m_rstan,
+    parameters = c("Petal.Width", "Speciesversicolor")
+  )
+  prior_dens <- bayestestR::estimate_density(bayestestR::simulate_prior(m_rstan))
+  n_grid <- sum(prior_dens$Parameter == "Petal.Width")
+
+  # `==` recycled the parameter names and kept only some prior rows (#494)
+  expect_no_warning(p <- plot(result, stack = FALSE, priors = TRUE))
+  prior_rows <- ggplot2::layer_data(p, 1)
+  expect_identical(
+    as.vector(table(prior_rows$group)),
+    rep(n_grid, length(unique(result$Parameter)))
+  )
+})
