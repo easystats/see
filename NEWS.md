@@ -19,6 +19,13 @@
 * `plot()` now works for `describe_distribution()` on a list of numeric
   vectors such as `list(mtcars$mpg, mtcars$cyl)` (#213).
 
+* If `priors = TRUE` and a plot showed more than one parameter, `plot()` for
+  `estimate_density()`, `p_direction()` and `p_significance()` dropped rows
+  from the prior distribution of each parameter. The prior densities in
+  these plots were wrong, and some plots warned that "longer object length
+  is not a multiple of shorter object length". The plots now use all prior
+  rows (#494).
+
 ## Changes
 
 * New `geom_raincloud()` draws a raincloud plot. For each group, it draws a
