@@ -13,7 +13,7 @@
 
       # remove parameters
       if (!is.null(parameter)) {
-        dens <- dens[dens$Parameter == parameter, ]
+        dens <- dens[dens$Parameter %in% parameter, ]
       }
 
       # limit xrange, to avoid overly wide plots
@@ -110,7 +110,7 @@
 
       # remove parameters
       if (!is.null(parameter)) {
-        dens <- dens[dens$Parameter == parameter, ]
+        dens <- dens[dens$Parameter %in% parameter, ]
       }
 
       # limit xrange, to avoid overly wide plots
