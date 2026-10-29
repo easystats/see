@@ -16,6 +16,7 @@
   size_point = 2,
   centrality = "median",
   ci = 0.95,
+  data = NULL,
   ...
 )
 }
@@ -55,6 +56,9 @@ to compute. Can be \code{"median"}, \code{"mean"} or \code{"MAP"}.}
 
 \item{ci}{Numeric value of probability of the CI (between 0 and 1) to be
 estimated. Default to \code{0.95}.}
+
+\item{data}{The original data used to create this object. Can be a
+statistical model.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
