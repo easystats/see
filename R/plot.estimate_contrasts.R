@@ -93,6 +93,7 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
     c(
       "x",
       "y",
+      "xend",
       "ymin",
       "ymax",
       "group",
@@ -745,7 +746,8 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #'   ("beams") represent the pairwise contrasts. A beam originates at the point
 #'   estimate of a reference level and projects toward the comparison level.
 #'   At the target level, the vertical span of the beam represents the confidence
-#'   interval of the estimated difference, anchored at the reference mean.
+#'   interval of the estimated difference, anchored at the reference mean. The
+#'   beams are drawn with [geom_lightbeam()].
 #' - **Interpretation:** The vertical span of the projected beam at the target
 #'   level corresponds to the confidence interval of the estimated difference,
 #'   evaluated *relative* to the reference point estimate. Intuitively, it answers:
@@ -845,11 +847,24 @@ plot.see_estimate_contrasts <- function(
       )
   }
 
+  # blank layer of the means first, so the x axis keeps their order
   p <- p +
-    ggplot2::geom_polygon(
-      data = x$geom_polygon,
-      ggplot2::aes(x = .data$x, y = .data$y, group = .data$group),
-      alpha = 0.1
+    ggplot2::geom_blank(
+      data = x$geom_pointrange,
+      ggplot2::aes(x = .data$x)
+    ) +
+    geom_lightbeam(
+      data = .lightbeams(x$geom_polygon),
+      ggplot2::aes(
+        x = .data$x,
+        y = .data$y,
+        xend = .data$xend,
+        ymin = .data$ymin,
+        ymax = .data$ymax,
+        group = .data$group
+      ),
+      alpha = 0.1,
+      na.rm = TRUE
     ) +
     ggplot2::geom_pointrange(
       data = x$geom_pointrange,
@@ -892,6 +907,28 @@ plot.see_estimate_contrasts <- function(
   }
 
   p
+}
+
+
+# one row per beam, from the three polygon rows per contrast (the estimate of
+# Level1, then the two tips at Level2)
+#' @keywords internal
+.lightbeams <- function(polygons) {
+  rows <- split(seq_len(nrow(polygons)), polygons$group)
+  if (any(lengths(rows) != 3L)) {
+    insight::format_error(
+      paste(
+        "The lighthouse data must have three rows per contrast. Please use",
+        "the output of `data_plot()` without removing rows."
+      )
+    )
+  }
+  vertex <- function(k) vapply(rows, `[`, integer(1), k)
+  beams <- polygons[vertex(1L), , drop = FALSE]
+  beams$xend <- polygons$x[vertex(2L)]
+  beams$ymin <- polygons$y[vertex(2L)]
+  beams$ymax <- polygons$y[vertex(3L)]
+  beams
 }
 
 

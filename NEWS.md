@@ -34,6 +34,9 @@
   shades quantile intervals behind the points, for example
   `shade = c(0.5, 0.8, 0.95)`. It needs the *ggdist* package (#135).
 
+* New `geom_lightbeam()` to draw the beams of lighthouse plots. `plot()` for
+  `modelbased::estimate_contrasts()` now uses it (#135).
+
 ## Bug fixes
 
 * `plot()` for `bayestestR::equivalence_test()` of a data frame failed with
