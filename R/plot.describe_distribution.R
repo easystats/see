@@ -42,6 +42,9 @@ data_plot.parameters_distribution <- function(x, data = NULL, ...) {
 #'   The remaining (non-highlighted) categories will be filled with a lighter
 #'   grey.
 #' @param size_bar Size of bar geoms.
+#' @param data The data frame, vector or list that was given to
+#'   `describe_distribution()`. If `NULL`, it is found by its name or, for a
+#'   list, rebuilt from the values stored in the result.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_check_normality
 #'
@@ -64,13 +67,16 @@ plot.see_parameters_distribution <- function(
   size_bar = 0.7,
   highlight = NULL,
   color_highlight = NULL,
+  data = NULL,
   ...
 ) {
   # get data
-  data <- .retrieve_data(x)
+  if (is.null(data)) {
+    data <- .retrieve_data(x)
+  }
 
   # only keep variables used in "describe_distribution()"
-  if (!is.null(x$Variable)) {
+  if (!is.null(x$Variable) && is.data.frame(data)) {
     data <- data[, x$Variable, drop = FALSE]
   }
 

@@ -1,5 +1,31 @@
 # see (devel)
 
+## Bug fixes
+
+* `plot()` now finds a model or data that exists only in the function that
+  calls `plot()`, for example `m` in `plot(p_direction(m))`. This works for
+  `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
+  and `describe_distribution()`. If its name is the name of a plot method
+  argument, such as `x` or `data`, `plot()` does not find it. This is also
+  true for a name that the lookup uses, such as `obj_name` (#311).
+
+* `plot()` for `p_direction()`, `p_significance()` and `point_estimate()` now
+  uses the model given in `data`. If `data` is given and the model cannot be
+  found by its name, it no longer fails (#311).
+
+* `plot()` for `estimate_density()` and `describe_distribution()` has a new
+  `data` argument. Before, `plot(estimate_density(m), data = m)` failed (#311).
+
+* `plot()` now works for `describe_distribution()` on a list of numeric
+  vectors such as `list(mtcars$mpg, mtcars$cyl)` (#213).
+
+* If `priors = TRUE` and a plot showed more than one parameter, `plot()` for
+  `estimate_density()`, `p_direction()` and `p_significance()` dropped rows
+  from the prior distribution of each parameter. The prior densities in
+  these plots were wrong, and some plots warned that "longer object length
+  is not a multiple of shorter object length". The plots now use all prior
+  rows (#494).
+
 ## Changes
 
 * New `geom_raincloud()` draws a raincloud plot. For each group, it draws a
