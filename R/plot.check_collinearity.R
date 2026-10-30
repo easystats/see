@@ -55,7 +55,13 @@ plot.see_check_collinearity <- function(
 
   dat <- datawizard::data_select(
     dat,
-    select = c(x = "Term", y = "VIF", facet = "Component", group = "group", df = "df"),
+    select = c(
+      x = "Term",
+      y = "VIF",
+      facet = "Component",
+      group = "group",
+      df = "df"
+    ),
     verbose = FALSE
   )
 
@@ -212,13 +218,27 @@ plot.see_check_collinearity <- function(
         if (is_check_model) {
           expression(atop(
             "Variance Inflation",
-            "Factor (" * plain(GVIF)^{1 / plain(df)} * ", log-scaled)"
+            "Factor (" *
+              plain(GVIF)^{
+                1 / plain(df)
+              } *
+              ", log-scaled)"
           ))
         } else {
-          expression("Variance Inflation Factor (" * plain(GVIF)^{1 / plain(df)} * ", log-scaled)")
+          expression(
+            "Variance Inflation Factor (" *
+              plain(GVIF)^{
+                1 / plain(df)
+              } *
+              ", log-scaled)"
+          )
         }
       } else {
-        paste("Variance Inflation", "Factor (VIF, log-scaled)", sep = ifelse(is_check_model, "\n", " "))
+        paste(
+          "Variance Inflation",
+          "Factor (VIF, log-scaled)",
+          sep = ifelse(is_check_model, "\n", " ")
+        )
       },
       caption = caption
     ) +
