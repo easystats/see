@@ -288,9 +288,9 @@ test_that("geom_violindot() stacks a lone group's dots across its whole box", {
   m <- dots_measure(p)
   alone <- m[m$group == 3, ]
 
-  # the dodged groups' dots have 0.1125 - 0.00625 = 0.10625 of room; the lone
+  # the dodged groups' dots have 0.1125 - 0.025 = 0.0875 of room; the lone
   # group's stacks reach further, within its own box [x - 0.475, x - 0.025]
-  expect_gt(max(alone$dot_x) - min(alone$dot_x), 0.10625)
+  expect_gt(max(alone$dot_x) - min(alone$dot_x), 0.0875)
   expect_gt(min(alone$dot_x - (alone$pos - 0.475)), -1e-6)
 })
 
@@ -386,8 +386,17 @@ test_that("geom_violindot() scales the dot gap with the axis resolution", {
   expect_equal(dots$xmin, level - 5.1)
 })
 
-test_that("geom_violindot() shrinks the dot gap with the dodge cell", {
-  expect_equal(expect_dots_in_cells(base_ab + geom_violindot()), 0.00625)
+test_that("geom_violindot() keeps the dot gap in dodged cells", {
+  expect_equal(expect_dots_in_cells(base_ab + geom_violindot()), 0.025)
+
+  d <- iris
+  d$g <- factor(rep(1:3, length.out = nrow(d)))
+  p <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot()
+  expect_equal(expect_dots_in_cells(p), 0.025)
 })
 
 test_that("geom_violindot() dots follow a reversed dodge, but not dodge2", {
@@ -403,6 +412,8 @@ test_that("geom_violindot() dots follow a reversed dodge, but not dodge2", {
 
 test_that("geom_violindot() caps the dot gap in narrow dodged cells", {
   expect_equal(expect_dots_in_cells(base_ab + geom_violindot(width = 0.04)), 0.0025)
+  # the half cell is 0.1125, so the gap of 0.06 for the interval is capped
+  expect_equal(expect_dots_in_cells(base_ab + geom_violindot(interval = TRUE)), 0.05625)
 
   p <- base_ab + geom_violindot(width = 0)
   expect_equal(expect_dots_in_cells(p), 0)
