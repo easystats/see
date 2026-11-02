@@ -52,10 +52,10 @@
   `...`, so it must be named in full.
 
 * The default gap between the dots and the half violins of `geom_violindot()`
-  now scales with the resolution of the categorical axis. In dodged cells, it
-  is at most a quarter of the room beside the half violin. The dots are now
-  larger with `interval = TRUE` or with three or more groups. In horizontal
-  plots, the dots are no longer shifted along the value axis.
+  now scales with the resolution of the categorical axis. With
+  `interval = TRUE`, it is now at most a quarter of the room beside the half
+  violin in dodged cells. The limit was half. In horizontal plots, the dots are
+  no longer shifted along the value axis.
 
 * `plot()` for `bayestestR::equivalence_test()` of a data frame failed with
   "invalid format '%i'". It now works.
