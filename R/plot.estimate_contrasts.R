@@ -67,6 +67,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   contrast_data <- as.data.frame(x)
   means <- as.data.frame(means)
+  if (identical(attr(x, "backend", exact = TRUE), "emmeans")) {
+    for (i in c("Level1", "Level2")) {
+      contrast_data[[i]] <- .means_labels(contrast_data[[i]], means, x_name)
+    }
+  }
   if (response_categories) {
     if (!"Response" %in% names(means)) {
       insight::format_error(
@@ -143,6 +148,38 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 
   class(dataplot) <- c("data_plot", "see_estimate_contrasts", class(dataplot))
   dataplot
+}
+
+
+# the levels of emmeans contrasts as the plot labels them. emmeans adds the
+# variable name to levels that all look like numbers, e.g. "cyl6", puts
+# parentheses around labels with an operator, e.g. "(cyl-1)", and joins the
+# levels of a joint contrast with a space. A label that fits more than one
+# combination of levels stays as it is, so that it is not drawn.
+#' @keywords internal
+.means_labels <- function(labels, means, x_name) {
+  labels <- as.character(labels)
+  no_parentheses <- function(x) sub("^\\((.*)\\)$", "\\1", x)
+  emmeans_levels <- lapply(x_name, function(i) {
+    values <- as.character(means[[i]])
+    if (anyNA(suppressWarnings(as.numeric(values)))) {
+      values
+    } else {
+      paste0(i, values)
+    }
+  })
+  cells <- unique(data.frame(
+    emmeans = no_parentheses(do.call(paste, c(emmeans_levels, sep = " "))),
+    plot = do.call(
+      paste,
+      c(lapply(x_name, function(i) as.character(means[[i]])), sep = ", ")
+    )
+  ))
+  cells <- cells[
+    !cells$emmeans %in% cells$emmeans[duplicated(cells$emmeans)],
+  ]
+  matched <- cells$plot[match(no_parentheses(labels), cells$emmeans)]
+  ifelse(is.na(matched), labels, matched)
 }
 
 

@@ -1609,8 +1609,6 @@ test_that("lighthouse plots draw link-scale pairs from the marginaleffects and e
   skip_if_not_installed("marginaleffects")
   skip_if_not_installed("emmeans")
 
-  # emmeans labels contrasts of levels like "6" as "cyl6", so the levels
-  # are words
   d <- mtcars
   d$cyl <- factor(d$cyl, labels = c("four", "six", "eight"))
   estimates <- function(model, backend, predict) {
@@ -1662,6 +1660,78 @@ test_that("lighthouse plots draw link-scale pairs from the marginaleffects and e
   expect_match(message, "`predict = \"response\"`", fixed = TRUE)
   expect_match(message, "`predict = \"none\"`", fixed = TRUE)
   expect_match(message, "same scale", fixed = TRUE)
+})
+
+
+test_that("lighthouse plots match the labels of emmeans contrasts to the means", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("emmeans")
+
+  d <- mtcars
+  # the x positions and heights of each lighthouse, which do not depend on
+  # the names of the levels
+  lighthouses <- function(labels, joint = FALSE) {
+    d$lvl <- factor(d$cyl, labels = labels)
+    d$am <- factor(d$am, labels = c("auto", "manual"))
+    contrast <- if (joint) c("am", "lvl") else "lvl"
+    model <- stats::lm(
+      if (joint) mpg ~ am * lvl else mpg ~ lvl,
+      data = d
+    )
+    beams <- .lightbeams(
+      data_plot(
+        modelbased::estimate_contrasts(
+          model,
+          contrast = contrast,
+          backend = "emmeans"
+        ),
+        modelbased::estimate_means(model, by = contrast, backend = "emmeans")
+      )$geom_polygon
+    )
+    beams$x <- as.integer(beams$x)
+    beams$xend <- as.integer(beams$xend)
+    beams <- beams[order(beams$x, beams$xend), ]
+    as.list(beams[c("x", "xend", "y", "ymin", "ymax")])
+  }
+
+  words <- c("four", "six", "eight")
+  expect_equal(lighthouses(c("4", "6", "8")), lighthouses(words))
+  # "(lvl-1)": parentheses around a level with a minus sign
+  expect_equal(lighthouses(c("-1", "0", "1")), lighthouses(words))
+  # "auto lvl6": a space between the levels of a joint contrast
+  expect_equal(
+    lighthouses(c("4", "6", "8"), joint = TRUE),
+    lighthouses(words, joint = TRUE)
+  )
+  expect_length(lighthouses(words, joint = TRUE)$x, 15L)
+
+  # one level that is no number: emmeans adds no variable name
+  expect_equal(lighthouses(c("4", "six", "8")), lighthouses(words))
+
+  # the label "a b c" of a joint contrast fits two rows of the means, so
+  # these contrasts are not drawn
+  contrasts <- data.frame(
+    Level1 = c("a b c", "d e"),
+    Level2 = c("d e", "f g"),
+    Difference = 1,
+    CI_low = 0,
+    CI_high = 2
+  )
+  attr(contrasts, "contrast") <- c("v1", "v2")
+  attr(contrasts, "backend") <- "emmeans"
+  means <- data.frame(
+    v1 = c("a b", "a", "d", "f"),
+    v2 = c("c", "b c", "e", "g"),
+    Mean = 1:4,
+    CI_low = 0:3,
+    CI_high = 2:5
+  )
+  expect_warning(
+    polygons <- .data_plot_estimate_contrasts(contrasts, means)$geom_polygon,
+    "1 of 2 contrasts are not drawn"
+  )
+  expect_identical(unique(polygons$Level1), "d, e")
+  expect_identical(unique(polygons$Level2), "f, g")
 })
 
 
