@@ -375,8 +375,8 @@
 <rect x='91.28' y='455.00' width='271.72' height='35.21' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3AAF85; fill-opacity: 0.15;' />
 <rect x='91.28' y='439.84' width='271.72' height='15.16' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #1B6CA8; fill-opacity: 0.15;' />
 <rect x='91.28' y='436.78' width='271.72' height='3.06' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CD201F; fill-opacity: 0.15;' />
-<line x1='288.89' y1='484.57' x2='288.89' y2='466.19' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
-<line x1='165.38' y1='484.57' x2='165.38' y2='466.19' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<line x1='288.89' y1='486.41' x2='288.89' y2='469.63' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<line x1='165.38' y1='486.41' x2='165.38' y2='469.63' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
 <circle cx='288.89' cy='477.76' r='3.20' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
 <circle cx='165.38' cy='477.76' r='3.20' style='stroke-width: 0.00; stroke: none; fill: #3AAF85;' />
 </g>
