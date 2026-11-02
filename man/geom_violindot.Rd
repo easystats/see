@@ -95,10 +95,10 @@ two observations are still drawn.}
 \item{position_dots}{Position adjustment for dots, either as a string, or the
 result of a call to a position adjustment function. The default leaves a
 gap of 0.025 times the resolution of the categorical axis (0.06 with
-\code{interval = TRUE}) between the dots and the half violin, at most half the
-room beside the half violin in a dodged cell, and dodges the dots with
-their half violins. A position that you set is used as given. Must be named
-in full, because \code{position} goes to the half violins.}
+\code{interval = TRUE}) between the dots and the half violin, at most a quarter
+of the room beside the half violin in a dodged cell, and dodges the dots
+with their half violins. A position that you set is used as given. Must be
+named in full, because \code{position} goes to the half violins.}
 
 \item{size_dots, dots_size}{Size adjustment for dots, passed to the
 \code{dotsize} argument of \code{\link[ggdist:geom_dots]{ggdist::geom_dots()}}.}

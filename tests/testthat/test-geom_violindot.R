@@ -388,15 +388,6 @@ test_that("geom_violindot() scales the dot gap with the axis resolution", {
 
 test_that("geom_violindot() keeps the dot gap in dodged cells", {
   expect_equal(expect_dots_in_cells(base_ab + geom_violindot()), 0.025)
-
-  d <- iris
-  d$g <- factor(rep(1:3, length.out = nrow(d)))
-  p <- ggplot2::ggplot(
-    d,
-    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
-  ) +
-    geom_violindot()
-  expect_equal(expect_dots_in_cells(p), 0.025)
 })
 
 test_that("geom_violindot() dots follow a reversed dodge, but not dodge2", {
@@ -411,9 +402,19 @@ test_that("geom_violindot() dots follow a reversed dodge, but not dodge2", {
 })
 
 test_that("geom_violindot() caps the dot gap in narrow dodged cells", {
-  expect_equal(expect_dots_in_cells(base_ab + geom_violindot(width = 0.04)), 0.0025)
+  expect_equal(expect_dots_in_cells(base_ab + geom_violindot(width = 0.04)), 0.00125)
   # the half cell is 0.1125, so the gap of 0.06 for the interval is capped
-  expect_equal(expect_dots_in_cells(base_ab + geom_violindot(interval = TRUE)), 0.05625)
+  expect_equal(expect_dots_in_cells(base_ab + geom_violindot(interval = TRUE)), 0.028125)
+
+  # with three groups, the half cell is 0.075, so the gap of 0.025 is capped
+  d <- iris
+  d$g <- factor(rep(1:3, length.out = nrow(d)))
+  p <- ggplot2::ggplot(
+    d,
+    ggplot2::aes(Species, Sepal.Length, fill = interaction(g, Species))
+  ) +
+    geom_violindot()
+  expect_equal(expect_dots_in_cells(p), 0.01875)
 
   p <- base_ab + geom_violindot(width = 0)
   expect_equal(expect_dots_in_cells(p), 0)
