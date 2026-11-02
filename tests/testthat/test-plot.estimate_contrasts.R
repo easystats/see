@@ -1704,6 +1704,11 @@ test_that("lighthouse plots match the labels of emmeans contrasts to the means",
     lighthouses(words, joint = TRUE)
   )
   expect_length(lighthouses(words, joint = TRUE)$x, 15L)
+  # "(auto lvl-1)": parentheses around the whole label
+  expect_equal(
+    lighthouses(c("-1", "0", "1"), joint = TRUE),
+    lighthouses(words, joint = TRUE)
+  )
 
   # one level that is no number: emmeans adds no variable name
   expect_equal(lighthouses(c("4", "six", "8")), lighthouses(words))
