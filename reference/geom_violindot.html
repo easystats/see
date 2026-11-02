@@ -23,7 +23,7 @@ flipped, so they overlap it."><meta property="og:image" content="https://easysta
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,9 +95,9 @@ flipped, so they overlap it.</p>
 <span>  dots_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dots_fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  binwidth <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  position_dots <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_nudge.html" class="external-link">position_nudge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">0.025</span>, y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>  interval <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  position_dots <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_nudge.html" class="external-link">position_nudge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">0.025</span>, y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>  size_dots <span class="op">=</span> <span class="va">dots_size</span>,</span>
 <span>  color_dots <span class="op">=</span> <span class="va">dots_color</span>,</span>
 <span>  fill_dots <span class="op">=</span> <span class="va">dots_fill</span></span>
@@ -167,17 +167,6 @@ the value axis. Dodged groups leave the dots less room, so a fixed bin
 width can make them overflow it, with a warning from ggdist.</p></dd>
 
 
-<dt id="arg-position-dots">position_dots<a class="anchor" aria-label="anchor" href="#arg-position-dots"></a></dt>
-<dd><p>Position adjustment for dots, either as a string, or the
-result of a call to a position adjustment function. The default nudges the
-dots by <code>x = -0.025</code> (<code>-0.06</code> with <code>interval = TRUE</code>). In a vertical plot,
-this moves them toward smaller x, away from the half violin, and in a
-dodged cell the nudge is at most half the room beside the half violin. In
-a horizontal plot, it moves them along the value axis. The default also
-dodges the dots with their half violins. A position that you set is used
-as given, so the dots are not dodged unless that position dodges them.</p></dd>
-
-
 <dt id="arg-interval">interval<a class="anchor" aria-label="anchor" href="#arg-interval"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, add the median and the 66% and 95%
 quantile intervals of each group, drawn with <code><a href="https://mjskay.github.io/ggdist/reference/stat_slabinterval.html" class="external-link">ggdist::stat_slabinterval()</a></code>
@@ -196,8 +185,21 @@ and the <code>point_</code> and <code>interval_</code> aesthetics) go to the hal
 <code>colour</code> does not reach the dots when <code>color_dots</code> is set, and <code>fill</code> does
 not reach them when <code>fill_dots</code> is set. As for the half violins, a <code>width</code>
 (or <code>height</code>) is the width of a whole violin, so the dots take half of it.
-An argument named <code>position</code> matches <code>position_dots</code>. The dots of groups
-with fewer than two observations are still drawn.</p></dd>
+<code>position</code> goes to the half violins and their interval, as in
+<code><a href="geom_violinhalf.html">geom_violinhalf()</a></code>. The default dots follow it only if it is <code>"dodge"</code>
+or made by <code><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html" class="external-link">ggplot2::position_dodge()</a></code>. The dots of groups with fewer than
+two observations are still drawn.</p></dd>
+
+
+<dt id="arg-position-dots">position_dots<a class="anchor" aria-label="anchor" href="#arg-position-dots"></a></dt>
+<dd><p>Position adjustment for dots, either as a string, or the
+result of a call to a position adjustment function. The default leaves a
+gap of 0.025 times the resolution of the categorical axis (0.06 with
+<code>interval = TRUE</code>) between the dots and the half violin, and dodges the dots
+with their half violins. In a dodged cell, the gap is at most half of the
+room beside the half violin (a quarter with <code>interval = TRUE</code>). A position
+that you set is used as given. Must be named in full, because <code>position</code>
+goes to the half violins.</p></dd>
 
 
 <dt id="arg-size-dots-dots-size">size_dots, dots_size<a class="anchor" aria-label="anchor" href="#arg-size-dots-dots-size"></a></dt>

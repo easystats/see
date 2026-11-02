@@ -29,9 +29,9 @@ geom_violindot(
   dots_color = NULL,
   dots_fill = NULL,
   binwidth = NA,
-  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
   interval = FALSE,
   ...,
+  position_dots = ggplot2::position_nudge(x = -0.025, y = 0),
   size_dots = dots_size,
   color_dots = dots_color,
   fill_dots = dots_fill
@@ -106,18 +106,6 @@ geom_violindot(
   axis. Dodged groups leave the dots less room, so a fixed bin width can
   make them overflow it, with a warning from ggdist.
 
-- position_dots:
-
-  Position adjustment for dots, either as a string, or the result of a
-  call to a position adjustment function. The default nudges the dots by
-  `x = -0.025` (`-0.06` with `interval = TRUE`). In a vertical plot,
-  this moves them toward smaller x, away from the half violin, and in a
-  dodged cell the nudge is at most half the room beside the half violin.
-  In a horizontal plot, it moves them along the value axis. The default
-  also dodges the dots with their half violins. A position that you set
-  is used as given, so the dots are not dodged unless that position
-  dodges them.
-
 - interval:
 
   Logical. If `TRUE`, add the median and the 66% and 95% quantile
@@ -142,9 +130,23 @@ geom_violindot(
   violins only. `colour` does not reach the dots when `color_dots` is
   set, and `fill` does not reach them when `fill_dots` is set. As for
   the half violins, a `width` (or `height`) is the width of a whole
-  violin, so the dots take half of it. An argument named `position`
-  matches `position_dots`. The dots of groups with fewer than two
-  observations are still drawn.
+  violin, so the dots take half of it. `position` goes to the half
+  violins and their interval, as in
+  [`geom_violinhalf()`](https://easystats.github.io/see/reference/geom_violinhalf.md).
+  The default dots follow it only if it is `"dodge"` or made by
+  [`ggplot2::position_dodge()`](https://ggplot2.tidyverse.org/reference/position_dodge.html).
+  The dots of groups with fewer than two observations are still drawn.
+
+- position_dots:
+
+  Position adjustment for dots, either as a string, or the result of a
+  call to a position adjustment function. The default leaves a gap of
+  0.025 times the resolution of the categorical axis (0.06 with
+  `interval = TRUE`) between the dots and the half violin, and dodges
+  the dots with their half violins. In a dodged cell, the gap is at most
+  half of the room beside the half violin (a quarter with
+  `interval = TRUE`). A position that you set is used as given. Must be
+  named in full, because `position` goes to the half violins.
 
 - size_dots, dots_size:
 
