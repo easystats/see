@@ -2,6 +2,11 @@
 
 ## Bug fixes
 
+* Collinearity plots label dimension-adjusted GVIFs supplied by *performance*
+  as `GVIF^(1/df)` with a superscript exponent, including in `check_model()`
+  panels. The 5/10 bands and plots containing only one-coefficient terms are
+  unchanged.
+
 * `plot()` now finds a model or data that exists only in the function that
   calls `plot()`, for example `m` in `plot(p_direction(m))`. This works for
   `p_direction()`, `p_significance()`, `rope()`, `hdi()`, `point_estimate()`
@@ -33,6 +38,9 @@
   observations as jittered points on the other side. Its `shade` argument
   shades quantile intervals behind the points, for example
   `shade = c(0.5, 0.8, 0.95)`. It needs the *ggdist* package (#135).
+
+* New `geom_lightbeam()` to draw the beams of lighthouse plots. `plot()` for
+  `modelbased::estimate_contrasts()` now uses it (#135).
 
 ## Bug fixes
 

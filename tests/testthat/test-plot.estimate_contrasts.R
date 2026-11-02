@@ -41,6 +41,22 @@ layer_index <- function(p, geom) {
   which(vapply(p$layers, function(l) inherits(l$geom, geom), logical(1)))
 }
 
+# the beams of a lighthouse plot as three polygon rows per contrast: the
+# start (x, y), then (xend, ymin) and (xend, ymax)
+beam_polygons <- function(beams) {
+  corner <- function(x, y) {
+    rows <- beams
+    rows$x <- x
+    rows$y <- y
+    rows
+  }
+  rbind(
+    corner(beams$x, beams$y),
+    corner(beams$xend, beams$ymin),
+    corner(beams$xend, beams$ymax)
+  )
+}
+
 
 test_that("lighthouses of contrasts with `by` use the means of their `by` level", {
   skip_if_not_installed("modelbased")
@@ -134,7 +150,7 @@ test_that("lighthouse plots of contrasts with `by` get one facet per `by` level"
 
   built <- ggplot2::ggplot_build(p)
   expect_shape(built$layout$layout, nrow = 3L)
-  polygons <- built$data[[layer_index(p, "GeomPolygon")]]
+  polygons <- built$data[[layer_index(p, "GeomLightbeam")]]
   pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
   for (panel in 1:3) {
     expect_length(unique(polygons$group[polygons$PANEL == panel]), 1)
@@ -283,7 +299,7 @@ test_that("joint contrasts with `by` get one facet per `by` level", {
 
   built <- ggplot2::ggplot_build(p)
   expect_shape(built$layout$layout, nrow = 2L)
-  polygons <- built$data[[layer_index(p, "GeomPolygon")]]
+  polygons <- built$data[[layer_index(p, "GeomLightbeam")]]
   pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
   for (panel in 1:2) {
     expect_length(unique(polygons$group[polygons$PANEL == panel]), 6)
@@ -769,9 +785,10 @@ test_that("`show_data = TRUE` draws the raw data first, jittered within each fac
   }
 
   p_default <- plot(fx$contrasts, fx$means)
-  expect_length(p_default$layers, 2)
-  expect_s3_class(p_default$layers[[1]]$geom, "GeomPolygon")
-  expect_s3_class(p_default$layers[[2]]$geom, "GeomPointrange")
+  expect_length(p_default$layers, 3)
+  expect_s3_class(p_default$layers[[1]]$geom, "GeomBlank")
+  expect_s3_class(p_default$layers[[2]]$geom, "GeomLightbeam")
+  expect_s3_class(p_default$layers[[3]]$geom, "GeomPointrange")
 })
 
 
@@ -998,7 +1015,7 @@ test_that("`show_data = TRUE` draws binary responses, ratio contrasts, and back-
   p <- plot(rc, fx$means, show_data = TRUE)
   expect_equal(p$layers[[1]]$data$y, d$mpg, tolerance = 1e-8)
   expect_lighthouses(
-    p$layers[[layer_index(p, "GeomPolygon")]]$data,
+    beam_polygons(p$layers[[layer_index(p, "GeomLightbeam")]]$data),
     rc,
     fx$means,
     "am",
@@ -1223,7 +1240,7 @@ test_that("`show_data` must be TRUE or FALSE and needs the contrasts with their 
 
   dp <- data_plot(fx$contrasts, fx$means)
   expect_error(plot(dp, show_data = TRUE), regexp = "estimate_contrasts")
-  expect_length(plot(dp)$layers, 2)
+  expect_length(plot(dp)$layers, 3)
 
   no_model <- fx$contrasts
   attr(no_model, "model") <- NULL
@@ -1960,9 +1977,10 @@ test_that("a numeric contrast variable with uneven values gets a continuous x ax
     by_model,
     by = c("wt=c(2,2.5,4)", "am")
   )
-  built <- ggplot2::ggplot_build(plot(by_contrasts, by_means))
+  p <- plot(by_contrasts, by_means)
+  built <- ggplot2::ggplot_build(p)
   expect_identical(nrow(built$layout$layout), 2L)
-  pointranges <- built$data[[2]]
+  pointranges <- built$data[[layer_index(p, "GeomPointrange")]]
   for (panel in c("1", "2")) {
     expect_identical(
       sort(pointranges$x[pointranges$PANEL == panel]),
@@ -2195,4 +2213,68 @@ test_that("`show_data = TRUE` with a factor and a numeric `by` names the numeric
     plot(contrasts, means, show_data = TRUE)
   )$data[[1]]
   expect_identical(nrow(points), sum(on_grid$g != "C"))
+})
+
+
+test_that("the beams of lighthouse plots have the corners of `data_plot()`", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  fx <- contrasts_by_fixture()
+  polygons <- data_plot(fx$contrasts, fx$means)$geom_polygon
+  p <- plot(fx$contrasts, fx$means)
+  built <- ggplot2::ggplot_build(p)
+  beams <- built$data[[layer_index(p, "GeomLightbeam")]]
+  groups <- sort(unique(polygons$group))
+  expect_identical(nrow(beams), length(groups))
+  for (k in seq_len(nrow(beams))) {
+    rows <- polygons[polygons$group == groups[beams$group[k]], ]
+    limits <- built$layout$panel_params[[beams$PANEL[k]]]$x$get_limits()
+    expect_equal(as.numeric(beams$x[k]), match(rows$x[1], limits))
+    expect_equal(as.numeric(beams$xend[k]), match(rows$x[2], limits))
+    expect_equal(c(beams$y[k], beams$ymin[k], beams$ymax[k]), rows$y, tolerance = 1e-8)
+  }
+})
+
+
+test_that("lighthouse plots keep a `by` variable named xend", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  s <- contrasts_factorial_data()
+  s <- data.frame(a = s$a, xend = s$b, out = s$y)
+  model <- lm(out ~ a * xend, data = s)
+  contrasts <- modelbased::estimate_contrasts(model, contrast = "a", by = "xend")
+  means <- modelbased::estimate_means(model, by = c("a", "xend"))
+  p <- plot(contrasts, means)
+  built <- ggplot2::ggplot_build(p)
+
+  expect_shape(built$layout$layout, nrow = 2L)
+  beams <- built$data[[layer_index(p, "GeomLightbeam")]]
+  expect_setequal(as.character(beams$PANEL), c("1", "2"))
+})
+
+
+test_that("lighthouse plots leave out a beam with a missing tip, with no warning", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  ir <- contrasts_iris()
+  contrasts <- ir$contrasts
+  contrasts$CI_low[2] <- NA
+  p <- plot(contrasts, ir$means)
+  expect_no_warning(ggplot2::ggplotGrob(p))
+  grob <- ggplot2::layer_grob(p, layer_index(p, "GeomLightbeam"))[[1]]
+  expect_length(unique(grob$id), 2L)
+})
+
+
+test_that("lighthouse plots stop for lighthouse data without three rows per contrast", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("marginaleffects")
+
+  ir <- contrasts_iris()
+  dp <- data_plot(ir$contrasts, ir$means)
+  dp$geom_polygon <- dp$geom_polygon[-1, ]
+  expect_error(plot(dp), regexp = "three rows per contrast", fixed = TRUE)
 })
