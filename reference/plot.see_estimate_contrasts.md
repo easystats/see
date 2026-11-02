@@ -184,7 +184,8 @@ visual:
   the point estimate of a reference level and projects toward the
   comparison level. At the target level, the vertical span of the beam
   represents the confidence interval of the estimated difference,
-  anchored at the reference mean.
+  anchored at the reference mean. The beams are drawn with
+  [`geom_lightbeam()`](https://easystats.github.io/see/reference/geom_lightbeam.md).
 
 - **Interpretation:** The vertical span of the projected beam at the
   target level corresponds to the confidence interval of the estimated

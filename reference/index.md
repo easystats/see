@@ -95,6 +95,9 @@
   [`geoms_from_list()`](https://easystats.github.io/see/reference/geom_from_list.md)
   : Create ggplot2 geom(s) from a list
 
+- [`geom_lightbeam()`](https://easystats.github.io/see/reference/geom_lightbeam.md)
+  : Lighthouse beams
+
 - [`geom_point2()`](https://easystats.github.io/see/reference/geom_point2.md)
   [`geom_jitter2()`](https://easystats.github.io/see/reference/geom_point2.md)
   [`geom_pointrange2()`](https://easystats.github.io/see/reference/geom_point2.md)

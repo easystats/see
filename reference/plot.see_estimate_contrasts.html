@@ -9,7 +9,7 @@ function."><meta property="og:image" content="https://easystats.github.io/see/re
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -207,7 +207,8 @@ intervals.</p></li>
 ("beams") represent the pairwise contrasts. A beam originates at the point
 estimate of a reference level and projects toward the comparison level.
 At the target level, the vertical span of the beam represents the confidence
-interval of the estimated difference, anchored at the reference mean.</p></li>
+interval of the estimated difference, anchored at the reference mean. The
+beams are drawn with <code><a href="geom_lightbeam.html">geom_lightbeam()</a></code>.</p></li>
 <li><p><strong>Interpretation:</strong> The vertical span of the projected beam at the target
 level corresponds to the confidence interval of the estimated difference,
 evaluated <em>relative</em> to the reference point estimate. Intuitively, it answers:
