@@ -55,7 +55,14 @@ plot.see_check_collinearity <- function(
 
   dat <- datawizard::data_select(
     dat,
-    select = c(x = "Term", y = "VIF", facet = "Component", group = "group")
+    select = c(
+      x = "Term",
+      y = "VIF",
+      facet = "Component",
+      group = "group",
+      df = "df"
+    ),
+    verbose = FALSE
   )
 
   if (insight::n_unique(dat$facet) <= 1) {
@@ -207,11 +214,32 @@ plot.see_check_collinearity <- function(
       title = "Collinearity",
       subtitle = "High collinearity (VIF) may inflate parameter uncertainty",
       x = NULL,
-      y = paste(
-        "Variance Inflation",
-        "Factor (VIF, log-scaled)",
-        sep = ifelse(is_check_model, "\n", " ")
-      ),
+      y = if (any(x$df > 1)) {
+        if (is_check_model) {
+          expression(atop(
+            "Variance Inflation",
+            "Factor (" *
+              plain(GVIF)^{
+                1 / plain(df)
+              } *
+              ", log-scaled)"
+          ))
+        } else {
+          expression(
+            "Variance Inflation Factor (" *
+              plain(GVIF)^{
+                1 / plain(df)
+              } *
+              ", log-scaled)"
+          )
+        }
+      } else {
+        paste(
+          "Variance Inflation",
+          "Factor (VIF, log-scaled)",
+          sep = ifelse(is_check_model, "\n", " ")
+        )
+      },
       caption = caption
     ) +
     ggplot2::scale_color_manual(
