@@ -476,10 +476,10 @@
 <rect x='57.49' y='453.20' width='307.62' height='62.47' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3AAF85; fill-opacity: 0.15;' />
 <rect x='57.49' y='426.30' width='307.62' height='26.90' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #1B6CA8; fill-opacity: 0.15;' />
 <rect x='57.49' y='420.88' width='307.62' height='5.42' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CD201F; fill-opacity: 0.15;' />
-<line x1='321.17' y1='470.41' x2='321.17' y2='433.02' style='stroke-width: 1.71; stroke: #1B6CA8; stroke-linecap: butt;' />
-<line x1='101.44' y1='467.91' x2='101.44' y2='430.22' style='stroke-width: 1.71; stroke: #1B6CA8; stroke-linecap: butt;' />
-<line x1='247.92' y1='509.03' x2='247.92' y2='479.93' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
-<line x1='174.68' y1='445.60' x2='174.68' y2='420.88' style='stroke-width: 1.71; stroke: #1B6CA8; stroke-linecap: butt;' />
+<line x1='321.17' y1='479.06' x2='321.17' y2='439.78' style='stroke-width: 1.71; stroke: #1B6CA8; stroke-linecap: butt;' />
+<line x1='101.44' y1='476.55' x2='101.44' y2='437.06' style='stroke-width: 1.71; stroke: #1B6CA8; stroke-linecap: butt;' />
+<line x1='247.92' y1='514.19' x2='247.92' y2='487.57' style='stroke-width: 1.71; stroke: #3AAF85; stroke-linecap: butt;' />
+<line x1='174.68' y1='454.02' x2='174.68' y2='420.88' style='stroke-width: 1.71; stroke: #1B6CA8; stroke-linecap: butt;' />
 <line x1='174.68' y1='426.40' x2='174.68' y2='420.88' style='stroke-width: 1.07; stroke: #1B6CA8;' />
 <polygon points='175.71,423.71 174.68,420.88 173.65,423.71 ' style='stroke-width: 1.07; stroke: #1B6CA8; fill: #1B6CA8;' />
 <circle cx='321.17' cy='452.84' r='3.20' style='stroke-width: 0.00; stroke: none; fill: #1B6CA8;' />
