@@ -206,6 +206,11 @@ plot(contrasts, means)
 # joint contrasts of `am` and `cyl`, on an axis of combined levels
 contrasts <- estimate_contrasts(model, contrast = c("am", "cyl"))
 plot(contrasts, means)
+
+# to avoid messy over-plotting, filter contrasts by specific levels
+means <- estimate_means(model, by = c("am", "cyl = c('4', '8')"))
+contrasts <- estimate_contrasts(model, contrast = c("am", "cyl = c('4', '8')"))
+plot(contrasts, means)
 }
 \dontshow{\}) # examplesIf}
 }

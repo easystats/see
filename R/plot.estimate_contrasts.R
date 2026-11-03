@@ -839,6 +839,11 @@ data_plot.estimate_contrasts <- function(x, data = NULL, ...) {
 #' # joint contrasts of `am` and `cyl`, on an axis of combined levels
 #' contrasts <- estimate_contrasts(model, contrast = c("am", "cyl"))
 #' plot(contrasts, means)
+#'
+#' # to avoid messy over-plotting, filter contrasts by specific levels
+#' means <- estimate_means(model, by = c("am", "cyl = c('4', '8')"))
+#' contrasts <- estimate_contrasts(model, contrast = c("am", "cyl = c('4', '8')"))
+#' plot(contrasts, means)
 #' }
 #'
 #' @export
@@ -854,7 +859,7 @@ plot.see_estimate_contrasts <- function(
 
   contrast_data <- x
   if (!inherits(x, "data_plot")) {
-    x <- data_plot(x, data = data)
+    x <- data_plot(x, data = data, ...)
   } else if (show_data) {
     insight::format_error(
       paste(
