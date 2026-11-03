@@ -118,7 +118,10 @@ test_that("the x axis of lighthouse plots is the contrast variable, in level ord
 
   ir <- contrasts_iris()
   polygons <- data_plot(ir$contrasts, ir$means)$geom_polygon
-  expect_identical(as.vector(table(polygons$group)), rep(3L, nrow(ir$contrasts)))
+  expect_identical(
+    as.vector(table(polygons$group)),
+    rep(3L, nrow(ir$contrasts))
+  )
   built <- ggplot2::ggplot_build(plot(ir$contrasts, ir$means))
   expect_identical(
     built$layout$panel_params[[1]]$x$get_limits(),
@@ -231,7 +234,10 @@ test_that("the x axis of joint contrasts shows combined levels in level order", 
     x_limits(jf),
     c("auto, 4", "auto, 6", "auto, 8", "manual, 4", "manual, 6", "manual, 8")
   )
-  expect_identical(attr(data_plot(jf$contrasts, jf$means), "info")$xlab, "am, cyl")
+  expect_identical(
+    attr(data_plot(jf$contrasts, jf$means), "info")$xlab,
+    "am, cyl"
+  )
 
   d_am <- d
   d_am$am <- factor(d_am$am, levels = c("manual", "auto"))
@@ -508,7 +514,11 @@ test_that("lighthouse plots work with two, numeric, and character `by` variables
   d$cyl <- as.character(d$cyl)
   d$am <- ifelse(d$am == 1, "manual", "auto")
   model <- lm(mpg ~ cyl * am, data = d)
-  contrasts <- modelbased::estimate_contrasts(model, contrast = "am", by = "cyl")
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = "cyl"
+  )
   means <- modelbased::estimate_means(model, by = c("cyl", "am"))
   dp <- data_plot(contrasts, means)
   expect_identical(polygon_rows_per_contrast(dp$geom_polygon), rep(3L, 3))
@@ -582,7 +592,13 @@ test_that("lighthouse plots draw probabilities and take the estimate column from
   dp <- data_plot(bcon, bmeans)
   expect_equal(dp$geom_pointrange$y, bmeans$Probability, tolerance = 1e-8)
   expect_identical(attr(dp, "info")$ylab, "Probability")
-  expect_lighthouses(dp$geom_polygon, bcon, bmeans, "am", y_name = "Probability")
+  expect_lighthouses(
+    dp$geom_polygon,
+    bcon,
+    bmeans,
+    "am",
+    y_name = "Probability"
+  )
   expect_no_error(ggplot2::ggplot_build(plot(bcon, bmeans)))
 
   # means without attributes use the list of column names
@@ -601,7 +617,11 @@ test_that("lighthouse plots draw probabilities and take the estimate column from
 
   rate <- plain
   names(rate)[2] <- "Rate"
-  expect_equal(data_plot(bcon, rate)$geom_pointrange$y, rate$Rate, tolerance = 1e-8)
+  expect_equal(
+    data_plot(bcon, rate)$geom_pointrange$y,
+    rate$Rate,
+    tolerance = 1e-8
+  )
 
   # `coef_name` comes before the list, in which Median comes before Mean
   two <- data.frame(
@@ -612,7 +632,11 @@ test_that("lighthouse plots draw probabilities and take the estimate column from
     CI_high = plain$CI_high
   )
   attr(two, "coef_name") <- "Mean"
-  expect_equal(data_plot(bcon, two)$geom_pointrange$y, two$Mean, tolerance = 1e-8)
+  expect_equal(
+    data_plot(bcon, two)$geom_pointrange$y,
+    two$Mean,
+    tolerance = 1e-8
+  )
 
   unknown <- plain
   names(unknown)[2] <- "Estimate"
@@ -822,7 +846,10 @@ test_that("`show_data = TRUE` stops for a transformed response and a numeric `by
     by = "Petal.Length"
   )
   means <- modelbased::estimate_means(model, by = c("Species", "Petal.Length"))
-  expect_error(plot(contrasts, means, show_data = TRUE), regexp = "Petal.Length")
+  expect_error(
+    plot(contrasts, means, show_data = TRUE),
+    regexp = "Petal.Length"
+  )
   expect_error(plot(contrasts, means, show_data = TRUE), regexp = "numeric")
   expect_no_error(plot(contrasts, means))
 })
@@ -836,7 +863,11 @@ test_that("`show_data = TRUE` draws a numeric `by` on the means' grid", {
   d_num <- mtcars
   d_num$am <- factor(d_num$am, labels = c("auto", "manual"))
   model <- lm(mpg ~ cyl * am, data = d_num)
-  contrasts <- modelbased::estimate_contrasts(model, contrast = "am", by = "cyl")
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "am",
+    by = "cyl"
+  )
   means <- modelbased::estimate_means(model, by = c("cyl", "am"))
   p <- plot(contrasts, means, show_data = TRUE)
   built <- ggplot2::ggplot_build(p)
@@ -873,7 +904,11 @@ test_that("`show_data = TRUE` stops when the contrasts or means are not on the s
   shifted <- lm(I(mpg - 10) ~ am, data = d)
   expect_error(
     plot(
-      modelbased::estimate_contrasts(shifted, contrast = "am", transform = TRUE),
+      modelbased::estimate_contrasts(
+        shifted,
+        contrast = "am",
+        transform = TRUE
+      ),
       modelbased::estimate_means(shifted, by = "am", transform = TRUE)
     ),
     regexp = "unknown"
@@ -1125,7 +1160,11 @@ test_that("the `transform` check passes the identity and names `transform` funct
     modelbased::estimate_means(lg, by = "am", transform = exp)
   ))
   expect_match(message, "a `transform` function", fixed = TRUE)
-  expect_match(message, "the estimated means with `transform = TRUE`", fixed = TRUE)
+  expect_match(
+    message,
+    "the estimated means with `transform = TRUE`",
+    fixed = TRUE
+  )
   expect_no_match(message, "with the same `transform`", fixed = TRUE)
 
   # the message names what the means record
@@ -1133,7 +1172,11 @@ test_that("the `transform` check passes the identity and names `transform` funct
     modelbased::estimate_contrasts(lg, contrast = "am", transform = exp),
     modelbased::estimate_means(lg, by = "am")
   ))
-  expect_match(message, "the estimated means with `transform = FALSE`", fixed = TRUE)
+  expect_match(
+    message,
+    "the estimated means with `transform = FALSE`",
+    fixed = TRUE
+  )
 })
 
 
@@ -1609,8 +1652,6 @@ test_that("lighthouse plots draw link-scale pairs from the marginaleffects and e
   skip_if_not_installed("marginaleffects")
   skip_if_not_installed("emmeans")
 
-  # emmeans labels contrasts of levels like "6" as "cyl6", so the levels
-  # are words
   d <- mtcars
   d$cyl <- factor(d$cyl, labels = c("four", "six", "eight"))
   estimates <- function(model, backend, predict) {
@@ -1642,8 +1683,16 @@ test_that("lighthouse plots draw link-scale pairs from the marginaleffects and e
   expect_identical(attr(emm$means, "predict", exact = TRUE), "none")
   expect_identical(attr(mfx$means, "predict", exact = TRUE), "link")
   expected <- lighthouse_y(mfx$contrasts, mfx$means)
-  expect_equal(lighthouse_y(mfx$contrasts, emm$means), expected, tolerance = 1e-6)
-  expect_equal(lighthouse_y(emm$contrasts, mfx$means), expected, tolerance = 1e-6)
+  expect_equal(
+    lighthouse_y(mfx$contrasts, emm$means),
+    expected,
+    tolerance = 1e-6
+  )
+  expect_equal(
+    lighthouse_y(emm$contrasts, mfx$means),
+    expected,
+    tolerance = 1e-6
+  )
 
   # with an identity link, the link scale is the response scale
   linear <- lm(mpg ~ cyl, data = d)
@@ -1662,6 +1711,97 @@ test_that("lighthouse plots draw link-scale pairs from the marginaleffects and e
   expect_match(message, "`predict = \"response\"`", fixed = TRUE)
   expect_match(message, "`predict = \"none\"`", fixed = TRUE)
   expect_match(message, "same scale", fixed = TRUE)
+})
+
+
+test_that("lighthouse plots match the labels of emmeans contrasts to the means", {
+  skip_if_not_installed("modelbased")
+  skip_if_not_installed("emmeans")
+
+  d <- mtcars
+  # the x positions and heights of each lighthouse, which do not depend on
+  # the names of the levels
+  lighthouses <- function(labels, joint = FALSE) {
+    d$lvl <- factor(d$cyl, labels = labels)
+    d$am <- factor(d$am, labels = c("auto", "manual"))
+    contrast <- if (joint) c("am", "lvl") else "lvl"
+    model <- stats::lm(
+      if (joint) mpg ~ am * lvl else mpg ~ lvl,
+      data = d
+    )
+    beams <- .lightbeams(
+      data_plot(
+        modelbased::estimate_contrasts(
+          model,
+          contrast = contrast,
+          backend = "emmeans"
+        ),
+        modelbased::estimate_means(model, by = contrast, backend = "emmeans")
+      )$geom_polygon
+    )
+    beams$x <- as.integer(beams$x)
+    beams$xend <- as.integer(beams$xend)
+    beams <- beams[order(beams$x, beams$xend), ]
+    as.list(beams[c("x", "xend", "y", "ymin", "ymax")])
+  }
+
+  words <- c("four", "six", "eight")
+  expect_equal(
+    lighthouses(c("4", "6", "8")),
+    lighthouses(words),
+    tolerance = 1e-8
+  )
+  # "(lvl-1)": parentheses around a level with a minus sign
+  expect_equal(
+    lighthouses(c("-1", "0", "1")),
+    lighthouses(words),
+    tolerance = 1e-8
+  )
+  # "auto lvl6": a space between the levels of a joint contrast
+  expect_equal(
+    lighthouses(c("4", "6", "8"), joint = TRUE),
+    lighthouses(words, joint = TRUE),
+    tolerance = 1e-8
+  )
+  expect_length(lighthouses(words, joint = TRUE)$x, 15L)
+  # "(auto lvl-1)": parentheses around the whole label
+  expect_equal(
+    lighthouses(c("-1", "0", "1"), joint = TRUE),
+    lighthouses(words, joint = TRUE),
+    tolerance = 1e-8
+  )
+
+  # one level that is no number: emmeans adds no variable name
+  expect_equal(
+    lighthouses(c("4", "six", "8")),
+    lighthouses(words),
+    tolerance = 1e-8
+  )
+
+  # the label "a b c" of a joint contrast fits two rows of the means, so
+  # these contrasts are not drawn
+  contrasts <- data.frame(
+    Level1 = c("a b c", "d e"),
+    Level2 = c("d e", "f g"),
+    Difference = 1,
+    CI_low = 0,
+    CI_high = 2
+  )
+  attr(contrasts, "contrast") <- c("v1", "v2")
+  attr(contrasts, "backend") <- "emmeans"
+  means <- data.frame(
+    v1 = c("a b", "a", "d", "f"),
+    v2 = c("c", "b c", "e", "g"),
+    Mean = 1:4,
+    CI_low = 0:3,
+    CI_high = 2:5
+  )
+  expect_warning(
+    polygons <- .data_plot_estimate_contrasts(contrasts, means)$geom_polygon,
+    "1 of 2 contrasts are not drawn"
+  )
+  expect_identical(unique(polygons$Level1), "d, e")
+  expect_identical(unique(polygons$Level2), "f, g")
 })
 
 
@@ -1687,7 +1827,11 @@ test_that("lighthouse plots draw ratio contrasts with `transform = TRUE` of an u
   linear <- lm(mpg ~ cyl, data = d)
   expected <- lighthouse_y(linear)
   expect_length(expected, 9L)
-  expect_equal(lighthouse_y(linear, transform = TRUE), expected, tolerance = 1e-8)
+  expect_equal(
+    lighthouse_y(linear, transform = TRUE),
+    expected,
+    tolerance = 1e-8
+  )
 
   logged <- lm(log(mpg) ~ cyl, data = d)
   message <- error_text(lighthouse_y(logged, transform = TRUE))
@@ -1776,7 +1920,11 @@ test_that("link-scale estimates count as the response scale only without a trans
   d$cyl <- factor(d$cyl, labels = c("four", "six", "eight"))
   expect_predict_error <- function(contrasts, means) {
     message <- error_text(data_plot(contrasts, means))
-    expect_match(message, "Lighthouse plots need both on the same scale", fixed = TRUE)
+    expect_match(
+      message,
+      "Lighthouse plots need both on the same scale",
+      fixed = TRUE
+    )
     expect_match(message, "`predict", fixed = TRUE)
   }
 
@@ -1813,7 +1961,11 @@ test_that("link-scale estimates count as the response scale only without a trans
     data = d
   ))
   expect_predict_error(
-    modelbased::estimate_contrasts(inflated, contrast = "cyl", predict = "link"),
+    modelbased::estimate_contrasts(
+      inflated,
+      contrast = "cyl",
+      predict = "link"
+    ),
     modelbased::estimate_means(inflated, by = "cyl", predict = "response")
   )
 })
@@ -1947,7 +2099,10 @@ test_that("a numeric contrast variable with uneven values gets a continuous x ax
   # evenly spaced values, or only two, keep the discrete axis
   cyl_model <- lm(mpg ~ cyl, data = mtcars)
   cyl_plot <- plot(
-    suppressMessages(modelbased::estimate_contrasts(cyl_model, contrast = "cyl")),
+    suppressMessages(modelbased::estimate_contrasts(
+      cyl_model,
+      contrast = "cyl"
+    )),
     suppressMessages(modelbased::estimate_means(cyl_model, by = "cyl"))
   )
   expect_true(x_is_discrete(cyl_plot))
@@ -2088,7 +2243,11 @@ test_that("lighthouse plots accept `by` variables with names that ggplot2 reserv
     d_name <- d
     d_name[[name]] <- d_name$cyl
     model <- lm(as.formula(paste("mpg ~", name, "* am")), data = d_name)
-    contrasts <- modelbased::estimate_contrasts(model, contrast = "am", by = name)
+    contrasts <- modelbased::estimate_contrasts(
+      model,
+      contrast = "am",
+      by = name
+    )
     means <- modelbased::estimate_means(model, by = c(name, "am"))
     p <- plot(contrasts, means)
     expect_identical(nrow(ggplot2::ggplot_build(p)$layout$layout), 3L)
@@ -2140,7 +2299,16 @@ test_that("a continuous axis keeps the x values of a contrast variable named lik
   skip_if_not_installed("modelbased")
   skip_if_not_installed("marginaleffects")
 
-  for (name in c("x", "y", "ymin", "ymax", "Mean1", "Mean2", "Level1", "Level2")) {
+  for (name in c(
+    "x",
+    "y",
+    "ymin",
+    "ymax",
+    "Mean1",
+    "Mean2",
+    "Level1",
+    "Level2"
+  )) {
     d <- mtcars
     d[[name]] <- d$wt
     model <- lm(as.formula(paste("mpg ~", name)), data = d)
@@ -2232,7 +2400,11 @@ test_that("the beams of lighthouse plots have the corners of `data_plot()`", {
     limits <- built$layout$panel_params[[beams$PANEL[k]]]$x$get_limits()
     expect_equal(as.numeric(beams$x[k]), match(rows$x[1], limits))
     expect_equal(as.numeric(beams$xend[k]), match(rows$x[2], limits))
-    expect_equal(c(beams$y[k], beams$ymin[k], beams$ymax[k]), rows$y, tolerance = 1e-8)
+    expect_equal(
+      c(beams$y[k], beams$ymin[k], beams$ymax[k]),
+      rows$y,
+      tolerance = 1e-8
+    )
   }
 })
 
@@ -2244,7 +2416,11 @@ test_that("lighthouse plots keep a `by` variable named xend", {
   s <- contrasts_factorial_data()
   s <- data.frame(a = s$a, xend = s$b, out = s$y)
   model <- lm(out ~ a * xend, data = s)
-  contrasts <- modelbased::estimate_contrasts(model, contrast = "a", by = "xend")
+  contrasts <- modelbased::estimate_contrasts(
+    model,
+    contrast = "a",
+    by = "xend"
+  )
   means <- modelbased::estimate_means(model, by = c("a", "xend"))
   p <- plot(contrasts, means)
   built <- ggplot2::ggplot_build(p)

@@ -61,3 +61,47 @@ test_that("lighthouse for proportions render correctly", {
     fig = plot(contrasts, means, show_data = TRUE)
   )
 })
+
+
+test_that("lighthouse plots match the labels of emmeans contrasts", {
+  skip_if_not_installed("emmeans")
+  plot_lighthouse <- function(labels, joint) {
+    d <- mtcars
+    d$lvl <- factor(d$cyl, labels = labels)
+    d$am <- factor(d$am, labels = c("auto", "manual"))
+    contrast <- if (joint) c("am", "lvl") else "lvl"
+    model <- stats::lm(
+      if (joint) mpg ~ am * lvl else mpg ~ lvl,
+      data = d
+    )
+    plot(
+      modelbased::estimate_contrasts(
+        model,
+        contrast = contrast,
+        backend = "emmeans"
+      ),
+      modelbased::estimate_means(model, by = contrast, backend = "emmeans")
+    )
+  }
+
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "`plot.estimate_contrasts()` emmeans labels-1",
+    fig = plot_lighthouse(c("four", "six", "eight"), TRUE)
+  )
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "`plot.estimate_contrasts()` emmeans labels-2",
+    fig = plot_lighthouse(c("four", "six", "eight"), FALSE)
+  )
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "`plot.estimate_contrasts()` emmeans labels-3",
+    fig = plot_lighthouse(c("4", "6", "8"), TRUE)
+  )
+  set.seed(123)
+  vdiffr::expect_doppelganger(
+    title = "`plot.estimate_contrasts()` emmeans labels-4",
+    fig = plot_lighthouse(c("4", "6", "8"), FALSE)
+  )
+})

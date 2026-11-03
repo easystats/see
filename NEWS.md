@@ -2,6 +2,11 @@
 
 ## Bug fixes
 
+* `plot()` for `modelbased::estimate_contrasts()` with `backend = "emmeans"`
+  now draws the lighthouses for levels that look like numbers, such as those
+  of `factor(cyl)`, and for joint contrasts. Before, it drew none of them and
+  warned that the estimated means have no row for their levels.
+
 * Collinearity plots label dimension-adjusted GVIFs supplied by *performance*
   as `GVIF^(1/df)` with a superscript exponent, including in `check_model()`
   panels. The 5/10 bands and plots containing only one-coefficient terms are
