@@ -1695,23 +1695,37 @@ test_that("lighthouse plots match the labels of emmeans contrasts to the means",
   }
 
   words <- c("four", "six", "eight")
-  expect_equal(lighthouses(c("4", "6", "8")), lighthouses(words))
+  expect_equal(
+    lighthouses(c("4", "6", "8")),
+    lighthouses(words),
+    tolerance = 1e-8
+  )
   # "(lvl-1)": parentheses around a level with a minus sign
-  expect_equal(lighthouses(c("-1", "0", "1")), lighthouses(words))
+  expect_equal(
+    lighthouses(c("-1", "0", "1")),
+    lighthouses(words),
+    tolerance = 1e-8
+  )
   # "auto lvl6": a space between the levels of a joint contrast
   expect_equal(
     lighthouses(c("4", "6", "8"), joint = TRUE),
-    lighthouses(words, joint = TRUE)
+    lighthouses(words, joint = TRUE),
+    tolerance = 1e-8
   )
   expect_length(lighthouses(words, joint = TRUE)$x, 15L)
   # "(auto lvl-1)": parentheses around the whole label
   expect_equal(
     lighthouses(c("-1", "0", "1"), joint = TRUE),
-    lighthouses(words, joint = TRUE)
+    lighthouses(words, joint = TRUE),
+    tolerance = 1e-8
   )
 
   # one level that is no number: emmeans adds no variable name
-  expect_equal(lighthouses(c("4", "six", "8")), lighthouses(words))
+  expect_equal(
+    lighthouses(c("4", "six", "8")),
+    lighthouses(words),
+    tolerance = 1e-8
+  )
 
   # the label "a b c" of a joint contrast fits two rows of the means, so
   # these contrasts are not drawn
