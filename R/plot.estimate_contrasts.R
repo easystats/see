@@ -859,7 +859,7 @@ plot.see_estimate_contrasts <- function(
 
   contrast_data <- x
   if (!inherits(x, "data_plot")) {
-    x <- data_plot(x, data = data, ...)
+    x <- data_plot(x, data = data)
   } else if (show_data) {
     insight::format_error(
       paste(
