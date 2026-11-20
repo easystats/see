@@ -53,6 +53,10 @@ Thus, the number of data points is limited to 2000 by default. Use
 \verb{plot(check_model(), maximum_dots = <number>)} (or
 \verb{check_model(maximum_dots = <number>)}) to define the number of data points
 that should be shown in the plots.
+
+If a row or column of panels gets less than one inch of plot area on the
+current graphics device, a message gives the device size at which the
+panels fit. Use a larger plot window or figure, or \code{panel = FALSE}.
 }
 \examples{
 \dontshow{if (require("patchwork") && FALSE) withAutoprint(\{ # examplesIf}

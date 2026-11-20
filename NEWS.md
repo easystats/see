@@ -38,6 +38,12 @@
 
 ## Changes
 
+* `plot()` for `check_model()` now prints a message when a row or column of
+  panels gets less than one inch of plot area on the graphics device. This
+  happens, for example, in the default 7 x 5 inch figures of Quarto and
+  R Markdown. The message gives the figure size at which the panels fit
+  (easystats/performance#638).
+
 * New `geom_raincloud()` draws a raincloud plot. For each group, it draws a
   half violin, the median with 66% and 95% quantile intervals, and the raw
   observations as jittered points on the other side. Its `shade` argument
