@@ -44,6 +44,7 @@ test_that("plot() of check_model() says when the panels don't fit the device", {
 
   # no message and no error if the drawn grid can't be read
   grid::grid.display.list(FALSE)
+  on.exit(grid::grid.display.list(TRUE), add = TRUE)
   expect_no_message(plot(x), message = "panels are too small")
   grid::grid.display.list(TRUE)
   grDevices::dev.off()
