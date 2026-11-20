@@ -319,7 +319,7 @@ plot.see_check_model <- function(
 # built a second time. Gives no message when the grid can't be read.
 .check_panel_size <- function(min_size = 1) {
   sizes <- tryCatch(.panel_sizes(), error = function(e) NULL)
-  if (is.null(sizes)) {
+  if (is.null(sizes) || !is.finite(sizes$row) || !is.finite(sizes$column)) {
     return(invisible(NULL))
   }
   too_low <- sizes$row < min_size
@@ -351,7 +351,8 @@ plot.see_check_model <- function(
     )
     quarto <- c(if (too_low) "`fig-height`", if (too_narrow) "`fig-width`")
     fix <- sprintf(
-      "Set the chunk option %s (%s in Quarto)",
+      "Set the chunk %s %s (%s in Quarto)",
+      if (length(chunk) > 1) "options" else "option",
       paste(chunk, collapse = " and "),
       paste(quarto, collapse = " and ")
     )
@@ -406,6 +407,11 @@ plot.see_check_model <- function(
   if (!any(free_rows) || !any(free_columns)) {
     return(NULL)
   }
+  row_weights <- as.numeric(heights[free_rows])
+  column_weights <- as.numeric(widths[free_columns])
+  if (min(row_weights) <= 0 || min(column_weights) <= 0) {
+    return(NULL)
+  }
 
   fixed_height <- grid::convertHeight(
     sum(heights[!free_rows]),
@@ -417,8 +423,6 @@ plot.see_check_model <- function(
     "in",
     valueOnly = TRUE
   )
-  row_weights <- as.numeric(heights[free_rows])
-  column_weights <- as.numeric(widths[free_columns])
 
   list(
     device = device,
