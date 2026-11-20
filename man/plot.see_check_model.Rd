@@ -56,7 +56,8 @@ that should be shown in the plots.
 
 If a row or column of panels gets less than one inch of plot area on the
 current graphics device, a message gives the device size at which the
-panels fit. Use a larger plot window or figure, or \code{panel = FALSE}.
+panels fit. Use a larger plot window or figure, or
+\code{check_model(model, panel = FALSE)}.
 }
 \examples{
 \dontshow{if (require("patchwork") && FALSE) withAutoprint(\{ # examplesIf}

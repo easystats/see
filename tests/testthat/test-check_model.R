@@ -20,11 +20,11 @@ test_that("plot() of check_model() says when the panels don't fit the device", {
   m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
   set.seed(123)
   x <- performance::check_model(m)
-  # keep the message on one line
+  # stop the message lines from wrapping, so fixed matches work
   old_width <- options(width = 300)
   on.exit(options(old_width), add = TRUE)
 
-  # 7 x 5 in, the default figure size in Quarto and R Markdown
+  # 7 x 5 in, the default figure size of HTML output in Quarto and R Markdown
   grDevices::pdf(NULL, width = 7, height = 5)
   expect_message(
     plot(x),

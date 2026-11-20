@@ -28,7 +28,8 @@
 #'
 #' If a row or column of panels gets less than one inch of plot area on the
 #' current graphics device, a message gives the device size at which the
-#' panels fit. Use a larger plot window or figure, or `panel = FALSE`.
+#' panels fit. Use a larger plot window or figure, or
+#' `check_model(model, panel = FALSE)`.
 #'
 #' @examplesIf require("patchwork") && FALSE
 #' library(performance)
