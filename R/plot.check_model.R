@@ -350,7 +350,7 @@ plot.see_check_model <- function(
       if (too_narrow) sprintf("`fig.width` to at least %g", need_width)
     )
     quarto <- c(if (too_low) "`fig-height`", if (too_narrow) "`fig-width`")
-    fix <- sprintf(
+    advice <- sprintf(
       "Set the chunk %s %s (%s in Quarto)",
       if (length(chunk) > 1) "options" else "option",
       paste(chunk, collapse = " and "),
@@ -361,7 +361,7 @@ plot.see_check_model <- function(
       if (too_low) sprintf("%g in tall", need_height),
       if (too_narrow) sprintf("%g in wide", need_width)
     )
-    fix <- sprintf(
+    advice <- sprintf(
       "Make the plot window or device at least %s",
       paste(fits, collapse = " and ")
     )
@@ -376,7 +376,7 @@ plot.see_check_model <- function(
     ),
     sprintf(
       "%s, or plot each check on its own with `plot(check_model(model, panel = FALSE))`.",
-      fix
+      advice
     )
   )
   invisible(NULL)
