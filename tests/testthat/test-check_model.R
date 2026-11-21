@@ -39,12 +39,12 @@ test_that("plot() of check_model() says when the panels don't fit the device", {
   expect_length(msg, 1)
   expect_match(
     msg,
-    "for this 7 x 5 in device: each row gets 0.14 in",
+    "for this 7 x 5 inches device: each row gets 0.14 inches",
     fixed = TRUE
   )
   expect_match(
     msg,
-    "Make the plot window or device at least 8 in tall",
+    "Make the plot window or device at least 8 inches tall",
     fixed = TRUE
   )
   expect_match(msg, "plot(check_model(model, panel = FALSE))", fixed = TRUE)
@@ -70,7 +70,7 @@ test_that("plot() of check_model() says when the panels don't fit the device", {
 
   # too narrow for two columns
   grDevices::pdf(NULL, width = 3, height = 12)
-  expect_message(plot(x), "at least 4 in wide", fixed = TRUE)
+  expect_message(plot(x), "at least 4 inches wide", fixed = TRUE)
   grDevices::dev.off()
 
   # large enough

@@ -338,10 +338,13 @@ plot.see_check_model <- function(
 
   small <- c(
     if (too_low) {
-      sprintf("each row gets %.2f in of plot height", max(0, sizes$row))
+      sprintf("each row gets %.2f inches of plot height", max(0, sizes$row))
     },
     if (too_narrow) {
-      sprintf("each column gets %.2f in of plot width", max(0, sizes$column))
+      sprintf(
+        "each column gets %.2f inches of plot width",
+        max(0, sizes$column)
+      )
     }
   )
   if (isTRUE(getOption("knitr.in.progress"))) {
@@ -358,8 +361,8 @@ plot.see_check_model <- function(
     )
   } else {
     fits <- c(
-      if (too_low) sprintf("%g in tall", need_height),
-      if (too_narrow) sprintf("%g in wide", need_width)
+      if (too_low) sprintf("%g inches tall", need_height),
+      if (too_narrow) sprintf("%g inches wide", need_width)
     )
     advice <- sprintf(
       "Make the plot window or device at least %s",
@@ -369,7 +372,7 @@ plot.see_check_model <- function(
 
   insight::format_alert(
     sprintf(
-      "The check_model() panels are too small for this %g x %g in device: %s.",
+      "The check_model() panels are too small for this %g x %g inches device: %s.",
       round(sizes$device[1], 1),
       round(sizes$device[2], 1),
       paste(small, collapse = " and ")
