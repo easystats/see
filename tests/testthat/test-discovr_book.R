@@ -9,6 +9,7 @@ test_that("check_model, chapter 8.12", {
   out <- performance::check_model(m)
   vdiffr::expect_doppelganger(
     title = "plot.check_model_discovr_8.12",
-    fig = plot(out)
+    fig = plot(out),
+    variant = snapshot_variant()
   )
 })

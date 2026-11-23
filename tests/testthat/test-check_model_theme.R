@@ -5,7 +5,11 @@ skip_if_not_installed("vdiffr")
 
 expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
   set.seed(seed)
-  vdiffr::expect_doppelganger(title = title, fig = fig)
+  vdiffr::expect_doppelganger(
+    title = title,
+    fig = fig,
+    variant = snapshot_variant()
+  )
 }
 
 # ==============================================================================
