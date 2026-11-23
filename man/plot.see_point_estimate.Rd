@@ -31,9 +31,8 @@ statistical model.}
 single plots are returned.}
 
 \item{show_labels}{Logical. If \code{TRUE}, the text labels for the point
-estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are
-shown. You may set \code{show_labels = FALSE} in case of overlapping
-labels, and add your own legend or footnote to the plot.}
+estimates (i.e. \emph{"Mean"}, \emph{"Median"} and/or \emph{"MAP"}) are shown.
+Multiple labels are placed at different heights above the density.}
 
 \item{show_intercept}{Logical, if \code{TRUE}, the intercept-parameter is included
 in the plot. By default, it is hidden because in many cases the

@@ -2,6 +2,9 @@
 
 ## Bug fixes
 
+* `plot()` for `bayestestR::point_estimate()` separates the estimation labels
+  vertically so nearby estimates remain readable (#41).
+
 * `plot()` for `modelbased::estimate_contrasts()` with `backend = "emmeans"`
   now draws the lighthouses for levels that look like numbers, such as those
   of `factor(cyl)`, and for joint contrasts. Before, it drew none of them and

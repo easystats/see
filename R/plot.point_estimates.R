@@ -81,9 +81,8 @@ data_plot.map_estimate <- data_plot.point_estimate
 #' The `plot()` method for the `bayestestR::point_estimate()`.
 #'
 #' @param show_labels Logical. If `TRUE`, the text labels for the point
-#'   estimates (i.e. *"Mean"*, *"Median"* and/or *"MAP"*) are
-#'   shown. You may set `show_labels = FALSE` in case of overlapping
-#'   labels, and add your own legend or footnote to the plot.
+#'   estimates (i.e. *"Mean"*, *"Median"* and/or *"MAP"*) are shown.
+#'   Multiple labels are placed at different heights above the density.
 #' @inheritParams data_plot
 #' @inheritParams plot.see_bayesfactor_parameters
 #' @inheritParams plot.see_check_outliers
@@ -140,12 +139,15 @@ plot.see_point_estimate <- function(
       return(NULL)
     }
 
-    label_mean_x <- mean_x
-    label_mean_y <- max_y * 1.05
-    label_median_x <- median_x
-    label_median_y <- max_y * 1.05
-    label_map_x <- map_x
-    label_map_y <- max_y * 1.05
+    present <- c(
+      mean = !is.null(mean_x) && !is.null(mean_y),
+      median = !is.null(median_x) && !is.null(median_y),
+      map = !is.null(map_x) && !is.null(map_y)
+    )
+    label_spacing <- 0.15
+    label_y <- max_y * (1.05 + label_spacing * (cumsum(present) - 1L))
+    extra_labels <- if (show_labels) max(sum(present) - 1L, 0L) else 0L
+    ylim <- max_y * (1.15 + label_spacing * extra_labels)
 
     p_object <- ggplot(i, aes(x = .data$x, y = .data$y, group = .data$group))
 
@@ -171,7 +173,7 @@ plot.see_point_estimate <- function(
         alpha = alpha_posteriors
       )
 
-    if (!is.null(mean_x) && !is.null(mean_y)) {
+    if (present[["mean"]]) {
       p_object <- p_object +
         geom_segment(
           x = mean_x,
@@ -192,8 +194,8 @@ plot.see_point_estimate <- function(
       if (show_labels) {
         p_object <- p_object +
           geom_text(
-            x = label_mean_x,
-            y = label_mean_y,
+            x = mean_x,
+            y = label_y[["mean"]],
             label = "Mean",
             color = "#E91E63",
             size = size_text
@@ -201,7 +203,7 @@ plot.see_point_estimate <- function(
       }
     }
 
-    if (!is.null(median_x) && !is.null(median_y)) {
+    if (present[["median"]]) {
       p_object <- p_object +
         geom_segment(
           x = median_x,
@@ -222,8 +224,8 @@ plot.see_point_estimate <- function(
       if (show_labels) {
         p_object <- p_object +
           geom_text(
-            x = label_median_x,
-            y = label_median_y,
+            x = median_x,
+            y = label_y[["median"]],
             label = "Median",
             color = "#2196F3",
             size = size_text
@@ -231,7 +233,7 @@ plot.see_point_estimate <- function(
       }
     }
 
-    if (!is.null(map_x) && !is.null(map_y)) {
+    if (present[["map"]]) {
       p_object <- p_object +
         geom_segment(
           x = map_x,
@@ -252,8 +254,8 @@ plot.see_point_estimate <- function(
       if (show_labels) {
         p_object <- p_object +
           geom_text(
-            x = label_map_x,
-            y = label_map_y,
+            x = map_x,
+            y = label_y[["map"]],
             label = "MAP",
             color = "#4CAF50",
             size = size_text
@@ -263,7 +265,7 @@ plot.see_point_estimate <- function(
 
     p_object <- p_object +
       geom_vline(xintercept = 0, linetype = "dotted") +
-      scale_y_continuous(expand = c(0, 0), limits = c(0, max_y * 1.15)) +
+      scale_y_continuous(expand = c(0, 0), limits = c(0, ylim)) +
       labs(
         title = "Bayesian Point Estimates",
         x = x_lab,
