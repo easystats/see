@@ -78,3 +78,27 @@ test_that("plot() of check_model() says when the panels don't fit the device", {
   expect_no_message(plot(x), message = "panels are too small")
   grDevices::dev.off()
 })
+
+
+test_that("plot() of check_model() skips the size message on ark's hidden device", {
+  skip_on_cran()
+  skip_if_not_installed("performance")
+
+  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+  set.seed(123)
+  x <- performance::check_model(m)
+
+  grDevices::pdf(NULL, width = 7, height = 5)
+  on.exit(grDevices::dev.off(), add = TRUE)
+
+  # Positron's hidden 480 x 480 px device: no message
+  local_mocked_bindings(
+    .device_name = function() ".ark.graphics.device",
+    .device_pixels = function() c(480, 480)
+  )
+  expect_no_message(plot(x), message = "panels are too small")
+
+  # ark that reports the Plots pane size: the check still runs
+  local_mocked_bindings(.device_pixels = function() c(504, 360))
+  expect_message(plot(x), "panels are too small", fixed = TRUE)
+})

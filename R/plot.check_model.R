@@ -318,6 +318,9 @@ plot.see_check_model <- function(
 # Reads the patchwork gtable from grid's display list, so the plots are not
 # built a second time. Gives no message when the grid can't be read.
 .check_panel_size <- function(min_size = 1) {
+  if (.is_ark_shadow_device()) {
+    return(invisible(NULL))
+  }
   sizes <- tryCatch(.panel_sizes(), error = function(e) NULL)
   if (is.null(sizes) || !is.finite(sizes$row) || !is.finite(sizes$column)) {
     return(invisible(NULL))
@@ -383,6 +386,29 @@ plot.see_check_model <- function(
     )
   )
   invisible(NULL)
+}
+
+
+# Positron's R kernel (ark) draws on a hidden device of 480 x 480 px, not on
+# the Plots pane, so dev.size() doesn't give the size the user sees. ark fixed
+# this in posit-dev/ark#1476, but Positron notebooks keep the 480 x 480
+# device. Skip only that size, so the check works once dev.size() gives the
+# pane size.
+.is_ark_shadow_device <- function() {
+  if (!identical(.device_name(), ".ark.graphics.device")) {
+    return(FALSE)
+  }
+  pixels <- .device_pixels()
+  length(pixels) == 2 && all(round(pixels) == 480)
+}
+
+# Small wrappers, so tests can mock the device
+.device_name <- function() {
+  names(grDevices::dev.cur())
+}
+
+.device_pixels <- function() {
+  grDevices::dev.size("px")
 }
 
 
