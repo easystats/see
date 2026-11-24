@@ -39,12 +39,12 @@ test_that("plot() of check_model() says when the panels don't fit the device", {
   expect_length(msg, 1)
   expect_match(
     msg,
-    "for this 7 x 5 inches device: each row gets 0.14 inches",
+    "for this 7 x 5 inches device: each row gets 0.45 inches",
     fixed = TRUE
   )
   expect_match(
     msg,
-    "Make the plot window or device at least 8 inches tall",
+    "Make the plot window or device at least 7 inches tall",
     fixed = TRUE
   )
   expect_match(msg, "plot(check_model(model, panel = FALSE))", fixed = TRUE)
@@ -56,7 +56,7 @@ test_that("plot() of check_model() says when the panels don't fit the device", {
   on.exit(options(old), add = TRUE)
   expect_match(
     size_message(plot(x)),
-    "Set the chunk option `fig.height` to at least 8 (`fig-height` in Quarto)",
+    "Set the chunk option `fig.height` to at least 7 (`fig-height` in Quarto)",
     fixed = TRUE
   )
   options(old)
@@ -101,4 +101,33 @@ test_that("plot() of check_model() skips the size message on ark's hidden device
   # ark that reports the Plots pane size: the check still runs
   local_mocked_bindings(.device_pixels = function() c(504, 360))
   expect_message(plot(x), "panels are too small", fixed = TRUE)
+})
+
+
+test_that("`check_model()` plots use base_size and the title sizes", {
+  skip_on_cran()
+  m <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+  x <- performance::check_model(
+    m,
+    base_size = 16,
+    size_title = 20,
+    size_axis_title = 6,
+    panel = FALSE
+  )
+  p <- plot(x)
+  expect_identical(
+    vapply(p, \(i) i$theme$text$size, numeric(1)),
+    rep(16, length(p)),
+    ignore_attr = TRUE
+  )
+  expect_identical(p[[1]]$theme$plot.title$size, 20)
+  expect_identical(p[[1]]$theme$axis.title$size, 6)
+
+  # a theme from the user still wins
+  x <- performance::check_model(
+    m,
+    theme = ggplot2::theme_dark(base_size = 20),
+    panel = FALSE
+  )
+  expect_identical(plot(x)[[1]]$theme$text$size, 20)
 })

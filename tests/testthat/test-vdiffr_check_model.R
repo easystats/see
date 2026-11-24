@@ -9,7 +9,11 @@ skip_if_not_installed("performance")
 # Helper function for reproducible vdiffr tests
 expect_doppelganger_with_seed <- function(title, fig, seed = 123) {
   set.seed(seed)
-  vdiffr::expect_doppelganger(title = title, fig = fig)
+  vdiffr::expect_doppelganger(
+    title = title,
+    fig = fig,
+    variant = snapshot_variant()
+  )
 }
 
 test_that("plot.see_check_model() renders correctly", {
