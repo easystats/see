@@ -2,6 +2,9 @@
 
 ## Bug fixes
 
+* `plot()` for `bayestestR::point_estimate()` separates the estimation labels
+  vertically so nearby estimates remain readable (#41).
+
 * `check_model()` plots now use the `base_size`, `size_title` and
   `size_axis_title` arguments of `performance::check_model()`. Before, these
   arguments were ignored and the default plots used a base font size of 11
