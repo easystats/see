@@ -26,6 +26,11 @@
 #' `check_model(maximum_dots = <number>)`) to define the number of data points
 #' that should be shown in the plots.
 #'
+#' If a row or column of panels gets less than one inch of plot area on the
+#' current graphics device, a message gives the device size at which the
+#' panels fit. Use a larger plot window or figure, or
+#' `check_model(model, panel = FALSE)`.
+#'
 #' @examplesIf require("patchwork") && FALSE
 #' library(performance)
 #'
@@ -301,10 +306,164 @@ plot.see_check_model <- function(
   if (panel) {
     pw <- plots(p, n_columns = n_columns)
     .safe_print_plots(pw, ...)
+    .check_panel_size()
     invisible(pw)
   } else {
     p
   }
+}
+
+
+# Tell the user when the panel grid just drawn is too small for the device.
+# Reads the patchwork gtable from grid's display list, so the plots are not
+# built a second time. Gives no message when the grid can't be read.
+.check_panel_size <- function(min_size = 1) {
+  if (.is_ark_shadow_device()) {
+    return(invisible(NULL))
+  }
+  sizes <- tryCatch(.panel_sizes(), error = function(e) NULL)
+  if (is.null(sizes) || !is.finite(sizes$row) || !is.finite(sizes$column)) {
+    return(invisible(NULL))
+  }
+  too_low <- sizes$row < min_size
+  too_narrow <- sizes$column < min_size
+  if (!too_low && !too_narrow) {
+    return(invisible(NULL))
+  }
+
+  # device size at which the smallest row (column) gets `min_size` inches,
+  # rounded up to half an inch
+  need <- function(fixed, weights) {
+    ceiling(2 * (fixed + min_size * sum(weights) / min(weights))) / 2
+  }
+  need_height <- need(sizes$fixed_height, sizes$row_weights)
+  need_width <- need(sizes$fixed_width, sizes$column_weights)
+
+  small <- c(
+    if (too_low) {
+      sprintf("each row gets %.2f inches of plot height", max(0, sizes$row))
+    },
+    if (too_narrow) {
+      sprintf(
+        "each column gets %.2f inches of plot width",
+        max(0, sizes$column)
+      )
+    }
+  )
+  if (isTRUE(getOption("knitr.in.progress"))) {
+    chunk <- c(
+      if (too_low) sprintf("`fig.height` to at least %g", need_height),
+      if (too_narrow) sprintf("`fig.width` to at least %g", need_width)
+    )
+    quarto <- c(if (too_low) "`fig-height`", if (too_narrow) "`fig-width`")
+    advice <- sprintf(
+      "Set the chunk %s %s (%s in Quarto)",
+      if (length(chunk) > 1) "options" else "option",
+      paste(chunk, collapse = " and "),
+      paste(quarto, collapse = " and ")
+    )
+  } else {
+    fits <- c(
+      if (too_low) sprintf("%g inches tall", need_height),
+      if (too_narrow) sprintf("%g inches wide", need_width)
+    )
+    advice <- sprintf(
+      "Make the plot window or device at least %s",
+      paste(fits, collapse = " and ")
+    )
+  }
+
+  insight::format_alert(
+    sprintf(
+      "The check_model() panels are too small for this %g x %g inches device: %s.",
+      round(sizes$device[1], 1),
+      round(sizes$device[2], 1),
+      paste(small, collapse = " and ")
+    ),
+    sprintf(
+      "%s, or plot each check on its own with `plot(check_model(model, panel = FALSE))`.",
+      advice
+    )
+  )
+  invisible(NULL)
+}
+
+
+# Positron's R kernel (ark) draws on a hidden device of 480 x 480 px, not on
+# the Plots pane, so dev.size() doesn't give the size the user sees. ark fixed
+# this in posit-dev/ark#1476, but Positron notebooks keep the 480 x 480
+# device. Skip only that size, so the check works once dev.size() gives the
+# pane size.
+.is_ark_shadow_device <- function() {
+  if (!identical(.device_name(), ".ark.graphics.device")) {
+    return(FALSE)
+  }
+  pixels <- .device_pixels()
+  length(pixels) == 2 && all(round(pixels) == 480)
+}
+
+# Small wrappers, so tests can mock the device
+.device_name <- function() {
+  names(grDevices::dev.cur())
+}
+
+.device_pixels <- function() {
+  grDevices::dev.size("px")
+}
+
+
+# Plot area (inches) of the smallest row and column of the patchwork just
+# drawn on the current device, or NULL if it can't be found.
+.panel_sizes <- function() {
+  drawn <- grid::grid.ls(recursive = FALSE, print = FALSE)$name
+  grid_table <- NULL
+  for (name in rev(drawn)) {
+    grob <- grid::grid.get(name)
+    if (inherits(grob, "gtable_patchwork")) {
+      grid_table <- grob
+      break
+    }
+  }
+  if (is.null(grid_table)) {
+    return(NULL)
+  }
+
+  device <- grDevices::dev.size("in")
+  heights <- grid_table$heights
+  widths <- grid_table$widths
+  free_rows <- grid::unitType(heights) == "null"
+  free_columns <- grid::unitType(widths) == "null"
+  if (!any(free_rows) || !any(free_columns)) {
+    return(NULL)
+  }
+  row_weights <- as.numeric(heights[free_rows])
+  column_weights <- as.numeric(widths[free_columns])
+  if (min(row_weights) <= 0 || min(column_weights) <= 0) {
+    return(NULL)
+  }
+
+  fixed_height <- grid::convertHeight(
+    sum(heights[!free_rows]),
+    "in",
+    valueOnly = TRUE
+  )
+  fixed_width <- grid::convertWidth(
+    sum(widths[!free_columns]),
+    "in",
+    valueOnly = TRUE
+  )
+
+  list(
+    device = device,
+    fixed_height = fixed_height,
+    fixed_width = fixed_width,
+    row_weights = row_weights,
+    column_weights = column_weights,
+    row = (device[2] - fixed_height) * min(row_weights) / sum(row_weights),
+    column = (device[1] - fixed_width) *
+      min(column_weights) /
+      sum(column_weights)
+  )
 }
 
 
