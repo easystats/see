@@ -9,7 +9,7 @@ Diagnostic plots for regression models."><meta property="og:image" content="http
 
     <a class="navbar-brand me-2" href="../index.html">see</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,6 +129,10 @@ Thus, the number of data points is limited to 2000 by default. Use
 <code>plot(check_model(), maximum_dots = &lt;number&gt;)</code> (or
 <code>check_model(maximum_dots = &lt;number&gt;)</code>) to define the number of data points
 that should be shown in the plots.</p>
+<p>If a row or column of panels gets less than one inch of plot area on the
+current graphics device, a message gives the device size at which the
+panels fit. Use a larger plot window or figure, or
+<code>check_model(model, panel = FALSE)</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
