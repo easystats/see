@@ -5,6 +5,11 @@
 * `plot()` for `bayestestR::point_estimate()` separates the estimation labels
   vertically so nearby estimates remain readable (#41).
 
+* `check_model()` plots now use the `base_size`, `size_title` and
+  `size_axis_title` arguments of `performance::check_model()`. Before, these
+  arguments were ignored and the default plots used a base font size of 11
+  instead of 10. A theme given in `theme` still takes precedence.
+
 * `plot()` for `modelbased::estimate_contrasts()` with `backend = "emmeans"`
   now draws the lighthouses for levels that look like numbers, such as those
   of `factor(cyl)`, and for joint contrasts. Before, it drew none of them and
@@ -40,6 +45,12 @@
   rows (#494).
 
 ## Changes
+
+* `plot()` for `check_model()` now prints a message when a row or column of
+  panels gets less than one inch of plot area on the graphics device. This
+  happens, for example, in the default 7 x 5 inch figures of Quarto and
+  R Markdown HTML documents. The message gives the figure size at which the
+  panels fit (easystats/performance#638).
 
 * New `geom_raincloud()` draws a raincloud plot. For each group, it draws a
   half violin, the median with 66% and 95% quantile intervals, and the raw

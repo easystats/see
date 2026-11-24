@@ -40,6 +40,12 @@
 ) {
   if (is.null(theme)) {
     theme <- attr(x, "theme")
+    # performance::check_model() stores its default `theme_lucid()` as a
+    # complete theme. Build it again below, so that `base_size` and the title
+    # sizes apply.
+    if (inherits(theme, "theme") && isTRUE(all.equal(theme, theme_lucid()))) {
+      theme <- NULL
+    }
   }
   if (!is.null(theme)) {
     if (is.character(theme)) {

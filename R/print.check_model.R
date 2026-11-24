@@ -33,5 +33,9 @@ print.see_check_model <- function(
     n_colums = n_columns,
     ...
   )))
+  # the size message is muted above, so check again
+  if (isTRUE(.default_value(x, "panel", TRUE))) {
+    .check_panel_size()
+  }
   invisible(x)
 }

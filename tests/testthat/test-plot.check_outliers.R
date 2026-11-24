@@ -23,7 +23,7 @@ test_that("`plot.see_check_outliers()` works", {
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers works default method",
     fig = plot(performance::check_outliers(model, verbose = FALSE)),
-    variant = "windows"
+    variant = snapshot_variant()
   )
 
   set.seed(123)
@@ -33,7 +33,7 @@ test_that("`plot.see_check_outliers()` works", {
       performance::check_outliers(model, verbose = FALSE),
       type = "bars"
     ),
-    variant = "windows"
+    variant = snapshot_variant()
   )
 
   set.seed(123)
@@ -44,7 +44,7 @@ test_that("`plot.see_check_outliers()` works", {
       type = "bars",
       rescale_distance = TRUE
     ),
-    variant = "windows"
+    variant = snapshot_variant()
   )
 
   set.seed(123)
@@ -54,7 +54,7 @@ test_that("`plot.see_check_outliers()` works", {
       performance::check_outliers(model, verbose = FALSE),
       type = "count"
     ))),
-    variant = "windows"
+    variant = snapshot_variant()
   )
 
   set.seed(123)
@@ -65,7 +65,7 @@ test_that("`plot.see_check_outliers()` works", {
       type = "scree",
       verbose = FALSE
     ),
-    variant = "windows"
+    variant = snapshot_variant()
   )
 
   set.seed(123)
@@ -76,7 +76,7 @@ test_that("`plot.see_check_outliers()` works", {
       type = "scree",
       verbose = FALSE
     ),
-    variant = "windows"
+    variant = snapshot_variant()
   )
 })
 
@@ -95,7 +95,7 @@ test_that("`plot.see_check_outliers()` multimethods", {
   vdiffr::expect_doppelganger(
     title = "plot.see_check_outliers multimethods",
     fig = plot(outliers_list),
-    variant = "windows"
+    variant = snapshot_variant()
   )
 })
 
