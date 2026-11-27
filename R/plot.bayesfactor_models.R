@@ -117,7 +117,7 @@ plot.see_bayesfactor_models <- function(
       as_percent = TRUE
     )
     many_pies_data$label <- insight::format_value(
-      many_pies_data$PostProb,
+      many_pies_data$bar_pos,
       1,
       as_percent = TRUE
     )
