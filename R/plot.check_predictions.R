@@ -493,6 +493,11 @@ plot.see_performance_pp_check <- function(
     x$x <- datawizard::to_numeric(x$x, dummy_factors = TRUE)
   }
 
+  # we now also have zero-counts for observed data, meaning that values
+  # not observed appear in the plot. We remove those rows now
+  not_observed <- x$count == 0 & x$key == "Observed data"
+  x <- x[!not_observed, ]
+
   p1 <- p2 <- NULL
 
   # 2. Build Error Bars Layer (if requested) -----------------------------------
